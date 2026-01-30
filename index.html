@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primer Technologies - Premium Logistics & Handyman Services</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== CSS RESET & GLOBAL STYLES ===== */
+        :root {
+            --primary: #0A2463;
+            --primary-light: #1E3A8A;
+            --accent: #FFB347; /* Softer gold/orange */
+            --accent-light: #FFCC80;
+            --white: #FFFFFF;
+            --surface: #F8FAFC;
+            --text-primary: #1F2937;
+            --text-secondary: #6B7280;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --error: #EF4444;
+            --border: #E5E7EB;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --radius-sm: 4px;
+            --radius: 8px;
+            --radius-lg: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+        }
+
+        h2 {
+            font-size: 2.25rem;
+        }
+
+        h3 {
+            font-size: 1.75rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.875rem 1.75rem;
+            font-weight: 600;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-size: 1rem;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-accent {
+            background-color: var(--accent);
+            color: var(--white);
+        }
+
+        .btn-accent:hover {
+            background-color: var(--accent-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-large {
+            padding: 1rem 2rem;
+            font-size: 1.125rem;
+        }
+
+        .btn-full {
+            width: 100%;
+        }
+
+        /* ===== HEADER & NAVIGATION ===== */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .nav-desktop {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--text-primary);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            padding: 1rem;
+            display: none;
+            flex-direction: column;
+            gap: 1rem;
+            z-index: 999;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            background: linear-gradient(135deg, #0A2463 0%, #1E3A8A 100%);
+            color: var(--white);
+            padding: 10rem 0 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') no-repeat center center/cover;
+            opacity: 0.15;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            color: var(--white);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-text p {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .app-download-btn {
+            background-color: var(--accent);
+            color: var(--white);
+            font-weight: 700;
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: 1rem;
+            transition: var(--transition);
+        }
+
+        .app-download-btn:hover {
+            background-color: var(--accent-light);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .app-icon {
+            font-size: 1.5rem;
+        }
+
+        .stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .hero-visual {
+            position: relative;
+        }
+
+        .service-showcase {
+            background-color: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .service-showcase-header {
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .service-showcase-header h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .service-cards-preview {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card-preview {
+            background-color: var(--surface);
+            padding: 1rem;
+            border-radius: var(--radius);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .service-card-preview:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .service-icon {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .service-name {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.875rem;
+        }
+
+        .quick-booking-cta {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: var(--white);
+            padding: 1rem;
+            border-radius: var(--radius);
+            text-align: center;
+        }
+
+        .quick-booking-cta h4 {
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        /* ===== SERVICES SECTION ===== */
+        .services {
+            background-color: var(--surface);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header p {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background-color: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .service-image {
+            height: 180px;
+            background-color: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 3rem;
+        }
+
+        .service-content {
+            padding: 1.5rem;
+        }
+
+        .service-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .service-description {
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+            min-height: 60px;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-feature i {
+            color: var(--accent);
+            font-size: 0.75rem;
+        }
+
+        .service-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .service-price {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary);
+        }
+
+        /* ===== HOW IT WORKS SECTION ===== */
+        .how-it-works {
+            position: relative;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            position: relative;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .step-description {
+            font-size: 0.875rem;
+        }
+
+        .steps::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--border);
+            z-index: 0;
+        }
+
+        /* ===== TESTIMONIALS SECTION ===== */
+        .testimonials {
+            background-color: var(--surface);
+        }
+
+        .testimonials-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .testimonial {
+            background-color: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .testimonial-content {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            font-size: 1.125rem;
+            line-height: 1.7;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--primary-light);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.25rem;
+        }
+
+        .author-info h4 {
+            margin-bottom: 0.25rem;
+        }
+
+        .author-title {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .slider-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .slider-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--white);
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .slider-btn:hover {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        /* ===== CTA SECTION ===== */
+        .cta {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .cta h2 {
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .cta p {
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background-color: var(--text-primary);
+            color: var(--white);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo-img {
+            height: 35px;
+            width: auto;
+        }
+
+        .footer-logo-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+
+        .footer-description {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background-color: var(--accent);
+            color: var(--text-primary);
+        }
+
+        .footer-heading {
+            font-size: 1.125rem;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-link {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-link a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: var(--transition);
+        }
+
+        .footer-link a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .contact-item i {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .copyright {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.875rem;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-bottom-link {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.875rem;
+            transition: var(--transition);
+        }
+
+        .footer-bottom-link:hover {
+            color: var(--accent);
+        }
+
+        /* ===== RESPONSIVE STYLES ===== */
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .hero::before {
+                display: none;
+            }
+            
+            .steps {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 3rem 2rem;
+            }
+            
+            .steps::before {
+                display: none;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.25rem;
+            }
+            
+            h2 {
+                font-size: 1.75rem;
+            }
+            
+            section {
+                padding: 3rem 0;
+            }
+            
+            .nav-desktop {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .user-actions .btn {
+                display: none;
+            }
+            
+            .hero {
+                padding: 8rem 0 3rem;
+            }
+            
+            .hero-actions {
+                flex-direction: column;
+            }
+            
+            .stats {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .service-cards-preview {
+                grid-template-columns: 1fr;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .steps {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* ===== MODAL STYLES ===== */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 1rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            border-radius: var(--radius-lg);
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-lg);
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            margin-bottom: 0;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-footer {
+            padding: 1.5rem 2rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo-container">
+                <!-- Logo image would be placed here -->
+                <div class="logo-img-placeholder" style="width: 40px; height: 40px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">PT</div>
+                <div class="logo-text">Primer</div>
+            </div>
+            
+            <nav class="nav-desktop">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="services.html" class="nav-link">Services</a>
+                <a href="booking.html" class="nav-link">Book Now</a>
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+            
+            <div class="user-actions">
+                <a href="login.html" class="btn btn-outline">Log In</a>
+                <a href="login.html#signup" class="btn btn-primary">Sign Up</a>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="index.html" class="nav-link active">Home</a>
+            <a href="services.html" class="nav-link">Services</a>
+            <a href="booking.html" class="nav-link">Book Now</a>
+            <a href="dashboard.html" class="nav-link">Dashboard</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+            <div class="mobile-auth">
+                <a href="login.html" class="btn btn-outline btn-full">Log In</a>
+                <a href="login.html#signup" class="btn btn-primary btn-full">Sign Up</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Professional Logistics & Handyman Services On-Demand</h1>
+                    <p>Reliable moving, delivery, and repair services for homes and businesses across Nigeria. Book vetted professionals in minutes.</p>
+                    
+                    <div class="hero-actions">
+                        <a href="booking.html" class="btn btn-accent btn-large">
+                            <i class="fas fa-truck-moving"></i>
+                            Book a Service Now
+                        </a>
+                        <a href="services.html" class="btn btn-outline btn-large" style="color: white; border-color: white;">
+                            <i class="fas fa-list-alt"></i>
+                            View All Services
+                        </a>
+                    </div>
+                    
+                    <!-- App Download Button -->
+                    <a href="#" class="app-download-btn" id="appDownloadBtn">
+                        <i class="fas fa-mobile-alt app-icon"></i>
+                        <div>
+                            <div style="font-size: 0.75rem;">Download Our App</div>
+                            <div>Available on iOS & Android</div>
+                        </div>
+                    </a>
+                    
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-value">2,500+</div>
+                            <div class="stat-label">Services Completed</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">98%</div>
+                            <div class="stat-label">Satisfaction Rate</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">24/7</div>
+                            <div class="stat-label">Support</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hero-visual">
+                    <div class="service-showcase">
+                        <div class="service-showcase-header">
+                            <h3>Our Top Services</h3>
+                            <p style="color: var(--text-secondary); font-size: 0.875rem;">Most requested services</p>
+                        </div>
+                        
+                        <div class="service-cards-preview">
+                            <div class="service-card-preview">
+                                <div class="service-icon">
+                                    <i class="fas fa-truck-loading"></i>
+                                </div>
+                                <div class="service-name">Home Moving</div>
+                            </div>
+                            
+                            <div class="service-card-preview">
+                                <div class="service-icon">
+                                    <i class="fas fa-tools"></i>
+                                </div>
+                                <div class="service-name">Furniture Assembly</div>
+                            </div>
+                            
+                            <div class="service-card-preview">
+                                <div class="service-icon">
+                                    <i class="fas fa-box-open"></i>
+                                </div>
+                                <div class="service-name">Office Relocation</div>
+                            </div>
+                            
+                            <div class="service-card-preview">
+                                <div class="service-icon">
+                                    <i class="fas fa-wrench"></i>
+                                </div>
+                                <div class="service-name">Home Repairs</div>
+                            </div>
+                        </div>
+                        
+                        <div class="quick-booking-cta">
+                            <h4>Need Immediate Service?</h4>
+                            <a href="booking.html" class="btn btn-primary" style="background: var(--primary); color: white;">
+                                <i class="fas fa-bolt"></i>
+                                Book ASAP
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SERVICES SECTION ===== -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Premium Services</h2>
+                <p>From moving your home to fixing appliances, we provide reliable, professional services you can trust.</p>
+            </div>
+            
+            <div class="services-grid" id="servicesGrid">
+                <!-- Services will be loaded dynamically from JSON -->
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="services.html" class="btn btn-primary btn-large">
+                    <i class="fas fa-eye"></i>
+                    View All Services
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== HOW IT WORKS SECTION ===== -->
+    <section class="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2>How Primer Works</h2>
+                <p>Getting professional help has never been easier. Just four simple steps.</p>
+            </div>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Book Service</h3>
+                    <p class="step-description">Select service, date, time and provide details through our platform or app.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Get Matched</h3>
+                    <p class="step-description">Our system matches you with the best available professional for your needs.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Service Delivery</h3>
+                    <p class="step-description">Professional arrives on time, completes the job efficiently and professionally.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Review & Pay</h3>
+                    <p class="step-description">Review the service, make secure payment, and get your invoice.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS SECTION ===== -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>Trusted by Homes & Businesses</h2>
+                <p>See what our clients say about their experience with Primer Technologies.</p>
+            </div>
+            
+            <div class="testimonials-slider">
+                <div class="testimonial active" id="testimonial1">
+                    <p class="testimonial-content">"Moving apartments in Kaduna used to be a nightmare until I found Primer. Their team was professional, careful with my belongings, and completed the move in half the expected time. Highly recommended!"</p>
+                    
+                    <div class="testimonial-author">
+                        <div class="author-avatar">CA</div>
+                        <div class="author-info">
+                            <h4>Chinedu Adebayo</h4>
+                            <p class="author-title">Homeowner, Lekki Phase 1</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="slider-controls">
+                    <button class="slider-btn prev-btn">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="slider-btn next-btn">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA SECTION ===== -->
+    <section class="cta">
+        <div class="container">
+            <h2>Need Reliable Help Today?</h2>
+            <p>Join thousands of satisfied customers who trust Primer for their logistics and handyman needs. Quality service guaranteed.</p>
+            
+            <div class="cta-buttons">
+                <a href="login.html#signup" class="btn btn-accent btn-large">
+                    <i class="fas fa-user-plus"></i>
+                    Get Started Free
+                </a>
+                <a href="contact.html" class="btn btn-outline btn-large" style="color: white; border-color: white;">
+                    <i class="fas fa-phone-alt"></i>
+                    Contact Support
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <div class="footer-logo-container">
+                        <div class="footer-logo-img-placeholder" style="width: 35px; height: 35px; background: var(--accent); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">PT</div>
+                        <div class="footer-logo-text">Primer</div>
+                    </div>
+                    <p class="footer-description">Premium logistics and handyman services platform. Professional, reliable, and on-demand.</p>
+                    
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Services</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="services.html">Home Moving</a></li>
+                        <li class="footer-link"><a href="services.html">Office Relocation</a></li>
+                        <li class="footer-link"><a href="services.html">Furniture Assembly</a></li>
+                        <li class="footer-link"><a href="services.html">Home Repairs</a></li>
+                        <li class="footer-link"><a href="services.html">Appliance Installation</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Company</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="#">About Us</a></li>
+                        <li class="footer-link"><a href="#">Careers</a></li>
+                        <li class="footer-link"><a href="contact.html">Contact</a></li>
+                        <li class="footer-link"><a href="#">Blog</a></li>
+                        <li class="footer-link"><a href="#">Press</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Contact Info</h4>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>123 Business District, Kaduna, Nigeria</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+234 (0) 800 123 4567</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>get.primer@proton.me</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Mon-Sun: 6am - 10pm</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">© 2026 Primer Technologies. All rights reserved.</p>
+                
+                <div class="footer-bottom-links">
+                    <a href="#" class="footer-bottom-link">Privacy Policy</a>
+                    <a href="#" class="footer-bottom-link">Terms of Service</a>
+                    <a href="#" class="footer-bottom-link">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== MODAL FOR APP DOWNLOAD ===== -->
+    <div class="modal" id="appDownloadModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Download Primer App</h3>
+                <button class="modal-close" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <div style="font-size: 4rem; color: var(--primary); margin-bottom: 1rem;">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 style="margin-bottom: 0.5rem;">Get the Primer Experience on Mobile</h3>
+                    <p>Book services, track professionals in real-time, and manage all your logistics needs on the go.</p>
+                </div>
+                
+                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <a href="#" class="btn btn-primary" style="justify-content: flex-start;">
+                        <i class="fab fa-apple" style="font-size: 1.5rem;"></i>
+                        <div style="text-align: left;">
+                            <div style="font-size: 0.75rem;">Download on the</div>
+                            <div style="font-weight: 700;">App Store</div>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="btn btn-outline" style="justify-content: flex-start;">
+                        <i class="fab fa-google-play" style="font-size: 1.5rem;"></i>
+                        <div style="text-align: left;">
+                            <div style="font-size: 0.75rem;">Get it on</div>
+                            <div style="font-weight: 700;">Google Play</div>
+                        </div>
+                    </a>
+                </div>
+                
+                <div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--border); text-align: center;">
+                    <p style="font-size: 0.875rem; color: var(--text-secondary);">Scan to download</p>
+                    <div style="width: 150px; height: 150px; background-color: #f0f0f0; margin: 0 auto; border-radius: var(--radius); display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-qrcode" style="font-size: 4rem; color: var(--text-secondary);"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===== MOBILE MENU TOGGLE =====
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+        });
+
+        // ===== APP DOWNLOAD MODAL =====
+        document.getElementById('appDownloadBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('appDownloadModal').classList.add('active');
+        });
+
+        document.getElementById('closeModal').addEventListener('click', function() {
+            document.getElementById('appDownloadModal').classList.remove('active');
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('appDownloadModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('active');
+            }
+        });
+
+        // ===== LOAD SERVICES FROM JSON =====
+        async function loadServices() {
+            const services = [
+                {
+                    id: "home-moving",
+                    name: "Home Moving Service",
+                    description: "Professional home relocation with packing, transportation, and unpacking services.",
+                    icon: "truck-moving",
+                    features: ["Packing materials provided", "Furniture disassembly", "Insurance coverage"],
+                    price: 85000,
+                    duration: "4-8 hours"
+                },
+                {
+                    id: "office-relocation",
+                    name: "Office Relocation",
+                    description: "Complete office moving service with IT equipment handling and setup.",
+                    icon: "building",
+                    features: ["IT equipment handling", "Furniture assembly", "Same-day setup"],
+                    price: 150000,
+                    duration: "1-2 days"
+                },
+                {
+                    id: "furniture-assembly",
+                    name: "Furniture Assembly",
+                    description: "Professional assembly of IKEA and other flat-pack furniture.",
+                    icon: "couch",
+                    features: ["All tools provided", "Waste removal", "Quality check"],
+                    price: 12000,
+                    duration: "1-2 hours"
+                },
+                {
+                    id: "handyman-services",
+                    name: "Handyman Services",
+                    description: "General home repairs, installations, and maintenance tasks.",
+                    icon: "tools",
+                    features: ["Electrical repairs", "Plumbing fixes", "Carpentry work"],
+                    price: 15000,
+                    duration: "2-3 hours"
+                },
+                {
+                    id: "appliance-installation",
+                    name: "Appliance Installation",
+                    description: "Professional installation of AC units, washing machines, and other appliances.",
+                    icon: "plug",
+                    features: ["Secure installation", "Testing & calibration", "Safety checks"],
+                    price: 18000,
+                    duration: "2-3 hours"
+                },
+                {
+                    id: "delivery-services",
+                    name: "Same-Day Delivery",
+                    description: "Express delivery service for packages across the city.",
+                    icon: "shipping-fast",
+                    features: ["Real-time tracking", "Multiple stops", "Proof of delivery"],
+                    price: 8000,
+                    duration: "2-4 hours"
+                }
+            ];
+
+            const servicesGrid = document.getElementById('servicesGrid');
+            
+            services.forEach(service => {
+                const serviceCard = document.createElement('div');
+                serviceCard.className = 'service-card';
+                serviceCard.innerHTML = `
+                    <div class="service-image" style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);">
+                        <i class="fas fa-${service.icon}"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">${service.name}</h3>
+                        <p class="service-description">${service.description}</p>
+                        
+                        <ul class="service-features">
+                            ${service.features.map(feature => `
+                                <li class="service-feature">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>${feature}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                        
+                        <div class="service-footer">
+                            <div class="service-price">₦${service.price.toLocaleString()}</div>
+                            <a href="booking.html?service=${service.id}" class="btn btn-primary">
+                                <i class="fas fa-bookmark"></i>
+                                Book Now
+                            </a>
+                        </div>
+                    </div>
+                `;
+                
+                servicesGrid.appendChild(serviceCard);
+            });
+        }
+
+        // ===== TESTIMONIAL SLIDER =====
+        let currentTestimonial = 1;
+        const totalTestimonials = 3;
+
+        document.querySelector('.prev-btn').addEventListener('click', function() {
+            currentTestimonial = currentTestimonial === 1 ? totalTestimonials : currentTestimonial - 1;
+            updateTestimonial();
+        });
+
+        document.querySelector('.next-btn').addEventListener('click', function() {
+            currentTestimonial = currentTestimonial === totalTestimonials ? 1 : currentTestimonial + 1;
+            updateTestimonial();
+        });
+
+        function updateTestimonial() {
+            const testimonial = document.getElementById('testimonial1');
+            
+            const testimonials = [
+                {
+                    content: "\"Moving apartments in Kaduna used to be a nightmare until I found Primer. Their team was professional, careful with my belongings, and completed the move in half the expected time. Highly recommended!\"",
+                    author: "Chinedu Adebayo",
+                    title: "Homeowner, Lekki Phase 1"
+                },
+                {
+                    content: "\"Our office relocation was handled seamlessly by Primer. They managed our IT equipment with care, set everything up perfectly, and minimized our downtime. Exceptional service!\"",
+                    author: "Amara Okonkwo",
+                    title: "Office Manager, Tech Solutions Ltd"
+                },
+                {
+                    content: "\"I've used Primer for furniture assembly and multiple home repairs. Their handymen are skilled, punctual, and reasonably priced. It's my go-to service for anything that needs fixing.\"",
+                    author: "Tunde Okafor",
+                    title: "Homeowner, Ikeja GRA"
+                }
+            ];
+            
+            const current = testimonials[currentTestimonial - 1];
+            testimonial.querySelector('.testimonial-content').textContent = current.content;
+            testimonial.querySelector('.author-avatar').textContent = current.author.split(' ').map(n => n[0]).join('');
+            testimonial.querySelector('h4').textContent = current.author;
+            testimonial.querySelector('.author-title').textContent = current.title;
+        }
+
+        // ===== SESSION MANAGEMENT =====
+        function checkSession() {
+            const session = localStorage.getItem('primer_user_session');
+            
+            if (session) {
+                try {
+                    const userData = JSON.parse(session);
+                    
+                    // Check if session is still valid
+                    if (new Date() < new Date(userData.expires)) {
+                        // Update user actions in header
+                        const userActions = document.querySelector('.user-actions');
+                        if (userActions) {
+                            userActions.innerHTML = `
+                                <div class="user-profile" onclick="window.location.href='dashboard.html'">
+                                    <div class="user-avatar">${userData.name.charAt(0)}</div>
+                                    <span>${userData.name.split(' ')[0]}</span>
+                                </div>
+                                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                                    <i class="fas fa-bars"></i>
+                                </button>
+                            `;
+                            
+                            // Update mobile menu
+                            const mobileAuth = document.querySelector('.mobile-auth');
+                            if (mobileAuth) {
+                                mobileAuth.innerHTML = `
+                                    <a href="dashboard.html" class="btn btn-outline btn-full">Dashboard</a>
+                                    <button class="btn btn-primary btn-full" onclick="logout()">Log Out</button>
+                                `;
+                            }
+                        }
+                    } else {
+                        // Session expired
+                        localStorage.removeItem('primer_user_session');
+                    }
+                } catch (e) {
+                    console.error('Error parsing session data:', e);
+                    localStorage.removeItem('primer_user_session');
+                }
+            }
+        }
+
+        // ===== LOGOUT FUNCTION =====
+        function logout() {
+            localStorage.removeItem('primer_user_session');
+            window.location.href = 'index.html';
+        }
+
+        // ===== INITIALIZE =====
+        document.addEventListener('DOMContentLoaded', function() {
+            loadServices();
+            checkSession();
+            
+            // Auto-update session expiry
+            const session = localStorage.getItem('primer_user_session');
+            if (session) {
+                const userData = JSON.parse(session);
+                userData.lastActivity = new Date().toISOString();
+                userData.expires = new Date(Date.now() + 2 * 60 * 60 * 1000).toISOString(); // 2 hours
+                localStorage.setItem('primer_user_session', JSON.stringify(userData));
+            }
+        });
+    </script>
+</body>
+</html>
