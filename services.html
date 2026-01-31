@@ -1,0 +1,2288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - Primer Technologies</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== CSS RESET & GLOBAL STYLES ===== */
+        :root {
+            --primary: #0A2463;
+            --primary-light: #1E3A8A;
+            --accent: #FFB347;
+            --accent-light: #FFCC80;
+            --white: #FFFFFF;
+            --surface: #F8FAFC;
+            --text-primary: #1F2937;
+            --text-secondary: #6B7280;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --error: #EF4444;
+            --border: #E5E7EB;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --radius-sm: 4px;
+            --radius: 8px;
+            --radius-lg: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+        }
+
+        h2 {
+            font-size: 2.25rem;
+        }
+
+        h3 {
+            font-size: 1.75rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.875rem 1.75rem;
+            font-weight: 600;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-size: 1rem;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-accent {
+            background-color: var(--accent);
+            color: var(--white);
+        }
+
+        .btn-accent:hover {
+            background-color: var(--accent-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-large {
+            padding: 1rem 2rem;
+            font-size: 1.125rem;
+        }
+
+        .btn-full {
+            width: 100%;
+        }
+
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+        }
+
+        /* ===== HEADER & NAVIGATION ===== */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .nav-desktop {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--text-primary);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            padding: 1rem;
+            display: none;
+            flex-direction: column;
+            gap: 1rem;
+            z-index: 999;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        /* ===== PAGE HEADER ===== */
+        .page-header {
+            background: linear-gradient(135deg, #0A2463 0%, #1E3A8A 100%);
+            color: var(--white);
+            padding: 8rem 0 4rem;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.125rem;
+        }
+
+        /* ===== SERVICE CATEGORIES SECTION ===== */
+        .service-categories {
+            background-color: var(--surface);
+            padding: 4rem 0;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .category-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid var(--border);
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .category-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .category-icon i {
+            font-size: 1.5rem;
+            color: var(--white);
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .category-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .category-services {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .category-service {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.875rem;
+            color: var(--text-primary);
+        }
+
+        .category-service i {
+            color: var(--accent);
+            font-size: 0.75rem;
+        }
+
+        .category-stats {
+            display: flex;
+            gap: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .stat-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        /* ===== SERVICES FILTER SECTION ===== */
+        .services-filter {
+            background-color: var(--white);
+            padding: 3rem 0;
+        }
+
+        .filter-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .search-bar {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1.5rem 1rem 3rem;
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(10, 36, 99, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+        }
+
+        .filters-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            min-width: 200px;
+        }
+
+        .filter-label {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .filter-select {
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            background-color: var(--white);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .price-range {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            display: none; /* Hiding price filter */
+        }
+
+        .price-input {
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            width: 120px;
+            transition: var(--transition);
+        }
+
+        .price-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .price-slider {
+            width: 200px;
+            display: none; /* Hiding price slider */
+        }
+
+        .filter-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .filter-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .filter-badge {
+            background-color: var(--surface);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-badge:hover {
+            background-color: var(--border);
+        }
+
+        .filter-badge.active {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .clear-filters {
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .clear-filters:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== SERVICES GRID (FROM T.HTML) ===== */
+        .services-grid-section {
+            padding: 2rem 0 5rem;
+            background-color: var(--surface);
+        }
+
+        .services-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .results-count {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .sort-options {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sort-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        /* Services Grid Layout from t.html */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 32px;
+            margin-top: 40px;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .service-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            padding: 6px 12px;
+            background-color: var(--accent);
+            color: var(--white);
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 4px;
+            z-index: 2;
+        }
+
+        .service-image {
+            height: 200px;
+            background-color: var(--primary-light);
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .service-image i {
+            font-size: 3rem;
+            color: var(--white);
+        }
+
+        .service-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+            padding: 20px;
+            color: var(--white);
+        }
+
+        .service-category {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.9;
+            margin-bottom: 4px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .service-title {
+            font-size: 20px;
+            color: var(--white);
+            margin-bottom: 0;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .service-content {
+            padding: 24px;
+        }
+
+        .service-description {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .service-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .detail-icon {
+            color: var(--accent);
+            font-size: 14px;
+        }
+
+        .detail-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .detail-value {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .service-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .service-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .service-availability {
+            font-size: 14px;
+            color: var(--success);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .service-availability i {
+            font-size: 12px;
+        }
+
+        .service-location {
+            font-size: 13px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .service-location i {
+            font-size: 12px;
+        }
+
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 4rem;
+            background-color: var(--white);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+        }
+
+        .no-results-icon {
+            font-size: 3rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        /* ===== PAGINATION ===== */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 3rem;
+        }
+
+        .pagination-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            background-color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .pagination-btn:hover {
+            background-color: var(--surface);
+            border-color: var(--primary);
+        }
+
+        .pagination-btn.active {
+            background-color: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+
+        .pagination-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .pagination-btn.disabled:hover {
+            background-color: var(--white);
+            border-color: var(--border);
+        }
+
+        .pagination-ellipsis {
+            padding: 0 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        /* ===== CTA SECTION ===== */
+        .services-cta {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .services-cta h2 {
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .services-cta p {
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background-color: var(--text-primary);
+            color: var(--white);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo-img {
+            height: 35px;
+            width: auto;
+        }
+
+        .footer-logo-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+
+        .footer-description {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background-color: var(--accent);
+            color: var(--text-primary);
+        }
+
+        .footer-heading {
+            font-size: 1.125rem;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-link {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-link a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: var(--transition);
+        }
+
+        .footer-link a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .contact-item i {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .copyright {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.875rem;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-bottom-link {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.875rem;
+            transition: var(--transition);
+        }
+
+        .footer-bottom-link:hover {
+            color: var(--accent);
+        }
+
+        /* ===== RESPONSIVE STYLES ===== */
+        @media (max-width: 1024px) {
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .filters-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .filter-group {
+                width: 100%;
+            }
+            
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.25rem;
+            }
+            
+            h2 {
+                font-size: 1.75rem;
+            }
+            
+            section {
+                padding: 3rem 0;
+            }
+            
+            .nav-desktop {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .user-actions .btn {
+                display: none;
+            }
+            
+            .page-header {
+                padding: 7rem 0 3rem;
+            }
+            
+            .services-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .filter-actions {
+                flex-direction: column;
+            }
+            
+            .service-actions {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .service-details {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo-container">
+                <div class="logo-img-placeholder" style="width: 40px; height: 40px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">PT</div>
+                <div class="logo-text">Primer</div>
+            </div>
+            
+            <nav class="nav-desktop">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="services.html" class="nav-link active">Services</a>
+                <a href="booking.html" class="nav-link">Book Now</a>
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+            
+            <div class="user-actions">
+                <a href="login.html" class="btn btn-outline">Log In</a>
+                <a href="register.html" class="btn btn-primary">Sign Up</a>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="services.html" class="nav-link active">Services</a>
+            <a href="booking.html" class="nav-link">Book Now</a>
+            <a href="dashboard.html" class="nav-link">Dashboard</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+            <div class="mobile-auth">
+                <a href="login.html" class="btn btn-outline btn-full">Log In</a>
+                <a href="register.html" class="btn btn-primary btn-full">Sign Up</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== PAGE HEADER ===== -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Our Premium Services</h1>
+            <p>Choose from our comprehensive range of logistics, handyman, and facility services. Professional, reliable, and available on-demand across Nigeria.</p>
+        </div>
+    </section>
+
+    <!-- ===== SERVICE CATEGORIES SECTION ===== -->
+    <section class="service-categories">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 1rem;">Our Service Categories</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--text-secondary);">
+                We offer three main categories of services, each with specialized sub-services to meet all your needs
+            </p>
+            
+            <div class="categories-grid">
+                <!-- Handyman Services -->
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3 class="category-title">Handyman Services</h3>
+                    <p class="category-description">
+                        Professional home repair, maintenance, and installation services by certified technicians.
+                    </p>
+                    <ul class="category-services">
+                        <li class="category-service">
+                            <i class="fas fa-check"></i>
+                            <span>Carpentry & Woodwork</span>
+                        </li>
+                        <li class="category-service">
+                            <i class="fas fa-check"></i>
+                            <span>Plumbing Repairs</span>
+                        </li>
+                        <li class="category-service">
+                            <i class="fas fa-check"></i>
+                            <span>Electrical Work</span>
+                        </li>
+                        <li class="category-service">
+                            <i class="fas fa-check"></i>
+                            <span>Painting Services</span>
+                        </li>
+                        <li class="category-service">
+                            <i class="fas fa-check"></i>
+                            <span>Appliance Installation</span>
+                        </li>
+                        <li class="category-service">
+                            <i class="fas fa-check"></i>
+                            <span>Furniture Assembly</span>
+                        </li>
+                        <li class="category-service">
+                            <i class="fas fa-check"></i>
+                            <span>General Repairs</span>
+                        </li>
+                    </ul>
+                    <div class="category-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">7+</div>
+                            <div class="stat-label">Services</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">50+</div>
+                            <div class="stat-label">Technicians</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">4.8</div>
+                            <div class="stat-label">Rating</div>
+                        </div>
+                         <a href="booking.html?service=${service.id}" class="btn btn-primary btn-small">
+                                    <i class="fas fa-calendar-check"></i>
+                                    Book Now
+                                </a>
+                    </div>
+                </div>
+
+                <!-- Logistics & Moving -->
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-truck-moving"></i>
+                    </div>
+                    <h3 class="category-title">Logistics & Moving</h3>
+                    <p class="category-description">
+                        Complete relocation and transportation solutions for homes and businesses.
+                    </p>
+                    <ul class="category-services">
+                        <li class="category-service">
+                            <i class="fas fa-check"></i>
+                            <span>Home Moving</span>
+                        </li>
+                        <li class="category-service">
+                            <i class="fas fa-check"></i>
+                            <span>Office Relocation</span>
+                        </li>
+                        <li class="category-service">
+                            <i class="fas fa-check"></i>
+                            <span>Same-Day Delivery</span>
+                        </li>
+                        <li class="category-service">
+                            <i class="fas fa-check"></i>
+                            <span>Furniture Transportation</span>
+                        </li>
+                        <li class="category-service">
+                            <i class="fas fa-check"></i>
+                            <span>Vehicle Transport</span>
+                        </li>
+                        <li class="category-service">
+                            <i class="fas fa-check"></i>
+                            <span>International Shipping</span>
+                        </li>
+                        <li class="category-service">
+                            <i class="fas fa-check"></i>
+                            <span>Storage Solutions</span>
+                        </li>
+                    </ul>
+                    <div class="category-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">7+</div>
+                            <div class="stat-label">Services</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">30+</div>
+                            <div class="stat-label">Vehicles</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">4.7</div>
+                            <div class="stat-label">Rating</div>
+                        </div>
+                         <a href="booking.htm" class="btn btn-primary btn-small">
+                                    <i class="fas fa-calendar-check"></i>
+                                    Book Now
+                                </a>
+                    </div>
+                </div>
+
+                <!-- Facility Management -->
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3 class="category-title">Facility Management</h3>
+                    <p class="category-description">
+                        Comprehensive facility maintenance and management services for commercial properties.
+                    </p>
+                    <ul class="category-services">
+                        <li class="category-service">
+                            <i class="fas fa-check"></i>
+                            <span>Commercial Cleaning</span>
+                        </li>
+                        <li class="category-service">
+                            <i class="fas fa-check"></i>
+                            <span>HVAC Maintenance</span>
+                        </li>
+                        <li class="category-service">
+                            <i class="fas fa-check"></i>
+                            <span>Security Services</span>
+                        </li>
+                        <li class="category-service">
+                            <i class="fas fa-check"></i>
+                            <span>Landscaping</span>
+                        </li>
+                        <li class="category-service">
+                            <i class="fas fa-check"></i>
+                            <span>Waste Management</span>
+                        </li>
+                        <li class="category-service">
+                            <i class="fas fa-check"></i>
+                            <span>Pest Control</span>
+                        </li>
+                        <li class="category-service">
+                            <i class="fas fa-check"></i>
+                            <span>Emergency Repairs</span>
+                        </li>
+                    </ul>
+                    <div class="category-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">7+</div>
+                            <div class="stat-label">Services</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">100+</div>
+                            <div class="stat-label">Clients</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">4.9</div>
+                            <div class="stat-label">Rating</div>
+                        </div>
+                         <a href="booking.html?service=${service.id}" class="btn btn-primary btn-small">
+                                    <i class="fas fa-calendar-check"></i>
+                                    Book Now
+                                </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SERVICES FILTER SECTION ===== -->
+    <section class="services-filter">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 1rem;">Browse All Services</h2>
+            <p style="text-align: center; max-width: 600px; margin: 0 auto 2rem; color: var(--text-secondary);">
+                Filter and search through our complete service catalog to find exactly what you need
+            </p>
+            
+            <div class="filter-container">
+                <!-- Search Bar -->
+                <div class="search-bar">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" id="searchInput" placeholder="Search for services (e.g., 'plumbing', 'moving', 'cleaning')">
+                </div>
+
+                <!-- Filters Row -->
+                <div class="filters-row">
+                    <div class="filter-group">
+                        <label class="filter-label">Service Category</label>
+                        <select class="filter-select" id="categoryFilter">
+                            <option value="all">All Categories</option>
+                            <option value="handyman">Handyman Services</option>
+                            <option value="logistics">Logistics & Moving</option>
+                            <option value="facility">Facility Management</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-label">Location</label>
+                        <select class="filter-select" id="locationFilter">
+                            <option value="all">All Locations</option>
+                            <option value="Kaduna">Kaduna</option>
+                            <option value="abuja">Abuja</option>
+                            <option value="lagos">Lagos</option>
+                            <option value="port-harcourt">Port Harcourt</option>
+                            <option value="ibadan">Ibadan</option>
+                            <option value="others">Other Cities</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Filter Actions -->
+                <div class="filter-actions">
+                    <button class="btn btn-primary" id="applyFilters">
+                        <i class="fas fa-filter"></i>
+                        Apply Filters
+                    </button>
+                    <button class="btn btn-outline" id="resetFilters">
+                        <i class="fas fa-redo"></i>
+                        Reset All
+                    </button>
+                </div>
+
+                <!-- Active Filter Badges -->
+                <div class="filter-badges" id="activeFilters">
+                    <!-- Active filters will be dynamically added here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SERVICES GRID SECTION ===== -->
+    <section class="services-grid-section">
+        <div class="container">
+            <!-- Services Header -->
+            <div class="services-header">
+                <div>
+                    <h2>All Available Services</h2>
+                    <div class="results-count" id="resultsCount">Loading services...</div>
+                </div>
+                
+                <div class="sort-options">
+                    <span class="sort-label">Sort by:</span>
+                    <select class="filter-select" id="sortBy">
+                        <option value="popular">Most Popular</option>
+                        <option value="rating">Highest Rated</option>
+                        <option value="name">Name: A to Z</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Services Grid (New Layout from t.html) -->
+            <div class="services-grid" id="servicesGrid">
+                <!-- Services will be loaded dynamically -->
+            </div>
+
+            <!-- No Results Message -->
+            <div class="no-results" id="noResults" style="display: none;">
+                <div class="no-results-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h3>No services found</h3>
+                <p>Try adjusting your filters or search terms to find what you're looking for.</p>
+                <button class="btn btn-primary" id="clearSearchFilters">
+                    <i class="fas fa-redo"></i>
+                    Clear All Filters
+                </button>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination" id="pagination">
+                <!-- Pagination will be dynamically added here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA SECTION ===== -->
+    <section class="services-cta">
+        <div class="container">
+            <h2>Can't Find What You Need?</h2>
+            <p>We offer custom solutions for unique requirements. Contact us for personalized service quotes and consultations.</p>
+            <a href="contact.html" class="btn btn-accent btn-large">
+                <i class="fas fa-headset"></i>
+                Request Custom Service
+            </a>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <div class="footer-logo-container">
+                        <div class="footer-logo-img-placeholder" style="width: 35px; height: 35px; background: var(--accent); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">PT</div>
+                        <div class="footer-logo-text">Primer</div>
+                    </div>
+                    <p class="footer-description">Premium logistics and handyman services platform. Professional, reliable, and on-demand.</p>
+                    
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Services</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="services.html">Handyman Services</a></li>
+                        <li class="footer-link"><a href="services.html">Logistics & Moving</a></li>
+                        <li class="footer-link"><a href="services.html">Facility Management</a></li>
+                        <li class="footer-link"><a href="services.html">Commercial Services</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Company</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="#">About Us</a></li>
+                        <li class="footer-link"><a href="#">Careers</a></li>
+                        <li class="footer-link"><a href="contact.html">Contact</a></li>
+                        <li class="footer-link"><a href="#">Blog</a></li>
+                        <li class="footer-link"><a href="#">Press</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Contact Info</h4>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>123 Business District, Kaduna, Nigeria</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+234 (0) 800 123 4567</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>get.primer@proton.me</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Mon-Sun: 6am - 10pm</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">© 2026 Primer Technologies. All rights reserved.</p>
+                
+                <div class="footer-bottom-links">
+                    <a href="#" class="footer-bottom-link">Privacy Policy</a>
+                    <a href="#" class="footer-bottom-link">Terms of Service</a>
+                    <a href="#" class="footer-bottom-link">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ===== MOBILE MENU TOGGLE =====
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+        });
+
+        // ===== SERVICE DATA =====
+        const servicesData = [
+            // Handyman Services (7 services)
+            {
+                id: "carpentry",
+                name: "Carpentry & Woodwork",
+                category: "handyman",
+                description: "Professional carpentry services including custom furniture, cabinets, shelves, and wood repairs by skilled craftsmen.",
+                icon: "hammer",
+                imageColor: "linear-gradient(135deg, #0A2463 0%, #1E3A8A 100%)",
+                features: ["Custom furniture", "Cabinet installation", "Shelving units", "Wood repairs", "Finish carpentry", "Measurements & cuts"],
+                duration: "3-6 hours",
+                durationLabel: "Per project",
+                location: ["Kaduna", "abuja", "lagos", "port-harcourt"],
+                rating: 4.8,
+                totalBookings: 189,
+                available: true,
+                popular: true,
+                badge: "Expert"
+            },
+            {
+                id: "plumbing",
+                name: "Plumbing Repairs",
+                category: "handyman",
+                description: "Licensed plumbing services for leaks, clogs, installations, and repairs with emergency services available.",
+                icon: "faucet",
+                imageColor: "linear-gradient(135deg, #1E3A8A 0%, #0A2463 100%)",
+                features: ["Leak detection", "Pipe repairs", "Drain cleaning", "Fixture installation", "Water heater service", "Emergency repairs"],
+                duration: "2-4 hours",
+                durationLabel: "Per service",
+                location: ["Kaduna", "abuja", "lagos", "port-harcourt", "ibadan"],
+                rating: 4.7,
+                totalBookings: 312,
+                available: true,
+                popular: true,
+                badge: "24/7"
+            },
+            {
+                id: "electrical",
+                name: "Electrical Work",
+                category: "handyman",
+                description: "Certified electrical services including wiring, installations, repairs, and safety inspections for residential and commercial properties.",
+                icon: "bolt",
+                imageColor: "linear-gradient(135deg, #0A2463 0%, #1E3A8A 100%)",
+                features: ["Wiring & rewiring", "Fixture installation", "Circuit breaker repair", "Safety inspections", "Generator installation", "Emergency repairs"],
+                duration: "3-5 hours",
+                durationLabel: "Per project",
+                location: ["Kaduna", "abuja", "lagos"],
+                rating: 4.9,
+                totalBookings: 267,
+                available: true,
+                popular: true,
+                badge: "Certified"
+            },
+            {
+                id: "painting",
+                name: "Painting Services",
+                category: "handyman",
+                description: "Professional interior and exterior painting services for homes and businesses with quality materials and clean-up included.",
+                icon: "paint-roller",
+                imageColor: "linear-gradient(135deg, #1E3A8A 0%, #0A2463 100%)",
+                features: ["Interior painting", "Exterior painting", "Surface preparation", "Quality paint materials", "Clean up included", "Color consultation"],
+                duration: "1-3 days",
+                durationLabel: "Per room",
+                location: ["Kaduna", "abuja", "port-harcourt", "ibadan"],
+                rating: 4.6,
+                totalBookings: 178,
+                available: true,
+                popular: false
+            },
+            {
+                id: "appliance-install",
+                name: "Appliance Installation",
+                category: "handyman",
+                description: "Professional installation of home appliances including AC units, washing machines, dishwashers, and refrigerators.",
+                icon: "plug",
+                imageColor: "linear-gradient(135deg, #0A2463 0%, #1E3A8A 100%)",
+                features: ["AC installation", "Washing machine setup", "Dishwasher installation", "Refrigerator setup", "Testing & calibration", "Safety checks"],
+                duration: "2-3 hours",
+                durationLabel: "Per appliance",
+                location: ["Kaduna", "abuja", "lagos"],
+                rating: 4.8,
+                totalBookings: 234,
+                available: true,
+                popular: true
+            },
+            {
+                id: "furniture-assembly",
+                name: "Furniture Assembly",
+                category: "handyman",
+                description: "Professional assembly of IKEA and other flat-pack furniture with all tools provided and waste removal included.",
+                icon: "couch",
+                imageColor: "linear-gradient(135deg, #1E3A8A 0%, #0A2463 100%)",
+                features: ["All tools provided", "IKEA specialist", "Waste removal", "Quality check", "Same-day service", "Warranty on assembly"],
+                duration: "1-2 hours",
+                durationLabel: "Per item",
+                location: ["Kaduna", "abuja", "lagos", "port-harcourt", "ibadan"],
+                rating: 4.7,
+                totalBookings: 456,
+                available: true,
+                popular: true,
+                badge: "Fast"
+            },
+            {
+                id: "general-repairs",
+                name: "General Repairs",
+                category: "handyman",
+                description: "Multi-skilled handyman services for various home repairs, installations, and maintenance tasks.",
+                icon: "tools",
+                imageColor: "linear-gradient(135deg, #0A2463 0%, #1E3A8A 100%)",
+                features: ["Drywall repair", "Door/window repair", "Fixture installation", "Tile work", "Gutter cleaning", "General maintenance"],
+                duration: "2-4 hours",
+                durationLabel: "Per service",
+                location: ["Kaduna", "abuja", "lagos", "port-harcourt"],
+                rating: 4.5,
+                totalBookings: 389,
+                available: true,
+                popular: false
+            },
+
+            // Logistics & Moving (7 services)
+            {
+                id: "home-moving",
+                name: "Home Moving",
+                category: "logistics",
+                description: "Complete home relocation service with professional packing, transportation, and unpacking services.",
+                icon: "truck-moving",
+                imageColor: "linear-gradient(135deg, #0A2463 0%, #1E3A8A 100%)",
+                features: ["Professional packing", "Furniture handling", "Transportation", "Unpacking service", "Insurance coverage", "Packing materials"],
+                duration: "4-8 hours",
+                durationLabel: "Per move",
+                location: ["Kaduna", "abuja", "lagos", "port-harcourt", "ibadan"],
+                rating: 4.8,
+                totalBookings: 234,
+                available: true,
+                popular: true,
+                badge: "Popular"
+            },
+            {
+                id: "office-relocation",
+                name: "Office Relocation",
+                category: "logistics",
+                description: "Professional office moving service with IT equipment handling and same-day setup for business continuity.",
+                icon: "building",
+                imageColor: "linear-gradient(135deg, #1E3A8A 0%, #0A2463 100%)",
+                features: ["IT equipment handling", "Furniture disassembly", "Same-day setup", "After-hours service", "Secure data handling", "Minimal downtime"],
+                duration: "1-2 days",
+                durationLabel: "Per relocation",
+                location: ["Kaduna", "abuja", "lagos"],
+                rating: 4.6,
+                totalBookings: 127,
+                available: true,
+                popular: true,
+                badge: "Business"
+            },
+            {
+                id: "same-day-delivery",
+                name: "Same-Day Delivery",
+                category: "logistics",
+                description: "Express delivery service for packages across the city with real-time tracking and proof of delivery.",
+                icon: "shipping-fast",
+                imageColor: "linear-gradient(135deg, #0A2463 0%, #1E3A8A 100%)",
+                features: ["Real-time tracking", "Multiple stops", "Proof of delivery", "Same-day service", "Package insurance", "Flexible scheduling"],
+                duration: "2-4 hours",
+                durationLabel: "Per delivery",
+                location: ["Kaduna", "abuja", "lagos"],
+                rating: 4.6,
+                totalBookings: 512,
+                available: true,
+                popular: true,
+                badge: "Express"
+            },
+            {
+                id: "furniture-transport",
+                name: "Furniture Transportation",
+                category: "logistics",
+                description: "Specialized transportation for large furniture items, antiques, and delicate pieces with secure handling.",
+                icon: "couch",
+                imageColor: "linear-gradient(135deg, #1E3A8A 0%, #0A2463 100%)",
+                features: ["Large item handling", "Antique specialists", "Secure wrapping", "GPS tracking", "White glove service", "Insurance included"],
+                duration: "3-5 hours",
+                durationLabel: "Per item",
+                location: ["Kaduna", "abuja", "lagos"],
+                rating: 4.7,
+                totalBookings: 89,
+                available: true,
+                popular: false
+            },
+            {
+                id: "vehicle-transport",
+                name: "Vehicle Transport",
+                category: "logistics",
+                description: "Safe and secure transportation of vehicles across Nigeria with enclosed carriers and insurance coverage.",
+                icon: "car",
+                imageColor: "linear-gradient(135deg, #0A2463 0%, #1E3A8A 100%)",
+                features: ["Enclosed carriers", "Door-to-door service", "Insurance coverage", "Real-time tracking", "Nationwide service", "Secure loading"],
+                duration: "2-7 days",
+                durationLabel: "Per vehicle",
+                location: ["Kaduna", "abuja", "lagos", "port-harcourt"],
+                rating: 4.8,
+                totalBookings: 45,
+                available: true,
+                popular: false
+            },
+            {
+                id: "international-shipping",
+                name: "International Shipping",
+                category: "logistics",
+                description: "Complete international shipping solutions for personal and commercial goods with customs clearance.",
+                icon: "globe",
+                imageColor: "linear-gradient(135deg, #1E3A8A 0%, #0A2463 100%)",
+                features: ["Air & sea freight", "Customs clearance", "Door-to-door", "Cargo insurance", "Documentation", "Tracking"],
+                duration: "7-30 days",
+                durationLabel: "Per shipment",
+                location: ["Kaduna", "abuja", "lagos"],
+                rating: 4.7,
+                totalBookings: 32,
+                available: true,
+                popular: false
+            },
+            {
+                id: "storage-solutions",
+                name: "Storage Solutions",
+                category: "logistics",
+                description: "Secure short-term and long-term storage solutions with climate control and 24/7 security.",
+                icon: "box",
+                imageColor: "linear-gradient(135deg, #0A2463 0%, #1E3A8A 100%)",
+                features: ["Climate control", "24/7 security", "Inventory management", "Pickup/delivery", "Short/long term", "Insurance"],
+                duration: "Monthly",
+                durationLabel: "Per unit/month",
+                location: ["Kaduna", "abuja", "lagos"],
+                rating: 4.6,
+                totalBookings: 78,
+                available: true,
+                popular: true
+            },
+
+            // Facility Management (7 services)
+            {
+                id: "commercial-cleaning",
+                name: "Commercial Cleaning",
+                category: "facility",
+                description: "Professional cleaning services for offices, retail spaces, and commercial properties with regular maintenance.",
+                icon: "broom",
+                imageColor: "linear-gradient(135deg, #0A2463 0%, #1E3A8A 100%)",
+                features: ["Daily cleaning", "Window cleaning", "Restroom sanitation", "Floor care", "Supply restocking", "Waste removal"],
+                duration: "Monthly",
+                durationLabel: "Per contract",
+                location: ["Kaduna", "abuja", "lagos", "port-harcourt"],
+                rating: 4.7,
+                totalBookings: 156,
+                available: true,
+                popular: true,
+                badge: "Popular"
+            },
+            {
+                id: "hvac-maintenance",
+                name: "HVAC Maintenance",
+                category: "facility",
+                description: "Professional HVAC system maintenance, repairs, and installation for commercial and residential buildings.",
+                icon: "fan",
+                imageColor: "linear-gradient(135deg, #1E3A8A 0%, #0A2463 100%)",
+                features: ["Regular maintenance", "System repairs", "Installation", "Duct cleaning", "Energy efficiency", "Emergency service"],
+                duration: "3-6 hours",
+                durationLabel: "Per service",
+                location: ["Kaduna", "abuja", "lagos"],
+                rating: 4.8,
+                totalBookings: 98,
+                available: true,
+                popular: true
+            },
+            {
+                id: "security-services",
+                name: "Security Services",
+                category: "facility",
+                description: "Comprehensive security solutions including manned guarding, surveillance, and access control systems.",
+                icon: "shield-alt",
+                imageColor: "linear-gradient(135deg, #0A2463 0%, #1E3A8A 100%)",
+                features: ["Manned guarding", "CCTV installation", "Access control", "Security audits", "Emergency response", "24/7 monitoring"],
+                duration: "Monthly",
+                durationLabel: "Per contract",
+                location: ["Kaduna", "abuja", "lagos"],
+                rating: 4.9,
+                totalBookings: 67,
+                available: true,
+                popular: false,
+                badge: "24/7"
+            },
+            {
+                id: "landscaping",
+                name: "Landscaping Services",
+                category: "facility",
+                description: "Professional landscaping and grounds maintenance for commercial properties and residential estates.",
+                icon: "leaf",
+                imageColor: "linear-gradient(135deg, #1E3A8A 0%, #0A2463 100%)",
+                features: ["Lawn care", "Garden design", "Irrigation systems", "Tree trimming", "Seasonal cleanup", "Regular maintenance"],
+                duration: "Monthly",
+                durationLabel: "Per contract",
+                location: ["Kaduna", "abuja", "lagos", "port-harcourt"],
+                rating: 4.6,
+                totalBookings: 89,
+                available: true,
+                popular: false
+            },
+            {
+                id: "waste-management",
+                name: "Waste Management",
+                category: "facility",
+                description: "Efficient waste collection, recycling, and disposal services for commercial and residential properties.",
+                icon: "trash-alt",
+                imageColor: "linear-gradient(135deg, #0A2463 0%, #1E3A8A 100%)",
+                features: ["Regular collection", "Recycling programs", "Hazardous waste", "Document shredding", "Waste audits", "Compliance"],
+                duration: "Monthly",
+                durationLabel: "Per contract",
+                location: ["Kaduna", "abuja", "lagos"],
+                rating: 4.7,
+                totalBookings: 112,
+                available: true,
+                popular: true
+            },
+            {
+                id: "pest-control",
+                name: "Pest Control",
+                category: "facility",
+                description: "Professional pest control and extermination services using safe and effective methods for all types of pests.",
+                icon: "bug",
+                imageColor: "linear-gradient(135deg, #1E3A8A 0%, #0A2463 100%)",
+                features: ["Insect control", "Rodent removal", "Termite treatment", "Regular inspections", "Safe chemicals", "Guarantee"],
+                duration: "2-3 hours",
+                durationLabel: "Per treatment",
+                location: ["Kaduna", "abuja", "lagos", "port-harcourt", "ibadan"],
+                rating: 4.8,
+                totalBookings: 145,
+                available: true,
+                popular: true
+            },
+            {
+                id: "emergency-repairs",
+                name: "Emergency Repairs",
+                category: "facility",
+                description: "24/7 emergency repair services for facility maintenance issues requiring immediate attention.",
+                icon: "exclamation-triangle",
+                imageColor: "linear-gradient(135deg, #0A2463 0%, #1E3A8A 100%)",
+                features: ["24/7 response", "Plumbing emergencies", "Electrical issues", "Structural repairs", "Quick response", "Temporary fixes"],
+                duration: "2-4 hours",
+                durationLabel: "Per emergency",
+                location: ["Kaduna", "abuja", "lagos"],
+                rating: 4.7,
+                totalBookings: 76,
+                available: true,
+                popular: true,
+                badge: "24/7"
+            }
+        ];
+
+        // ===== FILTER STATE =====
+        let currentFilters = {
+            search: '',
+            category: 'all',
+            location: 'all',
+            sortBy: 'popular'
+        };
+
+        let currentPage = 1;
+        const servicesPerPage = 9;
+
+        // ===== DOM ELEMENTS =====
+        const servicesGrid = document.getElementById('servicesGrid');
+        const resultsCount = document.getElementById('resultsCount');
+        const noResults = document.getElementById('noResults');
+        const activeFiltersContainer = document.getElementById('activeFilters');
+        const searchInput = document.getElementById('searchInput');
+        const categoryFilter = document.getElementById('categoryFilter');
+        const locationFilter = document.getElementById('locationFilter');
+        const sortBySelect = document.getElementById('sortBy');
+        const applyFiltersBtn = document.getElementById('applyFilters');
+        const resetFiltersBtn = document.getElementById('resetFilters');
+        const clearSearchFiltersBtn = document.getElementById('clearSearchFilters');
+
+        // ===== INITIALIZE SERVICES =====
+        function initializeServices() {
+            renderServices();
+            setupEventListeners();
+            updateActiveFilters();
+        }
+
+        // ===== FILTER SERVICES =====
+        function filterServices() {
+            return servicesData.filter(service => {
+                // Search filter
+                if (currentFilters.search) {
+                    const searchLower = currentFilters.search.toLowerCase();
+                    const matchesSearch = 
+                        service.name.toLowerCase().includes(searchLower) ||
+                        service.description.toLowerCase().includes(searchLower) ||
+                        service.category.toLowerCase().includes(searchLower);
+                    
+                    if (!matchesSearch) return false;
+                }
+
+                // Category filter
+                if (currentFilters.category !== 'all' && service.category !== currentFilters.category) {
+                    return false;
+                }
+
+                // Location filter
+                if (currentFilters.location !== 'all') {
+                    if (currentFilters.location === 'others') {
+                        // Check if service is NOT in major cities
+                        const majorCities = ['Kaduna', 'abuja', 'lagos', 'port-harcourt', 'ibadan'];
+                        const hasLocation = service.location.some(loc => majorCities.includes(loc));
+                        if (hasLocation) return false;
+                    } else if (!service.location.includes(currentFilters.location)) {
+                        return false;
+                    }
+                }
+
+                return true;
+            });
+        }
+
+        // ===== SORT SERVICES =====
+        function sortServices(services) {
+            switch (currentFilters.sortBy) {
+                case 'rating':
+                    return [...services].sort((a, b) => b.rating - a.rating);
+                case 'name':
+                    return [...services].sort((a, b) => a.name.localeCompare(b.name));
+                case 'popular':
+                default:
+                    return [...services].sort((a, b) => {
+                        // Sort by popularity, then rating
+                        if (b.popular !== a.popular) return b.popular - a.popular;
+                        if (b.totalBookings !== a.totalBookings) return b.totalBookings - a.totalBookings;
+                        return b.rating - a.rating;
+                    });
+            }
+        }
+
+        // ===== RENDER SERVICES (USING T.HTML LAYOUT) =====
+        function renderServices() {
+            const filteredServices = filterServices();
+            const sortedServices = sortServices(filteredServices);
+            
+            // Pagination
+            const totalPages = Math.ceil(sortedServices.length / servicesPerPage);
+            const startIndex = (currentPage - 1) * servicesPerPage;
+            const endIndex = startIndex + servicesPerPage;
+            const paginatedServices = sortedServices.slice(startIndex, endIndex);
+            
+            // Update results count
+            resultsCount.textContent = `${sortedServices.length} services found`;
+            
+            // Clear grid
+            servicesGrid.innerHTML = '';
+            
+            // Show/hide no results message
+            if (paginatedServices.length === 0) {
+                noResults.style.display = 'block';
+                servicesGrid.style.display = 'none';
+            } else {
+                noResults.style.display = 'none';
+                servicesGrid.style.display = 'grid';
+                
+                // Render service cards
+                paginatedServices.forEach(service => {
+                    const serviceCard = document.createElement('div');
+                    serviceCard.className = 'service-card';
+                    serviceCard.dataset.id = service.id;
+                    
+                    serviceCard.innerHTML = `
+                        ${service.badge ? `<div class="service-badge">${service.badge}</div>` : ''}
+                        <div class="service-image" style="background: ${service.imageColor};">
+                            <i class="fas fa-${service.icon}"></i>
+                            <div class="service-overlay">
+                                <div class="service-category">${service.category.toUpperCase()}</div>
+                                <h3 class="service-title">${service.name}</h3>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <p class="service-description">${service.description}</p>
+                            
+                            <div class="service-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-clock detail-icon"></i>
+                                    <div>
+                                        <div class="detail-label">Duration</div>
+                                        <div class="detail-value">${service.duration}</div>
+                                    </div>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-star detail-icon"></i>
+                                    <div>
+                                        <div class="detail-label">Rating</div>
+                                        <div class="detail-value">${service.rating.toFixed(1)}/5</div>
+                                    </div>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-map-marker-alt detail-icon"></i>
+                                    <div>
+                                        <div class="detail-label">Locations</div>
+                                        <div class="detail-value">${service.location.length} cities</div>
+                                    </div>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-calendar-check detail-icon"></i>
+                                    <div>
+                                        <div class="detail-label">Bookings</div>
+                                        <div class="detail-value">${service.totalBookings}+</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="service-actions">
+                                <div class="service-info">
+                                    <div class="service-availability">
+                                        <i class="fas fa-check-circle"></i>
+                                        Available Now
+                                    </div>
+                                    <div class="service-location">
+                                        <i class="fas fa-map-pin"></i>
+                                        ${service.location.join(', ')}
+                                    </div>
+                                </div>
+                                <a href="booking.html?service=${service.id}" class="btn btn-primary btn-small">
+                                    <i class="fas fa-calendar-check"></i>
+                                    Book Now
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                    
+                    servicesGrid.appendChild(serviceCard);
+                });
+            }
+            
+            // Render pagination
+            renderPagination(sortedServices.length, totalPages);
+        }
+
+        // ===== RENDER PAGINATION =====
+        function renderPagination(totalServices, totalPages) {
+            const pagination = document.getElementById('pagination');
+            pagination.innerHTML = '';
+            
+            if (totalPages <= 1) return;
+            
+            // Previous button
+            const prevBtn = document.createElement('button');
+            prevBtn.className = `pagination-btn ${currentPage === 1 ? 'disabled' : ''}`;
+            prevBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
+            prevBtn.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderServices();
+                }
+            });
+            pagination.appendChild(prevBtn);
+            
+            // Page numbers
+            const maxVisiblePages = 5;
+            let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+            let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+            
+            if (endPage - startPage + 1 < maxVisiblePages) {
+                startPage = Math.max(1, endPage - maxVisiblePages + 1);
+            }
+            
+            // First page
+            if (startPage > 1) {
+                const firstPageBtn = document.createElement('button');
+                firstPageBtn.className = 'pagination-btn';
+                firstPageBtn.textContent = '1';
+                firstPageBtn.addEventListener('click', () => {
+                    currentPage = 1;
+                    renderServices();
+                });
+                pagination.appendChild(firstPageBtn);
+                
+                if (startPage > 2) {
+                    const ellipsis = document.createElement('span');
+                    ellipsis.className = 'pagination-ellipsis';
+                    ellipsis.textContent = '...';
+                    pagination.appendChild(ellipsis);
+                }
+            }
+            
+            // Page numbers
+            for (let i = startPage; i <= endPage; i++) {
+                const pageBtn = document.createElement('button');
+                pageBtn.className = `pagination-btn ${i === currentPage ? 'active' : ''}`;
+                pageBtn.textContent = i;
+                pageBtn.addEventListener('click', () => {
+                    currentPage = i;
+                    renderServices();
+                });
+                pagination.appendChild(pageBtn);
+            }
+            
+            // Last page
+            if (endPage < totalPages) {
+                if (endPage < totalPages - 1) {
+                    const ellipsis = document.createElement('span');
+                    ellipsis.className = 'pagination-ellipsis';
+                    ellipsis.textContent = '...';
+                    pagination.appendChild(ellipsis);
+                }
+                
+                const lastPageBtn = document.createElement('button');
+                lastPageBtn.className = 'pagination-btn';
+                lastPageBtn.textContent = totalPages;
+                lastPageBtn.addEventListener('click', () => {
+                    currentPage = totalPages;
+                    renderServices();
+                });
+                pagination.appendChild(lastPageBtn);
+            }
+            
+            // Next button
+            const nextBtn = document.createElement('button');
+            nextBtn.className = `pagination-btn ${currentPage === totalPages ? 'disabled' : ''}`;
+            nextBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+            nextBtn.addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderServices();
+                }
+            });
+            pagination.appendChild(nextBtn);
+        }
+
+        // ===== UPDATE ACTIVE FILTERS =====
+        function updateActiveFilters() {
+            activeFiltersContainer.innerHTML = '';
+            
+            // Search filter
+            if (currentFilters.search) {
+                const badge = createFilterBadge('search', `Search: "${currentFilters.search}"`);
+                activeFiltersContainer.appendChild(badge);
+            }
+            
+            // Category filter
+            if (currentFilters.category !== 'all') {
+                const categoryName = categoryFilter.options[categoryFilter.selectedIndex].text;
+                const badge = createFilterBadge('category', `Category: ${categoryName}`);
+                activeFiltersContainer.appendChild(badge);
+            }
+            
+            // Location filter
+            if (currentFilters.location !== 'all') {
+                const locationName = locationFilter.options[locationFilter.selectedIndex].text;
+                const badge = createFilterBadge('location', `Location: ${locationName}`);
+                activeFiltersContainer.appendChild(badge);
+            }
+            
+            // Clear all filters link
+            if (activeFiltersContainer.children.length > 0) {
+                const clearAll = document.createElement('div');
+                clearAll.className = 'clear-filters';
+                clearAll.innerHTML = '<i class="fas fa-times"></i> Clear all filters';
+                clearAll.addEventListener('click', resetFilters);
+                activeFiltersContainer.appendChild(clearAll);
+            }
+        }
+
+        function createFilterBadge(type, text) {
+            const badge = document.createElement('div');
+            badge.className = 'filter-badge active';
+            badge.innerHTML = `
+                <span>${text}</span>
+                <i class="fas fa-times"></i>
+            `;
+            
+            badge.addEventListener('click', (e) => {
+                e.stopPropagation();
+                removeFilter(type);
+            });
+            
+            return badge;
+        }
+
+        function removeFilter(type) {
+            switch (type) {
+                case 'search':
+                    currentFilters.search = '';
+                    searchInput.value = '';
+                    break;
+                case 'category':
+                    currentFilters.category = 'all';
+                    categoryFilter.value = 'all';
+                    break;
+                case 'location':
+                    currentFilters.location = 'all';
+                    locationFilter.value = 'all';
+                    break;
+            }
+            
+            currentPage = 1;
+            renderServices();
+            updateActiveFilters();
+        }
+
+        // ===== RESET FILTERS =====
+        function resetFilters() {
+            currentFilters = {
+                search: '',
+                category: 'all',
+                location: 'all',
+                sortBy: 'popular'
+            };
+            
+            searchInput.value = '';
+            categoryFilter.value = 'all';
+            locationFilter.value = 'all';
+            sortBySelect.value = 'popular';
+            
+            currentPage = 1;
+            renderServices();
+            updateActiveFilters();
+        }
+
+        // ===== APPLY FILTERS =====
+        function applyFilters() {
+            currentFilters.search = searchInput.value.trim().toLowerCase();
+            currentFilters.category = categoryFilter.value;
+            currentFilters.location = locationFilter.value;
+            currentFilters.sortBy = sortBySelect.value;
+            
+            currentPage = 1;
+            renderServices();
+            updateActiveFilters();
+        }
+
+        // ===== SETUP EVENT LISTENERS =====
+        function setupEventListeners() {
+            // Apply filters button
+            applyFiltersBtn.addEventListener('click', applyFilters);
+            
+            // Reset filters button
+            resetFiltersBtn.addEventListener('click', resetFilters);
+            
+            // Clear search filters button
+            clearSearchFiltersBtn.addEventListener('click', resetFilters);
+            
+            // Search input (debounced)
+            let searchTimeout;
+            searchInput.addEventListener('input', () => {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    applyFilters();
+                }, 500);
+            });
+            
+            // Sort select
+            sortBySelect.addEventListener('change', () => {
+                currentFilters.sortBy = sortBySelect.value;
+                renderServices();
+            });
+        }
+
+        // ===== SESSION MANAGEMENT =====
+        function checkSession() {
+            const session = localStorage.getItem('primer_user_session');
+            
+            if (session) {
+                try {
+                    const userData = JSON.parse(session);
+                    
+                    // Check if session is still valid
+                    if (new Date() < new Date(userData.expires)) {
+                        // Update user actions in header
+                        const userActions = document.querySelector('.user-actions');
+                        if (userActions) {
+                            userActions.innerHTML = `
+                                <div class="user-profile" onclick="window.location.href='dashboard.html'">
+                                    <div class="user-avatar">${userData.name.charAt(0)}</div>
+                                    <span>${userData.name.split(' ')[0]}</span>
+                                </div>
+                                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                                    <i class="fas fa-bars"></i>
+                                </button>
+                            `;
+                            
+                            // Update mobile menu
+                            const mobileAuth = document.querySelector('.mobile-auth');
+                            if (mobileAuth) {
+                                mobileAuth.innerHTML = `
+                                    <a href="dashboard.html" class="btn btn-outline btn-full">Dashboard</a>
+                                    <button class="btn btn-primary btn-full" onclick="logout()">Log Out</button>
+                                `;
+                            }
+                        }
+                    } else {
+                        // Session expired
+                        localStorage.removeItem('primer_user_session');
+                    }
+                } catch (e) {
+                    console.error('Error parsing session data:', e);
+                    localStorage.removeItem('primer_user_session');
+                }
+            }
+        }
+
+        // ===== LOGOUT FUNCTION =====
+        function logout() {
+            localStorage.removeItem('primer_user_session');
+            window.location.href = 'index.html';
+        }
+
+        // ===== INITIALIZE =====
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeServices();
+            checkSession();
+        });
+    </script>
+</body>
+</html>

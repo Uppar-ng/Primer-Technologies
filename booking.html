@@ -1,0 +1,2761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Service - Primer Technologies</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== CSS RESET & GLOBAL STYLES ===== */
+        :root {
+            --primary: #0A2463;
+            --primary-light: #1E3A8A;
+            --accent: #FFB347;
+            --accent-light: #FFCC80;
+            --white: #FFFFFF;
+            --surface: #F8FAFC;
+            --text-primary: #1F2937;
+            --text-secondary: #6B7280;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --error: #EF4444;
+            --border: #E5E7EB;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --radius-sm: 4px;
+            --radius: 8px;
+            --radius-lg: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--surface);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.875rem 1.75rem;
+            font-weight: 600;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-size: 1rem;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-accent {
+            background-color: var(--accent);
+            color: var(--white);
+        }
+
+        .btn-accent:hover {
+            background-color: var(--accent-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-large {
+            padding: 1rem 2rem;
+            font-size: 1.125rem;
+        }
+
+        .btn-full {
+            width: 100%;
+        }
+
+        /* ===== HEADER & NAVIGATION ===== */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .nav-desktop {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--text-primary);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            padding: 1rem;
+            display: none;
+            flex-direction: column;
+            gap: 1rem;
+            z-index: 999;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        /* ===== LOGIN REQUIRED OVERLAY ===== */
+        .login-required-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 1rem;
+        }
+
+        .login-required-overlay.active {
+            display: flex;
+        }
+
+        .login-required-modal {
+            background-color: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 3rem 2rem;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-required-icon {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .login-required-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        /* ===== BOOKING PAGE LAYOUT ===== */
+        .booking-page {
+            min-height: 100vh;
+            padding: 8rem 0 3rem;
+        }
+
+        .booking-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .booking-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .booking-header h1 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .booking-wizard {
+            background-color: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* ===== WIZARD PROGRESS ===== */
+        .wizard-progress {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            padding: 2rem;
+            color: var(--white);
+        }
+
+        .wizard-progress h3 {
+            color: var(--white);
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin: 0 auto;
+            max-width: 800px;
+        }
+
+        .progress-steps::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: rgba(255, 255, 255, 0.3);
+            z-index: 1;
+        }
+
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+        }
+
+        .step-indicator {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.3);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .progress-step.active .step-indicator {
+            background-color: var(--accent);
+            color: var(--text-primary);
+            transform: scale(1.1);
+        }
+
+        .progress-step.completed .step-indicator {
+            background-color: var(--accent-light);
+            color: var(--text-primary);
+        }
+
+        .step-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .progress-step.active .step-label {
+            color: var(--white);
+            font-weight: 700;
+        }
+
+        /* ===== WIZARD CONTENT ===== */
+        .wizard-content {
+            padding: 2rem;
+        }
+
+        .wizard-step {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .wizard-step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .step-header {
+            margin-bottom: 2rem;
+        }
+
+        .step-header h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .step-description {
+            color: var(--text-secondary);
+        }
+
+        /* ===== FORM STYLES ===== */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .form-label .required {
+            color: var(--error);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(10, 36, 99, 0.1);
+        }
+
+        .form-input.error {
+            border-color: var(--error);
+        }
+
+        .error-message {
+            color: var(--error);
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-textarea {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            resize: vertical;
+            min-height: 120px;
+            transition: var(--transition);
+        }
+
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(10, 36, 99, 0.1);
+        }
+
+        /* ===== SERVICE SELECTION ===== */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .service-option {
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .service-option:hover {
+            border-color: var(--primary);
+            background-color: rgba(10, 36, 99, 0.05);
+        }
+
+        .service-option.selected {
+            border-color: var(--primary);
+            background-color: rgba(10, 36, 99, 0.1);
+            box-shadow: 0 0 0 2px rgba(10, 36, 99, 0.2);
+        }
+
+        .service-option-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .service-option-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .service-option-price {
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .service-option-duration {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        /* ===== SCHEDULING ===== */
+        .scheduling-options {
+            margin-top: 1.5rem;
+        }
+
+        .scheduling-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 1.5rem;
+        }
+
+        .scheduling-tab {
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            transition: var(--transition);
+        }
+
+        .scheduling-tab:hover {
+            color: var(--primary);
+        }
+
+        .scheduling-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .calendar-container {
+            margin-bottom: 2rem;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .calendar-nav-btn {
+            background: none;
+            border: none;
+            font-size: 1.25rem;
+            color: var(--primary);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+
+        .calendar-nav-btn:hover {
+            background-color: var(--surface);
+        }
+
+        .current-month {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .calendar-day-header {
+            text-align: center;
+            font-weight: 600;
+            padding: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .calendar-day {
+            text-align: center;
+            padding: 0.75rem 0.5rem;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .calendar-day:hover {
+            background-color: var(--surface);
+            border-color: var(--border);
+        }
+
+        .calendar-day.selected {
+            background-color: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+
+        .calendar-day.disabled {
+            color: var(--border);
+            cursor: not-allowed;
+        }
+
+        .calendar-day.disabled:hover {
+            background-color: transparent;
+            border-color: transparent;
+        }
+
+        .calendar-day.today {
+            border: 2px solid var(--accent);
+        }
+
+        .time-slots-container {
+            margin-top: 2rem;
+        }
+
+        .time-slots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .time-slot {
+            padding: 0.75rem;
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .time-slot:hover {
+            border-color: var(--primary);
+            background-color: rgba(10, 36, 99, 0.05);
+        }
+
+        .time-slot.selected {
+            background-color: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+
+        .time-slot.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .time-slot.disabled:hover {
+            border-color: var(--border);
+            background-color: transparent;
+        }
+
+        /* ===== ASAP OPTION ===== */
+        .asap-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem;
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: var(--transition);
+            margin-bottom: 1.5rem;
+        }
+
+        .asap-option:hover {
+            border-color: var(--accent);
+            background-color: rgba(255, 179, 71, 0.05);
+        }
+
+        .asap-option.selected {
+            border-color: var(--accent);
+            background-color: rgba(255, 179, 71, 0.1);
+            box-shadow: 0 0 0 2px rgba(255, 179, 71, 0.2);
+        }
+
+        .asap-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .asap-icon {
+            font-size: 2rem;
+            color: var(--accent);
+        }
+
+        .asap-info h4 {
+            margin-bottom: 0.25rem;
+        }
+
+        .asap-info p {
+            margin-bottom: 0;
+            font-size: 0.875rem;
+        }
+
+        .asap-price {
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        /* ===== FILE UPLOAD ===== */
+        .upload-area {
+            border: 3px dashed var(--border);
+            border-radius: var(--radius-lg);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary);
+            background-color: rgba(10, 36, 99, 0.05);
+        }
+
+        .upload-area.dragover {
+            border-color: var(--accent);
+            background-color: rgba(255, 179, 71, 0.1);
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .upload-hint {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .upload-requirements {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .image-preview-container {
+            margin-top: 1.5rem;
+        }
+
+        .image-preview-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .image-preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .preview-item {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            height: 150px;
+            box-shadow: var(--shadow);
+        }
+
+        .preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .remove-image {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background-color: rgba(239, 68, 68, 0.9);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .remove-image:hover {
+            background-color: var(--error);
+            transform: scale(1.1);
+        }
+
+        .upload-progress {
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background-color: var(--border);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--success);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+
+        /* ===== BOOKING SUMMARY ===== */
+        .booking-summary {
+            background-color: var(--surface);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .summary-title {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+        }
+
+        .summary-label {
+            color: var(--text-secondary);
+        }
+
+        .summary-value {
+            font-weight: 600;
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-top: 2px solid var(--border);
+            margin-top: 0.5rem;
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .payment-options {
+            margin-top: 2rem;
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .payment-method {
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .payment-method:hover {
+            border-color: var(--primary);
+        }
+
+        .payment-method.selected {
+            border-color: var(--primary);
+            background-color: rgba(10, 36, 99, 0.05);
+            box-shadow: 0 0 0 2px rgba(10, 36, 99, 0.1);
+        }
+
+        .payment-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .payment-name {
+            font-weight: 600;
+        }
+
+        /* ===== FORM ACTIONS ===== */
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            padding: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .back-btn {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .back-btn:hover {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .next-btn, .submit-btn {
+            min-width: 150px;
+        }
+
+        /* ===== LOADING OVERLAY ===== */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 3000;
+        }
+
+        .loading-overlay.active {
+            display: flex;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid var(--white);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ===== SUCCESS MESSAGE ===== */
+        .success-message {
+            text-align: center;
+            padding: 4rem 2rem;
+            display: none;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            color: var(--success);
+            margin-bottom: 1.5rem;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background-color: var(--text-primary);
+            color: var(--white);
+            padding: 4rem 0 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo-img {
+            height: 35px;
+            width: auto;
+        }
+
+        .footer-logo-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+
+        .footer-description {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background-color: var(--accent);
+            color: var(--text-primary);
+        }
+
+        .footer-heading {
+            font-size: 1.125rem;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-link {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-link a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: var(--transition);
+        }
+
+        .footer-link a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .contact-item i {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .copyright {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.875rem;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-bottom-link {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.875rem;
+            transition: var(--transition);
+        }
+
+        .footer-bottom-link:hover {
+            color: var(--accent);
+        }
+
+        /* ===== RESPONSIVE STYLES ===== */
+        @media (max-width: 1024px) {
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .progress-steps {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+            
+            .progress-step {
+                flex: 0 0 calc(33.333% - 1rem);
+            }
+            
+            .services-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 0.75rem 0;
+            }
+            
+            .nav-desktop {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .user-actions .btn {
+                display: none;
+            }
+            
+            .booking-page {
+                padding: 7rem 0 2rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .payment-methods {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .back-btn, .next-btn, .submit-btn {
+                width: 100%;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .progress-step {
+                flex: 0 0 calc(50% - 1rem);
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .wizard-progress {
+                padding: 1.5rem 1rem;
+            }
+            
+            .wizard-content {
+                padding: 1.5rem;
+            }
+            
+            .calendar-grid {
+                gap: 0.25rem;
+            }
+            
+            .calendar-day {
+                padding: 0.5rem 0.25rem;
+                font-size: 0.875rem;
+            }
+            
+            .time-slots-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo-container">
+                <div class="logo-img-placeholder" style="width: 40px; height: 40px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">PT</div>
+                <div class="logo-text">Primer</div>
+            </div>
+            
+            <nav class="nav-desktop">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="services.html" class="nav-link">Services</a>
+                <a href="booking.html" class="nav-link active">Book Now</a>
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+            
+            <div class="user-actions">
+                <div class="user-profile" id="userProfile">
+                    <!-- User profile will be loaded by JavaScript -->
+                </div>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="services.html" class="nav-link">Services</a>
+            <a href="booking.html" class="nav-link active">Book Now</a>
+            <a href="dashboard.html" class="nav-link">Dashboard</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+            <div class="mobile-auth" id="mobileAuth">
+                <!-- Auth buttons will be loaded by JavaScript -->
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== LOGIN REQUIRED OVERLAY ===== -->
+    <div class="login-required-overlay" id="loginRequiredOverlay">
+        <div class="login-required-modal">
+            <div class="login-required-icon">
+                <i class="fas fa-lock"></i>
+            </div>
+            <h2>Login Required</h2>
+            <p>You need to be logged in to book a service. Please sign up or log in to continue.</p>
+            <div class="login-required-actions">
+                <a href="login.html" class="btn btn-primary">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Log In
+                </a>
+                <a href="register.html" class="btn btn-accent">
+                    <i class="fas fa-user-plus"></i>
+                    Sign Up
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== BOOKING PAGE ===== -->
+    <section class="booking-page" id="bookingPage">
+        <div class="container booking-container">
+            <div class="booking-header">
+                <h1>Book a Service</h1>
+                <p>Complete the form below to book your logistics or handyman service. Follow the steps to finalize your booking.</p>
+            </div>
+
+            <!-- NETLIFY FORM (Hidden until final step) -->
+            <form name="booking" 
+                  method="POST" 
+                  enctype="multipart/form-data"
+                  data-netlify="true"
+                  data-netlify-honeypot="bot-field"
+                  id="netlifyForm"
+                  style="display: none;">
+                <input type="hidden" name="form-name" value="booking">
+                <input type="text" name="bot-field" style="display: none;">
+                
+                <!-- Form fields will be populated by JavaScript -->
+                <input type="hidden" name="service_type" id="formServiceType">
+                <input type="hidden" name="scheduled_date" id="formDate">
+                <input type="hidden" name="scheduled_time" id="formTime">
+                <input type="hidden" name="customer_name" id="formCustomerName">
+                <input type="hidden" name="customer_email" id="formCustomerEmail">
+                <input type="hidden" name="customer_phone" id="formCustomerPhone">
+                <input type="hidden" name="customer_address" id="formCustomerAddress">
+                <input type="hidden" name="special_instructions" id="formInstructions">
+                <input type="hidden" name="total_price" id="formTotalPrice">
+                <input type="hidden" name="payment_method" id="formPaymentMethod">
+                
+                <!-- File upload will be handled by Netlify -->
+                <input type="file" name="service_images" id="formImages" multiple accept="image/*" style="display: none;">
+            </form>
+
+            <!-- BOOKING WIZARD -->
+            <div class="booking-wizard" id="bookingWizard">
+                <!-- Progress Steps -->
+                <div class="wizard-progress">
+                    <h3>Booking Process</h3>
+                    <div class="progress-steps">
+                        <div class="progress-step active" data-step="1">
+                            <div class="step-indicator">1</div>
+                            <div class="step-label">Select Service</div>
+                        </div>
+                        <div class="progress-step" data-step="2">
+                            <div class="step-indicator">2</div>
+                            <div class="step-label">Schedule</div>
+                        </div>
+                        <div class="progress-step" data-step="3">
+                            <div class="step-indicator">3</div>
+                            <div class="step-label">Upload Images</div>
+                        </div>
+                        <div class="progress-step" data-step="4">
+                            <div class="step-indicator">4</div>
+                            <div class="step-label">Your Details</div>
+                        </div>
+                        <div class="progress-step" data-step="5">
+                            <div class="step-indicator">5</div>
+                            <div class="step-label">Confirmation</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wizard Content -->
+                <div class="wizard-content">
+                    <!-- Step 1: Select Service -->
+                    <div class="wizard-step active" id="step1">
+                        <div class="step-header">
+                            <h3>Select Your Service</h3>
+                            <p class="step-description">Choose the service you need from our available options.</p>
+                        </div>
+                        
+                        <div class="services-grid" id="servicesGrid">
+                            <!-- Services will be loaded dynamically -->
+                        </div>
+                        
+                        <div class="error-message" id="serviceError">Please select a service to continue.</div>
+                    </div>
+
+                    <!-- Step 2: Schedule -->
+                    <div class="wizard-step" id="step2">
+                        <div class="step-header">
+                            <h3>Schedule Your Service</h3>
+                            <p class="step-description">Select a date and time for your service, or choose ASAP for immediate service.</p>
+                        </div>
+                        
+                        <div class="asap-option" id="asapOption">
+                            <div class="asap-left">
+                                <div class="asap-icon">
+                                    <i class="fas fa-bolt"></i>
+                                </div>
+                                <div class="asap-info">
+                                    <h4>ASAP Service</h4>
+                                    <p>Get a professional dispatched immediately (within 1-2 hours)</p>
+                                </div>
+                            </div>
+                            <div class="asap-price">+₦5,000</div>
+                        </div>
+                        
+                        <div class="scheduling-options">
+                            <div class="scheduling-tabs">
+                                <div class="scheduling-tab active" data-tab="calendar">Select Date & Time</div>
+                            </div>
+                            
+                            <div class="calendar-container">
+                                <div class="calendar-header">
+                                    <button class="calendar-nav-btn" id="prevMonth">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </button>
+                                    <div class="current-month" id="currentMonth">January 2024</div>
+                                    <button class="calendar-nav-btn" id="nextMonth">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </button>
+                                </div>
+                                
+                                <div class="calendar-grid" id="calendarGrid">
+                                    <!-- Calendar will be generated dynamically -->
+                                </div>
+                                
+                                <div class="time-slots-container" id="timeSlotsContainer">
+                                    <h4>Available Time Slots</h4>
+                                    <div class="time-slots-grid" id="timeSlotsGrid">
+                                        <!-- Time slots will be generated dynamically -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="error-message" id="scheduleError">Please select a date and time or choose ASAP service.</div>
+                    </div>
+
+                    <!-- Step 3: Upload Images -->
+                    <div class="wizard-step" id="step3">
+                        <div class="step-header">
+                            <h3>Upload Reference Images</h3>
+                            <p class="step-description">Upload photos to help our provider understand the scope of work (optional but recommended).</p>
+                        </div>
+                        
+                        <div class="upload-area" id="uploadArea">
+                            <div class="upload-icon">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <h4>Drop images here or click to browse</h4>
+                            <p class="upload-hint">Upload up to 5 images (JPG, PNG, WebP)</p>
+                            <p class="upload-requirements">Maximum file size: 5MB per image</p>
+                            <input type="file" class="file-input" id="fileInput" multiple accept="image/*">
+                        </div>
+                        
+                        <div class="upload-progress" id="uploadProgress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill"></div>
+                            </div>
+                            <div class="progress-text" id="progressText">Uploading...</div>
+                        </div>
+                        
+                        <div class="image-preview-container" id="imagePreviewContainer">
+                            <!-- Image previews will be added here -->
+                        </div>
+                        
+                        <div class="error-message" id="uploadError">Maximum 5 images allowed. Each image must be less than 5MB.</div>
+                    </div>
+
+                    <!-- Step 4: Customer Details -->
+                    <div class="wizard-step" id="step4">
+                        <div class="step-header">
+                            <h3>Your Contact Details</h3>
+                            <p class="step-description">Provide your information so we can confirm your booking and send updates.</p>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Full Name <span class="required">*</span></label>
+                                <input type="text" class="form-input" id="customerName" placeholder="Enter your full name">
+                                <div class="error-message" id="nameError">Please enter your full name.</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Email Address <span class="required">*</span></label>
+                                <input type="email" class="form-input" id="customerEmail" placeholder="Enter your email">
+                                <div class="error-message" id="emailError">Please enter a valid email address.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Phone Number <span class="required">*</span></label>
+                                <input type="tel" class="form-input" id="customerPhone" placeholder="+234 800 123 4567">
+                                <div class="error-message" id="phoneError">Please enter a valid phone number.</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Service Address <span class="required">*</span></label>
+                                <input type="text" class="form-input" id="customerAddress" placeholder="Enter service location">
+                                <div class="error-message" id="addressError">Please enter the service address.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Special Instructions (Optional)</label>
+                            <textarea class="form-textarea" id="specialInstructions" placeholder="Any special requirements or instructions for the provider..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Step 5: Confirmation & Payment -->
+                    <div class="wizard-step" id="step5">
+                        <div class="step-header">
+                            <h3>Confirmation & Payment</h3>
+                            <p class="step-description">Review your booking details and select a payment method.</p>
+                        </div>
+                        
+                        <div class="booking-summary">
+                            <h4 class="summary-title">Booking Summary</h4>
+                            
+                            <div class="summary-item">
+                                <span class="summary-label">Service:</span>
+                                <span class="summary-value" id="summaryService">-</span>
+                            </div>
+                            
+                            <div class="summary-item">
+                                <span class="summary-label">Provider Assignment:</span>
+                                <span class="summary-value">Automatic (We'll assign the best available provider)</span>
+                            </div>
+                            
+                            <div class="summary-item">
+                                <span class="summary-label">Schedule:</span>
+                                <span class="summary-value" id="summarySchedule">-</span>
+                            </div>
+                            
+                            <div class="summary-item">
+                                <span class="summary-label">Service Price:</span>
+                                <span class="summary-value" id="summaryServicePrice">₦0</span>
+                            </div>
+                            
+                            <div class="summary-item" id="asapFeeItem" style="display: none;">
+                                <span class="summary-label">ASAP Fee:</span>
+                                <span class="summary-value">₦5,000</span>
+                            </div>
+                            
+                            <div class="summary-total">
+                                <span class="summary-label">Total Amount:</span>
+                                <span class="summary-value" id="summaryTotal">₦0</span>
+                            </div>
+                            
+                            <div class="payment-options">
+                                <h4>Select Payment Method</h4>
+                                <div class="payment-methods">
+                                    <div class="payment-method" data-method="pay_on_service">
+                                        <div class="payment-icon">
+                                            <i class="fas fa-money-bill-wave"></i>
+                                        </div>
+                                        <div class="payment-name">Pay on Service</div>
+                                    </div>
+                                    
+                                    <div class="payment-method" data-method="card">
+                                        <div class="payment-icon">
+                                            <i class="fas fa-credit-card"></i>
+                                        </div>
+                                        <div class="payment-name">Credit/Debit Card</div>
+                                    </div>
+                                    
+                                    <div class="payment-method" data-method="transfer">
+                                        <div class="payment-icon">
+                                            <i class="fas fa-university"></i>
+                                        </div>
+                                        <div class="payment-name">Bank Transfer</div>
+                                    </div>
+                                    
+                                    <div class="payment-method" data-method="wallet">
+                                        <div class="payment-icon">
+                                            <i class="fas fa-wallet"></i>
+                                        </div>
+                                        <div class="payment-name">Digital Wallet</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="error-message" id="paymentError">Please select a payment method.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group" style="margin-top: 2rem;">
+                            <label class="form-label">
+                                <input type="checkbox" id="termsAgreement" style="margin-right: 0.5rem;">
+                                I agree to the <a href="#" style="color: var(--primary);">Terms of Service</a> and understand that a booking fee may apply for cancellations.
+                            </label>
+                            <div class="error-message" id="termsError">Please agree to the terms to continue.</div>
+                        </div>
+                    </div>
+
+                    <!-- Success Message (Shown after submission) -->
+                    <div class="success-message" id="successMessage">
+                        <div class="success-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h3>Booking Confirmed!</h3>
+                        <p>Your service has been booked successfully. A confirmation email has been sent to your inbox.</p>
+                        <p style="font-weight: 600; margin-top: 1rem;">Booking ID: <span id="bookingId">PRM-2024-001</span></p>
+                        <p style="color: var(--text-secondary); margin-top: 0.5rem;">A provider will be assigned to your booking shortly.</p>
+                        <div style="margin-top: 2rem;">
+                            <a href="dashboard.html" class="btn btn-primary">
+                                <i class="fas fa-tachometer-alt"></i>
+                                Go to Dashboard
+                            </a>
+                            <a href="index.html" class="btn btn-outline" style="margin-left: 1rem;">
+                                <i class="fas fa-home"></i>
+                                Back to Home
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="form-actions" id="formActions">
+                    <button class="btn btn-outline back-btn" id="backBtn">
+                        <i class="fas fa-arrow-left"></i>
+                        Back
+                    </button>
+                    <button class="btn btn-primary next-btn" id="nextBtn">
+                        Next
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button class="btn btn-accent submit-btn" id="submitBtn" style="display: none;">
+                        <i class="fas fa-paper-plane"></i>
+                        Confirm Booking
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== LOADING OVERLAY ===== -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <div class="footer-logo-container">
+                        <div class="footer-logo-img-placeholder" style="width: 35px; height: 35px; background: var(--accent); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">PT</div>
+                        <div class="footer-logo-text">Primer</div>
+                    </div>
+                    <p class="footer-description">Premium logistics and handyman services platform. Professional, reliable, and on-demand.</p>
+                    
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Services</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="services.html">Home Moving</a></li>
+                        <li class="footer-link"><a href="services.html">Office Relocation</a></li>
+                        <li class="footer-link"><a href="services.html">Furniture Assembly</a></li>
+                        <li class="footer-link"><a href="services.html">Home Repairs</a></li>
+                        <li class="footer-link"><a href="services.html">Appliance Installation</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Company</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="#">About Us</a></li>
+                        <li class="footer-link"><a href="#">Careers</a></li>
+                        <li class="footer-link"><a href="contact.html">Contact</a></li>
+                        <li class="footer-link"><a href="#">Blog</a></li>
+                        <li class="footer-link"><a href="#">Press</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4 class="footer-heading">Contact Info</h4>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>123 Business District, Lagos, Nigeria</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+234 (0) 800 123 4567</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>get.primer@proton.me</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Mon-Sun: 6am - 10pm</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">© 2026 Primer Technologies. All rights reserved.</p>
+                
+                <div class="footer-bottom-links">
+                    <a href="#" class="footer-bottom-link">Privacy Policy</a>
+                    <a href="#" class="footer-bottom-link">Terms of Service</a>
+                    <a href="#" class="footer-bottom-link">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ===== SESSION MANAGEMENT =====
+        function checkSession() {
+            const session = localStorage.getItem('primer_user_session');
+            
+            if (!session) {
+                // Show login required overlay
+                document.getElementById('loginRequiredOverlay').classList.add('active');
+                document.getElementById('bookingPage').style.display = 'none';
+                updateHeaderForGuest();
+                return null;
+            }
+            
+            try {
+                const userData = JSON.parse(session);
+                
+                // Check if session is still valid
+                if (new Date() > new Date(userData.expires)) {
+                    localStorage.removeItem('primer_user_session');
+                    document.getElementById('loginRequiredOverlay').classList.add('active');
+                    document.getElementById('bookingPage').style.display = 'none';
+                    updateHeaderForGuest();
+                    return null;
+                }
+                
+                // Update session expiration
+                userData.expires = new Date(Date.now() + 2 * 60 * 60 * 1000).toISOString();
+                localStorage.setItem('primer_user_session', JSON.stringify(userData));
+                
+                // Hide login required overlay
+                document.getElementById('loginRequiredOverlay').classList.remove('active');
+                document.getElementById('bookingPage').style.display = 'block';
+                
+                // Update header for logged in user
+                updateHeaderForUser(userData);
+                
+                return userData;
+            } catch (e) {
+                console.error('Error parsing session data:', e);
+                localStorage.removeItem('primer_user_session');
+                document.getElementById('loginRequiredOverlay').classList.add('active');
+                document.getElementById('bookingPage').style.display = 'none';
+                updateHeaderForGuest();
+                return null;
+            }
+        }
+
+        function updateHeaderForGuest() {
+            // Update desktop header
+            const userProfile = document.getElementById('userProfile');
+            if (userProfile) {
+                userProfile.innerHTML = `
+                    <a href="login.html" class="btn btn-outline">Log In</a>
+                    <a href="register.html" class="btn btn-primary">Sign Up</a>
+                `;
+            }
+            
+            // Update mobile menu
+            const mobileAuth = document.getElementById('mobileAuth');
+            if (mobileAuth) {
+                mobileAuth.innerHTML = `
+                    <a href="login.html" class="btn btn-outline btn-full">Log In</a>
+                    <a href="register.html" class="btn btn-primary btn-full">Sign Up</a>
+                `;
+            }
+        }
+
+        function updateHeaderForUser(userData) {
+            // Update desktop header
+            const userProfile = document.getElementById('userProfile');
+            if (userProfile) {
+                userProfile.innerHTML = `
+                    <div class="user-profile" onclick="window.location.href='dashboard.html'">
+                        <div class="user-avatar">${userData.name ? userData.name.charAt(0).toUpperCase() : 'U'}</div>
+                        <span>${userData.name ? userData.name.split(' ')[0] : 'User'}</span>
+                    </div>
+                `;
+            }
+            
+            // Update mobile menu
+            const mobileAuth = document.getElementById('mobileAuth');
+            if (mobileAuth) {
+                mobileAuth.innerHTML = `
+                    <a href="dashboard.html" class="btn btn-outline btn-full">Dashboard</a>
+                    <button class="btn btn-primary btn-full" onclick="logout()">Log Out</button>
+                `;
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('primer_user_session');
+            window.location.reload();
+        }
+
+        // ===== MOBILE MENU TOGGLE =====
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+        });
+
+        // ===== BOOKING WIZARD DATA =====
+        const bookingData = {
+            service: null,
+            schedule: {
+                asap: false,
+                date: null,
+                time: null
+            },
+            images: [],
+            customer: {
+                name: '',
+                email: '',
+                phone: '',
+                address: '',
+                instructions: ''
+            },
+            payment: null,
+            totalPrice: 0
+        };
+
+        // ===== SERVICES DATA =====
+        const services = [
+            {
+                id: "home-moving",
+                name: "Home Moving Service",
+                icon: "truck-moving",
+                description: "Complete home relocation with packing",
+                price: 85000,
+                duration: "4-8 hours"
+            },
+            {
+                id: "office-relocation",
+                name: "Office Relocation",
+                icon: "building",
+                description: "Professional office moving service",
+                price: 150000,
+                duration: "1-2 days"
+            },
+            {
+                id: "furniture-assembly",
+                name: "Furniture Assembly",
+                icon: "couch",
+                description: "IKEA and flat-pack furniture assembly",
+                price: 12000,
+                duration: "1-2 hours"
+            },
+            {
+                id: "handyman-services",
+                name: "Handyman Services",
+                icon: "tools",
+                description: "General home repairs and maintenance",
+                price: 15000,
+                duration: "2-3 hours"
+            },
+            {
+                id: "appliance-installation",
+                name: "Appliance Installation",
+                icon: "plug",
+                description: "AC, washing machine installation",
+                price: 18000,
+                duration: "2-3 hours"
+            },
+            {
+                id: "delivery-services",
+                name: "Same-Day Delivery",
+                icon: "shipping-fast",
+                description: "Express delivery across the city",
+                price: 8000,
+                duration: "2-4 hours"
+            }
+        ];
+
+        // ===== WIZARD STATE =====
+        let currentStep = 1;
+        const totalSteps = 5;
+        let uploadedImages = [];
+        let selectedDate = null;
+        let selectedTime = null;
+        let asapSelected = false;
+        let currentMonth = new Date().getMonth();
+        let currentYear = new Date().getFullYear();
+
+        // ===== DOM ELEMENTS =====
+        const stepElements = document.querySelectorAll('.wizard-step');
+        const progressSteps = document.querySelectorAll('.progress-step');
+        const backBtn = document.getElementById('backBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const submitBtn = document.getElementById('submitBtn');
+        const servicesGrid = document.getElementById('servicesGrid');
+        const asapOption = document.getElementById('asapOption');
+        const calendarGrid = document.getElementById('calendarGrid');
+        const timeSlotsGrid = document.getElementById('timeSlotsGrid');
+        const currentMonthElement = document.getElementById('currentMonth');
+        const prevMonthBtn = document.getElementById('prevMonth');
+        const nextMonthBtn = document.getElementById('nextMonth');
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const imagePreviewContainer = document.getElementById('imagePreviewContainer');
+        const uploadProgress = document.getElementById('uploadProgress');
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        const successMessage = document.getElementById('successMessage');
+        const formActions = document.getElementById('formActions');
+        const netlifyForm = document.getElementById('netlifyForm');
+        const formImages = document.getElementById('formImages');
+
+        // ===== INITIALIZE WIZARD =====
+        function initializeWizard() {
+            loadServices();
+            setupEventListeners();
+            generateCalendar();
+            generateTimeSlots();
+            updateWizardState();
+            
+            // Check for service ID in URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const serviceId = urlParams.get('service');
+            if (serviceId) {
+                const service = services.find(s => s.id === serviceId);
+                if (service) {
+                    selectService(service);
+                }
+            }
+        }
+
+        // ===== LOAD SERVICES =====
+        function loadServices() {
+            servicesGrid.innerHTML = '';
+            
+            services.forEach(service => {
+                const serviceOption = document.createElement('div');
+                serviceOption.className = 'service-option';
+                serviceOption.dataset.id = service.id;
+                
+                serviceOption.innerHTML = `
+                    <div class="service-option-icon">
+                        <i class="fas fa-${service.icon}"></i>
+                    </div>
+                    <h4 class="service-option-title">${service.name}</h4>
+                    <p class="service-option-description">${service.description}</p>
+                    <div class="service-option-price">₦${service.price.toLocaleString()}</div>
+                    <div class="service-option-duration">${service.duration}</div>
+                `;
+                
+                serviceOption.addEventListener('click', () => selectService(service));
+                servicesGrid.appendChild(serviceOption);
+            });
+        }
+
+        // ===== SELECT SERVICE =====
+        function selectService(service) {
+            // Remove selected class from all services
+            document.querySelectorAll('.service-option').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked service
+            const selectedElement = document.querySelector(`[data-id="${service.id}"]`);
+            if (selectedElement) {
+                selectedElement.classList.add('selected');
+            }
+            
+            // Update booking data
+            bookingData.service = service;
+            bookingData.totalPrice = service.price;
+            
+            // Clear schedule selections
+            clearScheduleSelections();
+            
+            // Update summary
+            updateSummary();
+            
+            // Hide error
+            hideError('serviceError');
+            
+            // Enable next button
+            nextBtn.disabled = false;
+        }
+
+        // ===== SCHEDULE FUNCTIONS =====
+        function clearScheduleSelections() {
+            asapSelected = false;
+            selectedDate = null;
+            selectedTime = null;
+            
+            asapOption.classList.remove('selected');
+            document.querySelectorAll('.calendar-day.selected').forEach(el => {
+                el.classList.remove('selected');
+            });
+            document.querySelectorAll('.time-slot.selected').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            bookingData.schedule = {
+                asap: false,
+                date: null,
+                time: null
+            };
+            
+            // Update ASAP fee display
+            document.getElementById('asapFeeItem').style.display = 'none';
+            updateSummary();
+        }
+
+        // ===== GENERATE CALENDAR =====
+        function generateCalendar() {
+            calendarGrid.innerHTML = '';
+            
+            // Day headers
+            const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            days.forEach(day => {
+                const dayHeader = document.createElement('div');
+                dayHeader.className = 'calendar-day-header';
+                dayHeader.textContent = day;
+                calendarGrid.appendChild(dayHeader);
+            });
+            
+            // Get first day of month
+            const firstDay = new Date(currentYear, currentMonth, 1);
+            const startingDay = firstDay.getDay(); // 0 = Sunday
+            
+            // Get days in month
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+            
+            // Previous month days
+            const prevMonthDays = new Date(currentYear, currentMonth, 0).getDate();
+            for (let i = startingDay - 1; i >= 0; i--) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day disabled';
+                dayElement.textContent = prevMonthDays - i;
+                calendarGrid.appendChild(dayElement);
+            }
+            
+            // Current month days
+            const today = new Date();
+            const isCurrentMonth = today.getMonth() === currentMonth && today.getFullYear() === currentYear;
+            
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day';
+                dayElement.textContent = day;
+                dayElement.dataset.date = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                
+                // Check if this is today
+                if (isCurrentMonth && day === today.getDate()) {
+                    dayElement.classList.add('today');
+                }
+                
+                // Check if date is in the past
+                const date = new Date(currentYear, currentMonth, day);
+                if (date < today.setHours(0, 0, 0, 0)) {
+                    dayElement.classList.add('disabled');
+                } else {
+                    dayElement.addEventListener('click', () => selectDate(dayElement));
+                }
+                
+                calendarGrid.appendChild(dayElement);
+            }
+            
+            // Update month display
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 
+                               'July', 'August', 'September', 'October', 'November', 'December'];
+            currentMonthElement.textContent = `${monthNames[currentMonth]} ${currentYear}`;
+        }
+
+        // ===== SELECT DATE =====
+        function selectDate(dayElement) {
+            // Remove selected class from all days
+            document.querySelectorAll('.calendar-day').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked day
+            dayElement.classList.add('selected');
+            
+            // Update selected date
+            selectedDate = dayElement.dataset.date;
+            asapSelected = false;
+            asapOption.classList.remove('selected');
+            
+            // Update booking data
+            bookingData.schedule.asap = false;
+            bookingData.schedule.date = selectedDate;
+            
+            // Update ASAP fee display
+            document.getElementById('asapFeeItem').style.display = 'none';
+            updateSummary();
+            
+            // Hide error
+            hideError('scheduleError');
+            
+            // Generate time slots for selected date
+            generateTimeSlots();
+        }
+
+        // ===== GENERATE TIME SLOTS =====
+        function generateTimeSlots() {
+            timeSlotsGrid.innerHTML = '';
+            
+            const timeSlots = [
+                '08:00 AM', '09:00 AM', '10:00 AM', '11:00 AM',
+                '12:00 PM', '01:00 PM', '02:00 PM', '03:00 PM',
+                '04:00 PM', '05:00 PM'
+            ];
+            
+            timeSlots.forEach(slot => {
+                const timeSlot = document.createElement('div');
+                timeSlot.className = 'time-slot';
+                timeSlot.textContent = slot;
+                timeSlot.dataset.time = slot;
+                
+                // Check if slot is available (simulate some slots as unavailable)
+                const isAvailable = Math.random() > 0.3; // 70% chance of being available
+                if (!isAvailable) {
+                    timeSlot.classList.add('disabled');
+                } else {
+                    timeSlot.addEventListener('click', () => selectTime(timeSlot));
+                }
+                
+                timeSlotsGrid.appendChild(timeSlot);
+            });
+        }
+
+        // ===== SELECT TIME =====
+        function selectTime(timeSlot) {
+            // Remove selected class from all time slots
+            document.querySelectorAll('.time-slot').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked time slot
+            timeSlot.classList.add('selected');
+            
+            // Update selected time
+            selectedTime = timeSlot.dataset.time;
+            
+            // Update booking data
+            bookingData.schedule.time = selectedTime;
+            
+            // Hide error
+            hideError('scheduleError');
+        }
+
+        // ===== ASAP SELECTION =====
+        asapOption.addEventListener('click', function() {
+            asapSelected = !asapSelected;
+            
+            if (asapSelected) {
+                this.classList.add('selected');
+                
+                // Clear date/time selections
+                document.querySelectorAll('.calendar-day.selected').forEach(el => {
+                    el.classList.remove('selected');
+                });
+                document.querySelectorAll('.time-slot.selected').forEach(el => {
+                    el.classList.remove('selected');
+                });
+                
+                selectedDate = null;
+                selectedTime = null;
+                
+                // Update booking data
+                bookingData.schedule.asap = true;
+                bookingData.schedule.date = null;
+                bookingData.schedule.time = null;
+                
+                // Update ASAP fee display
+                document.getElementById('asapFeeItem').style.display = 'flex';
+                updateSummary();
+            } else {
+                this.classList.remove('selected');
+                bookingData.schedule.asap = false;
+                document.getElementById('asapFeeItem').style.display = 'none';
+                updateSummary();
+            }
+            
+            // Hide error
+            hideError('scheduleError');
+        });
+
+        // ===== FILE UPLOAD =====
+        uploadArea.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            
+            if (e.dataTransfer.files.length > 0) {
+                handleFiles(e.dataTransfer.files);
+            }
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFiles(e.target.files);
+            }
+        });
+
+        function handleFiles(files) {
+            // Check total number of images
+            const totalImages = uploadedImages.length + files.length;
+            if (totalImages > 5) {
+                showError('uploadError', 'Maximum 5 images allowed. Please remove some images first.');
+                return;
+            }
+            
+            // Process each file
+            Array.from(files).forEach((file, index) => {
+                // Check file size (5MB = 5 * 1024 * 1024 bytes)
+                if (file.size > 5 * 1024 * 1024) {
+                    showError('uploadError', `File "${file.name}" exceeds 5MB limit.`);
+                    return;
+                }
+                
+                // Check file type
+                if (!file.type.match('image.*')) {
+                    showError('uploadError', `File "${file.name}" is not an image.`);
+                    return;
+                }
+                
+                // Create preview
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imageData = {
+                        file: file,
+                        preview: e.target.result,
+                        name: file.name,
+                        size: file.size
+                    };
+                    
+                    uploadedImages.push(imageData);
+                    createImagePreview(imageData);
+                    
+                    // Update Netlify form file input
+                    updateNetlifyFileInput();
+                    
+                    // Hide error if we have at least one valid image
+                    if (uploadedImages.length > 0) {
+                        hideError('uploadError');
+                    }
+                };
+                
+                reader.readAsDataURL(file);
+            });
+            
+            // Reset file input
+            fileInput.value = '';
+        }
+
+        function createImagePreview(imageData) {
+            const previewItem = document.createElement('div');
+            previewItem.className = 'preview-item';
+            previewItem.dataset.name = imageData.name;
+            
+            previewItem.innerHTML = `
+                <img src="${imageData.preview}" alt="Uploaded image">
+                <div class="remove-image" title="Remove image">
+                    <i class="fas fa-times"></i>
+                </div>
+            `;
+            
+            // Add remove functionality
+            const removeBtn = previewItem.querySelector('.remove-image');
+            removeBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                removeImage(imageData.name);
+            });
+            
+            imagePreviewContainer.appendChild(previewItem);
+            imagePreviewContainer.style.display = 'block';
+        }
+
+        function removeImage(fileName) {
+            uploadedImages = uploadedImages.filter(img => img.name !== fileName);
+            
+            // Remove preview element
+            const previewItem = document.querySelector(`[data-name="${fileName}"]`);
+            if (previewItem) {
+                previewItem.remove();
+            }
+            
+            // Update Netlify form file input
+            updateNetlifyFileInput();
+            
+            // Hide preview container if no images
+            if (uploadedImages.length === 0) {
+                imagePreviewContainer.style.display = 'none';
+            }
+        }
+
+        function updateNetlifyFileInput() {
+            // For Netlify forms, we need to update the file input
+            // In a real implementation, this would create a DataTransfer object
+            // For now, we'll store the files in bookingData
+            bookingData.images = uploadedImages.map(img => img.file);
+        }
+
+        // ===== UPDATE SUMMARY =====
+        function updateSummary() {
+            if (bookingData.service) {
+                document.getElementById('summaryService').textContent = bookingData.service.name;
+                document.getElementById('summaryServicePrice').textContent = `₦${bookingData.service.price.toLocaleString()}`;
+            }
+            
+            // Update schedule display
+            let scheduleText = '-';
+            if (bookingData.schedule.asap) {
+                scheduleText = 'ASAP (Within 1-2 hours)';
+            } else if (bookingData.schedule.date && bookingData.schedule.time) {
+                const date = new Date(bookingData.schedule.date);
+                const dateString = date.toLocaleDateString('en-US', { 
+                    weekday: 'short', 
+                    month: 'short', 
+                    day: 'numeric' 
+                });
+                scheduleText = `${dateString} at ${bookingData.schedule.time}`;
+            }
+            document.getElementById('summarySchedule').textContent = scheduleText;
+            
+            // Calculate total
+            let total = bookingData.service ? bookingData.service.price : 0;
+            if (bookingData.schedule.asap) {
+                total += 5000;
+            }
+            
+            bookingData.totalPrice = total;
+            document.getElementById('summaryTotal').textContent = `₦${total.toLocaleString()}`;
+        }
+
+        // ===== PAYMENT METHOD SELECTION =====
+        document.querySelectorAll('.payment-method').forEach(method => {
+            method.addEventListener('click', function() {
+                // Remove selected class from all methods
+                document.querySelectorAll('.payment-method').forEach(el => {
+                    el.classList.remove('selected');
+                });
+                
+                // Add selected class to clicked method
+                this.classList.add('selected');
+                
+                // Update booking data
+                bookingData.payment = this.dataset.method;
+                
+                // Hide error
+                hideError('paymentError');
+            });
+        });
+
+        // ===== FORM VALIDATION =====
+        function validateCurrentStep() {
+            switch (currentStep) {
+                case 1:
+                    if (!bookingData.service) {
+                        showError('serviceError', 'Please select a service to continue.');
+                        return false;
+                    }
+                    return true;
+                    
+                case 2:
+                    if (!bookingData.schedule.asap && (!bookingData.schedule.date || !bookingData.schedule.time)) {
+                        showError('scheduleError', 'Please select a date and time or choose ASAP service.');
+                        return false;
+                    }
+                    return true;
+                    
+                case 4:
+                    // Validate customer details
+                    const name = document.getElementById('customerName').value.trim();
+                    const email = document.getElementById('customerEmail').value.trim();
+                    const phone = document.getElementById('customerPhone').value.trim();
+                    const address = document.getElementById('customerAddress').value.trim();
+                    
+                    let isValid = true;
+                    
+                    if (!name) {
+                        showError('nameError', 'Please enter your full name.');
+                        isValid = false;
+                    } else {
+                        hideError('nameError');
+                    }
+                    
+                    if (!email || !isValidEmail(email)) {
+                        showError('emailError', 'Please enter a valid email address.');
+                        isValid = false;
+                    } else {
+                        hideError('emailError');
+                    }
+                    
+                    if (!phone || !isValidPhone(phone)) {
+                        showError('phoneError', 'Please enter a valid phone number.');
+                        isValid = false;
+                    } else {
+                        hideError('phoneError');
+                    }
+                    
+                    if (!address) {
+                        showError('addressError', 'Please enter the service address.');
+                        isValid = false;
+                    } else {
+                        hideError('addressError');
+                    }
+                    
+                    if (isValid) {
+                        // Save customer data
+                        bookingData.customer = {
+                            name,
+                            email,
+                            phone,
+                            address,
+                            instructions: document.getElementById('specialInstructions').value.trim()
+                        };
+                    }
+                    
+                    return isValid;
+                    
+                case 5:
+                    // Validate payment and terms
+                    if (!bookingData.payment) {
+                        showError('paymentError', 'Please select a payment method.');
+                        return false;
+                    }
+                    
+                    if (!document.getElementById('termsAgreement').checked) {
+                        showError('termsError', 'Please agree to the terms and conditions.');
+                        return false;
+                    }
+                    
+                    hideError('termsError');
+                    return true;
+                    
+                default:
+                    return true;
+            }
+        }
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function isValidPhone(phone) {
+            // Simple validation for Nigerian phone numbers
+            const phoneRegex = /^\+?234\d{10}$|^0\d{10}$/;
+            return phoneRegex.test(phone.replace(/\s/g, ''));
+        }
+
+        function showError(errorId, message) {
+            const errorElement = document.getElementById(errorId);
+            errorElement.textContent = message;
+            errorElement.classList.add('show');
+            
+            // Scroll to error
+            errorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function hideError(errorId) {
+            const errorElement = document.getElementById(errorId);
+            errorElement.classList.remove('show');
+        }
+
+        // ===== WIZARD NAVIGATION =====
+        function goToStep(step) {
+            // Validate current step before moving
+            if (step > currentStep && !validateCurrentStep()) {
+                return;
+            }
+            
+            // Hide current step
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            document.querySelector(`.progress-step[data-step="${currentStep}"]`).classList.remove('active');
+            
+            // Update current step
+            currentStep = step;
+            
+            // Show new step
+            document.getElementById(`step${currentStep}`).classList.add('active');
+            document.querySelector(`.progress-step[data-step="${currentStep}"]`).classList.add('active');
+            
+            // Mark previous steps as completed
+            for (let i = 1; i < currentStep; i++) {
+                document.querySelector(`.progress-step[data-step="${i}"]`).classList.add('completed');
+            }
+            
+            // Update wizard state
+            updateWizardState();
+            
+            // Scroll to top of wizard
+            document.querySelector('.wizard-content').scrollTop = 0;
+        }
+
+        function updateWizardState() {
+            // Update button visibility
+            backBtn.style.display = currentStep === 1 ? 'none' : 'flex';
+            nextBtn.style.display = currentStep === totalSteps ? 'none' : 'flex';
+            submitBtn.style.display = currentStep === totalSteps ? 'flex' : 'none';
+            
+            // Update summary on step 5
+            if (currentStep === 5) {
+                updateSummary();
+            }
+        }
+
+        // ===== SETUP EVENT LISTENERS =====
+        function setupEventListeners() {
+            // Navigation buttons
+            backBtn.addEventListener('click', () => {
+                if (currentStep > 1) {
+                    goToStep(currentStep - 1);
+                }
+            });
+
+            nextBtn.addEventListener('click', () => {
+                if (currentStep < totalSteps) {
+                    goToStep(currentStep + 1);
+                }
+            });
+
+            // Calendar navigation
+            prevMonthBtn.addEventListener('click', () => {
+                currentMonth--;
+                if (currentMonth < 0) {
+                    currentMonth = 11;
+                    currentYear--;
+                }
+                generateCalendar();
+            });
+
+            nextMonthBtn.addEventListener('click', () => {
+                currentMonth++;
+                if (currentMonth > 11) {
+                    currentMonth = 0;
+                    currentYear++;
+                }
+                generateCalendar();
+            });
+
+            // Form submission
+            submitBtn.addEventListener('click', submitBooking);
+        }
+
+        // ===== SUBMIT BOOKING =====
+        async function submitBooking() {
+            if (!validateCurrentStep()) {
+                return;
+            }
+            
+            // Show loading overlay
+            loadingOverlay.classList.add('active');
+            
+            try {
+                // Simulate API call delay
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // Generate booking ID
+                const bookingId = `PRM-${new Date().getFullYear()}-${Math.floor(Math.random() * 1000).toString().padStart(3, '0')}`;
+                document.getElementById('bookingId').textContent = bookingId;
+                
+                // Save booking to localStorage (for dashboard)
+                saveBookingToLocalStorage(bookingId);
+                
+                // Prepare Netlify form data
+                prepareNetlifyForm(bookingId);
+                
+                // Submit Netlify form
+                await submitNetlifyForm();
+                
+                // Show success message
+                document.querySelector('.wizard-content').style.display = 'none';
+                formActions.style.display = 'none';
+                successMessage.style.display = 'block';
+                
+            } catch (error) {
+                console.error('Booking submission error:', error);
+                alert('There was an error submitting your booking. Please try again.');
+            } finally {
+                loadingOverlay.classList.remove('active');
+            }
+        }
+
+        function saveBookingToLocalStorage(bookingId) {
+            // Get existing bookings
+            const bookings = JSON.parse(localStorage.getItem('primer_bookings') || '[]');
+            
+            // Create new booking
+            const newBooking = {
+                id: bookingId,
+                service: bookingData.service,
+                schedule: bookingData.schedule,
+                customer: bookingData.customer,
+                payment: bookingData.payment,
+                total: bookingData.totalPrice,
+                status: 'confirmed',
+                provider: 'To be assigned',
+                createdAt: new Date().toISOString(),
+                scheduledDate: bookingData.schedule.date || new Date().toISOString().split('T')[0]
+            };
+            
+            // Add to bookings
+            bookings.push(newBooking);
+            
+            // Save to localStorage
+            localStorage.setItem('primer_bookings', JSON.stringify(bookings));
+            
+            // Also save to user's bookings if logged in
+            const session = localStorage.getItem('primer_user_session');
+            if (session) {
+                try {
+                    const userData = JSON.parse(session);
+                    if (userData.bookings) {
+                        userData.bookings.push(bookingId);
+                    } else {
+                        userData.bookings = [bookingId];
+                    }
+                    localStorage.setItem('primer_user_session', JSON.stringify(userData));
+                } catch (e) {
+                    console.error('Error updating user bookings:', e);
+                }
+            }
+        }
+
+        function prepareNetlifyForm(bookingId) {
+            // Populate hidden form fields
+            document.getElementById('formServiceType').value = bookingData.service.name;
+            document.getElementById('formDate').value = bookingData.schedule.date || 'ASAP';
+            document.getElementById('formTime').value = bookingData.schedule.time || 'ASAP';
+            document.getElementById('formCustomerName').value = bookingData.customer.name;
+            document.getElementById('formCustomerEmail').value = bookingData.customer.email;
+            document.getElementById('formCustomerPhone').value = bookingData.customer.phone;
+            document.getElementById('formCustomerAddress').value = bookingData.customer.address;
+            document.getElementById('formInstructions').value = bookingData.customer.instructions;
+            document.getElementById('formTotalPrice').value = `₦${bookingData.totalPrice.toLocaleString()}`;
+            document.getElementById('formPaymentMethod').value = bookingData.payment;
+            
+            // Note: File uploads are handled automatically by Netlify
+            // when the form is submitted with enctype="multipart/form-data"
+        }
+
+        async function submitNetlifyForm() {
+            // Netlify forms handle submission automatically
+            // We just need to trigger the form submission
+            netlifyForm.style.display = 'block';
+            
+            // Create FormData object
+            const formData = new FormData(netlifyForm);
+            
+            // Add files to FormData
+            bookingData.images.forEach((file, index) => {
+                formData.append('service_images', file);
+            });
+            
+            // Submit form
+            try {
+                const response = await fetch('/', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    console.log('Form submitted successfully to Netlify');
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            } catch (error) {
+                console.error('Netlify form submission error:', error);
+                // Continue anyway since localStorage booking is saved
+            }
+            
+            netlifyForm.style.display = 'none';
+        }
+
+        // ===== INITIALIZE =====
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check session first
+            const userData = checkSession();
+            
+            // Only initialize wizard if user is logged in
+            if (userData) {
+                initializeWizard();
+                
+                // Pre-fill customer details from user session
+                document.getElementById('customerName').value = userData.name || '';
+                document.getElementById('customerEmail').value = userData.email || '';
+                document.getElementById('customerPhone').value = userData.phone || '';
+                document.getElementById('customerAddress').value = userData.address || '';
+            }
+        });
+    </script>
+</body>
+</html>
