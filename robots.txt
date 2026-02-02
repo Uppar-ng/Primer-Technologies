@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /data/
+Disallow: /admin/
+
+Sitemap: https://primertechnologies.com/sitemap.xml

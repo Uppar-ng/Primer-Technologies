@@ -1,0 +1,2187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Book a Service | Primer Technologies</title>
+    <meta name="description" content="Book property services with our easy multi-step wizard. Choose from listing, maintenance, moving, or handyman services.">
+    <meta name="keywords" content="book service, property services, appointment booking, schedule service">
+    <meta name="author" content="Primer Technologies">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Book a Service | Primer Technologies">
+    <meta property="og:description" content="Easy booking for all your property service needs.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://primertechnologies.com/book-service.html">
+    <meta property="og:image" content="https://primertechnologies.com/images/booking-og.jpg">
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "Property Services Booking",
+        "description": "Book property listing, maintenance, moving, or handyman services",
+        "provider": {
+            "@type": "RealEstateAgent",
+            "name": "Primer Technologies"
+        },
+        "availableChannel": {
+            "@type": "ServiceChannel",
+            "serviceUrl": "https://primer-technologies.vercel.me/book-service.html"
+        }
+    }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    
+    <!-- CSS Styles (Inlined for performance) -->
+    <style>
+    /* CSS Reset and Base Styles */
+    :root {
+        --primary-blue: #2563EB;
+        --primary-blue-dark: #1D4ED8;
+        --secondary-green: #10B981;
+        --secondary-green-dark: #059669;
+        --accent-amber: #F59E0B;
+        --accent-amber-dark: #D97706;
+        --background-light: #FFFFFF;
+        --background-dark: #F3F4F6;
+        --surface-white: #FFFFFF;
+        --surface-gray: #F9FAFB;
+        --surface-dark: #111827;
+        --text-primary: #111827;
+        --text-secondary: #6B7280;
+        --text-tertiary: #9CA3AF;
+        --border-light: #E5E7EB;
+        --border-medium: #D1D5DB;
+        --success: #10B981;
+        --warning: #F59E0B;
+        --error: #EF4444;
+        --info: #3B82F6;
+        
+        --spacing-xs: 0.25rem;  /* 4px */
+        --spacing-sm: 0.5rem;   /* 8px */
+        --spacing-md: 1rem;     /* 16px */
+        --spacing-lg: 1.5rem;   /* 24px */
+        --spacing-xl: 2rem;     /* 32px */
+        --spacing-2xl: 3rem;    /* 48px */
+        --spacing-3xl: 4rem;    /* 64px */
+        
+        --border-radius-sm: 0.375rem;
+        --border-radius-md: 0.5rem;
+        --border-radius-lg: 0.75rem;
+        --border-radius-xl: 1rem;
+        
+        --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+        --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+        --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+        
+        --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        --font-size-xs: 0.75rem;
+        --font-size-sm: 0.875rem;
+        --font-size-base: 1rem;
+        --font-size-lg: 1.125rem;
+        --font-size-xl: 1.25rem;
+        --font-size-2xl: 1.5rem;
+        --font-size-3xl: 1.875rem;
+        --font-size-4xl: 2.25rem;
+        --font-size-5xl: 3rem;
+        
+        --line-height-tight: 1.2;
+        --line-height-normal: 1.5;
+        --line-height-relaxed: 1.75;
+        
+        --transition-fast: 150ms;
+        --transition-normal: 250ms;
+        --transition-slow: 350ms;
+        
+        --z-index-dropdown: 1000;
+        --z-index-sticky: 1020;
+        --z-index-modal: 1030;
+        --z-index-popover: 1040;
+        --z-index-tooltip: 1050;
+        --z-index-wizard: 1060;
+    }
+    
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    html {
+        font-size: 16px;
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    body {
+        font-family: var(--font-family);
+        font-size: var(--font-size-base);
+        line-height: var(--line-height-normal);
+        color: var(--text-primary);
+        background-color: var(--background-light);
+        overflow-x: hidden;
+    }
+    
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: 700;
+        line-height: var(--line-height-tight);
+        color: var(--text-primary);
+    }
+    
+    h1 {
+        font-size: var(--font-size-3xl);
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    h2 {
+        font-size: var(--font-size-2xl);
+        margin-bottom: var(--spacing-md);
+    }
+    
+    h3 {
+        font-size: var(--font-size-xl);
+        margin-bottom: var(--spacing-md);
+    }
+    
+    p {
+        margin-bottom: var(--spacing-md);
+        color: var(--text-secondary);
+    }
+    
+    a {
+        color: var(--primary-blue);
+        text-decoration: none;
+        transition: color var(--transition-fast) ease;
+    }
+    
+    a:hover, a:focus {
+        color: var(--primary-blue-dark);
+        text-decoration: underline;
+    }
+    
+    /* Utility Classes */
+    .container {
+        width: 100%;
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 var(--spacing-lg);
+    }
+    
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+    
+    .text-center {
+        text-align: center;
+    }
+    
+    .text-primary {
+        color: var(--primary-blue);
+    }
+    
+    .bg-light {
+        background-color: var(--background-dark);
+    }
+    
+    /* Professional Header */
+    .main-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: var(--surface-white);
+        box-shadow: var(--shadow-md);
+        z-index: var(--z-index-sticky);
+        transition: all var(--transition-normal) ease;
+    }
+    
+    .main-header.scrolled {
+        padding: var(--spacing-sm) 0;
+        box-shadow: var(--shadow-lg);
+    }
+    
+    .header-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: var(--spacing-md) 0;
+        transition: padding var(--transition-normal) ease;
+    }
+    
+    .main-header.scrolled .header-container {
+        padding: var(--spacing-xs) 0;
+    }
+    
+    .logo-container {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-md);
+    }
+    
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        text-decoration: none;
+        font-weight: 800;
+        font-size: 1.5rem;
+        color: var(--text-primary);
+    }
+    
+    .logo-icon {
+        color: var(--primary-blue);
+        font-size: 1.75rem;
+    }
+    
+    .logo-text {
+        font-size: 1.5rem;
+        font-weight: 800;
+    }
+    
+    .logo-tagline {
+        font-size: 0.875rem;
+        font-weight: 400;
+        color: var(--text-secondary);
+        margin-left: var(--spacing-sm);
+        padding-left: var(--spacing-sm);
+        border-left: 2px solid var(--border-light);
+        display: none;
+    }
+    
+    @media (min-width: 768px) {
+        .logo-tagline {
+            display: inline;
+        }
+    }
+    
+    /* Desktop Navigation */
+    .desktop-nav {
+        display: none;
+    }
+    
+    @media (min-width: 768px) {
+        .desktop-nav {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-lg);
+        }
+    }
+    
+    .nav-links {
+        display: flex;
+        gap: var(--spacing-lg);
+        list-style: none;
+    }
+    
+    .nav-link {
+        position: relative;
+        color: var(--text-secondary);
+        font-weight: 500;
+        text-decoration: none;
+        padding: var(--spacing-sm) 0;
+        transition: color var(--transition-fast) ease;
+    }
+    
+    .nav-link:hover, .nav-link:focus {
+        color: var(--primary-blue);
+        text-decoration: none;
+    }
+    
+    .nav-link.active {
+        color: var(--primary-blue);
+    }
+    
+    /* Header Actions */
+    .header-actions {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-md);
+    }
+    
+    .action-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.625rem 1.25rem;
+        font-size: var(--font-size-sm);
+        font-weight: 600;
+        line-height: 1;
+        border-radius: var(--border-radius-md);
+        border: none;
+        cursor: pointer;
+        transition: all var(--transition-normal) ease;
+        text-decoration: none;
+        white-space: nowrap;
+        user-select: none;
+    }
+    
+    .action-btn:focus {
+        outline: 2px solid var(--primary-blue);
+        outline-offset: 2px;
+    }
+    
+    .action-btn-primary {
+        background-color: var(--primary-blue);
+        color: white;
+    }
+    
+    .action-btn-primary:hover, .action-btn-primary:focus {
+        background-color: var(--primary-blue-dark);
+        color: white;
+        text-decoration: none;
+    }
+    
+    /* Mobile Menu Toggle */
+    .mobile-menu-toggle {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 2rem;
+        height: 1.5rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+    }
+    
+    @media (min-width: 768px) {
+        .mobile-menu-toggle {
+            display: none;
+        }
+    }
+    
+    .menu-line {
+        width: 100%;
+        height: 2px;
+        background-color: var(--text-primary);
+        border-radius: 1px;
+        transition: all var(--transition-fast) ease;
+    }
+    
+    /* Main Content Padding for Fixed Header */
+    .main-content {
+        padding-top: 5rem;
+        min-height: calc(100vh - 5rem);
+        display: flex;
+        flex-direction: column;
+    }
+    
+    @media (max-width: 767px) {
+        .main-content {
+            padding-top: 4rem;
+            min-height: calc(100vh - 4rem);
+        }
+    }
+    
+    /* Booking Wizard Container */
+    .booking-wizard {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    /* Page Header */
+    .page-header {
+        background-color: var(--background-dark);
+        padding: var(--spacing-2xl) 0;
+        text-align: center;
+    }
+    
+    .page-header h1 {
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .page-header p {
+        max-width: 600px;
+        margin: 0 auto;
+        color: var(--text-secondary);
+    }
+    
+    /* Wizard Container */
+    .wizard-container {
+        flex: 1;
+        padding: var(--spacing-2xl) 0;
+        background-color: var(--background-light);
+    }
+    
+    /* Progress Bar */
+    .progress-bar {
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto var(--spacing-2xl);
+        position: relative;
+    }
+    
+    .progress-steps {
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    .progress-steps::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background-color: var(--border-light);
+        transform: translateY(-50%);
+        z-index: 1;
+    }
+    
+    .progress-line {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        height: 2px;
+        background-color: var(--primary-blue);
+        transform: translateY(-50%);
+        transition: width var(--transition-normal) ease;
+        z-index: 2;
+    }
+    
+    .step {
+        position: relative;
+        z-index: 3;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .step-circle {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        background-color: var(--surface-white);
+        border: 2px solid var(--border-light);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        color: var(--text-secondary);
+        transition: all var(--transition-normal) ease;
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .step.active .step-circle {
+        border-color: var(--primary-blue);
+        background-color: var(--primary-blue);
+        color: white;
+    }
+    
+    .step.completed .step-circle {
+        border-color: var(--primary-blue);
+        background-color: var(--primary-blue);
+        color: white;
+    }
+    
+    .step.completed .step-circle::after {
+        content: '✓';
+        font-size: 1.125rem;
+    }
+    
+    .step-label {
+        font-size: var(--font-size-sm);
+        font-weight: 500;
+        color: var(--text-secondary);
+        text-align: center;
+        display: none;
+    }
+    
+    @media (min-width: 768px) {
+        .step-label {
+            display: block;
+        }
+    }
+    
+    .step.active .step-label {
+        color: var(--primary-blue);
+        font-weight: 600;
+    }
+    
+    /* Wizard Content */
+    .wizard-content {
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+        min-height: 400px;
+    }
+    
+    .wizard-step {
+        background: var(--surface-white);
+        border-radius: var(--border-radius-lg);
+        padding: var(--spacing-2xl);
+        box-shadow: var(--shadow-md);
+        display: none;
+        animation: fadeIn 0.3s ease;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .wizard-step.active {
+        display: block;
+    }
+    
+    .step-header {
+        text-align: center;
+        margin-bottom: var(--spacing-xl);
+    }
+    
+    .step-icon {
+        width: 4rem;
+        height: 4rem;
+        background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+        border-radius: var(--border-radius-lg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto var(--spacing-lg);
+        color: white;
+        font-size: 1.5rem;
+    }
+    
+    .step-title {
+        font-size: var(--font-size-2xl);
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .step-description {
+        color: var(--text-secondary);
+        max-width: 500px;
+        margin: 0 auto;
+    }
+    
+    /* Service Selection */
+    .service-options {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+        margin-bottom: var(--spacing-xl);
+    }
+    
+    @media (min-width: 768px) {
+        .service-options {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    
+    @media (min-width: 1024px) {
+        .service-options {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+    
+    .service-option {
+        position: relative;
+    }
+    
+    .service-card {
+        background: var(--surface-white);
+        border: 2px solid var(--border-light);
+        border-radius: var(--border-radius-lg);
+        padding: var(--spacing-lg);
+        text-align: center;
+        cursor: pointer;
+        transition: all var(--transition-fast) ease;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .service-card:hover {
+        border-color: var(--primary-blue);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+    }
+    
+    .service-card.selected {
+        border-color: var(--primary-blue);
+        background-color: var(--primary-blue)10;
+        box-shadow: var(--shadow-md);
+    }
+    
+    .service-icon {
+        width: 3rem;
+        height: 3rem;
+        background-color: var(--primary-blue);
+        border-radius: var(--border-radius-md);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto var(--spacing-md);
+        color: white;
+        font-size: 1.25rem;
+    }
+    
+    .service-card.selected .service-icon {
+        background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+    }
+    
+    .service-name {
+        font-size: var(--font-size-lg);
+        font-weight: 600;
+        margin-bottom: var(--spacing-sm);
+        color: var(--text-primary);
+    }
+    
+    .service-description {
+        font-size: var(--font-size-sm);
+        color: var(--text-secondary);
+        margin-bottom: 0;
+    }
+    
+    /* Package Selection */
+    .package-options {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+        margin-bottom: var(--spacing-xl);
+    }
+    
+    @media (min-width: 768px) {
+        .package-options {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+    
+    .package-card {
+        background: var(--surface-white);
+        border: 2px solid var(--border-light);
+        border-radius: var(--border-radius-lg);
+        overflow: hidden;
+        cursor: pointer;
+        transition: all var(--transition-fast) ease;
+        position: relative;
+    }
+    
+    .package-card:hover {
+        border-color: var(--primary-blue);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+    }
+    
+    .package-card.selected {
+        border-color: var(--primary-blue);
+        background-color: var(--primary-blue)10;
+        box-shadow: var(--shadow-md);
+    }
+    
+    .popular-badge {
+        position: absolute;
+        top: 0;
+        right: var(--spacing-lg);
+        background-color: var(--primary-blue);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
+        font-size: var(--font-size-xs);
+        font-weight: 600;
+    }
+    
+    .package-header {
+        padding: var(--spacing-lg);
+        text-align: center;
+        border-bottom: 1px solid var(--border-light);
+    }
+    
+    .package-name {
+        font-size: var(--font-size-lg);
+        font-weight: 600;
+        margin-bottom: var(--spacing-sm);
+        color: var(--text-primary);
+    }
+    
+    .package-price {
+        font-size: var(--font-size-2xl);
+        font-weight: 700;
+        color: var(--primary-blue);
+        margin-bottom: var(--spacing-xs);
+    }
+    
+    .package-period {
+        color: var(--text-secondary);
+        font-size: var(--font-size-sm);
+    }
+    
+    .package-features {
+        padding: var(--spacing-lg);
+    }
+    
+    .feature-list {
+        list-style: none;
+    }
+    
+    .feature-list li {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        margin-bottom: var(--spacing-sm);
+        color: var(--text-secondary);
+        font-size: var(--font-size-sm);
+    }
+    
+    .feature-list li i {
+        color: var(--success);
+        min-width: 1rem;
+    }
+    
+    .feature-list li.disabled {
+        color: var(--text-tertiary);
+    }
+    
+    .feature-list li.disabled i {
+        color: var(--text-tertiary);
+    }
+    
+    /* Add-ons Selection */
+    .addons-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+        margin-bottom: var(--spacing-xl);
+    }
+    
+    @media (min-width: 768px) {
+        .addons-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    
+    .addon-option {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--spacing-md);
+        padding: var(--spacing-lg);
+        background: var(--surface-white);
+        border: 2px solid var(--border-light);
+        border-radius: var(--border-radius-lg);
+        cursor: pointer;
+        transition: all var(--transition-fast) ease;
+    }
+    
+    .addon-option:hover {
+        border-color: var(--primary-blue);
+    }
+    
+    .addon-option.selected {
+        border-color: var(--primary-blue);
+        background-color: var(--primary-blue)10;
+    }
+    
+    .addon-checkbox {
+        flex-shrink: 0;
+        width: 1.25rem;
+        height: 1.25rem;
+        border: 2px solid var(--border-medium);
+        border-radius: var(--border-radius-sm);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all var(--transition-fast) ease;
+        margin-top: 0.125rem;
+    }
+    
+    .addon-option.selected .addon-checkbox {
+        background-color: var(--primary-blue);
+        border-color: var(--primary-blue);
+    }
+    
+    .addon-option.selected .addon-checkbox::after {
+        content: '✓';
+        color: white;
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+    
+    .addon-content {
+        flex: 1;
+    }
+    
+    .addon-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .addon-name {
+        font-weight: 600;
+        color: var(--text-primary);
+    }
+    
+    .addon-price {
+        font-weight: 600;
+        color: var(--primary-blue);
+        font-size: var(--font-size-lg);
+    }
+    
+    .addon-description {
+        color: var(--text-secondary);
+        font-size: var(--font-size-sm);
+    }
+    
+    /* Calendar & Time Selection */
+    .datetime-selection {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--spacing-2xl);
+        margin-bottom: var(--spacing-xl);
+    }
+    
+    @media (min-width: 768px) {
+        .datetime-selection {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+    
+    .calendar-section, .time-section {
+        background: var(--surface-white);
+        border-radius: var(--border-radius-lg);
+        padding: var(--spacing-xl);
+        border: 1px solid var(--border-light);
+    }
+    
+    .calendar-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    .calendar-nav {
+        display: flex;
+        gap: var(--spacing-sm);
+    }
+    
+    .calendar-nav-btn {
+        width: 2rem;
+        height: 2rem;
+        background: var(--background-dark);
+        border: none;
+        border-radius: var(--border-radius-sm);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all var(--transition-fast) ease;
+    }
+    
+    .calendar-nav-btn:hover {
+        background-color: var(--border-light);
+    }
+    
+    .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: var(--spacing-sm);
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    .calendar-day {
+        text-align: center;
+        font-weight: 600;
+        color: var(--text-secondary);
+        font-size: var(--font-size-sm);
+        padding: var(--spacing-sm) 0;
+    }
+    
+    .calendar-date {
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: var(--border-radius-sm);
+        cursor: pointer;
+        transition: all var(--transition-fast) ease;
+        font-weight: 500;
+        color: var(--text-primary);
+    }
+    
+    .calendar-date:hover:not(.disabled):not(.selected) {
+        background-color: var(--background-dark);
+    }
+    
+    .calendar-date.selected {
+        background-color: var(--primary-blue);
+        color: white;
+        font-weight: 600;
+    }
+    
+    .calendar-date.disabled {
+        color: var(--text-tertiary);
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+    
+    .calendar-date.other-month {
+        color: var(--text-tertiary);
+        opacity: 0.5;
+    }
+    
+    .time-slots {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-sm);
+    }
+    
+    @media (min-width: 480px) {
+        .time-slots {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+    
+    .time-slot {
+        padding: var(--spacing-md);
+        background: var(--background-dark);
+        border: 2px solid transparent;
+        border-radius: var(--border-radius-md);
+        text-align: center;
+        cursor: pointer;
+        transition: all var(--transition-fast) ease;
+        font-weight: 500;
+    }
+    
+    .time-slot:hover:not(.disabled):not(.selected) {
+        border-color: var(--primary-blue);
+        background-color: var(--surface-white);
+    }
+    
+    .time-slot.selected {
+        background-color: var(--primary-blue);
+        color: white;
+        border-color: var(--primary-blue);
+    }
+    
+    .time-slot.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        background-color: var(--border-light);
+    }
+    
+    /* Contact & Address Forms */
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
+        margin-bottom: var(--spacing-xl);
+    }
+    
+    @media (min-width: 768px) {
+        .form-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+    
+    .form-section {
+        background: var(--surface-white);
+        border-radius: var(--border-radius-lg);
+        padding: var(--spacing-xl);
+        border: 1px solid var(--border-light);
+    }
+    
+    .form-section h3 {
+        margin-bottom: var(--spacing-lg);
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+    }
+    
+    .form-section h3 i {
+        color: var(--primary-blue);
+    }
+    
+    .form-group {
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    .form-label {
+        display: block;
+        margin-bottom: var(--spacing-xs);
+        font-weight: 500;
+        color: var(--text-primary);
+        font-size: var(--font-size-sm);
+    }
+    
+    .form-input, .form-textarea, .form-select {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        font-size: var(--font-size-base);
+        border: 1px solid var(--border-medium);
+        border-radius: var(--border-radius-md);
+        background-color: var(--surface-white);
+        transition: border-color var(--transition-fast) ease;
+        font-family: var(--font-family);
+    }
+    
+    .form-input:focus, .form-textarea:focus, .form-select:focus {
+        outline: none;
+        border-color: var(--primary-blue);
+        box-shadow: 0 0 0 3px var(--primary-blue)20;
+    }
+    
+    .form-textarea {
+        min-height: 100px;
+        resize: vertical;
+    }
+    
+    /* Review & Summary */
+    .summary-container {
+        background: var(--surface-white);
+        border-radius: var(--border-radius-lg);
+        padding: var(--spacing-xl);
+        border: 1px solid var(--border-light);
+        margin-bottom: var(--spacing-xl);
+    }
+    
+    .summary-section {
+        margin-bottom: var(--spacing-xl);
+        padding-bottom: var(--spacing-xl);
+        border-bottom: 1px solid var(--border-light);
+    }
+    
+    .summary-section:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+    
+    .summary-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: var(--spacing-lg);
+        cursor: pointer;
+    }
+    
+    .summary-header h4 {
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+    }
+    
+    .summary-header i {
+        color: var(--primary-blue);
+    }
+    
+    .edit-btn {
+        background: none;
+        border: none;
+        color: var(--primary-blue);
+        font-size: var(--font-size-sm);
+        font-weight: 500;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-xs);
+        padding: var(--spacing-xs) var(--spacing-sm);
+        border-radius: var(--border-radius-sm);
+        transition: all var(--transition-fast) ease;
+    }
+    
+    .edit-btn:hover {
+        background-color: var(--background-dark);
+    }
+    
+    .summary-content {
+        color: var(--text-secondary);
+    }
+    
+    .summary-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--spacing-sm) 0;
+        border-bottom: 1px solid var(--border-light);
+    }
+    
+    .summary-item:last-child {
+        border-bottom: none;
+    }
+    
+    .summary-item.total {
+        font-weight: 700;
+        color: var(--text-primary);
+        font-size: var(--font-size-lg);
+        padding-top: var(--spacing-md);
+        border-top: 2px solid var(--border-light);
+        border-bottom: none;
+    }
+    
+    .summary-price {
+        font-weight: 600;
+        color: var(--primary-blue);
+    }
+    
+    /* Wizard Navigation */
+    .wizard-navigation {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: var(--spacing-xl);
+        border-top: 1px solid var(--border-light);
+        margin-top: auto;
+    }
+    
+    .nav-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.75rem 1.5rem;
+        font-size: var(--font-size-base);
+        font-weight: 600;
+        line-height: 1;
+        border-radius: var(--border-radius-md);
+        border: none;
+        cursor: pointer;
+        transition: all var(--transition-normal) ease;
+        text-decoration: none;
+        white-space: nowrap;
+        user-select: none;
+        touch-action: manipulation;
+        gap: var(--spacing-sm);
+    }
+    
+    .nav-btn:focus {
+        outline: 2px solid var(--primary-blue);
+        outline-offset: 2px;
+    }
+    
+    .nav-btn-primary {
+        background-color: var(--primary-blue);
+        color: white;
+    }
+    
+    .nav-btn-primary:hover, .nav-btn-primary:focus {
+        background-color: var(--primary-blue-dark);
+        color: white;
+        text-decoration: none;
+    }
+    
+    .nav-btn-secondary {
+        background-color: var(--background-dark);
+        color: var(--text-primary);
+    }
+    
+    .nav-btn-secondary:hover, .nav-btn-secondary:focus {
+        background-color: var(--border-light);
+        color: var(--text-primary);
+    }
+    
+    .nav-btn-outline {
+        background-color: transparent;
+        color: var(--primary-blue);
+        border: 2px solid var(--primary-blue);
+    }
+    
+    .nav-btn-outline:hover, .nav-btn-outline:focus {
+        background-color: var(--primary-blue);
+        color: white;
+    }
+    
+    .nav-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+    
+    /* Success Screen */
+    .success-screen {
+        text-align: center;
+        padding: var(--spacing-3xl) var(--spacing-xl);
+        background: var(--surface-white);
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--shadow-md);
+        display: none;
+        animation: fadeIn 0.3s ease;
+    }
+    
+    .success-screen.active {
+        display: block;
+    }
+    
+    .success-icon {
+        width: 5rem;
+        height: 5rem;
+        background: linear-gradient(135deg, var(--secondary-green) 0%, var(--secondary-green-dark) 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto var(--spacing-lg);
+        color: white;
+        font-size: 2rem;
+    }
+    
+    .booking-reference {
+        display: inline-block;
+        background: var(--background-dark);
+        padding: var(--spacing-sm) var(--spacing-lg);
+        border-radius: var(--border-radius-lg);
+        font-family: monospace;
+        font-size: var(--font-size-lg);
+        font-weight: 600;
+        color: var(--text-primary);
+        margin: var(--spacing-lg) 0;
+    }
+    
+    .booking-details {
+        max-width: 500px;
+        margin: var(--spacing-xl) auto;
+        text-align: left;
+        background: var(--background-dark);
+        padding: var(--spacing-xl);
+        border-radius: var(--border-radius-lg);
+    }
+    
+    .detail-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--spacing-sm) 0;
+        border-bottom: 1px solid var(--border-light);
+    }
+    
+    .detail-item:last-child {
+        border-bottom: none;
+    }
+    
+    /* Loading States */
+    .loading {
+        display: inline-block;
+        width: 1.5rem;
+        height: 1.5rem;
+        border: 2px solid var(--border-light);
+        border-top-color: var(--primary-blue);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+    
+    /* Footer */
+    .footer {
+        background-color: var(--surface-dark);
+        color: white;
+        padding: var(--spacing-3xl) 0 var(--spacing-xl);
+        margin-top: auto;
+    }
+    
+    .footer a {
+        color: white;
+        opacity: 0.8;
+        transition: opacity var(--transition-fast) ease;
+    }
+    
+    .footer a:hover {
+        opacity: 1;
+        text-decoration: underline;
+    }
+    
+    .footer-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--spacing-2xl);
+        margin-bottom: var(--spacing-2xl);
+    }
+    
+    @media (min-width: 768px) {
+        .footer-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    
+    @media (min-width: 1024px) {
+        .footer-grid {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+    
+    .footer-section h3 {
+        color: white;
+        font-size: var(--font-size-lg);
+        margin-bottom: var(--spacing-lg);
+        opacity: 0.9;
+    }
+    
+    .footer-links {
+        list-style: none;
+    }
+    
+    .footer-links li {
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .social-links {
+        display: flex;
+        gap: var(--spacing-md);
+        margin-top: var(--spacing-lg);
+    }
+    
+    .social-link {
+        width: 2.5rem;
+        height: 2.5rem;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color var(--transition-fast) ease;
+    }
+    
+    .social-link:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        text-decoration: none;
+    }
+    
+    .footer-bottom {
+        text-align: center;
+        padding-top: var(--spacing-xl);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.6);
+        font-size: var(--font-size-sm);
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 767px) {
+        .wizard-step {
+            padding: var(--spacing-lg);
+        }
+        
+        .step-title {
+            font-size: var(--font-size-xl);
+        }
+        
+        .calendar-section, .time-section, .form-section {
+            padding: var(--spacing-lg);
+        }
+        
+        .summary-container {
+            padding: var(--spacing-lg);
+        }
+        
+        .wizard-navigation {
+            flex-direction: column;
+            gap: var(--spacing-md);
+        }
+        
+        .wizard-navigation .nav-btn {
+            width: 100%;
+        }
+    }
+    
+    /* Dark Mode Support */
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --background-light: #1F2937;
+            --background-dark: #111827;
+            --surface-white: #1F2937;
+            --surface-gray: #374151;
+            --text-primary: #F9FAFB;
+            --text-secondary: #D1D5DB;
+            --text-tertiary: #9CA3AF;
+            --border-light: #374151;
+            --border-medium: #4B5563;
+        }
+        
+        .service-card, .package-card, .addon-option, .calendar-section,
+        .time-section, .form-section, .summary-container, .wizard-step {
+            background-color: var(--surface-gray);
+            border-color: var(--border-medium);
+        }
+        
+        .step-circle {
+            background-color: var(--surface-dark);
+        }
+        
+        .main-header {
+            background-color: var(--surface-white);
+        }
+    }
+    
+    /* ====== BOOKING WIZARD HEADER WITH BACKGROUND IMAGE ====== */
+.booking-wizard .page-header {
+    position: relative;
+    padding: var(--spacing-3xl) 0;
+    background: 
+        linear-gradient(135deg, rgba(37, 99, 235, 0.92) 0%, rgba(16, 185, 129, 0.92) 100%),
+        url('../images/booking-header-bg.jpg');
+    background-size: cover;
+    background-position: center 70%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: white;
+    margin-bottom: var(--spacing-3xl);
+    overflow: hidden;
+    text-align: center;
+}
+
+/* Enhanced dark overlay for better wizard readability */
+.booking-wizard .page-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.6) 0%,
+        rgba(0, 0, 0, 0.45) 50%,
+        rgba(0, 0, 0, 0.35) 100%
+    );
+    z-index: 0;
+}
+
+/* Subtle pattern overlay for visual interest */
+.booking-wizard .page-header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: 1;
+    opacity: 0.4;
+}
+
+.booking-wizard .page-header .container {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+}
+
+/* Page Title - Booking Specific */
+.booking-wizard .page-header h1 {
+    font-size: var(--font-size-5xl);
+    font-weight: 800;
+    color: white;
+    margin-bottom: var(--spacing-md);
+    line-height: 1.1;
+    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.5);
+    letter-spacing: -0.5px;
+    animation: slideDown 0.8s ease-out;
+}
+
+@media (max-width: 1024px) {
+    .booking-wizard .page-header h1 {
+        font-size: var(--font-size-4xl);
+    }
+}
+
+@media (max-width: 767px) {
+    .booking-wizard .page-header h1 {
+        font-size: var(--font-size-3xl);
+        letter-spacing: -0.25px;
+    }
+}
+
+/* Page Subtitle - Wizard Description */
+.booking-wizard .page-header p {
+    font-size: var(--font-size-xl);
+    color: rgba(255, 255, 255, 0.95);
+    line-height: var(--line-height-relaxed);
+    max-width: 600px;
+    margin: 0 auto;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    animation: fadeIn 0.8s ease-out 0.3s both;
+}
+
+@media (max-width: 767px) {
+    .booking-wizard .page-header p {
+        font-size: var(--font-size-lg);
+        color: rgba(255, 255, 255, 0.9);
+    }
+}
+
+/* Decorative wizard icon */
+.booking-wizard .page-header .wizard-icon {
+    display: inline-block;
+    margin-bottom: var(--spacing-xl);
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    animation: bounceIn 1s ease-out;
+}
+
+.booking-wizard .page-header .wizard-icon i {
+    font-size: 2.5rem;
+    color: white;
+}
+
+/* Progress indicator (optional for wizard) */
+.booking-wizard .page-header .wizard-progress {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-2xl);
+    animation: fadeIn 0.8s ease-out 0.6s both;
+}
+
+.booking-wizard .page-header .progress-step {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transition: all var(--transition-fast) ease;
+}
+
+.booking-wizard .page-header .progress-step.active {
+    background: var(--accent-amber);
+    transform: scale(1.2);
+    box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.3);
+}
+
+/* Animations */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+    .booking-wizard .page-header {
+        padding: var(--spacing-2xl) 0;
+        margin-bottom: var(--spacing-2xl);
+        background-attachment: scroll; /* Better mobile performance */
+    }
+    
+    .booking-wizard .page-header::after {
+        background-size: 30px 30px; /* Smaller pattern on mobile */
+    }
+    
+    .booking-wizard .page-header .wizard-icon {
+        width: 60px;
+        height: 60px;
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    .booking-wizard .page-header .wizard-icon i {
+        font-size: 1.75rem;
+    }
+}
+
+/* Loading state */
+.booking-wizard .page-header.loading {
+    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-green) 100%);
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.9;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .booking-wizard .page-header {
+        background: 
+            linear-gradient(135deg, rgba(37, 99, 235, 0.95) 0%, rgba(16, 185, 129, 0.95) 100%),
+            url('../images/booking-header-bg.jpg');
+    }
+    
+    .booking-wizard .page-header::before {
+        background: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.7) 0%,
+            rgba(0, 0, 0, 0.55) 50%,
+            rgba(0, 0, 0, 0.45) 100%
+        );
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .booking-wizard .page-header {
+        background: var(--primary-blue);
+        background-image: none;
+    }
+    
+    .booking-wizard .page-header::before,
+    .booking-wizard .page-header::after {
+        display: none;
+    }
+    
+    .booking-wizard .page-header h1,
+    .booking-wizard .page-header p {
+        text-shadow: 0 0 0 transparent;
+        color: white;
+    }
+    
+    .booking-wizard .page-header .wizard-icon {
+        border: 3px solid white;
+        background: rgba(255, 255, 255, 0.2);
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .booking-wizard .page-header h1,
+    .booking-wizard .page-header p,
+    .booking-wizard .page-header .wizard-icon,
+    .booking-wizard .page-header .wizard-progress {
+        animation: none;
+    }
+    
+    .booking-wizard .page-header.loading {
+        animation: none;
+    }
+    
+    .booking-wizard .page-header {
+        background-attachment: scroll;
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- Professional Header -->
+    <header class="main-header" id="mainHeader">
+        <div class="container header-container">
+            <!-- Logo -->
+            <div class="logo-container">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-building logo-icon"></i>
+                    <span class="logo-text">Primer Technologies</span>
+                    <span class="logo-tagline">Complete Property Solutions</span>
+                </a>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <nav class="desktop-nav">
+                <ul class="nav-links">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="browse.html" class="nav-link">Properties</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="services.html" class="nav-link">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="about.html" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="blog.html" class="nav-link">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="contact.html" class="nav-link">Contact</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Header Actions -->
+            <div class="header-actions">
+                <!-- User Menu -->
+                <div class="user-menu" style="position: relative;">
+                    <button class="action-btn action-btn-outline" id="loginBtn" style="padding: 0.5rem 1rem;">
+                        <i class="fas fa-sign-in-alt" style="margin-right: 0.5rem;"></i>Sign In
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu">
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation (Simplified for this page) -->
+    <nav class="mobile-nav" id="mobileNav" style="display: none;">
+        <!-- Mobile menu would go here -->
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Booking Wizard -->
+        <div class="booking-wizard">
+            <!-- Page Header -->
+            <section class="page-header">
+                <div class="container">
+                    <h1>Book a Service</h1>
+                    <p>Complete our easy step-by-step wizard to book your property service</p>
+                </div>
+            </section>
+
+            <!-- Wizard Container -->
+            <div class="wizard-container">
+                <div class="container">
+                    <!-- Progress Bar -->
+                    <div class="progress-bar">
+                        <div class="progress-steps">
+                            <div class="step active" data-step="1">
+                                <div class="step-circle">1</div>
+                                <div class="step-label">Service</div>
+                            </div>
+                            <div class="step" data-step="2">
+                                <div class="step-circle">2</div>
+                                <div class="step-label">Package</div>
+                            </div>
+                            <div class="step" data-step="3">
+                                <div class="step-circle">3</div>
+                                <div class="step-label">Add-ons</div>
+                            </div>
+                            <div class="step" data-step="4">
+                                <div class="step-circle">4</div>
+                                <div class="step-label">Date & Time</div>
+                            </div>
+                            <div class="step" data-step="5">
+                                <div class="step-circle">5</div>
+                                <div class="step-label">Contact</div>
+                            </div>
+                            <div class="step" data-step="6">
+                                <div class="step-circle">6</div>
+                                <div class="step-label">Review</div>
+                            </div>
+                        </div>
+                        <div class="progress-line" id="progressLine" style="width: 16.66%;"></div>
+                    </div>
+
+                    <!-- Wizard Steps -->
+                    <div class="wizard-content">
+                        <!-- Step 1: Service Selection -->
+                        <div class="wizard-step active" id="step1" data-step="1">
+                            <div class="step-header">
+                                <div class="step-icon">
+                                    <i class="fas fa-concierge-bell"></i>
+                                </div>
+                                <h2 class="step-title">Choose a Service</h2>
+                                <p class="step-description">Select the type of service you need for your property</p>
+                            </div>
+
+                            <div class="service-options">
+                                <div class="service-option">
+                                    <div class="service-card" data-service="listing">
+                                        <div class="service-icon">
+                                            <i class="fas fa-home"></i>
+                                        </div>
+                                        <h3 class="service-name">Property Listing</h3>
+                                        <p class="service-description">Professional marketing and listing services</p>
+                                    </div>
+                                </div>
+                                <div class="service-option">
+                                    <div class="service-card" data-service="maintenance">
+                                        <div class="service-icon">
+                                            <i class="fas fa-tools"></i>
+                                        </div>
+                                        <h3 class="service-name">Property Maintenance</h3>
+                                        <p class="service-description">Regular upkeep and repair services</p>
+                                    </div>
+                                </div>
+                                <div class="service-option">
+                                    <div class="service-card" data-service="logistics">
+                                        <div class="service-icon">
+                                            <i class="fas fa-truck-moving"></i>
+                                        </div>
+                                        <h3 class="service-name">Moving & Logistics</h3>
+                                        <p class="service-description">Complete moving and storage solutions</p>
+                                    </div>
+                                </div>
+                                <div class="service-option">
+                                    <div class="service-card" data-service="handyman">
+                                        <div class="service-icon">
+                                            <i class="fas fa-hammer"></i>
+                                        </div>
+                                        <h3 class="service-name">Handyman Services</h3>
+                                        <p class="service-description">Repairs, installations, and assembly</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="wizard-navigation">
+                                <button class="nav-btn nav-btn-secondary" id="cancelBooking">
+                                    <i class="fas fa-times"></i>
+                                    Cancel
+                                </button>
+                                <button class="nav-btn nav-btn-primary" id="nextStep1" disabled>
+                                    Continue
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Package Selection -->
+                        <div class="wizard-step" id="step2" data-step="2">
+                            <div class="step-header">
+                                <div class="step-icon">
+                                    <i class="fas fa-box-open"></i>
+                                </div>
+                                <h2 class="step-title">Select a Package</h2>
+                                <p class="step-description" id="packageStepDescription">Choose the package that best fits your needs</p>
+                            </div>
+
+                            <div class="package-options" id="packageOptions">
+                                <!-- Packages will be loaded via JavaScript -->
+                            </div>
+
+                            <div class="wizard-navigation">
+                                <button class="nav-btn nav-btn-outline" id="prevStep2">
+                                    <i class="fas fa-arrow-left"></i>
+                                    Back
+                                </button>
+                                <button class="nav-btn nav-btn-primary" id="nextStep2" disabled>
+                                    Continue
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Add-ons Selection -->
+                        <div class="wizard-step" id="step3" data-step="3">
+                            <div class="step-header">
+                                <div class="step-icon">
+                                    <i class="fas fa-plus-circle"></i>
+                                </div>
+                                <h2 class="step-title">Add Extra Services</h2>
+                                <p class="step-description">Enhance your service with these optional add-ons</p>
+                            </div>
+
+                            <div class="addons-grid" id="addonsGrid">
+                                <!-- Add-ons will be loaded via JavaScript -->
+                            </div>
+
+                            <div class="wizard-navigation">
+                                <button class="nav-btn nav-btn-outline" id="prevStep3">
+                                    <i class="fas fa-arrow-left"></i>
+                                    Back
+                                </button>
+                                <button class="nav-btn nav-btn-primary" id="nextStep3">
+                                    Continue
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 4: Date & Time Selection -->
+                        <div class="wizard-step" id="step4" data-step="4">
+                            <div class="step-header">
+                                <div class="step-icon">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </div>
+                                <h2 class="step-title">Select Date & Time</h2>
+                                <p class="step-description">Choose when you'd like the service to be performed</p>
+                            </div>
+
+                            <div class="datetime-selection">
+                                <div class="calendar-section">
+                                    <div class="calendar-header">
+                                        <h3>Select Date</h3>
+                                        <div class="calendar-nav">
+                                            <button class="calendar-nav-btn" id="prevMonth">
+                                                <i class="fas fa-chevron-left"></i>
+                                            </button>
+                                            <button class="calendar-nav-btn" id="nextMonth">
+                                                <i class="fas fa-chevron-right"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="calendar-grid" id="calendarGrid">
+                                        <!-- Calendar will be generated via JavaScript -->
+                                    </div>
+                                    <div id="selectedDateDisplay" style="text-align: center; color: var(--text-secondary); font-size: var(--font-size-sm);">
+                                        No date selected
+                                    </div>
+                                </div>
+
+                                <div class="time-section">
+                                    <h3>Select Time</h3>
+                                    <div class="time-slots" id="timeSlots">
+                                        <!-- Time slots will be generated via JavaScript -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="wizard-navigation">
+                                <button class="nav-btn nav-btn-outline" id="prevStep4">
+                                    <i class="fas fa-arrow-left"></i>
+                                    Back
+                                </button>
+                                <button class="nav-btn nav-btn-primary" id="nextStep4" disabled>
+                                    Continue
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 5: Contact Information -->
+                        <div class="wizard-step" id="step5" data-step="5">
+                            <div class="step-header">
+                                <div class="step-icon">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <h2 class="step-title">Contact Information</h2>
+                                <p class="step-description">Tell us how to reach you and where the service will be performed</p>
+                            </div>
+
+                            <div class="form-grid">
+                                <div class="form-section">
+                                    <h3><i class="fas fa-address-card"></i> Personal Details</h3>
+                                    <div class="form-group">
+                                        <label for="fullName" class="form-label">Full Name *</label>
+                                        <input type="text" id="fullName" class="form-input" placeholder="Moh Isaq" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email" class="form-label">Email Address *</label>
+                                        <input type="email" id="email" class="form-input" placeholder="moh@example.com" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone" class="form-label">Phone Number *</label>
+                                        <input type="tel" id="phone" class="form-input" placeholder="08123456789" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-section">
+                                    <h3><i class="fas fa-map-marker-alt"></i> Service Address</h3>
+                                    <div class="form-group">
+                                        <label for="address" class="form-label">Street Address *</label>
+                                        <input type="text" id="address" class="form-input" placeholder="123 Metro Area, kaduna" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="city" class="form-label">City *</label>
+                                        <input type="text" id="city" class="form-input" placeholder="Kaduna" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md);">
+                                            <div>
+                                                <label for="state" class="form-label">State *</label>
+                                                <select id="state" class="form-select" required>
+                                                    <option value="">Select State</option>
+                                                    <option value="Kaduna">Kaduna</option>
+                                                    <option value="Zaria">Zaria</option>
+                                                    <option value="Kano">Kano</option>
+                                                    <!-- More states would be added -->
+                                                </select>
+                                            </div>
+                                            <div>
+                                                <label for="zipCode" class="form-label">ZIP Code *</label>
+                                                <input type="text" id="zipCode" class="form-input" placeholder="800001" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="specialInstructions" class="form-label">Special Instructions</label>
+                                <textarea id="specialInstructions" class="form-textarea" placeholder="Any special requirements or instructions for our team..."></textarea>
+                            </div>
+
+                            <div class="wizard-navigation">
+                                <button class="nav-btn nav-btn-outline" id="prevStep5">
+                                    <i class="fas fa-arrow-left"></i>
+                                    Back
+                                </button>
+                                <button class="nav-btn nav-btn-primary" id="nextStep5" disabled>
+                                    Continue
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 6: Review & Confirm -->
+                        <div class="wizard-step" id="step6" data-step="6">
+                            <div class="step-header">
+                                <div class="step-icon">
+                                    <i class="fas fa-clipboard-check"></i>
+                                </div>
+                                <h2 class="step-title">Review & Confirm</h2>
+                                <p class="step-description">Please review your booking details before confirming</p>
+                            </div>
+
+                            <div class="summary-container" id="bookingSummary">
+                                <!-- Summary will be populated via JavaScript -->
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" style="display: flex; align-items: flex-start; gap: var(--spacing-sm);">
+                                    <input type="checkbox" id="termsAgreement" style="margin-top: 0.25rem;">
+                                    <span>I agree to the <a href="terms.html" target="_blank">Terms of Service</a> and <a href="privacy.html" target="_blank">Privacy Policy</a>. I understand that this booking is subject to availability and confirmation.</span>
+                                </label>
+                            </div>
+
+                            <div class="wizard-navigation">
+                                <button class="nav-btn nav-btn-outline" id="prevStep6">
+                                    <i class="fas fa-arrow-left"></i>
+                                    Back
+                                </button>
+                                <button class="nav-btn nav-btn-primary" id="confirmBooking" disabled>
+                                    <i class="fas fa-check"></i>
+                                    Confirm Booking
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Success Screen -->
+                        <div class="success-screen" id="successScreen">
+                            <div class="success-icon">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <h2>Booking Confirmed!</h2>
+                            <p>Your service has been scheduled successfully. We've sent a confirmation email with all the details.</p>
+                            
+                            <div class="booking-reference" id="bookingReference">
+                                PRIMER-000001
+                            </div>
+
+                            <div class="booking-details" id="finalBookingDetails">
+                                <!-- Final booking details will be populated via JavaScript -->
+                            </div>
+
+                            <div class="wizard-navigation" style="justify-content: center; border-top: none; margin-top: var(--spacing-2xl);">
+                                <button class="nav-btn nav-btn-primary" id="newBooking">
+                                    <i class="fas fa-plus"></i>
+                                    Book Another Service
+                                </button>
+                                <a href="index.html" class="nav-btn nav-btn-outline">
+                                    <i class="fas fa-home"></i>
+                                    Return Home
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Primer Technologies</h3>
+                    <p>Complete Property Solutions for modern living. We handle everything from finding your dream property to maintaining it for years to come.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="browse.html">Browse Properties</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Our Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="services.html#listing">Property Listing</a></li>
+                        <li><a href="services.html#maintenance">Property Maintenance</a></li>
+                        <li><a href="services.html#logistics">Logistics & Moving</a></li>
+                        <li><a href="services.html#handyman">Handyman Services</a></li>
+                        <li><a href="book-service.html">Book a Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <address>
+                        <p><i class="fas fa-map-marker-alt" style="margin-right: 0.5rem;"></i>Metropolitan Area<br>
+                        Ahmadu Bello Way, Kaduna<br>
+                        Nigeria</p>
+                        <p><i class="fas fa-phone" style="margin-right: 0.5rem;"></i>+1 (555) 123-4567</p>
+                        <p><i class="fas fa-envelope" style="margin-right: 0.5rem;"></i>get.primer@proton.me</p>
+                        <p><i class="fas fa-clock" style="margin-right: 0.5rem;"></i>Mon-Fri: 8am-7pm<br>
+                        Sat: 9am-5pm</p>
+                    </address>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Primer Technologies. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#">Cookie Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js" defer></script>
+    <script src="js/booking-wizard.js" defer></script>
+</body>
+</html>

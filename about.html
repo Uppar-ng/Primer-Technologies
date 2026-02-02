@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>About Us | Primer Technologies | Complete Property Solutions</title>
+    <meta name="description" content="Learn about Primer Technologies - Our mission, values, team, and commitment to providing complete property solutions for modern living.">
+    <meta name="keywords" content="about us, real estate company, property management team, company history, Primer Technologies">
+    <meta name="author" content="Primer Technologies">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="About Us | Primer Technologies">
+    <meta property="og:description" content="Learn about our mission, team, and commitment to complete property solutions.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://primertechnologies.com/about.html">
+    <meta property="og:image" content="https://primertechnologies.com/images/og-about.jpg">
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        "name": "About Primer Technologies",
+        "description": "Primer Technologies offers comprehensive real estate services including property listing, maintenance, logistics, and handyman services.",
+        "url": "https://primer-technologies.vercel.app/about.html",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Primer Technologies",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://primer-technologies.vercel.app/images/logo.svg"
+            }
+        }
+    }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    
+    <!-- CSS Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* ====== PROFESSIONAL HERO SECTION WITH BACKGROUND IMAGE ====== */
+.hero-section {
+    position: relative;
+    min-height: calc(100vh - 5rem);
+    display: flex;
+    align-items: center;
+    /* Primary background with image + gradient overlay */
+    background: 
+        linear-gradient(135deg, rgba(37, 99, 235, 0.85) 0%, rgba(16, 185, 129, 0.85) 100%),
+        url('images/about.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Creates smooth parallax effect */
+    overflow: hidden;
+    /* Smooth loading */
+    background-color: var(--primary-blue); /* Fallback color */
+}
+
+/* Mobile adjustment */
+@media (max-width: 767px) {
+    .hero-section {
+        min-height: calc(100vh - 4rem);
+        background-attachment: scroll; /* Disable parallax on mobile for performance */
+    }
+}
+
+/* Additional dark overlay for better text contrast */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3); /* 30% dark overlay */
+    z-index: 0;
+}
+
+/* Hero content container */
+.hero-content {
+    position: relative;
+    z-index: 1; /* Ensure content is above background layers */
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--spacing-3xl) var(--spacing-lg);
+    text-align: center;
+}
+
+/* Hero title */
+.hero-title {
+    font-size: var(--font-size-5xl);
+    margin-bottom: var(--spacing-xl);
+    color: white; /* Changed for contrast against dark background */
+    line-height: 1.1;
+    font-weight: 800;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4); /* Text shadow for readability */
+    animation: fadeInUp 0.8s ease-out;
+}
+
+/* Mobile title adjustment */
+@media (max-width: 767px) {
+    .hero-title {
+        font-size: var(--font-size-4xl);
+        text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+    }
+}
+
+/* Hero subtitle */
+.hero-subtitle {
+    font-size: var(--font-size-xl);
+    color: rgba(255, 255, 255, 0.95); /* Changed for contrast */
+    margin-bottom: var(--spacing-2xl);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: var(--line-height-relaxed);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+/* Mobile subtitle adjustment */
+@media (max-width: 767px) {
+    .hero-subtitle {
+        font-size: var(--font-size-lg);
+        color: rgba(255, 255, 255, 0.9);
+    }
+}
+
+/* Search container styling update for dark background */
+.search-container {
+    background: rgba(255, 255, 255, 0.95); /* More opaque on dark background */
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-xl);
+    margin-top: var(--spacing-xl);
+    animation: fadeInUp 0.8s ease-out 0.4s both;
+    backdrop-filter: blur(10px); /* Modern glass effect */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Fade-in animation for elements */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Loading state for background image */
+.hero-section.loading {
+    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-green) 100%);
+}
+
+.hero-section.loading::after {
+    content: 'Loading...';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: var(--font-size-lg);
+    opacity: 0.7;
+}
+    </style>
+</head>
+<body>
+    <!-- Professional Header (Same as index.html) -->
+    <header class="main-header" id="mainHeader">
+        <div class="container header-container">
+            <div class="logo-container">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-building logo-icon"></i>
+                    <span class="logo-text">Primer Technologies</span>
+                    <span class="logo-tagline">Complete Property Solutions</span>
+                </a>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <nav class="desktop-nav">
+                <ul class="nav-links">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="browse.html" class="nav-link has-dropdown">Properties</a>
+                        <div class="dropdown-menu">
+                            <a href="browse.html" class="dropdown-link">Browse All</a>
+                            <a href="browse.html?type=sale" class="dropdown-link">For Sale</a>
+                            <a href="browse.html?type=rent" class="dropdown-link">For Rent</a>
+                            <a href="browse.html?type=commercial" class="dropdown-link">Commercial</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="services.html" class="nav-link has-dropdown">Services</a>
+                        <div class="dropdown-menu">
+                            <a href="services.html#listing" class="dropdown-link">Property Listing</a>
+                            <a href="services.html#maintenance" class="dropdown-link">Maintenance</a>
+                            <a href="services.html#logistics" class="dropdown-link">Moving & Logistics</a>
+                            <a href="services.html#handyman" class="dropdown-link">Handyman Services</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="about.html" class="nav-link active">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="blog.html" class="nav-link">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="contact.html" class="nav-link">Contact</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Header Actions -->
+            <div class="header-actions">
+                <!-- User Menu -->
+                <div class="user-menu">
+                    <button class="user-btn" id="userMenuBtn" aria-label="User menu">
+                        
+                    </button>
+                    <div class="dropdown-menu" id="userDropdown" style="right: 0; left: auto; min-width: 180px;">
+                        <a href="profile.html" class="dropdown-link"><i class="fas fa-user" style="margin-right: 0.5rem;"></i>Profile</a>
+                        <a href="favorites.html" class="dropdown-link"><i class="fas fa-heart" style="margin-right: 0.5rem;"></i>Favorites</a>
+                        <a href="bookings.html" class="dropdown-link"><i class="fas fa-calendar" style="margin-right: 0.5rem;"></i>Bookings</a>
+                        <div style="border-top: 1px solid var(--border-light); margin: var(--spacing-sm) 0;"></div>
+                        <a href="logout.html" class="dropdown-link"><i class="fas fa-sign-out-alt" style="margin-right: 0.5rem;"></i>Logout</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu">
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation (Same as index.html) -->
+    <nav class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-header">
+            <div class="logo">
+                <i class="fas fa-building logo-icon"></i>
+                <span class="logo-text">Primer Technologies</span>
+            </div>
+            <button class="mobile-menu-toggle active" id="closeMobileMenu" aria-label="Close mobile menu">
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+            </button>
+        </div>
+
+        <ul class="mobile-nav-links">
+            <li><a href="index.html" class="mobile-nav-link">Home</a></li>
+            <li><a href="browse.html" class="mobile-nav-link">Browse Properties</a></li>
+            <li><a href="browse.html?type=sale" class="mobile-nav-link">For Sale</a></li>
+            <li><a href="browse.html?type=rent" class="mobile-nav-link">For Rent</a></li>
+            <li><a href="services.html" class="mobile-nav-link">Services</a></li>
+            <li><a href="services.html#listing" class="mobile-nav-link">Property Listing</a></li>
+            <li><a href="services.html#maintenance" class="mobile-nav-link">Maintenance</a></li>
+            <li><a href="services.html#logistics" class="mobile-nav-link">Moving & Logistics</a></li>
+            <li><a href="services.html#handyman" class="mobile-nav-link">Handyman Services</a></li>
+            <li><a href="about.html" class="mobile-nav-link active">About Us</a></li>
+            <li><a href="blog.html" class="mobile-nav-link">Blog</a></li>
+            <li><a href="contact.html" class="mobile-nav-link">Contact</a></li>
+        </ul>
+
+        <div class="mobile-nav-actions">
+            <a href="login.html" class="action-btn action-btn-outline">
+                <i class="fas fa-sign-in-alt" style="margin-right: 0.5rem;"></i>Sign In
+            </a>
+            <button class="action-btn action-btn-primary" id="mobileListPropertyBtn">
+                <i class="fas fa-plus" style="margin-right: 0.5rem;"></i>List Property
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">About Primer Technologies</h1>
+                <p class="hero-subtitle">Building lasting relationships through complete property solutions</p>
+            </div>
+        </section>
+
+        <!-- Company Story -->
+        <section class="section-padding">
+            <div class="container">
+                <div class="about-story">
+                    <div class="story-content">
+                        <h2 class="section-title">Our Story</h2>
+                        <div class="story-text">
+                            <p>Founded in 2026, Primer Technologies began with a simple mission: to simplify the property experience for everyone. We saw that buying, selling, and maintaining properties was fragmented, stressful, and inefficient.</p>
+                            <p>Our founders, Alamin Ahmed and Najib Isah Ukissa, combined their expertise in real estate and technology to create a platform that addresses every aspect of property ownership and management in one place.</p>
+                            <p>What started as a small local service has grown into a comprehensive property solutions company serving hundreds of clients across multiple states. We're proud to have helped over 50 families find their dream homes and manage their properties seamlessly.</p>
+                        </div>
+                    </div>
+                    <div class="story-image">
+                        <img src="images/about/company-history.jpg" alt="Primer Technologies founding team" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mission & Values -->
+        <section class="section-padding bg-light">
+            <div class="container">
+                <h2 class="section-title text-center">Our Mission & Values</h2>
+                <div class="values-grid">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <h3>Our Mission</h3>
+                        <p>To provide complete, seamless property solutions that empower people to make confident decisions about their homes and investments.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h3>Our Vision</h3>
+                        <p>To be the most trusted and comprehensive property solutions platform in Nigeria by 2027.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>Integrity</h3>
+                        <p>We believe in transparent, honest communication and ethical practices in every interaction.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Client Focus</h3>
+                        <p>Our clients' success is our success. We're committed to understanding and exceeding their expectations.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3>Innovation</h3>
+                        <p>We continuously improve our services and technology to provide better solutions for our clients.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>Community</h3>
+                        <p>We're committed to building stronger communities through better housing and property management.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section class="section-padding">
+            <div class="container">
+                <h2 class="section-title text-center">Meet Our Team</h2>
+                <p class="text-center" style="max-width: 800px; margin: 0 auto var(--spacing-2xl); color: var(--text-secondary);">
+                    Our team of experienced professionals brings together expertise from real estate, technology, property management, and customer service.
+                </p>
+                <div class="team-grid" id="teamGrid">
+                    <!-- Team members will be loaded via JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Company Stats -->
+        <section class="section-padding bg-light">
+            <div class="container">
+                <h2 class="section-title text-center">By The Numbers</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" data-count="50">0</div>
+                        <div class="stat-label">Properties Sold & Managed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" data-count="98">0</div>
+                        <div class="stat-label">Client Satisfaction Rate</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" data-count="50">0</div>
+                        <div class="stat-label">Expert Team Members</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" data-count="5">0</div>
+                        <div class="stat-label">Cities & States Served</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" data-count="1">0</div>
+                        <div class="stat-label">Services Completed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" data-count="24">0</div>
+                        <div class="stat-label">/7 Support Available</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Office Locations -->
+        <section class="section-padding">
+            <div class="container">
+                <h2 class="section-title text-center">Our Offices</h2>
+                <div class="offices-grid">
+                    <div class="office-card">
+                        <div class="office-image">
+                            <img src="images/about/office-headquarters.jpg" alt="Headquarters Office" loading="lazy">
+                        </div>
+                        <div class="office-content">
+                            <h3>Headquarters</h3>
+                            <address>
+                                <p><i class="fas fa-map-marker-alt"></i> Kaduna Metropolitan Area<br>
+                                Ahmadu Bello Way, Kaduna</p>
+                                <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                                <p><i class="fas fa-envelope"></i> get.primer@proton.me</p>
+                                <p><i class="fas fa-clock"></i> Mon-Fri: 8am-7pm</p>
+                            </address>
+                        </div>
+                    </div>
+                    <div class="office-card">
+                        <div class="office-image">
+                            <img src="images/about/office-west.jpg" alt="West Coast Office" loading="lazy">
+                        </div>
+                        <div class="office-content">
+                            <h3>Zaria Office</h3>
+                            <address>
+                                <p><i class="fas fa-map-marker-alt"></i> Zaria city<br>
+                                Kofan kuyam bana</p>
+                                <p><i class="fas fa-phone"></i> +1 (555) 987-6543</p>
+                                <p><i class="fas fa-envelope"></i> get.primer@proton.me</p>
+                                <p><i class="fas fa-clock"></i> Mon-Fri: 9am-6pm PT</p>
+                            </address>
+                        </div>
+                    </div>
+                    <div class="office-card">
+                        <div class="office-image">
+                            <img src="images/about/office-east.jpg" alt="East Coast Office" loading="lazy">
+                        </div>
+                        <div class="office-content">
+                            <h3>Kano  Office</h3>
+                            <address>
+                                <p><i class="fas fa-map-marker-alt"></i> 456 Metropolitan Ave<br>
+                                Metro area, Kano</p>
+                                <p><i class="fas fa-phone"></i> +1 (555) 456-7890</p>
+                                <p><i class="fas fa-envelope"></i> get.primer@proton.me</p>
+                                <p><i class="fas fa-clock"></i> Mon-Fri: 8am-7pm ET</p>
+                            </address>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="section-padding bg-light">
+            <div class="container">
+                <div class="cta-section">
+                    <h2>Ready to Experience Complete Property Solutions?</h2>
+                    <p>Join thousands of satisfied clients who trust Primer Technologies with their property needs.</p>
+                    <div class="cta-buttons">
+                        <a href="contact.html" class="btn btn-primary btn-lg">
+                            <i class="fas fa-envelope" style="margin-right: 0.5rem;"></i>Contact Us
+                        </a>
+                        <a href="services.html" class="btn btn-outline btn-lg">
+                            <i class="fas fa-info-circle" style="margin-right: 0.5rem;"></i>View Our Services
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer (Same as index.html) -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Primer Technologies</h3>
+                    <p>Complete Property Solutions for modern living. We handle everything from finding your dream property to maintaining it for years to come.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="browse.html">Browse Properties</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Our Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="services.html#listing">Property Listing</a></li>
+                        <li><a href="services.html#maintenance">Property Maintenance</a></li>
+                        <li><a href="services.html#logistics">Logistics & Moving</a></li>
+                        <li><a href="services.html#handyman">Handyman Services</a></li>
+                        <li><a href="book-service.html">Book a Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <address>
+                        <p><i class="fas fa-map-marker-alt" style="margin-right: 0.5rem;"></i>Metropolitan area<br>
+                        Ahmadu Bello Way, Kaduna<br>
+                        Nigeria</p>
+                        <p><i class="fas fa-phone" style="margin-right: 0.5rem;"></i>+1 (555) 123-4567</p>
+                        <p><i class="fas fa-envelope" style="margin-right: 0.5rem;"></i>get.primer@proton.me</p>
+                        <p><i class="fas fa-clock" style="margin-right: 0.5rem;"></i>Mon-Fri: 8am-7pm<br>
+                        Sat: 9am-5pm</p>
+                    </address>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Primer Technologies. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#">Cookie Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main2.js" defer></script>
+    <script src="js/about.js" defer></script>
+</body>
+</html>

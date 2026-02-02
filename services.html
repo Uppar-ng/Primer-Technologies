@@ -1,0 +1,1948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Our Services | Primer Technologies - Complete Property Solutions</title>
+    <meta name="description" content="Primer Technologies offers four comprehensive property services: Property Listing, Maintenance, Moving & Logistics, and Handyman Services.">
+    <meta name="keywords" content="property services, real estate services, home maintenance, moving services, handyman services">
+    <meta name="author" content="Primer Technologies">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Our Services | Primer Technologies">
+    <meta property="og:description" content="Complete property solutions including listing, maintenance, moving, and handyman services.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://primer-technologies.vercel.app/services.html">
+    <meta property="og:image" content="https://primer-technologies.vercel.app/images/services-og.jpg">
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "serviceType": "Real Estate Services",
+        "provider": {
+            "@type": "RealEstateAgent",
+            "name": "Primer Technologies",
+            "description": "Complete Property Solutions"
+        },
+        "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Property Services",
+            "itemListElement": [
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Property Listing Services",
+                        "description": "Professional property marketing including photography, virtual tours, advertising, multiple listing placement"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Property & House Maintenance",
+                        "description": "Regular maintenance plans, emergency repairs, seasonal services, 24/7 support team"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Logistics & Moving Services",
+                        "description": "Complete moving solutions: packing, unpacking, furniture assembly, storage coordination, moving day management"
+                    }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Handyman Services",
+                        "description": "Small repairs, installations, assembly help, home improvements, fixture replacements"
+                    }
+                }
+            ]
+        }
+    }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    
+    <!-- CSS Styles (Inlined for performance) -->
+    <style>
+    /* CSS Reset and Base Styles */
+    :root {
+        --primary-blue: #2563EB;
+        --primary-blue-dark: #1D4ED8;
+        --secondary-green: #10B981;
+        --secondary-green-dark: #059669;
+        --accent-amber: #F59E0B;
+        --accent-amber-dark: #D97706;
+        --background-light: #FFFFFF;
+        --background-dark: #F3F4F6;
+        --surface-white: #FFFFFF;
+        --surface-gray: #F9FAFB;
+        --surface-dark: #111827;
+        --text-primary: #111827;
+        --text-secondary: #6B7280;
+        --text-tertiary: #9CA3AF;
+        --border-light: #E5E7EB;
+        --border-medium: #D1D5DB;
+        --success: #10B981;
+        --warning: #F59E0B;
+        --error: #EF4444;
+        --info: #3B82F6;
+        
+        --spacing-xs: 0.25rem;  /* 4px */
+        --spacing-sm: 0.5rem;   /* 8px */
+        --spacing-md: 1rem;     /* 16px */
+        --spacing-lg: 1.5rem;   /* 24px */
+        --spacing-xl: 2rem;     /* 32px */
+        --spacing-2xl: 3rem;    /* 48px */
+        --spacing-3xl: 4rem;    /* 64px */
+        
+        --border-radius-sm: 0.375rem;
+        --border-radius-md: 0.5rem;
+        --border-radius-lg: 0.75rem;
+        --border-radius-xl: 1rem;
+        
+        --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+        --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+        --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+        
+        --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        --font-size-xs: 0.75rem;
+        --font-size-sm: 0.875rem;
+        --font-size-base: 1rem;
+        --font-size-lg: 1.125rem;
+        --font-size-xl: 1.25rem;
+        --font-size-2xl: 1.5rem;
+        --font-size-3xl: 1.875rem;
+        --font-size-4xl: 2.25rem;
+        --font-size-5xl: 3rem;
+        
+        --line-height-tight: 1.2;
+        --line-height-normal: 1.5;
+        --line-height-relaxed: 1.75;
+        
+        --transition-fast: 150ms;
+        --transition-normal: 250ms;
+        --transition-slow: 350ms;
+        
+        --z-index-dropdown: 1000;
+        --z-index-sticky: 1020;
+        --z-index-modal: 1030;
+        --z-index-popover: 1040;
+        --z-index-tooltip: 1050;
+    }
+    
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    html {
+        font-size: 16px;
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    body {
+        font-family: var(--font-family);
+        font-size: var(--font-size-base);
+        line-height: var(--line-height-normal);
+        color: var(--text-primary);
+        background-color: var(--background-light);
+        overflow-x: hidden;
+    }
+    
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: 700;
+        line-height: var(--line-height-tight);
+        color: var(--text-primary);
+    }
+    
+    h1 {
+        font-size: var(--font-size-4xl);
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    h2 {
+        font-size: var(--font-size-3xl);
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    h3 {
+        font-size: var(--font-size-2xl);
+        margin-bottom: var(--spacing-md);
+    }
+    
+    h4 {
+        font-size: var(--font-size-xl);
+        margin-bottom: var(--spacing-md);
+    }
+    
+    p {
+        margin-bottom: var(--spacing-md);
+        color: var(--text-secondary);
+    }
+    
+    a {
+        color: var(--primary-blue);
+        text-decoration: none;
+        transition: color var(--transition-fast) ease;
+    }
+    
+    a:hover, a:focus {
+        color: var(--primary-blue-dark);
+        text-decoration: underline;
+    }
+    
+    /* Utility Classes */
+    .container {
+        width: 100%;
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 var(--spacing-lg);
+    }
+    
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+    
+    .text-center {
+        text-align: center;
+    }
+    
+    .text-primary {
+        color: var(--primary-blue);
+    }
+    
+    .bg-light {
+        background-color: var(--background-dark);
+    }
+    
+    .section-padding {
+        padding: var(--spacing-3xl) 0;
+    }
+    
+    /* Professional Header */
+    .main-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: var(--surface-white);
+        box-shadow: var(--shadow-md);
+        z-index: var(--z-index-sticky);
+        transition: all var(--transition-normal) ease;
+    }
+    
+    .main-header.scrolled {
+        padding: var(--spacing-sm) 0;
+        box-shadow: var(--shadow-lg);
+    }
+    
+    .header-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: var(--spacing-md) 0;
+        transition: padding var(--transition-normal) ease;
+    }
+    
+    .main-header.scrolled .header-container {
+        padding: var(--spacing-xs) 0;
+    }
+    
+    .logo-container {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-md);
+    }
+    
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        text-decoration: none;
+        font-weight: 800;
+        font-size: 1.5rem;
+        color: var(--text-primary);
+    }
+    
+    .logo-icon {
+        color: var(--primary-blue);
+        font-size: 1.75rem;
+    }
+    
+    .logo-text {
+        font-size: 1.5rem;
+        font-weight: 800;
+    }
+    
+    .logo-tagline {
+        font-size: 0.875rem;
+        font-weight: 400;
+        color: var(--text-secondary);
+        margin-left: var(--spacing-sm);
+        padding-left: var(--spacing-sm);
+        border-left: 2px solid var(--border-light);
+        display: none;
+    }
+    
+    @media (min-width: 768px) {
+        .logo-tagline {
+            display: inline;
+        }
+    }
+    
+    /* Desktop Navigation */
+    .desktop-nav {
+        display: none;
+    }
+    
+    @media (min-width: 768px) {
+        .desktop-nav {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-lg);
+        }
+    }
+    
+    .nav-links {
+        display: flex;
+        gap: var(--spacing-lg);
+        list-style: none;
+    }
+    
+    .nav-link {
+        position: relative;
+        color: var(--text-secondary);
+        font-weight: 500;
+        text-decoration: none;
+        padding: var(--spacing-sm) 0;
+        transition: color var(--transition-fast) ease;
+    }
+    
+    .nav-link:hover, .nav-link:focus {
+        color: var(--primary-blue);
+        text-decoration: none;
+    }
+    
+    .nav-link.active {
+        color: var(--primary-blue);
+    }
+    
+    .nav-link.active::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background-color: var(--primary-blue);
+        border-radius: var(--border-radius-sm);
+    }
+    
+    /* Header Actions */
+    .header-actions {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-md);
+    }
+    
+    .action-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.625rem 1.25rem;
+        font-size: var(--font-size-sm);
+        font-weight: 600;
+        line-height: 1;
+        border-radius: var(--border-radius-md);
+        border: none;
+        cursor: pointer;
+        transition: all var(--transition-normal) ease;
+        text-decoration: none;
+        white-space: nowrap;
+        user-select: none;
+    }
+    
+    .action-btn:focus {
+        outline: 2px solid var(--primary-blue);
+        outline-offset: 2px;
+    }
+    
+    .action-btn-primary {
+        background-color: var(--primary-blue);
+        color: white;
+    }
+    
+    .action-btn-primary:hover, .action-btn-primary:focus {
+        background-color: var(--primary-blue-dark);
+        color: white;
+        text-decoration: none;
+    }
+    
+    /* Mobile Menu Toggle */
+    .mobile-menu-toggle {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 2rem;
+        height: 1.5rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+    }
+    
+    @media (min-width: 768px) {
+        .mobile-menu-toggle {
+            display: none;
+        }
+    }
+    
+    .menu-line {
+        width: 100%;
+        height: 2px;
+        background-color: var(--text-primary);
+        border-radius: 1px;
+        transition: all var(--transition-fast) ease;
+    }
+    
+    /* Main Content Padding for Fixed Header */
+    .main-content {
+        padding-top: 5rem;
+    }
+    
+    @media (max-width: 767px) {
+        .main-content {
+            padding-top: 4rem;
+        }
+    }
+    
+    /* Page Header */
+    .page-header {
+        background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+        color: white;
+        padding: var(--spacing-3xl) 0;
+        text-align: center;
+    }
+    
+    .page-header h1 {
+        color: white;
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .page-header p {
+        color: rgba(255, 255, 255, 0.9);
+        max-width: 600px;
+        margin: 0 auto;
+        font-size: var(--font-size-lg);
+    }
+    
+    /* Service Navigation Tabs */
+    .service-tabs {
+        position: sticky;
+        top: 5rem;
+        background-color: var(--surface-white);
+        box-shadow: var(--shadow-sm);
+        z-index: var(--z-index-sticky);
+        padding: var(--spacing-md) 0;
+        border-bottom: 1px solid var(--border-light);
+    }
+    
+    @media (max-width: 767px) {
+        .service-tabs {
+            top: 4rem;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        
+        .service-tabs::-webkit-scrollbar {
+            display: none;
+        }
+    }
+    
+    .tabs-container {
+        display: flex;
+        gap: var(--spacing-md);
+        justify-content: center;
+    }
+    
+    @media (max-width: 767px) {
+        .tabs-container {
+            justify-content: flex-start;
+            padding: 0 var(--spacing-sm);
+            min-width: max-content;
+        }
+    }
+    
+    .service-tab {
+        padding: var(--spacing-sm) var(--spacing-lg);
+        background: none;
+        border: none;
+        border-radius: var(--border-radius-md);
+        font-size: var(--font-size-base);
+        font-weight: 500;
+        color: var(--text-secondary);
+        cursor: pointer;
+        transition: all var(--transition-fast) ease;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+    }
+    
+    .service-tab:hover {
+        color: var(--primary-blue);
+        background-color: var(--background-dark);
+    }
+    
+    .service-tab.active {
+        color: var(--primary-blue);
+        background-color: var(--primary-blue)10;
+        font-weight: 600;
+    }
+    
+    .tab-icon {
+        font-size: 1.25rem;
+    }
+    
+    @media (max-width: 767px) {
+        .service-tab {
+            padding: var(--spacing-sm) var(--spacing-md);
+            font-size: var(--font-size-sm);
+        }
+        
+        .tab-icon {
+            font-size: 1rem;
+        }
+    }
+    
+    /* Service Sections */
+    .service-section {
+        padding: var(--spacing-3xl) 0;
+        scroll-margin-top: 8rem;
+    }
+    
+    @media (max-width: 767px) {
+        .service-section {
+            padding: var(--spacing-2xl) 0;
+            scroll-margin-top: 7rem;
+        }
+    }
+    
+    .service-section:nth-child(even) {
+        background-color: var(--background-dark);
+    }
+    
+    .service-header {
+        text-align: center;
+        margin-bottom: var(--spacing-2xl);
+    }
+    
+    .service-icon-large {
+        width: 5rem;
+        height: 5rem;
+        background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+        border-radius: var(--border-radius-lg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto var(--spacing-lg);
+        color: white;
+        font-size: 2rem;
+    }
+    
+    .service-intro {
+        max-width: 800px;
+        margin: 0 auto var(--spacing-2xl);
+        text-align: center;
+        font-size: var(--font-size-lg);
+        line-height: var(--line-height-relaxed);
+    }
+    
+    /* Service Features Grid */
+    .service-features {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
+        margin-bottom: var(--spacing-2xl);
+    }
+    
+    @media (min-width: 768px) {
+        .service-features {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    
+    @media (min-width: 1024px) {
+        .service-features {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+    
+    .feature-card {
+        background: var(--surface-white);
+        border-radius: var(--border-radius-lg);
+        padding: var(--spacing-xl);
+        text-align: center;
+        box-shadow: var(--shadow-md);
+        transition: transform var(--transition-normal) ease, box-shadow var(--transition-normal) ease;
+    }
+    
+    .feature-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-xl);
+    }
+    
+    .feature-icon {
+        width: 3rem;
+        height: 3rem;
+        background-color: var(--primary-blue);
+        border-radius: var(--border-radius-md);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto var(--spacing-md);
+        color: white;
+        font-size: 1.25rem;
+    }
+    
+    .feature-title {
+        font-size: var(--font-size-lg);
+        margin-bottom: var(--spacing-sm);
+        color: var(--text-primary);
+    }
+    
+    .feature-description {
+        color: var(--text-secondary);
+        font-size: var(--font-size-sm);
+        line-height: var(--line-height-relaxed);
+    }
+    
+    /* Pricing Tables */
+    .pricing-section {
+        margin-top: var(--spacing-3xl);
+    }
+    
+    .pricing-tables {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
+        margin-top: var(--spacing-xl);
+    }
+    
+    @media (min-width: 768px) {
+        .pricing-tables {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    
+    @media (min-width: 1024px) {
+        .pricing-tables {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+    
+    .pricing-card {
+        background: var(--surface-white);
+        border-radius: var(--border-radius-lg);
+        overflow: hidden;
+        box-shadow: var(--shadow-md);
+        transition: transform var(--transition-normal) ease, box-shadow var(--transition-normal) ease;
+        position: relative;
+    }
+    
+    .pricing-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-xl);
+    }
+    
+    .pricing-card.popular {
+        border: 2px solid var(--primary-blue);
+        transform: scale(1.05);
+    }
+    
+    @media (max-width: 767px) {
+        .pricing-card.popular {
+            transform: none;
+        }
+    }
+    
+    .popular-badge {
+        position: absolute;
+        top: 0;
+        right: var(--spacing-lg);
+        background-color: var(--primary-blue);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
+        font-size: var(--font-size-xs);
+        font-weight: 600;
+    }
+    
+    .pricing-header {
+        padding: var(--spacing-xl);
+        text-align: center;
+        border-bottom: 1px solid var(--border-light);
+    }
+    
+    .pricing-title {
+        font-size: var(--font-size-xl);
+        margin-bottom: var(--spacing-sm);
+        color: var(--text-primary);
+    }
+    
+    .pricing-price {
+        font-size: var(--font-size-3xl);
+        font-weight: 700;
+        color: var(--primary-blue);
+        margin-bottom: var(--spacing-xs);
+    }
+    
+    .pricing-period {
+        color: var(--text-secondary);
+        font-size: var(--font-size-sm);
+    }
+    
+    .pricing-features {
+        padding: var(--spacing-xl);
+    }
+    
+    .feature-list {
+        list-style: none;
+    }
+    
+    .feature-list li {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        margin-bottom: var(--spacing-md);
+        color: var(--text-secondary);
+    }
+    
+    .feature-list li i {
+        color: var(--success);
+    }
+    
+    .feature-list li.disabled {
+        color: var(--text-tertiary);
+    }
+    
+    .feature-list li.disabled i {
+        color: var(--text-tertiary);
+    }
+    
+    .pricing-footer {
+        padding: var(--spacing-xl);
+        padding-top: 0;
+        text-align: center;
+    }
+    
+    /* Service Process */
+    .process-section {
+        margin-top: var(--spacing-3xl);
+    }
+    
+    .process-steps {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--spacing-2xl);
+        margin-top: var(--spacing-xl);
+        position: relative;
+    }
+    
+    @media (min-width: 768px) {
+        .process-steps {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+    
+    .process-step {
+        text-align: center;
+        position: relative;
+        z-index: 1;
+    }
+    
+    @media (min-width: 768px) {
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 3rem;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: var(--border-light);
+            z-index: 0;
+        }
+    }
+    
+    .step-number {
+        width: 4rem;
+        height: 4rem;
+        background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto var(--spacing-lg);
+        color: white;
+        font-size: var(--font-size-xl);
+        font-weight: 700;
+        position: relative;
+        z-index: 1;
+    }
+    
+    .step-title {
+        font-size: var(--font-size-lg);
+        margin-bottom: var(--spacing-sm);
+        color: var(--text-primary);
+    }
+    
+    .step-description {
+        color: var(--text-secondary);
+        font-size: var(--font-size-sm);
+    }
+    
+    /* CTA Section */
+    .service-cta {
+        text-align: center;
+        padding: var(--spacing-3xl) 0;
+        background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+        color: white;
+    }
+    
+    .service-cta h2 {
+        color: white;
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .service-cta p {
+        color: rgba(255, 255, 255, 0.9);
+        max-width: 600px;
+        margin: 0 auto var(--spacing-2xl);
+        font-size: var(--font-size-lg);
+    }
+    
+    .cta-buttons {
+        display: flex;
+        gap: var(--spacing-md);
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    /* Button Styles */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.75rem 1.5rem;
+        font-size: var(--font-size-base);
+        font-weight: 600;
+        line-height: 1;
+        border-radius: var(--border-radius-md);
+        border: none;
+        cursor: pointer;
+        transition: all var(--transition-normal) ease;
+        text-decoration: none;
+        white-space: nowrap;
+        user-select: none;
+        touch-action: manipulation;
+    }
+    
+    .btn:focus {
+        outline: 2px solid var(--primary-blue);
+        outline-offset: 2px;
+    }
+    
+    .btn-primary {
+        background-color: var(--primary-blue);
+        color: white;
+    }
+    
+    .btn-primary:hover, .btn-primary:focus {
+        background-color: var(--primary-blue-dark);
+        color: white;
+        text-decoration: none;
+    }
+    
+    .btn-secondary {
+        background-color: var(--secondary-green);
+        color: white;
+    }
+    
+    .btn-secondary:hover, .btn-secondary:focus {
+        background-color: var(--secondary-green-dark);
+        color: white;
+    }
+    
+    .btn-outline {
+        background-color: transparent;
+        color: var(--primary-blue);
+        border: 2px solid var(--primary-blue);
+    }
+    
+    .btn-outline:hover, .btn-outline:focus {
+        background-color: var(--primary-blue);
+        color: white;
+    }
+    
+    .btn-white {
+        background-color: white;
+        color: var(--primary-blue);
+    }
+    
+    .btn-white:hover, .btn-white:focus {
+        background-color: var(--background-dark);
+        color: var(--primary-blue);
+    }
+    
+    .btn-lg {
+        padding: 1rem 2rem;
+        font-size: var(--font-size-lg);
+    }
+    
+    .btn-full {
+        width: 100%;
+    }
+    
+    /* Loading States */
+    .loading {
+        display: inline-block;
+        width: 1.5rem;
+        height: 1.5rem;
+        border: 2px solid var(--border-light);
+        border-top-color: var(--primary-blue);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+    
+    /* Comparison Table */
+    .comparison-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: var(--spacing-2xl) 0;
+        background: var(--surface-white);
+        border-radius: var(--border-radius-lg);
+        overflow: hidden;
+        box-shadow: var(--shadow-md);
+    }
+    
+    .comparison-table th,
+    .comparison-table td {
+        padding: var(--spacing-lg);
+        text-align: left;
+        border-bottom: 1px solid var(--border-light);
+    }
+    
+    .comparison-table th {
+        background-color: var(--background-dark);
+        font-weight: 600;
+        color: var(--text-primary);
+    }
+    
+    .comparison-table td {
+        color: var(--text-secondary);
+    }
+    
+    .comparison-table tr:last-child td {
+        border-bottom: none;
+    }
+    
+    .checkmark {
+        color: var(--success);
+        font-weight: 600;
+    }
+    
+    .xmark {
+        color: var(--error);
+        font-weight: 600;
+    }
+    
+    @media (max-width: 767px) {
+        .comparison-table {
+            display: block;
+            overflow-x: auto;
+        }
+    }
+    
+    /* FAQ Section */
+    .faq-section {
+        margin-top: var(--spacing-3xl);
+    }
+    
+    .faq-container {
+        max-width: 800px;
+        margin: var(--spacing-xl) auto 0;
+    }
+    
+    .faq-item {
+        border-bottom: 1px solid var(--border-light);
+        padding: var(--spacing-lg) 0;
+    }
+    
+    .faq-question {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        user-select: none;
+    }
+    
+    .faq-question h4 {
+        margin: 0;
+        flex: 1;
+        color: var(--text-primary);
+    }
+    
+    .faq-toggle {
+        background: none;
+        border: none;
+        color: var(--text-secondary);
+        font-size: 1.25rem;
+        cursor: pointer;
+        transition: transform var(--transition-fast) ease;
+        width: 2rem;
+        height: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .faq-item.active .faq-toggle {
+        transform: rotate(45deg);
+        color: var(--primary-blue);
+    }
+    
+    .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height var(--transition-normal) ease;
+        color: var(--text-secondary);
+        line-height: var(--line-height-relaxed);
+    }
+    
+    .faq-item.active .faq-answer {
+        max-height: 500px;
+        margin-top: var(--spacing-md);
+    }
+    
+    /* Mobile Service Cards */
+    .mobile-service-cards {
+        display: none;
+    }
+    
+    @media (max-width: 767px) {
+        .mobile-service-cards {
+            display: block;
+            margin-top: var(--spacing-xl);
+        }
+        
+        .service-tabs {
+            display: none;
+        }
+        
+        .service-section:not(:first-of-type) {
+            display: none;
+        }
+        
+        .mobile-service-card {
+            background: var(--surface-white);
+            border-radius: var(--border-radius-lg);
+            padding: var(--spacing-xl);
+            margin-bottom: var(--spacing-xl);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .mobile-service-header {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .mobile-service-icon {
+            width: 3rem;
+            height: 3rem;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+            border-radius: var(--border-radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+        }
+    }
+    
+    /* Footer */
+    .footer {
+        background-color: var(--surface-dark);
+        color: white;
+        padding: var(--spacing-3xl) 0 var(--spacing-xl);
+    }
+    
+    .footer a {
+        color: white;
+        opacity: 0.8;
+        transition: opacity var(--transition-fast) ease;
+    }
+    
+    .footer a:hover {
+        opacity: 1;
+        text-decoration: underline;
+    }
+    
+    .footer-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--spacing-2xl);
+        margin-bottom: var(--spacing-2xl);
+    }
+    
+    @media (min-width: 768px) {
+        .footer-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    
+    @media (min-width: 1024px) {
+        .footer-grid {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+    
+    .footer-section h3 {
+        color: white;
+        font-size: var(--font-size-lg);
+        margin-bottom: var(--spacing-lg);
+        opacity: 0.9;
+    }
+    
+    .footer-links {
+        list-style: none;
+    }
+    
+    .footer-links li {
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .social-links {
+        display: flex;
+        gap: var(--spacing-md);
+        margin-top: var(--spacing-lg);
+    }
+    
+    .social-link {
+        width: 2.5rem;
+        height: 2.5rem;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color var(--transition-fast) ease;
+    }
+    
+    .social-link:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        text-decoration: none;
+    }
+    
+    .footer-bottom {
+        text-align: center;
+        padding-top: var(--spacing-xl);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.6);
+        font-size: var(--font-size-sm);
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 767px) {
+        .page-header h1 {
+            font-size: var(--font-size-3xl);
+        }
+        
+        .service-intro {
+            font-size: var(--font-size-base);
+        }
+        
+        .pricing-tables {
+            grid-template-columns: 1fr;
+        }
+        
+        .cta-buttons {
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .cta-buttons .btn {
+            width: 100%;
+            max-width: 300px;
+        }
+    }
+    
+    /* Dark Mode Support */
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --background-light: #1F2937;
+            --background-dark: #111827;
+            --surface-white: #1F2937;
+            --surface-gray: #374151;
+            --text-primary: #F9FAFB;
+            --text-secondary: #D1D5DB;
+            --text-tertiary: #9CA3AF;
+            --border-light: #374151;
+            --border-medium: #4B5563;
+        }
+        
+        .feature-card, .pricing-card, .comparison-table {
+            background-color: var(--surface-gray);
+        }
+        
+        .service-tabs {
+            background-color: var(--surface-white);
+        }
+        
+        .page-header, .service-cta {
+            background: linear-gradient(135deg, #1D4ED8 0%, #1E40AF 100%);
+        }
+        
+        .main-header {
+            background-color: var(--surface-white);
+        }
+    }
+    </style>
+</head>
+<body>
+    <!-- Professional Header -->
+    <header class="main-header" id="mainHeader">
+        <div class="container header-container">
+            <!-- Logo -->
+            <div class="logo-container">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-building logo-icon"></i>
+                    <span class="logo-text">Primer Technologies</span>
+                    <span class="logo-tagline">Complete Property Solutions</span>
+                </a>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <nav class="desktop-nav">
+                <ul class="nav-links">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="browse.html" class="nav-link">Properties</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="services.html" class="nav-link active">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="about.html" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="blog.html" class="nav-link">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="contact.html" class="nav-link">Contact</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Header Actions -->
+            <div class="header-actions">
+                <!-- User Menu -->
+                <div class="user-menu" style="position: relative;">
+                </div>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu">
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation (Simplified for this page) -->
+    <nav class="mobile-nav" id="mobileNav" style="display: none;">
+        <!-- Mobile menu would go here -->
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <h1>Our Comprehensive Property Services</h1>
+                <p>From finding your dream property to maintaining it for years to come, we provide complete solutions for all your property needs.</p>
+            </div>
+        </section>
+
+        <!-- Service Navigation Tabs (Desktop) -->
+        <div class="service-tabs">
+            <div class="container tabs-container">
+                <button class="service-tab active" data-service="listing">
+                    <i class="fas fa-home tab-icon"></i>
+                    <span>Property Listing</span>
+                </button>
+                <button class="service-tab" data-service="maintenance">
+                    <i class="fas fa-tools tab-icon"></i>
+                    <span>Property Maintenance</span>
+                </button>
+                <button class="service-tab" data-service="logistics">
+                    <i class="fas fa-truck-moving tab-icon"></i>
+                    <span>Moving & Logistics</span>
+                </button>
+                <button class="service-tab" data-service="handyman">
+                    <i class="fas fa-hammer tab-icon"></i>
+                    <span>Handyman Services</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Property Listing Service -->
+        <section class="service-section" id="listing">
+            <div class="container">
+                <div class="service-header">
+                    <div class="service-icon-large">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h2>Property Listing Services</h2>
+                    <p class="service-intro">
+                        Maximize your property's visibility and value with our comprehensive listing services. 
+                        We handle everything from professional photography to targeted marketing strategies.
+                    </p>
+                </div>
+
+                <!-- Features -->
+                <div class="service-features">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <h3 class="feature-title">Professional Photography</h3>
+                        <p class="feature-description">
+                            High-quality photos and virtual tours that showcase your property's best features 
+                            and attract serious buyers.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <h3 class="feature-title">Targeted Marketing</h3>
+                        <p class="feature-description">
+                            Strategic advertising across multiple platforms including MLS, social media, 
+                            and real estate networks.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="feature-title">Market Analysis</h3>
+                        <p class="feature-description">
+                            Comprehensive pricing strategy based on current market trends and comparable 
+                            properties in your area.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Pricing -->
+                <div class="pricing-section">
+                    <h3 class="text-center">Packages & Pricing</h3>
+                    <div class="pricing-tables">
+                        <div class="pricing-card">
+                            <div class="pricing-header">
+                                <h4 class="pricing-title">Essential</h4>
+                                <div class="pricing-price">$999</div>
+                                <div class="pricing-period">One-time fee</div>
+                            </div>
+                            <div class="pricing-features">
+                                <ul class="feature-list">
+                                    <li><i class="fas fa-check"></i> Professional Photography</li>
+                                    <li><i class="fas fa-check"></i> Basic Listing on MLS</li>
+                                    <li><i class="fas fa-check"></i> Property Description</li>
+                                    <li><i class="fas fa-check"></i> For Sale Sign</li>
+                                    <li class="disabled"><i class="fas fa-times"></i> Virtual Tour</li>
+                                    <li class="disabled"><i class="fas fa-times"></i> Social Media Marketing</li>
+                                </ul>
+                            </div>
+                            <div class="pricing-footer">
+                                <button class="btn btn-outline btn-full" data-service="listing" data-package="essential">
+                                    Book This Package
+                                </button>
+                            </div>
+                        </div>
+                        <div class="pricing-card popular">
+                            <div class="popular-badge">Most Popular</div>
+                            <div class="pricing-header">
+                                <h4 class="pricing-title">Professional</h4>
+                                <div class="pricing-price">$1,999</div>
+                                <div class="pricing-period">One-time fee</div>
+                            </div>
+                            <div class="pricing-features">
+                                <ul class="feature-list">
+                                    <li><i class="fas fa-check"></i> Everything in Essential</li>
+                                    <li><i class="fas fa-check"></i> 360° Virtual Tour</li>
+                                    <li><i class="fas fa-check"></i> Social Media Campaign</li>
+                                    <li><i class="fas fa-check"></i> Open House Coordination</li>
+                                    <li><i class="fas fa-check"></i> Professional Staging Advice</li>
+                                    <li class="disabled"><i class="fas fa-times"></i> Premium Advertising</li>
+                                </ul>
+                            </div>
+                            <div class="pricing-footer">
+                                <button class="btn btn-primary btn-full" data-service="listing" data-package="professional">
+                                    Book This Package
+                                </button>
+                            </div>
+                        </div>
+                        <div class="pricing-card">
+                            <div class="pricing-header">
+                                <h4 class="pricing-title">Premium</h4>
+                                <div class="pricing-price">$2,999</div>
+                                <div class="pricing-period">One-time fee</div>
+                            </div>
+                            <div class="pricing-features">
+                                <ul class="feature-list">
+                                    <li><i class="fas fa-check"></i> Everything in Professional</li>
+                                    <li><i class="fas fa-check"></i> Premium Advertising</li>
+                                    <li><i class="fas fa-check"></i> Video Walkthrough</li>
+                                    <li><i class="fas fa-check"></i> Targeted Buyer Outreach</li>
+                                    <li><i class="fas fa-check"></i> Professional Staging</li>
+                                    <li><i class="fas fa-check"></i> Closing Coordination</li>
+                                </ul>
+                            </div>
+                            <div class="pricing-footer">
+                                <button class="btn btn-outline btn-full" data-service="listing" data-package="premium">
+                                    Book This Package
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Process -->
+                <div class="process-section">
+                    <h3 class="text-center">How It Works</h3>
+                    <div class="process-steps">
+                        <div class="process-step">
+                            <div class="step-number">1</div>
+                            <h4 class="step-title">Consultation</h4>
+                            <p class="step-description">We assess your property and discuss your goals</p>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">2</div>
+                            <h4 class="step-title">Preparation</h4>
+                            <p class="step-description">Professional photography, staging, and marketing materials</p>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">3</div>
+                            <h4 class="step-title">Marketing</h4>
+                            <p class="step-description">Strategic listing across all major platforms</p>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">4</div>
+                            <h4 class="step-title">Showings</h4>
+                            <p class="step-description">Coordinated viewings and open houses</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Property Maintenance Service -->
+        <section class="service-section" id="maintenance">
+            <div class="container">
+                <div class="service-header">
+                    <div class="service-icon-large">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h2>Property & House Maintenance</h2>
+                    <p class="service-intro">
+                        Keep your property in perfect condition with our comprehensive maintenance plans. 
+                        From regular upkeep to emergency repairs, we've got you covered.
+                    </p>
+                </div>
+
+                <!-- Features -->
+                <div class="service-features">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <h3 class="feature-title">Preventive Maintenance</h3>
+                        <p class="feature-description">
+                            Scheduled inspections and maintenance to prevent issues before they become 
+                            costly problems.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3 class="feature-title">Emergency Repairs</h3>
+                        <p class="feature-description">
+                            24/7 emergency repair services for urgent issues like plumbing, electrical, 
+                            and HVAC problems.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <h3 class="feature-title">Seasonal Services</h3>
+                        <p class="feature-description">
+                            Specialized services for each season including gutter cleaning, HVAC checks, 
+                            and winter preparation.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Comparison Table -->
+                <div class="pricing-section">
+                    <h3 class="text-center">Maintenance Plans</h3>
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Features</th>
+                                <th>Basic</th>
+                                <th>Standard</th>
+                                <th>Premium</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Monthly Inspection</td>
+                                <td><span class="checkmark">✓</span></td>
+                                <td><span class="checkmark">✓</span></td>
+                                <td><span class="checkmark">✓</span></td>
+                            </tr>
+                            <tr>
+                                <td>Emergency Response (24/7)</td>
+                                <td><span class="xmark">✗</span></td>
+                                <td><span class="checkmark">✓</span></td>
+                                <td><span class="checkmark">✓</span></td>
+                            </tr>
+                            <tr>
+                                <td>Seasonal Maintenance</td>
+                                <td><span class="xmark">✗</span></td>
+                                <td><span class="checkmark">✓</span></td>
+                                <td><span class="checkmark">✓</span></td>
+                            </tr>
+                            <tr>
+                                <td>Priority Scheduling</td>
+                                <td><span class="xmark">✗</span></td>
+                                <td><span class="xmark">✗</span></td>
+                                <td><span class="checkmark">✓</span></td>
+                            </tr>
+                            <tr>
+                                <td>Annual Cost</td>
+                                <td>$599</td>
+                                <td>$1,199</td>
+                                <td>$2,399</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- FAQ -->
+                <div class="faq-section">
+                    <h3 class="text-center">Frequently Asked Questions</h3>
+                    <div class="faq-container">
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>What's included in the monthly inspection?</h4>
+                                <button class="faq-toggle">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Our monthly inspection includes checking HVAC systems, plumbing fixtures, 
+                                electrical outlets, safety devices, and identifying any potential issues 
+                                before they become major problems.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>How quickly do you respond to emergencies?</h4>
+                                <button class="faq-toggle">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                            <div class="faq-answer">
+                                <p>For emergency repairs, we guarantee a response within 2 hours and 
+                                typically have a technician on-site within 4 hours for urgent issues.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Moving & Logistics Service -->
+        <section class="service-section" id="logistics">
+            <div class="container">
+                <div class="service-header">
+                    <div class="service-icon-large">
+                        <i class="fas fa-truck-moving"></i>
+                    </div>
+                    <h2>Moving & Logistics Services</h2>
+                    <p class="service-intro">
+                        Stress-free moving with our complete logistics solutions. We handle everything 
+                        from packing to unpacking, ensuring a smooth transition to your new home.
+                    </p>
+                </div>
+
+                <!-- Features -->
+                <div class="service-features">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-box-open"></i>
+                        </div>
+                        <h3 class="feature-title">Complete Packing</h3>
+                        <p class="feature-description">
+                            Professional packing using high-quality materials to ensure your belongings 
+                            arrive safely.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-people-carry"></i>
+                        </div>
+                        <h3 class="feature-title">Furniture Handling</h3>
+                        <p class="feature-description">
+                            Safe disassembly, transport, and reassembly of all furniture pieces by 
+                            experienced professionals.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-warehouse"></i>
+                        </div>
+                        <h3 class="feature-title">Storage Solutions</h3>
+                        <p class="feature-description">
+                            Secure short-term and long-term storage options for your belongings 
+                            during transition periods.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Pricing -->
+                <div class="pricing-section">
+                    <h3 class="text-center">Moving Packages</h3>
+                    <div class="pricing-tables">
+                        <div class="pricing-card">
+                            <div class="pricing-header">
+                                <h4 class="pricing-title">Local Move</h4>
+                                <div class="pricing-price">$899</div>
+                                <div class="pricing-period">2-bedroom home</div>
+                            </div>
+                            <div class="pricing-features">
+                                <ul class="feature-list">
+                                    <li><i class="fas fa-check"></i> Loading & Unloading</li>
+                                    <li><i class="fas fa-check"></i> Transportation</li>
+                                    <li><i class="fas fa-check"></i> Basic Furniture Protection</li>
+                                    <li class="disabled"><i class="fas fa-times"></i> Packing Service</li>
+                                    <li class="disabled"><i class="fas fa-times"></i> Storage</li>
+                                    <li class="disabled"><i class="fas fa-times"></i> Assembly Service</li>
+                                </ul>
+                            </div>
+                            <div class="pricing-footer">
+                                <button class="btn btn-outline btn-full" data-service="logistics" data-package="local">
+                                    Book This Package
+                                </button>
+                            </div>
+                        </div>
+                        <div class="pricing-card popular">
+                            <div class="popular-badge">Most Popular</div>
+                            <div class="pricing-header">
+                                <h4 class="pricing-title">Complete Move</h4>
+                                <div class="pricing-price">$1,899</div>
+                                <div class="pricing-period">3-bedroom home</div>
+                            </div>
+                            <div class="pricing-features">
+                                <ul class="feature-list">
+                                    <li><i class="fas fa-check"></i> Everything in Local Move</li>
+                                    <li><i class="fas fa-check"></i> Complete Packing Service</li>
+                                    <li><i class="fas fa-check"></i> Premium Furniture Protection</li>
+                                    <li><i class="fas fa-check"></i> 1 Month Storage Included</li>
+                                    <li><i class="fas fa-check"></i> Basic Assembly Service</li>
+                                    <li class="disabled"><i class="fas fa-times"></i> Unpacking Service</li>
+                                </ul>
+                            </div>
+                            <div class="pricing-footer">
+                                <button class="btn btn-primary btn-full" data-service="logistics" data-package="complete">
+                                    Book This Package
+                                </button>
+                            </div>
+                        </div>
+                        <div class="pricing-card">
+                            <div class="pricing-header">
+                                <h4 class="pricing-title">Premium Move</h4>
+                                <div class="pricing-price">$3,499</div>
+                                <div class="pricing-period">4+ bedroom home</div>
+                            </div>
+                            <div class="pricing-features">
+                                <ul class="feature-list">
+                                    <li><i class="fas fa-check"></i> Everything in Complete Move</li>
+                                    <li><i class="fas fa-check"></i> Complete Unpacking Service</li>
+                                    <li><i class="fas fa-check"></i> 3 Months Storage Included</li>
+                                    <li><i class="fas fa-check"></i> Full Assembly Service</li>
+                                    <li><i class="fas fa-check"></i> Move Coordination</li>
+                                    <li><i class="fas fa-check"></i> Cleaning Service</li>
+                                </ul>
+                            </div>
+                            <div class="pricing-footer">
+                                <button class="btn btn-outline btn-full" data-service="logistics" data-package="premium">
+                                    Book This Package
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Handyman Services -->
+        <section class="service-section" id="handyman">
+            <div class="container">
+                <div class="service-header">
+                    <div class="service-icon-large">
+                        <i class="fas fa-hammer"></i>
+                    </div>
+                    <h2>Handyman Services</h2>
+                    <p class="service-intro">
+                        Reliable handyman services for all your home repair and improvement needs. 
+                        From small fixes to major projects, our certified professionals deliver quality work.
+                    </p>
+                </div>
+
+                <!-- Features -->
+                <div class="service-features">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-wrench"></i>
+                        </div>
+                        <h3 class="feature-title">Home Repairs</h3>
+                        <p class="feature-description">
+                            Fixing leaky faucets, repairing drywall, replacing light fixtures, 
+                            and other common household repairs.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-paint-roller"></i>
+                        </div>
+                        <h3 class="feature-title">Installations</h3>
+                        <p class="feature-description">
+                            Installing shelves, curtain rods, ceiling fans, appliances, 
+                            and other home fixtures.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-couch"></i>
+                        </div>
+                        <h3 class="feature-title">Assembly Services</h3>
+                        <p class="feature-description">
+                            Professional assembly of furniture, exercise equipment, 
+                            playground sets, and more.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Service Comparison -->
+                <div class="pricing-section">
+                    <h3 class="text-center">Service Options</h3>
+                    <div class="pricing-tables">
+                        <div class="pricing-card">
+                            <div class="pricing-header">
+                                <h4 class="pricing-title">Per Project</h4>
+                                <div class="pricing-price">$89/hr</div>
+                                <div class="pricing-period">2-hour minimum</div>
+                            </div>
+                            <div class="pricing-features">
+                                <ul class="feature-list">
+                                    <li><i class="fas fa-check"></i> Certified Professionals</li>
+                                    <li><i class="fas fa-check"></i> All Materials Included</li>
+                                    <li><i class="fas fa-check"></i> Quality Guarantee</li>
+                                    <li><i class="fas fa-check"></i> Cleanup Included</li>
+                                    <li class="disabled"><i class="fas fa-times"></i> Priority Scheduling</li>
+                                    <li class="disabled"><i class="fas fa-times"></i> Discounted Rates</li>
+                                </ul>
+                            </div>
+                            <div class="pricing-footer">
+                                <button class="btn btn-outline btn-full" data-service="handyman" data-package="project">
+                                    Book a Project
+                                </button>
+                            </div>
+                        </div>
+                        <div class="pricing-card popular">
+                            <div class="popular-badge">Best Value</div>
+                            <div class="pricing-header">
+                                <h4 class="pricing-title">Monthly Plan</h4>
+                                <div class="pricing-price">$199/mo</div>
+                                <div class="pricing-period">Up to 4 hours</div>
+                            </div>
+                            <div class="pricing-features">
+                                <ul class="feature-list">
+                                    <li><i class="fas fa-check"></i> Everything in Per Project</li>
+                                    <li><i class="fas fa-check"></i> Priority Scheduling</li>
+                                    <li><i class="fas fa-check"></i> Discounted Hourly Rate</li>
+                                    <li><i class="fas fa-check"></i> Monthly Inspection</li>
+                                    <li><i class="fas fa-check"></i> Emergency Call-out</li>
+                                    <li><i class="fas fa-check"></i> No Minimum Hours</li>
+                                </ul>
+                            </div>
+                            <div class="pricing-footer">
+                                <button class="btn btn-primary btn-full" data-service="handyman" data-package="monthly">
+                                    Subscribe Now
+                                </button>
+                            </div>
+                        </div>
+                        <div class="pricing-card">
+                            <div class="pricing-header">
+                                <h4 class="pricing-title">Annual Plan</h4>
+                                <div class="pricing-price">$1,999/yr</div>
+                                <div class="pricing-period">Save 16%</div>
+                            </div>
+                            <div class="pricing-features">
+                                <ul class="feature-list">
+                                    <li><i class="fas fa-check"></i> Everything in Monthly Plan</li>
+                                    <li><i class="fas fa-check"></i> Additional 10% Discount</li>
+                                    <li><i class="fas fa-check"></i> Free Annual Maintenance Check</li>
+                                    <li><i class="fas fa-check"></i> VIP Priority Service</li>
+                                    <li><i class="fas fa-check"></i> Materials Discount</li>
+                                    <li><i class="fas fa-check"></i> Gift Certificate</li>
+                                </ul>
+                            </div>
+                            <div class="pricing-footer">
+                                <button class="btn btn-outline btn-full" data-service="handyman" data-package="annual">
+                                    Subscribe Now
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mobile Service Cards (For Mobile View) -->
+        <div class="mobile-service-cards">
+            <!-- Cards will be loaded via JavaScript -->
+        </div>
+
+        <!-- CTA Section -->
+        <section class="service-cta">
+            <div class="container">
+                <h2>Ready to Get Started?</h2>
+                <p>Choose the service that fits your needs and book online today. Our team is ready to help you with all your property needs.</p>
+                <div class="cta-buttons">
+                    <a href="book-service.html" class="btn btn-white btn-lg">
+                        <i class="fas fa-calendar-check" style="margin-right: 0.5rem;"></i>
+                        Book a Service Now
+                    </a>
+                    <a href="contact.html" class="btn btn-outline btn-lg" style="color: white; border-color: white;">
+                        <i class="fas fa-phone" style="margin-right: 0.5rem;"></i>
+                        Contact Us First
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Primer Technologies</h3>
+                    <p>Complete Property Solutions for modern living. We handle everything from finding your dream property to maintaining it for years to come.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="browse.html">Browse Properties</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Our Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="services.html#listing">Property Listing</a></li>
+                        <li><a href="services.html#maintenance">Property Maintenance</a></li>
+                        <li><a href="services.html#logistics">Logistics & Moving</a></li>
+                        <li><a href="services.html#handyman">Handyman Services</a></li>
+                        <li><a href="book-service.html">Book a Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <address>
+                        <p><i class="fas fa-map-marker-alt" style="margin-right: 0.5rem;"></i>Metropolitan Area<br>
+                        Ahmadu Bello Way, Kaduna<br>
+                        Nigeria</p>
+                        <p><i class="fas fa-phone" style="margin-right: 0.5rem;"></i>+1 (555) 123-4567</p>
+                        <p><i class="fas fa-envelope" style="margin-right: 0.5rem;"></i>get.primer@proton.me</p>
+                        <p><i class="fas fa-clock" style="margin-right: 0.5rem;"></i>Mon-Fri: 8am-7pm<br>
+                        Sat: 9am-5pm</p>
+                    </address>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Primer Technologies. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#">Cookie Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js" defer></script>
+    <script src="js/services.js" defer></script>
+</body>
+</html>

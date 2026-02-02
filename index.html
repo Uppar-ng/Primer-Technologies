@@ -1,0 +1,1794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Primer Technologies | Complete Property Solutions</title>
+    <meta name="description" content="Primer Technologies offers comprehensive real estate services including property listing, maintenance, logistics, and handyman services. Your complete property solution partner.">
+    <meta name="keywords" content="real estate, property management, home maintenance, moving services, handyman">
+    <meta name="author" content="Primer Technologies">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Primer Technologies | Complete Property Solutions">
+    <meta property="og:description" content="Professional real estate services for modern property needs.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://primer-technologies.vercel.app">
+    <meta property="og:image" content="https://primer-technologies.vercel.app/images/og-image.jpg">
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "RealEstateAgent",
+        "name": "Primer Technologies",
+        "description": "Complete Property Solutions including listing, maintenance, logistics, and handyman services.",
+        "url": "https://primer-technologies.vercel.app",
+        "logo": "https://primer-technologies.vercel.app/images/logo.svg",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Kaduna State Nigeria",
+            "addressLocality": "Kaduna",
+            "addressRegion": "kaduna",
+            "postalCode": "800001",
+            "addressCountry": "NG"
+        },
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+1-555-123-4567",
+            "contactType": "customer service",
+            "availableLanguage": "English"
+        }
+    }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    
+    <!-- CSS Styles (Inlined for performance) -->
+    <style>
+    /* CSS Reset and Base Styles */
+    :root {
+        --primary-blue: #2563EB;
+        --primary-blue-dark: #1D4ED8;
+        --secondary-green: #10B981;
+        --secondary-green-dark: #059669;
+        --accent-amber: #F59E0B;
+        --accent-amber-dark: #D97706;
+        --background-light: #FFFFFF;
+        --background-dark: #F3F4F6;
+        --surface-white: #FFFFFF;
+        --surface-gray: #F9FAFB;
+        --surface-dark: #111827;
+        --text-primary: #111827;
+        --text-secondary: #6B7280;
+        --text-tertiary: #9CA3AF;
+        --border-light: #E5E7EB;
+        --border-medium: #D1D5DB;
+        --success: #10B981;
+        --warning: #F59E0B;
+        --error: #EF4444;
+        --info: #3B82F6;
+        
+        --spacing-xs: 0.25rem;  /* 4px */
+        --spacing-sm: 0.5rem;   /* 8px */
+        --spacing-md: 1rem;     /* 16px */
+        --spacing-lg: 1.5rem;   /* 24px */
+        --spacing-xl: 2rem;     /* 32px */
+        --spacing-2xl: 3rem;    /* 48px */
+        --spacing-3xl: 4rem;    /* 64px */
+        
+        --border-radius-sm: 0.375rem;
+        --border-radius-md: 0.5rem;
+        --border-radius-lg: 0.75rem;
+        --border-radius-xl: 1rem;
+        
+        --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+        --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+        --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+        
+        --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        --font-size-xs: 0.75rem;
+        --font-size-sm: 0.875rem;
+        --font-size-base: 1rem;
+        --font-size-lg: 1.125rem;
+        --font-size-xl: 1.25rem;
+        --font-size-2xl: 1.5rem;
+        --font-size-3xl: 1.875rem;
+        --font-size-4xl: 2.25rem;
+        --font-size-5xl: 3rem;
+        
+        --line-height-tight: 1.2;
+        --line-height-normal: 1.5;
+        --line-height-relaxed: 1.75;
+        
+        --transition-fast: 150ms;
+        --transition-normal: 250ms;
+        --transition-slow: 350ms;
+        
+        --z-index-dropdown: 1000;
+        --z-index-sticky: 1020;
+        --z-index-modal: 1030;
+        --z-index-popover: 1040;
+        --z-index-tooltip: 1050;
+    }
+    
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    html {
+        font-size: 16px;
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    body {
+        font-family: var(--font-family);
+        font-size: var(--font-size-base);
+        line-height: var(--line-height-normal);
+        color: var(--text-primary);
+        background-color: var(--background-light);
+        overflow-x: hidden;
+    }
+    
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: 700;
+        line-height: var(--line-height-tight);
+        margin-bottom: var(--spacing-lg);
+        color: var(--text-primary);
+    }
+    
+    h1 {
+        font-size: var(--font-size-4xl);
+    }
+    
+    h2 {
+        font-size: var(--font-size-3xl);
+    }
+    
+    h3 {
+        font-size: var(--font-size-2xl);
+    }
+    
+    h4 {
+        font-size: var(--font-size-xl);
+    }
+    
+    p {
+        margin-bottom: var(--spacing-md);
+        color: var(--text-secondary);
+    }
+    
+    a {
+        color: var(--primary-blue);
+        text-decoration: none;
+        transition: color var(--transition-fast) ease;
+    }
+    
+    a:hover, a:focus {
+        color: var(--primary-blue-dark);
+        text-decoration: underline;
+    }
+    
+    /* Utility Classes */
+    .container {
+        width: 100%;
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 var(--spacing-lg);
+    }
+    
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+    
+    .text-center {
+        text-align: center;
+    }
+    
+    .text-primary {
+        color: var(--primary-blue);
+    }
+    
+    .bg-light {
+        background-color: var(--background-dark);
+    }
+    
+    .section-padding {
+        padding: var(--spacing-3xl) 0;
+    }
+    
+    /* Professional Header */
+    .main-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: var(--surface-white);
+        box-shadow: var(--shadow-md);
+        z-index: var(--z-index-sticky);
+        transition: all var(--transition-normal) ease;
+    }
+    
+    .main-header.scrolled {
+        padding: var(--spacing-sm) 0;
+        box-shadow: var(--shadow-lg);
+    }
+    
+    .header-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: var(--spacing-md) 0;
+        transition: padding var(--transition-normal) ease;
+    }
+    
+    .main-header.scrolled .header-container {
+        padding: var(--spacing-xs) 0;
+    }
+    
+    .logo-container {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-md);
+    }
+    
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        text-decoration: none;
+        font-weight: 800;
+        font-size: 1.5rem;
+        color: var(--text-primary);
+    }
+    
+    .logo-icon {
+        color: var(--primary-blue);
+        font-size: 1.75rem;
+    }
+    
+    .logo-text {
+        font-size: 1.5rem;
+        font-weight: 800;
+    }
+    
+    .logo-tagline {
+        font-size: 0.875rem;
+        font-weight: 400;
+        color: var(--text-secondary);
+        margin-left: var(--spacing-sm);
+        padding-left: var(--spacing-sm);
+        border-left: 2px solid var(--border-light);
+        display: none;
+    }
+    
+    @media (min-width: 768px) {
+        .logo-tagline {
+            display: inline;
+        }
+    }
+    
+    /* Desktop Navigation */
+    .desktop-nav {
+        display: none;
+    }
+    
+    @media (min-width: 768px) {
+        .desktop-nav {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-lg);
+        }
+    }
+    
+    .nav-links {
+        display: flex;
+        gap: var(--spacing-lg);
+        list-style: none;
+    }
+    
+    .nav-link {
+        position: relative;
+        color: var(--text-secondary);
+        font-weight: 500;
+        text-decoration: none;
+        padding: var(--spacing-sm) 0;
+        transition: color var(--transition-fast) ease;
+    }
+    
+    .nav-link:hover, .nav-link:focus {
+        color: var(--primary-blue);
+        text-decoration: none;
+    }
+    
+    .nav-link.active {
+        color: var(--primary-blue);
+    }
+    
+    .nav-link.active::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background-color: var(--primary-blue);
+        border-radius: var(--border-radius-sm);
+    }
+    
+    .nav-link.has-dropdown {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+    }
+    
+    .nav-link.has-dropdown::after {
+        content: '\f078';
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+        font-size: 0.75rem;
+        transition: transform var(--transition-fast) ease;
+    }
+    
+    .nav-link.has-dropdown:hover::after {
+        transform: rotate(180deg);
+    }
+    
+    .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: var(--surface-white);
+        box-shadow: var(--shadow-lg);
+        border-radius: var(--border-radius-md);
+        padding: var(--spacing-sm) 0;
+        min-width: 200px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+        transition: all var(--transition-fast) ease;
+        z-index: var(--z-index-dropdown);
+    }
+    
+    .nav-item.dropdown:hover .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    
+    .dropdown-link {
+        display: block;
+        padding: var(--spacing-sm) var(--spacing-lg);
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: all var(--transition-fast) ease;
+    }
+    
+    .dropdown-link:hover {
+        background-color: var(--background-dark);
+        color: var(--primary-blue);
+        text-decoration: none;
+    }
+    
+    .header-actions {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-md);
+    }
+    
+    .action-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.625rem 1.25rem;
+        font-size: var(--font-size-sm);
+        font-weight: 600;
+        line-height: 1;
+        border-radius: var(--border-radius-md);
+        border: none;
+        cursor: pointer;
+        transition: all var(--transition-normal) ease;
+        text-decoration: none;
+        white-space: nowrap;
+        user-select: none;
+    }
+    
+    .action-btn:focus {
+        outline: 2px solid var(--primary-blue);
+        outline-offset: 2px;
+    }
+    
+    .action-btn-primary {
+        background-color: var(--primary-blue);
+        color: white;
+    }
+    
+    .action-btn-primary:hover, .action-btn-primary:focus {
+        background-color: var(--primary-blue-dark);
+        color: white;
+        text-decoration: none;
+    }
+    
+    .action-btn-outline {
+        background-color: transparent;
+        color: var(--primary-blue);
+        border: 2px solid var(--primary-blue);
+    }
+    
+    .action-btn-outline:hover, .action-btn-outline:focus {
+        background-color: var(--primary-blue);
+        color: white;
+    }
+    
+    .user-menu {
+        position: relative;
+    }
+    
+    .user-btn {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        padding: 0.5rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        border-radius: var(--border-radius-md);
+        transition: background-color var(--transition-fast) ease;
+    }
+    
+    .user-btn:hover {
+        background-color: var(--background-dark);
+    }
+    
+    .user-avatar {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        background-color: var(--primary-blue);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        font-size: 1rem;
+    }
+    
+    .user-name {
+        font-weight: 500;
+        color: var(--text-primary);
+        display: none;
+    }
+    
+    @media (min-width: 1024px) {
+        .user-name {
+            display: block;
+        }
+    }
+    
+    /* Mobile Menu Toggle */
+    .mobile-menu-toggle {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 2rem;
+        height: 1.5rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+    }
+    
+    @media (min-width: 768px) {
+        .mobile-menu-toggle {
+            display: none;
+        }
+    }
+    
+    .menu-line {
+        width: 100%;
+        height: 2px;
+        background-color: var(--text-primary);
+        border-radius: 1px;
+        transition: all var(--transition-fast) ease;
+    }
+    
+    .mobile-menu-toggle.active .menu-line:nth-child(1) {
+        transform: rotate(45deg) translate(6px, 6px);
+    }
+    
+    .mobile-menu-toggle.active .menu-line:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .mobile-menu-toggle.active .menu-line:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -6px);
+    }
+    
+    /* Mobile Navigation */
+    .mobile-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: var(--surface-white);
+        z-index: var(--z-index-modal);
+        transform: translateX(-100%);
+        transition: transform var(--transition-normal) ease;
+        overflow-y: auto;
+        padding: var(--spacing-3xl) var(--spacing-lg) var(--spacing-xl);
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .mobile-nav.active {
+        transform: translateX(0);
+    }
+    
+    .mobile-nav-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: var(--spacing-2xl);
+        padding-bottom: var(--spacing-lg);
+        border-bottom: 1px solid var(--border-light);
+    }
+    
+    .mobile-nav-links {
+        list-style: none;
+        flex: 1;
+    }
+    
+    .mobile-nav-link {
+        display: block;
+        padding: var(--spacing-lg) 0;
+        color: var(--text-primary);
+        font-weight: 500;
+        text-decoration: none;
+        border-bottom: 1px solid var(--border-light);
+        transition: color var(--transition-fast) ease;
+    }
+    
+    .mobile-nav-link:hover, .mobile-nav-link:focus {
+        color: var(--primary-blue);
+        text-decoration: none;
+    }
+    
+    .mobile-nav-link.active {
+        color: var(--primary-blue);
+    }
+    
+    .mobile-nav-actions {
+        margin-top: auto;
+        padding-top: var(--spacing-xl);
+        border-top: 1px solid var(--border-light);
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+    
+    .mobile-nav-actions .action-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    /* Main Content Padding for Fixed Header */
+    .main-content {
+        padding-top: 5rem;
+    }
+    
+    @media (max-width: 767px) {
+        .main-content {
+            padding-top: 4rem;
+        }
+    }
+    
+   /* ====== PROFESSIONAL HERO SECTION WITH BACKGROUND IMAGE ====== */
+.hero-section {
+    position: relative;
+    min-height: calc(100vh - 5rem);
+    display: flex;
+    align-items: center;
+    /* Primary background with image + gradient overlay */
+    background: 
+        linear-gradient(135deg, rgba(37, 99, 235, 0.85) 0%, rgba(16, 185, 129, 0.85) 100%),
+        url('images/miniflat.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Creates smooth parallax effect */
+    overflow: hidden;
+    /* Smooth loading */
+    background-color: var(--primary-blue); /* Fallback color */
+}
+
+/* Mobile adjustment */
+@media (max-width: 767px) {
+    .hero-section {
+        min-height: calc(100vh - 4rem);
+        background-attachment: scroll; /* Disable parallax on mobile for performance */
+    }
+}
+
+/* Additional dark overlay for better text contrast */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3); /* 30% dark overlay */
+    z-index: 0;
+}
+
+/* Hero content container */
+.hero-content {
+    position: relative;
+    z-index: 1; /* Ensure content is above background layers */
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--spacing-3xl) var(--spacing-lg);
+    text-align: center;
+}
+
+/* Hero title */
+.hero-title {
+    font-size: var(--font-size-5xl);
+    margin-bottom: var(--spacing-xl);
+    color: white; /* Changed for contrast against dark background */
+    line-height: 1.1;
+    font-weight: 800;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4); /* Text shadow for readability */
+    animation: fadeInUp 0.8s ease-out;
+}
+
+/* Mobile title adjustment */
+@media (max-width: 767px) {
+    .hero-title {
+        font-size: var(--font-size-4xl);
+        text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+    }
+}
+
+/* Hero subtitle */
+.hero-subtitle {
+    font-size: var(--font-size-xl);
+    color: rgba(255, 255, 255, 0.95); /* Changed for contrast */
+    margin-bottom: var(--spacing-2xl);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: var(--line-height-relaxed);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+/* Mobile subtitle adjustment */
+@media (max-width: 767px) {
+    .hero-subtitle {
+        font-size: var(--font-size-lg);
+        color: rgba(255, 255, 255, 0.9);
+    }
+}
+
+/* Search container styling update for dark background */
+.search-container {
+    background: rgba(255, 255, 255, 0.95); /* More opaque on dark background */
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-xl);
+    margin-top: var(--spacing-xl);
+    animation: fadeInUp 0.8s ease-out 0.4s both;
+    backdrop-filter: blur(10px); /* Modern glass effect */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Fade-in animation for elements */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Loading state for background image */
+.hero-section.loading {
+    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-green) 100%);
+}
+
+.hero-section.loading::after {
+    content: 'Loading...';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: var(--font-size-lg);
+    opacity: 0.7;
+}    
+    .search-container {
+        background: var(--surface-white);
+        border-radius: var(--border-radius-lg);
+        padding: var(--spacing-xl);
+        box-shadow: var(--shadow-xl);
+        margin-top: var(--spacing-xl);
+    }
+    
+    .search-form {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+    
+    .form-group {
+        flex: 1;
+    }
+    
+    .form-label {
+        display: block;
+        margin-bottom: var(--spacing-xs);
+        font-weight: 500;
+        color: var(--text-primary);
+    }
+    
+    .form-input, .form-select {
+        width: 100%;
+        padding: 0.875rem 1rem;
+        font-size: var(--font-size-base);
+        border: 1px solid var(--border-medium);
+        border-radius: var(--border-radius-md);
+        background-color: var(--surface-white);
+        transition: border-color var(--transition-fast) ease;
+    }
+    
+    .form-input:focus, .form-select:focus {
+        outline: none;
+        border-color: var(--primary-blue);
+        box-shadow: 0 0 0 3px var(--primary-blue)20;
+    }
+    
+    .price-range {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-md);
+    }
+    
+    .price-input {
+        flex: 1;
+    }
+    
+    @media (min-width: 768px) {
+        .search-form {
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        
+        .form-group {
+            flex: 1 0 calc(50% - 0.5rem);
+        }
+        
+        .form-group:last-child {
+            flex: 1 0 100%;
+        }
+    }
+    
+    @media (min-width: 1024px) {
+        .search-form {
+            flex-wrap: nowrap;
+        }
+        
+        .form-group {
+            flex: 1;
+        }
+        
+        .form-group:last-child {
+            flex: 0 0 auto;
+        }
+    }
+    
+    /* Featured Properties */
+    .section-title {
+        text-align: center;
+        margin-bottom: var(--spacing-2xl);
+        position: relative;
+    }
+    
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: -0.75rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 4rem;
+        height: 0.25rem;
+        background-color: var(--primary-blue);
+        border-radius: var(--border-radius-sm);
+    }
+    
+    .properties-carousel {
+        position: relative;
+        overflow: hidden;
+        padding: var(--spacing-lg) 0;
+    }
+    
+    .carousel-container {
+        display: flex;
+        gap: var(--spacing-lg);
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        padding: var(--spacing-sm) var(--spacing-lg);
+        margin: 0 calc(-1 * var(--spacing-lg));
+    }
+    
+    .carousel-container::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .property-card {
+        flex: 0 0 calc(100% - 2rem);
+        scroll-snap-align: start;
+        background: var(--surface-white);
+        border-radius: var(--border-radius-lg);
+        overflow: hidden;
+        box-shadow: var(--shadow-md);
+        transition: transform var(--transition-normal) ease, box-shadow var(--transition-normal) ease;
+    }
+    
+    @media (min-width: 768px) {
+        .property-card {
+            flex: 0 0 calc(50% - 1rem);
+        }
+    }
+    
+    @media (min-width: 1024px) {
+        .property-card {
+            flex: 0 0 calc(33.333% - 1.5rem);
+        }
+    }
+    
+    .property-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-xl);
+    }
+    
+    .property-image {
+        position: relative;
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
+    }
+    
+    .property-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform var(--transition-normal) ease;
+    }
+    
+    .property-card:hover .property-image img {
+        transform: scale(1.05);
+    }
+    
+    .property-badge {
+        position: absolute;
+        top: var(--spacing-md);
+        left: var(--spacing-md);
+        background-color: var(--primary-blue);
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: var(--border-radius-sm);
+        font-size: var(--font-size-xs);
+        font-weight: 600;
+    }
+    
+    .property-favorite {
+        position: absolute;
+        top: var(--spacing-md);
+        right: var(--spacing-md);
+        width: 2.5rem;
+        height: 2.5rem;
+        background-color: var(--surface-white);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        cursor: pointer;
+        transition: all var(--transition-fast) ease;
+        color: var(--text-secondary);
+    }
+    
+    .property-favorite:hover {
+        background-color: var(--background-dark);
+        color: var(--error);
+    }
+    
+    .property-favorite.active {
+        color: var(--error);
+    }
+    
+    .property-content {
+        padding: var(--spacing-lg);
+    }
+    
+    .property-price {
+        font-size: var(--font-size-2xl);
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: var(--spacing-xs);
+    }
+    
+    .property-title {
+        font-size: var(--font-size-lg);
+        font-weight: 600;
+        margin-bottom: var(--spacing-sm);
+        color: var(--text-primary);
+    }
+    
+    .property-address {
+        color: var(--text-secondary);
+        margin-bottom: var(--spacing-md);
+        font-size: var(--font-size-sm);
+    }
+    
+    .property-features {
+        display: flex;
+        gap: var(--spacing-lg);
+        color: var(--text-secondary);
+        font-size: var(--font-size-sm);
+    }
+    
+    .feature {
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
+    }
+    
+    .feature i {
+        color: var(--primary-blue);
+    }
+    
+    /* Services Grid */
+    .services-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
+        margin-top: var(--spacing-2xl);
+    }
+    
+    @media (min-width: 768px) {
+        .services-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    
+    @media (min-width: 1024px) {
+        .services-grid {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+    
+    .service-card {
+        background: var(--surface-white);
+        border-radius: var(--border-radius-lg);
+        padding: var(--spacing-xl);
+        text-align: center;
+        box-shadow: var(--shadow-md);
+        transition: transform var(--transition-normal) ease, box-shadow var(--transition-normal) ease;
+    }
+    
+    .service-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-xl);
+    }
+    
+    .service-icon {
+        width: 4rem;
+        height: 4rem;
+        background-color: var(--primary-blue);
+        border-radius: var(--border-radius-lg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto var(--spacing-lg);
+        color: white;
+        font-size: 1.5rem;
+    }
+    
+    .service-title {
+        font-size: var(--font-size-xl);
+        margin-bottom: var(--spacing-md);
+        color: var(--text-primary);
+    }
+    
+    .service-description {
+        color: var(--text-secondary);
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    /* Testimonials */
+    .testimonials-carousel {
+        position: relative;
+        overflow: hidden;
+        padding: var(--spacing-lg) 0;
+    }
+    
+    .testimonial-card {
+        background: var(--surface-white);
+        border-radius: var(--border-radius-lg);
+        padding: var(--spacing-xl);
+        box-shadow: var(--shadow-md);
+        margin: 0 var(--spacing-lg);
+    }
+    
+    .testimonial-rating {
+        color: var(--accent-amber);
+        margin-bottom: var(--spacing-md);
+        font-size: 1.25rem;
+    }
+    
+    .testimonial-text {
+        font-style: italic;
+        color: var(--text-secondary);
+        margin-bottom: var(--spacing-lg);
+        line-height: var(--line-height-relaxed);
+    }
+    
+    .testimonial-author {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-md);
+    }
+    
+    .author-avatar {
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        background-color: var(--background-dark);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary-blue);
+        font-weight: 600;
+    }
+    
+    .author-info h4 {
+        margin-bottom: 0.25rem;
+        font-size: var(--font-size-base);
+    }
+    
+    .author-info p {
+        margin: 0;
+        font-size: var(--font-size-sm);
+        color: var(--text-tertiary);
+    }
+    
+    /* Blog Preview */
+    .blog-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
+        margin-top: var(--spacing-2xl);
+    }
+    
+    @media (min-width: 768px) {
+        .blog-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    
+    @media (min-width: 1024px) {
+        .blog-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+    
+    .blog-card {
+        background: var(--surface-white);
+        border-radius: var(--border-radius-lg);
+        overflow: hidden;
+        box-shadow: var(--shadow-md);
+        transition: transform var(--transition-normal) ease, box-shadow var(--transition-normal) ease;
+    }
+    
+    .blog-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-xl);
+    }
+    
+    .blog-image {
+        width: 100%;
+        height: 12rem;
+        overflow: hidden;
+    }
+    
+    .blog-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform var(--transition-normal) ease;
+    }
+    
+    .blog-card:hover .blog-image img {
+        transform: scale(1.05);
+    }
+    
+    .blog-content {
+        padding: var(--spacing-lg);
+    }
+    
+    .blog-category {
+        display: inline-block;
+        background-color: var(--primary-blue);
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: var(--border-radius-sm);
+        font-size: var(--font-size-xs);
+        font-weight: 600;
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .blog-title {
+        font-size: var(--font-size-lg);
+        margin-bottom: var(--spacing-sm);
+        color: var(--text-primary);
+    }
+    
+    .blog-excerpt {
+        color: var(--text-secondary);
+        margin-bottom: var(--spacing-md);
+        font-size: var(--font-size-sm);
+    }
+    
+    .blog-meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: var(--font-size-xs);
+        color: var(--text-tertiary);
+    }
+    
+    /* Footer */
+    .footer {
+        background-color: var(--surface-dark);
+        color: white;
+        padding: var(--spacing-3xl) 0 var(--spacing-xl);
+    }
+    
+    .footer a {
+        color: white;
+        opacity: 0.8;
+        transition: opacity var(--transition-fast) ease;
+    }
+    
+    .footer a:hover {
+        opacity: 1;
+        text-decoration: underline;
+    }
+    
+    .footer-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--spacing-2xl);
+        margin-bottom: var(--spacing-2xl);
+    }
+    
+    @media (min-width: 768px) {
+        .footer-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    
+    @media (min-width: 1024px) {
+        .footer-grid {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+    
+    .footer-section h3 {
+        color: white;
+        font-size: var(--font-size-lg);
+        margin-bottom: var(--spacing-lg);
+        opacity: 0.9;
+    }
+    
+    .footer-links {
+        list-style: none;
+    }
+    
+    .footer-links li {
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .social-links {
+        display: flex;
+        gap: var(--spacing-md);
+        margin-top: var(--spacing-lg);
+    }
+    
+    .social-link {
+        width: 2.5rem;
+        height: 2.5rem;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color var(--transition-fast) ease;
+    }
+    
+    .social-link:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        text-decoration: none;
+    }
+    
+    .footer-bottom {
+        text-align: center;
+        padding-top: var(--spacing-xl);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.6);
+        font-size: var(--font-size-sm);
+    }
+    
+    /* Button Styles */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.75rem 1.5rem;
+        font-size: var(--font-size-base);
+        font-weight: 600;
+        line-height: 1;
+        border-radius: var(--border-radius-md);
+        border: none;
+        cursor: pointer;
+        transition: all var(--transition-normal) ease;
+        text-decoration: none;
+        white-space: nowrap;
+        user-select: none;
+        touch-action: manipulation;
+    }
+    
+    .btn:focus {
+        outline: 2px solid var(--primary-blue);
+        outline-offset: 2px;
+    }
+    
+    .btn-primary {
+        background-color: var(--primary-blue);
+        color: white;
+    }
+    
+    .btn-primary:hover, .btn-primary:focus {
+        background-color: var(--primary-blue-dark);
+        color: white;
+        text-decoration: none;
+    }
+    
+    .btn-secondary {
+        background-color: var(--secondary-green);
+        color: white;
+    }
+    
+    .btn-secondary:hover, .btn-secondary:focus {
+        background-color: var(--secondary-green-dark);
+        color: white;
+    }
+    
+    .btn-outline {
+        background-color: transparent;
+        color: var(--primary-blue);
+        border: 2px solid var(--primary-blue);
+    }
+    
+    .btn-outline:hover, .btn-outline:focus {
+        background-color: var(--primary-blue);
+        color: white;
+    }
+    
+    .btn-lg {
+        padding: 1rem 2rem;
+        font-size: var(--font-size-lg);
+    }
+    
+    .btn-full {
+        width: 100%;
+    }
+    
+    /* Loading States */
+    .loading {
+        display: inline-block;
+        width: 1.5rem;
+        height: 1.5rem;
+        border: 2px solid var(--border-light);
+        border-top-color: var(--primary-blue);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+    
+    .skeleton {
+        background-color: var(--border-light);
+        border-radius: var(--border-radius-md);
+        animation: pulse 1.5s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+    }
+    
+    /* High Contrast Mode Support */
+    @media (prefers-contrast: high) {
+        :root {
+            --primary-blue: #0000FF;
+            --secondary-green: #008000;
+            --text-primary: #000000;
+            --text-secondary: #333333;
+        }
+    }
+    
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+        * {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+        
+        html {
+            scroll-behavior: auto;
+        }
+    }
+    
+    /* Dark Mode Support */
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --background-light: #1F2937;
+            --background-dark: #111827;
+            --surface-white: #1F2937;
+            --surface-gray: #374151;
+            --text-primary: #F9FAFB;
+            --text-secondary: #D1D5DB;
+            --text-tertiary: #9CA3AF;
+            --border-light: #374151;
+            --border-medium: #4B5563;
+        }
+        
+        .property-card, .service-card, .testimonial-card, .blog-card {
+            background-color: var(--surface-gray);
+        }
+        
+        .form-input, .form-select {
+            background-color: var(--surface-gray);
+            border-color: var(--border-medium);
+            color: var(--text-primary);
+        }
+        
+        .main-header {
+            background-color: var(--surface-white);
+        }
+    }
+    </style>
+</head>
+<body>
+    <!-- Professional Header -->
+    <header class="main-header" id="mainHeader">
+        <div class="container header-container">
+            <!-- Logo -->
+            <div class="logo-container">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-building logo-icon"></i>
+                    <span class="logo-text">Primer</span>
+                   
+                </a>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <nav class="desktop-nav">
+                <ul class="nav-links">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link active">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="browse.html" class="nav-link has-dropdown">Properties</a>
+                        <div class="dropdown-menu">
+                            <a href="browse.html" class="dropdown-link">Browse All</a>
+                            <a href="browse.html?type=sale" class="dropdown-link">For Sale</a>
+                            <a href="browse.html?type=rent" class="dropdown-link">For Rent</a>
+                            <a href="browse.html?type=commercial" class="dropdown-link">Commercial</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="services.html" class="nav-link has-dropdown">Services</a>
+                        <div class="dropdown-menu">
+                            <a href="services.html#listing" class="dropdown-link">Property Listing</a>
+                            <a href="services.html#maintenance" class="dropdown-link">Maintenance</a>
+                            <a href="services.html#logistics" class="dropdown-link">Moving & Logistics</a>
+                            <a href="services.html#handyman" class="dropdown-link">Handyman Services</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="about.html" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="blog.html" class="nav-link">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="contact.html" class="nav-link">Contact</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Header Actions -->
+            <div class="header-actions">
+                <!-- User Menu (Logged in) -->
+                <div class="user-menu">
+                    <button class="user-btn" id="userMenuBtn" aria-label="User menu">
+                        
+                        <i class="fas fa-chevron-down" style="font-size: 0.75rem;"></i>
+                    </button>
+                    <div class="dropdown-menu" id="userDropdown" style="right: 0; left: auto; min-width: 180px;">
+                        <a href="profile.html" class="dropdown-link"><i class="fas fa-user" style="margin-right: 0.5rem;"></i>Profile</a>
+                        <a href="favorites.html" class="dropdown-link"><i class="fas fa-heart" style="margin-right: 0.5rem;"></i>Favorites</a>
+                        <a href="bookings.html" class="dropdown-link"><i class="fas fa-calendar" style="margin-right: 0.5rem;"></i>Bookings</a>
+                        <div style="border-top: 1px solid var(--border-light); margin: var(--spacing-sm) 0;"></div>
+                        <a href="logout.html" class="dropdown-link"><i class="fas fa-sign-out-alt" style="margin-right: 0.5rem;"></i>Logout</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu">
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-header">
+            <div class="logo">
+                <i class="fas fa-building logo-icon"></i>
+                <span class="logo-text">Primer Technologies</span>
+            </div>
+            <button class="mobile-menu-toggle active" id="closeMobileMenu" aria-label="Close mobile menu">
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+            </button>
+        </div>
+
+        <ul class="mobile-nav-links">
+            <li><a href="index.html" class="mobile-nav-link active">Home</a></li>
+            <li><a href="browse.html" class="mobile-nav-link">Browse Properties</a></li>
+            <li><a href="browse.html?type=sale" class="mobile-nav-link">For Sale</a></li>
+            <li><a href="browse.html?type=rent" class="mobile-nav-link">For Rent</a></li>
+            <li><a href="services.html" class="mobile-nav-link">Services</a></li>
+            <li><a href="services.html#listing" class="mobile-nav-link">Property Listing</a></li>
+            <li><a href="services.html#maintenance" class="mobile-nav-link">Maintenance</a></li>
+            <li><a href="services.html#logistics" class="mobile-nav-link">Moving & Logistics</a></li>
+            <li><a href="services.html#handyman" class="mobile-nav-link">Handyman Services</a></li>
+            <li><a href="about.html" class="mobile-nav-link">About Us</a></li>
+            <li><a href="blog.html" class="mobile-nav-link">Blog</a></li>
+            <li><a href="contact.html" class="mobile-nav-link">Contact</a></li>
+        </ul>
+
+        <div class="mobile-nav-actions">
+            <a href="login.html" class="action-btn action-btn-outline">
+                <i class="fas fa-sign-in-alt" style="margin-right: 0.5rem;"></i>Sign In
+            </a>
+            <button class="action-btn action-btn-primary" id="mobileListPropertyBtn">
+                <i class="fas fa-plus" style="margin-right: 0.5rem;"></i>List Property
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">Find Your Dream Property with Primer Technologies</h1>
+                <p class="hero-subtitle">Complete Property Solutions - From finding your perfect home to maintaining it for years to come</p>
+                
+                <div class="search-container">
+                    <form class="search-form" id="propertySearch">
+                        <div class="form-group">
+                            <label for="location" class="form-label">Location</label>
+                            <input type="text" id="location" class="form-input" placeholder="Enter city, neighborhood, or ZIP" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="propertyType" class="form-label">Property Type</label>
+                            <select id="propertyType" class="form-select">
+                                <option value="">Any Type</option>
+                                <option value="house">House</option>
+                                <option value="apartment">Apartment</option>
+                                <option value="condo">Condo</option>
+                                <option value="commercial">Commercial</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="priceRange" class="form-label">Price Range</label>
+                            <div class="price-range">
+                                <input type="number" id="minPrice" class="form-input price-input" placeholder="Min" min="0">
+                                <span>to</span>
+                                <input type="number" id="maxPrice" class="form-input price-input" placeholder="Max" min="0">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-lg btn-full">
+                                <i class="fas fa-search" style="margin-right: 0.5rem;"></i>Search Properties
+                                <span class="loading" style="display: none; margin-left: 0.5rem;"></span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Properties -->
+        <section class="section-padding bg-light">
+            <div class="container">
+                <h2 class="section-title">Featured Properties</h2>
+                <div class="properties-carousel">
+                    <div class="carousel-container" id="featuredProperties">
+                        <!-- Properties will be loaded via JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Overview -->
+        <section class="section-padding">
+            <div class="container">
+                <h2 class="section-title">Our Core Services</h2>
+                <div class="services-grid" id="servicesGrid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <h3 class="service-title">Property Listing</h3>
+                        <p class="service-description">Professional property marketing including photography, virtual tours, advertising, and multiple listing placement.</p>
+                        <button class="btn btn-primary" onclick="viewService('listing')">Learn More</button>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h3 class="service-title">Property Maintenance</h3>
+                        <p class="service-description">Regular maintenance plans, emergency repairs, seasonal services, and 24/7 support team for your property.</p>
+                        <button class="btn btn-primary" onclick="viewService('maintenance')">Learn More</button>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-truck-moving"></i>
+                        </div>
+                        <h3 class="service-title">Moving & Logistics</h3>
+                        <p class="service-description">Complete moving solutions: packing, unpacking, furniture assembly, storage coordination, and moving day management.</p>
+                        <button class="btn btn-primary" onclick="viewService('logistics')">Learn More</button>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-hammer"></i>
+                        </div>
+                        <h3 class="service-title">Handyman Services</h3>
+                        <p class="service-description">Small repairs, installations, assembly help, home improvements, and fixture replacements by certified professionals.</p>
+                        <button class="btn btn-primary" onclick="viewService('handyman')">Learn More</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section class="section-padding bg-light">
+            <div class="container">
+                <h2 class="section-title">How It Works</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h3 class="service-title">Find Your Property</h3>
+                        <p class="service-description">Browse our extensive database of properties with advanced filters, virtual tours, and professional guidance.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <h3 class="service-title">Schedule Viewing</h3>
+                        <p class="service-description">Book viewings at your convenience with our online scheduling system. We coordinate all appointments for you.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-clipboard-check"></i>
+                        </div>
+                        <h3 class="service-title">Complete Service Package</h3>
+                        <p class="service-description">Get access to our full suite of property services including maintenance, moving, and ongoing support.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="section-padding">
+            <div class="container">
+                <h2 class="section-title">What Our Clients Say</h2>
+                <div class="testimonials-carousel">
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"Primer Technologies made our home buying experience seamless. Their maintenance package has been invaluable for our busy family. The team is professional, responsive, and truly cares about their clients."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">RM</div>
+                            <div class="author-info">
+                                <h4>Robert Martinez</h4>
+                                <p>Home Owner | 2023</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Preview -->
+        <section class="section-padding bg-light">
+            <div class="container">
+                <h2 class="section-title">Latest From Our Blog</h2>
+                <div class="blog-grid" id="blogGrid">
+                    <article class="blog-card">
+                        <div class="blog-image">
+                            <img src="images/blog/4.jpg" alt="Property maintenance guide" loading="lazy">
+                        </div>
+                        <div class="blog-content">
+                            <span class="blog-category">Maintenance</span>
+                            <h3 class="blog-title">Complete Guide to Property Maintenance in 2024</h3>
+                            <p class="blog-excerpt">Learn essential maintenance tips to protect your property investment and increase its value over time with our comprehensive guide.</p>
+                            <div class="blog-meta">
+                                <span><i class="fas fa-user" style="margin-right: 0.25rem;"></i>Marcus IB</span>
+                                <span><i class="fas fa-calendar" style="margin-right: 0.25rem;"></i>Oct 20, 2024</span>
+                            </div>
+                            <button class="btn btn-outline" onclick="viewBlogPost(1)" style="margin-top: var(--spacing-md);">
+                                Read More
+                            </button>
+                        </div>
+                    </article>
+                    <article class="blog-card">
+                        <div class="blog-image">
+                            <img src="images/blog/2.jpg" alt="Market trends analysis" loading="lazy">
+                        </div>
+                        <div class="blog-content">
+                            <span class="blog-category">Market Trends</span>
+                            <h3 class="blog-title">Market Trends: What Buyers Want in 2024</h3>
+                            <p class="blog-excerpt">Discover the latest trends in real estate and what features modern home buyers are looking for in today's competitive market.</p>
+                            <div class="blog-meta">
+                                <span><i class="fas fa-user" style="margin-right: 0.25rem;"></i>Marcus IB</span>
+                                <span><i class="fas fa-calendar" style="margin-right: 0.25rem;"></i>Oct 15, 2024</span>
+                            </div>
+                            <button class="btn btn-outline" onclick="viewBlogPost(2)" style="margin-top: var(--spacing-md);">
+                                Read More
+                            </button>
+                        </div>
+                    </article>
+                    <article class="blog-card">
+                        <div class="blog-image">
+                            <img src="images/blog/2.jpg" alt="Moving guide" loading="lazy">
+                        </div>
+                        <div class="blog-content">
+                            <span class="blog-category">Moving</span>
+                            <h3 class="blog-title">Stress-Free Moving: A Step-by-Step Guide</h3>
+                            <p class="blog-excerpt">Our comprehensive guide to planning and executing a smooth, stress-free move to your new home with professional moving services.</p>
+                            <div class="blog-meta">
+                                <span><i class="fas fa-user" style="margin-right: 0.25rem;"></i>Moh Isaq</span>
+                                <span><i class="fas fa-calendar" style="margin-right: 0.25rem;"></i>Oct 10, 2024</span>
+                            </div>
+                            <button class="btn btn-outline" onclick="viewBlogPost(3)" style="margin-top: var(--spacing-md);">
+                                Read More
+                            </button>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Primer Technologies</h3>
+                    <p>Complete Property Solutions for modern living. We handle everything from finding your dream property to maintaining it for years to come.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="browse.html">Browse Properties</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Our Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="services.html#listing">Property Listing</a></li>
+                        <li><a href="services.html#maintenance">Property Maintenance</a></li>
+                        <li><a href="services.html#logistics">Logistics & Moving</a></li>
+                        <li><a href="services.html#handyman">Handyman Services</a></li>
+                        <li><a href="book-service.html">Book a Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <address>
+                        <p><i class="fas fa-map-marker-alt" style="margin-right: 0.5rem;"></i>Ahmadu Bello Way, Kaduna<br>
+                        Metro area, 800001<br>
+                        Nigeria</p>
+                        <p><i class="fas fa-phone" style="margin-right: 0.5rem;"></i>+1 (555) 123-4567</p>
+                        <p><i class="fas fa-envelope" style="margin-right: 0.5rem;"></i>get.primer@proton.me</p>
+                        <p><i class="fas fa-clock" style="margin-right: 0.5rem;"></i>Mon-Fri: 8am-7pm<br>
+                        Sat: 9am-5pm</p>
+                    </address>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Primer Technologies. All rights reserved. | <a href="privacy.html-">Privacy Policy</a> | <a href="terms.html">Terms of Service</a> | <a href="#">Cookie Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js" defer></script>
+</body>
+</html>

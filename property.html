@@ -1,0 +1,1627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Modern Luxury Villa | Primer Technologies</title>
+    <meta name="description" content="Stunning modern villa with panoramic views, state-of-the-art kitchen, and luxurious master suite. 4 bedrooms, 3 bathrooms, 3,200 sqft.">
+    <meta name="keywords" content="luxury villa, modern home, property for sale, California real estate">
+    <meta name="author" content="Primer Technologies">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Modern Luxury Villa | Primer Technologies">
+    <meta property="og:description" content="Stunning modern villa with panoramic views, state-of-the-art kitchen, and luxurious master suite.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://primer-technologies.vercel.app/property.html?id=1">
+    <meta property="og:image" content="https://primer-technologies.vercel.app/images/properties/villa1.jpg">
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SingleFamilyResidence",
+        "name": "Modern Luxury Villa",
+        "description": "Stunning modern villa with panoramic views, state-of-the-art kitchen, and luxurious master suite.",
+        "url": "https://primer-technologies.vercel.app/property.html?id=1",
+        "image": [
+            "https://primer-technologies.vercel.app/images/properties/villa1.jpg",
+            "https://primer-technologies.vercel.app/images/properties/villa2.jpg",
+            "https://primer-technologies.vercel.app/images/properties/villa3.jpg"
+        ],
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Ahmadu Bello Way, Kaduna",
+            "addressLocality": "Kaduna",
+            "addressRegion": "KD",
+            "postalCode": "800001",
+            "addressCountry": "NG"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "34.0522",
+            "longitude": "-118.2437"
+        },
+        "numberOfRooms": 8,
+        "numberOfBedrooms": 4,
+        "numberOfBathroomsTotal": 3,
+        "floorSize": "3200 sqft",
+        "price": "750000",
+        "priceCurrency": "NGN",
+        "forSale": true
+    }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    
+    <!-- CSS Styles (Inlined for performance) -->
+    <style>
+    /* CSS Reset and Base Styles */
+    :root {
+        --primary-blue: #2563EB;
+        --primary-blue-dark: #1D4ED8;
+        --secondary-green: #10B981;
+        --secondary-green-dark: #059669;
+        --whatsapp-green: #25D366;
+        --whatsapp-green-dark: #128C7E;
+        --accent-amber: #F59E0B;
+        --accent-amber-dark: #D97706;
+        --background-light: #FFFFFF;
+        --background-dark: #F3F4F6;
+        --surface-white: #FFFFFF;
+        --surface-gray: #F9FAFB;
+        --surface-dark: #111827;
+        --text-primary: #111827;
+        --text-secondary: #6B7280;
+        --text-tertiary: #9CA3AF;
+        --border-light: #E5E7EB;
+        --border-medium: #D1D5DB;
+        --success: #10B981;
+        --warning: #F59E0B;
+        --error: #EF4444;
+        --info: #3B82F6;
+        
+        --spacing-xs: 0.25rem;  /* 4px */
+        --spacing-sm: 0.5rem;   /* 8px */
+        --spacing-md: 1rem;     /* 16px */
+        --spacing-lg: 1.5rem;   /* 24px */
+        --spacing-xl: 2rem;     /* 32px */
+        --spacing-2xl: 3rem;    /* 48px */
+        --spacing-3xl: 4rem;    /* 64px */
+        
+        --border-radius-sm: 0.375rem;
+        --border-radius-md: 0.5rem;
+        --border-radius-lg: 0.75rem;
+        --border-radius-xl: 1rem;
+        
+        --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+        --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+        --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+        
+        --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        --font-size-xs: 0.75rem;
+        --font-size-sm: 0.875rem;
+        --font-size-base: 1rem;
+        --font-size-lg: 1.125rem;
+        --font-size-xl: 1.25rem;
+        --font-size-2xl: 1.5rem;
+        --font-size-3xl: 1.875rem;
+        --font-size-4xl: 2.25rem;
+        --font-size-5xl: 3rem;
+        
+        --line-height-tight: 1.2;
+        --line-height-normal: 1.5;
+        --line-height-relaxed: 1.75;
+        
+        --transition-fast: 150ms;
+        --transition-normal: 250ms;
+        --transition-slow: 350ms;
+        
+        --z-index-dropdown: 1000;
+        --z-index-sticky: 1020;
+        --z-index-modal: 1030;
+        --z-index-popover: 1040;
+        --z-index-tooltip: 1050;
+        --z-index-lightbox: 1060;
+        --z-index-action-bar: 1070;
+    }
+    
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    html {
+        font-size: 16px;
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    body {
+        font-family: var(--font-family);
+        font-size: var(--font-size-base);
+        line-height: var(--line-height-normal);
+        color: var(--text-primary);
+        background-color: var(--background-light);
+        overflow-x: hidden;
+    }
+    
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: 700;
+        line-height: var(--line-height-tight);
+        color: var(--text-primary);
+    }
+    
+    h1 {
+        font-size: var(--font-size-3xl);
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    h2 {
+        font-size: var(--font-size-2xl);
+        margin-bottom: var(--spacing-md);
+    }
+    
+    h3 {
+        font-size: var(--font-size-xl);
+        margin-bottom: var(--spacing-md);
+    }
+    
+    p {
+        margin-bottom: var(--spacing-md);
+        color: var(--text-secondary);
+    }
+    
+    a {
+        color: var(--primary-blue);
+        text-decoration: none;
+        transition: color var(--transition-fast) ease;
+    }
+    
+    a:hover, a:focus {
+        color: var(--primary-blue-dark);
+        text-decoration: underline;
+    }
+    
+    /* Utility Classes */
+    .container {
+        width: 100%;
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 var(--spacing-lg);
+    }
+    
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+    
+    .text-center {
+        text-align: center;
+    }
+    
+    .text-primary {
+        color: var(--primary-blue);
+    }
+    
+    .bg-light {
+        background-color: var(--background-dark);
+    }
+    
+    .section-padding {
+        padding: var(--spacing-2xl) 0;
+    }
+    
+    /* Professional Header */
+    .main-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: var(--surface-white);
+        box-shadow: var(--shadow-md);
+        z-index: var(--z-index-sticky);
+        transition: all var(--transition-normal) ease;
+    }
+    
+    .main-header.scrolled {
+        padding: var(--spacing-sm) 0;
+        box-shadow: var(--shadow-lg);
+    }
+    
+    .header-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: var(--spacing-md) 0;
+        transition: padding var(--transition-normal) ease;
+    }
+    
+    .main-header.scrolled .header-container {
+        padding: var(--spacing-xs) 0;
+    }
+    
+    .logo-container {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-md);
+    }
+    
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        text-decoration: none;
+        font-weight: 800;
+        font-size: 1.5rem;
+        color: var(--text-primary);
+    }
+    
+    .logo-icon {
+        color: var(--primary-blue);
+        font-size: 1.75rem;
+    }
+    
+    .logo-text {
+        font-size: 1.5rem;
+        font-weight: 800;
+    }
+    
+    .logo-tagline {
+        font-size: 0.875rem;
+        font-weight: 400;
+        color: var(--text-secondary);
+        margin-left: var(--spacing-sm);
+        padding-left: var(--spacing-sm);
+        border-left: 2px solid var(--border-light);
+        display: none;
+    }
+    
+    @media (min-width: 768px) {
+        .logo-tagline {
+            display: inline;
+        }
+    }
+    
+    /* Desktop Navigation */
+    .desktop-nav {
+        display: none;
+    }
+    
+    @media (min-width: 768px) {
+        .desktop-nav {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-lg);
+        }
+    }
+    
+    .nav-links {
+        display: flex;
+        gap: var(--spacing-lg);
+        list-style: none;
+    }
+    
+    .nav-link {
+        position: relative;
+        color: var(--text-secondary);
+        font-weight: 500;
+        text-decoration: none;
+        padding: var(--spacing-sm) 0;
+        transition: color var(--transition-fast) ease;
+    }
+    
+    .nav-link:hover, .nav-link:focus {
+        color: var(--primary-blue);
+        text-decoration: none;
+    }
+    
+    .nav-link.active {
+        color: var(--primary-blue);
+    }
+    
+    /* Header Actions */
+    .header-actions {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-md);
+    }
+    
+    .action-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.625rem 1.25rem;
+        font-size: var(--font-size-sm);
+        font-weight: 600;
+        line-height: 1;
+        border-radius: var(--border-radius-md);
+        border: none;
+        cursor: pointer;
+        transition: all var(--transition-normal) ease;
+        text-decoration: none;
+        white-space: nowrap;
+        user-select: none;
+    }
+    
+    .action-btn:focus {
+        outline: 2px solid var(--primary-blue);
+        outline-offset: 2px;
+    }
+    
+    .action-btn-primary {
+        background-color: var(--primary-blue);
+        color: white;
+    }
+    
+    .action-btn-primary:hover, .action-btn-primary:focus {
+        background-color: var(--primary-blue-dark);
+        color: white;
+        text-decoration: none;
+    }
+    
+    /* Mobile Menu Toggle */
+    .mobile-menu-toggle {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 2rem;
+        height: 1.5rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+    }
+    
+    @media (min-width: 768px) {
+        .mobile-menu-toggle {
+            display: none;
+        }
+    }
+    
+    .menu-line {
+        width: 100%;
+        height: 2px;
+        background-color: var(--text-primary);
+        border-radius: 1px;
+        transition: all var(--transition-fast) ease;
+    }
+    
+    /* Main Content Padding for Fixed Header */
+    .main-content {
+        padding-top: 5rem;
+    }
+    
+    @media (max-width: 767px) {
+        .main-content {
+            padding-top: 4rem;
+        }
+    }
+    
+    /* Property Header */
+    .property-header {
+        background-color: var(--background-dark);
+        padding: var(--spacing-xl) 0;
+        border-bottom: 1px solid var(--border-light);
+    }
+    
+    .property-header-content {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+    
+    @media (min-width: 768px) {
+        .property-header-content {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+    }
+    
+    .property-title-section h1 {
+        margin-bottom: var(--spacing-xs);
+    }
+    
+    .property-address {
+        color: var(--text-secondary);
+        font-size: var(--font-size-lg);
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+    }
+    
+    .property-price {
+        font-size: var(--font-size-3xl);
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: var(--spacing-xs);
+    }
+    
+    .property-status {
+        display: inline-block;
+        background-color: var(--primary-blue);
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: var(--border-radius-sm);
+        font-size: var(--font-size-sm);
+        font-weight: 600;
+        margin-bottom: var(--spacing-md);
+    }
+    
+    /* Property Layout */
+    .property-layout {
+        display: flex;
+        gap: var(--spacing-2xl);
+        padding: var(--spacing-2xl) 0;
+        position: relative;
+    }
+    
+    @media (max-width: 1023px) {
+        .property-layout {
+            flex-direction: column;
+        }
+    }
+    
+    /* Property Gallery */
+    .property-gallery {
+        flex: 1;
+        min-width: 0;
+    }
+    
+    .main-image-container {
+        position: relative;
+        border-radius: var(--border-radius-lg);
+        overflow: hidden;
+        background-color: var(--background-dark);
+        margin-bottom: var(--spacing-md);
+        height: 400px;
+    }
+    
+    @media (max-width: 767px) {
+        .main-image-container {
+            height: 300px;
+        }
+    }
+    
+    .main-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform var(--transition-normal) ease;
+        cursor: zoom-in;
+    }
+    
+    .gallery-controls {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        transform: translateY(-50%);
+        display: flex;
+        justify-content: space-between;
+        padding: 0 var(--spacing-md);
+        pointer-events: none;
+    }
+    
+    .gallery-btn {
+        width: 3rem;
+        height: 3rem;
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        cursor: pointer;
+        pointer-events: all;
+        transition: all var(--transition-fast) ease;
+        box-shadow: var(--shadow-md);
+    }
+    
+    .gallery-btn:hover {
+        background-color: white;
+        transform: scale(1.1);
+    }
+    
+    .gallery-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+    }
+    
+    .thumbnail-strip {
+        display: flex;
+        gap: var(--spacing-sm);
+        overflow-x: auto;
+        padding: var(--spacing-sm) 0;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+    
+    .thumbnail-strip::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .thumbnail {
+        width: 80px;
+        height: 60px;
+        border-radius: var(--border-radius-sm);
+        overflow: hidden;
+        flex-shrink: 0;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: all var(--transition-fast) ease;
+    }
+    
+    .thumbnail:hover {
+        border-color: var(--primary-blue);
+    }
+    
+    .thumbnail.active {
+        border-color: var(--primary-blue);
+    }
+    
+    .thumbnail img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    /* Property Details Sidebar */
+    .property-sidebar {
+        width: 400px;
+        flex-shrink: 0;
+    }
+    
+    @media (max-width: 1023px) {
+        .property-sidebar {
+            width: 100%;
+        }
+    }
+    
+    .details-card {
+        background: var(--surface-white);
+        border-radius: var(--border-radius-lg);
+        padding: var(--spacing-xl);
+        box-shadow: var(--shadow-md);
+        margin-bottom: var(--spacing-xl);
+        position: sticky;
+        top: 7rem;
+    }
+    
+    /* Property Features */
+    .property-features-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--spacing-lg);
+        margin-bottom: var(--spacing-xl);
+        padding-bottom: var(--spacing-xl);
+        border-bottom: 1px solid var(--border-light);
+    }
+    
+    @media (max-width: 767px) {
+        .property-features-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    
+    .feature-item {
+        text-align: center;
+    }
+    
+    .feature-icon {
+        width: 3rem;
+        height: 3rem;
+        background-color: var(--primary-blue);
+        border-radius: var(--border-radius-md);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto var(--spacing-sm);
+        color: white;
+        font-size: 1.25rem;
+    }
+    
+    .feature-value {
+        font-size: var(--font-size-xl);
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 0.25rem;
+    }
+    
+    .feature-label {
+        font-size: var(--font-size-sm);
+        color: var(--text-secondary);
+    }
+    
+    /* Property Description */
+    .property-description {
+        margin-bottom: var(--spacing-xl);
+    }
+    
+    .description-content {
+        line-height: var(--line-height-relaxed);
+        color: var(--text-secondary);
+    }
+    
+    /* Amenities */
+    .amenities-section {
+        margin-bottom: var(--spacing-xl);
+    }
+    
+    .amenities-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--spacing-sm);
+        margin-top: var(--spacing-md);
+    }
+    
+    @media (max-width: 767px) {
+        .amenities-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+    
+    .amenity-item {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        color: var(--text-secondary);
+    }
+    
+    .amenity-item i {
+        color: var(--primary-blue);
+        width: 1.25rem;
+    }
+    
+    /* Contact Form */
+    .contact-form-section {
+        margin-top: var(--spacing-xl);
+        padding-top: var(--spacing-xl);
+        border-top: 1px solid var(--border-light);
+    }
+    
+    .form-title {
+        font-size: var(--font-size-lg);
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    .form-group {
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .form-label {
+        display: block;
+        margin-bottom: var(--spacing-xs);
+        font-weight: 500;
+        color: var(--text-primary);
+        font-size: var(--font-size-sm);
+    }
+    
+    .form-input, .form-textarea, .form-select {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        font-size: var(--font-size-base);
+        border: 1px solid var(--border-medium);
+        border-radius: var(--border-radius-md);
+        background-color: var(--surface-white);
+        transition: border-color var(--transition-fast) ease;
+        font-family: var(--font-family);
+    }
+    
+    .form-input:focus, .form-textarea:focus, .form-select:focus {
+        outline: none;
+        border-color: var(--primary-blue);
+        box-shadow: 0 0 0 3px var(--primary-blue)20;
+    }
+    
+    .form-textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+    
+    /* Location Map */
+    .location-section {
+        margin-top: var(--spacing-2xl);
+        padding-top: var(--spacing-2xl);
+        border-top: 1px solid var(--border-light);
+    }
+    
+    .map-container {
+        width: 100%;
+        height: 300px;
+        border-radius: var(--border-radius-lg);
+        overflow: hidden;
+        margin-top: var(--spacing-lg);
+        background-color: var(--background-dark);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-secondary);
+    }
+    
+    /* Similar Properties */
+    .similar-properties {
+        background-color: var(--background-dark);
+        padding: var(--spacing-2xl) 0;
+    }
+    
+    .similar-properties-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
+        margin-top: var(--spacing-xl);
+    }
+    
+    @media (min-width: 768px) {
+        .similar-properties-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    
+    @media (min-width: 1024px) {
+        .similar-properties-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+    
+    /* Property Card */
+    .property-card {
+        background: var(--surface-white);
+        border-radius: var(--border-radius-lg);
+        overflow: hidden;
+        box-shadow: var(--shadow-md);
+        transition: transform var(--transition-normal) ease, box-shadow var(--transition-normal) ease;
+    }
+    
+    .property-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-xl);
+    }
+    
+    .property-card-image {
+        position: relative;
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
+    }
+    
+    .property-card-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform var(--transition-normal) ease;
+    }
+    
+    .property-card:hover .property-card-image img {
+        transform: scale(1.05);
+    }
+    
+    .property-card-content {
+        padding: var(--spacing-lg);
+    }
+    
+    .property-card-price {
+        font-size: var(--font-size-xl);
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: var(--spacing-xs);
+    }
+    
+    .property-card-title {
+        font-size: var(--font-size-lg);
+        font-weight: 600;
+        margin-bottom: var(--spacing-sm);
+        color: var(--text-primary);
+    }
+    
+    .property-card-address {
+        color: var(--text-secondary);
+        margin-bottom: var(--spacing-md);
+        font-size: var(--font-size-sm);
+    }
+    
+    .property-card-features {
+        display: flex;
+        gap: var(--spacing-lg);
+        color: var(--text-secondary);
+        font-size: var(--font-size-sm);
+    }
+    
+    /* Mobile Action Bar */
+    .mobile-action-bar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: var(--surface-white);
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        z-index: var(--z-index-action-bar);
+        display: none;
+        padding: var(--spacing-sm) var(--spacing-lg);
+        backdrop-filter: blur(10px);
+        border-top: 1px solid var(--border-light);
+    }
+    
+    @media (max-width: 767px) {
+        .mobile-action-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+    
+    .action-bar-price {
+        font-size: var(--font-size-lg);
+        font-weight: 700;
+        color: var(--text-primary);
+    }
+    
+    .action-bar-actions {
+        display: flex;
+        gap: var(--spacing-sm);
+    }
+    
+    .action-bar-btn {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        cursor: pointer;
+        transition: all var(--transition-fast) ease;
+    }
+    
+    .action-bar-btn.primary {
+        background-color: var(--primary-blue);
+        color: white;
+    }
+    
+    .action-bar-btn.primary:hover {
+        background-color: var(--primary-blue-dark);
+    }
+    
+    .action-bar-btn.secondary {
+        background-color: var(--background-dark);
+        color: var(--text-primary);
+    }
+    
+    .action-bar-btn.secondary:hover {
+        background-color: var(--border-light);
+    }
+    
+    .action-bar-btn.whatsapp {
+        background-color: var(--whatsapp-green);
+        color: white;
+    }
+    
+    .action-bar-btn.whatsapp:hover {
+        background-color: var(--whatsapp-green-dark);
+    }
+    
+    /* Lightbox */
+    .lightbox {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.9);
+        z-index: var(--z-index-lightbox);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: var(--spacing-xl);
+    }
+    
+    .lightbox.active {
+        display: flex;
+    }
+    
+    .lightbox-content {
+        position: relative;
+        max-width: 90vw;
+        max-height: 90vh;
+        width: auto;
+        height: auto;
+    }
+    
+    .lightbox-image {
+        max-width: 100%;
+        max-height: 90vh;
+        object-fit: contain;
+        border-radius: var(--border-radius-md);
+    }
+    
+    .lightbox-close {
+        position: absolute;
+        top: -3rem;
+        right: 0;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 2rem;
+        cursor: pointer;
+        width: 3rem;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .lightbox-nav {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        transform: translateY(-50%);
+        display: flex;
+        justify-content: space-between;
+        padding: 0 var(--spacing-xl);
+        pointer-events: none;
+    }
+    
+    .lightbox-btn {
+        width: 3rem;
+        height: 3rem;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        cursor: pointer;
+        pointer-events: all;
+        transition: all var(--transition-fast) ease;
+        color: white;
+    }
+    
+    .lightbox-btn:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+        transform: scale(1.1);
+    }
+    
+    .lightbox-counter {
+        position: absolute;
+        bottom: -3rem;
+        left: 0;
+        right: 0;
+        text-align: center;
+        color: white;
+        font-size: var(--font-size-sm);
+    }
+    
+    /* Accordion for Mobile */
+    .accordion {
+        display: none;
+    }
+    
+    @media (max-width: 767px) {
+        .accordion {
+            display: block;
+            margin-top: var(--spacing-xl);
+        }
+        
+        .accordion-item {
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        .accordion-header {
+            padding: var(--spacing-lg) 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .accordion-title {
+            font-size: var(--font-size-lg);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0;
+        }
+        
+        .accordion-icon {
+            transition: transform var(--transition-fast) ease;
+        }
+        
+        .accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+        
+        .accordion-content {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height var(--transition-normal) ease;
+        }
+        
+        .accordion-item.active .accordion-content {
+            padding-bottom: var(--spacing-xl);
+            max-height: 2000px;
+        }
+    }
+    
+    /* Button Styles */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.75rem 1.5rem;
+        font-size: var(--font-size-base);
+        font-weight: 600;
+        line-height: 1;
+        border-radius: var(--border-radius-md);
+        border: none;
+        cursor: pointer;
+        transition: all var(--transition-normal) ease;
+        text-decoration: none;
+        white-space: nowrap;
+        user-select: none;
+        touch-action: manipulation;
+    }
+    
+    .btn:focus {
+        outline: 2px solid var(--primary-blue);
+        outline-offset: 2px;
+    }
+    
+    .btn-primary {
+        background-color: var(--primary-blue);
+        color: white;
+    }
+    
+    .btn-primary:hover, .btn-primary:focus {
+        background-color: var(--primary-blue-dark);
+        color: white;
+        text-decoration: none;
+    }
+    
+    .btn-secondary {
+        background-color: var(--secondary-green);
+        color: white;
+    }
+    
+    .btn-secondary:hover, .btn-secondary:focus {
+        background-color: var(--secondary-green-dark);
+        color: white;
+    }
+    
+    .btn-outline {
+        background-color: transparent;
+        color: var(--primary-blue);
+        border: 2px solid var(--primary-blue);
+    }
+    
+    .btn-outline:hover, .btn-outline:focus {
+        background-color: var(--primary-blue);
+        color: white;
+    }
+    
+    .btn-full {
+        width: 100%;
+    }
+    
+    .btn-lg {
+        padding: 1rem 2rem;
+        font-size: var(--font-size-lg);
+    }
+    
+    /* Loading States */
+    .loading {
+        display: inline-block;
+        width: 1.5rem;
+        height: 1.5rem;
+        border: 2px solid var(--border-light);
+        border-top-color: var(--primary-blue);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+    
+    /* Footer */
+    .footer {
+        background-color: var(--surface-dark);
+        color: white;
+        padding: var(--spacing-3xl) 0 var(--spacing-xl);
+    }
+    
+    .footer a {
+        color: white;
+        opacity: 0.8;
+        transition: opacity var(--transition-fast) ease;
+    }
+    
+    .footer a:hover {
+        opacity: 1;
+        text-decoration: underline;
+    }
+    
+    .footer-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--spacing-2xl);
+        margin-bottom: var(--spacing-2xl);
+    }
+    
+    @media (min-width: 768px) {
+        .footer-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    
+    @media (min-width: 1024px) {
+        .footer-grid {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+    
+    .footer-section h3 {
+        color: white;
+        font-size: var(--font-size-lg);
+        margin-bottom: var(--spacing-lg);
+        opacity: 0.9;
+    }
+    
+    .footer-links {
+        list-style: none;
+    }
+    
+    .footer-links li {
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .social-links {
+        display: flex;
+        gap: var(--spacing-md);
+        margin-top: var(--spacing-lg);
+    }
+    
+    .social-link {
+        width: 2.5rem;
+        height: 2.5rem;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color var(--transition-fast) ease;
+    }
+    
+    .social-link:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        text-decoration: none;
+    }
+    
+    .footer-bottom {
+        text-align: center;
+        padding-top: var(--spacing-xl);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.6);
+        font-size: var(--font-size-sm);
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 767px) {
+        .details-card {
+            position: static;
+            margin-top: var(--spacing-xl);
+        }
+        
+        .property-features-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .gallery-controls {
+            display: none;
+        }
+    }
+    
+    /* Dark Mode Support */
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --background-light: #1F2937;
+            --background-dark: #111827;
+            --surface-white: #1F2937;
+            --surface-gray: #374151;
+            --text-primary: #F9FAFB;
+            --text-secondary: #D1D5DB;
+            --text-tertiary: #9CA3AF;
+            --border-light: #374151;
+            --border-medium: #4B5563;
+        }
+        
+        .property-card, .details-card {
+            background-color: var(--surface-gray);
+        }
+        
+        .form-input, .form-textarea, .form-select {
+            background-color: var(--surface-gray);
+            border-color: var(--border-medium);
+            color: var(--text-primary);
+        }
+        
+        .main-header {
+            background-color: var(--surface-white);
+        }
+        
+        .mobile-action-bar {
+            background-color: var(--surface-white);
+        }
+    }
+    </style>
+</head>
+<body>
+    <!-- Professional Header -->
+    <header class="main-header" id="mainHeader">
+        <div class="container header-container">
+            <!-- Logo -->
+            <div class="logo-container">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-building logo-icon"></i>
+                    <span class="logo-text">Primer Technologies</span>
+                    <span class="logo-tagline">Complete Property Solutions</span>
+                </a>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <nav class="desktop-nav">
+                <ul class="nav-links">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="browse.html" class="nav-link">Properties</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="services.html" class="nav-link">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="about.html" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="blog.html" class="nav-link">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="contact.html" class="nav-link">Contact</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Header Actions -->
+            <div class="header-actions">
+                <!-- User Menu -->
+                <div class="user-menu" style="position: relative;">
+                   
+                </div>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu">
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation (Simplified for this page) -->
+    <nav class="mobile-nav" id="mobileNav" style="display: none;">
+        <!-- Mobile menu would go here -->
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Property Header -->
+        <section class="property-header">
+            <div class="container property-header-content">
+                <div class="property-title-section">
+                    <h1 id="propertyTitle">Modern Luxury Villa</h1>
+                    <div class="property-address">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span id="propertyAddress">Ahmadu Bello Way, Kaduna</span>
+                    </div>
+                </div>
+                <div class="property-price-section">
+                    <div class="property-price" id="propertyPrice">₦750,000</div>
+                    <div class="property-status" id="propertyStatus">For Sale</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Property Layout -->
+        <div class="container property-layout">
+            <!-- Property Gallery -->
+            <div class="property-gallery">
+                <!-- Main Image -->
+                <div class="main-image-container">
+                    <img src="images/3.jpg" alt="Modern Luxury Villa - Main Image" class="main-image" id="mainImage">
+                    
+                    <!-- Gallery Controls -->
+                    <div class="gallery-controls">
+                        <button class="gallery-btn" id="prevImage" aria-label="Previous image">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="gallery-btn" id="nextImage" aria-label="Next image">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Thumbnail Strip -->
+                <div class="thumbnail-strip" id="thumbnailStrip">
+                    <!-- Thumbnails will be loaded via JavaScript -->
+                </div>
+
+                <!-- Property Details (Mobile Accordion) -->
+                <div class="accordion" id="propertyAccordion">
+                    <!-- Description -->
+                    <div class="accordion-item active">
+                        <div class="accordion-header">
+                            <h3 class="accordion-title">Description</h3>
+                            <i class="fas fa-chevron-down accordion-icon"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <p id="mobileDescription">Stunning modern villa with panoramic views, state-of-the-art kitchen, and luxurious master suite. Features include smart home automation, energy-efficient systems, and designer finishes throughout.</p>
+                        </div>
+                    </div>
+
+                    <!-- Features -->
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <h3 class="accordion-title">Features</h3>
+                            <i class="fas fa-chevron-down accordion-icon"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="amenities-grid" id="mobileAmenities">
+                                <!-- Features will be loaded via JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Location -->
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <h3 class="accordion-title">Location</h3>
+                            <i class="fas fa-chevron-down accordion-icon"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="map-container">
+                                <div id="mobileMap" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: var(--text-secondary);">
+                                    <i class="fas fa-map" style="font-size: 3rem; margin-right: 1rem;"></i>
+                                    <span>Interactive Map</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property Details Sidebar -->
+            <aside class="property-sidebar">
+                <div class="details-card">
+                    <!-- Property Features -->
+                    <div class="property-features-grid">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-bed"></i>
+                            </div>
+                            <div class="feature-value" id="bedrooms">4</div>
+                            <div class="feature-label">Bedrooms</div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-bath"></i>
+                            </div>
+                            <div class="feature-value" id="bathrooms">3</div>
+                            <div class="feature-label">Bathrooms</div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-ruler-combined"></i>
+                            </div>
+                            <div class="feature-value" id="squareFeet">3,200</div>
+                            <div class="feature-label">Square Feet</div>
+                        </div>
+                    </div>
+
+                    <!-- Property Description (Desktop) -->
+                    <div class="property-description">
+                        <h3>Description</h3>
+                        <div class="description-content" id="propertyDescription">
+                            Stunning modern villa with panoramic views, state-of-the-art kitchen, and luxurious master suite. Features include smart home automation, energy-efficient systems, and designer finishes throughout. The open floor plan creates a seamless flow between living spaces, perfect for entertaining. Recent upgrades include solar panels, smart home system, and custom landscaping.
+                        </div>
+                    </div>
+
+                    <!-- Amenities (Desktop) -->
+                    <div class="amenities-section">
+                        <h3>Amenities</h3>
+                        <div class="amenities-grid" id="amenitiesGrid">
+                            <!-- Amenities will be loaded via JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Schedule Viewing Form -->
+                    <div class="contact-form-section">
+                        <h3 class="form-title">Schedule a Viewing</h3>
+                        <form id="viewingForm">
+                            <div class="form-group">
+                                <label for="name" class="form-label">Full Name *</label>
+                                <input type="text" id="name" class="form-input" placeholder="John Doe" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="form-label">Email Address *</label>
+                                <input type="email" id="email" class="form-input" placeholder="john@example.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone" class="form-label">Phone Number *</label>
+                                <input type="tel" id="phone" class="form-input" placeholder="+234 812 345 6789" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="preferredDate" class="form-label">Preferred Date</label>
+                                <input type="date" id="preferredDate" class="form-input" min="2026-01-01">
+                            </div>
+                            <div class="form-group">
+                                <label for="message" class="form-label">Message</label>
+                                <textarea id="message" class="form-textarea" placeholder="I would like to schedule a viewing and learn more about this property..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-full btn-lg">
+                                <i class="fas fa-calendar-check" style="margin-right: 0.5rem;"></i>
+                                Schedule Viewing
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Location Map (Desktop) -->
+                <div class="location-section">
+                    <h3>Location</h3>
+                    <div class="map-container">
+                        <div id="desktopMap" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: var(--text-secondary);">
+                            <i class="fas fa-map" style="font-size: 3rem; margin-right: 1rem;"></i>
+                            <span>Interactive Map</span>
+                        </div>
+                    </div>
+                    <p style="margin-top: var(--spacing-md); color: var(--text-secondary);">
+                        <i class="fas fa-info-circle" style="margin-right: 0.5rem;"></i>
+                        Location shown is approximate. Exact address provided upon appointment confirmation.
+                    </p>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Similar Properties -->
+        <section class="similar-properties">
+            <div class="container">
+                <h2 class="text-center">Similar Properties</h2>
+                <div class="similar-properties-grid" id="similarProperties">
+                    <!-- Similar properties will be loaded via JavaScript -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Mobile Action Bar -->
+    <div class="mobile-action-bar" id="mobileActionBar">
+        <div class="action-bar-price" id="actionBarPrice">₦750,000</div>
+        <div class="action-bar-actions">
+            <button class="action-bar-btn secondary" id="mobileFavoriteBtn" aria-label="Add to favorites">
+                <i class="far fa-heart"></i>
+            </button>
+            <button class="action-bar-btn secondary" id="mobileShareBtn" aria-label="Share property">
+                <i class="fas fa-share-alt"></i>
+            </button>
+            <button class="action-bar-btn whatsapp" id="mobileWhatsAppBtn" aria-label="Contact via WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </button>
+            <button class="action-bar-btn primary" id="mobileCallBtn" aria-label="Call agent">
+                <i class="fas fa-phone"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <img src="" alt="" class="lightbox-image" id="lightboxImage">
+            <button class="lightbox-close" id="lightboxClose" aria-label="Close lightbox">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="lightbox-nav">
+                <button class="lightbox-btn" id="lightboxPrev" aria-label="Previous image">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="lightbox-btn" id="lightboxNext" aria-label="Next image">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="lightbox-counter" id="lightboxCounter">1 / 3</div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Primer Technologies</h3>
+                    <p>Complete Property Solutions for modern living. We handle everything from finding your dream property to maintaining it for years to come.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="browse.html">Browse Properties</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Our Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="services.html#listing">Property Listing</a></li>
+                        <li><a href="services.html#maintenance">Property Maintenance</a></li>
+                        <li><a href="services.html#logistics">Logistics & Moving</a></li>
+                        <li><a href="services.html#handyman">Handyman Services</a></li>
+                        <li><a href="book-service.html">Book a Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <address>
+                        <p><i class="fas fa-map-marker-alt" style="margin-right: 0.5rem;"></i>Metropolitan Area <br>
+                       Ahmadu Bello Way, Kaduna <br>
+                        Nigeria</p>
+                        <p><i class="fas fa-phone" style="margin-right: 0.5rem;"></i>+234 812 345 6789</p>
+                        <p><i class="fas fa-envelope" style="margin-right: 0.5rem;"></i>get.primer@proton.me</p>
+                        <p><i class="fas fa-clock" style="margin-right: 0.5rem;"></i>Mon-Fri: 8am-7pm<br>
+                        Sat: 9am-5pm</p>
+                    </address>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Primer Technologies. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#">Cookie Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js" defer></script>
+    <script src="js/property.js" defer></script>
+</body>
+</html>
