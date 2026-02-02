@@ -1,1 +1,18 @@
-
+{
+  "company": {
+    "name": "Primer Technologies",
+    "tagline": "Complete Property Solutions",
+    "contact": {
+      "address": "Metropolitan Area, Ahmadu Bello Way, Kaduna, Nigeria",
+      "phone": "+1 (555) 123-4567",
+      "email": "get.primer@proton.me",
+      "hours": "Mon-Fri: 8am-7pm, Sat: 9am-5pm, Sun: Closed"
+    },
+    "social": {
+      "facebook": "https://facebook.com/primertech",
+      "instagram": "https://instagram.com/primertech",
+      "twitter": "https://twitter.com/primertech",
+      "linkedin": "https://linkedin.com/company/primertech"
+    }
+  }
+}

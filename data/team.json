@@ -1,0 +1,28 @@
+{
+  "team": [
+    {
+      "id": 1,
+      "name": "Alamin Ahmed",
+      "position": "Founder & CEO",
+      "bio": "Visionary leader driving Primer Technologies' mission to revolutionize property solutions. Focuses on strategic growth, innovation, and building lasting client relationships through technology-driven services.",
+      "image": "alamin-ahmed.jpg",
+      "department": "Executive Leadership",
+      "email": "alamin@primertechnologies.com",
+      "phone": "+234 800 123 4567",
+      "experience": "Emerging Innovator",
+      "specialties": ["Business Strategy", "Technology Integration", "Client Experience", "Market Development"]
+    },
+    {
+      "id": 2,
+      "name": "Najib Isah Ukissa",
+      "position": "Co-founder & Director",
+      "bio": "Operational leader overseeing service delivery and team coordination. Dedicated to ensuring seamless property solutions through efficient processes and customer-focused service excellence.",
+      "image": "najib-ukissa.jpg",
+      "department": "Executive Leadership",
+      "email": "najib@primertechnologies.com",
+      "phone": "+234 800 123 4568",
+      "experience": "Dynamic Operations Leader",
+      "specialties": ["Service Operations", "Team Management", "Process Optimization", "Quality Control"]
+    }
+  ]
+}

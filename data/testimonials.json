@@ -1,0 +1,58 @@
+{
+  "testimonials": [
+    {
+      "id": 1,
+      "name": "Robert Martinez",
+      "text": "Primer Technologies handled everything perfectly! From listing our property to coordinating the move, their team was professional and efficient. Highly recommended!",
+      "rating": 5,
+      "service": "Property Listing + Moving",
+      "date": "2023-09-15",
+      "property": "Family Home in Suburbia"
+    },
+    {
+      "id": 2,
+      "name": "Jennifer Lee",
+      "text": "The maintenance team saved us from a major plumbing disaster. Quick response, fair pricing, and excellent work. We've signed up for their regular maintenance plan.",
+      "rating": 5,
+      "service": "Emergency Maintenance",
+      "date": "2023-10-05",
+      "property": "Downtown Apartment"
+    },
+    {
+      "id": 3,
+      "name": "David Wilson",
+      "text": "Outstanding handyman service! Fixed multiple issues in our new home quickly and professionally. Will definitely use Primer for all future property needs.",
+      "rating": 5,
+      "service": "Handyman Services",
+      "date": "2023-10-12",
+      "property": "Suburban Home"
+    },
+    {
+      "id": 4,
+      "name": "Amanda Chen",
+      "text": "The moving team was incredible. Careful with our belongings, efficient, and friendly. Made our relocation stress-free. Thank you Primer Technologies!",
+      "rating": 5,
+      "service": "Full-Service Moving",
+      "date": "2023-09-28",
+      "property": "Cross-Country Move"
+    },
+    {
+      "id": 5,
+      "name": "Thomas O'Brien",
+      "text": "Professional property listing service that got us 15% above asking price. The photography and marketing were top-notch. Excellent value for money.",
+      "rating": 5,
+      "service": "Property Listing",
+      "date": "2023-10-18",
+      "property": "Luxury Condo"
+    },
+    {
+      "id": 6,
+      "name": "Samantha Park",
+      "text": "24/7 support is a game-changer. Had an emergency on a weekend and the team was there within an hour. Peace of mind is priceless.",
+      "rating": 5,
+      "service": "Emergency Maintenance",
+      "date": "2023-10-22",
+      "property": "Rental Property"
+    }
+  ]
+}
