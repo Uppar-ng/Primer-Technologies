@@ -1,0 +1,178 @@
+[
+  {
+    "id": "standard-tenancy-agreement",
+    "title": "Standard Tenancy Agreement",
+    "description": "Nigeria-compliant rental agreement template with all necessary clauses for comprehensive landlord and tenant protection. Designed by legal experts to meet Nigerian real estate requirements.",
+    "category": ["legal"],
+    "icon": "fas fa-file-contract",
+    "badge": "Most Popular",
+    "features": [
+      "Complete 4-page legally compliant template",
+      "Nigerian-specific clauses and requirements",
+      "Clear terms for rent, deposit, and utilities",
+      "Maintenance responsibilities section",
+      "Default and termination procedures",
+      "Witness and signature sections"
+    ],
+    "format": "Microsoft Word (.docx)",
+    "pages": "4 pages",
+    "fileSize": "45 KB",
+    "updates": "2024 Edition",
+    "bestFor": "Landlords renting residential properties, property managers, real estate agents, and tenants wanting to understand standard rental terms.",
+    "downloadUrl": "downloads/standard-tenancy-agreement.docx"
+  },
+  {
+    "id": "rent-increase-notice",
+    "title": "Rent Increase Notice",
+    "description": "Professional notification template for rent increases compliant with Nigerian tenancy laws. Includes tenant response section and clear communication of terms.",
+    "category": ["legal", "management"],
+    "icon": "fas fa-envelope-open-text",
+    "badge": null,
+    "features": [
+      "30-day notice compliant template",
+      "Professional formatting and layout",
+      "Editable reasons section",
+      "Tenant acknowledgement and response",
+      "Payment details section",
+      "Multiple reason checkboxes"
+    ],
+    "format": "Microsoft Word (.docx)",
+    "pages": "2 pages",
+    "fileSize": "32 KB",
+    "updates": "2024 Edition",
+    "bestFor": "Landlords needing to increase rent legally, property managers handling multiple properties, and tenants wanting proper documentation.",
+    "downloadUrl": "downloads/rent-increase-notice.docx"
+  },
+  {
+    "id": "property-listing-template",
+    "title": "Property Listing Template",
+    "description": "Complete property marketing template with all sections needed for effective property presentation, sales, and rental listings.",
+    "category": ["marketing"],
+    "icon": "fas fa-home",
+    "badge": "New",
+    "features": [
+      "Property specifications section",
+      "Amenities and features checklist",
+      "Photo checklist for complete coverage",
+      "Pricing and terms breakdown",
+      "Legal status and documentation section",
+      "Contact and viewing arrangements"
+    ],
+    "format": "Microsoft Word (.docx)",
+    "pages": "3 pages",
+    "fileSize": "38 KB",
+    "updates": "2024 Edition",
+    "bestFor": "Real estate agents, property owners, property managers, and anyone looking to create professional property listings for sale or rent.",
+    "downloadUrl": "downloads/property-listing-template.docx"
+  },
+  {
+    "id": "rental-application-form",
+    "title": "Rental Application Form",
+    "description": "Comprehensive tenant screening application with Nigeria-specific fields for thorough tenant evaluation and background checking.",
+    "category": ["management"],
+    "icon": "fas fa-user-check",
+    "badge": null,
+    "features": [
+      "4-page detailed application form",
+      "Nigeria-specific ID and address fields",
+      "Employment and income verification",
+      "Reference check sections",
+      "Emergency contact information",
+      "Pet and vehicle information"
+    ],
+    "format": "Microsoft Word (.docx)",
+    "pages": "4 pages",
+    "fileSize": "42 KB",
+    "updates": "2024 Edition",
+    "bestFor": "Landlords screening potential tenants, property managers handling multiple applications, and real estate agents assisting clients with tenant selection.",
+    "downloadUrl": "downloads/rental-application-form.docx"
+  },
+  {
+    "id": "property-inspection-checklist",
+    "title": "Property Inspection Checklist",
+    "description": "Comprehensive inspection template for move-in/move-out inspections, routine maintenance checks, and property condition assessments.",
+    "category": ["management", "planning"],
+    "icon": "fas fa-clipboard-check",
+    "badge": "Essential",
+    "features": [
+      "Room-by-room inspection sections",
+      "Condition rating scales",
+      "Photo documentation prompts",
+      "Maintenance requirement tracking",
+      "Sign-off sections for both parties",
+      "Damage documentation"
+    ],
+    "format": "Microsoft Word (.docx)",
+    "pages": "5 pages",
+    "fileSize": "48 KB",
+    "updates": "2024 Edition",
+    "bestFor": "Landlords conducting property inspections, property managers maintaining property conditions, and tenants wanting to document property condition.",
+    "downloadUrl": "downloads/property-inspection-checklist.docx"
+  },
+  {
+    "id": "maintenance-request-form",
+    "title": "Maintenance Request Form",
+    "description": "Professional maintenance request template for tenants to report issues and for landlords to track repairs and maintenance work.",
+    "category": ["management"],
+    "icon": "fas fa-tools",
+    "badge": null,
+    "features": [
+      "Detailed issue description section",
+      "Priority level selection",
+      "Photo upload instructions",
+      "Contact information fields",
+      "Landlord response section",
+      "Repair completion tracking"
+    ],
+    "format": "Microsoft Word (.docx)",
+    "pages": "2 pages",
+    "fileSize": "35 KB",
+    "updates": "2024 Edition",
+    "bestFor": "Tenants reporting maintenance issues, landlords tracking repair requests, and property managers managing multiple properties.",
+    "downloadUrl": "downloads/maintenance-request-form.docx"
+  },
+  {
+    "id": "property-management-agreement",
+    "title": "Property Management Agreement",
+    "description": "Comprehensive property management contract template for landlords hiring property management services in Nigeria.",
+    "category": ["legal", "management"],
+    "icon": "fas fa-handshake",
+    "badge": "Professional",
+    "features": [
+      "Scope of management services",
+      "Fee structure and payment terms",
+      "Responsibilities of both parties",
+      "Term and termination clauses",
+      "Legal compliance sections",
+      "Dispute resolution procedures"
+    ],
+    "format": "Microsoft Word (.docx)",
+    "pages": "6 pages",
+    "fileSize": "52 KB",
+    "updates": "2024 Edition",
+    "bestFor": "Landlords hiring property managers, property management companies, and real estate professionals offering management services.",
+    "downloadUrl": "downloads/property-management-agreement.docx"
+  },
+  {
+    "id": "moving-checklist",
+    "title": "Moving Checklist & Planner",
+    "description": "Complete moving timeline and checklist template covering everything from 8 weeks before moving to moving day essentials.",
+    "category": ["planning"],
+    "icon": "fas fa-truck-moving",
+    "badge": null,
+    "features": [
+      "8-week moving timeline",
+      "Packing room-by-room checklist",
+      "Utility transfer reminders",
+      "Address change checklist",
+      "Moving day essentials list",
+      "Unpacking priority guide"
+    ],
+    "format": "Microsoft Word (.docx)",
+    "pages": "4 pages",
+    "fileSize": "40 KB",
+    "updates": "2024 Edition",
+    "bestFor": "Anyone planning a move, tenants changing residences, and real estate agents assisting clients with relocation.",
+    "downloadUrl": "downloads/moving-checklist.docx"
+  }
+]
