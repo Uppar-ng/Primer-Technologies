@@ -46,384 +46,1494 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     
-    <!-- CSS Styles -->
-    <link rel="stylesheet" href="css/styles.css">
+    <!-- CSS Styles (Using index.html CSS) -->
     <style>
-        /* ====== RESOURCES HERO SECTION ====== */
-        .hero-section {
-            position: relative;
-            min-height: 60vh;
-            display: flex;
-            align-items: center;
-            background: 
-                linear-gradient(135deg, rgba(37, 99, 235, 0.85) 0%, rgba(16, 185, 129, 0.85) 100%),
-                url('images/resources-hero.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            overflow: hidden;
+    /* ====== MERGED ENHANCED CSS FROM index.html ====== */
+    :root {
+        /* Enhanced Color System */
+        --primary-blue: #2563EB;
+        --primary-blue-dark: #1D4ED8;
+        --primary-blue-light: #3B82F6;
+        --secondary-green: #10B981;
+        --secondary-green-dark: #059669;
+        --accent-amber: #F59E0B;
+        --accent-amber-dark: #D97706;
+        --background-light: #FFFFFF;
+        --background-dark: #F3F4F6;
+        --surface-white: #FFFFFF;
+        --surface-gray: #F9FAFB;
+        --surface-dark: #111827;
+        --text-primary: #111827;
+        --text-secondary: #6B7280;
+        --text-tertiary: #9CA3AF;
+        --border-light: #E5E7EB;
+        --border-medium: #D1D5DB;
+        --success: #10B981;
+        --warning: #F59E0B;
+        --error: #EF4444;
+        --info: #3B82F6;
+        
+        /* Enhanced Spacing System (8px base) */
+        --spacing-xs: 0.25rem;
+        --spacing-sm: 0.5rem;
+        --spacing-md: 1rem;
+        --spacing-lg: 1.5rem;
+        --spacing-xl: 2rem;
+        --spacing-2xl: 3rem;
+        --spacing-3xl: 4rem;
+        
+        /* Enhanced Border Radius */
+        --border-radius-sm: 0.375rem;
+        --border-radius-md: 0.5rem;
+        --border-radius-lg: 0.75rem;
+        --border-radius-xl: 1rem;
+        --border-radius-full: 9999px;
+        
+        /* Enhanced Shadows (Material Design inspired) */
+        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        
+        /* Glassmorphism */
+        --glass-bg: rgba(255, 255, 255, 0.25);
+        --glass-border: rgba(255, 255, 255, 0.18);
+        --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        
+        /* Typography */
+        --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        --font-family-mono: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
+        
+        --font-size-xs: 0.75rem;
+        --font-size-sm: 0.875rem;
+        --font-size-base: 1rem;
+        --font-size-lg: 1.125rem;
+        --font-size-xl: 1.25rem;
+        --font-size-2xl: 1.5rem;
+        --font-size-3xl: 1.875rem;
+        --font-size-4xl: 2.25rem;
+        --font-size-5xl: 3rem;
+        --font-size-6xl: 3.75rem;
+        
+        --line-height-tight: 1.2;
+        --line-height-normal: 1.5;
+        --line-height-relaxed: 1.75;
+        --line-height-loose: 2;
+        
+        /* Enhanced Transitions & Animations */
+        --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+        --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+        --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+        --transition-bounce: 400ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        
+        /* Enhanced Z-index System */
+        --z-index-negative: -1;
+        --z-index-normal: 1;
+        --z-index-dropdown: 1000;
+        --z-index-sticky: 1020;
+        --z-index-modal-backdrop: 1025;
+        --z-index-modal: 1030;
+        --z-index-popover: 1040;
+        --z-index-tooltip: 1050;
+        --z-index-toast: 1060;
+        
+        /* Container Widths */
+        --container-sm: 640px;
+        --container-md: 768px;
+        --container-lg: 1024px;
+        --container-xl: 1280px;
+        --container-2xl: 1536px;
+    }
+    
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    html {
+        font-size: 16px;
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+        scroll-padding-top: 5rem;
+    }
+    
+    body {
+        font-family: var(--font-family);
+        font-size: var(--font-size-base);
+        line-height: var(--line-height-normal);
+        color: var(--text-primary);
+        background-color: var(--background-light);
+        overflow-x: hidden;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    /* ====== ENHANCED TYPOGRAPHY ====== */
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: 700;
+        line-height: var(--line-height-tight);
+        margin-bottom: var(--spacing-lg);
+        color: var(--text-primary);
+        letter-spacing: -0.025em;
+    }
+    
+    h1 {
+        font-size: clamp(var(--font-size-4xl), 5vw, var(--font-size-6xl));
+        background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-green) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    h2 {
+        font-size: clamp(var(--font-size-3xl), 4vw, var(--font-size-4xl));
+        position: relative;
+        display: inline-block;
+    }
+    
+    h3 {
+        font-size: clamp(var(--font-size-2xl), 3vw, var(--font-size-3xl));
+    }
+    
+    h4 {
+        font-size: var(--font-size-xl);
+    }
+    
+    p {
+        margin-bottom: var(--spacing-md);
+        color: var(--text-secondary);
+        line-height: var(--line-height-relaxed);
+    }
+    
+    a {
+        color: var(--primary-blue);
+        text-decoration: none;
+        transition: all var(--transition-fast);
+        position: relative;
+    }
+    
+    a:hover, a:focus {
+        color: var(--primary-blue-dark);
+    }
+    
+    /* ====== ENHANCED UTILITY CLASSES ====== */
+    .container {
+        width: 100%;
+        max-width: var(--container-xl);
+        margin: 0 auto;
+        padding: 0 var(--spacing-lg);
+    }
+    
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+    
+    .text-center {
+        text-align: center;
+    }
+    
+    .text-primary {
+        color: var(--primary-blue);
+    }
+    
+    .text-gradient {
+        background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-green) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .bg-light {
+        background-color: var(--background-dark);
+    }
+    
+    .bg-dark {
+        background-color: var(--surface-dark);
+    }
+    
+    .section-padding {
+        padding: var(--spacing-3xl) 0;
+        position: relative;
+    }
+    
+    /* ====== ENHANCED PROFESSIONAL HEADER ====== */
+    .main-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(135deg, 
+            rgba(255, 255, 255, 0.95) 0%,
+            rgba(255, 255, 255, 0.98) 100%);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: var(--shadow-md);
+        z-index: var(--z-index-sticky);
+        transition: all var(--transition-normal);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        will-change: transform, backdrop-filter;
+        height: 80px;
+    }
+    
+    .main-header.scrolled {
+        height: 70px;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        box-shadow: var(--shadow-lg);
+        transform: translateY(0);
+    }
+    
+    .main-header.hidden {
+        transform: translateY(-100%);
+    }
+    
+    .header-container {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        gap: var(--spacing-xl);
+        height: 100%;
+        padding: 0 var(--spacing-lg);
+        max-width: var(--container-xl);
+        margin: 0 auto;
+        transition: padding var(--transition-normal) ease;
+    }
+    
+    .main-header.scrolled .header-container {
+        height: 60px;
+    }
+    
+    /* Enhanced Logo with Image */
+    .logo-container {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-md);
+        z-index: var(--z-index-sticky);
+    }
+    
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        text-decoration: none;
+        font-weight: 800;
+        color: var(--text-primary);
+        transition: transform var(--transition-bounce);
+    }
+    
+    .logo:hover {
+        transform: scale(1.05);
+    }
+    
+    .logo-image {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+        border-radius: var(--border-radius-md);
+        background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-green) 100%);
+        padding: var(--spacing-xs);
+        box-shadow: var(--shadow-md);
+        transition: all var(--transition-normal);
+    }
+    
+    .logo:hover .logo-image {
+        transform: rotate(10deg) scale(1.1);
+        box-shadow: var(--shadow-lg);
+    }
+    
+    .logo-text {
+        font-size: var(--font-size-2xl);
+        font-weight: 800;
+        position: relative;
+    }
+    
+    .logo-text::after {
+        content: 'Technologies';
+        font-size: var(--font-size-xs);
+        font-weight: 600;
+        color: var(--primary-blue);
+        position: absolute;
+        bottom: -0.8rem;
+        left: 0;
+        background: var(--background-light);
+        padding: 0.1rem 0.3rem;
+        border-radius: var(--border-radius-sm);
+        box-shadow: var(--shadow-sm);
+    }
+    
+    .logo-tagline {
+        font-size: 0.875rem;
+        font-weight: 400;
+        color: var(--text-secondary);
+        margin-left: var(--spacing-sm);
+        padding-left: var(--spacing-sm);
+        border-left: 2px solid var(--border-light);
+        display: none;
+    }
+    
+    @media (min-width: 768px) {
+        .logo-tagline {
+            display: inline;
         }
-
-        @media (max-width: 767px) {
-            .hero-section {
-                min-height: 50vh;
-            }
+        
+        .logo-text::after {
+            display: none;
         }
-
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.3);
-            z-index: 0;
+    }
+    
+    @media (max-width: 767px) {
+        .logo-image {
+            width: 35px;
+            height: 35px;
         }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: var(--spacing-2xl) var(--spacing-lg);
-            text-align: center;
-        }
-
-        .hero-title {
-            font-size: var(--font-size-4xl);
-            margin-bottom: var(--spacing-lg);
-            color: white;
-            line-height: 1.1;
-            font-weight: 800;
-            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
-        }
-
-        @media (max-width: 767px) {
-            .hero-title {
-                font-size: var(--font-size-3xl);
-            }
-        }
-
-        .hero-subtitle {
-            font-size: var(--font-size-lg);
-            color: rgba(255, 255, 255, 0.95);
-            margin-bottom: var(--spacing-xl);
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: var(--line-height-relaxed);
-        }
-
-        /* ====== RESOURCES GRID ====== */
-        .resources-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: var(--spacing-xl);
-            margin-top: var(--spacing-2xl);
-        }
-
-        @media (max-width: 767px) {
-            .resources-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .resource-card {
-            background: var(--surface-white);
-            border-radius: var(--border-radius-lg);
-            overflow: hidden;
-            box-shadow: var(--shadow-md);
-            transition: all var(--transition-normal) ease;
-            border: 1px solid var(--border-light);
-        }
-
-        .resource-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .resource-header {
-            padding: var(--spacing-lg);
-            background: var(--primary-blue);
-            color: white;
-            position: relative;
-        }
-
-        .resource-icon {
-            width: 60px;
-            height: 60px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: var(--border-radius-md);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: var(--spacing-md);
-            font-size: 1.5rem;
-        }
-
-        .resource-badge {
-            position: absolute;
-            top: var(--spacing-md);
-            right: var(--spacing-md);
-            background: var(--accent-amber);
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: var(--border-radius-sm);
-            font-size: var(--font-size-xs);
-            font-weight: 600;
-        }
-
-        .resource-content {
-            padding: var(--spacing-lg);
-        }
-
-        .resource-title {
-            font-size: var(--font-size-lg);
-            margin-bottom: var(--spacing-sm);
-            color: var(--text-primary);
-        }
-
-        .resource-description {
-            color: var(--text-secondary);
-            margin-bottom: var(--spacing-md);
-            line-height: var(--line-height-relaxed);
-        }
-
-        .resource-features {
-            list-style: none;
-            margin: var(--spacing-md) 0;
-        }
-
-        .resource-features li {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-            margin-bottom: var(--spacing-xs);
-            color: var(--text-secondary);
-            font-size: var(--font-size-sm);
-        }
-
-        .resource-features li i {
-            color: var(--primary-blue);
-        }
-
-        .resource-details {
-            background: var(--background-dark);
-            border-radius: var(--border-radius-md);
-            padding: var(--spacing-md);
-            margin: var(--spacing-md) 0;
-        }
-
-        .detail-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: var(--spacing-xs);
-            font-size: var(--font-size-sm);
-        }
-
-        .detail-label {
-            color: var(--text-secondary);
-        }
-
-        .detail-value {
-            color: var(--text-primary);
-            font-weight: 500;
-        }
-
-        .resource-footer {
-            padding: var(--spacing-lg);
-            border-top: 1px solid var(--border-light);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .download-info {
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
-        }
-
-        .file-size {
-            font-size: var(--font-size-xs);
-            color: var(--text-tertiary);
-        }
-
-        /* ====== CATEGORIES SECTION ====== */
-        .categories-section {
-            background: var(--background-dark);
-            padding: var(--spacing-xl) 0;
-        }
-
-        .categories-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: var(--spacing-lg);
-            margin-top: var(--spacing-xl);
-        }
-
-        .category-card {
-            background: white;
-            padding: var(--spacing-lg);
-            border-radius: var(--border-radius-lg);
-            text-align: center;
-            transition: all var(--transition-normal) ease;
-            cursor: pointer;
-            border: 2px solid transparent;
-        }
-
-        .category-card:hover {
-            transform: translateY(-3px);
-            border-color: var(--primary-blue);
-            box-shadow: var(--shadow-md);
-        }
-
-        .category-card.active {
-            background: var(--primary-blue);
-            color: white;
-            border-color: var(--primary-blue);
-        }
-
-        .category-card.active i {
-            color: white;
-        }
-
-        .category-card i {
-            font-size: 2rem;
-            color: var(--primary-blue);
-            margin-bottom: var(--spacing-sm);
-        }
-
-        /* ====== HOW TO USE SECTION ====== */
-        .how-to-section {
-            padding: var(--spacing-2xl) 0;
-        }
-
-        .steps-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: var(--spacing-xl);
-            margin-top: var(--spacing-xl);
-        }
-
-        .step-card {
-            text-align: center;
-            padding: var(--spacing-lg);
-        }
-
-        .step-number {
-            width: 50px;
-            height: 50px;
-            background: var(--primary-blue);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        
+        .logo-text {
             font-size: var(--font-size-xl);
-            font-weight: 700;
-            margin: 0 auto var(--spacing-lg);
         }
-
-        /* ====== FAQ SECTION ====== */
-        .faq-section {
-            background: var(--background-dark);
-            padding: var(--spacing-2xl) 0;
-        }
-
-        .faq-grid {
-            max-width: 800px;
-            margin: var(--spacing-xl) auto 0;
-        }
-
-        .faq-item {
-            background: white;
-            border-radius: var(--border-radius-md);
-            margin-bottom: var(--spacing-md);
-            overflow: hidden;
-        }
-
-        .faq-question {
-            padding: var(--spacing-lg);
+    }
+    
+    /* Enhanced Desktop Navigation */
+    .desktop-nav {
+        justify-self: center;
+        display: none;
+    }
+    
+    @media (min-width: 768px) {
+        .desktop-nav {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            cursor: pointer;
-            font-weight: 600;
+            justify-content: center;
+            flex: 1;
         }
-
-        .faq-answer {
-            padding: 0 var(--spacing-lg);
-            max-height: 0;
-            overflow: hidden;
-            transition: all var(--transition-normal) ease;
+    }
+    
+    .nav-links {
+        display: flex;
+        gap: var(--spacing-lg);
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .nav-item {
+        position: relative;
+    }
+    
+    .nav-link {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-xs);
+        padding: var(--spacing-sm) 0;
+        color: var(--text-secondary);
+        font-weight: 500;
+        text-decoration: none;
+        border-radius: var(--border-radius-md);
+        transition: all var(--transition-normal);
+        overflow: hidden;
+    }
+    
+    .nav-link::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, 
+            rgba(37, 99, 235, 0.1) 0%,
+            rgba(16, 185, 129, 0.1) 100%);
+        opacity: 0;
+        transition: opacity var(--transition-normal);
+        border-radius: var(--border-radius-md);
+    }
+    
+    .nav-link:hover::before,
+    .nav-link.active::before {
+        opacity: 1;
+    }
+    
+    .nav-link:hover, .nav-link:focus {
+        color: var(--primary-blue);
+        transform: translateY(-2px);
+        text-decoration: none;
+    }
+    
+    .nav-link.active {
+        color: var(--primary-blue);
+        font-weight: 600;
+    }
+    
+    .nav-link.active::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background-color: var(--primary-blue);
+        border-radius: var(--border-radius-sm);
+    }
+    
+    .nav-link.has-dropdown {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+    }
+    
+    .nav-link.has-dropdown::after {
+        content: '\f078';
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+        font-size: 0.75rem;
+        transition: transform var(--transition-fast) ease;
+    }
+    
+    .nav-link.has-dropdown:hover::after {
+        transform: rotate(180deg);
+    }
+    
+    /* Enhanced Dropdown Menu */
+    .dropdown-menu {
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 50%;
+        transform: translateX(-50%) translateY(-10px);
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--border-radius-lg);
+        padding: var(--spacing-sm) 0;
+        min-width: 220px;
+        opacity: 0;
+        visibility: hidden;
+        transition: all var(--transition-normal);
+        box-shadow: var(--glass-shadow);
+        z-index: var(--z-index-dropdown);
+    }
+    
+    .nav-item.dropdown:hover .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+    }
+    
+    .dropdown-link {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        padding: var(--spacing-sm) var(--spacing-lg);
+        color: var(--text-primary);
+        text-decoration: none;
+        border-radius: var(--border-radius-md);
+        transition: all var(--transition-fast);
+        margin: var(--spacing-xs) 0;
+    }
+    
+    .dropdown-link:hover {
+        background: rgba(37, 99, 235, 0.1);
+        color: var(--primary-blue);
+        transform: translateX(5px);
+        text-decoration: none;
+    }
+    
+    /* Enhanced Header Actions */
+    .header-actions {
+        justify-self: end;
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-md);
+    }
+    
+    /* Enhanced Action Buttons */
+    .action-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.625rem 1.25rem;
+        font-size: var(--font-size-sm);
+        font-weight: 600;
+        line-height: 1;
+        border-radius: var(--border-radius-md);
+        border: none;
+        cursor: pointer;
+        transition: all var(--transition-normal);
+        text-decoration: none;
+        white-space: nowrap;
+        user-select: none;
+        position: relative;
+        overflow: hidden;
+        isolation: isolate;
+    }
+    
+    .action-btn::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, 
+            rgba(255, 255, 255, 0.2) 0%,
+            rgba(255, 255, 255, 0) 100%);
+        opacity: 0;
+        transition: opacity var(--transition-normal);
+        z-index: -1;
+    }
+    
+    .action-btn:hover::before {
+        opacity: 1;
+    }
+    
+    .action-btn:active {
+        transform: scale(0.98);
+    }
+    
+    .action-btn:focus {
+        outline: 2px solid var(--primary-blue);
+        outline-offset: 2px;
+    }
+    
+    .action-btn-primary {
+        background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+        color: white;
+        box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+    }
+    
+    .action-btn-primary:hover, .action-btn-primary:focus {
+        background: linear-gradient(135deg, var(--primary-blue-dark) 0%, var(--primary-blue) 100%);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+        text-decoration: none;
+    }
+    
+    .action-btn-outline {
+        background: transparent;
+        color: var(--primary-blue);
+        border: 2px solid var(--primary-blue);
+    }
+    
+    .action-btn-outline:hover, .action-btn-outline:focus {
+        background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+        color: white;
+        border-color: transparent;
+        transform: translateY(-2px);
+    }
+    
+    /* Enhanced User Menu */
+    .user-menu {
+        position: relative;
+    }
+    
+    .user-btn {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        padding: 0.5rem;
+        background: linear-gradient(135deg, 
+            rgba(37, 99, 235, 0.1) 0%,
+            rgba(16, 185, 129, 0.1) 100%);
+        border: 1px solid rgba(37, 99, 235, 0.2);
+        border-radius: var(--border-radius-full);
+        cursor: pointer;
+        transition: all var(--transition-normal);
+    }
+    
+    .user-btn:hover {
+        background: linear-gradient(135deg, 
+            rgba(37, 99, 235, 0.2) 0%,
+            rgba(16, 185, 129, 0.2) 100%);
+        transform: scale(1.05);
+    }
+    
+    .user-avatar {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-green) 100%);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        font-size: 1rem;
+        box-shadow: var(--shadow-md);
+    }
+    
+    .user-name {
+        font-weight: 500;
+        color: var(--text-primary);
+        display: none;
+    }
+    
+    @media (min-width: 1024px) {
+        .user-name {
+            display: block;
         }
-
-        .faq-item.active .faq-answer {
-            padding-bottom: var(--spacing-lg);
-            max-height: 500px;
+    }
+    
+    /* Enhanced Mobile Menu Toggle */
+    .mobile-menu-toggle {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 21px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        z-index: var(--z-index-modal);
+        transition: transform var(--transition-normal);
+    }
+    
+    .mobile-menu-toggle:hover {
+        transform: scale(1.1);
+    }
+    
+    @media (min-width: 768px) {
+        .mobile-menu-toggle {
+            display: none;
         }
-
-        .faq-icon {
-            transition: transform var(--transition-normal) ease;
+    }
+    
+    .menu-line {
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(90deg, var(--primary-blue) 0%, var(--secondary-green) 100%);
+        border-radius: var(--border-radius-full);
+        transition: all var(--transition-normal) cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        transform-origin: center;
+    }
+    
+    .mobile-menu-toggle.active .menu-line:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+        background: var(--primary-blue);
+    }
+    
+    .mobile-menu-toggle.active .menu-line:nth-child(2) {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+    
+    .mobile-menu-toggle.active .menu-line:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+        background: var(--primary-blue);
+    }
+    
+    /* Enhanced Mobile Navigation */
+    .mobile-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--glass-bg);
+        backdrop-filter: blur(30px);
+        -webkit-backdrop-filter: blur(30px);
+        z-index: var(--z-index-modal);
+        transform: translateX(-100%);
+        transition: transform var(--transition-normal) cubic-bezier(0.4, 0, 0.2, 1);
+        overflow-y: auto;
+        padding: var(--spacing-3xl) var(--spacing-lg) var(--spacing-xl);
+        display: flex;
+        flex-direction: column;
+        border-right: 1px solid var(--glass-border);
+    }
+    
+    .mobile-nav.active {
+        transform: translateX(0);
+    }
+    
+    .mobile-nav-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: var(--spacing-2xl);
+        padding-bottom: var(--spacing-lg);
+        border-bottom: 1px solid var(--glass-border);
+    }
+    
+    .mobile-nav-links {
+        list-style: none;
+        flex: 1;
+    }
+    
+    .mobile-nav-link {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        padding: var(--spacing-lg) 0;
+        color: var(--text-primary);
+        font-weight: 500;
+        text-decoration: none;
+        border-bottom: 1px solid var(--glass-border);
+        transition: all var(--transition-fast);
+        font-size: var(--font-size-lg);
+    }
+    
+    .mobile-nav-link:hover, .mobile-nav-link:focus {
+        color: var(--primary-blue);
+        padding-left: var(--spacing-sm);
+        text-decoration: none;
+    }
+    
+    .mobile-nav-link.active {
+        color: var(--primary-blue);
+        font-weight: 600;
+    }
+    
+    .mobile-nav-actions {
+        margin-top: auto;
+        padding-top: var(--spacing-xl);
+        border-top: 1px solid var(--glass-border);
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+    
+    .mobile-nav-actions .action-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    /* ====== MAIN CONTENT ADJUSTMENT ====== */
+    .main-content {
+        padding-top: 80px;
+        flex: 1;
+    }
+    
+    .main-header.scrolled ~ .main-content {
+        padding-top: 70px;
+    }
+    
+    @media (max-width: 767px) {
+        .main-content {
+            padding-top: 70px;
         }
-
-        .faq-item.active .faq-icon {
-            transform: rotate(180deg);
+        
+        .main-header.scrolled ~ .main-content {
+            padding-top: 60px;
         }
-
-        /* ====== EMAIL CAPTURE ====== */
-        .email-capture {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
-            color: white;
-            padding: var(--spacing-2xl) 0;
-            text-align: center;
+        
+        .header-container {
+            grid-template-columns: 1fr auto;
+            gap: var(--spacing-md);
         }
-
-        .email-capture h2 {
-            color: white;
+        
+        .desktop-nav {
+            display: none;
         }
-
-        .email-form {
-            max-width: 500px;
-            margin: var(--spacing-xl) auto 0;
+        
+        .header-actions {
+            display: none;
+        }
+        
+        .mobile-menu-toggle {
             display: flex;
-            gap: var(--spacing-sm);
         }
+    }
+    
+    /* ====== BUTTON STYLES ====== */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.75rem 1.5rem;
+        font-size: var(--font-size-base);
+        font-weight: 600;
+        line-height: 1;
+        border-radius: var(--border-radius-md);
+        border: none;
+        cursor: pointer;
+        transition: all var(--transition-normal);
+        text-decoration: none;
+        white-space: nowrap;
+        user-select: none;
+        touch-action: manipulation;
+        position: relative;
+        overflow: hidden;
+        isolation: isolate;
+    }
+    
+    .btn::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, 
+            rgba(255, 255, 255, 0.2) 0%,
+            rgba(255, 255, 255, 0) 100%);
+        opacity: 0;
+        transition: opacity var(--transition-normal);
+        z-index: -1;
+    }
+    
+    .btn:hover::before {
+        opacity: 1;
+    }
+    
+    .btn:focus {
+        outline: 2px solid var(--primary-blue);
+        outline-offset: 2px;
+    }
+    
+    .btn-primary {
+        background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+        color: white;
+        box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+    }
+    
+    .btn-primary:hover, .btn-primary:focus {
+        background: linear-gradient(135deg, var(--primary-blue-dark) 0%, var(--primary-blue) 100%);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+        text-decoration: none;
+    }
+    
+    .btn-secondary {
+        background: linear-gradient(135deg, var(--secondary-green) 0%, var(--secondary-green-dark) 100%);
+        color: white;
+    }
+    
+    .btn-secondary:hover, .btn-secondary:focus {
+        background: linear-gradient(135deg, var(--secondary-green-dark) 0%, var(--secondary-green) 100%);
+        color: white;
+        transform: translateY(-2px);
+    }
+    
+    .btn-outline {
+        background: transparent;
+        color: var(--primary-blue);
+        border: 2px solid var(--primary-blue);
+    }
+    
+    .btn-outline:hover, .btn-outline:focus {
+        background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+        color: white;
+        border-color: transparent;
+        transform: translateY(-2px);
+    }
+    
+    .btn-lg {
+        padding: 1rem 2rem;
+        font-size: var(--font-size-lg);
+    }
+    
+    .btn-full {
+        width: 100%;
+    }
+    
+    /* ====== RESOURCES PAGE SPECIFIC STYLES ====== */
+    
+    /* Hero Section */
+    .hero-section {
+        position: relative;
+        min-height: 60vh;
+        display: flex;
+        align-items: center;
+        background: 
+            linear-gradient(135deg, rgba(37, 99, 235, 0.85) 0%, rgba(16, 185, 129, 0.85) 100%),
+            url('https://lh3.googleusercontent.com/d/17Akn3tEwGf0X40fadrdNpBtnDejgKvRT');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        overflow: hidden;
+    }
 
-        @media (max-width: 767px) {
-            .email-form {
-                flex-direction: column;
-            }
+    @media (max-width: 767px) {
+        .hero-section {
+            min-height: 50vh;
         }
+    }
 
-        /* ====== ANIMATIONS ====== */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    .hero-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.3);
+        z-index: 0;
+    }
 
-        .fade-in {
-            animation: fadeInUp 0.6s ease-out;
+    .hero-content {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: var(--spacing-2xl) var(--spacing-lg);
+        text-align: center;
+    }
+
+    .hero-title {
+        font-size: var(--font-size-4xl);
+        margin-bottom: var(--spacing-lg);
+        color: white;
+        line-height: 1.1;
+        font-weight: 800;
+        text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    @media (max-width: 767px) {
+        .hero-title {
+            font-size: var(--font-size-3xl);
         }
+    }
+
+    .hero-subtitle {
+        font-size: var(--font-size-lg);
+        color: rgba(255, 255, 255, 0.95);
+        margin-bottom: var(--spacing-xl);
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: var(--line-height-relaxed);
+    }
+    
+    /* Section Title */
+    .section-title {
+        text-align: center;
+        margin-bottom: var(--spacing-2xl);
+        position: relative;
+    }
+    
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: -0.75rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 4rem;
+        height: 0.25rem;
+        background: linear-gradient(90deg, var(--primary-blue) 0%, var(--secondary-green) 100%);
+        border-radius: var(--border-radius-sm);
+    }
+    
+    .section-subtitle {
+        text-align: center;
+        color: var(--text-secondary);
+        margin-bottom: var(--spacing-xl);
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Categories Section */
+    .categories-section {
+        background: var(--background-dark);
+        padding: var(--spacing-xl) 0;
+    }
+
+    .categories-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: var(--spacing-lg);
+        margin-top: var(--spacing-xl);
+    }
+
+    .category-card {
+        background: white;
+        padding: var(--spacing-lg);
+        border-radius: var(--border-radius-lg);
+        text-align: center;
+        transition: all var(--transition-normal) ease;
+        cursor: pointer;
+        border: 2px solid transparent;
+    }
+
+    .category-card:hover {
+        transform: translateY(-3px);
+        border-color: var(--primary-blue);
+        box-shadow: var(--shadow-md);
+    }
+
+    .category-card.active {
+        background: var(--primary-blue);
+        color: white;
+        border-color: var(--primary-blue);
+    }
+
+    .category-card.active i {
+        color: white;
+    }
+
+    .category-card i {
+        font-size: 2rem;
+        color: var(--primary-blue);
+        margin-bottom: var(--spacing-sm);
+    }
+
+    /* Resources Grid */
+    .resources-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: var(--spacing-xl);
+        margin-top: var(--spacing-2xl);
+    }
+
+    @media (max-width: 767px) {
+        .resources-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .resource-card {
+        background: var(--surface-white);
+        border-radius: var(--border-radius-lg);
+        overflow: hidden;
+        box-shadow: var(--shadow-md);
+        transition: all var(--transition-normal) ease;
+        border: 1px solid var(--border-light);
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    .resource-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-xl);
+    }
+
+    .resource-header {
+        padding: var(--spacing-lg);
+        background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+        color: white;
+        position: relative;
+    }
+
+    .resource-icon {
+        width: 60px;
+        height: 60px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: var(--border-radius-md);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: var(--spacing-md);
+        font-size: 1.5rem;
+    }
+
+    .resource-badge {
+        position: absolute;
+        top: var(--spacing-md);
+        right: var(--spacing-md);
+        background: var(--accent-amber);
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: var(--border-radius-sm);
+        font-size: var(--font-size-xs);
+        font-weight: 600;
+    }
+
+    .resource-content {
+        padding: var(--spacing-lg);
+    }
+
+    .resource-title {
+        font-size: var(--font-size-lg);
+        margin-bottom: var(--spacing-sm);
+        color: var(--text-primary);
+    }
+
+    .resource-description {
+        color: var(--text-secondary);
+        margin-bottom: var(--spacing-md);
+        line-height: var(--line-height-relaxed);
+    }
+
+    .resource-features {
+        list-style: none;
+        margin: var(--spacing-md) 0;
+    }
+
+    .resource-features li {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        margin-bottom: var(--spacing-xs);
+        color: var(--text-secondary);
+        font-size: var(--font-size-sm);
+    }
+
+    .resource-features li i {
+        color: var(--primary-blue);
+    }
+
+    .resource-details {
+        background: var(--background-dark);
+        border-radius: var(--border-radius-md);
+        padding: var(--spacing-md);
+        margin: var(--spacing-md) 0;
+    }
+
+    .detail-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: var(--spacing-xs);
+        font-size: var(--font-size-sm);
+    }
+
+    .detail-label {
+        color: var(--text-secondary);
+    }
+
+    .detail-value {
+        color: var(--text-primary);
+        font-weight: 500;
+    }
+
+    .resource-footer {
+        padding: var(--spacing-lg);
+        border-top: 1px solid var(--border-light);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .download-info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .file-size {
+        font-size: var(--font-size-xs);
+        color: var(--text-tertiary);
+    }
+
+    /* How to Use Section */
+    .how-to-section {
+        padding: var(--spacing-2xl) 0;
+    }
+
+    .steps-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--spacing-xl);
+        margin-top: var(--spacing-xl);
+    }
+
+    .step-card {
+        text-align: center;
+        padding: var(--spacing-lg);
+    }
+
+    .step-number {
+        width: 50px;
+        height: 50px;
+        background: var(--primary-blue);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: var(--font-size-xl);
+        font-weight: 700;
+        margin: 0 auto var(--spacing-lg);
+    }
+
+    /* FAQ Section */
+    .faq-section {
+        background: var(--background-dark);
+        padding: var(--spacing-2xl) 0;
+    }
+
+    .faq-grid {
+        max-width: 800px;
+        margin: var(--spacing-xl) auto 0;
+    }
+
+    .faq-item {
+        background: white;
+        border-radius: var(--border-radius-md);
+        margin-bottom: var(--spacing-md);
+        overflow: hidden;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .faq-question {
+        padding: var(--spacing-lg);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        font-weight: 600;
+        transition: background-color var(--transition-fast);
+    }
+
+    .faq-question:hover {
+        background-color: var(--background-dark);
+    }
+
+    .faq-answer {
+        padding: 0 var(--spacing-lg);
+        max-height: 0;
+        overflow: hidden;
+        transition: all var(--transition-normal) ease;
+    }
+
+    .faq-item.active .faq-answer {
+        padding-bottom: var(--spacing-lg);
+        max-height: 500px;
+    }
+
+    .faq-icon {
+        transition: transform var(--transition-normal) ease;
+    }
+
+    .faq-item.active .faq-icon {
+        transform: rotate(180deg);
+    }
+
+    /* Email Capture */
+    .email-capture {
+        background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+        color: white;
+        padding: var(--spacing-2xl) 0;
+        text-align: center;
+    }
+
+    .email-capture h2 {
+        color: white;
+    }
+
+    .email-form {
+        max-width: 500px;
+        margin: var(--spacing-xl) auto 0;
+        display: flex;
+        gap: var(--spacing-sm);
+    }
+
+    @media (max-width: 767px) {
+        .email-form {
+            flex-direction: column;
+        }
+    }
+
+    /* Form Styles */
+    .form-input, .form-select {
+        width: 100%;
+        padding: 0.875rem 1rem;
+        font-size: var(--font-size-base);
+        border: 1px solid var(--border-medium);
+        border-radius: var(--border-radius-md);
+        background-color: var(--surface-white);
+        transition: all var(--transition-normal);
+    }
+
+    .form-input:focus, .form-select:focus {
+        outline: none;
+        border-color: var(--primary-blue);
+        box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2);
+        transform: translateY(-2px);
+    }
+
+    /* ====== FOOTER ====== */
+    .footer {
+        background: linear-gradient(135deg, var(--surface-dark) 0%, #1a202c 100%);
+        color: white;
+        padding: var(--spacing-3xl) 0 var(--spacing-xl);
+        position: relative;
+    }
+    
+    .footer::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent 0%, var(--primary-blue) 50%, transparent 100%);
+    }
+    
+    .footer a {
+        color: white;
+        opacity: 0.8;
+        transition: all var(--transition-fast);
+    }
+    
+    .footer a:hover {
+        opacity: 1;
+        color: var(--primary-blue-light);
+        text-decoration: none;
+        transform: translateX(5px);
+    }
+    
+    .footer-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--spacing-2xl);
+        margin-bottom: var(--spacing-2xl);
+    }
+    
+    @media (min-width: 768px) {
+        .footer-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    
+    @media (min-width: 1024px) {
+        .footer-grid {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+    
+    .footer-section h3 {
+        color: white;
+        font-size: var(--font-size-lg);
+        margin-bottom: var(--spacing-lg);
+        opacity: 0.9;
+        position: relative;
+        display: inline-block;
+    }
+    
+    .footer-section h3::after {
+        content: '';
+        position: absolute;
+        bottom: -0.5rem;
+        left: 0;
+        width: 2rem;
+        height: 2px;
+        background: var(--primary-blue);
+        border-radius: var(--border-radius-sm);
+    }
+    
+    .footer-links {
+        list-style: none;
+    }
+    
+    .footer-links li {
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .social-links {
+        display: flex;
+        gap: var(--spacing-md);
+        margin-top: var(--spacing-lg);
+    }
+    
+    .social-link {
+        width: 2.5rem;
+        height: 2.5rem;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all var(--transition-fast);
+    }
+    
+    .social-link:hover {
+        background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-green) 100%);
+        transform: translateY(-3px) rotate(10deg);
+        text-decoration: none;
+    }
+    
+    .footer-bottom {
+        text-align: center;
+        padding-top: var(--spacing-xl);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.6);
+        font-size: var(--font-size-sm);
+    }
+    
+    /* ====== ANIMATIONS ====== */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .fade-in {
+        animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    /* ====== DARK MODE ====== */
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --background-light: #1F2937;
+            --background-dark: #111827;
+            --surface-white: #1F2937;
+            --surface-gray: #374151;
+            --surface-dark: #030712;
+            --text-primary: #F9FAFB;
+            --text-secondary: #D1D5DB;
+            --text-tertiary: #9CA3AF;
+            --border-light: #374151;
+            --border-medium: #4B5563;
+            --glass-bg: rgba(31, 41, 55, 0.7);
+            --glass-border: rgba(55, 65, 81, 0.5);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+        }
+        
+        .main-header {
+            background: rgba(17, 24, 39, 0.95);
+            border-bottom: 1px solid rgba(55, 65, 81, 0.5);
+        }
+        
+        .logo-image {
+            box-shadow: 0 0 20px rgba(37, 99, 235, 0.3);
+        }
+        
+        .dropdown-menu {
+            background: rgba(31, 41, 55, 0.9);
+            border: 1px solid rgba(55, 65, 81, 0.7);
+        }
+        
+        .mobile-nav {
+            background: rgba(17, 24, 39, 0.95);
+        }
+        
+        .resource-card, .category-card, .faq-item, .step-card {
+            background-color: var(--surface-gray);
+        }
+        
+        .form-input, .form-select {
+            background-color: var(--surface-gray);
+            border-color: var(--border-medium);
+            color: var(--text-primary);
+        }
+        
+        .btn-outline {
+            border-color: rgba(255, 255, 255, 0.2);
+            color: var(--text-primary);
+        }
+        
+        .logo-text::after {
+            background: var(--background-light);
+        }
+    }
     </style>
 </head>
 <body>
     <!-- Professional Header -->
     <header class="main-header" id="mainHeader">
         <div class="container header-container">
+            <!-- Logo -->
             <div class="logo-container">
                 <a href="index.html" class="logo">
-                    <i class="fas fa-building logo-icon"></i>
-                    <span class="logo-text">Primer Technologies</span>
+                    <img src="https://lh3.googleusercontent.com/d/1mPoNCeZxbgb8YE__XEvR5mO-ulSx2Uoe" alt="Primer Technologies Logo" class="logo-image">
+                    <span class="logo-text">Primer</span>
                     <span class="logo-tagline">Complete Property Solutions</span>
                 </a>
             </div>
@@ -434,11 +1544,23 @@
                     <li class="nav-item">
                         <a href="index.html" class="nav-link">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="browse.html" class="nav-link">Properties</a>
+                    <li class="nav-item dropdown">
+                        <a href="browse.html" class="nav-link has-dropdown">Properties</a>
+                        <div class="dropdown-menu">
+                            <a href="browse.html" class="dropdown-link">Browse All</a>
+                            <a href="browse.html?type=sale" class="dropdown-link">For Sale</a>
+                            <a href="browse.html?type=rent" class="dropdown-link">For Rent</a>
+                            <a href="browse.html?type=commercial" class="dropdown-link">Commercial</a>
+                        </div>
                     </li>
-                    <li class="nav-item">
-                        <a href="services.html" class="nav-link">Services</a>
+                    <li class="nav-item dropdown">
+                        <a href="services.html" class="nav-link has-dropdown">Services</a>
+                        <div class="dropdown-menu">
+                            <a href="services.html#listing" class="dropdown-link">Property Listing</a>
+                            <a href="services.html#maintenance" class="dropdown-link">Maintenance</a>
+                            <a href="services.html#logistics" class="dropdown-link">Moving & Logistics</a>
+                            <a href="services.html#handyman" class="dropdown-link">Handyman Services</a>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a href="about.html" class="nav-link">About</a>
@@ -457,12 +1579,23 @@
 
             <!-- Header Actions -->
             <div class="header-actions">
-                <a href="login.html" class="action-btn action-btn-outline" style="margin-right: var(--spacing-sm);">
-                    <i class="fas fa-sign-in-alt" style="margin-right: 0.5rem;"></i>Sign In
-                </a>
-                <a href="list-property.html" class="action-btn action-btn-primary">
-                    <i class="fas fa-plus" style="margin-right: 0.5rem;"></i>List Property
-                </a>
+                <!-- User Menu (Logged in) -->
+                <div class="user-menu">
+                    <button class="user-btn" id="userMenuBtn" aria-label="User menu">
+                        <div class="user-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <span class="user-name">Account</span>
+                        <i class="fas fa-chevron-down" style="font-size: 0.75rem;"></i>
+                    </button>
+                    <div class="dropdown-menu" id="userDropdown" style="right: 0; left: auto; min-width: 180px;">
+                        <a href="profile.html" class="dropdown-link"><i class="fas fa-user" style="margin-right: 0.5rem;"></i>Profile</a>
+                        <a href="favorites.html" class="dropdown-link"><i class="fas fa-heart" style="margin-right: 0.5rem;"></i>Favorites</a>
+                        <a href="bookings.html" class="dropdown-link"><i class="fas fa-calendar" style="margin-right: 0.5rem;"></i>Bookings</a>
+                        <div style="border-top: 1px solid var(--border-light); margin: var(--spacing-sm) 0;"></div>
+                        <a href="logout.html" class="dropdown-link"><i class="fas fa-sign-out-alt" style="margin-right: 0.5rem;"></i>Logout</a>
+                    </div>
+                </div>
             </div>
 
             <!-- Mobile Menu Toggle -->
@@ -478,7 +1611,7 @@
     <nav class="mobile-nav" id="mobileNav">
         <div class="mobile-nav-header">
             <div class="logo">
-                <i class="fas fa-building logo-icon"></i>
+                <img src="images/1.jpg" alt="Primer Technologies Logo" class="logo-image">
                 <span class="logo-text">Primer Technologies</span>
             </div>
             <button class="mobile-menu-toggle active" id="closeMobileMenu" aria-label="Close mobile menu">
@@ -491,7 +1624,13 @@
         <ul class="mobile-nav-links">
             <li><a href="index.html" class="mobile-nav-link">Home</a></li>
             <li><a href="browse.html" class="mobile-nav-link">Browse Properties</a></li>
+            <li><a href="browse.html?type=sale" class="mobile-nav-link">For Sale</a></li>
+            <li><a href="browse.html?type=rent" class="mobile-nav-link">For Rent</a></li>
             <li><a href="services.html" class="mobile-nav-link">Services</a></li>
+            <li><a href="services.html#listing" class="mobile-nav-link">Property Listing</a></li>
+            <li><a href="services.html#maintenance" class="mobile-nav-link">Maintenance</a></li>
+            <li><a href="services.html#logistics" class="mobile-nav-link">Moving & Logistics</a></li>
+            <li><a href="services.html#handyman" class="mobile-nav-link">Handyman Services</a></li>
             <li><a href="about.html" class="mobile-nav-link">About Us</a></li>
             <li><a href="blog.html" class="mobile-nav-link">Blog</a></li>
             <li><a href="resources.html" class="mobile-nav-link active">Resources</a></li>
@@ -502,9 +1641,9 @@
             <a href="login.html" class="action-btn action-btn-outline">
                 <i class="fas fa-sign-in-alt" style="margin-right: 0.5rem;"></i>Sign In
             </a>
-            <a href="list-property.html" class="action-btn action-btn-primary">
+            <button class="action-btn action-btn-primary" id="mobileListPropertyBtn">
                 <i class="fas fa-plus" style="margin-right: 0.5rem;"></i>List Property
-            </a>
+            </button>
         </div>
     </nav>
 
@@ -559,257 +1698,7 @@
                 <p class="section-subtitle">Click any template to download and learn what's included</p>
                 
                 <div class="resources-grid" id="resourcesGrid">
-                    <!-- Resource 1: Standard Tenancy Agreement -->
-                    <article class="resource-card fade-in" data-category="legal">
-                        <div class="resource-header">
-                            <div class="resource-icon">
-                                <i class="fas fa-file-contract"></i>
-                            </div>
-                            <div class="resource-badge">Most Popular</div>
-                            <h3 class="resource-title" style="color: white;">Standard Tenancy Agreement</h3>
-                        </div>
-                        
-                        <div class="resource-content">
-                            <p class="resource-description">
-                                Nigeria-compliant rental agreement template with all necessary clauses for comprehensive landlord and tenant protection. Designed by legal experts to meet Nigerian real estate requirements.
-                            </p>
-                            
-                            <div class="resource-details">
-                                <h4 style="font-size: var(--font-size-sm); margin-bottom: var(--spacing-sm); color: var(--text-primary);">What's Included:</h4>
-                                <ul class="resource-features">
-                                    <li><i class="fas fa-check"></i> Complete 4-page legally compliant template</li>
-                                    <li><i class="fas fa-check"></i> Nigerian-specific clauses and requirements</li>
-                                    <li><i class="fas fa-check"></i> Clear terms for rent, deposit, and utilities</li>
-                                    <li><i class="fas fa-check"></i> Maintenance responsibilities section</li>
-                                    <li><i class="fas fa-check"></i> Default and termination procedures</li>
-                                    <li><i class="fas fa-check"></i> Witness and signature sections</li>
-                                </ul>
-                            </div>
-                            
-                            <div class="resource-details">
-                                <h4 style="font-size: var(--font-size-sm); margin-bottom: var(--spacing-sm); color: var(--text-primary);">Document Details:</h4>
-                                <div class="detail-item">
-                                    <span class="detail-label">Format:</span>
-                                    <span class="detail-value">Microsoft Word (.docx)</span>
-                                </div>
-                                <div class="detail-item">
-                                    <span class="detail-label">Pages:</span>
-                                    <span class="detail-value">4 pages</span>
-                                </div>
-                                <div class="detail-item">
-                                    <span class="detail-label">File Size:</span>
-                                    <span class="detail-value">45 KB</span>
-                                </div>
-                                <div class="detail-item">
-                                    <span class="detail-label">Updates:</span>
-                                    <span class="detail-value">2024 Edition</span>
-                                </div>
-                            </div>
-                            
-                            <div class="resource-details">
-                                <h4 style="font-size: var(--font-size-sm); margin-bottom: var(--spacing-sm); color: var(--text-primary);">Best For:</h4>
-                                <p style="font-size: var(--font-size-sm); color: var(--text-secondary);">
-                                    Landlords renting residential properties, property managers, real estate agents, and tenants wanting to understand standard rental terms.
-                                </p>
-                            </div>
-                        </div>
-                        
-                        <div class="resource-footer">
-                            <div class="download-info">
-                                <span style="font-size: var(--font-size-sm); color: var(--text-secondary);">Free Download</span>
-                                <span class="file-size">Microsoft Word Document • 45KB</span>
-                            </div>
-                            <a href="downloads/standard-tenancy-agreement.docx" class="btn btn-primary" download onclick="trackDownload('standard-tenancy-agreement')">
-                                <i class="fas fa-download"></i> Download
-                            </a>
-                        </div>
-                    </article>
-
-                    <!-- Resource 2: Rent Increase Notice -->
-                    <article class="resource-card fade-in" data-category="legal management">
-                        <div class="resource-header">
-                            <div class="resource-icon">
-                                <i class="fas fa-envelope-open-text"></i>
-                            </div>
-                            <h3 class="resource-title" style="color: white;">Rent Increase Notice</h3>
-                        </div>
-                        
-                        <div class="resource-content">
-                            <p class="resource-description">
-                                Professional notification template for rent increases compliant with Nigerian tenancy laws. Includes tenant response section and clear communication of terms.
-                            </p>
-                            
-                            <div class="resource-details">
-                                <h4 style="font-size: var(--font-size-sm); margin-bottom: var(--spacing-sm); color: var(--text-primary);">What's Included:</h4>
-                                <ul class="resource-features">
-                                    <li><i class="fas fa-check"></i> 30-day notice compliant template</li>
-                                    <li><i class="fas fa-check"></i> Professional formatting and layout</li>
-                                    <li><i class="fas fa-check"></i> Editable reasons section</li>
-                                    <li><i class="fas fa-check"></i> Tenant acknowledgement and response</li>
-                                    <li><i class="fas fa-check"></i> Payment details section</li>
-                                    <li><i class="fas fa-check"></i> Multiple reason checkboxes</li>
-                                </ul>
-                            </div>
-                            
-                            <div class="resource-details">
-                                <h4 style="font-size: var(--font-size-sm); margin-bottom: var(--spacing-sm); color: var(--text-primary);">Document Details:</h4>
-                                <div class="detail-item">
-                                    <span class="detail-label">Format:</span>
-                                    <span class="detail-value">Microsoft Word (.docx)</span>
-                                </div>
-                                <div class="detail-item">
-                                    <span class="detail-label">Pages:</span>
-                                    <span class="detail-value">2 pages</span>
-                                </div>
-                                <div class="detail-item">
-                                    <span class="detail-label">File Size:</span>
-                                    <span class="detail-value">32 KB</span>
-                                </div>
-                                <div class="detail-item">
-                                    <span class="detail-label">Legal Compliance:</span>
-                                    <span class="detail-value">Nigeria Tenancy Laws</span>
-                                </div>
-                            </div>
-                            
-                            <div class="resource-details">
-                                <h4 style="font-size: var(--font-size-sm); margin-bottom: var(--spacing-sm); color: var(--text-primary);">How to Use:</h4>
-                                <p style="font-size: var(--font-size-sm); color: var(--text-secondary);">
-                                    1. Fill in tenant and property details<br>
-                                    2. Specify current and new rent amounts<br>
-                                    3. Check appropriate reason boxes<br>
-                                    4. Set effective date (minimum 30 days ahead)<br>
-                                    5. Send via registered mail or hand deliver
-                                </p>
-                            </div>
-                        </div>
-                        
-                        <div class="resource-footer">
-                            <div class="download-info">
-                                <span style="font-size: var(--font-size-sm); color: var(--text-secondary);">Free Download</span>
-                                <span class="file-size">Microsoft Word Document • 32KB</span>
-                            </div>
-                            <a href="downloads/rent-increase-notice.docx" class="btn btn-primary" download onclick="trackDownload('rent-increase-notice')">
-                                <i class="fas fa-download"></i> Download
-                            </a>
-                        </div>
-                    </article>
-
-                    <!-- Resource 3: Property Listing Template -->
-                    <article class="resource-card fade-in" data-category="marketing">
-                        <div class="resource-header">
-                            <div class="resource-icon">
-                                <i class="fas fa-home"></i>
-                            </div>
-                            <div class="resource-badge">New</div>
-                            <h3 class="resource-title" style="color: white;">Property Listing Template</h3>
-                        </div>
-                        
-                        <div class="resource-content">
-                            <p class="resource-description">
-                                Complete property marketing template with all sections needed for effective property presentation, sales, and rental listings.
-                            </p>
-                            
-                            <div class="resource-details">
-                                <h4 style="font-size: var(--font-size-sm); margin-bottom: var(--spacing-sm); color: var(--text-primary);">What's Included:</h4>
-                                <ul class="resource-features">
-                                    <li><i class="fas fa-check"></i> Property specifications section</li>
-                                    <li><i class="fas fa-check"></i> Amenities and features checklist</li>
-                                    <li><i class="fas fa-check"></i> Photo checklist for complete coverage</li>
-                                    <li><i class="fas fa-check"></i> Pricing and terms breakdown</li>
-                                    <li><i class="fas fa-check"></i> Legal status and documentation section</li>
-                                    <li><i class="fas fa-check"></i> Contact and viewing arrangements</li>
-                                </ul>
-                            </div>
-                            
-                            <div class="resource-details">
-                                <h4 style="font-size: var(--font-size-sm); margin-bottom: var(--spacing-sm); color: var(--text-primary);">Template Sections:</h4>
-                                <div style="font-size: var(--font-size-sm); color: var(--text-secondary); line-height: 1.6;">
-                                    • Property Information & Location<br>
-                                    • Specifications & Amenities<br>
-                                    • Features Checklist<br>
-                                    • Photo Requirements<br>
-                                    • Pricing/Terms Breakdown<br>
-                                    • Legal Status<br>
-                                    • Contact Details
-                                </div>
-                            </div>
-                            
-                            <div class="resource-details">
-                                <h4 style="font-size: var(--font-size-sm); margin-bottom: var(--spacing-sm); color: var(--text-primary);">Best For:</h4>
-                                <p style="font-size: var(--font-size-sm); color: var(--text-secondary);">
-                                    Real estate agents, property owners, property managers, and anyone looking to create professional property listings for sale or rent.
-                                </p>
-                            </div>
-                        </div>
-                        
-                        <div class="resource-footer">
-                            <div class="download-info">
-                                <span style="font-size: var(--font-size-sm); color: var(--text-secondary);">Free Download</span>
-                                <span class="file-size">Microsoft Word Document • 38KB</span>
-                            </div>
-                            <a href="downloads/property-listing-template.docx" class="btn btn-primary" download onclick="trackDownload('property-listing-template')">
-                                <i class="fas fa-download"></i> Download
-                            </a>
-                        </div>
-                    </article>
-
-                    <!-- Resource 4: Rental Application Form -->
-                    <article class="resource-card fade-in" data-category="management">
-                        <div class="resource-header">
-                            <div class="resource-icon">
-                                <i class="fas fa-user-check"></i>
-                            </div>
-                            <h3 class="resource-title" style="color: white;">Rental Application Form</h3>
-                        </div>
-                        
-                        <div class="resource-content">
-                            <p class="resource-description">
-                                Comprehensive tenant screening application with Nigeria-specific fields for thorough tenant evaluation and background checking.
-                            </p>
-                            
-                            <div class="resource-details">
-                                <h4 style="font-size: var(--font-size-sm); margin-bottom: var(--spacing-sm); color: var(--text-primary);">What's Included:</h4>
-                                <ul class="resource-features">
-                                    <li><i class="fas fa-check"></i> 4-page detailed application form</li>
-                                    <li><i class="fas fa-check"></i> Nigeria-specific ID and address fields</li>
-                                    <li><i class="fas fa-check"></i> Employment and income verification</li>
-                                    <li><i class="fas fa-check"></i> Reference check sections</li>
-                                    <li><i class="fas fa-check"></i> Emergency contact information</li>
-                                    <li><i class="fas fa-check"></i> Pet and vehicle information</li>
-                                </ul>
-                            </div>
-                            
-                            <div class="resource-details">
-                                <h4 style="font-size: var(--font-size-sm); margin-bottom: var(--spacing-sm); color: var(--text-primary);">Application Sections:</h4>
-                                <div style="font-size: var(--font-size-sm); color: var(--text-secondary); line-height: 1.6;">
-                                    • Applicant Information<br>
-                                    • Contact & Employment Details<br>
-                                    • Income Verification<br>
-                                    • References & Previous Landlord<br>
-                                    • Additional Occupants<br>
-                                    • Pets & Vehicles<br>
-                                    • Declaration & Checklist
-                                </div>
-                            </div>
-                            
-                            <div class="resource-details">
-                                <h4 style="font-size: var(--font-size-sm); margin-bottom: var(--spacing-sm); color: var(--text-primary);">Screening Benefits:</h4>
-                                <p style="font-size: var(--font-size-sm); color: var(--text-secondary);">
-                                    Helps landlords make informed decisions by collecting comprehensive tenant information, verifying income, checking references, and documenting application details.
-                                </p>
-                            </div>
-                        </div>
-                        
-                        <div class="resource-footer">
-                            <div class="download-info">
-                                <span style="font-size: var(--font-size-sm); color: var(--text-secondary);">Free Download</span>
-                                <span class="file-size">Microsoft Word Document • 42KB</span>
-                            </div>
-                            <a href="downloads/rental-application-form.docx" class="btn btn-primary" download onclick="trackDownload('rental-application-form')">
-                                <i class="fas fa-download"></i> Download
-                            </a>
-                        </div>
-                    </article>
+                    <!-- Resources will be loaded via JavaScript -->
                 </div>
             </div>
         </section>
@@ -930,9 +1819,10 @@
                         <li><a href="index.html">Home</a></li>
                         <li><a href="browse.html">Browse Properties</a></li>
                         <li><a href="services.html">Services</a></li>
+                        <li><a href="resources.html">Resources</a></li>
                         <li><a href="about.html">About Us</a></li>
                         <li><a href="blog.html">Blog</a></li>
-                        <li><a href="resources.html">Resources</a></li>
+                        
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
@@ -949,10 +1839,10 @@
                 <div class="footer-section">
                     <h3>Contact Us</h3>
                     <address>
-                        <p><i class="fas fa-map-marker-alt" style="margin-right: 0.5rem;"></i>Metropolitan area<br>
-                        Ahmadu Bello Way, Kaduna<br>
+                        <p><i class="fas fa-map-marker-alt" style="margin-right: 0.5rem;"></i>Ahmadu Bello Way, Kaduna<br>
+                        Metro area, 800001<br>
                         Nigeria</p>
-                        <p><i class="fas fa-phone" style="margin-right: 0.5rem;"></i>+234 812 345 6789</p>
+                        <p><i class="fas fa-phone" style="margin-right: 0.5rem;"></i>+1 (555) 123-4567</p>
                         <p><i class="fas fa-envelope" style="margin-right: 0.5rem;"></i>get.primer@proton.me</p>
                         <p><i class="fas fa-clock" style="margin-right: 0.5rem;"></i>Mon-Fri: 8am-7pm<br>
                         Sat: 9am-5pm</p>
@@ -960,7 +1850,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 Primer Technologies. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#">Cookie Policy</a></p>
+                <p>&copy; 2024 Primer Technologies. All rights reserved. | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a> | <a href="#">Cookie Policy</a></p>
             </div>
         </div>
     </footer>
@@ -969,40 +1859,200 @@
     <script src="js/main.js" defer></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Filter functionality
-            const categoryCards = document.querySelectorAll('.category-card');
-            const resourceCards = document.querySelectorAll('.resource-card');
+            // Resources data embedded directly
+            const resourcesData = [
+                {
+                    id: "standard-tenancy-agreement",
+                    title: "Standard Tenancy Agreement",
+                    description: "Nigeria-compliant rental agreement template with all necessary clauses for comprehensive landlord and tenant protection. Designed by legal experts to meet Nigerian real estate requirements.",
+                    category: ["legal"],
+                    icon: "fas fa-file-contract",
+                    badge: "Most Popular",
+                    features: [
+                        "Complete 4-page legally compliant template",
+                        "Nigerian-specific clauses and requirements",
+                        "Clear terms for rent, deposit, and utilities",
+                        "Maintenance responsibilities section",
+                        "Default and termination procedures",
+                        "Witness and signature sections"
+                    ],
+                    format: "Microsoft Word (.docx)",
+                    pages: "4 pages",
+                    fileSize: "45 KB",
+                    updates: "2024 Edition",
+                    bestFor: "Landlords renting residential properties, property managers, real estate agents, and tenants wanting to understand standard rental terms.",
+                    downloadUrl: "downloads/standard-tenancy-agreement.docx"
+                },
+                {
+                    id: "rent-increase-notice",
+                    title: "Rent Increase Notice",
+                    description: "Professional notification template for rent increases compliant with Nigerian tenancy laws. Includes tenant response section and clear communication of terms.",
+                    category: ["legal", "management"],
+                    icon: "fas fa-envelope-open-text",
+                    badge: null,
+                    features: [
+                        "30-day notice compliant template",
+                        "Professional formatting and layout",
+                        "Editable reasons section",
+                        "Tenant acknowledgement and response",
+                        "Payment details section",
+                        "Multiple reason checkboxes"
+                    ],
+                    format: "Microsoft Word (.docx)",
+                    pages: "2 pages",
+                    fileSize: "32 KB",
+                    updates: "2024 Edition",
+                    bestFor: "Landlords needing to increase rent legally, property managers handling multiple properties, and tenants wanting proper documentation.",
+                    downloadUrl: "downloads/rent-increase-notice.docx"
+                },
+                {
+                    id: "property-listing-template",
+                    title: "Property Listing Template",
+                    description: "Complete property marketing template with all sections needed for effective property presentation, sales, and rental listings.",
+                    category: ["marketing"],
+                    icon: "fas fa-home",
+                    badge: "New",
+                    features: [
+                        "Property specifications section",
+                        "Amenities and features checklist",
+                        "Photo checklist for complete coverage",
+                        "Pricing and terms breakdown",
+                        "Legal status and documentation section",
+                        "Contact and viewing arrangements"
+                    ],
+                    format: "Microsoft Word (.docx)",
+                    pages: "3 pages",
+                    fileSize: "38 KB",
+                    updates: "2024 Edition",
+                    bestFor: "Real estate agents, property owners, property managers, and anyone looking to create professional property listings for sale or rent.",
+                    downloadUrl: "downloads/property-listing-template.docx"
+                },
+                {
+                    id: "rental-application-form",
+                    title: "Rental Application Form",
+                    description: "Comprehensive tenant screening application with Nigeria-specific fields for thorough tenant evaluation and background checking.",
+                    category: ["management"],
+                    icon: "fas fa-user-check",
+                    badge: null,
+                    features: [
+                        "4-page detailed application form",
+                        "Nigeria-specific ID and address fields",
+                        "Employment and income verification",
+                        "Reference check sections",
+                        "Emergency contact information",
+                        "Pet and vehicle information"
+                    ],
+                    format: "Microsoft Word (.docx)",
+                    pages: "4 pages",
+                    fileSize: "42 KB",
+                    updates: "2024 Edition",
+                    bestFor: "Landlords screening potential tenants, property managers handling multiple applications, and real estate agents assisting clients with tenant selection.",
+                    downloadUrl: "downloads/rental-application-form.docx"
+                },
+                {
+                    id: "property-inspection-checklist",
+                    title: "Property Inspection Checklist",
+                    description: "Comprehensive inspection template for move-in/move-out inspections, routine maintenance checks, and property condition assessments.",
+                    category: ["management", "planning"],
+                    icon: "fas fa-clipboard-check",
+                    badge: "Essential",
+                    features: [
+                        "Room-by-room inspection sections",
+                        "Condition rating scales",
+                        "Photo documentation prompts",
+                        "Maintenance requirement tracking",
+                        "Sign-off sections for both parties",
+                        "Damage documentation"
+                    ],
+                    format: "Microsoft Word (.docx)",
+                    pages: "5 pages",
+                    fileSize: "48 KB",
+                    updates: "2024 Edition",
+                    bestFor: "Landlords conducting property inspections, property managers maintaining property conditions, and tenants wanting to document property condition.",
+                    downloadUrl: "downloads/property-inspection-checklist.docx"
+                },
+                {
+                    id: "maintenance-request-form",
+                    title: "Maintenance Request Form",
+                    description: "Professional maintenance request template for tenants to report issues and for landlords to track repairs and maintenance work.",
+                    category: ["management"],
+                    icon: "fas fa-tools",
+                    badge: null,
+                    features: [
+                        "Detailed issue description section",
+                        "Priority level selection",
+                        "Photo upload instructions",
+                        "Contact information fields",
+                        "Landlord response section",
+                        "Repair completion tracking"
+                    ],
+                    format: "Microsoft Word (.docx)",
+                    pages: "2 pages",
+                    fileSize: "35 KB",
+                    updates: "2024 Edition",
+                    bestFor: "Tenants reporting maintenance issues, landlords tracking repair requests, and property managers managing multiple properties.",
+                    downloadUrl: "downloads/maintenance-request-form.docx"
+                },
+                {
+                    id: "property-management-agreement",
+                    title: "Property Management Agreement",
+                    description: "Comprehensive property management contract template for landlords hiring property management services in Nigeria.",
+                    category: ["legal", "management"],
+                    icon: "fas fa-handshake",
+                    badge: "Professional",
+                    features: [
+                        "Scope of management services",
+                        "Fee structure and payment terms",
+                        "Responsibilities of both parties",
+                        "Term and termination clauses",
+                        "Legal compliance sections",
+                        "Dispute resolution procedures"
+                    ],
+                    format: "Microsoft Word (.docx)",
+                    pages: "6 pages",
+                    fileSize: "52 KB",
+                    updates: "2024 Edition",
+                    bestFor: "Landlords hiring property managers, property management companies, and real estate professionals offering management services.",
+                    downloadUrl: "downloads/property-management-agreement.docx"
+                },
+                {
+                    id: "moving-checklist",
+                    title: "Moving Checklist & Planner",
+                    description: "Complete moving timeline and checklist template covering everything from 8 weeks before moving to moving day essentials.",
+                    category: ["planning"],
+                    icon: "fas fa-truck-moving",
+                    badge: null,
+                    features: [
+                        "8-week moving timeline",
+                        "Packing room-by-room checklist",
+                        "Utility transfer reminders",
+                        "Address change checklist",
+                        "Moving day essentials list",
+                        "Unpacking priority guide"
+                    ],
+                    format: "Microsoft Word (.docx)",
+                    pages: "4 pages",
+                    fileSize: "40 KB",
+                    updates: "2024 Edition",
+                    bestFor: "Anyone planning a move, tenants changing residences, and real estate agents assisting clients with relocation.",
+                    downloadUrl: "downloads/moving-checklist.docx"
+                }
+            ];
             
-            categoryCards.forEach(card => {
-                card.addEventListener('click', function() {
-                    const category = this.dataset.category;
-                    
-                    // Update active category
-                    categoryCards.forEach(c => c.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    // Filter resources
-                    resourceCards.forEach(resource => {
-                        if (category === 'all') {
-                            resource.style.display = 'block';
-                            setTimeout(() => {
-                                resource.classList.add('fade-in');
-                            }, 10);
-                        } else {
-                            const resourceCategories = resource.dataset.category.split(' ');
-                            if (resourceCategories.includes(category)) {
-                                resource.style.display = 'block';
-                                setTimeout(() => {
-                                    resource.classList.add('fade-in');
-                                }, 10);
-                            } else {
-                                resource.style.display = 'none';
-                                resource.classList.remove('fade-in');
-                            }
-                        }
-                    });
-                });
+            // Load resources from embedded data
+            const resourcesGrid = document.getElementById('resourcesGrid');
+            resourcesGrid.innerHTML = '';
+            
+            resourcesData.forEach((resource, index) => {
+                const resourceCard = createResourceCard(resource, index);
+                resourcesGrid.appendChild(resourceCard);
+                
+                // Add animation delay
+                resourceCard.style.animationDelay = `${index * 0.1}s`;
             });
+            
+            // Initialize filter functionality after resources are loaded
+            initializeFilterFunctionality();
             
             // FAQ toggle functionality
             const faqItems = document.querySelectorAll('.faq-item');
@@ -1036,21 +2086,161 @@
                     }
                 });
             }
-            
-            // Track downloads function
-            window.trackDownload = function(templateName) {
-                // In a real implementation, you would send this to your analytics
-                console.log(`Downloaded: ${templateName}`);
-                // Example: Send to Google Analytics
-                // gtag('event', 'download', { 'template': templateName });
-            };
-            
-            // Stagger animation for resource cards
-            const resourceCardsList = document.querySelectorAll('.resource-card');
-            resourceCardsList.forEach((card, index) => {
-                card.style.animationDelay = `${index * 0.1}s`;
-            });
         });
+        
+        function createResourceCard(resource, index) {
+            const card = document.createElement('article');
+            card.className = 'resource-card fade-in';
+            card.dataset.category = resource.category.join(' ');
+            
+            card.innerHTML = `
+                <div class="resource-header">
+                    <div class="resource-icon">
+                        <i class="${resource.icon}"></i>
+                    </div>
+                    ${resource.badge ? `<div class="resource-badge">${resource.badge}</div>` : ''}
+                    <h3 class="resource-title" style="color: white;">${resource.title}</h3>
+                </div>
+                
+                <div class="resource-content">
+                    <p class="resource-description">
+                        ${resource.description}
+                    </p>
+                    
+                    <div class="resource-details">
+                        <h4 style="font-size: var(--font-size-sm); margin-bottom: var(--spacing-sm); color: var(--text-primary);">What's Included:</h4>
+                        <ul class="resource-features">
+                            ${resource.features.map(feature => `<li><i class="fas fa-check"></i> ${feature}</li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div class="resource-details">
+                        <h4 style="font-size: var(--font-size-sm); margin-bottom: var(--spacing-sm); color: var(--text-primary);">Document Details:</h4>
+                        <div class="detail-item">
+                            <span class="detail-label">Format:</span>
+                            <span class="detail-value">${resource.format}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Pages:</span>
+                            <span class="detail-value">${resource.pages}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">File Size:</span>
+                            <span class="detail-value">${resource.fileSize}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Updates:</span>
+                            <span class="detail-value">${resource.updates}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="resource-details">
+                        <h4 style="font-size: var(--font-size-sm); margin-bottom: var(--spacing-sm); color: var(--text-primary);">Best For:</h4>
+                        <p style="font-size: var(--font-size-sm); color: var(--text-secondary);">
+                            ${resource.bestFor}
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="resource-footer">
+                    <div class="download-info">
+                        <span style="font-size: var(--font-size-sm); color: var(--text-secondary);">Free Download</span>
+                        <span class="file-size">${resource.format} • ${resource.fileSize}</span>
+                    </div>
+                    <a href="${resource.downloadUrl}" class="btn btn-primary" download onclick="trackDownload('${resource.id}', event)">
+                        <i class="fas fa-download"></i> Download
+                    </a>
+                </div>
+            `;
+            
+            return card;
+        }
+        
+        function initializeFilterFunctionality() {
+            const categoryCards = document.querySelectorAll('.category-card');
+            const resourceCards = document.querySelectorAll('.resource-card');
+            
+            categoryCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const category = this.dataset.category;
+                    
+                    // Update active category
+                    categoryCards.forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Filter resources
+                    resourceCards.forEach(resource => {
+                        if (category === 'all') {
+                            resource.style.display = 'block';
+                            setTimeout(() => {
+                                resource.classList.add('fade-in');
+                            }, 10);
+                        } else {
+                            const resourceCategories = resource.dataset.category.split(' ');
+                            if (resourceCategories.includes(category)) {
+                                resource.style.display = 'block';
+                                setTimeout(() => {
+                                    resource.classList.add('fade-in');
+                                }, 10);
+                            } else {
+                                resource.style.display = 'none';
+                                resource.classList.remove('fade-in');
+                            }
+                        }
+                    });
+                });
+            });
+        }
+        
+        // Track downloads function
+        window.trackDownload = function(templateId, event) {
+            // Prevent default to show our custom feedback first
+            if (event) {
+                event.preventDefault();
+            }
+            
+            // In a real implementation, you would send this to your analytics
+            console.log(`Downloaded template: ${templateId}`);
+            
+            // Example: Send to Google Analytics
+            // if (typeof gtag !== 'undefined') {
+            //     gtag('event', 'download', {
+            //         'event_category': 'template',
+            //         'event_label': templateId
+            //     });
+            // }
+            
+            // Show download confirmation
+            const downloadBtn = event.target.closest('.btn');
+            if (downloadBtn) {
+                const originalText = downloadBtn.innerHTML;
+                const originalHref = downloadBtn.getAttribute('href');
+                
+                downloadBtn.innerHTML = '<i class="fas fa-check"></i> Downloaded!';
+                downloadBtn.classList.add('btn-secondary');
+                downloadBtn.classList.remove('btn-primary');
+                downloadBtn.onclick = null;
+                
+                // Actually trigger the download after showing feedback
+                setTimeout(() => {
+                    // Create a temporary link to trigger download
+                    const tempLink = document.createElement('a');
+                    tempLink.href = originalHref;
+                    tempLink.download = '';
+                    tempLink.style.display = 'none';
+                    document.body.appendChild(tempLink);
+                    tempLink.click();
+                    document.body.removeChild(tempLink);
+                }, 500);
+                
+                setTimeout(() => {
+                    downloadBtn.innerHTML = originalText;
+                    downloadBtn.classList.remove('btn-secondary');
+                    downloadBtn.classList.add('btn-primary');
+                    downloadBtn.onclick = (e) => trackDownload(templateId, e);
+                }, 2000);
+            }
+        };
     </script>
 </body>
 </html>
