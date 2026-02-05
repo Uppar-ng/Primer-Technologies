@@ -1,970 +1,1351 @@
-// booking-wizard.js - Works with existing HTML structure
+// booking-wizard.js - Clean Booking Wizard with Formspree Integration
+
 document.addEventListener('DOMContentLoaded', function() {
-    // ================
-    // GLOBAL VARIABLES
-    // ================
-    let bookingData = {
-        service: null,
-        package: null,
-        addons: [],
-        datetime: {
-            date: null,
-            time: null
-        },
-        contact: {
-            fullName: '',
-            email: '',
-            phone: '',
-            address: '',
-            city: '',
-            state: '',
-            zipCode: '',
-            specialInstructions: ''
-        },
-        totalPrice: 0,
-        bookingId: generateBookingId()
-    };
-
-    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID'; // Replace with your Formspree form ID
+    console.log('DOM loaded, initializing booking wizard...');
     
-    // ================
-    // SERVICE SELECTION (STEP 1)
-    // ================
+    // Initialize everything
+    initBookingWizard();
+});
+
+// Formspree Configuration - REPLACE WITH YOUR FORM ID
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID_HERE';
+const FORMSPREE_SUBMIT_BUTTON = 'Submit Booking';
+
+// Booking State
+const bookingState = {
+    currentStep: 1,
+    selectedService: null,
+    serviceDetails: {},
+    selectedAddons: [],
+    selectedDate: null,
+    selectedTime: null,
+    contactInfo: {},
+    totalPrice: 0,
+    bookingReference: generateBookingReference()
+};
+
+// Services Data
+const services = [
+    {
+        id: 'listing',
+        name: 'Property Listing',
+        description: 'Professional property listing and marketing services',
+        icon: 'fas fa-home',
+        duration: 'Varies',
+        basePrice: 0,
+        features: [
+            'Professional photography',
+            'Virtual tour creation',
+            'Marketing across platforms',
+            'Open house organization'
+        ],
+        questions: [
+            {
+                id: 'propertyType',
+                type: 'select',
+                label: 'Property Type',
+                required: true,
+                options: [
+                    { value: 'house', label: 'House' },
+                    { value: 'apartment', label: 'Apartment' },
+                    { value: 'commercial', label: 'Commercial' },
+                    { value: 'land', label: 'Land' },
+                    { value: 'other', label: 'Other' }
+                ]
+            },
+            {
+                id: 'bedrooms',
+                type: 'number',
+                label: 'Number of Bedrooms',
+                required: true,
+                min: 0,
+                max: 20,
+                placeholder: 'e.g., 3'
+            },
+            {
+                id: 'bathrooms',
+                type: 'number',
+                label: 'Number of Bathrooms',
+                required: true,
+                min: 1,
+                max: 20,
+                placeholder: 'e.g., 2'
+            },
+            {
+                id: 'squareFootage',
+                type: 'number',
+                label: 'Square Footage',
+                required: false,
+                placeholder: 'Approximate size in sq ft'
+            }
+        ]
+    },
+    {
+        id: 'maintenance',
+        name: 'Property Maintenance',
+        description: 'Complete property maintenance and repair services',
+        icon: 'fas fa-tools',
+        duration: 'Ongoing',
+        basePrice: 0,
+        features: [
+            'Regular inspections',
+            'Emergency repairs',
+            'Preventive maintenance',
+            '24/7 support'
+        ],
+        questions: [
+            {
+                id: 'maintenanceType',
+                type: 'select',
+                label: 'Maintenance Type',
+                required: true,
+                options: [
+                    { value: 'regular', label: 'Regular Maintenance' },
+                    { value: 'emergency', label: 'Emergency Repair' },
+                    { value: 'seasonal', label: 'Seasonal Service' },
+                    { value: 'inspection', label: 'Property Inspection' }
+                ]
+            },
+            {
+                id: 'frequency',
+                type: 'select',
+                label: 'Service Frequency',
+                required: true,
+                options: [
+                    { value: 'one_time', label: 'One-time Service' },
+                    { value: 'weekly', label: 'Weekly' },
+                    { value: 'biweekly', label: 'Bi-weekly' },
+                    { value: 'monthly', label: 'Monthly' },
+                    { value: 'quarterly', label: 'Quarterly' },
+                    { value: 'annually', label: 'Annually' }
+                ]
+            }
+        ]
+    },
+    {
+        id: 'logistics',
+        name: 'Moving & Logistics',
+        description: 'Professional moving and logistics services',
+        icon: 'fas fa-truck-moving',
+        duration: 'One-time',
+        basePrice: 0,
+        features: [
+            'Packing & unpacking',
+            'Loading & unloading',
+            'Transportation',
+            'Storage solutions'
+        ],
+        questions: [
+            {
+                id: 'vehicleType',
+                type: 'select',
+                label: 'Vehicle Type Needed',
+                required: true,
+                options: [
+                    { value: 'small_van', label: 'Small Van (1-2 rooms)' },
+                    { value: 'medium_truck', label: 'Medium Truck (2-3 rooms)' },
+                    { value: 'large_truck', label: 'Large Truck (3-4 rooms)' },
+                    { value: 'extra_large', label: 'Extra Large Truck (4+ rooms)' }
+                ]
+            },
+            {
+                id: 'rooms',
+                type: 'number',
+                label: 'Number of Rooms',
+                required: true,
+                min: 1,
+                max: 20,
+                placeholder: 'Total number of rooms to move'
+            }
+        ]
+    },
+    {
+        id: 'handyman',
+        name: 'Handyman Services',
+        description: 'Expert handyman and repair services',
+        icon: 'fas fa-hammer',
+        duration: 'As needed',
+        basePrice: 0,
+        features: [
+            'Minor repairs',
+            'Installations',
+            'Furniture assembly',
+            'Custom projects'
+        ],
+        questions: [
+            {
+                id: 'serviceCategory',
+                type: 'select',
+                label: 'Service Category',
+                required: true,
+                options: [
+                    { value: 'electrical', label: 'Electrical Work' },
+                    { value: 'plumbing', label: 'Plumbing' },
+                    { value: 'carpentry', label: 'Carpentry' },
+                    { value: 'painting', label: 'Painting' },
+                    { value: 'drywall', label: 'Drywall Repair' },
+                    { value: 'assembly', label: 'Furniture Assembly' }
+                ]
+            },
+            {
+                id: 'taskDescription',
+                type: 'textarea',
+                label: 'Task Description',
+                required: true,
+                placeholder: 'Please describe the work needed...',
+                rows: 3
+            }
+        ]
+    }
+];
+
+// Addons Data (simplified)
+const addons = {
+    listing: [
+        { id: 'virtual_staging', name: 'Virtual Staging', description: 'Digitally furnished photos', price: 0 },
+        { id: 'drone_photos', name: 'Drone Photography', description: 'Aerial property shots', price: 0 }
+    ],
+    maintenance: [
+        { id: 'gutter_clean', name: 'Gutter Cleaning', description: 'Complete gutter cleaning', price: 0 },
+        { id: 'hvac_service', name: 'HVAC Service', description: 'HVAC maintenance', price: 0 }
+    ],
+    logistics: [
+        { id: 'packing', name: 'Packing Service', description: 'Professional packing', price: 0 },
+        { id: 'storage', name: 'Storage Unit', description: 'Secure storage rental', price: 0 }
+    ],
+    handyman: [
+        { id: 'emergency', name: 'Emergency Service', description: 'Priority same-day service', price: 0 },
+        { id: 'warranty', name: 'Warranty Extension', description: 'Extended warranty', price: 0 }
+    ]
+};
+
+// Utility Functions
+function generateBookingReference() {
+    const prefix = 'PRIMER';
+    const randomNum = Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
+    return `${prefix}-${randomNum}`;
+}
+
+function formatCurrency(amount) {
+    return 'Price upon request';
+}
+
+function formatDate(dateString) {
+    if (!dateString) return 'Not selected';
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+}
+
+// Main Initialization
+function initBookingWizard() {
+    console.log('Initializing booking wizard...');
+    
+    try {
+        // Step 1: Service Selection
+        initServiceSelection();
+        
+        // Step 2: Navigation
+        initStepNavigation();
+        
+        // Step 3: Calendar
+        initCalendar();
+        
+        // Step 4: Time Slots
+        initTimeSlots();
+        
+        // Step 5: Contact Form
+        initContactForm();
+        
+        // Step 6: Terms and Submission
+        initTermsAndSubmission();
+        
+        // Success Actions
+        initSuccessActions();
+        
+        console.log('Booking wizard initialized successfully');
+    } catch (error) {
+        console.error('Error initializing booking wizard:', error);
+        showError('Failed to initialize booking wizard. Please refresh the page.');
+    }
+}
+
+// STEP 1: Service Selection
+function initServiceSelection() {
+    console.log('Initializing service selection...');
+    
     const serviceCards = document.querySelectorAll('.service-card');
-    const nextStep1Btn = document.getElementById('nextStep1');
+    const nextButton = document.getElementById('nextStep1');
     
-    // Service packages data - Using your existing service types
-    const servicePackages = {
-        listing: [
-            {
-                id: 'listing_basic',
-                name: 'Basic Listing',
-                price: 299,
-                period: 'one-time',
-                features: [
-                    'Property listing on website',
-                    'Basic photography',
-                    '30-day listing',
-                    'Contact form'
-                ]
-            },
-            {
-                id: 'listing_standard',
-                name: 'Standard Listing',
-                price: 499,
-                period: 'one-time',
-                features: [
-                    'Everything in Basic plus:',
-                    'Professional photography',
-                    'Virtual tour',
-                    '90-day listing',
-                    'Featured placement'
-                ],
-                popular: true
-            },
-            {
-                id: 'listing_premium',
-                name: 'Premium Listing',
-                price: 799,
-                period: 'one-time',
-                features: [
-                    'Everything in Standard plus:',
-                    'Video walkthrough',
-                    'Open house organization',
-                    'Dedicated agent',
-                    'Cross-platform syndication'
-                ]
-            }
-        ],
-        maintenance: [
-            {
-                id: 'maintenance_basic',
-                name: 'Basic Maintenance',
-                price: 149,
-                period: 'per month',
-                features: [
-                    'Monthly inspection',
-                    'Basic repairs',
-                    'Cleaning services',
-                    'Emergency contact'
-                ]
-            },
-            {
-                id: 'maintenance_standard',
-                name: 'Standard Maintenance',
-                price: 249,
-                period: 'per month',
-                features: [
-                    'Everything in Basic plus:',
-                    'Bi-weekly inspection',
-                    'Advanced repairs',
-                    'Professional cleaning',
-                    'Landscaping'
-                ],
-                popular: true
-            },
-            {
-                id: 'maintenance_premium',
-                name: 'Premium Maintenance',
-                price: 399,
-                period: 'per month',
-                features: [
-                    'Everything in Standard plus:',
-                    'Weekly inspection',
-                    'All repairs covered',
-                    '24/7 emergency',
-                    'Smart home monitoring'
-                ]
-            }
-        ],
-        logistics: [
-            {
-                id: 'logistics_basic',
-                name: 'Local Move',
-                price: 499,
-                period: 'one-time',
-                features: [
-                    'Local transportation',
-                    '2 movers (4 hours)',
-                    'Packing materials',
-                    'Loading/unloading'
-                ]
-            },
-            {
-                id: 'logistics_standard',
-                name: 'Long Distance',
-                price: 1299,
-                period: 'one-time',
-                features: [
-                    'Everything in Basic plus:',
-                    'Long-distance transport',
-                    '3 movers (8 hours)',
-                    'Premium packing',
-                    'Storage (30 days)'
-                ],
-                popular: true
-            },
-            {
-                id: 'logistics_premium',
-                name: 'Full Service',
-                price: 2499,
-                period: 'one-time',
-                features: [
-                    'Everything in Standard plus:',
-                    'Full packing/unpacking',
-                    '4 movers (12 hours)',
-                    'Custom crating',
-                    'Setup at destination'
-                ]
-            }
-        ],
-        handyman: [
-            {
-                id: 'handyman_basic',
-                name: 'Single Task',
-                price: 89,
-                period: 'per hour',
-                features: [
-                    'Basic repairs',
-                    'Minor installations',
-                    'Furniture assembly',
-                    '2-hour minimum'
-                ]
-            },
-            {
-                id: 'handyman_standard',
-                name: 'Multiple Tasks',
-                price: 249,
-                period: 'flat rate',
-                features: [
-                    'Everything in Basic plus:',
-                    'Up to 3 tasks',
-                    'Half-day service',
-                    'Advanced installations',
-                    'Next-day scheduling'
-                ],
-                popular: true
-            },
-            {
-                id: 'handyman_premium',
-                name: 'Project Package',
-                price: 599,
-                period: 'flat rate',
-                features: [
-                    'Everything in Standard plus:',
-                    'Full-day service',
-                    'Complete room makeover',
-                    'Custom carpentry',
-                    'Priority service'
-                ]
-            }
-        ]
-    };
-
-    // Service add-ons data
-    const serviceAddons = {
-        listing: [
-            { id: 'virtual_staging', name: 'Virtual Staging', price: 149, description: 'Digitally furnished photos' },
-            { id: 'drone_photos', name: 'Drone Photography', price: 199, description: 'Aerial property shots' },
-            { id: 'floor_plan', name: '3D Floor Plan', price: 99, description: 'Interactive layout' },
-            { id: 'copywriting', name: 'Professional Copy', price: 79, description: 'Compelling description' }
-        ],
-        maintenance: [
-            { id: 'gutter_clean', name: 'Gutter Cleaning', price: 129, description: 'Complete gutter service' },
-            { id: 'hvac_service', name: 'HVAC Service', price: 199, description: 'HVAC maintenance' },
-            { id: 'pressure_wash', name: 'Pressure Washing', price: 249, description: 'Exterior cleaning' },
-            { id: 'window_clean', name: 'Window Cleaning', price: 149, description: 'Interior/exterior windows' }
-        ],
-        logistics: [
-            { id: 'packing', name: 'Packing Service', price: 299, description: 'Complete packing' },
-            { id: 'unpacking', name: 'Unpacking Service', price: 299, description: 'Complete unpacking' },
-            { id: 'storage_ins', name: 'Storage Insurance', price: 49, description: 'Extended insurance' },
-            { id: 'car_transport', name: 'Vehicle Transport', price: 399, description: 'Car transportation' }
-        ],
-        handyman: [
-            { id: 'emergency', name: 'Emergency Service', price: 99, description: 'Priority same-day' },
-            { id: 'materials', name: 'Material Purchase', price: 79, description: 'Purchase & delivery' },
-            { id: 'cleanup', name: 'Cleanup Service', price: 59, description: 'Post-work cleanup' },
-            { id: 'warranty', name: 'Warranty Extension', price: 129, description: '1-year warranty' }
-        ]
-    };
-
-    // Initialize service selection
-    if (serviceCards.length > 0) {
-        serviceCards.forEach(card => {
-            card.addEventListener('click', function() {
-                serviceCards.forEach(c => c.classList.remove('selected'));
-                this.classList.add('selected');
-                bookingData.service = this.dataset.service;
-                nextStep1Btn.disabled = false;
+    if (!serviceCards.length) {
+        console.error('No service cards found');
+        return;
+    }
+    
+    // Clear any existing event listeners by cloning and replacing
+    serviceCards.forEach(card => {
+        const newCard = card.cloneNode(true);
+        card.parentNode.replaceChild(newCard, card);
+    });
+    
+    // Get fresh references
+    const freshServiceCards = document.querySelectorAll('.service-card');
+    
+    freshServiceCards.forEach(card => {
+        card.addEventListener('click', function(e) {
+            e.stopPropagation();
+            
+            console.log('Service card clicked:', this.dataset.service);
+            
+            // Remove selected class from all cards
+            freshServiceCards.forEach(c => {
+                c.classList.remove('selected');
             });
+            
+            // Add selected class to clicked card
+            this.classList.add('selected');
+            
+            // Get service ID and find service
+            const serviceId = this.dataset.service;
+            const selectedService = services.find(s => s.id === serviceId);
+            
+            if (selectedService) {
+                bookingState.selectedService = selectedService;
+                nextButton.disabled = false;
+                
+                console.log(`Service selected: ${selectedService.name}`);
+            }
+        });
+    });
+    
+    // Next button
+    if (nextButton) {
+        nextButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            if (!bookingState.selectedService) {
+                alert('Please select a service');
+                return;
+            }
+            
+            console.log('Moving to step 2...');
+            loadServiceQuestions();
+            goToStep(2);
         });
     }
+    
+    // Initialize with no service selected
+    nextButton.disabled = true;
+}
 
-    // ================
-    // PACKAGE SELECTION (STEP 2)
-    // ================
-    const packageOptionsContainer = document.getElementById('packageOptions');
-    const nextStep2Btn = document.getElementById('nextStep2');
-    const prevStep2Btn = document.getElementById('prevStep2');
-
-    function loadPackages() {
-        if (!bookingData.service || !packageOptionsContainer) return;
-
-        const packages = servicePackages[bookingData.service];
-        if (!packages) return;
-
-        packageOptionsContainer.innerHTML = '';
-
-        packages.forEach(pkg => {
-            const packageCard = document.createElement('div');
-            packageCard.className = 'package-card';
-            if (bookingData.package?.id === pkg.id) {
-                packageCard.classList.add('selected');
-            }
-            packageCard.dataset.packageId = pkg.id;
-
-            let featuresHTML = '';
-            pkg.features.forEach(feature => {
-                featuresHTML += `<li><i class="fas fa-check"></i>${feature}</li>`;
-            });
-
-            packageCard.innerHTML = `
-                ${pkg.popular ? '<div class="popular-badge">Most Popular</div>' : ''}
-                <div class="package-header">
-                    <h4 class="package-name">${pkg.name}</h4>
-                    <div class="package-price">$${pkg.price}</div>
-                    <div class="package-period">${pkg.period}</div>
-                </div>
-                <div class="package-features">
-                    <ul class="feature-list">
-                        ${featuresHTML}
-                    </ul>
-                </div>
-            `;
-
-            packageCard.addEventListener('click', function() {
-                document.querySelectorAll('.package-card').forEach(card => {
-                    card.classList.remove('selected');
+// Load Service Questions for Step 2
+function loadServiceQuestions() {
+    console.log('Loading service questions...');
+    
+    const container = document.getElementById('serviceDetailsContainer');
+    const service = bookingState.selectedService;
+    
+    if (!service || !service.questions) {
+        container.innerHTML = '<p>No questions available for this service.</p>';
+        return;
+    }
+    
+    let html = '';
+    
+    service.questions.forEach(question => {
+        html += `<div class="form-group" data-question="${question.id}">`;
+        html += `<label class="form-label">${question.label}${question.required ? ' <span class="required-star">*</span>' : ''}</label>`;
+        
+        switch(question.type) {
+            case 'select':
+                html += `<select class="form-select" id="${question.id}" name="${question.id}" ${question.required ? 'required' : ''}>`;
+                html += `<option value="">Select...</option>`;
+                question.options.forEach(option => {
+                    html += `<option value="${option.value}">${option.label}</option>`;
                 });
-                this.classList.add('selected');
-                bookingData.package = pkg;
-                nextStep2Btn.disabled = false;
-            });
+                html += `</select>`;
+                break;
+                
+            case 'number':
+                html += `<input type="number" class="form-input" id="${question.id}" name="${question.id}" 
+                    ${question.required ? 'required' : ''}
+                    ${question.min ? `min="${question.min}"` : ''}
+                    ${question.max ? `max="${question.max}"` : ''}
+                    placeholder="${question.placeholder || ''}">`;
+                break;
+                
+            case 'textarea':
+                html += `<textarea class="form-textarea" id="${question.id}" name="${question.id}" 
+                    rows="${question.rows || 3}"
+                    ${question.required ? 'required' : ''}
+                    placeholder="${question.placeholder || ''}"></textarea>`;
+                break;
+                
+            default:
+                html += `<input type="text" class="form-input" id="${question.id}" name="${question.id}"
+                    ${question.required ? 'required' : ''}
+                    placeholder="${question.placeholder || ''}">`;
+        }
+        
+        html += `</div>`;
+    });
+    
+    container.innerHTML = html;
+    
+    // Initialize validation
+    initStep2Validation();
+}
 
-            packageOptionsContainer.appendChild(packageCard);
+// Step 2 Validation
+function initStep2Validation() {
+    const nextButton = document.getElementById('nextStep2');
+    const formInputs = document.querySelectorAll('#serviceDetailsContainer input, #serviceDetailsContainer select, #serviceDetailsContainer textarea');
+    
+    if (!nextButton || !formInputs.length) return;
+    
+    // Validate on input
+    formInputs.forEach(input => {
+        input.addEventListener('input', validateStep2);
+        input.addEventListener('change', validateStep2);
+    });
+    
+    // Initial validation
+    validateStep2();
+    
+    // Next button
+    nextButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        if (validateStep2()) {
+            saveServiceDetails();
+            loadAddons();
+            goToStep(3);
+        } else {
+            alert('Please fill in all required fields');
+        }
+    });
+    
+    // Back button
+    const backButton = document.getElementById('prevStep2');
+    if (backButton) {
+        backButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            goToStep(1);
         });
     }
+}
 
-    // ================
-    // ADD-ONS SELECTION (STEP 3)
-    // ================
-    const addonsGrid = document.getElementById('addonsGrid');
-    const nextStep3Btn = document.getElementById('nextStep3');
-    const prevStep3Btn = document.getElementById('prevStep3');
-
-    function loadAddons() {
-        if (!bookingData.service || !addonsGrid) return;
-
-        const addons = serviceAddons[bookingData.service];
-        if (!addons) return;
-
-        addonsGrid.innerHTML = '';
-
-        addons.forEach(addon => {
-            const addonOption = document.createElement('div');
-            addonOption.className = 'addon-option';
-            if (bookingData.addons.some(a => a.id === addon.id)) {
-                addonOption.classList.add('selected');
+function validateStep2() {
+    const nextButton = document.getElementById('nextStep2');
+    const service = bookingState.selectedService;
+    
+    if (!service || !service.questions) {
+        if (nextButton) nextButton.disabled = true;
+        return false;
+    }
+    
+    let isValid = true;
+    
+    // Check each required question
+    service.questions.forEach(question => {
+        if (question.required) {
+            const input = document.getElementById(question.id);
+            if (input) {
+                const value = input.value.trim();
+                if (!value) {
+                    isValid = false;
+                    input.classList.add('error');
+                } else {
+                    input.classList.remove('error');
+                }
+            } else {
+                isValid = false;
             }
-            addonOption.dataset.addonId = addon.id;
+        }
+    });
+    
+    if (nextButton) {
+        nextButton.disabled = !isValid;
+    }
+    
+    return isValid;
+}
 
-            addonOption.innerHTML = `
+function saveServiceDetails() {
+    bookingState.serviceDetails = {};
+    const service = bookingState.selectedService;
+    
+    if (service && service.questions) {
+        service.questions.forEach(question => {
+            const input = document.getElementById(question.id);
+            if (input) {
+                bookingState.serviceDetails[question.id] = input.value;
+            }
+        });
+    }
+    
+    console.log('Service details saved:', bookingState.serviceDetails);
+}
+
+// STEP 3: Add-ons
+function loadAddons() {
+    console.log('Loading add-ons...');
+    
+    const container = document.getElementById('addonsGrid');
+    const serviceId = bookingState.selectedService.id;
+    const serviceAddons = addons[serviceId] || [];
+    
+    if (!serviceAddons.length) {
+        container.innerHTML = '<p>No add-ons available for this service.</p>';
+        return;
+    }
+    
+    let html = '';
+    
+    serviceAddons.forEach(addon => {
+        html += `
+            <div class="addon-option" data-addon-id="${addon.id}">
                 <div class="addon-checkbox"></div>
                 <div class="addon-content">
                     <div class="addon-header">
                         <h4 class="addon-name">${addon.name}</h4>
-                        <div class="addon-price">$${addon.price}</div>
                     </div>
                     <p class="addon-description">${addon.description}</p>
                 </div>
-            `;
+            </div>
+        `;
+    });
+    
+    container.innerHTML = html;
+    
+    // Initialize addon selection
+    initAddonSelection();
+}
 
-            addonOption.addEventListener('click', function() {
-                this.classList.toggle('selected');
-                
-                if (this.classList.contains('selected')) {
-                    bookingData.addons.push(addon);
-                } else {
-                    bookingData.addons = bookingData.addons.filter(a => a.id !== addon.id);
-                }
-            });
-
-            addonsGrid.appendChild(addonOption);
+function initAddonSelection() {
+    const addonOptions = document.querySelectorAll('.addon-option');
+    
+    addonOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            this.classList.toggle('selected');
+        });
+    });
+    
+    // Next button
+    const nextButton = document.getElementById('nextStep3');
+    if (nextButton) {
+        nextButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            saveSelectedAddons();
+            goToStep(4);
         });
     }
-
-    // ================
-    // DATE & TIME SELECTION (STEP 4)
-    // ================
-    const calendarGrid = document.getElementById('calendarGrid');
-    const timeSlots = document.getElementById('timeSlots');
-    const prevMonthBtn = document.getElementById('prevMonth');
-    const nextMonthBtn = document.getElementById('nextMonth');
-    const selectedDateDisplay = document.getElementById('selectedDateDisplay');
-    const nextStep4Btn = document.getElementById('nextStep4');
-    const prevStep4Btn = document.getElementById('prevStep4');
-
-    let currentDate = new Date();
-    let currentMonth = currentDate.getMonth();
-    let currentYear = currentDate.getFullYear();
-
-    // Available time slots
-    const availableTimes = ['9:00 AM', '10:00 AM', '11:00 AM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM'];
-
-    function renderCalendar() {
-        if (!calendarGrid) return;
-
-        calendarGrid.innerHTML = '';
-
-        // Day headers
-        const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-        days.forEach(day => {
-            const dayElement = document.createElement('div');
-            dayElement.className = 'calendar-day';
-            dayElement.textContent = day;
-            calendarGrid.appendChild(dayElement);
-        });
-
-        // Get first day of month
-        const firstDay = new Date(currentYear, currentMonth, 1);
-        const startingDay = firstDay.getDay();
-
-        // Get last day of month
-        const lastDay = new Date(currentYear, currentMonth + 1, 0);
-        const daysInMonth = lastDay.getDate();
-
-        // Previous month's days
-        const prevMonthLastDay = new Date(currentYear, currentMonth, 0).getDate();
-        for (let i = 0; i < startingDay; i++) {
-            const dateElement = document.createElement('div');
-            dateElement.className = 'calendar-date other-month';
-            dateElement.textContent = prevMonthLastDay - startingDay + i + 1;
-            calendarGrid.appendChild(dateElement);
-        }
-
-        // Current month's days
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-
-        for (let day = 1; day <= daysInMonth; day++) {
-            const dateElement = document.createElement('div');
-            dateElement.className = 'calendar-date';
-            dateElement.textContent = day;
-            dateElement.dataset.date = `${currentYear}-${currentMonth + 1}-${day}`;
-
-            const dateObj = new Date(currentYear, currentMonth, day);
-            dateObj.setHours(0, 0, 0, 0);
-
-            // Disable past dates
-            if (dateObj < today) {
-                dateElement.classList.add('disabled');
-            }
-
-            // Mark selected date
-            if (bookingData.datetime.date && 
-                dateObj.getTime() === new Date(bookingData.datetime.date).getTime()) {
-                dateElement.classList.add('selected');
-            }
-
-            if (!dateElement.classList.contains('disabled')) {
-                dateElement.addEventListener('click', function() {
-                    document.querySelectorAll('.calendar-date').forEach(el => {
-                        el.classList.remove('selected');
-                    });
-                    this.classList.add('selected');
-                    bookingData.datetime.date = this.dataset.date;
-                    
-                    const dateObj = new Date(bookingData.datetime.date);
-                    selectedDateDisplay.textContent = `Selected: ${dateObj.toLocaleDateString('en-US', { 
-                        weekday: 'long', 
-                        year: 'numeric', 
-                        month: 'long', 
-                        day: 'numeric' 
-                    })}`;
-                    
-                    validateStep4();
-                });
-            }
-
-            calendarGrid.appendChild(dateElement);
-        }
-
-        // Update month/year display
-        const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
-                          'July', 'August', 'September', 'October', 'November', 'December'];
-        document.querySelector('.calendar-section h3').textContent = 
-            `${monthNames[currentMonth]} ${currentYear}`;
-    }
-
-    function renderTimeSlots() {
-        if (!timeSlots) return;
-
-        timeSlots.innerHTML = '';
-
-        availableTimes.forEach(time => {
-            const timeSlot = document.createElement('div');
-            timeSlot.className = 'time-slot';
-            timeSlot.textContent = time;
-
-            if (bookingData.datetime.time === time) {
-                timeSlot.classList.add('selected');
-            }
-
-            timeSlot.addEventListener('click', function() {
-                document.querySelectorAll('.time-slot').forEach(el => {
-                    el.classList.remove('selected');
-                });
-                this.classList.add('selected');
-                bookingData.datetime.time = time;
-                validateStep4();
-            });
-
-            timeSlots.appendChild(timeSlot);
+    
+    // Back button
+    const backButton = document.getElementById('prevStep3');
+    if (backButton) {
+        backButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            goToStep(2);
         });
     }
+}
 
-    function validateStep4() {
-        nextStep4Btn.disabled = !(bookingData.datetime.date && bookingData.datetime.time);
-    }
-
-    // Calendar navigation
-    if (prevMonthBtn) {
-        prevMonthBtn.addEventListener('click', function() {
-            currentMonth--;
-            if (currentMonth < 0) {
-                currentMonth = 11;
-                currentYear--;
-            }
-            renderCalendar();
-        });
-    }
-
-    if (nextMonthBtn) {
-        nextMonthBtn.addEventListener('click', function() {
-            currentMonth++;
-            if (currentMonth > 11) {
-                currentMonth = 0;
-                currentYear++;
-            }
-            renderCalendar();
-        });
-    }
-
-    // ================
-    // CONTACT INFO (STEP 5)
-    // ================
-    const nextStep5Btn = document.getElementById('nextStep5');
-    const prevStep5Btn = document.getElementById('prevStep5');
-    const contactInputs = ['fullName', 'email', 'phone', 'address', 'city', 'state', 'zipCode'];
-
-    function validateContactForm() {
-        let isValid = true;
-        
-        contactInputs.forEach(inputId => {
-            const input = document.getElementById(inputId);
-            if (input && input.required) {
-                if (!input.value.trim()) {
-                    isValid = false;
-                }
-            }
-        });
-
-        // Email validation
-        const emailInput = document.getElementById('email');
-        if (emailInput && emailInput.value) {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(emailInput.value)) {
-                isValid = false;
-            }
-        }
-
-        nextStep5Btn.disabled = !isValid;
-        return isValid;
-    }
-
-    function saveContactInfo() {
-        contactInputs.forEach(inputId => {
-            const input = document.getElementById(inputId);
-            if (input) {
-                bookingData.contact[inputId] = input.value.trim();
-            }
-        });
-        
-        const specialInstructions = document.getElementById('specialInstructions');
-        if (specialInstructions) {
-            bookingData.contact.specialInstructions = specialInstructions.value.trim();
-        }
-    }
-
-    // Add input event listeners
-    contactInputs.forEach(inputId => {
-        const input = document.getElementById(inputId);
-        if (input) {
-            input.addEventListener('input', validateContactForm);
-            input.addEventListener('change', validateContactForm);
+function saveSelectedAddons() {
+    const selectedAddons = [];
+    const serviceId = bookingState.selectedService.id;
+    const serviceAddons = addons[serviceId] || [];
+    
+    document.querySelectorAll('.addon-option.selected').forEach(option => {
+        const addonId = option.dataset.addonId;
+        const addon = serviceAddons.find(a => a.id === addonId);
+        if (addon) {
+            selectedAddons.push(addon);
         }
     });
-
-    // ================
-    // REVIEW & CONFIRM (STEP 6)
-    // ================
-    const bookingSummary = document.getElementById('bookingSummary');
-    const confirmBookingBtn = document.getElementById('confirmBooking');
-    const prevStep6Btn = document.getElementById('prevStep6');
-    const termsAgreement = document.getElementById('termsAgreement');
-
-    function calculateTotal() {
-        let total = 0;
-        
-        if (bookingData.package) {
-            total += bookingData.package.price;
-        }
-        
-        bookingData.addons.forEach(addon => {
-            total += addon.price;
-        });
-        
-        bookingData.totalPrice = total;
-        return total;
-    }
-
-    function renderBookingSummary() {
-        if (!bookingSummary) return;
-
-        const total = calculateTotal();
-        
-        bookingSummary.innerHTML = `
-            <div class="summary-section">
-                <div class="summary-header">
-                    <h4><i class="fas fa-concierge-bell"></i> Service Details</h4>
-                    <button class="edit-btn" data-step="1">
-                        <i class="fas fa-edit"></i> Edit
-                    </button>
-                </div>
-                <div class="summary-content">
-                    <div class="summary-item">
-                        <span>Service Type:</span>
-                        <span>${bookingData.service ? bookingData.service.charAt(0).toUpperCase() + bookingData.service.slice(1) : 'Not selected'}</span>
-                    </div>
-                    <div class="summary-item">
-                        <span>Package:</span>
-                        <span>${bookingData.package ? `${bookingData.package.name} - $${bookingData.package.price}` : 'Not selected'}</span>
-                    </div>
-                    ${bookingData.addons.length > 0 ? `
-                        <div class="summary-item">
-                            <span>Add-ons:</span>
-                            <span></span>
-                        </div>
-                        ${bookingData.addons.map(addon => `
-                            <div class="summary-item" style="padding-left: 1.5rem;">
-                                <span>• ${addon.name}</span>
-                                <span class="summary-price">$${addon.price}</span>
-                            </div>
-                        `).join('')}
-                    ` : ''}
-                </div>
-            </div>
-            
-            <div class="summary-section">
-                <div class="summary-header">
-                    <h4><i class="fas fa-calendar-alt"></i> Schedule</h4>
-                    <button class="edit-btn" data-step="4">
-                        <i class="fas fa-edit"></i> Edit
-                    </button>
-                </div>
-                <div class="summary-content">
-                    <div class="summary-item">
-                        <span>Date:</span>
-                        <span>${bookingData.datetime.date ? new Date(bookingData.datetime.date).toLocaleDateString('en-US', { 
-                            weekday: 'long', 
-                            year: 'numeric', 
-                            month: 'long', 
-                            day: 'numeric' 
-                        }) : 'Not selected'}</span>
-                    </div>
-                    <div class="summary-item">
-                        <span>Time:</span>
-                        <span>${bookingData.datetime.time || 'Not selected'}</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="summary-section">
-                <div class="summary-header">
-                    <h4><i class="fas fa-user"></i> Contact Information</h4>
-                    <button class="edit-btn" data-step="5">
-                        <i class="fas fa-edit"></i> Edit
-                    </button>
-                </div>
-                <div class="summary-content">
-                    <div class="summary-item">
-                        <span>Name:</span>
-                        <span>${bookingData.contact.fullName || 'Not provided'}</span>
-                    </div>
-                    <div class="summary-item">
-                        <span>Email:</span>
-                        <span>${bookingData.contact.email || 'Not provided'}</span>
-                    </div>
-                    <div class="summary-item">
-                        <span>Phone:</span>
-                        <span>${bookingData.contact.phone || 'Not provided'}</span>
-                    </div>
-                    <div class="summary-item">
-                        <span>Address:</span>
-                        <span>${bookingData.contact.address ? `${bookingData.contact.address}, ${bookingData.contact.city}, ${bookingData.contact.state} ${bookingData.contact.zipCode}` : 'Not provided'}</span>
-                    </div>
-                    ${bookingData.contact.specialInstructions ? `
-                        <div class="summary-item">
-                            <span>Special Instructions:</span>
-                            <span>${bookingData.contact.specialInstructions}</span>
-                        </div>
-                    ` : ''}
-                </div>
-            </div>
-            
-            <div class="summary-section">
-                <div class="summary-item total">
-                    <span>Total Amount:</span>
-                    <span class="summary-price">$${total.toFixed(2)}</span>
-                </div>
-            </div>
-        `;
-
-        // Add edit button listeners
-        bookingSummary.querySelectorAll('.edit-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const step = parseInt(this.dataset.step);
-                goToStep(step);
-            });
-        });
-    }
-
-    // Terms agreement toggle
-    if (termsAgreement) {
-        termsAgreement.addEventListener('change', function() {
-            confirmBookingBtn.disabled = !this.checked;
-        });
-    }
-
-    // ================
-    // SUCCESS SCREEN
-    // ================
-    const successScreen = document.getElementById('successScreen');
-    const bookingReference = document.getElementById('bookingReference');
-    const finalBookingDetails = document.getElementById('finalBookingDetails');
-    const newBookingBtn = document.getElementById('newBooking');
-
-    function showSuccessScreen() {
-        bookingReference.textContent = bookingData.bookingId;
-        
-        const dateTime = bookingData.datetime.date ? new Date(bookingData.datetime.date) : null;
-        finalBookingDetails.innerHTML = `
-            <div class="detail-item">
-                <span>Service:</span>
-                <span>${bookingData.service ? bookingData.service.charAt(0).toUpperCase() + bookingData.service.slice(1) : ''}</span>
-            </div>
-            <div class="detail-item">
-                <span>Package:</span>
-                <span>${bookingData.package.name}</span>
-            </div>
-            <div class="detail-item">
-                <span>Date:</span>
-                <span>${dateTime ? dateTime.toLocaleDateString('en-US', { 
-                    weekday: 'long', 
-                    year: 'numeric', 
-                    month: 'long', 
-                    day: 'numeric' 
-                }) : ''}</span>
-            </div>
-            <div class="detail-item">
-                <span>Time:</span>
-                <span>${bookingData.datetime.time}</span>
-            </div>
-            <div class="detail-item">
-                <span>Total:</span>
-                <span>$${bookingData.totalPrice.toFixed(2)}</span>
-            </div>
-        `;
-        
-        document.querySelectorAll('.wizard-step').forEach(step => {
-            step.classList.remove('active');
-        });
-        successScreen.classList.add('active');
-        
-        document.getElementById('progressLine').style.width = '100%';
-        updateStepIndicators(7);
-    }
-
-    // ================
-    // NAVIGATION FUNCTIONS
-    // ================
-    function goToStep(stepNumber) {
-        document.querySelectorAll('.wizard-step').forEach(step => {
-            step.classList.remove('active');
-        });
-        
-        const targetStep = document.getElementById(`step${stepNumber}`);
-        if (targetStep) {
-            targetStep.classList.add('active');
-        }
-        
-        const progressWidth = (stepNumber / 6) * 100;
-        document.getElementById('progressLine').style.width = `${progressWidth}%`;
-        
-        updateStepIndicators(stepNumber);
-        
-        if (stepNumber === 2 && bookingData.service) {
-            loadPackages();
-        } else if (stepNumber === 3 && bookingData.service) {
-            loadAddons();
-        } else if (stepNumber === 4) {
-            renderCalendar();
-            renderTimeSlots();
-        } else if (stepNumber === 6) {
-            saveContactInfo();
-            renderBookingSummary();
-        }
-    }
-
-    function updateStepIndicators(currentStep) {
-        const steps = document.querySelectorAll('.step');
-        steps.forEach(step => {
-            step.classList.remove('active', 'completed');
-            const stepNum = parseInt(step.dataset.step);
-            if (stepNum < currentStep) {
-                step.classList.add('completed');
-            } else if (stepNum === currentStep) {
-                step.classList.add('active');
-            }
-        });
-    }
-
-    // ================
-    // FORMSPREE API INTEGRATION
-    // ================
-    async function submitBookingToFormspree() {
-        try {
-            const response = await fetch(FORMSPREE_ENDPOINT, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify({
-                    _subject: `New Service Booking - ${bookingData.bookingId}`,
-                    booking_id: bookingData.bookingId,
-                    service_type: bookingData.service,
-                    package_name: bookingData.package?.name,
-                    package_price: bookingData.package?.price || 0,
-                    addons: bookingData.addons.map(a => `${a.name} - $${a.price}`).join(', '),
-                    total_price: bookingData.totalPrice,
-                    scheduled_date: bookingData.datetime.date,
-                    scheduled_time: bookingData.datetime.time,
-                    full_name: bookingData.contact.fullName,
-                    email: bookingData.contact.email,
-                    phone: bookingData.contact.phone,
-                    address: `${bookingData.contact.address}, ${bookingData.contact.city}, ${bookingData.contact.state} ${bookingData.contact.zipCode}`,
-                    special_instructions: bookingData.contact.specialInstructions,
-                    timestamp: new Date().toISOString()
-                })
-            });
-
-            return response.ok;
-        } catch (error) {
-            console.error('Error submitting booking:', error);
-            return false;
-        }
-    }
-
-    // ================
-    // EVENT LISTENERS
-    // ================
     
-    // Step navigation
-    if (nextStep1Btn) {
-        nextStep1Btn.addEventListener('click', () => goToStep(2));
-    }
+    bookingState.selectedAddons = selectedAddons;
+    console.log('Addons saved:', bookingState.selectedAddons);
+}
 
-    if (nextStep2Btn) {
-        nextStep2Btn.addEventListener('click', () => goToStep(3));
-    }
+// STEP 4: Date & Time
+let currentCalendarDate = new Date();
 
-    if (prevStep2Btn) {
-        prevStep2Btn.addEventListener('click', () => goToStep(1));
-    }
-
-    if (nextStep3Btn) {
-        nextStep3Btn.addEventListener('click', () => goToStep(4));
-    }
-
-    if (prevStep3Btn) {
-        prevStep3Btn.addEventListener('click', () => goToStep(2));
-    }
-
-    if (nextStep4Btn) {
-        nextStep4Btn.addEventListener('click', () => goToStep(5));
-    }
-
-    if (prevStep4Btn) {
-        prevStep4Btn.addEventListener('click', () => goToStep(3));
-    }
-
-    if (nextStep5Btn) {
-        nextStep5Btn.addEventListener('click', () => {
-            saveContactInfo();
-            goToStep(6);
+function initCalendar() {
+    console.log('Initializing calendar...');
+    
+    renderCalendar();
+    
+    // Month navigation
+    const prevMonthBtn = document.getElementById('prevMonth');
+    const nextMonthBtn = document.getElementById('nextMonth');
+    
+    if (prevMonthBtn) {
+        prevMonthBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            currentCalendarDate.setMonth(currentCalendarDate.getMonth() - 1);
+            renderCalendar();
         });
     }
-
-    if (prevStep5Btn) {
-        prevStep5Btn.addEventListener('click', () => goToStep(4));
+    
+    if (nextMonthBtn) {
+        nextMonthBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            currentCalendarDate.setMonth(currentCalendarDate.getMonth() + 1);
+            renderCalendar();
+        });
     }
-
-    if (prevStep6Btn) {
-        prevStep6Btn.addEventListener('click', () => goToStep(5));
+    
+    // Next button
+    const nextButton = document.getElementById('nextStep4');
+    if (nextButton) {
+        nextButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            if (!bookingState.selectedDate || !bookingState.selectedTime) {
+                alert('Please select both date and time');
+                return;
+            }
+            
+            goToStep(5);
+        });
     }
+    
+    // Back button
+    const backButton = document.getElementById('prevStep4');
+    if (backButton) {
+        backButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            goToStep(3);
+        });
+    }
+}
 
-    // Confirm booking
-    if (confirmBookingBtn) {
-        confirmBookingBtn.addEventListener('click', async function() {
-            if (!this.disabled) {
-                const originalText = this.innerHTML;
-                this.innerHTML = '<span class="loading"></span> Processing...';
-                this.disabled = true;
+function renderCalendar() {
+    const calendarGrid = document.getElementById('calendarGrid');
+    if (!calendarGrid) return;
+    
+    // Clear calendar
+    calendarGrid.innerHTML = '';
+    
+    // Add day headers
+    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    days.forEach(day => {
+        const dayElement = document.createElement('div');
+        dayElement.className = 'calendar-day';
+        dayElement.textContent = day;
+        calendarGrid.appendChild(dayElement);
+    });
+    
+    // Get month info
+    const year = currentCalendarDate.getFullYear();
+    const month = currentCalendarDate.getMonth();
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
+    const totalDays = lastDay.getDate();
+    const startingDay = firstDay.getDay();
+    
+    // Add empty cells for days before first day
+    for (let i = 0; i < startingDay; i++) {
+        const emptyCell = document.createElement('div');
+        emptyCell.className = 'calendar-date other-month';
+        calendarGrid.appendChild(emptyCell);
+    }
+    
+    // Add days
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    for (let day = 1; day <= totalDays; day++) {
+        const date = new Date(year, month, day);
+        const dateElement = document.createElement('div');
+        dateElement.className = 'calendar-date';
+        dateElement.textContent = day;
+        dateElement.dataset.date = date.toISOString().split('T')[0];
+        
+        // Disable past dates
+        if (date < today) {
+            dateElement.classList.add('disabled');
+        } else {
+            dateElement.addEventListener('click', function() {
+                // Remove selected from all dates
+                document.querySelectorAll('.calendar-date').forEach(d => {
+                    d.classList.remove('selected');
+                });
                 
-                const success = await submitBookingToFormspree();
+                // Select this date
+                this.classList.add('selected');
+                bookingState.selectedDate = this.dataset.date;
                 
-                if (success) {
-                    showSuccessScreen();
-                } else {
-                    alert('There was an error processing your booking. Please try again.');
-                    this.innerHTML = originalText;
-                    this.disabled = false;
+                // Update display
+                const display = document.getElementById('selectedDateDisplay');
+                if (display) {
+                    display.textContent = `Selected: ${formatDate(bookingState.selectedDate)}`;
                 }
+                
+                validateDateTime();
+            });
+        }
+        
+        // Mark as selected if matches saved date
+        if (bookingState.selectedDate === dateElement.dataset.date) {
+            dateElement.classList.add('selected');
+        }
+        
+        calendarGrid.appendChild(dateElement);
+    }
+    
+    // Update month display
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"];
+    const monthYearDisplay = document.querySelector('.calendar-header h3');
+    if (monthYearDisplay) {
+        monthYearDisplay.textContent = `${monthNames[month]} ${year}`;
+    }
+}
+
+function initTimeSlots() {
+    console.log('Initializing time slots...');
+    
+    const timeSlotsContainer = document.getElementById('timeSlots');
+    if (!timeSlotsContainer) return;
+    
+    const timeSlots = [
+        '08:00 AM', '09:00 AM', '10:00 AM', '11:00 AM',
+        '12:00 PM', '01:00 PM', '02:00 PM', '03:00 PM',
+        '04:00 PM', '05:00 PM'
+    ];
+    
+    timeSlotsContainer.innerHTML = '';
+    
+    timeSlots.forEach(slot => {
+        const slotElement = document.createElement('div');
+        slotElement.className = 'time-slot';
+        slotElement.textContent = slot;
+        slotElement.dataset.time = slot;
+        
+        slotElement.addEventListener('click', function() {
+            // Remove selected from all slots
+            document.querySelectorAll('.time-slot').forEach(s => {
+                s.classList.remove('selected');
+            });
+            
+            // Select this slot
+            this.classList.add('selected');
+            bookingState.selectedTime = this.dataset.time;
+            
+            validateDateTime();
+        });
+        
+        // Mark as selected if matches saved time
+        if (bookingState.selectedTime === slot) {
+            slotElement.classList.add('selected');
+        }
+        
+        timeSlotsContainer.appendChild(slotElement);
+    });
+}
+
+function validateDateTime() {
+    const nextButton = document.getElementById('nextStep4');
+    if (nextButton) {
+        const isValid = !!(bookingState.selectedDate && bookingState.selectedTime);
+        nextButton.disabled = !isValid;
+        return isValid;
+    }
+    return false;
+}
+
+// STEP 5: Contact Information
+function initContactForm() {
+    console.log('Initializing contact form...');
+    
+    const nextButton = document.getElementById('nextStep5');
+    if (!nextButton) return;
+    
+    // Validate on input
+    const requiredFields = ['fullName', 'email', 'phone', 'address', 'city', 'state', 'zipCode'];
+    
+    requiredFields.forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        if (field) {
+            field.addEventListener('input', validateContactForm);
+            field.addEventListener('change', validateContactForm);
+        }
+    });
+    
+    // Initial validation
+    validateContactForm();
+    
+    // Next button
+    nextButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        if (validateContactForm()) {
+            saveContactInfo();
+            loadBookingSummary();
+            goToStep(6);
+        } else {
+            alert('Please fill in all required fields correctly');
+        }
+    });
+    
+    // Back button
+    const backButton = document.getElementById('prevStep5');
+    if (backButton) {
+        backButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            goToStep(4);
+        });
+    }
+}
+
+function validateContactForm() {
+    const nextButton = document.getElementById('nextStep5');
+    if (!nextButton) return false;
+    
+    let isValid = true;
+    const requiredFields = ['fullName', 'email', 'phone', 'address', 'city', 'state', 'zipCode'];
+    
+    // Clear previous errors
+    document.querySelectorAll('.field-error').forEach(error => error.remove());
+    document.querySelectorAll('.form-input.error, .form-select.error').forEach(el => {
+        el.classList.remove('error');
+    });
+    
+    // Check each required field
+    requiredFields.forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        if (!field) return;
+        
+        const value = field.value.trim();
+        
+        if (!value) {
+            isValid = false;
+            field.classList.add('error');
+            showFieldError(field, 'This field is required');
+        } else if (fieldId === 'email' && !isValidEmail(value)) {
+            isValid = false;
+            field.classList.add('error');
+            showFieldError(field, 'Please enter a valid email address');
+        } else if (fieldId === 'phone' && !isValidPhone(value)) {
+            isValid = false;
+            field.classList.add('error');
+            showFieldError(field, 'Please enter a valid phone number');
+        }
+    });
+    
+    nextButton.disabled = !isValid;
+    return isValid;
+}
+
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+function isValidPhone(phone) {
+    // Remove non-digits and check length
+    const digitsOnly = phone.replace(/\D/g, '');
+    return digitsOnly.length >= 10;
+}
+
+function showFieldError(field, message) {
+    // Remove existing error
+    const existingError = field.parentNode.querySelector('.field-error');
+    if (existingError) existingError.remove();
+    
+    // Add new error
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'field-error';
+    errorDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
+    field.parentNode.appendChild(errorDiv);
+}
+
+function saveContactInfo() {
+    bookingState.contactInfo = {
+        fullName: document.getElementById('fullName').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        address: document.getElementById('address').value,
+        city: document.getElementById('city').value,
+        state: document.getElementById('state').value,
+        zipCode: document.getElementById('zipCode').value,
+        specialInstructions: document.getElementById('specialInstructions').value
+    };
+    
+    console.log('Contact info saved:', bookingState.contactInfo);
+}
+
+// STEP 6: Review & Summary
+function loadBookingSummary() {
+    console.log('Loading booking summary...');
+    
+    const container = document.getElementById('bookingSummary');
+    if (!container) return;
+    
+    // Calculate total price
+    bookingState.totalPrice = 0;
+    
+    let html = '';
+    
+    // Service Details
+    html += `
+        <div class="summary-section">
+            <div class="summary-header">
+                <h4><i class="fas fa-concierge-bell"></i> Service Details</h4>
+                <button class="edit-btn" data-step="1">Edit</button>
+            </div>
+            <div class="summary-content">
+                <div class="summary-item">
+                    <span class="label">Service:</span>
+                    <span class="value">${bookingState.selectedService.name}</span>
+                </div>
+    `;
+    
+    // Add service details
+    Object.entries(bookingState.serviceDetails).forEach(([key, value]) => {
+        if (value) {
+            const question = bookingState.selectedService.questions.find(q => q.id === key);
+            if (question) {
+                html += `
+                    <div class="summary-item">
+                        <span class="label">${question.label}:</span>
+                        <span class="value">${value}</span>
+                    </div>
+                `;
+            }
+        }
+    });
+    
+    html += `</div></div>`;
+    
+    // Add-ons
+    if (bookingState.selectedAddons.length > 0) {
+        html += `
+            <div class="summary-section">
+                <div class="summary-header">
+                    <h4><i class="fas fa-plus-circle"></i> Add-ons</h4>
+                    <button class="edit-btn" data-step="3">Edit</button>
+                </div>
+                <div class="summary-content">
+        `;
+        
+        bookingState.selectedAddons.forEach(addon => {
+            html += `
+                <div class="summary-item">
+                    <span class="label">${addon.name}:</span>
+                    <span class="value">${addon.description}</span>
+                </div>
+            `;
+        });
+        
+        html += `</div></div>`;
+    }
+    
+    // Date & Time
+    html += `
+        <div class="summary-section">
+            <div class="summary-header">
+                <h4><i class="fas fa-calendar-alt"></i> Schedule</h4>
+                <button class="edit-btn" data-step="4">Edit</button>
+            </div>
+            <div class="summary-content">
+                <div class="summary-item">
+                    <span class="label">Date:</span>
+                    <span class="value">${formatDate(bookingState.selectedDate)}</span>
+                </div>
+                <div class="summary-item">
+                    <span class="label">Time:</span>
+                    <span class="value">${bookingState.selectedTime}</span>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Contact Info
+    html += `
+        <div class="summary-section">
+            <div class="summary-header">
+                <h4><i class="fas fa-user"></i> Contact Information</h4>
+                <button class="edit-btn" data-step="5">Edit</button>
+            </div>
+            <div class="summary-content">
+                <div class="summary-item">
+                    <span class="label">Name:</span>
+                    <span class="value">${bookingState.contactInfo.fullName}</span>
+                </div>
+                <div class="summary-item">
+                    <span class="label">Email:</span>
+                    <span class="value">${bookingState.contactInfo.email}</span>
+                </div>
+                <div class="summary-item">
+                    <span class="label">Phone:</span>
+                    <span class="value">${bookingState.contactInfo.phone}</span>
+                </div>
+                <div class="summary-item">
+                    <span class="label">Address:</span>
+                    <span class="value">${bookingState.contactInfo.address}, ${bookingState.contactInfo.city}, ${bookingState.contactInfo.state} ${bookingState.contactInfo.zipCode}</span>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Total Price
+    html += `
+        <div class="summary-section">
+            <div class="summary-header">
+                <h4><i class="fas fa-receipt"></i> Pricing</h4>
+            </div>
+            <div class="summary-content">
+                <div class="summary-item total">
+                    <span class="label">Pricing:</span>
+                    <span class="summary-price">Price upon request</span>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    container.innerHTML = html;
+    
+    // Add edit button functionality
+    initEditButtons();
+}
+
+function initEditButtons() {
+    document.querySelectorAll('.edit-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const step = parseInt(this.dataset.step);
+            goToStep(step);
+        });
+    });
+}
+
+// Terms and Submission
+function initTermsAndSubmission() {
+    console.log('Initializing terms and submission...');
+    
+    const termsCheckbox = document.getElementById('termsAgreement');
+    const confirmButton = document.getElementById('confirmBooking');
+    
+    if (!termsCheckbox || !confirmButton) return;
+    
+    // Terms checkbox
+    termsCheckbox.addEventListener('change', function() {
+        confirmButton.disabled = !this.checked;
+    });
+    
+    // Confirm booking
+    confirmButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        if (!termsCheckbox.checked) {
+            alert('Please agree to the terms and conditions');
+            return;
+        }
+        
+        submitBooking();
+    });
+    
+    // Back button
+    const backButton = document.getElementById('prevStep6');
+    if (backButton) {
+        backButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            goToStep(5);
+        });
+    }
+}
+
+// Formspree Submission
+async function submitBooking() {
+    const confirmButton = document.getElementById('confirmBooking');
+    const originalText = confirmButton.innerHTML;
+    
+    try {
+        // Show loading
+        confirmButton.disabled = true;
+        confirmButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+        
+        // Prepare form data
+        const formData = new FormData();
+        
+        // Basic booking info
+        formData.append('_subject', `New Booking: ${bookingState.bookingReference}`);
+        formData.append('booking_reference', bookingState.bookingReference);
+        formData.append('service_type', bookingState.selectedService.name);
+        formData.append('service_id', bookingState.selectedService.id);
+        
+        // Service details
+        Object.entries(bookingState.serviceDetails).forEach(([key, value]) => {
+            formData.append(key, value);
+        });
+        
+        // Add-ons
+        bookingState.selectedAddons.forEach((addon, index) => {
+            formData.append(`addon_${index + 1}`, `${addon.name} - ${addon.description}`);
+        });
+        
+        // Schedule
+        formData.append('date', bookingState.selectedDate);
+        formData.append('time', bookingState.selectedTime);
+        
+        // Contact info
+        Object.entries(bookingState.contactInfo).forEach(([key, value]) => {
+            formData.append(key, value);
+        });
+        
+        // Price
+        formData.append('pricing', 'Price upon request');
+        
+        // Metadata
+        formData.append('_replyto', bookingState.contactInfo.email);
+        formData.append('submission_date', new Date().toISOString());
+        
+        // Send to Formspree
+        const response = await fetch(FORMSPREE_ENDPOINT, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
             }
         });
+        
+        if (response.ok) {
+            showSuccessScreen();
+        } else {
+            throw new Error('Form submission failed');
+        }
+        
+    } catch (error) {
+        console.error('Submission error:', error);
+        alert('There was an error submitting your booking. Please try again.');
+        
+        // Reset button
+        confirmButton.disabled = false;
+        confirmButton.innerHTML = originalText;
     }
+}
 
+// Success Screen
+function showSuccessScreen() {
+    console.log('Showing success screen...');
+    
+    // Update booking reference
+    document.getElementById('bookingReference').textContent = bookingState.bookingReference;
+    
+    // Hide all steps
+    document.querySelectorAll('.wizard-step').forEach(step => {
+        step.classList.remove('active');
+    });
+    
+    // Show success screen
+    const successScreen = document.getElementById('successScreen');
+    if (successScreen) {
+        successScreen.classList.add('active');
+    }
+    
+    // Update progress to 100%
+    updateProgressBar(100);
+}
+
+function initSuccessActions() {
+    // New booking button
+    const newBookingBtn = document.getElementById('newBooking');
+    if (newBookingBtn) {
+        newBookingBtn.addEventListener('click', resetWizard);
+    }
+}
+
+function resetWizard() {
+    console.log('Resetting wizard...');
+    
+    // Reset booking state
+    Object.keys(bookingState).forEach(key => {
+        if (key === 'bookingReference') {
+            bookingState[key] = generateBookingReference();
+        } else if (Array.isArray(bookingState[key])) {
+            bookingState[key] = [];
+        } else if (typeof bookingState[key] === 'object') {
+            bookingState[key] = {};
+        } else {
+            bookingState[key] = null;
+        }
+    });
+    
+    bookingState.currentStep = 1;
+    
+    // Reset form fields
+    document.getElementById('fullName').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('phone').value = '';
+    document.getElementById('address').value = '';
+    document.getElementById('city').value = '';
+    document.getElementById('state').value = '';
+    document.getElementById('zipCode').value = '';
+    document.getElementById('specialInstructions').value = '';
+    document.getElementById('termsAgreement').checked = false;
+    
+    // Reset UI
+    document.querySelectorAll('.service-card').forEach(card => {
+        card.classList.remove('selected');
+    });
+    
+    document.querySelectorAll('.wizard-step').forEach(step => {
+        step.classList.remove('active');
+    });
+    
+    document.getElementById('step1').classList.add('active');
+    document.getElementById('successScreen').classList.remove('active');
+    
+    // Reset progress
+    updateProgressBar();
+    
+    // Reset buttons
+    document.getElementById('nextStep1').disabled = true;
+    document.getElementById('confirmBooking').disabled = true;
+    
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Step Navigation
+function initStepNavigation() {
+    console.log('Initializing step navigation...');
+    
     // Cancel booking
-    const cancelBookingBtn = document.getElementById('cancelBooking');
-    if (cancelBookingBtn) {
-        cancelBookingBtn.addEventListener('click', function() {
-            if (confirm('Are you sure you want to cancel this booking?')) {
+    const cancelBtn = document.getElementById('cancelBooking');
+    if (cancelBtn) {
+        cancelBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            if (confirm('Are you sure you want to cancel? All data will be lost.')) {
                 window.location.href = 'index.html';
             }
         });
     }
+    
+    // Update progress bar initially
+    updateProgressBar();
+}
 
-    // New booking
-    if (newBookingBtn) {
-        newBookingBtn.addEventListener('click', function() {
-            // Reset data
-            bookingData = {
-                service: null,
-                package: null,
-                addons: [],
-                datetime: {
-                    date: null,
-                    time: null
-                },
-                contact: {
-                    fullName: '',
-                    email: '',
-                    phone: '',
-                    address: '',
-                    city: '',
-                    state: '',
-                    zipCode: '',
-                    specialInstructions: ''
-                },
-                totalPrice: 0,
-                bookingId: generateBookingId()
-            };
-            
-            // Reset UI
-            document.querySelectorAll('.service-card').forEach(card => {
-                card.classList.remove('selected');
-            });
-            nextStep1Btn.disabled = true;
-            
-            contactInputs.forEach(inputId => {
-                const input = document.getElementById(inputId);
-                if (input) input.value = '';
-            });
-            
-            const specialInstructions = document.getElementById('specialInstructions');
-            if (specialInstructions) specialInstructions.value = '';
-            
-            if (termsAgreement) termsAgreement.checked = false;
-            
-            goToStep(1);
-        });
+function goToStep(stepNumber) {
+    console.log(`Going to step ${stepNumber}`);
+    
+    // Validate step number
+    if (stepNumber < 1 || stepNumber > 6) {
+        console.error('Invalid step number:', stepNumber);
+        return;
     }
-
-    // ================
-    // UTILITY FUNCTIONS
-    // ================
-    function generateBookingId() {
-        const timestamp = Date.now().toString().slice(-6);
-        const random = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
-        return `PRIMER-${timestamp}${random}`;
+    
+    // Hide all steps
+    document.querySelectorAll('.wizard-step').forEach(step => {
+        step.classList.remove('active');
+    });
+    
+    // Show target step
+    const targetStep = document.getElementById(`step${stepNumber}`);
+    if (targetStep) {
+        targetStep.classList.add('active');
+        bookingState.currentStep = stepNumber;
+        
+        // Update progress bar
+        updateProgressBar();
+        
+        // Smooth scroll to step
+        setTimeout(() => {
+            targetStep.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+    } else {
+        console.error(`Step ${stepNumber} not found`);
     }
+}
 
-    // ================
-    // INITIALIZATION
-    // ================
-    renderCalendar();
-    renderTimeSlots();
-    validateContactForm();
+function updateProgressBar(percentage = null) {
+    const progressLine = document.getElementById('progressLine');
+    if (!progressLine) return;
+    
+    // Calculate percentage if not provided
+    let progressPercent;
+    if (percentage !== null) {
+        progressPercent = percentage;
+    } else {
+        progressPercent = ((bookingState.currentStep - 1) / 5) * 100;
+    }
+    
+    progressLine.style.width = `${progressPercent}%`;
+    
+    // Update step indicators
+    document.querySelectorAll('.step').forEach((step, index) => {
+        const stepNumber = index + 1;
+        
+        step.classList.remove('active', 'completed');
+        
+        if (stepNumber < bookingState.currentStep) {
+            step.classList.add('completed');
+        } else if (stepNumber === bookingState.currentStep) {
+            step.classList.add('active');
+        }
+    });
+}
+
+// Error Handling
+function showError(message) {
+    console.error('Booking Wizard Error:', message);
+    
+    // Create error display if it doesn't exist
+    let errorDiv = document.getElementById('bookingWizardError');
+    if (!errorDiv) {
+        errorDiv = document.createElement('div');
+        errorDiv.id = 'bookingWizardError';
+        errorDiv.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #ef4444;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            z-index: 10000;
+            max-width: 300px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        `;
+        document.body.appendChild(errorDiv);
+    }
+    
+    errorDiv.textContent = message;
+    
+    // Auto-remove after 5 seconds
+    setTimeout(() => {
+        if (errorDiv.parentNode) {
+            errorDiv.parentNode.removeChild(errorDiv);
+        }
+    }, 5000);
+}
+
+// Make sure no service is auto-selected
+window.addEventListener('load', function() {
+    console.log('Page loaded, ensuring no auto-selection...');
+    
+    // Clear any auto-selected service
+    document.querySelectorAll('.service-card.selected').forEach(card => {
+        card.classList.remove('selected');
+    });
+    
+    // Disable next button
+    const nextButton = document.getElementById('nextStep1');
+    if (nextButton) {
+        nextButton.disabled = true;
+    }
+    
+    // Ensure step 1 is active
+    goToStep(1);
 });
+
+// Export for debugging
+window.bookingState = bookingState;
+window.goToStep = goToStep;
