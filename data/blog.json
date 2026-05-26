@@ -2,76 +2,58 @@
   "posts": [
     {
       "id": 1,
-      "title": "Complete Guide to Property Maintenance in 2023",
-      "excerpt": "Learn essential maintenance tips to protect your property investment and avoid costly repairs.",
-      "content": "Full article content about property maintenance...",
-      "author": "Sarah Chen",
-      "date": "2023-10-20",
-      "category": "Maintenance",
-      "image": "2.jpg",
-      "readTime": "5 min",
-      "tags": ["maintenance", "tips", "homecare", "prevention"]
+      "title": "The Ultimate Guide to Buying Property in Lagos: Legal, Financial, and Practical Steps",
+      "category": "Buying Guide",
+      "author": "Alamin Ahmed",
+      "date": "2025-05-20",
+      "excerpt": "Navigate Lagos real estate with confidence. This complete guide covers due diligence, financing, legal checks, and negotiation strategies.",
+      "fullBody": "<p>Lagos property market is one of Africa’s fastest-growing, but it can be daunting for first-time buyers. This guide walks you through every stage – from budgeting to key handover.</p><h3>1. Define Your Budget and Financing</h3><p>Start by evaluating your savings and income. Properties in Lekki, Ikoyi, and Victoria Island range from ₦80 million to over ₦1 billion. For middle-income buyers, consider Ajah, Ikorodu, or satellite towns where prices start around ₦15 million for a 2-bedroom flat. Mortgage options are limited but growing – explore Federal Mortgage Bank, cooperative societies, or developer payment plans.</p><h3>2. Location Research</h3><p>Each area has unique advantages. Lekki Phase 1 offers proximity to business hubs but higher prices. Ajah has more affordable options but traffic congestion. Ikeja and GRA are established with good infrastructure. Visit at different times to assess noise, flooding risk (especially in flood-prone zones like Ogudu), and access to schools, hospitals, and markets.</p><h3>3. Verify Land Documents</h3><p>Insist on seeing the original title documents: Certificate of Occupancy (C of O), Governor’s Consent, or Deed of Assignment. Hire a reputable lawyer to conduct a search at the Land Registry to confirm the seller has valid ownership and no encumbrances. Beware of 'family land' without clear allocation – disputes are common and can take years to resolve.</p><h3>4. Conduct a Physical Inspection</h3><p>Do not rely solely on photos. Visit the property to check for structural defects, plumbing, electrical wiring, water supply (borehole or public), and drainage. Hire a professional surveyor for a land survey to confirm boundaries.</p><h3>5. Negotiate and Sign Agreement</h3><p>Once satisfied, make an offer. Prices are often negotiable – aim for 5–15% below asking. Engage a lawyer to draft or review the contract. Ensure the agreement includes the exact property description, payment schedule, possession date, and a clause protecting you against title defects.</p><h3>6. Pay and Obtain Receipts</h3><p>Pay via bank transfer or cheque – never cash. Obtain a signed receipt and acknowledgment. After full payment, the seller must execute the Deed of Assignment and you apply for Governor’s Consent (essential for transferring title). Budget 10–15% of purchase price for legal fees, stamp duties, registration, and consent.</p><h3>7. Final Handover</h3><p>Collect all original documents, keys, and any utility payment receipts. Update property tax records in your name. Congratulations – you are now a homeowner!</p><p>Buying property in Lagos is rewarding if you follow these steps. Always work with a trusted agent and legal professional to avoid scams.</p>",
+      "image": "https://images.unsplash.com/photo-1560518883-ce09059eeffc?w=800&h=500&fit=crop",
+      "views": 1870
     },
     {
       "id": 2,
-      "title": "How to Prepare Your Home for Sale: Professional Tips",
-      "excerpt": "Expert advice on getting your home market-ready to attract the best offers.",
-      "content": "Full article content about preparing homes for sale...",
-      "author": "Marcus Johnson",
-      "date": "2023-10-15",
-      "category": "Selling",
-      "image": "4.jpg",
-      "readTime": "7 min",
-      "tags": ["selling", "staging", "realestate", "tips"]
+      "title": "Essential Property Maintenance Checklist for Nigerian Homeowners",
+      "category": "Maintenance",
+      "author": "Sarah Adeyemi",
+      "date": "2025-05-18",
+      "excerpt": "Regular maintenance saves money and preserves value. Here is a seasonal checklist tailored to Nigeria’s climate.",
+      "fullBody": "<p>Neglecting maintenance can lead to costly repairs. This checklist helps you stay on top of key tasks throughout the year.</p><h3>Rainy Season (March – October)</h3><p>Nigeria’s heavy rains can cause leaks and flooding. Inspect your roof for missing tiles or rusted sheets. Clear gutters and downpipes to avoid water pooling. Check for cracks in walls and foundation – seal them with waterproof cement. Ensure sump pumps (if installed) are working and that drainage channels around the house are not blocked. Test your backup generator and ensure the fuel tank is sealed against moisture.</p><h3>Dry Season (November – February)</h3><p>Harmattan dust affects air quality and electrical appliances. Clean air conditioner filters and ducts. Lubricate hinges, window frames, and gate rollers – dust accelerates wear. Inspect electrical wiring for signs of overheating (melted insulation, burning smell). Repaint exterior walls to protect from sun damage. Have your borehole pump serviced and check for sediment buildup in storage tanks.</p><h3>Monthly Tasks</h3><p>Test smoke detectors and fire extinguishers. Inspect plumbing for leaks under sinks and behind toilets. Check water pressure – low pressure may indicate pipe blockage or pump issues. Clean drains and garbage disposal (if installed). Look for termite signs (mud tubes, hollow wood) and treat immediately – termites are rampant in humid areas like Lagos.</p><h3>Quarterly Tasks</h3><p>Service your generator (change oil, air filter, spark plugs). Test the automatic transfer switch if you have one. Inspect security systems – cameras, alarms, electric fence. Check gate automation batteries and remote controls. Have a pest control professional treat the property for cockroaches, rodents, and mosquitoes.</p><h3>Annual Tasks</h3><p>Deep clean water tanks (professionally). Repaint rusted metal gates and window frames. Have a structural engineer assess the building for cracks or settling. Update property insurance coverage based on current replacement cost. Trim trees and remove overhanging branches that could fall during storms.</p><p>Following this routine ensures your property remains safe, comfortable, and valuable for decades.</p>",
+      "image": "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&h=500&fit=crop",
+      "views": 1240
     },
     {
       "id": 3,
-      "title": "Stress-Free Moving: Our Complete Checklist",
-      "excerpt": "Everything you need to know for a smooth and organized move.",
-      "content": "Full article content about moving checklists...",
-      "author": "Robert Davis",
-      "date": "2023-10-10",
-      "category": "Moving",
-      "image": "1.jpg",
-      "readTime": "8 min",
-      "tags": ["moving", "checklist", "organization", "tips"]
+      "title": "How to Choose a Reliable Handyman in Nigeria (and Avoid Scams)",
+      "category": "Handyman",
+      "author": "Michael Okafor",
+      "date": "2025-05-12",
+      "excerpt": "Not all handymen are equal. Learn how to find skilled, trustworthy professionals for repairs and installations.",
+      "fullBody": "<p>From leaking faucets to faulty wiring, a good handyman can save you stress and money. But poor workmanship or outright fraud is common. Here’s how to choose wisely.</p><h3>1. Verify Credentials</h3><p>Ask for references from previous clients – call them. Check if the handyman has a physical workshop or shop, which indicates legitimacy. For electrical and plumbing jobs, prefer professionals with trade association membership (e.g., Nigerian Society of Engineers for complex tasks).</p><h3>2. Request a Written Quote</h3><p>Insist on a detailed quote listing materials, labour, and timeline. Avoid anyone who demands full payment upfront. A reasonable deposit (30-50%) is acceptable for materials. Obtain a receipt for all payments.</p><h3>3. Check Online Reviews and Local Reputation</h3><p>Search social media neighbourhood groups (WhatsApp, Facebook) for recommendations. Many scammers change phone numbers frequently – a handyman who has served your area for years is safer. Prima’s verified handymen undergo background checks and have a track record.</p><h3>4. Observe Their Work Style</h3><p>A professional handyman arrives on time, has proper tools, wears protective gear (e.g., goggles for grinding), and cleans up after the job. They should explain the problem and solution in simple terms. Be wary of those who try to upsell unnecessary services.</p><h3>5. Get a Guarantee</h3><p>Reputable handymen offer a warranty on labour (e.g., 30 days on repairs). If the same issue recurs quickly, they should fix it free. Prima’s service partners provide a 60‑day workmanship guarantee.</p><h3>Services to Avoid DIY</h3><p>While you can handle painting or furniture assembly, leave gas installations, main electrical panel work, and major plumbing (sewer lines) to certified professionals. Improper DIY can void home insurance.</p><p>Prima handyman services include carpentry, plumbing, electrical, painting, and appliance repair – all vetted and insured. Book by calling +2341234567890 or WhatsApp.</p>",
+      "image": "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&h=500&fit=crop",
+      "views": 980
     },
     {
       "id": 4,
-      "title": "Essential Handyman Services Every Homeowner Should Know",
-      "excerpt": "Discover the most common and important handyman services for home maintenance.",
-      "content": "Full article content about essential handyman services...",
-      "author": "Emily Wilson",
-      "date": "2023-10-05",
-      "category": "Handyman",
-      "image": "3.jpg",
-      "readTime": "6 min",
-      "tags": ["handyman", "repairs", "homeimprovement", "services"]
+      "title": "The Rise of Short-Let Rentals in Abuja: Opportunities and Pitfalls",
+      "category": "Market Trends",
+      "author": "Najib Isah Ukissa",
+      "date": "2025-05-08",
+      "excerpt": "Short‑let apartments are booming in Abuja, but investors must understand regulations, pricing, and operational challenges.",
+      "fullBody": "<p>Abuja has become a hotspot for short‑let rentals (Airbnb‑style). Areas like Wuse 2, Maitama, and Guzape see high occupancy from business travellers, diplomats, and tourists. However, success requires strategic planning.</p><h3>Opportunities</h3><p>Daily rates for a 2‑bedroom apartment can reach ₦50,000–₦100,000, compared to ₦1.5 million monthly for long‑term rent. Occupancy rates of 60–70% can yield double the revenue. The city’s status as Nigeria’s capital ensures a steady stream of transient residents. Smart investors are converting unused spaces into boutique short‑let units.</p><h3>Regulatory Landscape</h3><p>Abuja has stricter enforcement than Lagos. You need a Social Development Secretariat (SDS) permit for short‑let operations. Many estates also prohibit short‑term rentals in their covenants – check before buying. Failure to comply can lead to fines or eviction. A good lawyer can help navigate the land use act and local bylaws.</p><h3>Operational Essentials</h3><p>Furnish to high standards – comfortable beds, fast WiFi, reliable power (inverter or generator), and backup water. Employ a responsive manager or use automated lock systems. Cleanliness is paramount; guests expect hotel‑grade hygiene. Listing on multiple platforms (Airbnb, Booking.com, Expedia) increases visibility. Price dynamically based on season – demand spikes during public holidays, conferences, and political events.</p><h3>Pitfalls to Avoid</h3><p>Do not buy a property solely for short‑let without checking location. If it is far from major attractions or airports (e.g., Kubwa or Lugbe), occupancy will be low. Also, consider maintenance costs – frequent guest turnover means more wear and tear. Factor in laundry, utilities, and platform commissions (15% on average).</p><h3>Success Story</h3><p>An investor we worked with purchased a 4‑bedroom in Wuse 2 for ₦180 million. After ₦15 million in renovations, he earns ₦8 million monthly at 65% occupancy – a 53% annual return on investment, far above long‑term yields.</p><p>Prima offers property management for short‑let landlords, including cleaning, guest communication, and pricing optimization. Contact us to learn more.</p>",
+      "image": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&h=500&fit=crop",
+      "views": 2130
     },
     {
       "id": 5,
-      "title": "Smart Home Technology for Modern Properties",
-      "excerpt": "Explore the latest smart home technologies that can increase property value and convenience.",
-      "content": "Full article content about smart home technology...",
-      "author": "Michael Brown",
-      "date": "2023-09-28",
-      "category": "Technology",
-      "image": "4.jpg",
-      "readTime": "9 min",
-      "tags": ["technology", "smarthome", "innovation", "propertyvalue"]
-    },
-    {
-      "id": 6,
-      "title": "Seasonal Property Maintenance Checklist",
-      "excerpt": "Quarterly maintenance tasks to keep your property in top condition year-round.",
-      "content": "Full article content about seasonal maintenance...",
-      "author": "Sarah Chen",
-      "date": "2023-09-20",
-      "category": "Maintenance",
-      "image": "1.jpg",
-      "readTime": "6 min",
-      "tags": ["seasonal", "maintenance", "checklist", "preparation"]
+      "title": "Moving Without Stress: A Complete Guide to Relocating in Nigeria",
+      "category": "Moving",
+      "author": "Sarah Adeyemi",
+      "date": "2025-05-05",
+      "excerpt": "Packing, transporting, and settling into a new home can be overwhelming. This guide makes your move efficient and calm.",
+      "fullBody": "<p>Relocating within Nigeria – whether across town or to another state – requires careful organization. Use this step‑by‑step plan to avoid common headaches.</p><h3>6 Weeks Before Move</h3><p>Declutter: Sort items into keep, donate, or discard. Host a garage sale or give away usable furniture to charities. Create a moving budget – include packing materials, transport, and possible storage. If hiring professional movers (recommended for heavy items), get quotes from at least three companies. Compare insurance coverage and check reviews. For long‑distance moves (e.g., Lagos to Abuja), book at least one month ahead.</p><h3>4 Weeks Before</h3><p>Gather packing supplies: strong boxes, bubble wrap, packing paper, tape, and markers. Pack non‑essentials first: off‑season clothing, books, décor. Label each box with room destination and a short description (e.g., 'Kitchen – fragile glasses'). Start notifying utilities: disconnect electricity, water, internet, and pay final bills. Arrange for transfer of school records for children.</p><h3>2 Weeks Before</h3><p>Confirm date and time with movers. Prepare a 'first‑night' box with toiletries, a change of clothes, medications, phone chargers, and basic utensils. Pack valuables (jewelry, documents, cash) separately – carry these in your personal vehicle. Cancel or transfer subscriptions (newspaper, gas delivery). Take photos of electronics and furniture before disassembly for reference.</p><h3>Moving Day</h3><p>Be present to direct the movers. Check each item off an inventory list. Keep snacks and water for the crew. After loading, do a final walkthrough – check closets, cabinets, and the yard. Lock all windows and doors. Take meter readings for electricity and water. Hand over keys to new owner or landlord.</p><h3>Arriving at New Home</h3><p>Inspect the property for any pre‑existing damage (document with photos). Unpack the first‑night box immediately. Check that utilities are working. Set up beds and basic kitchen before tackling other boxes. Dispose of packing materials responsibly – recycle cardboard.</p><h3>After the Move</h3><p>Update your address with bank, employer, driver’s license, and insurance companies. Register children in new schools. Introduce yourself to neighbours. If anything was damaged during the move, file a claim with the mover’s insurance within 48 hours.</p><p>Prima Moving & Logistics offers full‑service relocations – packing, transport, storage, and unpacking. Call us at +2341234567890 or WhatsApp for a free quote.</p>",
+      "image": "https://images.unsplash.com/photo-1595428774223-ef5262f7fb34?w=800&h=500&fit=crop",
+      "views": 1560
     }
-  ],
-  "categories": ["Maintenance", "Selling", "Moving", "Handyman", "Technology", "Tips", "Guides"]
+  ]
 }
