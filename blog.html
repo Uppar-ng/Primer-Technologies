@@ -2,366 +2,701 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Blog & Resources | Primer Technologies | Property Insights & Tips</title>
-    <meta name="description" content="Expert insights, property tips, market trends, and valuable resources from Primer Technologies. Stay informed about real estate and property management.">
-    <meta name="keywords" content="real estate blog, property tips, home maintenance, market trends, moving guide, property investment">
-    <meta name="author" content="Primer Technologies">
-    
-    <!-- Open Graph / Social Media Meta Tags -->
-    <meta property="og:title" content="Blog & Resources | Primer Technologies">
-    <meta property="og:description" content="Expert insights and valuable resources for property owners and investors.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://primertechnologies.com/blog.html">
-    <meta property="og:image" content="https://primertechnologies.com/images/og-blog.jpg">
-    
-    <!-- JSON-LD Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Blog",
-        "name": "Primer Technologies Blog",
-        "description": "Expert insights on real estate, property management, and home improvement",
-        "url": "https://primer-technologies.vercel.app/blog.html",
-        "publisher": {
-            "@type": "Organization",
-            "name": "Primer Technologies",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://primer-technologies.vercel.app/images/logo.svg"
-            }
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Blog | Prima</title>
+    <meta name="description" content="Expert insights, property tips, market trends, and home maintenance advice from Prima.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-    }
-    </script>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    
-    <!-- CSS Styles -->
-    <link rel="stylesheet" href="css/styles.css">
+        :root {
+            --primary: #2563EB;
+            --primary-dark: #1D4ED8;
+            --bg: #F8FAFC;
+            --white: #FFFFFF;
+            --text: #0F172A;
+            --text-light: #475569;
+            --border: #E2E8F0;
+            --shadow: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.025);
+            --radius: 12px;
+        }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+        }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        /* Header */
+        .main-header {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+        }
+        .logo a {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .desktop-nav {
+            display: flex;
+            gap: 2rem;
+        }
+        .desktop-nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .desktop-nav a:hover, .desktop-nav a.active {
+            color: var(--primary);
+        }
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+        }
+        .icon-btn {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--text);
+            padding: 0.5rem;
+            border-radius: 8px;
+        }
+        .mobile-only { display: none; }
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 80%;
+            max-width: 300px;
+            height: 100%;
+            background: var(--white);
+            z-index: 200;
+            transition: left 0.3s ease;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            box-shadow: var(--shadow-lg);
+        }
+        .mobile-menu.open { left: 0; }
+        .mobile-menu a {
+            text-decoration: none;
+            font-size: 1.2rem;
+            color: var(--text);
+            font-weight: 500;
+        }
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        /* Blog layout */
+        .blog-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+        @media (max-width: 768px) {
+            .blog-layout { grid-template-columns: 1fr; gap: 2rem; }
+        }
+        .blog-grid {
+            display: grid;
+            gap: 2rem;
+        }
+        .blog-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s;
+        }
+        .blog-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        .blog-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+        .blog-content {
+            padding: 1.5rem;
+        }
+        .blog-category {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 2rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+        .blog-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        .blog-excerpt {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-light);
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+        }
+        .read-more {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+        /* Sidebar */
+        .sidebar-widget {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+        .sidebar-widget h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        .search-box {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .search-box input {
+            flex: 1;
+            padding: 0.6rem;
+            border: 1px solid var(--border);
+            border-radius: 2rem;
+            background: var(--bg);
+        }
+        .search-box button {
+            background: var(--primary);
+            border: none;
+            padding: 0.6rem 1rem;
+            border-radius: 2rem;
+            color: white;
+            cursor: pointer;
+        }
+        .categories-list {
+            list-style: none;
+        }
+        .categories-list li {
+            margin-bottom: 0.75rem;
+        }
+        .categories-list a {
+            color: var(--text);
+            text-decoration: none;
+            display: flex;
+            justify-content: space-between;
+        }
+        .categories-list a:hover {
+            color: var(--primary);
+        }
+        .popular-post {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            align-items: center;
+        }
+        .popular-post img {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+        .popular-post h4 {
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+        .popular-post p {
+            font-size: 0.75rem;
+            color: var(--text-light);
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 2rem 0;
+        }
+        .pagination button {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            background: var(--white);
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .pagination button.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        /* Modal for full article */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        .modal.active {
+            display: flex;
+        }
+        .modal-content {
+            background: var(--white);
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: var(--radius);
+            padding: 2rem;
+            position: relative;
+            box-shadow: var(--shadow-lg);
+        }
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+        .modal-close:hover {
+            color: var(--text);
+        }
+        .modal-content img {
+            width: 100%;
+            border-radius: var(--radius);
+            margin-bottom: 1rem;
+        }
+        .modal-content .category {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 2rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        .modal-content h2 {
+            margin-bottom: 0.5rem;
+        }
+        .modal-content .meta {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 1rem;
+        }
+        .modal-content .full-body {
+            line-height: 1.7;
+            color: var(--text);
+        }
+        /* Footer */
+        .footer {
+            background: #0F172A;
+            color: #94A3B8;
+            padding: 3rem 0 1.5rem;
+            margin-top: 3rem;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .footer h4 { color: white; margin-bottom: 1rem; }
+        .footer a { color: #94A3B8; text-decoration: none; display: block; margin: 0.5rem 0; }
+        .social i { font-size: 1.2rem; margin-right: 1rem; cursor: pointer; }
+        .footer-bottom { text-align: center; padding-top: 1rem; border-top: 1px solid #1E293B; font-size: 0.85rem; }
+        @media (max-width: 768px) {
+            .desktop-nav { display: none; }
+            .mobile-only { display: block; }
+        }
+        [data-theme="dark"] {
+            --bg: #0F172A;
+            --white: #1E293B;
+            --text: #F1F5F9;
+            --text-light: #94A3B8;
+            --border: #334155;
+        }
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-light);
+        }
+    </style>
 </head>
 <body>
-    <!-- Professional Header -->
-    <header class="main-header" id="mainHeader">
-        <div class="container header-container">
-            <div class="logo-container">
-                <a href="index.html" class="logo">
-                    <i class="fas fa-building logo-icon"></i>
-                    <span class="logo-text">Primer Technologies</span>
-                    <span class="logo-tagline">Complete Property Solutions</span>
-                </a>
-            </div>
-
-            <!-- Desktop Navigation -->
+    <header class="main-header">
+        <div class="container">
+            <div class="logo"><a href="index.html">Prima</a></div>
             <nav class="desktop-nav">
-                <ul class="nav-links">
-                    <li class="nav-item">
-                        <a href="index.html" class="nav-link">Home</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a href="browse.html" class="nav-link has-dropdown">Properties</a>
-                        <div class="dropdown-menu">
-                            <a href="browse.html" class="dropdown-link">Browse All</a>
-                            <a href="browse.html?type=sale" class="dropdown-link">For Sale</a>
-                            <a href="browse.html?type=rent" class="dropdown-link">For Rent</a>
-                            <a href="browse.html?type=commercial" class="dropdown-link">Commercial</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a href="services.html" class="nav-link has-dropdown">Services</a>
-                        <div class="dropdown-menu">
-                            <a href="services.html#listing" class="dropdown-link">Property Listing</a>
-                            <a href="services.html#maintenance" class="dropdown-link">Maintenance</a>
-                            <a href="services.html#logistics" class="dropdown-link">Moving & Logistics</a>
-                            <a href="services.html#handyman" class="dropdown-link">Handyman Services</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a href="about.html" class="nav-link">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="blog.html" class="nav-link active">Blog</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="contact.html" class="nav-link">Contact</a>
-                    </li>
-                </ul>
+                <a href="index.html">Home</a>
+                <a href="browse.html">Buy</a>
+                <a href="browse.html?type=rent">Rent</a>
+                <a href="browse.html?type=shortlet">Short Let</a>
+                <a href="services.html">Services</a>
+                <a href="about.html">About</a>
+                <a href="blog.html" class="active">Blog</a>
+                <a href="contact.html">Contact</a>
+                <a href="favorites.html"><i class="fas fa-heart"></i> Saved</a>
             </nav>
-
-            <!-- Header Actions -->
             <div class="header-actions">
-                <!-- User Menu -->
-                <div class="user-menu">
-                    <div class="dropdown-menu" id="userDropdown" style="right: 0; left: auto; min-width: 180px;">
-                        <a href="profile.html" class="dropdown-link"><i class="fas fa-user" style="margin-right: 0.5rem;"></i>Profile</a>
-                        <a href="favorites.html" class="dropdown-link"><i class="fas fa-heart" style="margin-right: 0.5rem;"></i>Favorites</a>
-                        <a href="bookings.html" class="dropdown-link"><i class="fas fa-calendar" style="margin-right: 0.5rem;"></i>Bookings</a>
-                        <div style="border-top: 1px solid var(--border-light); margin: var(--spacing-sm) 0;"></div>
-                        <a href="logout.html" class="dropdown-link"><i class="fas fa-sign-out-alt" style="margin-right: 0.5rem;"></i>Logout</a>
-                    </div>
-                </div>
+                <button id="themeToggle" class="icon-btn"><i class="fas fa-moon"></i></button>
+                <button id="mobileMenuToggle" class="icon-btn mobile-only"><i class="fas fa-bars"></i></button>
             </div>
-
-            <!-- Mobile Menu Toggle -->
-            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu">
-                <span class="menu-line"></span>
-                <span class="menu-line"></span>
-                <span class="menu-line"></span>
-            </button>
         </div>
     </header>
 
-    <!-- Mobile Navigation -->
-    <nav class="mobile-nav" id="mobileNav">
-        <div class="mobile-nav-header">
-            <div class="logo">
-                <i class="fas fa-building logo-icon"></i>
-                <span class="logo-text">Primer Technologies</span>
+    <div class="mobile-menu" id="mobileMenu">
+        <button id="closeMenu"><i class="fas fa-times"></i></button>
+        <a href="index.html">Home</a>
+        <a href="browse.html">Buy</a>
+        <a href="browse.html?type=rent">Rent</a>
+        <a href="browse.html?type=shortlet">Short Let</a>
+        <a href="services.html">Services</a>
+        <a href="about.html">About</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+        <a href="favorites.html">Saved Properties</a>
+    </div>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Blog & Insights</h1>
+                <p>Expert tips, market trends, and property advice from the Prima team.</p>
             </div>
-            <button class="mobile-menu-toggle active" id="closeMobileMenu" aria-label="Close mobile menu">
-                <span class="menu-line"></span>
-                <span class="menu-line"></span>
-                <span class="menu-line"></span>
-            </button>
-        </div>
+        </section>
 
-        <ul class="mobile-nav-links">
-            <li><a href="index.html" class="mobile-nav-link">Home</a></li>
-            <li><a href="browse.html" class="mobile-nav-link">Browse Properties</a></li>
-            <li><a href="browse.html?type=sale" class="mobile-nav-link">For Sale</a></li>
-            <li><a href="browse.html?type=rent" class="mobile-nav-link">For Rent</a></li>
-            <li><a href="services.html" class="mobile-nav-link">Services</a></li>
-            <li><a href="services.html#listing" class="mobile-nav-link">Property Listing</a></li>
-            <li><a href="services.html#maintenance" class="mobile-nav-link">Maintenance</a></li>
-            <li><a href="services.html#logistics" class="mobile-nav-link">Moving & Logistics</a></li>
-            <li><a href="services.html#handyman" class="mobile-nav-link">Handyman Services</a></li>
-            <li><a href="about.html" class="mobile-nav-link">About Us</a></li>
-            <li><a href="blog.html" class="mobile-nav-link active">Blog</a></li>
-            <li><a href="contact.html" class="mobile-nav-link">Contact</a></li>
-        </ul>
-
-        <div class="mobile-nav-actions">
-            <a href="login.html" class="action-btn action-btn-outline">
-                <i class="fas fa-sign-in-alt" style="margin-right: 0.5rem;"></i>Sign In
-            </a>
-            <button class="action-btn action-btn-primary" id="mobileListPropertyBtn">
-                <i class="fas fa-plus" style="margin-right: 0.5rem;"></i>List Property
-            </button>                        
-        </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="main-content">
-        <!-- Hero Section -->
-        <section class="hero-section">
-            <div class="hero-content">
-                <h1 class="hero-title">Blog & Resources</h1>
-                <p class="hero-subtitle">Expert insights, property tips, and valuable resources for property owners and investors</p>
-                <div class="search-container" style="max-width: 600px; margin: var(--spacing-xl) auto 0;">
-                    <form class="blog-search-form" id="blogSearchForm">
-                        <div class="form-group">
-                            <input type="text" id="blogSearch" class="form-input" placeholder="Search articles by keyword, topic, or author...">
-                            <button type="submit" class="btn btn-primary" style="position: absolute; right: 0; top: 0; bottom: 0; border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </div>
-                    </form>
+        <div class="container">
+            <div class="blog-layout">
+                <div class="blog-grid" id="blogGrid">
+                    <div class="loading">Loading articles...</div>
                 </div>
-            </div>
-        </section>
-
-        <!-- Featured Article -->
-        <section class="section-padding bg-light">
-            <div class="container">
-                <h2 class="section-title text-center">Featured Article</h2>
-                <article class="featured-article" id="featuredArticle">
-                    <!-- Featured article will be loaded via JavaScript -->
-                </article>
-            </div>
-        </section>
-
-        <!-- Main Content Area -->
-        <section class="section-padding">
-            <div class="container">
-                <div class="blog-layout">
-                    <!-- Articles Grid -->
-                    <div class="articles-container">
-                        <div class="articles-header">
-                            <h2>Latest Articles</h2>
-                            <div class="articles-filter">
-                                <select id="categoryFilter" class="form-select" style="max-width: 200px;">
-                                    <option value="all">All Categories</option>
-                                    <option value="market-trends">Market Trends</option>
-                                    <option value="maintenance">Maintenance</option>
-                                    <option value="investment">Investment</option>
-                                    <option value="moving">Moving</option>
-                                    <option value="guides">Guides</option>
-                                    <option value="tips">Tips & Advice</option>
-                                </select>
-                                <select id="sortFilter" class="form-select" style="max-width: 200px;">
-                                    <option value="newest">Newest First</option>
-                                    <option value="oldest">Oldest First</option>
-                                    <option value="popular">Most Popular</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <div class="blog-grid" id="articlesGrid">
-                            <!-- Articles will be loaded via JavaScript -->
-                        </div>
-                        
-                        <div class="pagination" id="pagination">
-                            <!-- Pagination will be generated via JavaScript -->
+                <aside>
+                    <div class="sidebar-widget">
+                        <h3>Search</h3>
+                        <div class="search-box">
+                            <input type="text" id="searchInput" placeholder="Search articles...">
+                            <button id="searchBtn"><i class="fas fa-search"></i></button>
                         </div>
                     </div>
-                    
-                    <!-- Sidebar -->
-                    <aside class="blog-sidebar">
-                        <!-- Categories -->
-                        <div class="sidebar-widget">
-                            <h3>Categories</h3>
-                            <ul class="categories-list" id="categoriesList">
-                                <!-- Categories will be loaded via JavaScript -->
-                            </ul>
-                        </div>
-                        
-                        <!-- Popular Articles -->
-                        <div class="sidebar-widget">
-                            <h3>Popular Articles</h3>
-                            <div class="popular-articles" id="popularArticles">
-                                <!-- Popular articles will be loaded via JavaScript -->
-                            </div>
-                        </div>
-                        
-                        <!-- Newsletter -->
-                        <div class="sidebar-widget">
-                            <div class="newsletter-widget">
-                                <h3>Stay Updated</h3>
-                                <p>Get the latest property tips and market insights delivered to your inbox.</p>
-                                <form class="newsletter-form" id="newsletterForm">
-                                    <input type="email" class="form-input" placeholder="Your email address" required>
-                                    <button type="submit" class="btn btn-primary btn-full" style="margin-top: var(--spacing-md);">
-                                        Subscribe
-                                    </button>
-                                </form>
-                                <p class="text-tertiary" style="font-size: var(--font-size-xs); margin-top: var(--spacing-sm);">
-                                    By subscribing, you agree to our Privacy Policy.
-                                </p>
-                            </div>
-                        </div>
-                        
-                        <!-- Resources -->
-                        <div class="sidebar-widget">
-                            <h3>Free Resources</h3>
-                            <div class="resources-list">
-                                <a href="#" class="resource-link">
-                                    <i class="fas fa-file-pdf"></i>
-                                    <span>Property Maintenance Checklist</span>
-                                </a>
-                                <a href="#" class="resource-link">
-                                    <i class="fas fa-file-pdf"></i>
-                                    <span>Home Buying Guide 2024</span>
-                                </a>
-                                <a href="#" class="resource-link">
-                                    <i class="fas fa-calculator"></i>
-                                    <span>Mortgage Calculator Tool</span>
-                                </a>
-                                <a href="#" class="resource-link">
-                                    <i class="fas fa-calendar"></i>
-                                    <span>Moving Day Checklist</span>
-                                </a>
-                            </div>
-                        </div>
-                    </aside>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA Section -->
-        <section class="section-padding bg-light">
-            <div class="container">
-                <div class="cta-section">
-                    <h2>Looking for Specific Information?</h2>
-                    <p>Can't find what you're looking for? Our team of experts is here to help with any property-related questions.</p>
-                    <div class="cta-buttons">
-                        <a href="contact.html" class="btn btn-primary btn-lg">
-                            <i class="fas fa-question-circle" style="margin-right: 0.5rem;"></i>Ask an Expert
-                        </a>
-                        <a href="services.html" class="btn btn-outline btn-lg">
-                            <i class="fas fa-info-circle" style="margin-right: 0.5rem;"></i>View Our Services
-                        </a>
+                    <div class="sidebar-widget">
+                        <h3>Categories</h3>
+                        <ul class="categories-list" id="categoriesList">
+                            <li><a href="#">Loading...</a></li>
+                        </ul>
                     </div>
-                </div>
+                    <div class="sidebar-widget">
+                        <h3>Popular Posts</h3>
+                        <div id="popularPosts">
+                            <div class="loading">Loading...</div>
+                        </div>
+                    </div>
+                </aside>
             </div>
-        </section>
+            <div id="pagination" class="pagination"></div>
+        </div>
     </main>
 
-    <!-- Footer -->
+    <!-- Modal for full article -->
+    <div id="articleModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <img id="modalImage" src="" alt="">
+            <span id="modalCategory" class="category"></span>
+            <h2 id="modalTitle"></h2>
+            <div class="meta">
+                <span><i class="fas fa-user"></i> <span id="modalAuthor"></span></span>
+                <span><i class="fas fa-calendar"></i> <span id="modalDate"></span></span>
+            </div>
+            <div id="modalBody" class="full-body"></div>
+        </div>
+    </div>
+
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
-                <div class="footer-section">
-                    <h3>Primer Technologies</h3>
-                    <p>Complete Property Solutions for modern living. We handle everything from finding your dream property to maintaining it for years to come.</p>
-                    <div class="social-links">
-                        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="browse.html">Browse Properties</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Our Services</h3>
-                    <ul class="footer-links">
-                        <li><a href="services.html#listing">Property Listing</a></li>
-                        <li><a href="services.html#maintenance">Property Maintenance</a></li>
-                        <li><a href="services.html#logistics">Logistics & Moving</a></li>
-                        <li><a href="services.html#handyman">Handyman Services</a></li>
-                        <li><a href="book-service.html">Book a Service</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Contact Us</h3>
-                    <address>
-                        <p><i class="fas fa-map-marker-alt" style="margin-right: 0.5rem;"></i>Metropolitan area<br>
-                        Ahmadu Bello Way, Kaduna<br>
-                        Nigeria</p>
-                        <p><i class="fas fa-phone" style="margin-right: 0.5rem;"></i>+1 (555) 123-4567</p>
-                        <p><i class="fas fa-envelope" style="margin-right: 0.5rem;"></i>get.primer@proton.me</p>
-                        <p><i class="fas fa-clock" style="margin-right: 0.5rem;"></i>Mon-Fri: 8am-7pm<br>
-                        Sat: 9am-5pm</p>
-                    </address>
-                </div>
+                <div><h4>Prima</h4><p>Complete property solutions for modern living in Nigeria.</p></div>
+                <div><h4>Company</h4><a href="about.html">About</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a></div>
+                <div><h4>Services</h4><a href="services.html">Listing</a><a href="services.html">Maintenance</a><a href="services.html">Moving</a><a href="services.html">Handyman</a></div>
+                <div><h4>Follow</h4><div class="social"><i class="fab fa-facebook"></i><i class="fab fa-instagram"></i><i class="fab fa-twitter"></i></div></div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Primer Technologies. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#">Cookie Policy</a></p>
-            </div>
+            <div class="footer-bottom">© 2026 Prima. All rights reserved.</div>
         </div>
     </footer>
 
-    <!-- JavaScript -->
-    <script src="js/main.js" defer></script>
-    <script src="js/blog.js" defer></script>
+    <script>
+        // Theme toggle
+        const themeToggle = document.getElementById('themeToggle');
+        if (themeToggle) {
+            const savedTheme = localStorage.getItem('prima_theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            themeToggle.innerHTML = savedTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+            themeToggle.addEventListener('click', () => {
+                const current = document.documentElement.getAttribute('data-theme');
+                const next = current === 'light' ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-theme', next);
+                localStorage.setItem('prima_theme', next);
+                themeToggle.innerHTML = next === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+            });
+        }
+
+        // Mobile menu
+        const mobileToggle = document.getElementById('mobileMenuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const closeMenu = document.getElementById('closeMenu');
+        if (mobileToggle && mobileMenu) {
+            mobileToggle.addEventListener('click', () => mobileMenu.classList.add('open'));
+            closeMenu.addEventListener('click', () => mobileMenu.classList.remove('open'));
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => mobileMenu.classList.remove('open'));
+            });
+        }
+
+        // Modal handling
+        const modal = document.getElementById('articleModal');
+        const modalClose = modal.querySelector('.modal-close');
+        function openModal(post) {
+            document.getElementById('modalImage').src = post.image || 'https://placehold.co/800x500?text=Article';
+            document.getElementById('modalCategory').innerText = post.category;
+            document.getElementById('modalTitle').innerText = post.title;
+            document.getElementById('modalAuthor').innerText = post.author;
+            document.getElementById('modalDate').innerText = formatDate(post.date);
+            document.getElementById('modalBody').innerHTML = post.fullBody || post.excerpt || 'Full article content will appear here.';
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        modalClose.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+        });
+
+        // Blog data
+        let allPosts = [];
+        let filteredPosts = [];
+        let currentPage = 1;
+        const postsPerPage = 6;
+        let currentCategory = 'all';
+        let currentSearch = '';
+
+        async function loadBlogData() {
+            try {
+                const response = await fetch('data/blog.json');
+                if (!response.ok) throw new Error('Failed to load blog data');
+                const data = await response.json();
+                allPosts = data.posts || [];
+                filteredPosts = [...allPosts];
+                renderCategories();
+                renderPopularPosts();
+                applyFiltersAndRender();
+            } catch (error) {
+                console.error('Error loading blog:', error);
+                document.getElementById('blogGrid').innerHTML = '<div class="loading">Unable to load articles. Please refresh.</div>';
+            }
+        }
+
+        function applyFiltersAndRender() {
+            filteredPosts = allPosts.filter(post => {
+                if (currentCategory !== 'all' && post.category !== currentCategory) return false;
+                if (currentSearch && !post.title.toLowerCase().includes(currentSearch.toLowerCase()) && !post.excerpt.toLowerCase().includes(currentSearch.toLowerCase())) return false;
+                return true;
+            });
+            currentPage = 1;
+            renderBlogGrid();
+            renderPagination();
+        }
+
+        function renderBlogGrid() {
+            const start = (currentPage - 1) * postsPerPage;
+            const pagePosts = filteredPosts.slice(start, start + postsPerPage);
+            const grid = document.getElementById('blogGrid');
+            if (pagePosts.length === 0) {
+                grid.innerHTML = '<div class="loading">No articles found.</div>';
+                return;
+            }
+            grid.innerHTML = pagePosts.map(post => `
+                <article class="blog-card">
+                    <img src="${post.image || 'https://placehold.co/800x500?text=Blog'}" alt="${post.title}" loading="lazy">
+                    <div class="blog-content">
+                        <span class="blog-category">${post.category}</span>
+                        <h2 class="blog-title">${post.title}</h2>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-user"></i> ${post.author}</span>
+                            <span><i class="fas fa-calendar"></i> ${formatDate(post.date)}</span>
+                        </div>
+                        <p class="blog-excerpt">${post.excerpt}</p>
+                        <a href="#" class="read-more" data-id="${post.id}">Read full article →</a>
+                    </div>
+                </article>
+            `).join('');
+            // Attach click handlers for read more
+            document.querySelectorAll('.read-more').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const id = parseInt(link.dataset.id);
+                    const post = allPosts.find(p => p.id === id);
+                    if (post) openModal(post);
+                });
+            });
+        }
+
+        function renderPagination() {
+            const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
+            const paginationDiv = document.getElementById('pagination');
+            if (totalPages <= 1) {
+                paginationDiv.innerHTML = '';
+                return;
+            }
+            let html = `<button ${currentPage === 1 ? 'disabled' : ''} onclick="changePage(-1)">Prev</button>`;
+            for (let i = 1; i <= totalPages; i++) {
+                if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
+                    html += `<button class="${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
+                } else if (i === currentPage - 2 || i === currentPage + 2) {
+                    html += `<span style="padding:0 0.5rem;">...</span>`;
+                }
+            }
+            html += `<button ${currentPage === totalPages ? 'disabled' : ''} onclick="changePage(1)">Next</button>`;
+            paginationDiv.innerHTML = html;
+        }
+
+        window.changePage = (delta) => {
+            const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
+            const newPage = currentPage + delta;
+            if (newPage >= 1 && newPage <= totalPages) {
+                currentPage = newPage;
+                renderBlogGrid();
+                renderPagination();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        };
+        window.goToPage = (page) => {
+            currentPage = page;
+            renderBlogGrid();
+            renderPagination();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        function renderCategories() {
+            const categories = {};
+            allPosts.forEach(post => {
+                const cat = post.category;
+                if (categories[cat]) categories[cat]++;
+                else categories[cat] = 1;
+            });
+            const listHtml = Object.entries(categories).map(([cat, count]) => `
+                <li><a href="#" data-category="${cat}">${cat} <span>(${count})</span></a></li>
+            `).join('');
+            const categoriesList = document.getElementById('categoriesList');
+            if (categoriesList) {
+                categoriesList.innerHTML = `<li><a href="#" data-category="all">All <span>(${allPosts.length})</span></a></li>${listHtml}`;
+                categoriesList.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const category = link.dataset.category;
+                        currentCategory = category === 'all' ? 'all' : category;
+                        applyFiltersAndRender();
+                    });
+                });
+            }
+        }
+
+        function renderPopularPosts() {
+            const popular = [...allPosts].sort((a,b) => (b.views || 0) - (a.views || 0)).slice(0, 3);
+            const container = document.getElementById('popularPosts');
+            if (!container) return;
+            if (popular.length === 0) {
+                container.innerHTML = '<p>No popular posts yet.</p>';
+                return;
+            }
+            container.innerHTML = popular.map(post => `
+                <div class="popular-post">
+                    <img src="${post.image || 'https://placehold.co/60x60?text=Post'}" alt="${post.title}">
+                    <div>
+                        <h4>${post.title}</h4>
+                        <p>${formatDate(post.date)}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+        }
+
+        // Search
+        document.getElementById('searchBtn')?.addEventListener('click', () => {
+            currentSearch = document.getElementById('searchInput').value.trim();
+            applyFiltersAndRender();
+        });
+        document.getElementById('searchInput')?.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                currentSearch = e.target.value.trim();
+                applyFiltersAndRender();
+            }
+        });
+
+        loadBlogData();
+    </script>
 </body>
 </html>

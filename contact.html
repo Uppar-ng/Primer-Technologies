@@ -2,585 +2,487 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Contact Us | Primer Technologies | Complete Property Solutions</title>
-    <meta name="description" content="Contact Primer Technologies for all your property needs. We're here to help with property listings, maintenance, moving services, and more.">
-    <meta name="keywords" content="contact Primer Technologies, real estate contact, property management support, moving services contact">
-    <meta name="author" content="Primer Technologies">
-    
-    <!-- Open Graph / Social Media Meta Tags -->
-    <meta property="og:title" content="Contact Us | Primer Technologies">
-    <meta property="og:description" content="Get in touch with our team for complete property solutions and expert advice.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://primer-technologies.vercel.app/contact.html">
-    <meta property="og:image" content="https://primer-technologies.vercel.app/images/og-contact.jpg">
-    
-    <!-- JSON-LD Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "ContactPage",
-        "name": "Contact Primer Technologies",
-        "description": "Contact us for property services and support",
-        "url": "https://primer-technologies.vercel.app/contact.html",
-        "contactPoint": {
-            "@type": "ContactPoint",
-            "telephone": "+1-555-123-4567",
-            "contactType": "customer service",
-            "email": "info@primertechnologies.com",
-            "availableLanguage": "English",
-            "hoursAvailable": {
-                "@type": "OpeningHoursSpecification",
-                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-                "opens": "08:00",
-                "closes": "19:00"
-            }
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Contact Us | Prima</title>
+    <meta name="description" content="Get in touch with Prima for property inquiries, support, or to book our services. Call, WhatsApp, or send us a message.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-    }
-    </script>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    
-    <!-- CSS Styles -->
-    <link rel="stylesheet" href="css/styles.css">
+        :root {
+            --primary: #2563EB;
+            --primary-dark: #1D4ED8;
+            --bg: #F8FAFC;
+            --white: #FFFFFF;
+            --text: #0F172A;
+            --text-light: #475569;
+            --border: #E2E8F0;
+            --shadow: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.025);
+            --radius: 12px;
+        }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+        }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        /* Header */
+        .main-header {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+        }
+        .logo a {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .desktop-nav {
+            display: flex;
+            gap: 2rem;
+        }
+        .desktop-nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .desktop-nav a:hover, .desktop-nav a.active {
+            color: var(--primary);
+        }
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+        }
+        .icon-btn {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--text);
+            padding: 0.5rem;
+            border-radius: 8px;
+        }
+        .mobile-only { display: none; }
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 80%;
+            max-width: 300px;
+            height: 100%;
+            background: var(--white);
+            z-index: 200;
+            transition: left 0.3s ease;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            box-shadow: var(--shadow-lg);
+        }
+        .mobile-menu.open { left: 0; }
+        .mobile-menu a {
+            text-decoration: none;
+            font-size: 1.2rem;
+            color: var(--text);
+            font-weight: 500;
+        }
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        /* Contact layout */
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+        @media (max-width: 768px) {
+            .contact-layout { grid-template-columns: 1fr; gap: 2rem; }
+        }
+        /* Contact form */
+        .contact-form {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+        .contact-form h2 {
+            margin-bottom: 1.5rem;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.3rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--bg);
+            font-family: inherit;
+        }
+        .form-group textarea {
+            resize: vertical;
+        }
+        .btn-submit {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+        }
+        .btn-submit:hover {
+            background: var(--primary-dark);
+        }
+        /* Contact info cards */
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .info-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+        .info-card h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .info-card p, .info-card address {
+            color: var(--text-light);
+            line-height: 1.6;
+            font-style: normal;
+        }
+        .info-card i {
+            color: var(--primary);
+            width: 24px;
+        }
+        .map-container {
+            margin-top: 1rem;
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+        .map-container iframe {
+            width: 100%;
+            height: 200px;
+            border: none;
+        }
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .social-links a {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            transition: color 0.2s;
+        }
+        .social-links a:hover {
+            color: var(--primary);
+        }
+        .footer {
+            background: #0F172A;
+            color: #94A3B8;
+            padding: 3rem 0 1.5rem;
+            margin-top: 3rem;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .footer h4 { color: white; margin-bottom: 1rem; }
+        .footer a { color: #94A3B8; text-decoration: none; display: block; margin: 0.5rem 0; }
+        .footer-bottom { text-align: center; padding-top: 1rem; border-top: 1px solid #1E293B; font-size: 0.85rem; }
+        @media (max-width: 768px) {
+            .desktop-nav { display: none; }
+            .mobile-only { display: block; }
+        }
+        [data-theme="dark"] {
+            --bg: #0F172A;
+            --white: #1E293B;
+            --text: #F1F5F9;
+            --text-light: #94A3B8;
+            --border: #334155;
+        }
+        .success-message {
+            background: #10B981;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .error-message {
+            background: #EF4444;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-    <!-- Professional Header -->
-    <header class="main-header" id="mainHeader">
-        <div class="container header-container">
-            <div class="logo-container">
-                <a href="index.html" class="logo">
-                    <i class="fas fa-building logo-icon"></i>
-                    <span class="logo-text">Primer Technologies</span>
-                    <span class="logo-tagline">Complete Property Solutions</span>
-                </a>
-            </div>
-
-            <!-- Desktop Navigation -->
+    <header class="main-header">
+        <div class="container">
+            <div class="logo"><a href="index.html">Prima</a></div>
             <nav class="desktop-nav">
-                <ul class="nav-links">
-                    <li class="nav-item">
-                        <a href="index.html" class="nav-link">Home</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a href="browse.html" class="nav-link has-dropdown">Properties</a>
-                        <div class="dropdown-menu">
-                            <a href="browse.html" class="dropdown-link">Browse All</a>
-                            <a href="browse.html?type=sale" class="dropdown-link">For Sale</a>
-                            <a href="browse.html?type=rent" class="dropdown-link">For Rent</a>
-                            <a href="browse.html?type=commercial" class="dropdown-link">Commercial</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a href="services.html" class="nav-link has-dropdown">Services</a>
-                        <div class="dropdown-menu">
-                            <a href="services.html#listing" class="dropdown-link">Property Listing</a>
-                            <a href="services.html#maintenance" class="dropdown-link">Maintenance</a>
-                            <a href="services.html#logistics" class="dropdown-link">Moving & Logistics</a>
-                            <a href="services.html#handyman" class="dropdown-link">Handyman Services</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a href="about.html" class="nav-link">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="blog.html" class="nav-link">Blog</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="contact.html" class="nav-link active">Contact</a>
-                    </li>
-                </ul>
+                <a href="index.html">Home</a>
+                <a href="browse.html">Buy</a>
+                <a href="browse.html?type=rent">Rent</a>
+                <a href="browse.html?type=shortlet">Short Let</a>
+                <a href="services.html">Services</a>
+                <a href="about.html">About</a>
+                <a href="blog.html">Blog</a>
+                <a href="contact.html" class="active">Contact</a>
+                <a href="favorites.html"><i class="fas fa-heart"></i> Saved</a>
             </nav>
-
-            <!-- Header Actions -->
             <div class="header-actions">
-                <!-- User Menu -->
-                <div class="user-menu">
-                    <div class="dropdown-menu" id="userDropdown" style="right: 0; left: auto; min-width: 180px;">
-                        <a href="profile.html" class="dropdown-link"><i class="fas fa-user" style="margin-right: 0.5rem;"></i>Profile</a>
-                        <a href="favorites.html" class="dropdown-link"><i class="fas fa-heart" style="margin-right: 0.5rem;"></i>Favorites</a>
-                        <a href="bookings.html" class="dropdown-link"><i class="fas fa-calendar" style="margin-right: 0.5rem;"></i>Bookings</a>
-                        <div style="border-top: 1px solid var(--border-light); margin: var(--spacing-sm) 0;"></div>
-                        <a href="logout.html" class="dropdown-link"><i class="fas fa-sign-out-alt" style="margin-right: 0.5rem;"></i>Logout</a>
-                    </div>
-                </div>
+                <button id="themeToggle" class="icon-btn"><i class="fas fa-moon"></i></button>
+                <button id="mobileMenuToggle" class="icon-btn mobile-only"><i class="fas fa-bars"></i></button>
             </div>
-
-            <!-- Mobile Menu Toggle -->
-            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu">
-                <span class="menu-line"></span>
-                <span class="menu-line"></span>
-                <span class="menu-line"></span>
-            </button>
         </div>
     </header>
 
-    <!-- Mobile Navigation -->
-    <nav class="mobile-nav" id="mobileNav">
-        <div class="mobile-nav-header">
-            <div class="logo">
-                <i class="fas fa-building logo-icon"></i>
-                <span class="logo-text">Primer Technologies</span>
-            </div>
-            <button class="mobile-menu-toggle active" id="closeMobileMenu" aria-label="Close mobile menu">
-                <span class="menu-line"></span>
-                <span class="menu-line"></span>
-                <span class="menu-line"></span>
-            </button>
-        </div>
+    <div class="mobile-menu" id="mobileMenu">
+        <button id="closeMenu"><i class="fas fa-times"></i></button>
+        <a href="index.html">Home</a>
+        <a href="browse.html">Buy</a>
+        <a href="browse.html?type=rent">Rent</a>
+        <a href="browse.html?type=shortlet">Short Let</a>
+        <a href="services.html">Services</a>
+        <a href="about.html">About</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+        <a href="favorites.html">Saved Properties</a>
+    </div>
 
-        <ul class="mobile-nav-links">
-            <li><a href="index.html" class="mobile-nav-link">Home</a></li>
-            <li><a href="browse.html" class="mobile-nav-link">Browse Properties</a></li>
-            <li><a href="browse.html?type=sale" class="mobile-nav-link">For Sale</a></li>
-            <li><a href="browse.html?type=rent" class="mobile-nav-link">For Rent</a></li>
-            <li><a href="services.html" class="mobile-nav-link">Services</a></li>
-            <li><a href="services.html#listing" class="mobile-nav-link">Property Listing</a></li>
-            <li><a href="services.html#maintenance" class="mobile-nav-link">Maintenance</a></li>
-            <li><a href="services.html#logistics" class="mobile-nav-link">Moving & Logistics</a></li>
-            <li><a href="services.html#handyman" class="mobile-nav-link">Handyman Services</a></li>
-            <li><a href="about.html" class="mobile-nav-link">About Us</a></li>
-            <li><a href="blog.html" class="mobile-nav-link">Blog</a></li>
-            <li><a href="contact.html" class="mobile-nav-link active">Contact</a></li>
-        </ul>
-
-        <div class="mobile-nav-actions">
-            <a href="login.html" class="action-btn action-btn-outline">
-                <i class="fas fa-sign-in-alt" style="margin-right: 0.5rem;"></i>Sign In
-            </a>
-            <button class="action-btn action-btn-primary" id="mobileListPropertyBtn">
-                <i class="fas fa-plus" style="margin-right: 0.5rem;"></i>List Property
-            </button>
-        </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="main-content">
-        <!-- Hero Section -->
-        <section class="hero-section">
-            <div class="hero-content">
-                <h1 class="hero-title">Contact Us</h1>
-                <p class="hero-subtitle">We're here to help with all your property needs. Get in touch with our team today.</p>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Contact Us</h1>
+                <p>We’re here to help with any property inquiry or service request.</p>
             </div>
         </section>
 
-        <!-- Contact Options -->
-        <section class="section-padding">
-            <div class="container">
-                <h2 class="section-title text-center">How Can We Help You?</h2>
-                <div class="contact-options">
-                    <div class="contact-option">
-                        <div class="option-icon">
-                            <i class="fas fa-comments"></i>
+        <div class="container">
+            <div class="contact-layout">
+                <!-- Contact Form -->
+                <div class="contact-form">
+                    <h2>Send us a message</h2>
+                    <div id="formStatus"></div>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" required>
                         </div>
-                        <h3>General Inquiries</h3>
-                        <p>Questions about our services or need more information?</p>
-                        <a href="#contactForm" class="btn btn-outline" style="margin-top: var(--spacing-md);">
-                            Send Message
-                        </a>
-                    </div>
-                    <div class="contact-option">
-                        <div class="option-icon">
-                            <i class="fas fa-phone-alt"></i>
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" required>
                         </div>
-                        <h3>Phone Support</h3>
-                        <p>Speak directly with our customer service team.</p>
-                        <a href="tel:+15551234567" class="btn btn-outline" style="margin-top: var(--spacing-md);">
-                            <i class="fas fa-phone" style="margin-right: 0.5rem;"></i>Call Now
-                        </a>
-                    </div>
-                    <div class="contact-option">
-                        <div class="option-icon">
-                            <i class="fas fa-calendar-check"></i>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone">
                         </div>
-                        <h3>Schedule Consultation</h3>
-                        <p>Book a personalized consultation with our experts.</p>
-                        <a href="book-service.html" class="btn btn-outline" style="margin-top: var(--spacing-md);">
-                            Book Now
-                        </a>
-                    </div>
-                    <div class="contact-option">
-                        <div class="option-icon">
-                            <i class="fas fa-question-circle"></i>
+                        <div class="form-group">
+                            <label for="subject">Subject *</label>
+                            <select id="subject" required>
+                                <option value="">Select a subject</option>
+                                <option value="Property Inquiry">Property Inquiry</option>
+                                <option value="Service Booking">Service Booking</option>
+                                <option value="Support">Support</option>
+                                <option value="Feedback">Feedback</option>
+                                <option value="Partnership">Partnership</option>
+                            </select>
                         </div>
-                        <h3>FAQ & Support</h3>
-                        <p>Find answers to common questions in our FAQ section.</p>
-                        <a href="#faq" class="btn btn-outline" style="margin-top: var(--spacing-md);">
-                            View FAQs
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Form & Info -->
-        <section class="section-padding bg-light">
-            <div class="container">
-                <div class="contact-layout">
-                    <!-- Contact Form -->
-                    <div class="contact-form-container">
-                        <h2 class="section-title">Send Us a Message</h2>
-                        <form class="contact-form" id="contactForm">
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="name" class="form-label">Full Name *</label>
-                                    <input type="text" id="name" class="form-input" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="email" class="form-label">Email Address *</label>
-                                    <input type="email" id="email" class="form-input" required>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="phone" class="form-label">Phone Number</label>
-                                    <input type="tel" id="phone" class="form-input">
-                                </div>
-                                <div class="form-group">
-                                    <label for="subject" class="form-label">Subject *</label>
-                                    <select id="subject" class="form-select" required>
-                                        <option value="">Select a subject</option>
-                                        <option value="property-listing">Property Listing Inquiry</option>
-                                        <option value="maintenance">Maintenance Services</option>
-                                        <option value="moving">Moving & Logistics</option>
-                                        <option value="handyman">Handyman Services</option>
-                                        <option value="general">General Inquiry</option>
-                                        <option value="support">Technical Support</option>
-                                        <option value="feedback">Feedback & Suggestions</option>
-                                        <option value="other">Other</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="propertyReference" class="form-label">Property Reference (Optional)</label>
-                                <input type="text" id="propertyReference" class="form-input" placeholder="Property ID or address if applicable">
-                            </div>
-                            <div class="form-group">
-                                <label for="message" class="form-label">Message *</label>
-                                <textarea id="message" class="form-input" rows="6" required></textarea>
-                            </div>
-                            <div class="form-group">
-                                <div class="checkbox-group">
-                                    <input type="checkbox" id="newsletter" name="newsletter">
-                                    <label for="newsletter">Subscribe to our newsletter for property tips and updates</label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary btn-lg">
-                                    Send Message
-                                    <span class="loading" style="display: none; margin-left: 0.5rem;"></span>
-                                </button>
-                            </div>
-                            <p class="text-tertiary" style="font-size: var(--font-size-sm); margin-top: var(--spacing-md);">
-                                * Required fields. We typically respond within 24 hours.
-                            </p>
-                        </form>
-                        <div class="form-success" id="formSuccess" style="display: none;">
-                            <div class="success-message">
-                                <i class="fas fa-check-circle" style="font-size: 3rem; color: var(--success); margin-bottom: var(--spacing-md);"></i>
-                                <h3>Message Sent Successfully!</h3>
-                                <p>Thank you for contacting Primer Technologies. We've received your message and will get back to you within 24 hours.</p>
-                                <p>Your reference number: <strong id="referenceNumber">PT-2024-001</strong></p>
-                                <button class="btn btn-outline" onclick="resetForm()" style="margin-top: var(--spacing-lg);">
-                                    Send Another Message
-                                </button>
-                            </div>
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" rows="5" required></textarea>
                         </div>
-                    </div>
-                    
-                    <!-- Contact Information -->
-                    <div class="contact-info">
-                        <h2 class="section-title">Contact Information</h2>
-                        
-                        <!-- Office Locations -->
-                        <div class="contact-section">
-                            <h3><i class="fas fa-map-marker-alt" style="margin-right: 0.5rem;"></i>Office Locations</h3>
-                            <div class="office-list">
-                                <div class="office-item">
-                                    <h4>Headquarters</h4>
-                                    <address>
-                                        <p>Metropolitan Area<br>
-                                        Ahmadu Bello Way, Kaduna<br>
-                                        Nigeria</p>
-                                    </address>
-                                </div>
-                                <div class="office-item">
-                                    <h4>Zaria Office</h4>
-                                    <address>
-                                        <p>789 Ocean View Drive<br>
-                                        Coastville, CA 90210<br>
-                                        Nigeria</p>
-                                    </address>
-                                </div>
-                                <div class="office-item">
-                                    <h4>East Coast Office</h4>
-                                    <address>
-                                        <p>456 Metropolitan Ave<br>
-                                        Metrocity, NY 10001<br>
-                                        Nigeria</p>
-                                    </address>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Contact Details -->
-                        <div class="contact-section">
-                            <h3><i class="fas fa-address-book" style="margin-right: 0.5rem;"></i>Contact Details</h3>
-                            <ul class="contact-details">
-                                <li>
-                                    <i class="fas fa-phone"></i>
-                                    <div>
-                                        <strong>Main Office</strong>
-                                        <p>+1 (555) 123-4567</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <i class="fas fa-phone"></i>
-                                    <div>
-                                        <strong>Sales & Listings</strong>
-                                        <p>+1 (555) 123-4568</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <i class="fas fa-phone"></i>
-                                    <div>
-                                        <strong>Support & Maintenance</strong>
-                                        <p>+1 (555) 123-4569</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <i class="fas fa-envelope"></i>
-                                    <div>
-                                        <strong>General Inquiries</strong>
-                                        <p>get.primer@proton.me</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <i class="fas fa-envelope"></i>
-                                    <div>
-                                        <strong>Support</strong>
-                                        <p>get.primer@proton.me</p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        
-                        <!-- Business Hours -->
-                        <div class="contact-section">
-                            <h3><i class="fas fa-clock" style="margin-right: 0.5rem;"></i>Business Hours</h3>
-                            <ul class="business-hours">
-                                <li>
-                                    <span>Monday - Friday</span>
-                                    <span>8:00 AM - 7:00 PM</span>
-                                </li>
-                                <li>
-                                    <span>Saturday</span>
-                                    <span>9:00 AM - 5:00 PM</span>
-                                </li>
-                                <li>
-                                    <span>Sunday</span>
-                                    <span>Emergency Support Only</span>
-                                </li>
-                                <li>
-                                    <span>24/7 Emergency</span>
-                                    <span>+1 (555) 123-EMER</span>
-                                </li>
-                            </ul>
-                        </div>
-                        
-                        <!-- Map -->
-                        <div class="contact-section">
-                            <h3><i class="fas fa-map" style="margin-right: 0.5rem;"></i>Find Us</h3>
-                            <div class="map-container">
-                                <iframe 
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.2219901290355!2d-74.00369368400567!3d40.71312937933185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a316fa661bb%3A0x7df4c1933d5c9e7b!2s123%20Property%20Ave%2C%20New%20York%2C%20NY%2010001!5e0!3m2!1sen!2sus!4v1625070000000!5m2!1sen!2sus" 
-                                    width="100%" 
-                                    height="250" 
-                                    style="border:0;" 
-                                    allowfullscreen="" 
-                                    loading="lazy"
-                                    title="Primer Technologies Headquarters Location">
-                                </iframe>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- FAQ Section -->
-        <section class="section-padding" id="faq">
-            <div class="container">
-                <h2 class="section-title text-center">Frequently Asked Questions</h2>
-                <p class="text-center" style="max-width: 800px; margin: 0 auto var(--spacing-2xl); color: var(--text-secondary);">
-                    Find quick answers to common questions about our services and processes.
-                </p>
-                <div class="faq-accordion" id="faqAccordion">
-                    <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
-                            How quickly can you list my property?
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <p>We can typically list your property within 48 hours of receiving all necessary documentation and completing our professional photography session. Our expedited service can list properties within 24 hours for urgent situations.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
-                            What areas do you serve?
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <p>We currently serve 25 cities across multiple states including California, New York, Texas, Florida, and Illinois. Our services are expanding, so please contact us to check if we cover your specific area.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
-                            How does your maintenance service work?
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <p>We offer flexible maintenance plans starting from basic monthly check-ups to comprehensive annual packages. All maintenance is performed by certified professionals, and we provide detailed reports after each service visit.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
-                            Are your movers insured and certified?
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Yes, all our moving and logistics team members are fully insured, background-checked, and certified. We provide valuation coverage for your belongings and have a perfect safety record.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
-                            What types of handyman services do you offer?
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <p>We offer a wide range of handyman services including minor repairs, installations, assembly, painting, drywall, plumbing fixes, electrical work (non-licensed), furniture assembly, and general home improvements.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
-                            How do I schedule a property viewing?
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <p>You can schedule viewings directly through our website on any property page, via our mobile app, or by calling our office. We offer flexible scheduling including evenings and weekends.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
-                            What are your service fees?
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Our fees vary by service and are transparently listed on our services page. Property listing typically ranges from 1-3% depending on the service package. Maintenance and handyman services are billed hourly or through monthly plans.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Still Have Questions -->
-                <div class="faq-footer" style="text-align: center; margin-top: var(--spacing-3xl);">
-                    <h3>Still Have Questions?</h3>
-                    <p style="margin-bottom: var(--spacing-lg);">Can't find what you're looking for? Our team is ready to help.</p>
-                    <a href="#contactForm" class="btn btn-primary btn-lg">
-                        <i class="fas fa-envelope" style="margin-right: 0.5rem;"></i>Contact Support
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Newsletter Section -->
-        <section class="section-padding bg-light">
-            <div class="container">
-                <div class="newsletter-section">
-                    <h2>Stay Connected</h2>
-                    <p>Subscribe to our newsletter for the latest property tips, market updates, and exclusive offers.</p>
-                    <form class="newsletter-form-large" id="newsletterFormLarge">
-                        <div class="form-group" style="flex: 1; max-width: 400px;">
-                            <input type="email" class="form-input" placeholder="Enter your email address" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-lg">
-                            Subscribe
-                        </button>
+                        <button type="submit" class="btn-submit">Send Message</button>
                     </form>
-                    <p class="text-tertiary" style="font-size: var(--font-size-sm); margin-top: var(--spacing-sm);">
-                        We respect your privacy. Unsubscribe at any time.
-                    </p>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="contact-info">
+                    <div class="info-card">
+                        <h3><i class="fas fa-map-marker-alt"></i> Headquarters</h3>
+                        <address>
+                            Ahmadu Bello Way, Kaduna, Nigeria<br>
+                            <i class="fas fa-phone"></i> <a href="tel:+2341234567890">+234 123 456 7890</a><br>
+                            <i class="fas fa-envelope"></i> <a href="mailto:get.primer@proton.me">get.primer@proton.me</a>
+                        </address>
+                    </div>
+                    <div class="info-card">
+                        <h3><i class="fas fa-clock"></i> Business Hours</h3>
+                        <p>Monday – Friday: 8:00 AM – 7:00 PM<br>
+                        Saturday: 9:00 AM – 5:00 PM<br>
+                        Sunday: Closed (emergency support only)</p>
+                    </div>
+                    <div class="info-card">
+                        <h3><i class="fas fa-share-alt"></i> Connect with us</h3>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <h3><i class="fas fa-map"></i> Find us</h3>
+                        <div class="map-container">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3940.0!2d7.4905!3d10.5105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104b0b1b1b1b1b1b%3A0x0!2sKaduna!5e0!3m2!1sen!2sng!4v1234567890123" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                        <p style="font-size:0.8rem; margin-top:0.5rem;">Ahmadu Bello Way, Kaduna</p>
+                    </div>
                 </div>
             </div>
-        </section>
+        </div>
     </main>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
-                <div class="footer-section">
-                    <h3>Primer Technologies</h3>
-                    <p>Complete Property Solutions for modern living. We handle everything from finding your dream property to maintaining it for years to come.</p>
-                    <div class="social-links">
-                        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="browse.html">Browse Properties</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Our Services</h3>
-                    <ul class="footer-links">
-                        <li><a href="services.html#listing">Property Listing</a></li>
-                        <li><a href="services.html#maintenance">Property Maintenance</a></li>
-                        <li><a href="services.html#logistics">Logistics & Moving</a></li>
-                        <li><a href="services.html#handyman">Handyman Services</a></li>
-                        <li><a href="book-service.html">Book a Service</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Contact Us</h3>
-                    <address>
-                        <p><i class="fas fa-map-marker-alt" style="margin-right: 0.5rem;"></i>Metropolitan Area<br>
-                        Ahmadu Bello Way, Kaduna<br>
-                        Nigeria</p>
-                        <p><i class="fas fa-phone" style="margin-right: 0.5rem;"></i>+1 (555) 123-4567</p>
-                        <p><i class="fas fa-envelope" style="margin-right: 0.5rem;"></i>get.primer@proton.me</p>
-                        <p><i class="fas fa-clock" style="margin-right: 0.5rem;"></i>Mon-Fri: 8am-7pm<br>
-                        Sat: 9am-5pm</p>
-                    </address>
-                </div>
+                <div><h4>Prima</h4><p>Complete property solutions for modern living in Nigeria.</p></div>
+                <div><h4>Company</h4><a href="about.html">About</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a></div>
+                <div><h4>Services</h4><a href="services.html">Listing</a><a href="services.html">Maintenance</a><a href="services.html">Moving</a><a href="services.html">Handyman</a></div>
+                <div><h4>Follow</h4><div class="social"><i class="fab fa-facebook"></i><i class="fab fa-instagram"></i><i class="fab fa-twitter"></i></div></div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Primer Technologies. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#">Cookie Policy</a></p>
-            </div>
+            <div class="footer-bottom">© 2026 Prima. All rights reserved.</div>
         </div>
     </footer>
 
-    <!-- JavaScript -->
-    <script src="js/main.js" defer></script>
-    <script src="js/contact.js" defer></script>
+    <script>
+        // Theme toggle
+        const themeToggle = document.getElementById('themeToggle');
+        if (themeToggle) {
+            const savedTheme = localStorage.getItem('prima_theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            themeToggle.innerHTML = savedTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+            themeToggle.addEventListener('click', () => {
+                const current = document.documentElement.getAttribute('data-theme');
+                const next = current === 'light' ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-theme', next);
+                localStorage.setItem('prima_theme', next);
+                themeToggle.innerHTML = next === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+            });
+        }
+
+        // Mobile menu
+        const mobileToggle = document.getElementById('mobileMenuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const closeMenu = document.getElementById('closeMenu');
+        if (mobileToggle && mobileMenu) {
+            mobileToggle.addEventListener('click', () => mobileMenu.classList.add('open'));
+            closeMenu.addEventListener('click', () => mobileMenu.classList.remove('open'));
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => mobileMenu.classList.remove('open'));
+            });
+        }
+
+        // Google Sheets webhook (same as before)
+        const SHEET_URL = 'https://script.google.com/macros/s/AKfycbyopnxgVhZo80kdR1Rrdr_SbivRJZXrE6cAkwOB9bWB1OklMmp3jWoe9c8W6SGM4XNhHA/exec';
+
+        const contactForm = document.getElementById('contactForm');
+        const formStatus = document.getElementById('formStatus');
+
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value.trim();
+
+            if (!name || !email || !subject || !message) {
+                formStatus.innerHTML = '<div class="error-message">Please fill in all required fields.</div>';
+                setTimeout(() => formStatus.innerHTML = '', 3000);
+                return;
+            }
+
+            const submitBtn = contactForm.querySelector('.btn-submit');
+            const originalText = submitBtn.innerText;
+            submitBtn.innerText = 'Sending...';
+            submitBtn.disabled = true;
+
+            const payload = {
+                type: 'contact_inquiry',
+                name: name,
+                email: email,
+                phone: phone || 'Not provided',
+                subject: subject,
+                message: message,
+                timestamp: new Date().toISOString()
+            };
+
+            try {
+                await fetch(SHEET_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: JSON.stringify(payload),
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                formStatus.innerHTML = '<div class="success-message">Message sent successfully! We will respond within 24 hours.</div>';
+                contactForm.reset();
+            } catch (error) {
+                console.error('Error sending message:', error);
+                formStatus.innerHTML = '<div class="error-message">Failed to send message. Please try again or call us directly.</div>';
+            } finally {
+                submitBtn.innerText = originalText;
+                submitBtn.disabled = false;
+                setTimeout(() => {
+                    if (formStatus.innerHTML) formStatus.innerHTML = '';
+                }, 5000);
+            }
+        });
+    </script>
 </body>
 </html>
