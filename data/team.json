@@ -2,27 +2,63 @@
   "team": [
     {
       "id": 1,
-      "name": "Alamin Ahmed",
-      "position": "Founder & CEO",
-      "bio": "Visionary leader driving Primer Technologies' mission to revolutionize property solutions. Focuses on strategic growth, innovation, and building lasting client relationships through technology-driven services.",
-      "image": "alamin-ahmed.jpg",
-      "department": "Executive Leadership",
-      "email": "alamin@primertechnologies.com",
-      "phone": "+234 800 123 4567",
-      "experience": "Emerging Innovator",
-      "specialties": ["Business Strategy", "Technology Integration", "Client Experience", "Market Development"]
+      "name": "Marcus Johnson",
+      "position": "Head of Property Services",
+      "bio": "With over 15 years in real estate and property management, Marcus leads our property services division with expertise in luxury properties and commercial real estate.",
+      "image": "marcus.jpg",
+      "department": "Property Management",
+      "email": "marcus@primertech.com",
+      "phone": "+1 (555) 123-4567 ext. 101",
+      "experience": "15 years",
+      "specialties": ["Luxury Properties", "Commercial Real Estate", "Property Investment"]
     },
     {
       "id": 2,
-      "name": "Najib Isah Ukissa",
-      "position": "Co-founder & Director",
-      "bio": "Operational leader overseeing service delivery and team coordination. Dedicated to ensuring seamless property solutions through efficient processes and customer-focused service excellence.",
-      "image": "najib-ukissa.jpg",
-      "department": "Executive Leadership",
-      "email": "najib@primertechnologies.com",
-      "phone": "+234 800 123 4568",
-      "experience": "Dynamic Operations Leader",
-      "specialties": ["Service Operations", "Team Management", "Process Optimization", "Quality Control"]
+      "name": "Sarah Chen",
+      "position": "Director of Maintenance Operations",
+      "bio": "Sarah brings 12 years of experience in facility management and maintenance operations. She ensures all our maintenance services meet the highest standards of quality and efficiency.",
+      "image": "sarah.jpg",
+      "department": "Maintenance",
+      "email": "sarah@primertech.com",
+      "phone": "+1 (555) 123-4567 ext. 102",
+      "experience": "12 years",
+      "specialties": ["Preventive Maintenance", "Emergency Repairs", "Facility Management"]
+    },
+    {
+      "id": 3,
+      "name": "Robert Davis",
+      "position": "Moving Services Manager",
+      "bio": "Robert has managed thousands of successful moves over his 10-year career. His expertise in logistics and customer service ensures smooth, stress-free moving experiences.",
+      "image": "robert.jpg",
+      "department": "Moving Services",
+      "email": "robert@primertech.com",
+      "phone": "+1 (555) 123-4567 ext. 103",
+      "experience": "10 years",
+      "specialties": ["Residential Moving", "Commercial Relocation", "Storage Solutions"]
+    },
+    {
+      "id": 4,
+      "name": "Emily Wilson",
+      "position": "Lead Handyman Coordinator",
+      "bio": "Emily coordinates our team of skilled handymen, ensuring prompt and professional service for all home repair and improvement projects.",
+      "image": "emily.jpg",
+      "department": "Handyman Services",
+      "email": "emily@primertech.com",
+      "phone": "+1 (555) 123-4567 ext. 104",
+      "experience": "8 years",
+      "specialties": ["Home Repairs", "Installations", "Emergency Services"]
+    },
+    {
+      "id": 5,
+      "name": "Michael Brown",
+      "position": "Customer Success Manager",
+      "bio": "Michael ensures every client receives exceptional service throughout their journey with Primer Technologies, from initial contact to ongoing support.",
+      "image": "michael.jpg",
+      "department": "Customer Success",
+      "email": "michael@primertech.com",
+      "phone": "+1 (555) 123-4567 ext. 105",
+      "experience": "6 years",
+      "specialties": ["Client Relations", "Service Coordination", "Quality Assurance"]
     }
   ]
 }
