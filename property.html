@@ -46,6 +46,8 @@
             -webkit-font-smoothing: antialiased;
         }
         .container { max-width:1280px; margin:0 auto; padding:0 2rem; }
+
+        /* Header */
         .main-header {
             background: rgba(255,255,255,0.8);
             backdrop-filter: blur(12px);
@@ -87,28 +89,57 @@
         .mobile-menu.open { left:0; }
         .mobile-menu a { text-decoration:none; font-size:1.2rem; color:var(--text); font-weight:500; padding:0.5rem 0; border-bottom:1px solid var(--border); }
 
+        /* Property Header */
         .property-header { background: var(--surface); padding:2rem 0; border-bottom:1px solid var(--border); }
         .property-title { font-family:'Playfair Display',serif; font-size:2rem; font-weight:700; margin-bottom:0.5rem; }
         .property-address { color: var(--text-secondary); margin-bottom:0.5rem; display:flex; align-items:center; gap:0.5rem; }
         .property-price { font-size:2rem; font-weight:800; color:var(--primary); margin-top:0.5rem; }
         .badge-type { background:var(--primary); color:white; padding:0.25rem 1rem; border-radius:2rem; font-size:0.8rem; display:inline-block; }
 
+        /* Layout */
         .property-layout { display:grid; grid-template-columns:1fr 380px; gap:2rem; margin:2rem 0; }
         @media (max-width:768px) { .property-layout { grid-template-columns:1fr; } }
 
-        .gallery { position:relative; }
-        .main-image-container { background:var(--surface); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow-sm); }
-        .main-img { width:100%; height:400px; object-fit:cover; cursor:pointer; }
+        /* Gallery & Video */
+        .media-section { margin-bottom:2rem; }
+        .main-image-container {
+            background:var(--surface); border-radius:var(--radius); overflow:hidden;
+            box-shadow:var(--shadow-sm); position:relative; cursor:pointer;
+        }
+        .main-img {
+            width:100%; height:400px; object-fit:cover; display:block;
+            transition: opacity 0.3s;
+        }
         .thumbnail-strip { display:flex; gap:0.75rem; margin-top:1rem; overflow-x:auto; padding-bottom:0.5rem; }
-        .thumbnail { width:80px; height:80px; border-radius:8px; object-fit:cover; cursor:pointer; opacity:0.6; transition:opacity 0.2s; border:2px solid transparent; }
+        .thumbnail { width:80px; height:80px; border-radius:8px; object-fit:cover; cursor:pointer; opacity:0.6; transition:0.2s; border:2px solid transparent; }
         .thumbnail.active, .thumbnail:hover { opacity:1; border-color:var(--accent); }
 
-        .sidebar-card { background:var(--surface); border-radius:var(--radius); padding:1.5rem; box-shadow:var(--shadow-sm); position:sticky; top:5rem; border:1px solid var(--border); }
-        .owner-row { display:flex; align-items:center; gap:1rem; margin:1rem 0; }
-        .owner-avatar { width:64px; height:64px; border-radius:50%; object-fit:cover; }
-        .owner-name { font-weight:700; font-size:1.1rem; display:flex; align-items:center; gap:0.5rem; }
-        .owner-verified { color:var(--accent); font-size:0.9rem; }
-        .owner-actions { display:flex; gap:0.75rem; margin-top:1rem; }
+        .video-container {
+            margin-top:1.5rem; border-radius:var(--radius); overflow:hidden;
+            box-shadow:var(--shadow-sm); background:#000;
+        }
+        .video-container video {
+            width:100%; display:block; max-height:400px; object-fit:cover;
+            /* anti‑download measures */
+            pointer-events: auto;
+        }
+
+        /* Owner Card */
+        .sidebar-card {
+            background:var(--surface); border-radius:var(--radius); padding:1.5rem;
+            box-shadow:var(--shadow-sm); position:sticky; top:5rem; border:1px solid var(--border);
+        }
+        .owner-profile {
+            display:flex; align-items:center; gap:1rem; margin-bottom:1rem;
+        }
+        .owner-avatar {
+            width:72px; height:72px; border-radius:50%; object-fit:cover;
+            border:2px solid var(--accent);
+        }
+        .owner-details h3 { font-size:1.2rem; font-weight:700; display:flex; align-items:center; gap:0.5rem; }
+        .verified-icon { color:var(--accent); font-size:0.9rem; }
+        .owner-phone { color:var(--text-secondary); font-size:0.9rem; }
+        .owner-actions { display:flex; gap:0.75rem; margin:1rem 0; }
         .btn-call, .btn-wa {
             display:inline-flex; align-items:center; gap:0.5rem; padding:0.75rem 1rem;
             border-radius:2rem; text-decoration:none; font-weight:600; font-size:0.9rem; transition:0.2s;
@@ -119,9 +150,16 @@
         hr { margin:1.5rem 0; border:none; border-top:1px solid var(--border); }
         .safety-tips { background:#FEF3C7; padding:1rem; border-radius:var(--radius-sm); font-size:0.85rem; color:#1A1F2E; margin-top:1rem; }
 
-        .tabs-container { margin-top:2rem; background:var(--surface); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow-sm); border:1px solid var(--border); }
+        /* Tabs */
+        .tabs-container {
+            margin-top:2rem; background:var(--surface); border-radius:var(--radius);
+            overflow:hidden; box-shadow:var(--shadow-sm); border:1px solid var(--border);
+        }
         .tabs-header { display:flex; border-bottom:1px solid var(--border); background:var(--surface); flex-wrap:wrap; }
-        .tab-btn-prop { padding:1rem 1.5rem; background:none; border:none; font-weight:600; cursor:pointer; transition:0.2s; color:var(--text-secondary); }
+        .tab-btn-prop {
+            padding:1rem 1.5rem; background:none; border:none; font-weight:600; cursor:pointer;
+            transition:0.2s; color:var(--text-secondary);
+        }
         .tab-btn-prop.active { color:var(--primary); border-bottom:2px solid var(--accent); }
         .tab-content { padding:1.5rem; display:none; }
         .tab-content.active { display:block; animation: fadeIn 0.3s ease; }
@@ -144,6 +182,26 @@
         .property-card .price { font-size:1.1rem; font-weight:700; color:var(--primary); padding:0.75rem 0.75rem 0; }
         .property-card h4 { padding:0 0.75rem; font-size:0.9rem; }
         .property-card p { padding:0 0.75rem 0.75rem; font-size:0.8rem; color:var(--text-secondary); }
+
+        /* Lightbox */
+        .lightbox {
+            position:fixed; top:0; left:0; right:0; bottom:0;
+            background:rgba(0,0,0,0.95); z-index:1000; display:none;
+            align-items:center; justify-content:center;
+        }
+        .lightbox.active { display:flex; }
+        .lightbox img { max-width:90%; max-height:90%; border-radius:8px; }
+        .lightbox-close {
+            position:absolute; top:20px; right:20px; background:none; border:none;
+            color:white; font-size:28px; cursor:pointer;
+        }
+        .lightbox-prev, .lightbox-next {
+            position:absolute; top:50%; transform:translateY(-50%);
+            background:rgba(255,255,255,0.2); border:none; color:white;
+            font-size:2rem; padding:0.5rem 1rem; cursor:pointer; border-radius:8px;
+        }
+        .lightbox-prev { left:20px; }
+        .lightbox-next { right:20px; }
 
         footer { background:#1A1F2E; color:#CBD5E1; padding:4rem 0 1.5rem; margin-top:3rem; }
         footer a { color:#94A3B8; text-decoration:none; }
@@ -171,7 +229,7 @@
             <a href="/how-it-works">How It Works</a>
             <a href="/about">About</a>
             <a href="/contact">Contact</a>
-            <a href="/post" class="btn-outline" style="padding:0.4rem 1.2rem; border-color:var(--accent); color:var(--accent);">List Property</a>
+            <a href="/post">Dashboard</a>
         </nav>
         <div class="header-actions">
             <button id="themeToggle" class="icon-btn"><i class="fas fa-moon"></i></button>
@@ -184,7 +242,7 @@
     <button id="closeMenu" class="close-btn"><i class="fas fa-times"></i></button>
     <a href="/">Home</a><a href="/browse?type=sale">Buy</a><a href="/browse?type=rent">Rent</a>
     <a href="/how-it-works">How It Works</a><a href="/about">About</a><a href="/contact">Contact</a>
-    <a href="/post">List Property</a>
+    <a href="/post">Dashboard</a>
 </div>
 
 <main class="container">
@@ -201,9 +259,17 @@
             <div><h4>Support</h4><a href="/contact">Contact</a><br><a href="/faq">FAQ</a><br><a href="/privacy">Privacy</a><br><a href="/terms">Terms</a></div>
             <div><h4>Connect</h4><div class="social"><i class="fab fa-facebook-f"></i><i class="fab fa-instagram"></i><i class="fab fa-twitter"></i></div></div>
         </div>
-        <div style="text-align:center; padding-top:1.5rem; border-top:1px solid #2E3548; font-size:0.8rem;">© 2026 Zaure Technologies. All rights reserved.</div>
+        <div style="text-align:center; padding-top:1.5rem; border-top:1px solid #2E3548; font-size:0.8rem;">© 2026 Zaure. All rights reserved.</div>
     </div>
 </footer>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+    <button class="lightbox-close">&times;</button>
+    <button class="lightbox-prev"><i class="fas fa-chevron-left"></i></button>
+    <img id="lightboxImg" src="" alt="">
+    <button class="lightbox-next"><i class="fas fa-chevron-right"></i></button>
+</div>
 
 <script>
     (function() {
@@ -248,6 +314,9 @@
             return price >= 1e6 ? `₦${(price/1e6).toFixed(1)}M` : `₦${price.toLocaleString()}`;
         }
 
+        let allImages = [];
+        let currentLightboxIndex = 0;
+
         function renderProperty(prop) {
             const container = document.getElementById('propertyContent');
             const priceFormatted = formatPrice(prop.price);
@@ -255,16 +324,29 @@
             const avatar = owner.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(owner.name)}&background=B49450&color=fff&size=128`;
 
             // Images
-            let images = prop.images && prop.images.length ? [...prop.images] : [];
-            while (images.length < 3) images.push(images[images.length-1] || 'https://placehold.co/800x500?text=Zaure');
-            images = images.slice(0,5);
-            const thumbnailsHtml = images.map((img, idx) => `<img src="${img}" class="thumbnail ${idx === 0 ? 'active' : ''}" data-index="${idx}">`).join('');
+            allImages = prop.images && prop.images.length ? [...prop.images] : ['https://placehold.co/800x500?text=Zaure'];
+            const mainImg = allImages[0];
+            const thumbnailsHtml = allImages.map((img, idx) =>
+                `<img src="${img}" class="thumbnail ${idx === 0 ? 'active' : ''}" data-index="${idx}" alt="Thumbnail">`
+            ).join('');
 
-            const propertyIdDisplay = prop.id || 'N/A';
+            // Video (if available)
+            const videoHtml = prop.video ? `
+                <div class="video-container">
+                    <video controls controlsList="nodownload" oncontextmenu="return false;" playsinline>
+                        <source src="${prop.video}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            ` : '';
+
+            // Details
             const yearBuilt = prop.yearBuilt || 'N/A';
             const parking = prop.parking || 'N/A';
             const lastUpdated = prop.listedDate ? new Date(prop.listedDate).toLocaleDateString('en-GB') : 'Unknown';
-            const amenitiesHtml = prop.amenities && prop.amenities.length ? prop.amenities.map(a => `<span class="amenity-tag">${a}</span>`).join('') : '<span class="amenity-tag">None listed</span>';
+            const amenitiesHtml = prop.amenities && prop.amenities.length
+                ? prop.amenities.map(a => `<span class="amenity-tag">${a}</span>`).join('')
+                : '<span class="amenity-tag">None listed</span>';
 
             container.innerHTML = `
                 <div class="property-header">
@@ -275,21 +357,24 @@
                 </div>
 
                 <div class="property-layout">
-                    <div class="gallery">
-                        <div class="main-image-container"><img src="${images[0]}" class="main-img" id="mainImage"></div>
+                    <div class="media-section">
+                        <div class="main-image-container" id="mainImageContainer">
+                            <img src="${mainImg}" class="main-img" id="mainImage" alt="${prop.title}">
+                        </div>
                         <div class="thumbnail-strip">${thumbnailsHtml}</div>
+                        ${videoHtml}
                     </div>
 
                     <div class="sidebar-card">
-                        <h3>Owner</h3>
-                        <div class="owner-row">
+                        <h3 style="font-family:'Playfair Display',serif; margin-bottom:1rem;">Owner</h3>
+                        <div class="owner-profile">
                             <img src="${avatar}" class="owner-avatar" onerror="this.src='https://ui-avatars.com/api/?name=Owner&background=B49450&color=fff&size=128'">
-                            <div>
-                                <div class="owner-name">
+                            <div class="owner-details">
+                                <h3>
                                     ${owner.name}
-                                    ${owner.verified ? '<span class="owner-verified"><i class="fas fa-check-circle"></i> Verified</span>' : ''}
-                                </div>
-                                <div style="color:var(--text-secondary); font-size:0.9rem;">${owner.phone || 'Phone not provided'}</div>
+                                    ${owner.verified ? '<span class="verified-icon"><i class="fas fa-check-circle"></i> Verified</span>' : ''}
+                                </h3>
+                                <div class="owner-phone">${owner.phone || 'Phone not provided'}</div>
                             </div>
                         </div>
                         <div class="owner-actions">
@@ -307,6 +392,7 @@
                         <button class="tab-btn-prop active" data-tab="overview">Overview</button>
                         <button class="tab-btn-prop" data-tab="description">Description</button>
                         <button class="tab-btn-prop" data-tab="amenities">Amenities</button>
+                        <button class="tab-btn-prop" data-tab="details">Details</button>
                     </div>
                     <div class="tab-content active" id="tab-overview">
                         <div class="info-grid">
@@ -315,13 +401,20 @@
                             <div class="info-item"><i class="fas fa-ruler-combined"></i> <strong>Land size:</strong> ${prop.squareFeet} sqm</div>
                             <div class="info-item"><i class="fas fa-calendar-alt"></i> <strong>Year built:</strong> ${yearBuilt}</div>
                             <div class="info-item"><i class="fas fa-car"></i> <strong>Parking:</strong> ${parking}</div>
-                            <div class="info-item"><i class="fas fa-tag"></i> <strong>Property ID:</strong> ${propertyIdDisplay}</div>
                             <div class="info-item"><i class="fas fa-clock"></i> <strong>Last updated:</strong> ${lastUpdated}</div>
                             <div class="info-item"><i class="fas fa-building"></i> <strong>Type:</strong> ${prop.propertyType}</div>
                         </div>
                     </div>
                     <div class="tab-content" id="tab-description"><p>${prop.description || 'No description provided.'}</p></div>
                     <div class="tab-content" id="tab-amenities"><div class="amenities-list">${amenitiesHtml}</div></div>
+                    <div class="tab-content" id="tab-details">
+                        <div class="info-grid">
+                            <div class="info-item"><i class="fas fa-toilet"></i> <strong>Toilets:</strong> ${prop.toilets || prop.bathrooms}</div>
+                            <div class="info-item"><i class="fas fa-vector-square"></i> <strong>Square Feet:</strong> ${prop.squareFeet || 'N/A'}</div>
+                            <div class="info-item"><i class="fas fa-city"></i> <strong>State:</strong> ${prop.state}</div>
+                            <div class="info-item"><i class="fas fa-map-pin"></i> <strong>City:</strong> ${prop.city}</div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="similar-section">
@@ -330,15 +423,68 @@
                 </div>
             `;
 
-            // Gallery functionality
-            const mainImg = document.getElementById('mainImage');
-            const thumbs = document.querySelectorAll('.thumbnail');
-            thumbs.forEach((thumb, idx) => {
+            // Gallery thumbnail switching
+            const mainImageEl = document.getElementById('mainImage');
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            thumbnails.forEach((thumb, idx) => {
                 thumb.addEventListener('click', () => {
-                    thumbs.forEach(t => t.classList.remove('active'));
-                    thumb.classList.add('active');
-                    mainImg.src = images[idx];
+                    updateMainImage(idx);
                 });
+            });
+
+            // Lightbox functionality
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            const lightboxClose = document.querySelector('.lightbox-close');
+            const lightboxPrev = document.querySelector('.lightbox-prev');
+            const lightboxNext = document.querySelector('.lightbox-next');
+
+            function updateMainImage(index) {
+                mainImageEl.src = allImages[index];
+                thumbnails.forEach((t, i) => t.classList.toggle('active', i === index));
+                currentLightboxIndex = index;
+            }
+
+            function openLightbox(index) {
+                currentLightboxIndex = index;
+                lightboxImg.src = allImages[currentLightboxIndex];
+                lightbox.classList.add('active');
+            }
+
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+            }
+
+            function prevImage() {
+                currentLightboxIndex = (currentLightboxIndex - 1 + allImages.length) % allImages.length;
+                lightboxImg.src = allImages[currentLightboxIndex];
+                updateMainImage(currentLightboxIndex);
+            }
+
+            function nextImage() {
+                currentLightboxIndex = (currentLightboxIndex + 1) % allImages.length;
+                lightboxImg.src = allImages[currentLightboxIndex];
+                updateMainImage(currentLightboxIndex);
+            }
+
+            // Main image click opens lightbox
+            document.getElementById('mainImageContainer').addEventListener('click', () => {
+                openLightbox(currentLightboxIndex);
+            });
+
+            lightboxClose.addEventListener('click', closeLightbox);
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) closeLightbox();
+            });
+            lightboxPrev.addEventListener('click', prevImage);
+            lightboxNext.addEventListener('click', nextImage);
+
+            // Keyboard navigation for lightbox
+            document.addEventListener('keydown', (e) => {
+                if (!lightbox.classList.contains('active')) return;
+                if (e.key === 'ArrowLeft') prevImage();
+                if (e.key === 'ArrowRight') nextImage();
+                if (e.key === 'Escape') closeLightbox();
             });
 
             // Tabs
@@ -354,7 +500,7 @@
                 });
             });
 
-            // WhatsApp share for owner
+            // WhatsApp button
             const waBtn = document.getElementById('ownerWhatsApp');
             if (waBtn && owner.phone) {
                 waBtn.addEventListener('click', (e) => {
@@ -368,6 +514,12 @@
                     e.preventDefault();
                     alert('Owner phone number not available.');
                 });
+            }
+
+            // Anti‑download for video: already inline, but add extra contextmenu prevention
+            const video = document.querySelector('video');
+            if (video) {
+                video.addEventListener('contextmenu', (e) => e.preventDefault());
             }
         }
 
