@@ -46,6 +46,8 @@
             -webkit-font-smoothing: antialiased;
         }
         .container { max-width:1280px; margin:0 auto; padding:0 2rem; }
+
+        /* Header */
         .main-header {
             background: rgba(255,255,255,0.8);
             backdrop-filter: blur(12px);
@@ -86,6 +88,23 @@
         }
         .mobile-menu.open { left:0; }
         .mobile-menu a { text-decoration:none; font-size:1.2rem; color:var(--text); font-weight:500; padding:0.5rem 0; border-bottom:1px solid var(--border); }
+        .signup-btn {
+            background: var(--accent);
+            color: #1A1F2E;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.9rem;
+        }
+        .signup-btn:hover { background: var(--accent-soft); }
+        .user-greeting {
+            font-weight:600; color:var(--primary); background:var(--surface-alt);
+            padding:0.5rem 1rem; border-radius:2rem; border:1px solid var(--border);
+            font-size:0.9rem;
+        }
 
         /* Hero */
         .hero {
@@ -125,30 +144,6 @@
         }
         .btn-primary:hover { background:var(--accent-soft); transform:translateY(-2px); }
 
-        /* Sign Up Button */
-        .signup-btn {
-            background: var(--accent);
-            color: #1A1F2E;
-            border: none;
-            padding: 0.6rem 1.5rem;
-            border-radius: 2rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.2s;
-            font-size: 0.9rem;
-            white-space: nowrap;
-        }
-        .signup-btn:hover { background: var(--accent-soft); }
-        .user-greeting {
-            font-weight: 600;
-            color: var(--primary);
-            font-size: 0.95rem;
-            background: var(--surface-alt);
-            padding: 0.5rem 1rem;
-            border-radius: 2rem;
-            border: 1px solid var(--border);
-        }
-
         /* Trust bar */
         .trust-bar { background:var(--surface); border-bottom:1px solid var(--border); padding:2rem 0; }
         .trust-grid { display:flex; justify-content:center; gap:3rem; flex-wrap:wrap; }
@@ -159,6 +154,7 @@
             font-size:1.1rem; color:var(--accent); background:var(--surface-alt);
             width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center;
         }
+
         /* Sections */
         .section { padding:5rem 0; }
         .bg-surface { background:var(--surface-alt); }
@@ -221,13 +217,13 @@
         .modal-overlay.active { opacity:1; visibility:visible; }
         .modal {
             background:var(--surface); border-radius:var(--radius); padding:2rem;
-            min-width:340px; max-width:400px; box-shadow:var(--shadow-lg);
+            min-width:360px; max-width:420px; box-shadow:var(--shadow-lg);
             transform:translateY(20px); transition:transform 0.3s ease;
         }
         .modal-overlay.active .modal { transform:translateY(0); }
         .modal-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; }
         .modal-header h3 { font-family:'Playfair Display',serif; font-size:1.5rem; }
-        .modal-close { background:none; border:none; font-size:1.3rem; cursor:pointer; color:var(--text); }
+        .modal-close { background:none; border:none; font-size:1.5rem; cursor:pointer; color:var(--text); }
         .modal-form { display:flex; flex-direction:column; gap:1rem; }
         .modal-form input {
             padding:0.8rem 1rem; border:1px solid var(--border); border-radius:var(--radius-sm);
@@ -235,11 +231,20 @@
         }
         .modal-form .btn-primary { justify-content:center; }
 
+        /* Selection modal options */
+        .options-list { display:flex; flex-direction:column; gap:0.5rem; }
+        .option-item {
+            padding:0.8rem 1rem; border:1px solid var(--border); border-radius:var(--radius-sm);
+            background:var(--surface-alt); cursor:pointer; transition:0.2s; text-align:left; font-weight:500;
+        }
+        .option-item:hover { background:var(--primary); color:white; border-color:var(--primary); }
+
         footer { background:#1A1F2E; color:#CBD5E1; padding:4rem 0 1.5rem; }
         footer a { color:#94A3B8; text-decoration:none; }
         footer a:hover { color:var(--accent-soft); }
         .footer-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:2rem; margin-bottom:2rem; }
         .social i { font-size:1.2rem; margin-right:1rem; }
+
         @media (max-width:768px) {
             .desktop-nav { display:none; }
             .mobile-only { display:block; }
@@ -262,10 +267,9 @@
             <a href="/how-it-works">How It Works</a>
             <a href="/about">About</a>
             <a href="/contact">Contact</a>
-            <a href="/post">List Property</a>
+            <a href="/post">Dashboard</a>
         </nav>
         <div class="header-actions">
-            <!-- Sign Up / Greeting -->
             <div id="userArea">
                 <button id="signupBtn" class="signup-btn">Sign Up</button>
                 <span id="greeting" class="user-greeting" style="display:none;"></span>
@@ -281,7 +285,7 @@
     <button id="closeMenu" class="close-btn"><i class="fas fa-times"></i></button>
     <a href="/">Home</a><a href="/browse?type=sale">Buy</a><a href="/browse?type=rent">Rent</a>
     <a href="/how-it-works">How It Works</a><a href="/about">About</a><a href="/contact">Contact</a>
-    <a href="/post">List Property</a>
+    <a href="/post">Dashboard</a>
 </div>
 
 <!-- Sign Up Modal -->
@@ -289,7 +293,7 @@
     <div class="modal">
         <div class="modal-header">
             <h3>Create your account</h3>
-            <button class="modal-close" id="closeSignupModal"><i class="fas fa-times"></i></button>
+            <button class="modal-close" id="closeSignupModalBtn"><i class="fas fa-times"></i></button>
         </div>
         <form id="signupForm" class="modal-form">
             <input type="text" id="signupName" placeholder="Your full name" required>
@@ -299,14 +303,14 @@
     </div>
 </div>
 
-<!-- Filter Modal (for property type / bedrooms) -->
+<!-- Property Type / Bedrooms Modal -->
 <div class="modal-overlay" id="selectionModal">
     <div class="modal">
         <div class="modal-header">
-            <h3 id="modalTitle">Select</h3>
-            <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
+            <h3 id="selectionModalTitle">Select</h3>
+            <button class="modal-close" id="closeSelectionModalBtn"><i class="fas fa-times"></i></button>
         </div>
-        <div class="modal-options" id="modalOptions"></div>
+        <div id="selectionOptionsContainer" class="options-list"></div>
     </div>
 </div>
 
@@ -402,183 +406,197 @@
 </footer>
 
 <script>
-    // ---------- Theme ----------
-    const themeToggle = document.getElementById('themeToggle');
-    const storedTheme = localStorage.getItem('zaure_theme') || 'light';
-    document.documentElement.setAttribute('data-theme', storedTheme);
-    themeToggle.innerHTML = storedTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-    themeToggle.addEventListener('click', () => {
-        const cur = document.documentElement.getAttribute('data-theme');
-        const next = cur === 'light' ? 'dark' : 'light';
-        document.documentElement.setAttribute('data-theme', next);
-        localStorage.setItem('zaure_theme', next);
-        themeToggle.innerHTML = next === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-    });
-
-    // ---------- Mobile Menu ----------
-    document.getElementById('mobileMenuToggle').addEventListener('click', () => document.getElementById('mobileMenu').classList.add('open'));
-    document.getElementById('closeMenu').addEventListener('click', () => document.getElementById('mobileMenu').classList.remove('open'));
-
-    // ---------- Sign Up Logic ----------
-    const signupBtn = document.getElementById('signupBtn');
-    const greetingSpan = document.getElementById('greeting');
-    const signupModal = document.getElementById('signupModal');
-    const closeSignupModal = document.getElementById('closeSignupModal');
-    const signupForm = document.getElementById('signupForm');
-
-    // Check if user already signed up
-    const savedUser = JSON.parse(localStorage.getItem('zaure_user'));
-    if (savedUser && savedUser.name) {
-        showGreeting(savedUser.name);
-    }
-
-    // Open modal
-    signupBtn.addEventListener('click', () => {
-        signupModal.classList.add('active');
-    });
-
-    // Close modal
-    closeSignupModal.addEventListener('click', () => {
-        signupModal.classList.remove('active');
-    });
-    window.addEventListener('click', (e) => {
-        if (e.target === signupModal) signupModal.classList.remove('active');
-    });
-
-    // Handle sign up form submission
-    signupForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const name = document.getElementById('signupName').value.trim();
-        const phone = document.getElementById('signupPhone').value.trim();
-        if (name && phone) {
-            const user = { name, phone };
-            localStorage.setItem('zaure_user', JSON.stringify(user));
-            showGreeting(name);
-            signupModal.classList.remove('active');
-            signupForm.reset();
-        }
-    });
-
-    function showGreeting(name) {
-        signupBtn.style.display = 'none';
-        greetingSpan.style.display = 'inline-block';
-        greetingSpan.textContent = `Hi, ${name.split(' ')[0]}`;
-    }
-
-    // ---------- Property Type / Beds Modal ----------
-    const modalOverlay = document.getElementById('selectionModal');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalOptions = document.getElementById('modalOptions');
-    const modalClose = document.getElementById('modalClose');
-    const propertyTypeBtn = document.getElementById('propertyTypeBtn');
-    const bedsBtn = document.getElementById('bedsBtn');
-    const propertyTypeValue = document.getElementById('propertyTypeValue');
-    const bedsValue = document.getElementById('bedsValue');
-
-    const propertyTypes = [
-        { value: 'house', label: 'House' },
-        { value: 'apartment', label: 'Apartment' },
-        { value: 'land', label: 'Land' },
-        { value: 'commercial', label: 'Commercial' }
-    ];
-    const bedOptions = [
-        { value: '1', label: '1' },
-        { value: '2', label: '2' },
-        { value: '3', label: '3' },
-        { value: '4+', label: '4+' }
-    ];
-
-    function openModal(type) {
-        let options, title;
-        if (type === 'propertyType') {
-            title = 'Property Type';
-            options = propertyTypes;
-        } else {
-            title = 'Bedrooms';
-            options = bedOptions;
-        }
-        modalTitle.textContent = title;
-        modalOptions.innerHTML = options.map(opt => `<button type="button" class="modal-option" data-value="${opt.value}">${opt.label}</button>`).join('');
-        modalOverlay.classList.add('active');
-    }
-
-    propertyTypeBtn.addEventListener('click', () => openModal('propertyType'));
-    bedsBtn.addEventListener('click', () => openModal('beds'));
-    modalClose.addEventListener('click', () => modalOverlay.classList.remove('active'));
-    modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) modalOverlay.classList.remove('active'); });
-    modalOptions.addEventListener('click', (e) => {
-        const option = e.target.closest('.modal-option');
-        if (!option) return;
-        const value = option.dataset.value;
-        const label = option.textContent.trim();
-        if (modalTitle.textContent === 'Property Type') {
-            propertyTypeValue.value = value;
-            propertyTypeBtn.innerHTML = `${label} <i class="fas fa-chevron-down"></i>`;
-        } else {
-            bedsValue.value = value;
-            bedsBtn.innerHTML = `${label} <i class="fas fa-chevron-down"></i>`;
-        }
-        modalOverlay.classList.remove('active');
-    });
-
-    // ---------- Search ----------
-    document.getElementById('heroSearch').addEventListener('submit', e => {
-        e.preventDefault();
-        const location = document.getElementById('searchLocation').value;
-        const type = propertyTypeValue.value;
-        const beds = bedsValue.value;
-        const min = document.getElementById('minPrice').value;
-        const max = document.getElementById('maxPrice').value;
-        let url = `/browse?location=${encodeURIComponent(location)}`;
-        if (type) url += `&propertyType=${type}`;
-        if (beds) url += `&beds=${beds}`;
-        if (min) url += `&min=${min}`;
-        if (max) url += `&max=${max}`;
-        window.location.href = url;
-    });
-
-    // ---------- Load Properties ----------
-    fetch('/data/properties.json')
-        .then(res => res.json())
-        .then(data => {
-            const props = data.properties;
-            const saleProps = props.filter(p => p.type === 'sale').slice(0, 6);
-            const rentProps = props.filter(p => p.type === 'rent').slice(0, 6);
-            document.getElementById('featuredSaleGrid').innerHTML = renderCards(saleProps);
-            document.getElementById('featuredRentGrid').innerHTML = renderCards(rentProps);
-        })
-        .catch(() => {
-            document.getElementById('featuredSaleGrid').innerHTML = '<p>Unable to load properties.</p>';
-            document.getElementById('featuredRentGrid').innerHTML = '<p>Unable to load properties.</p>';
+    (function() {
+        // ---------- THEME ----------
+        const themeToggle = document.getElementById('themeToggle');
+        const storedTheme = localStorage.getItem('zaure_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', storedTheme);
+        themeToggle.innerHTML = storedTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        themeToggle.addEventListener('click', () => {
+            const cur = document.documentElement.getAttribute('data-theme');
+            const next = cur === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('zaure_theme', next);
+            themeToggle.innerHTML = next === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
         });
 
-    function renderCards(properties) {
-        return properties.map(p => {
-            const price = p.price >= 1e6 ? `₦${(p.price/1e6).toFixed(1)}M` : `₦${p.price.toLocaleString()}`;
-            const img = p.images?.[0] || 'https://placehold.co/600x400?text=Zaure';
-            const verifiedBadge = p.owner?.verified ? '<div class="badge-verified"><i class="fas fa-check-circle"></i> Verified</div>' : '';
-            return `
-                <div class="property-card" onclick="window.location.href='/property?id=${p.id}'">
-                    <div class="img-wrapper">
-                        <img src="${img}" alt="${p.title}" loading="lazy">
-                        ${verifiedBadge}
-                    </div>
-                    <div class="card-body">
-                        <div class="price">${price}</div>
-                        <h3>${p.title}</h3>
-                        <p>${p.address}, ${p.city}</p>
-                        <div class="features">
-                            ${p.propertyType !== 'land' ? `<span><i class="fas fa-bed"></i> ${p.bedrooms} Beds</span><span><i class="fas fa-bath"></i> ${p.bathrooms} Baths</span>` : '<span><i class="fas fa-map"></i> Land</span>'}
+        // ---------- MOBILE MENU ----------
+        const mobileToggle = document.getElementById('mobileMenuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const closeMenuBtn = document.getElementById('closeMenu');
+        mobileToggle.addEventListener('click', () => mobileMenu.classList.add('open'));
+        closeMenuBtn.addEventListener('click', () => mobileMenu.classList.remove('open'));
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.remove('open'));
+        });
+
+        // ---------- SIGN UP MODAL ----------
+        const signupBtn = document.getElementById('signupBtn');
+        const greetingSpan = document.getElementById('greeting');
+        const signupModalOverlay = document.getElementById('signupModal');
+        const closeSignupModalBtn = document.getElementById('closeSignupModalBtn');
+        const signupForm = document.getElementById('signupForm');
+
+        // Check if user already signed up
+        const savedUser = JSON.parse(localStorage.getItem('zaure_user'));
+        if (savedUser && savedUser.name) {
+            showGreeting(savedUser.name);
+        }
+
+        signupBtn.addEventListener('click', () => {
+            signupModalOverlay.classList.add('active');
+        });
+
+        closeSignupModalBtn.addEventListener('click', () => {
+            signupModalOverlay.classList.remove('active');
+        });
+        window.addEventListener('click', (e) => {
+            if (e.target === signupModalOverlay) signupModalOverlay.classList.remove('active');
+        });
+
+        signupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('signupName').value.trim();
+            const phone = document.getElementById('signupPhone').value.trim();
+            if (name && phone) {
+                const user = { name, phone };
+                localStorage.setItem('zaure_user', JSON.stringify(user));
+                showGreeting(name);
+                signupModalOverlay.classList.remove('active');
+                signupForm.reset();
+            }
+        });
+
+        function showGreeting(name) {
+            signupBtn.style.display = 'none';
+            greetingSpan.style.display = 'inline-block';
+            greetingSpan.textContent = `Hi, ${name.split(' ')[0]}`;
+        }
+
+        // ---------- PROPERTY TYPE / BEDS SELECTION MODAL ----------
+        const selectionModalOverlay = document.getElementById('selectionModal');
+        const selectionModalTitle = document.getElementById('selectionModalTitle');
+        const selectionOptionsContainer = document.getElementById('selectionOptionsContainer');
+        const closeSelectionModalBtn = document.getElementById('closeSelectionModalBtn');
+
+        const propertyTypeBtn = document.getElementById('propertyTypeBtn');
+        const bedsBtn = document.getElementById('bedsBtn');
+        const propertyTypeValue = document.getElementById('propertyTypeValue');
+        const bedsValue = document.getElementById('bedsValue');
+
+        const propertyTypes = [
+            { value: 'house', label: 'House' },
+            { value: 'apartment', label: 'Apartment' },
+            { value: 'land', label: 'Land' },
+            { value: 'commercial', label: 'Commercial' }
+        ];
+        const bedOptions = [
+            { value: '1', label: '1' },
+            { value: '2', label: '2' },
+            { value: '3', label: '3' },
+            { value: '4+', label: '4+' }
+        ];
+
+        let currentSelectionType = '';
+
+        function openSelectionModal(type) {
+            currentSelectionType = type;
+            const options = type === 'propertyType' ? propertyTypes : bedOptions;
+            selectionModalTitle.textContent = type === 'propertyType' ? 'Property Type' : 'Bedrooms';
+            selectionOptionsContainer.innerHTML = options.map(opt => 
+                `<button type="button" class="option-item" data-value="${opt.value}">${opt.label}</button>`
+            ).join('');
+            selectionModalOverlay.classList.add('active');
+        }
+
+        function closeSelectionModal() {
+            selectionModalOverlay.classList.remove('active');
+        }
+
+        propertyTypeBtn.addEventListener('click', () => openSelectionModal('propertyType'));
+        bedsBtn.addEventListener('click', () => openSelectionModal('beds'));
+
+        closeSelectionModalBtn.addEventListener('click', closeSelectionModal);
+        selectionModalOverlay.addEventListener('click', (e) => {
+            if (e.target === selectionModalOverlay) closeSelectionModal();
+        });
+
+        // Handle option click
+        selectionOptionsContainer.addEventListener('click', (e) => {
+            const optionBtn = e.target.closest('.option-item');
+            if (!optionBtn) return;
+            const value = optionBtn.dataset.value;
+            const label = optionBtn.textContent.trim();
+
+            if (currentSelectionType === 'propertyType') {
+                propertyTypeValue.value = value;
+                propertyTypeBtn.innerHTML = `${label} <i class="fas fa-chevron-down"></i>`;
+            } else {
+                bedsValue.value = value;
+                bedsBtn.innerHTML = `${label} <i class="fas fa-chevron-down"></i>`;
+            }
+            closeSelectionModal();
+        });
+
+        // ---------- SEARCH ----------
+        document.getElementById('heroSearch').addEventListener('submit', e => {
+            e.preventDefault();
+            const location = document.getElementById('searchLocation').value.trim();
+            const type = propertyTypeValue.value;
+            const beds = bedsValue.value;
+            const min = document.getElementById('minPrice').value;
+            const max = document.getElementById('maxPrice').value;
+            let url = `/browse?location=${encodeURIComponent(location)}`;
+            if (type) url += `&propertyType=${type}`;
+            if (beds) url += `&beds=${beds}`;
+            if (min) url += `&min=${min}`;
+            if (max) url += `&max=${max}`;
+            window.location.href = url;
+        });
+
+        // ---------- LOAD PROPERTIES ----------
+        fetch('/data/properties.json')
+            .then(res => res.json())
+            .then(data => {
+                const props = data.properties;
+                const saleProps = props.filter(p => p.type === 'sale').slice(0, 6);
+                const rentProps = props.filter(p => p.type === 'rent').slice(0, 6);
+                document.getElementById('featuredSaleGrid').innerHTML = renderCards(saleProps);
+                document.getElementById('featuredRentGrid').innerHTML = renderCards(rentProps);
+            })
+            .catch(() => {
+                document.getElementById('featuredSaleGrid').innerHTML = '<p>Unable to load properties.</p>';
+                document.getElementById('featuredRentGrid').innerHTML = '<p>Unable to load properties.</p>';
+            });
+
+        function renderCards(properties) {
+            return properties.map(p => {
+                const price = p.price >= 1e6 ? `₦${(p.price/1e6).toFixed(1)}M` : `₦${p.price.toLocaleString()}`;
+                const img = p.images?.[0] || 'https://placehold.co/600x400?text=Zaure';
+                const verifiedBadge = p.owner?.verified ? '<div class="badge-verified"><i class="fas fa-check-circle"></i> Verified</div>' : '';
+                return `
+                    <div class="property-card" onclick="window.location.href='/property?id=${p.id}'">
+                        <div class="img-wrapper">
+                            <img src="${img}" alt="${p.title}" loading="lazy">
+                            ${verifiedBadge}
+                        </div>
+                        <div class="card-body">
+                            <div class="price">${price}</div>
+                            <h3>${p.title}</h3>
+                            <p>${p.address}, ${p.city}</p>
+                            <div class="features">
+                                ${p.propertyType !== 'land' ? `<span><i class="fas fa-bed"></i> ${p.bedrooms} Beds</span><span><i class="fas fa-bath"></i> ${p.bathrooms} Baths</span>` : '<span><i class="fas fa-map"></i> Land</span>'}
+                            </div>
                         </div>
                     </div>
-                </div>
-            `;
-        }).join('');
-    }
+                `;
+            }).join('');
+        }
 
-    // ---------- Cities Grid ----------
-    const states = ['Kaduna','Kano','Zaria','Sokoto','Maiduguri','Jos','Abuja','Lagos','Ibadan','Katsina','Bauchi','Gombe'];
-    document.getElementById('statesGrid').innerHTML = states.map(s => `<div class="state-item" onclick="window.location.href='/browse?location=${s}'">${s} <span>→</span></div>`).join('');
+        // ---------- CITIES GRID ----------
+        const states = ['Kaduna','Kano','Zaria','Sokoto','Maiduguri','Jos','Abuja','Lagos','Ibadan','Katsina','Bauchi','Gombe'];
+        document.getElementById('statesGrid').innerHTML = states.map(s => `<div class="state-item" onclick="window.location.href='/browse?location=${s}'">${s} <span>→</span></div>`).join('');
+    })();
 </script>
 </body>
 </html>
