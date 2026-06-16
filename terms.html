@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>About Zaure – Your entrance to home</title>
-    <meta name="description" content="Learn about Zaure's mission to connect property owners directly with seekers, with no middlemen.">
+    <title>Terms of Service | Zaure</title>
+    <meta name="description" content="Read the terms and conditions for using Zaure's direct owner–seeker platform.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -21,7 +21,6 @@
             --border: #E5E7EB;
             --shadow-sm: 0 2px 4px rgba(0,0,0,0.03), 0 1px 2px rgba(0,0,0,0.04);
             --shadow-md: 0 4px 12px rgba(0,0,0,0.04);
-            --shadow-lg: 0 12px 24px -8px rgba(0,0,0,0.06);
             --radius: 16px;
             --radius-sm: 12px;
             --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
@@ -90,33 +89,25 @@
         .page-hero {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-soft) 100%);
             color: white;
-            padding: 4rem 0;
+            padding: 3rem 0;
             text-align: center;
         }
-        .page-hero h1 { font-family: 'Playfair Display', serif; font-size: 2.8rem; margin-bottom: 1rem; }
-        .page-hero p { font-size: 1.1rem; opacity: 0.9; max-width: 700px; margin: 0 auto; }
-
-        .section { padding: 5rem 0; }
-        .section-title {
-            font-family:'Playfair Display',serif; font-size:2.2rem; font-weight:700; text-align:center;
-            margin-bottom:2.5rem; color:var(--primary);
+        .page-hero h1 { font-family: 'Playfair Display', serif; font-size: 2.5rem; }
+        .content-section {
+            max-width: 900px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background: var(--surface);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
         }
-        .story-grid { display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center; }
-        @media (max-width:768px) { .story-grid { grid-template-columns:1fr; } }
-        .story-text p { margin-bottom:1rem; color:var(--text-secondary); }
-        .story-image img { width:100%; border-radius:var(--radius); box-shadow:var(--shadow-md); }
-
-        .values-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:2rem; }
-        .value-card {
-            background:var(--surface); padding:2rem; border-radius:var(--radius);
-            text-align:center; box-shadow:var(--shadow-sm); border:1px solid var(--border);
-            transition:0.2s;
-        }
-        .value-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-lg); }
-        .value-icon { font-size:2rem; color:var(--accent); margin-bottom:1rem; }
-        .value-card h3 { margin-bottom:0.75rem; }
-
-        footer { background:#1A1F2E; color:#CBD5E1; padding:4rem 0 1.5rem; }
+        .content-section h2 { font-family:'Playfair Display',serif; margin:2rem 0 1rem; color:var(--primary); }
+        .content-section h2:first-of-type { margin-top:0; }
+        .content-section p, .content-section ul { margin-bottom:1rem; color:var(--text-secondary); }
+        .content-section ul { padding-left:1.5rem; }
+        .content-section li { margin-bottom:0.5rem; }
+        footer { background:#1A1F2E; color:#CBD5E1; padding:4rem 0 1.5rem; margin-top:3rem; }
         footer a { color:#94A3B8; text-decoration:none; }
         footer a:hover { color:var(--accent-soft); }
         .footer-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:2rem; margin-bottom:2rem; }
@@ -124,7 +115,7 @@
         @media (max-width:768px) {
             .desktop-nav { display:none; }
             .mobile-only { display:block; }
-            .page-hero h1 { font-size:2.2rem; }
+            .page-hero h1 { font-size:2rem; }
         }
     </style>
 </head>
@@ -137,7 +128,7 @@
             <a href="/browse?type=sale">Buy</a>
             <a href="/browse?type=rent">Rent</a>
             <a href="/how-it-works">How It Works</a>
-            <a href="/about" class="active">About</a>
+            <a href="/about">About</a>
             <a href="/contact">Contact</a>
             <a href="/post" class="btn-outline" style="padding:0.4rem 1.2rem; border-color:var(--accent); color:var(--accent);">List Property</a>
         </nav>
@@ -158,63 +149,68 @@
 <main>
     <section class="page-hero">
         <div class="container">
-            <h1>About Zaure</h1>
-            <p>We are building a trusted space where property owners and seekers meet directly — without agents, hidden fees, or middlemen.</p>
+            <h1>Terms of Service</h1>
         </div>
     </section>
 
-    <section class="section">
-        <div class="container">
-            <div class="story-grid">
-                <div class="story-text">
-                    <h2 class="section-title" style="text-align:left; margin-bottom:1.5rem;">Our Story</h2>
-                    <p>Zaure was born out of a simple frustration: finding a house to rent or buy in Northern Nigeria meant dealing with agents who often lacked transparency, charged arbitrary fees, and controlled access to listings.</p>
-                    <p>We saw that property owners wanted to connect directly with tenants and buyers, but lacked a trusted platform to do so. Seekers were tired of paying "viewing fees" before even seeing a home.</p>
-                    <p>Named after the traditional Hausa entrance hall — the <em>zaure</em> — our platform is that first room where guests are welcomed and genuine connections begin. We provide the space; the transaction is yours.</p>
-                    <p>Today, Zaure is growing across Kano, Kaduna, Zaria, Abuja, and beyond — built by a team passionate about making property search honest, simple, and human.</p>
-                </div>
-                <div class="story-image">
-                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=400&fit=crop" alt="Modern Nigerian home" loading="lazy">
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="content-section container">
+        <p><strong>Last Updated:</strong> June 2026</p>
 
-    <section class="section" style="background:var(--surface-alt);">
-        <div class="container">
-            <h2 class="section-title">Our Values</h2>
-            <div class="values-grid">
-                <div class="value-card">
-                    <div class="value-icon"><i class="fas fa-handshake"></i></div>
-                    <h3>Transparency</h3>
-                    <p>No hidden fees. No agent commissions. Owners and seekers deal directly.</p>
-                </div>
-                <div class="value-card">
-                    <div class="value-icon"><i class="fas fa-shield-alt"></i></div>
-                    <h3>Trust</h3>
-                    <p>Verified identity badges help you know who you're dealing with.</p>
-                </div>
-                <div class="value-card">
-                    <div class="value-icon"><i class="fas fa-clock"></i></div>
-                    <h3>Simplicity</h3>
-                    <p>List a property in minutes. Find a home without the stress.</p>
-                </div>
-                <div class="value-card">
-                    <div class="value-icon"><i class="fas fa-map-marker-alt"></i></div>
-                    <h3>Local Roots</h3>
-                    <p>Built for Northern Nigeria, by people who understand the market.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        <h2>1. Acceptance of Terms</h2>
+        <p>By accessing or using Zaure (the "Platform"), you agree to be bound by these Terms of Service. If you do not agree, do not use the Platform.</p>
 
-    <section class="section">
-        <div class="container" style="text-align:center;">
-            <h2 class="section-title">Join the Movement</h2>
-            <p style="max-width:600px; margin:0 auto 2rem; color:var(--text-secondary);">Whether you're an owner tired of agent hassles, or a seeker looking for a genuine place to call home, Zaure is your entrance.</p>
-            <a href="/browse" class="btn-outline" style="padding:0.8rem 2rem; font-size:1rem;">Browse Properties</a>
-        </div>
-    </section>
+        <h2>2. Description of Service</h2>
+        <p>Zaure is a classifieds marketplace that allows property owners to list properties and seekers to browse and contact owners directly. We are not a real estate agent, broker, or property manager. We do not participate in any transaction between users.</p>
+
+        <h2>3. Eligibility</h2>
+        <p>You must be at least 18 years old to use the Platform. By using Zaure, you represent that you have the legal capacity to enter into a binding agreement.</p>
+
+        <h2>4. User Accounts</h2>
+        <p>You may be required to provide a phone number or other information to access certain features. You are responsible for maintaining the confidentiality of your account and for all activities under your account.</p>
+
+        <h2>5. Listing Rules</h2>
+        <ul>
+            <li>You must own the property or have written authority to list it.</li>
+            <li>Listings must contain accurate, honest descriptions and real photos of the actual property.</li>
+            <li>Fraudulent, misleading, or duplicate listings are prohibited and will be removed.</li>
+            <li>You must not post discriminatory content or hate speech.</li>
+        </ul>
+
+        <h2>6. Prohibited Conduct</h2>
+        <ul>
+            <li>Impersonating another person or entity.</li>
+            <li>Harassing or spamming other users.</li>
+            <li>Attempting to bypass any Platform security or paywalls (if introduced).</li>
+            <li>Using the Platform to advertise services, other websites, or unrelated products.</li>
+        </ul>
+
+        <h2>7. Verified Badge</h2>
+        <p>Users may voluntarily verify their identity through a government-issued ID (NIN/BVN). A "Verified" badge indicates only that the identity document was confirmed by our third‑party KYC provider. It does not guarantee the person's honesty, the property's condition, or the success of any transaction. Always conduct your own due diligence.</p>
+
+        <h2>8. Fees</h2>
+        <p>Listing and browsing are currently free. We reserve the right to introduce optional premium features in the future, but we will never charge a commission on transactions between users.</p>
+
+        <h2>9. Intellectual Property</h2>
+        <p>The Zaure name, logo, and Platform design are our intellectual property. You may not use them without written permission. You retain ownership of the content you post, but grant us a licence to display it on the Platform.</p>
+
+        <h2>10. Limitation of Liability</h2>
+        <p>Zaure is provided "as is." We make no warranties regarding the accuracy of listings, the conduct of users, or the outcome of any transaction. To the fullest extent permitted by Nigerian law, Zaure shall not be liable for any direct, indirect, or consequential damages arising from your use of the Platform.</p>
+
+        <h2>11. Indemnification</h2>
+        <p>You agree to indemnify and hold harmless Zaure and its team from any claims, losses, or damages resulting from your violation of these Terms or your interactions with other users.</p>
+
+        <h2>12. Termination</h2>
+        <p>We reserve the right to suspend or terminate your access at any time, with or without cause, including if you violate these Terms.</p>
+
+        <h2>13. Disputes</h2>
+        <p>These Terms are governed by the laws of the Federal Republic of Nigeria. Any dispute shall first be attempted to be resolved through negotiation. If unresolved, the matter shall be referred to the courts of competent jurisdiction in Kaduna State.</p>
+
+        <h2>14. Changes to These Terms</h2>
+        <p>We may update these Terms periodically. Continued use of the Platform after changes take effect constitutes acceptance of the new Terms.</p>
+
+        <h2>15. Contact</h2>
+        <p>For questions about these Terms, contact us at <a href="mailto:hello@zaure.com">hello@zaure.com</a>.</p>
+    </div>
 </main>
 
 <footer>

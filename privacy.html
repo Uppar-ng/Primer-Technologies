@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>About Zaure – Your entrance to home</title>
-    <meta name="description" content="Learn about Zaure's mission to connect property owners directly with seekers, with no middlemen.">
+    <title>Privacy Policy | Zaure</title>
+    <meta name="description" content="Learn how Zaure collects, uses, and protects your personal data in compliance with the Nigeria Data Protection Act.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -21,7 +21,6 @@
             --border: #E5E7EB;
             --shadow-sm: 0 2px 4px rgba(0,0,0,0.03), 0 1px 2px rgba(0,0,0,0.04);
             --shadow-md: 0 4px 12px rgba(0,0,0,0.04);
-            --shadow-lg: 0 12px 24px -8px rgba(0,0,0,0.06);
             --radius: 16px;
             --radius-sm: 12px;
             --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
@@ -90,33 +89,25 @@
         .page-hero {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-soft) 100%);
             color: white;
-            padding: 4rem 0;
+            padding: 3rem 0;
             text-align: center;
         }
-        .page-hero h1 { font-family: 'Playfair Display', serif; font-size: 2.8rem; margin-bottom: 1rem; }
-        .page-hero p { font-size: 1.1rem; opacity: 0.9; max-width: 700px; margin: 0 auto; }
-
-        .section { padding: 5rem 0; }
-        .section-title {
-            font-family:'Playfair Display',serif; font-size:2.2rem; font-weight:700; text-align:center;
-            margin-bottom:2.5rem; color:var(--primary);
+        .page-hero h1 { font-family: 'Playfair Display', serif; font-size: 2.5rem; }
+        .content-section {
+            max-width: 900px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background: var(--surface);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
         }
-        .story-grid { display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center; }
-        @media (max-width:768px) { .story-grid { grid-template-columns:1fr; } }
-        .story-text p { margin-bottom:1rem; color:var(--text-secondary); }
-        .story-image img { width:100%; border-radius:var(--radius); box-shadow:var(--shadow-md); }
-
-        .values-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:2rem; }
-        .value-card {
-            background:var(--surface); padding:2rem; border-radius:var(--radius);
-            text-align:center; box-shadow:var(--shadow-sm); border:1px solid var(--border);
-            transition:0.2s;
-        }
-        .value-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-lg); }
-        .value-icon { font-size:2rem; color:var(--accent); margin-bottom:1rem; }
-        .value-card h3 { margin-bottom:0.75rem; }
-
-        footer { background:#1A1F2E; color:#CBD5E1; padding:4rem 0 1.5rem; }
+        .content-section h2 { font-family:'Playfair Display',serif; margin:2rem 0 1rem; color:var(--primary); }
+        .content-section h2:first-of-type { margin-top:0; }
+        .content-section p, .content-section ul { margin-bottom:1rem; color:var(--text-secondary); }
+        .content-section ul { padding-left:1.5rem; }
+        .content-section li { margin-bottom:0.5rem; }
+        footer { background:#1A1F2E; color:#CBD5E1; padding:4rem 0 1.5rem; margin-top:3rem; }
         footer a { color:#94A3B8; text-decoration:none; }
         footer a:hover { color:var(--accent-soft); }
         .footer-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:2rem; margin-bottom:2rem; }
@@ -124,7 +115,7 @@
         @media (max-width:768px) {
             .desktop-nav { display:none; }
             .mobile-only { display:block; }
-            .page-hero h1 { font-size:2.2rem; }
+            .page-hero h1 { font-size:2rem; }
         }
     </style>
 </head>
@@ -137,7 +128,7 @@
             <a href="/browse?type=sale">Buy</a>
             <a href="/browse?type=rent">Rent</a>
             <a href="/how-it-works">How It Works</a>
-            <a href="/about" class="active">About</a>
+            <a href="/about">About</a>
             <a href="/contact">Contact</a>
             <a href="/post" class="btn-outline" style="padding:0.4rem 1.2rem; border-color:var(--accent); color:var(--accent);">List Property</a>
         </nav>
@@ -158,63 +149,108 @@
 <main>
     <section class="page-hero">
         <div class="container">
-            <h1>About Zaure</h1>
-            <p>We are building a trusted space where property owners and seekers meet directly — without agents, hidden fees, or middlemen.</p>
+            <h1>Privacy Policy</h1>
         </div>
     </section>
 
-    <section class="section">
-        <div class="container">
-            <div class="story-grid">
-                <div class="story-text">
-                    <h2 class="section-title" style="text-align:left; margin-bottom:1.5rem;">Our Story</h2>
-                    <p>Zaure was born out of a simple frustration: finding a house to rent or buy in Northern Nigeria meant dealing with agents who often lacked transparency, charged arbitrary fees, and controlled access to listings.</p>
-                    <p>We saw that property owners wanted to connect directly with tenants and buyers, but lacked a trusted platform to do so. Seekers were tired of paying "viewing fees" before even seeing a home.</p>
-                    <p>Named after the traditional Hausa entrance hall — the <em>zaure</em> — our platform is that first room where guests are welcomed and genuine connections begin. We provide the space; the transaction is yours.</p>
-                    <p>Today, Zaure is growing across Kano, Kaduna, Zaria, Abuja, and beyond — built by a team passionate about making property search honest, simple, and human.</p>
-                </div>
-                <div class="story-image">
-                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=400&fit=crop" alt="Modern Nigerian home" loading="lazy">
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="content-section container">
+        <p><strong>Last Updated:</strong> June 2026</p>
 
-    <section class="section" style="background:var(--surface-alt);">
-        <div class="container">
-            <h2 class="section-title">Our Values</h2>
-            <div class="values-grid">
-                <div class="value-card">
-                    <div class="value-icon"><i class="fas fa-handshake"></i></div>
-                    <h3>Transparency</h3>
-                    <p>No hidden fees. No agent commissions. Owners and seekers deal directly.</p>
-                </div>
-                <div class="value-card">
-                    <div class="value-icon"><i class="fas fa-shield-alt"></i></div>
-                    <h3>Trust</h3>
-                    <p>Verified identity badges help you know who you're dealing with.</p>
-                </div>
-                <div class="value-card">
-                    <div class="value-icon"><i class="fas fa-clock"></i></div>
-                    <h3>Simplicity</h3>
-                    <p>List a property in minutes. Find a home without the stress.</p>
-                </div>
-                <div class="value-card">
-                    <div class="value-icon"><i class="fas fa-map-marker-alt"></i></div>
-                    <h3>Local Roots</h3>
-                    <p>Built for Northern Nigeria, by people who understand the market.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        <h2>1. Introduction</h2>
+        <p>Zaure ("we", "our", or "us") is committed to protecting your privacy. This policy explains how we collect, use, disclose, and safeguard your personal data when you use our website and services (the "Platform"). It complies with the Nigeria Data Protection Act (NDPA) 2023 and other applicable regulations.</p>
 
-    <section class="section">
-        <div class="container" style="text-align:center;">
-            <h2 class="section-title">Join the Movement</h2>
-            <p style="max-width:600px; margin:0 auto 2rem; color:var(--text-secondary);">Whether you're an owner tired of agent hassles, or a seeker looking for a genuine place to call home, Zaure is your entrance.</p>
-            <a href="/browse" class="btn-outline" style="padding:0.8rem 2rem; font-size:1rem;">Browse Properties</a>
-        </div>
-    </section>
+        <h2>2. Information We Collect</h2>
+        <p><strong>a. Information you provide directly:</strong></p>
+        <ul>
+            <li>Phone number (required for account creation)</li>
+            <li>Name (when provided during verification or listing)</li>
+            <li>Email address (if provided for contact or alerts)</li>
+            <li>NIN or BVN (if you opt into identity verification)</li>
+            <li>Property details and photos (when you list a property)</li>
+            <li>Messages sent through the Platform</li>
+        </ul>
+        <p><strong>b. Information collected automatically:</strong></p>
+        <ul>
+            <li>Device type, operating system, and browser</li>
+            <li>IP address and approximate location</li>
+            <li>Pages visited, time spent, and interactions</li>
+        </ul>
+        <p><strong>c. Information from third parties:</strong></p>
+        <ul>
+            <li>Identity verification confirmation from our KYC provider (Dojah, Prembly, or similar)</li>
+            <li>Payment confirmation (if you purchase optional premium features)</li>
+        </ul>
+
+        <h2>3. How We Use Your Data</h2>
+        <p>We use your personal data to:</p>
+        <ul>
+            <li>Create and manage your account</li>
+            <li>Display your property listings to other users</li>
+            <li>Facilitate direct contact between owners and seekers</li>
+            <li>Process identity verification and issue Verified badges</li>
+            <li>Improve the Platform and analyse usage patterns</li>
+            <li>Communicate updates, security alerts, and responses to your inquiries</li>
+            <li>Prevent fraud and enforce our Terms of Service</li>
+            <li>Comply with legal obligations</li>
+        </ul>
+
+        <h2>4. Legal Basis for Processing</h2>
+        <p>We process your data based on:</p>
+        <ul>
+            <li><strong>Consent:</strong> for identity verification and optional communications</li>
+            <li><strong>Contractual necessity:</strong> to provide the Platform services you request</li>
+            <li><strong>Legitimate interest:</strong> to improve security, prevent fraud, and enhance user experience</li>
+            <li><strong>Legal obligation:</strong> to respond to lawful requests from authorities</li>
+        </ul>
+
+        <h2>5. How We Share Your Data</h2>
+        <p>We do <strong>not</strong> sell your personal data. We share it only in these circumstances:</p>
+        <ul>
+            <li><strong>With other users:</strong> your phone number (if you choose to display it), your listing content, and your Verified badge status are visible to seekers.</li>
+            <li><strong>With KYC providers:</strong> your NIN or BVN is transmitted securely to our identity verification partner solely for the purpose of confirming your identity. We do not store the raw NIN/BVN number on our servers.</li>
+            <li><strong>With service providers:</strong> trusted third parties who assist us in operating the Platform (hosting, analytics, email) and who are bound by confidentiality obligations.</li>
+            <li><strong>With law enforcement:</strong> when required by a valid court order or applicable law.</li>
+        </ul>
+
+        <h2>6. Data Retention</h2>
+        <ul>
+            <li><strong>Account data:</strong> retained for as long as your account is active, plus 12 months after deletion request.</li>
+            <li><strong>Listing data:</strong> retained until you delete the listing or your account is closed.</li>
+            <li><strong>Identity verification status:</strong> retained for the life of your account plus 24 months for audit purposes.</li>
+            <li><strong>Usage analytics:</strong> anonymised and retained indefinitely for statistical analysis.</li>
+        </ul>
+
+        <h2>7. Your Rights Under NDPA</h2>
+        <p>You have the right to:</p>
+        <ul>
+            <li>Access the personal data we hold about you</li>
+            <li>Request correction of inaccurate data</li>
+            <li>Request deletion of your data</li>
+            <li>Restrict or object to processing</li>
+            <li>Data portability</li>
+            <li>Withdraw consent at any time (this does not affect the lawfulness of processing prior to withdrawal)</li>
+            <li>Lodge a complaint with the Nigeria Data Protection Commission (NDPC)</li>
+        </ul>
+        <p>To exercise any of these rights, email us at <a href="mailto:privacy@zaure.com">privacy@zaure.com</a>. We will respond within 30 days.</p>
+
+        <h2>8. Data Security</h2>
+        <p>We implement appropriate technical and organisational measures to protect your data, including encryption in transit and at rest, access controls, and regular security reviews. However, no internet transmission is completely secure; you use the Platform at your own risk.</p>
+
+        <h2>9. Cookies</h2>
+        <p>We use essential cookies to keep the Platform functioning and analytics cookies to understand usage. You can disable cookies in your browser settings, though some features may not work properly.</p>
+
+        <h2>10. Third‑Party Links</h2>
+        <p>The Platform may contain links to external websites. We are not responsible for their privacy practices and encourage you to read their policies.</p>
+
+        <h2>11. Data Breach Notification</h2>
+        <p>In the event of a data breach that poses a risk to your rights, we will notify you and the NDPC within 72 hours as required by law.</p>
+
+        <h2>12. Changes to This Policy</h2>
+        <p>We may update this policy from time to time. Material changes will be communicated via the Platform or email. Continued use after changes take effect constitutes acceptance.</p>
+
+        <h2>13. Contact</h2>
+        <p>If you have any questions about this Privacy Policy, please contact us at <a href="mailto:get.zaure@proton.me">get.zaure@proton.me</a>.</p>
+    </div>
 </main>
 
 <footer>
