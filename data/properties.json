@@ -23,6 +23,7 @@
         "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800",
         "https://images.unsplash.com/photo-1600573472550-8090b5e0745e?w=800"
       ],
+      "video": "https://www.w3schools.com/html/mov_bbb.mp4",
       "owner": {
         "name": "Mal. Ibrahim Musa",
         "phone": "08012345678",
@@ -53,6 +54,7 @@
         "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800",
         "https://images.unsplash.com/photo-1600566753086-00f18f6b005a?w=800"
       ],
+      "video": null,
       "owner": {
         "name": "Aisha Sani",
         "phone": "08098765432",
@@ -83,6 +85,7 @@
         "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=800",
         "https://images.unsplash.com/photo-1560185007-5f0bb1866cab?w=800"
       ],
+      "video": null,
       "owner": {
         "name": "Yusuf Abdullahi",
         "phone": "08123456789",
@@ -112,6 +115,7 @@
       "images": [
         "https://images.unsplash.com/photo-1585412727339-54e4bae3bbf9?w=800"
       ],
+      "video": null,
       "owner": {
         "name": "Mariam Lawal",
         "phone": "07011223344",
@@ -141,6 +145,7 @@
       "images": [
         "https://images.unsplash.com/photo-1599420186946-0e9f1ce1e5c1?w=800"
       ],
+      "video": null,
       "owner": {
         "name": "Kabir Bello",
         "phone": "09087654321",
@@ -170,6 +175,7 @@
       "images": [
         "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800"
       ],
+      "video": "https://www.w3schools.com/html/mov_bbb.mp4",
       "owner": {
         "name": "Zainab Usman",
         "phone": "08123456789",
