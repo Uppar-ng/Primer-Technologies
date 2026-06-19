@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>For You | Zaure</title>
+    <meta name="description" content="Discover homes for sale & rent across Northern Nigeria, personalised just for you.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1A1F2E;
+            --primary-soft: #2E3548;
+            --accent: #B49450;
+            --accent-soft: #D4B87A;
+            --bg: #FBFBFB;
+            --surface: #FFFFFF;
+            --surface-alt: #F6F6F6;
+            --text: #1E1E1E;
+            --text-secondary: #6B7280;
+            --border: #E5E7EB;
+            --shadow-lg: 0 12px 24px -8px rgba(0,0,0,0.06);
+            --radius: 16px;
+            --radius-sm: 12px;
+            --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
+        }
+        [data-theme="dark"] {
+            --primary: #D4B87A;
+            --accent: #D4B87A;
+            --bg: #0B1120;
+            --surface: #131C31;
+            --surface-alt: #1A2540;
+            --text: #F1F5F9;
+            --text-secondary: #94A3B8;
+            --border: #2A3550;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow: hidden;
+            touch-action: pan-y;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-font-smoothing: antialiased;
+        }
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            height: 100dvh;
+        }
+        /* Header – minimal */
+        .feed-header {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 0.8rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+        .feed-header .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .feed-header .tabs {
+            display: flex;
+            gap: 1.5rem;
+        }
+        .feed-header .tab {
+            background: none;
+            border: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0.3rem 0;
+            border-bottom: 2px solid transparent;
+            transition: 0.2s;
+        }
+        .feed-header .tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+        }
+        .feed-header .icon-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            font-size: 1.1rem;
+            cursor: pointer;
+            color: var(--text);
+            padding: 0.5rem;
+            border-radius: 50%;
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Card stack */
+        .cards-container {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+        .card {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: var(--surface);
+            border-radius: 0;
+            display: flex;
+            flex-direction: column;
+            transform: translateX(0) scale(1);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            z-index: 1;
+        }
+        .card.swiped-left {
+            transform: translateX(-120%) rotate(-10deg);
+            opacity: 0;
+        }
+        .card.swiped-right {
+            transform: translateX(120%) rotate(10deg);
+            opacity: 0;
+        }
+        .card.undo {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .card-image-wrapper {
+            position: relative;
+            flex: 1;
+            overflow: hidden;
+            background: #000;
+        }
+        .card-image-wrapper img,
+        .card-image-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .card-image-wrapper video {
+            pointer-events: none; /* prevents download context menu on some browsers */
+        }
+        .card-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem 1.5rem 1.5rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            color: white;
+        }
+        .card-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+        .card-location {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .verified-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            background: var(--accent);
+            color: #1A1F2E;
+            padding: 0.2rem 0.6rem;
+            border-radius: 1rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-left: 0.5rem;
+        }
+
+        /* Action buttons on card */
+        .card-actions {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            z-index: 5;
+        }
+        .action-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .action-btn.like:hover { background: #10B981; border-color: #10B981; }
+        .action-btn.skip:hover { background: #EF4444; border-color: #EF4444; }
+        .action-btn.call:hover { background: var(--primary); border-color: var(--primary); }
+
+        /* Tags */
+        .card-tags {
+            position: absolute;
+            bottom: 5rem;
+            left: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            z-index: 5;
+        }
+        .card-tag {
+            background: rgba(255,255,255,0.25);
+            backdrop-filter: blur(4px);
+            padding: 0.3rem 0.8rem;
+            border-radius: 2rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: white;
+            cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: 0.2s;
+        }
+        .card-tag:hover {
+            background: rgba(255,255,255,0.5);
+        }
+
+        /* Bottom action bar */
+        .bottom-bar {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            padding: 1rem;
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            z-index: 10;
+        }
+        .bottom-btn {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn-skip {
+            background: var(--surface-alt);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+        .btn-like {
+            background: var(--accent);
+            color: #1A1F2E;
+        }
+        .btn-call {
+            background: var(--primary);
+            color: white;
+        }
+        .btn-share {
+            background: var(--surface-alt);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+            font-size: 1.2rem;
+        }
+        .bottom-btn:active { transform: scale(0.9); }
+
+        .empty-state {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: var(--text-secondary);
+        }
+        .undo-toast {
+            position: fixed;
+            bottom: 6rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 2rem;
+            font-weight: 500;
+            z-index: 20;
+            opacity: 0;
+            transition: opacity 0.2s;
+            cursor: pointer;
+        }
+        .undo-toast.visible { opacity: 1; }
+    </style>
+</head>
+<body>
+<div class="app-container">
+    <header class="feed-header">
+        <a href="/" class="logo">Zaure</a>
+        <div class="tabs">
+            <button class="tab active" data-feed="forYou">For You</button>
+            <button class="tab" data-feed="trending">Trending</button>
+        </div>
+        <button id="themeToggle" class="icon-btn"><i class="fas fa-moon"></i></button>
+    </header>
+
+    <div class="cards-container" id="cardsContainer">
+        <div class="empty-state" id="emptyState" style="display:none;">
+            <i class="fas fa-home" style="font-size:3rem; color:var(--accent); margin-bottom:1rem;"></i>
+            <h3>No more properties</h3>
+            <p>Adjust your filters or check back later.</p>
+        </div>
+    </div>
+
+    <div class="bottom-bar">
+        <button class="bottom-btn btn-skip" id="skipBtn" title="Not Interested"><i class="fas fa-times"></i></button>
+        <button class="bottom-btn btn-share" id="shareBtn" title="Share"><i class="fab fa-whatsapp"></i></button>
+        <button class="bottom-btn btn-like" id="likeBtn" title="Save"><i class="fas fa-heart"></i></button>
+        <button class="bottom-btn btn-call" id="callBtn" title="Call Owner"><i class="fas fa-phone-alt"></i></button>
+    </div>
+
+    <div class="undo-toast" id="undoToast">Undo</div>
+</div>
+
+<script>
+(function() {
+    // ---------- DOM elements ----------
+    const cardsContainer = document.getElementById('cardsContainer');
+    const emptyState = document.getElementById('emptyState');
+    const undoToast = document.getElementById('undoToast');
+    const likeBtn = document.getElementById('likeBtn');
+    const skipBtn = document.getElementById('skipBtn');
+    const callBtn = document.getElementById('callBtn');
+    const shareBtn = document.getElementById('shareBtn');
+    const tabBtns = document.querySelectorAll('.tab');
+    const themeToggle = document.getElementById('themeToggle');
+
+    // ---------- Theme ----------
+    const savedTheme = localStorage.getItem('zaure_theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    themeToggle.innerHTML = savedTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    themeToggle.addEventListener('click', () => {
+        const cur = document.documentElement.getAttribute('data-theme');
+        const next = cur === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('zaure_theme', next);
+        themeToggle.innerHTML = next === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    });
+
+    // ---------- Tab switching ----------
+    let currentFeed = 'forYou'; // or 'trending'
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            tabBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentFeed = btn.dataset.feed;
+            resetFeed();
+        });
+    });
+
+    // ---------- Data & Recommender ----------
+    let allProperties = [];
+    let featureVectors = [];
+    let similarityMatrix = {};
+    let popularityScores = {};
+    let feedQueue = [];
+    let currentCardIndex = -1;
+    let lastDismissed = null;
+    let undoTimeout = null;
+    let userProfile = null;
+
+    // Load user profile from localStorage
+    function loadUserProfile() {
+        const stored = localStorage.getItem('zaure_profile');
+        if (stored) {
+            userProfile = JSON.parse(stored);
+        } else {
+            // Seed from sign-up data
+            const user = JSON.parse(localStorage.getItem('zaure_user') || '{}');
+            userProfile = {
+                cityWeights: user.city ? { [user.city]: 1 } : {},
+                priceMean: user.type === 'rent' ? 800000 : 30000000,
+                priceStd: 500000,
+                bedroomsMean: 2,
+                verifiedBias: 0.5,
+                contentVector: new Array(20).fill(0), // will be resized later
+                recentActions: []
+            };
+        }
+    }
+
+    function saveUserProfile() {
+        localStorage.setItem('zaure_profile', JSON.stringify(userProfile));
+    }
+
+    // Load static data files
+    async function loadData() {
+        try {
+            const [propsRes, vectorsRes, simRes, popRes] = await Promise.all([
+                fetch('/data/properties.json').then(r => r.json()),
+                fetch('/data/feature-vectors.json').then(r => r.json()),
+                fetch('/data/similarity-matrix.json').then(r => r.json()),
+                fetch('/data/popularity.json').then(r => r.json()).catch(() => ({}))
+            ]);
+            allProperties = propsRes.properties;
+            featureVectors = vectorsRes; // array of {id, vector}
+            similarityMatrix = simRes;
+            popularityScores = popRes;
+        } catch (e) {
+            console.warn('Data files not loaded, using fallback', e);
+            // Fallback: load only properties and create minimal feature vectors
+            try {
+                const res = await fetch('/data/properties.json').then(r => r.json());
+                allProperties = res.properties;
+                featureVectors = allProperties.map(p => ({ id: p.id, vector: buildSimpleVector(p) }));
+                // build simple similarity matrix on the fly
+                similarityMatrix = {};
+                for (let p of allProperties) {
+                    similarityMatrix[p.id] = [];
+                }
+            } catch (err) {
+                console.error('Failed to load properties', err);
+            }
+        }
+    }
+
+    // Build a simple feature vector from a property (fallback)
+    function buildSimpleVector(prop) {
+        const cities = ['Kaduna','Kano','Zaria','Abuja','Sokoto','Maiduguri','Jos','Lagos','Ibadan','Katsina','Bauchi','Gombe'];
+        const types = ['house','apartment','land','commercial'];
+        const listingTypes = ['sale','rent'];
+        let vec = [];
+        // city one-hot
+        cities.forEach(c => vec.push(prop.city === c ? 1 : 0));
+        // property type one-hot
+        types.forEach(t => vec.push(prop.propertyType === t ? 1 : 0));
+        // listing type
+        listingTypes.forEach(t => vec.push(prop.type === t ? 1 : 0));
+        // price normalized (log scale)
+        vec.push(Math.log(prop.price + 1) / 20);
+        // bedrooms normalized
+        vec.push(prop.bedrooms / 5);
+        // bathrooms normalized
+        vec.push(prop.bathrooms / 5);
+        // verified
+        vec.push(prop.owner?.verified ? 1 : 0);
+        // amenities count
+        vec.push((prop.amenities?.length || 0) / 10);
+        // pad to length 20
+        while (vec.length < 20) vec.push(0);
+        return vec.slice(0, 20);
+    }
+
+    function getPropertyVector(propId) {
+        const fv = featureVectors.find(v => v.id == propId);
+        if (fv && fv.vector) return fv.vector;
+        const prop = allProperties.find(p => p.id == propId);
+        if (prop) return buildSimpleVector(prop);
+        return new Array(20).fill(0);
+    }
+
+    // Cosine similarity
+    function cosineSimilarity(vecA, vecB) {
+        let dot = 0, magA = 0, magB = 0;
+        for (let i = 0; i < vecA.length; i++) {
+            dot += vecA[i] * vecB[i];
+            magA += vecA[i] * vecA[i];
+            magB += vecB[i] * vecB[i];
+        }
+        if (magA === 0 || magB === 0) return 0;
+        return dot / (Math.sqrt(magA) * Math.sqrt(magB));
+    }
+
+    // Score a property for the current user
+    function scoreProperty(prop) {
+        if (!userProfile) return Math.random();
+        const vec = getPropertyVector(prop.id);
+        let score = 0;
+
+        // Location score
+        if (userProfile.cityWeights[prop.city]) {
+            score += userProfile.cityWeights[prop.city] * 0.3;
+        }
+
+        // Price score (gaussian)
+        const priceDiff = Math.abs(prop.price - userProfile.priceMean);
+        const priceScore = Math.exp(- (priceDiff * priceDiff) / (2 * userProfile.priceStd * userProfile.priceStd));
+        score += priceScore * 0.25;
+
+        // Bedrooms score
+        const bedDiff = Math.abs(prop.bedrooms - userProfile.bedroomsMean);
+        const bedScore = Math.exp(- bedDiff * 0.5);
+        score += bedScore * 0.15;
+
+        // Verified bias
+        if (prop.owner?.verified && userProfile.verifiedBias > 0.5) {
+            score += userProfile.verifiedBias * 0.1;
+        }
+
+        // Content similarity (if profile vector exists)
+        if (userProfile.contentVector && userProfile.contentVector.length > 0) {
+            const sim = cosineSimilarity(userProfile.contentVector, vec);
+            score += sim * 0.2;
+        }
+
+        // Collaborative boost
+        if (userProfile.recentActions) {
+            const recentIds = userProfile.recentActions.slice(-5).map(a => a.propertyId);
+            for (let id of recentIds) {
+                if (similarityMatrix[id]) {
+                    const similar = similarityMatrix[id].find(s => s.id == prop.id);
+                    if (similar) score += similar.similarity * 0.1;
+                }
+            }
+        }
+
+        // Popularity boost
+        score += (popularityScores[prop.id] || 0) * 0.05;
+
+        // Freshness boost
+        if (prop.listedDate) {
+            const daysAgo = (Date.now() - new Date(prop.listedDate).getTime()) / (1000*60*60*24);
+            score += Math.max(0, 1 - daysAgo / 30) * 0.1;
+        }
+
+        // Exploration noise
+        score += (Math.random() - 0.5) * 0.1;
+
+        return score;
+    }
+
+    // Build feed queue sorted by score
+    function buildFeedQueue() {
+        if (!allProperties.length) return;
+        let candidates = [...allProperties];
+        if (currentFeed === 'trending') {
+            candidates.sort((a,b) => (popularityScores[b.id] || 0) - (popularityScores[a.id] || 0));
+            feedQueue = candidates;
+        } else {
+            // For You: score all, sort descending
+            candidates = candidates.map(p => ({ prop: p, score: scoreProperty(p) }));
+            candidates.sort((a,b) => b.score - a.score);
+            feedQueue = candidates.map(c => c.prop);
+        }
+        currentCardIndex = -1;
+        // clear old cards
+        cardsContainer.innerHTML = '';
+        cardsContainer.appendChild(emptyState);
+        showNextCard();
+    }
+
+    let currentCardElement = null;
+    let currentProperty = null;
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    function showNextCard() {
+        if (feedQueue.length === 0 || currentCardIndex >= feedQueue.length - 1) {
+            emptyState.style.display = 'block';
+            return;
+        }
+        emptyState.style.display = 'none';
+        currentCardIndex++;
+        currentProperty = feedQueue[currentCardIndex];
+        renderCard(currentProperty);
+    }
+
+    function renderCard(prop) {
+        if (currentCardElement) {
+            currentCardElement.remove();
+        }
+        const card = document.createElement('div');
+        card.className = 'card';
+        const img = prop.images?.[0] || 'https://placehold.co/600x800?text=Zaure';
+        const videoSrc = prop.video || null;
+        const verifiedBadge = prop.owner?.verified ? '<span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span>' : '';
+
+        card.innerHTML = `
+            <div class="card-image-wrapper">
+                ${videoSrc ? `<video src="${videoSrc}" muted loop playsinline controlsList="nodownload" oncontextmenu="return false;"></video>` : `<img src="${img}" alt="${prop.title}">`}
+                <div class="card-tags">
+                    <span class="card-tag" data-filter="city">${prop.city}</span>
+                    <span class="card-tag" data-filter="type">${prop.propertyType}</span>
+                    ${prop.amenities?.slice(0,2).map(a => `<span class="card-tag" data-filter="amenity">${a}</span>`).join('')}
+                </div>
+                <div class="card-overlay">
+                    <div class="card-price">${formatPrice(prop.price)}</div>
+                    <div class="card-title">${prop.title}${verifiedBadge}</div>
+                    <div class="card-location"><i class="fas fa-map-marker-alt"></i> ${prop.address}, ${prop.city}</div>
+                </div>
+                <div class="card-actions">
+                    <button class="action-btn like" title="Like"><i class="fas fa-heart"></i></button>
+                    <button class="action-btn skip" title="Not Interested"><i class="fas fa-times"></i></button>
+                    <button class="action-btn call" title="Call Owner"><i class="fas fa-phone-alt"></i></button>
+                </div>
+            </div>
+        `;
+        cardsContainer.appendChild(card);
+        currentCardElement = card;
+
+        // Video auto-play when visible
+        const video = card.querySelector('video');
+        if (video) {
+            video.play().catch(() => {});
+            // pause when swipe starts? handled by removal
+        }
+
+        // Event listeners for swipe, tags, buttons
+        setupCardInteractions(card, prop);
+    }
+
+    function formatPrice(price) {
+        return price >= 1e6 ? `₦${(price/1e6).toFixed(1)}M` : `₦${price.toLocaleString()}`;
+    }
+
+    function setupCardInteractions(card, prop) {
+        // Touch swipe
+        card.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+        }, {passive: true});
+        card.addEventListener('touchend', (e) => {
+            const dx = e.changedTouches[0].clientX - touchStartX;
+            const dy = e.changedTouches[0].clientY - touchStartY;
+            if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+                if (dx > 0) {
+                    likeProperty(prop);
+                } else {
+                    skipProperty(prop);
+                }
+            }
+        });
+
+        // Action buttons on card
+        card.querySelector('.like').addEventListener('click', (e) => {
+            e.stopPropagation();
+            likeProperty(prop);
+        });
+        card.querySelector('.skip').addEventListener('click', (e) => {
+            e.stopPropagation();
+            skipProperty(prop);
+        });
+        card.querySelector('.call').addEventListener('click', (e) => {
+            e.stopPropagation();
+            callOwner(prop);
+        });
+
+        // Tags
+        card.querySelectorAll('.card-tag').forEach(tag => {
+            tag.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const filter = tag.dataset.filter;
+                if (filter === 'city') {
+                    userProfile.cityWeights[prop.city] = (userProfile.cityWeights[prop.city] || 0) + 1;
+                } else if (filter === 'type') {
+                    // adjust type preference? simpler: just boost similar properties
+                    recordInteraction(prop, 'tag_click', 2);
+                }
+                saveUserProfile();
+                resetFeed();
+            });
+        });
+    }
+
+    function likeProperty(prop) {
+        recordInteraction(prop, 'like', 8);
+        animateCard('right');
+        lastDismissed = prop;
+        showUndoToast();
+        showNextCard();
+    }
+
+    function skipProperty(prop) {
+        recordInteraction(prop, 'skip', -3);
+        animateCard('left');
+        lastDismissed = prop;
+        showUndoToast();
+        showNextCard();
+    }
+
+    function callOwner(prop) {
+        recordInteraction(prop, 'call', 12);
+        const phone = prop.owner?.phone;
+        if (phone) {
+            window.open(`tel:${phone}`, '_system');
+        } else {
+            alert('Owner phone not available.');
+        }
+    }
+
+    function animateCard(direction) {
+        if (!currentCardElement) return;
+        currentCardElement.classList.add(direction === 'right' ? 'swiped-right' : 'swiped-left');
+        setTimeout(() => {
+            if (currentCardElement) {
+                currentCardElement.remove();
+                currentCardElement = null;
+            }
+        }, 300);
+    }
+
+    function recordInteraction(prop, action, weight) {
+        // Update profile
+        updateProfile(prop, weight);
+        // Save interaction log
+        const interactions = JSON.parse(localStorage.getItem('zaure_interactions') || '[]');
+        interactions.push({
+            propertyId: prop.id,
+            action,
+            weight,
+            timestamp: Date.now()
+        });
+        // Keep last 50
+        if (interactions.length > 50) interactions.shift();
+        localStorage.setItem('zaure_interactions', JSON.stringify(interactions));
+        // Update recent actions in profile
+        userProfile.recentActions = interactions.slice(-10);
+        saveUserProfile();
+    }
+
+    function updateProfile(prop, weight) {
+        if (weight > 0) {
+            // positive update
+            userProfile.cityWeights[prop.city] = (userProfile.cityWeights[prop.city] || 0) * 0.9 + weight * 0.1;
+            userProfile.priceMean = userProfile.priceMean * 0.9 + prop.price * 0.1;
+            userProfile.bedroomsMean = userProfile.bedroomsMean * 0.9 + prop.bedrooms * 0.1;
+            if (prop.owner?.verified) userProfile.verifiedBias = userProfile.verifiedBias * 0.9 + 0.1;
+            // blend content vector
+            const vec = getPropertyVector(prop.id);
+            if (userProfile.contentVector.length === vec.length) {
+                for (let i = 0; i < vec.length; i++) {
+                    userProfile.contentVector[i] = userProfile.contentVector[i] * 0.9 + vec[i] * 0.1;
+                }
+            } else {
+                userProfile.contentVector = vec;
+            }
+        } else {
+            // negative update: slight opposite effect
+            userProfile.cityWeights[prop.city] = (userProfile.cityWeights[prop.city] || 0) * 0.95;
+            if (prop.owner?.verified) userProfile.verifiedBias = userProfile.verifiedBias * 0.95;
+        }
+        saveUserProfile();
+    }
+
+    function showUndoToast() {
+        if (undoTimeout) clearTimeout(undoTimeout);
+        undoToast.classList.add('visible');
+        undoTimeout = setTimeout(() => {
+            undoToast.classList.remove('visible');
+        }, 3000);
+        undoToast.onclick = () => {
+            if (lastDismissed) {
+                // undo last action (only if we still have a reference)
+                recordInteraction(lastDismissed, 'undo', 2);
+                feedQueue.splice(currentCardIndex, 0, lastDismissed); // re-insert before current
+                currentCardIndex--; // go back
+                renderCard(lastDismissed);
+                lastDismissed = null;
+                undoToast.classList.remove('visible');
+                clearTimeout(undoTimeout);
+            }
+        };
+    }
+
+    function resetFeed() {
+        // Reset feed but keep profile
+        feedQueue = [];
+        currentCardIndex = -1;
+        lastDismissed = null;
+        if (currentCardElement) currentCardElement.remove();
+        buildFeedQueue();
+    }
+
+    // Bottom buttons
+    likeBtn.addEventListener('click', () => {
+        if (currentProperty) likeProperty(currentProperty);
+    });
+    skipBtn.addEventListener('click', () => {
+        if (currentProperty) skipProperty(currentProperty);
+    });
+    callBtn.addEventListener('click', () => {
+        if (currentProperty) callOwner(currentProperty);
+    });
+    shareBtn.addEventListener('click', () => {
+        if (currentProperty) {
+            const text = `Check out this property: ${currentProperty.title} - ${window.location.origin}/property?id=${currentProperty.id}`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+            recordInteraction(currentProperty, 'share', 8);
+        }
+    });
+
+    // Keyboard support (optional)
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') { if (currentProperty) skipProperty(currentProperty); }
+        if (e.key === 'ArrowRight') { if (currentProperty) likeProperty(currentProperty); }
+        if (e.key === 'ArrowUp') { if (currentProperty) callOwner(currentProperty); }
+    });
+
+    // Initialisation
+    async function init() {
+        loadUserProfile();
+        await loadData();
+        // Ensure contentVector size matches feature vectors
+        if (featureVectors.length > 0 && userProfile.contentVector.length < featureVectors[0].vector.length) {
+            userProfile.contentVector = new Array(featureVectors[0].vector.length).fill(0);
+        }
+        buildFeedQueue();
+    }
+
+    init();
+})();
+</script>
+</body>
+</html>
