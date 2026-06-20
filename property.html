@@ -46,7 +46,6 @@
             -webkit-font-smoothing: antialiased;
         }
         .container { max-width:1280px; margin:0 auto; padding:0 2rem; }
-
         /* Header */
         .main-header {
             background: rgba(255,255,255,0.8);
@@ -62,7 +61,7 @@
             color: var(--primary); letter-spacing:-0.5px; display:flex; align-items:baseline;
         }
         .logo a .dot { width:6px; height:6px; background:var(--accent); border-radius:50%; margin-left:4px; }
-        .desktop-nav { display:flex; gap:2.2rem; }
+        .desktop-nav { display:flex; gap:2.2rem; align-items:center; }
         .desktop-nav a {
             text-decoration:none; color:var(--text); font-weight:500; font-size:0.95rem;
             transition:color 0.2s; position:relative;
@@ -73,7 +72,7 @@
         }
         .desktop-nav a:hover, .desktop-nav a.active { color:var(--primary); }
         .desktop-nav a:hover::after, .desktop-nav a.active::after { width:100%; }
-        .header-actions { display:flex; gap:0.8rem; }
+        .header-actions { display:flex; gap:0.8rem; align-items:center; }
         .icon-btn {
             background:transparent; border:1px solid var(--border); font-size:1.1rem; cursor:pointer;
             color:var(--text); padding:0.5rem; border-radius:50%; width:38px; height:38px;
@@ -100,16 +99,12 @@
         .property-layout { display:grid; grid-template-columns:1fr 380px; gap:2rem; margin:2rem 0; }
         @media (max-width:768px) { .property-layout { grid-template-columns:1fr; } }
 
-        /* Gallery & Video */
-        .media-section { margin-bottom:2rem; }
+        .gallery { position:relative; }
         .main-image-container {
             background:var(--surface); border-radius:var(--radius); overflow:hidden;
-            box-shadow:var(--shadow-sm); position:relative; cursor:pointer;
+            box-shadow:var(--shadow-sm); cursor:pointer;
         }
-        .main-img {
-            width:100%; height:400px; object-fit:cover; display:block;
-            transition: opacity 0.3s;
-        }
+        .main-img { width:100%; height:400px; object-fit:cover; display:block; }
         .thumbnail-strip { display:flex; gap:0.75rem; margin-top:1rem; overflow-x:auto; padding-bottom:0.5rem; }
         .thumbnail { width:80px; height:80px; border-radius:8px; object-fit:cover; cursor:pointer; opacity:0.6; transition:0.2s; border:2px solid transparent; }
         .thumbnail.active, .thumbnail:hover { opacity:1; border-color:var(--accent); }
@@ -120,8 +115,6 @@
         }
         .video-container video {
             width:100%; display:block; max-height:400px; object-fit:cover;
-            /* anti‑download measures */
-            pointer-events: auto;
         }
 
         /* Owner Card */
@@ -129,24 +122,25 @@
             background:var(--surface); border-radius:var(--radius); padding:1.5rem;
             box-shadow:var(--shadow-sm); position:sticky; top:5rem; border:1px solid var(--border);
         }
-        .owner-profile {
-            display:flex; align-items:center; gap:1rem; margin-bottom:1rem;
-        }
+        .owner-profile { display:flex; align-items:center; gap:1rem; margin-bottom:1rem; }
         .owner-avatar {
             width:72px; height:72px; border-radius:50%; object-fit:cover;
-            border:2px solid var(--accent);
+            border:2px solid var(--accent); background:var(--surface-alt);
         }
         .owner-details h3 { font-size:1.2rem; font-weight:700; display:flex; align-items:center; gap:0.5rem; }
         .verified-icon { color:var(--accent); font-size:0.9rem; }
         .owner-phone { color:var(--text-secondary); font-size:0.9rem; }
-        .owner-actions { display:flex; gap:0.75rem; margin:1rem 0; }
-        .btn-call, .btn-wa {
+        .owner-actions { display:flex; gap:0.75rem; margin:1rem 0; flex-wrap:wrap; }
+        .btn-call, .btn-wa, .btn-heart {
             display:inline-flex; align-items:center; gap:0.5rem; padding:0.75rem 1rem;
-            border-radius:2rem; text-decoration:none; font-weight:600; font-size:0.9rem; transition:0.2s;
+            border-radius:2rem; text-decoration:none; font-weight:600; font-size:0.9rem;
+            transition:0.2s; border:none; cursor:pointer;
         }
         .btn-call { background:var(--primary); color:white; }
         .btn-wa { background:#25D366; color:white; }
-        .btn-call:hover, .btn-wa:hover { transform:translateY(-2px); }
+        .btn-heart { background:var(--surface-alt); color:var(--text-secondary); border:1px solid var(--border); }
+        .btn-heart.saved { background:#EF4444; color:white; border-color:#EF4444; }
+        .btn-call:hover, .btn-wa:hover, .btn-heart:hover { transform:translateY(-2px); }
         hr { margin:1.5rem 0; border:none; border-top:1px solid var(--border); }
         .safety-tips { background:#FEF3C7; padding:1rem; border-radius:var(--radius-sm); font-size:0.85rem; color:#1A1F2E; margin-top:1rem; }
 
@@ -171,6 +165,23 @@
         .amenities-list { display:flex; flex-wrap:wrap; gap:0.75rem; }
         .amenity-tag { background:var(--surface-alt); padding:0.5rem 1rem; border-radius:2rem; font-size:0.85rem; }
 
+        /* Tappable tags */
+        .card-tags { margin-top:0.5rem; }
+        .card-tag {
+            display: inline-block;
+            background: var(--surface-alt);
+            padding: 0.25rem 0.7rem;
+            border-radius: 1rem;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            margin-right: 0.4rem;
+            border: 1px solid var(--border);
+            transition: 0.2s;
+        }
+        .card-tag:hover { background: var(--primary); color: white; border-color: var(--primary); }
+
         .similar-section { margin:3rem 0; }
         .similar-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:1.5rem; margin-top:1.5rem; }
         .property-card {
@@ -183,6 +194,12 @@
         .property-card h4 { padding:0 0.75rem; font-size:0.9rem; }
         .property-card p { padding:0 0.75rem 0.75rem; font-size:0.8rem; color:var(--text-secondary); }
 
+        footer { background:#1A1F2E; color:#CBD5E1; padding:4rem 0 1.5rem; margin-top:3rem; }
+        footer a { color:#94A3B8; text-decoration:none; }
+        footer a:hover { color:var(--accent-soft); }
+        .footer-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:2rem; margin-bottom:2rem; }
+        .social i { font-size:1.2rem; margin-right:1rem; }
+
         /* Lightbox */
         .lightbox {
             position:fixed; top:0; left:0; right:0; bottom:0;
@@ -191,10 +208,7 @@
         }
         .lightbox.active { display:flex; }
         .lightbox img { max-width:90%; max-height:90%; border-radius:8px; }
-        .lightbox-close {
-            position:absolute; top:20px; right:20px; background:none; border:none;
-            color:white; font-size:28px; cursor:pointer;
-        }
+        .lightbox-close { position:absolute; top:20px; right:20px; background:none; border:none; color:white; font-size:28px; cursor:pointer; }
         .lightbox-prev, .lightbox-next {
             position:absolute; top:50%; transform:translateY(-50%);
             background:rgba(255,255,255,0.2); border:none; color:white;
@@ -203,11 +217,6 @@
         .lightbox-prev { left:20px; }
         .lightbox-next { right:20px; }
 
-        footer { background:#1A1F2E; color:#CBD5E1; padding:4rem 0 1.5rem; margin-top:3rem; }
-        footer a { color:#94A3B8; text-decoration:none; }
-        footer a:hover { color:var(--accent-soft); }
-        .footer-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:2rem; margin-bottom:2rem; }
-        .social i { font-size:1.2rem; margin-right:1rem; }
         @media (max-width:768px) {
             .desktop-nav { display:none; }
             .mobile-only { display:block; }
@@ -272,275 +281,296 @@
 </div>
 
 <script>
-    (function() {
-        // Theme toggle
-        const themeToggle = document.getElementById('themeToggle');
-        const storedTheme = localStorage.getItem('zaure_theme') || 'light';
-        document.documentElement.setAttribute('data-theme', storedTheme);
-        themeToggle.innerHTML = storedTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-        themeToggle.addEventListener('click', () => {
-            const cur = document.documentElement.getAttribute('data-theme');
-            const next = cur === 'light' ? 'dark' : 'light';
-            document.documentElement.setAttribute('data-theme', next);
-            localStorage.setItem('zaure_theme', next);
-            themeToggle.innerHTML = next === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+(function() {
+    // Theme & mobile menu (same as other pages)
+    const themeToggle = document.getElementById('themeToggle');
+    const savedTheme = localStorage.getItem('zaure_theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    themeToggle.innerHTML = savedTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    themeToggle.addEventListener('click', () => {
+        const cur = document.documentElement.getAttribute('data-theme');
+        const next = cur === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('zaure_theme', next);
+        themeToggle.innerHTML = next === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    });
+
+    document.getElementById('mobileMenuToggle').addEventListener('click', () => document.getElementById('mobileMenu').classList.add('open'));
+    document.getElementById('closeMenu').addEventListener('click', () => document.getElementById('mobileMenu').classList.remove('open'));
+
+    // Get property ID from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const propertyId = urlParams.get('id');
+    if (!propertyId) {
+        document.getElementById('propertyContent').innerHTML = '<div class="error-message">No property ID specified.</div>';
+    } else {
+        fetch('/data/properties.json')
+            .then(res => res.json())
+            .then(data => {
+                const property = data.properties.find(p => p.id == propertyId);
+                if (!property) throw new Error('Property not found');
+                renderProperty(property);
+                loadSimilarProperties(property, data.properties);
+            })
+            .catch(err => {
+                console.error(err);
+                document.getElementById('propertyContent').innerHTML = '<div class="error-message">Failed to load property.</div>';
+            });
+    }
+
+    function formatPrice(price) {
+        return price >= 1e6 ? `₦${(price/1e6).toFixed(1)}M` : `₦${price.toLocaleString()}`;
+    }
+
+    let allImages = [];
+    let currentLightboxIndex = 0;
+
+    function renderProperty(prop) {
+        const container = document.getElementById('propertyContent');
+        const priceFormatted = formatPrice(prop.price);
+        const owner = prop.owner || { name: 'Owner', phone: '', verified: false };
+        const avatar = owner.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(owner.name)}&background=B49450&color=fff&size=128`;
+
+        // Images
+        allImages = prop.images && prop.images.length ? [...prop.images] : ['https://placehold.co/800x500?text=Zaure'];
+        const mainImg = allImages[0];
+        const thumbnailsHtml = allImages.map((img, idx) =>
+            `<img src="${img}" class="thumbnail ${idx === 0 ? 'active' : ''}" data-index="${idx}" alt="Thumbnail">`
+        ).join('');
+
+        // Video
+        const videoHtml = prop.video ? `
+            <div class="video-container">
+                <video controls controlsList="nodownload" oncontextmenu="return false;" playsinline>
+                    <source src="${prop.video}" type="video/mp4">
+                </video>
+            </div>
+        ` : '';
+
+        const yearBuilt = prop.yearBuilt || 'N/A';
+        const parking = prop.parking || 'N/A';
+        const lastUpdated = prop.listedDate ? new Date(prop.listedDate).toLocaleDateString('en-GB') : 'Unknown';
+        const amenitiesHtml = prop.amenities && prop.amenities.length
+            ? prop.amenities.map(a => `<span class="amenity-tag">${a}</span>`).join('')
+            : '<span class="amenity-tag">None listed</span>';
+
+        // Check if already saved
+        const interactions = JSON.parse(localStorage.getItem('zaure_interactions') || '[]');
+        const isSaved = interactions.some(i => i.propertyId == prop.id && i.action === 'like');
+
+        container.innerHTML = `
+            <div class="property-header">
+                <h1 class="property-title">${prop.title}</h1>
+                <div class="property-address"><i class="fas fa-map-marker-alt"></i> ${prop.address}, ${prop.city}, ${prop.state}</div>
+                <div class="property-price">${priceFormatted}</div>
+                <div style="margin-top:0.5rem;">
+                    <span class="badge-type">${prop.type === 'sale' ? 'For Sale' : 'For Rent'}</span>
+                </div>
+                <div class="card-tags" style="margin-top:0.75rem;">
+                    <span class="card-tag" onclick="event.stopPropagation(); window.location.href='/browse?location=${encodeURIComponent(prop.city)}'">${prop.city}</span>
+                    <span class="card-tag" onclick="event.stopPropagation(); window.location.href='/browse?propertyType=${encodeURIComponent(prop.propertyType)}'">${prop.propertyType}</span>
+                    ${prop.amenities?.slice(0,3).map(a => `<span class="card-tag" onclick="event.stopPropagation(); window.location.href='/browse?search=${encodeURIComponent(a)}'">${a}</span>`).join('')}
+                </div>
+            </div>
+
+            <div class="property-layout">
+                <div class="gallery">
+                    <div class="main-image-container" id="mainImageContainer">
+                        <img src="${mainImg}" class="main-img" id="mainImage" alt="${prop.title}">
+                    </div>
+                    <div class="thumbnail-strip">${thumbnailsHtml}</div>
+                    ${videoHtml}
+                </div>
+
+                <div class="sidebar-card">
+                    <h3 style="font-family:'Playfair Display',serif; margin-bottom:1rem;">Owner</h3>
+                    <div class="owner-profile">
+                        <img src="${avatar}" class="owner-avatar" onerror="this.style.background='var(--accent)';">
+                        <div class="owner-details">
+                            <h3>
+                                ${owner.name}
+                                ${owner.verified ? '<span class="verified-icon"><i class="fas fa-check-circle"></i> Verified</span>' : ''}
+                            </h3>
+                            <div class="owner-phone">${owner.phone || 'Phone not provided'}</div>
+                        </div>
+                    </div>
+                    <div class="owner-actions">
+                        ${owner.phone ? `<a href="tel:${owner.phone}" class="btn-call" id="callBtn"><i class="fas fa-phone-alt"></i> Call</a>` : ''}
+                        <a href="#" class="btn-wa" id="ownerWhatsApp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                        <button class="btn-heart ${isSaved ? 'saved' : ''}" id="heartBtn">
+                            <i class="fas fa-heart"></i> ${isSaved ? 'Saved' : 'Save'}
+                        </button>
+                    </div>
+                    <hr>
+                    <div class="safety-tips"><i class="fas fa-shield-alt"></i> Do not pay any money before viewing the property and verifying the owner's identity.</div>
+                </div>
+            </div>
+
+            <div class="tabs-container">
+                <div class="tabs-header">
+                    <button class="tab-btn-prop active" data-tab="overview">Overview</button>
+                    <button class="tab-btn-prop" data-tab="description">Description</button>
+                    <button class="tab-btn-prop" data-tab="amenities">Amenities</button>
+                    <button class="tab-btn-prop" data-tab="details">Details</button>
+                </div>
+                <div class="tab-content active" id="tab-overview">
+                    <div class="info-grid">
+                        <div class="info-item"><i class="fas fa-bed"></i> <strong>Bedrooms:</strong> ${prop.bedrooms}</div>
+                        <div class="info-item"><i class="fas fa-bath"></i> <strong>Bathrooms:</strong> ${prop.bathrooms}</div>
+                        <div class="info-item"><i class="fas fa-ruler-combined"></i> <strong>Land size:</strong> ${prop.squareFeet} sqm</div>
+                        <div class="info-item"><i class="fas fa-calendar-alt"></i> <strong>Year built:</strong> ${yearBuilt}</div>
+                        <div class="info-item"><i class="fas fa-car"></i> <strong>Parking:</strong> ${parking}</div>
+                        <div class="info-item"><i class="fas fa-clock"></i> <strong>Last updated:</strong> ${lastUpdated}</div>
+                        <div class="info-item"><i class="fas fa-building"></i> <strong>Type:</strong> ${prop.propertyType}</div>
+                    </div>
+                </div>
+                <div class="tab-content" id="tab-description"><p>${prop.description || 'No description provided.'}</p></div>
+                <div class="tab-content" id="tab-amenities"><div class="amenities-list">${amenitiesHtml}</div></div>
+                <div class="tab-content" id="tab-details">
+                    <div class="info-grid">
+                        <div class="info-item"><i class="fas fa-toilet"></i> <strong>Toilets:</strong> ${prop.toilets || prop.bathrooms}</div>
+                        <div class="info-item"><i class="fas fa-vector-square"></i> <strong>Square Feet:</strong> ${prop.squareFeet || 'N/A'}</div>
+                        <div class="info-item"><i class="fas fa-city"></i> <strong>State:</strong> ${prop.state}</div>
+                        <div class="info-item"><i class="fas fa-map-pin"></i> <strong>City:</strong> ${prop.city}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="similar-section">
+                <h2>Similar properties nearby</h2>
+                <div id="similarGrid" class="similar-grid"></div>
+            </div>
+        `;
+
+        // Gallery & lightbox logic
+        const mainImgEl = document.getElementById('mainImage');
+        const thumbnails = document.querySelectorAll('.thumbnail');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxClose = document.querySelector('.lightbox-close');
+        const lightboxPrev = document.querySelector('.lightbox-prev');
+        const lightboxNext = document.querySelector('.lightbox-next');
+
+        function updateMainImage(index) {
+            mainImgEl.src = allImages[index];
+            thumbnails.forEach((t, i) => t.classList.toggle('active', i === index));
+            currentLightboxIndex = index;
+        }
+
+        function openLightbox(index) {
+            currentLightboxIndex = index;
+            lightboxImg.src = allImages[index];
+            lightbox.classList.add('active');
+        }
+
+        function closeLightbox() { lightbox.classList.remove('active'); }
+        function prevImage() {
+            currentLightboxIndex = (currentLightboxIndex - 1 + allImages.length) % allImages.length;
+            lightboxImg.src = allImages[currentLightboxIndex];
+            updateMainImage(currentLightboxIndex);
+        }
+        function nextImage() {
+            currentLightboxIndex = (currentLightboxIndex + 1) % allImages.length;
+            lightboxImg.src = allImages[currentLightboxIndex];
+            updateMainImage(currentLightboxIndex);
+        }
+
+        thumbnails.forEach((thumb, idx) => {
+            thumb.addEventListener('click', () => updateMainImage(idx));
+        });
+        document.getElementById('mainImageContainer').addEventListener('click', () => openLightbox(currentLightboxIndex));
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+        lightboxPrev.addEventListener('click', prevImage);
+        lightboxNext.addEventListener('click', nextImage);
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'ArrowLeft') prevImage();
+            if (e.key === 'ArrowRight') nextImage();
+            if (e.key === 'Escape') closeLightbox();
         });
 
-        // Mobile menu
-        document.getElementById('mobileMenuToggle').addEventListener('click', () => document.getElementById('mobileMenu').classList.add('open'));
-        document.getElementById('closeMenu').addEventListener('click', () => document.getElementById('mobileMenu').classList.remove('open'));
+        // Tabs
+        const tabBtns = document.querySelectorAll('.tab-btn-prop');
+        const tabContents = document.querySelectorAll('.tab-content');
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabId = btn.dataset.tab;
+                tabBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                tabContents.forEach(c => c.classList.remove('active'));
+                document.getElementById(`tab-${tabId}`).classList.add('active');
+            });
+        });
 
-        // Get property ID from URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const propertyId = urlParams.get('id');
-        if (!propertyId) {
-            document.getElementById('propertyContent').innerHTML = '<div class="error-message">No property ID specified.</div>';
-        } else {
-            fetch('/data/properties.json')
-                .then(res => res.json())
-                .then(data => {
-                    const property = data.properties.find(p => p.id == propertyId);
-                    if (!property) throw new Error('Property not found');
-                    renderProperty(property);
-                    loadSimilarProperties(property, data.properties);
-                })
-                .catch(err => {
-                    console.error(err);
-                    document.getElementById('propertyContent').innerHTML = '<div class="error-message">Failed to load property. Please try again.</div>';
-                });
+        // Heart/save logic
+        let saved = isSaved;
+        const heartBtn = document.getElementById('heartBtn');
+        heartBtn.addEventListener('click', () => {
+            saved = !saved;
+            heartBtn.classList.toggle('saved', saved);
+            heartBtn.innerHTML = `<i class="fas fa-heart"></i> ${saved ? 'Saved' : 'Save'}`;
+            if (saved) {
+                logInteraction(prop, 'like', 8);
+            } else {
+                const interactions = JSON.parse(localStorage.getItem('zaure_interactions') || '[]');
+                const idx = interactions.findIndex(i => i.propertyId == prop.id && i.action === 'like');
+                if (idx !== -1) interactions.splice(idx, 1);
+                localStorage.setItem('zaure_interactions', JSON.stringify(interactions));
+            }
+        });
+
+        // WhatsApp button
+        const waBtn = document.getElementById('ownerWhatsApp');
+        waBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (owner.phone) {
+                const phone = owner.phone.replace(/\D/g, '');
+                const text = `Hello, I am interested in your property "${prop.title}" on Zaure.`;
+                window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`, '_blank');
+                logInteraction(prop, 'whatsapp', 8);
+            } else {
+                alert('Owner phone not available.');
+            }
+        });
+
+        // Call button logging
+        const callBtn = document.getElementById('callBtn');
+        if (callBtn) callBtn.addEventListener('click', () => logInteraction(prop, 'call', 12));
+
+        // View time logging
+        const viewStart = Date.now();
+        window.addEventListener('beforeunload', () => {
+            const seconds = (Date.now() - viewStart) / 1000;
+            if (seconds >= 5) logInteraction(prop, 'view', seconds >= 15 ? 3 : 1);
+        });
+    }
+
+    function logInteraction(prop, action, weight) {
+        const interactions = JSON.parse(localStorage.getItem('zaure_interactions') || '[]');
+        interactions.push({ propertyId: prop.id, action, weight, timestamp: Date.now() });
+        if (interactions.length > 50) interactions.shift();
+        localStorage.setItem('zaure_interactions', JSON.stringify(interactions));
+    }
+
+    function loadSimilarProperties(prop, allProperties) {
+        const similar = allProperties.filter(p => p.id != prop.id && p.city === prop.city).slice(0, 4);
+        const grid = document.getElementById('similarGrid');
+        if (!grid) return;
+        if (!similar.length) {
+            grid.innerHTML = '<p>No similar properties found.</p>';
+            return;
         }
-
-        function formatPrice(price) {
-            return price >= 1e6 ? `₦${(price/1e6).toFixed(1)}M` : `₦${price.toLocaleString()}`;
-        }
-
-        let allImages = [];
-        let currentLightboxIndex = 0;
-
-        function renderProperty(prop) {
-            const container = document.getElementById('propertyContent');
-            const priceFormatted = formatPrice(prop.price);
-            const owner = prop.owner || { name: 'Owner', phone: '', verified: false };
-            const avatar = owner.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(owner.name)}&background=B49450&color=fff&size=128`;
-
-            // Images
-            allImages = prop.images && prop.images.length ? [...prop.images] : ['https://placehold.co/800x500?text=Zaure'];
-            const mainImg = allImages[0];
-            const thumbnailsHtml = allImages.map((img, idx) =>
-                `<img src="${img}" class="thumbnail ${idx === 0 ? 'active' : ''}" data-index="${idx}" alt="Thumbnail">`
-            ).join('');
-
-            // Video (if available)
-            const videoHtml = prop.video ? `
-                <div class="video-container">
-                    <video controls controlsList="nodownload" oncontextmenu="return false;" playsinline>
-                        <source src="${prop.video}" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-            ` : '';
-
-            // Details
-            const yearBuilt = prop.yearBuilt || 'N/A';
-            const parking = prop.parking || 'N/A';
-            const lastUpdated = prop.listedDate ? new Date(prop.listedDate).toLocaleDateString('en-GB') : 'Unknown';
-            const amenitiesHtml = prop.amenities && prop.amenities.length
-                ? prop.amenities.map(a => `<span class="amenity-tag">${a}</span>`).join('')
-                : '<span class="amenity-tag">None listed</span>';
-
-            container.innerHTML = `
-                <div class="property-header">
-                    <h1 class="property-title">${prop.title}</h1>
-                    <div class="property-address"><i class="fas fa-map-marker-alt"></i> ${prop.address}, ${prop.city}, ${prop.state}</div>
-                    <div class="property-price">${priceFormatted}</div>
-                    <div style="margin-top:0.5rem;"><span class="badge-type">${prop.type === 'sale' ? 'For Sale' : 'For Rent'}</span></div>
-                </div>
-
-                <div class="property-layout">
-                    <div class="media-section">
-                        <div class="main-image-container" id="mainImageContainer">
-                            <img src="${mainImg}" class="main-img" id="mainImage" alt="${prop.title}">
-                        </div>
-                        <div class="thumbnail-strip">${thumbnailsHtml}</div>
-                        ${videoHtml}
-                    </div>
-
-                    <div class="sidebar-card">
-                        <h3 style="font-family:'Playfair Display',serif; margin-bottom:1rem;">Owner</h3>
-                        <div class="owner-profile">
-                            <img src="${avatar}" class="owner-avatar" onerror="this.src='https://ui-avatars.com/api/?name=Owner&background=B49450&color=fff&size=128'">
-                            <div class="owner-details">
-                                <h3>
-                                    ${owner.name}
-                                    ${owner.verified ? '<span class="verified-icon"><i class="fas fa-check-circle"></i> Verified</span>' : ''}
-                                </h3>
-                                <div class="owner-phone">${owner.phone || 'Phone not provided'}</div>
-                            </div>
-                        </div>
-                        <div class="owner-actions">
-                            ${owner.phone ? `<a href="tel:${owner.phone}" class="btn-call"><i class="fas fa-phone-alt"></i> Call</a>` : ''}
-                            <a href="#" class="btn-wa" id="ownerWhatsApp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-                        </div>
-                        <hr>
-                        <div class="safety-tips"><i class="fas fa-shield-alt"></i> Do not pay any money before viewing the property and verifying the owner's identity.</div>
-                    </div>
-                </div>
-
-                <!-- Tabs -->
-                <div class="tabs-container">
-                    <div class="tabs-header">
-                        <button class="tab-btn-prop active" data-tab="overview">Overview</button>
-                        <button class="tab-btn-prop" data-tab="description">Description</button>
-                        <button class="tab-btn-prop" data-tab="amenities">Amenities</button>
-                        <button class="tab-btn-prop" data-tab="details">Details</button>
-                    </div>
-                    <div class="tab-content active" id="tab-overview">
-                        <div class="info-grid">
-                            <div class="info-item"><i class="fas fa-bed"></i> <strong>Bedrooms:</strong> ${prop.bedrooms}</div>
-                            <div class="info-item"><i class="fas fa-bath"></i> <strong>Bathrooms:</strong> ${prop.bathrooms}</div>
-                            <div class="info-item"><i class="fas fa-ruler-combined"></i> <strong>Land size:</strong> ${prop.squareFeet} sqm</div>
-                            <div class="info-item"><i class="fas fa-calendar-alt"></i> <strong>Year built:</strong> ${yearBuilt}</div>
-                            <div class="info-item"><i class="fas fa-car"></i> <strong>Parking:</strong> ${parking}</div>
-                            <div class="info-item"><i class="fas fa-clock"></i> <strong>Last updated:</strong> ${lastUpdated}</div>
-                            <div class="info-item"><i class="fas fa-building"></i> <strong>Type:</strong> ${prop.propertyType}</div>
-                        </div>
-                    </div>
-                    <div class="tab-content" id="tab-description"><p>${prop.description || 'No description provided.'}</p></div>
-                    <div class="tab-content" id="tab-amenities"><div class="amenities-list">${amenitiesHtml}</div></div>
-                    <div class="tab-content" id="tab-details">
-                        <div class="info-grid">
-                            <div class="info-item"><i class="fas fa-toilet"></i> <strong>Toilets:</strong> ${prop.toilets || prop.bathrooms}</div>
-                            <div class="info-item"><i class="fas fa-vector-square"></i> <strong>Square Feet:</strong> ${prop.squareFeet || 'N/A'}</div>
-                            <div class="info-item"><i class="fas fa-city"></i> <strong>State:</strong> ${prop.state}</div>
-                            <div class="info-item"><i class="fas fa-map-pin"></i> <strong>City:</strong> ${prop.city}</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="similar-section">
-                    <h2>Similar properties nearby</h2>
-                    <div id="similarGrid" class="similar-grid"></div>
-                </div>
-            `;
-
-            // Gallery thumbnail switching
-            const mainImageEl = document.getElementById('mainImage');
-            const thumbnails = document.querySelectorAll('.thumbnail');
-            thumbnails.forEach((thumb, idx) => {
-                thumb.addEventListener('click', () => {
-                    updateMainImage(idx);
-                });
-            });
-
-            // Lightbox functionality
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImg = document.getElementById('lightboxImg');
-            const lightboxClose = document.querySelector('.lightbox-close');
-            const lightboxPrev = document.querySelector('.lightbox-prev');
-            const lightboxNext = document.querySelector('.lightbox-next');
-
-            function updateMainImage(index) {
-                mainImageEl.src = allImages[index];
-                thumbnails.forEach((t, i) => t.classList.toggle('active', i === index));
-                currentLightboxIndex = index;
-            }
-
-            function openLightbox(index) {
-                currentLightboxIndex = index;
-                lightboxImg.src = allImages[currentLightboxIndex];
-                lightbox.classList.add('active');
-            }
-
-            function closeLightbox() {
-                lightbox.classList.remove('active');
-            }
-
-            function prevImage() {
-                currentLightboxIndex = (currentLightboxIndex - 1 + allImages.length) % allImages.length;
-                lightboxImg.src = allImages[currentLightboxIndex];
-                updateMainImage(currentLightboxIndex);
-            }
-
-            function nextImage() {
-                currentLightboxIndex = (currentLightboxIndex + 1) % allImages.length;
-                lightboxImg.src = allImages[currentLightboxIndex];
-                updateMainImage(currentLightboxIndex);
-            }
-
-            // Main image click opens lightbox
-            document.getElementById('mainImageContainer').addEventListener('click', () => {
-                openLightbox(currentLightboxIndex);
-            });
-
-            lightboxClose.addEventListener('click', closeLightbox);
-            lightbox.addEventListener('click', (e) => {
-                if (e.target === lightbox) closeLightbox();
-            });
-            lightboxPrev.addEventListener('click', prevImage);
-            lightboxNext.addEventListener('click', nextImage);
-
-            // Keyboard navigation for lightbox
-            document.addEventListener('keydown', (e) => {
-                if (!lightbox.classList.contains('active')) return;
-                if (e.key === 'ArrowLeft') prevImage();
-                if (e.key === 'ArrowRight') nextImage();
-                if (e.key === 'Escape') closeLightbox();
-            });
-
-            // Tabs
-            const tabBtns = document.querySelectorAll('.tab-btn-prop');
-            const tabContents = document.querySelectorAll('.tab-content');
-            tabBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const tabId = btn.dataset.tab;
-                    tabBtns.forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    tabContents.forEach(c => c.classList.remove('active'));
-                    document.getElementById(`tab-${tabId}`).classList.add('active');
-                });
-            });
-
-            // WhatsApp button
-            const waBtn = document.getElementById('ownerWhatsApp');
-            if (waBtn && owner.phone) {
-                waBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const phone = owner.phone.replace(/\D/g, '');
-                    const text = `Hello, I am interested in your property "${prop.title}" on Zaure.`;
-                    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`, '_blank');
-                });
-            } else if (waBtn) {
-                waBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    alert('Owner phone number not available.');
-                });
-            }
-
-            // Anti‑download for video: already inline, but add extra contextmenu prevention
-            const video = document.querySelector('video');
-            if (video) {
-                video.addEventListener('contextmenu', (e) => e.preventDefault());
-            }
-        }
-
-        function loadSimilarProperties(prop, allProperties) {
-            const similar = allProperties.filter(p => p.id != prop.id && p.city === prop.city).slice(0, 4);
-            const grid = document.getElementById('similarGrid');
-            if (!grid) return;
-            if (!similar.length) {
-                grid.innerHTML = '<p>No similar properties found.</p>';
-                return;
-            }
-            grid.innerHTML = similar.map(p => `
-                <div class="property-card" onclick="window.location.href='/property?id=${p.id}'">
-                    <img src="${p.images?.[0] || 'https://placehold.co/400x300?text=Zaure'}" alt="${p.title}" loading="lazy">
-                    <div class="price">${formatPrice(p.price)}</div>
-                    <h4>${p.title}</h4>
-                    <p>${p.address}, ${p.city}</p>
-                </div>
-            `).join('');
-        }
-    })();
+        grid.innerHTML = similar.map(p => `
+            <div class="property-card" onclick="window.location.href='/property?id=${p.id}'">
+                <img src="${p.images?.[0] || 'https://placehold.co/400x300?text=Zaure'}" alt="${p.title}" loading="lazy">
+                <div class="price">${formatPrice(p.price)}</div>
+                <h4>${p.title}</h4>
+                <p>${p.address}, ${p.city}</p>
+            </div>
+        `).join('');
+    }
+})();
 </script>
 </body>
 </html>

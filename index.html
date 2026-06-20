@@ -46,7 +46,6 @@
             -webkit-font-smoothing: antialiased;
         }
         .container { max-width:1280px; margin:0 auto; padding:0 2rem; }
-
         /* Header */
         .main-header {
             background: rgba(255,255,255,0.8);
@@ -103,8 +102,9 @@
         .user-greeting {
             font-weight:600; color:var(--primary); background:var(--surface-alt);
             padding:0.5rem 1rem; border-radius:2rem; border:1px solid var(--border);
-            font-size:0.9rem;
+            font-size:0.9rem; text-decoration:none; display:inline-block;
         }
+        .user-greeting:hover { background:var(--border); }
 
         /* Hero */
         .hero {
@@ -187,6 +187,24 @@
         .card-body h3 { font-size:1rem; font-weight:600; margin-bottom:0.4rem; }
         .card-body p { color:var(--text-secondary); font-size:0.85rem; margin-bottom:1rem; }
         .features { display:flex; gap:1rem; color:var(--text-secondary); font-size:0.8rem; border-top:1px solid var(--border); padding-top:0.8rem; }
+
+        /* Tappable tags */
+        .card-tags { margin-top:0.5rem; }
+        .card-tag {
+            display: inline-block;
+            background: var(--surface-alt);
+            padding: 0.25rem 0.7rem;
+            border-radius: 1rem;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            margin-right: 0.4rem;
+            border: 1px solid var(--border);
+            transition: 0.2s;
+        }
+        .card-tag:hover { background: var(--primary); color: white; border-color: var(--primary); }
+
         .btn-outline {
             border:1px solid var(--primary); color:var(--primary); padding:0.6rem 1.8rem;
             border-radius:3rem; font-weight:600; text-decoration:none; transition:0.2s; display:inline-block;
@@ -269,11 +287,10 @@
             <a href="/contact">Contact</a>
             <a href="/post">Dashboard</a>
         </nav>
+        <div class="header-actions" id="headerUserArea">
+            <!-- dynamically filled -->
+        </div>
         <div class="header-actions">
-            <div id="userArea">
-                <button id="signupBtn" class="signup-btn">Sign Up</button>
-                <span id="greeting" class="user-greeting" style="display:none;"></span>
-            </div>
             <button id="themeToggle" class="icon-btn"><i class="fas fa-moon"></i></button>
             <button id="mobileMenuToggle" class="icon-btn mobile-only"><i class="fas fa-bars"></i></button>
         </div>
@@ -318,7 +335,7 @@
     <section class="hero">
         <div class="hero-content container">
             <h1>Your <span class="highlight">entrance</span> to home.<br>No middlemen.</h1>
-            <p>Zaure connects you directly with verified property owners. Browse homes for sale & rent across Northern Nigeria and speak to the owner instantly.</p>
+            <p>Zaure connects you directly with verified property owners. Browse homes for sale & rent across Northern Nigeria and speak to the owner instantly. Or let our smart feed find your perfect match.</p>
             <form id="heroSearch" class="hero-search">
                 <input type="text" id="searchLocation" placeholder="City or area" value="Kaduna">
                 <button type="button" class="trigger-btn" id="propertyTypeBtn">Property Type <i class="fas fa-chevron-down"></i></button>
@@ -331,6 +348,11 @@
             </form>
             <input type="hidden" id="propertyTypeValue" value="">
             <input type="hidden" id="bedsValue" value="">
+            <div style="margin-top:1.5rem;">
+                <a href="/browse" class="btn-primary" style="background:var(--accent); padding:0.8rem 2rem;">
+                    <i class="fas fa-magic"></i> Discover Homes For You
+                </a>
+            </div>
         </div>
     </section>
 
@@ -407,7 +429,7 @@
 
 <script>
     (function() {
-        // ---------- THEME ----------
+        // Theme toggle
         const themeToggle = document.getElementById('themeToggle');
         const storedTheme = localStorage.getItem('zaure_theme') || 'light';
         document.documentElement.setAttribute('data-theme', storedTheme);
@@ -420,7 +442,7 @@
             themeToggle.innerHTML = next === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
         });
 
-        // ---------- MOBILE MENU ----------
+        // Mobile menu
         const mobileToggle = document.getElementById('mobileMenuToggle');
         const mobileMenu = document.getElementById('mobileMenu');
         const closeMenuBtn = document.getElementById('closeMenu');
@@ -430,55 +452,49 @@
             link.addEventListener('click', () => mobileMenu.classList.remove('open'));
         });
 
-        // ---------- SIGN UP MODAL ----------
-        const signupBtn = document.getElementById('signupBtn');
-        const greetingSpan = document.getElementById('greeting');
+        // User area
+        const headerUserArea = document.getElementById('headerUserArea');
+        function renderUserArea() {
+            const user = JSON.parse(localStorage.getItem('zaure_user'));
+            if (user && user.name) {
+                headerUserArea.innerHTML = `<a href="/profile" class="user-greeting">Hi, ${user.name.split(' ')[0]}</a>`;
+            } else {
+                headerUserArea.innerHTML = `<button id="signupBtn" class="signup-btn">Sign Up</button>`;
+                const signupBtn = document.getElementById('signupBtn');
+                if (signupBtn) {
+                    signupBtn.addEventListener('click', () => {
+                        document.getElementById('signupModal').classList.add('active');
+                    });
+                }
+            }
+        }
+        renderUserArea();
+
+        // Sign Up modal
         const signupModalOverlay = document.getElementById('signupModal');
         const closeSignupModalBtn = document.getElementById('closeSignupModalBtn');
         const signupForm = document.getElementById('signupForm');
-
-        // Check if user already signed up
-        const savedUser = JSON.parse(localStorage.getItem('zaure_user'));
-        if (savedUser && savedUser.name) {
-            showGreeting(savedUser.name);
-        }
-
-        signupBtn.addEventListener('click', () => {
-            signupModalOverlay.classList.add('active');
-        });
-
-        closeSignupModalBtn.addEventListener('click', () => {
-            signupModalOverlay.classList.remove('active');
-        });
+        closeSignupModalBtn.addEventListener('click', () => signupModalOverlay.classList.remove('active'));
         window.addEventListener('click', (e) => {
             if (e.target === signupModalOverlay) signupModalOverlay.classList.remove('active');
         });
-
         signupForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const name = document.getElementById('signupName').value.trim();
             const phone = document.getElementById('signupPhone').value.trim();
             if (name && phone) {
-                const user = { name, phone };
-                localStorage.setItem('zaure_user', JSON.stringify(user));
-                showGreeting(name);
+                localStorage.setItem('zaure_user', JSON.stringify({ name, phone }));
                 signupModalOverlay.classList.remove('active');
                 signupForm.reset();
+                renderUserArea();
             }
         });
 
-        function showGreeting(name) {
-            signupBtn.style.display = 'none';
-            greetingSpan.style.display = 'inline-block';
-            greetingSpan.textContent = `Hi, ${name.split(' ')[0]}`;
-        }
-
-        // ---------- PROPERTY TYPE / BEDS SELECTION MODAL ----------
+        // Property type / beds modal
         const selectionModalOverlay = document.getElementById('selectionModal');
         const selectionModalTitle = document.getElementById('selectionModalTitle');
         const selectionOptionsContainer = document.getElementById('selectionOptionsContainer');
         const closeSelectionModalBtn = document.getElementById('closeSelectionModalBtn');
-
         const propertyTypeBtn = document.getElementById('propertyTypeBtn');
         const bedsBtn = document.getElementById('bedsBtn');
         const propertyTypeValue = document.getElementById('propertyTypeValue');
@@ -498,7 +514,6 @@
         ];
 
         let currentSelectionType = '';
-
         function openSelectionModal(type) {
             currentSelectionType = type;
             const options = type === 'propertyType' ? propertyTypes : bedOptions;
@@ -508,26 +523,20 @@
             ).join('');
             selectionModalOverlay.classList.add('active');
         }
-
         function closeSelectionModal() {
             selectionModalOverlay.classList.remove('active');
         }
-
         propertyTypeBtn.addEventListener('click', () => openSelectionModal('propertyType'));
         bedsBtn.addEventListener('click', () => openSelectionModal('beds'));
-
         closeSelectionModalBtn.addEventListener('click', closeSelectionModal);
         selectionModalOverlay.addEventListener('click', (e) => {
             if (e.target === selectionModalOverlay) closeSelectionModal();
         });
-
-        // Handle option click
         selectionOptionsContainer.addEventListener('click', (e) => {
             const optionBtn = e.target.closest('.option-item');
             if (!optionBtn) return;
             const value = optionBtn.dataset.value;
             const label = optionBtn.textContent.trim();
-
             if (currentSelectionType === 'propertyType') {
                 propertyTypeValue.value = value;
                 propertyTypeBtn.innerHTML = `${label} <i class="fas fa-chevron-down"></i>`;
@@ -538,7 +547,7 @@
             closeSelectionModal();
         });
 
-        // ---------- SEARCH ----------
+        // Search form
         document.getElementById('heroSearch').addEventListener('submit', e => {
             e.preventDefault();
             const location = document.getElementById('searchLocation').value.trim();
@@ -554,7 +563,7 @@
             window.location.href = url;
         });
 
-        // ---------- LOAD PROPERTIES ----------
+        // Load featured properties
         fetch('/data/properties.json')
             .then(res => res.json())
             .then(data => {
@@ -587,13 +596,17 @@
                             <div class="features">
                                 ${p.propertyType !== 'land' ? `<span><i class="fas fa-bed"></i> ${p.bedrooms} Beds</span><span><i class="fas fa-bath"></i> ${p.bathrooms} Baths</span>` : '<span><i class="fas fa-map"></i> Land</span>'}
                             </div>
+                            <div class="card-tags">
+                                <span class="card-tag" onclick="event.stopPropagation(); window.location.href='/browse?location=${encodeURIComponent(p.city)}'">${p.city}</span>
+                                <span class="card-tag" onclick="event.stopPropagation(); window.location.href='/browse?propertyType=${encodeURIComponent(p.propertyType)}'">${p.propertyType}</span>
+                            </div>
                         </div>
                     </div>
                 `;
             }).join('');
         }
 
-        // ---------- CITIES GRID ----------
+        // Cities grid
         const states = ['Kaduna','Kano','Zaria','Sokoto','Maiduguri','Jos','Abuja','Lagos','Ibadan','Katsina','Bauchi','Gombe'];
         document.getElementById('statesGrid').innerHTML = states.map(s => `<div class="state-item" onclick="window.location.href='/browse?location=${s}'">${s} <span>→</span></div>`).join('');
     })();

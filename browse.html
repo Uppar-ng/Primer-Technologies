@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Browse Properties | Zaure</title>
-    <meta name="description" content="Search and filter properties for sale or rent across Northern Nigeria. Connect directly with verified owners.">
+    <meta name="description" content="Browse homes for sale and rent across Northern Nigeria, or use our smart For You feed to find your perfect match.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -46,6 +46,7 @@
             -webkit-font-smoothing: antialiased;
         }
         .container { max-width:1280px; margin:0 auto; padding:0 2rem; }
+        /* Header */
         .main-header {
             background: rgba(255,255,255,0.8);
             backdrop-filter: blur(12px);
@@ -60,7 +61,7 @@
             color: var(--primary); letter-spacing:-0.5px; display:flex; align-items:baseline;
         }
         .logo a .dot { width:6px; height:6px; background:var(--accent); border-radius:50%; margin-left:4px; }
-        .desktop-nav { display:flex; gap:2.2rem; }
+        .desktop-nav { display:flex; gap:2.2rem; align-items:center; }
         .desktop-nav a {
             text-decoration:none; color:var(--text); font-weight:500; font-size:0.95rem;
             transition:color 0.2s; position:relative;
@@ -71,7 +72,7 @@
         }
         .desktop-nav a:hover, .desktop-nav a.active { color:var(--primary); }
         .desktop-nav a:hover::after, .desktop-nav a.active::after { width:100%; }
-        .header-actions { display:flex; gap:0.8rem; }
+        .header-actions { display:flex; gap:0.8rem; align-items:center; }
         .icon-btn {
             background:transparent; border:1px solid var(--border); font-size:1.1rem; cursor:pointer;
             color:var(--text); padding:0.5rem; border-radius:50%; width:38px; height:38px;
@@ -87,11 +88,22 @@
         .mobile-menu.open { left:0; }
         .mobile-menu a { text-decoration:none; font-size:1.2rem; color:var(--text); font-weight:500; padding:0.5rem 0; border-bottom:1px solid var(--border); }
 
+        /* View toggle */
+        .view-toggle {
+            display: flex; justify-content: center; gap: 1rem; margin: 2rem 0 1rem;
+        }
+        .view-toggle button {
+            background: var(--surface); border: 1px solid var(--border); padding: 0.6rem 2rem;
+            border-radius: 2rem; font-weight: 600; cursor: pointer; transition: 0.2s; color: var(--text);
+        }
+        .view-toggle button.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+        /* Classic filters bar */
         .filters-bar {
             background: var(--surface);
             padding: 1.5rem;
             border-radius: var(--radius);
-            margin: 2rem 0;
+            margin-bottom: 2rem;
             display: flex;
             flex-wrap: wrap;
             gap: 1rem;
@@ -100,8 +112,7 @@
             border: 1px solid var(--border);
         }
         .filters-bar input,
-        .filters-bar .trigger-btn,
-        .filters-bar select {
+        .filters-bar .trigger-btn {
             padding: 0.75rem 1rem;
             border: 1px solid var(--border);
             border-radius: 3rem;
@@ -127,15 +138,7 @@
             gap: 1rem;
         }
         .results-count { color: var(--text-secondary); font-size: 0.9rem; }
-        .sort-select {
-            padding: 0.5rem 1rem;
-            border: 1px solid var(--border);
-            border-radius: 2rem;
-            background: var(--surface);
-            font-size: 0.9rem;
-            color: var(--text);
-        }
-        .property-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:2rem; margin-bottom: 2rem; }
+        .property-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:2rem; margin-bottom:2rem; }
         .property-card {
             background:var(--surface); border-radius:var(--radius); overflow:hidden;
             box-shadow:var(--shadow-sm); cursor:pointer; transition:all var(--transition);
@@ -159,12 +162,24 @@
         .card-body h3 { font-size:1rem; font-weight:600; margin-bottom:0.4rem; }
         .card-body p { color:var(--text-secondary); font-size:0.85rem; margin-bottom:1rem; }
         .features { display:flex; gap:1rem; color:var(--text-secondary); font-size:0.8rem; border-top:1px solid var(--border); padding-top:0.8rem; }
-        .card-footer { display:flex; justify-content:flex-end; align-items:center; padding:0.5rem 1rem 1rem; }
-        .share-wa {
-            background: #25D366; color: white; border: none; padding: 0.4rem 0.8rem;
-            border-radius: 1.5rem; font-size: 0.8rem; cursor: pointer;
-            display: inline-flex; align-items: center; gap: 0.3rem;
+
+        /* Tappable tags on cards */
+        .card-tags { margin-top:0.5rem; }
+        .card-tag {
+            display: inline-block;
+            background: var(--surface-alt);
+            padding: 0.25rem 0.7rem;
+            border-radius: 1rem;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            margin-right: 0.4rem;
+            border: 1px solid var(--border);
+            transition: 0.2s;
         }
+        .card-tag:hover { background: var(--primary); color: white; border-color: var(--primary); }
+
         .btn-primary {
             background:var(--accent); color:#1A1F2E; border:none; padding:0.75rem 1.5rem;
             border-radius:3rem; font-weight:700; cursor:pointer; transition:0.2s;
@@ -185,6 +200,70 @@
         .pagination button:hover:not(:disabled) { background:var(--primary); color:white; }
         .pagination button:disabled { opacity:0.5; cursor:not-allowed; }
         .no-results { text-align:center; padding:3rem; background:var(--surface); border-radius:var(--radius); color:var(--text-secondary); }
+
+        /* For You feed container */
+        #foryouView { display: none; position: relative; height: calc(100vh - 200px); overflow: hidden; background: var(--bg); }
+        #foryouView.active { display: block; }
+
+        .feed-cards-container { position: relative; width: 100%; height: 100%; }
+        .feed-card {
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: var(--surface); display: flex; flex-direction: column;
+            transform: translateX(0) scale(1); transition: transform 0.3s ease, opacity 0.3s ease; z-index: 1;
+        }
+        .feed-card.swiped-left { transform: translateX(-120%) rotate(-10deg); opacity: 0; }
+        .feed-card.swiped-right { transform: translateX(120%) rotate(10deg); opacity: 0; }
+        .feed-card .card-image-wrapper { flex: 1; overflow: hidden; background: #000; position: relative; }
+        .feed-card img, .feed-card video { width: 100%; height: 100%; object-fit: cover; }
+        .feed-card video { pointer-events: none; }
+        .feed-card .card-overlay {
+            position: absolute; bottom: 0; left: 0; right: 0; padding: 2rem 1.5rem 1.5rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7)); color: white;
+        }
+        .feed-card .card-price { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; }
+        .feed-card .card-title { font-size: 1.2rem; font-weight: 600; }
+        .feed-card .card-location { font-size: 0.9rem; opacity: 0.9; }
+        .feed-card .verified-badge {
+            display: inline-flex; align-items: center; gap: 0.3rem; background: var(--accent);
+            color: #1A1F2E; padding: 0.2rem 0.6rem; border-radius: 1rem; font-size: 0.7rem; font-weight: 700;
+        }
+        .feed-card .card-actions {
+            position: absolute; right: 1rem; top: 50%; transform: translateY(-50%);
+            display: flex; flex-direction: column; gap: 1rem; z-index: 5;
+        }
+        .feed-card .action-btn {
+            width: 50px; height: 50px; border-radius: 50%; background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.3); color: white;
+            font-size: 1.4rem; display: flex; align-items: center; justify-content: center; cursor: pointer;
+        }
+        .feed-card .card-tags {
+            position: absolute; bottom: 8rem; left: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem; z-index: 5;
+        }
+        .feed-card .card-tag {
+            background: rgba(255,255,255,0.25); backdrop-filter: blur(4px); padding: 0.3rem 0.8rem;
+            border-radius: 2rem; font-size: 0.75rem; color: white; cursor: pointer;
+        }
+        .feed-card .card-tag:hover { background: rgba(255,255,255,0.5); }
+
+        .feed-bottom-bar {
+            display: flex; justify-content: center; gap: 1.5rem; padding: 1rem;
+            background: var(--surface); border-top: 1px solid var(--border);
+        }
+        .feed-bottom-btn {
+            width: 56px; height: 56px; border-radius: 50%; border: none; font-size: 1.5rem;
+            cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center;
+        }
+        .feed-bottom-btn.skip { background: var(--surface-alt); color: var(--text-secondary); border: 1px solid var(--border); }
+        .feed-bottom-btn.like { background: var(--accent); color: #1A1F2E; }
+        .feed-bottom-btn.call { background: var(--primary); color: white; }
+        .feed-bottom-btn.share { background: var(--surface-alt); color: var(--text-secondary); border: 1px solid var(--border); }
+
+        .feed-undo-toast {
+            position: fixed; bottom: 6rem; left: 50%; transform: translateX(-50%); background: var(--primary);
+            color: white; padding: 0.5rem 1.5rem; border-radius: 2rem; z-index: 20; opacity: 0; cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .feed-undo-toast.visible { opacity: 1; }
 
         .modal-overlay {
             position:fixed; top:0; left:0; width:100%; height:100%;
@@ -219,6 +298,7 @@
             .mobile-only { display:block; }
             .filters-bar { flex-direction:column; }
             .filters-bar input, .filters-bar .trigger-btn, .filters-bar select { width:100%; }
+            #foryouView { height: calc(100vh - 180px); }
         }
     </style>
 </head>
@@ -233,7 +313,7 @@
             <a href="/how-it-works">How It Works</a>
             <a href="/about">About</a>
             <a href="/contact">Contact</a>
-            <a href="/post" class="btn-outline" style="padding:0.4rem 1.2rem; border-color:var(--accent); color:var(--accent);">List Property</a>
+            <a href="/post">Dashboard</a>
         </nav>
         <div class="header-actions">
             <button id="themeToggle" class="icon-btn"><i class="fas fa-moon"></i></button>
@@ -246,44 +326,52 @@
     <button id="closeMenu" class="close-btn"><i class="fas fa-times"></i></button>
     <a href="/">Home</a><a href="/browse?type=sale">Buy</a><a href="/browse?type=rent">Rent</a>
     <a href="/how-it-works">How It Works</a><a href="/about">About</a><a href="/contact">Contact</a>
-    <a href="/post">List Property</a>
+    <a href="/post">Dashboard</a>
 </div>
 
 <main class="container">
-    <!-- Filters bar -->
-    <div class="filters-bar">
-        <input type="text" id="locationFilter" placeholder="Location (city or area)">
-        <button type="button" class="trigger-btn" id="propertyTypeFilterBtn">Property Type <i class="fas fa-chevron-down"></i></button>
-        <select id="typeFilter">
-            <option value="">All Listings</option>
-            <option value="sale">For Sale</option>
-            <option value="rent">For Rent</option>
-        </select>
-        <button type="button" class="trigger-btn" id="bedFilterBtn">Bedrooms <i class="fas fa-chevron-down"></i></button>
-        <input type="number" id="minPriceFilter" placeholder="Min Price">
-        <input type="number" id="maxPriceFilter" placeholder="Max Price">
-        <button id="nearMeBtn" class="btn-outline"><i class="fas fa-location-arrow"></i> Near Me</button>
-        <button id="applyFiltersBtn" class="btn-primary"><i class="fas fa-search"></i> Apply</button>
-    </div>
-    <!-- Hidden inputs for modal values -->
-    <input type="hidden" id="propertyTypeValue" value="">
-    <input type="hidden" id="bedsValue" value="">
-
-    <!-- Results header -->
-    <div class="results-header">
-        <div class="results-count" id="resultsCount">Loading properties...</div>
-        <select id="sortSelect" class="sort-select">
-            <option value="price_asc">Price: Low to High</option>
-            <option value="price_desc">Price: High to Low</option>
-            <option value="newest">Newest First</option>
-        </select>
+    <!-- View Toggle -->
+    <div class="view-toggle">
+        <button id="classicViewBtn"><i class="fas fa-th-list"></i> Classic Browse</button>
+        <button id="foryouViewBtn"><i class="fas fa-magic"></i> For You Feed</button>
     </div>
 
-    <!-- Property grid -->
-    <div id="propertyGrid" class="property-grid"></div>
+    <!-- Classic Browse View -->
+    <div id="classicView" style="display:none;">
+        <div class="filters-bar">
+            <input type="text" id="locationFilter" placeholder="Location (city or area)">
+            <button type="button" class="trigger-btn" id="propertyTypeFilterBtn">Property Type <i class="fas fa-chevron-down"></i></button>
+            <button type="button" class="trigger-btn" id="listingTypeFilterBtn">Listing Type <i class="fas fa-chevron-down"></i></button>
+            <button type="button" class="trigger-btn" id="bedFilterBtn">Bedrooms <i class="fas fa-chevron-down"></i></button>
+            <input type="number" id="minPriceFilter" placeholder="Min Price">
+            <input type="number" id="maxPriceFilter" placeholder="Max Price">
+            <button id="nearMeBtn" class="btn-outline"><i class="fas fa-location-arrow"></i> Near Me</button>
+            <button id="applyFiltersBtn" class="btn-primary"><i class="fas fa-search"></i> Apply</button>
+        </div>
+        <input type="hidden" id="propertyTypeValue" value="">
+        <input type="hidden" id="listingTypeValue" value="">
+        <input type="hidden" id="bedsValue" value="">
 
-    <!-- Pagination -->
-    <div id="pagination" class="pagination"></div>
+        <div class="results-header">
+            <div class="results-count" id="resultsCount">Loading properties...</div>
+            <button type="button" class="trigger-btn" id="sortFilterBtn">Sort <i class="fas fa-chevron-down"></i></button>
+        </div>
+        <input type="hidden" id="sortValue" value="price_asc">
+        <div id="propertyGrid" class="property-grid"></div>
+        <div id="pagination" class="pagination"></div>
+    </div>
+
+    <!-- For You Feed View -->
+    <div id="foryouView">
+        <div class="feed-cards-container" id="feedCardsContainer"></div>
+        <div class="feed-bottom-bar">
+            <button class="feed-bottom-btn skip" id="feedSkipBtn"><i class="fas fa-times"></i></button>
+            <button class="feed-bottom-btn share" id="feedShareBtn"><i class="fab fa-whatsapp"></i></button>
+            <button class="feed-bottom-btn like" id="feedLikeBtn"><i class="fas fa-heart"></i></button>
+            <button class="feed-bottom-btn call" id="feedCallBtn"><i class="fas fa-phone-alt"></i></button>
+        </div>
+        <div class="feed-undo-toast" id="feedUndoToast">Undo</div>
+    </div>
 </main>
 
 <footer>
@@ -294,11 +382,11 @@
             <div><h4>Support</h4><a href="/contact">Contact</a><br><a href="/faq">FAQ</a><br><a href="/privacy">Privacy</a><br><a href="/terms">Terms</a></div>
             <div><h4>Connect</h4><div class="social"><i class="fab fa-facebook-f"></i><i class="fab fa-instagram"></i><i class="fab fa-twitter"></i></div></div>
         </div>
-        <div style="text-align:center; padding-top:1.5rem; border-top:1px solid #2E3548; font-size:0.8rem;">© 2026 Zaure Technologies. All rights reserved.</div>
+        <div style="text-align:center; padding-top:1.5rem; border-top:1px solid #2E3548; font-size:0.8rem;">© 2026 Zaure. All rights reserved.</div>
     </div>
 </footer>
 
-<!-- Modal for Property Type / Bedrooms -->
+<!-- Modal for all selections -->
 <div class="modal-overlay" id="selectionModal">
     <div class="modal">
         <div class="modal-header">
@@ -310,298 +398,637 @@
 </div>
 
 <script>
-    (function() {
-        // ---------- Theme ----------
-        const themeToggle = document.getElementById('themeToggle');
-        const storedTheme = localStorage.getItem('zaure_theme') || 'light';
-        document.documentElement.setAttribute('data-theme', storedTheme);
-        themeToggle.innerHTML = storedTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-        themeToggle.addEventListener('click', () => {
-            const cur = document.documentElement.getAttribute('data-theme');
-            const next = cur === 'light' ? 'dark' : 'light';
-            document.documentElement.setAttribute('data-theme', next);
-            localStorage.setItem('zaure_theme', next);
-            themeToggle.innerHTML = next === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-        });
+(function() {
+    // ──────────────────────────────────────
+    // Theme & mobile menu
+    const themeToggle = document.getElementById('themeToggle');
+    const savedTheme = localStorage.getItem('zaure_theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    themeToggle.innerHTML = savedTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    themeToggle.addEventListener('click', () => {
+        const cur = document.documentElement.getAttribute('data-theme');
+        const next = cur === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('zaure_theme', next);
+        themeToggle.innerHTML = next === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    });
 
-        // ---------- Mobile Menu ----------
-        document.getElementById('mobileMenuToggle').addEventListener('click', () => document.getElementById('mobileMenu').classList.add('open'));
-        document.getElementById('closeMenu').addEventListener('click', () => document.getElementById('mobileMenu').classList.remove('open'));
+    document.getElementById('mobileMenuToggle').addEventListener('click', () => document.getElementById('mobileMenu').classList.add('open'));
+    document.getElementById('closeMenu').addEventListener('click', () => document.getElementById('mobileMenu').classList.remove('open'));
 
-        // ---------- Modal Setup ----------
-        const modalOverlay = document.getElementById('selectionModal');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalOptions = document.getElementById('modalOptions');
-        const modalCloseBtn = document.getElementById('modalClose');
-        const propertyTypeBtn = document.getElementById('propertyTypeFilterBtn');
-        const bedBtn = document.getElementById('bedFilterBtn');
-        const propertyTypeHidden = document.getElementById('propertyTypeValue');
-        const bedsHidden = document.getElementById('bedsValue');
+    // ──────────────────────────────────────
+    // View logic (default to For You if no filters)
+    const urlParams = new URLSearchParams(window.location.search);
+    const hasFilters = urlParams.get('location') ||
+                       urlParams.get('type') ||
+                       urlParams.get('propertyType') ||
+                       urlParams.get('beds') ||
+                       urlParams.get('min') ||
+                       urlParams.get('max');
 
-        const propertyTypes = [
-            { value: 'house', label: 'House' },
-            { value: 'apartment', label: 'Apartment' },
-            { value: 'land', label: 'Land' },
-            { value: 'commercial', label: 'Commercial' }
-        ];
-        const bedOptions = [
-            { value: '1', label: '1' },
-            { value: '2', label: '2' },
-            { value: '3', label: '3' },
-            { value: '4+', label: '4+' }
-        ];
+    const classicViewBtn = document.getElementById('classicViewBtn');
+    const foryouViewBtn = document.getElementById('foryouViewBtn');
+    const classicView = document.getElementById('classicView');
+    const foryouView = document.getElementById('foryouView');
 
-        let currentModal = '';
+    function activateView(view) {
+        if (view === 'classic') {
+            classicViewBtn.classList.add('active');
+            foryouViewBtn.classList.remove('active');
+            classicView.style.display = 'block';
+            foryouView.style.display = 'none';
+        } else {
+            foryouViewBtn.classList.add('active');
+            classicViewBtn.classList.remove('active');
+            classicView.style.display = 'none';
+            foryouView.style.display = 'block';
+            if (!window.feedInitialized) {
+                initFeed();
+                window.feedInitialized = true;
+            }
+        }
+    }
 
-        function openModal(type) {
-            currentModal = type;
-            let options, title;
-            if (type === 'propertyType') {
+    if (hasFilters) {
+        activateView('classic');
+    } else {
+        activateView('foryou');
+    }
+
+    classicViewBtn.addEventListener('click', () => activateView('classic'));
+    foryouViewBtn.addEventListener('click', () => activateView('foryou'));
+
+    // ──────────────────────────────────────
+    // Single modal controller for all trigger buttons
+    const modalOverlay = document.getElementById('selectionModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalOptions = document.getElementById('modalOptions');
+    const modalCloseBtn = document.getElementById('modalClose');
+
+    const propertyTypeFilterBtn = document.getElementById('propertyTypeFilterBtn');
+    const listingTypeFilterBtn = document.getElementById('listingTypeFilterBtn');
+    const bedFilterBtn = document.getElementById('bedFilterBtn');
+    const sortFilterBtn = document.getElementById('sortFilterBtn');
+
+    const propertyTypeHidden = document.getElementById('propertyTypeValue');
+    const listingTypeHidden = document.getElementById('listingTypeValue');
+    const bedsHidden = document.getElementById('bedsValue');
+    const sortHidden = document.getElementById('sortValue');
+
+    const propertyTypes = [
+        { value: 'house', label: 'House' },
+        { value: 'apartment', label: 'Apartment' },
+        { value: 'land', label: 'Land' },
+        { value: 'commercial', label: 'Commercial' }
+    ];
+    const listingTypes = [
+        { value: '', label: 'All Listings' },
+        { value: 'sale', label: 'For Sale' },
+        { value: 'rent', label: 'For Rent' }
+    ];
+    const bedOptions = [
+        { value: '', label: 'Any' },
+        { value: '1', label: '1' },
+        { value: '2', label: '2' },
+        { value: '3', label: '3' },
+        { value: '4+', label: '4+' }
+    ];
+    const sortOptions = [
+        { value: 'price_asc', label: 'Price: Low to High' },
+        { value: 'price_desc', label: 'Price: High to Low' },
+        { value: 'newest', label: 'Newest First' }
+    ];
+
+    let currentModal = '';  // 'propertyType', 'listingType', 'beds', 'sort'
+    let currentTriggerBtn = null;
+
+    function openModal(type, triggerBtn) {
+        currentModal = type;
+        currentTriggerBtn = triggerBtn;
+        let options, title;
+        switch (type) {
+            case 'propertyType':
                 title = 'Property Type';
                 options = propertyTypes;
-            } else {
+                break;
+            case 'listingType':
+                title = 'Listing Type';
+                options = listingTypes;
+                break;
+            case 'beds':
                 title = 'Bedrooms';
                 options = bedOptions;
-            }
-            modalTitle.textContent = title;
-            modalOptions.innerHTML = options.map(opt => `<button type="button" class="modal-option" data-value="${opt.value}">${opt.label}</button>`).join('');
-            modalOverlay.classList.add('active');
+                break;
+            case 'sort':
+                title = 'Sort by';
+                options = sortOptions;
+                break;
         }
+        modalTitle.textContent = title;
+        modalOptions.innerHTML = options.map(opt => 
+            `<button type="button" class="modal-option" data-value="${opt.value}">${opt.label}</button>`
+        ).join('');
+        modalOverlay.classList.add('active');
+    }
 
-        propertyTypeBtn.addEventListener('click', () => openModal('propertyType'));
-        bedBtn.addEventListener('click', () => openModal('beds'));
-        modalCloseBtn.addEventListener('click', () => modalOverlay.classList.remove('active'));
-        modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) modalOverlay.classList.remove('active'); });
-        modalOptions.addEventListener('click', (e) => {
-            const option = e.target.closest('.modal-option');
-            if (!option) return;
-            const value = option.dataset.value;
-            const label = option.textContent.trim();
-            if (currentModal === 'propertyType') {
+    function closeModal() {
+        modalOverlay.classList.remove('active');
+    }
+
+    propertyTypeFilterBtn.addEventListener('click', () => openModal('propertyType', propertyTypeFilterBtn));
+    listingTypeFilterBtn.addEventListener('click', () => openModal('listingType', listingTypeFilterBtn));
+    bedFilterBtn.addEventListener('click', () => openModal('beds', bedFilterBtn));
+    sortFilterBtn.addEventListener('click', () => openModal('sort', sortFilterBtn));
+
+    modalCloseBtn.addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) closeModal();
+    });
+
+    modalOptions.addEventListener('click', (e) => {
+        const option = e.target.closest('.modal-option');
+        if (!option) return;
+        const value = option.dataset.value;
+        const label = option.textContent.trim();
+
+        switch (currentModal) {
+            case 'propertyType':
                 propertyTypeHidden.value = value;
-                propertyTypeBtn.innerHTML = `${label} <i class="fas fa-chevron-down"></i>`;
-            } else {
+                propertyTypeFilterBtn.innerHTML = `${label} <i class="fas fa-chevron-down"></i>`;
+                break;
+            case 'listingType':
+                listingTypeHidden.value = value;
+                listingTypeFilterBtn.innerHTML = `${label} <i class="fas fa-chevron-down"></i>`;
+                break;
+            case 'beds':
                 bedsHidden.value = value;
-                bedBtn.innerHTML = `${label} <i class="fas fa-chevron-down"></i>`;
+                bedFilterBtn.innerHTML = `${label} <i class="fas fa-chevron-down"></i>`;
+                break;
+            case 'sort':
+                sortHidden.value = value;
+                sortFilterBtn.innerHTML = `${label} <i class="fas fa-chevron-down"></i>`;
+                applyFiltersAndRender();
+                break;
+        }
+        closeModal();
+        // Auto-apply on property/listing/beds change
+        if (currentModal !== 'sort') {
+            applyFiltersAndRender();
+        }
+    });
+
+    // ──────────────────────────────────────
+    // Classic browse logic
+    let allProperties = [];
+    let filteredProperties = [];
+    let currentPage = 1;
+    const itemsPerPage = 12;
+
+    const urlLocation = urlParams.get('location') || '';
+    const urlPropertyType = urlParams.get('propertyType') || '';
+    const urlType = urlParams.get('type') || '';
+    const urlBeds = urlParams.get('beds') || '';
+    const urlMin = urlParams.get('min') || '';
+    const urlMax = urlParams.get('max') || '';
+
+    document.getElementById('locationFilter').value = urlLocation;
+    if (urlType) {
+        listingTypeHidden.value = urlType;
+        const typeObj = listingTypes.find(t => t.value === urlType);
+        if (typeObj) listingTypeFilterBtn.innerHTML = `${typeObj.label} <i class="fas fa-chevron-down"></i>`;
+    }
+    document.getElementById('minPriceFilter').value = urlMin;
+    document.getElementById('maxPriceFilter').value = urlMax;
+    if (urlPropertyType) {
+        propertyTypeHidden.value = urlPropertyType;
+        const typeObj = propertyTypes.find(t => t.value === urlPropertyType);
+        if (typeObj) propertyTypeFilterBtn.innerHTML = `${typeObj.label} <i class="fas fa-chevron-down"></i>`;
+    }
+    if (urlBeds) {
+        bedsHidden.value = urlBeds;
+        const bedObj = bedOptions.find(b => b.value === urlBeds);
+        if (bedObj) bedFilterBtn.innerHTML = `${bedObj.label} <i class="fas fa-chevron-down"></i>`;
+    }
+
+    function formatPrice(price) {
+        return price >= 1e6 ? `₦${(price/1e6).toFixed(1)}M` : `₦${price.toLocaleString()}`;
+    }
+
+    function applyFiltersAndRender() {
+        const location = document.getElementById('locationFilter').value.toLowerCase().trim();
+        const propertyType = propertyTypeHidden.value;
+        const listingType = listingTypeHidden.value;
+        const bedsRaw = bedsHidden.value;
+        const minPrice = parseInt(document.getElementById('minPriceFilter').value) || 0;
+        const maxPrice = parseInt(document.getElementById('maxPriceFilter').value) || Infinity;
+
+        filteredProperties = allProperties.filter(p => {
+            const matchesLocation = location === '' || p.city.toLowerCase().includes(location) || p.address.toLowerCase().includes(location);
+            const matchesPropertyType = propertyType === '' || p.propertyType === propertyType;
+            const matchesListingType = listingType === '' || p.type === listingType;
+            let matchesBeds = true;
+            if (bedsRaw !== '') {
+                const needed = bedsRaw === '4+' ? 4 : parseInt(bedsRaw);
+                matchesBeds = p.bedrooms >= needed;
             }
-            modalOverlay.classList.remove('active');
+            const matchesPrice = p.price >= minPrice && p.price <= maxPrice;
+            return matchesLocation && matchesPropertyType && matchesListingType && matchesBeds && matchesPrice;
         });
 
-        // ---------- Global State ----------
-        let allProperties = [];
-        let filteredProperties = [];
-        let currentPage = 1;
-        const itemsPerPage = 12;
+        const sortVal = sortHidden.value;
+        if (sortVal === 'price_asc') filteredProperties.sort((a,b) => a.price - b.price);
+        else if (sortVal === 'price_desc') filteredProperties.sort((a,b) => b.price - a.price);
+        else if (sortVal === 'newest') filteredProperties.sort((a,b) => new Date(b.listedDate) - new Date(a.listedDate));
 
-        // Parse URL parameters
-        const urlParams = new URLSearchParams(window.location.search);
-        const urlLocation = urlParams.get('location') || '';
-        const urlPropertyType = urlParams.get('propertyType') || '';
-        const urlType = urlParams.get('type') || ''; // sale/rent
-        const urlBeds = urlParams.get('beds') || '';
-        const urlMin = urlParams.get('min') || '';
-        const urlMax = urlParams.get('max') || '';
+        currentPage = 1;
+        renderResults();
+        renderPagination();
+    }
 
-        // Pre-fill filters
-        document.getElementById('locationFilter').value = urlLocation;
-        if (urlType) document.getElementById('typeFilter').value = urlType;
-        document.getElementById('minPriceFilter').value = urlMin;
-        document.getElementById('maxPriceFilter').value = urlMax;
-        if (urlPropertyType) {
-            propertyTypeHidden.value = urlPropertyType;
-            const typeObj = propertyTypes.find(t => t.value === urlPropertyType);
-            if (typeObj) propertyTypeBtn.innerHTML = `${typeObj.label} <i class="fas fa-chevron-down"></i>`;
-        }
-        if (urlBeds) {
-            bedsHidden.value = urlBeds;
-            const bedObj = bedOptions.find(b => b.value === urlBeds);
-            if (bedObj) bedBtn.innerHTML = `${bedObj.label} <i class="fas fa-chevron-down"></i>`;
+    function renderResults() {
+        const start = (currentPage - 1) * itemsPerPage;
+        const pageItems = filteredProperties.slice(start, start + itemsPerPage);
+        const grid = document.getElementById('propertyGrid');
+        const countSpan = document.getElementById('resultsCount');
+        countSpan.textContent = `Showing ${pageItems.length} of ${filteredProperties.length} properties`;
+
+        if (pageItems.length === 0) {
+            grid.innerHTML = '<div class="no-results">No properties match your filters.</div>';
+            return;
         }
 
-        // ---------- Fetch Data ----------
-        fetch('/data/properties.json')
-            .then(res => res.json())
-            .then(data => {
-                allProperties = data.properties;
-                applyFiltersAndRender();
-            })
-            .catch(err => {
-                console.error(err);
-                document.getElementById('propertyGrid').innerHTML = '<div class="no-results">Failed to load properties. Please refresh.</div>';
-            });
-
-        // ---------- Helper: Format Price ----------
-        function formatPrice(price) {
-            return price >= 1e6 ? `₦${(price/1e6).toFixed(1)}M` : `₦${price.toLocaleString()}`;
-        }
-
-        // ---------- Filter & Sort ----------
-        function applyFiltersAndRender() {
-            const location = document.getElementById('locationFilter').value.toLowerCase().trim();
-            const propertyType = propertyTypeHidden.value;
-            const listingType = document.getElementById('typeFilter').value;
-            const bedsRaw = bedsHidden.value;
-            const minPrice = parseInt(document.getElementById('minPriceFilter').value) || 0;
-            const maxPrice = parseInt(document.getElementById('maxPriceFilter').value) || Infinity;
-
-            filteredProperties = allProperties.filter(p => {
-                const matchesLocation = location === '' || p.city.toLowerCase().includes(location) || p.address.toLowerCase().includes(location);
-                const matchesPropertyType = propertyType === '' || p.propertyType === propertyType;
-                const matchesListingType = listingType === '' || p.type === listingType;
-                let matchesBeds = true;
-                if (bedsRaw !== '') {
-                    const needed = bedsRaw === '4+' ? 4 : parseInt(bedsRaw);
-                    matchesBeds = p.bedrooms >= needed;
-                }
-                const matchesPrice = p.price >= minPrice && p.price <= maxPrice;
-                return matchesLocation && matchesPropertyType && matchesListingType && matchesBeds && matchesPrice;
-            });
-
-            // Sort
-            const sortVal = document.getElementById('sortSelect').value;
-            if (sortVal === 'price_asc') filteredProperties.sort((a,b) => a.price - b.price);
-            else if (sortVal === 'price_desc') filteredProperties.sort((a,b) => b.price - a.price);
-            else if (sortVal === 'newest') filteredProperties.sort((a,b) => new Date(b.listedDate) - new Date(a.listedDate));
-
-            currentPage = 1;
-            renderResults();
-            renderPagination();
-        }
-
-        // ---------- Render Cards ----------
-        function renderResults() {
-            const start = (currentPage - 1) * itemsPerPage;
-            const pageItems = filteredProperties.slice(start, start + itemsPerPage);
-            const grid = document.getElementById('propertyGrid');
-            const countSpan = document.getElementById('resultsCount');
-            countSpan.textContent = `Showing ${pageItems.length} of ${filteredProperties.length} properties`;
-
-            if (pageItems.length === 0) {
-                grid.innerHTML = '<div class="no-results">No properties match your filters. Try adjusting your criteria.</div>';
-                return;
-            }
-
-            grid.innerHTML = pageItems.map(p => {
-                const price = formatPrice(p.price);
-                const img = p.images?.[0] || 'https://placehold.co/600x400?text=Zaure';
-                const verifiedBadge = p.owner?.verified ? '<div class="badge-verified"><i class="fas fa-check-circle"></i> Verified</div>' : '';
-                return `
-                    <div class="property-card" data-id="${p.id}">
-                        <div class="img-wrapper">
-                            <img src="${img}" alt="${p.title}" loading="lazy">
-                            ${verifiedBadge}
+        grid.innerHTML = pageItems.map(p => {
+            const price = formatPrice(p.price);
+            const img = p.images?.[0] || 'https://placehold.co/600x400?text=Zaure';
+            const verifiedBadge = p.owner?.verified ? '<div class="badge-verified"><i class="fas fa-check-circle"></i> Verified</div>' : '';
+            return `
+                <div class="property-card" onclick="window.location.href='/property?id=${p.id}'">
+                    <div class="img-wrapper">
+                        <img src="${img}" alt="${p.title}" loading="lazy">
+                        ${verifiedBadge}
+                    </div>
+                    <div class="card-body">
+                        <div class="price">${price}</div>
+                        <h3>${p.title}</h3>
+                        <p>${p.address}, ${p.city}</p>
+                        <div class="features">
+                            ${p.propertyType !== 'land' ? `<span><i class="fas fa-bed"></i> ${p.bedrooms} Beds</span><span><i class="fas fa-bath"></i> ${p.bathrooms} Baths</span>` : '<span><i class="fas fa-map"></i> Land</span>'}
                         </div>
-                        <div class="card-body">
-                            <div class="price">${price}</div>
-                            <h3>${p.title}</h3>
-                            <p>${p.address}, ${p.city}</p>
-                            <div class="features">
-                                ${p.propertyType !== 'land' ? `<span><i class="fas fa-bed"></i> ${p.bedrooms} Beds</span><span><i class="fas fa-bath"></i> ${p.bathrooms} Baths</span>` : '<span><i class="fas fa-map"></i> Land</span>'}
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <button class="share-wa" data-title="${p.title}" data-id="${p.id}"><i class="fab fa-whatsapp"></i> Share</button>
+                        <div class="card-tags">
+                            <span class="card-tag" onclick="event.stopPropagation(); window.location.href='/browse?location=${encodeURIComponent(p.city)}'">${p.city}</span>
+                            <span class="card-tag" onclick="event.stopPropagation(); window.location.href='/browse?propertyType=${encodeURIComponent(p.propertyType)}'">${p.propertyType}</span>
                         </div>
                     </div>
-                `;
-            }).join('');
+                </div>
+            `;
+        }).join('');
+    }
 
-            // Click card to go to detail
-            document.querySelectorAll('.property-card').forEach(card => {
-                card.addEventListener('click', (e) => {
-                    if (!e.target.closest('.share-wa')) {
-                        const id = card.dataset.id;
-                        window.location.href = `/property?id=${id}`;
-                    }
-                });
-            });
+    function renderPagination() {
+        const totalPages = Math.ceil(filteredProperties.length / itemsPerPage);
+        const paginationDiv = document.getElementById('pagination');
+        if (totalPages <= 1) { paginationDiv.innerHTML = ''; return; }
+
+        let html = `<button onclick="changePage(-1)" ${currentPage === 1 ? 'disabled' : ''}>Prev</button>`;
+        for (let i = 1; i <= totalPages; i++) {
+            if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
+                html += `<button class="${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
+            } else if (i === currentPage - 2 || i === currentPage + 2) {
+                html += '<span style="padding:0 0.5rem;">...</span>';
+            }
         }
+        html += `<button onclick="changePage(1)" ${currentPage === totalPages ? 'disabled' : ''}>Next</button>`;
+        paginationDiv.innerHTML = html;
+    }
 
-        // ---------- Pagination ----------
-        function renderPagination() {
-            const totalPages = Math.ceil(filteredProperties.length / itemsPerPage);
-            const paginationDiv = document.getElementById('pagination');
-            if (totalPages <= 1) {
-                paginationDiv.innerHTML = '';
-                return;
-            }
-
-            let html = `<button onclick="changePage(-1)" ${currentPage === 1 ? 'disabled' : ''}>Prev</button>`;
-            for (let i = 1; i <= totalPages; i++) {
-                if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
-                    html += `<button class="${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
-                } else if (i === currentPage - 2 || i === currentPage + 2) {
-                    html += `<span style="padding:0 0.5rem;">...</span>`;
-                }
-            }
-            html += `<button onclick="changePage(1)" ${currentPage === totalPages ? 'disabled' : ''}>Next</button>`;
-            paginationDiv.innerHTML = html;
-        }
-
-        window.changePage = (delta) => {
-            const total = Math.ceil(filteredProperties.length / itemsPerPage);
-            const newPage = currentPage + delta;
-            if (newPage >= 1 && newPage <= total) {
-                currentPage = newPage;
-                renderResults();
-                renderPagination();
-                window.scrollTo({ top: 200, behavior: 'smooth' });
-            }
-        };
-        window.goToPage = (page) => {
-            currentPage = page;
+    window.changePage = (delta) => {
+        const total = Math.ceil(filteredProperties.length / itemsPerPage);
+        const newPage = currentPage + delta;
+        if (newPage >= 1 && newPage <= total) {
+            currentPage = newPage;
             renderResults();
             renderPagination();
             window.scrollTo({ top: 200, behavior: 'smooth' });
-        };
+        }
+    };
+    window.goToPage = (page) => {
+        currentPage = page;
+        renderResults();
+        renderPagination();
+        window.scrollTo({ top: 200, behavior: 'smooth' });
+    };
 
-        // ---------- WhatsApp Share ----------
-        document.addEventListener('click', (e) => {
-            if (e.target.closest('.share-wa')) {
-                e.stopPropagation();
-                const btn = e.target.closest('.share-wa');
-                const title = btn.dataset.title;
-                const id = btn.dataset.id;
-                const shareUrl = `${window.location.origin}/property?id=${id}`;
-                const text = `Check out this property on Zaure: ${title} - ${shareUrl}`;
-                window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
-            }
+    document.getElementById('applyFiltersBtn').addEventListener('click', applyFiltersAndRender);
+    ['locationFilter','minPriceFilter','maxPriceFilter'].forEach(id => {
+        document.getElementById(id).addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') applyFiltersAndRender();
+        });
+    });
+
+    document.getElementById('nearMeBtn').addEventListener('click', () => {
+        if (!navigator.geolocation) { alert('Geolocation not supported.'); return; }
+        navigator.geolocation.getCurrentPosition(async (pos) => {
+            const { latitude, longitude } = pos.coords;
+            try {
+                const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
+                const data = await res.json();
+                const city = data.address.city || data.address.town || data.address.state || '';
+                if (city) document.getElementById('locationFilter').value = city;
+                applyFiltersAndRender();
+            } catch { alert('Unable to determine location.'); }
+        }, () => alert('Location access denied.'));
+    });
+
+    // ──────────────────────────────────────
+    // For You feed engine (TikTok-style)
+    let feedProperties = [];
+    let feedFeatureVectors = [];
+    let feedSimilarityMatrix = {};
+    let feedPopularity = {};
+    let feedQueue = [];
+    let feedIndex = -1;
+    let feedCurrentCard = null;
+    let feedCurrentProp = null;
+    let feedLastDismissed = null;
+    let feedUndoTimeout;
+    let feedProfile;
+
+    const citiesList = ['Kaduna','Kano','Zaria','Abuja','Sokoto','Maiduguri','Jos','Lagos','Ibadan','Katsina','Bauchi','Gombe'];
+    const typesList = ['house','apartment','land','commercial'];
+    const listingTypesList = ['sale','rent'];
+
+    function buildFeedVector(prop) {
+        let v = [];
+        citiesList.forEach(c => v.push(prop.city === c ? 1 : 0));
+        typesList.forEach(t => v.push(prop.propertyType === t ? 1 : 0));
+        listingTypesList.forEach(t => v.push(prop.type === t ? 1 : 0));
+        v.push(Math.log(prop.price+1)/20);
+        v.push(prop.bedrooms/5);
+        v.push(prop.bathrooms/5);
+        v.push(prop.owner?.verified?1:0);
+        v.push((prop.amenities?.length||0)/10);
+        while(v.length<20) v.push(0);
+        return v.slice(0,20);
+    }
+
+    function cosineSim(a,b) {
+        let d=0,ma=0,mb=0;
+        for(let i=0;i<a.length;i++){ d+=a[i]*b[i]; ma+=a[i]*a[i]; mb+=b[i]*b[i]; }
+        return (ma&&mb)? d/(Math.sqrt(ma)*Math.sqrt(mb)) : 0;
+    }
+
+    async function initFeed() {
+        try {
+            const res = await fetch('/data/properties.json');
+            const data = await res.json();
+            feedProperties = data.properties;
+        } catch(e) { return; }
+
+        feedFeatureVectors = feedProperties.map(p => ({id:p.id, vector: buildFeedVector(p)}));
+        const vecMap = {};
+        feedFeatureVectors.forEach(v => vecMap[v.id]=v.vector);
+        feedSimilarityMatrix = {};
+        feedProperties.forEach(p => {
+            const my = vecMap[p.id];
+            feedSimilarityMatrix[p.id] = feedProperties
+                .filter(o=>o.id!==p.id)
+                .map(o=>({id:o.id,sim:cosineSim(my,vecMap[o.id])}))
+                .sort((a,b)=>b.sim-a.sim).slice(0,15);
+        });
+        feedPopularity = {};
+        feedProperties.forEach(p => {
+            let s = 0;
+            if(p.listedDate) s += Math.max(0,1-(Date.now()-new Date(p.listedDate))/(30*864e4))*0.5;
+            if(p.owner?.verified) s += 0.3;
+            s += Math.random()*0.2;
+            feedPopularity[p.id] = Math.min(1,s);
         });
 
-        // ---------- Geolocation ----------
-        document.getElementById('nearMeBtn').addEventListener('click', () => {
-            if (!navigator.geolocation) {
-                alert('Geolocation is not supported by your browser.');
-                return;
-            }
-            navigator.geolocation.getCurrentPosition(async (pos) => {
-                const { latitude, longitude } = pos.coords;
-                try {
-                    const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
-                    const data = await res.json();
-                    const city = data.address.city || data.address.town || data.address.state || '';
-                    if (city) document.getElementById('locationFilter').value = city;
-                    applyFiltersAndRender();
-                } catch (err) {
-                    alert('Unable to determine your location. Please enter manually.');
+        feedProfile = JSON.parse(localStorage.getItem('zaure_profile'));
+        if(!feedProfile) {
+            const u = JSON.parse(localStorage.getItem('zaure_user')||'{}');
+            feedProfile = {
+                cityWeights: u.city?{[u.city]:1}:{},
+                priceMean:800000, priceStd:500000, bedroomsMean:2, verifiedBias:0.5,
+                contentVector: new Array(20).fill(0),
+                recentActions:[]
+            };
+        }
+
+        buildFeedQueue();
+    }
+
+    function scoreProperty(prop) {
+        if(!feedProfile) return Math.random();
+        const vec = feedFeatureVectors.find(v=>v.id==prop.id)?.vector || buildFeedVector(prop);
+        let s = 0;
+        if(feedProfile.cityWeights[prop.city]) s += feedProfile.cityWeights[prop.city]*0.3;
+        const pDiff = Math.abs(prop.price - feedProfile.priceMean);
+        s += Math.exp(-pDiff*pDiff/(2*feedProfile.priceStd*feedProfile.priceStd))*0.25;
+        const bDiff = Math.abs(prop.bedrooms - feedProfile.bedroomsMean);
+        s += Math.exp(-bDiff*0.5)*0.15;
+        if(prop.owner?.verified && feedProfile.verifiedBias>0.5) s += feedProfile.verifiedBias*0.1;
+        if(feedProfile.contentVector && feedProfile.contentVector.length===20) {
+            s += cosineSim(feedProfile.contentVector, vec)*0.2;
+        }
+        if(feedProfile.recentActions) {
+            feedProfile.recentActions.slice(-5).forEach(a => {
+                if(feedSimilarityMatrix[a.propertyId]) {
+                    const m = feedSimilarityMatrix[a.propertyId].find(x=>x.id==prop.id);
+                    if(m) s += m.sim*0.1;
                 }
-            }, () => {
-                alert('Location access denied. Please enable it in your browser settings.');
             });
+        }
+        s += (feedPopularity[prop.id]||0)*0.05;
+        if(prop.listedDate) s += Math.max(0,1-(Date.now()-new Date(prop.listedDate))/(30*864e4))*0.1;
+        s += (Math.random()-0.5)*0.1;
+        return s;
+    }
+
+    function buildFeedQueue() {
+        const scored = feedProperties.map(p=>({prop:p,score:scoreProperty(p)}));
+        scored.sort((a,b)=>b.score-a.score);
+        feedQueue = scored.map(c=>c.prop);
+        feedIndex = -1;
+        document.getElementById('feedCardsContainer').innerHTML = '';
+        showNextCard();
+    }
+
+    function showNextCard() {
+        if(feedIndex >= feedQueue.length-1) {
+            document.getElementById('feedCardsContainer').innerHTML = '<div style="text-align:center;padding:2rem;">No more properties</div>';
+            return;
+        }
+        feedIndex++;
+        feedCurrentProp = feedQueue[feedIndex];
+        renderFeedCard(feedCurrentProp);
+    }
+
+    function renderFeedCard(prop) {
+        const container = document.getElementById('feedCardsContainer');
+        if(feedCurrentCard) feedCurrentCard.remove();
+        const card = document.createElement('div');
+        card.className = 'feed-card';
+        const img = prop.images?.[0] || 'https://placehold.co/600x800?text=Zaure';
+        const vid = prop.video || null;
+        const verified = prop.owner?.verified ? '<span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span>' : '';
+        card.innerHTML = `
+            <div class="card-image-wrapper">
+                ${vid ? `<video src="${vid}" muted loop playsinline controlsList="nodownload" oncontextmenu="return false;"></video>` : `<img src="${img}">`}
+                <div class="card-tags">
+                    <span class="card-tag">${prop.city}</span>
+                    <span class="card-tag">${prop.propertyType}</span>
+                    ${prop.amenities?.slice(0,2).map(a=>`<span class="card-tag">${a}</span>`).join('')}
+                </div>
+                <div class="card-overlay">
+                    <div class="card-price">${formatPrice(prop.price)}</div>
+                    <div class="card-title">${prop.title}${verified}</div>
+                    <div class="card-location"><i class="fas fa-map-marker-alt"></i> ${prop.address}, ${prop.city}</div>
+                </div>
+                <div class="card-actions">
+                    <button class="action-btn like"><i class="fas fa-heart"></i></button>
+                    <button class="action-btn skip"><i class="fas fa-times"></i></button>
+                    <button class="action-btn call"><i class="fas fa-phone-alt"></i></button>
+                </div>
+            </div>
+        `;
+        container.appendChild(card);
+        feedCurrentCard = card;
+
+        // Whole card click navigates to property detail
+        card.addEventListener('click', (e) => {
+            // Only navigate if the click wasn't on an action button (they stopPropagation)
+            window.location.href = `/property?id=${prop.id}`;
         });
 
-        // ---------- Apply Filters Button ----------
-        document.getElementById('applyFiltersBtn').addEventListener('click', applyFiltersAndRender);
-        // Sort change auto-applies
-        document.getElementById('sortSelect').addEventListener('change', applyFiltersAndRender);
+        const v = card.querySelector('video');
+        if(v) v.play().catch(()=>{});
+        setupFeedCardGestures(card, prop);
+    }
 
-        // Allow Enter key on price/location inputs
-        ['locationFilter', 'minPriceFilter', 'maxPriceFilter'].forEach(id => {
-            document.getElementById(id).addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') applyFiltersAndRender();
+    function setupFeedCardGestures(card, prop) {
+        let startX, startY;
+        card.addEventListener('touchstart', e => {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+        }, {passive:true});
+        card.addEventListener('touchend', e => {
+            const dx = e.changedTouches[0].clientX - startX;
+            const dy = e.changedTouches[0].clientY - startY;
+            if(Math.abs(dx)>50 && Math.abs(dx)>Math.abs(dy)) {
+                if(dx>0) feedLike(prop);
+                else feedSkip(prop);
+            }
+        });
+        // Action buttons
+        card.querySelector('.like').addEventListener('click', e => { e.stopPropagation(); feedLike(prop); });
+        card.querySelector('.skip').addEventListener('click', e => { e.stopPropagation(); feedSkip(prop); });
+        card.querySelector('.call').addEventListener('click', e => { e.stopPropagation(); feedCall(prop); });
+        card.querySelectorAll('.card-tag').forEach(tag => {
+            tag.addEventListener('click', e => {
+                e.stopPropagation();
+                const filter = tag.textContent.trim();
+                if(citiesList.includes(filter)) {
+                    feedProfile.cityWeights[filter] = (feedProfile.cityWeights[filter]||0)+1;
+                    localStorage.setItem('zaure_profile', JSON.stringify(feedProfile));
+                }
+                buildFeedQueue();
             });
         });
-    })();
+    }
+
+    function feedLike(prop) {
+        recordFeedInteraction(prop, 'like', 8);
+        feedCurrentCard.classList.add('swiped-right');
+        feedLastDismissed = prop;
+        showUndo();
+        setTimeout(() => {
+            feedCurrentCard?.remove();
+            feedCurrentCard = null;
+            showNextCard();
+        }, 300);
+    }
+
+    function feedSkip(prop) {
+        recordFeedInteraction(prop, 'skip', -3);
+        feedCurrentCard.classList.add('swiped-left');
+        feedLastDismissed = prop;
+        showUndo();
+        setTimeout(() => {
+            feedCurrentCard?.remove();
+            feedCurrentCard = null;
+            showNextCard();
+        }, 300);
+    }
+
+    function feedCall(prop) {
+        recordFeedInteraction(prop, 'call', 12);
+        const phone = prop.owner?.phone;
+        if(phone) window.open(`tel:${phone}`, '_system');
+        else alert('Owner phone not available.');
+    }
+
+    function recordFeedInteraction(prop, action, weight) {
+        const interactions = JSON.parse(localStorage.getItem('zaure_interactions')||'[]');
+        interactions.push({ propertyId:prop.id, action, weight, timestamp:Date.now() });
+        if(interactions.length>50) interactions.shift();
+        localStorage.setItem('zaure_interactions', JSON.stringify(interactions));
+        // Update profile
+        if(weight>0) {
+            feedProfile.cityWeights[prop.city] = (feedProfile.cityWeights[prop.city]||0)*0.9 + weight*0.1;
+            feedProfile.priceMean = feedProfile.priceMean*0.9 + prop.price*0.1;
+            feedProfile.bedroomsMean = feedProfile.bedroomsMean*0.9 + prop.bedrooms*0.1;
+            if(prop.owner?.verified) feedProfile.verifiedBias = feedProfile.verifiedBias*0.9+0.1;
+            const vec = feedFeatureVectors.find(v=>v.id==prop.id)?.vector || buildFeedVector(prop);
+            for(let i=0;i<vec.length;i++) feedProfile.contentVector[i] = feedProfile.contentVector[i]*0.9 + vec[i]*0.1;
+        } else {
+            feedProfile.cityWeights[prop.city] = (feedProfile.cityWeights[prop.city]||0)*0.95;
+            if(prop.owner?.verified) feedProfile.verifiedBias = feedProfile.verifiedBias*0.95;
+        }
+        feedProfile.recentActions = interactions.slice(-10).map(i=>({propertyId:i.propertyId}));
+        localStorage.setItem('zaure_profile', JSON.stringify(feedProfile));
+    }
+
+    function showUndo() {
+        if(feedUndoTimeout) clearTimeout(feedUndoTimeout);
+        document.getElementById('feedUndoToast').classList.add('visible');
+        feedUndoTimeout = setTimeout(() => document.getElementById('feedUndoToast').classList.remove('visible'), 3000);
+    }
+
+    document.getElementById('feedUndoToast').addEventListener('click', () => {
+        if(feedLastDismissed) {
+            feedQueue.splice(feedIndex, 0, feedLastDismissed);
+            feedIndex--;
+            renderFeedCard(feedLastDismissed);
+            feedLastDismissed = null;
+            document.getElementById('feedUndoToast').classList.remove('visible');
+            if(feedUndoTimeout) clearTimeout(feedUndoTimeout);
+        }
+    });
+
+    // Bottom bar buttons
+    document.getElementById('feedLikeBtn').addEventListener('click', () => { if(feedCurrentProp) feedLike(feedCurrentProp); });
+    document.getElementById('feedSkipBtn').addEventListener('click', () => { if(feedCurrentProp) feedSkip(feedCurrentProp); });
+    document.getElementById('feedCallBtn').addEventListener('click', () => { if(feedCurrentProp) feedCall(feedCurrentProp); });
+    document.getElementById('feedShareBtn').addEventListener('click', () => {
+        if(feedCurrentProp) {
+            const text = `Check out this property: ${feedCurrentProp.title} - ${window.location.origin}/property?id=${feedCurrentProp.id}`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+            recordFeedInteraction(feedCurrentProp, 'share', 8);
+        }
+    });
+
+    // Initial data load for classic browse
+    fetch('/data/properties.json')
+        .then(res => res.json())
+        .then(data => {
+            allProperties = data.properties;
+            applyFiltersAndRender();
+        })
+        .catch(() => {
+            document.getElementById('propertyGrid').innerHTML = '<div class="no-results">Failed to load properties.</div>';
+        });
+})();
 </script>
 </body>
 </html>
