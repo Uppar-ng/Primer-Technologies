@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Browse Properties | Zaure</title>
-    <meta name="description" content="Browse homes for sale and rent across Northern Nigeria, or use our smart For You feed to find your perfect match.">
+    <meta name="description" content="Browse homes for sale and rent across Northern Nigeria with our smart feed.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -46,6 +46,19 @@
             -webkit-font-smoothing: antialiased;
         }
         .container { max-width:1280px; margin:0 auto; padding:0 2rem; }
+
+        /* Remove blue tap highlight and focus outlines */
+        button, a, .trigger-btn, .btn-primary, .btn-outline, .option-item, .action-circle, .feed-btn, .card-tag, .state-item, .property-card {
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+        button:focus, a:focus, .trigger-btn:focus, .btn-primary:focus, .btn-outline:focus,
+        .option-item:focus, .action-circle:focus, .feed-btn:focus, .card-tag:focus,
+        .state-item:focus, .property-card:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
         /* Header */
         .main-header {
             background: rgba(255,255,255,0.8);
@@ -88,7 +101,7 @@
         .mobile-menu.open { left:0; }
         .mobile-menu a { text-decoration:none; font-size:1.2rem; color:var(--text); font-weight:500; padding:0.5rem 0; border-bottom:1px solid var(--border); }
 
-        /* View toggle */
+        /* View Toggle */
         .view-toggle {
             display: flex; justify-content: center; gap: 1rem; margin: 2rem 0 1rem;
         }
@@ -98,7 +111,9 @@
         }
         .view-toggle button.active { background: var(--primary); color: white; border-color: var(--primary); }
 
-        /* Classic filters bar */
+        /* Classic Browse */
+        #classicView { display: none; }
+        #classicView.active { display: block; }
         .filters-bar {
             background: var(--surface);
             padding: 1.5rem;
@@ -129,6 +144,12 @@
             justify-content: space-between;
         }
         .filters-bar .trigger-btn i { font-size: 0.8rem; color: var(--text-secondary); }
+        .btn-primary {
+            background:var(--accent); color:#1A1F2E; border:none; padding:0.75rem 1.5rem;
+            border-radius:3rem; font-weight:700; cursor:pointer; transition:0.2s;
+            white-space:nowrap; display:flex; align-items:center; gap:0.5rem; font-size:0.95rem;
+        }
+        .btn-primary:hover { background:var(--accent-soft); }
         .results-header {
             display: flex;
             justify-content: space-between;
@@ -145,6 +166,7 @@
             border:1px solid var(--border); position:relative;
         }
         .property-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-lg); }
+        .property-card.location-highlight { border: 2px solid var(--accent); }
         .img-wrapper { position:relative; overflow:hidden; height:220px; }
         .img-wrapper img { width:100%; height:100%; object-fit:cover; transition:transform 0.5s; }
         .property-card:hover .img-wrapper img { transform:scale(1.05); }
@@ -154,6 +176,11 @@
             font-size:0.7rem; font-weight:600; display:flex; align-items:center; gap:0.3rem;
             border:1px solid #E5E7EB;
         }
+        .badge-location {
+            position:absolute; top:1rem; left:1rem; background:rgba(180,148,80,0.95);
+            color:#1A1F2E; padding:0.3rem 0.8rem; border-radius:2rem;
+            font-size:0.7rem; font-weight:600; display:flex; align-items:center; gap:0.3rem;
+        }
         .card-body { padding:1.3rem; }
         .price {
             font-size:1.3rem; font-weight:700; color:var(--primary); margin-bottom:0.5rem;
@@ -161,10 +188,9 @@
         }
         .card-body h3 { font-size:1rem; font-weight:600; margin-bottom:0.4rem; }
         .card-body p { color:var(--text-secondary); font-size:0.85rem; margin-bottom:1rem; }
-        .features { display:flex; gap:1rem; color:var(--text-secondary); font-size:0.8rem; border-top:1px solid var(--border); padding-top:0.8rem; }
-
-        /* Tappable tags on cards */
-        .card-tags { margin-top:0.5rem; }
+        .features { display:flex; gap:1rem; color:var(--text-secondary); font-size:0.8rem; border-top:1px solid var(--border); padding-top:0.8rem; flex-wrap:wrap; }
+        .distance-info { color: var(--accent); font-weight: 600; font-size: 0.8rem; }
+        .card-tags { margin-top:0.5rem; display:flex; flex-wrap:wrap; gap:0.4rem; }
         .card-tag {
             display: inline-block;
             background: var(--surface-alt);
@@ -174,97 +200,262 @@
             font-weight: 500;
             color: var(--text-secondary);
             cursor: pointer;
-            margin-right: 0.4rem;
             border: 1px solid var(--border);
             transition: 0.2s;
         }
         .card-tag:hover { background: var(--primary); color: white; border-color: var(--primary); }
-
-        .btn-primary {
-            background:var(--accent); color:#1A1F2E; border:none; padding:0.75rem 1.5rem;
-            border-radius:3rem; font-weight:700; cursor:pointer; transition:0.2s;
-            white-space:nowrap; display:flex; align-items:center; gap:0.5rem; font-size:0.95rem;
-        }
-        .btn-primary:hover { background:var(--accent-soft); }
+        .card-tag.location-tag { background: var(--accent); color: #1A1F2E; border-color: var(--accent); }
         .btn-outline {
             border:1px solid var(--primary); color:var(--primary); padding:0.6rem 1.8rem;
-            border-radius:3rem; font-weight:600; text-decoration:none; transition:0.2s; display:inline-block;
+            border-radius:3rem; font-weight:600; text-decoration:none; transition:0.2s; display:inline-block; cursor:pointer;
         }
         .btn-outline:hover { background:var(--primary); color:white; }
         .pagination { display:flex; justify-content:center; gap:0.5rem; margin:2rem 0; }
         .pagination button {
             padding:0.5rem 1rem; border:1px solid var(--border); background:var(--surface);
-            cursor:pointer; border-radius:8px; transition:0.2s;
+            cursor:pointer; border-radius:8px; color:var(--text); transition:0.2s;
         }
         .pagination button.active { background:var(--primary); color:white; border-color:var(--primary); }
         .pagination button:hover:not(:disabled) { background:var(--primary); color:white; }
         .pagination button:disabled { opacity:0.5; cursor:not-allowed; }
-        .no-results { text-align:center; padding:3rem; background:var(--surface); border-radius:var(--radius); color:var(--text-secondary); }
+        .no-results { text-align:center; padding:3rem; background:var(--surface); border-radius:var(--radius); color:var(--text-secondary); grid-column:1/-1; }
 
-        /* For You feed container */
-        #foryouView { display: none; position: relative; height: calc(100vh - 200px); overflow: hidden; background: var(--bg); }
+        /* For You Feed - Full Screen */
+        #foryouView { 
+            display: none; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            bottom: 0; 
+            background: #000; 
+            z-index: 200; 
+        }
         #foryouView.active { display: block; }
-
-        .feed-cards-container { position: relative; width: 100%; height: 100%; }
+        .feed-top-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+            background: linear-gradient(rgba(0,0,0,0.6), transparent);
+        }
+        .feed-close-btn {
+            background: rgba(255,255,255,0.15);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(8px);
+        }
+        .feed-location-badge {
+            background: var(--accent);
+            color: #1A1F2E;
+            padding: 0.4rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .feed-wrapper {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
         .feed-card {
-            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background: var(--surface); display: flex; flex-direction: column;
-            transform: translateX(0) scale(1); transition: transform 0.3s ease, opacity 0.3s ease; z-index: 1;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #111;
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform;
         }
-        .feed-card.swiped-left { transform: translateX(-120%) rotate(-10deg); opacity: 0; }
-        .feed-card.swiped-right { transform: translateX(120%) rotate(10deg); opacity: 0; }
-        .feed-card .card-image-wrapper { flex: 1; overflow: hidden; background: #000; position: relative; }
-        .feed-card img, .feed-card video { width: 100%; height: 100%; object-fit: cover; }
-        .feed-card video { pointer-events: none; }
-        .feed-card .card-overlay {
-            position: absolute; bottom: 0; left: 0; right: 0; padding: 2rem 1.5rem 1.5rem;
-            background: linear-gradient(transparent, rgba(0,0,0,0.7)); color: white;
+        .card-media {
+            width: 100%;
+            height: 100%;
+            position: relative;
         }
-        .feed-card .card-price { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; }
-        .feed-card .card-title { font-size: 1.2rem; font-weight: 600; }
-        .feed-card .card-location { font-size: 0.9rem; opacity: 0.9; }
-        .feed-card .verified-badge {
-            display: inline-flex; align-items: center; gap: 0.3rem; background: var(--accent);
-            color: #1A1F2E; padding: 0.2rem 0.6rem; border-radius: 1rem; font-size: 0.7rem; font-weight: 700;
+        .card-images {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.3s ease;
         }
-        .feed-card .card-actions {
-            position: absolute; right: 1rem; top: 50%; transform: translateY(-50%);
-            display: flex; flex-direction: column; gap: 1rem; z-index: 5;
+        .card-images .card-img {
+            min-width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
-        .feed-card .action-btn {
-            width: 50px; height: 50px; border-radius: 50%; background: rgba(255,255,255,0.2);
-            backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.3); color: white;
-            font-size: 1.4rem; display: flex; align-items: center; justify-content: center; cursor: pointer;
+        .card-images video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+            min-width: 100%;
         }
-        .feed-card .card-tags {
-            position: absolute; bottom: 8rem; left: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem; z-index: 5;
+        .image-dots {
+            position: absolute;
+            bottom: 10rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+            z-index: 5;
         }
-        .feed-card .card-tag {
-            background: rgba(255,255,255,0.25); backdrop-filter: blur(4px); padding: 0.3rem 0.8rem;
-            border-radius: 2rem; font-size: 0.75rem; color: white; cursor: pointer;
+        .image-dots .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            transition: 0.2s;
         }
-        .feed-card .card-tag:hover { background: rgba(255,255,255,0.5); }
-
+        .image-dots .dot.active {
+            background: var(--accent);
+            width: 20px;
+            border-radius: 4px;
+        }
+        .card-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem 1.5rem 6rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.85));
+            color: white;
+        }
+        .card-overlay .card-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            background: var(--accent);
+            color: #1A1F2E;
+            padding: 0.3rem 0.8rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+        }
+        .card-overlay .card-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+        .card-overlay .card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+        .card-overlay .card-loc {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        .card-features-row {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .card-actions-side {
+            position: absolute;
+            right: 1rem;
+            bottom: 10rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            z-index: 5;
+        }
+        .action-circle {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .action-circle:hover { background: rgba(255,255,255,0.3); transform: scale(1.1); }
+        .action-circle.liked { background: #ff2d55; border-color: #ff2d55; }
         .feed-bottom-bar {
-            display: flex; justify-content: center; gap: 1.5rem; padding: 1rem;
-            background: var(--surface); border-top: 1px solid var(--border);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.2rem;
+            z-index: 10;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
         }
-        .feed-bottom-btn {
-            width: 56px; height: 56px; border-radius: 50%; border: none; font-size: 1.5rem;
-            cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center;
+        .feed-btn {
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: 0.2s;
         }
-        .feed-bottom-btn.skip { background: var(--surface-alt); color: var(--text-secondary); border: 1px solid var(--border); }
-        .feed-bottom-btn.like { background: var(--accent); color: #1A1F2E; }
-        .feed-bottom-btn.call { background: var(--primary); color: white; }
-        .feed-bottom-btn.share { background: var(--surface-alt); color: var(--text-secondary); border: 1px solid var(--border); }
+        .feed-btn:active { transform: scale(0.9); }
+        .feed-btn-prev {
+            width: 50px; height: 50px;
+            background: rgba(255,255,255,0.15);
+            color: white;
+            font-size: 1.3rem;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .feed-btn-next {
+            width: 60px; height: 60px;
+            background: var(--accent);
+            color: #1A1F2E;
+            font-size: 1.8rem;
+        }
+        .feed-btn-save {
+            width: 50px; height: 50px;
+            background: rgba(255,255,255,0.15);
+            color: white;
+            font-size: 1.3rem;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .feed-btn-save.active { background: #ff2d55; border-color: #ff2d55; }
+        .feed-btn-call {
+            width: 50px; height: 50px;
+            background: #34c759;
+            color: white;
+            font-size: 1.2rem;
+        }
+        .feed-btn-share {
+            width: 50px; height: 50px;
+            background: rgba(255,255,255,0.15);
+            color: white;
+            font-size: 1.2rem;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
 
-        .feed-undo-toast {
-            position: fixed; bottom: 6rem; left: 50%; transform: translateX(-50%); background: var(--primary);
-            color: white; padding: 0.5rem 1.5rem; border-radius: 2rem; z-index: 20; opacity: 0; cursor: pointer;
-            transition: opacity 0.2s;
-        }
-        .feed-undo-toast.visible { opacity: 1; }
-
+        /* Selection Modal */
         .modal-overlay {
             position:fixed; top:0; left:0; width:100%; height:100%;
             background:rgba(0,0,0,0.5); backdrop-filter:blur(4px); z-index:300;
@@ -285,6 +476,7 @@
         .modal-option {
             padding:0.8rem 1rem; border:1px solid var(--border); border-radius:var(--radius-sm);
             background:var(--surface-alt); cursor:pointer; transition:0.2s; text-align:left; font-weight:500;
+            color: var(--text);
         }
         .modal-option:hover { background:var(--primary); color:white; border-color:var(--primary); }
 
@@ -293,12 +485,12 @@
         footer a:hover { color:var(--accent-soft); }
         .footer-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:2rem; margin-bottom:2rem; }
         .social i { font-size:1.2rem; margin-right:1rem; }
+
         @media (max-width:768px) {
             .desktop-nav { display:none; }
             .mobile-only { display:block; }
             .filters-bar { flex-direction:column; }
-            .filters-bar input, .filters-bar .trigger-btn, .filters-bar select { width:100%; }
-            #foryouView { height: calc(100vh - 180px); }
+            .filters-bar input, .filters-bar .trigger-btn { width:100%; }
         }
     </style>
 </head>
@@ -308,8 +500,7 @@
         <div class="logo"><a href="/">Zaure<span class="dot"></span></a></div>
         <nav class="desktop-nav">
             <a href="/">Home</a>
-            <a href="/browse?type=sale">Buy</a>
-            <a href="/browse?type=rent">Rent</a>
+            <a href="/browse" class="active">Browse</a>
             <a href="/how-it-works">How It Works</a>
             <a href="/about">About</a>
             <a href="/contact">Contact</a>
@@ -324,28 +515,27 @@
 
 <div class="mobile-menu" id="mobileMenu">
     <button id="closeMenu" class="close-btn"><i class="fas fa-times"></i></button>
-    <a href="/">Home</a><a href="/browse?type=sale">Buy</a><a href="/browse?type=rent">Rent</a>
-    <a href="/how-it-works">How It Works</a><a href="/about">About</a><a href="/contact">Contact</a>
-    <a href="/post">Dashboard</a>
+    <a href="/">Home</a><a href="/browse">Browse</a><a href="/how-it-works">How It Works</a>
+    <a href="/about">About</a><a href="/contact">Contact</a><a href="/post">Dashboard</a>
 </div>
 
 <main class="container">
     <!-- View Toggle -->
     <div class="view-toggle">
-        <button id="classicViewBtn"><i class="fas fa-th-list"></i> Classic Browse</button>
+        <button id="classicViewBtn" class="active"><i class="fas fa-th-list"></i> Classic Browse</button>
         <button id="foryouViewBtn"><i class="fas fa-magic"></i> For You Feed</button>
     </div>
 
     <!-- Classic Browse View -->
-    <div id="classicView" style="display:none;">
+    <div id="classicView" class="active">
         <div class="filters-bar">
-            <input type="text" id="locationFilter" placeholder="Location (city or area)">
+            <input type="text" id="locationFilter" placeholder="City or area">
             <button type="button" class="trigger-btn" id="propertyTypeFilterBtn">Property Type <i class="fas fa-chevron-down"></i></button>
             <button type="button" class="trigger-btn" id="listingTypeFilterBtn">Listing Type <i class="fas fa-chevron-down"></i></button>
             <button type="button" class="trigger-btn" id="bedFilterBtn">Bedrooms <i class="fas fa-chevron-down"></i></button>
             <input type="number" id="minPriceFilter" placeholder="Min Price">
             <input type="number" id="maxPriceFilter" placeholder="Max Price">
-            <button id="nearMeBtn" class="btn-outline"><i class="fas fa-location-arrow"></i> Near Me</button>
+            <button id="nearMeBtn" class="btn-primary"><i class="fas fa-location-arrow"></i> Near Me</button>
             <button id="applyFiltersBtn" class="btn-primary"><i class="fas fa-search"></i> Apply</button>
         </div>
         <input type="hidden" id="propertyTypeValue" value="">
@@ -354,25 +544,43 @@
 
         <div class="results-header">
             <div class="results-count" id="resultsCount">Loading properties...</div>
-            <button type="button" class="trigger-btn" id="sortFilterBtn">Sort <i class="fas fa-chevron-down"></i></button>
+            <button type="button" class="trigger-btn" id="sortFilterBtn">Sort: Nearest First <i class="fas fa-chevron-down"></i></button>
         </div>
-        <input type="hidden" id="sortValue" value="price_asc">
+        <input type="hidden" id="sortValue" value="nearest">
         <div id="propertyGrid" class="property-grid"></div>
         <div id="pagination" class="pagination"></div>
     </div>
-
-    <!-- For You Feed View -->
-    <div id="foryouView">
-        <div class="feed-cards-container" id="feedCardsContainer"></div>
-        <div class="feed-bottom-bar">
-            <button class="feed-bottom-btn skip" id="feedSkipBtn"><i class="fas fa-times"></i></button>
-            <button class="feed-bottom-btn share" id="feedShareBtn"><i class="fab fa-whatsapp"></i></button>
-            <button class="feed-bottom-btn like" id="feedLikeBtn"><i class="fas fa-heart"></i></button>
-            <button class="feed-bottom-btn call" id="feedCallBtn"><i class="fas fa-phone-alt"></i></button>
-        </div>
-        <div class="feed-undo-toast" id="feedUndoToast">Undo</div>
-    </div>
 </main>
+
+<!-- For You Feed (Full Screen) -->
+<div id="foryouView">
+    <div class="feed-top-bar">
+        <button class="feed-close-btn" id="feedCloseBtn"><i class="fas fa-times"></i></button>
+        <div class="feed-location-badge" id="feedLocationBadge">
+            <i class="fas fa-location-dot"></i>
+            <span id="feedLocationText">Near you</span>
+        </div>
+    </div>
+    <div class="feed-wrapper" id="feedWrapper"></div>
+    <div class="feed-bottom-bar">
+        <button class="feed-btn feed-btn-prev" id="feedPrevBtn"><i class="fas fa-chevron-down"></i></button>
+        <button class="feed-btn feed-btn-share" id="feedShareBtn"><i class="fab fa-whatsapp"></i></button>
+        <button class="feed-btn feed-btn-next" id="feedNextBtn"><i class="fas fa-chevron-up"></i></button>
+        <button class="feed-btn feed-btn-save" id="feedSaveBtn"><i class="fas fa-heart"></i></button>
+        <button class="feed-btn feed-btn-call" id="feedCallBtn"><i class="fas fa-phone-alt"></i></button>
+    </div>
+</div>
+
+<!-- Selection Modal -->
+<div class="modal-overlay" id="selectionModal">
+    <div class="modal">
+        <div class="modal-header">
+            <h3 id="modalTitle">Select</h3>
+            <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="modal-options" id="modalOptions"></div>
+    </div>
+</div>
 
 <footer>
     <div class="container">
@@ -386,28 +594,127 @@
     </div>
 </footer>
 
-<!-- Modal for all selections -->
-<div class="modal-overlay" id="selectionModal">
-    <div class="modal">
-        <div class="modal-header">
-            <h3 id="modalTitle">Select</h3>
-            <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
-        </div>
-        <div class="modal-options" id="modalOptions"></div>
-    </div>
-</div>
-
 <script>
 (function() {
-    // ──────────────────────────────────────
-    // Theme & mobile menu
+    // ============================================
+    // NIGERIA CITIES DATABASE (Corrected)
+    // ============================================
+    const nigeriaCities = {
+        'kaduna': { lat: 10.5105, lng: 7.4165, state: 'Kaduna', region: 'northwest' },
+        'zaria': { lat: 11.0855, lng: 7.7199, state: 'Kaduna', region: 'northwest' },
+        'kano': { lat: 12.0022, lng: 8.5920, state: 'Kano', region: 'northwest' },
+        'katsina': { lat: 12.9908, lng: 7.6171, state: 'Katsina', region: 'northwest' },
+        'sokoto': { lat: 13.0626, lng: 5.2337, state: 'Sokoto', region: 'northwest' },
+        'maiduguri': { lat: 11.8333, lng: 13.1500, state: 'Borno', region: 'northeast' },
+        'bauchi': { lat: 10.3158, lng: 9.8442, state: 'Bauchi', region: 'northeast' },
+        'gombe': { lat: 10.2853, lng: 11.1672, state: 'Gombe', region: 'northeast' },
+        'abuja': { lat: 9.0579, lng: 7.4951, state: 'FCT', region: 'northcentral' },
+        'jos': { lat: 9.8965, lng: 8.8583, state: 'Plateau', region: 'northcentral' },
+        'lagos': { lat: 6.5244, lng: 3.3792, state: 'Lagos', region: 'southwest' },
+        'ibadan': { lat: 7.3775, lng: 3.9470, state: 'Oyo', region: 'southwest' },
+        'ilorin': { lat: 8.4966, lng: 4.5427, state: 'Kwara', region: 'northcentral' }
+    };
+
+    // ============================================
+    // LOCATION ENGINE
+    // ============================================
+    const LocationEngine = {
+        userLocation: null,
+        
+        calculateDistance(lat1, lng1, lat2, lng2) {
+            const R = 6371;
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLng = (lng2 - lng1) * Math.PI / 180;
+            const a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(lat1 * Math.PI/180) * Math.cos(lat2 * Math.PI/180) * Math.sin(dLng/2) * Math.sin(dLng/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            return R * c;
+        },
+
+        extractCityFromProperty(address, city) {
+            const text = `${address || ''} ${city || ''}`.toLowerCase().trim();
+            for (const [cityName, coords] of Object.entries(nigeriaCities)) {
+                if (text.includes(cityName)) return { city: cityName, ...coords };
+            }
+            if (city && nigeriaCities[city.toLowerCase()]) {
+                const c = nigeriaCities[city.toLowerCase()];
+                return { city: city.toLowerCase(), ...c };
+            }
+            return null;
+        },
+
+        isNearUser(property) {
+            if (!this.userLocation) return true;
+            const pl = this.extractCityFromProperty(property.address, property.city);
+            if (!pl) return false;
+            if (this.userLocation.city === pl.city) return true;
+            if (this.userLocation.state === pl.state) {
+                const dist = this.calculateDistance(
+                    this.userLocation.coordinates?.lat || 0,
+                    this.userLocation.coordinates?.lng || 0,
+                    pl.lat, pl.lng
+                );
+                return dist <= 100;
+            }
+            const dist = this.calculateDistance(
+                this.userLocation.coordinates?.lat || 0,
+                this.userLocation.coordinates?.lng || 0,
+                pl.lat, pl.lng
+            );
+            return dist <= 50;
+        },
+
+        async detectUserLocation() {
+            const cached = localStorage.getItem('zaure_location_context');
+            if (cached) {
+                try {
+                    const data = JSON.parse(cached);
+                    if ((Date.now() - data.timestamp) / 60000 < 30) {
+                        this.userLocation = data;
+                        return data;
+                    }
+                } catch (e) {}
+            }
+
+            if (navigator.geolocation) {
+                try {
+                    const position = await new Promise((resolve, reject) => {
+                        navigator.geolocation.getCurrentPosition(resolve, reject, { timeout: 10000, maximumAge: 300000 });
+                    });
+                    const { latitude, longitude } = position.coords;
+                    let nearest = null, minDist = Infinity;
+                    for (const [name, coords] of Object.entries(nigeriaCities)) {
+                        const d = this.calculateDistance(latitude, longitude, coords.lat, coords.lng);
+                        if (d < minDist && d < 50) { minDist = d; nearest = { city: name, ...coords }; }
+                    }
+                    if (nearest) {
+                        const loc = { city: nearest.city, state: nearest.state, coordinates: { lat: latitude, lng: longitude }, source: 'gps', timestamp: Date.now() };
+                        localStorage.setItem('zaure_location_context', JSON.stringify(loc));
+                        this.userLocation = loc;
+                        return loc;
+                    }
+                } catch (e) {}
+            }
+
+            const user = JSON.parse(localStorage.getItem('zaure_user'));
+            if (user?.location && nigeriaCities[user.location.toLowerCase()]) {
+                const loc = { city: user.location.toLowerCase(), state: nigeriaCities[user.location.toLowerCase()].state, coordinates: nigeriaCities[user.location.toLowerCase()], source: 'user-preference', timestamp: Date.now() };
+                localStorage.setItem('zaure_location_context', JSON.stringify(loc));
+                this.userLocation = loc;
+                return loc;
+            }
+            return null;
+        }
+    };
+
+    // ============================================
+    // THEME & MOBILE
+    // ============================================
     const themeToggle = document.getElementById('themeToggle');
     const savedTheme = localStorage.getItem('zaure_theme') || 'light';
     document.documentElement.setAttribute('data-theme', savedTheme);
     themeToggle.innerHTML = savedTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
     themeToggle.addEventListener('click', () => {
-        const cur = document.documentElement.getAttribute('data-theme');
-        const next = cur === 'light' ? 'dark' : 'light';
+        const next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
         document.documentElement.setAttribute('data-theme', next);
         localStorage.setItem('zaure_theme', next);
         themeToggle.innerHTML = next === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
@@ -416,618 +723,537 @@
     document.getElementById('mobileMenuToggle').addEventListener('click', () => document.getElementById('mobileMenu').classList.add('open'));
     document.getElementById('closeMenu').addEventListener('click', () => document.getElementById('mobileMenu').classList.remove('open'));
 
-    // ──────────────────────────────────────
-    // View logic (default to For You if no filters)
-    const urlParams = new URLSearchParams(window.location.search);
-    const hasFilters = urlParams.get('location') ||
-                       urlParams.get('type') ||
-                       urlParams.get('propertyType') ||
-                       urlParams.get('beds') ||
-                       urlParams.get('min') ||
-                       urlParams.get('max');
-
+    // ============================================
+    // VIEW TOGGLE
+    // ============================================
     const classicViewBtn = document.getElementById('classicViewBtn');
     const foryouViewBtn = document.getElementById('foryouViewBtn');
     const classicView = document.getElementById('classicView');
     const foryouView = document.getElementById('foryouView');
 
-    function activateView(view) {
-        if (view === 'classic') {
-            classicViewBtn.classList.add('active');
-            foryouViewBtn.classList.remove('active');
-            classicView.style.display = 'block';
-            foryouView.style.display = 'none';
-        } else {
-            foryouViewBtn.classList.add('active');
-            classicViewBtn.classList.remove('active');
-            classicView.style.display = 'none';
-            foryouView.style.display = 'block';
-            if (!window.feedInitialized) {
-                initFeed();
-                window.feedInitialized = true;
-            }
-        }
+    function showClassic() {
+        classicViewBtn.classList.add('active');
+        foryouViewBtn.classList.remove('active');
+        classicView.classList.add('active');
+        foryouView.classList.remove('active');
+        document.body.style.overflow = '';
     }
 
-    if (hasFilters) {
-        activateView('classic');
-    } else {
-        activateView('foryou');
+    function showForYou() {
+        foryouViewBtn.classList.add('active');
+        classicViewBtn.classList.remove('active');
+        foryouView.classList.add('active');
+        classicView.classList.remove('active');
+        document.body.style.overflow = 'hidden';
+        if (!window.feedInitialized) { initFeed(); window.feedInitialized = true; }
     }
 
-    classicViewBtn.addEventListener('click', () => activateView('classic'));
-    foryouViewBtn.addEventListener('click', () => activateView('foryou'));
+    classicViewBtn.addEventListener('click', showClassic);
+    foryouViewBtn.addEventListener('click', showForYou);
+    document.getElementById('feedCloseBtn').addEventListener('click', showClassic);
 
-    // ──────────────────────────────────────
-    // Single modal controller for all trigger buttons
+    // ============================================
+    // MODAL
+    // ============================================
     const modalOverlay = document.getElementById('selectionModal');
     const modalTitle = document.getElementById('modalTitle');
     const modalOptions = document.getElementById('modalOptions');
-    const modalCloseBtn = document.getElementById('modalClose');
+    let currentModal = '', currentTriggerBtn = null;
 
-    const propertyTypeFilterBtn = document.getElementById('propertyTypeFilterBtn');
-    const listingTypeFilterBtn = document.getElementById('listingTypeFilterBtn');
-    const bedFilterBtn = document.getElementById('bedFilterBtn');
-    const sortFilterBtn = document.getElementById('sortFilterBtn');
-
-    const propertyTypeHidden = document.getElementById('propertyTypeValue');
-    const listingTypeHidden = document.getElementById('listingTypeValue');
-    const bedsHidden = document.getElementById('bedsValue');
-    const sortHidden = document.getElementById('sortValue');
-
-    const propertyTypes = [
-        { value: 'house', label: 'House' },
-        { value: 'apartment', label: 'Apartment' },
-        { value: 'land', label: 'Land' },
-        { value: 'commercial', label: 'Commercial' }
-    ];
-    const listingTypes = [
-        { value: '', label: 'All Listings' },
-        { value: 'sale', label: 'For Sale' },
-        { value: 'rent', label: 'For Rent' }
-    ];
-    const bedOptions = [
-        { value: '', label: 'Any' },
-        { value: '1', label: '1' },
-        { value: '2', label: '2' },
-        { value: '3', label: '3' },
-        { value: '4+', label: '4+' }
-    ];
+    const propertyTypes = [{ value: 'house', label: 'House' }, { value: 'apartment', label: 'Apartment' }, { value: 'land', label: 'Land' }, { value: 'commercial', label: 'Commercial' }];
+    const listingTypes = [{ value: '', label: 'All Listings' }, { value: 'sale', label: 'For Sale' }, { value: 'rent', label: 'For Rent' }];
+    const bedOptions = [{ value: '', label: 'Any' }, { value: '1', label: '1' }, { value: '2', label: '2' }, { value: '3', label: '3' }, { value: '4+', label: '4+' }];
     const sortOptions = [
+        { value: 'nearest', label: 'Nearest First' },
         { value: 'price_asc', label: 'Price: Low to High' },
         { value: 'price_desc', label: 'Price: High to Low' },
         { value: 'newest', label: 'Newest First' }
     ];
 
-    let currentModal = '';  // 'propertyType', 'listingType', 'beds', 'sort'
-    let currentTriggerBtn = null;
-
-    function openModal(type, triggerBtn) {
-        currentModal = type;
-        currentTriggerBtn = triggerBtn;
-        let options, title;
-        switch (type) {
-            case 'propertyType':
-                title = 'Property Type';
-                options = propertyTypes;
-                break;
-            case 'listingType':
-                title = 'Listing Type';
-                options = listingTypes;
-                break;
-            case 'beds':
-                title = 'Bedrooms';
-                options = bedOptions;
-                break;
-            case 'sort':
-                title = 'Sort by';
-                options = sortOptions;
-                break;
-        }
+    function openModal(type, btn) {
+        currentModal = type; currentTriggerBtn = btn;
+        let opts, title;
+        if (type === 'propertyType') { title = 'Property Type'; opts = propertyTypes; }
+        else if (type === 'listingType') { title = 'Listing Type'; opts = listingTypes; }
+        else if (type === 'beds') { title = 'Bedrooms'; opts = bedOptions; }
+        else if (type === 'sort') { title = 'Sort by'; opts = sortOptions; }
         modalTitle.textContent = title;
-        modalOptions.innerHTML = options.map(opt => 
-            `<button type="button" class="modal-option" data-value="${opt.value}">${opt.label}</button>`
-        ).join('');
+        modalOptions.innerHTML = opts.map(o => `<button class="modal-option" data-value="${o.value}">${o.label}</button>`).join('');
         modalOverlay.classList.add('active');
     }
 
-    function closeModal() {
-        modalOverlay.classList.remove('active');
-    }
-
-    propertyTypeFilterBtn.addEventListener('click', () => openModal('propertyType', propertyTypeFilterBtn));
-    listingTypeFilterBtn.addEventListener('click', () => openModal('listingType', listingTypeFilterBtn));
-    bedFilterBtn.addEventListener('click', () => openModal('beds', bedFilterBtn));
-    sortFilterBtn.addEventListener('click', () => openModal('sort', sortFilterBtn));
-
-    modalCloseBtn.addEventListener('click', closeModal);
-    modalOverlay.addEventListener('click', (e) => {
-        if (e.target === modalOverlay) closeModal();
-    });
+    document.getElementById('propertyTypeFilterBtn').addEventListener('click', () => openModal('propertyType', document.getElementById('propertyTypeFilterBtn')));
+    document.getElementById('listingTypeFilterBtn').addEventListener('click', () => openModal('listingType', document.getElementById('listingTypeFilterBtn')));
+    document.getElementById('bedFilterBtn').addEventListener('click', () => openModal('beds', document.getElementById('bedFilterBtn')));
+    document.getElementById('sortFilterBtn').addEventListener('click', () => openModal('sort', document.getElementById('sortFilterBtn')));
+    document.getElementById('modalClose').addEventListener('click', () => modalOverlay.classList.remove('active'));
+    modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) modalOverlay.classList.remove('active'); });
 
     modalOptions.addEventListener('click', (e) => {
-        const option = e.target.closest('.modal-option');
-        if (!option) return;
-        const value = option.dataset.value;
-        const label = option.textContent.trim();
-
-        switch (currentModal) {
-            case 'propertyType':
-                propertyTypeHidden.value = value;
-                propertyTypeFilterBtn.innerHTML = `${label} <i class="fas fa-chevron-down"></i>`;
-                break;
-            case 'listingType':
-                listingTypeHidden.value = value;
-                listingTypeFilterBtn.innerHTML = `${label} <i class="fas fa-chevron-down"></i>`;
-                break;
-            case 'beds':
-                bedsHidden.value = value;
-                bedFilterBtn.innerHTML = `${label} <i class="fas fa-chevron-down"></i>`;
-                break;
-            case 'sort':
-                sortHidden.value = value;
-                sortFilterBtn.innerHTML = `${label} <i class="fas fa-chevron-down"></i>`;
-                applyFiltersAndRender();
-                break;
+        const opt = e.target.closest('.modal-option');
+        if (!opt) return;
+        const val = opt.dataset.value, label = opt.textContent.trim();
+        if (currentModal === 'propertyType') {
+            document.getElementById('propertyTypeValue').value = val;
+            document.getElementById('propertyTypeFilterBtn').innerHTML = `${label} <i class="fas fa-chevron-down"></i>`;
+        } else if (currentModal === 'listingType') {
+            document.getElementById('listingTypeValue').value = val;
+            document.getElementById('listingTypeFilterBtn').innerHTML = `${label} <i class="fas fa-chevron-down"></i>`;
+        } else if (currentModal === 'beds') {
+            document.getElementById('bedsValue').value = val;
+            document.getElementById('bedFilterBtn').innerHTML = `${label} <i class="fas fa-chevron-down"></i>`;
+        } else if (currentModal === 'sort') {
+            document.getElementById('sortValue').value = val;
+            document.getElementById('sortFilterBtn').innerHTML = `Sort: ${label} <i class="fas fa-chevron-down"></i>`;
+            applyClassicFilters();
         }
-        closeModal();
-        // Auto-apply on property/listing/beds change
-        if (currentModal !== 'sort') {
-            applyFiltersAndRender();
-        }
+        modalOverlay.classList.remove('active');
+        if (currentModal !== 'sort') applyClassicFilters();
     });
 
-    // ──────────────────────────────────────
-    // Classic browse logic
-    let allProperties = [];
-    let filteredProperties = [];
-    let currentPage = 1;
+    // ============================================
+    // CLASSIC BROWSE
+    // ============================================
+    let allProperties = [], filteredProperties = [], currentPage = 1;
     const itemsPerPage = 12;
 
-    const urlLocation = urlParams.get('location') || '';
-    const urlPropertyType = urlParams.get('propertyType') || '';
-    const urlType = urlParams.get('type') || '';
-    const urlBeds = urlParams.get('beds') || '';
-    const urlMin = urlParams.get('min') || '';
-    const urlMax = urlParams.get('max') || '';
+    function formatPrice(p) { return p >= 1e6 ? `₦${(p/1e6).toFixed(1)}M` : `₦${p.toLocaleString()}`; }
 
-    document.getElementById('locationFilter').value = urlLocation;
-    if (urlType) {
-        listingTypeHidden.value = urlType;
-        const typeObj = listingTypes.find(t => t.value === urlType);
-        if (typeObj) listingTypeFilterBtn.innerHTML = `${typeObj.label} <i class="fas fa-chevron-down"></i>`;
-    }
-    document.getElementById('minPriceFilter').value = urlMin;
-    document.getElementById('maxPriceFilter').value = urlMax;
-    if (urlPropertyType) {
-        propertyTypeHidden.value = urlPropertyType;
-        const typeObj = propertyTypes.find(t => t.value === urlPropertyType);
-        if (typeObj) propertyTypeFilterBtn.innerHTML = `${typeObj.label} <i class="fas fa-chevron-down"></i>`;
-    }
-    if (urlBeds) {
-        bedsHidden.value = urlBeds;
-        const bedObj = bedOptions.find(b => b.value === urlBeds);
-        if (bedObj) bedFilterBtn.innerHTML = `${bedObj.label} <i class="fas fa-chevron-down"></i>`;
+    function getPropertyDistance(prop) {
+        if (!LocationEngine.userLocation) return null;
+        const pl = LocationEngine.extractCityFromProperty(prop.address, prop.city);
+        if (!pl) return null;
+        return LocationEngine.calculateDistance(
+            LocationEngine.userLocation.coordinates?.lat || 0,
+            LocationEngine.userLocation.coordinates?.lng || 0,
+            pl.lat, pl.lng
+        );
     }
 
-    function formatPrice(price) {
-        return price >= 1e6 ? `₦${(price/1e6).toFixed(1)}M` : `₦${price.toLocaleString()}`;
+    function getLocationBadge(prop) {
+        if (!LocationEngine.userLocation) return null;
+        const pl = LocationEngine.extractCityFromProperty(prop.address, prop.city);
+        if (!pl) return null;
+        if (LocationEngine.userLocation.city === pl.city) return { text: 'In Your City', icon: 'fa-location-dot' };
+        if (LocationEngine.userLocation.state === pl.state) return { text: 'Same State', icon: 'fa-map-pin' };
+        const dist = getPropertyDistance(prop);
+        if (dist && dist <= 100) return { text: `${Math.round(dist)}km Away`, icon: 'fa-map-marker-alt' };
+        return null;
     }
 
-    function applyFiltersAndRender() {
-        const location = document.getElementById('locationFilter').value.toLowerCase().trim();
-        const propertyType = propertyTypeHidden.value;
-        const listingType = listingTypeHidden.value;
-        const bedsRaw = bedsHidden.value;
-        const minPrice = parseInt(document.getElementById('minPriceFilter').value) || 0;
-        const maxPrice = parseInt(document.getElementById('maxPriceFilter').value) || Infinity;
+    function applyClassicFilters() {
+        const loc = document.getElementById('locationFilter').value.toLowerCase().trim();
+        const pType = document.getElementById('propertyTypeValue').value;
+        const lType = document.getElementById('listingTypeValue').value;
+        const bedsRaw = document.getElementById('bedsValue').value;
+        const minP = parseInt(document.getElementById('minPriceFilter').value) || 0;
+        const maxP = parseInt(document.getElementById('maxPriceFilter').value) || Infinity;
 
         filteredProperties = allProperties.filter(p => {
-            const matchesLocation = location === '' || p.city.toLowerCase().includes(location) || p.address.toLowerCase().includes(location);
-            const matchesPropertyType = propertyType === '' || p.propertyType === propertyType;
-            const matchesListingType = listingType === '' || p.type === listingType;
-            let matchesBeds = true;
-            if (bedsRaw !== '') {
-                const needed = bedsRaw === '4+' ? 4 : parseInt(bedsRaw);
-                matchesBeds = p.bedrooms >= needed;
-            }
-            const matchesPrice = p.price >= minPrice && p.price <= maxPrice;
-            return matchesLocation && matchesPropertyType && matchesListingType && matchesBeds && matchesPrice;
+            if (loc && !p.city.toLowerCase().includes(loc) && !(p.address||'').toLowerCase().includes(loc)) return false;
+            if (pType && p.propertyType !== pType) return false;
+            if (lType && p.type !== lType) return false;
+            if (bedsRaw) { const need = bedsRaw === '4+' ? 4 : parseInt(bedsRaw); if (p.bedrooms < need) return false; }
+            if (p.price < minP || p.price > maxP) return false;
+            return true;
         });
 
-        const sortVal = sortHidden.value;
-        if (sortVal === 'price_asc') filteredProperties.sort((a,b) => a.price - b.price);
-        else if (sortVal === 'price_desc') filteredProperties.sort((a,b) => b.price - a.price);
-        else if (sortVal === 'newest') filteredProperties.sort((a,b) => new Date(b.listedDate) - new Date(a.listedDate));
+        const sortVal = document.getElementById('sortValue').value;
+        if (sortVal === 'nearest' && LocationEngine.userLocation) {
+            filteredProperties.sort((a, b) => (getPropertyDistance(a) || Infinity) - (getPropertyDistance(b) || Infinity));
+        } else if (sortVal === 'price_asc') filteredProperties.sort((a, b) => a.price - b.price);
+        else if (sortVal === 'price_desc') filteredProperties.sort((a, b) => b.price - a.price);
+        else if (sortVal === 'newest') filteredProperties.sort((a, b) => new Date(b.createdAt||0) - new Date(a.createdAt||0));
 
         currentPage = 1;
-        renderResults();
-        renderPagination();
+        renderClassicResults();
+        renderClassicPagination();
     }
 
-    function renderResults() {
+    function renderClassicResults() {
         const start = (currentPage - 1) * itemsPerPage;
-        const pageItems = filteredProperties.slice(start, start + itemsPerPage);
+        const items = filteredProperties.slice(start, start + itemsPerPage);
+        document.getElementById('resultsCount').textContent = `Showing ${items.length} of ${filteredProperties.length} properties`;
         const grid = document.getElementById('propertyGrid');
-        const countSpan = document.getElementById('resultsCount');
-        countSpan.textContent = `Showing ${pageItems.length} of ${filteredProperties.length} properties`;
 
-        if (pageItems.length === 0) {
-            grid.innerHTML = '<div class="no-results">No properties match your filters.</div>';
+        if (!items.length) {
+            grid.innerHTML = '<div class="no-results">No properties match your filters. Try adjusting your search.</div>';
             return;
         }
 
-        grid.innerHTML = pageItems.map(p => {
+        grid.innerHTML = items.map(p => {
             const price = formatPrice(p.price);
             const img = p.images?.[0] || 'https://placehold.co/600x400?text=Zaure';
-            const verifiedBadge = p.owner?.verified ? '<div class="badge-verified"><i class="fas fa-check-circle"></i> Verified</div>' : '';
+            const verified = p.owner?.verified ? '<div class="badge-verified"><i class="fas fa-check-circle"></i> Verified</div>' : '';
+            const badge = getLocationBadge(p);
+            const locBadge = badge ? `<div class="badge-location"><i class="fas ${badge.icon}"></i> ${badge.text}</div>` : '';
+            const dist = getPropertyDistance(p);
+            const distDisplay = dist ? `<span class="distance-info"><i class="fas fa-location-dot"></i> ${dist < 1 ? 'Same city' : dist.toFixed(1) + ' km'}</span>` : '';
+            const highlight = badge && badge.text === 'In Your City' ? ' location-highlight' : '';
+
             return `
-                <div class="property-card" onclick="window.location.href='/property?id=${p.id}'">
+                <div class="property-card${highlight}" onclick="window.location.href='/property?id=${p.id}'">
                     <div class="img-wrapper">
                         <img src="${img}" alt="${p.title}" loading="lazy">
-                        ${verifiedBadge}
+                        ${verified}${locBadge}
                     </div>
                     <div class="card-body">
                         <div class="price">${price}</div>
                         <h3>${p.title}</h3>
-                        <p>${p.address}, ${p.city}</p>
+                        <p>${distDisplay} ${p.address || ''}, ${p.city}</p>
                         <div class="features">
                             ${p.propertyType !== 'land' ? `<span><i class="fas fa-bed"></i> ${p.bedrooms} Beds</span><span><i class="fas fa-bath"></i> ${p.bathrooms} Baths</span>` : '<span><i class="fas fa-map"></i> Land</span>'}
                         </div>
                         <div class="card-tags">
-                            <span class="card-tag" onclick="event.stopPropagation(); window.location.href='/browse?location=${encodeURIComponent(p.city)}'">${p.city}</span>
-                            <span class="card-tag" onclick="event.stopPropagation(); window.location.href='/browse?propertyType=${encodeURIComponent(p.propertyType)}'">${p.propertyType}</span>
+                            <span class="card-tag" onclick="event.stopPropagation(); document.getElementById('locationFilter').value='${p.city}'; applyClassicFilters();">${p.city}</span>
+                            <span class="card-tag" onclick="event.stopPropagation(); document.getElementById('propertyTypeValue').value='${p.propertyType}'; applyClassicFilters();">${p.propertyType}</span>
+                            ${badge ? `<span class="card-tag location-tag"><i class="fas ${badge.icon}"></i> ${badge.text}</span>` : ''}
                         </div>
                     </div>
-                </div>
-            `;
+                </div>`;
         }).join('');
     }
 
-    function renderPagination() {
-        const totalPages = Math.ceil(filteredProperties.length / itemsPerPage);
-        const paginationDiv = document.getElementById('pagination');
-        if (totalPages <= 1) { paginationDiv.innerHTML = ''; return; }
-
-        let html = `<button onclick="changePage(-1)" ${currentPage === 1 ? 'disabled' : ''}>Prev</button>`;
-        for (let i = 1; i <= totalPages; i++) {
-            if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
-                html += `<button class="${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
+    function renderClassicPagination() {
+        const total = Math.ceil(filteredProperties.length / itemsPerPage);
+        const pg = document.getElementById('pagination');
+        if (total <= 1) { pg.innerHTML = ''; return; }
+        let h = `<button onclick="window.classicGoPage(${currentPage-1})" ${currentPage===1?'disabled':''}>Prev</button>`;
+        for (let i = 1; i <= total; i++) {
+            if (i === 1 || i === total || (i >= currentPage - 1 && i <= currentPage + 1)) {
+                h += `<button class="${i===currentPage?'active':''}" onclick="window.classicGoPage(${i})">${i}</button>`;
             } else if (i === currentPage - 2 || i === currentPage + 2) {
-                html += '<span style="padding:0 0.5rem;">...</span>';
+                h += '<span>...</span>';
             }
         }
-        html += `<button onclick="changePage(1)" ${currentPage === totalPages ? 'disabled' : ''}>Next</button>`;
-        paginationDiv.innerHTML = html;
+        h += `<button onclick="window.classicGoPage(${currentPage+1})" ${currentPage===total?'disabled':''}>Next</button>`;
+        pg.innerHTML = h;
     }
 
-    window.changePage = (delta) => {
+    window.classicGoPage = (page) => {
         const total = Math.ceil(filteredProperties.length / itemsPerPage);
-        const newPage = currentPage + delta;
-        if (newPage >= 1 && newPage <= total) {
-            currentPage = newPage;
-            renderResults();
-            renderPagination();
-            window.scrollTo({ top: 200, behavior: 'smooth' });
-        }
-    };
-    window.goToPage = (page) => {
+        if (page < 1 || page > total) return;
         currentPage = page;
-        renderResults();
-        renderPagination();
+        renderClassicResults();
+        renderClassicPagination();
         window.scrollTo({ top: 200, behavior: 'smooth' });
     };
 
-    document.getElementById('applyFiltersBtn').addEventListener('click', applyFiltersAndRender);
+    document.getElementById('applyFiltersBtn').addEventListener('click', applyClassicFilters);
     ['locationFilter','minPriceFilter','maxPriceFilter'].forEach(id => {
-        document.getElementById(id).addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') applyFiltersAndRender();
+        document.getElementById(id).addEventListener('keypress', (e) => { if (e.key === 'Enter') applyClassicFilters(); });
+    });
+
+    // Updated "Near Me" button
+    document.getElementById('nearMeBtn').addEventListener('click', async () => {
+        const loc = await LocationEngine.detectUserLocation();
+        if (loc?.city) {
+            // Show a brief indication of detected city
+            document.getElementById('locationFilter').placeholder = `📍 ${loc.city.charAt(0).toUpperCase() + loc.city.slice(1)}`;
+            // Clear any existing location filter so we show *all* properties sorted by distance
+            document.getElementById('locationFilter').value = '';
+            // Switch to nearest-first sort and apply
+            document.getElementById('sortValue').value = 'nearest';
+            document.getElementById('sortFilterBtn').innerHTML = 'Sort: Nearest First <i class="fas fa-chevron-down"></i>';
+            applyClassicFilters();
+        } else {
+            alert('Could not detect your location. Please ensure location access is granted or enter your city manually.');
+        }
+    });
+
+    // ============================================
+    // FOR YOU FEED (LOCATION‑ONLY + IMAGE CAROUSEL)
+    // ============================================
+    let feedQueue = [], feedHistory = [], feedIndex = 0, feedCard = null, feedAnimating = false;
+    const favorites = JSON.parse(localStorage.getItem('zaure_favorites') || '[]');
+    let cityPrefs = JSON.parse(localStorage.getItem('zaure_city_preferences') || '{}');
+
+    function feedScore(prop) {
+        let s = 0.5;
+        const pl = LocationEngine.extractCityFromProperty(prop.address, prop.city);
+        const ul = LocationEngine.userLocation;
+        if (ul && pl) {
+            if (ul.city === pl.city) s += 0.4;
+            else if (ul.state === pl.state) s += 0.2;
+        }
+        if (prop.city && cityPrefs[prop.city.toLowerCase()]) s += cityPrefs[prop.city.toLowerCase()] * 0.2;
+        if (prop.owner?.verified) s += 0.05;
+        return Math.max(0, Math.min(1, s));
+    }
+
+    function buildFeed() {
+        const nearby = allProperties.filter(p => LocationEngine.isNearUser(p));
+        if (nearby.length === 0) {
+            feedQueue = [...allProperties];
+        } else {
+            const scored = nearby.map(p => ({ p, s: feedScore(p) }));
+            scored.sort((a, b) => b.s - a.s);
+            feedQueue = scored.map(x => x.p);
+        }
+        feedIndex = 0;
+        feedHistory = [];
+    }
+
+    function stopCurrentVideo() {
+        if (feedCard) {
+            const v = feedCard.querySelector('video');
+            if (v) v.pause();
+        }
+    }
+
+    let currentImageIndex = 0;
+
+    function renderFeedCard(prop) {
+        const wrapper = document.getElementById('feedWrapper');
+        stopCurrentVideo();
+        if (feedCard) feedCard.remove();
+        
+        const card = document.createElement('div');
+        card.className = 'feed-card';
+        
+        const video = prop.video || null;
+        const images = prop.images?.length ? prop.images : ['https://placehold.co/600x800/1a1a1a/ffffff?text=Zaure'];
+        const hasMultipleImages = !video && images.length > 1;
+        currentImageIndex = 0;
+        
+        const badge = (() => {
+            if (!LocationEngine.userLocation) return null;
+            const pl = LocationEngine.extractCityFromProperty(prop.address, prop.city);
+            if (!pl) return null;
+            if (LocationEngine.userLocation.city === pl.city) return 'In Your City';
+            if (LocationEngine.userLocation.state === pl.state) return 'Same State';
+            return null;
+        })();
+        const isFav = favorites.includes(prop.id);
+
+        card.innerHTML = `
+            <div class="card-media">
+                ${video ? 
+                    `<video src="${video}" autoplay muted loop playsinline></video>` : 
+                    `<div class="card-images" id="cardImages">
+                        ${images.map(img => `<img class="card-img" src="${img}" alt="">`).join('')}
+                    </div>`
+                }
+                ${hasMultipleImages ? `
+                <div class="image-dots" id="imageDots">
+                    ${images.map((_, i) => `<div class="dot ${i === 0 ? 'active' : ''}"></div>`).join('')}
+                </div>` : ''}
+                <div class="card-overlay">
+                    ${badge ? `<span class="card-badge"><i class="fas fa-location-dot"></i> ${badge}</span>` : ''}
+                    <div class="card-price">${formatPrice(prop.price)}</div>
+                    <div class="card-title">${prop.title}</div>
+                    <div class="card-loc"><i class="fas fa-map-marker-alt"></i> ${prop.address || prop.city}</div>
+                    <div class="card-features-row">
+                        ${prop.bedrooms ? `<span><i class="fas fa-bed"></i> ${prop.bedrooms} Beds</span>` : ''}
+                        ${prop.bathrooms ? `<span><i class="fas fa-bath"></i> ${prop.bathrooms} Baths</span>` : ''}
+                    </div>
+                </div>
+                <div class="card-actions-side">
+                    <button class="action-circle btn-fav-feed ${isFav?'liked':''}"><i class="fas fa-heart"></i></button>
+                </div>
+            </div>`;
+        
+        wrapper.appendChild(card);
+        feedCard = card;
+        
+        const videoEl = card.querySelector('video');
+        if (videoEl) videoEl.play().catch(() => {});
+        
+        document.getElementById('feedSaveBtn').classList.toggle('active', isFav);
+        
+        let startY = 0, startX = 0, currentY = 0, currentX = 0, dragging = false;
+        const imagesContainer = card.querySelector('.card-images');
+        const dots = card.querySelectorAll('.dot');
+        
+        function updateImageSlide(index) {
+            if (!imagesContainer) return;
+            currentImageIndex = index;
+            imagesContainer.style.transform = `translateX(-${index * 100}%)`;
+            dots?.forEach((d, i) => d.classList.toggle('active', i === index));
+        }
+
+        card.addEventListener('touchstart', e => {
+            if (feedAnimating) return;
+            startY = e.touches[0].clientY;
+            startX = e.touches[0].clientX;
+            dragging = true;
+            card.style.transition = 'none';
+            if (imagesContainer) imagesContainer.style.transition = 'none';
+        }, { passive: true });
+        
+        card.addEventListener('touchmove', e => {
+            if (!dragging || feedAnimating) return;
+            currentY = e.touches[0].clientY;
+            currentX = e.touches[0].clientX;
+            const dy = currentY - startY;
+            const dx = currentX - startX;
+            
+            if (hasMultipleImages && Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 10) {
+                const percent = (dx / card.offsetWidth) * 100;
+                imagesContainer.style.transform = `translateX(calc(-${currentImageIndex * 100}% + ${percent}px))`;
+            } else {
+                card.style.transform = `translateY(${dy}px)`;
+            }
+        }, { passive: true });
+        
+        card.addEventListener('touchend', () => {
+            if (!dragging || feedAnimating) return;
+            dragging = false;
+            const dy = currentY - startY;
+            const dx = currentX - startX;
+            
+            if (hasMultipleImages && Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
+                if (dx < -30 && currentImageIndex < images.length - 1) {
+                    currentImageIndex++;
+                } else if (dx > 30 && currentImageIndex > 0) {
+                    currentImageIndex--;
+                }
+                if (imagesContainer) imagesContainer.style.transition = 'transform 0.3s ease';
+                updateImageSlide(currentImageIndex);
+                card.style.transform = 'translateY(0)';
+                card.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            } else {
+                card.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                if (dy < -60) feedNext(prop);
+                else if (dy > 60) feedPrev();
+                else card.style.transform = 'translateY(0)';
+            }
         });
-    });
 
-    document.getElementById('nearMeBtn').addEventListener('click', () => {
-        if (!navigator.geolocation) { alert('Geolocation not supported.'); return; }
-        navigator.geolocation.getCurrentPosition(async (pos) => {
-            const { latitude, longitude } = pos.coords;
-            try {
-                const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
-                const data = await res.json();
-                const city = data.address.city || data.address.town || data.address.state || '';
-                if (city) document.getElementById('locationFilter').value = city;
-                applyFiltersAndRender();
-            } catch { alert('Unable to determine location.'); }
-        }, () => alert('Location access denied.'));
-    });
+        let md = false, msY = 0, msX = 0;
+        card.addEventListener('mousedown', e => {
+            if (feedAnimating) return;
+            msY = e.clientY;
+            msX = e.clientX;
+            md = true;
+            card.style.transition = 'none';
+            if (imagesContainer) imagesContainer.style.transition = 'none';
+        });
+        document.addEventListener('mousemove', e => {
+            if (!md || feedAnimating) return;
+            const dy = e.clientY - msY;
+            const dx = e.clientX - msX;
+            if (hasMultipleImages && Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 10) {
+                const percent = (dx / card.offsetWidth) * 100;
+                imagesContainer.style.transform = `translateX(calc(-${currentImageIndex * 100}% + ${percent}px))`;
+            } else {
+                card.style.transform = `translateY(${dy}px)`;
+            }
+        });
+        document.addEventListener('mouseup', e => {
+            if (!md || feedAnimating) return;
+            md = false;
+            const dy = e.clientY - msY;
+            const dx = e.clientX - msX;
+            
+            if (hasMultipleImages && Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
+                if (dx < -30 && currentImageIndex < images.length - 1) currentImageIndex++;
+                else if (dx > 30 && currentImageIndex > 0) currentImageIndex--;
+                if (imagesContainer) imagesContainer.style.transition = 'transform 0.3s ease';
+                updateImageSlide(currentImageIndex);
+                card.style.transform = 'translateY(0)';
+                card.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            } else {
+                card.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                if (dy < -60) feedNext(prop);
+                else if (dy > 60) feedPrev();
+                else card.style.transform = 'translateY(0)';
+            }
+        });
 
-    // ──────────────────────────────────────
-    // For You feed engine (TikTok-style)
-    let feedProperties = [];
-    let feedFeatureVectors = [];
-    let feedSimilarityMatrix = {};
-    let feedPopularity = {};
-    let feedQueue = [];
-    let feedIndex = -1;
-    let feedCurrentCard = null;
-    let feedCurrentProp = null;
-    let feedLastDismissed = null;
-    let feedUndoTimeout;
-    let feedProfile;
-
-    const citiesList = ['Kaduna','Kano','Zaria','Abuja','Sokoto','Maiduguri','Jos','Lagos','Ibadan','Katsina','Bauchi','Gombe'];
-    const typesList = ['house','apartment','land','commercial'];
-    const listingTypesList = ['sale','rent'];
-
-    function buildFeedVector(prop) {
-        let v = [];
-        citiesList.forEach(c => v.push(prop.city === c ? 1 : 0));
-        typesList.forEach(t => v.push(prop.propertyType === t ? 1 : 0));
-        listingTypesList.forEach(t => v.push(prop.type === t ? 1 : 0));
-        v.push(Math.log(prop.price+1)/20);
-        v.push(prop.bedrooms/5);
-        v.push(prop.bathrooms/5);
-        v.push(prop.owner?.verified?1:0);
-        v.push((prop.amenities?.length||0)/10);
-        while(v.length<20) v.push(0);
-        return v.slice(0,20);
+        card.querySelector('.btn-fav-feed').addEventListener('click', e => { e.stopPropagation(); toggleFav(prop); });
     }
 
-    function cosineSim(a,b) {
-        let d=0,ma=0,mb=0;
-        for(let i=0;i<a.length;i++){ d+=a[i]*b[i]; ma+=a[i]*a[i]; mb+=b[i]*b[i]; }
-        return (ma&&mb)? d/(Math.sqrt(ma)*Math.sqrt(mb)) : 0;
+    function feedNext(prop) {
+        if (feedAnimating) return;
+        feedAnimating = true;
+        stopCurrentVideo();
+        
+        feedHistory.push({ prop, index: feedIndex });
+        if (feedHistory.length > 30) feedHistory.shift();
+        if (prop.city) { const c = prop.city.toLowerCase(); cityPrefs[c] = (cityPrefs[c] || 0) + 0.05; localStorage.setItem('zaure_city_preferences', JSON.stringify(cityPrefs)); }
+        
+        feedCard.style.transform = 'translateY(-120%)';
+        feedCard.style.opacity = '0';
+        
+        setTimeout(() => {
+            feedCard.remove(); feedCard = null; feedIndex++;
+            if (feedIndex >= feedQueue.length - 2) buildFeed();
+            feedAnimating = false;
+            if (feedIndex < feedQueue.length) renderFeedCard(feedQueue[feedIndex]);
+        }, 400);
     }
 
-    async function initFeed() {
+    function feedPrev() {
+        if (feedAnimating || !feedHistory.length) return;
+        feedAnimating = true;
+        stopCurrentVideo();
+        
+        const prev = feedHistory.pop();
+        feedCard.style.transform = 'translateY(120%)';
+        feedCard.style.opacity = '0';
+        
+        setTimeout(() => {
+            feedCard.remove(); feedCard = null;
+            feedIndex = prev.index;
+            if (!feedQueue[feedIndex] || feedQueue[feedIndex].id !== prev.prop.id) feedQueue.splice(feedIndex, 0, prev.prop);
+            feedAnimating = false;
+            renderFeedCard(prev.prop);
+        }, 400);
+    }
+
+    function toggleFav(prop) {
+        const idx = favorites.indexOf(prop.id);
+        if (idx > -1) favorites.splice(idx, 1);
+        else { favorites.push(prop.id); if (prop.city) { const c = prop.city.toLowerCase(); cityPrefs[c] = (cityPrefs[c] || 0) + 0.1; localStorage.setItem('zaure_city_preferences', JSON.stringify(cityPrefs)); } }
+        localStorage.setItem('zaure_favorites', JSON.stringify(favorites));
+        document.getElementById('feedSaveBtn').classList.toggle('active', favorites.includes(prop.id));
+        const btn = feedCard?.querySelector('.btn-fav-feed');
+        if (btn) btn.classList.toggle('liked', favorites.includes(prop.id));
+    }
+
+    function initFeed() {
+        buildFeed();
+        if (feedQueue.length) renderFeedCard(feedQueue[0]);
+        document.getElementById('feedLocationText').textContent = LocationEngine.userLocation?.city ? `Near ${LocationEngine.userLocation.city.charAt(0).toUpperCase() + LocationEngine.userLocation.city.slice(1)}` : 'Near you';
+    }
+
+    document.getElementById('feedNextBtn').addEventListener('click', () => { if (feedQueue[feedIndex]) feedNext(feedQueue[feedIndex]); });
+    document.getElementById('feedPrevBtn').addEventListener('click', feedPrev);
+    document.getElementById('feedSaveBtn').addEventListener('click', () => { if (feedQueue[feedIndex]) toggleFav(feedQueue[feedIndex]); });
+    document.getElementById('feedCallBtn').addEventListener('click', () => {
+        const p = feedQueue[feedIndex];
+        if (p?.owner?.phone) window.open(`tel:${p.owner.phone}`, '_system');
+    });
+    document.getElementById('feedShareBtn').addEventListener('click', () => {
+        const p = feedQueue[feedIndex];
+        if (p) window.open(`https://wa.me/?text=${encodeURIComponent(`🏠 ${p.title}\n📍 ${p.city}\n💰 ${formatPrice(p.price)}\n\n${window.location.origin}/property?id=${p.id}`)}`, '_blank');
+    });
+
+    // ============================================
+    // INIT
+    // ============================================
+    async function init() {
         try {
             const res = await fetch('/data/properties.json');
             const data = await res.json();
-            feedProperties = data.properties;
-        } catch(e) { return; }
+            allProperties = data.properties || [];
+        } catch (e) { console.error('Failed to load properties:', e); }
 
-        feedFeatureVectors = feedProperties.map(p => ({id:p.id, vector: buildFeedVector(p)}));
-        const vecMap = {};
-        feedFeatureVectors.forEach(v => vecMap[v.id]=v.vector);
-        feedSimilarityMatrix = {};
-        feedProperties.forEach(p => {
-            const my = vecMap[p.id];
-            feedSimilarityMatrix[p.id] = feedProperties
-                .filter(o=>o.id!==p.id)
-                .map(o=>({id:o.id,sim:cosineSim(my,vecMap[o.id])}))
-                .sort((a,b)=>b.sim-a.sim).slice(0,15);
-        });
-        feedPopularity = {};
-        feedProperties.forEach(p => {
-            let s = 0;
-            if(p.listedDate) s += Math.max(0,1-(Date.now()-new Date(p.listedDate))/(30*864e4))*0.5;
-            if(p.owner?.verified) s += 0.3;
-            s += Math.random()*0.2;
-            feedPopularity[p.id] = Math.min(1,s);
-        });
+        await LocationEngine.detectUserLocation();
 
-        feedProfile = JSON.parse(localStorage.getItem('zaure_profile'));
-        if(!feedProfile) {
-            const u = JSON.parse(localStorage.getItem('zaure_user')||'{}');
-            feedProfile = {
-                cityWeights: u.city?{[u.city]:1}:{},
-                priceMean:800000, priceStd:500000, bedroomsMean:2, verifiedBias:0.5,
-                contentVector: new Array(20).fill(0),
-                recentActions:[]
-            };
-        }
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('location')) document.getElementById('locationFilter').value = params.get('location');
+        if (params.get('type')) { document.getElementById('listingTypeValue').value = params.get('type'); const lt = listingTypes.find(t => t.value === params.get('type')); if (lt) document.getElementById('listingTypeFilterBtn').innerHTML = `${lt.label} <i class="fas fa-chevron-down"></i>`; }
+        if (params.get('propertyType')) { document.getElementById('propertyTypeValue').value = params.get('propertyType'); const pt = propertyTypes.find(t => t.value === params.get('propertyType')); if (pt) document.getElementById('propertyTypeFilterBtn').innerHTML = `${pt.label} <i class="fas fa-chevron-down"></i>`; }
+        if (params.get('beds')) { document.getElementById('bedsValue').value = params.get('beds'); const bd = bedOptions.find(b => b.value === params.get('beds')); if (bd) document.getElementById('bedFilterBtn').innerHTML = `${bd.label} <i class="fas fa-chevron-down"></i>`; }
+        if (params.get('min')) document.getElementById('minPriceFilter').value = params.get('min');
+        if (params.get('max')) document.getElementById('maxPriceFilter').value = params.get('max');
 
-        buildFeedQueue();
+        applyClassicFilters();
     }
 
-    function scoreProperty(prop) {
-        if(!feedProfile) return Math.random();
-        const vec = feedFeatureVectors.find(v=>v.id==prop.id)?.vector || buildFeedVector(prop);
-        let s = 0;
-        if(feedProfile.cityWeights[prop.city]) s += feedProfile.cityWeights[prop.city]*0.3;
-        const pDiff = Math.abs(prop.price - feedProfile.priceMean);
-        s += Math.exp(-pDiff*pDiff/(2*feedProfile.priceStd*feedProfile.priceStd))*0.25;
-        const bDiff = Math.abs(prop.bedrooms - feedProfile.bedroomsMean);
-        s += Math.exp(-bDiff*0.5)*0.15;
-        if(prop.owner?.verified && feedProfile.verifiedBias>0.5) s += feedProfile.verifiedBias*0.1;
-        if(feedProfile.contentVector && feedProfile.contentVector.length===20) {
-            s += cosineSim(feedProfile.contentVector, vec)*0.2;
-        }
-        if(feedProfile.recentActions) {
-            feedProfile.recentActions.slice(-5).forEach(a => {
-                if(feedSimilarityMatrix[a.propertyId]) {
-                    const m = feedSimilarityMatrix[a.propertyId].find(x=>x.id==prop.id);
-                    if(m) s += m.sim*0.1;
-                }
-            });
-        }
-        s += (feedPopularity[prop.id]||0)*0.05;
-        if(prop.listedDate) s += Math.max(0,1-(Date.now()-new Date(prop.listedDate))/(30*864e4))*0.1;
-        s += (Math.random()-0.5)*0.1;
-        return s;
-    }
-
-    function buildFeedQueue() {
-        const scored = feedProperties.map(p=>({prop:p,score:scoreProperty(p)}));
-        scored.sort((a,b)=>b.score-a.score);
-        feedQueue = scored.map(c=>c.prop);
-        feedIndex = -1;
-        document.getElementById('feedCardsContainer').innerHTML = '';
-        showNextCard();
-    }
-
-    function showNextCard() {
-        if(feedIndex >= feedQueue.length-1) {
-            document.getElementById('feedCardsContainer').innerHTML = '<div style="text-align:center;padding:2rem;">No more properties</div>';
-            return;
-        }
-        feedIndex++;
-        feedCurrentProp = feedQueue[feedIndex];
-        renderFeedCard(feedCurrentProp);
-    }
-
-    function renderFeedCard(prop) {
-        const container = document.getElementById('feedCardsContainer');
-        if(feedCurrentCard) feedCurrentCard.remove();
-        const card = document.createElement('div');
-        card.className = 'feed-card';
-        const img = prop.images?.[0] || 'https://placehold.co/600x800?text=Zaure';
-        const vid = prop.video || null;
-        const verified = prop.owner?.verified ? '<span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span>' : '';
-        card.innerHTML = `
-            <div class="card-image-wrapper">
-                ${vid ? `<video src="${vid}" muted loop playsinline controlsList="nodownload" oncontextmenu="return false;"></video>` : `<img src="${img}">`}
-                <div class="card-tags">
-                    <span class="card-tag">${prop.city}</span>
-                    <span class="card-tag">${prop.propertyType}</span>
-                    ${prop.amenities?.slice(0,2).map(a=>`<span class="card-tag">${a}</span>`).join('')}
-                </div>
-                <div class="card-overlay">
-                    <div class="card-price">${formatPrice(prop.price)}</div>
-                    <div class="card-title">${prop.title}${verified}</div>
-                    <div class="card-location"><i class="fas fa-map-marker-alt"></i> ${prop.address}, ${prop.city}</div>
-                </div>
-                <div class="card-actions">
-                    <button class="action-btn like"><i class="fas fa-heart"></i></button>
-                    <button class="action-btn skip"><i class="fas fa-times"></i></button>
-                    <button class="action-btn call"><i class="fas fa-phone-alt"></i></button>
-                </div>
-            </div>
-        `;
-        container.appendChild(card);
-        feedCurrentCard = card;
-
-        // Whole card click navigates to property detail
-        card.addEventListener('click', (e) => {
-            // Only navigate if the click wasn't on an action button (they stopPropagation)
-            window.location.href = `/property?id=${prop.id}`;
-        });
-
-        const v = card.querySelector('video');
-        if(v) v.play().catch(()=>{});
-        setupFeedCardGestures(card, prop);
-    }
-
-    function setupFeedCardGestures(card, prop) {
-        let startX, startY;
-        card.addEventListener('touchstart', e => {
-            startX = e.touches[0].clientX;
-            startY = e.touches[0].clientY;
-        }, {passive:true});
-        card.addEventListener('touchend', e => {
-            const dx = e.changedTouches[0].clientX - startX;
-            const dy = e.changedTouches[0].clientY - startY;
-            if(Math.abs(dx)>50 && Math.abs(dx)>Math.abs(dy)) {
-                if(dx>0) feedLike(prop);
-                else feedSkip(prop);
-            }
-        });
-        // Action buttons
-        card.querySelector('.like').addEventListener('click', e => { e.stopPropagation(); feedLike(prop); });
-        card.querySelector('.skip').addEventListener('click', e => { e.stopPropagation(); feedSkip(prop); });
-        card.querySelector('.call').addEventListener('click', e => { e.stopPropagation(); feedCall(prop); });
-        card.querySelectorAll('.card-tag').forEach(tag => {
-            tag.addEventListener('click', e => {
-                e.stopPropagation();
-                const filter = tag.textContent.trim();
-                if(citiesList.includes(filter)) {
-                    feedProfile.cityWeights[filter] = (feedProfile.cityWeights[filter]||0)+1;
-                    localStorage.setItem('zaure_profile', JSON.stringify(feedProfile));
-                }
-                buildFeedQueue();
-            });
-        });
-    }
-
-    function feedLike(prop) {
-        recordFeedInteraction(prop, 'like', 8);
-        feedCurrentCard.classList.add('swiped-right');
-        feedLastDismissed = prop;
-        showUndo();
-        setTimeout(() => {
-            feedCurrentCard?.remove();
-            feedCurrentCard = null;
-            showNextCard();
-        }, 300);
-    }
-
-    function feedSkip(prop) {
-        recordFeedInteraction(prop, 'skip', -3);
-        feedCurrentCard.classList.add('swiped-left');
-        feedLastDismissed = prop;
-        showUndo();
-        setTimeout(() => {
-            feedCurrentCard?.remove();
-            feedCurrentCard = null;
-            showNextCard();
-        }, 300);
-    }
-
-    function feedCall(prop) {
-        recordFeedInteraction(prop, 'call', 12);
-        const phone = prop.owner?.phone;
-        if(phone) window.open(`tel:${phone}`, '_system');
-        else alert('Owner phone not available.');
-    }
-
-    function recordFeedInteraction(prop, action, weight) {
-        const interactions = JSON.parse(localStorage.getItem('zaure_interactions')||'[]');
-        interactions.push({ propertyId:prop.id, action, weight, timestamp:Date.now() });
-        if(interactions.length>50) interactions.shift();
-        localStorage.setItem('zaure_interactions', JSON.stringify(interactions));
-        // Update profile
-        if(weight>0) {
-            feedProfile.cityWeights[prop.city] = (feedProfile.cityWeights[prop.city]||0)*0.9 + weight*0.1;
-            feedProfile.priceMean = feedProfile.priceMean*0.9 + prop.price*0.1;
-            feedProfile.bedroomsMean = feedProfile.bedroomsMean*0.9 + prop.bedrooms*0.1;
-            if(prop.owner?.verified) feedProfile.verifiedBias = feedProfile.verifiedBias*0.9+0.1;
-            const vec = feedFeatureVectors.find(v=>v.id==prop.id)?.vector || buildFeedVector(prop);
-            for(let i=0;i<vec.length;i++) feedProfile.contentVector[i] = feedProfile.contentVector[i]*0.9 + vec[i]*0.1;
-        } else {
-            feedProfile.cityWeights[prop.city] = (feedProfile.cityWeights[prop.city]||0)*0.95;
-            if(prop.owner?.verified) feedProfile.verifiedBias = feedProfile.verifiedBias*0.95;
-        }
-        feedProfile.recentActions = interactions.slice(-10).map(i=>({propertyId:i.propertyId}));
-        localStorage.setItem('zaure_profile', JSON.stringify(feedProfile));
-    }
-
-    function showUndo() {
-        if(feedUndoTimeout) clearTimeout(feedUndoTimeout);
-        document.getElementById('feedUndoToast').classList.add('visible');
-        feedUndoTimeout = setTimeout(() => document.getElementById('feedUndoToast').classList.remove('visible'), 3000);
-    }
-
-    document.getElementById('feedUndoToast').addEventListener('click', () => {
-        if(feedLastDismissed) {
-            feedQueue.splice(feedIndex, 0, feedLastDismissed);
-            feedIndex--;
-            renderFeedCard(feedLastDismissed);
-            feedLastDismissed = null;
-            document.getElementById('feedUndoToast').classList.remove('visible');
-            if(feedUndoTimeout) clearTimeout(feedUndoTimeout);
-        }
-    });
-
-    // Bottom bar buttons
-    document.getElementById('feedLikeBtn').addEventListener('click', () => { if(feedCurrentProp) feedLike(feedCurrentProp); });
-    document.getElementById('feedSkipBtn').addEventListener('click', () => { if(feedCurrentProp) feedSkip(feedCurrentProp); });
-    document.getElementById('feedCallBtn').addEventListener('click', () => { if(feedCurrentProp) feedCall(feedCurrentProp); });
-    document.getElementById('feedShareBtn').addEventListener('click', () => {
-        if(feedCurrentProp) {
-            const text = `Check out this property: ${feedCurrentProp.title} - ${window.location.origin}/property?id=${feedCurrentProp.id}`;
-            window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
-            recordFeedInteraction(feedCurrentProp, 'share', 8);
-        }
-    });
-
-    // Initial data load for classic browse
-    fetch('/data/properties.json')
-        .then(res => res.json())
-        .then(data => {
-            allProperties = data.properties;
-            applyFiltersAndRender();
-        })
-        .catch(() => {
-            document.getElementById('propertyGrid').innerHTML = '<div class="no-results">Failed to load properties.</div>';
-        });
+    init();
 })();
 </script>
 </body>
