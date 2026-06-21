@@ -558,7 +558,7 @@
         <button class="feed-close-btn" id="feedCloseBtn"><i class="fas fa-times"></i></button>
         <div class="feed-location-badge" id="feedLocationBadge">
             <i class="fas fa-location-dot"></i>
-            <span id="feedLocationText">Near you</span>
+            <span id="feedLocationText">For You</span>
         </div>
     </div>
     <div class="feed-wrapper" id="feedWrapper"></div>
@@ -944,15 +944,11 @@
         document.getElementById(id).addEventListener('keypress', (e) => { if (e.key === 'Enter') applyClassicFilters(); });
     });
 
-    // Updated "Near Me" button
     document.getElementById('nearMeBtn').addEventListener('click', async () => {
         const loc = await LocationEngine.detectUserLocation();
         if (loc?.city) {
-            // Show a brief indication of detected city
             document.getElementById('locationFilter').placeholder = `📍 ${loc.city.charAt(0).toUpperCase() + loc.city.slice(1)}`;
-            // Clear any existing location filter so we show *all* properties sorted by distance
             document.getElementById('locationFilter').value = '';
-            // Switch to nearest-first sort and apply
             document.getElementById('sortValue').value = 'nearest';
             document.getElementById('sortFilterBtn').innerHTML = 'Sort: Nearest First <i class="fas fa-chevron-down"></i>';
             applyClassicFilters();
@@ -962,34 +958,33 @@
     });
 
     // ============================================
-    // FOR YOU FEED (LOCATION‑ONLY + IMAGE CAROUSEL)
+    // FOR YOU FEED (ALL PROPERTIES, RANDOMIZED)
     // ============================================
     let feedQueue = [], feedHistory = [], feedIndex = 0, feedCard = null, feedAnimating = false;
     const favorites = JSON.parse(localStorage.getItem('zaure_favorites') || '[]');
     let cityPrefs = JSON.parse(localStorage.getItem('zaure_city_preferences') || '{}');
 
     function feedScore(prop) {
-        let s = 0.5;
+        // Base random component for variety
+        let score = Math.random() * 0.6;
         const pl = LocationEngine.extractCityFromProperty(prop.address, prop.city);
         const ul = LocationEngine.userLocation;
         if (ul && pl) {
-            if (ul.city === pl.city) s += 0.4;
-            else if (ul.state === pl.state) s += 0.2;
+            if (ul.city === pl.city) score += 0.2;
+            else if (ul.state === pl.state) score += 0.1;
         }
-        if (prop.city && cityPrefs[prop.city.toLowerCase()]) s += cityPrefs[prop.city.toLowerCase()] * 0.2;
-        if (prop.owner?.verified) s += 0.05;
-        return Math.max(0, Math.min(1, s));
+        if (prop.city && cityPrefs[prop.city.toLowerCase()]) {
+            score += cityPrefs[prop.city.toLowerCase()] * 0.15;
+        }
+        if (prop.owner?.verified) score += 0.05;
+        return Math.min(1, score);
     }
 
     function buildFeed() {
-        const nearby = allProperties.filter(p => LocationEngine.isNearUser(p));
-        if (nearby.length === 0) {
-            feedQueue = [...allProperties];
-        } else {
-            const scored = nearby.map(p => ({ p, s: feedScore(p) }));
-            scored.sort((a, b) => b.s - a.s);
-            feedQueue = scored.map(x => x.p);
-        }
+        // Use ALL properties, scored with randomness and slight location weighting
+        const scored = allProperties.map(p => ({ p, s: feedScore(p) }));
+        scored.sort((a, b) => b.s - a.s);
+        feedQueue = scored.map(x => x.p);
         feedIndex = 0;
         feedHistory = [];
     }
@@ -1178,7 +1173,7 @@
         
         setTimeout(() => {
             feedCard.remove(); feedCard = null; feedIndex++;
-            if (feedIndex >= feedQueue.length - 2) buildFeed();
+            if (feedIndex >= feedQueue.length - 2) buildFeed(); // rebuild with new randomness
             feedAnimating = false;
             if (feedIndex < feedQueue.length) renderFeedCard(feedQueue[feedIndex]);
         }, 400);
@@ -1215,7 +1210,10 @@
     function initFeed() {
         buildFeed();
         if (feedQueue.length) renderFeedCard(feedQueue[0]);
-        document.getElementById('feedLocationText').textContent = LocationEngine.userLocation?.city ? `Near ${LocationEngine.userLocation.city.charAt(0).toUpperCase() + LocationEngine.userLocation.city.slice(1)}` : 'Near you';
+        const locText = LocationEngine.userLocation?.city 
+            ? `For You in ${LocationEngine.userLocation.city.charAt(0).toUpperCase() + LocationEngine.userLocation.city.slice(1)}` 
+            : 'For You';
+        document.getElementById('feedLocationText').textContent = locText;
     }
 
     document.getElementById('feedNextBtn').addEventListener('click', () => { if (feedQueue[feedIndex]) feedNext(feedQueue[feedIndex]); });
