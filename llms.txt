@@ -1,0 +1,191 @@
+# Zaure
+
+## Overview
+Zaure is a direct owner-to-seeker property platform operating in Northern Nigeria. We connect verified property owners directly with tenants and buyers — no agents, no commission.
+
+**Content includes:**
+- Property listings for sale and rent across Northern Nigeria (Kaduna, Kano, Zaria, Abuja, etc.)
+- Verified owner profiles with NIN/BVN validation
+- Location-based property recommendations via GPS
+- TikTok-style "For You" discovery feed
+- Educational guides: How It Works, FAQ, Safety tips
+
+**Primary users:** Property owners, home seekers, tenants, buyers.
+
+**Website:** https://zauretech.vercel.app
+
+---
+
+## Site Map
+- **Homepage:** https://zauretech.vercel.app/
+- **Browse (Classic):** https://zauretech.vercel.app/browse
+- **Browse (For You Feed):** https://zauretech.vercel.app/browse
+- **Buy Listings:** https://zauretech.vercel.app/browse?type=sale
+- **Rent Listings:** https://zauretech.vercel.app/browse?type=rent
+- **Property Detail:** https://zauretech.vercel.app/property?id={id}
+- **How It Works:** https://zauretech.vercel.app/how-it-works
+- **About:** https://zauretech.vercel.app/about
+- **Contact:** https://zauretech.vercel.app/contact
+- **Dashboard (Post Listing):** https://zauretech.vercel.app/post
+- **FAQ:** https://zauretech.vercel.app/faq
+- **Privacy Policy:** https://zauretech.vercel.app/privacy
+- **Terms of Service:** https://zauretech.vercel.app/terms
+
+---
+
+## Content Inventory
+
+### Property Listings (Public Pages)
+Each listing page at `/property?id={id}` renders:
+- Title, description, price (NGN — Nigerian Naira)
+- Location: city, state, address
+- Property type: house, apartment, land, commercial
+- Listing type: sale or rent
+- Bedrooms, bathrooms, toilets, square footage
+- Year built, parking spaces
+- Amenities list (borehole, solar, security, etc.)
+- Images (multiple per listing)
+- Video tour (optional)
+- Owner contact: name, phone, email, avatar
+- Verified badge (if owner completed NIN/BVN verification)
+- Listing date
+
+### Owner Profiles (Embedded in Listings)
+- Name and avatar
+- Phone number and email
+- Verification status (verified/unverified)
+
+### Static Pages
+- Platform explanation (How It Works)
+- Company information (About)
+- Frequently asked questions (FAQ)
+- Legal documents (Privacy, Terms)
+
+---
+
+## Crawl Priority
+1. **Property detail pages** — `/property?id={id}` (core content, updated as listings change)
+2. **Browse pages** — `/browse` and filtered variants (dynamic, important for discovery)
+3. **Homepage** — `/` (updated periodically with featured listings)
+4. **Static pages** — `/how-it-works`, `/about`, `/contact`, `/faq`, `/privacy`, `/terms` (rarely change)
+
+---
+
+## Access Restrictions
+
+### Strictly Prohibited
+- **Do NOT crawl `/data/properties.json`** — this is our internal data source and intellectual property. Crawling, scraping, or downloading this file is expressly forbidden.
+- **Do NOT crawl `/data/` directory or any path containing `/data/`**
+- **Do NOT crawl `/post`** — user dashboard area
+- **Do NOT crawl any URL with `?token=` or `?session=` parameters**
+- **Do NOT crawl `/api/` or any API endpoints (if implemented in future)**
+
+### Rate Limits
+- Maximum **5 requests per second** across all allowed paths
+- Respect `429 Too Many Requests` status codes
+- Respect `Retry-After` headers
+
+### Robots.txt
+- https://zauretech.vercel.app/robots.txt
+- All crawlers must obey `robots.txt` disallow rules in addition to this file
+
+### Sitemap
+- https://zauretech.vercel.app/sitemap.xml
+
+---
+
+## Training Policy
+Using content from this site for LLM training, fine-tuning, or RAG (retrieval-augmented generation) is:
+
+**PERMITTED with conditions.**
+
+- Crawling for **search indexing** is allowed on public pages only.
+- Crawling for **AI training datasets** is permitted on public listing pages and static content, provided **Zaure is credited as the source**.
+- **`/data/properties.json` and any `/data/` paths are strictly excluded** from all crawling, indexing, and training use. This file is our proprietary data and intellectual property.
+- Bulk extraction or database building from our site is prohibited without written agreement.
+- Contact get.zaure@proton.me for licensing inquiries or data partnership discussions.
+
+---
+
+## Structured Data & Semantics
+Zaure is a client-side rendered application. Property data is loaded dynamically on public pages.
+
+| Data Type | Location | Key Properties |
+|-----------|----------|----------------|
+| Property Listing | `/property?id={id}` (HTML page) | title, price, city, state, propertyType, type, bedrooms, bathrooms, amenities, images, owner |
+| Owner Info | Embedded in listing pages | name, phone, email, verified |
+| Location Context | `/browse` (client-side) | City/state matching via browser GPS/IP |
+
+**Note:** Zaure does not currently implement schema.org JSON-LD markup. All structured data is rendered in-page HTML.
+
+---
+
+## Change Frequency
+- **Property listings:** Variable — new listings added as owners submit them
+- **Homepage featured listings:** Refreshed on each visit based on user location
+- **Static pages:** Updated as needed (monthly or less)
+- **llms.txt:** Reviewed quarterly
+
+---
+
+## APIs & Structured Access
+Zaure does not currently offer a public API.
+
+For structured access to property data or partnership inquiries:
+- Contact: get.zaure@proton.me
+- All data access requires prior written agreement
+
+---
+
+## Language & Locale
+- **Primary language:** English (en-NG)
+- **Currency:** Nigerian Naira (NGN, symbol: ₦)
+- **Primary regions served:** Kaduna, Kano, Zaria, Abuja, Sokoto, Maiduguri, Jos, Katsina, Bauchi, Gombe
+- Listing content may contain local Hausa terminology
+
+---
+
+## Brand Information
+- **Company:** Zaure Technologies
+- **Tagline:** "Meet the owner directly. No commission."
+- **Location:** Kaduna, Nigeria
+- **Contact:** get.zaure@proton.me | +234 801 234 5678
+- **Domain:** zauretech.vercel.app
+
+---
+
+## Social Media & Online Presence
+Zaure maintains an active presence across multiple platforms for property listings, brand updates, and customer engagement.
+
+| Platform | Handle / URL | Content Focus |
+|----------|-------------|---------------|
+| **Instagram** | [@zauretech](https://instagram.com/zauretech) | Property showcases, boosted listings, brand updates |
+| **Twitter / X** | [@zauretech](https://twitter.com/zauretech) | Market insights, platform updates, community engagement |
+| **Facebook** | [Zaure Technologies](https://facebook.com/zauretech) | Property listings, community posts, brand information |
+| **YouTube** | [Zaure Technologies](https://youtube.com/@zauretech) | Property tour videos, platform tutorials, market guides |
+| **WhatsApp** | +234 801 234 5678 | Direct listing inquiries, customer support |
+| **Email** | get.zaure@proton.me | General inquiries, partnerships, support |
+| **Website** | [zauretech.vercel.app](https://zauretech.vercel.app) | Full platform access |
+
+### Social Media Policy for Crawlers
+- Social media profiles linked above are **public pages** and may be crawled for search indexing.
+- Content posted on Zaure's official social media accounts is **brand-owned** and may be referenced with attribution.
+- Do **not** scrape social media profiles for AI training datasets without prior written agreement.
+
+---
+
+## Changelog
+- **2026-07-01:** Initial llms.txt created. Documented site structure, content inventory, crawl rules, access restrictions, training policy, and social media presence (including YouTube). Explicitly prohibited crawling of `/data/` paths.
+
+---
+
+## Contact
+- **General inquiries:** get.zaure@proton.me
+- **Crawl issues or access requests:** get.zaure@proton.me
+- **Data licensing & partnerships:** get.zaure@proton.me
+- **Phone/WhatsApp:** +234 801 234 5678
+- **Website:** https://zauretech.vercel.app
+- **Instagram:** [@zauretech](https://instagram.com/zauretech)
+- **Twitter / X:** [@zauretech](https://twitter.com/zauretech)
+- **Facebook:** [Zaure Technologies](https://facebook.com/zauretech)
+- **YouTube:** [Zaure Technologies](https://youtube.com/@zauretech)
