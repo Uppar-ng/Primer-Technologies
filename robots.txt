@@ -1,6 +1,43 @@
 User-agent: *
-Allow: /
 Disallow: /data/
-Disallow: /admin/
+Disallow: /post
+Disallow: /api/
+Disallow: /*?token=
+Disallow: /*?session=
+Allow: /
 
-Sitemap: https://primertechnologies.com/sitemap.xml
+Crawl-delay: 10
+
+# AI Crawlers
+User-agent: GPTBot
+Disallow: /data/
+Disallow: /post
+Disallow: /api/
+Allow: /
+
+User-agent: ChatGPT-User
+Disallow: /data/
+Disallow: /post
+Disallow: /api/
+Allow: /
+
+User-agent: Claude-Web
+Disallow: /data/
+Disallow: /post
+Disallow: /api/
+Allow: /
+
+User-agent: anthropic-ai
+Disallow: /data/
+Disallow: /post
+Disallow: /api/
+Allow: /
+
+User-agent: Google-Extended
+Disallow: /data/
+Disallow: /post
+Disallow: /api/
+Allow: /
+
+User-agent: PerplexityBot
+Disallow: /
