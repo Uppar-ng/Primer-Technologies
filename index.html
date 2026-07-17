@@ -103,7 +103,7 @@
         .desktop-nav a:hover, .desktop-nav a.active { color:var(--primary); }
         .desktop-nav a:hover::after, .desktop-nav a.active::after { width:100%; }
         
-        /* ✅ FIX: Styled Navigation Button */
+        /* ✅ Styled Navigation Button */
         .btn-nav {
             display: inline-block;
             padding: 0.5rem 1.5rem;
@@ -485,7 +485,9 @@
             <a href="/how-it-works">How It Works</a>
             <a href="/about">About</a>
             <a href="/contact">Contact</a>
-            <!-- ✅ Fixed Navigation Button -->
+            <!-- ✅ Profile Link Added -->
+            <a href="/profile">Profile</a>
+            <!-- ✅ List Property Button -->
             <a href="#" class="btn-nav">List Property</a>
         </nav>
         <div class="header-actions" id="headerUserArea">
@@ -501,8 +503,14 @@
 <!-- Mobile Menu -->
 <div class="mobile-menu" id="mobileMenu">
     <button id="closeMenu" class="close-btn"><i class="fas fa-times"></i></button>
-    <a href="/">Home</a><a href="/browse?type=sale">Buy</a><a href="/browse?type=rent">Rent</a>
-    <a href="/how-it-works">How It Works</a><a href="/about">About</a><a href="/contact">Contact</a>
+    <a href="/">Home</a>
+    <a href="/browse?type=sale">Buy</a>
+    <a href="/browse?type=rent">Rent</a>
+    <a href="/how-it-works">How It Works</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+    <!-- ✅ Profile Link Added to Mobile -->
+    <a href="/profile">Profile</a>
     <a href="#">List Property</a>
 </div>
 
@@ -551,7 +559,7 @@
 </div>
 
 <main>
-    <!-- HERO SECTION WITH NEW STRUCTURE -->
+    <!-- HERO SECTION WITH ANIMATIONS -->
     <section class="hero">
         <div class="hero-bg"></div> <!-- 1. Cinematic animated background -->
         <div class="hero-content container">
