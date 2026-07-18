@@ -5,664 +5,190 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Browse Properties | Zaure</title>
     <meta name="description" content="Browse homes for sale and rent across Northern Nigeria with our smart feed.">
-    <!-- Primary Meta Tags -->
     <title>Zaure — Your entrance to home | Direct owner connections</title>
     <meta name="title" content="Zaure — Your entrance to home | Direct owner connections">
     <meta name="description" content="Zaure connects verified property owners directly with seekers. No agents, no commission. Find homes for sale & rent across Northern Nigeria.">
-
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://zauretech.vercel.app/">
     <meta property="og:title" content="Zaure — Your entrance to home">
     <meta property="og:description" content="Zaure connects verified property owners directly with seekers. No agents, no commission. Browse homes across Northern Nigeria.">
     <meta property="og:image" content="https://zauretech.vercel.app/og-image.png">
     <meta property="og:site_name" content="Zaure Technologies">
-
-    <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://zauretech.vercel.app/">
     <meta property="twitter:title" content="Zaure — Your entrance to home">
     <meta property="twitter:description" content="Zaure connects verified property owners directly with seekers. No agents, no commission.">
     <meta property="twitter:image" content="https://zauretech.vercel.app/og-image.png">
-
-    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
-
-    <!-- Theme Color -->
     <meta name="theme-color" content="#1A1F2E">
     <meta name="msapplication-TileColor" content="#1A1F2E">
-    
-    <!-- ============================================================== -->
-    <!-- JSON-LD SCHEMA FOR GOOGLE ITEM LIST (Property Grid)             -->
-    <!-- ============================================================== -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ItemList",
-      "url": "https://zauretech.vercel.app/browse",
-      "name": "Zaure Property Listings",
-      "numberOfItems": 0,
-      "itemListElement": []
-    }
-    </script>
-    <!-- ============================================================== -->
-
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","url":"https://zauretech.vercel.app/browse","name":"Zaure Property Listings","numberOfItems":0,"itemListElement":[]}</script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1A1F2E;
-            --primary-soft: #2E3548;
-            --accent: #B49450;
-            --accent-soft: #D4B87A;
-            --bg: #FBFBFB;
-            --surface: #FFFFFF;
-            --surface-alt: #F6F6F6;
-            --text: #1E1E1E;
-            --text-secondary: #6B7280;
-            --border: #E5E7EB;
-            --shadow-sm: 0 2px 4px rgba(0,0,0,0.03), 0 1px 2px rgba(0,0,0,0.04);
-            --shadow-md: 0 4px 12px rgba(0,0,0,0.04);
-            --shadow-lg: 0 12px 24px -8px rgba(0,0,0,0.06);
-            --radius: 16px;
-            --radius-sm: 12px;
-            --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
+            --primary: #1A1F2E; --primary-soft: #2E3548; --accent: #B49450; --accent-soft: #D4B87A;
+            --bg: #FBFBFB; --surface: #FFFFFF; --surface-alt: #F6F6F6; --text: #1E1E1E;
+            --text-secondary: #6B7280; --border: #E5E7EB; --shadow-sm: 0 2px 4px rgba(0,0,0,0.03), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.04); --shadow-lg: 0 12px 24px -8px rgba(0,0,0,0.06);
+            --radius: 16px; --radius-sm: 12px; --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
         }
         [data-theme="dark"] {
-            --primary: #D4B87A;
-            --accent: #D4B87A;
-            --bg: #0B1120;
-            --surface: #131C31;
-            --surface-alt: #1A2540;
-            --text: #F1F5F9;
-            --text-secondary: #94A3B8;
-            --border: #2A3550;
+            --primary: #D4B87A; --accent: #D4B87A; --bg: #0B1120; --surface: #131C31;
+            --surface-alt: #1A2540; --text: #F1F5F9; --text-secondary: #94A3B8; --border: #2A3550;
         }
         * { margin:0; padding:0; box-sizing:border-box; }
-        body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height:1.6;
-            transition: background var(--transition), color var(--transition);
-            -webkit-font-smoothing: antialiased;
-        }
+        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height:1.6; transition: background var(--transition), color var(--transition); -webkit-font-smoothing: antialiased; }
         .container { max-width:1280px; margin:0 auto; padding:0 2rem; }
-
-        /* Remove blue tap highlight and focus outlines */
         button, a, .trigger-btn, .btn-primary, .btn-outline, .option-item, .action-circle, .feed-btn, .card-tag, .state-item, .property-card {
-            -webkit-tap-highlight-color: transparent;
-            outline: none;
+            -webkit-tap-highlight-color: transparent; outline: none;
         }
         button:focus, a:focus, .trigger-btn:focus, .btn-primary:focus, .btn-outline:focus,
         .option-item:focus, .action-circle:focus, .feed-btn:focus, .card-tag:focus,
-        .state-item:focus, .property-card:focus {
-            outline: none;
-            box-shadow: none;
-        }
-
-        /* Header */
+        .state-item:focus, .property-card:focus { outline: none; box-shadow: none; }
         .main-header {
-            background: rgba(255,255,255,0.8);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
-            position: sticky; top:0; z-index:100;
+            background: rgba(255,255,255,0.8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border); position: sticky; top:0; z-index:100;
         }
         [data-theme="dark"] .main-header { background: rgba(19,28,49,0.8); }
         .main-header .container { display:flex; justify-content:space-between; align-items:center; padding:1rem 2rem; }
-        .logo a {
-            text-decoration:none; font-family:'Playfair Display',serif; font-size:2rem; font-weight:800;
-            color: var(--primary); letter-spacing:-0.5px; display:flex; align-items:baseline;
-        }
+        .logo a { text-decoration:none; font-family:'Playfair Display',serif; font-size:2rem; font-weight:800; color: var(--primary); letter-spacing:-0.5px; display:flex; align-items:baseline; }
         .logo a .dot { width:6px; height:6px; background:var(--accent); border-radius:50%; margin-left:4px; }
         .desktop-nav { display:flex; gap:2.2rem; align-items:center; }
-        .desktop-nav a {
-            text-decoration:none; color:var(--text); font-weight:500; font-size:0.95rem;
-            transition:color 0.2s; position:relative;
-        }
-        .desktop-nav a::after {
-            content:''; position:absolute; bottom:-6px; left:0; width:0; height:2px;
-            background:var(--accent); border-radius:2px; transition:width 0.25s;
-        }
+        .desktop-nav a { text-decoration:none; color:var(--text); font-weight:500; font-size:0.95rem; transition:color 0.2s; position:relative; }
+        .desktop-nav a::after { content:''; position:absolute; bottom:-6px; left:0; width:0; height:2px; background:var(--accent); border-radius:2px; transition:width 0.25s; }
         .desktop-nav a:hover, .desktop-nav a.active { color:var(--primary); }
         .desktop-nav a:hover::after, .desktop-nav a.active::after { width:100%; }
-        
-        /* Corporate Styled Navigation Button */
         .btn-nav {
-            display: inline-block;
-            padding: 0.5rem 1.5rem;
-            border: 2px solid var(--accent);
-            border-radius: 50px;
-            color: var(--accent);
-            background: transparent;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            opacity: 0;
-            transform: translateY(15px);
-            animation: btnFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            animation-delay: 0.5s;
+            display: inline-block; padding: 0.5rem 1.5rem; border: 2px solid var(--accent); border-radius: 50px;
+            color: var(--accent); background: transparent; font-weight: 600; font-size: 0.9rem;
+            transition: all 0.2s ease; text-decoration: none; opacity: 0; transform: translateY(15px);
+            animation: btnFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.5s;
         }
-        .btn-nav:hover {
-            background: var(--accent);
-            color: #ffffff;
-            border-color: var(--accent);
-            transform: translateY(-2px);
-        }
+        .btn-nav:hover { background: var(--accent); color: #ffffff; border-color: var(--accent); transform: translateY(-2px); }
         .btn-nav::after { display: none; }
-
-        @keyframes btnFadeUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
+        @keyframes btnFadeUp { to { opacity: 1; transform: translateY(0); } }
         .header-actions { display:flex; gap:0.8rem; align-items:center; }
-        .icon-btn {
-            background:transparent; border:1px solid var(--border); font-size:1.1rem; cursor:pointer;
-            color:var(--text); padding:0.5rem; border-radius:50%; width:38px; height:38px;
-            display:flex; align-items:center; justify-content:center; transition:0.2s;
-        }
+        .icon-btn { background:transparent; border:1px solid var(--border); font-size:1.1rem; cursor:pointer; color:var(--text); padding:0.5rem; border-radius:50%; width:38px; height:38px; display:flex; align-items:center; justify-content:center; transition:0.2s; }
         .icon-btn:hover { background:var(--primary); color:white; border-color:var(--primary); }
         .mobile-only { display:none; }
-        .mobile-menu {
-            position:fixed; top:0; left:-100%; width:80%; max-width:320px; height:100%;
-            background:var(--surface); z-index:200; transition:left 0.35s; padding:2.5rem 2rem;
-            display:flex; flex-direction:column; gap:1.5rem; box-shadow:var(--shadow-lg);
-        }
+        .mobile-menu { position:fixed; top:0; left:-100%; width:80%; max-width:320px; height:100%; background:var(--surface); z-index:200; transition:left 0.35s; padding:2.5rem 2rem; display:flex; flex-direction:column; gap:1.5rem; box-shadow:var(--shadow-lg); }
         .mobile-menu.open { left:0; }
         .mobile-menu a { text-decoration:none; font-size:1.2rem; color:var(--text); font-weight:500; padding:0.5rem 0; border-bottom:1px solid var(--border); }
-
-        /* View Toggle */
-        .view-toggle {
-            display: flex; justify-content: center; gap: 1rem; margin: 2rem 0 1rem;
-        }
-        .view-toggle button {
-            background: var(--surface); border: 1px solid var(--border); padding: 0.6rem 2rem;
-            border-radius: 2rem; font-weight: 600; cursor: pointer; transition: 0.2s; color: var(--text);
-        }
+        .view-toggle { display: flex; justify-content: center; gap: 1rem; margin: 2rem 0 1rem; }
+        .view-toggle button { background: var(--surface); border: 1px solid var(--border); padding: 0.6rem 2rem; border-radius: 2rem; font-weight: 600; cursor: pointer; transition: 0.2s; color: var(--text); }
         .view-toggle button.active { background: var(--primary); color: white; border-color: var(--primary); }
-
-        /* Classic Browse */
         #classicView { display: none; }
         #classicView.active { display: block; }
-        .filters-bar {
-            background: var(--surface);
-            padding: 1.5rem;
-            border-radius: var(--radius);
-            margin-bottom: 2rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            align-items: center;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--border);
-        }
-        .filters-bar input,
-        .filters-bar .trigger-btn {
-            padding: 0.75rem 1rem;
-            border: 1px solid var(--border);
-            border-radius: 3rem;
-            background: var(--bg);
-            flex: 1;
-            min-width: 130px;
-            font-size: 0.9rem;
-            color: var(--text);
-            cursor: pointer;
-        }
-        .filters-bar .trigger-btn {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+        .filters-bar { background: var(--surface); padding: 1.5rem; border-radius: var(--radius); margin-bottom: 2rem; display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; box-shadow: var(--shadow-sm); border: 1px solid var(--border); }
+        .filters-bar input, .filters-bar .trigger-btn { padding: 0.75rem 1rem; border: 1px solid var(--border); border-radius: 3rem; background: var(--bg); flex: 1; min-width: 130px; font-size: 0.9rem; color: var(--text); cursor: pointer; }
+        .filters-bar .trigger-btn { display: flex; align-items: center; justify-content: space-between; }
         .filters-bar .trigger-btn i { font-size: 0.8rem; color: var(--text-secondary); }
-        .btn-primary {
-            background:var(--accent); color:#1A1F2E; border:none; padding:0.75rem 1.5rem;
-            border-radius:3rem; font-weight:700; cursor:pointer; transition:0.2s;
-            white-space:nowrap; display:flex; align-items:center; gap:0.5rem; font-size:0.95rem;
-        }
+        .btn-primary { background:var(--accent); color:#1A1F2E; border:none; padding:0.75rem 1.5rem; border-radius:3rem; font-weight:700; cursor:pointer; transition:0.2s; white-space:nowrap; display:flex; align-items:center; gap:0.5rem; font-size:0.95rem; }
         .btn-primary:hover { background:var(--accent-soft); }
-        .results-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
+        .results-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem; }
         .results-count { color: var(--text-secondary); font-size: 0.9rem; }
-        
-        /* Price Range Slider Container */
-        .price-range-wrapper {
-            flex: 1;
-            min-width: 180px;
-            padding: 0 1rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.3rem;
-        }
-        .price-slider-labels {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-        }
-        input[type="range"] {
-            -webkit-appearance: none;
-            width: 100%;
-            height: 4px;
-            border-radius: 2px;
-            background: var(--border);
-            outline: none;
-            transition: 0.2s;
-        }
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: var(--accent);
-            cursor: pointer;
-            border: 2px solid var(--surface);
-            box-shadow: var(--shadow-sm);
-        }
-        input[type="range"]::-moz-range-thumb {
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: var(--accent);
-            cursor: pointer;
-            border: 2px solid var(--surface);
-        }
-        .price-inputs {
-            display: flex;
-            gap: 0.5rem;
-            align-items: center;
-        }
-        .price-inputs input {
-            flex: 1;
-            min-width: 60px;
-            padding: 0.4rem 0.5rem;
-            border: 1px solid var(--border);
-            border-radius: 0.5rem;
-            background: var(--bg);
-            font-size: 0.8rem;
-            text-align: center;
-        }
+        .price-range-wrapper { flex: 1; min-width: 180px; padding: 0 1rem; display: flex; flex-direction: column; gap: 0.3rem; }
+        .price-slider-labels { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-secondary); }
+        input[type="range"] { -webkit-appearance: none; width: 100%; height: 4px; border-radius: 2px; background: var(--border); outline: none; transition: 0.2s; }
+        input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 16px; height: 16px; border-radius: 50%; background: var(--accent); cursor: pointer; border: 2px solid var(--surface); box-shadow: var(--shadow-sm); }
+        input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border-radius: 50%; background: var(--accent); cursor: pointer; border: 2px solid var(--surface); }
+        .price-inputs { display: flex; gap: 0.5rem; align-items: center; }
+        .price-inputs input { flex: 1; min-width: 60px; padding: 0.4rem 0.5rem; border: 1px solid var(--border); border-radius: 0.5rem; background: var(--bg); font-size: 0.8rem; text-align: center; }
         .price-inputs span { color: var(--text-secondary); font-size: 0.8rem; }
-
         .property-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:2rem; margin-bottom:2rem; }
-        .property-card {
-            background:var(--surface); border-radius:var(--radius); overflow:hidden;
-            box-shadow:var(--shadow-sm); cursor:pointer; transition:all var(--transition);
-            border:1px solid var(--border); position:relative;
-        }
+        .property-card { background:var(--surface); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow-sm); cursor:pointer; transition:all var(--transition); border:1px solid var(--border); position:relative; }
         .property-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-lg); }
         .property-card.location-highlight { border: 2px solid var(--accent); }
         .img-wrapper { position:relative; overflow:hidden; height:220px; }
         .img-wrapper img { width:100%; height:100%; object-fit:cover; transition:transform 0.5s; }
         .property-card:hover .img-wrapper img { transform:scale(1.05); }
-        .badge-verified {
-            position:absolute; top:1rem; right:1rem; background:rgba(255,255,255,0.9);
-            backdrop-filter:blur(4px); color:#1E1E1E; padding:0.3rem 0.8rem; border-radius:2rem;
-            font-size:0.7rem; font-weight:600; display:flex; align-items:center; gap:0.3rem;
-            border:1px solid #E5E7EB;
-        }
-        .badge-location {
-            position:absolute; top:1rem; left:1rem; background:rgba(180,148,80,0.95);
-            color:#1A1F2E; padding:0.3rem 0.8rem; border-radius:2rem;
-            font-size:0.7rem; font-weight:600; display:flex; align-items:center; gap:0.3rem;
-        }
-        .badge-top-pick {
-            position:absolute; top:1rem; left:1rem; background:var(--accent);
-            color:#1A1F2E; padding:0.3rem 0.8rem; border-radius:2rem;
-            font-size:0.7rem; font-weight:700; display:flex; align-items:center; gap:0.3rem;
-            box-shadow: var(--shadow-sm);
-        }
+        .badge-verified { position:absolute; top:1rem; right:1rem; background:rgba(255,255,255,0.9); backdrop-filter:blur(4px); color:#1E1E1E; padding:0.3rem 0.8rem; border-radius:2rem; font-size:0.7rem; font-weight:600; display:flex; align-items:center; gap:0.3rem; border:1px solid #E5E7EB; }
+        .badge-location { position:absolute; top:1rem; left:1rem; background:rgba(180,148,80,0.95); color:#1A1F2E; padding:0.3rem 0.8rem; border-radius:2rem; font-size:0.7rem; font-weight:600; display:flex; align-items:center; gap:0.3rem; }
+        .badge-top-pick { position:absolute; top:1rem; left:1rem; background:var(--accent); color:#1A1F2E; padding:0.3rem 0.8rem; border-radius:2rem; font-size:0.7rem; font-weight:700; display:flex; align-items:center; gap:0.3rem; box-shadow: var(--shadow-sm); }
         .card-body { padding:1.3rem; }
-        .price {
-            font-size:1.3rem; font-weight:700; color:var(--primary); margin-bottom:0.5rem;
-            font-family:'Playfair Display',serif;
-        }
+        .price { font-size:1.3rem; font-weight:700; color:var(--primary); margin-bottom:0.5rem; font-family:'Playfair Display',serif; }
         .card-body h3 { font-size:1rem; font-weight:600; margin-bottom:0.4rem; }
         .card-body p { color:var(--text-secondary); font-size:0.85rem; margin-bottom:1rem; }
         .features { display:flex; gap:1rem; color:var(--text-secondary); font-size:0.8rem; border-top:1px solid var(--border); padding-top:0.8rem; flex-wrap:wrap; }
         .distance-info { color: var(--accent); font-weight: 600; font-size: 0.8rem; }
         .card-tags { margin-top:0.5rem; display:flex; flex-wrap:wrap; gap:0.4rem; }
-        .card-tag {
-            display: inline-block;
-            background: var(--surface-alt);
-            padding: 0.25rem 0.7rem;
-            border-radius: 1rem;
-            font-size: 0.7rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            cursor: pointer;
-            border: 1px solid var(--border);
-            transition: 0.2s;
-        }
+        .card-tag { display: inline-block; background: var(--surface-alt); padding: 0.25rem 0.7rem; border-radius: 1rem; font-size: 0.7rem; font-weight: 500; color: var(--text-secondary); cursor: pointer; border: 1px solid var(--border); transition: 0.2s; }
         .card-tag:hover { background: var(--primary); color: white; border-color: var(--primary); }
         .card-tag.location-tag { background: var(--accent); color: #1A1F2E; border-color: var(--accent); }
-        .btn-outline {
-            border:1px solid var(--primary); color:var(--primary); padding:0.6rem 1.8rem;
-            border-radius:3rem; font-weight:600; text-decoration:none; transition:0.2s; display:inline-block; cursor:pointer;
-        }
+        .btn-outline { border:1px solid var(--primary); color:var(--primary); padding:0.6rem 1.8rem; border-radius:3rem; font-weight:600; text-decoration:none; transition:0.2s; display:inline-block; cursor:pointer; }
         .btn-outline:hover { background:var(--primary); color:white; }
         .pagination { display:flex; justify-content:center; gap:0.5rem; margin:2rem 0; }
-        .pagination button {
-            padding:0.5rem 1rem; border:1px solid var(--border); background:var(--surface);
-            cursor:pointer; border-radius:8px; color:var(--text); transition:0.2s;
-        }
+        .pagination button { padding:0.5rem 1rem; border:1px solid var(--border); background:var(--surface); cursor:pointer; border-radius:8px; color:var(--text); transition:0.2s; }
         .pagination button.active { background:var(--primary); color:white; border-color:var(--primary); }
         .pagination button:hover:not(:disabled) { background:var(--primary); color:white; }
         .pagination button:disabled { opacity:0.5; cursor:not-allowed; }
         .no-results { text-align:center; padding:3rem; background:var(--surface); border-radius:var(--radius); color:var(--text-secondary); grid-column:1/-1; }
-
-        /* For You Feed - Full Screen */
-        #foryouView { 
-            display: none; 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            right: 0; 
-            bottom: 0; 
-            background: #000; 
-            z-index: 200; 
-        }
+        #foryouView { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #000; z-index: 200; }
         #foryouView.active { display: block; }
-        .feed-top-bar {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            padding: 1rem 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 10;
-            background: linear-gradient(rgba(0,0,0,0.6), transparent);
-        }
-        .feed-close-btn {
-            background: rgba(255,255,255,0.15);
-            border: none;
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(8px);
-        }
-        .feed-location-badge {
-            background: var(--accent);
-            color: #1A1F2E;
-            padding: 0.4rem 1rem;
-            border-radius: 2rem;
-            font-size: 0.8rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-        .feed-wrapper {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            overflow: hidden;
-        }
-        .feed-card {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: #111;
-            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            will-change: transform;
-        }
-        .card-media {
-            width: 100%;
-            height: 100%;
-            position: relative;
-        }
-        .card-images {
-            display: flex;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.3s ease;
-        }
-        .card-images .card-img {
-            min-width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .card-images video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            pointer-events: none;
-            min-width: 100%;
-        }
-        .image-dots {
-            position: absolute;
-            bottom: 10rem;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 0.5rem;
-            z-index: 5;
-        }
-        .image-dots .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.4);
-            transition: 0.2s;
-        }
-        .image-dots .dot.active {
-            background: var(--accent);
-            width: 20px;
-            border-radius: 4px;
-        }
-        .card-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 2rem 1.5rem 6rem;
-            background: linear-gradient(transparent, rgba(0,0,0,0.85));
-            color: white;
-        }
-        .card-overlay .card-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.3rem;
-            background: var(--accent);
-            color: #1A1F2E;
-            padding: 0.3rem 0.8rem;
-            border-radius: 1rem;
-            font-size: 0.75rem;
-            font-weight: 700;
-            margin-bottom: 0.8rem;
-        }
-        .card-overlay .card-price {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.3rem;
-        }
-        .card-overlay .card-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 0.3rem;
-        }
-        .card-overlay .card-loc {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-        .card-features-row {
-            display: flex;
-            gap: 1.5rem;
-            margin-top: 0.5rem;
-            font-size: 0.9rem;
-        }
-        .card-actions-side {
-            position: absolute;
-            right: 1rem;
-            bottom: 10rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            z-index: 5;
-        }
-        .action-circle {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.15);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255,255,255,0.2);
-            color: white;
-            font-size: 1.3rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: 0.2s;
-        }
+        .feed-top-bar { position: absolute; top: 0; left: 0; right: 0; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; z-index: 10; background: linear-gradient(rgba(0,0,0,0.6), transparent); }
+        .feed-close-btn { background: rgba(255,255,255,0.15); border: none; color: white; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(8px); }
+        .feed-location-badge { background: var(--accent); color: #1A1F2E; padding: 0.4rem 1rem; border-radius: 2rem; font-size: 0.8rem; font-weight: 600; display: flex; align-items: center; gap: 0.4rem; }
+        .feed-wrapper { width: 100%; height: 100%; position: relative; overflow: hidden; }
+        .feed-card { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: #111; transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); will-change: transform; }
+        .card-media { width: 100%; height: 100%; position: relative; }
+        .card-images { display: flex; width: 100%; height: 100%; transition: transform 0.3s ease; }
+        .card-images .card-img { min-width: 100%; height: 100%; object-fit: cover; }
+        .card-images video { width: 100%; height: 100%; object-fit: cover; pointer-events: none; min-width: 100%; }
+        .image-dots { position: absolute; bottom: 10rem; left: 50%; transform: translateX(-50%); display: flex; gap: 0.5rem; z-index: 5; }
+        .image-dots .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.4); transition: 0.2s; }
+        .image-dots .dot.active { background: var(--accent); width: 20px; border-radius: 4px; }
+        .card-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 2rem 1.5rem 6rem; background: linear-gradient(transparent, rgba(0,0,0,0.85)); color: white; }
+        .card-overlay .card-badge { display: inline-flex; align-items: center; gap: 0.3rem; background: var(--accent); color: #1A1F2E; padding: 0.3rem 0.8rem; border-radius: 1rem; font-size: 0.75rem; font-weight: 700; margin-bottom: 0.8rem; }
+        .card-overlay .card-price { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; margin-bottom: 0.3rem; }
+        .card-overlay .card-title { font-size: 1.2rem; font-weight: 600; margin-bottom: 0.3rem; }
+        .card-overlay .card-loc { font-size: 0.9rem; opacity: 0.9; }
+        .card-features-row { display: flex; gap: 1.5rem; margin-top: 0.5rem; font-size: 0.9rem; }
+        .card-actions-side { position: absolute; right: 1rem; bottom: 10rem; display: flex; flex-direction: column; gap: 1rem; z-index: 5; }
+        .action-circle { width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.15); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.2); color: white; font-size: 1.3rem; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s; }
         .action-circle:hover { background: rgba(255,255,255,0.3); transform: scale(1.1); }
         .action-circle.liked { background: #ff2d55; border-color: #ff2d55; }
-        .feed-bottom-bar {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 1rem 1.5rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 1.2rem;
-            z-index: 10;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
-        }
-        .feed-btn {
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: 0.2s;
-        }
+        .feed-bottom-bar { position: absolute; bottom: 0; left: 0; right: 0; padding: 1rem 1.5rem; display: flex; justify-content: center; align-items: center; gap: 1.2rem; z-index: 10; background: linear-gradient(transparent, rgba(0,0,0,0.8)); }
+        .feed-btn { border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: 0.2s; }
         .feed-btn:active { transform: scale(0.9); }
-        .feed-btn-prev {
-            width: 50px; height: 50px;
-            background: rgba(255,255,255,0.15);
-            color: white;
-            font-size: 1.3rem;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-        .feed-btn-next {
-            width: 60px; height: 60px;
-            background: var(--accent);
-            color: #1A1F2E;
-            font-size: 1.8rem;
-        }
-        .feed-btn-save {
-            width: 50px; height: 50px;
-            background: rgba(255,255,255,0.15);
-            color: white;
-            font-size: 1.3rem;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
+        .feed-btn-prev { width: 50px; height: 50px; background: rgba(255,255,255,0.15); color: white; font-size: 1.3rem; border: 1px solid rgba(255,255,255,0.2); }
+        .feed-btn-next { width: 60px; height: 60px; background: var(--accent); color: #1A1F2E; font-size: 1.8rem; }
+        .feed-btn-save { width: 50px; height: 50px; background: rgba(255,255,255,0.15); color: white; font-size: 1.3rem; border: 1px solid rgba(255,255,255,0.2); }
         .feed-btn-save.active { background: #ff2d55; border-color: #ff2d55; }
-        .feed-btn-call {
-            width: 50px; height: 50px;
-            background: #34c759;
-            color: white;
-            font-size: 1.2rem;
-        }
-        .feed-btn-share {
-            width: 50px; height: 50px;
-            background: rgba(255,255,255,0.15);
-            color: white;
-            font-size: 1.2rem;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        /* Selection Modal */
-        .modal-overlay {
-            position:fixed; top:0; left:0; width:100%; height:100%;
-            background:rgba(0,0,0,0.5); backdrop-filter:blur(4px); z-index:300;
-            display:flex; align-items:center; justify-content:center;
-            opacity:0; visibility:hidden; transition:opacity 0.3s, visibility 0.3s;
-        }
+        .feed-btn-call { width: 50px; height: 50px; background: #34c759; color: white; font-size: 1.2rem; }
+        .feed-btn-share { width: 50px; height: 50px; background: rgba(255,255,255,0.15); color: white; font-size: 1.2rem; border: 1px solid rgba(255,255,255,0.2); }
+        .modal-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); backdrop-filter:blur(4px); z-index:300; display:flex; align-items:center; justify-content:center; opacity:0; visibility:hidden; transition:opacity 0.3s, visibility 0.3s; }
         .modal-overlay.active { opacity:1; visibility:visible; }
-        .modal {
-            background:var(--surface); border-radius:var(--radius); padding:2rem;
-            min-width:320px; max-width:400px; box-shadow:var(--shadow-lg);
-            transform:translateY(20px); transition:transform 0.3s ease;
-        }
+        .modal { background:var(--surface); border-radius:var(--radius); padding:2rem; min-width:320px; max-width:400px; box-shadow:var(--shadow-lg); transform:translateY(20px); transition:transform 0.3s ease; }
         .modal-overlay.active .modal { transform:translateY(0); }
         .modal-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; }
         .modal-header h3 { font-family:'Playfair Display',serif; font-size:1.5rem; }
         .modal-close { background:none; border:none; font-size:1.3rem; cursor:pointer; color:var(--text); }
         .modal-options { display:flex; flex-direction:column; gap:0.5rem; }
-        .modal-option {
-            padding:0.8rem 1rem; border:1px solid var(--border); border-radius:var(--radius-sm);
-            background:var(--surface-alt); cursor:pointer; transition:0.2s; text-align:left; font-weight:500;
-            color: var(--text);
-        }
+        .modal-option { padding:0.8rem 1rem; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--surface-alt); cursor:pointer; transition:0.2s; text-align:left; font-weight:500; color: var(--text); }
         .modal-option:hover { background:var(--primary); color:white; border-color:var(--primary); }
-
-        /* Corporate Footer */
         footer { background:#1A1F2E; color:#CBD5E1; padding:4rem 0 1.5rem; margin-top:3rem; }
         footer a { color:#94A3B8; text-decoration:none; transition: all 0.2s; }
         footer a:hover { color:var(--accent-soft); transform: translateX(4px); }
-        footer .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1.5fr;
-            gap: 3rem;
-            margin-bottom: 0;
-        }
-        footer .footer-col h4 {
-            color: #ffffff;
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            font-size: 1rem;
-            margin-bottom: 1.2rem;
-            letter-spacing: 0.5px;
-        }
+        footer .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 3rem; margin-bottom: 0; }
+        footer .footer-col h4 { color: #ffffff; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 1rem; margin-bottom: 1.2rem; letter-spacing: 0.5px; }
         footer .footer-col a { display: block; font-size: 0.9rem; margin-bottom: 0.8rem; }
         footer .footer-col.brand p { color: #94A3B8; font-size: 0.95rem; line-height: 1.6; }
         footer .social a { display: inline-block !important; color: #B49450; margin-right: 1rem; transition: transform 0.2s; }
         footer .social a:hover { transform: scale(1.1); color: var(--accent-soft); }
-        footer .footer-bottom {
-            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
-            padding-top: 2rem; margin-top: 2rem; border-top: 1px solid #2E3548;
-            font-size: 0.85rem; color: #94A3B8;
-        }
-
+        footer .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; padding-top: 2rem; margin-top: 2rem; border-top: 1px solid #2E3548; font-size: 0.85rem; color: #94A3B8; }
         @media (max-width:768px) {
-            .desktop-nav { display:none; }
-            .mobile-only { display:block; }
-            .filters-bar { flex-direction:column; }
-            .filters-bar input, .filters-bar .trigger-btn { width:100%; }
+            .desktop-nav { display:none; } .mobile-only { display:block; }
+            .filters-bar { flex-direction:column; } .filters-bar input, .filters-bar .trigger-btn { width:100%; }
             .price-range-wrapper { width:100%; padding: 0; }
             footer .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
             footer .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
         }
     </style>
-    
-    <!-- Vercel Speed Insights -->
     <script type="module">
         import { injectSpeedInsights } from 'https://cdn.jsdelivr.net/npm/@vercel/speed-insights@2/dist/index.mjs';
         injectSpeedInsights();
@@ -673,13 +199,7 @@
     <div class="container">
         <div class="logo"><a href="/">Zaure<span class="dot"></span></a></div>
         <nav class="desktop-nav">
-            <a href="/">Home</a>
-            <a href="/browse" class="active">Browse</a>
-            <a href="/how-it-works">How It Works</a>
-            <a href="/about">About</a>
-            <a href="/contact">Contact</a>
-            <a href="/profile">Profile</a>
-            <a href="#" class="btn-nav">List Property</a>
+            <a href="/">Home</a> <a href="/browse" class="active">Browse</a> <a href="/how-it-works">How It Works</a> <a href="/about">About</a> <a href="/contact">Contact</a> <a href="/profile">Profile</a> <a href="#" class="btn-nav">List Property</a>
         </nav>
         <div class="header-actions">
             <button id="themeToggle" class="icon-btn"><i class="fas fa-moon"></i></button>
@@ -687,29 +207,19 @@
         </div>
     </div>
 </header>
-
 <div class="mobile-menu" id="mobileMenu">
     <button id="closeMenu" class="close-btn"><i class="fas fa-times"></i></button>
-    <a href="/">Home</a><a href="/browse">Browse</a><a href="/how-it-works">How It Works</a>
-    <a href="/about">About</a><a href="/contact">Contact</a><a href="/profile">Profile</a>
-    <a href="#">List Property</a>
+    <a href="/">Home</a> <a href="/browse">Browse</a> <a href="/how-it-works">How It Works</a> <a href="/about">About</a> <a href="/contact">Contact</a> <a href="/profile">Profile</a> <a href="#">List Property</a>
 </div>
-
 <main class="container">
-    <!-- View Toggle -->
     <div class="view-toggle">
         <button id="foryouViewBtn" class="active"><i class="fas fa-magic"></i> For You Feed</button>
         <button id="classicViewBtn"><i class="fas fa-th-list"></i> Classic Browse</button>
     </div>
-
-    <!-- For You Feed (Full Screen) - ACTIVE BY DEFAULT -->
     <div id="foryouView" class="active">
         <div class="feed-top-bar">
             <button class="feed-close-btn" id="feedCloseBtn"><i class="fas fa-times"></i></button>
-            <div class="feed-location-badge" id="feedLocationBadge">
-                <i class="fas fa-location-dot"></i>
-                <span id="feedLocationText">For You</span>
-            </div>
+            <div class="feed-location-badge" id="feedLocationBadge"><i class="fas fa-location-dot"></i> <span id="feedLocationText">For You</span></div>
         </div>
         <div class="feed-wrapper" id="feedWrapper"></div>
         <div class="feed-bottom-bar">
@@ -720,16 +230,12 @@
             <button class="feed-btn feed-btn-call" id="feedCallBtn"><i class="fas fa-phone-alt"></i></button>
         </div>
     </div>
-
-    <!-- Classic Browse View -->
     <div id="classicView">
         <div class="filters-bar">
             <input type="text" id="locationFilter" placeholder="City or area">
             <button type="button" class="trigger-btn" id="propertyTypeFilterBtn">Property Type <i class="fas fa-chevron-down"></i></button>
             <button type="button" class="trigger-btn" id="listingTypeFilterBtn">Listing Type <i class="fas fa-chevron-down"></i></button>
             <button type="button" class="trigger-btn" id="bedFilterBtn">Bedrooms <i class="fas fa-chevron-down"></i></button>
-            
-            <!-- Corporate Price Range Slider -->
             <div class="price-range-wrapper">
                 <div class="price-inputs">
                     <input type="number" id="minPriceInput" placeholder="Min" min="0" step="10000">
@@ -737,20 +243,15 @@
                     <input type="number" id="maxPriceInput" placeholder="Max" min="0" step="10000">
                 </div>
                 <div class="price-slider-labels">
-                    <span>₦0</span>
-                    <span>₦50M+</span>
+                    <span>₦0</span> <span>₦50M+</span>
                 </div>
                 <input type="range" id="minPriceSlider" min="0" max="50000000" step="100000" value="0">
                 <input type="range" id="maxPriceSlider" min="0" max="50000000" step="100000" value="50000000">
             </div>
-
             <button id="nearMeBtn" class="btn-primary"><i class="fas fa-location-arrow"></i> Near Me</button>
             <button id="applyFiltersBtn" class="btn-primary"><i class="fas fa-search"></i> Apply</button>
         </div>
-        <input type="hidden" id="propertyTypeValue" value="">
-        <input type="hidden" id="listingTypeValue" value="">
-        <input type="hidden" id="bedsValue" value="">
-
+        <input type="hidden" id="propertyTypeValue" value=""><input type="hidden" id="listingTypeValue" value=""><input type="hidden" id="bedsValue" value="">
         <div class="results-header">
             <div class="results-count" id="resultsCount">Loading properties...</div>
             <button type="button" class="trigger-btn" id="sortFilterBtn">Sort: Nearest First <i class="fas fa-chevron-down"></i></button>
@@ -760,82 +261,25 @@
         <div id="pagination" class="pagination"></div>
     </div>
 </main>
-
-<!-- Selection Modal -->
 <div class="modal-overlay" id="selectionModal">
     <div class="modal">
-        <div class="modal-header">
-            <h3 id="modalTitle">Select</h3>
-            <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
-        </div>
+        <div class="modal-header"><h3 id="modalTitle">Select</h3><button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button></div>
         <div class="modal-options" id="modalOptions"></div>
     </div>
 </div>
-
-<!-- Corporate Footer -->
 <footer>
     <div class="container">
         <div class="footer-grid">
-            <!-- 1. Brand & Remote Location -->
-            <div class="footer-col brand">
-                <h4 style="font-family:'Playfair Display',serif; font-size:1.5rem;">Zaure<span style="color:#B49450;">.</span></h4>
-                <p>Your digital entrance hall – connecting verified owners and seekers directly across Northern Nigeria.</p>
-                <div style="margin-top:1rem; font-size:0.9rem; color:#94A3B8;">
-                    <i class="fas fa-globe" style="color:#B49450; margin-right:0.5rem;"></i> Remote · Northern Nigeria<br>
-                    <i class="fas fa-envelope" style="color:#B49450; margin-right:0.5rem; margin-top:0.3rem;"></i> get.zaure@proton.me
-                </div>
-            </div>
-
-            <!-- 2. Quick Links (Primary Navigation) -->
-            <div class="footer-col">
-                <h4>Find a Home</h4>
-                <a href="/browse?type=sale">Buy Property</a>
-                <a href="/browse?type=rent">Rent Property</a>
-                <a href="/how-it-works">How It Works</a>
-                <a href="/browse">Browse All Listings</a>
-            </div>
-
-            <!-- 3. Company & Legal -->
-            <div class="footer-col">
-                <h4>Company</h4>
-                <a href="/about">About Us</a>
-                <a href="/contact">Contact</a>
-                <a href="/privacy">Privacy Policy</a>
-                <a href="/terms">Terms of Service</a>
-            </div>
-
-            <!-- 4. Social & Trust Badges -->
-            <div class="footer-col connect">
-                <h4>Connect</h4>
-                <div class="social" style="margin-bottom:1.5rem;">
-                    <a href="https://twitter.com/zauretech" target="_blank"><i class="fab fa-twitter"></i></a>
-                    <a href="https://instagram.com/zauretech" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="https://linkedin.com/company/zauretech" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://facebook.com/zauretech" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                </div>
-                <p style="font-size:0.85rem; color:#94A3B8; margin-bottom:1rem;">Follow us everywhere @zauretech</p>
-                <!-- Trust Badges -->
-                <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
-                    <span style="background:rgba(180,148,80,0.1); color:#B49450; padding:0.25rem 0.8rem; border-radius:50px; font-size:0.7rem; font-weight:600; border:1px solid rgba(180,148,80,0.2);">No Middlemen</span>
-                    <span style="background:rgba(180,148,80,0.1); color:#B49450; padding:0.25rem 0.8rem; border-radius:50px; font-size:0.7rem; font-weight:600; border:1px solid rgba(180,148,80,0.2);">Verified Owners</span>
-                    <span style="background:rgba(180,148,80,0.1); color:#B49450; padding:0.25rem 0.8rem; border-radius:50px; font-size:0.7rem; font-weight:600; border:1px solid rgba(180,148,80,0.2);">Zero Commission</span>
-                </div>
-            </div>
+            <div class="footer-col brand"><h4 style="font-family:'Playfair Display',serif; font-size:1.5rem;">Zaure<span style="color:#B49450;">.</span></h4><p>Your digital entrance hall – connecting verified owners and seekers directly across Northern Nigeria.</p><div style="margin-top:1rem; font-size:0.9rem; color:#94A3B8;"><i class="fas fa-globe" style="color:#B49450; margin-right:0.5rem;"></i> Remote · Northern Nigeria<br><i class="fas fa-envelope" style="color:#B49450; margin-right:0.5rem; margin-top:0.3rem;"></i> get.zaure@proton.me</div></div>
+            <div class="footer-col"><h4>Find a Home</h4><a href="/browse?type=sale">Buy Property</a><a href="/browse?type=rent">Rent Property</a><a href="/how-it-works">How It Works</a><a href="/browse">Browse All Listings</a></div>
+            <div class="footer-col"><h4>Company</h4><a href="/about">About Us</a><a href="/contact">Contact</a><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Service</a></div>
+            <div class="footer-col connect"><h4>Connect</h4><div class="social" style="margin-bottom:1.5rem;"><a href="https://twitter.com/zauretech" target="_blank"><i class="fab fa-twitter"></i></a><a href="https://instagram.com/zauretech" target="_blank"><i class="fab fa-instagram"></i></a><a href="https://linkedin.com/company/zauretech" target="_blank"><i class="fab fa-linkedin-in"></i></a><a href="https://facebook.com/zauretech" target="_blank"><i class="fab fa-facebook-f"></i></a></div><p style="font-size:0.85rem; color:#94A3B8; margin-bottom:1rem;">Follow us everywhere @zauretech</p><div style="display:flex; gap:0.5rem; flex-wrap:wrap;"><span style="background:rgba(180,148,80,0.1); color:#B49450; padding:0.25rem 0.8rem; border-radius:50px; font-size:0.7rem; font-weight:600; border:1px solid rgba(180,148,80,0.2);">No Middlemen</span><span style="background:rgba(180,148,80,0.1); color:#B49450; padding:0.25rem 0.8rem; border-radius:50px; font-size:0.7rem; font-weight:600; border:1px solid rgba(180,148,80,0.2);">Verified Owners</span><span style="background:rgba(180,148,80,0.1); color:#B49450; padding:0.25rem 0.8rem; border-radius:50px; font-size:0.7rem; font-weight:600; border:1px solid rgba(180,148,80,0.2);">Zero Commission</span></div></div>
         </div>
-
-        <!-- 5. Bottom Copyright Bar -->
-        <div class="footer-bottom">
-            <span>&copy; 2026 <strong style="color:white;">Zaure Technologies</strong>. All rights reserved.</span>
-            <span>Built for Northern Nigeria. 🇳🇬</span>
-        </div>
+        <div class="footer-bottom"><span>&copy; 2026 <strong style="color:white;">Zaure Technologies</strong>. All rights reserved.</span><span>Built for Northern Nigeria. 🇳🇬</span></div>
     </div>
 </footer>
-
 <script>
 (function() {
-    // ============================================
-    // NIGERIA CITIES DATABASE (Corrected)
-    // ============================================
     const nigeriaCities = {
         'kaduna': { lat: 10.5105, lng: 7.4165, state: 'Kaduna', region: 'northwest' },
         'zaria': { lat: 11.0855, lng: 7.7199, state: 'Kaduna', region: 'northwest' },
@@ -851,13 +295,8 @@
         'ibadan': { lat: 7.3775, lng: 3.9470, state: 'Oyo', region: 'southwest' },
         'ilorin': { lat: 8.4966, lng: 4.5427, state: 'Kwara', region: 'northcentral' }
     };
-
-    // ============================================
-    // LOCATION ENGINE
-    // ============================================
     const LocationEngine = {
         userLocation: null,
-        
         calculateDistance(lat1, lng1, lat2, lng2) {
             const R = 6371;
             const dLat = (lat2 - lat1) * Math.PI / 180;
@@ -866,7 +305,6 @@
             const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
             return R * c;
         },
-
         extractCityFromProperty(address, city) {
             const text = `${address || ''} ${city || ''}`.toLowerCase().trim();
             for (const [cityName, coords] of Object.entries(nigeriaCities)) {
@@ -878,45 +316,12 @@
             }
             return null;
         },
-
-        isNearUser(property) {
-            if (!this.userLocation) return true;
-            const pl = this.extractCityFromProperty(property.address, property.city);
-            if (!pl) return false;
-            if (this.userLocation.city === pl.city) return true;
-            if (this.userLocation.state === pl.state) {
-                const dist = this.calculateDistance(
-                    this.userLocation.coordinates?.lat || 0,
-                    this.userLocation.coordinates?.lng || 0,
-                    pl.lat, pl.lng
-                );
-                return dist <= 100;
-            }
-            const dist = this.calculateDistance(
-                this.userLocation.coordinates?.lat || 0,
-                this.userLocation.coordinates?.lng || 0,
-                pl.lat, pl.lng
-            );
-            return dist <= 50;
-        },
-
         async detectUserLocation() {
             const cached = localStorage.getItem('zaure_location_context');
-            if (cached) {
-                try {
-                    const data = JSON.parse(cached);
-                    if ((Date.now() - data.timestamp) / 60000 < 30) {
-                        this.userLocation = data;
-                        return data;
-                    }
-                } catch (e) {}
-            }
-
+            if (cached) { try { const data = JSON.parse(cached); if ((Date.now() - data.timestamp) / 60000 < 30) { this.userLocation = data; return data; } } catch (e) {} }
             if (navigator.geolocation) {
                 try {
-                    const position = await new Promise((resolve, reject) => {
-                        navigator.geolocation.getCurrentPosition(resolve, reject, { timeout: 10000, maximumAge: 300000 });
-                    });
+                    const position = await new Promise((resolve, reject) => { navigator.geolocation.getCurrentPosition(resolve, reject, { timeout: 10000, maximumAge: 300000 }); });
                     const { latitude, longitude } = position.coords;
                     let nearest = null, minDist = Infinity;
                     for (const [name, coords] of Object.entries(nigeriaCities)) {
@@ -926,26 +331,19 @@
                     if (nearest) {
                         const loc = { city: nearest.city, state: nearest.state, coordinates: { lat: latitude, lng: longitude }, source: 'gps', timestamp: Date.now() };
                         localStorage.setItem('zaure_location_context', JSON.stringify(loc));
-                        this.userLocation = loc;
-                        return loc;
+                        this.userLocation = loc; return loc;
                     }
                 } catch (e) {}
             }
-
             const user = JSON.parse(localStorage.getItem('zaure_user'));
             if (user?.location && nigeriaCities[user.location.toLowerCase()]) {
                 const loc = { city: user.location.toLowerCase(), state: nigeriaCities[user.location.toLowerCase()].state, coordinates: nigeriaCities[user.location.toLowerCase()], source: 'user-preference', timestamp: Date.now() };
                 localStorage.setItem('zaure_location_context', JSON.stringify(loc));
-                this.userLocation = loc;
-                return loc;
+                this.userLocation = loc; return loc;
             }
             return null;
         }
     };
-
-    // ============================================
-    // THEME & MOBILE
-    // ============================================
     const themeToggle = document.getElementById('themeToggle');
     const savedTheme = localStorage.getItem('zaure_theme') || 'light';
     document.documentElement.setAttribute('data-theme', savedTheme);
@@ -956,92 +354,46 @@
         localStorage.setItem('zaure_theme', next);
         themeToggle.innerHTML = next === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
     });
-
     document.getElementById('mobileMenuToggle').addEventListener('click', () => document.getElementById('mobileMenu').classList.add('open'));
     document.getElementById('closeMenu').addEventListener('click', () => document.getElementById('mobileMenu').classList.remove('open'));
-
-    // ============================================
-    // VIEW TOGGLE
-    // ============================================
     const classicViewBtn = document.getElementById('classicViewBtn');
     const foryouViewBtn = document.getElementById('foryouViewBtn');
     const classicView = document.getElementById('classicView');
     const foryouView = document.getElementById('foryouView');
-
-    function showClassic() {
-        classicViewBtn.classList.add('active');
-        foryouViewBtn.classList.remove('active');
-        classicView.classList.add('active');
-        foryouView.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-
-    function showForYou() {
-        foryouViewBtn.classList.add('active');
-        classicViewBtn.classList.remove('active');
-        foryouView.classList.add('active');
-        classicView.classList.remove('active');
-        document.body.style.overflow = 'hidden';
-        if (!window.feedInitialized) { initFeed(); window.feedInitialized = true; }
-    }
-
+    function showClassic() { classicViewBtn.classList.add('active'); foryouViewBtn.classList.remove('active'); classicView.classList.add('active'); foryouView.classList.remove('active'); document.body.style.overflow = ''; }
+    function showForYou() { foryouViewBtn.classList.add('active'); classicViewBtn.classList.remove('active'); foryouView.classList.add('active'); classicView.classList.remove('active'); document.body.style.overflow = 'hidden'; if (!window.feedInitialized) { initFeed(); window.feedInitialized = true; } }
     classicViewBtn.addEventListener('click', showClassic);
     foryouViewBtn.addEventListener('click', showForYou);
     document.getElementById('feedCloseBtn').addEventListener('click', showClassic);
-
-    // ============================================
-    // PRICE SLIDER SYNC
-    // ============================================
     const minSlider = document.getElementById('minPriceSlider');
     const maxSlider = document.getElementById('maxPriceSlider');
     const minInput = document.getElementById('minPriceInput');
     const maxInput = document.getElementById('maxPriceInput');
-
     function updatePriceFromSliders() {
         let minVal = parseInt(minSlider.value);
         let maxVal = parseInt(maxSlider.value);
-        if (minVal > maxVal) {
-            minSlider.value = maxVal;
-            minVal = maxVal;
-        }
+        if (minVal > maxVal) { minSlider.value = maxVal; minVal = maxVal; }
         minInput.value = minVal > 0 ? minVal : '';
         maxInput.value = maxVal >= 50000000 ? '' : maxVal;
     }
-
     function updateSlidersFromInputs() {
         let minVal = parseInt(minInput.value) || 0;
         let maxVal = parseInt(maxInput.value) || 50000000;
-        if (minVal > maxVal) {
-            minVal = maxVal;
-            minInput.value = maxVal;
-        }
-        minSlider.value = minVal;
-        maxSlider.value = maxVal;
+        if (minVal > maxVal) { minVal = maxVal; minInput.value = maxVal; }
+        minSlider.value = minVal; maxSlider.value = maxVal;
     }
-
     minSlider.addEventListener('input', updatePriceFromSliders);
     maxSlider.addEventListener('input', updatePriceFromSliders);
     minInput.addEventListener('change', () => { updateSlidersFromInputs(); applyClassicFilters(); });
     maxInput.addEventListener('change', () => { updateSlidersFromInputs(); applyClassicFilters(); });
-
-    // ============================================
-    // MODAL
-    // ============================================
     const modalOverlay = document.getElementById('selectionModal');
     const modalTitle = document.getElementById('modalTitle');
     const modalOptions = document.getElementById('modalOptions');
     let currentModal = '', currentTriggerBtn = null;
-
     const propertyTypes = [{ value: 'house', label: 'House' }, { value: 'apartment', label: 'Apartment' }, { value: 'land', label: 'Land' }, { value: 'commercial', label: 'Commercial' }];
     const listingTypes = [{ value: '', label: 'All Listings' }, { value: 'sale', label: 'For Sale' }, { value: 'rent', label: 'For Rent' }];
     const bedOptions = [{ value: '', label: 'Any' }, { value: '1', label: '1' }, { value: '2', label: '2' }, { value: '3', label: '3' }, { value: '4+', label: '4+' }];
-    const sortOptions = [
-        { value: 'nearest', label: 'Nearest First' },
-        { value: 'price_asc', label: 'Price: Low to High' },
-        { value: 'price_desc', label: 'Price: High to Low' },
-        { value: 'newest', label: 'Newest First' }
-    ];
-
+    const sortOptions = [{ value: 'nearest', label: 'Nearest First' }, { value: 'price_asc', label: 'Price: Low to High' }, { value: 'price_desc', label: 'Price: High to Low' }, { value: 'newest', label: 'Newest First' }];
     function openModal(type, btn) {
         currentModal = type; currentTriggerBtn = btn;
         let opts, title;
@@ -1053,55 +405,32 @@
         modalOptions.innerHTML = opts.map(o => `<button class="modal-option" data-value="${o.value}">${o.label}</button>`).join('');
         modalOverlay.classList.add('active');
     }
-
     document.getElementById('propertyTypeFilterBtn').addEventListener('click', () => openModal('propertyType', document.getElementById('propertyTypeFilterBtn')));
     document.getElementById('listingTypeFilterBtn').addEventListener('click', () => openModal('listingType', document.getElementById('listingTypeFilterBtn')));
     document.getElementById('bedFilterBtn').addEventListener('click', () => openModal('beds', document.getElementById('bedFilterBtn')));
     document.getElementById('sortFilterBtn').addEventListener('click', () => openModal('sort', document.getElementById('sortFilterBtn')));
     document.getElementById('modalClose').addEventListener('click', () => modalOverlay.classList.remove('active'));
     modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) modalOverlay.classList.remove('active'); });
-
     modalOptions.addEventListener('click', (e) => {
         const opt = e.target.closest('.modal-option');
         if (!opt) return;
         const val = opt.dataset.value, label = opt.textContent.trim();
-        if (currentModal === 'propertyType') {
-            document.getElementById('propertyTypeValue').value = val;
-            document.getElementById('propertyTypeFilterBtn').innerHTML = `${label} <i class="fas fa-chevron-down"></i>`;
-        } else if (currentModal === 'listingType') {
-            document.getElementById('listingTypeValue').value = val;
-            document.getElementById('listingTypeFilterBtn').innerHTML = `${label} <i class="fas fa-chevron-down"></i>`;
-        } else if (currentModal === 'beds') {
-            document.getElementById('bedsValue').value = val;
-            document.getElementById('bedFilterBtn').innerHTML = `${label} <i class="fas fa-chevron-down"></i>`;
-        } else if (currentModal === 'sort') {
-            document.getElementById('sortValue').value = val;
-            document.getElementById('sortFilterBtn').innerHTML = `Sort: ${label} <i class="fas fa-chevron-down"></i>`;
-            applyClassicFilters();
-        }
+        if (currentModal === 'propertyType') { document.getElementById('propertyTypeValue').value = val; document.getElementById('propertyTypeFilterBtn').innerHTML = `${label} <i class="fas fa-chevron-down"></i>`; }
+        else if (currentModal === 'listingType') { document.getElementById('listingTypeValue').value = val; document.getElementById('listingTypeFilterBtn').innerHTML = `${label} <i class="fas fa-chevron-down"></i>`; }
+        else if (currentModal === 'beds') { document.getElementById('bedsValue').value = val; document.getElementById('bedFilterBtn').innerHTML = `${label} <i class="fas fa-chevron-down"></i>`; }
+        else if (currentModal === 'sort') { document.getElementById('sortValue').value = val; document.getElementById('sortFilterBtn').innerHTML = `Sort: ${label} <i class="fas fa-chevron-down"></i>`; applyClassicFilters(); }
         modalOverlay.classList.remove('active');
         if (currentModal !== 'sort') applyClassicFilters();
     });
-
-    // ============================================
-    // CLASSIC BROWSE
-    // ============================================
     let allProperties = [], filteredProperties = [], currentPage = 1;
     const itemsPerPage = 12;
-
     function formatPrice(p) { return p >= 1e6 ? `₦${(p/1e6).toFixed(1)}M` : `₦${p.toLocaleString()}`; }
-
     function getPropertyDistance(prop) {
         if (!LocationEngine.userLocation) return null;
         const pl = LocationEngine.extractCityFromProperty(prop.address, prop.city);
         if (!pl) return null;
-        return LocationEngine.calculateDistance(
-            LocationEngine.userLocation.coordinates?.lat || 0,
-            LocationEngine.userLocation.coordinates?.lng || 0,
-            pl.lat, pl.lng
-        );
+        return LocationEngine.calculateDistance(LocationEngine.userLocation.coordinates?.lat || 0, LocationEngine.userLocation.coordinates?.lng || 0, pl.lat, pl.lng);
     }
-
     function getLocationBadge(prop) {
         if (!LocationEngine.userLocation) return null;
         const pl = LocationEngine.extractCityFromProperty(prop.address, prop.city);
@@ -1112,7 +441,6 @@
         if (dist && dist <= 100) return { text: `${Math.round(dist)}km Away`, icon: 'fa-map-marker-alt', topPick: false };
         return null;
     }
-
     function applyClassicFilters() {
         const loc = document.getElementById('locationFilter').value.toLowerCase().trim();
         const pType = document.getElementById('propertyTypeValue').value;
@@ -1120,7 +448,6 @@
         const bedsRaw = document.getElementById('bedsValue').value;
         const minP = parseInt(minSlider.value) || 0;
         const maxP = parseInt(maxSlider.value) || Infinity;
-
         filteredProperties = allProperties.filter(p => {
             if (loc && !p.city.toLowerCase().includes(loc) && !(p.address||'').toLowerCase().includes(loc)) return false;
             if (pType && p.propertyType !== pType) return false;
@@ -1129,30 +456,21 @@
             if (p.price < minP || p.price > maxP) return false;
             return true;
         });
-
         const sortVal = document.getElementById('sortValue').value;
         if (sortVal === 'nearest' && LocationEngine.userLocation) {
             filteredProperties.sort((a, b) => (getPropertyDistance(a) || Infinity) - (getPropertyDistance(b) || Infinity));
         } else if (sortVal === 'price_asc') filteredProperties.sort((a, b) => a.price - b.price);
         else if (sortVal === 'price_desc') filteredProperties.sort((a, b) => b.price - a.price);
         else if (sortVal === 'newest') filteredProperties.sort((a, b) => new Date(b.createdAt||0) - new Date(a.createdAt||0));
-
         currentPage = 1;
-        renderClassicResults();
-        renderClassicPagination();
+        renderClassicResults(); renderClassicPagination();
     }
-
     function renderClassicResults() {
         const start = (currentPage - 1) * itemsPerPage;
         const items = filteredProperties.slice(start, start + itemsPerPage);
         document.getElementById('resultsCount').textContent = `Showing ${items.length} of ${filteredProperties.length} properties`;
         const grid = document.getElementById('propertyGrid');
-
-        if (!items.length) {
-            grid.innerHTML = '<div class="no-results">No properties match your filters. Try adjusting your search.</div>';
-            return;
-        }
-
+        if (!items.length) { grid.innerHTML = '<div class="no-results">No properties match your filters. Try adjusting your search.</div>'; return; }
         grid.innerHTML = items.map(p => {
             const price = formatPrice(p.price);
             const img = p.images?.[0] || 'https://placehold.co/600x400?text=Zaure';
@@ -1163,7 +481,6 @@
             const dist = getPropertyDistance(p);
             const distDisplay = dist ? `<span class="distance-info"><i class="fas fa-location-dot"></i> ${dist < 1 ? 'Same city' : dist.toFixed(1) + ' km'}</span>` : '';
             const highlight = badge && badge.text === 'In Your City' ? ' location-highlight' : '';
-
             return `
                 <div class="property-card${highlight}" onclick="window.location.href='/property/${p.slug}'">
                     <div class="img-wrapper">
@@ -1186,7 +503,6 @@
                 </div>`;
         }).join('');
     }
-
     function renderClassicPagination() {
         const total = Math.ceil(filteredProperties.length / itemsPerPage);
         const pg = document.getElementById('pagination');
@@ -1202,43 +518,26 @@
         h += `<button onclick="window.classicGoPage(${currentPage+1})" ${currentPage===total?'disabled':''}>Next</button>`;
         pg.innerHTML = h;
     }
-
     window.classicGoPage = (page) => {
         const total = Math.ceil(filteredProperties.length / itemsPerPage);
         if (page < 1 || page > total) return;
-        currentPage = page;
-        renderClassicResults();
-        renderClassicPagination();
-        window.scrollTo({ top: 200, behavior: 'smooth' });
+        currentPage = page; renderClassicResults(); renderClassicPagination(); window.scrollTo({ top: 200, behavior: 'smooth' });
     };
-
     document.getElementById('applyFiltersBtn').addEventListener('click', applyClassicFilters);
-    ['locationFilter'].forEach(id => {
-        document.getElementById(id).addEventListener('keypress', (e) => { if (e.key === 'Enter') applyClassicFilters(); });
-    });
-
+    ['locationFilter'].forEach(id => { document.getElementById(id).addEventListener('keypress', (e) => { if (e.key === 'Enter') applyClassicFilters(); }); });
     document.getElementById('nearMeBtn').addEventListener('click', async () => {
         const loc = await LocationEngine.detectUserLocation();
         if (loc?.city) {
             document.getElementById('locationFilter').placeholder = `📍 ${loc.city.charAt(0).toUpperCase() + loc.city.slice(1)}`;
-            document.getElementById('locationFilter').value = '';
-            document.getElementById('sortValue').value = 'nearest';
+            document.getElementById('locationFilter').value = ''; document.getElementById('sortValue').value = 'nearest';
             document.getElementById('sortFilterBtn').innerHTML = 'Sort: Nearest First <i class="fas fa-chevron-down"></i>';
             applyClassicFilters();
-        } else {
-            alert('Could not detect your location. Please ensure location access is granted or enter your city manually.');
-        }
+        } else { alert('Could not detect your location. Please ensure location access is granted or enter your city manually.'); }
     });
-
-    // ============================================
-    // FOR YOU FEED (ALL PROPERTIES, RANDOMIZED)
-    // ============================================
     let feedQueue = [], feedHistory = [], feedIndex = 0, feedCard = null, feedAnimating = false;
     const favorites = JSON.parse(localStorage.getItem('zaure_favorites') || '[]');
     let cityPrefs = JSON.parse(localStorage.getItem('zaure_city_preferences') || '{}');
-
     function feedScore(prop) {
-        // Base random component for variety
         let score = Math.random() * 0.6;
         const pl = LocationEngine.extractCityFromProperty(prop.address, prop.city);
         const ul = LocationEngine.userLocation;
@@ -1246,44 +545,27 @@
             if (ul.city === pl.city) score += 0.2;
             else if (ul.state === pl.state) score += 0.1;
         }
-        if (prop.city && cityPrefs[prop.city.toLowerCase()]) {
-            score += cityPrefs[prop.city.toLowerCase()] * 0.15;
-        }
+        if (prop.city && cityPrefs[prop.city.toLowerCase()]) { score += cityPrefs[prop.city.toLowerCase()] * 0.15; }
         if (prop.owner?.verified) score += 0.05;
         return Math.min(1, score);
     }
-
     function buildFeed() {
-        // Use ALL properties, scored with randomness and slight location weighting
         const scored = allProperties.map(p => ({ p, s: feedScore(p) }));
         scored.sort((a, b) => b.s - a.s);
         feedQueue = scored.map(x => x.p);
-        feedIndex = 0;
-        feedHistory = [];
+        feedIndex = 0; feedHistory = [];
     }
-
-    function stopCurrentVideo() {
-        if (feedCard) {
-            const v = feedCard.querySelector('video');
-            if (v) v.pause();
-        }
-    }
-
+    function stopCurrentVideo() { if (feedCard) { const v = feedCard.querySelector('video'); if (v) v.pause(); } }
     let currentImageIndex = 0;
-
     function renderFeedCard(prop) {
         const wrapper = document.getElementById('feedWrapper');
-        stopCurrentVideo();
-        if (feedCard) feedCard.remove();
-        
+        stopCurrentVideo(); if (feedCard) feedCard.remove();
         const card = document.createElement('div');
         card.className = 'feed-card';
-        
         const video = prop.video || null;
         const images = prop.images?.length ? prop.images : ['https://placehold.co/600x800/1a1a1a/ffffff?text=Zaure'];
         const hasMultipleImages = !video && images.length > 1;
         currentImageIndex = 0;
-        
         const badge = (() => {
             if (!LocationEngine.userLocation) return null;
             const pl = LocationEngine.extractCityFromProperty(prop.address, prop.city);
@@ -1293,19 +575,10 @@
             return null;
         })();
         const isFav = favorites.includes(prop.id);
-
         card.innerHTML = `
             <div class="card-media">
-                ${video ? 
-                    `<video src="${video}" autoplay muted loop playsinline></video>` : 
-                    `<div class="card-images" id="cardImages">
-                        ${images.map(img => `<img class="card-img" src="${img}" alt="" loading="lazy">`).join('')}
-                    </div>`
-                }
-                ${hasMultipleImages ? `
-                <div class="image-dots" id="imageDots">
-                    ${images.map((_, i) => `<div class="dot ${i === 0 ? 'active' : ''}"></div>`).join('')}
-                </div>` : ''}
+                ${video ? `<video src="${video}" autoplay muted loop playsinline></video>` : `<div class="card-images" id="cardImages">${images.map(img => `<img class="card-img" src="${img}" alt="" loading="lazy">`).join('')}</div>`}
+                ${hasMultipleImages ? `<div class="image-dots" id="imageDots">${images.map((_, i) => `<div class="dot ${i === 0 ? 'active' : ''}"></div>`).join('')}</div>` : ''}
                 <div class="card-overlay">
                     ${badge ? `<span class="card-badge"><i class="fas fa-location-dot"></i> ${badge}</span>` : ''}
                     <div class="card-price">${formatPrice(prop.price)}</div>
@@ -1320,42 +593,27 @@
                     <button class="action-circle btn-fav-feed ${isFav?'liked':''}"><i class="fas fa-heart"></i></button>
                 </div>
             </div>`;
-        
         wrapper.appendChild(card);
         feedCard = card;
-        
         const videoEl = card.querySelector('video');
         if (videoEl) videoEl.play().catch(() => {});
-        
         document.getElementById('feedSaveBtn').classList.toggle('active', isFav);
-        
         let startY = 0, startX = 0, currentY = 0, currentX = 0, dragging = false;
         const imagesContainer = card.querySelector('.card-images');
         const dots = card.querySelectorAll('.dot');
-        
         function updateImageSlide(index) {
             if (!imagesContainer) return;
             currentImageIndex = index;
             imagesContainer.style.transform = `translateX(-${index * 100}%)`;
             dots?.forEach((d, i) => d.classList.toggle('active', i === index));
         }
-
         card.addEventListener('touchstart', e => {
-            if (feedAnimating) return;
-            startY = e.touches[0].clientY;
-            startX = e.touches[0].clientX;
-            dragging = true;
-            card.style.transition = 'none';
-            if (imagesContainer) imagesContainer.style.transition = 'none';
+            if (feedAnimating) return; startY = e.touches[0].clientY; startX = e.touches[0].clientX;
+            dragging = true; card.style.transition = 'none'; if (imagesContainer) imagesContainer.style.transition = 'none';
         }, { passive: true });
-        
         card.addEventListener('touchmove', e => {
-            if (!dragging || feedAnimating) return;
-            currentY = e.touches[0].clientY;
-            currentX = e.touches[0].clientX;
-            const dy = currentY - startY;
-            const dx = currentX - startX;
-            
+            if (!dragging || feedAnimating) return; currentY = e.touches[0].clientY; currentX = e.touches[0].clientX;
+            const dy = currentY - startY; const dx = currentX - startX;
             if (hasMultipleImages && Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 10) {
                 const percent = (dx / card.offsetWidth) * 100;
                 imagesContainer.style.transform = `translateX(calc(-${currentImageIndex * 100}% + ${percent}px))`;
@@ -1363,19 +621,12 @@
                 card.style.transform = `translateY(${dy}px)`;
             }
         }, { passive: true });
-        
         card.addEventListener('touchend', () => {
-            if (!dragging || feedAnimating) return;
-            dragging = false;
-            const dy = currentY - startY;
-            const dx = currentX - startX;
-            
+            if (!dragging || feedAnimating) return; dragging = false;
+            const dy = currentY - startY; const dx = currentX - startX;
             if (hasMultipleImages && Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
-                if (dx < -30 && currentImageIndex < images.length - 1) {
-                    currentImageIndex++;
-                } else if (dx > 30 && currentImageIndex > 0) {
-                    currentImageIndex--;
-                }
+                if (dx < -30 && currentImageIndex < images.length - 1) { currentImageIndex++; }
+                else if (dx > 30 && currentImageIndex > 0) { currentImageIndex--; }
                 if (imagesContainer) imagesContainer.style.transition = 'transform 0.3s ease';
                 updateImageSlide(currentImageIndex);
                 card.style.transform = 'translateY(0)';
@@ -1387,33 +638,21 @@
                 else card.style.transform = 'translateY(0)';
             }
         });
-
         let md = false, msY = 0, msX = 0;
         card.addEventListener('mousedown', e => {
-            if (feedAnimating) return;
-            msY = e.clientY;
-            msX = e.clientX;
-            md = true;
-            card.style.transition = 'none';
-            if (imagesContainer) imagesContainer.style.transition = 'none';
+            if (feedAnimating) return; msY = e.clientY; msX = e.clientX; md = true;
+            card.style.transition = 'none'; if (imagesContainer) imagesContainer.style.transition = 'none';
         });
         document.addEventListener('mousemove', e => {
-            if (!md || feedAnimating) return;
-            const dy = e.clientY - msY;
-            const dx = e.clientX - msX;
+            if (!md || feedAnimating) return; const dy = e.clientY - msY; const dx = e.clientX - msX;
             if (hasMultipleImages && Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 10) {
                 const percent = (dx / card.offsetWidth) * 100;
                 imagesContainer.style.transform = `translateX(calc(-${currentImageIndex * 100}% + ${percent}px))`;
-            } else {
-                card.style.transform = `translateY(${dy}px)`;
-            }
+            } else { card.style.transform = `translateY(${dy}px)`; }
         });
         document.addEventListener('mouseup', e => {
-            if (!md || feedAnimating) return;
-            md = false;
-            const dy = e.clientY - msY;
-            const dx = e.clientX - msX;
-            
+            if (!md || feedAnimating) return; md = false;
+            const dy = e.clientY - msY; const dx = e.clientX - msX;
             if (hasMultipleImages && Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
                 if (dx < -30 && currentImageIndex < images.length - 1) currentImageIndex++;
                 else if (dx > 30 && currentImageIndex > 0) currentImageIndex--;
@@ -1428,48 +667,31 @@
                 else card.style.transform = 'translateY(0)';
             }
         });
-
         card.querySelector('.btn-fav-feed').addEventListener('click', e => { e.stopPropagation(); toggleFav(prop); });
     }
-
     function feedNext(prop) {
-        if (feedAnimating) return;
-        feedAnimating = true;
-        stopCurrentVideo();
-        
+        if (feedAnimating) return; feedAnimating = true; stopCurrentVideo();
         feedHistory.push({ prop, index: feedIndex });
         if (feedHistory.length > 30) feedHistory.shift();
         if (prop.city) { const c = prop.city.toLowerCase(); cityPrefs[c] = (cityPrefs[c] || 0) + 0.05; localStorage.setItem('zaure_city_preferences', JSON.stringify(cityPrefs)); }
-        
-        feedCard.style.transform = 'translateY(-120%)';
-        feedCard.style.opacity = '0';
-        
+        feedCard.style.transform = 'translateY(-120%)'; feedCard.style.opacity = '0';
         setTimeout(() => {
             feedCard.remove(); feedCard = null; feedIndex++;
-            if (feedIndex >= feedQueue.length - 2) buildFeed(); // rebuild with new randomness
+            if (feedIndex >= feedQueue.length - 2) buildFeed();
             feedAnimating = false;
             if (feedIndex < feedQueue.length) renderFeedCard(feedQueue[feedIndex]);
         }, 400);
     }
-
     function feedPrev() {
-        if (feedAnimating || !feedHistory.length) return;
-        feedAnimating = true;
-        stopCurrentVideo();
-        
+        if (feedAnimating || !feedHistory.length) return; feedAnimating = true; stopCurrentVideo();
         const prev = feedHistory.pop();
-        feedCard.style.transform = 'translateY(120%)';
-        feedCard.style.opacity = '0';
-        
+        feedCard.style.transform = 'translateY(120%)'; feedCard.style.opacity = '0';
         setTimeout(() => {
-            feedCard.remove(); feedCard = null;
-            feedIndex = prev.index;
+            feedCard.remove(); feedCard = null; feedIndex = prev.index;
             if (!feedQueue[feedIndex] || feedQueue[feedIndex].id !== prev.prop.id) feedQueue.splice(feedIndex, 0, prev.prop);
-            feedAnimating = false;
-            renderFeedCard(prev.prop);
+            feedAnimating = false; renderFeedCard(prev.prop);
         }, 400);
     }
-
     function toggleFav(prop) {
         const idx = favorites.indexOf(prop.id);
         if (idx > -1) favorites.splice(idx, 1);
@@ -1479,40 +701,26 @@
         const btn = feedCard?.querySelector('.btn-fav-feed');
         if (btn) btn.classList.toggle('liked', favorites.includes(prop.id));
     }
-
     function initFeed() {
         buildFeed();
         if (feedQueue.length) renderFeedCard(feedQueue[0]);
-        const locText = LocationEngine.userLocation?.city 
-            ? `For You in ${LocationEngine.userLocation.city.charAt(0).toUpperCase() + LocationEngine.userLocation.city.slice(1)}` 
-            : 'For You';
+        const locText = LocationEngine.userLocation?.city ? `For You in ${LocationEngine.userLocation.city.charAt(0).toUpperCase() + LocationEngine.userLocation.city.slice(1)}` : 'For You';
         document.getElementById('feedLocationText').textContent = locText;
     }
-
     document.getElementById('feedNextBtn').addEventListener('click', () => { if (feedQueue[feedIndex]) feedNext(feedQueue[feedIndex]); });
     document.getElementById('feedPrevBtn').addEventListener('click', feedPrev);
     document.getElementById('feedSaveBtn').addEventListener('click', () => { if (feedQueue[feedIndex]) toggleFav(feedQueue[feedIndex]); });
-    document.getElementById('feedCallBtn').addEventListener('click', () => {
-        const p = feedQueue[feedIndex];
-        if (p?.owner?.phone) window.open(`tel:${p.owner.phone}`, '_system');
-    });
+    document.getElementById('feedCallBtn').addEventListener('click', () => { const p = feedQueue[feedIndex]; if (p?.owner?.phone) window.open(`tel:${p.owner.phone}`, '_system'); });
     document.getElementById('feedShareBtn').addEventListener('click', () => {
         const p = feedQueue[feedIndex];
         if (p) window.open(`https://wa.me/?text=${encodeURIComponent(`🏠 ${p.title}\n📍 ${p.city}\n💰 ${formatPrice(p.price)}\n\n${window.location.origin}/property/${p.slug}`)}`, '_blank');
     });
-
-    // ============================================
-    // INIT (Show Feed First)
-    // ============================================
     async function init() {
         try {
             const res = await fetch('/data/properties.json');
-            const data = await res.json();
-            allProperties = data.properties || [];
+            const data = await res.json(); allProperties = data.properties || [];
         } catch (e) { console.error('Failed to load properties:', e); }
-
         await LocationEngine.detectUserLocation();
-
         const params = new URLSearchParams(window.location.search);
         if (params.get('location')) document.getElementById('locationFilter').value = params.get('location');
         if (params.get('type')) { document.getElementById('listingTypeValue').value = params.get('type'); const lt = listingTypes.find(t => t.value === params.get('type')); if (lt) document.getElementById('listingTypeFilterBtn').innerHTML = `${lt.label} <i class="fas fa-chevron-down"></i>`; }
@@ -1520,14 +728,8 @@
         if (params.get('beds')) { document.getElementById('bedsValue').value = params.get('beds'); const bd = bedOptions.find(b => b.value === params.get('beds')); if (bd) document.getElementById('bedFilterBtn').innerHTML = `${bd.label} <i class="fas fa-chevron-down"></i>`; }
         if (params.get('min')) { minSlider.value = params.get('min'); minInput.value = params.get('min'); }
         if (params.get('max')) { maxSlider.value = params.get('max'); maxInput.value = params.get('max'); }
-
-        // Show Feed First
-        showForYou();
-        
-        // Prepare classic view in background
-        applyClassicFilters();
+        showForYou(); applyClassicFilters();
     }
-
     init();
 })();
 </script>
