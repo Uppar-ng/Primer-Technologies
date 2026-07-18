@@ -46,6 +46,8 @@
             -webkit-font-smoothing: antialiased;
         }
         .container { max-width:1280px; margin:0 auto; padding:0 2rem; }
+        
+        /* Header */
         .main-header {
             background: rgba(255,255,255,0.8);
             backdrop-filter: blur(12px);
@@ -60,7 +62,7 @@
             color: var(--primary); letter-spacing:-0.5px; display:flex; align-items:baseline;
         }
         .logo a .dot { width:6px; height:6px; background:var(--accent); border-radius:50%; margin-left:4px; }
-        .desktop-nav { display:flex; gap:2.2rem; }
+        .desktop-nav { display:flex; gap:2.2rem; align-items:center; }
         .desktop-nav a {
             text-decoration:none; color:var(--text); font-weight:500; font-size:0.95rem;
             transition:color 0.2s; position:relative;
@@ -71,6 +73,36 @@
         }
         .desktop-nav a:hover, .desktop-nav a.active { color:var(--primary); }
         .desktop-nav a:hover::after, .desktop-nav a.active::after { width:100%; }
+        
+        /* Styled Navigation Button */
+        .btn-nav {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border: 2px solid var(--accent);
+            border-radius: 50px;
+            color: var(--accent);
+            background: transparent;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            opacity: 0;
+            transform: translateY(15px);
+            animation: btnFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: 0.5s;
+        }
+        .btn-nav:hover {
+            background: var(--accent);
+            color: #ffffff;
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+        .btn-nav::after { display: none; }
+
+        @keyframes btnFadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .header-actions { display:flex; gap:0.8rem; }
         .icon-btn {
             background:transparent; border:1px solid var(--border); font-size:1.1rem; cursor:pointer;
@@ -118,18 +150,76 @@
             background:var(--accent); color:#1A1F2E; border:none; padding:0.8rem 2rem;
             border-radius:3rem; font-weight:700; cursor:pointer; transition:0.2s; text-decoration:none;
             display:inline-block; font-size:1rem;
+            opacity: 0;
+            transform: translateY(15px);
+            animation: btnFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: 0.6s;
         }
-        .btn-primary:hover { background:var(--accent-soft); }
+        .btn-primary:hover { background:var(--accent-soft); transform:translateY(-2px); box-shadow: 0 10px 20px -8px rgba(180,148,80,0.4); }
+        
+        /* Remove blue focus outlines for all interactive elements */
+        a:focus, button:focus, input:focus, select:focus, textarea:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(180,148,80,0.3);
+        }
 
-        footer { background:#1A1F2E; color:#CBD5E1; padding:4rem 0 1.5rem; }
-        footer a { color:#94A3B8; text-decoration:none; }
-        footer a:hover { color:var(--accent-soft); }
-        .footer-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:2rem; margin-bottom:2rem; }
-        .social i { font-size:1.2rem; margin-right:1rem; }
+        /* Corporate Footer */
+        footer { background:#1A1F2E; color:#CBD5E1; padding:4rem 0 1.5rem; margin-top:4rem; }
+        footer a { color:#94A3B8; text-decoration:none; transition: all 0.2s; }
+        footer a:hover { color:var(--accent-soft); transform: translateX(4px); }
+        
+        footer .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 3rem;
+            margin-bottom: 0;
+        }
+        footer .footer-col h4 {
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 1.2rem;
+            letter-spacing: 0.5px;
+        }
+        footer .footer-col a {
+            display: block;
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+        }
+        footer .footer-col.brand p {
+            color: #94A3B8;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        footer .social a {
+            display: inline-block !important;
+            color: #B49450;
+            margin-right: 1rem;
+            transition: transform 0.2s;
+        }
+        footer .social a:hover {
+            transform: scale(1.1);
+            color: var(--accent-soft);
+        }
+        footer .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid #2E3548;
+            font-size: 0.85rem;
+            color: #94A3B8;
+        }
+
         @media (max-width:768px) {
             .desktop-nav { display:none; }
             .mobile-only { display:block; }
             .page-hero h1 { font-size:2.2rem; }
+            footer .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+            footer .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
         }
     </style>
     
@@ -150,7 +240,8 @@
             <a href="/how-it-works" class="active">How It Works</a>
             <a href="/about">About</a>
             <a href="/contact">Contact</a>
-            <a href="/post" class="btn-outline" style="padding:0.4rem 1.2rem; border-color:var(--accent); color:var(--accent);">List Property</a>
+            <a href="/profile">Profile</a>
+            <a href="#" class="btn-nav">List Property</a>
         </nav>
         <div class="header-actions">
             <button id="themeToggle" class="icon-btn"><i class="fas fa-moon"></i></button>
@@ -163,7 +254,8 @@
     <button id="closeMenu" class="close-btn"><i class="fas fa-times"></i></button>
     <a href="/">Home</a><a href="/browse?type=sale">Buy</a><a href="/browse?type=rent">Rent</a>
     <a href="/how-it-works">How It Works</a><a href="/about">About</a><a href="/contact">Contact</a>
-    <a href="/post">List Property</a>
+    <a href="/profile">Profile</a>
+    <a href="#">List Property</a>
 </div>
 
 <main>
@@ -210,15 +302,62 @@
     </div>
 </main>
 
+<!-- Corporate Footer -->
 <footer>
     <div class="container">
         <div class="footer-grid">
-            <div><h4 style="color:white;">Zaure</h4><p>Your digital entrance hall – connecting owners and seekers directly.</p></div>
-            <div><h4>Explore</h4><a href="/browse?type=sale">Buy</a><br><a href="/browse?type=rent">Rent</a><br><a href="/how-it-works">How It Works</a></div>
-            <div><h4>Support</h4><a href="/contact">Contact</a><br><a href="/faq">FAQ</a><br><a href="/privacy">Privacy</a><br><a href="/terms">Terms</a></div>
-            <div><h4>Connect</h4><div class="social"><i class="fab fa-facebook-f"></i><i class="fab fa-instagram"></i><i class="fab fa-twitter"></i></div></div>
+            <!-- 1. Brand & Remote Location -->
+            <div class="footer-col brand">
+                <h4 style="font-family:'Playfair Display',serif; font-size:1.5rem;">Zaure<span style="color:#B49450;">.</span></h4>
+                <p>Your digital entrance hall – connecting verified owners and seekers directly across Northern Nigeria.</p>
+                <div style="margin-top:1rem; font-size:0.9rem; color:#94A3B8;">
+                    <i class="fas fa-globe" style="color:#B49450; margin-right:0.5rem;"></i> Remote · Northern Nigeria<br>
+                    <i class="fas fa-envelope" style="color:#B49450; margin-right:0.5rem; margin-top:0.3rem;"></i> get.zaure@proton.me
+                </div>
+            </div>
+
+            <!-- 2. Quick Links (Primary Navigation) -->
+            <div class="footer-col">
+                <h4>Find a Home</h4>
+                <a href="/browse?type=sale">Buy Property</a>
+                <a href="/browse?type=rent">Rent Property</a>
+                <a href="/how-it-works">How It Works</a>
+                <a href="/browse">Browse All Listings</a>
+            </div>
+
+            <!-- 3. Company & Legal -->
+            <div class="footer-col">
+                <h4>Company</h4>
+                <a href="/about">About Us</a>
+                <a href="/contact">Contact</a>
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/terms">Terms of Service</a>
+            </div>
+
+            <!-- 4. Social & Trust Badges -->
+            <div class="footer-col connect">
+                <h4>Connect</h4>
+                <div class="social" style="margin-bottom:1.5rem;">
+                    <a href="https://twitter.com/zauretech" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com/zauretech" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com/company/zauretech" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://facebook.com/zauretech" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                </div>
+                <p style="font-size:0.85rem; color:#94A3B8; margin-bottom:1rem;">Follow us everywhere @zauretech</p>
+                <!-- Trust Badges -->
+                <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                    <span style="background:rgba(180,148,80,0.1); color:#B49450; padding:0.25rem 0.8rem; border-radius:50px; font-size:0.7rem; font-weight:600; border:1px solid rgba(180,148,80,0.2);">No Middlemen</span>
+                    <span style="background:rgba(180,148,80,0.1); color:#B49450; padding:0.25rem 0.8rem; border-radius:50px; font-size:0.7rem; font-weight:600; border:1px solid rgba(180,148,80,0.2);">Verified Owners</span>
+                    <span style="background:rgba(180,148,80,0.1); color:#B49450; padding:0.25rem 0.8rem; border-radius:50px; font-size:0.7rem; font-weight:600; border:1px solid rgba(180,148,80,0.2);">Zero Commission</span>
+                </div>
+            </div>
         </div>
-        <div style="text-align:center; padding-top:1.5rem; border-top:1px solid #2E3548; font-size:0.8rem;">© 2026 Zaure. All rights reserved.</div>
+
+        <!-- 5. Bottom Copyright Bar -->
+        <div class="footer-bottom">
+            <span>&copy; 2026 <strong style="color:white;">Zaure Technologies</strong>. All rights reserved.</span>
+            <span>Built for Northern Nigeria. 🇳🇬</span>
+        </div>
     </div>
 </footer>
 
