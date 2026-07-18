@@ -9,292 +9,93 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1A1F2E;
-            --primary-soft: #2E3548;
-            --accent: #B49450;
-            --accent-soft: #D4B87A;
-            --bg: #FBFBFB;
-            --surface: #FFFFFF;
-            --surface-alt: #F6F6F6;
-            --text: #1E1E1E;
-            --text-secondary: #6B7280;
-            --border: #E5E7EB;
-            --shadow-sm: 0 2px 4px rgba(0,0,0,0.03), 0 1px 2px rgba(0,0,0,0.04);
-            --shadow-md: 0 4px 12px rgba(0,0,0,0.04);
-            --shadow-lg: 0 12px 24px -8px rgba(0,0,0,0.06);
-            --radius: 16px;
-            --radius-sm: 12px;
-            --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
+            --primary: #1A1F2E; --primary-soft: #2E3548; --accent: #B49450; --accent-soft: #D4B87A;
+            --bg: #FBFBFB; --surface: #FFFFFF; --surface-alt: #F6F6F6; --text: #1E1E1E;
+            --text-secondary: #6B7280; --border: #E5E7EB; --shadow-sm: 0 2px 4px rgba(0,0,0,0.03), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.04); --shadow-lg: 0 12px 24px -8px rgba(0,0,0,0.06);
+            --radius: 16px; --radius-sm: 12px; --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
         }
         [data-theme="dark"] {
-            --primary: #D4B87A;
-            --accent: #D4B87A;
-            --bg: #0B1120;
-            --surface: #131C31;
-            --surface-alt: #1A2540;
-            --text: #F1F5F9;
-            --text-secondary: #94A3B8;
-            --border: #2A3550;
+            --primary: #D4B87A; --accent: #D4B87A; --bg: #0B1120; --surface: #131C31;
+            --surface-alt: #1A2540; --text: #F1F5F9; --text-secondary: #94A3B8; --border: #2A3550;
         }
         * { margin:0; padding:0; box-sizing:border-box; }
-        body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height:1.6;
-            transition: background var(--transition), color var(--transition);
-            -webkit-font-smoothing: antialiased;
-        }
+        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height:1.6; transition: background var(--transition), color var(--transition); -webkit-font-smoothing: antialiased; }
         .container { max-width:1280px; margin:0 auto; padding:0 2rem; }
-
-        /* Remove blue focus outlines */
-        button:focus, a:focus, input:focus, select:focus, textarea:focus {
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(180,148,80,0.3);
-        }
-
-        /* Header */
+        button:focus, a:focus, input:focus, select:focus, textarea:focus { outline: none; box-shadow: 0 0 0 2px rgba(180,148,80,0.3); }
         .main-header {
-            background: rgba(255,255,255,0.8);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
-            position: sticky; top:0; z-index:100;
+            background: rgba(255,255,255,0.8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border); position: sticky; top:0; z-index:100;
         }
         [data-theme="dark"] .main-header { background: rgba(19,28,49,0.8); }
         .main-header .container { display:flex; justify-content:space-between; align-items:center; padding:1rem 2rem; }
-        .logo a {
-            text-decoration:none; font-family:'Playfair Display',serif; font-size:2rem; font-weight:800;
-            color: var(--primary); letter-spacing:-0.5px; display:flex; align-items:baseline;
-        }
+        .logo a { text-decoration:none; font-family:'Playfair Display',serif; font-size:2rem; font-weight:800; color: var(--primary); letter-spacing:-0.5px; display:flex; align-items:baseline; }
         .logo a .dot { width:6px; height:6px; background:var(--accent); border-radius:50%; margin-left:4px; }
         .desktop-nav { display:flex; gap:2.2rem; align-items:center; }
-        .desktop-nav a {
-            text-decoration:none; color:var(--text); font-weight:500; font-size:0.95rem;
-            transition:color 0.2s; position:relative;
-        }
-        .desktop-nav a::after {
-            content:''; position:absolute; bottom:-6px; left:0; width:0; height:2px;
-            background:var(--accent); border-radius:2px; transition:width 0.25s;
-        }
+        .desktop-nav a { text-decoration:none; color:var(--text); font-weight:500; font-size:0.95rem; transition:color 0.2s; position:relative; }
+        .desktop-nav a::after { content:''; position:absolute; bottom:-6px; left:0; width:0; height:2px; background:var(--accent); border-radius:2px; transition:width 0.25s; }
         .desktop-nav a:hover, .desktop-nav a.active { color:var(--primary); }
         .desktop-nav a:hover::after, .desktop-nav a.active::after { width:100%; }
-        
-        /* Corporate Navigation Button */
         .btn-nav {
-            display: inline-block;
-            padding: 0.5rem 1.5rem;
-            border: 2px solid var(--accent);
-            border-radius: 50px;
-            color: var(--accent);
-            background: transparent;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            opacity: 0;
-            transform: translateY(15px);
-            animation: btnFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            animation-delay: 0.5s;
+            display: inline-block; padding: 0.5rem 1.5rem; border: 2px solid var(--accent); border-radius: 50px;
+            color: var(--accent); background: transparent; font-weight: 600; font-size: 0.9rem;
+            transition: all 0.2s ease; text-decoration: none; opacity: 0; transform: translateY(15px);
+            animation: btnFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.5s;
         }
-        .btn-nav:hover {
-            background: var(--accent);
-            color: #ffffff;
-            border-color: var(--accent);
-            transform: translateY(-2px);
-        }
+        .btn-nav:hover { background: var(--accent); color: #ffffff; border-color: var(--accent); transform: translateY(-2px); }
         .btn-nav::after { display: none; }
-
-        @keyframes btnFadeUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
+        @keyframes btnFadeUp { to { opacity: 1; transform: translateY(0); } }
         .header-actions { display:flex; gap:0.8rem; align-items:center; }
-        .icon-btn {
-            background:transparent; border:1px solid var(--border); font-size:1.1rem; cursor:pointer;
-            color:var(--text); padding:0.5rem; border-radius:50%; width:38px; height:38px;
-            display:flex; align-items:center; justify-content:center; transition:0.2s;
-        }
+        .icon-btn { background:transparent; border:1px solid var(--border); font-size:1.1rem; cursor:pointer; color:var(--text); padding:0.5rem; border-radius:50%; width:38px; height:38px; display:flex; align-items:center; justify-content:center; transition:0.2s; }
         .icon-btn:hover { background:var(--primary); color:white; border-color:var(--primary); }
         .mobile-only { display:none; }
-        .mobile-menu {
-            position:fixed; top:0; left:-100%; width:80%; max-width:320px; height:100%;
-            background:var(--surface); z-index:200; transition:left 0.35s; padding:2.5rem 2rem;
-            display:flex; flex-direction:column; gap:1.5rem; box-shadow:var(--shadow-lg);
-        }
+        .mobile-menu { position:fixed; top:0; left:-100%; width:80%; max-width:320px; height:100%; background:var(--surface); z-index:200; transition:left 0.35s; padding:2.5rem 2rem; display:flex; flex-direction:column; gap:1.5rem; box-shadow:var(--shadow-lg); }
         .mobile-menu.open { left:0; }
         .mobile-menu a { text-decoration:none; font-size:1.2rem; color:var(--text); font-weight:500; padding:0.5rem 0; border-bottom:1px solid var(--border); }
-
-        /* Property Header */
         .property-header { background: var(--surface); padding:2rem 0; border-bottom:1px solid var(--border); }
         .property-title { font-family:'Playfair Display',serif; font-size:2rem; font-weight:700; margin-bottom:0.5rem; }
         .property-address { color: var(--text-secondary); margin-bottom:0.5rem; display:flex; align-items:center; gap:0.5rem; }
         .property-price { font-size:2rem; font-weight:800; color:var(--primary); margin-top:0.5rem; }
         .badge-type { background:var(--primary); color:white; padding:0.25rem 1rem; border-radius:2rem; font-size:0.8rem; display:inline-block; }
-
-        /* Layout */
         .property-layout { display:grid; grid-template-columns:1fr 380px; gap:2rem; margin:2rem 0; }
         @media (max-width:768px) { .property-layout { grid-template-columns:1fr; } }
-
-        /* ============================================================== */
-        /* MOBILE-FIRST RESPONSIVE GALLERY WITH CUSTOM VIDEO PLAYER        */
-        /* ============================================================== */
         .gallery { position:relative; width:100%; }
-        
-        /* Main media container - always aspect ratio 16/9 */
         .main-media-container {
-            position:relative;
-            width:100%;
-            aspect-ratio: 16 / 9;
-            background:var(--surface);
-            border-radius:var(--radius);
-            overflow:hidden;
-            box-shadow:var(--shadow-sm);
-            cursor:pointer;
-            display:flex;
-            align-items:center;
-            justify-content:center;
+            position:relative; width:100%; aspect-ratio: 16 / 9; background:var(--surface);
+            border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow-sm);
+            cursor:pointer; display:flex; align-items:center; justify-content:center;
         }
-        
-        .main-media-container img {
-            width:100%;
-            height:100%;
-            object-fit:cover;
-            display:block;
-        }
-        
-        .main-media-container video {
-            width:100%;
-            height:100%;
-            object-fit:cover;
-            display:block;
-            background:#000;
-        }
-        
-        /* Custom video play button overlay */
+        .main-media-container img { width:100%; height:100%; object-fit:cover; display:block; }
+        .main-media-container video { width:100%; height:100%; object-fit:cover; display:block; background:#000; }
         .video-play-overlay {
-            position:absolute;
-            top:0; left:0; right:0; bottom:0;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            background:rgba(0,0,0,0.15);
-            pointer-events:none;
-            z-index:2;
-            transition: opacity 0.3s;
+            position:absolute; top:0; left:0; right:0; bottom:0; display:flex; align-items:center; justify-content:center;
+            background:rgba(0,0,0,0.15); pointer-events:none; z-index:2; transition: opacity 0.3s;
         }
-        .video-play-overlay.hidden {
-            opacity:0;
-        }
+        .video-play-overlay.hidden { opacity:0; }
         .video-play-overlay .play-icon {
-            width:72px; height:72px;
-            background:rgba(255,255,255,0.9);
-            backdrop-filter:blur(4px);
-            border-radius:50%;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            font-size:28px;
-            color:var(--primary);
-            box-shadow:var(--shadow-lg);
-            transition: transform 0.2s;
+            width:72px; height:72px; background:rgba(255,255,255,0.9); backdrop-filter:blur(4px);
+            border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:28px;
+            color:var(--primary); box-shadow:var(--shadow-lg); transition: transform 0.2s;
         }
-        .main-media-container:hover .video-play-overlay .play-icon {
-            transform:scale(1.05);
-        }
-        .main-media-container:hover .video-play-overlay:not(.hidden) .play-icon {
-            transform:scale(1.1);
-        }
-
-        /* Thumbnail strip - horizontal scrollable */
-        .thumbnail-strip {
-            display:flex;
-            gap:0.75rem;
-            margin-top:1rem;
-            overflow-x:auto;
-            padding-bottom:0.5rem;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-        }
-        .thumbnail-strip::-webkit-scrollbar {
-            height:4px;
-        }
-        .thumbnail-strip::-webkit-scrollbar-track {
-            background:var(--surface-alt);
-            border-radius:4px;
-        }
-        .thumbnail-strip::-webkit-scrollbar-thumb {
-            background:var(--accent);
-            border-radius:4px;
-        }
-        .thumbnail {
-            flex: 0 0 80px;
-            height:80px;
-            border-radius:8px;
-            object-fit:cover;
-            cursor:pointer;
-            opacity:0.6;
-            transition:0.2s;
-            border:2px solid transparent;
-            scroll-snap-align: start;
-        }
-        .thumbnail.active, .thumbnail:hover {
-            opacity:1;
-            border-color:var(--accent);
-        }
-        .thumbnail.video-thumb {
-            position:relative;
-        }
-        .thumbnail.video-thumb::after {
-            content:'\f144';
-            font-family:'Font Awesome 5 Free';
-            font-weight:400;
-            position:absolute;
-            top:50%; left:50%;
-            transform:translate(-50%, -50%);
-            font-size:24px;
-            color:rgba(255,255,255,0.8);
-            text-shadow:0 2px 8px rgba(0,0,0,0.5);
-            pointer-events:none;
-        }
-        /* ============================================================== */
-
-        /* Owner Card */
-        .sidebar-card {
-            background:var(--surface); border-radius:var(--radius); padding:1.5rem;
-            box-shadow:var(--shadow-sm); position:sticky; top:5rem; border:1px solid var(--border);
-        }
+        .main-media-container:hover .video-play-overlay .play-icon { transform:scale(1.05); }
+        .main-media-container:hover .video-play-overlay:not(.hidden) .play-icon { transform:scale(1.1); }
+        .thumbnail-strip { display:flex; gap:0.75rem; margin-top:1rem; overflow-x:auto; padding-bottom:0.5rem; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+        .thumbnail-strip::-webkit-scrollbar { height:4px; }
+        .thumbnail-strip::-webkit-scrollbar-track { background:var(--surface-alt); border-radius:4px; }
+        .thumbnail-strip::-webkit-scrollbar-thumb { background:var(--accent); border-radius:4px; }
+        .thumbnail { flex: 0 0 80px; height:80px; border-radius:8px; object-fit:cover; cursor:pointer; opacity:0.6; transition:0.2s; border:2px solid transparent; scroll-snap-align: start; }
+        .thumbnail.active, .thumbnail:hover { opacity:1; border-color:var(--accent); }
+        .thumbnail.video-thumb { position:relative; }
+        .thumbnail.video-thumb::after { content:'\f144'; font-family:'Font Awesome 5 Free'; font-weight:400; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); font-size:24px; color:rgba(255,255,255,0.8); text-shadow:0 2px 8px rgba(0,0,0,0.5); pointer-events:none; }
+        .sidebar-card { background:var(--surface); border-radius:var(--radius); padding:1.5rem; box-shadow:var(--shadow-sm); position:sticky; top:5rem; border:1px solid var(--border); }
         .owner-profile { display:flex; align-items:center; gap:1rem; margin-bottom:1rem; }
-        .owner-avatar {
-            width:72px; height:72px; border-radius:50%; object-fit:cover;
-            border:2px solid var(--accent); background:var(--surface-alt);
-        }
+        .owner-avatar { width:72px; height:72px; border-radius:50%; object-fit:cover; border:2px solid var(--accent); background:var(--surface-alt); }
         .owner-details h3 { font-size:1.2rem; font-weight:700; display:flex; align-items:center; gap:0.5rem; }
-        
-        /* GOLDEN VERIFIED BADGE */
-        .verified-icon {
-            display:inline-flex;
-            align-items:center;
-            gap:0.25rem;
-            background:var(--accent);
-            color:#1A1F2E;
-            font-size:0.7rem;
-            font-weight:700;
-            padding:0.15rem 0.6rem 0.15rem 0.3rem;
-            border-radius:2rem;
-            box-shadow:0 2px 8px rgba(180,148,80,0.3);
-        }
-        .verified-icon i {
-            font-size:0.65rem;
-        }
-
+        .verified-icon { display:inline-flex; align-items:center; gap:0.25rem; background:var(--accent); color:#1A1F2E; font-size:0.7rem; font-weight:700; padding:0.15rem 0.6rem 0.15rem 0.3rem; border-radius:2rem; box-shadow:0 2px 8px rgba(180,148,80,0.3); }
+        .verified-icon i { font-size:0.65rem; }
         .owner-phone { color:var(--text-secondary); font-size:0.9rem; }
         .owner-actions { display:flex; gap:0.75rem; margin:1rem 0; flex-wrap:wrap; }
-        .btn-call, .btn-wa, .btn-heart {
-            display:inline-flex; align-items:center; gap:0.5rem; padding:0.75rem 1rem;
-            border-radius:2rem; text-decoration:none; font-weight:600; font-size:0.9rem;
-            transition:0.2s; border:none; cursor:pointer;
-        }
+        .btn-call, .btn-wa, .btn-heart { display:inline-flex; align-items:center; gap:0.5rem; padding:0.75rem 1rem; border-radius:2rem; text-decoration:none; font-weight:600; font-size:0.9rem; transition:0.2s; border:none; cursor:pointer; }
         .btn-call { background:var(--primary); color:white; }
         .btn-wa { background:#25D366; color:white; }
         .btn-heart { background:var(--surface-alt); color:var(--text-secondary); border:1px solid var(--border); }
@@ -302,118 +103,51 @@
         .btn-call:hover, .btn-wa:hover, .btn-heart:hover { transform:translateY(-2px); }
         hr { margin:1.5rem 0; border:none; border-top:1px solid var(--border); }
         .safety-tips { background:#FEF3C7; padding:1rem; border-radius:var(--radius-sm); font-size:0.85rem; color:#1A1F2E; margin-top:1rem; }
-
-        /* Tabs */
-        .tabs-container {
-            margin-top:2rem; background:var(--surface); border-radius:var(--radius);
-            overflow:hidden; box-shadow:var(--shadow-sm); border:1px solid var(--border);
-        }
+        .tabs-container { margin-top:2rem; background:var(--surface); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow-sm); border:1px solid var(--border); }
         .tabs-header { display:flex; border-bottom:1px solid var(--border); background:var(--surface); flex-wrap:wrap; }
-        .tab-btn-prop {
-            padding:1rem 1.5rem; background:none; border:none; font-weight:600; cursor:pointer;
-            transition:0.2s; color:var(--text-secondary);
-        }
+        .tab-btn-prop { padding:1rem 1.5rem; background:none; border:none; font-weight:600; cursor:pointer; transition:0.2s; color:var(--text-secondary); }
         .tab-btn-prop.active { color:var(--primary); border-bottom:2px solid var(--accent); }
         .tab-content { padding:1.5rem; display:none; }
         .tab-content.active { display:block; animation: fadeIn 0.3s ease; }
         @keyframes fadeIn { from { opacity:0; transform:translateY(5px); } to { opacity:1; transform:translateY(0); } }
-
         .info-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:1rem; }
         .info-item { display:flex; align-items:center; gap:0.75rem; padding:0.75rem; background:var(--surface-alt); border-radius:8px; }
         .info-item i { width:24px; color:var(--accent); }
         .amenities-list { display:flex; flex-wrap:wrap; gap:0.75rem; }
         .amenity-tag { background:var(--surface-alt); padding:0.5rem 1rem; border-radius:2rem; font-size:0.85rem; }
-
-        /* Tappable tags */
         .card-tags { margin-top:0.5rem; }
-        .card-tag {
-            display: inline-block;
-            background: var(--surface-alt);
-            padding: 0.25rem 0.7rem;
-            border-radius: 1rem;
-            font-size: 0.7rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            cursor: pointer;
-            margin-right: 0.4rem;
-            border: 1px solid var(--border);
-            transition: 0.2s;
-        }
+        .card-tag { display: inline-block; background: var(--surface-alt); padding: 0.25rem 0.7rem; border-radius: 1rem; font-size: 0.7rem; font-weight: 500; color: var(--text-secondary); cursor: pointer; margin-right: 0.4rem; border: 1px solid var(--border); transition: 0.2s; }
         .card-tag:hover { background: var(--primary); color: white; border-color: var(--primary); }
-
         .similar-section { margin:3rem 0; }
         .similar-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:1.5rem; margin-top:1.5rem; }
-        .property-card {
-            background:var(--surface); border-radius:var(--radius); overflow:hidden;
-            box-shadow:var(--shadow-sm); cursor:pointer; transition:all var(--transition); border:1px solid var(--border);
-        }
+        .property-card { background:var(--surface); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow-sm); cursor:pointer; transition:all var(--transition); border:1px solid var(--border); }
         .property-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-lg); }
         .property-card img { width:100%; height:160px; object-fit:cover; }
         .property-card .price { font-size:1.1rem; font-weight:700; color:var(--primary); padding:0.75rem 0.75rem 0; }
         .property-card h4 { padding:0 0.75rem; font-size:0.9rem; }
         .property-card p { padding:0 0.75rem 0.75rem; font-size:0.8rem; color:var(--text-secondary); }
-
-        /* Corporate Footer */
         footer { background:#1A1F2E; color:#CBD5E1; padding:4rem 0 1.5rem; margin-top:3rem; }
         footer a { color:#94A3B8; text-decoration:none; transition: all 0.2s; }
         footer a:hover { color:var(--accent-soft); transform: translateX(4px); }
-        footer .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1.5fr;
-            gap: 3rem;
-            margin-bottom: 0;
-        }
-        footer .footer-col h4 {
-            color: #ffffff;
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            font-size: 1rem;
-            margin-bottom: 1.2rem;
-            letter-spacing: 0.5px;
-        }
+        footer .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 3rem; margin-bottom: 0; }
+        footer .footer-col h4 { color: #ffffff; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 1rem; margin-bottom: 1.2rem; letter-spacing: 0.5px; }
         footer .footer-col a { display: block; font-size: 0.9rem; margin-bottom: 0.8rem; }
         footer .footer-col.brand p { color: #94A3B8; font-size: 0.95rem; line-height: 1.6; }
         footer .social a { display: inline-block !important; color: #B49450; margin-right: 1rem; transition: transform 0.2s; }
         footer .social a:hover { transform: scale(1.1); color: var(--accent-soft); }
-        footer .footer-bottom {
-            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
-            padding-top: 2rem; margin-top: 2rem; border-top: 1px solid #2E3548;
-            font-size: 0.85rem; color: #94A3B8;
-        }
-
-        /* Lightbox (Supports both images and video) */
-        .lightbox {
-            position:fixed; top:0; left:0; right:0; bottom:0;
-            background:rgba(0,0,0,0.95); z-index:1000; display:none;
-            align-items:center; justify-content:center;
-            flex-direction:column;
-        }
+        footer .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; padding-top: 2rem; margin-top: 2rem; border-top: 1px solid #2E3548; font-size: 0.85rem; color: #94A3B8; }
+        .lightbox { position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.95); z-index:1000; display:none; align-items:center; justify-content:center; flex-direction:column; }
         .lightbox.active { display:flex; }
-        .lightbox-content {
-            max-width:90%; max-height:90%;
-            display:flex; align-items:center; justify-content:center;
-        }
-        .lightbox-content img {
-            max-width:100%; max-height:80vh; border-radius:8px;
-        }
-        .lightbox-content video {
-            max-width:100%; max-height:80vh; border-radius:8px; background:#000;
-        }
+        .lightbox-content { max-width:90%; max-height:90%; display:flex; align-items:center; justify-content:center; }
+        .lightbox-content img { max-width:100%; max-height:80vh; border-radius:8px; }
+        .lightbox-content video { max-width:100%; max-height:80vh; border-radius:8px; background:#000; }
         .lightbox-close { position:absolute; top:20px; right:20px; background:none; border:none; color:white; font-size:28px; cursor:pointer; z-index:2; }
-        .lightbox-prev, .lightbox-next {
-            position:absolute; top:50%; transform:translateY(-50%);
-            background:rgba(255,255,255,0.2); border:none; color:white;
-            font-size:2rem; padding:0.5rem 1rem; cursor:pointer; border-radius:8px; z-index:2;
-        }
+        .lightbox-prev, .lightbox-next { position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.2); border:none; color:white; font-size:2rem; padding:0.5rem 1rem; cursor:pointer; border-radius:8px; z-index:2; }
         .lightbox-prev { left:20px; }
         .lightbox-next { right:20px; }
+        @media (max-width:768px) { .lightbox-prev, .lightbox-next { font-size:1.5rem; padding:0.3rem 0.8rem; } }
         @media (max-width:768px) {
-            .lightbox-prev, .lightbox-next { font-size:1.5rem; padding:0.3rem 0.8rem; }
-        }
-
-        @media (max-width:768px) {
-            .desktop-nav { display:none; }
-            .mobile-only { display:block; }
+            .desktop-nav { display:none; } .mobile-only { display:block; }
             .main-media-container { aspect-ratio: 4/3; }
             .sidebar-card { position:static; margin-top:1rem; }
             .property-title { font-size:1.6rem; }
@@ -422,8 +156,6 @@
         }
         .loading, .error-message { text-align:center; padding:3rem; color:var(--text-secondary); }
     </style>
-    
-    <!-- Vercel Speed Insights -->
     <script type="module">
         import { injectSpeedInsights } from 'https://cdn.jsdelivr.net/npm/@vercel/speed-insights@2/dist/index.mjs';
         injectSpeedInsights();
@@ -434,14 +166,9 @@
     <div class="container">
         <div class="logo"><a href="/">Zaure<span class="dot"></span></a></div>
         <nav class="desktop-nav">
-            <a href="/">Home</a>
-            <a href="/browse?type=sale">Buy</a>
-            <a href="/browse?type=rent">Rent</a>
-            <a href="/how-it-works">How It Works</a>
-            <a href="/about">About</a>
-            <a href="/contact">Contact</a>
-            <a href="/profile">Profile</a>
-            <a href="#" class="btn-nav">List Property</a>
+            <a href="/">Home</a> <a href="/browse?type=sale">Buy</a> <a href="/browse?type=rent">Rent</a>
+            <a href="/how-it-works">How It Works</a> <a href="/about">About</a> <a href="/contact">Contact</a>
+            <a href="/profile">Profile</a> <a href="#" class="btn-nav">List Property</a>
         </nav>
         <div class="header-actions">
             <button id="themeToggle" class="icon-btn"><i class="fas fa-moon"></i></button>
@@ -449,91 +176,36 @@
         </div>
     </div>
 </header>
-
 <div class="mobile-menu" id="mobileMenu">
     <button id="closeMenu" class="close-btn"><i class="fas fa-times"></i></button>
     <a href="/">Home</a><a href="/browse?type=sale">Buy</a><a href="/browse?type=rent">Rent</a>
     <a href="/how-it-works">How It Works</a><a href="/about">About</a><a href="/contact">Contact</a>
-    <a href="/profile">Profile</a>
-    <a href="#">List Property</a>
+    <a href="/profile">Profile</a> <a href="#">List Property</a>
 </div>
-
 <main class="container">
     <div id="propertyContent">
         <div class="loading">Loading property details...</div>
     </div>
 </main>
-
-<!-- Corporate Footer -->
 <footer>
     <div class="container">
         <div class="footer-grid">
-            <!-- 1. Brand & Remote Location -->
-            <div class="footer-col brand">
-                <h4 style="font-family:'Playfair Display',serif; font-size:1.5rem;">Zaure<span style="color:#B49450;">.</span></h4>
-                <p>Your digital entrance hall – connecting verified owners and seekers directly across Northern Nigeria.</p>
-                <div style="margin-top:1rem; font-size:0.9rem; color:#94A3B8;">
-                    <i class="fas fa-globe" style="color:#B49450; margin-right:0.5rem;"></i> Remote · Northern Nigeria<br>
-                    <i class="fas fa-envelope" style="color:#B49450; margin-right:0.5rem; margin-top:0.3rem;"></i> get.zaure@proton.me
-                </div>
-            </div>
-
-            <!-- 2. Quick Links (Primary Navigation) -->
-            <div class="footer-col">
-                <h4>Find a Home</h4>
-                <a href="/browse?type=sale">Buy Property</a>
-                <a href="/browse?type=rent">Rent Property</a>
-                <a href="/how-it-works">How It Works</a>
-                <a href="/browse">Browse All Listings</a>
-            </div>
-
-            <!-- 3. Company & Legal -->
-            <div class="footer-col">
-                <h4>Company</h4>
-                <a href="/about">About Us</a>
-                <a href="/contact">Contact</a>
-                <a href="/privacy">Privacy Policy</a>
-                <a href="/terms">Terms of Service</a>
-            </div>
-
-            <!-- 4. Social & Trust Badges -->
-            <div class="footer-col connect">
-                <h4>Connect</h4>
-                <div class="social" style="margin-bottom:1.5rem;">
-                    <a href="https://twitter.com/zauretech" target="_blank"><i class="fab fa-twitter"></i></a>
-                    <a href="https://instagram.com/zauretech" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="https://linkedin.com/company/zauretech" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://facebook.com/zauretech" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                </div>
-                <p style="font-size:0.85rem; color:#94A3B8; margin-bottom:1rem;">Follow us everywhere @zauretech</p>
-                <!-- Trust Badges -->
-                <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
-                    <span style="background:rgba(180,148,80,0.1); color:#B49450; padding:0.25rem 0.8rem; border-radius:50px; font-size:0.7rem; font-weight:600; border:1px solid rgba(180,148,80,0.2);">No Middlemen</span>
-                    <span style="background:rgba(180,148,80,0.1); color:#B49450; padding:0.25rem 0.8rem; border-radius:50px; font-size:0.7rem; font-weight:600; border:1px solid rgba(180,148,80,0.2);">Verified Owners</span>
-                    <span style="background:rgba(180,148,80,0.1); color:#B49450; padding:0.25rem 0.8rem; border-radius:50px; font-size:0.7rem; font-weight:600; border:1px solid rgba(180,148,80,0.2);">Zero Commission</span>
-                </div>
-            </div>
+            <div class="footer-col brand"><h4 style="font-family:'Playfair Display',serif; font-size:1.5rem;">Zaure<span style="color:#B49450;">.</span></h4><p>Your digital entrance hall – connecting verified owners and seekers directly across Northern Nigeria.</p><div style="margin-top:1rem; font-size:0.9rem; color:#94A3B8;"><i class="fas fa-globe" style="color:#B49450; margin-right:0.5rem;"></i> Remote · Northern Nigeria<br><i class="fas fa-envelope" style="color:#B49450; margin-right:0.5rem; margin-top:0.3rem;"></i> get.zaure@proton.me</div></div>
+            <div class="footer-col"><h4>Find a Home</h4><a href="/browse?type=sale">Buy Property</a><a href="/browse?type=rent">Rent Property</a><a href="/how-it-works">How It Works</a><a href="/browse">Browse All Listings</a></div>
+            <div class="footer-col"><h4>Company</h4><a href="/about">About Us</a><a href="/contact">Contact</a><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Service</a></div>
+            <div class="footer-col connect"><h4>Connect</h4><div class="social" style="margin-bottom:1.5rem;"><a href="https://twitter.com/zauretech" target="_blank"><i class="fab fa-twitter"></i></a><a href="https://instagram.com/zauretech" target="_blank"><i class="fab fa-instagram"></i></a><a href="https://linkedin.com/company/zauretech" target="_blank"><i class="fab fa-linkedin-in"></i></a><a href="https://facebook.com/zauretech" target="_blank"><i class="fab fa-facebook-f"></i></a></div><p style="font-size:0.85rem; color:#94A3B8; margin-bottom:1rem;">Follow us everywhere @zauretech</p><div style="display:flex; gap:0.5rem; flex-wrap:wrap;"><span style="background:rgba(180,148,80,0.1); color:#B49450; padding:0.25rem 0.8rem; border-radius:50px; font-size:0.7rem; font-weight:600; border:1px solid rgba(180,148,80,0.2);">No Middlemen</span><span style="background:rgba(180,148,80,0.1); color:#B49450; padding:0.25rem 0.8rem; border-radius:50px; font-size:0.7rem; font-weight:600; border:1px solid rgba(180,148,80,0.2);">Verified Owners</span><span style="background:rgba(180,148,80,0.1); color:#B49450; padding:0.25rem 0.8rem; border-radius:50px; font-size:0.7rem; font-weight:600; border:1px solid rgba(180,148,80,0.2);">Zero Commission</span></div></div>
         </div>
-
-        <!-- 5. Bottom Copyright Bar -->
-        <div class="footer-bottom">
-            <span>&copy; 2026 <strong style="color:white;">Zaure Technologies</strong>. All rights reserved.</span>
-            <span>Built for Northern Nigeria. 🇳🇬</span>
-        </div>
+        <div class="footer-bottom"><span>&copy; 2026 <strong style="color:white;">Zaure Technologies</strong>. All rights reserved.</span><span>Built for Northern Nigeria. 🇳🇬</span></div>
     </div>
 </footer>
-
-<!-- Lightbox (Supports images & video) -->
 <div class="lightbox" id="lightbox">
     <button class="lightbox-close">&times;</button>
     <button class="lightbox-prev"><i class="fas fa-chevron-left"></i></button>
     <div class="lightbox-content" id="lightboxContent"></div>
     <button class="lightbox-next"><i class="fas fa-chevron-right"></i></button>
 </div>
-
 <script>
 (function() {
-    // Theme & mobile menu
     const themeToggle = document.getElementById('themeToggle');
     const savedTheme = localStorage.getItem('zaure_theme') || 'light';
     document.documentElement.setAttribute('data-theme', savedTheme);
@@ -545,15 +217,9 @@
         localStorage.setItem('zaure_theme', next);
         themeToggle.innerHTML = next === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
     });
-
     document.getElementById('mobileMenuToggle').addEventListener('click', () => document.getElementById('mobileMenu').classList.add('open'));
     document.getElementById('closeMenu').addEventListener('click', () => document.getElementById('mobileMenu').classList.remove('open'));
-
-    // ==============================================================
-    // NEW: READ SLUG FROM URL INSTEAD OF ID
-    // ==============================================================
     const slug = window.location.pathname.split('/').pop(); 
-    
     if (!slug || slug === 'property') {
         document.getElementById('propertyContent').innerHTML = '<div class="error-message">No property specified.</div>';
     } else {
@@ -570,106 +236,67 @@
                 document.getElementById('propertyContent').innerHTML = '<div class="error-message">Failed to load property.</div>';
             });
     }
-
-    function formatPrice(price) {
-        return price >= 1e6 ? `₦${(price/1e6).toFixed(1)}M` : `₦${price.toLocaleString()}`;
-    }
-
-    let allMedia = []; // Stores { type: 'image'|'video', src: 'url' }
-    let currentMediaIndex = 0;
-
+    function formatPrice(price) { return price >= 1e6 ? `₦${(price/1e6).toFixed(1)}M` : `₦${price.toLocaleString()}`; }
+    let allMedia = []; let currentMediaIndex = 0;
     function renderProperty(prop) {
         const container = document.getElementById('propertyContent');
         const priceFormatted = formatPrice(prop.price);
         const owner = prop.owner || { name: 'Owner', phone: '', verified: false };
         const avatar = owner.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(owner.name)}&background=B49450&color=fff&size=128`;
-
-        // Build media array (images + optional video)
         allMedia = [];
-        if (prop.images && prop.images.length) {
-            prop.images.forEach(img => allMedia.push({ type: 'image', src: img }));
-        } else {
-            allMedia.push({ type: 'image', src: 'https://placehold.co/800x500?text=Zaure' });
-        }
-        // If video exists, insert it as the second item (after the first image)
-        if (prop.video) {
-            allMedia.splice(1, 0, { type: 'video', src: prop.video });
-        }
-
+        if (prop.images && prop.images.length) { prop.images.forEach(img => allMedia.push({ type: 'image', src: img })); }
+        else { allMedia.push({ type: 'image', src: 'https://placehold.co/800x500?text=Zaure' }); }
+        if (prop.video) { allMedia.splice(1, 0, { type: 'video', src: prop.video }); }
         const mainMedia = allMedia[0];
         const thumbnailsHtml = allMedia.map((item, idx) => {
             const isVideo = item.type === 'video';
             const thumbSrc = isVideo ? 'https://placehold.co/80x80/1a1a1a/ffffff?text=▶' : item.src;
             return `<img src="${thumbSrc}" class="thumbnail ${idx === 0 ? 'active' : ''} ${isVideo ? 'video-thumb' : ''}" data-index="${idx}" alt="Thumbnail" loading="lazy">`;
         }).join('');
-
-        // Determine if main media is video
         const isMainVideo = mainMedia.type === 'video';
         const mainMediaHtml = isMainVideo
-            ? `<video id="mainVideo" src="${mainMedia.src}" muted playsinline></video>
-               <div class="video-play-overlay" id="videoOverlay">
-                   <div class="play-icon"><i class="fas fa-play"></i></div>
-               </div>`
+            ? `<video id="mainVideo" src="${mainMedia.src}" muted playsinline></video><div class="video-play-overlay" id="videoOverlay"><div class="play-icon"><i class="fas fa-play"></i></div></div>`
             : `<img src="${mainMedia.src}" id="mainImage" alt="${prop.title}" loading="lazy">`;
-
-        const yearBuilt = prop.yearBuilt || 'N/A';
-        const parking = prop.parking || 'N/A';
+        const yearBuilt = prop.yearBuilt || 'N/A'; const parking = prop.parking || 'N/A';
         const lastUpdated = prop.listedDate ? new Date(prop.listedDate).toLocaleDateString('en-GB') : 'Unknown';
-        const amenitiesHtml = prop.amenities && prop.amenities.length
-            ? prop.amenities.map(a => `<span class="amenity-tag">${a}</span>`).join('')
-            : '<span class="amenity-tag">None listed</span>';
-
-        // Check if already saved
+        const amenitiesHtml = prop.amenities && prop.amenities.length ? prop.amenities.map(a => `<span class="amenity-tag">${a}</span>`).join('') : '<span class="amenity-tag">None listed</span>';
         const interactions = JSON.parse(localStorage.getItem('zaure_interactions') || '[]');
         const isSaved = interactions.some(i => i.propertyId == prop.id && i.action === 'like');
-
         container.innerHTML = `
             <div class="property-header">
                 <h1 class="property-title">${prop.title}</h1>
                 <div class="property-address"><i class="fas fa-map-marker-alt"></i> ${prop.address}, ${prop.city}, ${prop.state}</div>
                 <div class="property-price">${priceFormatted}</div>
-                <div style="margin-top:0.5rem;">
-                    <span class="badge-type">${prop.type === 'sale' ? 'For Sale' : 'For Rent'}</span>
-                </div>
+                <div style="margin-top:0.5rem;"><span class="badge-type">${prop.type === 'sale' ? 'For Sale' : 'For Rent'}</span></div>
                 <div class="card-tags" style="margin-top:0.75rem;">
                     <span class="card-tag" onclick="event.stopPropagation(); window.location.href='/browse?location=${encodeURIComponent(prop.city)}'">${prop.city}</span>
                     <span class="card-tag" onclick="event.stopPropagation(); window.location.href='/browse?propertyType=${encodeURIComponent(prop.propertyType)}'">${prop.propertyType}</span>
                     ${prop.amenities?.slice(0,3).map(a => `<span class="card-tag" onclick="event.stopPropagation(); window.location.href='/browse?search=${encodeURIComponent(a)}'">${a}</span>`).join('')}
                 </div>
             </div>
-
             <div class="property-layout">
                 <div class="gallery">
-                    <div class="main-media-container" id="mainMediaContainer">
-                        ${mainMediaHtml}
-                    </div>
+                    <div class="main-media-container" id="mainMediaContainer">${mainMediaHtml}</div>
                     <div class="thumbnail-strip">${thumbnailsHtml}</div>
                 </div>
-
                 <div class="sidebar-card">
                     <h3 style="font-family:'Playfair Display',serif; margin-bottom:1rem;">Owner</h3>
                     <div class="owner-profile">
                         <img src="${avatar}" class="owner-avatar" onerror="this.style.background='var(--accent)';">
                         <div class="owner-details">
-                            <h3>
-                                ${owner.name}
-                                ${owner.verified ? `<span class="verified-icon"><i class="fas fa-check-circle"></i> Verified</span>` : ''}
-                            </h3>
+                            <h3>${owner.name} ${owner.verified ? `<span class="verified-icon"><i class="fas fa-check-circle"></i> Verified</span>` : ''}</h3>
                             <div class="owner-phone">${owner.phone || 'Phone not provided'}</div>
                         </div>
                     </div>
                     <div class="owner-actions">
                         ${owner.phone ? `<a href="tel:${owner.phone}" class="btn-call" id="callBtn"><i class="fas fa-phone-alt"></i> Call</a>` : ''}
                         <a href="#" class="btn-wa" id="ownerWhatsApp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-                        <button class="btn-heart ${isSaved ? 'saved' : ''}" id="heartBtn">
-                            <i class="fas fa-heart"></i> ${isSaved ? 'Saved' : 'Save'}
-                        </button>
+                        <button class="btn-heart ${isSaved ? 'saved' : ''}" id="heartBtn"><i class="fas fa-heart"></i> ${isSaved ? 'Saved' : 'Save'}</button>
                     </div>
                     <hr>
                     <div class="safety-tips"><i class="fas fa-shield-alt"></i> Do not pay any money before viewing the property and verifying the owner's identity.</div>
                 </div>
             </div>
-
             <div class="tabs-container">
                 <div class="tabs-header">
                     <button class="tab-btn-prop active" data-tab="overview">Overview</button>
@@ -678,130 +305,64 @@
                     <button class="tab-btn-prop" data-tab="details">Details</button>
                 </div>
                 <div class="tab-content active" id="tab-overview">
-                    <div class="info-grid">
-                        <div class="info-item"><i class="fas fa-bed"></i> <strong>Bedrooms:</strong> ${prop.bedrooms}</div>
-                        <div class="info-item"><i class="fas fa-bath"></i> <strong>Bathrooms:</strong> ${prop.bathrooms}</div>
-                        <div class="info-item"><i class="fas fa-ruler-combined"></i> <strong>Land size:</strong> ${prop.squareFeet} sqm</div>
-                        <div class="info-item"><i class="fas fa-calendar-alt"></i> <strong>Year built:</strong> ${yearBuilt}</div>
-                        <div class="info-item"><i class="fas fa-car"></i> <strong>Parking:</strong> ${parking}</div>
-                        <div class="info-item"><i class="fas fa-clock"></i> <strong>Last updated:</strong> ${lastUpdated}</div>
-                        <div class="info-item"><i class="fas fa-building"></i> <strong>Type:</strong> ${prop.propertyType}</div>
-                    </div>
+                    <div class="info-grid"><div class="info-item"><i class="fas fa-bed"></i> <strong>Bedrooms:</strong> ${prop.bedrooms}</div><div class="info-item"><i class="fas fa-bath"></i> <strong>Bathrooms:</strong> ${prop.bathrooms}</div><div class="info-item"><i class="fas fa-ruler-combined"></i> <strong>Land size:</strong> ${prop.squareFeet} sqm</div><div class="info-item"><i class="fas fa-calendar-alt"></i> <strong>Year built:</strong> ${yearBuilt}</div><div class="info-item"><i class="fas fa-car"></i> <strong>Parking:</strong> ${parking}</div><div class="info-item"><i class="fas fa-clock"></i> <strong>Last updated:</strong> ${lastUpdated}</div><div class="info-item"><i class="fas fa-building"></i> <strong>Type:</strong> ${prop.propertyType}</div></div>
                 </div>
                 <div class="tab-content" id="tab-description"><p>${prop.description || 'No description provided.'}</p></div>
                 <div class="tab-content" id="tab-amenities"><div class="amenities-list">${amenitiesHtml}</div></div>
                 <div class="tab-content" id="tab-details">
-                    <div class="info-grid">
-                        <div class="info-item"><i class="fas fa-toilet"></i> <strong>Toilets:</strong> ${prop.toilets || prop.bathrooms}</div>
-                        <div class="info-item"><i class="fas fa-vector-square"></i> <strong>Square Feet:</strong> ${prop.squareFeet || 'N/A'}</div>
-                        <div class="info-item"><i class="fas fa-city"></i> <strong>State:</strong> ${prop.state}</div>
-                        <div class="info-item"><i class="fas fa-map-pin"></i> <strong>City:</strong> ${prop.city}</div>
-                    </div>
+                    <div class="info-grid"><div class="info-item"><i class="fas fa-toilet"></i> <strong>Toilets:</strong> ${prop.toilets || prop.bathrooms}</div><div class="info-item"><i class="fas fa-vector-square"></i> <strong>Square Feet:</strong> ${prop.squareFeet || 'N/A'}</div><div class="info-item"><i class="fas fa-city"></i> <strong>State:</strong> ${prop.state}</div><div class="info-item"><i class="fas fa-map-pin"></i> <strong>City:</strong> ${prop.city}</div></div>
                 </div>
             </div>
-
-            <div class="similar-section">
-                <h2>Similar properties nearby</h2>
-                <div id="similarGrid" class="similar-grid"></div>
-            </div>
+            <div class="similar-section"><h2>Similar properties nearby</h2><div id="similarGrid" class="similar-grid"></div></div>
         `;
-
-        // ==============================================================
-        // CUSTOM VIDEO PLAYER (Inside gallery)
-        // ==============================================================
         const mainVideo = document.getElementById('mainVideo');
         const videoOverlay = document.getElementById('videoOverlay');
         const mainMediaContainer = document.getElementById('mainMediaContainer');
-
         if (mainVideo) {
-            // Click video to toggle play/pause
-            mainVideo.addEventListener('click', () => {
-                if (mainVideo.paused) {
-                    mainVideo.play();
-                    videoOverlay.classList.add('hidden');
-                } else {
-                    mainVideo.pause();
-                    videoOverlay.classList.remove('hidden');
-                }
-            });
-            // Hide overlay when playing
-            mainVideo.addEventListener('play', () => {
-                videoOverlay.classList.add('hidden');
-            });
-            // Show overlay when paused
-            mainVideo.addEventListener('pause', () => {
-                videoOverlay.classList.remove('hidden');
-            });
+            mainVideo.addEventListener('click', () => { if (mainVideo.paused) { mainVideo.play(); videoOverlay.classList.add('hidden'); } else { mainVideo.pause(); videoOverlay.classList.remove('hidden'); } });
+            mainVideo.addEventListener('play', () => { videoOverlay.classList.add('hidden'); });
+            mainVideo.addEventListener('pause', () => { videoOverlay.classList.remove('hidden'); });
         }
-
-        // ==============================================================
-        // GALLERY & LIGHTBOX LOGIC (Supports images + video)
-        // ==============================================================
         const thumbnails = document.querySelectorAll('.thumbnail');
         const lightbox = document.getElementById('lightbox');
         const lightboxContent = document.getElementById('lightboxContent');
         const lightboxClose = document.querySelector('.lightbox-close');
         const lightboxPrev = document.querySelector('.lightbox-prev');
         const lightboxNext = document.querySelector('.lightbox-next');
-
         function updateMainMedia(index) {
             currentMediaIndex = index;
             const item = allMedia[index];
             const container = document.getElementById('mainMediaContainer');
-            
             if (item.type === 'video') {
-                container.innerHTML = `
-                    <video id="mainVideo" src="${item.src}" muted playsinline></video>
-                    <div class="video-play-overlay" id="videoOverlay">
-                        <div class="play-icon"><i class="fas fa-play"></i></div>
-                    </div>
-                `;
-                // Re-attach video events
+                container.innerHTML = `<video id="mainVideo" src="${item.src}" muted playsinline></video><div class="video-play-overlay" id="videoOverlay"><div class="play-icon"><i class="fas fa-play"></i></div></div>`;
                 const newVideo = document.getElementById('mainVideo');
                 const newOverlay = document.getElementById('videoOverlay');
-                newVideo.addEventListener('click', () => {
-                    if (newVideo.paused) { newVideo.play(); newOverlay.classList.add('hidden'); }
-                    else { newVideo.pause(); newOverlay.classList.remove('hidden'); }
-                });
+                newVideo.addEventListener('click', () => { if (newVideo.paused) { newVideo.play(); newOverlay.classList.add('hidden'); } else { newVideo.pause(); newOverlay.classList.remove('hidden'); } });
                 newVideo.addEventListener('play', () => newOverlay.classList.add('hidden'));
                 newVideo.addEventListener('pause', () => newOverlay.classList.remove('hidden'));
-            } else {
-                container.innerHTML = `<img src="${item.src}" id="mainImage" alt="Property" loading="lazy">`;
-            }
-            
+            } else { container.innerHTML = `<img src="${item.src}" id="mainImage" alt="Property" loading="lazy">`; }
             thumbnails.forEach((t, i) => t.classList.toggle('active', i === index));
         }
-
         function openLightbox(index) {
             currentMediaIndex = index;
             const item = allMedia[index];
-            lightboxContent.innerHTML = item.type === 'video'
-                ? `<video src="${item.src}" controls autoplay playsinline></video>`
-                : `<img src="${item.src}" alt="Property">`;
+            lightboxContent.innerHTML = item.type === 'video' ? `<video src="${item.src}" controls autoplay playsinline></video>` : `<img src="${item.src}" alt="Property">`;
             lightbox.classList.add('active');
         }
-
         function closeLightbox() { lightbox.classList.remove('active'); }
         function prevMedia() {
             currentMediaIndex = (currentMediaIndex - 1 + allMedia.length) % allMedia.length;
             const item = allMedia[currentMediaIndex];
-            lightboxContent.innerHTML = item.type === 'video'
-                ? `<video src="${item.src}" controls autoplay playsinline></video>`
-                : `<img src="${item.src}" alt="Property">`;
+            lightboxContent.innerHTML = item.type === 'video' ? `<video src="${item.src}" controls autoplay playsinline></video>` : `<img src="${item.src}" alt="Property">`;
             updateMainMedia(currentMediaIndex);
         }
         function nextMedia() {
             currentMediaIndex = (currentMediaIndex + 1) % allMedia.length;
             const item = allMedia[currentMediaIndex];
-            lightboxContent.innerHTML = item.type === 'video'
-                ? `<video src="${item.src}" controls autoplay playsinline></video>`
-                : `<img src="${item.src}" alt="Property">`;
+            lightboxContent.innerHTML = item.type === 'video' ? `<video src="${item.src}" controls autoplay playsinline></video>` : `<img src="${item.src}" alt="Property">`;
             updateMainMedia(currentMediaIndex);
         }
-
-        thumbnails.forEach((thumb, idx) => {
-            thumb.addEventListener('click', () => updateMainMedia(idx));
-        });
+        thumbnails.forEach((thumb, idx) => { thumb.addEventListener('click', () => updateMainMedia(idx)); });
         mainMediaContainer.addEventListener('click', () => openLightbox(currentMediaIndex));
         lightboxClose.addEventListener('click', closeLightbox);
         lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
@@ -813,10 +374,6 @@
             if (e.key === 'ArrowRight') nextMedia();
             if (e.key === 'Escape') closeLightbox();
         });
-
-        // ==============================================================
-        // TABS
-        // ==============================================================
         const tabBtns = document.querySelectorAll('.tab-btn-prop');
         const tabContents = document.querySelectorAll('.tab-content');
         tabBtns.forEach(btn => {
@@ -828,29 +385,19 @@
                 document.getElementById(`tab-${tabId}`).classList.add('active');
             });
         });
-
-        // ==============================================================
-        // HEART / SAVE LOGIC
-        // ==============================================================
         let saved = isSaved;
         const heartBtn = document.getElementById('heartBtn');
         heartBtn.addEventListener('click', () => {
             saved = !saved;
             heartBtn.classList.toggle('saved', saved);
             heartBtn.innerHTML = `<i class="fas fa-heart"></i> ${saved ? 'Saved' : 'Save'}`;
-            if (saved) {
-                logInteraction(prop, 'like', 8);
-            } else {
+            if (saved) { logInteraction(prop, 'like', 8); } else {
                 const interactions = JSON.parse(localStorage.getItem('zaure_interactions') || '[]');
                 const idx = interactions.findIndex(i => i.propertyId == prop.id && i.action === 'like');
                 if (idx !== -1) interactions.splice(idx, 1);
                 localStorage.setItem('zaure_interactions', JSON.stringify(interactions));
             }
         });
-
-        // ==============================================================
-        // WHATSAPP BUTTON
-        // ==============================================================
         const waBtn = document.getElementById('ownerWhatsApp');
         waBtn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -859,42 +406,27 @@
                 const text = `Hello, I am interested in your property "${prop.title}" on Zaure.`;
                 window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`, '_blank');
                 logInteraction(prop, 'whatsapp', 8);
-            } else {
-                alert('Owner phone not available.');
-            }
+            } else { alert('Owner phone not available.'); }
         });
-
-        // ==============================================================
-        // CALL BUTTON LOGGING
-        // ==============================================================
         const callBtn = document.getElementById('callBtn');
         if (callBtn) callBtn.addEventListener('click', () => logInteraction(prop, 'call', 12));
-
-        // ==============================================================
-        // VIEW TIME LOGGING
-        // ==============================================================
         const viewStart = Date.now();
         window.addEventListener('beforeunload', () => {
             const seconds = (Date.now() - viewStart) / 1000;
             if (seconds >= 5) logInteraction(prop, 'view', seconds >= 15 ? 3 : 1);
         });
     }
-
     function logInteraction(prop, action, weight) {
         const interactions = JSON.parse(localStorage.getItem('zaure_interactions') || '[]');
         interactions.push({ propertyId: prop.id, action, weight, timestamp: Date.now() });
         if (interactions.length > 50) interactions.shift();
         localStorage.setItem('zaure_interactions', JSON.stringify(interactions));
     }
-
     function loadSimilarProperties(prop, allProperties) {
         const similar = allProperties.filter(p => p.id != prop.id && p.city === prop.city).slice(0, 4);
         const grid = document.getElementById('similarGrid');
         if (!grid) return;
-        if (!similar.length) {
-            grid.innerHTML = '<p>No similar properties found.</p>';
-            return;
-        }
+        if (!similar.length) { grid.innerHTML = '<p>No similar properties found.</p>'; return; }
         grid.innerHTML = similar.map(p => `
             <div class="property-card" onclick="window.location.href='/property/${p.slug}'">
                 <img src="${p.images?.[0] || 'https://placehold.co/400x300?text=Zaure'}" alt="${p.title}" loading="lazy">
