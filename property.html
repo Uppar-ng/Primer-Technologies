@@ -549,16 +549,18 @@
     document.getElementById('mobileMenuToggle').addEventListener('click', () => document.getElementById('mobileMenu').classList.add('open'));
     document.getElementById('closeMenu').addEventListener('click', () => document.getElementById('mobileMenu').classList.remove('open'));
 
-    // Get property ID from URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const propertyId = urlParams.get('id');
-    if (!propertyId) {
-        document.getElementById('propertyContent').innerHTML = '<div class="error-message">No property ID specified.</div>';
+    // ==============================================================
+    // NEW: READ SLUG FROM URL INSTEAD OF ID
+    // ==============================================================
+    const slug = window.location.pathname.split('/').pop(); 
+    
+    if (!slug || slug === 'property') {
+        document.getElementById('propertyContent').innerHTML = '<div class="error-message">No property specified.</div>';
     } else {
         fetch('/data/properties.json')
             .then(res => res.json())
             .then(data => {
-                const property = data.properties.find(p => p.id == propertyId);
+                const property = data.properties.find(p => p.slug === slug);
                 if (!property) throw new Error('Property not found');
                 renderProperty(property);
                 loadSimilarProperties(property, data.properties);
@@ -894,7 +896,7 @@
             return;
         }
         grid.innerHTML = similar.map(p => `
-            <div class="property-card" onclick="window.location.href='/property?id=${p.id}'">
+            <div class="property-card" onclick="window.location.href='/property/${p.slug}'">
                 <img src="${p.images?.[0] || 'https://placehold.co/400x300?text=Zaure'}" alt="${p.title}" loading="lazy">
                 <div class="price">${formatPrice(p.price)}</div>
                 <h4>${p.title}</h4>
