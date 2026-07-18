@@ -3,238 +3,286 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Blog | Prima</title>
-    <meta name="description" content="Expert insights, property tips, market trends, and home maintenance advice from Prima.">
+    <title>Blog & Insights | Zaure</title>
+    <meta name="description" content="Expert property tips, market trends, and real estate advice from the Zaure team in Northern Nigeria.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://zauretech.vercel.app/blog">
+    <meta property="og:title" content="Blog & Insights | Zaure">
+    <meta property="og:description" content="Expert property tips, market trends, and real estate advice from the Zaure team in Northern Nigeria.">
+    <meta property="og:image" content="https://zauretech.vercel.app/og-image.png">
+    <meta property="og:site_name" content="Zaure Technologies">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://zauretech.vercel.app/blog">
+    <meta property="twitter:title" content="Blog & Insights | Zaure">
+    <meta property="twitter:description" content="Expert property tips, market trends, and real estate advice from the Zaure team in Northern Nigeria.">
+    <meta property="twitter:image" content="https://zauretech.vercel.app/og-image.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#1A1F2E">
+
+    <!-- ============================================================== -->
+    <!-- BASE WEBSITE SCHEMA (Organization & Executive Team)              -->
+    <!-- ============================================================== -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Zaure Technologies",
+      "url": "https://zauretech.vercel.app",
+      "description": "PropTech platform in Northern Nigeria connecting verified property owners directly with seekers. No middlemen. No commission.",
+      "foundingDate": "2024",
+      "numberOfEmployees": "7",
+      "founder": {
+        "@type": "Person",
+        "name": "Alamin Ahmed",
+        "jobTitle": "Founder & CEO",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Zaure Technologies"
+        }
+      },
+      "employee": [
+        { "@type": "Person", "name": "Alamin Ahmed", "jobTitle": "Founder & CEO" },
+        { "@type": "Person", "name": "Ammar Ibrahim", "jobTitle": "Head of Operations" },
+        { "@type": "Person", "name": "A. Usman", "jobTitle": "Program Director" },
+        { "@type": "Person", "name": "Muhammad Abdullahi", "jobTitle": "Lead Instructor" }
+      ]
+    }
+    </script>
+    <!-- ============================================================== -->
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
         :root {
-            --primary: #2563EB;
-            --primary-dark: #1D4ED8;
-            --bg: #F8FAFC;
-            --white: #FFFFFF;
-            --text: #0F172A;
-            --text-light: #475569;
-            --border: #E2E8F0;
-            --shadow: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03);
-            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.025);
-            --radius: 12px;
+            --primary: #1A1F2E;
+            --primary-soft: #2E3548;
+            --accent: #B49450;
+            --accent-soft: #D4B87A;
+            --bg: #FBFBFB;
+            --surface: #FFFFFF;
+            --surface-alt: #F6F6F6;
+            --text: #1E1E1E;
+            --text-secondary: #6B7280;
+            --border: #E5E7EB;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.03), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.04);
+            --shadow-lg: 0 12px 24px -8px rgba(0,0,0,0.06);
+            --radius: 16px;
+            --radius-sm: 12px;
+            --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
         }
+        [data-theme="dark"] {
+            --primary: #D4B87A;
+            --accent: #D4B87A;
+            --bg: #0B1120;
+            --surface: #131C31;
+            --surface-alt: #1A2540;
+            --text: #F1F5F9;
+            --text-secondary: #94A3B8;
+            --border: #2A3550;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
         body {
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
             background: var(--bg);
             color: var(--text);
-            line-height: 1.5;
+            line-height: 1.6;
+            transition: background var(--transition), color var(--transition);
+            -webkit-font-smoothing: antialiased;
         }
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
+        .container { max-width:1280px; margin:0 auto; padding:0 2rem; }
+
+        /* Remove blue focus outlines */
+        button:focus, a:focus, input:focus, select:focus, textarea:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(180,148,80,0.3);
         }
-        /* Header */
+
+        /* ============================================================== */
+        /* HEADER                                                          */
+        /* ============================================================== */
         .main-header {
-            background: var(--white);
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            position: sticky; top:0; z-index:100;
         }
-        .main-header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 1.5rem;
-        }
+        [data-theme="dark"] .main-header { background: rgba(19,28,49,0.8); }
+        .main-header .container { display:flex; justify-content:space-between; align-items:center; padding:1rem 2rem; }
         .logo a {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--primary);
-            text-decoration: none;
+            text-decoration:none; font-family:'Playfair Display',serif; font-size:2rem; font-weight:800;
+            color: var(--primary); letter-spacing:-0.5px; display:flex; align-items:baseline;
         }
-        .desktop-nav {
-            display: flex;
-            gap: 2rem;
-        }
+        .logo a .dot { width:6px; height:6px; background:var(--accent); border-radius:50%; margin-left:4px; }
+        .desktop-nav { display:flex; gap:2.2rem; align-items:center; }
         .desktop-nav a {
-            text-decoration: none;
-            color: var(--text);
-            font-weight: 500;
-            transition: color 0.2s;
+            text-decoration:none; color:var(--text); font-weight:500; font-size:0.95rem;
+            transition:color 0.2s; position:relative;
         }
-        .desktop-nav a:hover, .desktop-nav a.active {
-            color: var(--primary);
+        .desktop-nav a::after {
+            content:''; position:absolute; bottom:-6px; left:0; width:0; height:2px;
+            background:var(--accent); border-radius:2px; transition:width 0.25s;
         }
-        .header-actions {
-            display: flex;
-            gap: 1rem;
+        .desktop-nav a:hover, .desktop-nav a.active { color:var(--primary); }
+        .desktop-nav a:hover::after, .desktop-nav a.active::after { width:100%; }
+        
+        .btn-nav {
+            display: inline-block; padding: 0.5rem 1.5rem; border: 2px solid var(--accent); border-radius: 50px;
+            color: var(--accent); background: transparent; font-weight: 600; font-size: 0.9rem;
+            transition: all 0.2s ease; text-decoration: none; opacity: 0; transform: translateY(15px);
+            animation: btnFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.5s;
         }
-        .icon-btn {
-            background: none;
-            border: none;
-            font-size: 1.2rem;
-            cursor: pointer;
-            color: var(--text);
-            padding: 0.5rem;
-            border-radius: 8px;
-        }
-        .mobile-only { display: none; }
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            left: -100%;
-            width: 80%;
-            max-width: 300px;
-            height: 100%;
-            background: var(--white);
-            z-index: 200;
-            transition: left 0.3s ease;
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            box-shadow: var(--shadow-lg);
-        }
-        .mobile-menu.open { left: 0; }
-        .mobile-menu a {
-            text-decoration: none;
-            font-size: 1.2rem;
-            color: var(--text);
-            font-weight: 500;
-        }
-        /* Hero */
+        .btn-nav:hover { background: var(--accent); color: #ffffff; border-color: var(--accent); transform: translateY(-2px); }
+        .btn-nav::after { display: none; }
+        @keyframes btnFadeUp { to { opacity: 1; transform: translateY(0); } }
+
+        .header-actions { display:flex; gap:0.8rem; align-items:center; }
+        .icon-btn { background:transparent; border:1px solid var(--border); font-size:1.1rem; cursor:pointer; color:var(--text); padding:0.5rem; border-radius:50%; width:38px; height:38px; display:flex; align-items:center; justify-content:center; transition:0.2s; }
+        .icon-btn:hover { background:var(--primary); color:white; border-color:var(--primary); }
+        .mobile-only { display:none; }
+        .mobile-menu { position:fixed; top:0; left:-100%; width:80%; max-width:320px; height:100%; background:var(--surface); z-index:200; transition:left 0.35s; padding:2.5rem 2rem; display:flex; flex-direction:column; gap:1.5rem; box-shadow:var(--shadow-lg); }
+        .mobile-menu.open { left:0; }
+        .mobile-menu a { text-decoration:none; font-size:1.2rem; color:var(--text); font-weight:500; padding:0.5rem 0; border-bottom:1px solid var(--border); }
+
+        /* ============================================================== */
+        /* HERO                                                          */
+        /* ============================================================== */
         .hero {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-soft) 100%);
             color: white;
-            padding: 3rem 0;
+            padding: 4rem 0;
             text-align: center;
         }
-        .hero h1 {
-            font-size: 2.2rem;
-            margin-bottom: 1rem;
-        }
-        .hero p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        /* Blog layout */
+        .hero h1 { font-family:'Playfair Display',serif; font-size:2.8rem; margin-bottom:1rem; }
+        .hero p { font-size:1.1rem; opacity:0.9; max-width:700px; margin:0 auto; }
+
+        /* ============================================================== */
+        /* BLOG LAYOUT                                                     */
+        /* ============================================================== */
         .blog-layout {
             display: grid;
             grid-template-columns: 2fr 1fr;
             gap: 3rem;
             margin: 3rem 0;
         }
-        @media (max-width: 768px) {
-            .blog-layout { grid-template-columns: 1fr; gap: 2rem; }
-        }
-        .blog-grid {
-            display: grid;
-            gap: 2rem;
-        }
+        @media (max-width: 768px) { .blog-layout { grid-template-columns: 1fr; gap: 2rem; } }
+
+        .blog-grid { display: grid; gap: 2rem; }
         .blog-card {
-            background: var(--white);
+            background: var(--surface);
             border-radius: var(--radius);
             overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: transform 0.2s;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid var(--border);
         }
         .blog-card:hover {
             transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent);
         }
         .blog-card img {
             width: 100%;
-            height: 220px;
+            height: 240px;
             object-fit: cover;
         }
-        .blog-content {
-            padding: 1.5rem;
-        }
+        .blog-content { padding: 1.5rem; }
         .blog-category {
             display: inline-block;
-            background: var(--primary);
-            color: white;
+            background: var(--accent);
+            color: var(--primary);
             padding: 0.2rem 0.8rem;
             border-radius: 2rem;
             font-size: 0.7rem;
-            font-weight: 600;
+            font-weight: 700;
             margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         .blog-title {
+            font-family:'Playfair Display',serif;
             font-size: 1.3rem;
+            font-weight: 700;
             margin-bottom: 0.5rem;
         }
-        .blog-excerpt {
-            color: var(--text-light);
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-        }
+        .blog-excerpt { color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.9rem; }
         .blog-meta {
             display: flex;
             justify-content: space-between;
-            color: var(--text-light);
+            color: var(--text-secondary);
             font-size: 0.8rem;
             margin-bottom: 1rem;
         }
         .read-more {
-            color: var(--primary);
+            color: var(--accent);
             text-decoration: none;
             font-weight: 600;
             font-size: 0.9rem;
             cursor: pointer;
+            transition: color 0.2s;
         }
-        /* Sidebar */
+        .read-more:hover { color: var(--accent-soft); }
+
+        /* ============================================================== */
+        /* SIDEBAR                                                         */
+        /* ============================================================== */
         .sidebar-widget {
-            background: var(--white);
+            background: var(--surface);
             border-radius: var(--radius);
             padding: 1.5rem;
             margin-bottom: 2rem;
-            box-shadow: var(--shadow);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
         }
         .sidebar-widget h3 {
+            font-family:'Playfair Display',serif;
             margin-bottom: 1rem;
             font-size: 1.2rem;
+            color: var(--primary);
         }
-        .search-box {
-            display: flex;
-            gap: 0.5rem;
-        }
+        .search-box { display: flex; gap: 0.5rem; }
         .search-box input {
-            flex: 1;
-            padding: 0.6rem;
+            flex: 1; padding: 0.6rem 1rem;
             border: 1px solid var(--border);
             border-radius: 2rem;
             background: var(--bg);
+            font-family: inherit;
+            color: var(--text);
         }
         .search-box button {
-            background: var(--primary);
+            background: var(--accent);
             border: none;
-            padding: 0.6rem 1rem;
+            padding: 0.6rem 1.2rem;
             border-radius: 2rem;
-            color: white;
+            color: var(--primary);
             cursor: pointer;
+            font-weight: 700;
+            transition: 0.2s;
         }
-        .categories-list {
-            list-style: none;
-        }
-        .categories-list li {
-            margin-bottom: 0.75rem;
-        }
+        .search-box button:hover { background: var(--accent-soft); }
+        
+        .categories-list { list-style: none; }
+        .categories-list li { margin-bottom: 0.75rem; }
         .categories-list a {
             color: var(--text);
             text-decoration: none;
             display: flex;
             justify-content: space-between;
+            transition: 0.2s;
         }
-        .categories-list a:hover {
-            color: var(--primary);
-        }
+        .categories-list a:hover { color: var(--accent); }
+        
         .popular-post {
             display: flex;
             gap: 1rem;
@@ -242,56 +290,53 @@
             align-items: center;
         }
         .popular-post img {
-            width: 60px;
-            height: 60px;
-            border-radius: 8px;
-            object-fit: cover;
+            width: 64px; height: 64px;
+            border-radius: 8px; object-fit: cover;
         }
-        .popular-post h4 {
-            font-size: 0.9rem;
-            margin-bottom: 0.25rem;
-        }
-        .popular-post p {
-            font-size: 0.75rem;
-            color: var(--text-light);
-        }
-        .pagination {
-            display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-            margin: 2rem 0;
-        }
+        .popular-post h4 { font-size: 0.9rem; margin-bottom: 0.25rem; color: var(--text); }
+        .popular-post p { font-size: 0.75rem; color: var(--text-secondary); }
+
+        /* ============================================================== */
+        /* PAGINATION                                                      */
+        /* ============================================================== */
+        .pagination { display: flex; justify-content: center; gap: 0.5rem; margin: 2rem 0; }
         .pagination button {
             padding: 0.5rem 1rem;
             border: 1px solid var(--border);
-            background: var(--white);
+            background: var(--surface);
             border-radius: 8px;
             cursor: pointer;
+            color: var(--text);
+            transition: 0.2s;
         }
         .pagination button.active {
             background: var(--primary);
             color: white;
             border-color: var(--primary);
         }
-        /* Modal for full article */
+        .pagination button:hover:not(:disabled) {
+            background: var(--primary);
+            color: white;
+        }
+        .pagination button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        /* ============================================================== */
+        /* MODAL FOR FULL ARTICLE                                         */
+        /* ============================================================== */
         .modal {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(4px);
             z-index: 1000;
             align-items: center;
             justify-content: center;
             padding: 1rem;
         }
-        .modal.active {
-            display: flex;
-        }
+        .modal.active { display: flex; }
         .modal-content {
-            background: var(--white);
+            background: var(--surface);
             max-width: 800px;
             max-height: 90vh;
             overflow-y: auto;
@@ -299,82 +344,84 @@
             padding: 2rem;
             position: relative;
             box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
         }
         .modal-close {
             position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text-light);
+            top: 1rem; right: 1rem;
+            background: none; border: none;
+            font-size: 1.5rem; cursor: pointer;
+            color: var(--text-secondary);
+            transition: 0.2s;
         }
-        .modal-close:hover {
-            color: var(--text);
-        }
+        .modal-close:hover { color: var(--text); }
         .modal-content img {
-            width: 100%;
-            border-radius: var(--radius);
-            margin-bottom: 1rem;
+            width: 100%; border-radius: var(--radius-sm); margin-bottom: 1rem;
         }
         .modal-content .category {
             display: inline-block;
-            background: var(--primary);
-            color: white;
+            background: var(--accent);
+            color: var(--primary);
             padding: 0.2rem 0.8rem;
             border-radius: 2rem;
             font-size: 0.7rem;
-            font-weight: 600;
+            font-weight: 700;
             margin-bottom: 1rem;
+            text-transform: uppercase;
         }
         .modal-content h2 {
+            font-family:'Playfair Display',serif;
             margin-bottom: 0.5rem;
+            color: var(--text);
         }
         .modal-content .meta {
-            color: var(--text-light);
+            color: var(--text-secondary);
             font-size: 0.85rem;
             margin-bottom: 1.5rem;
             display: flex;
             gap: 1rem;
         }
         .modal-content .full-body {
-            line-height: 1.7;
-            color: var(--text);
+            line-height: 1.8;
+            color: var(--text-secondary);
         }
-        /* Footer */
-        .footer {
-            background: #0F172A;
-            color: #94A3B8;
-            padding: 3rem 0 1.5rem;
-            margin-top: 3rem;
-        }
-        .footer-grid {
+
+        /* ============================================================== */
+        /* CORPORATE FOOTER                                                */
+        /* ============================================================== */
+        footer { background:#1A1F2E; color:#CBD5E1; padding:4rem 0 1.5rem; margin-top:4rem; }
+        footer a { color:#94A3B8; text-decoration:none; transition: all 0.2s; }
+        footer a:hover { color:var(--accent-soft); transform: translateX(4px); }
+        footer .footer-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 3rem;
+            margin-bottom: 0;
         }
-        .footer h4 { color: white; margin-bottom: 1rem; }
-        .footer a { color: #94A3B8; text-decoration: none; display: block; margin: 0.5rem 0; }
-        .social i { font-size: 1.2rem; margin-right: 1rem; cursor: pointer; }
-        .footer-bottom { text-align: center; padding-top: 1rem; border-top: 1px solid #1E293B; font-size: 0.85rem; }
-        @media (max-width: 768px) {
-            .desktop-nav { display: none; }
-            .mobile-only { display: block; }
+        footer .footer-col h4 {
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 1.2rem;
+            letter-spacing: 0.5px;
         }
-        [data-theme="dark"] {
-            --bg: #0F172A;
-            --white: #1E293B;
-            --text: #F1F5F9;
-            --text-light: #94A3B8;
-            --border: #334155;
+        footer .footer-col a { display: block; font-size: 0.9rem; margin-bottom: 0.8rem; }
+        footer .footer-col.brand p { color: #94A3B8; font-size: 0.95rem; line-height: 1.6; }
+        footer .social a { display: inline-block !important; color: #B49450; margin-right: 1rem; transition: transform 0.2s; }
+        footer .social a:hover { transform: scale(1.1); color: var(--accent-soft); }
+        footer .footer-bottom {
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
+            padding-top: 2rem; margin-top: 2rem; border-top: 1px solid #2E3548;
+            font-size: 0.85rem; color: #94A3B8;
         }
-        .loading {
-            text-align: center;
-            padding: 2rem;
-            color: var(--text-light);
+        @media (max-width:768px) {
+            .desktop-nav { display:none; } .mobile-only { display:block; }
+            .hero h1 { font-size:2.2rem; }
+            footer .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+            footer .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
         }
+        .loading { text-align:center; padding:2rem; color:var(--text-secondary); }
     </style>
     
     <!-- Vercel Speed Insights -->
@@ -384,19 +431,19 @@
     </script>
 </head>
 <body>
+    <!-- CORPORATE HEADER -->
     <header class="main-header">
         <div class="container">
-            <div class="logo"><a href="index.html">Prima</a></div>
+            <div class="logo"><a href="/">Zaure<span class="dot"></span></a></div>
             <nav class="desktop-nav">
-                <a href="index.html">Home</a>
-                <a href="browse.html">Buy</a>
-                <a href="browse.html?type=rent">Rent</a>
-                <a href="browse.html?type=shortlet">Short Let</a>
-                <a href="services.html">Services</a>
-                <a href="about.html">About</a>
-                <a href="blog.html" class="active">Blog</a>
-                <a href="contact.html">Contact</a>
-                <a href="favorites.html"><i class="fas fa-heart"></i> Saved</a>
+                <a href="/">Home</a>
+                <a href="/browse">Browse</a>
+                <a href="/how-it-works">How It Works</a>
+                <a href="/about">About</a>
+                <a href="/blog" class="active">Blog</a>
+                <a href="/contact">Contact</a>
+                <a href="/profile">Profile</a>
+                <a href="#" class="btn-nav">List Property</a>
             </nav>
             <div class="header-actions">
                 <button id="themeToggle" class="icon-btn"><i class="fas fa-moon"></i></button>
@@ -405,32 +452,36 @@
         </div>
     </header>
 
+    <!-- MOBILE MENU -->
     <div class="mobile-menu" id="mobileMenu">
         <button id="closeMenu"><i class="fas fa-times"></i></button>
-        <a href="index.html">Home</a>
-        <a href="browse.html">Buy</a>
-        <a href="browse.html?type=rent">Rent</a>
-        <a href="browse.html?type=shortlet">Short Let</a>
-        <a href="services.html">Services</a>
-        <a href="about.html">About</a>
-        <a href="blog.html">Blog</a>
-        <a href="contact.html">Contact</a>
-        <a href="favorites.html">Saved Properties</a>
+        <a href="/">Home</a>
+        <a href="/browse">Browse</a>
+        <a href="/how-it-works">How It Works</a>
+        <a href="/about">About</a>
+        <a href="/blog">Blog</a>
+        <a href="/contact">Contact</a>
+        <a href="/profile">Profile</a>
+        <a href="#">List Property</a>
     </div>
 
     <main>
+        <!-- HERO -->
         <section class="hero">
             <div class="container">
                 <h1>Blog & Insights</h1>
-                <p>Expert tips, market trends, and property advice from the Prima team.</p>
+                <p>Expert property tips, market trends, and real estate advice from the Zaure team in Northern Nigeria.</p>
             </div>
         </section>
 
         <div class="container">
             <div class="blog-layout">
+                <!-- MAIN GRID -->
                 <div class="blog-grid" id="blogGrid">
                     <div class="loading">Loading articles...</div>
                 </div>
+
+                <!-- SIDEBAR -->
                 <aside>
                     <div class="sidebar-widget">
                         <h3>Search</h3>
@@ -457,7 +508,7 @@
         </div>
     </main>
 
-    <!-- Modal for full article -->
+    <!-- ARTICLE MODAL -->
     <div id="articleModal" class="modal">
         <div class="modal-content">
             <button class="modal-close">&times;</button>
@@ -472,35 +523,74 @@
         </div>
     </div>
 
-    <footer class="footer">
+    <!-- CORPORATE FOOTER -->
+    <footer>
         <div class="container">
             <div class="footer-grid">
-                <div><h4>Prima</h4><p>Complete property solutions for modern living in Nigeria.</p></div>
-                <div><h4>Company</h4><a href="about.html">About</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a></div>
-                <div><h4>Services</h4><a href="services.html">Listing</a><a href="services.html">Maintenance</a><a href="services.html">Moving</a><a href="services.html">Handyman</a></div>
-                <div><h4>Follow</h4><div class="social"><i class="fab fa-facebook"></i><i class="fab fa-instagram"></i><i class="fab fa-twitter"></i></div></div>
+                <div class="footer-col brand">
+                    <h4 style="font-family:'Playfair Display',serif; font-size:1.5rem;">Zaure<span style="color:#B49450;">.</span></h4>
+                    <p>Your digital entrance hall – connecting verified owners and seekers directly across Northern Nigeria.</p>
+                    <div style="margin-top:1rem; font-size:0.9rem; color:#94A3B8;">
+                        <i class="fas fa-globe" style="color:#B49450; margin-right:0.5rem;"></i> Remote · Northern Nigeria<br>
+                        <i class="fas fa-envelope" style="color:#B49450; margin-right:0.5rem; margin-top:0.3rem;"></i> get.zaure@proton.me
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Find a Home</h4>
+                    <a href="/browse?type=sale">Buy Property</a>
+                    <a href="/browse?type=rent">Rent Property</a>
+                    <a href="/how-it-works">How It Works</a>
+                    <a href="/browse">Browse All Listings</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <a href="/about">About Us</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/privacy">Privacy Policy</a>
+                    <a href="/terms">Terms of Service</a>
+                </div>
+                <div class="footer-col connect">
+                    <h4>Connect</h4>
+                    <div class="social" style="margin-bottom:1.5rem;">
+                        <a href="https://twitter.com/zauretech" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://instagram.com/zauretech" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://linkedin.com/company/zauretech" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://facebook.com/zauretech" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                    <p style="font-size:0.85rem; color:#94A3B8; margin-bottom:1rem;">Follow us everywhere @zauretech</p>
+                    <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                        <span style="background:rgba(180,148,80,0.1); color:#B49450; padding:0.25rem 0.8rem; border-radius:50px; font-size:0.7rem; font-weight:600; border:1px solid rgba(180,148,80,0.2);">No Middlemen</span>
+                        <span style="background:rgba(180,148,80,0.1); color:#B49450; padding:0.25rem 0.8rem; border-radius:50px; font-size:0.7rem; font-weight:600; border:1px solid rgba(180,148,80,0.2);">Verified Owners</span>
+                        <span style="background:rgba(180,148,80,0.1); color:#B49450; padding:0.25rem 0.8rem; border-radius:50px; font-size:0.7rem; font-weight:600; border:1px solid rgba(180,148,80,0.2);">Zero Commission</span>
+                    </div>
+                </div>
             </div>
-            <div class="footer-bottom">© 2026 Prima. All rights reserved.</div>
+            <div class="footer-bottom">
+                <span>&copy; 2026 <strong style="color:white;">Zaure Technologies</strong>. All rights reserved.</span>
+                <span>Built for Northern Nigeria. 🇳🇬</span>
+            </div>
         </div>
     </footer>
 
+    <!-- SCRIPTS -->
     <script>
-        // Theme toggle
+        // ==============================================================
+        // THEME TOGGLE & MOBILE MENU
+        // ==============================================================
         const themeToggle = document.getElementById('themeToggle');
         if (themeToggle) {
-            const savedTheme = localStorage.getItem('prima_theme') || 'light';
+            const savedTheme = localStorage.getItem('zaure_theme') || 'light';
             document.documentElement.setAttribute('data-theme', savedTheme);
             themeToggle.innerHTML = savedTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
             themeToggle.addEventListener('click', () => {
                 const current = document.documentElement.getAttribute('data-theme');
                 const next = current === 'light' ? 'dark' : 'light';
                 document.documentElement.setAttribute('data-theme', next);
-                localStorage.setItem('prima_theme', next);
+                localStorage.setItem('zaure_theme', next);
                 themeToggle.innerHTML = next === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
             });
         }
 
-        // Mobile menu
         const mobileToggle = document.getElementById('mobileMenuToggle');
         const mobileMenu = document.getElementById('mobileMenu');
         const closeMenu = document.getElementById('closeMenu');
@@ -512,9 +602,41 @@
             });
         }
 
-        // Modal handling
+        // ==============================================================
+        // MODAL HANDLING & GOOGLE SCHEMA INJECTION
+        // ==============================================================
         const modal = document.getElementById('articleModal');
         const modalClose = modal.querySelector('.modal-close');
+        
+        // Function to inject Article Schema into <head> for SEO
+        function injectArticleSchema(post) {
+            // Remove old schema if it exists
+            const oldSchema = document.getElementById('seo-article-schema');
+            if (oldSchema) oldSchema.remove();
+
+            const script = document.createElement('script');
+            script.id = 'seo-article-schema';
+            script.type = 'application/ld+json';
+            script.textContent = JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Article",
+                "headline": post.title,
+                "image": post.image || "https://zauretech.vercel.app/og-image.png",
+                "author": {
+                    "@type": "Person",
+                    "name": post.author
+                },
+                "datePublished": post.date,
+                "dateModified": post.date,
+                "description": post.excerpt,
+                "mainEntityOfPage": {
+                    "@type": "WebPage",
+                    "@id": "https://zauretech.vercel.app/blog"
+                }
+            });
+            document.head.appendChild(script);
+        }
+
         function openModal(post) {
             document.getElementById('modalImage').src = post.image || 'https://placehold.co/800x500?text=Article';
             document.getElementById('modalCategory').innerText = post.category;
@@ -522,13 +644,22 @@
             document.getElementById('modalAuthor').innerText = post.author;
             document.getElementById('modalDate').innerText = formatDate(post.date);
             document.getElementById('modalBody').innerHTML = post.fullBody || post.excerpt || 'Full article content will appear here.';
+            
+            // Inject Google Schema
+            injectArticleSchema(post);
+            
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
+
         function closeModal() {
             modal.classList.remove('active');
             document.body.style.overflow = '';
+            // Remove schema when modal closes (keeps head clean)
+            const oldSchema = document.getElementById('seo-article-schema');
+            if (oldSchema) oldSchema.remove();
         }
+
         modalClose.addEventListener('click', closeModal);
         modal.addEventListener('click', (e) => {
             if (e.target === modal) closeModal();
@@ -537,7 +668,9 @@
             if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
         });
 
-        // Blog data
+        // ==============================================================
+        // BLOG DATA & RENDER
+        // ==============================================================
         let allPosts = [];
         let filteredPosts = [];
         let currentPage = 1;
@@ -595,7 +728,7 @@
                     </div>
                 </article>
             `).join('');
-            // Attach click handlers for read more
+            
             document.querySelectorAll('.read-more').forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -690,7 +823,9 @@
             return date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
         }
 
-        // Search
+        // ==============================================================
+        // SEARCH
+        // ==============================================================
         document.getElementById('searchBtn')?.addEventListener('click', () => {
             currentSearch = document.getElementById('searchInput').value.trim();
             applyFiltersAndRender();
@@ -702,6 +837,9 @@
             }
         });
 
+        // ==============================================================
+        // INIT
+        // ==============================================================
         loadBlogData();
     </script>
 </body>
