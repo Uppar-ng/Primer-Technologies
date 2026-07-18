@@ -35,6 +35,32 @@
     <!-- Theme Color -->
     <meta name="theme-color" content="#1A1F2E">
     <meta name="msapplication-TileColor" content="#1A1F2E">
+    
+    <!-- ============================================================== -->
+    <!-- JSON-LD SCHEMA FOR GOOGLE KNOWLEDGE PANEL (Company & Founder)    -->
+    <!-- ============================================================== -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Zaure Technologies",
+      "url": "https://zauretech.vercel.app",
+      "description": "PropTech platform in Northern Nigeria connecting verified property owners directly with seekers. No middlemen. No commission.",
+      "foundingDate": "2024",
+      "numberOfEmployees": "7",
+      "founder": {
+        "@type": "Person",
+        "name": "Alamin Ahmed",
+        "jobTitle": "Founder & CEO",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Zaure Technologies"
+        }
+      }
+    }
+    </script>
+    <!-- ============================================================== -->
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -76,7 +102,6 @@
             -webkit-font-smoothing: antialiased;
         }
         .container { max-width:1280px; margin:0 auto; padding:0 2rem; }
-        /* Header */
         .main-header {
             background: rgba(255,255,255,0.8);
             backdrop-filter: blur(12px);
@@ -103,7 +128,7 @@
         .desktop-nav a:hover, .desktop-nav a.active { color:var(--primary); }
         .desktop-nav a:hover::after, .desktop-nav a.active::after { width:100%; }
         
-        /* ✅ Styled Navigation Button */
+        /* Corporate Navigation Button */
         .btn-nav {
             display: inline-block;
             padding: 0.5rem 1.5rem;
@@ -115,6 +140,10 @@
             font-size: 0.9rem;
             transition: all 0.2s ease;
             text-decoration: none;
+            opacity: 0;
+            transform: translateY(15px);
+            animation: btnFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: 0.5s;
         }
         .btn-nav:hover {
             background: var(--accent);
@@ -122,7 +151,11 @@
             border-color: var(--accent);
             transform: translateY(-2px);
         }
-        .btn-nav::after { display: none; } /* Remove underline effect */
+        .btn-nav::after { display: none; }
+
+        @keyframes btnFadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
 
         .header-actions { display:flex; gap:0.8rem; align-items:center; }
         .icon-btn {
@@ -139,27 +172,9 @@
         }
         .mobile-menu.open { left:0; }
         .mobile-menu a { text-decoration:none; font-size:1.2rem; color:var(--text); font-weight:500; padding:0.5rem 0; border-bottom:1px solid var(--border); }
-        .signup-btn {
-            background: var(--accent);
-            color: #1A1F2E;
-            border: none;
-            padding: 0.6rem 1.5rem;
-            border-radius: 2rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.2s;
-            font-size: 0.9rem;
-        }
-        .signup-btn:hover { background: var(--accent-soft); }
-        .user-greeting {
-            font-weight:600; color:var(--primary); background:var(--surface-alt);
-            padding:0.5rem 1rem; border-radius:2rem; border:1px solid var(--border);
-            font-size:0.9rem; text-decoration:none; display:inline-block;
-        }
-        .user-greeting:hover { background:var(--border); }
 
         /* ============================================================== */
-        /* HERO WITH ALL 5 ANIMATIONS & NEW BACKGROUND                     */
+        /* DYNAMIC HERO BACKGROUND SLIDER (8 Images)                      */
         /* ============================================================== */
         .hero {
             position:relative;
@@ -168,19 +183,48 @@
             color:white;
             overflow:hidden; 
         }
-        /* 1. Cinematic Zoom Background (New Image) */
         .hero-bg {
             position:absolute;
-            top:-10%; left:-10%; width:120%; height:120%; /* Extra space for zoom */
-            background: url('https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=1600&h=800&fit=crop') center/cover no-repeat;
+            top:-10%; left:-10%; width:120%; height:120%;
             animation: zoomIn 30s ease-in-out infinite alternate;
             z-index:0;
-            will-change: transform; /* Helps browser performance */
+            will-change: transform;
+            
+            /* ARRAY OF 8 IMAGES FOR DYNAMIC CROSSFADE SLIDER */
+            background-image: 
+                url('https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1600&h=800&fit=crop'),
+                url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1600&h=800&fit=crop'),
+                url('https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=1600&h=800&fit=crop'),
+                url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&h=800&fit=crop'),
+                url('https://images.unsplash.com/photo-1600607687920-4e2a09c1f0d4?w=1600&h=800&fit=crop'),
+                url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a5?w=1600&h=800&fit=crop'),
+                url('https://images.unsplash.com/photo-1600585154522-57b763f4b220?w=1600&h=800&fit=crop'),
+                url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1600&h=800&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            
+            /* KEYFRAME ANIMATION FOR THE SLIDER */
+            animation: bgSlide 45s infinite;
         }
+        
+        @keyframes bgSlide {
+            0%, 10% { background-image: url('https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1600&h=800&fit=crop'); }
+            12.5%, 22.5% { background-image: url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1600&h=800&fit=crop'); }
+            25%, 35% { background-image: url('https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=1600&h=800&fit=crop'); }
+            37.5%, 47.5% { background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&h=800&fit=crop'); }
+            50%, 60% { background-image: url('https://images.unsplash.com/photo-1600607687920-4e2a09c1f0d4?w=1600&h=800&fit=crop'); }
+            62.5%, 72.5% { background-image: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a5?w=1600&h=800&fit=crop'); }
+            75%, 85% { background-image: url('https://images.unsplash.com/photo-1600585154522-57b763f4b220?w=1600&h=800&fit=crop'); }
+            87.5%, 97.5% { background-image: url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1600&h=800&fit=crop'); }
+            100% { background-image: url('https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1600&h=800&fit=crop'); }
+        }
+
         @keyframes zoomIn {
             0% { transform: scale(1); }
-            100% { transform: scale(1.15); }
+            100% { transform: scale(1.08); }
         }
+        
         .hero::before {
             content:'';
             position:absolute;
@@ -188,6 +232,8 @@
             background: linear-gradient(180deg, rgba(26,31,46,0.75) 0%, rgba(26,31,46,0.85) 100%);
             z-index:1;
         }
+        /* ============================================================== */
+
         /* 2. Fade-Up & Slide-In Animation */
         .hero-content {
             position:relative; z-index:2; max-width:850px; margin:0 auto;
@@ -238,8 +284,7 @@
         }
         .hero-search .trigger-btn { display:flex; align-items:center; justify-content:space-between; }
         .hero-search .trigger-btn i { font-size:0.8rem; color:var(--text-secondary); }
-        /* REMOVED BLUE HIGHLIGHT */
-        .hero-search input:focus, .hero-search .trigger-btn:focus { outline:none; border-color:var(--accent); box-shadow:0 0 0 2px rgba(180,148,80,0.3); }
+        .hero-search input:focus, .hero-search .trigger-btn:focus { outline:none; border-color:var(--accent); box-shadow:0 0 0 2px rgba(180,148,80,0.2); }
         .price-range { display:flex; gap:0.5rem; flex:2; }
         
         /* 5. Ripple Effect Button */
@@ -265,21 +310,6 @@
         .btn-primary:active::after {
             width: 400px; height: 400px; opacity: 1; transition: 0s;
         }
-        /* ============================================================== */
-
-        /* BUTTON ENTRANCE ANIMATIONS (Fade Up) */
-        .btn-nav, .signup-btn, .btn-outline, .btn-primary {
-            opacity: 0;
-            transform: translateY(15px);
-            animation: btnFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-        @keyframes btnFadeUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-        /* Staggered Delays for buttons */
-        .btn-nav { animation-delay: 0.7s; }
-        .signup-btn { animation-delay: 0.8s; }
-        .btn-outline { animation-delay: 0.9s; }
 
         /* Trust bar */
         .trust-bar { background:var(--surface); border-bottom:1px solid var(--border); padding:2rem 0; }
@@ -325,6 +355,12 @@
             position:absolute; top:1rem; left:1rem; background:rgba(180,148,80,0.95);
             color:#1A1F2E; padding:0.3rem 0.8rem; border-radius:2rem;
             font-size:0.7rem; font-weight:600; display:flex; align-items:center; gap:0.3rem;
+        }
+        .badge-top-pick {
+            position:absolute; top:1rem; left:1rem; background:var(--accent);
+            color:#1A1F2E; padding:0.3rem 0.8rem; border-radius:2rem;
+            font-size:0.7rem; font-weight:700; display:flex; align-items:center; gap:0.3rem;
+            box-shadow: var(--shadow-sm);
         }
         .card-body { padding:1.3rem; }
         .price {
@@ -375,6 +411,64 @@
         }
         .state-item:hover { background:var(--primary); color:white; }
 
+        /* ============================================================== */
+        /* CORPORATE BLOG SECTION (Latest Posts)                          */
+        /* ============================================================== */
+        .blog-section { padding: 5rem 0; background: var(--surface-alt); }
+        .blog-grid-home { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .blog-card-home {
+            background: var(--surface);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid var(--border);
+            cursor: pointer;
+        }
+        .blog-card-home:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent);
+        }
+        .blog-card-home img {
+            width: 100%; height: 220px; object-fit: cover;
+        }
+        .blog-card-home .blog-content { padding: 1.5rem; }
+        .blog-card-home .blog-category {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--primary);
+            padding: 0.2rem 0.8rem;
+            border-radius: 2rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .blog-card-home h3 {
+            font-family:'Playfair Display',serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+        .blog-card-home p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        .blog-card-home .read-more-home {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        .blog-card-home .read-more-home:hover { color: var(--accent-soft); }
+        /* ============================================================== */
+
         /* Modals */
         .modal-overlay {
             position:fixed; top:0; left:0; width:100%; height:100%;
@@ -419,8 +513,8 @@
         }
         .option-item:hover { background:var(--primary); color:white; border-color:var(--primary); }
 
-        /* Corporate Footer Styles */
-        footer { background:#1A1F2E; color:#CBD5E1; padding:4rem 0 1.5rem; }
+        /* Corporate Footer */
+        footer { background:#1A1F2E; color:#CBD5E1; padding:4rem 0 1.5rem; margin-top:3rem; }
         footer a { color:#94A3B8; text-decoration:none; transition: all 0.2s; }
         footer a:hover { color:var(--accent-soft); transform: translateX(4px); }
         
@@ -494,20 +588,15 @@
     <div class="container">
         <div class="logo"><a href="/">Zaure<span class="dot"></span></a></div>
         <nav class="desktop-nav">
-            <a href="/" class="active">Home</a>
+            <a href="/">Home</a>
             <a href="/browse?type=sale">Buy</a>
             <a href="/browse?type=rent">Rent</a>
             <a href="/how-it-works">How It Works</a>
             <a href="/about">About</a>
             <a href="/contact">Contact</a>
-            <!-- ✅ Profile Link Added -->
             <a href="/profile">Profile</a>
-            <!-- ✅ List Property Button -->
             <a href="#" class="btn-nav">List Property</a>
         </nav>
-        <div class="header-actions" id="headerUserArea">
-            <!-- dynamically filled -->
-        </div>
         <div class="header-actions">
             <button id="themeToggle" class="icon-btn"><i class="fas fa-moon"></i></button>
             <button id="mobileMenuToggle" class="icon-btn mobile-only"><i class="fas fa-bars"></i></button>
@@ -515,7 +604,6 @@
     </div>
 </header>
 
-<!-- Mobile Menu -->
 <div class="mobile-menu" id="mobileMenu">
     <button id="closeMenu" class="close-btn"><i class="fas fa-times"></i></button>
     <a href="/">Home</a>
@@ -524,7 +612,6 @@
     <a href="/how-it-works">How It Works</a>
     <a href="/about">About</a>
     <a href="/contact">Contact</a>
-    <!-- ✅ Profile Link Added to Mobile -->
     <a href="/profile">Profile</a>
     <a href="#">List Property</a>
 </div>
@@ -574,9 +661,9 @@
 </div>
 
 <main>
-    <!-- HERO SECTION WITH ANIMATIONS & NEW BACKGROUND -->
+    <!-- HERO SECTION WITH ANIMATIONS & DYNAMIC BACKGROUND -->
     <section class="hero">
-        <div class="hero-bg"></div> <!-- 1. Cinematic animated background -->
+        <div class="hero-bg"></div> <!-- 8-image dynamic slider -->
         <div class="hero-content container">
             <h1>Your <span class="highlight">entrance</span> to home.<br>No middlemen.</h1>
             <p>Zaure connects you directly with verified property owners. Browse homes for sale & rent across Northern Nigeria and speak to the owner instantly. Or let our smart feed find your perfect match.</p>
@@ -659,9 +746,26 @@
             <div class="states-grid" id="statesGrid"></div>
         </div>
     </section>
+
+    <!-- ============================================================== -->
+    <!-- CORPORATE BLOG SECTION (Homepage)                               -->
+    <!-- ============================================================== -->
+    <section class="blog-section">
+        <div class="container">
+            <h2 class="section-title">Insights & Articles</h2>
+            <p class="section-subtitle">Expert property tips, market trends, and advice from the Zaure team.</p>
+            <div class="blog-grid-home" id="homeBlogGrid">
+                <div class="loading" style="text-align:center; padding:2rem; color:var(--text-secondary);">Loading articles...</div>
+            </div>
+            <div style="text-align:center; margin-top:2.5rem;">
+                <a href="/blog" class="btn-outline">Read All Articles →</a>
+            </div>
+        </div>
+    </section>
+    <!-- ============================================================== -->
 </main>
 
-<!-- Updated Corporate Footer -->
+<!-- Corporate Footer -->
 <footer>
     <div class="container">
         <div class="footer-grid">
@@ -722,33 +826,6 @@
 
 <script>
 (function() {
-    // ============================================
-    // THEME TOGGLE
-    // ============================================
-    const themeToggle = document.getElementById('themeToggle');
-    const storedTheme = localStorage.getItem('zaure_theme') || 'light';
-    document.documentElement.setAttribute('data-theme', storedTheme);
-    themeToggle.innerHTML = storedTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-    themeToggle.addEventListener('click', () => {
-        const cur = document.documentElement.getAttribute('data-theme');
-        const next = cur === 'light' ? 'dark' : 'light';
-        document.documentElement.setAttribute('data-theme', next);
-        localStorage.setItem('zaure_theme', next);
-        themeToggle.innerHTML = next === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-    });
-
-    // ============================================
-    // MOBILE MENU
-    // ============================================
-    const mobileToggle = document.getElementById('mobileMenuToggle');
-    const mobileMenu = document.getElementById('mobileMenu');
-    const closeMenuBtn = document.getElementById('closeMenu');
-    mobileToggle.addEventListener('click', () => mobileMenu.classList.add('open'));
-    closeMenuBtn.addEventListener('click', () => mobileMenu.classList.remove('open'));
-    mobileMenu.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => mobileMenu.classList.remove('open'));
-    });
-
     // ============================================
     // NIGERIA CITIES DATABASE (Production Geocoding)
     // ============================================
@@ -1279,10 +1356,46 @@
     ).join('');
 
     // ============================================
+    // LOAD BLOG POSTS FOR HOMEPAGE
+    // ============================================
+    async function loadHomepageBlog() {
+        const grid = document.getElementById('homeBlogGrid');
+        try {
+            const response = await fetch('/data/blog.json');
+            if (!response.ok) throw new Error('Failed to load blog data');
+            const data = await response.json();
+            const posts = data.posts || [];
+            // Get latest 3 posts
+            const latest = posts.slice(0, 3);
+            
+            if (latest.length === 0) {
+                grid.innerHTML = '<p style="text-align:center;color:var(--text-secondary);">No articles available.</p>';
+                return;
+            }
+
+            grid.innerHTML = latest.map(post => `
+                <div class="blog-card-home" onclick="window.location.href='/blog'">
+                    <img src="${post.image || 'https://placehold.co/800x500?text=Blog'}" alt="${post.title}" loading="lazy">
+                    <div class="blog-content">
+                        <span class="blog-category">${post.category}</span>
+                        <h3>${post.title}</h3>
+                        <p>${post.excerpt}</p>
+                        <a href="/blog" class="read-more-home">Read more →</a>
+                    </div>
+                </div>
+            `).join('');
+        } catch (error) {
+            console.error('Error loading blog:', error);
+            grid.innerHTML = '<p style="text-align:center;color:var(--text-secondary);">Unable to load articles.</p>';
+        }
+    }
+
+    // ============================================
     // INITIALIZE
     // ============================================
     window.addEventListener('DOMContentLoaded', () => {
         setTimeout(loadPropertiesWithLocation, 100);
+        loadHomepageBlog();
     });
 
     // Refresh when returning to tab after 10+ minutes
