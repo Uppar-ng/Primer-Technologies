@@ -2,6 +2,7 @@
   "properties": [
     {
       "id": 1,
+      "slug": "4-bedroom-bungalow-with-bq",
       "type": "sale",
       "propertyType": "house",
       "title": "4 Bedroom Bungalow with BQ",
@@ -36,6 +37,7 @@
     },
     {
       "id": 2,
+      "slug": "3-bedroom-bungalow-with-bq-and-gate-house",
       "type": "sale",
       "propertyType": "house",
       "title": "3 Bedroom Bungalow with BQ and Gate House",
@@ -70,6 +72,7 @@
     },
     {
       "id": 3,
+      "slug": "3-bedroom-luxurious-house",
       "type": "sale",
       "propertyType": "house",
       "title": "3 Bedroom Luxurious House",
@@ -104,6 +107,7 @@
     },
     {
       "id": 4,
+      "slug": "luxury-multi-level-mansion-bayajidda-road",
       "type": "sale",
       "propertyType": "house",
       "title": "Luxury Multi-Level Mansion – Bayajidda Road",
@@ -138,6 +142,7 @@
     },
     {
       "id": 5,
+      "slug": "3-bedroom-bungalow-with-self-contained-bq",
       "type": "sale",
       "propertyType": "house",
       "title": "3 Bedroom Bungalow with Self-Contained BQ",
@@ -172,6 +177,7 @@
     },
     {
       "id": 6,
+      "slug": "newly-built-3-bedroom-bungalow-with-bq",
       "type": "sale",
       "propertyType": "house",
       "title": "Newly Built 3 Bedroom Bungalow with BQ",
