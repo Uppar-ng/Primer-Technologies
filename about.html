@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>About Zaure – Your entrance to home</title>
-    <meta name="description" content="Learn about Zaure's mission to connect property owners directly with seekers, with no middlemen.">
+    <meta name="description" content="Learn about Zaure's mission to connect property owners directly with seekers, with no middlemen. Founded by Alamin Ahmed in Northern Nigeria.">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
@@ -32,6 +32,40 @@
     <meta name="theme-color" content="#1A1F2E">
     <meta name="msapplication-TileColor" content="#1A1F2E">
     
+    <!-- ============================================================== -->
+    <!-- JSON-LD SCHEMA FOR GOOGLE KNOWLEDGE PANEL                        -->
+    <!-- ============================================================== -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Zaure Technologies",
+      "url": "https://zauretech.vercel.app",
+      "description": "PropTech platform in Northern Nigeria connecting verified property owners directly with seekers. No middlemen. No commission.",
+      "foundingDate": "2026",
+      "numberOfEmployees": "7",
+      "founder": {
+        "@type": "Person",
+        "name": "Alamin Ahmed",
+        "sameAs": [
+          "https://www.instagram.com/blvckel"
+        ],
+        "jobTitle": "Founder & CEO",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Zaure Technologies"
+        }
+      },
+      "employee": [
+        { "@type": "Person", "name": "Alamin Ahmed", "jobTitle": "Founder & CEO" },
+        { "@type": "Person", "name": "Ammar Ibrahim", "jobTitle": "Head of Operations" },
+        { "@type": "Person", "name": "A. Usman", "jobTitle": "Program Director" },
+        { "@type": "Person", "name": "Muhammad Abdullahi", "jobTitle": "Lead Instructor" }
+      ]
+    }
+    </script>
+    <!-- ============================================================== -->
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
     
@@ -100,7 +134,7 @@
         .desktop-nav a:hover, .desktop-nav a.active { color:var(--primary); }
         .desktop-nav a:hover::after, .desktop-nav a.active::after { width:100%; }
         
-        /* ✅ FIX: Styled Navigation Button */
+        /* Styled Navigation Button */
         .btn-nav {
             display: inline-block;
             padding: 0.5rem 1.5rem;
@@ -112,6 +146,10 @@
             font-size: 0.9rem;
             transition: all 0.2s ease;
             text-decoration: none;
+            opacity: 0;
+            transform: translateY(15px);
+            animation: btnFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: 0.5s;
         }
         .btn-nav:hover {
             background: var(--accent);
@@ -119,9 +157,13 @@
             border-color: var(--accent);
             transform: translateY(-2px);
         }
-        .btn-nav::after { display: none; } /* Remove underline effect */
+        .btn-nav::after { display: none; }
 
-        .header-actions { display:flex; gap:0.8rem; }
+        @keyframes btnFadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header-actions { display:flex; gap:0.8rem; align-items:center; }
         .icon-btn {
             background:transparent; border:1px solid var(--border); font-size:1.1rem; cursor:pointer;
             color:var(--text); padding:0.5rem; border-radius:50%; width:38px; height:38px;
@@ -137,74 +179,143 @@
         .mobile-menu.open { left:0; }
         .mobile-menu a { text-decoration:none; font-size:1.2rem; color:var(--text); font-weight:500; padding:0.5rem 0; border-bottom:1px solid var(--border); }
 
-        .page-hero {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-soft) 100%);
-            color: white;
-            padding: 4rem 0;
-            text-align: center;
-        }
-        .page-hero h1 { font-family: 'Playfair Display', serif; font-size: 2.8rem; margin-bottom: 1rem; }
-        .page-hero p { font-size: 1.1rem; opacity: 0.9; max-width: 700px; margin: 0 auto; }
-
-        .section { padding: 5rem 0; }
-        .section-title {
-            font-family:'Playfair Display',serif; font-size:2.2rem; font-weight:700; text-align:center;
-            margin-bottom:2.5rem; color:var(--primary);
-        }
-        .story-grid { display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center; }
-        @media (max-width:768px) { .story-grid { grid-template-columns:1fr; } }
-        
-        .story-text p { margin-bottom:1.5rem; color:var(--text-secondary); }
-        .story-text .closing-line { margin-top:2rem; font-weight:600; color:var(--text); font-size:1.1rem; }
-        .story-image img { width:100%; border-radius:var(--radius); box-shadow:var(--shadow-md); }
-
-        .values-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:2rem; }
-        .value-card {
-            background:var(--surface); padding:2rem; border-radius:var(--radius);
-            text-align:center; box-shadow:var(--shadow-sm); border:1px solid var(--border);
-            transition:0.2s;
-        }
-        .value-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-lg); }
-        .value-icon { font-size:2rem; color:var(--accent); margin-bottom:1rem; }
-        .value-card h3 { margin-bottom:0.75rem; }
-
-        .btn-browse {
-            display: inline-block;
-            padding: 1rem 2.5rem;
+        /* ============================================================== */
+        /* CORPORATE ABOUT HERO                                            */
+        /* ============================================================== */
+        .about-hero {
+            position: relative;
             background: var(--primary);
-            color: #ffffff;
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            font-size: 1rem;
-            text-decoration: none;
-            border-radius: 50px;
-            border: 2px solid var(--primary);
-            transition: all var(--transition);
-            box-shadow: var(--shadow-md);
+            padding: 6rem 0 5rem;
+            color: white;
+            overflow: hidden;
         }
-        .btn-browse:hover {
+        .about-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; right: -20%;
+            width: 800px; height: 800px;
+            background: rgba(180, 148, 80, 0.08);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .about-hero .container { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: flex-start; max-width: 1000px; }
+        .badge-gold {
+            display: inline-block;
             background: var(--accent);
-            border-color: var(--accent);
             color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-lg);
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
         }
-        .btn-browse i { margin-right: 0.5rem; }
-        [data-theme="dark"] .btn-browse {
-            background: var(--accent);
-            border-color: var(--accent);
-            color: #0B1120;
+        .about-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+            max-width: 800px;
         }
-        [data-theme="dark"] .btn-browse:hover {
-            background: var(--accent-soft);
-            border-color: var(--accent-soft);
+        .about-hero h1 span { color: var(--accent-soft); }
+        .about-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            line-height: 1.7;
+            margin-bottom: 2rem;
         }
 
-        /* Corporate Footer Styles */
-        footer { background:#1A1F2E; color:#CBD5E1; padding:4rem 0 1.5rem; }
+        /* ============================================================== */
+        /* MISSION & PILLARS                                               */
+        /* ============================================================== */
+        .pillars-section { padding: 5rem 0; background: var(--surface-alt); }
+        .pillars-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; }
+        @media (max-width: 768px) { .pillars-grid { grid-template-columns: 1fr; } }
+        .pillar-card {
+            background: var(--surface);
+            padding: 2.5rem 2rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+            transition: 0.2s;
+        }
+        .pillar-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+        .pillar-icon {
+            width: 60px; height: 60px;
+            background: rgba(180, 148, 80, 0.1);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+        .pillar-card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .pillar-card p { color: var(--text-secondary); font-size: 0.95rem; }
+
+        /* ============================================================== */
+        /* OUR STORY (Compact)                                             */
+        /* ============================================================== */
+        .story-section { padding: 5rem 0; }
+        .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+        .story-text p { margin-bottom: 1.2rem; color: var(--text-secondary); font-size: 1rem; line-height: 1.7; }
+        .story-text p strong { color: var(--text); }
+        .story-image img { width: 100%; border-radius: var(--radius); box-shadow: var(--shadow-md); }
+
+        /* ============================================================== */
+        /* EXECUTIVE TEAM (Company Officials)                              */
+        /* ============================================================== */
+        .team-section { padding: 5rem 0; background: var(--surface-alt); }
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; max-width: 900px; margin: 0 auto; }
+        .team-card {
+            background: var(--surface);
+            padding: 2rem 1.5rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+            transition: 0.2s;
+        }
+        .team-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--accent); }
+        .team-avatar {
+            width: 64px; height: 64px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 1.2rem; font-family: 'Playfair Display', serif;
+            margin: 0 auto 1rem;
+            border: 2px solid var(--accent);
+        }
+        .team-card h4 { font-size: 1.1rem; margin-bottom: 0.2rem; }
+        .team-card .role { color: var(--accent); font-weight: 600; font-size: 0.85rem; margin-bottom: 0.5rem; }
+        .team-card .social-handle { font-size: 0.8rem; color: var(--text-secondary); }
+        .team-stats {
+            text-align: center;
+            margin-top: 3rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        .team-stats strong { color: var(--text); }
+
+        /* ============================================================== */
+        /* CTA SECTION                                                     */
+        /* ============================================================== */
+        .cta-section { padding: 5rem 0; text-align: center; }
+        .cta-section h2 { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 1.5rem; }
+        .cta-section p { max-width: 500px; margin: 0 auto 2rem; color: var(--text-secondary); }
+
+        /* ============================================================== */
+        /* CORPORATE FOOTER                                                */
+        /* ============================================================== */
+        footer { background:#1A1F2E; color:#CBD5E1; padding:4rem 0 1.5rem; margin-top:3rem; }
         footer a { color:#94A3B8; text-decoration:none; transition: all 0.2s; }
         footer a:hover { color:var(--accent-soft); transform: translateX(4px); }
-        
         footer .footer-grid {
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1.5fr;
@@ -219,42 +330,26 @@
             margin-bottom: 1.2rem;
             letter-spacing: 0.5px;
         }
-        footer .footer-col a {
-            display: block;
-            font-size: 0.9rem;
-            margin-bottom: 0.8rem;
-        }
-        footer .footer-col.brand p {
-            color: #94A3B8;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-        footer .social a {
-            display: inline-block !important;
-            color: #B49450;
-            margin-right: 1rem;
-            transition: transform 0.2s;
-        }
-        footer .social a:hover {
-            transform: scale(1.1);
-            color: var(--accent-soft);
-        }
+        footer .footer-col a { display: block; font-size: 0.9rem; margin-bottom: 0.8rem; }
+        footer .footer-col.brand p { color: #94A3B8; font-size: 0.95rem; line-height: 1.6; }
+        footer .social a { display: inline-block !important; color: #B49450; margin-right: 1rem; transition: transform 0.2s; }
+        footer .social a:hover { transform: scale(1.1); color: var(--accent-soft); }
         footer .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            padding-top: 2rem;
-            margin-top: 2rem;
-            border-top: 1px solid #2E3548;
-            font-size: 0.85rem;
-            color: #94A3B8;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
+            padding-top: 2rem; margin-top: 2rem; border-top: 1px solid #2E3548;
+            font-size: 0.85rem; color: #94A3B8;
         }
 
-        @media (max-width: 768px) {
+        /* ============================================================== */
+        /* RESPONSIVE                                                      */
+        /* ============================================================== */
+        @media (max-width:768px) {
             .desktop-nav { display:none; }
             .mobile-only { display:block; }
-            .page-hero h1 { font-size:2.2rem; }
+            .about-hero { padding: 4rem 0; }
+            .about-hero h1 { font-size: 2.5rem; }
+            .story-grid { grid-template-columns: 1fr; }
+            .team-grid { grid-template-columns: 1fr 1fr; }
             footer .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
             footer .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
         }
@@ -277,7 +372,7 @@
             <a href="/how-it-works">How It Works</a>
             <a href="/about" class="active">About</a>
             <a href="/contact">Contact</a>
-            <!-- ✅ Fixed Navigation Button -->
+            <a href="/profile">Profile</a>
             <a href="#" class="btn-nav">List Property</a>
         </nav>
         <div class="header-actions">
@@ -289,38 +384,60 @@
 
 <div class="mobile-menu" id="mobileMenu">
     <button id="closeMenu" class="close-btn"><i class="fas fa-times"></i></button>
-    <a href="/">Home</a><a href="/browse?type=sale">Buy</a><a href="/browse?type=rent">Rent</a>
-    <a href="/how-it-works">How It Works</a><a href="/about">About</a><a href="/contact">Contact</a>
+    <a href="/">Home</a>
+    <a href="/browse?type=sale">Buy</a>
+    <a href="/browse?type=rent">Rent</a>
+    <a href="/how-it-works">How It Works</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+    <a href="/profile">Profile</a>
     <a href="#">List Property</a>
 </div>
 
 <main>
-    <section class="page-hero">
+    <!-- CORPORATE HERO -->
+    <section class="about-hero">
         <div class="container">
-            <h1>About Zaure</h1>
-            <p>We are building a trusted space where property owners and seekers meet directly — without agents, hidden fees, or middlemen.</p>
+            <div class="badge-gold">PropTech · Northern Nigeria</div>
+            <h1>Your <span>entrance</span> to home.<br>No middlemen.</h1>
+            <p>Zaure is a PropTech platform built to restore transparency to the Northern Nigerian real estate market. We connect verified property owners directly with seekers — eliminating agents, hidden fees, and opaque commissions.</p>
         </div>
     </section>
 
-    <section class="section">
+    <!-- THREE PILLARS -->
+    <section class="pillars-section">
+        <div class="container">
+            <div class="pillars-grid">
+                <div class="pillar-card">
+                    <div class="pillar-icon"><i class="fas fa-user-check"></i></div>
+                    <h3>Verified Owners</h3>
+                    <p>Every property owner on Zaure is authenticated via NIN or BVN, ensuring you connect with a legitimate source.</p>
+                </div>
+                <div class="pillar-card">
+                    <div class="pillar-icon"><i class="fas fa-handshake"></i></div>
+                    <h3>Direct Connections</h3>
+                    <p>No agents. No middlemen. You speak directly to the owner from the moment you find a property.</p>
+                </div>
+                <div class="pillar-card">
+                    <div class="pillar-icon"><i class="fas fa-coins"></i></div>
+                    <h3>Zero Commission</h3>
+                    <p>List and browse completely free. We do not charge fees or commissions on any transaction between users.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMPACT STORY + FOUNDER -->
+    <section class="story-section">
         <div class="container">
             <div class="story-grid">
                 <div class="story-text">
-                    <h2 class="section-title" style="text-align:left; margin-bottom:1.5rem;">Our Story</h2>
-                    
-                    <p>Zaure was born from a clear market failure: in Northern Nigeria, finding a home meant navigating a fragmented system of intermediaries who controlled access, distorted pricing, and offered little accountability.</p>
-                    
-                    <p>Property owners lacked a direct channel to reach serious tenants and buyers. Seekers were routinely asked to pay "viewing fees" before seeing a single room.</p>
-                    
-                    <p>We built Zaure to close that gap.</p>
-                    
-                    <p>Named after the traditional Hausa entrance hall—the <em>zaure</em>—our platform serves as the trusted threshold where verified owners and genuine seekers meet. We provide the secure infrastructure and the verification layer; the transaction remains entirely between the parties.</p>
-                    
-                    <p>Behind Zaure is Alamin Ahmed, a passionate advocate for digital inclusion and transparent marketplaces in Northern Nigeria. As Founder & CEO, Alamin brings a deep understanding of the local housing landscape and a commitment to leveraging technology for social impact. Under his leadership, Zaure is scaling across Kano, Kaduna, Zaria, and Abuja, driven by a team dedicated to making property discovery transparent, equitable, and human-centered.</p>
-
-                    <div class="closing-line">Your entrance to home. Directly.</div>
+                    <h2 style="font-family:'Playfair Display',serif; font-size:2.2rem; margin-bottom:1.5rem; color:var(--primary);">Our Story</h2>
+                    <p><strong>Zaure</strong> was born from a clear market failure: in Northern Nigeria, finding a home meant navigating a fragmented system of intermediaries who controlled access, distorted pricing, and offered little accountability.</p>
+                    <p>Property owners lacked a direct channel to reach serious tenants and buyers. Seekers were routinely asked to pay <strong>"viewing fees"</strong> before seeing a single room.</p>
+                    <p>We built Zaure to close that gap. Named after the traditional Hausa entrance hall—the <em>zaure</em>—our platform serves as the trusted threshold where verified owners and genuine seekers meet.</p>
+                    <p style="border-top:1px solid var(--border); padding-top:1rem; margin-top:1rem;">Behind Zaure is <strong>Alamin Ahmed</strong>, a passionate advocate for digital inclusion in Northern Nigeria. As Founder & CEO, Alamin brings deep local market knowledge and a commitment to leveraging technology for social impact.</p>
                 </div>
-                
                 <div class="story-image">
                     <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=400&fit=crop" alt="Modern Nigerian home" loading="lazy">
                 </div>
@@ -328,50 +445,54 @@
         </div>
     </section>
 
-    <section class="section" style="background:var(--surface-alt);">
+    <!-- EXECUTIVE TEAM -->
+    <section class="team-section">
         <div class="container">
-            <h2 class="section-title">Our Values</h2>
-            <div class="values-grid">
-                <div class="value-card">
-                    <div class="value-icon"><i class="fas fa-handshake"></i></div>
-                    <h3>Transparency</h3>
-                    <p>No hidden fees. No agent commissions. Owners and seekers deal directly.</p>
+            <h2 style="font-family:'Playfair Display',serif; font-size:2.2rem; text-align:center; margin-bottom:2.5rem; color:var(--primary);">Executive Team</h2>
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-avatar">AA</div>
+                    <h4>Alamin Ahmed</h4>
+                    <div class="role">Founder & CEO</div>
+                    <div class="social-handle">@blvckel</div>
                 </div>
-                <div class="value-card">
-                    <div class="value-icon"><i class="fas fa-shield-alt"></i></div>
-                    <h3>Trust</h3>
-                    <p>Verified identity badges help you know who you're dealing with.</p>
+                <div class="team-card">
+                    <div class="team-avatar">AI</div>
+                    <h4>Ammar Ibrahim</h4>
+                    <div class="role">Head of Operations</div>
                 </div>
-                <div class="value-card">
-                    <div class="value-icon"><i class="fas fa-clock"></i></div>
-                    <h3>Simplicity</h3>
-                    <p>List a property in minutes. Find a home without the stress.</p>
+                <div class="team-card">
+                    <div class="team-avatar">AU</div>
+                    <h4>A. Usman</h4>
+                    <div class="role">Program Director</div>
                 </div>
-                <div class="value-card">
-                    <div class="value-icon"><i class="fas fa-map-marker-alt"></i></div>
-                    <h3>Local Roots</h3>
-                    <p>Built for Northern Nigeria, by people who understand the market.</p>
+                <div class="team-card">
+                    <div class="team-avatar">MA</div>
+                    <h4>Muhammad Abdullahi</h4>
+                    <div class="role">Lead Instructor</div>
                 </div>
+            </div>
+            <div class="team-stats">
+                <i class="fas fa-users" style="color:var(--accent); margin-right:0.5rem;"></i> 
+                A dedicated team of <strong>7 professionals</strong> working across Northern Nigeria.
             </div>
         </div>
     </section>
 
-    <section class="section">
-        <div class="container" style="text-align:center;">
-            <h2 class="section-title">Join the Movement</h2>
-            <p style="max-width:600px; margin:0 auto 2rem; color:var(--text-secondary);">Whether you're an owner tired of agent hassles, or a seeker looking for a genuine place to call home, Zaure is your entrance.</p>
-            
-            <a href="/browse" class="btn-browse">
-                <i class="fas fa-search"></i> Browse Properties
-            </a>
+    <!-- CTA SECTION -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Join the Movement</h2>
+            <p>Whether you're an owner tired of agent hassles, or a seeker looking for a genuine place to call home, Zaure is your entrance.</p>
+            <a href="/browse" class="btn-browse" style="display:inline-block; padding:1rem 2.5rem; background:var(--primary); color:white; border-radius:50px; font-weight:600; text-decoration:none; transition:0.2s;">Browse Properties</a>
         </div>
     </section>
 </main>
 
+<!-- CORPORATE FOOTER -->
 <footer>
     <div class="container">
         <div class="footer-grid">
-            <!-- 1. Brand & Remote Location -->
             <div class="footer-col brand">
                 <h4 style="font-family:'Playfair Display',serif; font-size:1.5rem;">Zaure<span style="color:#B49450;">.</span></h4>
                 <p>Your digital entrance hall – connecting verified owners and seekers directly across Northern Nigeria.</p>
@@ -380,8 +501,6 @@
                     <i class="fas fa-envelope" style="color:#B49450; margin-right:0.5rem; margin-top:0.3rem;"></i> get.zaure@proton.me
                 </div>
             </div>
-
-            <!-- 2. Quick Links (Primary Navigation) -->
             <div class="footer-col">
                 <h4>Find a Home</h4>
                 <a href="/browse?type=sale">Buy Property</a>
@@ -389,8 +508,6 @@
                 <a href="/how-it-works">How It Works</a>
                 <a href="/browse">Browse All Listings</a>
             </div>
-
-            <!-- 3. Company & Legal -->
             <div class="footer-col">
                 <h4>Company</h4>
                 <a href="/about">About Us</a>
@@ -398,8 +515,6 @@
                 <a href="/privacy">Privacy Policy</a>
                 <a href="/terms">Terms of Service</a>
             </div>
-
-            <!-- 4. Social & Trust Badges -->
             <div class="footer-col connect">
                 <h4>Connect</h4>
                 <div class="social" style="margin-bottom:1.5rem;">
@@ -409,7 +524,6 @@
                     <a href="https://facebook.com/zauretech" target="_blank"><i class="fab fa-facebook-f"></i></a>
                 </div>
                 <p style="font-size:0.85rem; color:#94A3B8; margin-bottom:1rem;">Follow us everywhere @zauretech</p>
-                <!-- Trust Badges -->
                 <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
                     <span style="background:rgba(180,148,80,0.1); color:#B49450; padding:0.25rem 0.8rem; border-radius:50px; font-size:0.7rem; font-weight:600; border:1px solid rgba(180,148,80,0.2);">No Middlemen</span>
                     <span style="background:rgba(180,148,80,0.1); color:#B49450; padding:0.25rem 0.8rem; border-radius:50px; font-size:0.7rem; font-weight:600; border:1px solid rgba(180,148,80,0.2);">Verified Owners</span>
@@ -417,8 +531,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- 5. Bottom Copyright Bar -->
         <div class="footer-bottom">
             <span>&copy; 2026 <strong style="color:white;">Zaure Technologies</strong>. All rights reserved.</span>
             <span>Built for Northern Nigeria. 🇳🇬</span>
