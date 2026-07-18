@@ -219,14 +219,15 @@
     });
     document.getElementById('mobileMenuToggle').addEventListener('click', () => document.getElementById('mobileMenu').classList.add('open'));
     document.getElementById('closeMenu').addEventListener('click', () => document.getElementById('mobileMenu').classList.remove('open'));
-    const slug = window.location.pathname.split('/').pop(); 
-    if (!slug || slug === 'property') {
+    const urlParams = new URLSearchParams(window.location.search);
+    const propertyId = urlParams.get('id');
+    if (!propertyId) {
         document.getElementById('propertyContent').innerHTML = '<div class="error-message">No property specified.</div>';
     } else {
         fetch('/data/properties.json')
             .then(res => res.json())
             .then(data => {
-                const property = data.properties.find(p => p.slug === slug);
+                const property = data.properties.find(p => p.id == propertyId);
                 if (!property) throw new Error('Property not found');
                 renderProperty(property);
                 loadSimilarProperties(property, data.properties);
@@ -428,7 +429,7 @@
         if (!grid) return;
         if (!similar.length) { grid.innerHTML = '<p>No similar properties found.</p>'; return; }
         grid.innerHTML = similar.map(p => `
-            <div class="property-card" onclick="window.location.href='/property/${p.slug}'">
+            <div class="property-card" onclick="window.location.href='/property?id=${p.id}'">
                 <img src="${p.images?.[0] || 'https://placehold.co/400x300?text=Zaure'}" alt="${p.title}" loading="lazy">
                 <div class="price">${formatPrice(p.price)}</div>
                 <h4>${p.title}</h4>
