@@ -482,7 +482,7 @@
             const distDisplay = dist ? `<span class="distance-info"><i class="fas fa-location-dot"></i> ${dist < 1 ? 'Same city' : dist.toFixed(1) + ' km'}</span>` : '';
             const highlight = badge && badge.text === 'In Your City' ? ' location-highlight' : '';
             return `
-                <div class="property-card${highlight}" onclick="window.location.href='/property/${p.slug}'">
+                <div class="property-card${highlight}" onclick="window.location.href='/property?id=${p.id}'">
                     <div class="img-wrapper">
                         <img src="${img}" alt="${p.title}" loading="lazy">
                         ${verified}${locBadge}${topPick}
@@ -713,7 +713,7 @@
     document.getElementById('feedCallBtn').addEventListener('click', () => { const p = feedQueue[feedIndex]; if (p?.owner?.phone) window.open(`tel:${p.owner.phone}`, '_system'); });
     document.getElementById('feedShareBtn').addEventListener('click', () => {
         const p = feedQueue[feedIndex];
-        if (p) window.open(`https://wa.me/?text=${encodeURIComponent(`🏠 ${p.title}\n📍 ${p.city}\n💰 ${formatPrice(p.price)}\n\n${window.location.origin}/property/${p.slug}`)}`, '_blank');
+        if (p) window.open(`https://wa.me/?text=${encodeURIComponent(`🏠 ${p.title}\n📍 ${p.city}\n💰 ${formatPrice(p.price)}\n\n${window.location.origin}/property?id=${p.id}`)}`, '_blank');
     });
     async function init() {
         try {
