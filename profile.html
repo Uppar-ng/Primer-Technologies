@@ -72,6 +72,36 @@
         }
         .desktop-nav a:hover, .desktop-nav a.active { color:var(--primary); }
         .desktop-nav a:hover::after, .desktop-nav a.active::after { width:100%; }
+        
+        /* Navigation Button */
+        .btn-nav {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border: 2px solid var(--accent);
+            border-radius: 50px;
+            color: var(--accent);
+            background: transparent;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            opacity: 0;
+            transform: translateY(15px);
+            animation: btnFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: 0.5s;
+        }
+        .btn-nav:hover {
+            background: var(--accent);
+            color: #ffffff;
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+        .btn-nav::after { display: none; }
+
+        @keyframes btnFadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .header-actions { display:flex; gap:0.8rem; align-items:center; }
         .icon-btn {
             background:transparent; border:1px solid var(--border); font-size:1.1rem; cursor:pointer;
@@ -104,7 +134,7 @@
             border-radius: var(--radius);
             padding: 2rem;
             margin: 2rem 0;
-            box-shadow: var(--shadow-sm);
+            box-shadow: var(--shadow-md);
             border: 1px solid var(--border);
             display: flex;
             align-items: center;
@@ -127,7 +157,7 @@
             font-family: 'Playfair Display', serif;
         }
         .profile-info h2 { font-family: 'Playfair Display', serif; margin-bottom: 0.25rem; }
-        .profile-info p { color: var(--text-secondary); display: flex; align-items: center; gap: 0.5rem; }
+        .profile-info p { color: var(--text-secondary); display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; }
         .profile-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
         .btn-sm {
             padding: 0.4rem 1rem;
@@ -211,7 +241,7 @@
             font-size: 1.2rem;
         }
 
-        /* Edit Modal */
+        /* Edit Modal - Corporate Style */
         .modal-overlay {
             position:fixed; top:0; left:0; width:100%; height:100%;
             background:rgba(0,0,0,0.5); backdrop-filter:blur(4px); z-index:300;
@@ -229,26 +259,105 @@
         .modal-header h3 { font-family:'Playfair Display',serif; font-size:1.5rem; }
         .modal-close { background:none; border:none; font-size:1.5rem; cursor:pointer; color:var(--text); }
         .modal-form { display:flex; flex-direction:column; gap:1rem; }
-        .modal-form input {
+        
+        .modal-form label { font-weight: 500; font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.5rem; }
+        .modal-form input, 
+        .modal-form .custom-select-trigger {
             padding:0.8rem 1rem; border:1px solid var(--border); border-radius:var(--radius-sm);
-            background:var(--bg); font-size:0.95rem;
+            background:var(--bg); font-size:0.95rem; width:100%; text-align:left;
         }
+        .modal-form input:focus { outline:none; border-color:var(--accent); }
+        
+        /* Custom Dropdown Trigger */
+        .custom-select-trigger {
+            display: flex; justify-content: space-between; align-items: center;
+            cursor: pointer; transition: 0.2s;
+        }
+        .custom-select-trigger:hover { border-color: var(--accent); }
+        
+        /* Custom Dropdown List */
+        .custom-select-options {
+            display: none; flex-direction: column; gap: 0.3rem;
+            border: 1px solid var(--border); border-radius: var(--radius-sm);
+            background: var(--surface); padding: 0.5rem; max-height: 200px; overflow-y: auto;
+            box-shadow: var(--shadow-md);
+        }
+        .custom-select-options.active { display: flex; }
+        .custom-select-options .option-item {
+            padding: 0.5rem 1rem; border-radius: var(--radius-sm);
+            cursor: pointer; transition: 0.2s; font-size: 0.95rem;
+        }
+        .custom-select-options .option-item:hover {
+            background: var(--accent); color: #1A1F2E; font-weight: 500;
+        }
+        .custom-select-options .option-item.selected {
+            background: var(--primary); color: white;
+        }
+
         .btn-primary {
             background:var(--accent); color:#1A1F2E; border:none; padding:0.8rem 1.5rem;
-            border-radius:3rem; font-weight:700; cursor:pointer; transition:0.2s;
+            border-radius:3rem; font-weight:700; cursor:pointer; transition:0.2s; margin-top:0.5rem;
         }
-        .btn-primary:hover { background:var(--accent-soft); }
+        .btn-primary:hover { background:var(--accent-soft); transform:translateY(-2px); }
 
+        /* Corporate Footer Styles */
         footer { background:#1A1F2E; color:#CBD5E1; padding:4rem 0 1.5rem; margin-top:3rem; }
-        footer a { color:#94A3B8; text-decoration:none; }
-        footer a:hover { color:var(--accent-soft); }
-        .footer-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:2rem; margin-bottom:2rem; }
-        .social i { font-size:1.2rem; margin-right:1rem; }
+        footer a { color:#94A3B8; text-decoration:none; transition: all 0.2s; }
+        footer a:hover { color:var(--accent-soft); transform: translateX(4px); }
+        
+        footer .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 3rem;
+            margin-bottom: 0;
+        }
+        footer .footer-col h4 {
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 1.2rem;
+            letter-spacing: 0.5px;
+        }
+        footer .footer-col a {
+            display: block;
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+        }
+        footer .footer-col.brand p {
+            color: #94A3B8;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        footer .social a {
+            display: inline-block !important;
+            color: #B49450;
+            margin-right: 1rem;
+            transition: transform 0.2s;
+        }
+        footer .social a:hover {
+            transform: scale(1.1);
+            color: var(--accent-soft);
+        }
+        footer .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid #2E3548;
+            font-size: 0.85rem;
+            color: #94A3B8;
+        }
+
         @media (max-width:768px) {
             .desktop-nav { display:none; }
             .mobile-only { display:block; }
             .page-hero h1 { font-size:2rem; }
             .profile-card { flex-direction: column; align-items: flex-start; }
+            footer .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+            footer .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
         }
     </style>
     
@@ -269,7 +378,8 @@
             <a href="/how-it-works">How It Works</a>
             <a href="/about">About</a>
             <a href="/contact">Contact</a>
-            <a href="/post">Dashboard</a>
+            <a href="/profile" class="active">Profile</a>
+            <a href="#" class="btn-nav">List Property</a>
         </nav>
         <div class="header-actions">
             <button id="themeToggle" class="icon-btn"><i class="fas fa-moon"></i></button>
@@ -282,7 +392,8 @@
     <button id="closeMenu" class="close-btn"><i class="fas fa-times"></i></button>
     <a href="/">Home</a><a href="/browse?type=sale">Buy</a><a href="/browse?type=rent">Rent</a>
     <a href="/how-it-works">How It Works</a><a href="/about">About</a><a href="/contact">Contact</a>
-    <a href="/post">Dashboard</a>
+    <a href="/profile">Profile</a>
+    <a href="#">List Property</a>
 </div>
 
 <main>
@@ -298,18 +409,6 @@
     </div>
 </main>
 
-<footer>
-    <div class="container">
-        <div class="footer-grid">
-            <div><h4 style="color:white;">Zaure</h4><p>Your digital entrance hall – connecting owners and seekers directly.</p></div>
-            <div><h4>Explore</h4><a href="/browse?type=sale">Buy</a><br><a href="/browse?type=rent">Rent</a><br><a href="/how-it-works">How It Works</a></div>
-            <div><h4>Support</h4><a href="/contact">Contact</a><br><a href="/faq">FAQ</a><br><a href="/privacy">Privacy</a><br><a href="/terms">Terms</a></div>
-            <div><h4>Connect</h4><div class="social"><i class="fab fa-facebook-f"></i><i class="fab fa-instagram"></i><i class="fab fa-twitter"></i></div></div>
-        </div>
-        <div style="text-align:center; padding-top:1.5rem; border-top:1px solid #2E3548; font-size:0.8rem;">© 2026 Zaure. All rights reserved.</div>
-    </div>
-</footer>
-
 <!-- Edit Profile Modal -->
 <div class="modal-overlay" id="editProfileModal">
     <div class="modal">
@@ -318,8 +417,35 @@
             <button class="modal-close" id="closeEditModal"><i class="fas fa-times"></i></button>
         </div>
         <form id="editProfileForm" class="modal-form">
-            <input type="text" id="editName" placeholder="Full name" required>
+            <label for="editName">Full Name</label>
+            <input type="text" id="editName" placeholder="Your full name" required>
+            
+            <label for="editPhone">Phone Number</label>
             <input type="tel" id="editPhone" placeholder="Phone number" required>
+
+            <label for="editLocation">Location</label>
+            <!-- Custom Dropdown Trigger -->
+            <div class="custom-select-trigger" id="locationSelectTrigger">
+                <span id="locationSelectText">Select your city</span>
+                <i class="fas fa-chevron-down" style="color:var(--text-secondary);"></i>
+            </div>
+            <!-- Custom Dropdown Options -->
+            <div class="custom-select-options" id="locationSelectOptions">
+                <div class="option-item" data-value="kaduna">Kaduna</div>
+                <div class="option-item" data-value="zaria">Zaria</div>
+                <div class="option-item" data-value="kano">Kano</div>
+                <div class="option-item" data-value="abuja">Abuja</div>
+                <div class="option-item" data-value="sokoto">Sokoto</div>
+                <div class="option-item" data-value="maiduguri">Maiduguri</div>
+                <div class="option-item" data-value="jos">Jos</div>
+                <div class="option-item" data-value="bauchi">Bauchi</div>
+                <div class="option-item" data-value="gombe">Gombe</div>
+                <div class="option-item" data-value="katsina">Katsina</div>
+                <div class="option-item" data-value="lagos">Lagos</div>
+                <div class="option-item" data-value="ibadan">Ibadan</div>
+            </div>
+            
+            <input type="hidden" id="editLocationValue" value="">
             <button type="submit" class="btn-primary">Save Changes</button>
         </form>
     </div>
@@ -428,6 +554,7 @@
                         <div class="profile-info">
                             <h2>${user.name}</h2>
                             <p><i class="fas fa-phone-alt"></i> ${user.phone || 'No phone'}</p>
+                            <p><i class="fas fa-map-marker-alt"></i> ${user.location ? user.location.charAt(0).toUpperCase() + user.location.slice(1) : 'No location set'}</p>
                         </div>
                     </div>
                     <div class="profile-actions">
@@ -513,29 +640,77 @@
             `;
             container.innerHTML = html;
 
-            // --- Edit Profile Modal ---
+            // --- Edit Profile Modal Logic ---
             const editModal = document.getElementById('editProfileModal');
             const closeEditBtn = document.getElementById('closeEditModal');
             const editForm = document.getElementById('editProfileForm');
             const editNameInput = document.getElementById('editName');
             const editPhoneInput = document.getElementById('editPhone');
+            const editLocationInput = document.getElementById('editLocationValue');
+            const locationTrigger = document.getElementById('locationSelectTrigger');
+            const locationOptions = document.getElementById('locationSelectOptions');
+            const locationText = document.getElementById('locationSelectText');
 
             document.getElementById('editProfileBtn').addEventListener('click', () => {
                 const currentUser = JSON.parse(localStorage.getItem('zaure_user'));
                 editNameInput.value = currentUser.name;
                 editPhoneInput.value = currentUser.phone || '';
+                editLocationInput.value = currentUser.location || '';
+                locationText.textContent = currentUser.location ? currentUser.location.charAt(0).toUpperCase() + currentUser.location.slice(1) : 'Select your city';
+                
+                // Highlight selected location in dropdown
+                const items = locationOptions.querySelectorAll('.option-item');
+                items.forEach(el => el.classList.remove('selected'));
+                if (currentUser.location) {
+                    const selected = locationOptions.querySelector(`.option-item[data-value="${currentUser.location}"]`);
+                    if (selected) selected.classList.add('selected');
+                }
+                
                 editModal.classList.add('active');
             });
 
             closeEditBtn.addEventListener('click', () => editModal.classList.remove('active'));
             editModal.addEventListener('click', (e) => { if (e.target === editModal) editModal.classList.remove('active'); });
 
+            // Toggle Custom Dropdown
+            locationTrigger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                locationOptions.classList.toggle('active');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', () => {
+                locationOptions.classList.remove('active');
+            });
+
+            // Select Option
+            locationOptions.querySelectorAll('.option-item').forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const value = item.dataset.value;
+                    const label = item.textContent.trim();
+                    
+                    locationText.textContent = label;
+                    editLocationInput.value = value;
+                    
+                    locationOptions.querySelectorAll('.option-item').forEach(el => el.classList.remove('selected'));
+                    item.classList.add('selected');
+                    locationOptions.classList.remove('active');
+                });
+            });
+
             editForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const newName = editNameInput.value.trim();
                 const newPhone = editPhoneInput.value.trim();
+                const newLocation = editLocationInput.value.trim();
+                
                 if (newName && newPhone) {
-                    localStorage.setItem('zaure_user', JSON.stringify({ name: newName, phone: newPhone }));
+                    localStorage.setItem('zaure_user', JSON.stringify({ 
+                        name: newName, 
+                        phone: newPhone, 
+                        location: newLocation 
+                    }));
                     editModal.classList.remove('active');
                     location.reload();
                 }
