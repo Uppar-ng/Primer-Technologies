@@ -159,7 +159,7 @@
         .user-greeting:hover { background:var(--border); }
 
         /* ============================================================== */
-        /* HERO WITH ALL 5 ANIMATIONS                                     */
+        /* HERO WITH ALL 5 ANIMATIONS & NEW BACKGROUND                     */
         /* ============================================================== */
         .hero {
             position:relative;
@@ -168,11 +168,11 @@
             color:white;
             overflow:hidden; 
         }
-        /* 1. Cinematic Zoom Background */
+        /* 1. Cinematic Zoom Background (New Image) */
         .hero-bg {
             position:absolute;
             top:-10%; left:-10%; width:120%; height:120%; /* Extra space for zoom */
-            background: url('https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1600&h=800&fit=crop') center/cover no-repeat;
+            background: url('https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=1600&h=800&fit=crop') center/cover no-repeat;
             animation: zoomIn 30s ease-in-out infinite alternate;
             z-index:0;
             will-change: transform; /* Helps browser performance */
@@ -238,7 +238,8 @@
         }
         .hero-search .trigger-btn { display:flex; align-items:center; justify-content:space-between; }
         .hero-search .trigger-btn i { font-size:0.8rem; color:var(--text-secondary); }
-        .hero-search input:focus, .hero-search .trigger-btn:focus { outline:none; border-color:var(--accent); box-shadow:0 0 0 3px rgba(180,148,80,0.2); }
+        /* REMOVED BLUE HIGHLIGHT */
+        .hero-search input:focus, .hero-search .trigger-btn:focus { outline:none; border-color:var(--accent); box-shadow:0 0 0 2px rgba(180,148,80,0.3); }
         .price-range { display:flex; gap:0.5rem; flex:2; }
         
         /* 5. Ripple Effect Button */
@@ -265,6 +266,20 @@
             width: 400px; height: 400px; opacity: 1; transition: 0s;
         }
         /* ============================================================== */
+
+        /* BUTTON ENTRANCE ANIMATIONS (Fade Up) */
+        .btn-nav, .signup-btn, .btn-outline, .btn-primary {
+            opacity: 0;
+            transform: translateY(15px);
+            animation: btnFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes btnFadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Staggered Delays for buttons */
+        .btn-nav { animation-delay: 0.7s; }
+        .signup-btn { animation-delay: 0.8s; }
+        .btn-outline { animation-delay: 0.9s; }
 
         /* Trust bar */
         .trust-bar { background:var(--surface); border-bottom:1px solid var(--border); padding:2rem 0; }
@@ -559,7 +574,7 @@
 </div>
 
 <main>
-    <!-- HERO SECTION WITH ANIMATIONS -->
+    <!-- HERO SECTION WITH ANIMATIONS & NEW BACKGROUND -->
     <section class="hero">
         <div class="hero-bg"></div> <!-- 1. Cinematic animated background -->
         <div class="hero-content container">
