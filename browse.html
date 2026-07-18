@@ -6,35 +6,51 @@
     <title>Browse Properties | Zaure</title>
     <meta name="description" content="Browse homes for sale and rent across Northern Nigeria with our smart feed.">
     <!-- Primary Meta Tags -->
-<title>Zaure — Your entrance to home | Direct owner connections</title>
-<meta name="title" content="Zaure — Your entrance to home | Direct owner connections">
-<meta name="description" content="Zaure connects verified property owners directly with seekers. No agents, no commission. Find homes for sale & rent across Northern Nigeria.">
+    <title>Zaure — Your entrance to home | Direct owner connections</title>
+    <meta name="title" content="Zaure — Your entrance to home | Direct owner connections">
+    <meta name="description" content="Zaure connects verified property owners directly with seekers. No agents, no commission. Find homes for sale & rent across Northern Nigeria.">
 
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://zauretech.vercel.app/">
-<meta property="og:title" content="Zaure — Your entrance to home">
-<meta property="og:description" content="Zaure connects verified property owners directly with seekers. No agents, no commission. Browse homes across Northern Nigeria.">
-<meta property="og:image" content="https://zauretech.vercel.app/og-image.png">
-<meta property="og:site_name" content="Zaure Technologies">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://zauretech.vercel.app/">
+    <meta property="og:title" content="Zaure — Your entrance to home">
+    <meta property="og:description" content="Zaure connects verified property owners directly with seekers. No agents, no commission. Browse homes across Northern Nigeria.">
+    <meta property="og:image" content="https://zauretech.vercel.app/og-image.png">
+    <meta property="og:site_name" content="Zaure Technologies">
 
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image">
-<meta property="twitter:url" content="https://zauretech.vercel.app/">
-<meta property="twitter:title" content="Zaure — Your entrance to home">
-<meta property="twitter:description" content="Zaure connects verified property owners directly with seekers. No agents, no commission.">
-<meta property="twitter:image" content="https://zauretech.vercel.app/og-image.png">
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://zauretech.vercel.app/">
+    <meta property="twitter:title" content="Zaure — Your entrance to home">
+    <meta property="twitter:description" content="Zaure connects verified property owners directly with seekers. No agents, no commission.">
+    <meta property="twitter:image" content="https://zauretech.vercel.app/og-image.png">
 
-<!-- Favicon -->
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="manifest" href="/site.webmanifest">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
 
-<!-- Theme Color -->
-<meta name="theme-color" content="#1A1F2E">
-<meta name="msapplication-TileColor" content="#1A1F2E">
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#1A1F2E">
+    <meta name="msapplication-TileColor" content="#1A1F2E">
+    
+    <!-- ============================================================== -->
+    <!-- JSON-LD SCHEMA FOR GOOGLE ITEM LIST (Property Grid)             -->
+    <!-- ============================================================== -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "url": "https://zauretech.vercel.app/browse",
+      "name": "Zaure Property Listings",
+      "numberOfItems": 0,
+      "itemListElement": []
+    }
+    </script>
+    <!-- ============================================================== -->
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -115,6 +131,36 @@
         }
         .desktop-nav a:hover, .desktop-nav a.active { color:var(--primary); }
         .desktop-nav a:hover::after, .desktop-nav a.active::after { width:100%; }
+        
+        /* Corporate Styled Navigation Button */
+        .btn-nav {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border: 2px solid var(--accent);
+            border-radius: 50px;
+            color: var(--accent);
+            background: transparent;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            opacity: 0;
+            transform: translateY(15px);
+            animation: btnFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: 0.5s;
+        }
+        .btn-nav:hover {
+            background: var(--accent);
+            color: #ffffff;
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+        .btn-nav::after { display: none; }
+
+        @keyframes btnFadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .header-actions { display:flex; gap:0.8rem; align-items:center; }
         .icon-btn {
             background:transparent; border:1px solid var(--border); font-size:1.1rem; cursor:pointer;
@@ -189,6 +235,67 @@
             gap: 1rem;
         }
         .results-count { color: var(--text-secondary); font-size: 0.9rem; }
+        
+        /* Price Range Slider Container */
+        .price-range-wrapper {
+            flex: 1;
+            min-width: 180px;
+            padding: 0 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+        .price-slider-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 4px;
+            border-radius: 2px;
+            background: var(--border);
+            outline: none;
+            transition: 0.2s;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--accent);
+            cursor: pointer;
+            border: 2px solid var(--surface);
+            box-shadow: var(--shadow-sm);
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--accent);
+            cursor: pointer;
+            border: 2px solid var(--surface);
+        }
+        .price-inputs {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        .price-inputs input {
+            flex: 1;
+            min-width: 60px;
+            padding: 0.4rem 0.5rem;
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            background: var(--bg);
+            font-size: 0.8rem;
+            text-align: center;
+        }
+        .price-inputs span { color: var(--text-secondary); font-size: 0.8rem; }
+
         .property-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:2rem; margin-bottom:2rem; }
         .property-card {
             background:var(--surface); border-radius:var(--radius); overflow:hidden;
@@ -210,6 +317,12 @@
             position:absolute; top:1rem; left:1rem; background:rgba(180,148,80,0.95);
             color:#1A1F2E; padding:0.3rem 0.8rem; border-radius:2rem;
             font-size:0.7rem; font-weight:600; display:flex; align-items:center; gap:0.3rem;
+        }
+        .badge-top-pick {
+            position:absolute; top:1rem; left:1rem; background:var(--accent);
+            color:#1A1F2E; padding:0.3rem 0.8rem; border-radius:2rem;
+            font-size:0.7rem; font-weight:700; display:flex; align-items:center; gap:0.3rem;
+            box-shadow: var(--shadow-sm);
         }
         .card-body { padding:1.3rem; }
         .price {
@@ -510,17 +623,42 @@
         }
         .modal-option:hover { background:var(--primary); color:white; border-color:var(--primary); }
 
+        /* Corporate Footer */
         footer { background:#1A1F2E; color:#CBD5E1; padding:4rem 0 1.5rem; margin-top:3rem; }
-        footer a { color:#94A3B8; text-decoration:none; }
-        footer a:hover { color:var(--accent-soft); }
-        .footer-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:2rem; margin-bottom:2rem; }
-        .social i { font-size:1.2rem; margin-right:1rem; }
+        footer a { color:#94A3B8; text-decoration:none; transition: all 0.2s; }
+        footer a:hover { color:var(--accent-soft); transform: translateX(4px); }
+        footer .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 3rem;
+            margin-bottom: 0;
+        }
+        footer .footer-col h4 {
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 1.2rem;
+            letter-spacing: 0.5px;
+        }
+        footer .footer-col a { display: block; font-size: 0.9rem; margin-bottom: 0.8rem; }
+        footer .footer-col.brand p { color: #94A3B8; font-size: 0.95rem; line-height: 1.6; }
+        footer .social a { display: inline-block !important; color: #B49450; margin-right: 1rem; transition: transform 0.2s; }
+        footer .social a:hover { transform: scale(1.1); color: var(--accent-soft); }
+        footer .footer-bottom {
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
+            padding-top: 2rem; margin-top: 2rem; border-top: 1px solid #2E3548;
+            font-size: 0.85rem; color: #94A3B8;
+        }
 
         @media (max-width:768px) {
             .desktop-nav { display:none; }
             .mobile-only { display:block; }
             .filters-bar { flex-direction:column; }
             .filters-bar input, .filters-bar .trigger-btn { width:100%; }
+            .price-range-wrapper { width:100%; padding: 0; }
+            footer .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+            footer .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
         }
     </style>
     
@@ -540,7 +678,8 @@
             <a href="/how-it-works">How It Works</a>
             <a href="/about">About</a>
             <a href="/contact">Contact</a>
-            <a href="/post">Dashboard</a>
+            <a href="/profile">Profile</a>
+            <a href="#" class="btn-nav">List Property</a>
         </nav>
         <div class="header-actions">
             <button id="themeToggle" class="icon-btn"><i class="fas fa-moon"></i></button>
@@ -552,25 +691,59 @@
 <div class="mobile-menu" id="mobileMenu">
     <button id="closeMenu" class="close-btn"><i class="fas fa-times"></i></button>
     <a href="/">Home</a><a href="/browse">Browse</a><a href="/how-it-works">How It Works</a>
-    <a href="/about">About</a><a href="/contact">Contact</a><a href="/post">Dashboard</a>
+    <a href="/about">About</a><a href="/contact">Contact</a><a href="/profile">Profile</a>
+    <a href="#">List Property</a>
 </div>
 
 <main class="container">
     <!-- View Toggle -->
     <div class="view-toggle">
-        <button id="classicViewBtn" class="active"><i class="fas fa-th-list"></i> Classic Browse</button>
-        <button id="foryouViewBtn"><i class="fas fa-magic"></i> For You Feed</button>
+        <button id="foryouViewBtn" class="active"><i class="fas fa-magic"></i> For You Feed</button>
+        <button id="classicViewBtn"><i class="fas fa-th-list"></i> Classic Browse</button>
+    </div>
+
+    <!-- For You Feed (Full Screen) - ACTIVE BY DEFAULT -->
+    <div id="foryouView" class="active">
+        <div class="feed-top-bar">
+            <button class="feed-close-btn" id="feedCloseBtn"><i class="fas fa-times"></i></button>
+            <div class="feed-location-badge" id="feedLocationBadge">
+                <i class="fas fa-location-dot"></i>
+                <span id="feedLocationText">For You</span>
+            </div>
+        </div>
+        <div class="feed-wrapper" id="feedWrapper"></div>
+        <div class="feed-bottom-bar">
+            <button class="feed-btn feed-btn-prev" id="feedPrevBtn"><i class="fas fa-chevron-down"></i></button>
+            <button class="feed-btn feed-btn-share" id="feedShareBtn"><i class="fab fa-whatsapp"></i></button>
+            <button class="feed-btn feed-btn-next" id="feedNextBtn"><i class="fas fa-chevron-up"></i></button>
+            <button class="feed-btn feed-btn-save" id="feedSaveBtn"><i class="fas fa-heart"></i></button>
+            <button class="feed-btn feed-btn-call" id="feedCallBtn"><i class="fas fa-phone-alt"></i></button>
+        </div>
     </div>
 
     <!-- Classic Browse View -->
-    <div id="classicView" class="active">
+    <div id="classicView">
         <div class="filters-bar">
             <input type="text" id="locationFilter" placeholder="City or area">
             <button type="button" class="trigger-btn" id="propertyTypeFilterBtn">Property Type <i class="fas fa-chevron-down"></i></button>
             <button type="button" class="trigger-btn" id="listingTypeFilterBtn">Listing Type <i class="fas fa-chevron-down"></i></button>
             <button type="button" class="trigger-btn" id="bedFilterBtn">Bedrooms <i class="fas fa-chevron-down"></i></button>
-            <input type="number" id="minPriceFilter" placeholder="Min Price">
-            <input type="number" id="maxPriceFilter" placeholder="Max Price">
+            
+            <!-- Corporate Price Range Slider -->
+            <div class="price-range-wrapper">
+                <div class="price-inputs">
+                    <input type="number" id="minPriceInput" placeholder="Min" min="0" step="10000">
+                    <span>–</span>
+                    <input type="number" id="maxPriceInput" placeholder="Max" min="0" step="10000">
+                </div>
+                <div class="price-slider-labels">
+                    <span>₦0</span>
+                    <span>₦50M+</span>
+                </div>
+                <input type="range" id="minPriceSlider" min="0" max="50000000" step="100000" value="0">
+                <input type="range" id="maxPriceSlider" min="0" max="50000000" step="100000" value="50000000">
+            </div>
+
             <button id="nearMeBtn" class="btn-primary"><i class="fas fa-location-arrow"></i> Near Me</button>
             <button id="applyFiltersBtn" class="btn-primary"><i class="fas fa-search"></i> Apply</button>
         </div>
@@ -588,25 +761,6 @@
     </div>
 </main>
 
-<!-- For You Feed (Full Screen) -->
-<div id="foryouView">
-    <div class="feed-top-bar">
-        <button class="feed-close-btn" id="feedCloseBtn"><i class="fas fa-times"></i></button>
-        <div class="feed-location-badge" id="feedLocationBadge">
-            <i class="fas fa-location-dot"></i>
-            <span id="feedLocationText">For You</span>
-        </div>
-    </div>
-    <div class="feed-wrapper" id="feedWrapper"></div>
-    <div class="feed-bottom-bar">
-        <button class="feed-btn feed-btn-prev" id="feedPrevBtn"><i class="fas fa-chevron-down"></i></button>
-        <button class="feed-btn feed-btn-share" id="feedShareBtn"><i class="fab fa-whatsapp"></i></button>
-        <button class="feed-btn feed-btn-next" id="feedNextBtn"><i class="fas fa-chevron-up"></i></button>
-        <button class="feed-btn feed-btn-save" id="feedSaveBtn"><i class="fas fa-heart"></i></button>
-        <button class="feed-btn feed-btn-call" id="feedCallBtn"><i class="fas fa-phone-alt"></i></button>
-    </div>
-</div>
-
 <!-- Selection Modal -->
 <div class="modal-overlay" id="selectionModal">
     <div class="modal">
@@ -618,15 +772,62 @@
     </div>
 </div>
 
+<!-- Corporate Footer -->
 <footer>
     <div class="container">
         <div class="footer-grid">
-            <div><h4 style="color:white;">Zaure</h4><p>Your digital entrance hall – connecting owners and seekers directly.</p></div>
-            <div><h4>Explore</h4><a href="/browse?type=sale">Buy</a><br><a href="/browse?type=rent">Rent</a><br><a href="/how-it-works">How It Works</a></div>
-            <div><h4>Support</h4><a href="/contact">Contact</a><br><a href="/faq">FAQ</a><br><a href="/privacy">Privacy</a><br><a href="/terms">Terms</a></div>
-            <div><h4>Connect</h4><div class="social"><i class="fab fa-facebook-f"></i><i class="fab fa-instagram"></i><i class="fab fa-twitter"></i></div></div>
+            <!-- 1. Brand & Remote Location -->
+            <div class="footer-col brand">
+                <h4 style="font-family:'Playfair Display',serif; font-size:1.5rem;">Zaure<span style="color:#B49450;">.</span></h4>
+                <p>Your digital entrance hall – connecting verified owners and seekers directly across Northern Nigeria.</p>
+                <div style="margin-top:1rem; font-size:0.9rem; color:#94A3B8;">
+                    <i class="fas fa-globe" style="color:#B49450; margin-right:0.5rem;"></i> Remote · Northern Nigeria<br>
+                    <i class="fas fa-envelope" style="color:#B49450; margin-right:0.5rem; margin-top:0.3rem;"></i> get.zaure@proton.me
+                </div>
+            </div>
+
+            <!-- 2. Quick Links (Primary Navigation) -->
+            <div class="footer-col">
+                <h4>Find a Home</h4>
+                <a href="/browse?type=sale">Buy Property</a>
+                <a href="/browse?type=rent">Rent Property</a>
+                <a href="/how-it-works">How It Works</a>
+                <a href="/browse">Browse All Listings</a>
+            </div>
+
+            <!-- 3. Company & Legal -->
+            <div class="footer-col">
+                <h4>Company</h4>
+                <a href="/about">About Us</a>
+                <a href="/contact">Contact</a>
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/terms">Terms of Service</a>
+            </div>
+
+            <!-- 4. Social & Trust Badges -->
+            <div class="footer-col connect">
+                <h4>Connect</h4>
+                <div class="social" style="margin-bottom:1.5rem;">
+                    <a href="https://twitter.com/zauretech" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com/zauretech" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com/company/zauretech" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://facebook.com/zauretech" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                </div>
+                <p style="font-size:0.85rem; color:#94A3B8; margin-bottom:1rem;">Follow us everywhere @zauretech</p>
+                <!-- Trust Badges -->
+                <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                    <span style="background:rgba(180,148,80,0.1); color:#B49450; padding:0.25rem 0.8rem; border-radius:50px; font-size:0.7rem; font-weight:600; border:1px solid rgba(180,148,80,0.2);">No Middlemen</span>
+                    <span style="background:rgba(180,148,80,0.1); color:#B49450; padding:0.25rem 0.8rem; border-radius:50px; font-size:0.7rem; font-weight:600; border:1px solid rgba(180,148,80,0.2);">Verified Owners</span>
+                    <span style="background:rgba(180,148,80,0.1); color:#B49450; padding:0.25rem 0.8rem; border-radius:50px; font-size:0.7rem; font-weight:600; border:1px solid rgba(180,148,80,0.2);">Zero Commission</span>
+                </div>
+            </div>
         </div>
-        <div style="text-align:center; padding-top:1.5rem; border-top:1px solid #2E3548; font-size:0.8rem;">© 2026 Zaure. All rights reserved.</div>
+
+        <!-- 5. Bottom Copyright Bar -->
+        <div class="footer-bottom">
+            <span>&copy; 2026 <strong style="color:white;">Zaure Technologies</strong>. All rights reserved.</span>
+            <span>Built for Northern Nigeria. 🇳🇬</span>
+        </div>
     </div>
 </footer>
 
@@ -789,6 +990,41 @@
     document.getElementById('feedCloseBtn').addEventListener('click', showClassic);
 
     // ============================================
+    // PRICE SLIDER SYNC
+    // ============================================
+    const minSlider = document.getElementById('minPriceSlider');
+    const maxSlider = document.getElementById('maxPriceSlider');
+    const minInput = document.getElementById('minPriceInput');
+    const maxInput = document.getElementById('maxPriceInput');
+
+    function updatePriceFromSliders() {
+        let minVal = parseInt(minSlider.value);
+        let maxVal = parseInt(maxSlider.value);
+        if (minVal > maxVal) {
+            minSlider.value = maxVal;
+            minVal = maxVal;
+        }
+        minInput.value = minVal > 0 ? minVal : '';
+        maxInput.value = maxVal >= 50000000 ? '' : maxVal;
+    }
+
+    function updateSlidersFromInputs() {
+        let minVal = parseInt(minInput.value) || 0;
+        let maxVal = parseInt(maxInput.value) || 50000000;
+        if (minVal > maxVal) {
+            minVal = maxVal;
+            minInput.value = maxVal;
+        }
+        minSlider.value = minVal;
+        maxSlider.value = maxVal;
+    }
+
+    minSlider.addEventListener('input', updatePriceFromSliders);
+    maxSlider.addEventListener('input', updatePriceFromSliders);
+    minInput.addEventListener('change', () => { updateSlidersFromInputs(); applyClassicFilters(); });
+    maxInput.addEventListener('change', () => { updateSlidersFromInputs(); applyClassicFilters(); });
+
+    // ============================================
     // MODAL
     // ============================================
     const modalOverlay = document.getElementById('selectionModal');
@@ -870,10 +1106,10 @@
         if (!LocationEngine.userLocation) return null;
         const pl = LocationEngine.extractCityFromProperty(prop.address, prop.city);
         if (!pl) return null;
-        if (LocationEngine.userLocation.city === pl.city) return { text: 'In Your City', icon: 'fa-location-dot' };
-        if (LocationEngine.userLocation.state === pl.state) return { text: 'Same State', icon: 'fa-map-pin' };
+        if (LocationEngine.userLocation.city === pl.city) return { text: 'In Your City', icon: 'fa-location-dot', topPick: true };
+        if (LocationEngine.userLocation.state === pl.state) return { text: 'Same State', icon: 'fa-map-pin', topPick: false };
         const dist = getPropertyDistance(prop);
-        if (dist && dist <= 100) return { text: `${Math.round(dist)}km Away`, icon: 'fa-map-marker-alt' };
+        if (dist && dist <= 100) return { text: `${Math.round(dist)}km Away`, icon: 'fa-map-marker-alt', topPick: false };
         return null;
     }
 
@@ -882,8 +1118,8 @@
         const pType = document.getElementById('propertyTypeValue').value;
         const lType = document.getElementById('listingTypeValue').value;
         const bedsRaw = document.getElementById('bedsValue').value;
-        const minP = parseInt(document.getElementById('minPriceFilter').value) || 0;
-        const maxP = parseInt(document.getElementById('maxPriceFilter').value) || Infinity;
+        const minP = parseInt(minSlider.value) || 0;
+        const maxP = parseInt(maxSlider.value) || Infinity;
 
         filteredProperties = allProperties.filter(p => {
             if (loc && !p.city.toLowerCase().includes(loc) && !(p.address||'').toLowerCase().includes(loc)) return false;
@@ -923,6 +1159,7 @@
             const verified = p.owner?.verified ? '<div class="badge-verified"><i class="fas fa-check-circle"></i> Verified</div>' : '';
             const badge = getLocationBadge(p);
             const locBadge = badge ? `<div class="badge-location"><i class="fas ${badge.icon}"></i> ${badge.text}</div>` : '';
+            const topPick = badge?.topPick ? `<div class="badge-top-pick"><i class="fas fa-star"></i> Top Pick</div>` : '';
             const dist = getPropertyDistance(p);
             const distDisplay = dist ? `<span class="distance-info"><i class="fas fa-location-dot"></i> ${dist < 1 ? 'Same city' : dist.toFixed(1) + ' km'}</span>` : '';
             const highlight = badge && badge.text === 'In Your City' ? ' location-highlight' : '';
@@ -931,7 +1168,7 @@
                 <div class="property-card${highlight}" onclick="window.location.href='/property?id=${p.id}'">
                     <div class="img-wrapper">
                         <img src="${img}" alt="${p.title}" loading="lazy">
-                        ${verified}${locBadge}
+                        ${verified}${locBadge}${topPick}
                     </div>
                     <div class="card-body">
                         <div class="price">${price}</div>
@@ -976,7 +1213,7 @@
     };
 
     document.getElementById('applyFiltersBtn').addEventListener('click', applyClassicFilters);
-    ['locationFilter','minPriceFilter','maxPriceFilter'].forEach(id => {
+    ['locationFilter'].forEach(id => {
         document.getElementById(id).addEventListener('keypress', (e) => { if (e.key === 'Enter') applyClassicFilters(); });
     });
 
@@ -1062,7 +1299,7 @@
                 ${video ? 
                     `<video src="${video}" autoplay muted loop playsinline></video>` : 
                     `<div class="card-images" id="cardImages">
-                        ${images.map(img => `<img class="card-img" src="${img}" alt="">`).join('')}
+                        ${images.map(img => `<img class="card-img" src="${img}" alt="" loading="lazy">`).join('')}
                     </div>`
                 }
                 ${hasMultipleImages ? `
@@ -1265,7 +1502,7 @@
     });
 
     // ============================================
-    // INIT
+    // INIT (Show Feed First)
     // ============================================
     async function init() {
         try {
@@ -1281,9 +1518,13 @@
         if (params.get('type')) { document.getElementById('listingTypeValue').value = params.get('type'); const lt = listingTypes.find(t => t.value === params.get('type')); if (lt) document.getElementById('listingTypeFilterBtn').innerHTML = `${lt.label} <i class="fas fa-chevron-down"></i>`; }
         if (params.get('propertyType')) { document.getElementById('propertyTypeValue').value = params.get('propertyType'); const pt = propertyTypes.find(t => t.value === params.get('propertyType')); if (pt) document.getElementById('propertyTypeFilterBtn').innerHTML = `${pt.label} <i class="fas fa-chevron-down"></i>`; }
         if (params.get('beds')) { document.getElementById('bedsValue').value = params.get('beds'); const bd = bedOptions.find(b => b.value === params.get('beds')); if (bd) document.getElementById('bedFilterBtn').innerHTML = `${bd.label} <i class="fas fa-chevron-down"></i>`; }
-        if (params.get('min')) document.getElementById('minPriceFilter').value = params.get('min');
-        if (params.get('max')) document.getElementById('maxPriceFilter').value = params.get('max');
+        if (params.get('min')) { minSlider.value = params.get('min'); minInput.value = params.get('min'); }
+        if (params.get('max')) { maxSlider.value = params.get('max'); maxInput.value = params.get('max'); }
 
+        // Show Feed First
+        showForYou();
+        
+        // Prepare classic view in background
         applyClassicFilters();
     }
 
