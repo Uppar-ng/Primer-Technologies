@@ -102,6 +102,16 @@
             -webkit-font-smoothing: antialiased;
         }
         .container { max-width:1280px; margin:0 auto; padding:0 2rem; }
+        
+        /* Remove blue focus outlines */
+        button:focus, a:focus, input:focus, select:focus, textarea:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(180,148,80,0.3);
+        }
+
+        /* ============================================================== */
+        /* HEADER                                                          */
+        /* ============================================================== */
         .main-header {
             background: rgba(255,255,255,0.8);
             backdrop-filter: blur(12px);
@@ -172,6 +182,24 @@
         }
         .mobile-menu.open { left:0; }
         .mobile-menu a { text-decoration:none; font-size:1.2rem; color:var(--text); font-weight:500; padding:0.5rem 0; border-bottom:1px solid var(--border); }
+        .signup-btn {
+            background: var(--accent);
+            color: #1A1F2E;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.9rem;
+        }
+        .signup-btn:hover { background: var(--accent-soft); }
+        .user-greeting {
+            font-weight:600; color:var(--primary); background:var(--surface-alt);
+            padding:0.5rem 1rem; border-radius:2rem; border:1px solid var(--border);
+            font-size:0.9rem; text-decoration:none; display:inline-block;
+        }
+        .user-greeting:hover { background:var(--border); }
 
         /* ============================================================== */
         /* DYNAMIC HERO BACKGROUND SLIDER (8 Images)                      */
@@ -330,10 +358,6 @@
             margin-bottom:2.5rem; color:var(--primary);
         }
         .section-subtitle { text-align:center; color:var(--text-secondary); max-width:600px; margin:-1.5rem auto 3rem; }
-        .location-context {
-            text-align:center; color:var(--accent); font-weight:500; margin:-1rem auto 2rem;
-            font-size:0.9rem; display:flex; align-items:center; justify-content:center; gap:0.5rem;
-        }
         .property-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:2rem; }
         .property-card {
             background:var(--surface); border-radius:var(--radius); overflow:hidden;
@@ -411,64 +435,6 @@
         }
         .state-item:hover { background:var(--primary); color:white; }
 
-        /* ============================================================== */
-        /* CORPORATE BLOG SECTION (Latest Posts)                          */
-        /* ============================================================== */
-        .blog-section { padding: 5rem 0; background: var(--surface-alt); }
-        .blog-grid-home { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        .blog-card-home {
-            background: var(--surface);
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow-sm);
-            transition: transform 0.2s, box-shadow 0.2s;
-            border: 1px solid var(--border);
-            cursor: pointer;
-        }
-        .blog-card-home:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-md);
-            border-color: var(--accent);
-        }
-        .blog-card-home img {
-            width: 100%; height: 220px; object-fit: cover;
-        }
-        .blog-card-home .blog-content { padding: 1.5rem; }
-        .blog-card-home .blog-category {
-            display: inline-block;
-            background: var(--accent);
-            color: var(--primary);
-            padding: 0.2rem 0.8rem;
-            border-radius: 2rem;
-            font-size: 0.7rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .blog-card-home h3 {
-            font-family:'Playfair Display',serif;
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: var(--text);
-        }
-        .blog-card-home p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            line-height: 1.5;
-        }
-        .blog-card-home .read-more-home {
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: color 0.2s;
-        }
-        .blog-card-home .read-more-home:hover { color: var(--accent-soft); }
-        /* ============================================================== */
-
         /* Modals */
         .modal-overlay {
             position:fixed; top:0; left:0; width:100%; height:100%;
@@ -487,23 +453,11 @@
         .modal-header h3 { font-family:'Playfair Display',serif; font-size:1.5rem; }
         .modal-close { background:none; border:none; font-size:1.5rem; cursor:pointer; color:var(--text); }
         .modal-form { display:flex; flex-direction:column; gap:1rem; }
-        .modal-form input,
-        .modal-form select {
+        .modal-form input {
             padding:0.8rem 1rem; border:1px solid var(--border); border-radius:var(--radius-sm);
-            background:var(--bg); font-size:0.95rem; color:var(--text);
-        }
-        .modal-form select {
-            cursor:pointer;
-            appearance:none;
-            background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%236B7280' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
-            background-repeat:no-repeat;
-            background-position:right 1rem center;
+            background:var(--bg); font-size:0.95rem;
         }
         .modal-form .btn-primary { justify-content:center; }
-        .location-detect-note {
-            font-size:0.8rem; color:var(--text-secondary); text-align:center;
-            padding:0.5rem; background:var(--surface-alt); border-radius:var(--radius-sm);
-        }
 
         /* Selection modal options */
         .options-list { display:flex; flex-direction:column; gap:0.5rem; }
@@ -517,7 +471,6 @@
         footer { background:#1A1F2E; color:#CBD5E1; padding:4rem 0 1.5rem; margin-top:3rem; }
         footer a { color:#94A3B8; text-decoration:none; transition: all 0.2s; }
         footer a:hover { color:var(--accent-soft); transform: translateX(4px); }
-        
         footer .footer-grid {
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1.5fr;
@@ -532,36 +485,14 @@
             margin-bottom: 1.2rem;
             letter-spacing: 0.5px;
         }
-        footer .footer-col a {
-            display: block;
-            font-size: 0.9rem;
-            margin-bottom: 0.8rem;
-        }
-        footer .footer-col.brand p {
-            color: #94A3B8;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-        footer .social a {
-            display: inline-block !important;
-            color: #B49450;
-            margin-right: 1rem;
-            transition: transform 0.2s;
-        }
-        footer .social a:hover {
-            transform: scale(1.1);
-            color: var(--accent-soft);
-        }
+        footer .footer-col a { display: block; font-size: 0.9rem; margin-bottom: 0.8rem; }
+        footer .footer-col.brand p { color: #94A3B8; font-size: 0.95rem; line-height: 1.6; }
+        footer .social a { display: inline-block !important; color: #B49450; margin-right: 1rem; transition: transform 0.2s; }
+        footer .social a:hover { transform: scale(1.1); color: var(--accent-soft); }
         footer .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            padding-top: 2rem;
-            margin-top: 2rem;
-            border-top: 1px solid #2E3548;
-            font-size: 0.85rem;
-            color: #94A3B8;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
+            padding-top: 2rem; margin-top: 2rem; border-top: 1px solid #2E3548;
+            font-size: 0.85rem; color: #94A3B8;
         }
 
         @media (max-width:768px) {
@@ -588,7 +519,7 @@
     <div class="container">
         <div class="logo"><a href="/">Zaure<span class="dot"></span></a></div>
         <nav class="desktop-nav">
-            <a href="/">Home</a>
+            <a href="/" class="active">Home</a>
             <a href="/browse?type=sale">Buy</a>
             <a href="/browse?type=rent">Rent</a>
             <a href="/how-it-works">How It Works</a>
@@ -597,6 +528,9 @@
             <a href="/profile">Profile</a>
             <a href="#" class="btn-nav">List Property</a>
         </nav>
+        <div class="header-actions" id="headerUserArea">
+            <!-- dynamically filled -->
+        </div>
         <div class="header-actions">
             <button id="themeToggle" class="icon-btn"><i class="fas fa-moon"></i></button>
             <button id="mobileMenuToggle" class="icon-btn mobile-only"><i class="fas fa-bars"></i></button>
@@ -604,14 +538,11 @@
     </div>
 </header>
 
+<!-- Mobile Menu -->
 <div class="mobile-menu" id="mobileMenu">
     <button id="closeMenu" class="close-btn"><i class="fas fa-times"></i></button>
-    <a href="/">Home</a>
-    <a href="/browse?type=sale">Buy</a>
-    <a href="/browse?type=rent">Rent</a>
-    <a href="/how-it-works">How It Works</a>
-    <a href="/about">About</a>
-    <a href="/contact">Contact</a>
+    <a href="/">Home</a><a href="/browse?type=sale">Buy</a><a href="/browse?type=rent">Rent</a>
+    <a href="/how-it-works">How It Works</a><a href="/about">About</a><a href="/contact">Contact</a>
     <a href="/profile">Profile</a>
     <a href="#">List Property</a>
 </div>
@@ -626,24 +557,6 @@
         <form id="signupForm" class="modal-form">
             <input type="text" id="signupName" placeholder="Your full name" required>
             <input type="tel" id="signupPhone" placeholder="Phone number" required>
-            <select id="signupLocation" required>
-                <option value="">Select your location</option>
-                <option value="kaduna">Kaduna</option>
-                <option value="zaria">Zaria</option>
-                <option value="kano">Kano</option>
-                <option value="abuja">Abuja</option>
-                <option value="sokoto">Sokoto</option>
-                <option value="maiduguri">Maiduguri</option>
-                <option value="jos">Jos</option>
-                <option value="bauchi">Bauchi</option>
-                <option value="gombe">Gombe</option>
-                <option value="katsina">Katsina</option>
-                <option value="lagos">Lagos</option>
-                <option value="ibadan">Ibadan</option>
-            </select>
-            <div class="location-detect-note" id="locationDetectNote" style="display:none;">
-                <i class="fas fa-location-dot"></i> We detected you're in <strong id="detectedCityName"></strong>
-            </div>
             <button type="submit" class="btn-primary">Sign Up</button>
         </form>
     </div>
@@ -701,7 +614,6 @@
     <section class="section">
         <div class="container">
             <h2 class="section-title">Homes for Sale</h2>
-            <div class="location-context" id="saleLocationContext" style="display:none;"></div>
             <p class="section-subtitle">Verified properties from owners, not agents.</p>
             <div class="property-grid" id="featuredSaleGrid"></div>
             <div style="text-align:center; margin-top:2.5rem;"><a href="/browse?type=sale" class="btn-outline">See all for sale →</a></div>
@@ -711,7 +623,6 @@
     <section class="section bg-surface">
         <div class="container">
             <h2 class="section-title">Places for Rent</h2>
-            <div class="location-context" id="rentLocationContext" style="display:none;"></div>
             <div class="property-grid" id="featuredRentGrid"></div>
             <div style="text-align:center; margin-top:2.5rem;"><a href="/browse?type=rent" class="btn-outline">Browse all rentals →</a></div>
         </div>
@@ -746,23 +657,6 @@
             <div class="states-grid" id="statesGrid"></div>
         </div>
     </section>
-
-    <!-- ============================================================== -->
-    <!-- CORPORATE BLOG SECTION (Homepage)                               -->
-    <!-- ============================================================== -->
-    <section class="blog-section">
-        <div class="container">
-            <h2 class="section-title">Insights & Articles</h2>
-            <p class="section-subtitle">Expert property tips, market trends, and advice from the Zaure team.</p>
-            <div class="blog-grid-home" id="homeBlogGrid">
-                <div class="loading" style="text-align:center; padding:2rem; color:var(--text-secondary);">Loading articles...</div>
-            </div>
-            <div style="text-align:center; margin-top:2.5rem;">
-                <a href="/blog" class="btn-outline">Read All Articles →</a>
-            </div>
-        </div>
-    </section>
-    <!-- ============================================================== -->
 </main>
 
 <!-- Corporate Footer -->
@@ -825,595 +719,195 @@
 </footer>
 
 <script>
-(function() {
-    // ============================================
-    // NIGERIA CITIES DATABASE (Production Geocoding)
-    // ============================================
-    const nigeriaCities = {
-        'kaduna': { lat: 10.5105, lng: 7.4165, state: 'Kaduna', region: 'northwest' },
-        'zaria': { lat: 11.0855, lng: 7.7199, state: 'Kaduna', region: 'northwest' },
-        'kano': { lat: 12.0022, lng: 8.5920, state: 'Kano', region: 'northwest' },
-        'katsina': { lat: 12.9908, lng: 7.6171, state: 'Katsina', region: 'northwest' },
-        'sokoto': { lat: 13.0626, lng: 5.2337, state: 'Sokoto', region: 'northwest' },
-        'birnin kebbi': { lat: 12.4539, lng: 4.1975, state: 'Kebbi', region: 'northwest' },
-        'gusau': { lat: 12.1702, lng: 6.6641, state: 'Zamfara', region: 'northwest' },
-        'dutse': { lat: 11.7589, lng: 9.3389, state: 'Jigawa', region: 'northwest' },
-        'maiduguri': { lat: 11.8333, lng: 13.1500, state: 'Borno', region: 'northeast' },
-        'bauchi': { lat: 10.3158, lng: 9.8442, state: 'Bauchi', region: 'northeast' },
-        'gombe': { lat: 10.2853, lng: 11.1672, state: 'Gombe', region: 'northeast' },
-        'yola': { lat: 9.2035, lng: 12.4954, state: 'Adamawa', region: 'northeast' },
-        'jalingo': { lat: 8.8937, lng: 11.3602, state: 'Taraba', region: 'northeast' },
-        'damaturu': { lat: 11.7490, lng: 11.9610, state: 'Yobe', region: 'northeast' },
-        'abuja': { lat: 9.0579, lng: 7.4951, state: 'FCT', region: 'northcentral' },
-        'jos': { lat: 9.8965, lng: 8.8583, state: 'Plateau', region: 'northcentral' },
-        'minna': { lat: 9.6155, lng: 6.5476, state: 'Niger', region: 'northcentral' },
-        'lokoja': { lat: 7.8000, lng: 6.7333, state: 'Kogi', region: 'northcentral' },
-        'lafia': { lat: 8.4930, lng: 8.5167, state: 'Nasarawa', region: 'northcentral' },
-        'makurdi': { lat: 7.7325, lng: 8.5391, state: 'Benue', region: 'northcentral' },
-        'ilorin': { lat: 8.4966, lng: 4.5427, state: 'Kwara', region: 'northcentral' },
-        'lagos': { lat: 6.5244, lng: 3.3792, state: 'Lagos', region: 'southwest' },
-        'ibadan': { lat: 7.3775, lng: 3.9470, state: 'Oyo', region: 'southwest' },
-        'port harcourt': { lat: 4.8156, lng: 7.0498, state: 'Rivers', region: 'southsouth' },
-        'benin city': { lat: 6.3350, lng: 5.6037, state: 'Edo', region: 'southsouth' },
-        'enugu': { lat: 6.4478, lng: 7.5144, state: 'Enugu', region: 'southeast' },
-        'owerri': { lat: 5.4850, lng: 7.0336, state: 'Imo', region: 'southeast' },
-        'abakaliki': { lat: 6.3167, lng: 8.1000, state: 'Ebonyi', region: 'southeast' },
-        'uyo': { lat: 5.0333, lng: 7.9333, state: 'Akwa Ibom', region: 'southsouth' },
-        'calabar': { lat: 4.9517, lng: 8.3220, state: 'Cross River', region: 'southsouth' }
-    };
+    (function() {
+        // Theme toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const storedTheme = localStorage.getItem('zaure_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', storedTheme);
+        themeToggle.innerHTML = storedTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        themeToggle.addEventListener('click', () => {
+            const cur = document.documentElement.getAttribute('data-theme');
+            const next = cur === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('zaure_theme', next);
+            themeToggle.innerHTML = next === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        });
 
-    // ============================================
-    // LOCATION ENGINE
-    // ============================================
-    const LocationEngine = {
-        userLocation: null,
-        
-        calculateDistance(lat1, lng1, lat2, lng2) {
-            const R = 6371;
-            const dLat = (lat2 - lat1) * Math.PI / 180;
-            const dLng = (lng2 - lng1) * Math.PI / 180;
-            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-                     Math.cos(lat1 * Math.PI/180) * Math.cos(lat2 * Math.PI/180) *
-                     Math.sin(dLng/2) * Math.sin(dLng/2);
-            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-            return R * c;
-        },
+        // Mobile menu
+        const mobileToggle = document.getElementById('mobileMenuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const closeMenuBtn = document.getElementById('closeMenu');
+        mobileToggle.addEventListener('click', () => mobileMenu.classList.add('open'));
+        closeMenuBtn.addEventListener('click', () => mobileMenu.classList.remove('open'));
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.remove('open'));
+        });
 
-        extractCityFromProperty(address, city) {
-            const text = `${address || ''} ${city || ''}`.toLowerCase().trim();
-            for (const [cityName, coords] of Object.entries(nigeriaCities)) {
-                if (text.includes(cityName)) {
-                    return { city: cityName, ...coords };
-                }
-            }
-            if (city && nigeriaCities[city.toLowerCase()]) {
-                const coords = nigeriaCities[city.toLowerCase()];
-                return { city: city.toLowerCase(), ...coords };
-            }
-            return null;
-        },
-
-        async detectUserLocation() {
-            // Check cache (30 minutes)
-            const cached = localStorage.getItem('zaure_location_context');
-            if (cached) {
-                try {
-                    const data = JSON.parse(cached);
-                    const ageMins = (Date.now() - data.timestamp) / 60000;
-                    if (ageMins < 30) {
-                        this.userLocation = data;
-                        return data;
-                    }
-                } catch (e) {}
-            }
-
-            // Method 1: GPS + Reverse Geocoding
-            if (navigator.geolocation) {
-                try {
-                    const position = await new Promise((resolve, reject) => {
-                        navigator.geolocation.getCurrentPosition(resolve, reject, {
-                            enableHighAccuracy: true,
-                            timeout: 10000,
-                            maximumAge: 300000
-                        });
-                    });
-                    
-                    const { latitude, longitude } = position.coords;
-                    try {
-                        const response = await fetch(
-                            `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json&zoom=10`,
-                            { headers: { 'User-Agent': 'ZaureApp/1.0' } }
-                        );
-                        const data = await response.json();
-                        if (data.address) {
-                            const city = (data.address.city || data.address.town || data.address.village || data.address.county || '').toLowerCase();
-                            const state = data.address.state || '';
-                            if (city && nigeriaCities[city]) {
-                                const location = {
-                                    city: city,
-                                    state: nigeriaCities[city].state,
-                                    coordinates: { lat: latitude, lng: longitude },
-                                    source: 'gps',
-                                    timestamp: Date.now()
-                                };
-                                localStorage.setItem('zaure_location_context', JSON.stringify(location));
-                                this.userLocation = location;
-                                return location;
-                            }
-                        }
-                    } catch (e) {
-                        console.log('Reverse geocoding failed, falling back to nearest city match');
-                    }
-
-                    // Fallback: find nearest city
-                    let nearestCity = null;
-                    let minDistance = Infinity;
-                    for (const [cityName, coords] of Object.entries(nigeriaCities)) {
-                        const distance = this.calculateDistance(latitude, longitude, coords.lat, coords.lng);
-                        if (distance < minDistance && distance < 50) {
-                            minDistance = distance;
-                            nearestCity = { city: cityName, ...coords };
-                        }
-                    }
-                    if (nearestCity) {
-                        const location = {
-                            city: nearestCity.city,
-                            state: nearestCity.state,
-                            coordinates: { lat: latitude, lng: longitude },
-                            source: 'gps-nearest',
-                            timestamp: Date.now()
-                        };
-                        localStorage.setItem('zaure_location_context', JSON.stringify(location));
-                        this.userLocation = location;
-                        return location;
-                    }
-                } catch (e) {
-                    console.log('GPS not available:', e.message);
-                }
-            }
-
-            // Method 2: IP Geolocation
-            try {
-                const response = await fetch('https://ipapi.co/json/');
-                const data = await response.json();
-                if (data.city) {
-                    const city = data.city.toLowerCase();
-                    if (nigeriaCities[city]) {
-                        const location = {
-                            city: city,
-                            state: nigeriaCities[city].state,
-                            coordinates: { lat: data.latitude, lng: data.longitude },
-                            source: 'ip',
-                            timestamp: Date.now()
-                        };
-                        localStorage.setItem('zaure_location_context', JSON.stringify(location));
-                        this.userLocation = location;
-                        return location;
-                    }
-                }
-            } catch (e) {
-                console.log('IP geolocation failed');
-            }
-
-            // Method 3: User's saved preference
+        // User area
+        const headerUserArea = document.getElementById('headerUserArea');
+        function renderUserArea() {
             const user = JSON.parse(localStorage.getItem('zaure_user'));
-            if (user && user.location) {
-                const city = user.location.toLowerCase();
-                if (nigeriaCities[city]) {
-                    const location = {
-                        city: city,
-                        state: nigeriaCities[city].state,
-                        coordinates: nigeriaCities[city],
-                        source: 'user-preference',
-                        timestamp: Date.now()
-                    };
-                    localStorage.setItem('zaure_location_context', JSON.stringify(location));
-                    this.userLocation = location;
-                    return location;
+            if (user && user.name) {
+                headerUserArea.innerHTML = `<a href="/profile" class="user-greeting">Hi, ${user.name.split(' ')[0]}</a>`;
+            } else {
+                headerUserArea.innerHTML = `<button id="signupBtn" class="signup-btn">Sign Up</button>`;
+                const signupBtn = document.getElementById('signupBtn');
+                if (signupBtn) {
+                    signupBtn.addEventListener('click', () => {
+                        document.getElementById('signupModal').classList.add('active');
+                    });
                 }
             }
+        }
+        renderUserArea();
 
-            return null;
-        },
+        // Sign Up modal
+        const signupModalOverlay = document.getElementById('signupModal');
+        const closeSignupModalBtn = document.getElementById('closeSignupModalBtn');
+        const signupForm = document.getElementById('signupForm');
+        closeSignupModalBtn.addEventListener('click', () => signupModalOverlay.classList.remove('active'));
+        window.addEventListener('click', (e) => {
+            if (e.target === signupModalOverlay) signupModalOverlay.classList.remove('active');
+        });
+        signupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('signupName').value.trim();
+            const phone = document.getElementById('signupPhone').value.trim();
+            if (name && phone) {
+                localStorage.setItem('zaure_user', JSON.stringify({ name, phone }));
+                signupModalOverlay.classList.remove('active');
+                signupForm.reset();
+                renderUserArea();
+            }
+        });
 
-        getRecommendations(properties, type, limit = 6) {
-            const filtered = properties.filter(p => p.type === type);
-            const userLoc = this.userLocation;
+        // Property type / beds modal
+        const selectionModalOverlay = document.getElementById('selectionModal');
+        const selectionModalTitle = document.getElementById('selectionModalTitle');
+        const selectionOptionsContainer = document.getElementById('selectionOptionsContainer');
+        const closeSelectionModalBtn = document.getElementById('closeSelectionModalBtn');
+        const propertyTypeBtn = document.getElementById('propertyTypeBtn');
+        const bedsBtn = document.getElementById('bedsBtn');
+        const propertyTypeValue = document.getElementById('propertyTypeValue');
+        const bedsValue = document.getElementById('bedsValue');
 
-            const scored = filtered.map(prop => {
-                const propLocation = this.extractCityFromProperty(prop.address, prop.city);
-                let locationScore = 0;
-                let distance = null;
+        const propertyTypes = [
+            { value: 'house', label: 'House' },
+            { value: 'apartment', label: 'Apartment' },
+            { value: 'land', label: 'Land' },
+            { value: 'commercial', label: 'Commercial' }
+        ];
+        const bedOptions = [
+            { value: '1', label: '1' },
+            { value: '2', label: '2' },
+            { value: '3', label: '3' },
+            { value: '4+', label: '4+' }
+        ];
 
-                if (userLoc && propLocation) {
-                    // Same city match
-                    if (userLoc.city === propLocation.city) {
-                        locationScore = 1.0;
-                        distance = 0;
-                    } else if (userLoc.state === propLocation.state) {
-                        locationScore = 0.7;
-                        distance = this.calculateDistance(
-                            userLoc.coordinates?.lat || 0,
-                            userLoc.coordinates?.lng || 0,
-                            propLocation.lat,
-                            propLocation.lng
-                        );
-                    } else {
-                        distance = this.calculateDistance(
-                            userLoc.coordinates?.lat || 0,
-                            userLoc.coordinates?.lng || 0,
-                            propLocation.lat,
-                            propLocation.lng
-                        );
-                        locationScore = Math.max(0, 1 - (distance / 500));
-                    }
-                }
+        let currentSelectionType = '';
+        function openSelectionModal(type) {
+            currentSelectionType = type;
+            const options = type === 'propertyType' ? propertyTypes : bedOptions;
+            selectionModalTitle.textContent = type === 'propertyType' ? 'Property Type' : 'Bedrooms';
+            selectionOptionsContainer.innerHTML = options.map(opt => 
+                `<button type="button" class="option-item" data-value="${opt.value}">${opt.label}</button>`
+            ).join('');
+            selectionModalOverlay.classList.add('active');
+        }
+        function closeSelectionModal() {
+            selectionModalOverlay.classList.remove('active');
+        }
+        propertyTypeBtn.addEventListener('click', () => openSelectionModal('propertyType'));
+        bedsBtn.addEventListener('click', () => openSelectionModal('beds'));
+        closeSelectionModalBtn.addEventListener('click', closeSelectionModal);
+        selectionModalOverlay.addEventListener('click', (e) => {
+            if (e.target === selectionModalOverlay) closeSelectionModal();
+        });
+        selectionOptionsContainer.addEventListener('click', (e) => {
+            const optionBtn = e.target.closest('.option-item');
+            if (!optionBtn) return;
+            const value = optionBtn.dataset.value;
+            const label = optionBtn.textContent.trim();
+            if (currentSelectionType === 'propertyType') {
+                propertyTypeValue.value = value;
+                propertyTypeBtn.innerHTML = `${label} <i class="fas fa-chevron-down"></i>`;
+            } else {
+                bedsValue.value = value;
+                bedsBtn.innerHTML = `${label} <i class="fas fa-chevron-down"></i>`;
+            }
+            closeSelectionModal();
+        });
 
-                // Freshness score
-                let freshnessScore = 0;
-                if (prop.createdAt) {
-                    const ageDays = (Date.now() - new Date(prop.createdAt).getTime()) / (1000*60*60*24);
-                    freshnessScore = Math.max(0, 1 - (ageDays / 30));
-                }
+        // Search form
+        document.getElementById('heroSearch').addEventListener('submit', e => {
+            e.preventDefault();
+            const location = document.getElementById('searchLocation').value.trim();
+            const type = propertyTypeValue.value;
+            const beds = bedsValue.value;
+            const min = document.getElementById('minPrice').value;
+            const max = document.getElementById('maxPrice').value;
+            let url = `/browse?location=${encodeURIComponent(location)}`;
+            if (type) url += `&propertyType=${type}`;
+            if (beds) url += `&beds=${beds}`;
+            if (min) url += `&min=${min}`;
+            if (max) url += `&max=${max}`;
+            window.location.href = url;
+        });
 
-                // Popularity score
-                let popularityScore = 0;
-                if (prop.views) {
-                    popularityScore = Math.min(1, prop.views / 1000);
-                }
-
-                const totalScore = (locationScore * 0.4) + (freshnessScore * 0.3) + (popularityScore * 0.3);
-
-                return {
-                    ...prop,
-                    _score: totalScore,
-                    _distance: distance,
-                    _locationScore: locationScore,
-                    _propLocation: propLocation,
-                    _badge: locationScore >= 1.0 ? 'In Your City' :
-                            locationScore >= 0.7 ? 'Near You' :
-                            locationScore >= 0.4 ? 'Same State' : null
-                };
+        // Load featured properties
+        fetch('/data/properties.json')
+            .then(res => res.json())
+            .then(data => {
+                const props = data.properties;
+                const saleProps = props.filter(p => p.type === 'sale').slice(0, 6);
+                const rentProps = props.filter(p => p.type === 'rent').slice(0, 6);
+                document.getElementById('featuredSaleGrid').innerHTML = renderCards(saleProps);
+                document.getElementById('featuredRentGrid').innerHTML = renderCards(rentProps);
+            })
+            .catch(() => {
+                document.getElementById('featuredSaleGrid').innerHTML = '<p style="text-align:center;color:var(--text-secondary);padding:2rem;">Unable to load properties.</p>';
+                document.getElementById('featuredRentGrid').innerHTML = '<p style="text-align:center;color:var(--text-secondary);padding:2rem;">Unable to load properties.</p>';
             });
 
-            scored.sort((a, b) => b._score - a._score);
-            return scored.slice(0, limit);
-        }
-    };
-
-    // ============================================
-    // USER AREA & SIGNUP
-    // ============================================
-    const headerUserArea = document.getElementById('headerUserArea');
-    function renderUserArea() {
-        const user = JSON.parse(localStorage.getItem('zaure_user'));
-        if (user && user.name) {
-            headerUserArea.innerHTML = `<a href="/profile" class="user-greeting">Hi, ${user.name.split(' ')[0]}</a>`;
-        } else {
-            headerUserArea.innerHTML = `<button id="signupBtn" class="signup-btn">Sign Up</button>`;
-            const signupBtn = document.getElementById('signupBtn');
-            if (signupBtn) {
-                signupBtn.addEventListener('click', () => {
-                    document.getElementById('signupModal').classList.add('active');
-                    detectAndSuggestLocation();
-                });
+        function renderCards(properties) {
+            if (!properties || properties.length === 0) {
+                return '<p style="text-align:center;color:var(--text-secondary);padding:2rem;">No properties available.</p>';
             }
+            return properties.map(p => {
+                // Safety check: skip broken entries
+                if (!p || !p.id) return '';
+                const price = p.price >= 1e6 ? `₦${(p.price/1e6).toFixed(1)}M` : `₦${p.price.toLocaleString()}`;
+                const img = p.images?.[0] || 'https://placehold.co/600x400?text=Zaure';
+                const verifiedBadge = p.owner?.verified ? '<div class="badge-verified"><i class="fas fa-check-circle"></i> Verified</div>' : '';
+                return `
+                    <div class="property-card" onclick="window.location.href='/property?id=${p.id}'">
+                        <div class="img-wrapper">
+                            <img src="${img}" alt="${p.title}" loading="lazy">
+                            ${verifiedBadge}
+                        </div>
+                        <div class="card-body">
+                            <div class="price">${price}</div>
+                            <h3>${p.title}</h3>
+                            <p>${p.address}, ${p.city}</p>
+                            <div class="features">
+                                ${p.propertyType !== 'land' ? `<span><i class="fas fa-bed"></i> ${p.bedrooms} Beds</span><span><i class="fas fa-bath"></i> ${p.bathrooms} Baths</span>` : '<span><i class="fas fa-map"></i> Land</span>'}
+                            </div>
+                            <div class="card-tags">
+                                <span class="card-tag" onclick="event.stopPropagation(); window.location.href='/browse?location=${encodeURIComponent(p.city)}'">${p.city}</span>
+                                <span class="card-tag" onclick="event.stopPropagation(); window.location.href='/browse?propertyType=${encodeURIComponent(p.propertyType)}'">${p.propertyType}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
         }
-    }
-    renderUserArea();
 
-    // Sign Up Modal
-    const signupModalOverlay = document.getElementById('signupModal');
-    const closeSignupModalBtn = document.getElementById('closeSignupModalBtn');
-    const signupForm = document.getElementById('signupForm');
-    const signupLocation = document.getElementById('signupLocation');
-    const locationDetectNote = document.getElementById('locationDetectNote');
-    const detectedCityName = document.getElementById('detectedCityName');
-
-    closeSignupModalBtn.addEventListener('click', () => signupModalOverlay.classList.remove('active'));
-    window.addEventListener('click', (e) => {
-        if (e.target === signupModalOverlay) signupModalOverlay.classList.remove('active');
-    });
-
-    async function detectAndSuggestLocation() {
-        const location = await LocationEngine.detectUserLocation();
-        if (location && location.city) {
-            detectedCityName.textContent = location.city.charAt(0).toUpperCase() + location.city.slice(1);
-            locationDetectNote.style.display = 'block';
-            // Pre-select if matches an option
-            const options = signupLocation.options;
-            for (let i = 0; i < options.length; i++) {
-                if (options[i].value === location.city) {
-                    signupLocation.value = location.city;
-                    break;
-                }
-            }
-        } else {
-            locationDetectNote.style.display = 'none';
-        }
-    }
-
-    signupForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const name = document.getElementById('signupName').value.trim();
-        const phone = document.getElementById('signupPhone').value.trim();
-        const location = signupLocation.value;
-        if (name && phone && location) {
-            localStorage.setItem('zaure_user', JSON.stringify({ name, phone, location }));
-            signupModalOverlay.classList.remove('active');
-            signupForm.reset();
-            locationDetectNote.style.display = 'none';
-            renderUserArea();
-            // Refresh listings with user's location
-            loadPropertiesWithLocation();
-        }
-    });
-
-    // ============================================
-    // PROPERTY TYPE / BEDS MODAL
-    // ============================================
-    const selectionModalOverlay = document.getElementById('selectionModal');
-    const selectionModalTitle = document.getElementById('selectionModalTitle');
-    const selectionOptionsContainer = document.getElementById('selectionOptionsContainer');
-    const closeSelectionModalBtn = document.getElementById('closeSelectionModalBtn');
-    const propertyTypeBtn = document.getElementById('propertyTypeBtn');
-    const bedsBtn = document.getElementById('bedsBtn');
-    const propertyTypeValue = document.getElementById('propertyTypeValue');
-    const bedsValue = document.getElementById('bedsValue');
-
-    const propertyTypes = [
-        { value: 'house', label: 'House' },
-        { value: 'apartment', label: 'Apartment' },
-        { value: 'land', label: 'Land' },
-        { value: 'commercial', label: 'Commercial' }
-    ];
-    const bedOptions = [
-        { value: '1', label: '1' },
-        { value: '2', label: '2' },
-        { value: '3', label: '3' },
-        { value: '4+', label: '4+' }
-    ];
-
-    let currentSelectionType = '';
-    function openSelectionModal(type) {
-        currentSelectionType = type;
-        const options = type === 'propertyType' ? propertyTypes : bedOptions;
-        selectionModalTitle.textContent = type === 'propertyType' ? 'Property Type' : 'Bedrooms';
-        selectionOptionsContainer.innerHTML = options.map(opt =>
-            `<button type="button" class="option-item" data-value="${opt.value}">${opt.label}</button>`
+        // Cities grid
+        const states = ['Kaduna','Kano','Zaria','Sokoto','Maiduguri','Jos','Abuja','Lagos','Ibadan','Katsina','Bauchi','Gombe'];
+        document.getElementById('statesGrid').innerHTML = states.map(s => 
+            `<div class="state-item" onclick="window.location.href='/browse?location=${s}'">${s} <span>→</span></div>`
         ).join('');
-        selectionModalOverlay.classList.add('active');
-    }
-    function closeSelectionModal() {
-        selectionModalOverlay.classList.remove('active');
-    }
-    propertyTypeBtn.addEventListener('click', () => openSelectionModal('propertyType'));
-    bedsBtn.addEventListener('click', () => openSelectionModal('beds'));
-    closeSelectionModalBtn.addEventListener('click', closeSelectionModal);
-    selectionModalOverlay.addEventListener('click', (e) => {
-        if (e.target === selectionModalOverlay) closeSelectionModal();
-    });
-    selectionOptionsContainer.addEventListener('click', (e) => {
-        const optionBtn = e.target.closest('.option-item');
-        if (!optionBtn) return;
-        const value = optionBtn.dataset.value;
-        const label = optionBtn.textContent.trim();
-        if (currentSelectionType === 'propertyType') {
-            propertyTypeValue.value = value;
-            propertyTypeBtn.innerHTML = `${label} <i class="fas fa-chevron-down"></i>`;
-        } else {
-            bedsValue.value = value;
-            bedsBtn.innerHTML = `${label} <i class="fas fa-chevron-down"></i>`;
-        }
-        closeSelectionModal();
-    });
-
-    // ============================================
-    // SEARCH FORM
-    // ============================================
-    document.getElementById('heroSearch').addEventListener('submit', e => {
-        e.preventDefault();
-        const location = document.getElementById('searchLocation').value.trim();
-        const type = propertyTypeValue.value;
-        const beds = bedsValue.value;
-        const min = document.getElementById('minPrice').value;
-        const max = document.getElementById('maxPrice').value;
-        let url = `/browse?location=${encodeURIComponent(location)}`;
-        if (type) url += `&propertyType=${type}`;
-        if (beds) url += `&beds=${beds}`;
-        if (min) url += `&min=${min}`;
-        if (max) url += `&max=${max}`;
-        window.location.href = url;
-    });
-
-    // ============================================
-    // PROPERTY RENDERING
-    // ============================================
-    function renderLocationCards(recommendations) {
-        if (!recommendations || recommendations.length === 0) {
-            return '<p style="text-align:center;color:var(--text-secondary);grid-column:1/-1;">No properties available</p>';
-        }
-
-        return recommendations.map(p => {
-            const price = p.price >= 1e6 ?
-                `₦${(p.price/1e6).toFixed(1)}M` :
-                `₦${p.price.toLocaleString()}`;
-            const img = p.images?.[0] || 'https://placehold.co/600x400?text=Zaure';
-
-            const verifiedBadge = p.owner?.verified ?
-                '<div class="badge-verified"><i class="fas fa-check-circle"></i> Verified</div>' : '';
-
-            const locationBadge = p._badge ?
-                `<div class="badge-location"><i class="fas fa-map-pin"></i> ${p._badge}</div>` : '';
-
-            let distanceDisplay = '';
-            if (p._distance !== null && p._distance <= 200) {
-                distanceDisplay = `<span class="distance-badge"><i class="fas fa-location-dot"></i> ${p._distance < 1 ? 'Same city' : p._distance.toFixed(1) + ' km away'}</span>`;
-            } else if (p._propLocation) {
-                distanceDisplay = `<span style="color:var(--text-secondary);"><i class="fas fa-map-marker-alt"></i> ${p._propLocation.city.charAt(0).toUpperCase() + p._propLocation.city.slice(1)}</span>`;
-            }
-
-            const highlightClass = p._locationScore >= 0.7 ? ' location-highlight' : '';
-
-            return `
-                <div class="property-card${highlightClass}" onclick="window.location.href='/property?id=${p.id}'">
-                    <div class="img-wrapper">
-                        <img src="${img}" alt="${p.title}" loading="lazy">
-                        ${verifiedBadge}
-                        ${locationBadge}
-                    </div>
-                    <div class="card-body">
-                        <div class="price">${price}</div>
-                        <h3>${p.title}</h3>
-                        <p>${distanceDisplay} ${p.address || ''}</p>
-                        <div class="features">
-                            ${p.propertyType !== 'land' ?
-                                `<span><i class="fas fa-bed"></i> ${p.bedrooms} Beds</span><span><i class="fas fa-bath"></i> ${p.bathrooms} Baths</span>` :
-                                '<span><i class="fas fa-map"></i> Land</span>'}
-                            ${p._score > 0.7 ? '<span style="color:var(--accent);"><i class="fas fa-star"></i> Top Pick</span>' : ''}
-                        </div>
-                        <div class="card-tags">
-                            <span class="card-tag" onclick="event.stopPropagation(); window.location.href='/browse?location=${encodeURIComponent(p.city)}'">${p.city}</span>
-                            <span class="card-tag" onclick="event.stopPropagation(); window.location.href='/browse?propertyType=${encodeURIComponent(p.propertyType)}'">${p.propertyType}</span>
-                            ${p._badge ? `<span class="card-tag location-tag"><i class="fas fa-location-dot"></i> ${p._badge}</span>` : ''}
-                        </div>
-                    </div>
-                </div>
-            `;
-        }).join('');
-    }
-
-    // ============================================
-    // LOAD & DISPLAY PROPERTIES
-    // ============================================
-    async function loadPropertiesWithLocation() {
-        const saleGrid = document.getElementById('featuredSaleGrid');
-        const rentGrid = document.getElementById('featuredRentGrid');
-        const saleContext = document.getElementById('saleLocationContext');
-        const rentContext = document.getElementById('rentLocationContext');
-        const searchLocation = document.getElementById('searchLocation');
-
-        if (!saleGrid || !rentGrid) return;
-
-        // Show loading
-        const loadingHTML = '<div style="text-align:center;padding:2rem;grid-column:1/-1;"><i class="fas fa-spinner fa-spin"></i> Finding best properties for your location...</div>';
-        saleGrid.innerHTML = loadingHTML;
-        rentGrid.innerHTML = loadingHTML;
-
-        try {
-            // Detect user location
-            const userLoc = await LocationEngine.detectUserLocation();
-
-            // Set search placeholder based on location
-            if (userLoc && userLoc.city) {
-                const cityName = userLoc.city.charAt(0).toUpperCase() + userLoc.city.slice(1);
-                searchLocation.placeholder = `City or area (e.g., ${cityName})`;
-                searchLocation.value = cityName;
-            }
-
-            // Fetch properties
-            const response = await fetch('/data/properties.json');
-            const data = await response.json();
-            const properties = data.properties || [];
-
-            // Get recommendations
-            const saleRecs = LocationEngine.getRecommendations(properties, 'sale');
-            const rentRecs = LocationEngine.getRecommendations(properties, 'rent');
-
-            // Display location context
-            if (userLoc && userLoc.city) {
-                const cityName = userLoc.city.charAt(0).toUpperCase() + userLoc.city.slice(1);
-                const contextHTML = `<i class="fas fa-location-dot"></i> Showing properties near <strong>${cityName}</strong>${userLoc.state ? ', ' + userLoc.state : ''}`;
-                saleContext.innerHTML = contextHTML;
-                saleContext.style.display = 'flex';
-                rentContext.innerHTML = contextHTML;
-                rentContext.style.display = 'flex';
-            }
-
-            // Render cards
-            saleGrid.innerHTML = renderLocationCards(saleRecs);
-            rentGrid.innerHTML = renderLocationCards(rentRecs);
-
-            // Store context
-            localStorage.setItem('zaure_last_recommendation_context', JSON.stringify({
-                city: userLoc?.city || 'unknown',
-                timestamp: Date.now()
-            }));
-
-        } catch (error) {
-            console.error('Failed to load properties:', error);
-            saleGrid.innerHTML = '<p style="text-align:center;color:var(--text-secondary);grid-column:1/-1;">Unable to load properties. Please try again later.</p>';
-            rentGrid.innerHTML = saleGrid.innerHTML;
-        }
-    }
-
-    // ============================================
-    // CITIES GRID
-    // ============================================
-    const states = ['Kaduna','Kano','Zaria','Sokoto','Maiduguri','Jos','Abuja','Lagos','Ibadan','Katsina','Bauchi','Gombe'];
-    document.getElementById('statesGrid').innerHTML = states.map(s =>
-        `<div class="state-item" onclick="window.location.href='/browse?location=${s}'">${s} <span>→</span></div>`
-    ).join('');
-
-    // ============================================
-    // LOAD BLOG POSTS FOR HOMEPAGE
-    // ============================================
-    async function loadHomepageBlog() {
-        const grid = document.getElementById('homeBlogGrid');
-        try {
-            const response = await fetch('/data/blog.json');
-            if (!response.ok) throw new Error('Failed to load blog data');
-            const data = await response.json();
-            const posts = data.posts || [];
-            // Get latest 3 posts
-            const latest = posts.slice(0, 3);
-            
-            if (latest.length === 0) {
-                grid.innerHTML = '<p style="text-align:center;color:var(--text-secondary);">No articles available.</p>';
-                return;
-            }
-
-            grid.innerHTML = latest.map(post => `
-                <div class="blog-card-home" onclick="window.location.href='/blog'">
-                    <img src="${post.image || 'https://placehold.co/800x500?text=Blog'}" alt="${post.title}" loading="lazy">
-                    <div class="blog-content">
-                        <span class="blog-category">${post.category}</span>
-                        <h3>${post.title}</h3>
-                        <p>${post.excerpt}</p>
-                        <a href="/blog" class="read-more-home">Read more →</a>
-                    </div>
-                </div>
-            `).join('');
-        } catch (error) {
-            console.error('Error loading blog:', error);
-            grid.innerHTML = '<p style="text-align:center;color:var(--text-secondary);">Unable to load articles.</p>';
-        }
-    }
-
-    // ============================================
-    // INITIALIZE
-    // ============================================
-    window.addEventListener('DOMContentLoaded', () => {
-        setTimeout(loadPropertiesWithLocation, 100);
-        loadHomepageBlog();
-    });
-
-    // Refresh when returning to tab after 10+ minutes
-    document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'visible') {
-            const lastUpdate = localStorage.getItem('zaure_last_recommendation_context');
-            if (lastUpdate) {
-                try {
-                    const { timestamp } = JSON.parse(lastUpdate);
-                    if ((Date.now() - timestamp) / 60000 > 10) {
-                        loadPropertiesWithLocation();
-                    }
-                } catch (e) {}
-            }
-        }
-    });
-
-})();
+    })();
 </script>
 </body>
 </html>
