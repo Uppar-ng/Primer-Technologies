@@ -1,1 +1,362 @@
-
+[
+  {
+    "id": 1,
+    "title": "Vintage Leather Sofa",
+    "price": 450000,
+    "location": "Lagos",
+    "date": "2 hours ago",
+    "category": "furniture",
+    "boosted": true,
+    "featured": false,
+    "description": "Beautiful vintage leather sofa in excellent condition. Made from premium Italian leather with solid wood frame. Perfect for your living room or home office. This piece adds character and elegance to any space.",
+    "tags": ["vintage", "leather", "sofa", "living room", "furniture"],
+    "images": [
+      "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1493663284031-b7e3aefc2178?w=800&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop&q=80"
+    ],
+    "seller": {
+      "name": "Furniture Hub",
+      "initials": "FH",
+      "verified": true,
+      "joined": "2024",
+      "listings": 12,
+      "rating": 4.9,
+      "sales": 47,
+      "response": "98%",
+      "bio": "Premium furniture seller with 5 years of experience. We curate the best pieces from around the world. Quality is our priority.",
+      "phone": "08012345678",
+      "whatsapp": "08012345678"
+    }
+  },
+  {
+    "id": 2,
+    "title": "iPhone 15 Pro 256GB",
+    "price": 899000,
+    "location": "Abuja",
+    "date": "5 hours ago",
+    "category": "electronics",
+    "boosted": false,
+    "featured": true,
+    "description": "Brand new iPhone 15 Pro with 256GB storage. Comes with all original accessories including charger, cable, and earphones. Still sealed in original box. Apple warranty included.",
+    "tags": ["iphone", "apple", "smartphone", "new", "electronics"],
+    "images": [
+      "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=800&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=800&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=800&h=600&fit=crop&q=80"
+    ],
+    "seller": {
+      "name": "ElectroWorld",
+      "initials": "EW",
+      "verified": true,
+      "joined": "2023",
+      "listings": 34,
+      "rating": 4.8,
+      "sales": 127,
+      "response": "96%",
+      "bio": "Authorized Apple reseller. We bring you the latest tech at competitive prices. All products are genuine with full warranty.",
+      "phone": "08098765432",
+      "whatsapp": "08098765432"
+    }
+  },
+  {
+    "id": 3,
+    "title": "Trek FX2 Mountain Bike",
+    "price": 320000,
+    "location": "Kano",
+    "date": "1 day ago",
+    "category": "vehicles",
+    "boosted": true,
+    "featured": false,
+    "description": "Trek FX2 mountain bike in great condition. Perfect for off-road adventures and daily commuting. Features 21-speed gears, disc brakes, and lightweight aluminum frame.",
+    "tags": ["bike", "trek", "mountain", "cycling", "outdoor"],
+    "images": [
+      "https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=800&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=800&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?w=800&h=600&fit=crop&q=80"
+    ],
+    "seller": {
+      "name": "Cycle City",
+      "initials": "CC",
+      "verified": true,
+      "joined": "2023",
+      "listings": 8,
+      "rating": 4.7,
+      "sales": 32,
+      "response": "92%",
+      "bio": "Passionate about cycling! We offer quality bikes and accessories for all ages. Ride safe, ride happy.",
+      "phone": "08024681357",
+      "whatsapp": "08024681357"
+    }
+  },
+  {
+    "id": 4,
+    "title": "Designer Desk Lamp",
+    "price": 85000,
+    "location": "Port Harcourt",
+    "date": "3 days ago",
+    "category": "furniture",
+    "boosted": false,
+    "featured": false,
+    "description": "Modern designer desk lamp with adjustable brightness and color temperature. Perfect for home office, study, or bedroom. Sleek minimalist design with energy-efficient LED.",
+    "tags": ["lamp", "desk", "office", "modern", "designer"],
+    "images": [
+      "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=800&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=800&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1534073828943-f801091bb18c?w=800&h=600&fit=crop&q=80"
+    ],
+    "seller": {
+      "name": "Vintage Vault",
+      "initials": "VV",
+      "verified": false,
+      "joined": "2024",
+      "listings": 5,
+      "rating": 4.2,
+      "sales": 9,
+      "response": "88%",
+      "bio": "New seller on Zaure. Curating unique vintage and modern pieces. Your satisfaction is my priority.",
+      "phone": "08013579246",
+      "whatsapp": "08013579246"
+    }
+  },
+  {
+    "id": 5,
+    "title": "Samsung 65\" 4K Smart TV",
+    "price": 640000,
+    "location": "Ibadan",
+    "date": "4 days ago",
+    "category": "electronics",
+    "boosted": false,
+    "featured": true,
+    "description": "Samsung 65 inch 4K Smart TV with stunning picture quality and immersive sound. Perfect for home entertainment, gaming, and streaming. Comes with voice remote and smart features.",
+    "tags": ["samsung", "tv", "4k", "smart", "entertainment"],
+    "images": [
+      "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=800&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=800&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1593784991095-a205069470b6?w=800&h=600&fit=crop&q=80"
+    ],
+    "seller": {
+      "name": "ElectroWorld",
+      "initials": "EW",
+      "verified": true,
+      "joined": "2023",
+      "listings": 34,
+      "rating": 4.8,
+      "sales": 127,
+      "response": "96%",
+      "bio": "Authorized Samsung reseller. We bring you the latest tech at competitive prices. All products are genuine with full warranty.",
+      "phone": "08098765432",
+      "whatsapp": "08098765432"
+    }
+  },
+  {
+    "id": 6,
+    "title": "Nike Air Max 90 (Size 10)",
+    "price": 95000,
+    "location": "Kaduna",
+    "date": "6 days ago",
+    "category": "fashion",
+    "boosted": false,
+    "featured": false,
+    "description": "Nike Air Max 90 in size 10. Classic style with iconic Air Max cushioning. Great condition with minimal wear. Perfect for daily wear or collectors.",
+    "tags": ["nike", "air max", "sneakers", "fashion", "size 10"],
+    "images": [
+      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1605348532760-6753d2c43329?w=800&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=800&h=600&fit=crop&q=80"
+    ],
+    "seller": {
+      "name": "Fashion Forward",
+      "initials": "FF",
+      "verified": true,
+      "joined": "2023",
+      "listings": 18,
+      "rating": 4.6,
+      "sales": 56,
+      "response": "94%",
+      "bio": "Curating the best fashion pieces for the modern individual. Authenticity guaranteed.",
+      "phone": "08036925814",
+      "whatsapp": "08036925814"
+    }
+  },
+  {
+    "id": 7,
+    "title": "3-Bedroom Apartment for Rent",
+    "price": 1500000,
+    "location": "Abuja",
+    "date": "2 days ago",
+    "category": "real-estate",
+    "boosted": true,
+    "featured": true,
+    "description": "Spacious 3-bedroom apartment in a secure estate. Fully furnished with modern amenities. Features include: 24/7 security, backup power, swimming pool, and gym access. Perfect for families or professionals.",
+    "tags": ["apartment", "rent", "furnished", "secure", "family"],
+    "images": [
+      "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop&q=80"
+    ],
+    "seller": {
+      "name": "Prime Properties",
+      "initials": "PP",
+      "verified": true,
+      "joined": "2022",
+      "listings": 45,
+      "rating": 4.9,
+      "sales": 89,
+      "response": "99%",
+      "bio": "Leading real estate agency in Nigeria. We connect you with the best properties across the country. Trust, transparency, and excellence.",
+      "phone": "08074185296",
+      "whatsapp": "08074185296"
+    }
+  },
+  {
+    "id": 8,
+    "title": "Professional Photography Service",
+    "price": 50000,
+    "location": "Lagos",
+    "date": "1 week ago",
+    "category": "services",
+    "boosted": false,
+    "featured": false,
+    "description": "Professional photography services for events, portraits, and commercial shoots. Includes: wedding photography, corporate events, product photography, and portrait sessions. 5 years of experience with a portfolio of over 500 satisfied clients.",
+    "tags": ["photography", "service", "events", "professional"],
+    "images": [
+      "https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=800&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1504208434309-cb69f4fe52b0?w=800&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&h=600&fit=crop&q=80"
+    ],
+    "seller": {
+      "name": "Captured Moments",
+      "initials": "CM",
+      "verified": true,
+      "joined": "2023",
+      "listings": 6,
+      "rating": 4.8,
+      "sales": 23,
+      "response": "97%",
+      "bio": "Award-winning photographer with a passion for capturing life's precious moments. Your memories are safe with us.",
+      "phone": "08085296374",
+      "whatsapp": "08085296374"
+    }
+  },
+  {
+    "id": 9,
+    "title": "MacBook Pro 14\" M3",
+    "price": 1450000,
+    "location": "Kano",
+    "date": "3 hours ago",
+    "category": "electronics",
+    "boosted": true,
+    "featured": true,
+    "description": "MacBook Pro 14 inch with M3 chip. 16GB RAM, 512GB SSD. Excellent condition with Apple Care+ until 2026. Includes original box, charger, and accessories. Perfect for professionals and creatives.",
+    "tags": ["macbook", "apple", "laptop", "pro", "m3"],
+    "images": [
+      "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=800&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=800&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=800&h=600&fit=crop&q=80"
+    ],
+    "seller": {
+      "name": "Tech Junction",
+      "initials": "TJ",
+      "verified": true,
+      "joined": "2023",
+      "listings": 22,
+      "rating": 4.9,
+      "sales": 73,
+      "response": "98%",
+      "bio": "Premium tech seller. We specialize in high-end laptops, smartphones, and accessories. All products are thoroughly tested and certified.",
+      "phone": "08096385274",
+      "whatsapp": "08096385274"
+    }
+  },
+  {
+    "id": 10,
+    "title": "Modern Dining Table Set",
+    "price": 280000,
+    "location": "Port Harcourt",
+    "date": "2 weeks ago",
+    "category": "furniture",
+    "boosted": false,
+    "featured": false,
+    "description": "Modern dining table set with 6 chairs. Solid wood construction with a sleek contemporary design. Perfect for family dinners and entertaining guests. Chairs feature comfortable cushioned seats.",
+    "tags": ["dining", "table", "chairs", "modern", "furniture"],
+    "images": [
+      "https://images.unsplash.com/photo-1618220179428-22790b461013?w=800&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1617806118233-18e1de247200?w=800&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1617806118233-18e1de247200?w=800&h=600&fit=crop&q=80"
+    ],
+    "seller": {
+      "name": "Furniture Hub",
+      "initials": "FH",
+      "verified": true,
+      "joined": "2024",
+      "listings": 12,
+      "rating": 4.9,
+      "sales": 47,
+      "response": "98%",
+      "bio": "Premium furniture seller with 5 years of experience. We curate the best pieces from around the world. Quality is our priority.",
+      "phone": "08012345678",
+      "whatsapp": "08012345678"
+    }
+  },
+  {
+    "id": 11,
+    "title": "Toyota Camry 2022",
+    "price": 3500000,
+    "location": "Ibadan",
+    "date": "1 day ago",
+    "category": "vehicles",
+    "boosted": true,
+    "featured": true,
+    "description": "Toyota Camry 2022 model. Low mileage (15,000 km), excellent condition. Full service history from authorized dealer. Features: leather seats, sunroof, navigation, and premium sound system.",
+    "tags": ["toyota", "camry", "car", "2022", "used"],
+    "images": [
+      "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=800&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=800&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1590362891991-f776e747a588?w=800&h=600&fit=crop&q=80"
+    ],
+    "seller": {
+      "name": "Auto Motors",
+      "initials": "AM",
+      "verified": true,
+      "joined": "2022",
+      "listings": 28,
+      "rating": 4.7,
+      "sales": 94,
+      "response": "95%",
+      "bio": "Premium auto dealer with 10 years of experience. We offer quality used cars with comprehensive warranty. Drive with confidence.",
+      "phone": "08014725836",
+      "whatsapp": "08014725836"
+    }
+  },
+  {
+    "id": 12,
+    "title": "Vintage Record Player",
+    "price": 120000,
+    "location": "Kaduna",
+    "date": "5 days ago",
+    "category": "electronics",
+    "boosted": false,
+    "featured": false,
+    "description": "Vintage record player in working condition. Great for vinyl collectors and audiophiles. Features built-in speakers, Bluetooth connectivity, and 3-speed turntable (33, 45, 78 RPM).",
+    "tags": ["record", "player", "vinyl", "vintage", "audio"],
+    "images": [
+      "https://images.unsplash.com/photo-1526470608268-f674ce90a6cd?w=800&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1561149875-7d11f50dd38e?w=800&h=600&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1535611180840-1304784f0fe0?w=800&h=600&fit=crop&q=80"
+    ],
+    "seller": {
+      "name": "Vintage Vault",
+      "initials": "VV",
+      "verified": false,
+      "joined": "2024",
+      "listings": 5,
+      "rating": 4.2,
+      "sales": 9,
+      "response": "88%",
+      "bio": "New seller on Zaure. Curating unique vintage and modern pieces. Your satisfaction is my priority.",
+      "phone": "08013579246",
+      "whatsapp": "08013579246"
+    }
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Furniture Hub",
+    "initials": "FH",
+    "badge": "verified",
+    "category": "furniture"
+  },
+  {
+    "name": "ElectroWorld",
+    "initials": "EW",
+    "badge": "premium",
+    "category": "electronics"
+  },
+  {
+    "name": "Vintage Vault",
+    "initials": "VV",
+    "badge": "trusted",
+    "category": "furniture"
+  },
+  {
+    "name": "Cycle City",
+    "initials": "CC",
+    "badge": "verified",
+    "category": "vehicles"
+  },
+  {
+    "name": "Tech Junction",
+    "initials": "TJ",
+    "badge": "premium",
+    "category": "electronics"
+  },
+  {
+    "name": "Fashion Forward",
+    "initials": "FF",
+    "badge": "verified",
+    "category": "fashion"
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Vehicles",
+    "slug": "vehicles",
+    "icon": "fas fa-car",
+    "count": 45
+  },
+  {
+    "name": "Electronics",
+    "slug": "electronics",
+    "icon": "fas fa-laptop",
+    "count": 128
+  },
+  {
+    "name": "Furniture",
+    "slug": "furniture",
+    "icon": "fas fa-couch",
+    "count": 67
+  },
+  {
+    "name": "Fashion",
+    "slug": "fashion",
+    "icon": "fas fa-tshirt",
+    "count": 93
+  },
+  {
+    "name": "Real Estate",
+    "slug": "real-estate",
+    "icon": "fas fa-house-chimney",
+    "count": 34
+  },
+  {
+    "name": "Services",
+    "slug": "services",
+    "icon": "fas fa-handshake",
+    "count": 56
+  },
+  {
+    "name": "Pets & Animals",
+    "slug": "pets",
+    "icon": "fas fa-dog",
+    "count": 22
+  },
+  {
+    "name": "Books & Media",
+    "slug": "books",
+    "icon": "fas fa-book",
+    "count": 41
+  }
+]
