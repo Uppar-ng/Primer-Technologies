@@ -1,812 +1,487 @@
-// js/main.js - Enhanced Version
-
-// ============================================
-// Configuration Constants
-// ============================================
-const Config = {
-    fallbackImages: {
-        property: 'images/2.jpg',
-        blog: 'images/3.jpg'
-    },
-    apiEndpoints: {
-        properties: 'data/properties.json',
-        blog: 'data/blog.json'
-    },
-    localStorageKeys: {
-        favorites: 'primer_favorites',
-        cart: 'primer_cart',
-        user: 'primer_user'
-    },
-    cacheDuration: 5 * 60 * 1000, // 5 minutes
-    currency: {
-        symbol: '₦',
-        code: 'NGN'
-    }
-};
-
-// ============================================
-// Application State
-// ============================================
-const AppState = {
-    isMobile: false,
-    isTouchDevice: false,
-    currentPage: 'home',
-    favorites: [],
-    cart: [],
-    user: null,
-    propertyFilters: {
-        location: '',
-        type: '',
-        minPrice: null,
-        maxPrice: null,
-        bedrooms: null,
-        bathrooms: null,
-        amenities: []
-    }
-};
-
-// ============================================
-// Cache Management
-// ============================================
-const Cache = {
-    properties: null,
-    blogPosts: null,
-    timestamp: {
-        properties: 0,
-        blog: 0
-    }
-};
-
-// ============================================
-// DOM Elements Reference
-// ============================================
-const DOM = {
-    mobileMenuModal: document.getElementById('mobileNav'),
-    mobileMenuBtn: document.getElementById('mobileMenuToggle'),
-    closeMenuModal: document.getElementById('closeMobileMenu'),
-    featuredProperties: document.getElementById('featuredProperties'),
-    servicesGrid: document.getElementById('servicesGrid'),
-    blogGrid: document.getElementById('blogGrid'),
-    mainHeader: document.getElementById('mainHeader')
-};
-
-// ============================================
-// Notification Manager
-// ============================================
-const NotificationManager = {
-    queue: [],
-    isShowing: false,
-    
-    show(message, type = 'info', duration = 3000) {
-        this.queue.push({ message, type, duration });
-        if (!this.isShowing) {
-            this.processQueue();
-        }
-    },
-    
-    processQueue() {
-        if (this.queue.length === 0) {
-            this.isShowing = false;
-            return;
-        }
-        
-        this.isShowing = true;
-        const { message, type, duration } = this.queue.shift();
-        this.createNotification(message, type, duration);
-    },
-    
-    createNotification(message, type, duration) {
-        const notification = document.createElement('div');
-        notification.className = `notification notification-${type}`;
-        notification.setAttribute('role', 'alert');
-        notification.setAttribute('aria-live', 'polite');
-        
-        notification.innerHTML = `
-            <div class="notification-content">
-                <i class="notification-icon ${this.getIcon(type)}"></i>
-                <span>${message}</span>
-            </div>
-            <button class="notification-close" aria-label="Close notification">
-                &times;
-            </button>
-        `;
-        
-        document.body.appendChild(notification);
-        
-        // Add close button handler
-        const closeBtn = notification.querySelector('.notification-close');
-        closeBtn.addEventListener('click', () => this.removeNotification(notification));
-        
-        // Auto remove
-        setTimeout(() => this.removeNotification(notification), duration);
-    },
-    
-    removeNotification(notification) {
-        notification.style.animation = 'slideOut 0.3s ease';
-        setTimeout(() => {
-            if (notification.parentNode) {
-                document.body.removeChild(notification);
-            }
-            this.processQueue();
-        }, 300);
-    },
-    
-    getIcon(type) {
-        const icons = {
-            success: 'fas fa-check-circle',
-            error: 'fas fa-exclamation-circle',
-            info: 'fas fa-info-circle'
-        };
-        return icons[type] || icons.info;
-    }
-};
-
-// ============================================
-// State Manager
-// ============================================
-const StateManager = {
-    initialize() {
-        // Load all state from localStorage
-        AppState.favorites = this.get(Config.localStorageKeys.favorites) || [];
-        AppState.cart = this.get(Config.localStorageKeys.cart) || [];
-        AppState.user = this.get(Config.localStorageKeys.user) || null;
-    },
-    
-    get(key) {
-        try {
-            const item = localStorage.getItem(key);
-            return item ? JSON.parse(item) : null;
-        } catch {
-            console.warn(`Failed to parse ${key} from localStorage`);
-            return null;
-        }
-    },
-    
-    set(key, value) {
-        try {
-            localStorage.setItem(key, JSON.stringify(value));
-            return true;
-        } catch (error) {
-            console.warn(`Failed to save ${key} to localStorage:`, error);
-            return false;
-        }
-    },
-    
-    updateFavorites(propertyId) {
-        const index = AppState.favorites.indexOf(propertyId);
-        if (index > -1) {
-            AppState.favorites.splice(index, 1);
-        } else {
-            AppState.favorites.push(propertyId);
-        }
-        this.set(Config.localStorageKeys.favorites, AppState.favorites);
-        return index === -1; // Returns true if added, false if removed
-    }
-};
-
-// ============================================
-// URL Helper
-// ============================================
-const URLHelper = {
-    getSearchParams() {
-        const params = new URLSearchParams(window.location.search);
-        return {
-            location: params.get('location') || '',
-            type: params.get('type') || '',
-            minPrice: params.get('minPrice') || '',
-            maxPrice: params.get('maxPrice') || ''
-        };
-    },
-    
-    buildSearchURL(params) {
-        const urlParams = new URLSearchParams();
-        
-        Object.entries(params).forEach(([key, value]) => {
-            if (value && value !== '') {
-                urlParams.set(key, value);
-            }
-        });
-        
-        return `browse.html?${urlParams.toString()}`;
-    },
-    
-    updateURLParam(key, value) {
-        const url = new URL(window.location);
-        if (value) {
-            url.searchParams.set(key, value);
-        } else {
-            url.searchParams.delete(key);
-        }
-        window.history.pushState({}, '', url);
-    }
-};
-
-// ============================================
-// Utility Functions
-// ============================================
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-function formatDate(dateString) {
-    try {
-        const options = { year: 'numeric', month: 'short', day: 'numeric' };
-        return new Date(dateString).toLocaleDateString('en-US', options);
-    } catch (e) {
-        return dateString;
-    }
-}
-
-function formatPrice(price) {
-    return `${Config.currency.symbol}${price.toLocaleString()}`;
-}
-
-function showNotification(message, type = 'info') {
-    NotificationManager.show(message, type);
-}
-
-function showError(message) {
-    showNotification(message, 'error');
-}
-
-// ============================================
-// Device & UI Functions
-// ============================================
+// ============================================================
+// DEVICE DETECTION
+// ============================================================
 function detectDevice() {
-    AppState.isMobile = window.innerWidth <= 767;
-    AppState.isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  const isMobile = window.innerWidth < 1024;
+  document.body.classList.remove('device-mobile', 'device-desktop');
+  document.body.classList.add(isMobile ? 'device-mobile' : 'device-desktop');
 }
+detectDevice();
+window.addEventListener('resize', detectDevice);
 
-function handleHeaderScroll() {
-    if (!DOM.mainHeader) return;
-    
-    if (window.scrollY > 50) {
-        DOM.mainHeader.classList.add('scrolled');
+// ============================================================
+// THEME MANAGEMENT
+// ============================================================
+function initTheme() {
+  const storedTheme = localStorage.getItem('zaure_theme') || 'light';
+  document.documentElement.setAttribute('data-theme', storedTheme);
+  
+  const themeToggle = document.getElementById('themeToggle');
+  if (themeToggle) {
+    themeToggle.innerHTML = storedTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+  }
+  
+  const darkModeToggle = document.getElementById('darkModeToggle');
+  if (darkModeToggle) {
+    if (storedTheme === 'dark') {
+      darkModeToggle.classList.add('active');
     } else {
-        DOM.mainHeader.classList.remove('scrolled');
+      darkModeToggle.classList.remove('active');
     }
+  }
 }
 
-function updateNavigation() {
-    const currentPath = window.location.pathname;
-    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
-    
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        
-        const linkPath = link.getAttribute('href');
-        if (currentPath.endsWith(linkPath) || 
-            (currentPath === '/' && linkPath === 'index.html') ||
-            (currentPath.includes('index.html') && linkPath === 'index.html')) {
-            link.classList.add('active');
-        }
+window.toggleTheme = function() {
+  const current = document.documentElement.getAttribute('data-theme');
+  const next = current === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('zaure_theme', next);
+  
+  const themeToggle = document.getElementById('themeToggle');
+  if (themeToggle) {
+    themeToggle.innerHTML = next === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+  }
+  
+  const darkModeToggle = document.getElementById('darkModeToggle');
+  if (darkModeToggle) {
+    if (next === 'dark') {
+      darkModeToggle.classList.add('active');
+    } else {
+      darkModeToggle.classList.remove('active');
+    }
+  }
+};
+
+// ============================================================
+// USER MANAGEMENT
+// ============================================================
+let currentUser = null;
+
+function loadUser() {
+  const saved = localStorage.getItem('zaure_user');
+  if (saved) {
+    try {
+      currentUser = JSON.parse(saved);
+      renderUserArea();
+      return true;
+    } catch (e) { return false; }
+  }
+  return false;
+}
+
+function renderUserArea() {
+  const headerUserArea = document.getElementById('headerUserArea');
+  if (!headerUserArea) return;
+  
+  if (currentUser) {
+    headerUserArea.innerHTML = `
+      <a href="/profile.html" class="user-greeting" style="text-decoration:none;">
+        <i class="fas fa-user"></i> ${currentUser.name.split(' ')[0]}
+      </a>
+    `;
+  } else {
+    headerUserArea.innerHTML = `
+      <div class="avatar" id="userAvatar" onclick="openSignup()">ZA</div>
+    `;
+  }
+}
+
+window.openSignup = function() {
+  const modal = document.getElementById('signupModal');
+  if (modal) modal.classList.add('active');
+};
+
+// ============================================================
+// SIGNUP MODAL
+// ============================================================
+document.addEventListener('DOMContentLoaded', function() {
+  const signupModal = document.getElementById('signupModal');
+  const closeSignupModalBtn = document.getElementById('closeSignupModalBtn');
+  const signupForm = document.getElementById('signupForm');
+
+  if (closeSignupModalBtn) {
+    closeSignupModalBtn.addEventListener('click', () => signupModal.classList.remove('active'));
+  }
+  if (signupModal) {
+    signupModal.addEventListener('click', (e) => {
+      if (e.target === signupModal) signupModal.classList.remove('active');
     });
+  }
+  if (signupForm) {
+    signupForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('signupName').value.trim();
+      const phone = document.getElementById('signupPhone').value.trim();
+      const state = document.getElementById('signupState').value;
+      if (name && phone && state) {
+        currentUser = { name, phone, state };
+        localStorage.setItem('zaure_user', JSON.stringify(currentUser));
+        signupModal.classList.remove('active');
+        signupForm.reset();
+        renderUserArea();
+        updateFavoriteBadge();
+        location.reload();
+      }
+    });
+  }
+});
+
+// ============================================================
+// DATA LOADING - FROM JSON FILES WITH CACHING
+// ============================================================
+
+// ----- Load products from JSON with caching -----
+async function loadProducts() {
+  // First check if we have cached products in localStorage
+  const cached = localStorage.getItem('zaure_products_cache');
+  if (cached) {
+    try {
+      const parsed = JSON.parse(cached);
+      if (parsed && parsed.length > 0) {
+        // Return cached data immediately, but also fetch fresh data in background
+        fetchFreshProducts();
+        return parsed;
+      }
+    } catch (e) {}
+  }
+  
+  // If no cache, fetch from JSON
+  return fetchFreshProducts();
 }
 
-// ============================================
-// Mobile Menu Functions
-// ============================================
-function openMobileMenu() {
-    if (DOM.mobileMenuModal) {
-        DOM.mobileMenuModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-        if (DOM.mobileMenuBtn) {
-            DOM.mobileMenuBtn.classList.add('active');
-        }
-    }
+async function fetchFreshProducts() {
+  try {
+    const response = await fetch('/data/products.json');
+    if (!response.ok) throw new Error('Products not found');
+    const products = await response.json();
+    // Cache for later
+    localStorage.setItem('zaure_products_cache', JSON.stringify(products));
+    return products;
+  } catch (error) {
+    console.error('Error loading products:', error);
+    return [];
+  }
 }
 
-function closeMobileMenu() {
-    if (DOM.mobileMenuModal) {
-        DOM.mobileMenuModal.classList.remove('active');
-        document.body.style.overflow = '';
-        if (DOM.mobileMenuBtn) {
-            DOM.mobileMenuBtn.classList.remove('active');
-        }
-    }
-}
-
-// ============================================
-// Property Card Creation
-// ============================================
-function createPropertyCard(property) {
-    const template = document.createElement('template');
-    const isFavorite = AppState.favorites.includes(property.id);
+// ----- Load categories from JSON -----
+async function loadCategories() {
+  try {
+    const response = await fetch('/data/categories.json');
+    if (!response.ok) throw new Error('Categories not found');
+    const categories = await response.json();
     
-    template.innerHTML = `
-        <div class="property-card" data-id="${property.id}" role="article" aria-label="${property.title} - ${formatPrice(property.price)}">
-            <div class="property-image">
-                <img src="${property.images[0] || Config.fallbackImages.property}" 
-                     alt="${property.title}" 
-                     loading="lazy"
-                     width="400" 
-                     height="300">
-                <span class="property-badge">${property.type === 'sale' ? 'For Sale' : 'For Rent'}</span>
-                <button class="property-favorite ${isFavorite ? 'active' : ''}" 
-                        aria-label="${isFavorite ? 'Remove from favorites' : 'Add to favorites'}"
-                        data-id="${property.id}"
-                        data-action="toggle-favorite">
-                    <i class="${isFavorite ? 'fas' : 'far'} fa-heart"></i>
-                </button>
-            </div>
-            <div class="property-content">
-                <div class="property-price">${formatPrice(property.price)}</div>
-                <h3 class="property-title">${property.title}</h3>
-                <p class="property-address">${property.address}, ${property.city}, ${property.state}</p>
-                <div class="property-features">
-                    <div class="feature">
-                        <i class="fas fa-bed"></i>
-                        <span>${property.bedrooms} bed${property.bedrooms !== 1 ? 's' : ''}</span>
-                    </div>
-                    <div class="feature">
-                        <i class="fas fa-bath"></i>
-                        <span>${property.bathrooms} bath${property.bathrooms !== 1 ? 's' : ''}</span>
-                    </div>
-                    <div class="feature">
-                        <i class="fas fa-ruler-combined"></i>
-                        <span>${property.squareFeet.toLocaleString()} sqft</span>
-                    </div>
-                </div>
-                <button class="btn btn-outline btn-full" 
-                        onclick="viewProperty(${property.id})" 
-                        style="margin-top: var(--spacing-md);">
-                    View Details
-                </button>
-            </div>
+    // Get products to count items per category
+    const products = await loadProducts();
+    
+    // Update category counts based on products
+    const updatedCategories = categories.map(cat => {
+      const count = products.filter(p => p.category === cat.slug).length;
+      return { ...cat, count: count };
+    });
+    
+    return updatedCategories;
+  } catch (error) {
+    console.error('Error loading categories:', error);
+    return [];
+  }
+}
+
+// ----- Load sellers from JSON -----
+async function loadTopSellers() {
+  try {
+    const response = await fetch('/data/sellers.json');
+    if (!response.ok) throw new Error('Sellers not found');
+    return await response.json();
+  } catch (error) {
+    console.error('Error loading sellers:', error);
+    return [];
+  }
+}
+
+// ----- Load trending keywords from JSON -----
+async function loadTrendingKeywords() {
+  try {
+    const response = await fetch('/data/trending.json');
+    if (!response.ok) throw new Error('Trending not found');
+    return await response.json();
+  } catch (error) {
+    console.error('Error loading trending:', error);
+    return [];
+  }
+}
+
+// ----- Synchronous version for pages that need it (Favorites, Profile) -----
+function getProductsSync() {
+  const cached = localStorage.getItem('zaure_products_cache');
+  if (cached) {
+    try {
+      return JSON.parse(cached);
+    } catch (e) {
+      return [];
+    }
+  }
+  return [];
+}
+
+// ============================================================
+// FAVORITES MANAGEMENT
+// ============================================================
+
+function getFavorites() {
+  const saved = localStorage.getItem('zaure_favorites');
+  if (saved) {
+    try {
+      return JSON.parse(saved);
+    } catch (e) {
+      return [];
+    }
+  }
+  return [];
+}
+
+function saveFavorites(favorites) {
+  localStorage.setItem('zaure_favorites', JSON.stringify(favorites));
+}
+
+function toggleFavorite(productId) {
+  if (!currentUser) {
+    openSignup();
+    return false;
+  }
+  
+  let favorites = getFavorites();
+  const index = favorites.indexOf(productId);
+  let isFavorite = false;
+  
+  if (index > -1) {
+    favorites.splice(index, 1);
+    isFavorite = false;
+  } else {
+    favorites.push(productId);
+    isFavorite = true;
+  }
+  saveFavorites(favorites);
+  updateFavoriteBadge();
+  return isFavorite;
+}
+
+function isFavorite(productId) {
+  const favorites = getFavorites();
+  return favorites.includes(productId);
+}
+
+function getFavoriteCount() {
+  return getFavorites().length;
+}
+
+function updateFavoriteBadge() {
+  const count = getFavoriteCount();
+  const badges = document.querySelectorAll('#favBadge');
+  badges.forEach(badge => {
+    if (count > 0) {
+      badge.textContent = count;
+      badge.style.display = 'inline';
+    } else {
+      badge.style.display = 'none';
+    }
+  });
+}
+
+window.toggleFavoriteCard = function(productId, buttonElement) {
+  event.stopPropagation();
+  
+  if (!currentUser) {
+    openSignup();
+    return;
+  }
+  
+  const isFav = toggleFavorite(productId);
+  const icon = buttonElement.querySelector('i');
+  
+  if (isFav) {
+    icon.className = 'fas fa-heart';
+    buttonElement.style.color = '#e74c3c';
+  } else {
+    icon.className = 'far fa-heart';
+    buttonElement.style.color = '';
+  }
+  updateFavoriteBadge();
+};
+
+// ============================================================
+// RENDER LISTINGS
+// ============================================================
+function renderListings(products, containerId) {
+  const grid = document.getElementById(containerId);
+  if (!grid) return;
+  
+  if (!products || products.length === 0) {
+    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--text-secondary);">No items found.</div>`;
+    return;
+  }
+  
+  grid.innerHTML = products.map(p => {
+    let badges = '';
+    if (p.boosted) badges += `<span class="badge-boosted"><i class="fas fa-bolt"></i> Boosted</span>`;
+    if (p.featured) badges += `<span class="badge-featured">Featured</span>`;
+    const price = p.price >= 1e6 ? `₦${(p.price/1e6).toFixed(1)}M` : `₦${p.price.toLocaleString()}`;
+    
+    const firstImage = p.images && p.images.length > 0 ? p.images[0] : null;
+    const imageHtml = firstImage 
+      ? `<img src="${firstImage}" alt="${p.title}" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\\'fas fa-box\\' style=\\'font-size:2.5rem;color:var(--text-secondary);\\'></i>';">`
+      : `<i class="fas fa-box" style="font-size:2.5rem;color:var(--text-secondary);"></i>`;
+    
+    const isFav = isFavorite(p.id);
+    const heartIcon = isFav ? 'fas fa-heart' : 'far fa-heart';
+    const heartColor = isFav ? 'color:#e74c3c;' : '';
+    
+    return `
+      <div class="listing-card" data-id="${p.id}">
+        <button class="fav-btn" onclick="event.stopPropagation(); toggleFavoriteCard(${p.id}, this)" 
+                style="${heartColor}">
+          <i class="${heartIcon}"></i>
+        </button>
+        <div class="listing-img" style="background:${p.bg || 'var(--surface-alt)'};" onclick="viewProduct(${p.id})">
+          ${imageHtml}
+          ${badges}
         </div>
+        <div class="listing-body" onclick="viewProduct(${p.id})">
+          <div class="price">${price}</div>
+          <div class="title">${p.title}</div>
+          <div class="meta"><span><i class="fas fa-map-pin"></i> ${p.location}</span><span><i class="far fa-clock"></i> ${p.date}</span></div>
+          <div class="listing-footer">
+            <span><i class="fas fa-store"></i> ${p.seller?.name || 'Unknown'}</span>
+            <span><i class="far fa-heart"></i> ${isFav ? 'Saved' : 'Save'}</span>
+          </div>
+        </div>
+      </div>
     `;
-    
-    return template.content.firstElementChild;
+  }).join('');
 }
 
-// ============================================
-// Data Loading Functions
-// ============================================
-async function loadInitialData() {
-    try {
-        await loadFeaturedProperties();
-        
-        if (DOM.blogGrid) {
-            await loadBlogPosts();
-        }
-        
-    } catch (error) {
-        console.error('Error loading initial data:', error);
-        showError('Failed to load data. Please check your connection.');
-    }
-}
+// ============================================================
+// VIEW PRODUCT
+// ============================================================
+window.viewProduct = function(productId) {
+  window.location.href = `/detail.html?id=${productId}`;
+};
 
-async function loadFeaturedProperties() {
-    if (!DOM.featuredProperties) return;
-    
-    try {
-        // Check cache first
-        const now = Date.now();
-        if (Cache.properties && (now - Cache.timestamp.properties < Config.cacheDuration)) {
-            renderProperties(Cache.properties.slice(0, 6));
-            return;
-        }
-        
-        const response = await fetch(Config.apiEndpoints.properties);
-        if (!response.ok) {
-            throw new Error('Properties file not found');
-        }
-        
-        const data = await response.json();
-        
-        // Cache the data
-        Cache.properties = data.properties;
-        Cache.timestamp.properties = now;
-        
-        // Render properties
-        renderProperties(data.properties.slice(0, 6));
-        
-    } catch (error) {
-        console.warn('Could not load properties.json:', error);
-        showFallbackProperties();
-    }
-}
+// ============================================================
+// LOAD CATEGORY
+// ============================================================
+window.loadCategory = function(slug) {
+  window.location.href = `/category.html?slug=${slug}`;
+};
 
-function renderProperties(properties) {
-    DOM.featuredProperties.innerHTML = '';
-    properties.forEach(property => {
-        DOM.featuredProperties.appendChild(createPropertyCard(property));
-    });
-}
-
-function showFallbackProperties() {
-    if (DOM.featuredProperties.children.length === 0) {
-        DOM.featuredProperties.innerHTML = `
-            <div style="text-align: center; padding: var(--spacing-xl); color: var(--text-secondary);">
-                <p>Properties will be loaded soon.</p>
-                <p>Check back later for featured listings.</p>
-            </div>
-        `;
-    }
-}
-
-async function loadBlogPosts() {
-    if (!DOM.blogGrid) return;
-    
-    try {
-        // Check cache first
-        const now = Date.now();
-        if (Cache.blogPosts && (now - Cache.timestamp.blog < Config.cacheDuration)) {
-            renderBlogPosts(Cache.blogPosts.slice(0, 3));
-            return;
-        }
-        
-        const response = await fetch(Config.apiEndpoints.blog);
-        if (!response.ok) {
-            throw new Error('Blog file not found');
-        }
-        
-        const data = await response.json();
-        
-        // Cache the data
-        Cache.blogPosts = data.posts;
-        Cache.timestamp.blog = now;
-        
-        // Render blog posts
-        renderBlogPosts(data.posts.slice(0, 3));
-        
-    } catch (error) {
-        console.warn('Could not load blog.json, keeping existing HTML:', error);
-    }
-}
-
-function renderBlogPosts(posts) {
-    DOM.blogGrid.innerHTML = '';
-    posts.forEach(post => {
-        const blogCard = document.createElement('article');
-        blogCard.className = 'blog-card';
-        blogCard.setAttribute('data-id', post.id);
-
-        blogCard.innerHTML = `
-            <div class="blog-image">
-                <img src="${post.image || Config.fallbackImages.blog}" alt="${post.title}" loading="lazy">
-            </div>
-            <div class="blog-content">
-                <span class="blog-category">${post.category}</span>
-                <h3 class="blog-title">${post.title}</h3>
-                <p class="blog-excerpt">${post.excerpt}</p>
-                <div class="blog-meta">
-                    <span><i class="fas fa-user" style="margin-right: 0.25rem;"></i>${post.author}</span>
-                    <span><i class="fas fa-calendar" style="margin-right: 0.25rem;"></i>${formatDate(post.date)}</span>
-                </div>
-                <button class="btn btn-outline" onclick="viewBlogPost(${post.id})" style="margin-top: var(--spacing-md);">
-                    Read More
-                </button>
-            </div>
-        `;
-
-        DOM.blogGrid.appendChild(blogCard);
-    });
-}
-
-// ============================================
-// Event Handlers
-// ============================================
-function handleGlobalClick(e) {
-    const target = e.target;
-    
-    // Handle favorite buttons
-    if (target.closest('[data-action="toggle-favorite"]')) {
-        e.preventDefault();
-        e.stopPropagation();
-        const button = target.closest('[data-action="toggle-favorite"]');
-        const propertyId = parseInt(button.dataset.id);
-        toggleFavorite(propertyId, button);
-        return;
-    }
-    
-    // Handle user dropdown outside click
-    const userMenuBtn = document.getElementById('userMenuBtn');
-    const userDropdown = document.getElementById('userDropdown');
-    if (userMenuBtn && userDropdown && userDropdown.classList.contains('active')) {
-        if (!userMenuBtn.contains(target) && !userDropdown.contains(target)) {
-            userDropdown.classList.remove('active');
-        }
-    }
-    
-    // Handle mobile nav link clicks
-    if (target.closest('.mobile-nav-link')) {
-        closeMobileMenu();
-    }
-}
-
-function handleResize() {
-    const wasMobile = AppState.isMobile;
-    detectDevice();
-    
-    if (wasMobile !== AppState.isMobile) {
-        updateNavigation();
-    }
-}
-
-function handlePropertySearch(e) {
-    e.preventDefault();
-    
-    const form = e.target;
-    const formData = new FormData(form);
-    const params = {
-        location: formData.get('location') || '',
-        type: formData.get('propertyType') || '',
-        minPrice: formData.get('minPrice') || '',
-        maxPrice: formData.get('maxPrice') || ''
-    };
-    
-    // Show loading state
-    const submitBtn = form.querySelector('button[type="submit"]');
-    if (submitBtn) {
-        const originalHTML = submitBtn.innerHTML;
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<span class="loading"></span> Searching...';
-        
-        // Build and redirect to search results
-        setTimeout(() => {
-            window.location.href = URLHelper.buildSearchURL(params);
-        }, 800);
-    }
-}
-
-function handleListProperty() {
-    window.location.href = 'contact.html?service=listing';
-}
-
-function toggleFavorite(propertyId, button) {
-    const wasAdded = StateManager.updateFavorites(propertyId);
-    
-    if (wasAdded) {
-        button.classList.add('active');
-        button.setAttribute('aria-label', 'Remove from favorites');
-        button.innerHTML = '<i class="fas fa-heart"></i>';
-        showNotification('Added to favorites', 'success');
+// ============================================================
+// POST AD BUTTONS
+// ============================================================
+document.addEventListener('DOMContentLoaded', function() {
+  const postAdCta = document.getElementById('postAdCta');
+  const fabPostAd = document.getElementById('fabPostAd');
+  const sellNavBtn = document.getElementById('sellNavBtn');
+  
+  const postAction = () => {
+    if (!currentUser) {
+      openSignup();
     } else {
-        button.classList.remove('active');
-        button.setAttribute('aria-label', 'Add to favorites');
-        button.innerHTML = '<i class="far fa-heart"></i>';
-        showNotification('Removed from favorites', 'info');
+      window.location.href = '/post.html';
     }
-}
+  };
+  
+  if (postAdCta) postAdCta.addEventListener('click', postAction);
+  if (fabPostAd) fabPostAd.addEventListener('click', postAction);
+  if (sellNavBtn) sellNavBtn.addEventListener('click', postAction);
+  
+  initTheme();
+  updateFavoriteBadge();
+});
 
-// ============================================
-// Form Functions
-// ============================================
-function prefillSearchForm() {
-    const { location, type, minPrice, maxPrice } = URLHelper.getSearchParams();
-    
-    // Set form values
-    const fields = {
-        'location': location,
-        'propertyType': type,
-        'minPrice': minPrice,
-        'maxPrice': maxPrice
-    };
-    
-    Object.entries(fields).forEach(([fieldId, value]) => {
-        const element = document.getElementById(fieldId);
-        if (element && value) {
-            element.value = value;
-        }
+// ============================================================
+// SEARCH HANDLER
+// ============================================================
+document.addEventListener('DOMContentLoaded', function() {
+  const searchInput = document.getElementById('searchInput');
+  const searchWrapper = document.getElementById('searchWrapper');
+  const acDropdown = document.getElementById('acDropdown');
+  const searchBtn = document.getElementById('searchBtn');
+
+  if (searchInput && searchWrapper) {
+    searchInput.addEventListener('input', async function() {
+      const query = this.value.trim();
+      if (query.length < 2) {
+        acDropdown.innerHTML = '';
+        searchWrapper.classList.remove('show-autocomplete');
+        return;
+      }
+      const products = await loadProducts();
+      const results = products.filter(p => 
+        p.title.toLowerCase().includes(query.toLowerCase()) ||
+        p.category.toLowerCase().includes(query.toLowerCase())
+      ).slice(0, 5);
+      
+      if (results.length === 0) {
+        acDropdown.innerHTML = `<div class="ac-item" style="justify-content:center;color:var(--text-secondary);">No results found</div>`;
+      } else {
+        acDropdown.innerHTML = results.map(p => {
+          const firstImage = p.images && p.images.length > 0 ? p.images[0] : null;
+          return `
+            <div class="ac-item" onclick="viewProduct(${p.id})">
+              <img src="${firstImage || 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2236%22 height=%2236%22%3E%3Crect width=%2236%22 height=%2236%22 fill=%22%23d6e1ed%22/%3E%3Ctext x=%228%22 y=%2224%22 font-size=%2220%22%3E📦%3C/text%3E%3C/svg%3E'}" alt="">
+              <span>${p.title}</span>
+              <small>${p.category}</small>
+            </div>
+          `;
+        }).join('');
+      }
+      searchWrapper.classList.add('show-autocomplete');
     });
-}
 
-// ============================================
-// Setup Functions
-// ============================================
-function setupEventListeners() {
-    // Global click handler for dynamic elements
-    document.addEventListener('click', handleGlobalClick);
-    
-    // Mobile menu
-    if (DOM.mobileMenuBtn) {
-        DOM.mobileMenuBtn.addEventListener('click', openMobileMenu);
-    }
-    
-    if (DOM.closeMenuModal) {
-        DOM.closeMenuModal.addEventListener('click', closeMobileMenu);
-    }
-    
-    // Window resize
-    window.addEventListener('resize', debounce(handleResize, 250));
-    
-    // Search form
-    const searchForm = document.getElementById('propertySearch');
-    if (searchForm) {
-        searchForm.addEventListener('submit', handlePropertySearch);
-    }
-    
-    // List property buttons
-    const listPropertyBtns = document.querySelectorAll('[data-action="list-property"]');
-    listPropertyBtns.forEach(btn => {
-        btn.addEventListener('click', handleListProperty);
+    document.addEventListener('click', function(e) {
+      if (!searchWrapper.contains(e.target)) {
+        searchWrapper.classList.remove('show-autocomplete');
+      }
     });
-    
-    // User menu
-    const userMenuBtn = document.getElementById('userMenuBtn');
-    const userDropdown = document.getElementById('userDropdown');
-    if (userMenuBtn && userDropdown) {
-        userMenuBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            userDropdown.classList.toggle('active');
-        });
+
+    if (searchBtn) {
+      searchBtn.addEventListener('click', async function(e) {
+        e.preventDefault();
+        const q = searchInput.value.trim();
+        if (q) {
+          const products = await loadProducts();
+          const filtered = products.filter(p => 
+            p.title.toLowerCase().includes(q.toLowerCase()) ||
+            p.category.toLowerCase().includes(q.toLowerCase()) ||
+            p.location.toLowerCase().includes(q.toLowerCase())
+          );
+          localStorage.setItem('zaure_search_results', JSON.stringify(filtered));
+          localStorage.setItem('zaure_search_query', q);
+          window.location.href = `/search.html`;
+        }
+      });
     }
-}
+  }
+});
 
-function setupLazyLoading() {
-    if (!('IntersectionObserver' in window)) return;
-    
-    const lazyObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                img.classList.remove('lazy');
-                lazyObserver.unobserve(img);
-            }
-        });
-    }, {
-        rootMargin: '50px 0px',
-        threshold: 0.1
-    });
-    
-    document.querySelectorAll('img[data-src]').forEach(img => {
-        lazyObserver.observe(img);
-    });
-}
+// ============================================================
+// EXPOSE GLOBAL FUNCTIONS
+// ============================================================
+window.getFavorites = getFavorites;
+window.saveFavorites = saveFavorites;
+window.toggleFavorite = toggleFavorite;
+window.isFavorite = isFavorite;
+window.getFavoriteCount = getFavoriteCount;
+window.updateFavoriteBadge = updateFavoriteBadge;
+window.toggleFavoriteCard = toggleFavoriteCard;
+window.loadProducts = loadProducts;
+window.loadCategories = loadCategories;
+window.loadTopSellers = loadTopSellers;
+window.loadTrendingKeywords = loadTrendingKeywords;
+window.renderListings = renderListings;
+window.getProductsSync = getProductsSync;
+window.initTheme = initTheme;
+window.toggleTheme = toggleTheme;
+window.loadUser = loadUser;
+window.renderUserArea = renderUserArea;
 
-function injectStyles() {
-    if (document.getElementById('dynamic-styles')) return;
-    
-    const style = document.createElement('style');
-    style.id = 'dynamic-styles';
-    style.textContent = `
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-        
-        @keyframes slideOut {
-            from {
-                transform: translateX(0);
-                opacity: 1;
-            }
-            to {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-        }
-        
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-        
-        .notification {
-            animation: slideIn 0.3s ease;
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #2563EB;
-            color: white;
-            padding: 12px 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            z-index: 1050;
-            font-size: 14px;
-            max-width: 300px;
-            word-wrap: break-word;
-        }
-        
-        .notification-success {
-            background-color: #10B981 !important;
-        }
-        
-        .notification-error {
-            background-color: #EF4444 !important;
-        }
-        
-        .notification-content {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .notification-close {
-            background: none;
-            border: none;
-            color: inherit;
-            font-size: 20px;
-            cursor: pointer;
-            margin-left: 10px;
-            opacity: 0.8;
-        }
-        
-        .notification-close:hover {
-            opacity: 1;
-        }
-        
-        .loading {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            border: 2px solid #fff;
-            border-top-color: transparent;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-right: 8px;
-            vertical-align: middle;
-        }
-    `;
-    
-    document.head.appendChild(style);
-}
-
-// ============================================
-// Navigation Functions (Public API)
-// ============================================
-function viewProperty(id) {
-    window.location.href = `property.html?id=${id}`;
-}
-
-function viewService(id) {
-    window.location.href = `services.html#${id}`;
-}
-
-function viewBlogPost(id) {
-    window.location.href = `blog.html#post-${id}`;
-}
-
-// ============================================
-// Initialization
-// ============================================
-function initApp() {
-    // Inject styles first
-    injectStyles();
-    
-    // Initialize state
-    StateManager.initialize();
-    
-    // Detect device
-    detectDevice();
-    
-    // Setup event listeners
-    setupEventListeners();
-    
-    // Load initial data
-    loadInitialData();
-    
-    // Update UI
-    updateNavigation();
-    prefillSearchForm();
-    handleHeaderScroll();
-    
-    // Setup performance optimizations
-    setupLazyLoading();
-    
-    // Add scroll listener
-    window.addEventListener('scroll', debounce(handleHeaderScroll, 100));
-}
-
-// Start the application
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initApp);
-} else {
-    initApp();
-}
+console.log('Zaure – Nigeria\'s trusted classified marketplace.');
