@@ -1,913 +1,327 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Zaure – Your entrance to home | Direct owner connections</title>
-    <meta name="description" content="Zaure connects verified property owners directly with seekers. No agents, no commission. Find homes for sale & rent across Northern Nigeria.">
-    <!-- Primary Meta Tags -->
-    <title>Zaure — Your entrance to home | Direct owner connections</title>
-    <meta name="title" content="Zaure — Your entrance to home | Direct owner connections">
-    <meta name="description" content="Zaure connects verified property owners directly with seekers. No agents, no commission. Find homes for sale & rent across Northern Nigeria.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Zaure – Buy & Sell Locally in Nigeria | Free Classified Marketplace</title>
+  <meta name="description" content="Zaure is Nigeria's leading free classified marketplace. Buy, sell, or trade items locally in Lagos, Abuja, Kano & across Nigeria. Post free ads, no commission, connect with verified buyers & sellers instantly.">
+  <meta name="keywords" content="classifieds Nigeria, buy and sell Nigeria, free ads Nigeria, online marketplace Nigeria, property for sale Nigeria, cars for sale Nigeria, electronics Nigeria, furniture Nigeria, fashion Nigeria, real estate Nigeria">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://zauretech.vercel.app/">
+  
+  <!-- Google Verification -->
+  <meta name="google-site-verification" content="google136f38ae653f16ba">
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://zauretech.vercel.app/">
+  <meta property="og:title" content="Zaure – Buy & Sell Locally in Nigeria | Free Classified Marketplace">
+  <meta property="og:description" content="Zaure is Nigeria's leading free classified marketplace. Buy, sell, or trade items locally. Post free ads, no commission.">
+  <meta property="og:image" content="https://zauretech.vercel.app/assets/og-image.jpg">
+  <meta property="og:site_name" content="Zaure Technologies">
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@zauretech">
+  <meta name="twitter:title" content="Zaure – Buy & Sell Locally in Nigeria">
+  <meta name="twitter:description" content="Zaure is Nigeria's leading free classified marketplace. Buy, sell, or trade items locally. Post free ads, no commission.">
+  
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Zaure Technologies",
+    "alternateName": "Zaure",
+    "url": "https://zauretech.vercel.app",
+    "logo": "https://zauretech.vercel.app/assets/logo-icon.svg",
+    "description": "Nigeria's leading free classified marketplace",
+    "foundingDate": "2024",
+    "founder": {
+      "@type": "Person",
+      "name": "Alamin Ahmed",
+      "jobTitle": "Founder & CEO"
+    },
+    "sameAs": [
+      "https://twitter.com/zauretech",
+      "https://instagram.com/zauretech",
+      "https://linkedin.com/company/zauretech",
+      "https://facebook.com/zauretech"
+    ]
+  }
+  </script>
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://zauretech.vercel.app/">
-    <meta property="og:title" content="Zaure — Your entrance to home">
-    <meta property="og:description" content="Zaure connects verified property owners directly with seekers. No agents, no commission. Browse homes across Northern Nigeria.">
-    <meta property="og:image" content="https://zauretech.vercel.app/og-image.png">
-    <meta property="og:site_name" content="Zaure Technologies">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://zauretech.vercel.app/">
-    <meta property="twitter:title" content="Zaure — Your entrance to home">
-    <meta property="twitter:description" content="Zaure connects verified property owners directly with seekers. No agents, no commission.">
-    <meta property="twitter:image" content="https://zauretech.vercel.app/og-image.png">
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="manifest" href="/site.webmanifest">
-
-    <!-- Theme Color -->
-    <meta name="theme-color" content="#1A1F2E">
-    <meta name="msapplication-TileColor" content="#1A1F2E">
-    
-    <!-- ============================================================== -->
-    <!-- JSON-LD SCHEMA FOR GOOGLE KNOWLEDGE PANEL (Company & Founder)    -->
-    <!-- ============================================================== -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Zaure Technologies",
-      "url": "https://zauretech.vercel.app",
-      "description": "PropTech platform in Northern Nigeria connecting verified property owners directly with seekers. No middlemen. No commission.",
-      "foundingDate": "2024",
-      "numberOfEmployees": "7",
-      "founder": {
-        "@type": "Person",
-        "name": "Alamin Ahmed",
-        "jobTitle": "Founder & CEO",
-        "worksFor": {
-          "@type": "Organization",
-          "name": "Zaure Technologies"
-        }
-      }
-    }
-    </script>
-    <!-- ============================================================== -->
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #1A1F2E;
-            --primary-soft: #2E3548;
-            --accent: #B49450;
-            --accent-soft: #D4B87A;
-            --bg: #FBFBFB;
-            --surface: #FFFFFF;
-            --surface-alt: #F6F6F6;
-            --text: #1E1E1E;
-            --text-secondary: #6B7280;
-            --border: #E5E7EB;
-            --shadow-sm: 0 2px 4px rgba(0,0,0,0.03), 0 1px 2px rgba(0,0,0,0.04);
-            --shadow-md: 0 4px 12px rgba(0,0,0,0.04);
-            --shadow-lg: 0 12px 24px -8px rgba(0,0,0,0.06);
-            --radius: 16px;
-            --radius-sm: 12px;
-            --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
-        }
-        [data-theme="dark"] {
-            --primary: #D4B87A;
-            --accent: #D4B87A;
-            --bg: #0B1120;
-            --surface: #131C31;
-            --surface-alt: #1A2540;
-            --text: #F1F5F9;
-            --text-secondary: #94A3B8;
-            --border: #2A3550;
-        }
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height:1.6;
-            transition: background var(--transition), color var(--transition);
-            -webkit-font-smoothing: antialiased;
-        }
-        .container { max-width:1280px; margin:0 auto; padding:0 2rem; }
-        
-        /* Remove blue focus outlines */
-        button:focus, a:focus, input:focus, select:focus, textarea:focus {
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(180,148,80,0.3);
-        }
-
-        /* ============================================================== */
-        /* HEADER                                                          */
-        /* ============================================================== */
-        .main-header {
-            background: rgba(255,255,255,0.8);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
-            position: sticky; top:0; z-index:100;
-        }
-        [data-theme="dark"] .main-header { background: rgba(19,28,49,0.8); }
-        .main-header .container { display:flex; justify-content:space-between; align-items:center; padding:1rem 2rem; }
-        .logo a {
-            text-decoration:none; font-family:'Playfair Display',serif; font-size:2rem; font-weight:800;
-            color: var(--primary); letter-spacing:-0.5px; display:flex; align-items:baseline;
-        }
-        .logo a .dot { width:6px; height:6px; background:var(--accent); border-radius:50%; margin-left:4px; }
-        .desktop-nav { display:flex; gap:2.2rem; align-items:center; }
-        .desktop-nav a {
-            text-decoration:none; color:var(--text); font-weight:500; font-size:0.95rem;
-            transition:color 0.2s; position:relative;
-        }
-        .desktop-nav a::after {
-            content:''; position:absolute; bottom:-6px; left:0; width:0; height:2px;
-            background:var(--accent); border-radius:2px; transition:width 0.25s;
-        }
-        .desktop-nav a:hover, .desktop-nav a.active { color:var(--primary); }
-        .desktop-nav a:hover::after, .desktop-nav a.active::after { width:100%; }
-        
-        /* Corporate Navigation Button */
-        .btn-nav {
-            display: inline-block;
-            padding: 0.5rem 1.5rem;
-            border: 2px solid var(--accent);
-            border-radius: 50px;
-            color: var(--accent);
-            background: transparent;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            opacity: 0;
-            transform: translateY(15px);
-            animation: btnFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            animation-delay: 0.5s;
-        }
-        .btn-nav:hover {
-            background: var(--accent);
-            color: #ffffff;
-            border-color: var(--accent);
-            transform: translateY(-2px);
-        }
-        .btn-nav::after { display: none; }
-
-        @keyframes btnFadeUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .header-actions { display:flex; gap:0.8rem; align-items:center; }
-        .icon-btn {
-            background:transparent; border:1px solid var(--border); font-size:1.1rem; cursor:pointer;
-            color:var(--text); padding:0.5rem; border-radius:50%; width:38px; height:38px;
-            display:flex; align-items:center; justify-content:center; transition:0.2s;
-        }
-        .icon-btn:hover { background:var(--primary); color:white; border-color:var(--primary); }
-        .mobile-only { display:none; }
-        .mobile-menu {
-            position:fixed; top:0; left:-100%; width:80%; max-width:320px; height:100%;
-            background:var(--surface); z-index:200; transition:left 0.35s; padding:2.5rem 2rem;
-            display:flex; flex-direction:column; gap:1.5rem; box-shadow:var(--shadow-lg);
-        }
-        .mobile-menu.open { left:0; }
-        .mobile-menu a { text-decoration:none; font-size:1.2rem; color:var(--text); font-weight:500; padding:0.5rem 0; border-bottom:1px solid var(--border); }
-        .signup-btn {
-            background: var(--accent);
-            color: #1A1F2E;
-            border: none;
-            padding: 0.6rem 1.5rem;
-            border-radius: 2rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.2s;
-            font-size: 0.9rem;
-        }
-        .signup-btn:hover { background: var(--accent-soft); }
-        .user-greeting {
-            font-weight:600; color:var(--primary); background:var(--surface-alt);
-            padding:0.5rem 1rem; border-radius:2rem; border:1px solid var(--border);
-            font-size:0.9rem; text-decoration:none; display:inline-block;
-        }
-        .user-greeting:hover { background:var(--border); }
-
-        /* ============================================================== */
-        /* DYNAMIC HERO BACKGROUND SLIDER (8 Images)                      */
-        /* ============================================================== */
-        .hero {
-            position:relative;
-            padding:7rem 0 6rem;
-            text-align:center;
-            color:white;
-            overflow:hidden; 
-        }
-        .hero-bg {
-            position:absolute;
-            top:-10%; left:-10%; width:120%; height:120%;
-            animation: zoomIn 30s ease-in-out infinite alternate;
-            z-index:0;
-            will-change: transform;
-            
-            /* ARRAY OF 8 IMAGES FOR DYNAMIC CROSSFADE SLIDER */
-            background-image: 
-                url('https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1600&h=800&fit=crop'),
-                url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1600&h=800&fit=crop'),
-                url('https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=1600&h=800&fit=crop'),
-                url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&h=800&fit=crop'),
-                url('https://images.unsplash.com/photo-1600607687920-4e2a09c1f0d4?w=1600&h=800&fit=crop'),
-                url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a5?w=1600&h=800&fit=crop'),
-                url('https://images.unsplash.com/photo-1600585154522-57b763f4b220?w=1600&h=800&fit=crop'),
-                url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1600&h=800&fit=crop');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            
-            /* KEYFRAME ANIMATION FOR THE SLIDER */
-            animation: bgSlide 45s infinite;
-        }
-        
-        @keyframes bgSlide {
-            0%, 10% { background-image: url('https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1600&h=800&fit=crop'); }
-            12.5%, 22.5% { background-image: url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1600&h=800&fit=crop'); }
-            25%, 35% { background-image: url('https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=1600&h=800&fit=crop'); }
-            37.5%, 47.5% { background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&h=800&fit=crop'); }
-            50%, 60% { background-image: url('https://images.unsplash.com/photo-1600607687920-4e2a09c1f0d4?w=1600&h=800&fit=crop'); }
-            62.5%, 72.5% { background-image: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a5?w=1600&h=800&fit=crop'); }
-            75%, 85% { background-image: url('https://images.unsplash.com/photo-1600585154522-57b763f4b220?w=1600&h=800&fit=crop'); }
-            87.5%, 97.5% { background-image: url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1600&h=800&fit=crop'); }
-            100% { background-image: url('https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1600&h=800&fit=crop'); }
-        }
-
-        @keyframes zoomIn {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.08); }
-        }
-        
-        .hero::before {
-            content:'';
-            position:absolute;
-            top:0; left:0; width:100%; height:100%;
-            background: linear-gradient(180deg, rgba(26,31,46,0.75) 0%, rgba(26,31,46,0.85) 100%);
-            z-index:1;
-        }
-        /* ============================================================== */
-
-        /* 2. Fade-Up & Slide-In Animation */
-        .hero-content {
-            position:relative; z-index:2; max-width:850px; margin:0 auto;
-            opacity: 0;
-            transform: translateY(40px);
-            animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-        @keyframes fadeUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-        /* Staggered Delays */
-        .hero-content h1 { animation-delay: 0.1s; }
-        .hero-content p { animation-delay: 0.3s; }
-        .hero-search { animation-delay: 0.6s; }
-
-        .hero h1 {
-            font-family:'Playfair Display',serif; font-size:3.5rem; font-weight:800; line-height:1.2;
-            margin-bottom:1.5rem; letter-spacing:-0.5px;
-        }
-        /* 3. Breathing Gold Highlight */
-        .hero h1 .highlight {
-            color: var(--accent-soft);
-            display: inline-block;
-            animation: breathe 4s ease-in-out infinite;
-        }
-        @keyframes breathe {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.75; transform: scale(1.02); }
-        }
-        .hero p { font-size:1.25rem; opacity:0.9; margin-bottom:2.5rem; max-width:650px; margin-left:auto; margin-right:auto; }
-        
-        /* 4. Floating Search Bar */
-        .hero-search {
-            background: rgba(255,255,255,0.95); backdrop-filter:blur(8px); border-radius:4rem;
-            padding:0.6rem; display:flex; flex-wrap:wrap; gap:0.5rem; max-width:950px; margin:0 auto;
-            box-shadow: var(--shadow-lg);
-            animation: float 6s ease-in-out infinite;
-            will-change: transform;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
-        }
-        .hero-search input,
-        .hero-search .trigger-btn {
-            flex:1; padding:1rem 1.2rem; border:1px solid #E5E7EB; border-radius:3rem;
-            background:white; font-size:0.95rem; color:#1E1E1E; min-width:110px; cursor:pointer;
-        }
-        .hero-search .trigger-btn { display:flex; align-items:center; justify-content:space-between; }
-        .hero-search .trigger-btn i { font-size:0.8rem; color:var(--text-secondary); }
-        .hero-search input:focus, .hero-search .trigger-btn:focus { outline:none; border-color:var(--accent); box-shadow:0 0 0 2px rgba(180,148,80,0.2); }
-        .price-range { display:flex; gap:0.5rem; flex:2; }
-        
-        /* 5. Ripple Effect Button */
-        .btn-primary {
-            background:var(--accent); color:#1A1F2E; border:none; padding:1rem 2.2rem;
-            border-radius:3rem; font-weight:700; cursor:pointer; transition:0.2s;
-            white-space:nowrap; display:flex; align-items:center; gap:0.5rem; font-size:0.95rem;
-            position: relative;
-            overflow: hidden;
-        }
-        .btn-primary:hover { background:var(--accent-soft); transform:translateY(-2px); }
-        .btn-primary::after {
-            content: '';
-            position: absolute;
-            top: 50%; left: 50%;
-            width: 0; height: 0;
-            background: rgba(255,255,255,0.4);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s, opacity 0.6s;
-            opacity: 0;
-        }
-        .btn-primary:active::after {
-            width: 400px; height: 400px; opacity: 1; transition: 0s;
-        }
-
-        /* Trust bar */
-        .trust-bar { background:var(--surface); border-bottom:1px solid var(--border); padding:2rem 0; }
-        .trust-grid { display:flex; justify-content:center; gap:3rem; flex-wrap:wrap; }
-        .trust-item {
-            display:flex; align-items:center; gap:0.6rem; font-weight:500; font-size:0.9rem; color:var(--text-secondary);
-        }
-        .trust-item i {
-            font-size:1.1rem; color:var(--accent); background:var(--surface-alt);
-            width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center;
-        }
-
-        /* Sections */
-        .section { padding:5rem 0; }
-        .bg-surface { background:var(--surface-alt); }
-        .section-title {
-            font-family:'Playfair Display',serif; font-size:2.2rem; font-weight:700; text-align:center;
-            margin-bottom:2.5rem; color:var(--primary);
-        }
-        .section-subtitle { text-align:center; color:var(--text-secondary); max-width:600px; margin:-1.5rem auto 3rem; }
-        .property-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:2rem; }
-        .property-card {
-            background:var(--surface); border-radius:var(--radius); overflow:hidden;
-            box-shadow:var(--shadow-sm); cursor:pointer; transition:all var(--transition);
-            border:1px solid var(--border); position:relative;
-        }
-        .property-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-lg); }
-        .property-card.location-highlight { border:2px solid var(--accent); }
-        .img-wrapper { position:relative; overflow:hidden; height:220px; }
-        .img-wrapper img { width:100%; height:100%; object-fit:cover; transition:transform 0.5s; }
-        .property-card:hover .img-wrapper img { transform:scale(1.05); }
-        .badge-verified {
-            position:absolute; top:1rem; right:1rem; background:rgba(255,255,255,0.9);
-            backdrop-filter:blur(4px); color:#1E1E1E; padding:0.3rem 0.8rem; border-radius:2rem;
-            font-size:0.7rem; font-weight:600; display:flex; align-items:center; gap:0.3rem;
-            border:1px solid #E5E7EB;
-        }
-        .badge-location {
-            position:absolute; top:1rem; left:1rem; background:rgba(180,148,80,0.95);
-            color:#1A1F2E; padding:0.3rem 0.8rem; border-radius:2rem;
-            font-size:0.7rem; font-weight:600; display:flex; align-items:center; gap:0.3rem;
-        }
-        .badge-top-pick {
-            position:absolute; top:1rem; left:1rem; background:var(--accent);
-            color:#1A1F2E; padding:0.3rem 0.8rem; border-radius:2rem;
-            font-size:0.7rem; font-weight:700; display:flex; align-items:center; gap:0.3rem;
-            box-shadow: var(--shadow-sm);
-        }
-        .card-body { padding:1.3rem; }
-        .price {
-            font-size:1.3rem; font-weight:700; color:var(--primary); margin-bottom:0.5rem;
-            font-family:'Playfair Display',serif;
-        }
-        .card-body h3 { font-size:1rem; font-weight:600; margin-bottom:0.4rem; }
-        .card-body p { color:var(--text-secondary); font-size:0.85rem; margin-bottom:1rem; }
-        .features { display:flex; gap:1rem; color:var(--text-secondary); font-size:0.8rem; border-top:1px solid var(--border); padding-top:0.8rem; flex-wrap:wrap; }
-        .distance-badge {
-            color:var(--accent); font-weight:600; font-size:0.8rem;
-        }
-
-        /* Tappable tags */
-        .card-tags { margin-top:0.5rem; display:flex; flex-wrap:wrap; gap:0.4rem; }
-        .card-tag {
-            display: inline-block;
-            background: var(--surface-alt);
-            padding: 0.25rem 0.7rem;
-            border-radius: 1rem;
-            font-size: 0.7rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            cursor: pointer;
-            border: 1px solid var(--border);
-            transition: 0.2s;
-        }
-        .card-tag:hover { background: var(--primary); color: white; border-color: var(--primary); }
-        .card-tag.location-tag { background: var(--accent); color: #1A1F2E; border-color: var(--accent); }
-
-        .btn-outline {
-            border:1px solid var(--primary); color:var(--primary); padding:0.6rem 1.8rem;
-            border-radius:3rem; font-weight:600; text-decoration:none; transition:0.2s; display:inline-block;
-        }
-        .btn-outline:hover { background:var(--primary); color:white; }
-        .benefits-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:2rem; }
-        .benefit-card {
-            background:var(--surface); padding:2rem; border-radius:var(--radius);
-            border:1px solid var(--border); transition:0.2s;
-        }
-        .benefit-card:hover { box-shadow:var(--shadow-md); }
-        .benefit-icon { font-size:1.8rem; color:var(--accent); margin-bottom:1rem; }
-        .states-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(130px,1fr)); gap:1rem; }
-        .state-item {
-            background:var(--surface); padding:0.8rem 1rem; border-radius:2rem;
-            display:flex; justify-content:space-between; align-items:center; cursor:pointer;
-            border:1px solid var(--border); font-weight:500; transition:0.2s;
-        }
-        .state-item:hover { background:var(--primary); color:white; }
-
-        /* Modals */
-        .modal-overlay {
-            position:fixed; top:0; left:0; width:100%; height:100%;
-            background:rgba(0,0,0,0.5); backdrop-filter:blur(4px); z-index:300;
-            display:flex; align-items:center; justify-content:center;
-            opacity:0; visibility:hidden; transition:opacity 0.3s, visibility 0.3s;
-        }
-        .modal-overlay.active { opacity:1; visibility:visible; }
-        .modal {
-            background:var(--surface); border-radius:var(--radius); padding:2rem;
-            min-width:360px; max-width:420px; box-shadow:var(--shadow-lg);
-            transform:translateY(20px); transition:transform 0.3s ease;
-        }
-        .modal-overlay.active .modal { transform:translateY(0); }
-        .modal-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; }
-        .modal-header h3 { font-family:'Playfair Display',serif; font-size:1.5rem; }
-        .modal-close { background:none; border:none; font-size:1.5rem; cursor:pointer; color:var(--text); }
-        .modal-form { display:flex; flex-direction:column; gap:1rem; }
-        .modal-form input {
-            padding:0.8rem 1rem; border:1px solid var(--border); border-radius:var(--radius-sm);
-            background:var(--bg); font-size:0.95rem;
-        }
-        .modal-form .btn-primary { justify-content:center; }
-
-        /* Selection modal options */
-        .options-list { display:flex; flex-direction:column; gap:0.5rem; }
-        .option-item {
-            padding:0.8rem 1rem; border:1px solid var(--border); border-radius:var(--radius-sm);
-            background:var(--surface-alt); cursor:pointer; transition:0.2s; text-align:left; font-weight:500;
-        }
-        .option-item:hover { background:var(--primary); color:white; border-color:var(--primary); }
-
-        /* Corporate Footer */
-        footer { background:#1A1F2E; color:#CBD5E1; padding:4rem 0 1.5rem; margin-top:3rem; }
-        footer a { color:#94A3B8; text-decoration:none; transition: all 0.2s; }
-        footer a:hover { color:var(--accent-soft); transform: translateX(4px); }
-        footer .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1.5fr;
-            gap: 3rem;
-            margin-bottom: 0;
-        }
-        footer .footer-col h4 {
-            color: #ffffff;
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            font-size: 1rem;
-            margin-bottom: 1.2rem;
-            letter-spacing: 0.5px;
-        }
-        footer .footer-col a { display: block; font-size: 0.9rem; margin-bottom: 0.8rem; }
-        footer .footer-col.brand p { color: #94A3B8; font-size: 0.95rem; line-height: 1.6; }
-        footer .social a { display: inline-block !important; color: #B49450; margin-right: 1rem; transition: transform 0.2s; }
-        footer .social a:hover { transform: scale(1.1); color: var(--accent-soft); }
-        footer .footer-bottom {
-            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
-            padding-top: 2rem; margin-top: 2rem; border-top: 1px solid #2E3548;
-            font-size: 0.85rem; color: #94A3B8;
-        }
-
-        @media (max-width:768px) {
-            .desktop-nav { display:none; }
-            .mobile-only { display:block; }
-            .hero { padding:5rem 0 4rem; }
-            .hero h1 { font-size:2.5rem; }
-            .hero p { font-size:1rem; }
-            .hero-search { flex-direction:column; border-radius:2rem; padding:1rem; }
-            .price-range { flex-direction:column; }
-            footer .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
-            footer .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
-        }
-    </style>
-    
-    <!-- Vercel Speed Insights -->
-    <script type="module">
-        import { injectSpeedInsights } from 'https://cdn.jsdelivr.net/npm/@vercel/speed-insights@2/dist/index.mjs';
-        injectSpeedInsights();
-    </script>
+  <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<header class="main-header">
-    <div class="container">
-        <div class="logo"><a href="/">Zaure<span class="dot"></span></a></div>
-        <nav class="desktop-nav">
-            <a href="/" class="active">Home</a>
-            <a href="/browse?type=sale">Buy</a>
-            <a href="/browse?type=rent">Rent</a>
-            <a href="/how-it-works">How It Works</a>
-            <a href="/about">About</a>
-            <a href="/contact">Contact</a>
-            <a href="/profile">Profile</a>
-            <a href="#" class="btn-nav">List Property</a>
-        </nav>
-        <div class="header-actions" id="headerUserArea">
-            <!-- dynamically filled -->
+
+  <!-- ===== NAV ===== -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="/" class="logo-wrapper">
+        <img src="/assets/logo-icon.svg" alt="Zaure" class="logo-icon">
+        <div class="logo-text">
+          <span class="brand">Zaure</span>
+          <span class="tagline">Your Entrance to Home</span>
         </div>
-        <div class="header-actions">
-            <button id="themeToggle" class="icon-btn"><i class="fas fa-moon"></i></button>
-            <button id="mobileMenuToggle" class="icon-btn mobile-only"><i class="fas fa-bars"></i></button>
+      </a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/category.html?slug=all">Browse</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <button class="icon-btn" id="themeToggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
+        <a href="/favorites.html" class="icon-btn" style="position:relative;text-decoration:none;">
+          <i class="fas fa-heart"></i>
+          <span id="favBadge">0</span>
+        </a>
+        <div id="headerUserArea">
+          <div class="avatar" id="userAvatar" onclick="openSignup()">ZA</div>
         </div>
+      </div>
     </div>
-</header>
+  </nav>
 
-<!-- Mobile Menu -->
-<div class="mobile-menu" id="mobileMenu">
-    <button id="closeMenu" class="close-btn"><i class="fas fa-times"></i></button>
-    <a href="/">Home</a><a href="/browse?type=sale">Buy</a><a href="/browse?type=rent">Rent</a>
-    <a href="/how-it-works">How It Works</a><a href="/about">About</a><a href="/contact">Contact</a>
-    <a href="/profile">Profile</a>
-    <a href="#">List Property</a>
-</div>
+  <div class="container">
 
-<!-- Sign Up Modal -->
-<div class="modal-overlay" id="signupModal">
-    <div class="modal">
-        <div class="modal-header">
-            <h3>Create your account</h3>
-            <button class="modal-close" id="closeSignupModalBtn"><i class="fas fa-times"></i></button>
-        </div>
-        <form id="signupForm" class="modal-form">
-            <input type="text" id="signupName" placeholder="Your full name" required>
-            <input type="tel" id="signupPhone" placeholder="Phone number" required>
-            <button type="submit" class="btn-primary">Sign Up</button>
-        </form>
-    </div>
-</div>
-
-<!-- Property Type / Bedrooms Modal -->
-<div class="modal-overlay" id="selectionModal">
-    <div class="modal">
-        <div class="modal-header">
-            <h3 id="selectionModalTitle">Select</h3>
-            <button class="modal-close" id="closeSelectionModalBtn"><i class="fas fa-times"></i></button>
-        </div>
-        <div id="selectionOptionsContainer" class="options-list"></div>
-    </div>
-</div>
-
-<main>
-    <!-- HERO SECTION WITH ANIMATIONS & DYNAMIC BACKGROUND -->
+    <!-- ===== HERO ===== -->
     <section class="hero">
-        <div class="hero-bg"></div> <!-- 8-image dynamic slider -->
-        <div class="hero-content container">
-            <h1>Your <span class="highlight">entrance</span> to home.<br>No middlemen.</h1>
-            <p>Zaure connects you directly with verified property owners. Browse homes for sale & rent across Northern Nigeria and speak to the owner instantly. Or let our smart feed find your perfect match.</p>
-            <form id="heroSearch" class="hero-search">
-                <input type="text" id="searchLocation" placeholder="City or area" value="">
-                <button type="button" class="trigger-btn" id="propertyTypeBtn">Property Type <i class="fas fa-chevron-down"></i></button>
-                <button type="button" class="trigger-btn" id="bedsBtn">Bedrooms <i class="fas fa-chevron-down"></i></button>
-                <div class="price-range">
-                    <input type="number" id="minPrice" placeholder="Min Price">
-                    <input type="number" id="maxPrice" placeholder="Max Price">
-                </div>
-                <button type="submit" class="btn-primary"><i class="fas fa-search"></i> Find</button>
-            </form>
-            <input type="hidden" id="propertyTypeValue" value="">
-            <input type="hidden" id="bedsValue" value="">
-            <div style="margin-top:1.5rem;">
-                <a href="/browse" class="btn-primary" style="background:var(--accent); padding:0.8rem 2rem;">
-                    <i class="fas fa-magic"></i> Discover Homes For You
-                </a>
-            </div>
+      <h1>Find <span>anything</span><br> near you.</h1>
+      <p style="color:var(--text-secondary);font-size:0.95rem;margin-top:4px;">Nigeria's leading free classified marketplace</p>
+      <div class="search-wrapper" id="searchWrapper">
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" id="searchInput" placeholder="Search for items..." autocomplete="off">
+          <button id="searchBtn"><i class="fas fa-arrow-right" style="margin-right:4px;"></i> Search</button>
         </div>
+        <div class="autocomplete-dropdown" id="acDropdown"></div>
+      </div>
+      <div class="trending-keywords" id="trendingKeywords">
+        <span class="keyword"><i class="fas fa-fire"></i> Loading...</span>
+      </div>
     </section>
 
-    <section class="trust-bar">
-        <div class="container">
-            <div class="trust-grid">
-                <div class="trust-item"><i class="fas fa-user-check"></i> Verified Owners</div>
-                <div class="trust-item"><i class="fas fa-handshake"></i> Direct Contact</div>
-                <div class="trust-item"><i class="fas fa-ban"></i> Zero Agent Fees</div>
-                <div class="trust-item"><i class="fas fa-clock"></i> List in Minutes</div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section">
-        <div class="container">
-            <h2 class="section-title">Homes for Sale</h2>
-            <p class="section-subtitle">Verified properties from owners, not agents.</p>
-            <div class="property-grid" id="featuredSaleGrid"></div>
-            <div style="text-align:center; margin-top:2.5rem;"><a href="/browse?type=sale" class="btn-outline">See all for sale →</a></div>
-        </div>
-    </section>
-
-    <section class="section bg-surface">
-        <div class="container">
-            <h2 class="section-title">Places for Rent</h2>
-            <div class="property-grid" id="featuredRentGrid"></div>
-            <div style="text-align:center; margin-top:2.5rem;"><a href="/browse?type=rent" class="btn-outline">Browse all rentals →</a></div>
-        </div>
-    </section>
-
-    <section class="section">
-        <div class="container">
-            <h2 class="section-title">Why Zaure?</h2>
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <div class="benefit-icon"><i class="fas fa-shield-alt"></i></div>
-                    <h3>Identity Verified</h3>
-                    <p>Owners can verify via NIN/BVN, so you know who you're dealing with.</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon"><i class="fas fa-comments"></i></div>
-                    <h3>Direct Communication</h3>
-                    <p>No agent screening calls. Message or call the owner directly from the listing.</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon"><i class="fas fa-coins"></i></div>
-                    <h3>Keep Your Money</h3>
-                    <p>Zero commission. The price you see is the price you pay – no hidden fees.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section bg-surface">
-        <div class="container">
-            <h2 class="section-title">Browse by City</h2>
-            <div class="states-grid" id="statesGrid"></div>
-        </div>
-    </section>
-</main>
-
-<!-- Corporate Footer -->
-<footer>
-    <div class="container">
-        <div class="footer-grid">
-            <!-- 1. Brand & Remote Location -->
-            <div class="footer-col brand">
-                <h4 style="font-family:'Playfair Display',serif; font-size:1.5rem;">Zaure<span style="color:#B49450;">.</span></h4>
-                <p>Your digital entrance hall – connecting verified owners and seekers directly across Northern Nigeria.</p>
-                <div style="margin-top:1rem; font-size:0.9rem; color:#94A3B8;">
-                    <i class="fas fa-globe" style="color:#B49450; margin-right:0.5rem;"></i> Remote · Northern Nigeria<br>
-                    <i class="fas fa-envelope" style="color:#B49450; margin-right:0.5rem; margin-top:0.3rem;"></i> get.zaure@proton.me
-                </div>
-            </div>
-
-            <!-- 2. Quick Links (Primary Navigation) -->
-            <div class="footer-col">
-                <h4>Find a Home</h4>
-                <a href="/browse?type=sale">Buy Property</a>
-                <a href="/browse?type=rent">Rent Property</a>
-                <a href="/how-it-works">How It Works</a>
-                <a href="/browse">Browse All Listings</a>
-            </div>
-
-            <!-- 3. Company & Legal -->
-            <div class="footer-col">
-                <h4>Company</h4>
-                <a href="/about">About Us</a>
-                <a href="/contact">Contact</a>
-                <a href="/privacy">Privacy Policy</a>
-                <a href="/terms">Terms of Service</a>
-            </div>
-
-            <!-- 4. Social & Trust Badges -->
-            <div class="footer-col connect">
-                <h4>Connect</h4>
-                <div class="social" style="margin-bottom:1.5rem;">
-                    <a href="https://twitter.com/zauretech" target="_blank"><i class="fab fa-twitter"></i></a>
-                    <a href="https://instagram.com/zauretech" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="https://linkedin.com/company/zauretech" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://facebook.com/zauretech" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                </div>
-                <p style="font-size:0.85rem; color:#94A3B8; margin-bottom:1rem;">Follow us everywhere @zauretech</p>
-                <!-- Trust Badges -->
-                <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
-                    <span style="background:rgba(180,148,80,0.1); color:#B49450; padding:0.25rem 0.8rem; border-radius:50px; font-size:0.7rem; font-weight:600; border:1px solid rgba(180,148,80,0.2);">No Middlemen</span>
-                    <span style="background:rgba(180,148,80,0.1); color:#B49450; padding:0.25rem 0.8rem; border-radius:50px; font-size:0.7rem; font-weight:600; border:1px solid rgba(180,148,80,0.2);">Verified Owners</span>
-                    <span style="background:rgba(180,148,80,0.1); color:#B49450; padding:0.25rem 0.8rem; border-radius:50px; font-size:0.7rem; font-weight:600; border:1px solid rgba(180,148,80,0.2);">Zero Commission</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- 5. Bottom Copyright Bar -->
-        <div class="footer-bottom">
-            <span>&copy; 2026 <strong style="color:white;">Zaure Technologies</strong>. All rights reserved.</span>
-            <span>Built for Northern Nigeria. 🇳🇬</span>
-        </div>
+    <!-- ===== PROMO CAROUSEL ===== -->
+    <div class="promo-carousel">
+      <div class="promo-card"><h3>List for Free</h3><p>Post your items at zero cost</p><span class="btn-outline-light">Learn more</span></div>
+      <div class="promo-card" style="background-image: radial-gradient(circle at 70% 30%, #1f5d8a, #0a1b2b);"><h3>Top Sellers</h3><p>Shop from verified local stores</p><span class="btn-outline-light">Explore</span></div>
+      <div class="promo-card" style="background-image: radial-gradient(circle at 30% 70%, #4a6f8f, #0d1f30);"><h3>Boost your listing</h3><p>Get 10x more views</p><span class="btn-outline-light">Boost now</span></div>
     </div>
-</footer>
 
-<script>
-    (function() {
-        // Theme toggle
-        const themeToggle = document.getElementById('themeToggle');
-        const storedTheme = localStorage.getItem('zaure_theme') || 'light';
-        document.documentElement.setAttribute('data-theme', storedTheme);
-        themeToggle.innerHTML = storedTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-        themeToggle.addEventListener('click', () => {
-            const cur = document.documentElement.getAttribute('data-theme');
-            const next = cur === 'light' ? 'dark' : 'light';
-            document.documentElement.setAttribute('data-theme', next);
-            localStorage.setItem('zaure_theme', next);
-            themeToggle.innerHTML = next === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-        });
+    <!-- ===== CATEGORIES ===== -->
+    <h2 class="section-title">Categories</h2>
+    <div class="grid-2col" id="categoryGrid">
+      <div class="category-card"><div class="icon-circle"><i class="fas fa-spinner fa-spin"></i></div><h3>Loading...</h3></div>
+    </div>
 
-        // Mobile menu
-        const mobileToggle = document.getElementById('mobileMenuToggle');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const closeMenuBtn = document.getElementById('closeMenu');
-        mobileToggle.addEventListener('click', () => mobileMenu.classList.add('open'));
-        closeMenuBtn.addEventListener('click', () => mobileMenu.classList.remove('open'));
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => mobileMenu.classList.remove('open'));
-        });
+    <!-- ===== FEATURED PRODUCTS ===== -->
+    <h2 class="section-title">Featured Products</h2>
+    <div class="grid-2col-listings" id="featuredGrid">
+      <div class="listing-card"><div class="listing-img"><i class="fas fa-spinner fa-spin"></i></div><div class="listing-body"><div class="price">Loading...</div></div></div>
+    </div>
 
-        // User area
-        const headerUserArea = document.getElementById('headerUserArea');
-        function renderUserArea() {
-            const user = JSON.parse(localStorage.getItem('zaure_user'));
-            if (user && user.name) {
-                headerUserArea.innerHTML = `<a href="/profile" class="user-greeting">Hi, ${user.name.split(' ')[0]}</a>`;
-            } else {
-                headerUserArea.innerHTML = `<button id="signupBtn" class="signup-btn">Sign Up</button>`;
-                const signupBtn = document.getElementById('signupBtn');
-                if (signupBtn) {
-                    signupBtn.addEventListener('click', () => {
-                        document.getElementById('signupModal').classList.add('active');
-                    });
-                }
-            }
-        }
-        renderUserArea();
+    <!-- ===== TOP SELLERS ===== -->
+    <h2 class="section-title">Top Sellers</h2>
+    <div class="storefronts" id="topSellersGrid">
+      <div class="storefront-card"><div class="store-avatar">...</div><div><div class="store-name">Loading</div></div></div>
+    </div>
 
-        // Sign Up modal
-        const signupModalOverlay = document.getElementById('signupModal');
-        const closeSignupModalBtn = document.getElementById('closeSignupModalBtn');
-        const signupForm = document.getElementById('signupForm');
-        closeSignupModalBtn.addEventListener('click', () => signupModalOverlay.classList.remove('active'));
-        window.addEventListener('click', (e) => {
-            if (e.target === signupModalOverlay) signupModalOverlay.classList.remove('active');
-        });
-        signupForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const name = document.getElementById('signupName').value.trim();
-            const phone = document.getElementById('signupPhone').value.trim();
-            if (name && phone) {
-                localStorage.setItem('zaure_user', JSON.stringify({ name, phone }));
-                signupModalOverlay.classList.remove('active');
-                signupForm.reset();
-                renderUserArea();
-            }
-        });
+    <!-- ===== TRENDING NEAR YOU ===== -->
+    <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap;">
+      <h2 class="section-title" style="margin-top:4px;" id="trendingTitle">Trending Near You</h2>
+      <a href="/category.html?slug=all" style="color:var(--text-secondary); font-weight:500; font-size:0.8rem; text-decoration:none;">View all</a>
+    </div>
+    <div class="grid-2col-listings" id="listingGrid">
+      <div class="listing-card"><div class="listing-img"><i class="fas fa-spinner fa-spin"></i></div><div class="listing-body"><div class="price">Loading...</div></div></div>
+    </div>
 
-        // Property type / beds modal
-        const selectionModalOverlay = document.getElementById('selectionModal');
-        const selectionModalTitle = document.getElementById('selectionModalTitle');
-        const selectionOptionsContainer = document.getElementById('selectionOptionsContainer');
-        const closeSelectionModalBtn = document.getElementById('closeSelectionModalBtn');
-        const propertyTypeBtn = document.getElementById('propertyTypeBtn');
-        const bedsBtn = document.getElementById('bedsBtn');
-        const propertyTypeValue = document.getElementById('propertyTypeValue');
-        const bedsValue = document.getElementById('bedsValue');
+    <!-- ===== CTA ===== -->
+    <section class="cta-banner">
+      <div><h2>Ready to sell?</h2><p>List your item in minutes – reach local buyers.</p></div>
+      <div><button class="btn-primary" id="postAdCta"><i class="fas fa-plus-circle"></i> Post a listing</button></div>
+    </section>
 
-        const propertyTypes = [
-            { value: 'house', label: 'House' },
-            { value: 'apartment', label: 'Apartment' },
-            { value: 'land', label: 'Land' },
-            { value: 'commercial', label: 'Commercial' }
-        ];
-        const bedOptions = [
-            { value: '1', label: '1' },
-            { value: '2', label: '2' },
-            { value: '3', label: '3' },
-            { value: '4+', label: '4+' }
-        ];
+  </div>
 
-        let currentSelectionType = '';
-        function openSelectionModal(type) {
-            currentSelectionType = type;
-            const options = type === 'propertyType' ? propertyTypes : bedOptions;
-            selectionModalTitle.textContent = type === 'propertyType' ? 'Property Type' : 'Bedrooms';
-            selectionOptionsContainer.innerHTML = options.map(opt => 
-                `<button type="button" class="option-item" data-value="${opt.value}">${opt.label}</button>`
-            ).join('');
-            selectionModalOverlay.classList.add('active');
-        }
-        function closeSelectionModal() {
-            selectionModalOverlay.classList.remove('active');
-        }
-        propertyTypeBtn.addEventListener('click', () => openSelectionModal('propertyType'));
-        bedsBtn.addEventListener('click', () => openSelectionModal('beds'));
-        closeSelectionModalBtn.addEventListener('click', closeSelectionModal);
-        selectionModalOverlay.addEventListener('click', (e) => {
-            if (e.target === selectionModalOverlay) closeSelectionModal();
-        });
-        selectionOptionsContainer.addEventListener('click', (e) => {
-            const optionBtn = e.target.closest('.option-item');
-            if (!optionBtn) return;
-            const value = optionBtn.dataset.value;
-            const label = optionBtn.textContent.trim();
-            if (currentSelectionType === 'propertyType') {
-                propertyTypeValue.value = value;
-                propertyTypeBtn.innerHTML = `${label} <i class="fas fa-chevron-down"></i>`;
-            } else {
-                bedsValue.value = value;
-                bedsBtn.innerHTML = `${label} <i class="fas fa-chevron-down"></i>`;
-            }
-            closeSelectionModal();
-        });
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
 
-        // Search form
-        document.getElementById('heroSearch').addEventListener('submit', e => {
-            e.preventDefault();
-            const location = document.getElementById('searchLocation').value.trim();
-            const type = propertyTypeValue.value;
-            const beds = bedsValue.value;
-            const min = document.getElementById('minPrice').value;
-            const max = document.getElementById('maxPrice').value;
-            let url = `/browse?location=${encodeURIComponent(location)}`;
-            if (type) url += `&propertyType=${type}`;
-            if (beds) url += `&beds=${beds}`;
-            if (min) url += `&min=${min}`;
-            if (max) url += `&max=${max}`;
-            window.location.href = url;
-        });
+        <div class="footer-col brand">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+            <img src="/assets/logo-icon.svg" alt="Zaure" style="width:32px;height:32px;">
+            <span style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:white;">Zaure</span>
+          </div>
+          <p>Nigeria's leading free classified marketplace. Buy, sell, or trade locally. No commission, no middlemen.</p>
+          <div class="social" style="margin-top:12px;">
+            <a href="https://twitter.com/zauretech" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com/zauretech" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://linkedin.com/company/zauretech" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://facebook.com/zauretech" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          </div>
+        </div>
 
-        // Load featured properties
-        fetch('/data/properties.json')
-            .then(res => res.json())
-            .then(data => {
-                const props = data.properties;
-                const saleProps = props.filter(p => p.type === 'sale').slice(0, 6);
-                const rentProps = props.filter(p => p.type === 'rent').slice(0, 6);
-                document.getElementById('featuredSaleGrid').innerHTML = renderCards(saleProps);
-                document.getElementById('featuredRentGrid').innerHTML = renderCards(rentProps);
-            })
-            .catch(() => {
-                document.getElementById('featuredSaleGrid').innerHTML = '<p style="text-align:center;color:var(--text-secondary);padding:2rem;">Unable to load properties.</p>';
-                document.getElementById('featuredRentGrid').innerHTML = '<p style="text-align:center;color:var(--text-secondary);padding:2rem;">Unable to load properties.</p>';
-            });
+        <div class="footer-col">
+          <h4>Browse</h4>
+          <a href="/category.html?slug=all">All Items</a>
+          <a href="/category.html?slug=vehicles">Vehicles</a>
+          <a href="/category.html?slug=electronics">Electronics</a>
+          <a href="/category.html?slug=furniture">Furniture</a>
+          <a href="/category.html?slug=fashion">Fashion</a>
+          <a href="/category.html?slug=real-estate">Real Estate</a>
+        </div>
 
-        function renderCards(properties) {
-            if (!properties || properties.length === 0) {
-                return '<p style="text-align:center;color:var(--text-secondary);padding:2rem;">No properties available.</p>';
-            }
-            return properties.map(p => {
-                // Safety check: skip broken entries
-                if (!p || !p.id) return '';
-                const price = p.price >= 1e6 ? `₦${(p.price/1e6).toFixed(1)}M` : `₦${p.price.toLocaleString()}`;
-                const img = p.images?.[0] || 'https://placehold.co/600x400?text=Zaure';
-                const verifiedBadge = p.owner?.verified ? '<div class="badge-verified"><i class="fas fa-check-circle"></i> Verified</div>' : '';
-                return `
-                    <div class="property-card" onclick="window.location.href='/property?id=${p.id}'">
-                        <div class="img-wrapper">
-                            <img src="${img}" alt="${p.title}" loading="lazy">
-                            ${verifiedBadge}
-                        </div>
-                        <div class="card-body">
-                            <div class="price">${price}</div>
-                            <h3>${p.title}</h3>
-                            <p>${p.address}, ${p.city}</p>
-                            <div class="features">
-                                ${p.propertyType !== 'land' ? `<span><i class="fas fa-bed"></i> ${p.bedrooms} Beds</span><span><i class="fas fa-bath"></i> ${p.bathrooms} Baths</span>` : '<span><i class="fas fa-map"></i> Land</span>'}
-                            </div>
-                            <div class="card-tags">
-                                <span class="card-tag" onclick="event.stopPropagation(); window.location.href='/browse?location=${encodeURIComponent(p.city)}'">${p.city}</span>
-                                <span class="card-tag" onclick="event.stopPropagation(); window.location.href='/browse?propertyType=${encodeURIComponent(p.propertyType)}'">${p.propertyType}</span>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
+        <div class="footer-col">
+          <h4>Support</h4>
+          <a href="/help.html">Help Center</a>
+          <a href="/safety.html">Safety Tips</a>
+          <a href="/contact.html">Contact Us</a>
+          <a href="/support.html">Support</a>
+        </div>
 
-        // Cities grid
-        const states = ['Kaduna','Kano','Zaria','Sokoto','Maiduguri','Jos','Abuja','Lagos','Ibadan','Katsina','Bauchi','Gombe'];
-        document.getElementById('statesGrid').innerHTML = states.map(s => 
-            `<div class="state-item" onclick="window.location.href='/browse?location=${s}'">${s} <span>→</span></div>`
-        ).join('');
-    })();
-</script>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="/about.html">About Us</a>
+          <a href="/careers.html">Careers</a>
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Service</a>
+        </div>
+
+        <div class="footer-col trust-badges" style="grid-column:1/-1;border-top:1px solid #2E3548;padding-top:16px;margin-top:8px;">
+          <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;">
+            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;">
+              <i class="fas fa-shield-alt" style="color:#B49450;"></i> Verified Users
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;">
+              <i class="fas fa-handshake" style="color:#B49450;"></i> No Commission
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;">
+              <i class="fas fa-user-check" style="color:#B49450;"></i> Identity Verified
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;">
+              <i class="fas fa-lock" style="color:#B49450;"></i> Secure Platform
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;">
+              <i class="fas fa-clock" style="color:#B49450;"></i> 24/7 Support
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;">
+              <i class="fas fa-star" style="color:#B49450;"></i> Trusted by Thousands
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;">
+              <i class="fas fa-phone" style="color:#B49450;"></i> Direct Contact
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;">
+              <i class="fas fa-credit-card" style="color:#B49450;"></i> Secure Payments
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <span>&copy; 2026 <strong style="color:white;">Zaure Technologies</strong>. All rights reserved.</span>
+          <span><i class="fas fa-globe"></i> Nigeria · English</span>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== BOTTOM NAV ===== -->
+  <div class="bottom-nav">
+    <a href="/" class="nav-item active"><i class="fas fa-home"></i><span>Home</span></a>
+    <button class="nav-item" onclick="document.getElementById('searchInput')?.focus();"><i class="fas fa-search"></i><span>Search</span></button>
+    <button class="post-btn" id="fabPostAd"><i class="fas fa-plus"></i></button>
+    <a href="/favorites.html" class="nav-item"><i class="fas fa-heart"></i><span>Favorites</span></a>
+    <a href="/profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
+  </div>
+
+  <!-- ===== SIGNUP MODAL ===== -->
+  <div class="modal-overlay" id="signupModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Create your account</h3>
+        <button class="modal-close" id="closeSignupModalBtn"><i class="fas fa-times"></i></button>
+      </div>
+      <form id="signupForm" class="modal-form">
+        <label for="signupName">Full Name</label>
+        <input type="text" id="signupName" placeholder="Enter your full name" required>
+        <label for="signupPhone">Phone Number</label>
+        <input type="tel" id="signupPhone" placeholder="Enter your phone number" required>
+        <label for="signupState">State</label>
+        <select id="signupState" required>
+          <option value="">Select your state</option>
+          <option value="Abia">Abia</option><option value="Adamawa">Adamawa</option>
+          <option value="Akwa Ibom">Akwa Ibom</option><option value="Anambra">Anambra</option>
+          <option value="Bauchi">Bauchi</option><option value="Bayelsa">Bayelsa</option>
+          <option value="Benue">Benue</option><option value="Borno">Borno</option>
+          <option value="Cross River">Cross River</option><option value="Delta">Delta</option>
+          <option value="Ebonyi">Ebonyi</option><option value="Edo">Edo</option>
+          <option value="Ekiti">Ekiti</option><option value="Enugu">Enugu</option>
+          <option value="FCT">FCT (Abuja)</option><option value="Gombe">Gombe</option>
+          <option value="Imo">Imo</option><option value="Jigawa">Jigawa</option>
+          <option value="Kaduna">Kaduna</option><option value="Kano">Kano</option>
+          <option value="Katsina">Katsina</option><option value="Kebbi">Kebbi</option>
+          <option value="Kogi">Kogi</option><option value="Kwara">Kwara</option>
+          <option value="Lagos">Lagos</option><option value="Nasarawa">Nasarawa</option>
+          <option value="Niger">Niger</option><option value="Ogun">Ogun</option>
+          <option value="Ondo">Ondo</option><option value="Osun">Osun</option>
+          <option value="Oyo">Oyo</option><option value="Plateau">Plateau</option>
+          <option value="Rivers">Rivers</option><option value="Sokoto">Sokoto</option>
+          <option value="Taraba">Taraba</option><option value="Yobe">Yobe</option>
+          <option value="Zamfara">Zamfara</option>
+        </select>
+        <button type="submit" class="btn-primary">Sign Up</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async function() {
+      const categories = await loadCategories();
+      const categoryGrid = document.getElementById('categoryGrid');
+      categoryGrid.innerHTML = categories.map(cat => `
+        <div class="category-card" onclick="loadCategory('${cat.slug}')">
+          <div class="icon-circle"><i class="${cat.icon}"></i></div>
+          <h3>${cat.name}</h3>
+          <p>${cat.count || 0} items</p>
+        </div>
+      `).join('');
+
+      const products = await loadProducts();
+      const featured = products.filter(p => p.featured).slice(0, 6);
+      renderListings(featured, 'featuredGrid');
+      renderListings(products.slice(0, 6), 'listingGrid');
+
+      const sellers = await loadTopSellers();
+      const sellersGrid = document.getElementById('topSellersGrid');
+      sellersGrid.innerHTML = sellers.map(s => `
+        <div class="storefront-card" onclick="loadCategory('${s.category || 'all'}')">
+          <div class="store-avatar">${s.initials || s.name.charAt(0)}</div>
+          <div>
+            <div class="store-name">${s.name}</div>
+            <div class="store-badge"><i class="fas fa-check-circle"></i> ${s.badge || 'verified'}</div>
+          </div>
+        </div>
+      `).join('');
+
+      const keywords = await loadTrendingKeywords();
+      const keywordsContainer = document.getElementById('trendingKeywords');
+      keywordsContainer.innerHTML = keywords.map(k => `
+        <span class="keyword" onclick="document.getElementById('searchInput').value='${k}';document.getElementById('searchBtn').click();">
+          <i class="fas fa-fire"></i> ${k}
+        </span>
+      `).join('');
+
+      loadUser();
+      initTheme();
+      updateFavoriteBadge();
+    });
+  </script>
 </body>
 </html>

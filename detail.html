@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Zaure – Product Details</title>
+  <meta name="description" content="View product details, seller information, and similar listings on Zaure.">
+  <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .product-gallery {
+      position: relative;
+      background: var(--surface);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      margin-bottom: 16px;
+    }
+    .product-gallery .main-image { width: 100%; height: 350px; object-fit: cover; background: var(--surface-alt); }
+    .product-gallery .thumbnail-strip { display: flex; gap: 8px; padding: 12px; overflow-x: auto; scrollbar-width: none; }
+    .product-gallery .thumbnail-strip::-webkit-scrollbar { display: none; }
+    .product-gallery .thumbnail-strip .thumb {
+      width: 60px; height: 60px; border-radius: 8px; object-fit: cover; cursor: pointer;
+      border: 2px solid transparent; transition: 0.2s; flex-shrink: 0;
+    }
+    .product-gallery .thumbnail-strip .thumb.active { border-color: #1a3650; }
+    .product-gallery .thumbnail-strip .thumb:hover { border-color: #1a3650; }
+    .product-gallery .gallery-badge {
+      position: absolute; top: 16px; left: 16px; background: rgba(0,0,0,0.7); color: white;
+      padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: 600; z-index: 2;
+    }
+    .product-gallery .gallery-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.9); border: none; width: 40px; height: 40px;
+      border-radius: 50%; cursor: pointer; font-size: 1rem; box-shadow: var(--shadow);
+      transition: 0.2s; z-index: 2;
+    }
+    .product-gallery .gallery-nav:hover { background: var(--surface); box-shadow: var(--shadow-hover); }
+    .product-gallery .gallery-nav.prev { left: 12px; }
+    .product-gallery .gallery-nav.next { right: 12px; }
+    .product-gallery .gallery-nav.hidden { display: none; }
+
+    .product-info-card {
+      background: var(--surface); border-radius: 20px; padding: 24px;
+      border: 1px solid var(--border); margin-bottom: 16px;
+    }
+    .product-info-card .product-title { font-size: 1.5rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .product-info-card .product-price { font-size: 2rem; font-weight: 800; color: #1a3650; margin: 8px 0; }
+    [data-theme="dark"] .product-info-card .product-price { color: #4a7a9a; }
+    .product-info-card .product-meta {
+      display: flex; flex-wrap: wrap; gap: 16px; font-size: 0.85rem;
+      color: var(--text-secondary); padding: 12px 0; border-top: 1px solid var(--border); margin-top: 8px;
+    }
+    .product-info-card .product-meta span i { margin-right: 4px; color: #1f5d8a; }
+    .product-info-card .product-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+    .product-info-card .product-tags .tag {
+      background: var(--surface-alt); padding: 4px 12px; border-radius: 20px;
+      font-size: 0.75rem; font-weight: 500; color: var(--text);
+    }
+    .product-info-card .product-description { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; margin: 12px 0; }
+
+    .action-buttons {
+      display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap;
+    }
+    .action-buttons .btn-contact {
+      flex: 2; background: #1a3650; color: white; border: none; padding: 14px 24px;
+      border-radius: 60px; font-weight: 600; font-size: 1rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      transition: 0.2s; text-decoration: none;
+    }
+    .action-buttons .btn-contact:hover { background: #0f2940; }
+    [data-theme="dark"] .action-buttons .btn-contact { background: #2A3550; color: #F1F5F9; }
+    [data-theme="dark"] .action-buttons .btn-contact:hover { background: #3A4560; }
+    .action-buttons .btn-favorite {
+      flex: 1; background: var(--surface); color: var(--text); border: 2px solid var(--border);
+      padding: 14px 20px; border-radius: 60px; font-weight: 600; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s;
+    }
+    .action-buttons .btn-favorite:hover { border-color: var(--text); }
+    .action-buttons .btn-favorite.liked { border-color: #e74c3c; color: #e74c3c; }
+    .action-buttons .btn-share {
+      flex: 0.5; background: var(--surface); color: var(--text); border: 2px solid var(--border);
+      padding: 14px 20px; border-radius: 60px; cursor: pointer; transition: 0.2s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .action-buttons .btn-share:hover { border-color: var(--text); }
+
+    .seller-card {
+      background: var(--surface); border-radius: 20px; padding: 24px;
+      border: 1px solid var(--border); margin-bottom: 16px;
+    }
+    .seller-card .seller-header { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+    .seller-card .seller-avatar-large {
+      width: 72px; height: 72px; border-radius: 50%; background: #1a3650;
+      display: flex; align-items: center; justify-content: center; color: white;
+      font-size: 1.8rem; font-weight: 700; flex-shrink: 0;
+    }
+    [data-theme="dark"] .seller-card .seller-avatar-large { background: #2A3550; color: #F1F5F9; }
+    .seller-card .seller-info { flex: 1; }
+    .seller-card .seller-info .seller-name { font-size: 1.1rem; font-weight: 700; color: var(--text); }
+    .seller-card .seller-info .seller-badge {
+      display: inline-flex; align-items: center; gap: 4px; font-size: 0.75rem;
+      color: #1f5d8a; background: var(--surface-alt); padding: 2px 10px; border-radius: 12px; margin-top: 4px;
+    }
+    .seller-card .seller-info .seller-meta { display: flex; gap: 16px; font-size: 0.8rem; color: var(--text-secondary); margin-top: 6px; }
+    .seller-card .seller-info .seller-meta span i { margin-right: 4px; }
+    .seller-card .seller-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+      padding: 16px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin: 12px 0;
+    }
+    .seller-card .seller-stats .stat-item { text-align: center; }
+    .seller-card .seller-stats .stat-item .number { font-size: 1.2rem; font-weight: 700; color: var(--text); }
+    .seller-card .seller-stats .stat-item .label { font-size: 0.7rem; color: var(--text-secondary); }
+    .seller-card .seller-bio { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin: 12px 0; }
+    .seller-card .seller-actions { display: flex; gap: 12px; margin-top: 12px; }
+    .seller-card .seller-actions .btn-seller {
+      flex: 1; background: var(--surface-alt); border: none; padding: 10px 16px;
+      border-radius: 60px; font-weight: 600; font-size: 0.85rem; color: var(--text);
+      cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 6px; text-decoration: none;
+    }
+    .seller-card .seller-actions .btn-seller:hover { background: var(--border); }
+    .seller-card .seller-actions .btn-whatsapp {
+      background: #25D366; color: white; border: none; padding: 10px 16px;
+      border-radius: 60px; font-weight: 600; font-size: 0.85rem; cursor: pointer;
+      transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 6px;
+      text-decoration: none; flex: 1;
+    }
+    .seller-card .seller-actions .btn-whatsapp:hover { background: #1da851; }
+
+    .location-card {
+      background: var(--surface); border-radius: 20px; padding: 24px;
+      border: 1px solid var(--border); margin-bottom: 16px;
+    }
+    .location-card .location-title { font-weight: 600; margin-bottom: 8px; color: var(--text); }
+    .location-card .location-address { display: flex; align-items: center; gap: 8px; color: var(--text-secondary); font-size: 0.9rem; }
+    .location-card .location-address i { color: #1f5d8a; }
+    .location-card .location-map {
+      width: 100%; height: 150px; background: var(--surface-alt); border-radius: 12px;
+      margin-top: 12px; display: flex; align-items: center; justify-content: center;
+      color: var(--text-secondary); font-size: 0.9rem;
+    }
+
+    .recommendations-section { margin: 24px 0; }
+    .recommendations-section .rec-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; color: var(--text); }
+    .recommendations-section .rec-title i { color: #1f5d8a; }
+
+    .safety-tips {
+      background: var(--surface-alt); border-radius: 16px; padding: 20px;
+      border: 1px solid var(--border); margin: 16px 0;
+    }
+    .safety-tips h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 12px; color: var(--text); }
+    .safety-tips ul { list-style: none; padding: 0; }
+    .safety-tips ul li { padding: 4px 0; font-size: 0.85rem; color: var(--text-secondary); display: flex; align-items: center; gap: 8px; }
+    .safety-tips ul li i { color: #1f5d8a; font-size: 0.8rem; }
+
+    .report-btn {
+      background: transparent; border: none; color: var(--text-secondary);
+      font-size: 0.8rem; cursor: pointer; padding: 8px; display: flex;
+      align-items: center; gap: 4px; transition: 0.2s; margin-top: 8px;
+    }
+    .report-btn:hover { color: #e74c3c; }
+
+    .detail-back { display: flex; align-items: center; gap: 12px; padding: 16px 0; }
+    .detail-back .back-btn { background: transparent; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text); text-decoration: none; }
+    .detail-back h2 { font-size: 1.1rem; font-weight: 600; color: var(--text); }
+
+    @media (min-width: 768px) {
+      .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+      .detail-grid .product-gallery { grid-column: 1 / -1; }
+      .detail-grid .product-info-card { grid-column: 1 / 2; }
+      .detail-grid .seller-card { grid-column: 2 / 3; }
+      .detail-grid .location-card { grid-column: 1 / 2; }
+      .detail-grid .safety-tips { grid-column: 2 / 3; }
+      .detail-grid .recommendations-section { grid-column: 1 / -1; }
+    }
+    @media (max-width: 767px) {
+      .product-gallery .main-image { height: 250px; }
+      .action-buttons .btn-favorite { flex: 0.5; }
+      .action-buttons .btn-share { flex: 0.3; }
+      .seller-card .seller-stats { grid-template-columns: repeat(3, 1fr); }
+      .seller-card .seller-actions { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAV ===== -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="/" class="logo-wrapper">
+        <img src="/assets/logo-icon.svg" alt="Zaure" class="logo-icon">
+        <div class="logo-text"><span class="brand">Zaure</span><span class="tagline">Your Entrance to Home</span></div>
+      </a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/category.html?slug=all">Browse</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <button class="icon-btn" id="themeToggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
+        <a href="/favorites.html" class="icon-btn" style="position:relative;text-decoration:none;"><i class="fas fa-heart"></i><span id="favBadge">0</span></a>
+        <div id="headerUserArea"><div class="avatar" id="userAvatar" onclick="openSignup()">ZA</div></div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <div class="detail-back">
+      <a href="/" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+      <h2>Product Details</h2>
+    </div>
+
+    <div id="loadingState" style="text-align:center;padding:40px;">
+      <i class="fas fa-spinner fa-spin" style="font-size:2rem;color:#1a3650;"></i>
+      <p style="margin-top:12px;color:var(--text-secondary);">Loading product details...</p>
+    </div>
+
+    <div id="productDetailContainer" style="display:none;">
+
+      <div class="product-gallery" id="productGallery">
+        <img src="" alt="Product image" class="main-image" id="mainImage">
+        <div class="thumbnail-strip" id="thumbnailStrip"></div>
+        <span class="gallery-badge" id="galleryBadge">Featured</span>
+        <button class="gallery-nav prev" id="galleryPrev"><i class="fas fa-chevron-left"></i></button>
+        <button class="gallery-nav next" id="galleryNext"><i class="fas fa-chevron-right"></i></button>
+      </div>
+
+      <div class="detail-grid">
+
+        <div class="product-info-card">
+          <div class="product-title" id="productTitle">Product Title</div>
+          <div class="product-price" id="productPrice">₦0</div>
+          <div class="product-meta" id="productMeta">
+            <span><i class="fas fa-map-pin"></i> <span id="productLocation">Location</span></span>
+            <span><i class="far fa-clock"></i> <span id="productDate">Date</span></span>
+            <span><i class="fas fa-tag"></i> <span id="productCategory">Category</span></span>
+          </div>
+          <div class="product-tags" id="productTags"></div>
+          <div class="product-description" id="productDescription">Product description goes here.</div>
+          <div class="action-buttons">
+            <a class="btn-contact" id="contactBtn"><i class="fas fa-phone"></i> Call Seller</a>
+            <button class="btn-favorite" id="favoriteBtn"><i class="far fa-heart"></i> Save</button>
+            <button class="btn-share" id="shareBtn"><i class="fas fa-share-alt"></i></button>
+          </div>
+          <button class="report-btn" id="reportBtn"><i class="fas fa-flag"></i> Report this listing</button>
+        </div>
+
+        <div class="seller-card" id="sellerCard">
+          <div class="seller-header">
+            <div class="seller-avatar-large" id="sellerAvatar">ZA</div>
+            <div class="seller-info">
+              <div class="seller-name" id="sellerName">Seller Name</div>
+              <div class="seller-badge" id="sellerBadge"><i class="fas fa-check-circle"></i> Verified</div>
+              <div class="seller-meta">
+                <span><i class="fas fa-calendar-alt"></i> Member since <span id="sellerJoined">2024</span></span>
+                <span><i class="fas fa-store"></i> <span id="sellerListings">0</span> listings</span>
+              </div>
+            </div>
+          </div>
+          <div class="seller-stats">
+            <div class="stat-item"><div class="number" id="sellerRating">4.9</div><div class="label"><i class="fas fa-star" style="color:#f5b342;"></i> Rating</div></div>
+            <div class="stat-item"><div class="number" id="sellerSales">0</div><div class="label">Items Sold</div></div>
+            <div class="stat-item"><div class="number" id="sellerResponse">95%</div><div class="label">Response Rate</div></div>
+          </div>
+          <div class="seller-bio" id="sellerBio">Professional seller with a passion for quality products.</div>
+          <div class="seller-actions">
+            <button class="btn-seller" id="viewSellerBtn"><i class="fas fa-store"></i> View All Listings</button>
+            <a class="btn-whatsapp" id="whatsappBtn" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+          </div>
+        </div>
+
+        <div class="location-card">
+          <div class="location-title"><i class="fas fa-map-pin" style="color:#1f5d8a;"></i> Location</div>
+          <div class="location-address" id="locationAddress">
+            <i class="fas fa-location-dot"></i> <span id="locationFull">Loading location...</span>
+          </div>
+          <div class="location-map" id="locationMap">
+            <i class="fas fa-map" style="font-size:2rem;margin-right:8px;color:#1f5d8a;"></i> Map view coming soon
+          </div>
+        </div>
+
+        <div class="safety-tips">
+          <h4><i class="fas fa-shield-alt" style="color:#1f5d8a;"></i> Safety Tips</h4>
+          <ul>
+            <li><i class="fas fa-check-circle"></i> Meet in a public place</li>
+            <li><i class="fas fa-check-circle"></i> Inspect the item before purchase</li>
+            <li><i class="fas fa-check-circle"></i> Avoid advance payments</li>
+            <li><i class="fas fa-check-circle"></i> Trust your instincts</li>
+          </ul>
+        </div>
+
+        <div class="recommendations-section">
+          <div class="rec-title"><i class="fas fa-lightbulb"></i> You Might Also Like</div>
+          <div class="grid-2col-listings" id="recommendationsGrid">
+            <div class="listing-card"><div class="listing-img"><i class="fas fa-spinner fa-spin"></i></div><div class="listing-body"><div class="price">Loading...</div></div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col brand">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+            <img src="/assets/logo-icon.svg" alt="Zaure" style="width:32px;height:32px;">
+            <span style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:white;">Zaure</span>
+          </div>
+          <p>Nigeria's leading free classified marketplace. Buy, sell, or trade locally. No commission, no middlemen.</p>
+          <div class="social" style="margin-top:12px;">
+            <a href="https://twitter.com/zauretech" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com/zauretech" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://linkedin.com/company/zauretech" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://facebook.com/zauretech" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          </div>
+        </div>
+        <div class="footer-col"><h4>Browse</h4><a href="/category.html?slug=all">All Items</a><a href="/category.html?slug=vehicles">Vehicles</a><a href="/category.html?slug=electronics">Electronics</a><a href="/category.html?slug=furniture">Furniture</a><a href="/category.html?slug=fashion">Fashion</a><a href="/category.html?slug=real-estate">Real Estate</a></div>
+        <div class="footer-col"><h4>Support</h4><a href="/help.html">Help Center</a><a href="/safety.html">Safety Tips</a><a href="/contact.html">Contact Us</a><a href="/support.html">Support</a></div>
+        <div class="footer-col"><h4>Company</h4><a href="/about.html">About Us</a><a href="/careers.html">Careers</a><a href="/privacy.html">Privacy Policy</a><a href="/terms.html">Terms of Service</a></div>
+        <div class="footer-col trust-badges" style="grid-column:1/-1;border-top:1px solid #2E3548;padding-top:16px;margin-top:8px;">
+          <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;">
+            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-shield-alt" style="color:#B49450;"></i> Verified Users</div>
+            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-handshake" style="color:#B49450;"></i> No Commission</div>
+            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-user-check" style="color:#B49450;"></i> Identity Verified</div>
+            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-lock" style="color:#B49450;"></i> Secure Platform</div>
+            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-clock" style="color:#B49450;"></i> 24/7 Support</div>
+            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-star" style="color:#B49450;"></i> Trusted by Thousands</div>
+            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-phone" style="color:#B49450;"></i> Direct Contact</div>
+            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-credit-card" style="color:#B49450;"></i> Secure Payments</div>
+          </div>
+        </div>
+        <div class="footer-bottom"><span>&copy; 2026 <strong style="color:white;">Zaure Technologies</strong>. All rights reserved.</span><span><i class="fas fa-globe"></i> Nigeria · English</span></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== BOTTOM NAV ===== -->
+  <div class="bottom-nav">
+    <a href="/" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
+    <button class="nav-item" onclick="window.location.href='/'"><i class="fas fa-search"></i><span>Search</span></button>
+    <button class="post-btn" id="fabPostAd"><i class="fas fa-plus"></i></button>
+    <a href="/favorites.html" class="nav-item"><i class="fas fa-heart"></i><span>Favorites</span></a>
+    <a href="/profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
+  </div>
+
+  <!-- ===== SIGNUP MODAL ===== -->
+  <div class="modal-overlay" id="signupModal">
+    <div class="modal">
+      <div class="modal-header"><h3>Create your account</h3><button class="modal-close" id="closeSignupModalBtn"><i class="fas fa-times"></i></button></div>
+      <form id="signupForm" class="modal-form">
+        <label for="signupName">Full Name</label>
+        <input type="text" id="signupName" placeholder="Enter your full name" required>
+        <label for="signupPhone">Phone Number</label>
+        <input type="tel" id="signupPhone" placeholder="Enter your phone number" required>
+        <label for="signupState">State</label>
+        <select id="signupState" required>
+          <option value="">Select your state</option>
+          <option value="Abia">Abia</option><option value="Adamawa">Adamawa</option>
+          <option value="Akwa Ibom">Akwa Ibom</option><option value="Anambra">Anambra</option>
+          <option value="Bauchi">Bauchi</option><option value="Bayelsa">Bayelsa</option>
+          <option value="Benue">Benue</option><option value="Borno">Borno</option>
+          <option value="Cross River">Cross River</option><option value="Delta">Delta</option>
+          <option value="Ebonyi">Ebonyi</option><option value="Edo">Edo</option>
+          <option value="Ekiti">Ekiti</option><option value="Enugu">Enugu</option>
+          <option value="FCT">FCT (Abuja)</option><option value="Gombe">Gombe</option>
+          <option value="Imo">Imo</option><option value="Jigawa">Jigawa</option>
+          <option value="Kaduna">Kaduna</option><option value="Kano">Kano</option>
+          <option value="Katsina">Katsina</option><option value="Kebbi">Kebbi</option>
+          <option value="Kogi">Kogi</option><option value="Kwara">Kwara</option>
+          <option value="Lagos">Lagos</option><option value="Nasarawa">Nasarawa</option>
+          <option value="Niger">Niger</option><option value="Ogun">Ogun</option>
+          <option value="Ondo">Ondo</option><option value="Osun">Osun</option>
+          <option value="Oyo">Oyo</option><option value="Plateau">Plateau</option>
+          <option value="Rivers">Rivers</option><option value="Sokoto">Sokoto</option>
+          <option value="Taraba">Taraba</option><option value="Yobe">Yobe</option>
+          <option value="Zamfara">Zamfara</option>
+        </select>
+        <button type="submit" class="btn-primary">Sign Up</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async function() {
+      const params = new URLSearchParams(window.location.search);
+      const productId = parseInt(params.get('id'));
+      
+      if (!productId) {
+        document.getElementById('loadingState').innerHTML = `<div style="text-align:center;padding:40px;"><i class="fas fa-exclamation-circle" style="font-size:2rem;color:#e74c3c;"></i><p style="margin-top:12px;color:var(--text-secondary);">Product not found.</p><a href="/" class="btn-primary" style="margin-top:16px;width:auto;padding:10px 28px;">Go Home</a></div>`;
+        return;
+      }
+
+      const products = await loadProducts();
+      const product = products.find(p => p.id === productId);
+      
+      if (!product) {
+        document.getElementById('loadingState').innerHTML = `<div style="text-align:center;padding:40px;"><i class="fas fa-exclamation-circle" style="font-size:2rem;color:#e74c3c;"></i><p style="margin-top:12px;color:var(--text-secondary);">Product not found.</p><a href="/" class="btn-primary" style="margin-top:16px;width:auto;padding:10px 28px;">Go Home</a></div>`;
+        return;
+      }
+
+      document.getElementById('loadingState').style.display = 'none';
+      document.getElementById('productDetailContainer').style.display = 'block';
+
+      const price = product.price >= 1e6 ? `₦${(product.price/1e6).toFixed(1)}M` : `₦${product.price.toLocaleString()}`;
+      
+      document.getElementById('productTitle').textContent = product.title;
+      document.getElementById('productPrice').textContent = price;
+      document.getElementById('productLocation').textContent = product.location || 'Nigeria';
+      document.getElementById('productDate').textContent = product.date || 'Recently';
+      document.getElementById('productCategory').textContent = product.category || 'General';
+      document.getElementById('productDescription').textContent = product.description || 'No description available.';
+
+      const tagsContainer = document.getElementById('productTags');
+      const tags = product.tags || [product.category, product.location];
+      tagsContainer.innerHTML = tags.map(t => `<span class="tag">#${t}</span>`).join('');
+
+      const images = product.images || [];
+      const mainImage = document.getElementById('mainImage');
+      const thumbnailStrip = document.getElementById('thumbnailStrip');
+      let currentImageIndex = 0;
+
+      if (images.length > 0 && images[0]) {
+        mainImage.src = images[0];
+        mainImage.alt = product.title;
+      } else {
+        mainImage.src = 'https://placehold.co/600x400?text=Zaure';
+      }
+
+      thumbnailStrip.innerHTML = images.map((img, index) => `
+        <img src="${img || 'https://placehold.co/60x60?text=Zaure'}" alt="Thumbnail ${index + 1}" class="thumb ${index === 0 ? 'active' : ''}" onclick="changeImage(${index})" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22%3E%3Crect width=%2260%22 height=%2260%22 fill=%22%23d6e1ed%22/%3E%3Ctext x=%2218%22 y=%2236%22 font-size=%2216%22%3E📦%3C/text%3E%3C/svg%3E'">
+      `).join('');
+
+      window.changeImage = function(index) {
+        currentImageIndex = index;
+        mainImage.src = images[index] || 'https://placehold.co/600x400?text=Zaure';
+        document.querySelectorAll('.thumb').forEach((el, i) => { el.classList.toggle('active', i === index); });
+      };
+
+      const galleryPrev = document.getElementById('galleryPrev');
+      const galleryNext = document.getElementById('galleryNext');
+      galleryPrev.addEventListener('click', function() { const prev = (currentImageIndex - 1 + images.length) % images.length; changeImage(prev); });
+      galleryNext.addEventListener('click', function() { const next = (currentImageIndex + 1) % images.length; changeImage(next); });
+      if (images.length <= 1) { galleryPrev.classList.add('hidden'); galleryNext.classList.add('hidden'); }
+
+      document.getElementById('galleryBadge').textContent = product.featured ? 'Featured' : 'Available';
+      document.getElementById('galleryBadge').style.background = product.featured ? 'rgba(26,54,80,0.9)' : 'rgba(0,0,0,0.7)';
+
+      const seller = product.seller || {
+        name: 'Verified Seller', initials: 'VS', verified: true, joined: '2024',
+        listings: 12, rating: 4.9, sales: 47, response: '95%',
+        bio: 'Professional seller with a passion for quality products.',
+        phone: '08012345678', whatsapp: '08012345678'
+      };
+
+      document.getElementById('sellerAvatar').textContent = seller.initials || seller.name.charAt(0);
+      document.getElementById('sellerName').textContent = seller.name;
+      document.getElementById('sellerBadge').innerHTML = seller.verified ? '<i class="fas fa-check-circle"></i> Verified' : '<i class="fas fa-clock"></i> New Seller';
+      document.getElementById('sellerBadge').style.color = seller.verified ? '#1f5d8a' : '#f5b342';
+      document.getElementById('sellerJoined').textContent = seller.joined || '2024';
+      document.getElementById('sellerListings').textContent = seller.listings || 0;
+      document.getElementById('sellerRating').textContent = seller.rating || '4.9';
+      document.getElementById('sellerSales').textContent = seller.sales || 0;
+      document.getElementById('sellerResponse').textContent = seller.response || '95%';
+      document.getElementById('sellerBio').textContent = seller.bio || 'Professional seller dedicated to quality.';
+
+      const contactBtn = document.getElementById('contactBtn');
+      const phoneNumber = seller.phone || '08012345678';
+      contactBtn.href = `tel:${phoneNumber}`;
+      contactBtn.innerHTML = `<i class="fas fa-phone"></i> Call ${seller.name}`;
+
+      const whatsappBtn = document.getElementById('whatsappBtn');
+      const whatsappNumber = seller.whatsapp || seller.phone || '08012345678';
+      const cleanNumber = whatsappNumber.replace(/[^0-9]/g, '');
+      whatsappBtn.href = `https://wa.me/${cleanNumber}?text=Hello%20${encodeURIComponent(seller.name)}%2C%20I%20am%20interested%20in%20your%20listing%3A%20${encodeURIComponent(product.title)}%20on%20Zaure.`;
+
+      const favoriteBtn = document.getElementById('favoriteBtn');
+      const isFav = isFavorite(product.id);
+      if (isFav) { favoriteBtn.classList.add('liked'); favoriteBtn.innerHTML = '<i class="fas fa-heart"></i> Saved'; }
+      favoriteBtn.addEventListener('click', function() {
+        if (!currentUser) { openSignup(); return; }
+        const isNowFav = toggleFavorite(product.id);
+        if (isNowFav) { this.classList.add('liked'); this.innerHTML = '<i class="fas fa-heart"></i> Saved'; }
+        else { this.classList.remove('liked'); this.innerHTML = '<i class="far fa-heart"></i> Save'; }
+        updateFavoriteBadge();
+      });
+
+      document.getElementById('locationFull').textContent = `${product.location || 'Nigeria'} - View on map`;
+
+      const recommendations = products.filter(p => p.id !== product.id && p.category === product.category).slice(0, 6);
+      if (recommendations.length === 0) { const fallback = products.filter(p => p.id !== product.id).slice(0, 6); renderListings(fallback, 'recommendationsGrid'); }
+      else { renderListings(recommendations, 'recommendationsGrid'); }
+
+      document.getElementById('shareBtn').addEventListener('click', function() {
+        if (navigator.share) { navigator.share({ title: product.title, text: `Check out this amazing item on Zaure: ${product.title}`, url: window.location.href }); }
+        else { navigator.clipboard.writeText(window.location.href).then(() => { alert('Link copied to clipboard!'); }); }
+      });
+
+      document.getElementById('reportBtn').addEventListener('click', function() {
+        if (!currentUser) { openSignup(); }
+        else { if (confirm('Are you sure you want to report this listing?')) { alert('Thank you for reporting. Our team will review this listing within 24 hours.'); } }
+      });
+
+      document.getElementById('viewSellerBtn').addEventListener('click', function() { window.location.href = `/category.html?slug=${product.category}`; });
+
+      document.getElementById('fabPostAd').addEventListener('click', function() {
+        if (!currentUser) { openSignup(); } else { window.location.href = '/post.html'; }
+      });
+
+      await loadUser();
+      initTheme();
+      updateFavoriteBadge();
+    });
+  </script>
+</body>
+</html>

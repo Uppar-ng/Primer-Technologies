@@ -1,43 +1,37 @@
+# robots.txt for Zaure Technologies
+# https://zauretech.vercel.app/robots.txt
+
 User-agent: *
-Disallow: /data/
-Disallow: /post
-Disallow: /api/
-Disallow: /*?token=
-Disallow: /*?session=
 Allow: /
 
-Crawl-delay: 10
-
-# AI Crawlers
-User-agent: GPTBot
-Disallow: /data/
-Disallow: /post
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /private/
 Disallow: /api/
-Allow: /
+Disallow: /assets/private/
 
-User-agent: ChatGPT-User
-Disallow: /data/
-Disallow: /post
-Disallow: /api/
-Allow: /
+# Disallow dynamic parameters that create duplicate content
+Disallow: /*?*
+Disallow: /*.json$
+Disallow: /*.xml$
 
-User-agent: Claude-Web
-Disallow: /data/
-Disallow: /post
-Disallow: /api/
-Allow: /
+# Allow crawling of important pages
+Allow: /$
+Allow: /category$
+Allow: /category?slug=*
+Allow: /detail?id=*
+Allow: /about$
+Allow: /contact$
+Allow: /help$
+Allow: /safety$
+Allow: /privacy$
+Allow: /terms$
 
-User-agent: anthropic-ai
-Disallow: /data/
-Disallow: /post
-Disallow: /api/
-Allow: /
+# Sitemap location
+Sitemap: https://zauretech.vercel.app/sitemap.xml
 
-User-agent: Google-Extended
-Disallow: /data/
-Disallow: /post
-Disallow: /api/
-Allow: /
+# Crawl-delay for aggressive bots
+Crawl-delay: 5
 
-User-agent: PerplexityBot
-Disallow: /
+# Host
+Host: https://zauretech.vercel.app

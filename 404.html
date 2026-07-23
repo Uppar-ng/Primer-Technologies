@@ -1,103 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Page Not Found | Zaure</title>
-    <meta name="description" content="The page you are looking for does not exist.">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #1A1F2E;
-            --primary-soft: #2E3548;
-            --accent: #B49450;
-            --accent-soft: #D4B87A;
-            --bg: #FBFBFB;
-            --surface: #FFFFFF;
-            --text: #1E1E1E;
-            --text-secondary: #6B7280;
-            --border: #E5E7EB;
-            --shadow-lg: 0 12px 24px -8px rgba(0,0,0,0.06);
-            --radius: 16px;
-            --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
-        }
-        [data-theme="dark"] {
-            --primary: #D4B87A;
-            --accent: #D4B87A;
-            --bg: #0B1120;
-            --surface: #131C31;
-            --text: #F1F5F9;
-            --text-secondary: #94A3B8;
-            --border: #2A3550;
-        }
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height:1.6;
-            transition: background var(--transition), color var(--transition);
-            -webkit-font-smoothing: antialiased;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            text-align: center;
-        }
-        .container { max-width: 600px; padding: 2rem; }
-        .error-code {
-            font-family: 'Playfair Display', serif;
-            font-size: 8rem;
-            font-weight: 800;
-            color: var(--primary);
-            line-height: 1;
-            margin-bottom: 1rem;
-        }
-        .error-icon {
-            font-size: 3rem;
-            color: var(--accent);
-            margin-bottom: 1.5rem;
-        }
-        h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-        p {
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-        }
-        .btn-primary {
-            background: var(--accent);
-            color: #1A1F2E;
-            border: none;
-            padding: 0.8rem 2rem;
-            border-radius: 3rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.2s;
-            text-decoration: none;
-            display: inline-block;
-        }
-        .btn-primary:hover {
-            background: var(--accent-soft);
-        }
-    </style>
-    
-    <!-- Vercel Speed Insights -->
-    <script type="module">
-        import { injectSpeedInsights } from 'https://cdn.jsdelivr.net/npm/@vercel/speed-insights@2/dist/index.mjs';
-        injectSpeedInsights();
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found – Zaure</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f4f7fb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .error-container {
+      text-align: center;
+      max-width: 500px;
+      padding: 40px;
+      background: white;
+      border-radius: 24px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.06);
+      border: 1px solid #e5ecf3;
+    }
+    .error-container .error-icon {
+      font-size: 4rem;
+      color: #B49450;
+      margin-bottom: 16px;
+    }
+    .error-container .error-code {
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem;
+      font-weight: 800;
+      color: #1A1F2E;
+      line-height: 1;
+    }
+    .error-container h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: #1A1F2E;
+      margin: 8px 0 12px;
+    }
+    .error-container p {
+      color: #4d6a87;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+    .error-container .btn-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #1A1F2E;
+      color: white;
+      padding: 12px 32px;
+      border-radius: 60px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+    .error-container .btn-home:hover {
+      background: #2E3548;
+      transform: translateY(-2px);
+    }
+    .error-container .search-box {
+      margin-top: 16px;
+      display: flex;
+      gap: 8px;
+    }
+    .error-container .search-box input {
+      flex: 1;
+      padding: 10px 16px;
+      border: 1px solid #e5ecf3;
+      border-radius: 60px;
+      font-size: 0.9rem;
+      outline: none;
+      transition: 0.2s;
+    }
+    .error-container .search-box input:focus {
+      border-color: #1A1F2E;
+      box-shadow: 0 0 0 2px rgba(26,31,46,0.1);
+    }
+    .error-container .search-box button {
+      padding: 10px 20px;
+      background: #1A1F2E;
+      color: white;
+      border: none;
+      border-radius: 60px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .error-container .search-box button:hover {
+      background: #2E3548;
+    }
+    .error-container .suggestions {
+      margin-top: 16px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .error-container .suggestions a {
+      color: #4d6a87;
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 4px 12px;
+      border: 1px solid #e5ecf3;
+      border-radius: 20px;
+      transition: 0.2s;
+    }
+    .error-container .suggestions a:hover {
+      border-color: #1A1F2E;
+      color: #1A1F2E;
+    }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #1A1F2E;
+      margin-bottom: 8px;
+      display: inline-block;
+    }
+    .logo i { color: #B49450; margin-right: 4px; }
+    @media (max-width: 480px) {
+      .error-container { padding: 24px; }
+      .error-container .error-code { font-size: 3.5rem; }
+      .error-container .search-box { flex-direction: column; }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="error-code">404</div>
-        <div class="error-icon"><i class="fas fa-archway"></i></div>
-        <h1>Lost in the Zaure?</h1>
-        <p>This entrance leads nowhere. The page you're looking for has moved or doesn't exist.</p>
-        <a href="/" class="btn-primary"><i class="fas fa-arrow-left"></i> Back to Home</a>
+
+  <div class="error-container">
+    <div class="logo"><i class="fas fa-store-alt"></i> Zaure</div>
+    <div class="error-icon"><i class="fas fa-map-signs"></i></div>
+    <div class="error-code">404</div>
+    <h1>Page Not Found</h1>
+    <p>Oops! The page you're looking for doesn't exist or has been moved.</p>
+    
+    <a href="/" class="btn-home"><i class="fas fa-home"></i> Back to Home</a>
+    
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Search for items..." onkeydown="if(event.key==='Enter') search()">
+      <button onclick="search()"><i class="fas fa-search"></i></button>
     </div>
+
+    <div class="suggestions">
+      <a href="/category?slug=vehicles">Vehicles</a>
+      <a href="/category?slug=electronics">Electronics</a>
+      <a href="/category?slug=furniture">Furniture</a>
+      <a href="/category?slug=fashion">Fashion</a>
+      <a href="/contact">Contact</a>
+      <a href="/help">Help</a>
+    </div>
+  </div>
+
+  <script>
+    function search() {
+      const q = document.getElementById('searchInput').value.trim();
+      if (q) {
+        localStorage.setItem('zaure_search_query', q);
+        window.location.href = '/search';
+      }
+    }
+  </script>
+
 </body>
 </html>

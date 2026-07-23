@@ -1,448 +1,505 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Saved Properties | Prima</title>
-    <meta name="description" content="View and manage your saved favorite properties.">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        :root {
-            --primary: #2563EB;
-            --primary-dark: #1D4ED8;
-            --bg: #F8FAFC;
-            --white: #FFFFFF;
-            --text: #0F172A;
-            --text-light: #475569;
-            --border: #E2E8F0;
-            --shadow: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03);
-            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.025);
-            --radius: 12px;
-        }
-        body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.5;
-        }
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-        /* Header */
-        .main-header {
-            background: var(--white);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .main-header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 1.5rem;
-        }
-        .logo a {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--primary);
-            text-decoration: none;
-        }
-        .desktop-nav {
-            display: flex;
-            gap: 2rem;
-        }
-        .desktop-nav a {
-            text-decoration: none;
-            color: var(--text);
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-        .desktop-nav a:hover, .desktop-nav a.active {
-            color: var(--primary);
-        }
-        .header-actions {
-            display: flex;
-            gap: 1rem;
-        }
-        .icon-btn {
-            background: none;
-            border: none;
-            font-size: 1.2rem;
-            cursor: pointer;
-            color: var(--text);
-            padding: 0.5rem;
-            border-radius: 8px;
-        }
-        .mobile-only { display: none; }
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            left: -100%;
-            width: 80%;
-            max-width: 300px;
-            height: 100%;
-            background: var(--white);
-            z-index: 200;
-            transition: left 0.3s ease;
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            box-shadow: var(--shadow-lg);
-        }
-        .mobile-menu.open { left: 0; }
-        .mobile-menu a {
-            text-decoration: none;
-            font-size: 1.2rem;
-            color: var(--text);
-            font-weight: 500;
-        }
-        /* Hero */
-        .hero {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            padding: 3rem 0;
-            text-align: center;
-        }
-        .hero h1 {
-            font-size: 2.2rem;
-            margin-bottom: 0.5rem;
-        }
-        .hero p {
-            font-size: 1rem;
-            opacity: 0.9;
-        }
-        /* Favorites grid */
-        .favorites-section {
-            margin: 3rem 0;
-        }
-        .favorites-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        .property-card {
-            background: var(--white);
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: transform 0.2s, box-shadow 0.2s;
-            position: relative;
-        }
-        .property-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-        }
-        .property-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            cursor: pointer;
-        }
-        .property-card .price {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--primary);
-            padding: 1rem 1rem 0;
-        }
-        .property-card h3 {
-            padding: 0.5rem 1rem 0;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-        }
-        .property-card p {
-            padding: 0 1rem;
-            color: var(--text-light);
-            font-size: 0.85rem;
-        }
-        .property-card .features {
-            padding: 0.5rem 1rem 1rem;
-            font-size: 0.8rem;
-            color: var(--text-light);
-        }
-        .remove-favorite {
-            position: absolute;
-            top: 0.5rem;
-            right: 0.5rem;
-            background: white;
-            border: none;
-            border-radius: 50%;
-            width: 32px;
-            height: 32px;
-            cursor: pointer;
-            color: #EF4444;
-            box-shadow: var(--shadow);
-            transition: 0.2s;
-        }
-        .remove-favorite:hover {
-            background: #EF4444;
-            color: white;
-            transform: scale(1.05);
-        }
-        .empty-state {
-            text-align: center;
-            padding: 4rem 2rem;
-            background: var(--white);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-        }
-        .empty-state i {
-            font-size: 4rem;
-            color: var(--text-light);
-            margin-bottom: 1rem;
-        }
-        .empty-state h3 {
-            margin-bottom: 0.5rem;
-        }
-        .empty-state p {
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
-        }
-        .btn-primary {
-            display: inline-block;
-            background: var(--primary);
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border-radius: 2rem;
-            text-decoration: none;
-            font-weight: 500;
-            transition: background 0.2s;
-        }
-        .btn-primary:hover {
-            background: var(--primary-dark);
-        }
-        .footer {
-            background: #0F172A;
-            color: #94A3B8;
-            padding: 3rem 0 1.5rem;
-            margin-top: 3rem;
-        }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-        .footer h4 { color: white; margin-bottom: 1rem; }
-        .footer a { color: #94A3B8; text-decoration: none; display: block; margin: 0.5rem 0; }
-        .social i { font-size: 1.2rem; margin-right: 1rem; cursor: pointer; }
-        .footer-bottom { text-align: center; padding-top: 1rem; border-top: 1px solid #1E293B; font-size: 0.85rem; }
-        @media (max-width: 768px) {
-            .desktop-nav { display: none; }
-            .mobile-only { display: block; }
-            .favorites-grid { grid-template-columns: 1fr; }
-        }
-        [data-theme="dark"] {
-            --bg: #0F172A;
-            --white: #1E293B;
-            --text: #F1F5F9;
-            --text-light: #94A3B8;
-            --border: #334155;
-        }
-        .loading {
-            text-align: center;
-            padding: 2rem;
-            color: var(--text-light);
-        }
-    </style>
-    
-    <!-- Vercel Speed Insights -->
-    <script type="module">
-        import { injectSpeedInsights } from 'https://cdn.jsdelivr.net/npm/@vercel/speed-insights@2/dist/index.mjs';
-        injectSpeedInsights();
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>My Favorites – Zaure</title>
+  <meta name="description" content="View and manage your favorite items on Zaure.">
+  <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .favorites-header {
+      background: var(--surface); border-radius: 20px; padding: 24px;
+      border: 1px solid var(--border); margin-bottom: 20px;
+    }
+    .favorites-header .page-title { display: flex; align-items: center; gap: 12px; }
+    .favorites-header .page-title h1 { font-size: 1.6rem; font-weight: 700; color: var(--text); }
+    .favorites-header .page-title i { font-size: 1.8rem; color: #e74c3c; }
+    .favorites-header .page-meta { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 8px; color: var(--text-secondary); font-size: 0.9rem; }
+    .favorites-header .page-meta i { color: #1f5d8a; }
+    .favorites-header .page-actions { display: flex; gap: 12px; margin-top: 12px; flex-wrap: wrap; }
+    .favorites-header .page-actions .btn-action {
+      background: transparent; border: 1px solid var(--border); padding: 8px 16px;
+      border-radius: 60px; font-weight: 500; font-size: 0.85rem; cursor: pointer;
+      transition: 0.2s; color: var(--text); display: flex; align-items: center; gap: 6px;
+    }
+    .favorites-header .page-actions .btn-action:hover { border-color: var(--text); background: var(--surface-alt); }
+    .favorites-header .page-actions .btn-action.danger:hover { border-color: #e74c3c; color: #e74c3c; }
+    .quick-stats {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px; margin-bottom: 20px;
+    }
+    .quick-stats .stat-box {
+      background: var(--surface); border-radius: 12px; padding: 14px 16px;
+      border: 1px solid var(--border); text-align: center;
+    }
+    .quick-stats .stat-box .stat-number { font-size: 1.3rem; font-weight: 700; color: var(--text); }
+    .quick-stats .stat-box .stat-label { font-size: 0.7rem; color: var(--text-secondary); margin-top: 2px; }
+    .filter-bar {
+      background: var(--surface); border-radius: 16px; padding: 12px 16px;
+      border: 1px solid var(--border); margin-bottom: 20px;
+      display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between;
+    }
+    .filter-bar .filter-group { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .filter-bar .filter-group label { font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); }
+    .filter-bar select {
+      padding: 6px 12px; border: 1px solid var(--border); border-radius: 8px;
+      font-size: 0.85rem; background: var(--input-bg); color: var(--text); outline: none;
+    }
+    .filter-bar select:focus { border-color: #1a3650; box-shadow: 0 0 0 2px rgba(26,54,80,0.1); }
+    .filter-bar .filter-results { font-size: 0.85rem; color: var(--text-secondary); font-weight: 500; }
+    .filter-bar .filter-results strong { color: var(--text); }
+    .view-toggle {
+      display: flex; gap: 4px; background: var(--surface-alt); border-radius: 8px; padding: 4px;
+    }
+    .view-toggle button {
+      background: transparent; border: none; padding: 6px 12px; border-radius: 6px;
+      cursor: pointer; font-size: 0.85rem; color: var(--text-secondary); transition: 0.2s;
+      display: flex; align-items: center; gap: 4px;
+    }
+    .view-toggle button.active { background: var(--surface); color: var(--text); box-shadow: var(--shadow); }
+    .view-toggle button:hover { color: var(--text); }
+    .grid-view .grid-2col-listings { grid-template-columns: 1fr 1fr; }
+    .list-view .grid-2col-listings { grid-template-columns: 1fr; }
+    .list-view .listing-card { display: flex; flex-direction: row; }
+    .list-view .listing-card .listing-img { width: 200px; height: 150px; flex-shrink: 0; }
+    .list-view .listing-card .listing-body { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+    .list-view .listing-card .listing-body .title { white-space: normal; }
+    @media (max-width: 640px) {
+      .list-view .listing-card { flex-direction: column; }
+      .list-view .listing-card .listing-img { width: 100%; height: 120px; }
+      .filter-bar { flex-direction: column; align-items: stretch; }
+      .view-toggle button span { display: none; }
+    }
+    .listing-card .remove-fav {
+      position: absolute; top: 8px; right: 8px; background: rgba(255,255,255,0.9);
+      border: 1px solid var(--border); border-radius: 50%; width: 32px; height: 32px;
+      display: flex; align-items: center; justify-content: center; cursor: pointer;
+      transition: 0.2s; z-index: 3; color: var(--text-secondary); font-size: 0.8rem;
+    }
+    [data-theme="dark"] .listing-card .remove-fav { background: rgba(19,28,49,0.9); }
+    .listing-card .remove-fav:hover { background: #e74c3c; color: white; border-color: #e74c3c; transform: scale(1.1); }
+    .empty-state {
+      text-align: center; padding: 60px 20px; background: var(--surface);
+      border-radius: 20px; border: 1px solid var(--border);
+    }
+    .empty-state i { font-size: 4rem; color: var(--text-secondary); margin-bottom: 16px; }
+    .empty-state h3 { font-size: 1.3rem; color: var(--text); margin-bottom: 8px; }
+    .empty-state p { color: var(--text-secondary); font-size: 0.95rem; max-width: 400px; margin: 0 auto; }
+    .empty-state .btn-primary { width: auto; padding: 10px 28px; margin-top: 16px; display: inline-flex; }
+    .empty-state .suggestions { margin-top: 20px; display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+    .empty-state .suggestions .suggestion-chip {
+      background: var(--surface-alt); padding: 8px 20px; border-radius: 20px;
+      font-size: 0.85rem; cursor: pointer; color: var(--text); transition: 0.2s; text-decoration: none;
+    }
+    .empty-state .suggestions .suggestion-chip:hover { background: var(--text); color: var(--surface); }
+    .pagination {
+      display: flex; justify-content: center; gap: 6px; margin-top: 30px; padding: 20px 0;
+    }
+    .pagination button {
+      padding: 8px 14px; border: 1px solid var(--border); border-radius: 8px;
+      background: var(--surface); color: var(--text); cursor: pointer; font-size: 0.85rem;
+      transition: 0.2s; min-width: 40px;
+    }
+    .pagination button:hover { background: var(--surface-alt); border-color: var(--text); }
+    .pagination button.active { background: #1a3650; color: white; border-color: #1a3650; }
+    [data-theme="dark"] .pagination button.active { background: #2A3550; border-color: #2A3550; }
+    .pagination button:disabled { opacity: 0.4; cursor: not-allowed; }
+    .pagination .ellipsis { display: flex; align-items: center; padding: 0 4px; color: var(--text-secondary); }
+    .toast {
+      position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%);
+      background: #1a3650; color: white; padding: 12px 24px; border-radius: 12px;
+      font-size: 0.9rem; box-shadow: 0 8px 24px rgba(0,0,0,0.15); z-index: 999;
+      opacity: 0; transition: opacity 0.3s ease; pointer-events: none;
+    }
+    [data-theme="dark"] .toast { background: #2A3550; }
+    .toast.show { opacity: 1; pointer-events: auto; }
+    .toast i { margin-right: 8px; }
+  </style>
 </head>
 <body>
-    <header class="main-header">
-        <div class="container">
-            <div class="logo"><a href="index.html">Prima</a></div>
-            <nav class="desktop-nav">
-                <a href="index.html">Home</a>
-                <a href="browse.html">Buy</a>
-                <a href="browse.html?type=rent">Rent</a>
-                <a href="browse.html?type=shortlet">Short Let</a>
-                <a href="services.html">Services</a>
-                <a href="about.html">About</a>
-                <a href="blog.html">Blog</a>
-                <a href="contact.html">Contact</a>
-                <a href="favorites.html" class="active"><i class="fas fa-heart"></i> Saved</a>
-            </nav>
-            <div class="header-actions">
-                <button id="themeToggle" class="icon-btn"><i class="fas fa-moon"></i></button>
-                <button id="mobileMenuToggle" class="icon-btn mobile-only"><i class="fas fa-bars"></i></button>
-            </div>
-        </div>
-    </header>
 
-    <div class="mobile-menu" id="mobileMenu">
-        <button id="closeMenu"><i class="fas fa-times"></i></button>
-        <a href="index.html">Home</a>
-        <a href="browse.html">Buy</a>
-        <a href="browse.html?type=rent">Rent</a>
-        <a href="browse.html?type=shortlet">Short Let</a>
-        <a href="services.html">Services</a>
-        <a href="about.html">About</a>
-        <a href="blog.html">Blog</a>
-        <a href="contact.html">Contact</a>
-        <a href="favorites.html">Saved Properties</a>
+  <div class="toast" id="toast"><i class="fas fa-check-circle"></i> <span id="toastMessage">Item removed</span></div>
+
+  <!-- ===== NAV ===== -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="/" class="logo-wrapper">
+        <img src="/assets/logo-icon.svg" alt="Zaure" class="logo-icon">
+        <div class="logo-text"><span class="brand">Zaure</span><span class="tagline">Your Entrance to Home</span></div>
+      </a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/category.html?slug=all">Browse</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <button class="icon-btn" id="themeToggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
+        <a href="/favorites.html" class="icon-btn" style="position:relative;text-decoration:none;"><i class="fas fa-heart"></i><span id="favBadge">0</span></a>
+        <div id="headerUserArea"><div class="avatar" id="userAvatar" onclick="openSignup()">ZA</div></div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <div class="breadcrumb">
+      <a href="/">Home</a>
+      <span class="separator"><i class="fas fa-chevron-right"></i></span>
+      <span class="current">My Favorites</span>
     </div>
 
-    <main>
-        <section class="hero">
-            <div class="container">
-                <h1>Saved Properties</h1>
-                <p>Your favorite listings – ready when you are.</p>
-            </div>
-        </section>
+    <div class="favorites-header">
+      <div class="page-title">
+        <i class="fas fa-heart"></i>
+        <h1>My Favorites</h1>
+      </div>
+      <div class="page-meta">
+        <span><i class="fas fa-box"></i> <span id="favoriteCount">0</span> items saved</span>
+        <span><i class="fas fa-clock"></i> Last updated: <span id="lastUpdated">Today</span></span>
+        <span><i class="fas fa-tag"></i> <span id="categoryCount">0</span> categories</span>
+      </div>
+      <div class="page-actions">
+        <button class="btn-action" id="refreshFavorites"><i class="fas fa-sync"></i> Refresh</button>
+        <button class="btn-action danger" id="clearAllFavorites"><i class="fas fa-trash"></i> Clear All</button>
+      </div>
+    </div>
 
-        <div class="container favorites-section">
-            <div id="favoritesContainer">
-                <div class="loading">Loading your saved properties...</div>
-            </div>
+    <div class="quick-stats" id="quickStats">
+      <div class="stat-box"><div class="stat-number" id="statTotal">0</div><div class="stat-label">Total Items</div></div>
+      <div class="stat-box"><div class="stat-number" id="statFeatured">0</div><div class="stat-label">Featured</div></div>
+      <div class="stat-box"><div class="stat-number" id="statBoosted">0</div><div class="stat-label">Boosted</div></div>
+      <div class="stat-box"><div class="stat-number" id="statValue">₦0</div><div class="stat-label">Total Value</div></div>
+    </div>
+
+    <div class="filter-bar">
+      <div class="filter-group">
+        <label><i class="fas fa-sliders-h"></i> Filter:</label>
+        <select id="filterSort">
+          <option value="newest">Newest First</option>
+          <option value="oldest">Oldest First</option>
+          <option value="price-low">Price: Low to High</option>
+          <option value="price-high">Price: High to Low</option>
+        </select>
+        <select id="filterCategory">
+          <option value="all">All Categories</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <span class="filter-results" id="filterResults">Showing <strong id="showingCount">0</strong> favorites</span>
+        <div class="view-toggle">
+          <button class="active" id="gridViewBtn" title="Grid View"><i class="fas fa-th"></i> <span>Grid</span></button>
+          <button id="listViewBtn" title="List View"><i class="fas fa-list"></i> <span>List</span></button>
         </div>
-    </main>
+      </div>
+    </div>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div><h4>Prima</h4><p>Complete property solutions for modern living in Nigeria.</p></div>
-                <div><h4>Company</h4><a href="about.html">About</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a></div>
-                <div><h4>Services</h4><a href="services.html">Listing</a><a href="services.html">Maintenance</a><a href="services.html">Moving</a><a href="services.html">Handyman</a></div>
-                <div><h4>Follow</h4><div class="social"><i class="fab fa-facebook"></i><i class="fab fa-instagram"></i><i class="fab fa-twitter"></i></div></div>
-            </div>
-            <div class="footer-bottom">© 2026 Prima. All rights reserved.</div>
+    <div id="favoritesContainer" class="grid-view">
+      <div class="grid-2col-listings" id="favoritesGrid">
+        <div class="listing-card"><div class="listing-img"><i class="fas fa-spinner fa-spin"></i></div><div class="listing-body"><div class="price">Loading...</div></div></div>
+      </div>
+    </div>
+
+    <div class="pagination" id="pagination">
+      <button id="prevPage" disabled><i class="fas fa-chevron-left"></i></button>
+      <div id="pageNumbers"></div>
+      <button id="nextPage"><i class="fas fa-chevron-right"></i></button>
+    </div>
+
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col brand">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+            <img src="/assets/logo-icon.svg" alt="Zaure" style="width:32px;height:32px;">
+            <span style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:white;">Zaure</span>
+          </div>
+          <p>Nigeria's leading free classified marketplace. Buy, sell, or trade locally. No commission, no middlemen.</p>
+          <div class="social" style="margin-top:12px;">
+            <a href="https://twitter.com/zauretech" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com/zauretech" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://linkedin.com/company/zauretech" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://facebook.com/zauretech" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          </div>
         </div>
-    </footer>
+        <div class="footer-col"><h4>Browse</h4><a href="/category.html?slug=all">All Items</a><a href="/category.html?slug=vehicles">Vehicles</a><a href="/category.html?slug=electronics">Electronics</a><a href="/category.html?slug=furniture">Furniture</a><a href="/category.html?slug=fashion">Fashion</a><a href="/category.html?slug=real-estate">Real Estate</a></div>
+        <div class="footer-col"><h4>Support</h4><a href="/help.html">Help Center</a><a href="/safety.html">Safety Tips</a><a href="/contact.html">Contact Us</a><a href="/support.html">Support</a></div>
+        <div class="footer-col"><h4>Company</h4><a href="/about.html">About Us</a><a href="/careers.html">Careers</a><a href="/privacy.html">Privacy Policy</a><a href="/terms.html">Terms of Service</a></div>
+        <div class="footer-col trust-badges" style="grid-column:1/-1;border-top:1px solid #2E3548;padding-top:16px;margin-top:8px;">
+          <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;">
+            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-shield-alt" style="color:#B49450;"></i> Verified Users</div>
+            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-handshake" style="color:#B49450;"></i> No Commission</div>
+            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-user-check" style="color:#B49450;"></i> Identity Verified</div>
+            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-lock" style="color:#B49450;"></i> Secure Platform</div>
+            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-clock" style="color:#B49450;"></i> 24/7 Support</div>
+            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-star" style="color:#B49450;"></i> Trusted by Thousands</div>
+            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-phone" style="color:#B49450;"></i> Direct Contact</div>
+            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-credit-card" style="color:#B49450;"></i> Secure Payments</div>
+          </div>
+        </div>
+        <div class="footer-bottom"><span>&copy; 2026 <strong style="color:white;">Zaure Technologies</strong>. All rights reserved.</span><span><i class="fas fa-globe"></i> Nigeria · English</span></div>
+      </div>
+    </div>
+  </footer>
 
-    <script>
-        // Theme toggle
-        const themeToggle = document.getElementById('themeToggle');
-        if (themeToggle) {
-            const savedTheme = localStorage.getItem('prima_theme') || 'light';
-            document.documentElement.setAttribute('data-theme', savedTheme);
-            themeToggle.innerHTML = savedTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-            themeToggle.addEventListener('click', () => {
-                const current = document.documentElement.getAttribute('data-theme');
-                const next = current === 'light' ? 'dark' : 'light';
-                document.documentElement.setAttribute('data-theme', next);
-                localStorage.setItem('prima_theme', next);
-                themeToggle.innerHTML = next === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-            });
+  <!-- ===== BOTTOM NAV ===== -->
+  <div class="bottom-nav">
+    <a href="/" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
+    <button class="nav-item" onclick="window.location.href='/'"><i class="fas fa-search"></i><span>Search</span></button>
+    <button class="post-btn" id="fabPostAd"><i class="fas fa-plus"></i></button>
+    <a href="/favorites.html" class="nav-item active"><i class="fas fa-heart"></i><span>Favorites</span></a>
+    <a href="/profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
+  </div>
+
+  <!-- ===== SIGNUP MODAL ===== -->
+  <div class="modal-overlay" id="signupModal">
+    <div class="modal">
+      <div class="modal-header"><h3>Create your account</h3><button class="modal-close" id="closeSignupModalBtn"><i class="fas fa-times"></i></button></div>
+      <form id="signupForm" class="modal-form">
+        <label for="signupName">Full Name</label>
+        <input type="text" id="signupName" placeholder="Enter your full name" required>
+        <label for="signupPhone">Phone Number</label>
+        <input type="tel" id="signupPhone" placeholder="Enter your phone number" required>
+        <label for="signupState">State</label>
+        <select id="signupState" required>
+          <option value="">Select your state</option>
+          <option value="Abia">Abia</option><option value="Adamawa">Adamawa</option>
+          <option value="Akwa Ibom">Akwa Ibom</option><option value="Anambra">Anambra</option>
+          <option value="Bauchi">Bauchi</option><option value="Bayelsa">Bayelsa</option>
+          <option value="Benue">Benue</option><option value="Borno">Borno</option>
+          <option value="Cross River">Cross River</option><option value="Delta">Delta</option>
+          <option value="Ebonyi">Ebonyi</option><option value="Edo">Edo</option>
+          <option value="Ekiti">Ekiti</option><option value="Enugu">Enugu</option>
+          <option value="FCT">FCT (Abuja)</option><option value="Gombe">Gombe</option>
+          <option value="Imo">Imo</option><option value="Jigawa">Jigawa</option>
+          <option value="Kaduna">Kaduna</option><option value="Kano">Kano</option>
+          <option value="Katsina">Katsina</option><option value="Kebbi">Kebbi</option>
+          <option value="Kogi">Kogi</option><option value="Kwara">Kwara</option>
+          <option value="Lagos">Lagos</option><option value="Nasarawa">Nasarawa</option>
+          <option value="Niger">Niger</option><option value="Ogun">Ogun</option>
+          <option value="Ondo">Ondo</option><option value="Osun">Osun</option>
+          <option value="Oyo">Oyo</option><option value="Plateau">Plateau</option>
+          <option value="Rivers">Rivers</option><option value="Sokoto">Sokoto</option>
+          <option value="Taraba">Taraba</option><option value="Yobe">Yobe</option>
+          <option value="Zamfara">Zamfara</option>
+        </select>
+        <button type="submit" class="btn-primary">Sign Up</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      let favoriteIds = [];
+      let favoriteProducts = [];
+      let filteredFavorites = [];
+      let currentPage = 1;
+      const itemsPerPage = 12;
+
+      const grid = document.getElementById('favoritesGrid');
+      const container = document.getElementById('favoritesContainer');
+      const filterSort = document.getElementById('filterSort');
+      const filterCategory = document.getElementById('filterCategory');
+      const prevPageBtn = document.getElementById('prevPage');
+      const nextPageBtn = document.getElementById('nextPage');
+      const pageNumbers = document.getElementById('pageNumbers');
+      const showingCount = document.getElementById('showingCount');
+      const favoriteCount = document.getElementById('favoriteCount');
+      const statTotal = document.getElementById('statTotal');
+      const statFeatured = document.getElementById('statFeatured');
+      const statBoosted = document.getElementById('statBoosted');
+      const statValue = document.getElementById('statValue');
+      const gridViewBtn = document.getElementById('gridViewBtn');
+      const listViewBtn = document.getElementById('listViewBtn');
+      const toast = document.getElementById('toast');
+      const toastMessage = document.getElementById('toastMessage');
+
+      let toastTimeout;
+
+      function showToast(message, type = 'success') {
+        toastMessage.textContent = message;
+        toast.className = 'toast show';
+        toast.style.background = type === 'success' ? '#1a3650' : '#e74c3c';
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => { toast.classList.remove('show'); }, 3000);
+      }
+
+      function loadFavorites() {
+        const saved = localStorage.getItem('zaure_favorites');
+        if (saved) { try { favoriteIds = JSON.parse(saved); } catch (e) { favoriteIds = []; } }
+        else { favoriteIds = []; }
+        return favoriteIds;
+      }
+
+      function getFavoriteProducts() {
+        const allProducts = getProductsSync();
+        favoriteProducts = allProducts.filter(p => favoriteIds.includes(p.id));
+        return favoriteProducts;
+      }
+
+      function updateStats(products) {
+        const total = products.length;
+        const featured = products.filter(p => p.featured).length;
+        const boosted = products.filter(p => p.boosted).length;
+        const totalValue = products.reduce((sum, p) => sum + p.price, 0);
+        statTotal.textContent = total;
+        statFeatured.textContent = featured;
+        statBoosted.textContent = boosted;
+        statValue.textContent = totalValue >= 1e6 ? `₦${(totalValue/1e6).toFixed(1)}M` : `₦${totalValue.toLocaleString()}`;
+        favoriteCount.textContent = total;
+        const uniqueCategories = new Set(products.map(p => p.category));
+        document.getElementById('categoryCount').textContent = uniqueCategories.size;
+        document.getElementById('lastUpdated').textContent = new Date().toLocaleString();
+      }
+
+      function applyFilters() {
+        let filtered = [...favoriteProducts];
+        const categoryFilter = filterCategory.value;
+        if (categoryFilter !== 'all') filtered = filtered.filter(p => p.category === categoryFilter);
+        const sort = filterSort.value;
+        switch(sort) {
+          case 'newest': filtered.sort((a, b) => new Date(b.date || '') - new Date(a.date || '')); break;
+          case 'oldest': filtered.sort((a, b) => new Date(a.date || '') - new Date(b.date || '')); break;
+          case 'price-low': filtered.sort((a, b) => a.price - b.price); break;
+          case 'price-high': filtered.sort((a, b) => b.price - a.price); break;
+          default: break;
         }
+        filteredFavorites = filtered;
+        currentPage = 1;
+        updateStats(filtered);
+        renderPage();
+      }
 
-        // Mobile menu
-        const mobileToggle = document.getElementById('mobileMenuToggle');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const closeMenu = document.getElementById('closeMenu');
-        if (mobileToggle && mobileMenu) {
-            mobileToggle.addEventListener('click', () => mobileMenu.classList.add('open'));
-            closeMenu.addEventListener('click', () => mobileMenu.classList.remove('open'));
-            mobileMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => mobileMenu.classList.remove('open'));
-            });
+      function renderPage() {
+        const start = (currentPage - 1) * itemsPerPage;
+        const end = Math.min(start + itemsPerPage, filteredFavorites.length);
+        const pageItems = filteredFavorites.slice(start, end);
+        showingCount.textContent = filteredFavorites.length;
+        if (filteredFavorites.length === 0) {
+          grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1;"><i class="fas fa-heart"></i><h3>No favorites yet</h3><p>Start saving items you love! Browse our marketplace and click the heart icon on any listing.</p><a href="/" class="btn-primary"><i class="fas fa-store"></i> Browse Marketplace</a><div class="suggestions"><a href="/category.html?slug=vehicles" class="suggestion-chip">🚗 Vehicles</a><a href="/category.html?slug=electronics" class="suggestion-chip">📱 Electronics</a><a href="/category.html?slug=furniture" class="suggestion-chip">🪑 Furniture</a><a href="/category.html?slug=fashion" class="suggestion-chip">👗 Fashion</a></div></div>`;
+        } else { renderFavorites(pageItems, 'favoritesGrid'); }
+        updatePagination();
+      }
+
+      function renderFavorites(products, containerId) {
+        const grid = document.getElementById(containerId);
+        if (!grid) return;
+        grid.innerHTML = products.map(p => {
+          let badges = '';
+          if (p.boosted) badges += `<span class="badge-boosted"><i class="fas fa-bolt"></i> Boosted</span>`;
+          if (p.featured) badges += `<span class="badge-featured">Featured</span>`;
+          const price = p.price >= 1e6 ? `₦${(p.price/1e6).toFixed(1)}M` : `₦${p.price.toLocaleString()}`;
+          const firstImage = p.images && p.images.length > 0 ? p.images[0] : null;
+          const imageHtml = firstImage ? `<img src="${firstImage}" alt="${p.title}" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\\'fas fa-box\\' style=\\'font-size:2.5rem;color:var(--text-secondary);\\'></i>';">` : `<i class="fas fa-box" style="font-size:2.5rem;color:var(--text-secondary);"></i>`;
+          return `<div class="listing-card" data-id="${p.id}"><button class="remove-fav" onclick="removeFavorite(${p.id})" title="Remove from favorites"><i class="fas fa-times"></i></button><div class="listing-img" style="background:${p.bg || 'var(--surface-alt)'};" onclick="viewProduct(${p.id})">${imageHtml}${badges}</div><div class="listing-body" onclick="viewProduct(${p.id})"><div class="price">${price}</div><div class="title">${p.title}</div><div class="meta"><span><i class="fas fa-map-pin"></i> ${p.location}</span><span><i class="far fa-clock"></i> ${p.date}</span></div><div class="listing-footer"><span><i class="fas fa-store"></i> ${p.seller?.name || 'Unknown'}</span><span><i class="far fa-heart"></i> Saved</span></div></div></div>`;
+        }).join('');
+      }
+
+      function updatePagination() {
+        const totalPages = Math.ceil(filteredFavorites.length / itemsPerPage);
+        prevPageBtn.disabled = currentPage <= 1;
+        nextPageBtn.disabled = currentPage >= totalPages || totalPages === 0;
+        let pagesHtml = '';
+        const maxVisible = 5;
+        let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+        let endPage = Math.min(totalPages, startPage + maxVisible - 1);
+        if (endPage - startPage < maxVisible - 1) startPage = Math.max(1, endPage - maxVisible + 1);
+        if (totalPages > 0) {
+          if (startPage > 1) { pagesHtml += `<button onclick="goToPage(1)">1</button>`; if (startPage > 2) pagesHtml += `<span class="ellipsis">…</span>`; }
+          for (let i = startPage; i <= endPage; i++) pagesHtml += `<button class="${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
+          if (endPage < totalPages) { if (endPage < totalPages - 1) pagesHtml += `<span class="ellipsis">…</span>`; pagesHtml += `<button onclick="goToPage(${totalPages})">${totalPages}</button>`; }
         }
+        pageNumbers.innerHTML = pagesHtml;
+      }
 
-        // Helper: format price
-        function formatPrice(price) {
-            return price >= 1e6 ? `₦${(price/1e6).toFixed(1)}M` : `₦${price.toLocaleString()}`;
+      window.goToPage = function(page) {
+        const totalPages = Math.ceil(filteredFavorites.length / itemsPerPage);
+        if (page < 1 || page > totalPages) return;
+        currentPage = page;
+        renderPage();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      };
+
+      window.removeFavorite = function(productId) {
+        if (!currentUser) { openSignup(); return; }
+        const index = favoriteIds.indexOf(productId);
+        if (index > -1) {
+          favoriteIds.splice(index, 1);
+          localStorage.setItem('zaure_favorites', JSON.stringify(favoriteIds));
+          favoriteProducts = favoriteProducts.filter(p => p.id !== productId);
+          const product = favoriteProducts.find(p => p.id === productId);
+          showToast(`Removed "${product?.title || 'item'}" from favorites`);
+          applyFilters();
+          updateFavoriteBadge();
         }
+      };
 
-        // Load favorites from localStorage and render
-        async function loadFavorites() {
-            const container = document.getElementById('favoritesContainer');
-            try {
-                const favorites = JSON.parse(localStorage.getItem('prima_favorites')) || [];
-                if (favorites.length === 0) {
-                    container.innerHTML = `
-                        <div class="empty-state">
-                            <i class="far fa-heart"></i>
-                            <h3>No saved properties yet</h3>
-                            <p>Start exploring properties and click the heart icon to save your favorites.</p>
-                            <a href="browse.html" class="btn-primary">Browse Properties</a>
-                        </div>
-                    `;
-                    return;
-                }
-                // Fetch all properties to get details of favorites
-                const response = await fetch('data/properties.json');
-                if (!response.ok) throw new Error('Failed to load properties');
-                const data = await response.json();
-                const allProperties = data.properties || [];
-                const favoriteProperties = allProperties.filter(p => favorites.includes(p.id));
-                if (favoriteProperties.length === 0) {
-                    container.innerHTML = `
-                        <div class="empty-state">
-                            <i class="far fa-heart"></i>
-                            <h3>Saved properties not found</h3>
-                            <p>Your saved items may have been removed from our listings.</p>
-                            <a href="browse.html" class="btn-primary">Browse Properties</a>
-                        </div>
-                    `;
-                    return;
-                }
-                renderFavorites(favoriteProperties);
-            } catch (error) {
-                console.error('Error loading favorites:', error);
-                container.innerHTML = `<div class="empty-state"><p>Unable to load your saved properties. Please refresh.</p></div>`;
-            }
-        }
+      gridViewBtn.addEventListener('click', function() {
+        container.classList.remove('list-view'); container.classList.add('grid-view');
+        this.classList.add('active'); listViewBtn.classList.remove('active');
+      });
+      listViewBtn.addEventListener('click', function() {
+        container.classList.remove('grid-view'); container.classList.add('list-view');
+        this.classList.add('active'); gridViewBtn.classList.remove('active');
+      });
 
-        function renderFavorites(properties) {
-            const container = document.getElementById('favoritesContainer');
-            container.innerHTML = `
-                <div class="favorites-grid">
-                    ${properties.map(prop => `
-                        <div class="property-card" data-id="${prop.id}">
-                            <img src="${prop.images?.[0] || 'https://placehold.co/600x400?text=Property'}" alt="${prop.title}" loading="lazy">
-                            <button class="remove-favorite" data-id="${prop.id}" title="Remove from favorites"><i class="fas fa-times"></i></button>
-                            <div class="price">${formatPrice(prop.price)}</div>
-                            <h3>${prop.title}</h3>
-                            <p>${prop.address}, ${prop.city}</p>
-                            <div class="features">${prop.bedrooms} beds • ${prop.bathrooms} baths</div>
-                        </div>
-                    `).join('')}
-                </div>
-            `;
-            // Add click listeners to property cards (navigate to detail)
-            document.querySelectorAll('.property-card').forEach(card => {
-                const id = card.dataset.id;
-                card.addEventListener('click', (e) => {
-                    if (!e.target.closest('.remove-favorite')) {
-                        window.location.href = `property.html?id=${id}`;
-                    }
-                });
-            });
-            // Add remove listeners
-            document.querySelectorAll('.remove-favorite').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    const id = parseInt(btn.dataset.id);
-                    removeFavorite(id);
-                });
-            });
-        }
+      filterSort.addEventListener('change', applyFilters);
+      filterCategory.addEventListener('change', applyFilters);
+      prevPageBtn.addEventListener('click', () => goToPage(currentPage - 1));
+      nextPageBtn.addEventListener('click', () => goToPage(currentPage + 1));
 
-        function removeFavorite(propertyId) {
-            let favorites = JSON.parse(localStorage.getItem('prima_favorites')) || [];
-            favorites = favorites.filter(id => id !== propertyId);
-            localStorage.setItem('prima_favorites', JSON.stringify(favorites));
-            // Dispatch event for any other pages listening (e.g., browse, property)
-            window.dispatchEvent(new CustomEvent('favoritesUpdated', { detail: favorites }));
-            // Reload the page to update the list
-            loadFavorites();
-        }
-
+      document.getElementById('refreshFavorites').addEventListener('click', function() {
+        this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Refreshing...';
+        this.disabled = true;
         loadFavorites();
-    </script>
+        getFavoriteProducts();
+        applyFilters();
+        this.innerHTML = '<i class="fas fa-sync"></i> Refresh';
+        this.disabled = false;
+        showToast('Favorites refreshed!');
+      });
+
+      document.getElementById('clearAllFavorites').addEventListener('click', function() {
+        if (!currentUser) { openSignup(); return; }
+        if (favoriteProducts.length === 0) { showToast('No favorites to clear', 'error'); return; }
+        if (confirm('Are you sure you want to remove all items from your favorites?')) {
+          favoriteIds = [];
+          localStorage.setItem('zaure_favorites', JSON.stringify(favoriteIds));
+          favoriteProducts = [];
+          applyFilters();
+          updateFavoriteBadge();
+          showToast('All favorites removed');
+        }
+      });
+
+      document.getElementById('fabPostAd').addEventListener('click', function() {
+        if (!currentUser) { openSignup(); } else { window.location.href = '/post.html'; }
+      });
+
+      function initFavorites() {
+        loadFavorites();
+        getFavoriteProducts();
+        const categories = loadCategories();
+        categories.then(cats => {
+          const categorySelect = document.getElementById('filterCategory');
+          categorySelect.innerHTML = '<option value="all">All Categories</option>' + cats.map(c => `<option value="${c.slug}">${c.name}</option>`).join('');
+          applyFilters();
+        }).catch(() => { applyFilters(); });
+        updateStats(favoriteProducts);
+        updateFavoriteBadge();
+      }
+
+      loadUser();
+      initTheme();
+      initFavorites();
+    });
+  </script>
 </body>
 </html>

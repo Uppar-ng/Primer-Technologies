@@ -1,14 +1,83 @@
+
+---
+
+## 5. `/site.webmanifest` (Web App Manifest)
+
+```json
 {
-  "name": "Zaure Technologies",
+  "name": "Zaure – Buy & Sell Locally in Nigeria",
   "short_name": "Zaure",
-  "description": "Direct owner-to-seeker property platform. No agents, no commission.",
+  "description": "Nigeria's leading free classified marketplace. Buy, sell, or trade items locally. No commission, no middlemen.",
   "start_url": "/",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#1A1F2E",
   "theme_color": "#1A1F2E",
+  "categories": ["marketplace", "classifieds", "shopping", "real-estate", "vehicles"],
+  "lang": "en",
+  "dir": "ltr",
   "icons": [
-    { "src": "/favicon-16x16.png", "sizes": "16x16", "type": "image/png" },
-    { "src": "/favicon-32x32.png", "sizes": "32x32", "type": "image/png" },
-    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
-  ]
+    {
+      "src": "/assets/logo-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "apple touch icon"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/assets/screenshot-mobile.jpg",
+      "sizes": "1080x1920",
+      "type": "image/jpeg",
+      "platform": "mobile"
+    },
+    {
+      "src": "/assets/screenshot-desktop.jpg",
+      "sizes": "1920x1080",
+      "type": "image/jpeg",
+      "platform": "desktop"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Browse Listings",
+      "url": "/category?slug=all",
+      "description": "Browse all listings on Zaure"
+    },
+    {
+      "name": "Post an Ad",
+      "url": "/post",
+      "description": "Post your item for sale"
+    },
+    {
+      "name": "My Favorites",
+      "url": "/favorites",
+      "description": "View your favorite items"
+    },
+    {
+      "name": "My Profile",
+      "url": "/profile",
+      "description": "Manage your profile"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
 }

@@ -1,681 +1,459 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>List Your Property | Zaure</title>
-    <meta name="description" content="Submit a property listing directly to Zaure. No middlemen, no commission.">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #1A1F2E;
-            --primary-soft: #2E3548;
-            --accent: #B49450;
-            --accent-soft: #D4B87A;
-            --bg: #FBFBFB;
-            --surface: #FFFFFF;
-            --surface-alt: #F6F6F6;
-            --text: #1E1E1E;
-            --text-secondary: #6B7280;
-            --border: #E5E7EB;
-            --shadow-sm: 0 2px 4px rgba(0,0,0,0.03), 0 1px 2px rgba(0,0,0,0.04);
-            --shadow-md: 0 4px 12px rgba(0,0,0,0.04);
-            --shadow-lg: 0 12px 24px -8px rgba(0,0,0,0.06);
-            --radius: 16px;
-            --radius-sm: 12px;
-            --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
-        }
-        [data-theme="dark"] {
-            --primary: #D4B87A;
-            --accent: #D4B87A;
-            --bg: #0B1120;
-            --surface: #131C31;
-            --surface-alt: #1A2540;
-            --text: #F1F5F9;
-            --text-secondary: #94A3B8;
-            --border: #2A3550;
-        }
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height:1.6;
-            transition: background var(--transition), color var(--transition);
-            -webkit-font-smoothing: antialiased;
-        }
-        .container { max-width:900px; margin:0 auto; padding:0 2rem; }
-        
-        /* Header */
-        .main-header {
-            background: rgba(255,255,255,0.8);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
-            position: sticky; top:0; z-index:100;
-        }
-        [data-theme="dark"] .main-header { background: rgba(19,28,49,0.8); }
-        .main-header .container { display:flex; justify-content:space-between; align-items:center; padding:1rem 2rem; }
-        .logo a {
-            text-decoration:none; font-family:'Playfair Display',serif; font-size:2rem; font-weight:800;
-            color: var(--primary); letter-spacing:-0.5px; display:flex; align-items:baseline;
-        }
-        .logo a .dot { width:6px; height:6px; background:var(--accent); border-radius:50%; margin-left:4px; }
-        .desktop-nav { display:flex; gap:2.2rem; align-items:center; }
-        .desktop-nav a {
-            text-decoration:none; color:var(--text); font-weight:500; font-size:0.95rem;
-            transition:color 0.2s; position:relative;
-        }
-        .desktop-nav a::after {
-            content:''; position:absolute; bottom:-6px; left:0; width:0; height:2px;
-            background:var(--accent); border-radius:2px; transition:width 0.25s;
-        }
-        .desktop-nav a:hover, .desktop-nav a.active { color:var(--primary); }
-        .desktop-nav a:hover::after, .desktop-nav a.active::after { width:100%; }
-        
-        .btn-nav {
-            display: inline-block;
-            padding: 0.5rem 1.5rem;
-            border: 2px solid var(--accent);
-            border-radius: 50px;
-            color: var(--accent);
-            background: transparent;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            opacity: 0;
-            transform: translateY(15px);
-            animation: btnFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            animation-delay: 0.5s;
-        }
-        .btn-nav:hover {
-            background: var(--accent);
-            color: #ffffff;
-            border-color: var(--accent);
-            transform: translateY(-2px);
-        }
-        .btn-nav::after { display: none; }
-
-        @keyframes btnFadeUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .header-actions { display:flex; gap:0.8rem; align-items:center; }
-        .icon-btn {
-            background:transparent; border:1px solid var(--border); font-size:1.1rem; cursor:pointer;
-            color:var(--text); padding:0.5rem; border-radius:50%; width:38px; height:38px;
-            display:flex; align-items:center; justify-content:center; transition:0.2s;
-        }
-        .icon-btn:hover { background:var(--primary); color:white; border-color:var(--primary); }
-        .mobile-only { display:none; }
-        .mobile-menu {
-            position:fixed; top:0; left:-100%; width:80%; max-width:320px; height:100%;
-            background:var(--surface); z-index:200; transition:left 0.35s; padding:2.5rem 2rem;
-            display:flex; flex-direction:column; gap:1.5rem; box-shadow:var(--shadow-lg);
-        }
-        .mobile-menu.open { left:0; }
-        .mobile-menu a { text-decoration:none; font-size:1.2rem; color:var(--text); font-weight:500; padding:0.5rem 0; border-bottom:1px solid var(--border); }
-
-        /* Page Header */
-        .page-hero {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-soft) 100%);
-            color: white;
-            padding: 4rem 0 3rem;
-            text-align: center;
-        }
-        .page-hero h1 { font-family: 'Playfair Display', serif; font-size: 2.8rem; margin-bottom: 0.5rem; }
-        .page-hero p { opacity: 0.9; font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
-
-        /* Form Container */
-        .form-wrapper {
-            background: var(--surface);
-            border-radius: var(--radius);
-            padding: 2.5rem;
-            margin: -2rem auto 3rem;
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--border);
-            position: relative;
-            z-index: 10;
-        }
-
-        /* Step indicator */
-        .steps-indicator {
-            display: flex;
-            margin-bottom: 2.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--border);
-        }
-        .step-item {
-            flex: 1;
-            text-align: center;
-            font-weight: 500;
-            color: var(--text-secondary);
-            position: relative;
-            font-size: 0.9rem;
-        }
-        .step-item.active {
-            color: var(--primary);
-            font-weight: 700;
-        }
-        .step-item.completed {
-            color: var(--accent);
-        }
-        .step-number {
-            display: block;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: var(--surface-alt);
-            line-height: 32px;
-            margin: 0 auto 0.5rem;
-            font-size: 0.8rem;
-            transition: 0.2s;
-        }
-        .step-item.active .step-number {
-            background: var(--accent);
-            color: white;
-        }
-        .step-item.completed .step-number {
-            background: var(--accent);
-            color: white;
-        }
-
-        .form-step { display: none; }
-        .form-step.active { display: block; }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 0.4rem;
-            font-size: 0.9rem;
-            color: var(--text);
-        }
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.8rem 1rem;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            background: var(--bg);
-            font-family: inherit;
-            font-size: 0.95rem;
-            color: var(--text);
-            transition: 0.2s;
-        }
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 2px rgba(180,148,80,0.2);
-        }
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-        }
-        
-        .btn {
-            padding: 0.8rem 2rem;
-            border-radius: 3rem;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.2s;
-            font-size: 0.95rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            opacity: 0;
-            transform: translateY(15px);
-            animation: btnFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-        .btn-primary {
-            background: var(--accent);
-            color: #1A1F2E;
-            animation-delay: 0.6s;
-        }
-        .btn-primary:hover { background: var(--accent-soft); transform: translateY(-2px); box-shadow: 0 10px 20px -8px rgba(180,148,80,0.4); }
-        .btn-outline {
-            border: 1px solid var(--primary);
-            color: var(--primary);
-            background: transparent;
-            animation-delay: 0.7s;
-        }
-        .btn-outline:hover { background: var(--primary); color: white; }
-
-        .button-group {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 2rem;
-        }
-
-        /* Review Card */
-        .request-card {
-            background: var(--surface-alt);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            padding: 1.2rem;
-            display: block;
-            margin-bottom: 1rem;
-        }
-        .request-card h4 { margin-bottom: 0.25rem; font-weight: 600; }
-        .request-card p { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.25rem; }
-
-        /* Corporate Footer */
-        footer { background:#1A1F2E; color:#CBD5E1; padding:4rem 0 1.5rem; margin-top:4rem; }
-        footer a { color:#94A3B8; text-decoration:none; transition: all 0.2s; }
-        footer a:hover { color:var(--accent-soft); transform: translateX(4px); }
-        
-        footer .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1.5fr;
-            gap: 3rem;
-            margin-bottom: 0;
-        }
-        footer .footer-col h4 {
-            color: #ffffff;
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            font-size: 1rem;
-            margin-bottom: 1.2rem;
-            letter-spacing: 0.5px;
-        }
-        footer .footer-col a {
-            display: block;
-            font-size: 0.9rem;
-            margin-bottom: 0.8rem;
-        }
-        footer .footer-col.brand p {
-            color: #94A3B8;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-        footer .social a {
-            display: inline-block !important;
-            color: #B49450;
-            margin-right: 1rem;
-            transition: transform 0.2s;
-        }
-        footer .social a:hover {
-            transform: scale(1.1);
-            color: var(--accent-soft);
-        }
-        footer .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            padding-top: 2rem;
-            margin-top: 2rem;
-            border-top: 1px solid #2E3548;
-            font-size: 0.85rem;
-            color: #94A3B8;
-        }
-
-        @media (max-width: 768px) {
-            .desktop-nav { display: none; }
-            .mobile-only { display: block; }
-            .page-hero h1 { font-size: 2.2rem; }
-            .form-row { grid-template-columns: 1fr; }
-            footer .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
-            footer .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
-        }
-    </style>
-    
-    <!-- Vercel Speed Insights -->
-    <script type="module">
-        import { injectSpeedInsights } from 'https://cdn.jsdelivr.net/npm/@vercel/speed-insights@2/dist/index.mjs';
-        injectSpeedInsights();
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Post a Listing – Zaure</title>
+  <meta name="description" content="Post your item for sale on Zaure - Nigeria's trusted classified marketplace.">
+  <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .post-container { max-width: 800px; margin: 0 auto; }
+    .post-header {
+      background: var(--surface); border-radius: 20px; padding: 24px;
+      border: 1px solid var(--border); margin-bottom: 20px;
+    }
+    .post-header h1 { font-size: 1.5rem; font-weight: 700; color: var(--text); }
+    .post-header p { color: var(--text-secondary); font-size: 0.9rem; margin-top: 4px; }
+    .post-form {
+      background: var(--surface); border-radius: 20px; padding: 24px;
+      border: 1px solid var(--border);
+    }
+    .post-form .form-section {
+      margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--border);
+    }
+    .post-form .form-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .post-form .form-section .section-title {
+      font-size: 1rem; font-weight: 700; color: var(--text);
+      margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+    }
+    .post-form .form-section .section-title i { color: #1f5d8a; }
+    .post-form .form-group { margin-bottom: 16px; }
+    .post-form .form-group label { display: block; font-weight: 600; font-size: 0.85rem; color: var(--text); margin-bottom: 4px; }
+    .post-form .form-group label .required { color: #e74c3c; }
+    .post-form .form-group input,
+    .post-form .form-group select,
+    .post-form .form-group textarea {
+      width: 100%; padding: 10px 14px; border: 1px solid var(--border);
+      border-radius: 12px; font-size: 0.95rem; background: var(--input-bg);
+      color: var(--text); transition: 0.2s;
+    }
+    .post-form .form-group input:focus,
+    .post-form .form-group select:focus,
+    .post-form .form-group textarea:focus {
+      border-color: #1a3650; box-shadow: 0 0 0 2px rgba(26,54,80,0.1); outline: none;
+    }
+    .post-form .form-group textarea { min-height: 100px; resize: vertical; }
+    .post-form .form-group .helper-text { font-size: 0.75rem; color: var(--text-secondary); margin-top: 4px; }
+    .post-form .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .post-form .btn-submit {
+      background: #1a3650; color: white; border: none; padding: 14px 28px;
+      border-radius: 60px; font-weight: 700; font-size: 1rem; cursor: pointer;
+      transition: 0.2s; width: 100%; display: flex; align-items: center;
+      justify-content: center; gap: 8px;
+    }
+    [data-theme="dark"] .post-form .btn-submit { background: #2A3550; color: #F1F5F9; }
+    .post-form .btn-submit:hover { background: #0f2940; }
+    [data-theme="dark"] .post-form .btn-submit:hover { background: #3A4560; }
+    .post-form .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+    .post-form .btn-cancel {
+      background: transparent; border: 1px solid var(--border); padding: 12px 24px;
+      border-radius: 60px; font-weight: 600; cursor: pointer; transition: 0.2s;
+      color: var(--text-secondary); width: 100%; margin-top: 8px;
+    }
+    .post-form .btn-cancel:hover { border-color: var(--text); color: var(--text); }
+    .image-upload-area {
+      border: 2px dashed var(--border); border-radius: 12px; padding: 20px;
+      text-align: center; cursor: pointer; transition: 0.2s;
+      min-height: 120px; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+    }
+    .image-upload-area:hover { border-color: #1a3650; background: var(--surface-alt); }
+    .image-upload-area i { font-size: 2rem; color: var(--text-secondary); }
+    .image-upload-area p { color: var(--text-secondary); font-size: 0.85rem; margin-top: 4px; }
+    .image-upload-area .uploaded-images { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+    .image-upload-area .uploaded-images .img-preview {
+      width: 80px; height: 80px; border-radius: 8px; object-fit: cover;
+      border: 1px solid var(--border); position: relative;
+    }
+    .image-upload-area .uploaded-images .img-preview .remove-img {
+      position: absolute; top: -6px; right: -6px; background: #e74c3c;
+      color: white; border: none; border-radius: 50%; width: 20px; height: 20px;
+      font-size: 0.6rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    }
+    .toast {
+      position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%);
+      background: #1a3650; color: white; padding: 12px 24px; border-radius: 12px;
+      font-size: 0.9rem; box-shadow: 0 8px 24px rgba(0,0,0,0.15); z-index: 999;
+      opacity: 0; transition: opacity 0.3s ease; pointer-events: none;
+    }
+    [data-theme="dark"] .toast { background: #2A3550; }
+    .toast.show { opacity: 1; pointer-events: auto; }
+    .toast i { margin-right: 8px; }
+    @media (max-width: 640px) {
+      .post-form .form-row { grid-template-columns: 1fr; }
+      .post-container { padding: 0; }
+    }
+  </style>
 </head>
 <body>
-<header class="main-header">
-    <div class="container">
-        <div class="logo"><a href="/">Zaure<span class="dot"></span></a></div>
-        <nav class="desktop-nav">
-            <a href="/">Home</a>
-            <a href="/browse?type=sale">Buy</a>
-            <a href="/browse?type=rent">Rent</a>
-            <a href="/how-it-works">How It Works</a>
-            <a href="/about">About</a>
-            <a href="/contact">Contact</a>
-            <a href="/profile">Profile</a>
-            <a href="#" class="btn-nav">List Property</a>
-        </nav>
-        <div class="header-actions">
-            <button id="themeToggle" class="icon-btn"><i class="fas fa-moon"></i></button>
-            <button id="mobileMenuToggle" class="icon-btn mobile-only"><i class="fas fa-bars"></i></button>
-        </div>
+
+  <div class="toast" id="toast"><i class="fas fa-check-circle"></i> <span id="toastMessage">Listing posted successfully!</span></div>
+
+  <!-- ===== NAV ===== -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="/" class="logo-wrapper">
+        <img src="/assets/logo-icon.svg" alt="Zaure" class="logo-icon">
+        <div class="logo-text"><span class="brand">Zaure</span><span class="tagline">Your Entrance to Home</span></div>
+      </a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/category.html?slug=all">Browse</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <button class="icon-btn" id="themeToggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
+        <a href="/favorites.html" class="icon-btn" style="position:relative;text-decoration:none;"><i class="fas fa-heart"></i><span id="favBadge">0</span></a>
+        <div id="headerUserArea"><div class="avatar" id="userAvatar" onclick="openSignup()">ZA</div></div>
+      </div>
     </div>
-</header>
+  </nav>
 
-<div class="mobile-menu" id="mobileMenu">
-    <button id="closeMenu" class="close-btn"><i class="fas fa-times"></i></button>
-    <a href="/">Home</a><a href="/browse?type=sale">Buy</a><a href="/browse?type=rent">Rent</a>
-    <a href="/how-it-works">How It Works</a><a href="/about">About</a><a href="/contact">Contact</a>
-    <a href="/profile">Profile</a>
-    <a href="#">List Property</a>
-</div>
+  <div class="container post-container">
 
-<main>
-    <section class="page-hero">
-        <div class="container">
-            <h1>List Your Property</h1>
-            <p>Submit your property directly to Zaure. Connect with verified seekers and keep 100% of your sale price — no middlemen, no commission.</p>
-        </div>
-    </section>
-
-    <div class="container">
-        <div class="form-wrapper">
-            <div class="steps-indicator">
-                <div class="step-item active" data-step="1"><span class="step-number">1</span> Property Details</div>
-                <div class="step-item" data-step="2"><span class="step-number">2</span> Description & Photos</div>
-                <div class="step-item" data-step="3"><span class="step-number">3</span> Review & Submit</div>
-            </div>
-
-            <form id="listingForm">
-                <!-- Step 1 -->
-                <div class="form-step active" id="step1">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Property Type *</label>
-                            <select id="propertyType" required>
-                                <option value="">Select</option>
-                                <option value="house">House</option>
-                                <option value="apartment">Apartment</option>
-                                <option value="land">Land</option>
-                                <option value="commercial">Commercial</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Listing Type *</label>
-                            <select id="listingType" required>
-                                <option value="">Select</option>
-                                <option value="sale">For Sale</option>
-                                <option value="rent">For Rent</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Title *</label>
-                        <input type="text" id="title" placeholder="e.g., 3-Bedroom Flat in Barnawa" required>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>City *</label>
-                            <input type="text" id="city" required>
-                        </div>
-                        <div class="form-group">
-                            <label>State</label>
-                            <input type="text" id="state">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Address / Area</label>
-                        <input type="text" id="address">
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Price (₦) *</label>
-                            <input type="number" id="price" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Land Size (sqm)</label>
-                            <input type="number" id="squareFeet" min="0">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Bedrooms</label>
-                            <input type="number" id="bedrooms" min="0" value="0">
-                        </div>
-                        <div class="form-group">
-                            <label>Bathrooms</label>
-                            <input type="number" id="bathrooms" min="0" value="0">
-                        </div>
-                    </div>
-                    <div class="button-group">
-                        <div></div>
-                        <button type="button" class="btn btn-primary" id="toStep2">Next <i class="fas fa-arrow-right"></i></button>
-                    </div>
-                </div>
-
-                <!-- Step 2 -->
-                <div class="form-step" id="step2">
-                    <div class="form-group">
-                        <label>Description</label>
-                        <textarea id="description" rows="4" placeholder="Describe the property, features, condition..."></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Amenities (comma separated)</label>
-                        <input type="text" id="amenities" placeholder="e.g., Borehole, Solar, Fenced, Security">
-                    </div>
-                    <div class="form-group">
-                        <label>Image URLs (one per line)</label>
-                        <textarea id="images" rows="3" placeholder="https://..."></textarea>
-                    </div>
-                    <div class="button-group">
-                        <button type="button" class="btn btn-outline" id="backStep1"><i class="fas fa-arrow-left"></i> Back</button>
-                        <button type="button" class="btn btn-primary" id="toStep3">Next <i class="fas fa-arrow-right"></i></button>
-                    </div>
-                </div>
-
-                <!-- Step 3 -->
-                <div class="form-step" id="step3">
-                    <h3 style="margin-bottom:1rem;">Review Your Details</h3>
-                    <div class="request-card" id="reviewSummary"></div>
-                    <div class="form-group" style="margin-top:1.5rem;">
-                        <label>
-                            <input type="checkbox" id="wantVerification" checked>
-                            I want to verify my identity (NIN/BVN) to get a Verified badge.
-                        </label>
-                    </div>
-                    <div class="button-group">
-                        <button type="button" class="btn btn-outline" id="backStep2"><i class="fas fa-arrow-left"></i> Back</button>
-                        <button type="submit" class="btn btn-primary">Submit Request <i class="fas fa-paper-plane"></i></button>
-                    </div>
-                </div>
-            </form>
-        </div>
+    <div class="breadcrumb">
+      <a href="/">Home</a>
+      <span class="separator"><i class="fas fa-chevron-right"></i></span>
+      <a href="/profile.html">Profile</a>
+      <span class="separator"><i class="fas fa-chevron-right"></i></span>
+      <span class="current" id="pageTitle">Post a Listing</span>
     </div>
-</main>
 
-<!-- Corporate Footer -->
-<footer>
-    <div class="container">
-        <div class="footer-grid">
-            <!-- 1. Brand & Remote Location -->
-            <div class="footer-col brand">
-                <h4 style="font-family:'Playfair Display',serif; font-size:1.5rem;">Zaure<span style="color:#B49450;">.</span></h4>
-                <p>Your digital entrance hall – connecting verified owners and seekers directly across Northern Nigeria.</p>
-                <div style="margin-top:1rem; font-size:0.9rem; color:#94A3B8;">
-                    <i class="fas fa-globe" style="color:#B49450; margin-right:0.5rem;"></i> Remote · Northern Nigeria<br>
-                    <i class="fas fa-envelope" style="color:#B49450; margin-right:0.5rem; margin-top:0.3rem;"></i> get.zaure@proton.me
-                </div>
-            </div>
-
-            <!-- 2. Quick Links (Primary Navigation) -->
-            <div class="footer-col">
-                <h4>Find a Home</h4>
-                <a href="/browse?type=sale">Buy Property</a>
-                <a href="/browse?type=rent">Rent Property</a>
-                <a href="/how-it-works">How It Works</a>
-                <a href="/browse">Browse All Listings</a>
-            </div>
-
-            <!-- 3. Company & Legal -->
-            <div class="footer-col">
-                <h4>Company</h4>
-                <a href="/about">About Us</a>
-                <a href="/contact">Contact</a>
-                <a href="/privacy">Privacy Policy</a>
-                <a href="/terms">Terms of Service</a>
-            </div>
-
-            <!-- 4. Social & Trust Badges -->
-            <div class="footer-col connect">
-                <h4>Connect</h4>
-                <div class="social" style="margin-bottom:1.5rem;">
-                    <a href="https://twitter.com/zauretech" target="_blank"><i class="fab fa-twitter"></i></a>
-                    <a href="https://instagram.com/zauretech" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="https://linkedin.com/company/zauretech" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://facebook.com/zauretech" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                </div>
-                <p style="font-size:0.85rem; color:#94A3B8; margin-bottom:1rem;">Follow us everywhere @zauretech</p>
-                <!-- Trust Badges -->
-                <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
-                    <span style="background:rgba(180,148,80,0.1); color:#B49450; padding:0.25rem 0.8rem; border-radius:50px; font-size:0.7rem; font-weight:600; border:1px solid rgba(180,148,80,0.2);">No Middlemen</span>
-                    <span style="background:rgba(180,148,80,0.1); color:#B49450; padding:0.25rem 0.8rem; border-radius:50px; font-size:0.7rem; font-weight:600; border:1px solid rgba(180,148,80,0.2);">Verified Owners</span>
-                    <span style="background:rgba(180,148,80,0.1); color:#B49450; padding:0.25rem 0.8rem; border-radius:50px; font-size:0.7rem; font-weight:600; border:1px solid rgba(180,148,80,0.2);">Zero Commission</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- 5. Bottom Copyright Bar -->
-        <div class="footer-bottom">
-            <span>&copy; 2026 <strong style="color:white;">Zaure Technologies</strong>. All rights reserved.</span>
-            <span>Built for Northern Nigeria. 🇳🇬</span>
-        </div>
+    <div class="post-header">
+      <h1 id="formTitle"><i class="fas fa-plus-circle" style="color:#1f5d8a;"></i> Post a New Listing</h1>
+      <p>Fill in the details below to list your item for sale. All fields marked with <span style="color:#e74c3c;">*</span> are required.</p>
     </div>
-</footer>
 
-<script>
-    // ---------- AUTH CHECK ----------
-    (function checkAuth() {
-        const user = JSON.parse(localStorage.getItem('zaure_user'));
-        if (!user || !user.name) {
-            window.location.href = '/?signup=required';
-            return;
+    <form id="postForm" class="post-form">
+
+      <div class="form-section">
+        <div class="section-title"><i class="fas fa-user"></i> Seller Information</div>
+        <div class="form-row">
+          <div class="form-group"><label>Your Name</label><input type="text" id="sellerName" readonly style="background:var(--surface-alt);cursor:not-allowed;"></div>
+          <div class="form-group"><label>Phone Number</label><input type="tel" id="sellerPhone" readonly style="background:var(--surface-alt);cursor:not-allowed;"></div>
+        </div>
+        <div class="form-group"><label>Location (State)</label><input type="text" id="sellerState" readonly style="background:var(--surface-alt);cursor:not-allowed;"></div>
+      </div>
+
+      <div class="form-section">
+        <div class="section-title"><i class="fas fa-box"></i> Product Details</div>
+        <div class="form-group"><label>Product Title <span class="required">*</span></label><input type="text" id="productTitle" placeholder="e.g., iPhone 15 Pro 256GB - Excellent Condition" required></div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Category <span class="required">*</span></label>
+            <select id="productCategory" required>
+              <option value="">Select category</option>
+              <option value="vehicles">Vehicles</option>
+              <option value="electronics">Electronics</option>
+              <option value="furniture">Furniture</option>
+              <option value="fashion">Fashion</option>
+              <option value="real-estate">Real Estate</option>
+              <option value="services">Services</option>
+              <option value="pets">Pets & Animals</option>
+              <option value="books">Books & Media</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Price (₦) <span class="required">*</span></label><input type="number" id="productPrice" placeholder="e.g., 450000" required></div>
+        </div>
+        <div class="form-group">
+          <label>Description <span class="required">*</span></label>
+          <textarea id="productDescription" placeholder="Describe your item in detail... Include condition, features, and why someone should buy it." required></textarea>
+          <div class="helper-text">Provide as much detail as possible to attract buyers.</div>
+        </div>
+        <div class="form-group">
+          <label>Tags (comma separated)</label>
+          <input type="text" id="productTags" placeholder="e.g., vintage, leather, sofa">
+          <div class="helper-text">Add relevant keywords to help buyers find your listing.</div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="section-title"><i class="fas fa-images"></i> Product Images</div>
+        <div class="form-group">
+          <label>Upload Images <span class="required">*</span></label>
+          <div class="image-upload-area" id="imageUploadArea">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <p>Click to upload or drag & drop images</p>
+            <input type="file" id="imageInput" accept="image/*" multiple style="display:none;">
+            <div class="uploaded-images" id="uploadedImages"></div>
+          </div>
+          <div class="helper-text">Upload up to 5 images. First image will be the main cover.</div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <button type="submit" class="btn-submit" id="submitBtn"><i class="fas fa-paper-plane"></i> <span id="submitBtnText">Post Listing</span></button>
+        <button type="button" class="btn-cancel" onclick="window.location.href='/'">Cancel</button>
+      </div>
+
+    </form>
+
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col brand">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+            <img src="/assets/logo-icon.svg" alt="Zaure" style="width:32px;height:32px;">
+            <span style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:white;">Zaure</span>
+          </div>
+          <p>Nigeria's leading free classified marketplace. Buy, sell, or trade locally. No commission, no middlemen.</p>
+          <div class="social" style="margin-top:12px;">
+            <a href="https://twitter.com/zauretech" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com/zauretech" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://linkedin.com/company/zauretech" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://facebook.com/zauretech" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          </div>
+        </div>
+        <div class="footer-col"><h4>Browse</h4><a href="/category.html?slug=all">All Items</a><a href="/category.html?slug=vehicles">Vehicles</a><a href="/category.html?slug=electronics">Electronics</a><a href="/category.html?slug=furniture">Furniture</a><a href="/category.html?slug=fashion">Fashion</a><a href="/category.html?slug=real-estate">Real Estate</a></div>
+        <div class="footer-col"><h4>Support</h4><a href="/help.html">Help Center</a><a href="/safety.html">Safety Tips</a><a href="/contact.html">Contact Us</a><a href="/support.html">Support</a></div>
+        <div class="footer-col"><h4>Company</h4><a href="/about.html">About Us</a><a href="/careers.html">Careers</a><a href="/privacy.html">Privacy Policy</a><a href="/terms.html">Terms of Service</a></div>
+        <div class="footer-col trust-badges" style="grid-column:1/-1;border-top:1px solid #2E3548;padding-top:16px;margin-top:8px;">
+          <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;">
+            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-shield-alt" style="color:#B49450;"></i> Verified Users</div>
+            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-handshake" style="color:#B49450;"></i> No Commission</div>
+            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-user-check" style="color:#B49450;"></i> Identity Verified</div>
+            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-lock" style="color:#B49450;"></i> Secure Platform</div>
+            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-clock" style="color:#B49450;"></i> 24/7 Support</div>
+            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-star" style="color:#B49450;"></i> Trusted by Thousands</div>
+            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-phone" style="color:#B49450;"></i> Direct Contact</div>
+            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-credit-card" style="color:#B49450;"></i> Secure Payments</div>
+          </div>
+        </div>
+        <div class="footer-bottom"><span>&copy; 2026 <strong style="color:white;">Zaure Technologies</strong>. All rights reserved.</span><span><i class="fas fa-globe"></i> Nigeria · English</span></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== BOTTOM NAV ===== -->
+  <div class="bottom-nav">
+    <a href="/" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
+    <button class="nav-item" onclick="window.location.href='/'"><i class="fas fa-search"></i><span>Search</span></button>
+    <button class="post-btn active" id="fabPostAd"><i class="fas fa-plus"></i></button>
+    <a href="/favorites.html" class="nav-item"><i class="fas fa-heart"></i><span>Favorites</span></a>
+    <a href="/profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
+  </div>
+
+  <!-- ===== SIGNUP MODAL ===== -->
+  <div class="modal-overlay" id="signupModal">
+    <div class="modal">
+      <div class="modal-header"><h3>Create your account</h3><button class="modal-close" id="closeSignupModalBtn"><i class="fas fa-times"></i></button></div>
+      <form id="signupForm" class="modal-form">
+        <label for="signupName">Full Name</label>
+        <input type="text" id="signupName" placeholder="Enter your full name" required>
+        <label for="signupPhone">Phone Number</label>
+        <input type="tel" id="signupPhone" placeholder="Enter your phone number" required>
+        <label for="signupState">State</label>
+        <select id="signupState" required>
+          <option value="">Select your state</option>
+          <option value="Abia">Abia</option><option value="Adamawa">Adamawa</option>
+          <option value="Akwa Ibom">Akwa Ibom</option><option value="Anambra">Anambra</option>
+          <option value="Bauchi">Bauchi</option><option value="Bayelsa">Bayelsa</option>
+          <option value="Benue">Benue</option><option value="Borno">Borno</option>
+          <option value="Cross River">Cross River</option><option value="Delta">Delta</option>
+          <option value="Ebonyi">Ebonyi</option><option value="Edo">Edo</option>
+          <option value="Ekiti">Ekiti</option><option value="Enugu">Enugu</option>
+          <option value="FCT">FCT (Abuja)</option><option value="Gombe">Gombe</option>
+          <option value="Imo">Imo</option><option value="Jigawa">Jigawa</option>
+          <option value="Kaduna">Kaduna</option><option value="Kano">Kano</option>
+          <option value="Katsina">Katsina</option><option value="Kebbi">Kebbi</option>
+          <option value="Kogi">Kogi</option><option value="Kwara">Kwara</option>
+          <option value="Lagos">Lagos</option><option value="Nasarawa">Nasarawa</option>
+          <option value="Niger">Niger</option><option value="Ogun">Ogun</option>
+          <option value="Ondo">Ondo</option><option value="Osun">Osun</option>
+          <option value="Oyo">Oyo</option><option value="Plateau">Plateau</option>
+          <option value="Rivers">Rivers</option><option value="Sokoto">Sokoto</option>
+          <option value="Taraba">Taraba</option><option value="Yobe">Yobe</option>
+          <option value="Zamfara">Zamfara</option>
+        </select>
+        <button type="submit" class="btn-primary">Sign Up</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      let toastTimeout;
+
+      function showToast(message, type = 'success') {
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toastMessage');
+        toastMessage.textContent = message;
+        toast.className = 'toast show';
+        toast.style.background = type === 'success' ? '#1a3650' : '#e74c3c';
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => { toast.classList.remove('show'); }, 3000);
+      }
+
+      const user = JSON.parse(localStorage.getItem('zaure_user'));
+      if (!user) {
+        openSignup();
+        document.getElementById('submitBtn').disabled = true;
+        document.getElementById('submitBtnText').textContent = 'Please Sign Up First';
+      } else {
+        document.getElementById('sellerName').value = user.name || '';
+        document.getElementById('sellerPhone').value = user.phone || '';
+        document.getElementById('sellerState').value = user.state || '';
+
+        const params = new URLSearchParams(window.location.search);
+        const editId = params.get('id');
+        if (editId) {
+          document.getElementById('formTitle').innerHTML = `<i class="fas fa-edit" style="color:#1f5d8a;"></i> Edit Listing`;
+          document.getElementById('pageTitle').textContent = 'Edit Listing';
+          document.getElementById('submitBtnText').textContent = 'Update Listing';
+          loadListingForEdit(editId);
         }
-    })();
+      }
 
-    // ---------- THEME ----------
-    const themeToggle = document.getElementById('themeToggle');
-    const storedTheme = localStorage.getItem('zaure_theme') || 'light';
-    document.documentElement.setAttribute('data-theme', storedTheme);
-    themeToggle.innerHTML = storedTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-    themeToggle.addEventListener('click', () => {
-        const cur = document.documentElement.getAttribute('data-theme');
-        const next = cur === 'light' ? 'dark' : 'light';
-        document.documentElement.setAttribute('data-theme', next);
-        localStorage.setItem('zaure_theme', next);
-        themeToggle.innerHTML = next === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-    });
+      function loadListingForEdit(id) {
+        const allListings = JSON.parse(localStorage.getItem('zaure_listings') || '[]');
+        const listing = allListings.find(l => l.id === parseInt(id));
+        if (listing) {
+          document.getElementById('productTitle').value = listing.title || '';
+          document.getElementById('productCategory').value = listing.category || '';
+          document.getElementById('productPrice').value = listing.price || '';
+          document.getElementById('productDescription').value = listing.description || '';
+          document.getElementById('productTags').value = (listing.tags || []).join(', ');
+          if (listing.images && listing.images.length > 0) {
+            const container = document.getElementById('uploadedImages');
+            listing.images.forEach((img, index) => {
+              const div = document.createElement('div');
+              div.style.position = 'relative';
+              div.innerHTML = `<img src="${img}" class="img-preview" style="width:80px;height:80px;object-fit:cover;border-radius:8px;border:1px solid var(--border);"><button type="button" class="remove-img" onclick="removeImage(${index})" style="position:absolute;top:-6px;right:-6px;background:#e74c3c;color:white;border:none;border-radius:50%;width:20px;height:20px;font-size:0.6rem;cursor:pointer;display:flex;align-items:center;justify-content:center;">×</button>`;
+              container.appendChild(div);
+            });
+          }
+          document.getElementById('submitBtn').dataset.editId = id;
+        }
+      }
 
-    // Mobile menu
-    document.getElementById('mobileMenuToggle').addEventListener('click', () => document.getElementById('mobileMenu').classList.add('open'));
-    document.getElementById('closeMenu').addEventListener('click', () => document.getElementById('mobileMenu').classList.remove('open'));
+      const imageUploadArea = document.getElementById('imageUploadArea');
+      const imageInput = document.getElementById('imageInput');
+      const uploadedImages = document.getElementById('uploadedImages');
+      let imageFiles = [];
 
-    // ---------- MULTI-STEP FORM ----------
-    const steps = document.querySelectorAll('.step-item');
-    const formSteps = document.querySelectorAll('.form-step');
-    let currentStep = 0;
+      imageUploadArea.addEventListener('click', function(e) {
+        if (!e.target.closest('.remove-img')) { imageInput.click(); }
+      });
 
-    function showStep(stepIndex) {
-        formSteps.forEach((s, i) => s.classList.toggle('active', i === stepIndex));
-        steps.forEach((s, i) => {
-            s.classList.remove('active', 'completed');
-            if (i < stepIndex) s.classList.add('completed');
-            if (i === stepIndex) s.classList.add('active');
+      imageInput.addEventListener('change', function(e) {
+        const files = Array.from(e.target.files);
+        files.forEach(file => {
+          if (imageFiles.length >= 5) { showToast('Maximum 5 images allowed', 'error'); return; }
+          const reader = new FileReader();
+          reader.onload = function(event) { imageFiles.push(event.target.result); renderImages(); };
+          reader.readAsDataURL(file);
         });
-        currentStep = stepIndex;
-    }
+        this.value = '';
+      });
 
-    // Validate step 1 before moving
-    document.getElementById('toStep2').addEventListener('click', () => {
-        const requiredFields = document.querySelectorAll('#step1 [required]');
-        let valid = true;
-        requiredFields.forEach(f => { if (!f.value.trim()) valid = false; });
-        if (!valid) {
-            alert('Please fill in all required fields.');
-            return;
-        }
-        showStep(1);
-    });
-    document.getElementById('backStep1').addEventListener('click', () => showStep(0));
-    document.getElementById('toStep3').addEventListener('click', () => {
-        showStep(2);
-        const summary = `
-            <h4>${document.getElementById('title').value}</h4>
-            <p><strong>Type:</strong> ${document.getElementById('propertyType').value} (${document.getElementById('listingType').value})</p>
-            <p><strong>Location:</strong> ${document.getElementById('address').value || 'N/A'}, ${document.getElementById('city').value}, ${document.getElementById('state').value}</p>
-            <p><strong>Price:</strong> ₦${parseInt(document.getElementById('price').value).toLocaleString()}</p>
-            <p><strong>Bedrooms:</strong> ${document.getElementById('bedrooms').value} | <strong>Bathrooms:</strong> ${document.getElementById('bathrooms').value} | <strong>Land:</strong> ${document.getElementById('squareFeet').value || 'N/A'} sqm</p>
-            <p><strong>Description:</strong> ${document.getElementById('description').value || 'None'}</p>
-            <p><strong>Amenities:</strong> ${document.getElementById('amenities').value || 'None'}</p>
-            <p><strong>Images:</strong> ${document.getElementById('images').value ? 'Provided' : 'None'}</p>
-        `;
-        document.getElementById('reviewSummary').innerHTML = summary;
-    });
-    document.getElementById('backStep2').addEventListener('click', () => showStep(1));
+      function renderImages() {
+        uploadedImages.innerHTML = imageFiles.map((img, index) => `
+          <div style="position:relative;">
+            <img src="${img}" class="img-preview" style="width:80px;height:80px;object-fit:cover;border-radius:8px;border:1px solid var(--border);">
+            <button type="button" class="remove-img" onclick="removeImage(${index})" style="position:absolute;top:-6px;right:-6px;background:#e74c3c;color:white;border:none;border-radius:50%;width:20px;height:20px;font-size:0.6rem;cursor:pointer;display:flex;align-items:center;justify-content:center;">×</button>
+          </div>
+        `).join('');
+      }
 
-    // ---------- FORM SUBMISSION (Formspree) ----------
-    const listingForm = document.getElementById('listingForm');
-    listingForm.addEventListener('submit', async (e) => {
+      window.removeImage = function(index) { imageFiles.splice(index, 1); renderImages(); };
+
+      imageUploadArea.addEventListener('dragover', function(e) {
+        e.preventDefault(); this.style.borderColor = '#1a3650'; this.style.background = 'var(--surface-alt)';
+      });
+      imageUploadArea.addEventListener('dragleave', function(e) {
+        e.preventDefault(); this.style.borderColor = 'var(--border)'; this.style.background = 'transparent';
+      });
+      imageUploadArea.addEventListener('drop', function(e) {
+        e.preventDefault(); this.style.borderColor = 'var(--border)'; this.style.background = 'transparent';
+        const files = Array.from(e.dataTransfer.files);
+        files.forEach(file => {
+          if (imageFiles.length >= 5) { showToast('Maximum 5 images allowed', 'error'); return; }
+          const reader = new FileReader();
+          reader.onload = function(event) { imageFiles.push(event.target.result); renderImages(); };
+          reader.readAsDataURL(file);
+        });
+      });
+
+      document.getElementById('postForm').addEventListener('submit', function(e) {
         e.preventDefault();
         const user = JSON.parse(localStorage.getItem('zaure_user'));
-        const requestData = {
-            id: Date.now(),
-            user: user,
-            title: document.getElementById('title').value,
-            propertyType: document.getElementById('propertyType').value,
-            listingType: document.getElementById('listingType').value,
-            city: document.getElementById('city').value,
-            state: document.getElementById('state').value,
-            address: document.getElementById('address').value,
-            price: document.getElementById('price').value,
-            bedrooms: document.getElementById('bedrooms').value,
-            bathrooms: document.getElementById('bathrooms').value,
-            squareFeet: document.getElementById('squareFeet').value,
-            description: document.getElementById('description').value,
-            amenities: document.getElementById('amenities').value,
-            images: document.getElementById('images').value,
-            wantVerification: document.getElementById('wantVerification').checked,
-            status: 'pending',
-            submittedAt: new Date().toISOString()
+        if (!user) { openSignup(); return; }
+
+        const title = document.getElementById('productTitle').value.trim();
+        const category = document.getElementById('productCategory').value;
+        const price = parseInt(document.getElementById('productPrice').value);
+        const description = document.getElementById('productDescription').value.trim();
+
+        if (!title) { showToast('Please enter a product title', 'error'); return; }
+        if (!category) { showToast('Please select a category', 'error'); return; }
+        if (!price || price <= 0) { showToast('Please enter a valid price', 'error'); return; }
+        if (!description) { showToast('Please enter a product description', 'error'); return; }
+        if (imageFiles.length === 0) { showToast('Please upload at least one image', 'error'); return; }
+
+        const tags = document.getElementById('productTags').value.split(',').map(t => t.trim()).filter(t => t);
+
+        const listing = {
+          id: Date.now(),
+          title: title,
+          category: category,
+          price: price,
+          description: description,
+          tags: tags,
+          images: imageFiles,
+          location: user.state || 'Nigeria',
+          date: 'Just now',
+          boosted: false,
+          featured: false,
+          seller: {
+            name: user.name,
+            phone: user.phone,
+            verified: true,
+            joined: new Date().getFullYear().toString(),
+            listings: 0,
+            rating: 5.0,
+            sales: 0,
+            response: '100%',
+            bio: user.bio || 'Seller on Zaure'
+          }
         };
 
-        // Save locally
-        let requests = JSON.parse(localStorage.getItem('zaure_requests') || '[]');
-        requests.unshift(requestData);
-        localStorage.setItem('zaure_requests', JSON.stringify(requests));
+        const editId = document.getElementById('submitBtn').dataset.editId;
+        let allListings = JSON.parse(localStorage.getItem('zaure_listings') || '[]');
 
-        // ⚠️ IMPORTANT: Replace 'your-form-id' with your actual Formspree Form ID
-        const formspreeUrl = 'https://formspree.io/f/your-form-id';
-        
-        const formData = new FormData();
-        for (let key in requestData) {
-            formData.append(key, typeof requestData[key] === 'object' ? JSON.stringify(requestData[key]) : requestData[key]);
-        }
-        
-        try {
-            const res = await fetch(formspreeUrl, { 
-                method: 'POST', 
-                body: formData, 
-                headers: { 'Accept': 'application/json' } 
-            });
-            if (res.ok) {
-                alert('✅ Request submitted successfully! We will review and publish it soon.');
-            } else {
-                throw new Error('Formspree error');
-            }
-        } catch (error) {
-            alert('✅ Request saved locally. We will process it shortly.');
-        } finally {
-            listingForm.reset();
-            showStep(0);
-        }
+        if (editId) {
+          const index = allListings.findIndex(l => l.id === parseInt(editId));
+          if (index > -1) { listing.id = parseInt(editId); allListings[index] = listing; showToast('Listing updated successfully!'); }
+        } else { allListings.push(listing); showToast('Listing posted successfully!'); }
+
+        localStorage.setItem('zaure_listings', JSON.stringify(allListings));
+        setTimeout(() => { window.location.href = '/profile.html'; }, 1500);
+      });
+
+      document.getElementById('fabPostAd').addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+      loadUser();
+      initTheme();
+      updateFavoriteBadge();
     });
-
-    // Initialize
-    showStep(0);
-</script>
+  </script>
 </body>
 </html>
