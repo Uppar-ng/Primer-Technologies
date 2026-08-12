@@ -4,110 +4,607 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>Post a Listing – Zaure</title>
-  <meta name="description" content="Post your item for sale on Zaure - Nigeria's trusted classified marketplace.">
+  <meta name="description" content="Post your items for free on Zaure - Nigeria's leading classified marketplace.">
   <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
   <style>
-    .post-container { max-width: 800px; margin: 0 auto; }
-    .post-header {
-      background: var(--surface); border-radius: 20px; padding: 24px;
-      border: 1px solid var(--border); margin-bottom: 20px;
+    /* ===== POST WIZARD STYLES ===== */
+    .post-container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 20px 0 40px;
     }
-    .post-header h1 { font-size: 1.5rem; font-weight: 700; color: var(--text); }
-    .post-header p { color: var(--text-secondary); font-size: 0.9rem; margin-top: 4px; }
-    .post-form {
-      background: var(--surface); border-radius: 20px; padding: 24px;
+
+    /* Progress Bar */
+    .wizard-progress {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      position: relative;
+      padding: 0 10px;
+    }
+
+    .wizard-progress::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 30px;
+      right: 30px;
+      height: 3px;
+      background: var(--border);
+      transform: translateY(-50%);
+      z-index: 0;
+    }
+
+    .wizard-progress .step-indicator {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      z-index: 1;
+      cursor: pointer;
+      flex: 1;
+    }
+
+    .wizard-progress .step-indicator .step-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--surface-alt);
+      border: 3px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      transition: 0.3s;
+      position: relative;
+    }
+
+    .wizard-progress .step-indicator.active .step-circle {
+      background: #1a3650;
+      border-color: #1a3650;
+      color: white;
+      box-shadow: 0 4px 16px rgba(26,54,80,0.3);
+    }
+
+    [data-theme="dark"] .wizard-progress .step-indicator.active .step-circle {
+      background: #2A3550;
+      border-color: #2A3550;
+    }
+
+    .wizard-progress .step-indicator.completed .step-circle {
+      background: #27ae60;
+      border-color: #27ae60;
+      color: white;
+    }
+
+    .wizard-progress .step-indicator .step-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-align: center;
+    }
+
+    .wizard-progress .step-indicator.active .step-label {
+      color: var(--text);
+    }
+
+    .wizard-progress .step-indicator.completed .step-label {
+      color: #27ae60;
+    }
+
+    /* Step Content */
+    .step-content {
+      display: none;
+      animation: fadeSlideIn 0.4s ease;
+    }
+
+    .step-content.active {
+      display: block;
+    }
+
+    @keyframes fadeSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .post-card {
+      background: var(--surface);
+      border-radius: 24px;
+      padding: 32px 28px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .post-card .step-header {
+      margin-bottom: 24px;
+    }
+
+    .post-card .step-header h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .post-card .step-header .subtitle {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .form-group label .required {
+      color: #e74c3c;
+      margin-left: 2px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      font-size: 0.95rem;
+      background: var(--input-bg);
+      color: var(--text);
+      transition: 0.2s;
+      font-family: inherit;
+      box-sizing: border-box;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: #1a3650;
+      box-shadow: 0 0 0 4px rgba(26,54,80,0.08);
+      outline: none;
+    }
+
+    [data-theme="dark"] .form-group input:focus,
+    [data-theme="dark"] .form-group select:focus,
+    [data-theme="dark"] .form-group textarea:focus {
+      border-color: #4a7a9a;
+      box-shadow: 0 0 0 4px rgba(74,122,154,0.15);
+    }
+
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .form-group .help-text {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-top: 5px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    /* Step Navigation Buttons */
+    .step-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .step-actions .btn-next {
+      flex: 1;
+      padding: 14px 24px;
+      background: #1a3650;
+      color: white;
+      border: none;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .step-actions .btn-next:hover {
+      background: #0f2940;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(26,54,80,0.3);
+    }
+
+    [data-theme="dark"] .step-actions .btn-next {
+      background: #2A3550;
+      color: #F1F5F9;
+    }
+
+    [data-theme="dark"] .step-actions .btn-next:hover {
+      background: #3A4560;
+    }
+
+    .step-actions .btn-prev {
+      padding: 14px 24px;
+      background: transparent;
+      color: var(--text-secondary);
+      border: 2px solid var(--border);
+      border-radius: 60px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .step-actions .btn-prev:hover {
+      border-color: var(--text);
+      color: var(--text);
+    }
+
+    .step-actions .btn-submit {
+      flex: 1;
+      padding: 14px 24px;
+      background: #27ae60;
+      color: white;
+      border: none;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .step-actions .btn-submit:hover {
+      background: #219a52;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(39,174,96,0.3);
+    }
+
+    .step-actions .btn-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* Image Upload */
+    .image-upload-area {
+      border: 2px dashed var(--border);
+      border-radius: 14px;
+      padding: 40px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.3s;
+      background: var(--surface-alt);
+    }
+
+    .image-upload-area:hover {
+      border-color: #1a3650;
+      background: var(--surface);
+    }
+
+    .image-upload-area.dragover {
+      border-color: #1a3650;
+      background: rgba(26,54,80,0.05);
+    }
+
+    .image-upload-area i {
+      font-size: 2.5rem;
+      color: var(--text-secondary);
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .image-upload-area p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin: 4px 0;
+    }
+
+    .image-upload-area .small-text {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    .image-preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .image-preview-grid .preview-item {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      aspect-ratio: 1;
+      background: var(--surface-alt);
+      border: 2px solid var(--border);
+      transition: 0.2s;
+    }
+
+    .image-preview-grid .preview-item:hover {
+      border-color: #1a3650;
+    }
+
+    .image-preview-grid .preview-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .image-preview-grid .preview-item .remove-btn {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      background: rgba(0,0,0,0.75);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      transition: 0.2s;
+    }
+
+    .image-preview-grid .preview-item .remove-btn:hover {
+      background: #e74c3c;
+      transform: scale(1.1);
+    }
+
+    .image-preview-grid .preview-item .index-badge {
+      position: absolute;
+      bottom: 6px;
+      left: 6px;
+      background: rgba(0,0,0,0.6);
+      color: white;
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-size: 0.65rem;
+    }
+
+    .image-count-text {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-top: 8px;
+    }
+
+    /* Review Step */
+    .review-item {
+      display: flex;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .review-item:last-child {
+      border-bottom: none;
+    }
+
+    .review-item .label {
+      font-weight: 600;
+      color: var(--text-secondary);
+      width: 120px;
+      flex-shrink: 0;
+      font-size: 0.85rem;
+    }
+
+    .review-item .value {
+      color: var(--text);
+      font-size: 0.9rem;
+      word-break: break-word;
+    }
+
+    .review-item .value .price-tag {
+      font-weight: 700;
+      color: #1a3650;
+      font-size: 1.1rem;
+    }
+
+    .review-images {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .review-images img {
+      width: 60px;
+      height: 60px;
+      border-radius: 8px;
+      object-fit: cover;
       border: 1px solid var(--border);
     }
-    .post-form .form-section {
-      margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--border);
+
+    /* Loading Spinner */
+    .loading-spinner {
+      display: inline-block;
+      width: 22px;
+      height: 22px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
     }
-    .post-form .form-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-    .post-form .form-section .section-title {
-      font-size: 1rem; font-weight: 700; color: var(--text);
-      margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
-    .post-form .form-section .section-title i { color: #1f5d8a; }
-    .post-form .form-group { margin-bottom: 16px; }
-    .post-form .form-group label { display: block; font-weight: 600; font-size: 0.85rem; color: var(--text); margin-bottom: 4px; }
-    .post-form .form-group label .required { color: #e74c3c; }
-    .post-form .form-group input,
-    .post-form .form-group select,
-    .post-form .form-group textarea {
-      width: 100%; padding: 10px 14px; border: 1px solid var(--border);
-      border-radius: 12px; font-size: 0.95rem; background: var(--input-bg);
-      color: var(--text); transition: 0.2s;
+
+    /* Guest Message */
+    .guest-message {
+      text-align: center;
+      padding: 60px 20px;
+      background: var(--surface);
+      border-radius: 24px;
+      border: 1px solid var(--border);
     }
-    .post-form .form-group input:focus,
-    .post-form .form-group select:focus,
-    .post-form .form-group textarea:focus {
-      border-color: #1a3650; box-shadow: 0 0 0 2px rgba(26,54,80,0.1); outline: none;
+
+    .guest-message i {
+      font-size: 3.5rem;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
     }
-    .post-form .form-group textarea { min-height: 100px; resize: vertical; }
-    .post-form .form-group .helper-text { font-size: 0.75rem; color: var(--text-secondary); margin-top: 4px; }
-    .post-form .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .post-form .btn-submit {
-      background: #1a3650; color: white; border: none; padding: 14px 28px;
-      border-radius: 60px; font-weight: 700; font-size: 1rem; cursor: pointer;
-      transition: 0.2s; width: 100%; display: flex; align-items: center;
-      justify-content: center; gap: 8px;
+
+    .guest-message h2 {
+      font-size: 1.3rem;
+      color: var(--text);
+      margin-bottom: 8px;
     }
-    [data-theme="dark"] .post-form .btn-submit { background: #2A3550; color: #F1F5F9; }
-    .post-form .btn-submit:hover { background: #0f2940; }
-    [data-theme="dark"] .post-form .btn-submit:hover { background: #3A4560; }
-    .post-form .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
-    .post-form .btn-cancel {
-      background: transparent; border: 1px solid var(--border); padding: 12px 24px;
-      border-radius: 60px; font-weight: 600; cursor: pointer; transition: 0.2s;
-      color: var(--text-secondary); width: 100%; margin-top: 8px;
+
+    .guest-message p {
+      color: var(--text-secondary);
+      margin-bottom: 20px;
     }
-    .post-form .btn-cancel:hover { border-color: var(--text); color: var(--text); }
-    .image-upload-area {
-      border: 2px dashed var(--border); border-radius: 12px; padding: 20px;
-      text-align: center; cursor: pointer; transition: 0.2s;
-      min-height: 120px; display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
+
+    .guest-message .btn-primary {
+      padding: 12px 32px;
+      border-radius: 60px;
+      background: #1a3650;
+      color: white;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: 0.2s;
     }
-    .image-upload-area:hover { border-color: #1a3650; background: var(--surface-alt); }
-    .image-upload-area i { font-size: 2rem; color: var(--text-secondary); }
-    .image-upload-area p { color: var(--text-secondary); font-size: 0.85rem; margin-top: 4px; }
-    .image-upload-area .uploaded-images { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
-    .image-upload-area .uploaded-images .img-preview {
-      width: 80px; height: 80px; border-radius: 8px; object-fit: cover;
-      border: 1px solid var(--border); position: relative;
+
+    .guest-message .btn-primary:hover {
+      background: #0f2940;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(26,54,80,0.3);
     }
-    .image-upload-area .uploaded-images .img-preview .remove-img {
-      position: absolute; top: -6px; right: -6px; background: #e74c3c;
-      color: white; border: none; border-radius: 50%; width: 20px; height: 20px;
-      font-size: 0.6rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
-    }
+
+    /* Toast */
     .toast {
-      position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%);
-      background: #1a3650; color: white; padding: 12px 24px; border-radius: 12px;
-      font-size: 0.9rem; box-shadow: 0 8px 24px rgba(0,0,0,0.15); z-index: 999;
-      opacity: 0; transition: opacity 0.3s ease; pointer-events: none;
+      position: fixed;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1a3650;
+      color: white;
+      padding: 14px 28px;
+      border-radius: 14px;
+      font-size: 0.9rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      z-index: 9999;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      max-width: 90%;
+      text-align: center;
+      pointer-events: none;
     }
-    [data-theme="dark"] .toast { background: #2A3550; }
-    .toast.show { opacity: 1; pointer-events: auto; }
-    .toast i { margin-right: 8px; }
+
+    .toast.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .toast.error {
+      background: #e74c3c;
+    }
+
+    .toast.success {
+      background: #27ae60;
+    }
+
+    /* Responsive */
     @media (max-width: 640px) {
-      .post-form .form-row { grid-template-columns: 1fr; }
-      .post-container { padding: 0; }
+      .post-card {
+        padding: 20px 16px;
+        border-radius: 16px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .wizard-progress .step-indicator .step-label {
+        font-size: 0.6rem;
+      }
+
+      .wizard-progress .step-indicator .step-circle {
+        width: 32px;
+        height: 32px;
+        font-size: 0.7rem;
+      }
+
+      .step-actions {
+        flex-direction: column;
+      }
+
+      .step-actions .btn-prev {
+        order: 2;
+      }
+
+      .review-item {
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .review-item .label {
+        width: 100%;
+        font-size: 0.75rem;
+      }
+
+      .image-preview-grid {
+        grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+        gap: 8px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .post-container {
+        padding: 30px 0 50px;
+      }
     }
   </style>
 </head>
 <body>
-
-  <div class="toast" id="toast"><i class="fas fa-check-circle"></i> <span id="toastMessage">Listing posted successfully!</span></div>
 
   <!-- ===== NAV ===== -->
   <nav class="navbar">
     <div class="container nav-container">
       <a href="/" class="logo-wrapper">
         <img src="/assets/logo-icon.svg" alt="Zaure" class="logo-icon">
-        <div class="logo-text"><span class="brand">Zaure</span><span class="tagline">Your Entrance to Home</span></div>
+        <div class="logo-text">
+          <span class="brand">Zaure</span>
+          <span class="tagline">Your Entrance to Home</span>
+        </div>
       </a>
       <div class="nav-links">
         <a href="/">Home</a>
@@ -117,93 +614,186 @@
       </div>
       <div class="nav-actions">
         <button class="icon-btn" id="themeToggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
-        <a href="/favorites.html" class="icon-btn" style="position:relative;text-decoration:none;"><i class="fas fa-heart"></i><span id="favBadge">0</span></a>
-        <div id="headerUserArea"><div class="avatar" id="userAvatar" onclick="openSignup()">ZA</div></div>
+        <a href="/favorites.html" class="icon-btn" style="position:relative;text-decoration:none;">
+          <i class="fas fa-heart"></i>
+          <span id="favBadge">0</span>
+        </a>
+        <div id="headerUserArea">
+          <div class="avatar" id="userAvatar" onclick="openSignup()">ZA</div>
+        </div>
       </div>
     </div>
   </nav>
 
-  <div class="container post-container">
-
-    <div class="breadcrumb">
-      <a href="/">Home</a>
-      <span class="separator"><i class="fas fa-chevron-right"></i></span>
-      <a href="/profile.html">Profile</a>
-      <span class="separator"><i class="fas fa-chevron-right"></i></span>
-      <span class="current" id="pageTitle">Post a Listing</span>
-    </div>
-
-    <div class="post-header">
-      <h1 id="formTitle"><i class="fas fa-plus-circle" style="color:#1f5d8a;"></i> Post a New Listing</h1>
-      <p>Fill in the details below to list your item for sale. All fields marked with <span style="color:#e74c3c;">*</span> are required.</p>
-    </div>
-
-    <form id="postForm" class="post-form">
-
-      <div class="form-section">
-        <div class="section-title"><i class="fas fa-user"></i> Seller Information</div>
-        <div class="form-row">
-          <div class="form-group"><label>Your Name</label><input type="text" id="sellerName" readonly style="background:var(--surface-alt);cursor:not-allowed;"></div>
-          <div class="form-group"><label>Phone Number</label><input type="tel" id="sellerPhone" readonly style="background:var(--surface-alt);cursor:not-allowed;"></div>
-        </div>
-        <div class="form-group"><label>Location (State)</label><input type="text" id="sellerState" readonly style="background:var(--surface-alt);cursor:not-allowed;"></div>
+  <!-- ===== MAIN CONTENT ===== -->
+  <div class="container">
+    <div class="post-container">
+      
+      <!-- Guest State -->
+      <div id="guestState" class="guest-message" style="display:none;">
+        <i class="fas fa-lock"></i>
+        <h2>Sign up to post a listing</h2>
+        <p>Create a free account to start selling on Zaure. It takes less than a minute!</p>
+        <button class="btn-primary" onclick="openSignup()">
+          <i class="fas fa-user-plus"></i> Create Account
+        </button>
       </div>
 
-      <div class="form-section">
-        <div class="section-title"><i class="fas fa-box"></i> Product Details</div>
-        <div class="form-group"><label>Product Title <span class="required">*</span></label><input type="text" id="productTitle" placeholder="e.g., iPhone 15 Pro 256GB - Excellent Condition" required></div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Category <span class="required">*</span></label>
-            <select id="productCategory" required>
-              <option value="">Select category</option>
-              <option value="vehicles">Vehicles</option>
-              <option value="electronics">Electronics</option>
-              <option value="furniture">Furniture</option>
-              <option value="fashion">Fashion</option>
-              <option value="real-estate">Real Estate</option>
-              <option value="services">Services</option>
-              <option value="pets">Pets & Animals</option>
-              <option value="books">Books & Media</option>
-              <option value="other">Other</option>
-            </select>
+      <!-- Post Wizard -->
+      <div id="postFormContainer">
+        <div class="post-card">
+          
+          <!-- Progress Bar -->
+          <div class="wizard-progress" id="wizardProgress">
+            <div class="step-indicator active" data-step="1">
+              <div class="step-circle">1</div>
+              <span class="step-label">Details</span>
+            </div>
+            <div class="step-indicator" data-step="2">
+              <div class="step-circle">2</div>
+              <span class="step-label">Photos</span>
+            </div>
+            <div class="step-indicator" data-step="3">
+              <div class="step-circle">3</div>
+              <span class="step-label">Review</span>
+            </div>
           </div>
-          <div class="form-group"><label>Price (₦) <span class="required">*</span></label><input type="number" id="productPrice" placeholder="e.g., 450000" required></div>
-        </div>
-        <div class="form-group">
-          <label>Description <span class="required">*</span></label>
-          <textarea id="productDescription" placeholder="Describe your item in detail... Include condition, features, and why someone should buy it." required></textarea>
-          <div class="helper-text">Provide as much detail as possible to attract buyers.</div>
-        </div>
-        <div class="form-group">
-          <label>Tags (comma separated)</label>
-          <input type="text" id="productTags" placeholder="e.g., vintage, leather, sofa">
-          <div class="helper-text">Add relevant keywords to help buyers find your listing.</div>
-        </div>
-      </div>
 
-      <div class="form-section">
-        <div class="section-title"><i class="fas fa-images"></i> Product Images</div>
-        <div class="form-group">
-          <label>Upload Images <span class="required">*</span></label>
-          <div class="image-upload-area" id="imageUploadArea">
-            <i class="fas fa-cloud-upload-alt"></i>
-            <p>Click to upload or drag & drop images</p>
-            <input type="file" id="imageInput" accept="image/*" multiple style="display:none;">
-            <div class="uploaded-images" id="uploadedImages"></div>
+          <!-- Step 1: Details -->
+          <div class="step-content active" data-step="1">
+            <div class="step-header">
+              <h2>📝 Item Details</h2>
+              <p class="subtitle">Tell buyers what you're selling. Be specific!</p>
+            </div>
+
+            <div class="form-group">
+              <label>What are you selling? <span class="required">*</span></label>
+              <input type="text" id="postTitle" placeholder="e.g., iPhone 14 Pro Max - 256GB" required maxlength="100">
+              <div class="help-text">Be descriptive. Max 100 characters.</div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Price (₦) <span class="required">*</span></label>
+                <input type="number" id="postPrice" placeholder="50000" required min="0" step="100">
+              </div>
+              <div class="form-group">
+                <label>Category <span class="required">*</span></label>
+                <select id="postCategory" required>
+                  <option value="">Select category</option>
+                  <option value="vehicles">🚗 Vehicles</option>
+                  <option value="electronics">📱 Electronics</option>
+                  <option value="furniture">🪑 Furniture</option>
+                  <option value="fashion">👗 Fashion</option>
+                  <option value="real-estate">🏠 Real Estate</option>
+                  <option value="services">🔧 Services</option>
+                  <option value="other">📦 Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Location <span class="required">*</span></label>
+              <input type="text" id="postLocation" placeholder="e.g., Lagos, Abuja, Kano" required>
+              <div class="help-text">City or state where the item is located.</div>
+            </div>
+
+            <div class="form-group">
+              <label>Description <span class="required">*</span></label>
+              <textarea id="postDescription" placeholder="Describe your item in detail... Include condition, features, why someone should buy it, etc." required maxlength="2000"></textarea>
+              <div class="help-text">Max 2000 characters. Be thorough and honest.</div>
+            </div>
+
+            <div class="step-actions">
+              <button type="button" class="btn-next" onclick="goToStep(2)">
+                Next Step <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
           </div>
-          <div class="helper-text">Upload up to 5 images. First image will be the main cover.</div>
+
+          <!-- Step 2: Photos -->
+          <div class="step-content" data-step="2">
+            <div class="step-header">
+              <h2>📸 Upload Photos</h2>
+              <p class="subtitle">Show buyers what you're selling. Good photos sell faster!</p>
+            </div>
+
+            <div class="form-group">
+              <label>Upload Images <span class="required">*</span></label>
+              <div class="image-upload-area" id="imageUploadArea">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p><strong>Click to upload images</strong></p>
+                <p class="small-text">or drag and drop</p>
+                <p class="small-text" style="margin-top:6px;">Max 5 images · JPG, PNG, GIF · Up to 5MB each</p>
+              </div>
+              <input type="file" id="imageInput" accept="image/*" multiple style="display:none;">
+              <div class="image-preview-grid" id="imagePreviewGrid"></div>
+              <div class="image-count-text" id="imageCountText">No images selected</div>
+            </div>
+
+            <div class="step-actions">
+              <button type="button" class="btn-prev" onclick="goToStep(1)">
+                <i class="fas fa-arrow-left"></i> Back
+              </button>
+              <button type="button" class="btn-next" onclick="goToStep(3)">
+                Review Listing <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 3: Review -->
+          <div class="step-content" data-step="3">
+            <div class="step-header">
+              <h2>✅ Review Your Listing</h2>
+              <p class="subtitle">Check everything looks good before posting.</p>
+            </div>
+
+            <div id="reviewContent">
+              <div class="review-item">
+                <span class="label">Title</span>
+                <span class="value" id="reviewTitle">-</span>
+              </div>
+              <div class="review-item">
+                <span class="label">Price</span>
+                <span class="value"><span class="price-tag" id="reviewPrice">-</span></span>
+              </div>
+              <div class="review-item">
+                <span class="label">Category</span>
+                <span class="value" id="reviewCategory">-</span>
+              </div>
+              <div class="review-item">
+                <span class="label">Location</span>
+                <span class="value" id="reviewLocation">-</span>
+              </div>
+              <div class="review-item">
+                <span class="label">Description</span>
+                <span class="value" id="reviewDescription">-</span>
+              </div>
+              <div class="review-item">
+                <span class="label">Images</span>
+                <div class="value">
+                  <div class="review-images" id="reviewImages"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="step-actions">
+              <button type="button" class="btn-prev" onclick="goToStep(2)">
+                <i class="fas fa-arrow-left"></i> Back
+              </button>
+              <button type="submit" class="btn-submit" id="submitBtn">
+                <i class="fas fa-rocket"></i> Post Listing
+              </button>
+            </div>
+          </div>
+
         </div>
       </div>
-
-      <div style="display:flex;flex-direction:column;gap:8px;">
-        <button type="submit" class="btn-submit" id="submitBtn"><i class="fas fa-paper-plane"></i> <span id="submitBtnText">Post Listing</span></button>
-        <button type="button" class="btn-cancel" onclick="window.location.href='/'">Cancel</button>
-      </div>
-
-    </form>
-
+    </div>
   </div>
+
+  <!-- ===== TOAST ===== -->
+  <div class="toast" id="toast"></div>
 
   <!-- ===== FOOTER ===== -->
   <footer class="footer">
@@ -222,22 +812,55 @@
             <a href="https://facebook.com/zauretech" target="_blank"><i class="fab fa-facebook-f"></i></a>
           </div>
         </div>
-        <div class="footer-col"><h4>Browse</h4><a href="/category.html?slug=all">All Items</a><a href="/category.html?slug=vehicles">Vehicles</a><a href="/category.html?slug=electronics">Electronics</a><a href="/category.html?slug=furniture">Furniture</a><a href="/category.html?slug=fashion">Fashion</a><a href="/category.html?slug=real-estate">Real Estate</a></div>
-        <div class="footer-col"><h4>Support</h4><a href="/help.html">Help Center</a><a href="/safety.html">Safety Tips</a><a href="/contact.html">Contact Us</a><a href="/support.html">Support</a></div>
-        <div class="footer-col"><h4>Company</h4><a href="/about.html">About Us</a><a href="/careers.html">Careers</a><a href="/privacy.html">Privacy Policy</a><a href="/terms.html">Terms of Service</a></div>
+        <div class="footer-col">
+          <h4>Browse</h4>
+          <a href="/category.html?slug=all">All Items</a>
+          <a href="/category.html?slug=vehicles">Vehicles</a>
+          <a href="/category.html?slug=electronics">Electronics</a>
+          <a href="/category.html?slug=furniture">Furniture</a>
+          <a href="/category.html?slug=fashion">Fashion</a>
+          <a href="/category.html?slug=real-estate">Real Estate</a>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <a href="/help.html">Help Center</a>
+          <a href="/safety.html">Safety Tips</a>
+          <a href="/contact.html">Contact Us</a>
+          <a href="/support.html">Support</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="/about.html">About Us</a>
+          <a href="/careers.html">Careers</a>
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Service</a>
+        </div>
         <div class="footer-col trust-badges" style="grid-column:1/-1;border-top:1px solid #2E3548;padding-top:16px;margin-top:8px;">
           <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;">
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-shield-alt" style="color:#B49450;"></i> Verified Users</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-handshake" style="color:#B49450;"></i> No Commission</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-user-check" style="color:#B49450;"></i> Identity Verified</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-lock" style="color:#B49450;"></i> Secure Platform</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-clock" style="color:#B49450;"></i> 24/7 Support</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-star" style="color:#B49450;"></i> Trusted by Thousands</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-phone" style="color:#B49450;"></i> Direct Contact</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-credit-card" style="color:#B49450;"></i> Secure Payments</div>
+            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;">
+              <i class="fas fa-shield-alt" style="color:#B49450;"></i> Verified Users
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;">
+              <i class="fas fa-handshake" style="color:#B49450;"></i> No Commission
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;">
+              <i class="fas fa-user-check" style="color:#B49450;"></i> Identity Verified
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;">
+              <i class="fas fa-lock" style="color:#B49450;"></i> Secure Platform
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;">
+              <i class="fas fa-clock" style="color:#B49450;"></i> 24/7 Support
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;">
+              <i class="fas fa-star" style="color:#B49450;"></i> Trusted by Thousands
+            </div>
           </div>
         </div>
-        <div class="footer-bottom"><span>&copy; 2026 <strong style="color:white;">Zaure Technologies</strong>. All rights reserved.</span><span><i class="fas fa-globe"></i> Nigeria · English</span></div>
+        <div class="footer-bottom">
+          <span>&copy; 2026 <strong style="color:white;">Zaure Technologies</strong>. All rights reserved.</span>
+          <span><i class="fas fa-globe"></i> Nigeria · English</span>
+        </div>
       </div>
     </div>
   </footer>
@@ -246,7 +869,7 @@
   <div class="bottom-nav">
     <a href="/" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
     <button class="nav-item" onclick="window.location.href='/'"><i class="fas fa-search"></i><span>Search</span></button>
-    <button class="post-btn active" id="fabPostAd"><i class="fas fa-plus"></i></button>
+    <button class="post-btn" id="fabPostAd"><i class="fas fa-plus"></i></button>
     <a href="/favorites.html" class="nav-item"><i class="fas fa-heart"></i><span>Favorites</span></a>
     <a href="/profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
   </div>
@@ -254,13 +877,16 @@
   <!-- ===== SIGNUP MODAL ===== -->
   <div class="modal-overlay" id="signupModal">
     <div class="modal">
-      <div class="modal-header"><h3>Create your account</h3><button class="modal-close" id="closeSignupModalBtn"><i class="fas fa-times"></i></button></div>
+      <div class="modal-header">
+        <h3>Create your account</h3>
+        <button class="modal-close" id="closeSignupModalBtn"><i class="fas fa-times"></i></button>
+      </div>
       <form id="signupForm" class="modal-form">
-        <label for="signupName">Full Name</label>
+        <label for="signupName">Full Name <span class="required">*</span></label>
         <input type="text" id="signupName" placeholder="Enter your full name" required>
-        <label for="signupPhone">Phone Number</label>
+        <label for="signupPhone">Phone Number <span class="required">*</span></label>
         <input type="tel" id="signupPhone" placeholder="Enter your phone number" required>
-        <label for="signupState">State</label>
+        <label for="signupState">State <span class="required">*</span></label>
         <select id="signupState" required>
           <option value="">Select your state</option>
           <option value="Abia">Abia</option><option value="Adamawa">Adamawa</option>
@@ -289,170 +915,430 @@
   </div>
 
   <script src="/js/main.js"></script>
+  
+  <!-- ===== POST PAGE SPECIFIC JAVASCRIPT ===== -->
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      let toastTimeout;
+    // ============================================================
+    // POST PAGE - Step Wizard with Slug-based URLs
+    // ============================================================
+    
+    let currentStep = 1;
+    const totalSteps = 3;
+    let selectedFiles = [];
+    let uploadedImageUrls = [];
+    let isSubmitting = false;
+    let formData = {};
+    
+    // DOM Elements - defined at the top level
+    const postFormContainer = document.getElementById('postFormContainer');
+    const imageUploadArea = document.getElementById('imageUploadArea');
+    const imageInput = document.getElementById('imageInput');
+    const imagePreviewGrid = document.getElementById('imagePreviewGrid');
+    const imageCountText = document.getElementById('imageCountText');
+    const submitBtn = document.getElementById('submitBtn');
 
-      function showToast(message, type = 'success') {
-        const toast = document.getElementById('toast');
-        const toastMessage = document.getElementById('toastMessage');
-        toastMessage.textContent = message;
-        toast.className = 'toast show';
-        toast.style.background = type === 'success' ? '#1a3650' : '#e74c3c';
-        clearTimeout(toastTimeout);
-        toastTimeout = setTimeout(() => { toast.classList.remove('show'); }, 3000);
+    // ============================================================
+    // Toast Notification
+    // ============================================================
+    function showToast(message, type = 'success') {
+      const toast = document.getElementById('toast');
+      if (!toast) return;
+      toast.textContent = message;
+      toast.className = 'toast show ' + type;
+      clearTimeout(toast._timeout);
+      toast._timeout = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 4000);
+    }
+
+    // ============================================================
+    // Check if User is Logged In
+    // ============================================================
+    function checkUser() {
+      const user = getCurrentUser();
+      const guestState = document.getElementById('guestState');
+      const postFormContainer = document.getElementById('postFormContainer');
+      
+      if (!user) {
+        if (guestState) guestState.style.display = 'block';
+        if (postFormContainer) postFormContainer.style.display = 'none';
+        return false;
       }
+      if (guestState) guestState.style.display = 'none';
+      if (postFormContainer) postFormContainer.style.display = 'block';
+      return true;
+    }
 
-      const user = JSON.parse(localStorage.getItem('zaure_user'));
+    // ============================================================
+    // Step Navigation
+    // ============================================================
+    window.goToStep = function(step) {
+      // Validate current step before moving forward
+      if (step > currentStep) {
+        if (currentStep === 1 && !validateStep1()) {
+          showToast('Please fill in all required fields', 'error');
+          return;
+        }
+        if (currentStep === 2 && selectedFiles.length === 0) {
+          showToast('Please upload at least one image', 'error');
+          return;
+        }
+      }
+      
+      currentStep = step;
+      
+      // Update step content
+      document.querySelectorAll('.step-content').forEach(el => {
+        el.classList.remove('active');
+      });
+      const target = document.querySelector(`.step-content[data-step="${step}"]`);
+      if (target) target.classList.add('active');
+      
+      // Update progress indicators
+      document.querySelectorAll('.step-indicator').forEach(el => {
+        const s = parseInt(el.dataset.step);
+        el.classList.remove('active', 'completed');
+        if (s === step) el.classList.add('active');
+        else if (s < step) el.classList.add('completed');
+      });
+      
+      // Update review if going to step 3
+      if (step === 3) updateReview();
+      
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    // ============================================================
+    // Validate Step 1
+    // ============================================================
+    function validateStep1() {
+      const title = document.getElementById('postTitle')?.value.trim() || '';
+      const price = document.getElementById('postPrice')?.value || '';
+      const category = document.getElementById('postCategory')?.value || '';
+      const location = document.getElementById('postLocation')?.value.trim() || '';
+      const description = document.getElementById('postDescription')?.value.trim() || '';
+      
+      // Store form data for review
+      formData = { title, price, category, location, description };
+      
+      return title && price && category && location && description;
+    }
+
+    // ============================================================
+    // Update Review Step
+    // ============================================================
+    function updateReview() {
+      const data = formData;
+      
+      const reviewTitle = document.getElementById('reviewTitle');
+      const reviewPrice = document.getElementById('reviewPrice');
+      const reviewCategory = document.getElementById('reviewCategory');
+      const reviewLocation = document.getElementById('reviewLocation');
+      const reviewDescription = document.getElementById('reviewDescription');
+      const reviewImages = document.getElementById('reviewImages');
+      
+      if (reviewTitle) reviewTitle.textContent = data.title || '-';
+      if (reviewPrice) reviewPrice.textContent = data.price ? `₦${parseFloat(data.price).toLocaleString()}` : '-';
+      
+      const categoryMap = {
+        'vehicles': '🚗 Vehicles',
+        'electronics': '📱 Electronics',
+        'furniture': '🪑 Furniture',
+        'fashion': '👗 Fashion',
+        'real-estate': '🏠 Real Estate',
+        'services': '🔧 Services',
+        'other': '📦 Other'
+      };
+      if (reviewCategory) reviewCategory.textContent = categoryMap[data.category] || data.category || '-';
+      if (reviewLocation) reviewLocation.textContent = data.location || '-';
+      if (reviewDescription) reviewDescription.textContent = data.description || '-';
+      
+      // Review images
+      if (reviewImages) {
+        if (selectedFiles.length > 0) {
+          reviewImages.innerHTML = selectedFiles.map((file, i) => {
+            const url = URL.createObjectURL(file);
+            return `<img src="${url}" alt="Image ${i+1}">`;
+          }).join('');
+        } else {
+          reviewImages.innerHTML = '<span style="color:var(--text-secondary);font-size:0.85rem;">No images selected</span>';
+        }
+      }
+    }
+
+    // ============================================================
+    // Image Upload - Drag & Drop
+    // ============================================================
+    if (imageUploadArea) {
+      imageUploadArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        imageUploadArea.classList.add('dragover');
+      });
+
+      imageUploadArea.addEventListener('dragleave', () => {
+        imageUploadArea.classList.remove('dragover');
+      });
+
+      imageUploadArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        imageUploadArea.classList.remove('dragover');
+        const files = Array.from(e.dataTransfer.files);
+        handleFiles(files);
+      });
+
+      imageUploadArea.addEventListener('click', () => {
+        if (imageInput) imageInput.click();
+      });
+
+      if (imageInput) {
+        imageInput.addEventListener('change', (e) => {
+          const files = Array.from(e.target.files);
+          handleFiles(files);
+          e.target.value = '';
+        });
+      }
+    }
+
+    // ============================================================
+    // Handle Files
+    // ============================================================
+    function handleFiles(files) {
+      const maxFiles = 5;
+      const remaining = maxFiles - selectedFiles.length;
+      const newFiles = files.slice(0, remaining);
+      
+      if (remaining <= 0) {
+        showToast('Maximum 5 images allowed', 'error');
+        return;
+      }
+      
+      // Validate file types and sizes
+      const validFiles = newFiles.filter(file => {
+        const validTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+        const maxSize = 5 * 1024 * 1024; // 5MB
+        
+        if (!validTypes.includes(file.type)) {
+          showToast(`${file.name} - Invalid format. Use JPG, PNG, or GIF.`, 'error');
+          return false;
+        }
+        if (file.size > maxSize) {
+          showToast(`${file.name} - File too large. Max 5MB.`, 'error');
+          return false;
+        }
+        return true;
+      });
+      
+      if (validFiles.length > 0) {
+        selectedFiles = [...selectedFiles, ...validFiles];
+        renderPreviews();
+        updateImageCount();
+        showToast(`${validFiles.length} image(s) added successfully`);
+      }
+    }
+
+    // ============================================================
+    // Render Image Previews
+    // ============================================================
+    function renderPreviews() {
+      if (!imagePreviewGrid) return;
+      
+      imagePreviewGrid.innerHTML = selectedFiles.map((file, index) => {
+        const url = URL.createObjectURL(file);
+        return `
+          <div class="preview-item">
+            <img src="${url}" alt="Image ${index + 1}">
+            <button class="remove-btn" onclick="removeImage(${index})" type="button">
+              <i class="fas fa-times"></i>
+            </button>
+            <span class="index-badge">#${index + 1}</span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    window.removeImage = function(index) {
+      URL.revokeObjectURL(selectedFiles[index]);
+      selectedFiles.splice(index, 1);
+      renderPreviews();
+      updateImageCount();
+    };
+
+    function updateImageCount() {
+      if (imageCountText) {
+        imageCountText.textContent = selectedFiles.length === 0 
+          ? 'No images selected' 
+          : `${selectedFiles.length} of 5 images selected`;
+      }
+    }
+
+    // ============================================================
+    // Generate URL-friendly slug
+    // ============================================================
+    function generateSlug(title) {
+      return title
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '')
+        .substring(0, 60);
+    }
+
+    // ============================================================
+    // Submit Form - Using event listener on document
+    // ============================================================
+    document.addEventListener('submit', async function(e) {
+      // Check if the submitted form is our post form
+      const form = e.target;
+      if (!form || form.id !== 'postForm') return;
+      
+      e.preventDefault();
+      
+      // Check user again
+      const user = getCurrentUser();
       if (!user) {
         openSignup();
-        document.getElementById('submitBtn').disabled = true;
-        document.getElementById('submitBtnText').textContent = 'Please Sign Up First';
-      } else {
-        document.getElementById('sellerName').value = user.name || '';
-        document.getElementById('sellerPhone').value = user.phone || '';
-        document.getElementById('sellerState').value = user.state || '';
-
-        const params = new URLSearchParams(window.location.search);
-        const editId = params.get('id');
-        if (editId) {
-          document.getElementById('formTitle').innerHTML = `<i class="fas fa-edit" style="color:#1f5d8a;"></i> Edit Listing`;
-          document.getElementById('pageTitle').textContent = 'Edit Listing';
-          document.getElementById('submitBtnText').textContent = 'Update Listing';
-          loadListingForEdit(editId);
+        return;
+      }
+      
+      // Validate
+      if (!validateStep1()) {
+        showToast('Please fill in all required fields', 'error');
+        goToStep(1);
+        return;
+      }
+      
+      if (selectedFiles.length === 0) {
+        showToast('Please upload at least one image', 'error');
+        goToStep(2);
+        return;
+      }
+      
+      // Disable submit button
+      isSubmitting = true;
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `<span class="loading-spinner"></span> Publishing...`;
+      }
+      
+      try {
+        // Step 1: Upload images
+        showToast('Uploading images...');
+        const imageUrls = await uploadMultipleImages(selectedFiles);
+        
+        if (imageUrls.length === 0) {
+          showToast('Failed to upload images. Please try again.', 'error');
+          return;
         }
-      }
-
-      function loadListingForEdit(id) {
-        const allListings = JSON.parse(localStorage.getItem('zaure_listings') || '[]');
-        const listing = allListings.find(l => l.id === parseInt(id));
-        if (listing) {
-          document.getElementById('productTitle').value = listing.title || '';
-          document.getElementById('productCategory').value = listing.category || '';
-          document.getElementById('productPrice').value = listing.price || '';
-          document.getElementById('productDescription').value = listing.description || '';
-          document.getElementById('productTags').value = (listing.tags || []).join(', ');
-          if (listing.images && listing.images.length > 0) {
-            const container = document.getElementById('uploadedImages');
-            listing.images.forEach((img, index) => {
-              const div = document.createElement('div');
-              div.style.position = 'relative';
-              div.innerHTML = `<img src="${img}" class="img-preview" style="width:80px;height:80px;object-fit:cover;border-radius:8px;border:1px solid var(--border);"><button type="button" class="remove-img" onclick="removeImage(${index})" style="position:absolute;top:-6px;right:-6px;background:#e74c3c;color:white;border:none;border-radius:50%;width:20px;height:20px;font-size:0.6rem;cursor:pointer;display:flex;align-items:center;justify-content:center;">×</button>`;
-              container.appendChild(div);
-            });
-          }
-          document.getElementById('submitBtn').dataset.editId = id;
-        }
-      }
-
-      const imageUploadArea = document.getElementById('imageUploadArea');
-      const imageInput = document.getElementById('imageInput');
-      const uploadedImages = document.getElementById('uploadedImages');
-      let imageFiles = [];
-
-      imageUploadArea.addEventListener('click', function(e) {
-        if (!e.target.closest('.remove-img')) { imageInput.click(); }
-      });
-
-      imageInput.addEventListener('change', function(e) {
-        const files = Array.from(e.target.files);
-        files.forEach(file => {
-          if (imageFiles.length >= 5) { showToast('Maximum 5 images allowed', 'error'); return; }
-          const reader = new FileReader();
-          reader.onload = function(event) { imageFiles.push(event.target.result); renderImages(); };
-          reader.readAsDataURL(file);
-        });
-        this.value = '';
-      });
-
-      function renderImages() {
-        uploadedImages.innerHTML = imageFiles.map((img, index) => `
-          <div style="position:relative;">
-            <img src="${img}" class="img-preview" style="width:80px;height:80px;object-fit:cover;border-radius:8px;border:1px solid var(--border);">
-            <button type="button" class="remove-img" onclick="removeImage(${index})" style="position:absolute;top:-6px;right:-6px;background:#e74c3c;color:white;border:none;border-radius:50%;width:20px;height:20px;font-size:0.6rem;cursor:pointer;display:flex;align-items:center;justify-content:center;">×</button>
-          </div>
-        `).join('');
-      }
-
-      window.removeImage = function(index) { imageFiles.splice(index, 1); renderImages(); };
-
-      imageUploadArea.addEventListener('dragover', function(e) {
-        e.preventDefault(); this.style.borderColor = '#1a3650'; this.style.background = 'var(--surface-alt)';
-      });
-      imageUploadArea.addEventListener('dragleave', function(e) {
-        e.preventDefault(); this.style.borderColor = 'var(--border)'; this.style.background = 'transparent';
-      });
-      imageUploadArea.addEventListener('drop', function(e) {
-        e.preventDefault(); this.style.borderColor = 'var(--border)'; this.style.background = 'transparent';
-        const files = Array.from(e.dataTransfer.files);
-        files.forEach(file => {
-          if (imageFiles.length >= 5) { showToast('Maximum 5 images allowed', 'error'); return; }
-          const reader = new FileReader();
-          reader.onload = function(event) { imageFiles.push(event.target.result); renderImages(); };
-          reader.readAsDataURL(file);
-        });
-      });
-
-      document.getElementById('postForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const user = JSON.parse(localStorage.getItem('zaure_user'));
-        if (!user) { openSignup(); return; }
-
-        const title = document.getElementById('productTitle').value.trim();
-        const category = document.getElementById('productCategory').value;
-        const price = parseInt(document.getElementById('productPrice').value);
-        const description = document.getElementById('productDescription').value.trim();
-
-        if (!title) { showToast('Please enter a product title', 'error'); return; }
-        if (!category) { showToast('Please select a category', 'error'); return; }
-        if (!price || price <= 0) { showToast('Please enter a valid price', 'error'); return; }
-        if (!description) { showToast('Please enter a product description', 'error'); return; }
-        if (imageFiles.length === 0) { showToast('Please upload at least one image', 'error'); return; }
-
-        const tags = document.getElementById('productTags').value.split(',').map(t => t.trim()).filter(t => t);
-
-        const listing = {
-          id: Date.now(),
-          title: title,
-          category: category,
-          price: price,
-          description: description,
-          tags: tags,
-          images: imageFiles,
-          location: user.state || 'Nigeria',
-          date: 'Just now',
-          boosted: false,
+        
+        // Step 2: Generate slug
+        const slug = generateSlug(formData.title);
+        
+        // Step 3: Save product to Google Sheets with slug
+        showToast('Saving your listing...');
+        const productData = {
+          title: formData.title,
+          price: parseFloat(formData.price),
+          category: formData.category,
+          location: formData.location,
+          description: formData.description,
+          images: imageUrls.join(','),
+          slug: slug,
+          sellerId: user.id,
+          sellerName: user.name,
+          sellerPhone: user.phone,
           featured: false,
-          seller: {
-            name: user.name,
-            phone: user.phone,
-            verified: true,
-            joined: new Date().getFullYear().toString(),
-            listings: 0,
-            rating: 5.0,
-            sales: 0,
-            response: '100%',
-            bio: user.bio || 'Seller on Zaure'
-          }
+          boosted: false
         };
+        
+        const result = await addProductToSheet(productData);
+        
+        if (result.success) {
+          showToast('🎉 Your listing is live!');
+          
+          // Reset form
+          const postForm = document.getElementById('postForm');
+          if (postForm) postForm.reset();
+          selectedFiles = [];
+          renderPreviews();
+          updateImageCount();
+          formData = {};
+          
+          // Redirect using slug instead of ID
+          setTimeout(() => {
+            window.location.href = `/p/${slug}`;
+          }, 1500);
+        } else {
+          showToast(result.error || 'Failed to post listing', 'error');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        showToast('Something went wrong. Please try again.', 'error');
+      } finally {
+        isSubmitting = false;
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = `<i class="fas fa-rocket"></i> Post Listing`;
+        }
+      }
+    });
 
-        const editId = document.getElementById('submitBtn').dataset.editId;
-        let allListings = JSON.parse(localStorage.getItem('zaure_listings') || '[]');
-
-        if (editId) {
-          const index = allListings.findIndex(l => l.id === parseInt(editId));
-          if (index > -1) { listing.id = parseInt(editId); allListings[index] = listing; showToast('Listing updated successfully!'); }
-        } else { allListings.push(listing); showToast('Listing posted successfully!'); }
-
-        localStorage.setItem('zaure_listings', JSON.stringify(allListings));
-        setTimeout(() => { window.location.href = '/profile.html'; }, 1500);
-      });
-
-      document.getElementById('fabPostAd').addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
-
-      loadUser();
+    // ============================================================
+    // Init
+    // ============================================================
+    document.addEventListener('DOMContentLoaded', async function() {
+      // Load user
+      await loadUser();
+      checkUser();
       initTheme();
       updateFavoriteBadge();
+      
+      // Handle signup modal
+      const signupModal = document.getElementById('signupModal');
+      const closeSignupModalBtn = document.getElementById('closeSignupModalBtn');
+      const signupForm = document.getElementById('signupForm');
+      
+      if (closeSignupModalBtn) {
+        closeSignupModalBtn.addEventListener('click', () => {
+          if (signupModal) signupModal.classList.remove('active');
+        });
+      }
+      if (signupModal) {
+        signupModal.addEventListener('click', (e) => {
+          if (e.target === signupModal) signupModal.classList.remove('active');
+        });
+      }
+      if (signupForm) {
+        signupForm.addEventListener('submit', async function(e) {
+          e.preventDefault();
+          const name = document.getElementById('signupName').value.trim();
+          const phone = document.getElementById('signupPhone').value.trim();
+          const state = document.getElementById('signupState').value;
+          
+          if (name && phone && state) {
+            try {
+              await signupUser(name, phone, state);
+              if (signupModal) signupModal.classList.remove('active');
+              signupForm.reset();
+              showToast('Account created successfully! 🎉');
+              setTimeout(() => location.reload(), 1000);
+            } catch (error) {
+              showToast(error.message, 'error');
+            }
+          }
+        });
+      }
+      
+      // Handle FAB post button
+      const fabPostAd = document.getElementById('fabPostAd');
+      if (fabPostAd) {
+        fabPostAd.addEventListener('click', function() {
+          if (!getCurrentUser()) {
+            openSignup();
+          } else {
+            window.location.href = '/post.html';
+          }
+        });
+      }
     });
   </script>
 </body>
