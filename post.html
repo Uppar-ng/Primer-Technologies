@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
   <style>
-    /* ===== POST WIZARD STYLES ===== */
+    /* ===== ALL EXISTING STYLES (keep the same) ===== */
     .post-container {
       max-width: 720px;
       margin: 0 auto;
@@ -510,20 +510,50 @@
       font-size: 0.7rem;
     }
 
-    .loading-spinner {
-      display: inline-block;
-      width: 22px;
-      height: 22px;
-      border: 2px solid rgba(255,255,255,0.3);
-      border-top-color: white;
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
+    /* ===== DEBUG STATUS BAR ===== */
+    .debug-status {
+      background: var(--surface-alt);
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin: 16px 0;
+      border: 1px solid var(--border);
+      font-size: 0.85rem;
+      display: none;
     }
 
-    @keyframes spin {
-      to { transform: rotate(360deg); }
+    .debug-status.show {
+      display: block;
     }
 
+    .debug-status .status-step {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 0;
+    }
+
+    .debug-status .status-step .icon {
+      width: 20px;
+      text-align: center;
+    }
+
+    .debug-status .status-step .icon.success {
+      color: #27ae60;
+    }
+
+    .debug-status .status-step .icon.error {
+      color: #e74c3c;
+    }
+
+    .debug-status .status-step .icon.pending {
+      color: #f5b342;
+    }
+
+    .debug-status .status-step .icon.done {
+      color: #27ae60;
+    }
+
+    /* ===== TOAST ===== */
     .toast {
       position: fixed;
       bottom: 100px;
@@ -556,6 +586,21 @@
       background: #27ae60;
     }
 
+    .loading-spinner {
+      display: inline-block;
+      width: 22px;
+      height: 22px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Responsive */
     @media (max-width: 640px) {
       .post-card {
         padding: 20px 16px;
@@ -663,186 +708,202 @@
             </div>
           </div>
 
-          <div class="step-content active" data-step="1">
-            <div class="step-header">
-              <h2>📝 Item Details</h2>
-              <p class="subtitle">Tell buyers what you're selling. Be specific!</p>
+          <!-- ===== DEBUG STATUS BAR ===== -->
+          <div class="debug-status" id="debugStatus">
+            <div class="status-step">
+              <span class="icon" id="statusIcon">⏳</span>
+              <span id="statusText">Ready</span>
             </div>
+          </div>
 
-            <div class="form-group">
-              <label>What are you selling? <span class="required">*</span></label>
-              <input type="text" id="postTitle" placeholder="e.g., iPhone 14 Pro Max - 256GB" required maxlength="100">
-              <div class="help-text">Be descriptive. Max 100 characters.</div>
-            </div>
+          <form id="postForm">
+            <!-- Step 1: Details -->
+            <div class="step-content active" data-step="1">
+              <div class="step-header">
+                <h2>📝 Item Details</h2>
+                <p class="subtitle">Tell buyers what you're selling. Be specific!</p>
+              </div>
 
-            <div class="form-row">
               <div class="form-group">
-                <label>Price (₦) <span class="required">*</span></label>
-                <input type="number" id="postPrice" placeholder="50000" required min="0" step="100">
+                <label>What are you selling? <span class="required">*</span></label>
+                <input type="text" id="postTitle" placeholder="e.g., iPhone 14 Pro Max - 256GB" required maxlength="100">
+                <div class="help-text">Be descriptive. Max 100 characters.</div>
               </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Price (₦) <span class="required">*</span></label>
+                  <input type="number" id="postPrice" placeholder="50000" required min="0" step="100">
+                </div>
+                <div class="form-group">
+                  <label>Category <span class="required">*</span></label>
+                  <select id="postCategory" required>
+                    <option value="">Select category</option>
+                    <option value="vehicles">🚗 Vehicles</option>
+                    <option value="electronics">📱 Electronics</option>
+                    <option value="furniture">🪑 Furniture</option>
+                    <option value="fashion">👗 Fashion</option>
+                    <option value="real-estate">🏠 Real Estate</option>
+                    <option value="services">🔧 Services</option>
+                    <option value="other">📦 Other</option>
+                  </select>
+                </div>
+              </div>
+
               <div class="form-group">
-                <label>Category <span class="required">*</span></label>
-                <select id="postCategory" required>
-                  <option value="">Select category</option>
-                  <option value="vehicles">🚗 Vehicles</option>
-                  <option value="electronics">📱 Electronics</option>
-                  <option value="furniture">🪑 Furniture</option>
-                  <option value="fashion">👗 Fashion</option>
-                  <option value="real-estate">🏠 Real Estate</option>
-                  <option value="services">🔧 Services</option>
-                  <option value="other">📦 Other</option>
-                </select>
+                <label>Location <span class="required">*</span></label>
+                <input type="text" id="postLocation" placeholder="e.g., Lagos, Abuja, Kano" required>
+                <div class="help-text">City or state where the item is located.</div>
+              </div>
+
+              <div class="form-group">
+                <label>Description <span class="required">*</span></label>
+                <textarea id="postDescription" placeholder="Describe your item in detail..." required maxlength="2000"></textarea>
+                <div class="help-text">Max 2000 characters. Be thorough and honest.</div>
+              </div>
+
+              <div class="step-actions">
+                <button type="button" class="btn-next" onclick="goToStep(2)">
+                  Next Step <i class="fas fa-arrow-right"></i>
+                </button>
               </div>
             </div>
 
-            <div class="form-group">
-              <label>Location <span class="required">*</span></label>
-              <input type="text" id="postLocation" placeholder="e.g., Lagos, Abuja, Kano" required>
-              <div class="help-text">City or state where the item is located.</div>
-            </div>
-
-            <div class="form-group">
-              <label>Description <span class="required">*</span></label>
-              <textarea id="postDescription" placeholder="Describe your item in detail..." required maxlength="2000"></textarea>
-              <div class="help-text">Max 2000 characters. Be thorough and honest.</div>
-            </div>
-
-            <div class="step-actions">
-              <button type="button" class="btn-next" onclick="goToStep(2)">
-                Next Step <i class="fas fa-arrow-right"></i>
-              </button>
-            </div>
-          </div>
-
-          <div class="step-content" data-step="2">
-            <div class="step-header">
-              <h2>📸 Upload Photos</h2>
-              <p class="subtitle">Show buyers what you're selling. Good photos sell faster!</p>
-            </div>
-
-            <div class="form-group">
-              <label>Upload Images <span class="required">*</span></label>
-              <div class="image-upload-area" id="imageUploadArea">
-                <i class="fas fa-cloud-upload-alt"></i>
-                <p><strong>Click to upload images</strong></p>
-                <p class="small-text">or drag and drop</p>
-                <p class="small-text" style="margin-top:6px;">Max 5 images · JPG, PNG, GIF · Up to 5MB each</p>
+            <!-- Step 2: Photos -->
+            <div class="step-content" data-step="2">
+              <div class="step-header">
+                <h2>📸 Upload Photos</h2>
+                <p class="subtitle">Show buyers what you're selling. Good photos sell faster!</p>
               </div>
-              <input type="file" id="imageInput" accept="image/*" multiple style="display:none;">
-              <div class="image-preview-grid" id="imagePreviewGrid"></div>
-              <div class="image-count-text" id="imageCountText">No images selected</div>
-            </div>
 
-            <div class="step-actions">
-              <button type="button" class="btn-prev" onclick="goToStep(1)">
-                <i class="fas fa-arrow-left"></i> Back
-              </button>
-              <button type="button" class="btn-next" onclick="goToStep(3)">
-                Review Listing <i class="fas fa-arrow-right"></i>
-              </button>
-            </div>
-          </div>
-
-          <div class="step-content" data-step="3">
-            <div class="step-header">
-              <h2>✅ Review Your Listing</h2>
-              <p class="subtitle">Check everything looks good before posting.</p>
-            </div>
-
-            <div id="reviewContent">
-              <div class="review-item">
-                <span class="label">Title</span>
-                <span class="value" id="reviewTitle">-</span>
-              </div>
-              <div class="review-item">
-                <span class="label">Price</span>
-                <span class="value"><span class="price-tag" id="reviewPrice">-</span></span>
-              </div>
-              <div class="review-item">
-                <span class="label">Category</span>
-                <span class="value" id="reviewCategory">-</span>
-              </div>
-              <div class="review-item">
-                <span class="label">Location</span>
-                <span class="value" id="reviewLocation">-</span>
-              </div>
-              <div class="review-item">
-                <span class="label">Description</span>
-                <span class="value" id="reviewDescription">-</span>
-              </div>
-              <div class="review-item">
-                <span class="label">Images</span>
-                <div class="value">
-                  <div class="review-images" id="reviewImages"></div>
+              <div class="form-group">
+                <label>Upload Images <span class="required">*</span></label>
+                <div class="image-upload-area" id="imageUploadArea">
+                  <i class="fas fa-cloud-upload-alt"></i>
+                  <p><strong>Click to upload images</strong></p>
+                  <p class="small-text">or drag and drop</p>
+                  <p class="small-text" style="margin-top:6px;">Max 5 images · JPG, PNG, GIF · Up to 5MB each</p>
                 </div>
+                <input type="file" id="imageInput" accept="image/*" multiple style="display:none;">
+                <div class="image-preview-grid" id="imagePreviewGrid"></div>
+                <div class="image-count-text" id="imageCountText">No images selected</div>
+              </div>
+
+              <div class="step-actions">
+                <button type="button" class="btn-prev" onclick="goToStep(1)">
+                  <i class="fas fa-arrow-left"></i> Back
+                </button>
+                <button type="button" class="btn-next" onclick="goToStep(3)">
+                  Review Listing <i class="fas fa-arrow-right"></i>
+                </button>
               </div>
             </div>
 
-            <div class="signup-section" id="signupSection">
-              <div id="signupRequired">
-                <h4>📝 Almost done!</h4>
-                <p>Create a free account to post your listing. It takes less than a minute.</p>
-                <div class="signup-form-inline">
-                  <div class="full-width">
-                    <input type="text" id="signupName" placeholder="Your full name" required>
-                  </div>
-                  <div>
-                    <input type="tel" id="signupPhone" placeholder="Phone number" required>
-                  </div>
-                  <div>
-                    <select id="signupState" required>
-                      <option value="">Select state</option>
-                      <option value="Abia">Abia</option><option value="Adamawa">Adamawa</option>
-                      <option value="Akwa Ibom">Akwa Ibom</option><option value="Anambra">Anambra</option>
-                      <option value="Bauchi">Bauchi</option><option value="Bayelsa">Bayelsa</option>
-                      <option value="Benue">Benue</option><option value="Borno">Borno</option>
-                      <option value="Cross River">Cross River</option><option value="Delta">Delta</option>
-                      <option value="Ebonyi">Ebonyi</option><option value="Edo">Edo</option>
-                      <option value="Ekiti">Ekiti</option><option value="Enugu">Enugu</option>
-                      <option value="FCT">FCT (Abuja)</option><option value="Gombe">Gombe</option>
-                      <option value="Imo">Imo</option><option value="Jigawa">Jigawa</option>
-                      <option value="Kaduna">Kaduna</option><option value="Kano">Kano</option>
-                      <option value="Katsina">Katsina</option><option value="Kebbi">Kebbi</option>
-                      <option value="Kogi">Kogi</option><option value="Kwara">Kwara</option>
-                      <option value="Lagos">Lagos</option><option value="Nasarawa">Nasarawa</option>
-                      <option value="Niger">Niger</option><option value="Ogun">Ogun</option>
-                      <option value="Ondo">Ondo</option><option value="Osun">Osun</option>
-                      <option value="Oyo">Oyo</option><option value="Plateau">Plateau</option>
-                      <option value="Rivers">Rivers</option><option value="Sokoto">Sokoto</option>
-                      <option value="Taraba">Taraba</option><option value="Yobe">Yobe</option>
-                      <option value="Zamfara">Zamfara</option>
-                    </select>
+            <!-- Step 3: Review -->
+            <div class="step-content" data-step="3">
+              <div class="step-header">
+                <h2>✅ Review Your Listing</h2>
+                <p class="subtitle">Check everything looks good before posting.</p>
+              </div>
+
+              <div id="reviewContent">
+                <div class="review-item">
+                  <span class="label">Title</span>
+                  <span class="value" id="reviewTitle">-</span>
+                </div>
+                <div class="review-item">
+                  <span class="label">Price</span>
+                  <span class="value"><span class="price-tag" id="reviewPrice">-</span></span>
+                </div>
+                <div class="review-item">
+                  <span class="label">Category</span>
+                  <span class="value" id="reviewCategory">-</span>
+                </div>
+                <div class="review-item">
+                  <span class="label">Location</span>
+                  <span class="value" id="reviewLocation">-</span>
+                </div>
+                <div class="review-item">
+                  <span class="label">Description</span>
+                  <span class="value" id="reviewDescription">-</span>
+                </div>
+                <div class="review-item">
+                  <span class="label">Images</span>
+                  <div class="value">
+                    <div class="review-images" id="reviewImages"></div>
                   </div>
                 </div>
               </div>
-              <div id="alreadySignedIn" style="display:none;">
-                <div class="already-signed-in">
-                  <span>✅ You're signed in as</span>
-                  <div class="user-badge">
-                    <span class="avatar-small" id="signedInAvatar">U</span>
-                    <span id="signedInName">User</span>
+
+              <!-- Signup Section -->
+              <div class="signup-section" id="signupSection">
+                <div id="signupRequired">
+                  <h4>📝 Almost done!</h4>
+                  <p>Create a free account to post your listing. It takes less than a minute.</p>
+                  <div class="signup-form-inline">
+                    <div class="full-width">
+                      <input type="text" id="signupName" placeholder="Your full name" required>
+                    </div>
+                    <div>
+                      <input type="tel" id="signupPhone" placeholder="Phone number" required>
+                    </div>
+                    <div>
+                      <select id="signupState" required>
+                        <option value="">Select state</option>
+                        <option value="Abia">Abia</option><option value="Adamawa">Adamawa</option>
+                        <option value="Akwa Ibom">Akwa Ibom</option><option value="Anambra">Anambra</option>
+                        <option value="Bauchi">Bauchi</option><option value="Bayelsa">Bayelsa</option>
+                        <option value="Benue">Benue</option><option value="Borno">Borno</option>
+                        <option value="Cross River">Cross River</option><option value="Delta">Delta</option>
+                        <option value="Ebonyi">Ebonyi</option><option value="Edo">Edo</option>
+                        <option value="Ekiti">Ekiti</option><option value="Enugu">Enugu</option>
+                        <option value="FCT">FCT (Abuja)</option><option value="Gombe">Gombe</option>
+                        <option value="Imo">Imo</option><option value="Jigawa">Jigawa</option>
+                        <option value="Kaduna">Kaduna</option><option value="Kano">Kano</option>
+                        <option value="Katsina">Katsina</option><option value="Kebbi">Kebbi</option>
+                        <option value="Kogi">Kogi</option><option value="Kwara">Kwara</option>
+                        <option value="Lagos">Lagos</option><option value="Nasarawa">Nasarawa</option>
+                        <option value="Niger">Niger</option><option value="Ogun">Ogun</option>
+                        <option value="Ondo">Ondo</option><option value="Osun">Osun</option>
+                        <option value="Oyo">Oyo</option><option value="Plateau">Plateau</option>
+                        <option value="Rivers">Rivers</option><option value="Sokoto">Sokoto</option>
+                        <option value="Taraba">Taraba</option><option value="Yobe">Yobe</option>
+                        <option value="Zamfara">Zamfara</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div id="alreadySignedIn" style="display:none;">
+                  <div class="already-signed-in">
+                    <span>✅ You're signed in as</span>
+                    <div class="user-badge">
+                      <span class="avatar-small" id="signedInAvatar">U</span>
+                      <span id="signedInName">User</span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <div class="step-actions">
-              <button type="button" class="btn-prev" onclick="goToStep(2)">
-                <i class="fas fa-arrow-left"></i> Back
-              </button>
-              <button type="submit" class="btn-submit" id="submitBtn">
-                <i class="fas fa-rocket"></i> Post Listing
-              </button>
+              <div class="step-actions">
+                <button type="button" class="btn-prev" onclick="goToStep(2)">
+                  <i class="fas fa-arrow-left"></i> Back
+                </button>
+                <button type="submit" class="btn-submit" id="submitBtn">
+                  <i class="fas fa-rocket"></i> Post Listing
+                </button>
+              </div>
             </div>
-          </div>
+          </form>
 
         </div>
       </div>
     </div>
   </div>
 
+  <!-- ===== TOAST ===== -->
   <div class="toast" id="toast"></div>
 
+  <!-- ===== FOOTER ===== -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
@@ -912,6 +973,7 @@
     </div>
   </footer>
 
+  <!-- ===== BOTTOM NAV ===== -->
   <div class="bottom-nav">
     <a href="/" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
     <button class="nav-item" onclick="window.location.href='/'"><i class="fas fa-search"></i><span>Search</span></button>
@@ -924,7 +986,7 @@
   
   <script>
     // ============================================================
-    // POST PAGE - WITH DEBUG LOGS
+    // POST PAGE - WITH VISUAL DEBUG FEEDBACK
     // ============================================================
     
     let currentStep = 1;
@@ -942,6 +1004,23 @@
     const alreadySignedIn = document.getElementById('alreadySignedIn');
     const signedInName = document.getElementById('signedInName');
     const signedInAvatar = document.getElementById('signedInAvatar');
+    const debugStatus = document.getElementById('debugStatus');
+    const statusIcon = document.getElementById('statusIcon');
+    const statusText = document.getElementById('statusText');
+
+    // ============================================================
+    // Visual Debug Status
+    // ============================================================
+    function setStatus(icon, text, type = 'pending') {
+      debugStatus.classList.add('show');
+      statusIcon.textContent = icon;
+      statusIcon.className = 'icon ' + type;
+      statusText.textContent = text;
+    }
+
+    function hideStatus() {
+      debugStatus.classList.remove('show');
+    }
 
     // ============================================================
     // Toast
@@ -958,19 +1037,11 @@
     }
 
     // ============================================================
-    // Debug Logger
-    // ============================================================
-    function debugLog(message, data = null) {
-      console.log(`🔍 [POST] ${message}`);
-      if (data) console.log(data);
-    }
-
-    // ============================================================
     // Check User
     // ============================================================
     function checkUserInSignup() {
       const user = getCurrentUser();
-      debugLog('Checking user:', user);
+      setStatus('👤', user ? 'Signed in as ' + user.name : 'Please sign up to post', user ? 'success' : 'pending');
       if (user) {
         signupRequired.style.display = 'none';
         alreadySignedIn.style.display = 'block';
@@ -986,7 +1057,6 @@
     // Step Navigation
     // ============================================================
     window.goToStep = function(step) {
-      debugLog('Going to step:', step);
       if (step > currentStep) {
         if (currentStep === 1 && !validateStep1()) {
           showToast('Please fill in all required fields', 'error');
@@ -1018,6 +1088,10 @@
         checkUserInSignup();
       }
       
+      // Update status
+      const stepNames = ['', '📝 Details', '📸 Photos', '✅ Review'];
+      setStatus('📋', 'Step ' + step + ': ' + stepNames[step], 'pending');
+      
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
@@ -1032,7 +1106,13 @@
       const description = document.getElementById('postDescription')?.value.trim() || '';
       
       formData = { title, price, category, location, description };
-      debugLog('Step 1 data:', formData);
+      
+      // Show status
+      if (title && price && category && location && description) {
+        setStatus('✅', 'All fields filled', 'success');
+      } else {
+        setStatus('⚠️', 'Please fill all required fields', 'error');
+      }
       
       return title && price && category && location && description;
     }
@@ -1132,7 +1212,7 @@
         selectedFiles = [...selectedFiles, ...validFiles];
         renderPreviews();
         updateImageCount();
-        debugLog('Files after addition:', selectedFiles.length);
+        setStatus('📸', selectedFiles.length + ' images uploaded', 'success');
         showToast(`${validFiles.length} image(s) added successfully`);
       }
     }
@@ -1159,7 +1239,11 @@
       selectedFiles.splice(index, 1);
       renderPreviews();
       updateImageCount();
-      debugLog('Files after removal:', selectedFiles.length);
+      if (selectedFiles.length === 0) {
+        setStatus('⚠️', 'No images selected', 'error');
+      } else {
+        setStatus('📸', selectedFiles.length + ' images uploaded', 'success');
+      }
     };
 
     function updateImageCount() {
@@ -1179,14 +1263,13 @@
     }
 
     // ============================================================
-    // SUBMIT HANDLER - WITH DEBUG LOGS
+    // SUBMIT HANDLER - WITH VISUAL FEEDBACK
     // ============================================================
     document.addEventListener('submit', async function(e) {
       const form = e.target;
       if (!form || form.id !== 'postForm') return;
       
       e.preventDefault();
-      debugLog('🚀 FORM SUBMITTED!');
       
       // Validate
       if (!validateStep1()) {
@@ -1210,8 +1293,6 @@
         signupPhone = document.getElementById('signupPhone')?.value.trim();
         signupState = document.getElementById('signupState')?.value;
         
-        debugLog('Signup fields:', { signupName, signupPhone, signupState });
-        
         if (!signupName || !signupPhone || !signupState) {
           showToast('Please fill in all signup fields', 'error');
           return;
@@ -1230,35 +1311,40 @@
         submitBtn.innerHTML = `<span class="loading-spinner"></span> Publishing...`;
       }
       
+      setStatus('⏳', 'Creating account...', 'pending');
+      
       try {
         // Sign up if needed
         if (!user) {
-          debugLog('Creating account for:', signupName);
+          setStatus('⏳', 'Creating your account...', 'pending');
           showToast('Creating your account...');
           user = await signupUser(signupName, signupPhone, signupState);
-          debugLog('Account created:', user);
           if (!user) {
             throw new Error('Failed to create account');
           }
+          setStatus('✅', 'Account created!', 'success');
           showToast('Account created! Posting your listing...');
         }
         
         // Upload images
-        debugLog('Uploading images...');
+        setStatus('⏳', 'Uploading images...', 'pending');
         showToast('Uploading images...');
         const imageUrls = await uploadMultipleImages(selectedFiles);
-        debugLog('Images uploaded:', imageUrls);
         
         if (imageUrls.length === 0) {
+          setStatus('❌', 'Image upload failed', 'error');
           showToast('Failed to upload images. Please try again.', 'error');
           return;
         }
+        setStatus('✅', imageUrls.length + ' images uploaded', 'success');
         
         // Generate slug
         const slug = generateSlug(formData.title);
-        debugLog('Generated slug:', slug);
         
         // Save product
+        setStatus('⏳', 'Saving your listing...', 'pending');
+        showToast('Saving your listing...');
+        
         const productData = {
           title: formData.title,
           price: parseFloat(formData.price),
@@ -1274,15 +1360,11 @@
           boosted: false
         };
         
-        debugLog('Product data to save:', productData);
-        showToast('Saving your listing...');
-        
         const result = await addProductToSheet(productData);
-        debugLog('Add product result:', result);
         
         if (result.success) {
+          setStatus('🎉', 'LISTING LIVE! ID: ' + result.productId, 'success');
           showToast('🎉 Your listing is live!');
-          debugLog('✅ LISTING SUCCESSFULLY POSTED! ID:', result.productId);
           
           // Reset
           const postForm = document.getElementById('postForm');
@@ -1296,13 +1378,13 @@
             window.location.href = `/p/${slug}`;
           }, 1500);
         } else {
-          debugLog('❌ Error from API:', result);
+          setStatus('❌', 'Error: ' + (result.error || 'Unknown'), 'error');
           showToast(result.error || 'Failed to post listing', 'error');
         }
       } catch (error) {
-        debugLog('❌ CATCH ERROR:', error);
-        console.error(error);
+        setStatus('❌', 'Error: ' + error.message, 'error');
         showToast(error.message || 'Something went wrong. Please try again.', 'error');
+        console.error(error);
       } finally {
         isSubmitting = false;
         if (submitBtn) {
@@ -1316,32 +1398,17 @@
     // INIT
     // ============================================================
     document.addEventListener('DOMContentLoaded', async function() {
-      debugLog('Page loaded, loading user...');
       await loadUser();
       initTheme();
       updateFavoriteBadge();
       checkUserInSignup();
-      debugLog('Ready!');
+      setStatus('✅', 'Ready to post!', 'success');
       
       const fabPostAd = document.getElementById('fabPostAd');
       if (fabPostAd) {
         fabPostAd.addEventListener('click', function() {
           window.location.href = '/post.html';
         });
-      }
-      
-      // Test API connection on load
-      try {
-        debugLog('Testing API connection...');
-        const test = await apiCall('getProducts', {}, 'GET');
-        debugLog('API test result:', test);
-        if (test.error) {
-          console.warn('API test returned error:', test.error);
-        } else {
-          debugLog('✅ API connection OK');
-        }
-      } catch (err) {
-        console.error('API test failed:', err);
       }
     });
   </script>
