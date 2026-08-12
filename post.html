@@ -17,7 +17,6 @@
       padding: 20px 0 40px;
     }
 
-    /* Progress Bar */
     .wizard-progress {
       display: flex;
       justify-content: space-between;
@@ -98,7 +97,6 @@
       color: #27ae60;
     }
 
-    /* Step Content */
     .step-content {
       display: none;
       animation: fadeSlideIn 0.4s ease;
@@ -183,13 +181,6 @@
       outline: none;
     }
 
-    [data-theme="dark"] .form-group input:focus,
-    [data-theme="dark"] .form-group select:focus,
-    [data-theme="dark"] .form-group textarea:focus {
-      border-color: #4a7a9a;
-      box-shadow: 0 0 0 4px rgba(74,122,154,0.15);
-    }
-
     .form-group textarea {
       min-height: 120px;
       resize: vertical;
@@ -207,7 +198,6 @@
       gap: 16px;
     }
 
-    /* Step Navigation Buttons */
     .step-actions {
       display: flex;
       gap: 12px;
@@ -237,15 +227,6 @@
       background: #0f2940;
       transform: translateY(-1px);
       box-shadow: 0 8px 24px rgba(26,54,80,0.3);
-    }
-
-    [data-theme="dark"] .step-actions .btn-next {
-      background: #2A3550;
-      color: #F1F5F9;
-    }
-
-    [data-theme="dark"] .step-actions .btn-next:hover {
-      background: #3A4560;
     }
 
     .step-actions .btn-prev {
@@ -297,7 +278,6 @@
       box-shadow: none;
     }
 
-    /* Image Upload */
     .image-upload-area {
       border: 2px dashed var(--border);
       border-radius: 14px;
@@ -403,7 +383,6 @@
       margin-top: 8px;
     }
 
-    /* Review Step */
     .review-item {
       display: flex;
       padding: 12px 0;
@@ -449,7 +428,88 @@
       border: 1px solid var(--border);
     }
 
-    /* Loading Spinner */
+    .signup-section {
+      background: var(--surface-alt);
+      border-radius: 16px;
+      padding: 20px;
+      margin: 16px 0;
+      border: 1px solid var(--border);
+    }
+
+    .signup-section h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .signup-section p {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+
+    .signup-section .signup-form-inline {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .signup-section .signup-form-inline .full-width {
+      grid-column: 1 / -1;
+    }
+
+    .signup-section .signup-form-inline input,
+    .signup-section .signup-form-inline select {
+      width: 100%;
+      padding: 10px 14px;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      font-size: 0.9rem;
+      background: var(--input-bg);
+      color: var(--text);
+      transition: 0.2s;
+      font-family: inherit;
+      box-sizing: border-box;
+    }
+
+    .signup-section .signup-form-inline input:focus,
+    .signup-section .signup-form-inline select:focus {
+      border-color: #1a3650;
+      box-shadow: 0 0 0 4px rgba(26,54,80,0.08);
+      outline: none;
+    }
+
+    .signup-section .already-signed-in {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 0;
+    }
+
+    .signup-section .already-signed-in .user-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface);
+      padding: 6px 16px 6px 12px;
+      border-radius: 60px;
+      border: 1px solid var(--border);
+    }
+
+    .signup-section .already-signed-in .user-badge .avatar-small {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #1a3650;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.7rem;
+    }
+
     .loading-spinner {
       display: inline-block;
       width: 22px;
@@ -464,51 +524,6 @@
       to { transform: rotate(360deg); }
     }
 
-    /* Guest Message */
-    .guest-message {
-      text-align: center;
-      padding: 60px 20px;
-      background: var(--surface);
-      border-radius: 24px;
-      border: 1px solid var(--border);
-    }
-
-    .guest-message i {
-      font-size: 3.5rem;
-      color: var(--text-secondary);
-      margin-bottom: 16px;
-    }
-
-    .guest-message h2 {
-      font-size: 1.3rem;
-      color: var(--text);
-      margin-bottom: 8px;
-    }
-
-    .guest-message p {
-      color: var(--text-secondary);
-      margin-bottom: 20px;
-    }
-
-    .guest-message .btn-primary {
-      padding: 12px 32px;
-      border-radius: 60px;
-      background: #1a3650;
-      color: white;
-      border: none;
-      font-weight: 600;
-      cursor: pointer;
-      font-size: 0.95rem;
-      transition: 0.2s;
-    }
-
-    .guest-message .btn-primary:hover {
-      background: #0f2940;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(26,54,80,0.3);
-    }
-
-    /* Toast */
     .toast {
       position: fixed;
       bottom: 100px;
@@ -541,7 +556,6 @@
       background: #27ae60;
     }
 
-    /* Responsive */
     @media (max-width: 640px) {
       .post-card {
         padding: 20px 16px;
@@ -585,6 +599,10 @@
         grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
         gap: 8px;
       }
+
+      .signup-section .signup-form-inline {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (min-width: 768px) {
@@ -596,7 +614,6 @@
 </head>
 <body>
 
-  <!-- ===== NAV ===== -->
   <nav class="navbar">
     <div class="container nav-container">
       <a href="/" class="logo-wrapper">
@@ -625,25 +642,12 @@
     </div>
   </nav>
 
-  <!-- ===== MAIN CONTENT ===== -->
   <div class="container">
     <div class="post-container">
       
-      <!-- Guest State -->
-      <div id="guestState" class="guest-message" style="display:none;">
-        <i class="fas fa-lock"></i>
-        <h2>Sign up to post a listing</h2>
-        <p>Create a free account to start selling on Zaure. It takes less than a minute!</p>
-        <button class="btn-primary" onclick="openSignup()">
-          <i class="fas fa-user-plus"></i> Create Account
-        </button>
-      </div>
-
-      <!-- Post Wizard -->
       <div id="postFormContainer">
         <div class="post-card">
           
-          <!-- Progress Bar -->
           <div class="wizard-progress" id="wizardProgress">
             <div class="step-indicator active" data-step="1">
               <div class="step-circle">1</div>
@@ -659,7 +663,6 @@
             </div>
           </div>
 
-          <!-- Step 1: Details -->
           <div class="step-content active" data-step="1">
             <div class="step-header">
               <h2>📝 Item Details</h2>
@@ -700,7 +703,7 @@
 
             <div class="form-group">
               <label>Description <span class="required">*</span></label>
-              <textarea id="postDescription" placeholder="Describe your item in detail... Include condition, features, why someone should buy it, etc." required maxlength="2000"></textarea>
+              <textarea id="postDescription" placeholder="Describe your item in detail..." required maxlength="2000"></textarea>
               <div class="help-text">Max 2000 characters. Be thorough and honest.</div>
             </div>
 
@@ -711,7 +714,6 @@
             </div>
           </div>
 
-          <!-- Step 2: Photos -->
           <div class="step-content" data-step="2">
             <div class="step-header">
               <h2>📸 Upload Photos</h2>
@@ -741,7 +743,6 @@
             </div>
           </div>
 
-          <!-- Step 3: Review -->
           <div class="step-content" data-step="3">
             <div class="step-header">
               <h2>✅ Review Your Listing</h2>
@@ -777,6 +778,54 @@
               </div>
             </div>
 
+            <div class="signup-section" id="signupSection">
+              <div id="signupRequired">
+                <h4>📝 Almost done!</h4>
+                <p>Create a free account to post your listing. It takes less than a minute.</p>
+                <div class="signup-form-inline">
+                  <div class="full-width">
+                    <input type="text" id="signupName" placeholder="Your full name" required>
+                  </div>
+                  <div>
+                    <input type="tel" id="signupPhone" placeholder="Phone number" required>
+                  </div>
+                  <div>
+                    <select id="signupState" required>
+                      <option value="">Select state</option>
+                      <option value="Abia">Abia</option><option value="Adamawa">Adamawa</option>
+                      <option value="Akwa Ibom">Akwa Ibom</option><option value="Anambra">Anambra</option>
+                      <option value="Bauchi">Bauchi</option><option value="Bayelsa">Bayelsa</option>
+                      <option value="Benue">Benue</option><option value="Borno">Borno</option>
+                      <option value="Cross River">Cross River</option><option value="Delta">Delta</option>
+                      <option value="Ebonyi">Ebonyi</option><option value="Edo">Edo</option>
+                      <option value="Ekiti">Ekiti</option><option value="Enugu">Enugu</option>
+                      <option value="FCT">FCT (Abuja)</option><option value="Gombe">Gombe</option>
+                      <option value="Imo">Imo</option><option value="Jigawa">Jigawa</option>
+                      <option value="Kaduna">Kaduna</option><option value="Kano">Kano</option>
+                      <option value="Katsina">Katsina</option><option value="Kebbi">Kebbi</option>
+                      <option value="Kogi">Kogi</option><option value="Kwara">Kwara</option>
+                      <option value="Lagos">Lagos</option><option value="Nasarawa">Nasarawa</option>
+                      <option value="Niger">Niger</option><option value="Ogun">Ogun</option>
+                      <option value="Ondo">Ondo</option><option value="Osun">Osun</option>
+                      <option value="Oyo">Oyo</option><option value="Plateau">Plateau</option>
+                      <option value="Rivers">Rivers</option><option value="Sokoto">Sokoto</option>
+                      <option value="Taraba">Taraba</option><option value="Yobe">Yobe</option>
+                      <option value="Zamfara">Zamfara</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div id="alreadySignedIn" style="display:none;">
+                <div class="already-signed-in">
+                  <span>✅ You're signed in as</span>
+                  <div class="user-badge">
+                    <span class="avatar-small" id="signedInAvatar">U</span>
+                    <span id="signedInName">User</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div class="step-actions">
               <button type="button" class="btn-prev" onclick="goToStep(2)">
                 <i class="fas fa-arrow-left"></i> Back
@@ -792,10 +841,8 @@
     </div>
   </div>
 
-  <!-- ===== TOAST ===== -->
   <div class="toast" id="toast"></div>
 
-  <!-- ===== FOOTER ===== -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
@@ -865,481 +912,9 @@
     </div>
   </footer>
 
-  <!-- ===== BOTTOM NAV ===== -->
   <div class="bottom-nav">
     <a href="/" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
     <button class="nav-item" onclick="window.location.href='/'"><i class="fas fa-search"></i><span>Search</span></button>
     <button class="post-btn" id="fabPostAd"><i class="fas fa-plus"></i></button>
     <a href="/favorites.html" class="nav-item"><i class="fas fa-heart"></i><span>Favorites</span></a>
-    <a href="/profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
-  </div>
-
-  <!-- ===== SIGNUP MODAL ===== -->
-  <div class="modal-overlay" id="signupModal">
-    <div class="modal">
-      <div class="modal-header">
-        <h3>Create your account</h3>
-        <button class="modal-close" id="closeSignupModalBtn"><i class="fas fa-times"></i></button>
-      </div>
-      <form id="signupForm" class="modal-form">
-        <label for="signupName">Full Name <span class="required">*</span></label>
-        <input type="text" id="signupName" placeholder="Enter your full name" required>
-        <label for="signupPhone">Phone Number <span class="required">*</span></label>
-        <input type="tel" id="signupPhone" placeholder="Enter your phone number" required>
-        <label for="signupState">State <span class="required">*</span></label>
-        <select id="signupState" required>
-          <option value="">Select your state</option>
-          <option value="Abia">Abia</option><option value="Adamawa">Adamawa</option>
-          <option value="Akwa Ibom">Akwa Ibom</option><option value="Anambra">Anambra</option>
-          <option value="Bauchi">Bauchi</option><option value="Bayelsa">Bayelsa</option>
-          <option value="Benue">Benue</option><option value="Borno">Borno</option>
-          <option value="Cross River">Cross River</option><option value="Delta">Delta</option>
-          <option value="Ebonyi">Ebonyi</option><option value="Edo">Edo</option>
-          <option value="Ekiti">Ekiti</option><option value="Enugu">Enugu</option>
-          <option value="FCT">FCT (Abuja)</option><option value="Gombe">Gombe</option>
-          <option value="Imo">Imo</option><option value="Jigawa">Jigawa</option>
-          <option value="Kaduna">Kaduna</option><option value="Kano">Kano</option>
-          <option value="Katsina">Katsina</option><option value="Kebbi">Kebbi</option>
-          <option value="Kogi">Kogi</option><option value="Kwara">Kwara</option>
-          <option value="Lagos">Lagos</option><option value="Nasarawa">Nasarawa</option>
-          <option value="Niger">Niger</option><option value="Ogun">Ogun</option>
-          <option value="Ondo">Ondo</option><option value="Osun">Osun</option>
-          <option value="Oyo">Oyo</option><option value="Plateau">Plateau</option>
-          <option value="Rivers">Rivers</option><option value="Sokoto">Sokoto</option>
-          <option value="Taraba">Taraba</option><option value="Yobe">Yobe</option>
-          <option value="Zamfara">Zamfara</option>
-        </select>
-        <button type="submit" class="btn-primary">Sign Up</button>
-      </form>
-    </div>
-  </div>
-
-  <script src="/js/main.js"></script>
-  
-  <!-- ===== POST PAGE SPECIFIC JAVASCRIPT ===== -->
-  <script>
-    // ============================================================
-    // POST PAGE - Step Wizard with Slug-based URLs
-    // ============================================================
-    
-    let currentStep = 1;
-    const totalSteps = 3;
-    let selectedFiles = [];
-    let uploadedImageUrls = [];
-    let isSubmitting = false;
-    let formData = {};
-    
-    // DOM Elements - defined at the top level
-    const postFormContainer = document.getElementById('postFormContainer');
-    const imageUploadArea = document.getElementById('imageUploadArea');
-    const imageInput = document.getElementById('imageInput');
-    const imagePreviewGrid = document.getElementById('imagePreviewGrid');
-    const imageCountText = document.getElementById('imageCountText');
-    const submitBtn = document.getElementById('submitBtn');
-
-    // ============================================================
-    // Toast Notification
-    // ============================================================
-    function showToast(message, type = 'success') {
-      const toast = document.getElementById('toast');
-      if (!toast) return;
-      toast.textContent = message;
-      toast.className = 'toast show ' + type;
-      clearTimeout(toast._timeout);
-      toast._timeout = setTimeout(() => {
-        toast.classList.remove('show');
-      }, 4000);
-    }
-
-    // ============================================================
-    // Check if User is Logged In
-    // ============================================================
-    function checkUser() {
-      const user = getCurrentUser();
-      const guestState = document.getElementById('guestState');
-      const postFormContainer = document.getElementById('postFormContainer');
-      
-      if (!user) {
-        if (guestState) guestState.style.display = 'block';
-        if (postFormContainer) postFormContainer.style.display = 'none';
-        return false;
-      }
-      if (guestState) guestState.style.display = 'none';
-      if (postFormContainer) postFormContainer.style.display = 'block';
-      return true;
-    }
-
-    // ============================================================
-    // Step Navigation
-    // ============================================================
-    window.goToStep = function(step) {
-      // Validate current step before moving forward
-      if (step > currentStep) {
-        if (currentStep === 1 && !validateStep1()) {
-          showToast('Please fill in all required fields', 'error');
-          return;
-        }
-        if (currentStep === 2 && selectedFiles.length === 0) {
-          showToast('Please upload at least one image', 'error');
-          return;
-        }
-      }
-      
-      currentStep = step;
-      
-      // Update step content
-      document.querySelectorAll('.step-content').forEach(el => {
-        el.classList.remove('active');
-      });
-      const target = document.querySelector(`.step-content[data-step="${step}"]`);
-      if (target) target.classList.add('active');
-      
-      // Update progress indicators
-      document.querySelectorAll('.step-indicator').forEach(el => {
-        const s = parseInt(el.dataset.step);
-        el.classList.remove('active', 'completed');
-        if (s === step) el.classList.add('active');
-        else if (s < step) el.classList.add('completed');
-      });
-      
-      // Update review if going to step 3
-      if (step === 3) updateReview();
-      
-      // Scroll to top
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
-
-    // ============================================================
-    // Validate Step 1
-    // ============================================================
-    function validateStep1() {
-      const title = document.getElementById('postTitle')?.value.trim() || '';
-      const price = document.getElementById('postPrice')?.value || '';
-      const category = document.getElementById('postCategory')?.value || '';
-      const location = document.getElementById('postLocation')?.value.trim() || '';
-      const description = document.getElementById('postDescription')?.value.trim() || '';
-      
-      // Store form data for review
-      formData = { title, price, category, location, description };
-      
-      return title && price && category && location && description;
-    }
-
-    // ============================================================
-    // Update Review Step
-    // ============================================================
-    function updateReview() {
-      const data = formData;
-      
-      const reviewTitle = document.getElementById('reviewTitle');
-      const reviewPrice = document.getElementById('reviewPrice');
-      const reviewCategory = document.getElementById('reviewCategory');
-      const reviewLocation = document.getElementById('reviewLocation');
-      const reviewDescription = document.getElementById('reviewDescription');
-      const reviewImages = document.getElementById('reviewImages');
-      
-      if (reviewTitle) reviewTitle.textContent = data.title || '-';
-      if (reviewPrice) reviewPrice.textContent = data.price ? `₦${parseFloat(data.price).toLocaleString()}` : '-';
-      
-      const categoryMap = {
-        'vehicles': '🚗 Vehicles',
-        'electronics': '📱 Electronics',
-        'furniture': '🪑 Furniture',
-        'fashion': '👗 Fashion',
-        'real-estate': '🏠 Real Estate',
-        'services': '🔧 Services',
-        'other': '📦 Other'
-      };
-      if (reviewCategory) reviewCategory.textContent = categoryMap[data.category] || data.category || '-';
-      if (reviewLocation) reviewLocation.textContent = data.location || '-';
-      if (reviewDescription) reviewDescription.textContent = data.description || '-';
-      
-      // Review images
-      if (reviewImages) {
-        if (selectedFiles.length > 0) {
-          reviewImages.innerHTML = selectedFiles.map((file, i) => {
-            const url = URL.createObjectURL(file);
-            return `<img src="${url}" alt="Image ${i+1}">`;
-          }).join('');
-        } else {
-          reviewImages.innerHTML = '<span style="color:var(--text-secondary);font-size:0.85rem;">No images selected</span>';
-        }
-      }
-    }
-
-    // ============================================================
-    // Image Upload - Drag & Drop
-    // ============================================================
-    if (imageUploadArea) {
-      imageUploadArea.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        imageUploadArea.classList.add('dragover');
-      });
-
-      imageUploadArea.addEventListener('dragleave', () => {
-        imageUploadArea.classList.remove('dragover');
-      });
-
-      imageUploadArea.addEventListener('drop', (e) => {
-        e.preventDefault();
-        imageUploadArea.classList.remove('dragover');
-        const files = Array.from(e.dataTransfer.files);
-        handleFiles(files);
-      });
-
-      imageUploadArea.addEventListener('click', () => {
-        if (imageInput) imageInput.click();
-      });
-
-      if (imageInput) {
-        imageInput.addEventListener('change', (e) => {
-          const files = Array.from(e.target.files);
-          handleFiles(files);
-          e.target.value = '';
-        });
-      }
-    }
-
-    // ============================================================
-    // Handle Files
-    // ============================================================
-    function handleFiles(files) {
-      const maxFiles = 5;
-      const remaining = maxFiles - selectedFiles.length;
-      const newFiles = files.slice(0, remaining);
-      
-      if (remaining <= 0) {
-        showToast('Maximum 5 images allowed', 'error');
-        return;
-      }
-      
-      // Validate file types and sizes
-      const validFiles = newFiles.filter(file => {
-        const validTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
-        const maxSize = 5 * 1024 * 1024; // 5MB
-        
-        if (!validTypes.includes(file.type)) {
-          showToast(`${file.name} - Invalid format. Use JPG, PNG, or GIF.`, 'error');
-          return false;
-        }
-        if (file.size > maxSize) {
-          showToast(`${file.name} - File too large. Max 5MB.`, 'error');
-          return false;
-        }
-        return true;
-      });
-      
-      if (validFiles.length > 0) {
-        selectedFiles = [...selectedFiles, ...validFiles];
-        renderPreviews();
-        updateImageCount();
-        showToast(`${validFiles.length} image(s) added successfully`);
-      }
-    }
-
-    // ============================================================
-    // Render Image Previews
-    // ============================================================
-    function renderPreviews() {
-      if (!imagePreviewGrid) return;
-      
-      imagePreviewGrid.innerHTML = selectedFiles.map((file, index) => {
-        const url = URL.createObjectURL(file);
-        return `
-          <div class="preview-item">
-            <img src="${url}" alt="Image ${index + 1}">
-            <button class="remove-btn" onclick="removeImage(${index})" type="button">
-              <i class="fas fa-times"></i>
-            </button>
-            <span class="index-badge">#${index + 1}</span>
-          </div>
-        `;
-      }).join('');
-    }
-
-    window.removeImage = function(index) {
-      URL.revokeObjectURL(selectedFiles[index]);
-      selectedFiles.splice(index, 1);
-      renderPreviews();
-      updateImageCount();
-    };
-
-    function updateImageCount() {
-      if (imageCountText) {
-        imageCountText.textContent = selectedFiles.length === 0 
-          ? 'No images selected' 
-          : `${selectedFiles.length} of 5 images selected`;
-      }
-    }
-
-    // ============================================================
-    // Generate URL-friendly slug
-    // ============================================================
-    function generateSlug(title) {
-      return title
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, '-')
-        .replace(/^-+|-+$/g, '')
-        .substring(0, 60);
-    }
-
-    // ============================================================
-    // Submit Form - Using event listener on document
-    // ============================================================
-    document.addEventListener('submit', async function(e) {
-      // Check if the submitted form is our post form
-      const form = e.target;
-      if (!form || form.id !== 'postForm') return;
-      
-      e.preventDefault();
-      
-      // Check user again
-      const user = getCurrentUser();
-      if (!user) {
-        openSignup();
-        return;
-      }
-      
-      // Validate
-      if (!validateStep1()) {
-        showToast('Please fill in all required fields', 'error');
-        goToStep(1);
-        return;
-      }
-      
-      if (selectedFiles.length === 0) {
-        showToast('Please upload at least one image', 'error');
-        goToStep(2);
-        return;
-      }
-      
-      // Disable submit button
-      isSubmitting = true;
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = `<span class="loading-spinner"></span> Publishing...`;
-      }
-      
-      try {
-        // Step 1: Upload images
-        showToast('Uploading images...');
-        const imageUrls = await uploadMultipleImages(selectedFiles);
-        
-        if (imageUrls.length === 0) {
-          showToast('Failed to upload images. Please try again.', 'error');
-          return;
-        }
-        
-        // Step 2: Generate slug
-        const slug = generateSlug(formData.title);
-        
-        // Step 3: Save product to Google Sheets with slug
-        showToast('Saving your listing...');
-        const productData = {
-          title: formData.title,
-          price: parseFloat(formData.price),
-          category: formData.category,
-          location: formData.location,
-          description: formData.description,
-          images: imageUrls.join(','),
-          slug: slug,
-          sellerId: user.id,
-          sellerName: user.name,
-          sellerPhone: user.phone,
-          featured: false,
-          boosted: false
-        };
-        
-        const result = await addProductToSheet(productData);
-        
-        if (result.success) {
-          showToast('🎉 Your listing is live!');
-          
-          // Reset form
-          const postForm = document.getElementById('postForm');
-          if (postForm) postForm.reset();
-          selectedFiles = [];
-          renderPreviews();
-          updateImageCount();
-          formData = {};
-          
-          // Redirect using slug instead of ID
-          setTimeout(() => {
-            window.location.href = `/p/${slug}`;
-          }, 1500);
-        } else {
-          showToast(result.error || 'Failed to post listing', 'error');
-        }
-      } catch (error) {
-        console.error('Error:', error);
-        showToast('Something went wrong. Please try again.', 'error');
-      } finally {
-        isSubmitting = false;
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = `<i class="fas fa-rocket"></i> Post Listing`;
-        }
-      }
-    });
-
-    // ============================================================
-    // Init
-    // ============================================================
-    document.addEventListener('DOMContentLoaded', async function() {
-      // Load user
-      await loadUser();
-      checkUser();
-      initTheme();
-      updateFavoriteBadge();
-      
-      // Handle signup modal
-      const signupModal = document.getElementById('signupModal');
-      const closeSignupModalBtn = document.getElementById('closeSignupModalBtn');
-      const signupForm = document.getElementById('signupForm');
-      
-      if (closeSignupModalBtn) {
-        closeSignupModalBtn.addEventListener('click', () => {
-          if (signupModal) signupModal.classList.remove('active');
-        });
-      }
-      if (signupModal) {
-        signupModal.addEventListener('click', (e) => {
-          if (e.target === signupModal) signupModal.classList.remove('active');
-        });
-      }
-      if (signupForm) {
-        signupForm.addEventListener('submit', async function(e) {
-          e.preventDefault();
-          const name = document.getElementById('signupName').value.trim();
-          const phone = document.getElementById('signupPhone').value.trim();
-          const state = document.getElementById('signupState').value;
-          
-          if (name && phone && state) {
-            try {
-              await signupUser(name, phone, state);
-              if (signupModal) signupModal.classList.remove('active');
-              signupForm.reset();
-              showToast('Account created successfully! 🎉');
-              setTimeout(() => location.reload(), 1000);
-            } catch (error) {
-              showToast(error.message, 'error');
-            }
-          }
-        });
-      }
-      
-      // Handle FAB post button
-      const fabPostAd = document.getElementById('fabPostAd');
-      if (fabPostAd) {
-        fabPostAd.addEventListener('click', function() {
-          if (!getCurrentUser()) {
-            openSignup();
-          } else {
-            window.location.href = '/post.html';
-          }
-        });
-      }
-    });
-  </script>
-</body>
-</html>
+    <a href="/
