@@ -2,8 +2,8 @@
 // ZAURE - Complete Main JavaScript File
 // ============================================================
 // 
-// WEB APP URL: https://script.google.com/macros/s/AKfycbz-nUsgiGhuFpLdADskCpAl1nYAhZWJstwzgY9yI908sSZW9-vJ7GTDCKTA_jV1gp4I/exec
-// SPREADSHEET ID: 1L2E0rVhWSVwoBFRb6Aj4Kj_IUfkIaZe6-MumqqNELzY
+// WEB APP URL: https://script.google.com/macros/s/AKfycbxAvdTHKpX9Zwgy3NAqQH9OvH2br7bUgv6mpgYAE35yU01VwnOkUCJPz1AUiru6Q-FEVw/exec
+// SPREADSHEET ID: 17fw2y7VQw2Z_IOVhBi4UQlxI2n3320Sn1v_7iek1YwM
 // IMGBB API KEY: fe8f7a672963dc48c9aa825db42aa216
 // ============================================================
 
@@ -11,7 +11,7 @@
 // API CONFIGURATION
 // ============================================================
 
-const API_BASE = 'https://script.google.com/macros/s/AKfycbz-nUsgiGhuFpLdADskCpAl1nYAhZWJstwzgY9yI908sSZW9-vJ7GTDCKTA_jV1gp4I/exec';
+const API_BASE = 'https://script.google.com/macros/s/AKfycbxAvdTHKpX9Zwgy3NAqQH9OvH2br7bUgv6mpgYAE35yU01VwnOkUCJPz1AUiru6Q-FEVw/exec';
 const IMGBB_API_KEY = 'fe8f7a672963dc48c9aa825db42aa216';
 
 // ============================================================
@@ -711,6 +711,6 @@ window.openSignup = openSignup;
 window.toggleFavoriteCard = toggleFavoriteCard;
 
 console.log('Zaure – Nigeria\'s trusted classified marketplace.');
-console.log('API URL:', API_BASE);
-console.log('Spreadsheet ID: 1L2E0rVhWSVwoBFRb6Aj4Kj_IUfkIaZe6-MumqqNELzY');
-console.log('ImgBB API Key: configured ✓');
+console.log('✅ API URL:', API_BASE);
+console.log('📊 Spreadsheet ID: 17fw2y7VQw2Z_IOVhBi4UQlxI2n3320Sn1v_7iek1YwM');
+console.log('🖼️ ImgBB API Key: configured ✓');
