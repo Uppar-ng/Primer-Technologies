@@ -917,4 +917,433 @@
     <button class="nav-item" onclick="window.location.href='/'"><i class="fas fa-search"></i><span>Search</span></button>
     <button class="post-btn" id="fabPostAd"><i class="fas fa-plus"></i></button>
     <a href="/favorites.html" class="nav-item"><i class="fas fa-heart"></i><span>Favorites</span></a>
-    <a href="/
+    <a href="/profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
+  </div>
+
+  <script src="/js/main.js"></script>
+  
+  <script>
+    // ============================================================
+    // POST PAGE - WITH DEBUG LOGS
+    // ============================================================
+    
+    let currentStep = 1;
+    let selectedFiles = [];
+    let isSubmitting = false;
+    let formData = {};
+
+    // DOM Elements
+    const imageUploadArea = document.getElementById('imageUploadArea');
+    const imageInput = document.getElementById('imageInput');
+    const imagePreviewGrid = document.getElementById('imagePreviewGrid');
+    const imageCountText = document.getElementById('imageCountText');
+    const submitBtn = document.getElementById('submitBtn');
+    const signupRequired = document.getElementById('signupRequired');
+    const alreadySignedIn = document.getElementById('alreadySignedIn');
+    const signedInName = document.getElementById('signedInName');
+    const signedInAvatar = document.getElementById('signedInAvatar');
+
+    // ============================================================
+    // Toast
+    // ============================================================
+    function showToast(message, type = 'success') {
+      const toast = document.getElementById('toast');
+      if (!toast) return;
+      toast.textContent = message;
+      toast.className = 'toast show ' + type;
+      clearTimeout(toast._timeout);
+      toast._timeout = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 4000);
+    }
+
+    // ============================================================
+    // Debug Logger
+    // ============================================================
+    function debugLog(message, data = null) {
+      console.log(`🔍 [POST] ${message}`);
+      if (data) console.log(data);
+    }
+
+    // ============================================================
+    // Check User
+    // ============================================================
+    function checkUserInSignup() {
+      const user = getCurrentUser();
+      debugLog('Checking user:', user);
+      if (user) {
+        signupRequired.style.display = 'none';
+        alreadySignedIn.style.display = 'block';
+        signedInName.textContent = user.name || 'User';
+        signedInAvatar.textContent = (user.name || 'U').charAt(0).toUpperCase();
+      } else {
+        signupRequired.style.display = 'block';
+        alreadySignedIn.style.display = 'none';
+      }
+    }
+
+    // ============================================================
+    // Step Navigation
+    // ============================================================
+    window.goToStep = function(step) {
+      debugLog('Going to step:', step);
+      if (step > currentStep) {
+        if (currentStep === 1 && !validateStep1()) {
+          showToast('Please fill in all required fields', 'error');
+          return;
+        }
+        if (currentStep === 2 && selectedFiles.length === 0) {
+          showToast('Please upload at least one image', 'error');
+          return;
+        }
+      }
+      
+      currentStep = step;
+      
+      document.querySelectorAll('.step-content').forEach(el => {
+        el.classList.remove('active');
+      });
+      const target = document.querySelector(`.step-content[data-step="${step}"]`);
+      if (target) target.classList.add('active');
+      
+      document.querySelectorAll('.step-indicator').forEach(el => {
+        const s = parseInt(el.dataset.step);
+        el.classList.remove('active', 'completed');
+        if (s === step) el.classList.add('active');
+        else if (s < step) el.classList.add('completed');
+      });
+      
+      if (step === 3) {
+        updateReview();
+        checkUserInSignup();
+      }
+      
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    // ============================================================
+    // Validate Step 1
+    // ============================================================
+    function validateStep1() {
+      const title = document.getElementById('postTitle')?.value.trim() || '';
+      const price = document.getElementById('postPrice')?.value || '';
+      const category = document.getElementById('postCategory')?.value || '';
+      const location = document.getElementById('postLocation')?.value.trim() || '';
+      const description = document.getElementById('postDescription')?.value.trim() || '';
+      
+      formData = { title, price, category, location, description };
+      debugLog('Step 1 data:', formData);
+      
+      return title && price && category && location && description;
+    }
+
+    // ============================================================
+    // Update Review
+    // ============================================================
+    function updateReview() {
+      const data = formData;
+      
+      document.getElementById('reviewTitle').textContent = data.title || '-';
+      document.getElementById('reviewPrice').textContent = data.price ? `₦${parseFloat(data.price).toLocaleString()}` : '-';
+      
+      const categoryMap = {
+        'vehicles': '🚗 Vehicles',
+        'electronics': '📱 Electronics',
+        'furniture': '🪑 Furniture',
+        'fashion': '👗 Fashion',
+        'real-estate': '🏠 Real Estate',
+        'services': '🔧 Services',
+        'other': '📦 Other'
+      };
+      document.getElementById('reviewCategory').textContent = categoryMap[data.category] || data.category || '-';
+      document.getElementById('reviewLocation').textContent = data.location || '-';
+      document.getElementById('reviewDescription').textContent = data.description || '-';
+      
+      const reviewImages = document.getElementById('reviewImages');
+      if (selectedFiles.length > 0) {
+        reviewImages.innerHTML = selectedFiles.map((file, i) => {
+          const url = URL.createObjectURL(file);
+          return `<img src="${url}" alt="Image ${i+1}">`;
+        }).join('');
+      } else {
+        reviewImages.innerHTML = '<span style="color:var(--text-secondary);font-size:0.85rem;">No images selected</span>';
+      }
+    }
+
+    // ============================================================
+    // Image Upload
+    // ============================================================
+    if (imageUploadArea) {
+      imageUploadArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        imageUploadArea.classList.add('dragover');
+      });
+
+      imageUploadArea.addEventListener('dragleave', () => {
+        imageUploadArea.classList.remove('dragover');
+      });
+
+      imageUploadArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        imageUploadArea.classList.remove('dragover');
+        const files = Array.from(e.dataTransfer.files);
+        handleFiles(files);
+      });
+
+      imageUploadArea.addEventListener('click', () => {
+        if (imageInput) imageInput.click();
+      });
+
+      if (imageInput) {
+        imageInput.addEventListener('change', (e) => {
+          const files = Array.from(e.target.files);
+          handleFiles(files);
+          e.target.value = '';
+        });
+      }
+    }
+
+    function handleFiles(files) {
+      const maxFiles = 5;
+      const remaining = maxFiles - selectedFiles.length;
+      const newFiles = files.slice(0, remaining);
+      
+      if (remaining <= 0) {
+        showToast('Maximum 5 images allowed', 'error');
+        return;
+      }
+      
+      const validFiles = newFiles.filter(file => {
+        const validTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+        const maxSize = 5 * 1024 * 1024;
+        
+        if (!validTypes.includes(file.type)) {
+          showToast(`${file.name} - Invalid format. Use JPG, PNG, or GIF.`, 'error');
+          return false;
+        }
+        if (file.size > maxSize) {
+          showToast(`${file.name} - File too large. Max 5MB.`, 'error');
+          return false;
+        }
+        return true;
+      });
+      
+      if (validFiles.length > 0) {
+        selectedFiles = [...selectedFiles, ...validFiles];
+        renderPreviews();
+        updateImageCount();
+        debugLog('Files after addition:', selectedFiles.length);
+        showToast(`${validFiles.length} image(s) added successfully`);
+      }
+    }
+
+    function renderPreviews() {
+      if (!imagePreviewGrid) return;
+      
+      imagePreviewGrid.innerHTML = selectedFiles.map((file, index) => {
+        const url = URL.createObjectURL(file);
+        return `
+          <div class="preview-item">
+            <img src="${url}" alt="Image ${index + 1}">
+            <button class="remove-btn" onclick="removeImage(${index})" type="button">
+              <i class="fas fa-times"></i>
+            </button>
+            <span class="index-badge">#${index + 1}</span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    window.removeImage = function(index) {
+      URL.revokeObjectURL(selectedFiles[index]);
+      selectedFiles.splice(index, 1);
+      renderPreviews();
+      updateImageCount();
+      debugLog('Files after removal:', selectedFiles.length);
+    };
+
+    function updateImageCount() {
+      if (imageCountText) {
+        imageCountText.textContent = selectedFiles.length === 0 
+          ? 'No images selected' 
+          : `${selectedFiles.length} of 5 images selected`;
+      }
+    }
+
+    function generateSlug(title) {
+      return title
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '')
+        .substring(0, 60);
+    }
+
+    // ============================================================
+    // SUBMIT HANDLER - WITH DEBUG LOGS
+    // ============================================================
+    document.addEventListener('submit', async function(e) {
+      const form = e.target;
+      if (!form || form.id !== 'postForm') return;
+      
+      e.preventDefault();
+      debugLog('🚀 FORM SUBMITTED!');
+      
+      // Validate
+      if (!validateStep1()) {
+        showToast('Please fill in all required fields', 'error');
+        goToStep(1);
+        return;
+      }
+      
+      if (selectedFiles.length === 0) {
+        showToast('Please upload at least one image', 'error');
+        goToStep(2);
+        return;
+      }
+      
+      // Get user
+      let user = getCurrentUser();
+      let signupName, signupPhone, signupState;
+      
+      if (!user) {
+        signupName = document.getElementById('signupName')?.value.trim();
+        signupPhone = document.getElementById('signupPhone')?.value.trim();
+        signupState = document.getElementById('signupState')?.value;
+        
+        debugLog('Signup fields:', { signupName, signupPhone, signupState });
+        
+        if (!signupName || !signupPhone || !signupState) {
+          showToast('Please fill in all signup fields', 'error');
+          return;
+        }
+        
+        if (signupPhone.length < 10) {
+          showToast('Please enter a valid phone number', 'error');
+          return;
+        }
+      }
+      
+      // Disable submit
+      isSubmitting = true;
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `<span class="loading-spinner"></span> Publishing...`;
+      }
+      
+      try {
+        // Sign up if needed
+        if (!user) {
+          debugLog('Creating account for:', signupName);
+          showToast('Creating your account...');
+          user = await signupUser(signupName, signupPhone, signupState);
+          debugLog('Account created:', user);
+          if (!user) {
+            throw new Error('Failed to create account');
+          }
+          showToast('Account created! Posting your listing...');
+        }
+        
+        // Upload images
+        debugLog('Uploading images...');
+        showToast('Uploading images...');
+        const imageUrls = await uploadMultipleImages(selectedFiles);
+        debugLog('Images uploaded:', imageUrls);
+        
+        if (imageUrls.length === 0) {
+          showToast('Failed to upload images. Please try again.', 'error');
+          return;
+        }
+        
+        // Generate slug
+        const slug = generateSlug(formData.title);
+        debugLog('Generated slug:', slug);
+        
+        // Save product
+        const productData = {
+          title: formData.title,
+          price: parseFloat(formData.price),
+          category: formData.category,
+          location: formData.location,
+          description: formData.description,
+          images: imageUrls.join(','),
+          slug: slug,
+          sellerId: user.id,
+          sellerName: user.name,
+          sellerPhone: user.phone,
+          featured: false,
+          boosted: false
+        };
+        
+        debugLog('Product data to save:', productData);
+        showToast('Saving your listing...');
+        
+        const result = await addProductToSheet(productData);
+        debugLog('Add product result:', result);
+        
+        if (result.success) {
+          showToast('🎉 Your listing is live!');
+          debugLog('✅ LISTING SUCCESSFULLY POSTED! ID:', result.productId);
+          
+          // Reset
+          const postForm = document.getElementById('postForm');
+          if (postForm) postForm.reset();
+          selectedFiles = [];
+          renderPreviews();
+          updateImageCount();
+          formData = {};
+          
+          setTimeout(() => {
+            window.location.href = `/p/${slug}`;
+          }, 1500);
+        } else {
+          debugLog('❌ Error from API:', result);
+          showToast(result.error || 'Failed to post listing', 'error');
+        }
+      } catch (error) {
+        debugLog('❌ CATCH ERROR:', error);
+        console.error(error);
+        showToast(error.message || 'Something went wrong. Please try again.', 'error');
+      } finally {
+        isSubmitting = false;
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = `<i class="fas fa-rocket"></i> Post Listing`;
+        }
+      }
+    });
+
+    // ============================================================
+    // INIT
+    // ============================================================
+    document.addEventListener('DOMContentLoaded', async function() {
+      debugLog('Page loaded, loading user...');
+      await loadUser();
+      initTheme();
+      updateFavoriteBadge();
+      checkUserInSignup();
+      debugLog('Ready!');
+      
+      const fabPostAd = document.getElementById('fabPostAd');
+      if (fabPostAd) {
+        fabPostAd.addEventListener('click', function() {
+          window.location.href = '/post.html';
+        });
+      }
+      
+      // Test API connection on load
+      try {
+        debugLog('Testing API connection...');
+        const test = await apiCall('getProducts', {}, 'GET');
+        debugLog('API test result:', test);
+        if (test.error) {
+          console.warn('API test returned error:', test.error);
+        } else {
+          debugLog('✅ API connection OK');
+        }
+      } catch (err) {
+        console.error('API test failed:', err);
+      }
+    });
+  </script>
+</body>
+</html>
