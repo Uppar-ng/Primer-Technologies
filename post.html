@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
   <style>
-    /* ===== ALL EXISTING STYLES (keep the same) ===== */
+    /* ===== ALL EXISTING STYLES ===== */
     .post-container {
       max-width: 720px;
       margin: 0 auto;
@@ -21,7 +21,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
       position: relative;
       padding: 0 10px;
     }
@@ -510,47 +510,56 @@
       font-size: 0.7rem;
     }
 
-    /* ===== DEBUG STATUS BAR ===== */
-    .debug-status {
-      background: var(--surface-alt);
+    /* ===== STATUS BAR - ALWAYS VISIBLE ===== */
+    .status-bar {
+      background: var(--surface);
       border-radius: 12px;
-      padding: 12px 16px;
-      margin: 16px 0;
-      border: 1px solid var(--border);
-      font-size: 0.85rem;
-      display: none;
-    }
-
-    .debug-status.show {
-      display: block;
-    }
-
-    .debug-status .status-step {
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      border: 2px solid var(--border);
       display: flex;
       align-items: center;
-      gap: 8px;
-      padding: 4px 0;
+      gap: 12px;
+      font-size: 0.95rem;
+      min-height: 50px;
     }
 
-    .debug-status .status-step .icon {
-      width: 20px;
-      text-align: center;
+    .status-bar .status-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
     }
 
-    .debug-status .status-step .icon.success {
+    .status-bar .status-icon.success {
       color: #27ae60;
     }
 
-    .debug-status .status-step .icon.error {
+    .status-bar .status-icon.error {
       color: #e74c3c;
     }
 
-    .debug-status .status-step .icon.pending {
+    .status-bar .status-icon.loading {
       color: #f5b342;
+      animation: spin 1s linear infinite;
     }
 
-    .debug-status .status-step .icon.done {
-      color: #27ae60;
+    .status-bar .status-icon.idle {
+      color: #1a3650;
+    }
+
+    .status-bar .status-text {
+      flex: 1;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .status-bar .status-detail {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
 
     /* ===== TOAST ===== */
@@ -594,10 +603,6 @@
       border-top-color: white;
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
     }
 
     /* Responsive */
@@ -648,6 +653,16 @@
       .signup-section .signup-form-inline {
         grid-template-columns: 1fr;
       }
+
+      .status-bar {
+        font-size: 0.85rem;
+        padding: 12px 14px;
+        flex-wrap: wrap;
+      }
+
+      .status-bar .status-icon {
+        font-size: 1.2rem;
+      }
     }
 
     @media (min-width: 768px) {
@@ -693,6 +708,13 @@
       <div id="postFormContainer">
         <div class="post-card">
           
+          <!-- ===== STATUS BAR - ALWAYS VISIBLE ===== -->
+          <div class="status-bar" id="statusBar">
+            <span class="status-icon idle" id="statusIcon">📋</span>
+            <span class="status-text" id="statusText">Ready to post your listing</span>
+            <span class="status-detail" id="statusDetail"></span>
+          </div>
+
           <div class="wizard-progress" id="wizardProgress">
             <div class="step-indicator active" data-step="1">
               <div class="step-circle">1</div>
@@ -705,14 +727,6 @@
             <div class="step-indicator" data-step="3">
               <div class="step-circle">3</div>
               <span class="step-label">Review</span>
-            </div>
-          </div>
-
-          <!-- ===== DEBUG STATUS BAR ===== -->
-          <div class="debug-status" id="debugStatus">
-            <div class="status-step">
-              <span class="icon" id="statusIcon">⏳</span>
-              <span id="statusText">Ready</span>
             </div>
           </div>
 
@@ -986,7 +1000,7 @@
   
   <script>
     // ============================================================
-    // POST PAGE - WITH VISUAL DEBUG FEEDBACK
+    // POST PAGE - WITH ALWAYS VISIBLE STATUS BAR
     // ============================================================
     
     let currentStep = 1;
@@ -1004,27 +1018,22 @@
     const alreadySignedIn = document.getElementById('alreadySignedIn');
     const signedInName = document.getElementById('signedInName');
     const signedInAvatar = document.getElementById('signedInAvatar');
-    const debugStatus = document.getElementById('debugStatus');
+    
+    // Status Bar Elements
     const statusIcon = document.getElementById('statusIcon');
     const statusText = document.getElementById('statusText');
+    const statusDetail = document.getElementById('statusDetail');
 
     // ============================================================
-    // Visual Debug Status
+    // Status Bar Functions
     // ============================================================
-    function setStatus(icon, text, type = 'pending') {
-      debugStatus.classList.add('show');
+    function setStatus(icon, text, detail = '', type = 'idle') {
       statusIcon.textContent = icon;
-      statusIcon.className = 'icon ' + type;
+      statusIcon.className = 'status-icon ' + type;
       statusText.textContent = text;
+      statusDetail.textContent = detail;
     }
 
-    function hideStatus() {
-      debugStatus.classList.remove('show');
-    }
-
-    // ============================================================
-    // Toast
-    // ============================================================
     function showToast(message, type = 'success') {
       const toast = document.getElementById('toast');
       if (!toast) return;
@@ -1041,15 +1050,16 @@
     // ============================================================
     function checkUserInSignup() {
       const user = getCurrentUser();
-      setStatus('👤', user ? 'Signed in as ' + user.name : 'Please sign up to post', user ? 'success' : 'pending');
       if (user) {
         signupRequired.style.display = 'none';
         alreadySignedIn.style.display = 'block';
         signedInName.textContent = user.name || 'User';
         signedInAvatar.textContent = (user.name || 'U').charAt(0).toUpperCase();
+        setStatus('👤', 'Signed in as ' + user.name, 'Ready to post', 'success');
       } else {
         signupRequired.style.display = 'block';
         alreadySignedIn.style.display = 'none';
+        setStatus('📝', 'Sign up to post', 'Fill in your details below', 'idle');
       }
     }
 
@@ -1088,9 +1098,8 @@
         checkUserInSignup();
       }
       
-      // Update status
-      const stepNames = ['', '📝 Details', '📸 Photos', '✅ Review'];
-      setStatus('📋', 'Step ' + step + ': ' + stepNames[step], 'pending');
+      const stepNames = ['', 'Details', 'Photos', 'Review'];
+      setStatus('📋', 'Step ' + step + ': ' + stepNames[step], 'Fill in your details', 'idle');
       
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
@@ -1107,14 +1116,13 @@
       
       formData = { title, price, category, location, description };
       
-      // Show status
       if (title && price && category && location && description) {
-        setStatus('✅', 'All fields filled', 'success');
+        setStatus('✅', 'All details filled', 'Ready for photos', 'success');
+        return true;
       } else {
-        setStatus('⚠️', 'Please fill all required fields', 'error');
+        setStatus('⚠️', 'Please fill all required fields', 'Missing some details', 'error');
+        return false;
       }
-      
-      return title && price && category && location && description;
     }
 
     // ============================================================
@@ -1212,7 +1220,7 @@
         selectedFiles = [...selectedFiles, ...validFiles];
         renderPreviews();
         updateImageCount();
-        setStatus('📸', selectedFiles.length + ' images uploaded', 'success');
+        setStatus('📸', selectedFiles.length + ' images uploaded', 'Ready to review', 'success');
         showToast(`${validFiles.length} image(s) added successfully`);
       }
     }
@@ -1240,9 +1248,9 @@
       renderPreviews();
       updateImageCount();
       if (selectedFiles.length === 0) {
-        setStatus('⚠️', 'No images selected', 'error');
+        setStatus('⚠️', 'No images selected', 'Upload at least one image', 'error');
       } else {
-        setStatus('📸', selectedFiles.length + ' images uploaded', 'success');
+        setStatus('📸', selectedFiles.length + ' images uploaded', 'Ready to review', 'success');
       }
     };
 
@@ -1263,7 +1271,7 @@
     }
 
     // ============================================================
-    // SUBMIT HANDLER - WITH VISUAL FEEDBACK
+    // SUBMIT HANDLER - WITH VISUAL STATUS UPDATES
     // ============================================================
     document.addEventListener('submit', async function(e) {
       const form = e.target;
@@ -1295,11 +1303,13 @@
         
         if (!signupName || !signupPhone || !signupState) {
           showToast('Please fill in all signup fields', 'error');
+          setStatus('⚠️', 'Please fill in all signup fields', 'Name, phone, and state required', 'error');
           return;
         }
         
         if (signupPhone.length < 10) {
           showToast('Please enter a valid phone number', 'error');
+          setStatus('⚠️', 'Invalid phone number', 'Must be at least 10 digits', 'error');
           return;
         }
       }
@@ -1311,38 +1321,36 @@
         submitBtn.innerHTML = `<span class="loading-spinner"></span> Publishing...`;
       }
       
-      setStatus('⏳', 'Creating account...', 'pending');
-      
       try {
         // Sign up if needed
         if (!user) {
-          setStatus('⏳', 'Creating your account...', 'pending');
+          setStatus('⏳', 'Creating your account...', 'Please wait', 'loading');
           showToast('Creating your account...');
           user = await signupUser(signupName, signupPhone, signupState);
           if (!user) {
             throw new Error('Failed to create account');
           }
-          setStatus('✅', 'Account created!', 'success');
+          setStatus('✅', 'Account created!', 'Now posting your listing', 'success');
           showToast('Account created! Posting your listing...');
         }
         
         // Upload images
-        setStatus('⏳', 'Uploading images...', 'pending');
+        setStatus('⏳', 'Uploading images...', selectedFiles.length + ' images', 'loading');
         showToast('Uploading images...');
         const imageUrls = await uploadMultipleImages(selectedFiles);
         
         if (imageUrls.length === 0) {
-          setStatus('❌', 'Image upload failed', 'error');
+          setStatus('❌', 'Image upload failed', 'Please try again', 'error');
           showToast('Failed to upload images. Please try again.', 'error');
           return;
         }
-        setStatus('✅', imageUrls.length + ' images uploaded', 'success');
+        setStatus('✅', imageUrls.length + ' images uploaded', 'Saving your listing', 'success');
         
         // Generate slug
         const slug = generateSlug(formData.title);
         
         // Save product
-        setStatus('⏳', 'Saving your listing...', 'pending');
+        setStatus('⏳', 'Saving your listing...', 'Please wait', 'loading');
         showToast('Saving your listing...');
         
         const productData = {
@@ -1363,7 +1371,7 @@
         const result = await addProductToSheet(productData);
         
         if (result.success) {
-          setStatus('🎉', 'LISTING LIVE! ID: ' + result.productId, 'success');
+          setStatus('🎉', 'LISTING LIVE!', 'ID: ' + result.productId, 'success');
           showToast('🎉 Your listing is live!');
           
           // Reset
@@ -1378,11 +1386,11 @@
             window.location.href = `/p/${slug}`;
           }, 1500);
         } else {
-          setStatus('❌', 'Error: ' + (result.error || 'Unknown'), 'error');
+          setStatus('❌', 'Error: ' + (result.error || 'Unknown'), 'Please try again', 'error');
           showToast(result.error || 'Failed to post listing', 'error');
         }
       } catch (error) {
-        setStatus('❌', 'Error: ' + error.message, 'error');
+        setStatus('❌', 'Error: ' + error.message, 'Please try again', 'error');
         showToast(error.message || 'Something went wrong. Please try again.', 'error');
         console.error(error);
       } finally {
@@ -1402,7 +1410,7 @@
       initTheme();
       updateFavoriteBadge();
       checkUserInSignup();
-      setStatus('✅', 'Ready to post!', 'success');
+      setStatus('✅', 'Ready to post!', 'Fill in your details', 'success');
       
       const fabPostAd = document.getElementById('fabPostAd');
       if (fabPostAd) {
