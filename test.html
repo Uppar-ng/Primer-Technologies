@@ -51,7 +51,6 @@
         .btn-sm { padding: 6px 14px; font-size: 0.8rem; }
         .btn-group { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
         
-        /* Status Bar */
         .status-bar {
             background: #edf2f7;
             border-radius: 8px;
@@ -276,6 +275,55 @@
         <div id="testResult" class="test-result hidden"></div>
     </div>
 
+    <!-- ===== SIGNUP FORM ===== -->
+    <div class="card">
+        <h2>👤 Signup Test</h2>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="testName" value="Test User">
+            </div>
+            <div class="form-group">
+                <label>Phone</label>
+                <input type="tel" id="testPhone" value="08012345678">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>State</label>
+            <select id="testState">
+                <option value="Lagos">Lagos</option>
+                <option value="Abuja">Abuja</option>
+                <option value="Kano">Kano</option>
+                <option value="Rivers">Rivers</option>
+            </select>
+        </div>
+        <button class="btn btn-warning" onclick="testSignup()">👤 Test Signup</button>
+    </div>
+
+    <!-- ===== POST PRODUCT FORM ===== -->
+    <div class="card">
+        <h2>➕ Post Product Test</h2>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text" id="testProductTitle" value="Test Product">
+            </div>
+            <div class="form-group">
+                <label>Price (₦)</label>
+                <input type="number" id="testProductPrice" value="750000">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Category</label>
+            <select id="testProductCategory">
+                <option value="electronics">Electronics</option>
+                <option value="vehicles">Vehicles</option>
+                <option value="furniture">Furniture</option>
+            </select>
+        </div>
+        <button class="btn btn-success" onclick="testPostProduct()">➕ Post Product</button>
+    </div>
+
     <script>
         // ============================================================
         // API CONFIGURATION
@@ -291,75 +339,124 @@
         };
 
         // ============================================================
-        // DOM Elements
+        // DOM Elements with null checks
         // ============================================================
-        const statusBar = document.getElementById('statusBar');
-        const statusIcon = document.getElementById('statusIcon');
-        const statusText = document.getElementById('statusText');
-        const statusDetail = document.getElementById('statusDetail');
-        const responseArea = document.getElementById('responseArea');
-        const testResult = document.getElementById('testResult');
-        const steps = {
-            step1: document.getElementById('step1'),
-            step2: document.getElementById('step2'),
-            step3: document.getElementById('step3'),
-            step4: document.getElementById('step4')
-        };
+        function getEl(id) {
+            const el = document.getElementById(id);
+            if (!el) {
+                console.warn('⚠️ Element not found:', id);
+                return null;
+            }
+            return el;
+        }
+
+        const statusBar = getEl('statusBar');
+        const statusIcon = getEl('statusIcon');
+        const statusText = getEl('statusText');
+        const statusDetail = getEl('statusDetail');
+        const responseArea = getEl('responseArea');
+        const testResult = getEl('testResult');
+        
+        // Step elements
+        const step1 = getEl('step1');
+        const step2 = getEl('step2');
+        const step3 = getEl('step3');
+        const step4 = getEl('step4');
+
+        // ============================================================
+        // Safe Update Functions
+        // ============================================================
+        function updateText(el, text) {
+            if (el) el.textContent = text;
+        }
+
+        function updateHtml(el, html) {
+            if (el) el.innerHTML = html;
+        }
+
+        function setClass(el, className) {
+            if (el) el.className = className;
+        }
 
         // ============================================================
         // Status Functions
         // ============================================================
         function setStatus(icon, text, detail, type = 'idle') {
-            statusIcon.textContent = icon;
-            statusText.textContent = text;
-            statusDetail.textContent = detail;
-            statusBar.className = 'status-bar status-' + type;
+            if (statusIcon) statusIcon.textContent = icon;
+            if (statusText) statusText.textContent = text;
+            if (statusDetail) statusDetail.textContent = detail;
+            if (statusBar) statusBar.className = 'status-bar status-' + type;
         }
 
-        function setStep(step, icon, text, type = '') {
-            const el = steps[step];
-            if (!el) return;
-            el.querySelector('.step-icon').textContent = icon;
-            el.textContent = text;
-            el.className = type;
+        function setStep(stepEl, icon, text, type = '') {
+            if (!stepEl) return;
+            const iconEl = stepEl.querySelector('.step-icon');
+            if (iconEl) iconEl.textContent = icon;
+            // Update the text while keeping the icon
+            const textNode = stepEl.childNodes[2];
+            if (textNode) {
+                // Get the current text content excluding the icon
+                const currentText = stepEl.textContent;
+                const iconText = iconEl ? iconEl.textContent : '';
+                stepEl.textContent = iconText + ' ' + text;
+                // Re-insert the icon element
+                const newIcon = document.createElement('span');
+                newIcon.className = 'step-icon';
+                newIcon.textContent = icon;
+                stepEl.prepend(newIcon);
+            } else {
+                stepEl.innerHTML = `<span class="step-icon">${icon}</span> ${text}`;
+            }
+            if (type) stepEl.className = type;
         }
 
         function resetSteps() {
-            setStep('step1', '⬜', '1. Sending request...');
-            setStep('step2', '⬜', '2. Waiting for response...');
-            setStep('step3', '⬜', '3. Processing response...');
-            setStep('step4', '⬜', '4. Done');
+            setStep(step1, '⬜', '1. Sending request...');
+            setStep(step2, '⬜', '2. Waiting for response...');
+            setStep(step3, '⬜', '3. Processing response...');
+            setStep(step4, '⬜', '4. Done');
         }
 
         function resetAll() {
             setStatus('⏳', 'Ready', 'Click a button to start testing', 'idle');
-            responseArea.textContent = 'Waiting for action...';
-            responseArea.className = 'response';
-            testResult.classList.add('hidden');
-            testResult.textContent = '';
+            if (responseArea) {
+                responseArea.textContent = 'Waiting for action...';
+                responseArea.className = 'response';
+            }
+            if (testResult) {
+                testResult.classList.add('hidden');
+                testResult.textContent = '';
+            }
             resetSteps();
         }
 
         function showResponse(data, type = 'success') {
-            responseArea.className = 'response ' + type;
-            responseArea.textContent = JSON.stringify(data, null, 2);
+            if (responseArea) {
+                responseArea.className = 'response ' + type;
+                responseArea.textContent = JSON.stringify(data, null, 2);
+            }
         }
 
         function showResult(message, isPass) {
-            testResult.textContent = message;
-            testResult.className = 'test-result ' + (isPass ? 'pass' : 'fail');
-            testResult.classList.remove('hidden');
+            if (testResult) {
+                testResult.textContent = message;
+                testResult.className = 'test-result ' + (isPass ? 'pass' : 'fail');
+                testResult.classList.remove('hidden');
+            }
         }
 
         // ============================================================
         // Get API URL
         // ============================================================
         function getApiUrl() {
-            const useProxy = document.getElementById('useProxy').checked;
-            const proxyKey = document.getElementById('proxySelect').value;
+            const useProxy = document.getElementById('useProxy');
+            const proxySelect = document.getElementById('proxySelect');
+            
+            const useProxyChecked = useProxy ? useProxy.checked : true;
+            const proxyKey = proxySelect ? proxySelect.value : 'thingproxy';
             const proxyUrl = PROXY_URLS[proxyKey] || '';
             
-            if (useProxy && proxyUrl) {
+            if (useProxyChecked && proxyUrl) {
                 return proxyUrl + encodeURIComponent(WEB_APP_URL);
             }
             return WEB_APP_URL;
@@ -372,7 +469,7 @@
             resetSteps();
             
             setStatus('📤', 'Sending request...', `Action: ${action}`, 'loading');
-            setStep('step1', '⏳', '1. Sending request...', 'active');
+            setStep(step1, '⏳', '1. Sending request...', 'active');
             
             const baseUrl = getApiUrl();
             const url = method === 'GET' 
@@ -388,7 +485,7 @@
                 options.body = JSON.stringify({ action, ...data });
             }
             
-            setStep('step2', '⏳', '2. Waiting for response...', 'active');
+            setStep(step2, '⏳', '2. Waiting for response...', 'active');
             setStatus('⏳', 'Waiting for response...', `URL: ${url.substring(0, 60)}...`, 'loading');
             
             try {
@@ -396,8 +493,8 @@
                 const response = await fetch(url, options);
                 const endTime = Date.now();
                 
-                setStep('step2', '✅', `2. Received response (${endTime - startTime}ms)`, 'done');
-                setStep('step3', '⏳', '3. Processing response...', 'active');
+                setStep(step2, '✅', `2. Received response (${endTime - startTime}ms)`, 'done');
+                setStep(step3, '⏳', '3. Processing response...', 'active');
                 setStatus('📥', 'Processing response...', `Status: ${response.status}`, 'loading');
                 
                 if (!response.ok) {
@@ -406,8 +503,8 @@
                 
                 const result = await response.json();
                 
-                setStep('step3', '✅', '3. Response processed successfully', 'done');
-                setStep('step4', '✅', '4. ✅ Done', 'done');
+                setStep(step3, '✅', '3. Response processed successfully', 'done');
+                setStep(step4, '✅', '4. ✅ Done', 'done');
                 
                 const isSuccess = !result.error;
                 setStatus(
@@ -421,9 +518,9 @@
                 return result;
                 
             } catch (error) {
-                setStep('step2', '❌', '2. ❌ Request failed', 'error');
-                setStep('step3', '❌', '3. ❌ Error', 'error');
-                setStep('step4', '❌', '4. ❌ Failed', 'error');
+                setStep(step2, '❌', '2. ❌ Request failed', 'error');
+                setStep(step3, '❌', '3. ❌ Error', 'error');
+                setStep(step4, '❌', '4. ❌ Failed', 'error');
                 
                 setStatus('❌', 'Failed', error.message, 'error');
                 showResponse({ error: error.message, type: 'network_error' }, 'error');
@@ -439,10 +536,10 @@
         async function testGetProducts() {
             try {
                 const result = await apiCallWithStatus('getProducts', {}, 'GET');
-                if (result.products !== undefined) {
+                if (result && result.products !== undefined) {
                     showResult(`✅ Found ${result.products.length} products`, true);
                 } else {
-                    showResult('❌ ' + (result.error || 'Unknown error'), false);
+                    showResult('❌ ' + (result?.error || 'Unknown error'), false);
                 }
             } catch (error) {
                 showResult('❌ Failed: ' + error.message, false);
@@ -450,9 +547,13 @@
         }
 
         async function testSignup() {
-            const name = document.getElementById('testName')?.value || 'Test User';
-            const phone = document.getElementById('testPhone')?.value || '08012345678';
-            const state = document.getElementById('testState')?.value || 'Lagos';
+            const nameEl = document.getElementById('testName');
+            const phoneEl = document.getElementById('testPhone');
+            const stateEl = document.getElementById('testState');
+            
+            const name = nameEl ? nameEl.value : 'Test User';
+            const phone = phoneEl ? phoneEl.value : '08012345678';
+            const state = stateEl ? stateEl.value : 'Lagos';
             
             try {
                 const result = await apiCallWithStatus('signup', {
@@ -463,10 +564,10 @@
                     bio: ''
                 });
                 
-                if (result.success) {
+                if (result && result.success) {
                     showResult(`✅ User "${name}" created! ID: ${result.user.id}`, true);
                 } else {
-                    showResult('❌ ' + (result.error || 'Signup failed'), false);
+                    showResult('❌ ' + (result?.error || 'Signup failed'), false);
                 }
             } catch (error) {
                 showResult('❌ Failed: ' + error.message, false);
@@ -474,9 +575,13 @@
         }
 
         async function testPostProduct() {
-            const title = document.getElementById('testProductTitle')?.value || 'Test Product';
-            const price = document.getElementById('testProductPrice')?.value || '750000';
-            const category = document.getElementById('testProductCategory')?.value || 'electronics';
+            const titleEl = document.getElementById('testProductTitle');
+            const priceEl = document.getElementById('testProductPrice');
+            const categoryEl = document.getElementById('testProductCategory');
+            
+            const title = titleEl ? titleEl.value : 'Test Product';
+            const price = priceEl ? priceEl.value : '750000';
+            const category = categoryEl ? categoryEl.value : 'electronics';
             
             try {
                 const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').substring(0, 60);
@@ -496,10 +601,10 @@
                     boosted: false
                 });
                 
-                if (result.success) {
+                if (result && result.success) {
                     showResult(`✅ Product "${title}" posted! ID: ${result.productId}`, true);
                 } else {
-                    showResult('❌ ' + (result.error || 'Post failed'), false);
+                    showResult('❌ ' + (result?.error || 'Post failed'), false);
                 }
             } catch (error) {
                 showResult('❌ Failed: ' + error.message, false);
@@ -507,70 +612,15 @@
         }
 
         // ============================================================
-        // Add test fields dynamically
+        // Display API URL
         // ============================================================
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add signup fields
-            const cards = document.querySelectorAll('.card');
-            const lastCard = cards[cards.length - 1];
-            
-            const signupHTML = `
-                <div class="card">
-                    <h2>👤 Signup Test</h2>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Full Name</label>
-                            <input type="text" id="testName" value="Test User">
-                        </div>
-                        <div class="form-group">
-                            <label>Phone</label>
-                            <input type="tel" id="testPhone" value="08012345678">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>State</label>
-                        <select id="testState">
-                            <option value="Lagos">Lagos</option>
-                            <option value="Abuja">Abuja</option>
-                            <option value="Kano">Kano</option>
-                            <option value="Rivers">Rivers</option>
-                        </select>
-                    </div>
-                    <button class="btn btn-warning" onclick="testSignup()">👤 Test Signup</button>
-                </div>
-            `;
-            
-            const productHTML = `
-                <div class="card">
-                    <h2>➕ Post Product Test</h2>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Title</label>
-                            <input type="text" id="testProductTitle" value="Test Product">
-                        </div>
-                        <div class="form-group">
-                            <label>Price (₦)</label>
-                            <input type="number" id="testProductPrice" value="750000">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Category</label>
-                        <select id="testProductCategory">
-                            <option value="electronics">Electronics</option>
-                            <option value="vehicles">Vehicles</option>
-                            <option value="furniture">Furniture</option>
-                        </select>
-                    </div>
-                    <button class="btn btn-success" onclick="testPostProduct()">➕ Post Product</button>
-                </div>
-            `;
-            
-            // Insert after the response card
-            const responseCard = document.querySelector('.card:nth-child(4)');
-            if (responseCard) {
-                responseCard.insertAdjacentHTML('afterend', signupHTML + productHTML);
-            }
-        });
+        const urlDisplay = document.getElementById('apiUrlDisplay');
+        if (urlDisplay) {
+            urlDisplay.textContent = WEB_APP_URL;
+        }
+
+        console.log('🧪 API Test Tool loaded!');
+        console.log('📡 Web App URL:', WEB_APP_URL);
     </script>
 </body>
 </html>
