@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>API Test - Zaure</title>
+    <title>Zaure API Test</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -70,10 +70,10 @@
         .btn-primary:hover { background: #0f2940; }
         .btn-success { background: #27ae60; color: white; }
         .btn-success:hover { background: #219a52; }
-        .btn-danger { background: #e74c3c; color: white; }
-        .btn-danger:hover { background: #c0392b; }
         .btn-warning { background: #f5b342; color: #1a1a1a; }
         .btn-warning:hover { background: #e6a33d; }
+        .btn-danger { background: #e74c3c; color: white; }
+        .btn-danger:hover { background: #c0392b; }
         .btn-sm { padding: 6px 14px; font-size: 0.8rem; }
         .response {
             background: #1a202c;
@@ -91,7 +91,6 @@
         }
         .response.error { color: #fc8181; }
         .response.success { color: #68d391; }
-        .btn-group { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
         .status-badge {
             display: inline-block;
             padding: 2px 12px;
@@ -99,60 +98,34 @@
             font-size: 0.7rem;
             font-weight: 600;
         }
+        .status-badge.pending { background: #fefcbf; color: #975a16; }
         .status-badge.success { background: #c6f6d5; color: #276749; }
         .status-badge.error { background: #fed7d7; color: #9b2c2c; }
-        .status-badge.pending { background: #fefcbf; color: #975a16; }
-        .loading {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            border: 2px solid #e2e8f0;
-            border-top-color: #1a3650;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
         .config-box {
             background: #edf2f7;
             padding: 12px;
             border-radius: 8px;
             font-size: 0.8rem;
             margin-bottom: 12px;
-        }
-        .config-box strong { color: #1a3650; }
-        .config-box .url {
-            color: #2b6cb0;
             word-break: break-all;
         }
-        .error-box {
-            background: #fed7d7;
-            border: 2px solid #fc8181;
-            padding: 12px;
-            border-radius: 8px;
-            color: #9b2c2c;
-            font-size: 0.85rem;
-            margin-top: 8px;
-        }
-        .success-box {
-            background: #c6f6d5;
-            border: 2px solid #68d391;
-            padding: 12px;
-            border-radius: 8px;
-            color: #276749;
-            font-size: 0.85rem;
-            margin-top: 8px;
-        }
-        @media (max-width: 640px) {
-            .form-row { grid-template-columns: 1fr; }
-            body { padding: 12px; }
-            .card { padding: 14px; }
-        }
+        .config-box strong { color: #1a3650; }
+        .btn-group { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
         .hidden { display: none; }
+        .test-result {
+            margin-top: 8px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+        }
+        .test-result.pass { background: #c6f6d5; color: #276749; }
+        .test-result.fail { background: #fed7d7; color: #9b2c2c; }
         .proxy-toggle {
             margin-top: 8px;
             display: flex;
             align-items: center;
             gap: 12px;
+            flex-wrap: wrap;
         }
         .proxy-toggle input[type="checkbox"] {
             width: 18px;
@@ -165,19 +138,12 @@
             color: #4a5568;
             cursor: pointer;
         }
-        .test-result {
-            margin-top: 8px;
-            padding: 8px 12px;
+        .proxy-toggle select {
+            padding: 4px 10px;
+            border: 2px solid #e2e8f0;
             border-radius: 6px;
             font-size: 0.85rem;
-        }
-        .test-result.pass {
-            background: #c6f6d5;
-            color: #276749;
-        }
-        .test-result.fail {
-            background: #fed7d7;
-            color: #9b2c2c;
+            background: white;
         }
         .deploy-note {
             background: #ebf8ff;
@@ -188,144 +154,54 @@
             color: #2a4365;
             margin-bottom: 12px;
         }
-        .deploy-note strong { color: #1a3650; }
     </style>
 </head>
 <body>
 
-    <h1>🧪 Zaure API Test Tool</h1>
+    <h1>🧪 Zaure API Test</h1>
 
-    <!-- ===== CONFIG ===== -->
     <div class="card">
         <h2>⚙️ Configuration</h2>
         <div class="deploy-note">
-            🚀 <strong>Running on Vercel</strong> — CORS proxy should be <strong>disabled</strong> for direct API calls.
+            🚀 <strong>Testing from Vercel</strong> — Try with proxy ON first, then OFF if it works.
         </div>
         <div class="config-box">
             <strong>Web App URL:</strong><br>
-            <span class="url" id="apiUrlDisplay">https://script.google.com/macros/s/AKfycbwfy8j8TDBxkv5n-mYv7eMyZS9ooLbN5ZAzLdYfmMydPiXtU8-nKD5VVQckKtiB3Mgp/exec</span>
+            <span id="apiUrlDisplay">https://script.google.com/macros/s/AKfycbwfy8j8TDBxkv5n-mYv7eMyZS9ooLbN5ZAzLdYfmMydPiXtU8-nKD5VVQckKtiB3Mgp/exec</span>
         </div>
         <div class="config-box">
             <strong>Spreadsheet ID:</strong><br>
             <span>17fw2y7VQw2Z_IOVhBi4UQlxI2n3320Sn1v_7iek1YwM</span>
         </div>
         <div class="proxy-toggle">
-            <input type="checkbox" id="useProxy">
-            <label for="useProxy">Enable CORS Proxy (only if you get CORS errors)</label>
+            <input type="checkbox" id="useProxy" checked>
+            <label for="useProxy">Enable CORS Proxy</label>
+            <select id="proxySelect">
+                <option value="thingproxy">thingproxy.freeboard.io</option>
+                <option value="corsproxy">corsproxy.io</option>
+                <option value="corsanywhere">cors-anywhere.herokuapp.com</option>
+                <option value="none">No Proxy (Direct)</option>
+            </select>
         </div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;">
             <button class="btn btn-primary btn-sm" onclick="testGetProducts()">📦 Test GET Products</button>
-            <button class="btn btn-success btn-sm" onclick="testPostProduct()">➕ Test POST Product</button>
-            <button class="btn btn-warning btn-sm" onclick="testSignup()">👤 Test Signup</button>
-            <button class="btn btn-danger btn-sm" onclick="testGetUser()">👤 Test Get User</button>
-            <button class="btn btn-danger btn-sm" onclick="clearResponse()">🗑️ Clear</button>
+            <button class="btn btn-success btn-sm" onclick="testSignup()">👤 Test Signup</button>
+            <button class="btn btn-warning btn-sm" onclick="testPostProduct()">➕ Test Post Product</button>
+            <button class="btn btn-danger btn-sm" onclick="clearAll()">🗑️ Clear</button>
         </div>
     </div>
 
-    <!-- ===== RESPONSE ===== -->
     <div class="card">
         <h2>📤 Response</h2>
         <div id="statusBadge">
             <span class="status-badge pending">⏳ Ready</span>
         </div>
-        <div class="response" id="responseArea">Waiting for action...</div>
-        <div id="corsWarning" class="error-box hidden">
-            ⚠️ <strong>Failed to Fetch / CORS Error</strong><br>
-            Try enabling the CORS Proxy checkbox above.<br>
-            Also verify your web app is deployed with <strong>"Anyone"</strong> access.
-        </div>
-        <div id="successBox" class="success-box hidden">
-            ✅ <strong>API is working!</strong>
-        </div>
+        <div class="response" id="responseArea">Click a button to test the API...</div>
     </div>
 
-    <!-- ===== TEST SIGNUP ===== -->
     <div class="card">
-        <h2>👤 Test Signup</h2>
-        <div class="form-row">
-            <div class="form-group">
-                <label>Full Name</label>
-                <input type="text" id="testName" value="Test User" placeholder="Full name">
-            </div>
-            <div class="form-group">
-                <label>Phone Number</label>
-                <input type="tel" id="testPhone" value="08012345678" placeholder="Phone number">
-            </div>
-        </div>
-        <div class="form-group">
-            <label>State</label>
-            <select id="testState">
-                <option value="Lagos">Lagos</option>
-                <option value="Abuja">Abuja</option>
-                <option value="Kano">Kano</option>
-                <option value="Rivers">Rivers</option>
-                <option value="Oyo">Oyo</option>
-                <option value="Kaduna">Kaduna</option>
-                <option value="Other">Other</option>
-            </select>
-        </div>
-        <button class="btn btn-warning" onclick="testSignup()">👤 Signup Test</button>
-        <div id="signupResult" class="test-result hidden"></div>
-    </div>
-
-    <!-- ===== TEST POST PRODUCT ===== -->
-    <div class="card">
-        <h2>➕ Test Post Product</h2>
-        <div class="form-group">
-            <label>Product Title <span style="color:red;">*</span></label>
-            <input type="text" id="testProductTitle" value="Test Product - iPhone 14" placeholder="Product title">
-        </div>
-        <div class="form-row">
-            <div class="form-group">
-                <label>Price (₦) <span style="color:red;">*</span></label>
-                <input type="number" id="testProductPrice" value="750000" placeholder="Price">
-            </div>
-            <div class="form-group">
-                <label>Category <span style="color:red;">*</span></label>
-                <select id="testProductCategory">
-                    <option value="electronics">📱 Electronics</option>
-                    <option value="vehicles">🚗 Vehicles</option>
-                    <option value="furniture">🪑 Furniture</option>
-                    <option value="fashion">👗 Fashion</option>
-                    <option value="real-estate">🏠 Real Estate</option>
-                    <option value="services">🔧 Services</option>
-                    <option value="other">📦 Other</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label>Location</label>
-            <input type="text" id="testProductLocation" value="Lagos" placeholder="Location">
-        </div>
-        <div class="form-group">
-            <label>Description</label>
-            <textarea id="testProductDescription" placeholder="Product description">Brand new iPhone 14 Pro Max in excellent condition. 256GB storage, Space Black.</textarea>
-        </div>
-        <div class="form-group">
-            <label>Image URLs (comma separated)</label>
-            <input type="text" id="testProductImages" value="https://via.placeholder.com/400x300/1a3650/ffffff?text=Zaure+Test" placeholder="https://example.com/image1.jpg">
-        </div>
-        <div class="form-group">
-            <label>Seller Info</label>
-            <div class="form-row">
-                <input type="text" id="testSellerId" placeholder="Seller ID" value="1">
-                <input type="text" id="testSellerName" placeholder="Seller Name" value="Test Seller">
-            </div>
-            <input type="text" id="testSellerPhone" placeholder="Seller Phone" value="08012345678" style="margin-top:8px;width:100%;padding:10px 14px;border:2px solid #e2e8f0;border-radius:8px;">
-        </div>
-        <button class="btn btn-success" onclick="testPostProduct()">➕ Post Product</button>
-        <div id="productResult" class="test-result hidden"></div>
-    </div>
-
-    <!-- ===== QUICK ACTIONS ===== -->
-    <div class="card">
-        <h2>⚡ Quick Actions</h2>
-        <div class="btn-group">
-            <button class="btn btn-primary btn-sm" onclick="testGetProducts()">📦 Get Products</button>
-            <button class="btn btn-success btn-sm" onclick="testPostProduct()">➕ Post Product</button>
-            <button class="btn btn-warning btn-sm" onclick="testSignup()">👤 Signup</button>
-            <button class="btn btn-danger btn-sm" onclick="testGetUser()">👤 Get User</button>
-        </div>
+        <h2>📝 Results</h2>
+        <div id="testResult" class="test-result hidden"></div>
     </div>
 
     <script>
@@ -334,16 +210,26 @@
         // ============================================================
         
         const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwfy8j8TDBxkv5n-mYv7eMyZS9ooLbN5ZAzLdYfmMydPiXtU8-nKD5VVQckKtiB3Mgp/exec';
-        const SPREADSHEET_ID = '17fw2y7VQw2Z_IOVhBi4UQlxI2n3320Sn1v_7iek1YwM';
-        const CORS_PROXY = 'https://thingproxy.freeboard.io/fetch/';
+        
+        const PROXY_URLS = {
+            'thingproxy': 'https://thingproxy.freeboard.io/fetch/',
+            'corsproxy': 'https://corsproxy.io/?',
+            'corsanywhere': 'https://cors-anywhere.herokuapp.com/',
+            'none': ''
+        };
 
         // ============================================================
-        // Get API URL based on proxy setting
+        // Get API URL
         // ============================================================
         function getApiUrl() {
             const useProxy = document.getElementById('useProxy').checked;
-            const url = useProxy ? CORS_PROXY + encodeURIComponent(WEB_APP_URL) : WEB_APP_URL;
-            return url;
+            const proxyKey = document.getElementById('proxySelect').value;
+            const proxyUrl = PROXY_URLS[proxyKey] || '';
+            
+            if (useProxy && proxyUrl) {
+                return proxyUrl + encodeURIComponent(WEB_APP_URL);
+            }
+            return WEB_APP_URL;
         }
 
         // ============================================================
@@ -351,16 +237,39 @@
         // ============================================================
         const responseArea = document.getElementById('responseArea');
         const statusBadge = document.getElementById('statusBadge');
-        const corsWarning = document.getElementById('corsWarning');
-        const successBox = document.getElementById('successBox');
+        const testResult = document.getElementById('testResult');
 
         // ============================================================
-        // Display API URL
+        // Display Functions
         // ============================================================
-        document.getElementById('apiUrlDisplay').textContent = WEB_APP_URL;
+        function setStatus(type, text) {
+            const badge = statusBadge.querySelector('.status-badge');
+            badge.className = 'status-badge ' + type;
+            badge.textContent = text;
+        }
+
+        function showResponse(data, type = 'success') {
+            responseArea.className = 'response ' + type;
+            responseArea.textContent = JSON.stringify(data, null, 2);
+            setStatus(type, type === 'success' ? '✅ Success' : '❌ Error');
+        }
+
+        function showResult(message, isPass) {
+            testResult.textContent = message;
+            testResult.className = 'test-result ' + (isPass ? 'pass' : 'fail');
+            testResult.classList.remove('hidden');
+        }
+
+        function clearAll() {
+            responseArea.textContent = 'Click a button to test the API...';
+            responseArea.className = 'response';
+            setStatus('pending', '⏳ Ready');
+            testResult.classList.add('hidden');
+            testResult.textContent = '';
+        }
 
         // ============================================================
-        // API Call Function
+        // API Call
         // ============================================================
         async function apiCall(action, data = {}, method = 'POST') {
             const baseUrl = getApiUrl();
@@ -377,94 +286,34 @@
                 options.body = JSON.stringify({ action, ...data });
             }
             
-            try {
-                const response = await fetch(url, options);
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-                }
-                
-                const result = await response.json();
-                return result;
-            } catch (error) {
-                if (error.message.includes('fetch') || error.message.includes('NetworkError')) {
-                    corsWarning.classList.remove('hidden');
-                    successBox.classList.add('hidden');
-                }
-                return { error: error.message, type: 'network_error' };
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
             }
-        }
-
-        // ============================================================
-        // Display Response
-        // ============================================================
-        function displayResponse(data, type = 'success') {
-            responseArea.className = 'response ' + type;
-            responseArea.textContent = JSON.stringify(data, null, 2);
-            
-            const badge = statusBadge.querySelector('.status-badge');
-            if (type === 'success') {
-                badge.className = 'status-badge success';
-                badge.textContent = '✅ Success';
-                corsWarning.classList.add('hidden');
-                if (!data.error) {
-                    successBox.classList.remove('hidden');
-                }
-            } else if (type === 'error') {
-                badge.className = 'status-badge error';
-                badge.textContent = '❌ Error';
-                if (data.error && (data.error.includes('fetch') || data.error.includes('NetworkError'))) {
-                    corsWarning.classList.remove('hidden');
-                }
-                successBox.classList.add('hidden');
-            } else {
-                badge.className = 'status-badge pending';
-                badge.textContent = '⏳ Loading...';
-                corsWarning.classList.add('hidden');
-                successBox.classList.add('hidden');
-            }
-        }
-
-        function clearResponse() {
-            responseArea.textContent = 'Waiting for action...';
-            responseArea.className = 'response';
-            const badge = statusBadge.querySelector('.status-badge');
-            badge.className = 'status-badge pending';
-            badge.textContent = '⏳ Ready';
-            corsWarning.classList.add('hidden');
-            successBox.classList.add('hidden');
-            document.querySelectorAll('.test-result').forEach(el => {
-                el.classList.add('hidden');
-                el.textContent = '';
-            });
-        }
-
-        function showTestResult(elementId, message, isPass) {
-            const el = document.getElementById(elementId);
-            el.textContent = message;
-            el.className = 'test-result ' + (isPass ? 'pass' : 'fail');
-            el.classList.remove('hidden');
+            return await response.json();
         }
 
         // ============================================================
         // TEST: Get Products
         // ============================================================
         async function testGetProducts() {
-            displayResponse({ loading: 'Fetching products...' }, 'pending');
-            corsWarning.classList.add('hidden');
-            successBox.classList.add('hidden');
-            
             try {
+                setStatus('pending', '⏳ Loading...');
+                responseArea.textContent = 'Fetching products...';
+                responseArea.className = 'response';
+                testResult.classList.add('hidden');
+
                 const result = await apiCall('getProducts', {}, 'GET');
-                displayResponse(result, result.error ? 'error' : 'success');
+                showResponse(result, result.error ? 'error' : 'success');
                 
-                if (result.products) {
-                    console.log('✅ Products found:', result.products.length);
-                    showTestResult('signupResult', `✅ Found ${result.products.length} products`, true);
+                if (result.products !== undefined) {
+                    showResult(`✅ Found ${result.products.length} products`, true);
+                } else {
+                    showResult('❌ ' + (result.error || 'Unknown error'), false);
                 }
             } catch (error) {
-                displayResponse({ error: error.message }, 'error');
-                showTestResult('signupResult', '❌ Error: ' + error.message, false);
+                showResponse({ error: error.message }, 'error');
+                showResult('❌ Failed to fetch: ' + error.message, false);
             }
         }
 
@@ -472,20 +321,16 @@
         // TEST: Signup
         // ============================================================
         async function testSignup() {
-            const name = document.getElementById('testName').value.trim();
-            const phone = document.getElementById('testPhone').value.trim();
-            const state = document.getElementById('testState').value;
-            
-            if (!name || !phone || !state) {
-                displayResponse({ error: 'Please fill in all fields' }, 'error');
-                return;
-            }
-            
-            displayResponse({ loading: 'Creating account for ' + name + '...' }, 'pending');
-            corsWarning.classList.add('hidden');
-            successBox.classList.add('hidden');
+            const name = document.getElementById('testName')?.value || 'Test User';
+            const phone = document.getElementById('testPhone')?.value || '08012345678';
+            const state = document.getElementById('testState')?.value || 'Lagos';
             
             try {
+                setStatus('pending', '⏳ Loading...');
+                responseArea.textContent = 'Creating account...';
+                responseArea.className = 'response';
+                testResult.classList.add('hidden');
+
                 const result = await apiCall('signup', {
                     name: name,
                     phone: phone,
@@ -493,48 +338,16 @@
                     email: '',
                     bio: ''
                 });
-                displayResponse(result, result.success ? 'success' : 'error');
+                showResponse(result, result.success ? 'success' : 'error');
                 
                 if (result.success) {
-                    console.log('✅ User created:', result.user);
-                    showTestResult('signupResult', `✅ User "${name}" created successfully! ID: ${result.user.id}`, true);
+                    showResult(`✅ User "${name}" created! ID: ${result.user.id}`, true);
                 } else {
-                    showTestResult('signupResult', '❌ ' + (result.error || 'Signup failed'), false);
+                    showResult('❌ ' + (result.error || 'Signup failed'), false);
                 }
             } catch (error) {
-                displayResponse({ error: error.message }, 'error');
-                showTestResult('signupResult', '❌ Error: ' + error.message, false);
-            }
-        }
-
-        // ============================================================
-        // TEST: Get User
-        // ============================================================
-        async function testGetUser() {
-            const phone = document.getElementById('testPhone').value.trim();
-            
-            if (!phone) {
-                displayResponse({ error: 'Please enter a phone number' }, 'error');
-                return;
-            }
-            
-            displayResponse({ loading: 'Fetching user with phone: ' + phone + '...' }, 'pending');
-            corsWarning.classList.add('hidden');
-            successBox.classList.add('hidden');
-            
-            try {
-                const result = await apiCall('getUser', { phone: phone }, 'GET');
-                displayResponse(result, result.user ? 'success' : 'error');
-                
-                if (result.user) {
-                    console.log('✅ User found:', result.user);
-                    showTestResult('signupResult', `✅ User found: ${result.user.name} (${result.user.phone})`, true);
-                } else {
-                    showTestResult('signupResult', '❌ User not found for phone: ' + phone, false);
-                }
-            } catch (error) {
-                displayResponse({ error: error.message }, 'error');
-                showTestResult('signupResult', '❌ Error: ' + error.message, false);
+                showResponse({ error: error.message }, 'error');
+                showResult('❌ Failed to fetch: ' + error.message, false);
             }
         }
 
@@ -542,70 +355,111 @@
         // TEST: Post Product
         // ============================================================
         async function testPostProduct() {
-            const title = document.getElementById('testProductTitle').value.trim();
-            const price = document.getElementById('testProductPrice').value;
-            const category = document.getElementById('testProductCategory').value;
-            const location = document.getElementById('testProductLocation').value.trim();
-            const description = document.getElementById('testProductDescription').value.trim();
-            const images = document.getElementById('testProductImages').value.trim();
-            const sellerId = document.getElementById('testSellerId').value.trim() || '1';
-            const sellerName = document.getElementById('testSellerName').value.trim() || 'Test Seller';
-            const sellerPhone = document.getElementById('testSellerPhone').value.trim() || '08012345678';
-            
-            if (!title || !price || !category) {
-                displayResponse({ error: 'Please fill in title, price, and category' }, 'error');
-                return;
-            }
-            
-            const slug = title.toLowerCase()
-                .replace(/[^a-z0-9]+/g, '-')
-                .replace(/^-+|-+$/g, '')
-                .substring(0, 60);
-            
-            const productData = {
-                title: title,
-                price: parseFloat(price),
-                category: category,
-                location: location || 'Nigeria',
-                description: description || 'No description provided.',
-                images: images || 'https://via.placeholder.com/400x300/1a3650/ffffff?text=Zaure+Test',
-                slug: slug,
-                sellerId: parseInt(sellerId),
-                sellerName: sellerName,
-                sellerPhone: sellerPhone,
-                featured: false,
-                boosted: false
-            };
-            
-            displayResponse({ loading: 'Posting product: ' + title + '...' }, 'pending');
-            corsWarning.classList.add('hidden');
-            successBox.classList.add('hidden');
+            const title = document.getElementById('testProductTitle')?.value || 'Test Product';
+            const price = document.getElementById('testProductPrice')?.value || '750000';
+            const category = document.getElementById('testProductCategory')?.value || 'electronics';
+            const location = document.getElementById('testProductLocation')?.value || 'Lagos';
             
             try {
-                const result = await apiCall('addProduct', productData);
-                displayResponse(result, result.success ? 'success' : 'error');
+                setStatus('pending', '⏳ Loading...');
+                responseArea.textContent = 'Posting product...';
+                responseArea.className = 'response';
+                testResult.classList.add('hidden');
+
+                const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').substring(0, 60);
+                
+                const result = await apiCall('addProduct', {
+                    title: title,
+                    price: parseFloat(price),
+                    category: category,
+                    location: location,
+                    description: 'Test product description',
+                    images: 'https://via.placeholder.com/400x300/1a3650/ffffff?text=Zaure+Test',
+                    slug: slug,
+                    sellerId: 1,
+                    sellerName: 'Test Seller',
+                    sellerPhone: '08012345678',
+                    featured: false,
+                    boosted: false
+                });
+                showResponse(result, result.success ? 'success' : 'error');
                 
                 if (result.success) {
-                    console.log('✅ Product posted! ID:', result.productId, 'Slug:', result.slug);
-                    showTestResult('productResult', `✅ Product "${title}" posted! ID: ${result.productId}`, true);
+                    showResult(`✅ Product "${title}" posted! ID: ${result.productId}`, true);
                 } else {
-                    showTestResult('productResult', '❌ ' + (result.error || 'Post failed'), false);
+                    showResult('❌ ' + (result.error || 'Post failed'), false);
                 }
             } catch (error) {
-                displayResponse({ error: error.message }, 'error');
-                showTestResult('productResult', '❌ Error: ' + error.message, false);
+                showResponse({ error: error.message }, 'error');
+                showResult('❌ Failed to fetch: ' + error.message, false);
             }
         }
 
         // ============================================================
-        // Auto-test on load
+        // Add test fields dynamically
         // ============================================================
-        console.log('🧪 API Test Tool loaded!');
-        console.log('📡 Web App URL:', WEB_APP_URL);
-        console.log('📊 Spreadsheet ID:', SPREADSHEET_ID);
-        console.log('🚀 Running on Vercel - CORS proxy is OFF by default');
-        console.log('ℹ️ Click buttons to test API endpoints.');
-        console.log('💡 If you get CORS errors, enable the proxy checkbox.');
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add signup fields if they don't exist
+            const signupCard = document.querySelector('.card:nth-child(3)');
+            if (signupCard) {
+                signupCard.innerHTML = `
+                    <h2>👤 Test Signup</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" id="testName" value="Test User">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="tel" id="testPhone" value="08012345678">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>State</label>
+                        <select id="testState">
+                            <option value="Lagos">Lagos</option>
+                            <option value="Abuja">Abuja</option>
+                            <option value="Kano">Kano</option>
+                            <option value="Rivers">Rivers</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-warning" onclick="testSignup()">👤 Test Signup</button>
+                `;
+            }
+
+            // Add product fields
+            const productCard = document.querySelector('.card:nth-child(4)');
+            if (productCard) {
+                productCard.innerHTML = `
+                    <h2>➕ Test Post Product</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Title</label>
+                            <input type="text" id="testProductTitle" value="Test Product">
+                        </div>
+                        <div class="form-group">
+                            <label>Price (₦)</label>
+                            <input type="number" id="testProductPrice" value="750000">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select id="testProductCategory">
+                                <option value="electronics">Electronics</option>
+                                <option value="vehicles">Vehicles</option>
+                                <option value="furniture">Furniture</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Location</label>
+                            <input type="text" id="testProductLocation" value="Lagos">
+                        </div>
+                    </div>
+                    <button class="btn btn-success" onclick="testPostProduct()">➕ Post Product</button>
+                `;
+            }
+        });
     </script>
 </body>
 </html>
