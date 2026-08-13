@@ -5,11 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>API Test - Zaure</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: #f0f4f8;
@@ -17,11 +13,7 @@
             max-width: 800px;
             margin: 0 auto;
         }
-        h1 {
-            color: #1a3650;
-            text-align: center;
-            margin-bottom: 20px;
-        }
+        h1 { color: #1a3650; text-align: center; margin-bottom: 20px; }
         .card {
             background: white;
             border-radius: 12px;
@@ -36,9 +28,7 @@
             border-bottom: 2px solid #e2e8f0;
             padding-bottom: 8px;
         }
-        .form-group {
-            margin-bottom: 12px;
-        }
+        .form-group { margin-bottom: 12px; }
         .form-group label {
             display: block;
             font-weight: 600;
@@ -62,15 +52,8 @@
             border-color: #1a3650;
             outline: none;
         }
-        .form-group textarea {
-            min-height: 80px;
-            resize: vertical;
-        }
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
+        .form-group textarea { min-height: 80px; resize: vertical; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .btn {
             padding: 10px 24px;
             border: none;
@@ -83,38 +66,15 @@
             align-items: center;
             gap: 6px;
         }
-        .btn-primary {
-            background: #1a3650;
-            color: white;
-        }
-        .btn-primary:hover {
-            background: #0f2940;
-        }
-        .btn-success {
-            background: #27ae60;
-            color: white;
-        }
-        .btn-success:hover {
-            background: #219a52;
-        }
-        .btn-danger {
-            background: #e74c3c;
-            color: white;
-        }
-        .btn-danger:hover {
-            background: #c0392b;
-        }
-        .btn-warning {
-            background: #f5b342;
-            color: #1a1a1a;
-        }
-        .btn-warning:hover {
-            background: #e6a33d;
-        }
-        .btn-sm {
-            padding: 6px 14px;
-            font-size: 0.8rem;
-        }
+        .btn-primary { background: #1a3650; color: white; }
+        .btn-primary:hover { background: #0f2940; }
+        .btn-success { background: #27ae60; color: white; }
+        .btn-success:hover { background: #219a52; }
+        .btn-danger { background: #e74c3c; color: white; }
+        .btn-danger:hover { background: #c0392b; }
+        .btn-warning { background: #f5b342; color: #1a1a1a; }
+        .btn-warning:hover { background: #e6a33d; }
+        .btn-sm { padding: 6px 14px; font-size: 0.8rem; }
         .response {
             background: #1a202c;
             color: #68d391;
@@ -129,18 +89,9 @@
             overflow-y: auto;
             margin-top: 12px;
         }
-        .response.error {
-            color: #fc8181;
-        }
-        .response.success {
-            color: #68d391;
-        }
-        .btn-group {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-top: 12px;
-        }
+        .response.error { color: #fc8181; }
+        .response.success { color: #68d391; }
+        .btn-group { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
         .status-badge {
             display: inline-block;
             padding: 2px 12px;
@@ -148,18 +99,9 @@
             font-size: 0.7rem;
             font-weight: 600;
         }
-        .status-badge.success {
-            background: #c6f6d5;
-            color: #276749;
-        }
-        .status-badge.error {
-            background: #fed7d7;
-            color: #9b2c2c;
-        }
-        .status-badge.pending {
-            background: #fefcbf;
-            color: #975a16;
-        }
+        .status-badge.success { background: #c6f6d5; color: #276749; }
+        .status-badge.error { background: #fed7d7; color: #9b2c2c; }
+        .status-badge.pending { background: #fefcbf; color: #975a16; }
         .loading {
             display: inline-block;
             width: 16px;
@@ -169,9 +111,7 @@
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
         }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
+        @keyframes spin { to { transform: rotate(360deg); } }
         .config-box {
             background: #edf2f7;
             padding: 12px;
@@ -179,17 +119,25 @@
             font-size: 0.8rem;
             margin-bottom: 12px;
         }
-        .config-box strong {
-            color: #1a3650;
+        .config-box strong { color: #1a3650; }
+        .config-box .url {
+            color: #2b6cb0;
+            word-break: break-all;
+        }
+        .error-box {
+            background: #fed7d7;
+            border: 2px solid #fc8181;
+            padding: 12px;
+            border-radius: 8px;
+            color: #9b2c2c;
+            font-size: 0.85rem;
+            margin-top: 8px;
         }
         @media (max-width: 640px) {
-            .form-row {
-                grid-template-columns: 1fr;
-            }
+            .form-row { grid-template-columns: 1fr; }
             body { padding: 12px; }
             .card { padding: 14px; }
         }
-        .hidden { display: none; }
     </style>
 </head>
 <body>
@@ -200,8 +148,16 @@
     <div class="card">
         <h2>⚙️ Configuration</h2>
         <div class="config-box">
-            <strong>API URL:</strong> 
-            <span id="apiUrlDisplay">https://script.google.com/macros/s/AKfycbxAvdTHKpX9Zwgy3NAqQH9OvH2br7bUgv6mpgYAE35yU01VwnOkUCJPz1AUiru6Q-FEVw/exec</span>
+            <strong>API URL:</strong><br>
+            <span class="url" id="apiUrlDisplay">https://script.google.com/macros/s/YOUR_WEB_APP_URL/exec</span>
+        </div>
+        <div class="error-box" id="corsWarning" style="display:none;">
+            ⚠️ <strong>Failed to Fetch / CORS Error</strong><br>
+            Your browser is blocking the request to the Google Apps Script API.<br><br>
+            <strong>Solutions:</strong><br>
+            1. Make sure your web app is deployed with <strong>"Anyone"</strong> access<br>
+            2. If testing locally, try using a <strong>CORS proxy</strong> (see below)<br>
+            3. Deploy your website to a live URL (Vercel, Netlify, etc.)
         </div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;">
             <button class="btn btn-primary btn-sm" onclick="testGetProducts()">📦 Test GET Products</button>
@@ -283,10 +239,10 @@
         </div>
         <div class="form-group">
             <label>Image URLs (comma separated)</label>
-            <input type="text" id="testProductImages" value="https://via.placeholder.com/400x300/1a3650/ffffff?text=Zaure+Test" placeholder="https://example.com/image1.jpg, https://example.com/image2.jpg">
+            <input type="text" id="testProductImages" value="https://via.placeholder.com/400x300/1a3650/ffffff?text=Zaure+Test" placeholder="https://example.com/image1.jpg">
         </div>
         <div class="form-group">
-            <label>Seller Info (for posting)</label>
+            <label>Seller Info</label>
             <div class="form-row">
                 <input type="text" id="testSellerId" placeholder="Seller ID" value="1">
                 <input type="text" id="testSellerName" placeholder="Seller Name" value="Test Seller">
@@ -309,18 +265,28 @@
 
     <script>
         // ============================================================
-        // API CONFIGURATION
+        // API CONFIGURATION - UPDATE THIS WITH YOUR WEB APP URL
         // ============================================================
+        // 👇 REPLACE THIS URL WITH YOUR DEPLOYED WEB APP URL
         const API_BASE = 'https://script.google.com/macros/s/AKfycbxAvdTHKpX9Zwgy3NAqQH9OvH2br7bUgv6mpgYAE35yU01VwnOkUCJPz1AUiru6Q-FEVw/exec';
+        
+        // Alternative: Use a CORS proxy if you're getting CORS errors
+        // const API_BASE = 'https://corsproxy.io/?' + encodeURIComponent('https://script.google.com/macros/s/YOUR_WEB_APP_URL/exec');
 
         // ============================================================
         // DOM Elements
         // ============================================================
         const responseArea = document.getElementById('responseArea');
         const statusBadge = document.getElementById('statusBadge');
+        const corsWarning = document.getElementById('corsWarning');
 
         // ============================================================
-        // API Call Function
+        // Display API URL
+        // ============================================================
+        document.getElementById('apiUrlDisplay').textContent = API_BASE;
+
+        // ============================================================
+        // API Call Function with better error handling
         // ============================================================
         async function apiCall(action, data = {}, method = 'POST') {
             const url = method === 'GET' 
@@ -338,10 +304,20 @@
             
             try {
                 const response = await fetch(url, options);
+                
+                // Check if response is OK
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
                 const result = await response.json();
                 return result;
             } catch (error) {
-                return { error: error.message };
+                // Check if it's a CORS error
+                if (error.message.includes('fetch') || error.message.includes('NetworkError')) {
+                    corsWarning.style.display = 'block';
+                }
+                return { error: error.message, type: 'network_error' };
             }
         }
 
@@ -359,6 +335,10 @@
             } else if (type === 'error') {
                 badge.className = 'status-badge error';
                 badge.textContent = '❌ Error';
+                // Show CORS warning if it's a network error
+                if (data.error && data.error.includes('fetch')) {
+                    corsWarning.style.display = 'block';
+                }
             } else {
                 badge.className = 'status-badge pending';
                 badge.textContent = '⏳ Loading...';
@@ -371,6 +351,7 @@
             const badge = statusBadge.querySelector('.status-badge');
             badge.className = 'status-badge pending';
             badge.textContent = '⏳ Ready';
+            corsWarning.style.display = 'none';
         }
 
         // ============================================================
@@ -378,6 +359,7 @@
         // ============================================================
         async function testGetProducts() {
             displayResponse({ loading: 'Fetching products...' }, 'pending');
+            corsWarning.style.display = 'none';
             
             try {
                 const result = await apiCall('getProducts', {}, 'GET');
@@ -405,6 +387,7 @@
             }
             
             displayResponse({ loading: 'Creating account for ' + name + '...' }, 'pending');
+            corsWarning.style.display = 'none';
             
             try {
                 const result = await apiCall('signup', {
@@ -436,6 +419,7 @@
             }
             
             displayResponse({ loading: 'Fetching user with phone: ' + phone + '...' }, 'pending');
+            corsWarning.style.display = 'none';
             
             try {
                 const result = await apiCall('getUser', { phone: phone }, 'GET');
@@ -453,7 +437,6 @@
         // TEST: Post Product
         // ============================================================
         async function testPostProduct() {
-            // Get form values
             const title = document.getElementById('testProductTitle').value.trim();
             const price = document.getElementById('testProductPrice').value;
             const category = document.getElementById('testProductCategory').value;
@@ -464,13 +447,11 @@
             const sellerName = document.getElementById('testSellerName').value.trim() || 'Test Seller';
             const sellerPhone = document.getElementById('testSellerPhone').value.trim() || '08012345678';
             
-            // Validate
             if (!title || !price || !category) {
                 displayResponse({ error: 'Please fill in title, price, and category' }, 'error');
                 return;
             }
             
-            // Generate slug
             const slug = title.toLowerCase()
                 .replace(/[^a-z0-9]+/g, '-')
                 .replace(/^-+|-+$/g, '')
@@ -492,6 +473,7 @@
             };
             
             displayResponse({ loading: 'Posting product: ' + title + '...' }, 'pending');
+            corsWarning.style.display = 'none';
             
             try {
                 const result = await apiCall('addProduct', productData);
@@ -506,39 +488,8 @@
         }
 
         // ============================================================
-        // Quick Test: Check API Connection on Load
-        // ============================================================
-        async function testConnection() {
-            displayResponse({ loading: 'Testing API connection...' }, 'pending');
-            
-            try {
-                const result = await apiCall('getProducts', {}, 'GET');
-                if (result.products !== undefined) {
-                    displayResponse({ 
-                        success: true, 
-                        message: '✅ API is working!', 
-                        productsFound: result.products ? result.products.length : 0 
-                    }, 'success');
-                    console.log('✅ API connection successful');
-                } else {
-                    displayResponse({ error: 'API returned unexpected response', result }, 'error');
-                }
-            } catch (error) {
-                displayResponse({ error: 'API connection failed: ' + error.message }, 'error');
-            }
-        }
-
-        // ============================================================
-        // Display API URL
-        // ============================================================
-        document.getElementById('apiUrlDisplay').textContent = API_BASE;
-
-        // ============================================================
         // Auto-test on load
         // ============================================================
-        // Uncomment to auto-test on load:
-        // testConnection();
-
         console.log('🧪 API Test Tool loaded!');
         console.log('📡 API URL:', API_BASE);
         console.log('ℹ️ Click buttons to test API endpoints.');
