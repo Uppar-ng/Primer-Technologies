@@ -283,11 +283,14 @@ textarea:focus {
   .nav-links { display: flex; }
 }
 
-/* Nav Actions */
+/* ============================================================
+   NAV ACTIONS - FIXED HEADER
+   ============================================================ */
 .nav-actions {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  flex-shrink: 0;
 }
 
 .nav-actions .icon-btn {
@@ -300,17 +303,61 @@ textarea:focus {
   text-decoration: none;
   position: relative;
   transition: color var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .nav-actions .icon-btn:hover {
   color: var(--text);
 }
 
+/* ============================================================
+   HEADER USER AREA - FIXED
+   ============================================================ */
+#headerUserArea {
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* User Greeting - displayed when logged in */
+.user-greeting {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  text-decoration: none !important;
+  color: var(--text) !important;
+  font-weight: 500 !important;
+  padding: 6px 14px !important;
+  border-radius: 30px !important;
+  background: var(--surface-alt) !important;
+  border: 1px solid var(--border) !important;
+  transition: all var(--transition) !important;
+  font-size: 0.85rem !important;
+  white-space: nowrap !important;
+  cursor: pointer !important;
+}
+
+.user-greeting:hover {
+  background: var(--border) !important;
+  transform: translateY(-1px);
+}
+
+.user-greeting i {
+  font-size: 1rem !important;
+  color: #1a3650 !important;
+}
+
+[data-theme="dark"] .user-greeting i {
+  color: #4a7a9a !important;
+}
+
+/* Avatar - displayed when not logged in */
 .avatar {
   width: 34px;
   height: 34px;
   background: #1a3650;
-  border-radius: 40px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -319,6 +366,7 @@ textarea:focus {
   font-size: 0.8rem;
   cursor: pointer;
   transition: transform var(--transition);
+  flex-shrink: 0;
 }
 
 [data-theme="dark"] .avatar {
@@ -344,25 +392,6 @@ textarea:focus {
   min-width: 16px;
   text-align: center;
   font-weight: 700;
-}
-
-/* User Greeting */
-.user-greeting {
-  font-weight: 600;
-  color: var(--text);
-  background: var(--surface-alt);
-  padding: 0.5rem 1rem;
-  border-radius: 2rem;
-  border: 1px solid var(--border);
-  font-size: 0.9rem;
-  text-decoration: none;
-  display: inline-block;
-  cursor: pointer;
-  transition: background var(--transition), color var(--transition);
-}
-
-.user-greeting:hover {
-  background: var(--border);
 }
 
 /* ============================================================
@@ -1542,7 +1571,7 @@ textarea:focus {
 }
 
 /* ============================================================
-   FOOTER
+   FOOTER (UPDATED)
    ============================================================ */
 .footer {
   background: #1A1F2E;
