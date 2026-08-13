@@ -153,7 +153,6 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            flex-wrap: wrap;
         }
         .proxy-toggle input[type="checkbox"] {
             width: 18px;
@@ -165,13 +164,6 @@
             font-size: 0.85rem;
             color: #4a5568;
             cursor: pointer;
-        }
-        .proxy-toggle select {
-            padding: 4px 10px;
-            border: 2px solid #e2e8f0;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            background: white;
         }
         .test-result {
             margin-top: 8px;
@@ -187,21 +179,16 @@
             background: #fed7d7;
             color: #9b2c2c;
         }
-        .proxy-status {
-            display: inline-block;
-            padding: 2px 10px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 600;
+        .deploy-note {
+            background: #ebf8ff;
+            border: 1px solid #90cdf4;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: #2a4365;
+            margin-bottom: 12px;
         }
-        .proxy-status.on {
-            background: #c6f6d5;
-            color: #276749;
-        }
-        .proxy-status.off {
-            background: #fed7d7;
-            color: #9b2c2c;
-        }
+        .deploy-note strong { color: #1a3650; }
     </style>
 </head>
 <body>
@@ -211,6 +198,9 @@
     <!-- ===== CONFIG ===== -->
     <div class="card">
         <h2>⚙️ Configuration</h2>
+        <div class="deploy-note">
+            🚀 <strong>Running on Vercel</strong> — CORS proxy should be <strong>disabled</strong> for direct API calls.
+        </div>
         <div class="config-box">
             <strong>Web App URL:</strong><br>
             <span class="url" id="apiUrlDisplay">https://script.google.com/macros/s/AKfycbwfy8j8TDBxkv5n-mYv7eMyZS9ooLbN5ZAzLdYfmMydPiXtU8-nKD5VVQckKtiB3Mgp/exec</span>
@@ -219,18 +209,9 @@
             <strong>Spreadsheet ID:</strong><br>
             <span>17fw2y7VQw2Z_IOVhBi4UQlxI2n3320Sn1v_7iek1YwM</span>
         </div>
-        <div class="config-box">
-            <strong>CORS Proxy:</strong><br>
-            <span id="proxyStatusDisplay"><span class="proxy-status on">✅ thingproxy (active)</span></span>
-        </div>
         <div class="proxy-toggle">
-            <input type="checkbox" id="useProxy" checked>
-            <label for="useProxy">Enable CORS Proxy</label>
-            <select id="proxySelect">
-                <option value="thingproxy">thingproxy.freeboard.io</option>
-                <option value="corsproxy">corsproxy.io</option>
-                <option value="corsanywhere">cors-anywhere.herokuapp.com</option>
-            </select>
+            <input type="checkbox" id="useProxy">
+            <label for="useProxy">Enable CORS Proxy (only if you get CORS errors)</label>
         </div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;">
             <button class="btn btn-primary btn-sm" onclick="testGetProducts()">📦 Test GET Products</button>
@@ -250,8 +231,8 @@
         <div class="response" id="responseArea">Waiting for action...</div>
         <div id="corsWarning" class="error-box hidden">
             ⚠️ <strong>Failed to Fetch / CORS Error</strong><br>
-            Make sure the CORS Proxy is enabled (checkbox above).<br>
-            Try selecting a different proxy from the dropdown.
+            Try enabling the CORS Proxy checkbox above.<br>
+            Also verify your web app is deployed with <strong>"Anyone"</strong> access.
         </div>
         <div id="successBox" class="success-box hidden">
             ✅ <strong>API is working!</strong>
@@ -354,31 +335,14 @@
         
         const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwfy8j8TDBxkv5n-mYv7eMyZS9ooLbN5ZAzLdYfmMydPiXtU8-nKD5VVQckKtiB3Mgp/exec';
         const SPREADSHEET_ID = '17fw2y7VQw2Z_IOVhBi4UQlxI2n3320Sn1v_7iek1YwM';
-        
-        const PROXY_URLS = {
-            'thingproxy': 'https://thingproxy.freeboard.io/fetch/',
-            'corsproxy': 'https://corsproxy.io/?',
-            'corsanywhere': 'https://cors-anywhere.herokuapp.com/'
-        };
+        const CORS_PROXY = 'https://thingproxy.freeboard.io/fetch/';
 
         // ============================================================
         // Get API URL based on proxy setting
         // ============================================================
         function getApiUrl() {
             const useProxy = document.getElementById('useProxy').checked;
-            const proxyKey = document.getElementById('proxySelect').value;
-            const proxyUrl = PROXY_URLS[proxyKey] || PROXY_URLS['thingproxy'];
-            
-            const url = useProxy ? proxyUrl + encodeURIComponent(WEB_APP_URL) : WEB_APP_URL;
-            
-            // Update status display
-            const statusEl = document.getElementById('proxyStatusDisplay');
-            if (useProxy) {
-                statusEl.innerHTML = `<span class="proxy-status on">✅ ${proxyKey} (active)</span>`;
-            } else {
-                statusEl.innerHTML = `<span class="proxy-status off">❌ Disabled</span>`;
-            }
-            
+            const url = useProxy ? CORS_PROXY + encodeURIComponent(WEB_APP_URL) : WEB_APP_URL;
             return url;
         }
 
@@ -639,8 +603,9 @@
         console.log('🧪 API Test Tool loaded!');
         console.log('📡 Web App URL:', WEB_APP_URL);
         console.log('📊 Spreadsheet ID:', SPREADSHEET_ID);
-        console.log('💡 Try different proxies from the dropdown if you get CORS errors.');
+        console.log('🚀 Running on Vercel - CORS proxy is OFF by default');
         console.log('ℹ️ Click buttons to test API endpoints.');
+        console.log('💡 If you get CORS errors, enable the proxy checkbox.');
     </script>
 </body>
 </html>
