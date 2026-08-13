@@ -57,7 +57,7 @@ window.toggleTheme = function() {
 };
 
 // ============================================================
-// USER MANAGEMENT - NO AVATAR
+// USER MANAGEMENT - COMPLETELY CLEAN HEADER
 // ============================================================
 let currentUser = null;
 
@@ -111,36 +111,14 @@ function updateUserProfile(data) {
 }
 
 // ============================================================
-// RENDER USER AREA - NO AVATAR, NO PROFILE LINK
+// RENDER USER AREA - COMPLETELY EMPTY
 // ============================================================
 function renderUserArea() {
   const headerUserArea = document.getElementById('headerUserArea');
   if (!headerUserArea) return;
   
-  if (currentUser) {
-    // Show just the user name - clean and simple
-    headerUserArea.innerHTML = `
-      <span style="
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        color: var(--text, #151e28);
-        font-weight: 500;
-        padding: 6px 12px;
-        border-radius: 30px;
-        background: var(--surface-alt, #f0f5fc);
-        border: 1px solid var(--border, #e5ecf3);
-        font-size: 0.85rem;
-        white-space: nowrap;
-      ">
-        <i class="fas fa-user-circle" style="font-size: 1rem; color: #1a3650;"></i>
-        <span>${currentUser.name.split(' ')[0]}</span>
-      </span>
-    `;
-  } else {
-    // Show nothing when not logged in
-    headerUserArea.innerHTML = '';
-  }
+  // Show NOTHING - completely empty
+  headerUserArea.innerHTML = '';
 }
 
 window.openSignup = function() {
