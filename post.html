@@ -10,14 +10,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
   <style>
-    /* ===== POST OPTIONS STYLES ===== */
     .post-container {
       max-width: 720px;
       margin: 0 auto;
       padding: 20px 0 40px;
     }
 
-    /* Page Header */
     .page-header {
       text-align: center;
       margin-bottom: 24px;
@@ -35,7 +33,6 @@
       font-size: 0.95rem;
     }
 
-    /* Info Box */
     .info-box {
       background: var(--surface-alt);
       border-radius: 16px;
@@ -68,99 +65,21 @@
       color: var(--text);
     }
 
-    /* Flow Steps */
-    .flow-steps {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-      gap: 6px;
-      margin: 16px 0 20px;
-    }
-
-    .flow-step {
-      text-align: center;
-      padding: 10px 6px;
-      background: var(--surface);
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      position: relative;
-    }
-
-    .flow-step .step-number {
+    .verification-badge {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: #1a3650;
-      color: white;
-      font-size: 0.6rem;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    [data-theme="dark"] .flow-step .step-number {
-      background: #2A3550;
-    }
-
-    .flow-step .step-icon {
-      font-size: 1.2rem;
-      display: block;
-      margin-bottom: 4px;
-    }
-
-    .flow-step .step-label {
-      font-size: 0.6rem;
+      gap: 6px;
+      background: #c6f6d5;
+      color: #276749;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.7rem;
       font-weight: 600;
-      color: var(--text);
-      display: block;
     }
 
-    .flow-step .step-desc {
-      font-size: 0.5rem;
-      color: var(--text-secondary);
-      display: block;
-      margin-top: 2px;
-    }
-
-    .flow-step .step-arrow {
-      position: absolute;
-      right: -6px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--border);
-      font-size: 0.6rem;
-    }
-
-    .flow-step:last-child .step-arrow {
-      display: none;
-    }
-
-    .flow-step.highlight {
-      border-color: #25D366;
-      background: rgba(37, 211, 102, 0.05);
-    }
-
-    .flow-step.team {
-      border-color: #1a3650;
-      background: rgba(26, 54, 80, 0.05);
-    }
-
-    .flow-step.ai {
-      border-color: #f5b342;
-      background: rgba(245, 179, 66, 0.05);
-    }
-
-    [data-theme="dark"] .flow-step.highlight {
-      background: rgba(37, 211, 102, 0.08);
-    }
-
-    [data-theme="dark"] .flow-step.team {
-      background: rgba(42, 53, 80, 0.15);
-    }
-
-    [data-theme="dark"] .flow-step.ai {
-      background: rgba(245, 179, 66, 0.1);
+    [data-theme="dark"] .verification-badge {
+      background: #1A2540;
+      color: #68d391;
     }
 
     .post-options {
@@ -193,7 +112,6 @@
       transform: scale(0.97);
     }
 
-    /* WhatsApp Card - Primary */
     .post-option-card.whatsapp {
       border-color: #25D366;
       background: linear-gradient(145deg, var(--surface), rgba(37, 211, 102, 0.05));
@@ -208,7 +126,6 @@
       background: linear-gradient(145deg, var(--surface), rgba(37, 211, 102, 0.08));
     }
 
-    /* Site Card - Disabled */
     .post-option-card.site {
       opacity: 0.6;
       cursor: not-allowed;
@@ -288,20 +205,6 @@
       letter-spacing: 0.5px;
     }
 
-    .post-option-card .human-support {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 8px;
-      font-size: 0.75rem;
-      color: var(--text-secondary);
-    }
-
-    .post-option-card .human-support i {
-      color: #25D366;
-      font-size: 0.85rem;
-    }
-
     .post-option-card .whatsapp-steps {
       margin-top: 10px;
       padding-top: 10px;
@@ -325,37 +228,34 @@
       text-align: center;
     }
 
-    .post-option-card .whatsapp-steps .step .team-tag {
+    .post-option-card .whatsapp-steps .step .tag {
+      font-size: 0.55rem;
+      padding: 1px 8px;
+      border-radius: 10px;
+      font-weight: 600;
+      margin-left: 4px;
+    }
+
+    .post-option-card .whatsapp-steps .step .tag.team {
       background: #c6f6d5;
       color: #276749;
-      font-size: 0.55rem;
-      padding: 1px 8px;
-      border-radius: 10px;
-      font-weight: 600;
-      margin-left: 4px;
     }
 
-    .post-option-card .whatsapp-steps .step .ai-tag {
+    .post-option-card .whatsapp-steps .step .tag.ai {
       background: #fefcbf;
       color: #975a16;
-      font-size: 0.55rem;
-      padding: 1px 8px;
-      border-radius: 10px;
-      font-weight: 600;
-      margin-left: 4px;
     }
 
-    [data-theme="dark"] .post-option-card .whatsapp-steps .step .team-tag {
+    [data-theme="dark"] .post-option-card .whatsapp-steps .step .tag.team {
       background: #1A2540;
       color: #68d391;
     }
 
-    [data-theme="dark"] .post-option-card .whatsapp-steps .step .ai-tag {
+    [data-theme="dark"] .post-option-card .whatsapp-steps .step .tag.ai {
       background: #2A3550;
       color: #f5b342;
     }
 
-    /* What to Expect Section */
     .what-to-expect {
       background: var(--surface);
       border-radius: 20px;
@@ -417,25 +317,6 @@
       color: var(--text);
     }
 
-    /* Verification Badge */
-    .verification-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: #c6f6d5;
-      color: #276749;
-      padding: 4px 14px;
-      border-radius: 20px;
-      font-size: 0.7rem;
-      font-weight: 600;
-    }
-
-    [data-theme="dark"] .verification-badge {
-      background: #1A2540;
-      color: #68d391;
-    }
-
-    /* Coming Soon Modal */
     .coming-soon-modal {
       position: fixed;
       top: 0;
@@ -519,7 +400,6 @@
       }
     }
 
-    /* Toast */
     .toast {
       position: fixed;
       bottom: 100px;
@@ -550,18 +430,6 @@
 
     .toast.success {
       background: #27ae60;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .flow-steps {
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 4px;
-      }
-
-      .flow-step .step-arrow {
-        display: none !important;
-      }
     }
 
     @media (max-width: 640px) {
@@ -609,57 +477,6 @@
         align-items: center;
         text-align: center;
       }
-
-      .flow-steps {
-        grid-template-columns: 1fr 1fr;
-        gap: 4px;
-      }
-
-      .flow-step {
-        padding: 8px 4px;
-        border-radius: 8px;
-      }
-
-      .flow-step .step-icon {
-        font-size: 1rem;
-      }
-
-      .flow-step .step-label {
-        font-size: 0.55rem;
-      }
-
-      .flow-step .step-desc {
-        font-size: 0.45rem;
-      }
-    }
-
-    @media (max-width: 400px) {
-      .flow-steps {
-        grid-template-columns: 1fr 1fr;
-        gap: 3px;
-      }
-
-      .flow-step {
-        padding: 6px 3px;
-      }
-
-      .flow-step .step-number {
-        width: 18px;
-        height: 18px;
-        font-size: 0.5rem;
-      }
-
-      .flow-step .step-icon {
-        font-size: 0.9rem;
-      }
-
-      .flow-step .step-label {
-        font-size: 0.5rem;
-      }
-
-      .flow-step .step-desc {
-        font-size: 0.4rem;
-      }
     }
   </style>
 </head>
@@ -706,82 +523,38 @@
   <div class="container">
     <div class="post-container">
 
-      <!-- Page Header -->
       <div class="page-header">
         <h1>📦 Post Your Listing</h1>
         <p>Get your items seen by thousands of buyers</p>
       </div>
 
-      <!-- Info Box -->
+      <!-- SINGLE EXPLANATION -->
       <div class="info-box">
         <i class="fas fa-robot"></i>
         <div class="info-text">
-          <strong>How it works:</strong> Our team collects your product details and questions, 
+          <strong>How it works:</strong> Our team collects your product details, 
           AI + Team verify the information, then AI automatically posts your listing to Zaure. 
-          <span class="verification-badge" style="margin-left:6px;"><i class="fas fa-check-circle"></i> AI + Team Verified</span>
-        </div>
-      </div>
-
-      <!-- How It Works - Flow Steps -->
-      <div class="flow-steps">
-        <div class="flow-step highlight">
-          <span class="step-number">1</span>
-          <span class="step-icon">💬</span>
-          <span class="step-label">Chat on WhatsApp</span>
-          <span class="step-desc">Start conversation</span>
-          <span class="step-arrow"><i class="fas fa-chevron-right"></i></span>
-        </div>
-        <div class="flow-step team">
-          <span class="step-number">2</span>
-          <span class="step-icon">👤</span>
-          <span class="step-label">Team Collects Info</span>
-          <span class="step-desc">Gathers product details</span>
-          <span class="step-arrow"><i class="fas fa-chevron-right"></i></span>
-        </div>
-        <div class="flow-step ai">
-          <span class="step-number">3</span>
-          <span class="step-icon">🤖</span>
-          <span class="step-label">AI + Team Verify</span>
-          <span class="step-desc">Both verify details</span>
-          <span class="step-arrow"><i class="fas fa-chevron-right"></i></span>
-        </div>
-        <div class="flow-step highlight">
-          <span class="step-number">4</span>
-          <span class="step-icon">🚀</span>
-          <span class="step-label">AI Auto-Posts</span>
-          <span class="step-desc">Listing goes live!</span>
-          <span class="step-arrow"><i class="fas fa-chevron-right"></i></span>
-        </div>
-        <div class="flow-step">
-          <span class="step-number">5</span>
-          <span class="step-icon">📱</span>
-          <span class="step-label">You Get Link</span>
-          <span class="step-desc">Share your listing</span>
+          <span class="verification-badge"><i class="fas fa-check-circle"></i> AI + Team Verified</span>
         </div>
       </div>
 
       <!-- Post Options -->
       <div class="post-options">
 
-        <!-- Option 1: WhatsApp - Primary -->
         <a class="post-option-card whatsapp" id="whatsappBtn" href="#" target="_blank" rel="noopener">
           <span class="option-icon">
             <i class="fab fa-whatsapp"></i>
           </span>
           <h3>Post via WhatsApp</h3>
-          <p>Our team collects your info, AI + Team verify,<br>then AI auto-posts your listing.</p>
+          <p>Team collects info, AI + Team verify,<br>AI auto-posts your listing.</p>
           <span class="option-badge whatsapp-badge">💬 Chat Now</span>
-          <div class="human-support">
-            <i class="fas fa-user-circle"></i> AI + Human Team
-          </div>
           <div class="whatsapp-steps">
-            <div class="step"><i class="fas fa-check-circle"></i> Team collects product info <span class="team-tag">👤 Team</span></div>
-            <div class="step"><i class="fas fa-check-circle"></i> AI + Team verify details <span class="ai-tag">🤖+👤</span></div>
+            <div class="step"><i class="fas fa-check-circle"></i> Team collects your info <span class="tag team">👤 Team</span></div>
+            <div class="step"><i class="fas fa-check-circle"></i> AI + Team verify details <span class="tag ai">🤖+👤</span></div>
             <div class="step"><i class="fas fa-check-circle"></i> AI auto-posts to Zaure</div>
           </div>
         </a>
 
-        <!-- Option 2: Post on Site - Disabled -->
         <div class="post-option-card site" onclick="showComingSoon()">
           <span class="coming-soon-overlay">Coming Soon</span>
           <span class="option-icon">
@@ -794,7 +567,7 @@
 
       </div>
 
-      <!-- What to Expect Section -->
+      <!-- What to Expect -->
       <div class="what-to-expect">
         <h3><i class="fas fa-list-check"></i> What to expect</h3>
         <div class="expect-grid">
@@ -909,37 +682,25 @@
 
   <script src="/js/main.js"></script>
   
-  <!-- ===== POST PAGE SPECIFIC JAVASCRIPT ===== -->
   <script>
-    // ============================================================
-    // POST PAGE - Team Collects Info, AI + Team Verify, AI Auto-Posts
-    // ============================================================
-    
-    // Your WhatsApp Business Number
+    // WhatsApp Number
     const WHATSAPP_NUMBER = '2349042339411';
     const WHATSAPP_MESSAGE = encodeURIComponent(
       'Hello Zaure Team! I want to post a listing. Please help me get started. 🚀'
     );
 
-    // ============================================================
-    // Device Detection for WhatsApp Link
-    // ============================================================
     function isMobile() {
       return /Android|iPhone|iPad|iPod|BlackBerry|Windows Phone/i.test(navigator.userAgent) || window.innerWidth < 768;
     }
 
     function getWhatsAppUrl() {
-      const isMobileDevice = isMobile();
-      if (isMobileDevice) {
+      if (isMobile()) {
         return `whatsapp://send?phone=${WHATSAPP_NUMBER}&text=${WHATSAPP_MESSAGE}`;
       } else {
         return `https://web.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${WHATSAPP_MESSAGE}`;
       }
     }
 
-    // ============================================================
-    // Toast Notification
-    // ============================================================
     function showToast(message, type = 'success') {
       const toast = document.getElementById('toast');
       if (!toast) return;
@@ -951,9 +712,6 @@
       }, 4000);
     }
 
-    // ============================================================
-    // Coming Soon Modal
-    // ============================================================
     window.showComingSoon = function() {
       document.getElementById('comingSoonModal').classList.add('active');
     };
@@ -962,33 +720,21 @@
       document.getElementById('comingSoonModal').classList.remove('active');
     };
 
-    // Close modal on click outside
     document.getElementById('comingSoonModal').addEventListener('click', function(e) {
       if (e.target === this) {
         closeComingSoon();
       }
     });
 
-    // ============================================================
-    // WhatsApp Button Handler
-    // ============================================================
     document.addEventListener('DOMContentLoaded', function() {
       const whatsappBtn = document.getElementById('whatsappBtn');
-      
       if (whatsappBtn) {
         whatsappBtn.href = getWhatsAppUrl();
-        
         whatsappBtn.addEventListener('click', function(e) {
-          const isMobileDevice = isMobile();
-          if (!isMobileDevice) {
-            showToast('Opening WhatsApp Web in a new tab...', 'success');
-          } else {
-            showToast('Opening WhatsApp app...', 'success');
-          }
+          showToast(isMobile() ? 'Opening WhatsApp app...' : 'Opening WhatsApp Web...', 'success');
         });
       }
 
-      // Handle FAB post button
       const fabPostAd = document.getElementById('fabPostAd');
       if (fabPostAd) {
         fabPostAd.addEventListener('click', function() {
@@ -996,15 +742,12 @@
         });
       }
 
-      // Load user and theme
       loadUser();
       initTheme();
       updateFavoriteBadge();
     });
 
     console.log('📦 Post page loaded - Team collects, AI+Team verify, AI auto-posts');
-    console.log('📱 Mobile detected:', isMobile());
-    console.log('📞 WhatsApp Number:', WHATSAPP_NUMBER);
   </script>
 </body>
 </html>
