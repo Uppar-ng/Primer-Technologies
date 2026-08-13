@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zaure API Test</title>
+    <title>Zaure API Test - Status View</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: #f0f4f8;
             padding: 20px;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
         }
         h1 { color: #1a3650; text-align: center; margin-bottom: 20px; }
@@ -28,6 +28,104 @@
             border-bottom: 2px solid #e2e8f0;
             padding-bottom: 8px;
         }
+        .btn {
+            padding: 10px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-primary { background: #1a3650; color: white; }
+        .btn-primary:hover { background: #0f2940; }
+        .btn-success { background: #27ae60; color: white; }
+        .btn-success:hover { background: #219a52; }
+        .btn-warning { background: #f5b342; color: #1a1a1a; }
+        .btn-warning:hover { background: #e6a33d; }
+        .btn-danger { background: #e74c3c; color: white; }
+        .btn-danger:hover { background: #c0392b; }
+        .btn-sm { padding: 6px 14px; font-size: 0.8rem; }
+        .btn-group { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+        
+        /* Status Bar */
+        .status-bar {
+            background: #edf2f7;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            border-left: 4px solid #a0aec0;
+            transition: 0.3s;
+        }
+        .status-bar.status-idle { border-left-color: #a0aec0; }
+        .status-bar.status-loading { border-left-color: #f5b342; background: #fefcbf; }
+        .status-bar.status-success { border-left-color: #27ae60; background: #c6f6d5; }
+        .status-bar.status-error { border-left-color: #e74c3c; background: #fed7d7; }
+        
+        .status-icon { font-size: 1.5rem; }
+        .status-text { font-weight: 600; color: #2d3748; }
+        .status-detail { color: #4a5568; font-size: 0.9rem; }
+        
+        .response {
+            background: #1a202c;
+            color: #68d391;
+            padding: 16px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-break: break-all;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 12px;
+        }
+        .response.error { color: #fc8181; }
+        .response.success { color: #68d391; }
+        
+        .config-box {
+            background: #edf2f7;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            margin-bottom: 12px;
+            word-break: break-all;
+        }
+        .config-box strong { color: #1a3650; }
+        
+        .proxy-toggle {
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .proxy-toggle input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .proxy-toggle label {
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: #4a5568;
+            cursor: pointer;
+        }
+        .proxy-toggle select {
+            padding: 4px 10px;
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            background: white;
+        }
+        
         .form-group { margin-bottom: 12px; }
         .form-group label {
             display: block;
@@ -54,64 +152,7 @@
         }
         .form-group textarea { min-height: 80px; resize: vertical; }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .btn {
-            padding: 10px 24px;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.2s;
-            font-size: 0.9rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .btn-primary { background: #1a3650; color: white; }
-        .btn-primary:hover { background: #0f2940; }
-        .btn-success { background: #27ae60; color: white; }
-        .btn-success:hover { background: #219a52; }
-        .btn-warning { background: #f5b342; color: #1a1a1a; }
-        .btn-warning:hover { background: #e6a33d; }
-        .btn-danger { background: #e74c3c; color: white; }
-        .btn-danger:hover { background: #c0392b; }
-        .btn-sm { padding: 6px 14px; font-size: 0.8rem; }
-        .response {
-            background: #1a202c;
-            color: #68d391;
-            padding: 16px;
-            border-radius: 8px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.8rem;
-            overflow-x: auto;
-            white-space: pre-wrap;
-            word-break: break-all;
-            max-height: 400px;
-            overflow-y: auto;
-            margin-top: 12px;
-        }
-        .response.error { color: #fc8181; }
-        .response.success { color: #68d391; }
-        .status-badge {
-            display: inline-block;
-            padding: 2px 12px;
-            border-radius: 12px;
-            font-size: 0.7rem;
-            font-weight: 600;
-        }
-        .status-badge.pending { background: #fefcbf; color: #975a16; }
-        .status-badge.success { background: #c6f6d5; color: #276749; }
-        .status-badge.error { background: #fed7d7; color: #9b2c2c; }
-        .config-box {
-            background: #edf2f7;
-            padding: 12px;
-            border-radius: 8px;
-            font-size: 0.8rem;
-            margin-bottom: 12px;
-            word-break: break-all;
-        }
-        .config-box strong { color: #1a3650; }
-        .btn-group { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
-        .hidden { display: none; }
+        
         .test-result {
             margin-top: 8px;
             padding: 8px 12px;
@@ -120,31 +161,8 @@
         }
         .test-result.pass { background: #c6f6d5; color: #276749; }
         .test-result.fail { background: #fed7d7; color: #9b2c2c; }
-        .proxy-toggle {
-            margin-top: 8px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-        .proxy-toggle input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            cursor: pointer;
-        }
-        .proxy-toggle label {
-            font-weight: 500;
-            font-size: 0.85rem;
-            color: #4a5568;
-            cursor: pointer;
-        }
-        .proxy-toggle select {
-            padding: 4px 10px;
-            border: 2px solid #e2e8f0;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            background: white;
-        }
+        .hidden { display: none; }
+        
         .deploy-note {
             background: #ebf8ff;
             border: 1px solid #90cdf4;
@@ -154,20 +172,52 @@
             color: #2a4365;
             margin-bottom: 12px;
         }
+        
+        .step-list {
+            list-style: none;
+            padding: 0;
+        }
+        .step-list li {
+            padding: 6px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+            color: #4a5568;
+            border-bottom: 1px solid #f0f4f8;
+        }
+        .step-list li .step-icon {
+            width: 24px;
+            text-align: center;
+        }
+        .step-list li.done { color: #276749; }
+        .step-list li.done .step-icon { color: #27ae60; }
+        .step-list li.error { color: #9b2c2c; }
+        .step-list li.error .step-icon { color: #e74c3c; }
+        .step-list li.active { color: #1a3650; font-weight: 600; }
+        .step-list li.active .step-icon { color: #f5b342; }
+        
+        @media (max-width: 640px) {
+            .form-row { grid-template-columns: 1fr; }
+            body { padding: 12px; }
+            .card { padding: 14px; }
+            .status-bar { flex-direction: column; align-items: flex-start; }
+        }
     </style>
 </head>
 <body>
 
-    <h1>🧪 Zaure API Test</h1>
+    <h1>🧪 Zaure API Test - Status View</h1>
 
+    <!-- ===== CONFIG ===== -->
     <div class="card">
         <h2>⚙️ Configuration</h2>
         <div class="deploy-note">
-            🚀 <strong>Testing from Vercel</strong> — Try with proxy ON first, then OFF if it works.
+            🚀 <strong>Testing from Vercel</strong> — Status bar shows each step
         </div>
         <div class="config-box">
             <strong>Web App URL:</strong><br>
-            <span id="apiUrlDisplay">https://script.google.com/macros/s/AKfycbwfy8j8TDBxkv5n-mYv7eMyZS9ooLbN5ZAzLdYfmMydPiXtU8-nKD5VVQckKtiB3Mgp/exec</span>
+            <span id="apiUrlDisplay">https://script.google.com/macros/s/AKfycbxeEohZxuOIAr5IeQra-soSMoGmReH6s_wqHb7nnUo/exec</span>
         </div>
         <div class="config-box">
             <strong>Spreadsheet ID:</strong><br>
@@ -183,24 +233,46 @@
                 <option value="none">No Proxy (Direct)</option>
             </select>
         </div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;">
+        <div class="btn-group">
             <button class="btn btn-primary btn-sm" onclick="testGetProducts()">📦 Test GET Products</button>
             <button class="btn btn-success btn-sm" onclick="testSignup()">👤 Test Signup</button>
             <button class="btn btn-warning btn-sm" onclick="testPostProduct()">➕ Test Post Product</button>
-            <button class="btn btn-danger btn-sm" onclick="clearAll()">🗑️ Clear</button>
+            <button class="btn btn-danger btn-sm" onclick="resetAll()">🔄 Reset</button>
         </div>
     </div>
 
+    <!-- ===== STATUS BAR ===== -->
+    <div class="card">
+        <h2>📊 Status</h2>
+        <div class="status-bar status-idle" id="statusBar">
+            <span class="status-icon" id="statusIcon">⏳</span>
+            <div>
+                <div class="status-text" id="statusText">Ready</div>
+                <div class="status-detail" id="statusDetail">Click a button to start testing</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== STEPS ===== -->
+    <div class="card">
+        <h2>📋 Steps</h2>
+        <ul class="step-list" id="stepList">
+            <li id="step1"><span class="step-icon">⬜</span> 1. Sending request...</li>
+            <li id="step2"><span class="step-icon">⬜</span> 2. Waiting for response...</li>
+            <li id="step3"><span class="step-icon">⬜</span> 3. Processing response...</li>
+            <li id="step4"><span class="step-icon">⬜</span> 4. Done</li>
+        </ul>
+    </div>
+
+    <!-- ===== RESPONSE ===== -->
     <div class="card">
         <h2>📤 Response</h2>
-        <div id="statusBadge">
-            <span class="status-badge pending">⏳ Ready</span>
-        </div>
-        <div class="response" id="responseArea">Click a button to test the API...</div>
+        <div class="response" id="responseArea">Waiting for action...</div>
     </div>
 
+    <!-- ===== RESULTS ===== -->
     <div class="card">
-        <h2>📝 Results</h2>
+        <h2>📝 Result</h2>
         <div id="testResult" class="test-result hidden"></div>
     </div>
 
@@ -209,7 +281,7 @@
         // API CONFIGURATION
         // ============================================================
         
-        const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwfy8j8TDBxkv5n-mYv7eMyZS9ooLbN5ZAzLdYfmMydPiXtU8-nKD5VVQckKtiB3Mgp/exec';
+        const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxeEohZxuOIAr5IeQra-soSMoGmReH6s_wqHb7nnUo/exec';
         
         const PROXY_URLS = {
             'thingproxy': 'https://thingproxy.freeboard.io/fetch/',
@@ -217,6 +289,67 @@
             'corsanywhere': 'https://cors-anywhere.herokuapp.com/',
             'none': ''
         };
+
+        // ============================================================
+        // DOM Elements
+        // ============================================================
+        const statusBar = document.getElementById('statusBar');
+        const statusIcon = document.getElementById('statusIcon');
+        const statusText = document.getElementById('statusText');
+        const statusDetail = document.getElementById('statusDetail');
+        const responseArea = document.getElementById('responseArea');
+        const testResult = document.getElementById('testResult');
+        const steps = {
+            step1: document.getElementById('step1'),
+            step2: document.getElementById('step2'),
+            step3: document.getElementById('step3'),
+            step4: document.getElementById('step4')
+        };
+
+        // ============================================================
+        // Status Functions
+        // ============================================================
+        function setStatus(icon, text, detail, type = 'idle') {
+            statusIcon.textContent = icon;
+            statusText.textContent = text;
+            statusDetail.textContent = detail;
+            statusBar.className = 'status-bar status-' + type;
+        }
+
+        function setStep(step, icon, text, type = '') {
+            const el = steps[step];
+            if (!el) return;
+            el.querySelector('.step-icon').textContent = icon;
+            el.textContent = text;
+            el.className = type;
+        }
+
+        function resetSteps() {
+            setStep('step1', '⬜', '1. Sending request...');
+            setStep('step2', '⬜', '2. Waiting for response...');
+            setStep('step3', '⬜', '3. Processing response...');
+            setStep('step4', '⬜', '4. Done');
+        }
+
+        function resetAll() {
+            setStatus('⏳', 'Ready', 'Click a button to start testing', 'idle');
+            responseArea.textContent = 'Waiting for action...';
+            responseArea.className = 'response';
+            testResult.classList.add('hidden');
+            testResult.textContent = '';
+            resetSteps();
+        }
+
+        function showResponse(data, type = 'success') {
+            responseArea.className = 'response ' + type;
+            responseArea.textContent = JSON.stringify(data, null, 2);
+        }
+
+        function showResult(message, isPass) {
+            testResult.textContent = message;
+            testResult.className = 'test-result ' + (isPass ? 'pass' : 'fail');
+            testResult.classList.remove('hidden');
+        }
 
         // ============================================================
         // Get API URL
@@ -233,45 +366,14 @@
         }
 
         // ============================================================
-        // DOM Elements
+        // API Call with Status Updates
         // ============================================================
-        const responseArea = document.getElementById('responseArea');
-        const statusBadge = document.getElementById('statusBadge');
-        const testResult = document.getElementById('testResult');
-
-        // ============================================================
-        // Display Functions
-        // ============================================================
-        function setStatus(type, text) {
-            const badge = statusBadge.querySelector('.status-badge');
-            badge.className = 'status-badge ' + type;
-            badge.textContent = text;
-        }
-
-        function showResponse(data, type = 'success') {
-            responseArea.className = 'response ' + type;
-            responseArea.textContent = JSON.stringify(data, null, 2);
-            setStatus(type, type === 'success' ? '✅ Success' : '❌ Error');
-        }
-
-        function showResult(message, isPass) {
-            testResult.textContent = message;
-            testResult.className = 'test-result ' + (isPass ? 'pass' : 'fail');
-            testResult.classList.remove('hidden');
-        }
-
-        function clearAll() {
-            responseArea.textContent = 'Click a button to test the API...';
-            responseArea.className = 'response';
-            setStatus('pending', '⏳ Ready');
-            testResult.classList.add('hidden');
-            testResult.textContent = '';
-        }
-
-        // ============================================================
-        // API Call
-        // ============================================================
-        async function apiCall(action, data = {}, method = 'POST') {
+        async function apiCallWithStatus(action, data = {}, method = 'POST') {
+            resetSteps();
+            
+            setStatus('📤', 'Sending request...', `Action: ${action}`, 'loading');
+            setStep('step1', '⏳', '1. Sending request...', 'active');
+            
             const baseUrl = getApiUrl();
             const url = method === 'GET' 
                 ? `${baseUrl}?${new URLSearchParams({ action, ...data })}`
@@ -286,59 +388,80 @@
                 options.body = JSON.stringify({ action, ...data });
             }
             
-            const response = await fetch(url, options);
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            setStep('step2', '⏳', '2. Waiting for response...', 'active');
+            setStatus('⏳', 'Waiting for response...', `URL: ${url.substring(0, 60)}...`, 'loading');
+            
+            try {
+                const startTime = Date.now();
+                const response = await fetch(url, options);
+                const endTime = Date.now();
+                
+                setStep('step2', '✅', `2. Received response (${endTime - startTime}ms)`, 'done');
+                setStep('step3', '⏳', '3. Processing response...', 'active');
+                setStatus('📥', 'Processing response...', `Status: ${response.status}`, 'loading');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const result = await response.json();
+                
+                setStep('step3', '✅', '3. Response processed successfully', 'done');
+                setStep('step4', '✅', '4. ✅ Done', 'done');
+                
+                const isSuccess = !result.error;
+                setStatus(
+                    isSuccess ? '✅' : '❌',
+                    isSuccess ? 'Success' : 'Error',
+                    isSuccess ? `Action "${action}" completed` : result.error || 'Something went wrong',
+                    isSuccess ? 'success' : 'error'
+                );
+                
+                showResponse(result, isSuccess ? 'success' : 'error');
+                return result;
+                
+            } catch (error) {
+                setStep('step2', '❌', '2. ❌ Request failed', 'error');
+                setStep('step3', '❌', '3. ❌ Error', 'error');
+                setStep('step4', '❌', '4. ❌ Failed', 'error');
+                
+                setStatus('❌', 'Failed', error.message, 'error');
+                showResponse({ error: error.message, type: 'network_error' }, 'error');
+                
+                throw error;
             }
-            return await response.json();
         }
 
         // ============================================================
-        // TEST: Get Products
+        // TESTS
         // ============================================================
+        
         async function testGetProducts() {
             try {
-                setStatus('pending', '⏳ Loading...');
-                responseArea.textContent = 'Fetching products...';
-                responseArea.className = 'response';
-                testResult.classList.add('hidden');
-
-                const result = await apiCall('getProducts', {}, 'GET');
-                showResponse(result, result.error ? 'error' : 'success');
-                
+                const result = await apiCallWithStatus('getProducts', {}, 'GET');
                 if (result.products !== undefined) {
                     showResult(`✅ Found ${result.products.length} products`, true);
                 } else {
                     showResult('❌ ' + (result.error || 'Unknown error'), false);
                 }
             } catch (error) {
-                showResponse({ error: error.message }, 'error');
-                showResult('❌ Failed to fetch: ' + error.message, false);
+                showResult('❌ Failed: ' + error.message, false);
             }
         }
 
-        // ============================================================
-        // TEST: Signup
-        // ============================================================
         async function testSignup() {
             const name = document.getElementById('testName')?.value || 'Test User';
             const phone = document.getElementById('testPhone')?.value || '08012345678';
             const state = document.getElementById('testState')?.value || 'Lagos';
             
             try {
-                setStatus('pending', '⏳ Loading...');
-                responseArea.textContent = 'Creating account...';
-                responseArea.className = 'response';
-                testResult.classList.add('hidden');
-
-                const result = await apiCall('signup', {
+                const result = await apiCallWithStatus('signup', {
                     name: name,
                     phone: phone,
                     state: state,
                     email: '',
                     bio: ''
                 });
-                showResponse(result, result.success ? 'success' : 'error');
                 
                 if (result.success) {
                     showResult(`✅ User "${name}" created! ID: ${result.user.id}`, true);
@@ -346,33 +469,23 @@
                     showResult('❌ ' + (result.error || 'Signup failed'), false);
                 }
             } catch (error) {
-                showResponse({ error: error.message }, 'error');
-                showResult('❌ Failed to fetch: ' + error.message, false);
+                showResult('❌ Failed: ' + error.message, false);
             }
         }
 
-        // ============================================================
-        // TEST: Post Product
-        // ============================================================
         async function testPostProduct() {
             const title = document.getElementById('testProductTitle')?.value || 'Test Product';
             const price = document.getElementById('testProductPrice')?.value || '750000';
             const category = document.getElementById('testProductCategory')?.value || 'electronics';
-            const location = document.getElementById('testProductLocation')?.value || 'Lagos';
             
             try {
-                setStatus('pending', '⏳ Loading...');
-                responseArea.textContent = 'Posting product...';
-                responseArea.className = 'response';
-                testResult.classList.add('hidden');
-
                 const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').substring(0, 60);
                 
-                const result = await apiCall('addProduct', {
+                const result = await apiCallWithStatus('addProduct', {
                     title: title,
                     price: parseFloat(price),
                     category: category,
-                    location: location,
+                    location: 'Lagos',
                     description: 'Test product description',
                     images: 'https://via.placeholder.com/400x300/1a3650/ffffff?text=Zaure+Test',
                     slug: slug,
@@ -382,7 +495,6 @@
                     featured: false,
                     boosted: false
                 });
-                showResponse(result, result.success ? 'success' : 'error');
                 
                 if (result.success) {
                     showResult(`✅ Product "${title}" posted! ID: ${result.productId}`, true);
@@ -390,8 +502,7 @@
                     showResult('❌ ' + (result.error || 'Post failed'), false);
                 }
             } catch (error) {
-                showResponse({ error: error.message }, 'error');
-                showResult('❌ Failed to fetch: ' + error.message, false);
+                showResult('❌ Failed: ' + error.message, false);
             }
         }
 
@@ -399,11 +510,13 @@
         // Add test fields dynamically
         // ============================================================
         document.addEventListener('DOMContentLoaded', function() {
-            // Add signup fields if they don't exist
-            const signupCard = document.querySelector('.card:nth-child(3)');
-            if (signupCard) {
-                signupCard.innerHTML = `
-                    <h2>👤 Test Signup</h2>
+            // Add signup fields
+            const cards = document.querySelectorAll('.card');
+            const lastCard = cards[cards.length - 1];
+            
+            const signupHTML = `
+                <div class="card">
+                    <h2>👤 Signup Test</h2>
                     <div class="form-row">
                         <div class="form-group">
                             <label>Full Name</label>
@@ -424,14 +537,12 @@
                         </select>
                     </div>
                     <button class="btn btn-warning" onclick="testSignup()">👤 Test Signup</button>
-                `;
-            }
-
-            // Add product fields
-            const productCard = document.querySelector('.card:nth-child(4)');
-            if (productCard) {
-                productCard.innerHTML = `
-                    <h2>➕ Test Post Product</h2>
+                </div>
+            `;
+            
+            const productHTML = `
+                <div class="card">
+                    <h2>➕ Post Product Test</h2>
                     <div class="form-row">
                         <div class="form-group">
                             <label>Title</label>
@@ -442,22 +553,22 @@
                             <input type="number" id="testProductPrice" value="750000">
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Category</label>
-                            <select id="testProductCategory">
-                                <option value="electronics">Electronics</option>
-                                <option value="vehicles">Vehicles</option>
-                                <option value="furniture">Furniture</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Location</label>
-                            <input type="text" id="testProductLocation" value="Lagos">
-                        </div>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select id="testProductCategory">
+                            <option value="electronics">Electronics</option>
+                            <option value="vehicles">Vehicles</option>
+                            <option value="furniture">Furniture</option>
+                        </select>
                     </div>
                     <button class="btn btn-success" onclick="testPostProduct()">➕ Post Product</button>
-                `;
+                </div>
+            `;
+            
+            // Insert after the response card
+            const responseCard = document.querySelector('.card:nth-child(4)');
+            if (responseCard) {
+                responseCard.insertAdjacentHTML('afterend', signupHTML + productHTML);
             }
         });
     </script>
