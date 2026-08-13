@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test - Zaure</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f0f4f8;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #1a3650;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .card h2 {
+            color: #1a3650;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+        }
+        .form-group {
+            margin-bottom: 12px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #4a5568;
+            margin-bottom: 4px;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: 0.2s;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #1a3650;
+            outline: none;
+        }
+        .form-group textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .btn {
+            padding: 10px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-primary {
+            background: #1a3650;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #0f2940;
+        }
+        .btn-success {
+            background: #27ae60;
+            color: white;
+        }
+        .btn-success:hover {
+            background: #219a52;
+        }
+        .btn-danger {
+            background: #e74c3c;
+            color: white;
+        }
+        .btn-danger:hover {
+            background: #c0392b;
+        }
+        .btn-warning {
+            background: #f5b342;
+            color: #1a1a1a;
+        }
+        .btn-warning:hover {
+            background: #e6a33d;
+        }
+        .btn-sm {
+            padding: 6px 14px;
+            font-size: 0.8rem;
+        }
+        .response {
+            background: #1a202c;
+            color: #68d391;
+            padding: 16px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-break: break-all;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 12px;
+        }
+        .response.error {
+            color: #fc8181;
+        }
+        .response.success {
+            color: #68d391;
+        }
+        .btn-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        .status-badge.success {
+            background: #c6f6d5;
+            color: #276749;
+        }
+        .status-badge.error {
+            background: #fed7d7;
+            color: #9b2c2c;
+        }
+        .status-badge.pending {
+            background: #fefcbf;
+            color: #975a16;
+        }
+        .loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #e2e8f0;
+            border-top-color: #1a3650;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .config-box {
+            background: #edf2f7;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            margin-bottom: 12px;
+        }
+        .config-box strong {
+            color: #1a3650;
+        }
+        @media (max-width: 640px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            body { padding: 12px; }
+            .card { padding: 14px; }
+        }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+    <h1>🧪 Zaure API Test Tool</h1>
+
+    <!-- ===== CONFIG ===== -->
+    <div class="card">
+        <h2>⚙️ Configuration</h2>
+        <div class="config-box">
+            <strong>API URL:</strong> 
+            <span id="apiUrlDisplay">https://script.google.com/macros/s/AKfycbxAvdTHKpX9Zwgy3NAqQH9OvH2br7bUgv6mpgYAE35yU01VwnOkUCJPz1AUiru6Q-FEVw/exec</span>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;">
+            <button class="btn btn-primary btn-sm" onclick="testGetProducts()">📦 Test GET Products</button>
+            <button class="btn btn-success btn-sm" onclick="testPostProduct()">➕ Test POST Product</button>
+            <button class="btn btn-warning btn-sm" onclick="testSignup()">👤 Test Signup</button>
+            <button class="btn btn-danger btn-sm" onclick="clearResponse()">🗑️ Clear</button>
+        </div>
+    </div>
+
+    <!-- ===== RESPONSE ===== -->
+    <div class="card">
+        <h2>📤 Response</h2>
+        <div id="statusBadge">
+            <span class="status-badge pending">⏳ Ready</span>
+        </div>
+        <div class="response" id="responseArea">Waiting for action...</div>
+    </div>
+
+    <!-- ===== TEST SIGNUP ===== -->
+    <div class="card">
+        <h2>👤 Test Signup</h2>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="testName" value="Test User" placeholder="Full name">
+            </div>
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" id="testPhone" value="08012345678" placeholder="Phone number">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>State</label>
+            <select id="testState">
+                <option value="Lagos">Lagos</option>
+                <option value="Abuja">Abuja</option>
+                <option value="Kano">Kano</option>
+                <option value="Rivers">Rivers</option>
+                <option value="Oyo">Oyo</option>
+                <option value="Kaduna">Kaduna</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        <button class="btn btn-warning" onclick="testSignup()">👤 Signup Test</button>
+    </div>
+
+    <!-- ===== TEST POST PRODUCT ===== -->
+    <div class="card">
+        <h2>➕ Test Post Product</h2>
+        <div class="form-group">
+            <label>Product Title <span style="color:red;">*</span></label>
+            <input type="text" id="testProductTitle" value="Test Product - iPhone 14" placeholder="Product title">
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Price (₦) <span style="color:red;">*</span></label>
+                <input type="number" id="testProductPrice" value="750000" placeholder="Price">
+            </div>
+            <div class="form-group">
+                <label>Category <span style="color:red;">*</span></label>
+                <select id="testProductCategory">
+                    <option value="electronics">📱 Electronics</option>
+                    <option value="vehicles">🚗 Vehicles</option>
+                    <option value="furniture">🪑 Furniture</option>
+                    <option value="fashion">👗 Fashion</option>
+                    <option value="real-estate">🏠 Real Estate</option>
+                    <option value="services">🔧 Services</option>
+                    <option value="other">📦 Other</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Location</label>
+            <input type="text" id="testProductLocation" value="Lagos" placeholder="Location">
+        </div>
+        <div class="form-group">
+            <label>Description</label>
+            <textarea id="testProductDescription" placeholder="Product description">Brand new iPhone 14 Pro Max in excellent condition. 256GB storage, Space Black.</textarea>
+        </div>
+        <div class="form-group">
+            <label>Image URLs (comma separated)</label>
+            <input type="text" id="testProductImages" value="https://via.placeholder.com/400x300/1a3650/ffffff?text=Zaure+Test" placeholder="https://example.com/image1.jpg, https://example.com/image2.jpg">
+        </div>
+        <div class="form-group">
+            <label>Seller Info (for posting)</label>
+            <div class="form-row">
+                <input type="text" id="testSellerId" placeholder="Seller ID" value="1">
+                <input type="text" id="testSellerName" placeholder="Seller Name" value="Test Seller">
+            </div>
+            <input type="text" id="testSellerPhone" placeholder="Seller Phone" value="08012345678" style="margin-top:8px;width:100%;padding:10px 14px;border:2px solid #e2e8f0;border-radius:8px;">
+        </div>
+        <button class="btn btn-success" onclick="testPostProduct()">➕ Post Product</button>
+    </div>
+
+    <!-- ===== QUICK ACTIONS ===== -->
+    <div class="card">
+        <h2>⚡ Quick Actions</h2>
+        <div class="btn-group">
+            <button class="btn btn-primary btn-sm" onclick="testGetProducts()">📦 Get Products</button>
+            <button class="btn btn-success btn-sm" onclick="testPostProduct()">➕ Post Product</button>
+            <button class="btn btn-warning btn-sm" onclick="testSignup()">👤 Signup</button>
+            <button class="btn btn-danger btn-sm" onclick="testGetUser()">👤 Get User</button>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        // API CONFIGURATION
+        // ============================================================
+        const API_BASE = 'https://script.google.com/macros/s/AKfycbxAvdTHKpX9Zwgy3NAqQH9OvH2br7bUgv6mpgYAE35yU01VwnOkUCJPz1AUiru6Q-FEVw/exec';
+
+        // ============================================================
+        // DOM Elements
+        // ============================================================
+        const responseArea = document.getElementById('responseArea');
+        const statusBadge = document.getElementById('statusBadge');
+
+        // ============================================================
+        // API Call Function
+        // ============================================================
+        async function apiCall(action, data = {}, method = 'POST') {
+            const url = method === 'GET' 
+                ? `${API_BASE}?${new URLSearchParams({ action, ...data })}`
+                : API_BASE;
+            
+            const options = {
+                method,
+                headers: { 'Content-Type': 'application/json' },
+            };
+            
+            if (method === 'POST') {
+                options.body = JSON.stringify({ action, ...data });
+            }
+            
+            try {
+                const response = await fetch(url, options);
+                const result = await response.json();
+                return result;
+            } catch (error) {
+                return { error: error.message };
+            }
+        }
+
+        // ============================================================
+        // Display Response
+        // ============================================================
+        function displayResponse(data, type = 'success') {
+            responseArea.className = 'response ' + type;
+            responseArea.textContent = JSON.stringify(data, null, 2);
+            
+            const badge = statusBadge.querySelector('.status-badge');
+            if (type === 'success') {
+                badge.className = 'status-badge success';
+                badge.textContent = '✅ Success';
+            } else if (type === 'error') {
+                badge.className = 'status-badge error';
+                badge.textContent = '❌ Error';
+            } else {
+                badge.className = 'status-badge pending';
+                badge.textContent = '⏳ Loading...';
+            }
+        }
+
+        function clearResponse() {
+            responseArea.textContent = 'Waiting for action...';
+            responseArea.className = 'response';
+            const badge = statusBadge.querySelector('.status-badge');
+            badge.className = 'status-badge pending';
+            badge.textContent = '⏳ Ready';
+        }
+
+        // ============================================================
+        // TEST: Get Products
+        // ============================================================
+        async function testGetProducts() {
+            displayResponse({ loading: 'Fetching products...' }, 'pending');
+            
+            try {
+                const result = await apiCall('getProducts', {}, 'GET');
+                displayResponse(result, result.error ? 'error' : 'success');
+                
+                if (result.products) {
+                    console.log('✅ Products found:', result.products.length);
+                }
+            } catch (error) {
+                displayResponse({ error: error.message }, 'error');
+            }
+        }
+
+        // ============================================================
+        // TEST: Signup
+        // ============================================================
+        async function testSignup() {
+            const name = document.getElementById('testName').value.trim();
+            const phone = document.getElementById('testPhone').value.trim();
+            const state = document.getElementById('testState').value;
+            
+            if (!name || !phone || !state) {
+                displayResponse({ error: 'Please fill in all fields' }, 'error');
+                return;
+            }
+            
+            displayResponse({ loading: 'Creating account for ' + name + '...' }, 'pending');
+            
+            try {
+                const result = await apiCall('signup', {
+                    name: name,
+                    phone: phone,
+                    state: state,
+                    email: '',
+                    bio: ''
+                });
+                displayResponse(result, result.success ? 'success' : 'error');
+                
+                if (result.success) {
+                    console.log('✅ User created:', result.user);
+                }
+            } catch (error) {
+                displayResponse({ error: error.message }, 'error');
+            }
+        }
+
+        // ============================================================
+        // TEST: Get User
+        // ============================================================
+        async function testGetUser() {
+            const phone = document.getElementById('testPhone').value.trim();
+            
+            if (!phone) {
+                displayResponse({ error: 'Please enter a phone number' }, 'error');
+                return;
+            }
+            
+            displayResponse({ loading: 'Fetching user with phone: ' + phone + '...' }, 'pending');
+            
+            try {
+                const result = await apiCall('getUser', { phone: phone }, 'GET');
+                displayResponse(result, result.user ? 'success' : 'error');
+                
+                if (result.user) {
+                    console.log('✅ User found:', result.user);
+                }
+            } catch (error) {
+                displayResponse({ error: error.message }, 'error');
+            }
+        }
+
+        // ============================================================
+        // TEST: Post Product
+        // ============================================================
+        async function testPostProduct() {
+            // Get form values
+            const title = document.getElementById('testProductTitle').value.trim();
+            const price = document.getElementById('testProductPrice').value;
+            const category = document.getElementById('testProductCategory').value;
+            const location = document.getElementById('testProductLocation').value.trim();
+            const description = document.getElementById('testProductDescription').value.trim();
+            const images = document.getElementById('testProductImages').value.trim();
+            const sellerId = document.getElementById('testSellerId').value.trim() || '1';
+            const sellerName = document.getElementById('testSellerName').value.trim() || 'Test Seller';
+            const sellerPhone = document.getElementById('testSellerPhone').value.trim() || '08012345678';
+            
+            // Validate
+            if (!title || !price || !category) {
+                displayResponse({ error: 'Please fill in title, price, and category' }, 'error');
+                return;
+            }
+            
+            // Generate slug
+            const slug = title.toLowerCase()
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/^-+|-+$/g, '')
+                .substring(0, 60);
+            
+            const productData = {
+                title: title,
+                price: parseFloat(price),
+                category: category,
+                location: location || 'Nigeria',
+                description: description || 'No description provided.',
+                images: images || 'https://via.placeholder.com/400x300/1a3650/ffffff?text=Zaure+Test',
+                slug: slug,
+                sellerId: parseInt(sellerId),
+                sellerName: sellerName,
+                sellerPhone: sellerPhone,
+                featured: false,
+                boosted: false
+            };
+            
+            displayResponse({ loading: 'Posting product: ' + title + '...' }, 'pending');
+            
+            try {
+                const result = await apiCall('addProduct', productData);
+                displayResponse(result, result.success ? 'success' : 'error');
+                
+                if (result.success) {
+                    console.log('✅ Product posted! ID:', result.productId, 'Slug:', result.slug);
+                }
+            } catch (error) {
+                displayResponse({ error: error.message }, 'error');
+            }
+        }
+
+        // ============================================================
+        // Quick Test: Check API Connection on Load
+        // ============================================================
+        async function testConnection() {
+            displayResponse({ loading: 'Testing API connection...' }, 'pending');
+            
+            try {
+                const result = await apiCall('getProducts', {}, 'GET');
+                if (result.products !== undefined) {
+                    displayResponse({ 
+                        success: true, 
+                        message: '✅ API is working!', 
+                        productsFound: result.products ? result.products.length : 0 
+                    }, 'success');
+                    console.log('✅ API connection successful');
+                } else {
+                    displayResponse({ error: 'API returned unexpected response', result }, 'error');
+                }
+            } catch (error) {
+                displayResponse({ error: 'API connection failed: ' + error.message }, 'error');
+            }
+        }
+
+        // ============================================================
+        // Display API URL
+        // ============================================================
+        document.getElementById('apiUrlDisplay').textContent = API_BASE;
+
+        // ============================================================
+        // Auto-test on load
+        // ============================================================
+        // Uncomment to auto-test on load:
+        // testConnection();
+
+        console.log('🧪 API Test Tool loaded!');
+        console.log('📡 API URL:', API_BASE);
+        console.log('ℹ️ Click buttons to test API endpoints.');
+    </script>
+
+</body>
+</html>
