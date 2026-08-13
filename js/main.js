@@ -1,4 +1,8 @@
 // ============================================================
+// ZAURE - Complete Main JavaScript File
+// ============================================================
+
+// ============================================================
 // DEVICE DETECTION
 // ============================================================
 function detectDevice() {
@@ -53,7 +57,7 @@ window.toggleTheme = function() {
 };
 
 // ============================================================
-// USER MANAGEMENT
+// USER MANAGEMENT - FIXED HEADER
 // ============================================================
 let currentUser = null;
 
@@ -82,7 +86,13 @@ function loadUser() {
 }
 
 function signupUser(name, phone, state) {
-  currentUser = { name, phone, state };
+  currentUser = { 
+    id: Date.now(),
+    name: name, 
+    phone: phone, 
+    state: state,
+    joined: new Date().toISOString()
+  };
   localStorage.setItem('zaure_user', JSON.stringify(currentUser));
   renderUserArea();
   updateFavoriteBadge();
@@ -106,15 +116,14 @@ function renderUserArea() {
   
   if (currentUser) {
     headerUserArea.innerHTML = `
-      <a href="/profile.html" class="user-greeting" style="text-decoration:none;display:flex;align-items:center;gap:6px;color:var(--text);font-weight:500;">
-        <i class="fas fa-user"></i> ${currentUser.name.split(' ')[0]}
+      <a href="/profile.html" class="user-greeting">
+        <i class="fas fa-user-circle"></i>
+        <span>${currentUser.name.split(' ')[0]}</span>
       </a>
     `;
   } else {
     headerUserArea.innerHTML = `
-      <div class="avatar" id="userAvatar" onclick="openSignup()" style="cursor:pointer;width:36px;height:36px;border-radius:50%;background:#1a3650;color:white;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;">
-        ZA
-      </div>
+      <div class="avatar" id="userAvatar" onclick="openSignup()">ZA</div>
     `;
   }
 }
