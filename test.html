@@ -165,6 +165,20 @@
             color: #4a5568;
             cursor: pointer;
         }
+        .test-result {
+            margin-top: 8px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+        }
+        .test-result.pass {
+            background: #c6f6d5;
+            color: #276749;
+        }
+        .test-result.fail {
+            background: #fed7d7;
+            color: #9b2c2c;
+        }
     </style>
 </head>
 <body>
@@ -176,7 +190,11 @@
         <h2>⚙️ Configuration</h2>
         <div class="config-box">
             <strong>Web App URL:</strong><br>
-            <span class="url" id="apiUrlDisplay">https://script.google.com/macros/s/1arYia8Mfdv5X9v2nmNXuNnuWzSHZjtZBZSFJWWmBYl9QcCc3EKLGFavb/exec</span>
+            <span class="url" id="apiUrlDisplay">https://script.google.com/macros/s/AKfycbwfy8j8TDBxkv5n-mYv7eMyZS9ooLbN5ZAzLdYfmMydPiXtU8-nKD5VVQckKtiB3Mgp/exec</span>
+        </div>
+        <div class="config-box">
+            <strong>Spreadsheet ID:</strong><br>
+            <span>17fw2y7VQw2Z_IOVhBi4UQlxI2n3320Sn1v_7iek1YwM</span>
         </div>
         <div class="config-box">
             <strong>Using CORS Proxy:</strong><br>
@@ -238,6 +256,7 @@
             </select>
         </div>
         <button class="btn btn-warning" onclick="testSignup()">👤 Signup Test</button>
+        <div id="signupResult" class="test-result hidden"></div>
     </div>
 
     <!-- ===== TEST POST PRODUCT ===== -->
@@ -286,6 +305,7 @@
             <input type="text" id="testSellerPhone" placeholder="Seller Phone" value="08012345678" style="margin-top:8px;width:100%;padding:10px 14px;border:2px solid #e2e8f0;border-radius:8px;">
         </div>
         <button class="btn btn-success" onclick="testPostProduct()">➕ Post Product</button>
+        <div id="productResult" class="test-result hidden"></div>
     </div>
 
     <!-- ===== QUICK ACTIONS ===== -->
@@ -301,15 +321,13 @@
 
     <script>
         // ============================================================
-        // API CONFIGURATION
+        // API CONFIGURATION - YOUR NEW WEB APP URL
         // ============================================================
         
-        // Your actual Web App URL
-        const WEB_APP_URL = 'https://script.google.com/macros/s/1arYia8Mfdv5X9v2nmNXuNnuWzSHZjtZBZSFJWWmBYl9QcCc3EKLGFavb/exec';
-        
-        // CORS Proxy URL
+        const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwfy8j8TDBxkv5n-mYv7eMyZS9ooLbN5ZAzLdYfmMydPiXtU8-nKD5VVQckKtiB3Mgp/exec';
+        const SPREADSHEET_ID = '17fw2y7VQw2Z_IOVhBi4UQlxI2n3320Sn1v_7iek1YwM';
         const CORS_PROXY = 'https://corsproxy.io/?';
-        
+
         // ============================================================
         // Get API URL based on proxy setting
         // ============================================================
@@ -317,7 +335,6 @@
             const useProxy = document.getElementById('useProxy').checked;
             const url = useProxy ? CORS_PROXY + encodeURIComponent(WEB_APP_URL) : WEB_APP_URL;
             
-            // Update display
             document.getElementById('proxyStatus').textContent = useProxy ? '✅ Enabled (fixes CORS issues)' : '❌ Disabled (may cause CORS errors)';
             document.getElementById('proxyStatus').style.color = useProxy ? '#276749' : '#9b2c2c';
             
@@ -365,7 +382,6 @@
                 const result = await response.json();
                 return result;
             } catch (error) {
-                // Check if it's a network/CORS error
                 if (error.message.includes('fetch') || error.message.includes('NetworkError')) {
                     corsWarning.classList.remove('hidden');
                     successBox.classList.add('hidden');
@@ -392,7 +408,7 @@
             } else if (type === 'error') {
                 badge.className = 'status-badge error';
                 badge.textContent = '❌ Error';
-                if (data.error && data.error.includes('fetch')) {
+                if (data.error && (data.error.includes('fetch') || data.error.includes('NetworkError'))) {
                     corsWarning.classList.remove('hidden');
                 }
                 successBox.classList.add('hidden');
@@ -412,6 +428,17 @@
             badge.textContent = '⏳ Ready';
             corsWarning.classList.add('hidden');
             successBox.classList.add('hidden');
+            document.querySelectorAll('.test-result').forEach(el => {
+                el.classList.add('hidden');
+                el.textContent = '';
+            });
+        }
+
+        function showTestResult(elementId, message, isPass) {
+            const el = document.getElementById(elementId);
+            el.textContent = message;
+            el.className = 'test-result ' + (isPass ? 'pass' : 'fail');
+            el.classList.remove('hidden');
         }
 
         // ============================================================
@@ -428,9 +455,11 @@
                 
                 if (result.products) {
                     console.log('✅ Products found:', result.products.length);
+                    showTestResult('signupResult', `✅ Found ${result.products.length} products`, true);
                 }
             } catch (error) {
                 displayResponse({ error: error.message }, 'error');
+                showTestResult('signupResult', '❌ Error: ' + error.message, false);
             }
         }
 
@@ -463,9 +492,13 @@
                 
                 if (result.success) {
                     console.log('✅ User created:', result.user);
+                    showTestResult('signupResult', `✅ User "${name}" created successfully! ID: ${result.user.id}`, true);
+                } else {
+                    showTestResult('signupResult', '❌ ' + (result.error || 'Signup failed'), false);
                 }
             } catch (error) {
                 displayResponse({ error: error.message }, 'error');
+                showTestResult('signupResult', '❌ Error: ' + error.message, false);
             }
         }
 
@@ -490,9 +523,13 @@
                 
                 if (result.user) {
                     console.log('✅ User found:', result.user);
+                    showTestResult('signupResult', `✅ User found: ${result.user.name} (${result.user.phone})`, true);
+                } else {
+                    showTestResult('signupResult', '❌ User not found for phone: ' + phone, false);
                 }
             } catch (error) {
                 displayResponse({ error: error.message }, 'error');
+                showTestResult('signupResult', '❌ Error: ' + error.message, false);
             }
         }
 
@@ -545,9 +582,13 @@
                 
                 if (result.success) {
                     console.log('✅ Product posted! ID:', result.productId, 'Slug:', result.slug);
+                    showTestResult('productResult', `✅ Product "${title}" posted! ID: ${result.productId}`, true);
+                } else {
+                    showTestResult('productResult', '❌ ' + (result.error || 'Post failed'), false);
                 }
             } catch (error) {
                 displayResponse({ error: error.message }, 'error');
+                showTestResult('productResult', '❌ Error: ' + error.message, false);
             }
         }
 
@@ -556,9 +597,9 @@
         // ============================================================
         console.log('🧪 API Test Tool loaded!');
         console.log('📡 Web App URL:', WEB_APP_URL);
-        console.log('ℹ️ Click buttons to test API endpoints.');
+        console.log('📊 Spreadsheet ID:', SPREADSHEET_ID);
         console.log('💡 Make sure CORS Proxy is enabled (checkbox above).');
+        console.log('ℹ️ Click buttons to test API endpoints.');
     </script>
-
 </body>
 </html>
