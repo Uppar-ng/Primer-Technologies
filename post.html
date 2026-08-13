@@ -10,100 +10,469 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
   <style>
-    /* ===== ALL EXISTING STYLES ===== */
+    /* ===== POST OPTIONS STYLES ===== */
     .post-container {
       max-width: 720px;
       margin: 0 auto;
       padding: 20px 0 40px;
     }
 
-    .wizard-progress {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      position: relative;
-      padding: 0 10px;
+    /* Page Header */
+    .page-header {
+      text-align: center;
+      margin-bottom: 24px;
     }
 
-    .wizard-progress::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 30px;
-      right: 30px;
-      height: 3px;
-      background: var(--border);
-      transform: translateY(-50%);
-      z-index: 0;
+    .page-header h1 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 4px;
     }
 
-    .wizard-progress .step-indicator {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      z-index: 1;
-      cursor: pointer;
-      flex: 1;
+    .page-header p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
     }
 
-    .wizard-progress .step-indicator .step-circle {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
+    /* Info Box */
+    .info-box {
       background: var(--surface-alt);
-      border: 3px solid var(--border);
+      border-radius: 16px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      border: 1px solid var(--border);
       display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .info-box i {
+      font-size: 1.2rem;
+      color: #1a3650;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    [data-theme="dark"] .info-box i {
+      color: #4a7a9a;
+    }
+
+    .info-box .info-text {
       font-size: 0.85rem;
       color: var(--text-secondary);
-      transition: 0.3s;
-      position: relative;
+      line-height: 1.6;
     }
 
-    .wizard-progress .step-indicator.active .step-circle {
-      background: #1a3650;
-      border-color: #1a3650;
-      color: white;
-      box-shadow: 0 4px 16px rgba(26,54,80,0.3);
-    }
-
-    [data-theme="dark"] .wizard-progress .step-indicator.active .step-circle {
-      background: #2A3550;
-      border-color: #2A3550;
-    }
-
-    .wizard-progress .step-indicator.completed .step-circle {
-      background: #27ae60;
-      border-color: #27ae60;
-      color: white;
-    }
-
-    .wizard-progress .step-indicator .step-label {
-      font-size: 0.7rem;
-      font-weight: 600;
-      color: var(--text-secondary);
-      text-align: center;
-    }
-
-    .wizard-progress .step-indicator.active .step-label {
+    .info-box .info-text strong {
       color: var(--text);
     }
 
-    .wizard-progress .step-indicator.completed .step-label {
-      color: #27ae60;
+    /* Flow Steps */
+    .flow-steps {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 8px;
+      margin: 16px 0 20px;
     }
 
-    .step-content {
-      display: none;
-      animation: fadeSlideIn 0.4s ease;
+    .flow-step {
+      text-align: center;
+      padding: 12px 8px;
+      background: var(--surface);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      position: relative;
     }
 
-    .step-content.active {
+    .flow-step .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #1a3650;
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    [data-theme="dark"] .flow-step .step-number {
+      background: #2A3550;
+    }
+
+    .flow-step .step-icon {
+      font-size: 1.4rem;
       display: block;
+      margin-bottom: 4px;
+    }
+
+    .flow-step .step-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--text);
+      display: block;
+    }
+
+    .flow-step .step-desc {
+      font-size: 0.55rem;
+      color: var(--text-secondary);
+      display: block;
+      margin-top: 2px;
+    }
+
+    .flow-step .step-arrow {
+      position: absolute;
+      right: -8px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--border);
+      font-size: 0.8rem;
+    }
+
+    .flow-step:last-child .step-arrow {
+      display: none;
+    }
+
+    .flow-step.highlight {
+      border-color: #25D366;
+      background: rgba(37, 211, 102, 0.05);
+    }
+
+    [data-theme="dark"] .flow-step.highlight {
+      background: rgba(37, 211, 102, 0.08);
+    }
+
+    .post-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 16px 0 20px;
+    }
+
+    .post-option-card {
+      background: var(--surface);
+      border-radius: 24px;
+      padding: 28px 20px;
+      border: 2px solid var(--border);
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: var(--text);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .post-option-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+    }
+
+    .post-option-card:active {
+      transform: scale(0.97);
+    }
+
+    /* WhatsApp Card - Primary */
+    .post-option-card.whatsapp {
+      border-color: #25D366;
+      background: linear-gradient(145deg, var(--surface), rgba(37, 211, 102, 0.05));
+    }
+
+    .post-option-card.whatsapp:hover {
+      border-color: #1da851;
+      box-shadow: 0 12px 40px rgba(37, 211, 102, 0.15);
+    }
+
+    [data-theme="dark"] .post-option-card.whatsapp {
+      background: linear-gradient(145deg, var(--surface), rgba(37, 211, 102, 0.08));
+    }
+
+    /* Site Card - Disabled */
+    .post-option-card.site {
+      opacity: 0.6;
+      cursor: not-allowed;
+      position: relative;
+    }
+
+    .post-option-card.site:hover {
+      transform: none;
+      box-shadow: none;
+    }
+
+    .post-option-card .option-icon {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .post-option-card .option-icon i {
+      font-size: 2.8rem;
+    }
+
+    .post-option-card .option-icon .fa-whatsapp {
+      color: #25D366;
+    }
+
+    .post-option-card .option-icon .fa-globe {
+      color: var(--text-secondary);
+      opacity: 0.5;
+    }
+
+    .post-option-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .post-option-card p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .post-option-card .option-badge {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .post-option-card .option-badge.whatsapp-badge {
+      background: #25D366;
+      color: white;
+    }
+
+    .post-option-card .option-badge.coming-soon {
+      background: var(--surface-alt);
+      color: var(--text-secondary);
+    }
+
+    .post-option-card .coming-soon-overlay {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: #e74c3c;
+      color: white;
+      padding: 2px 12px;
+      border-radius: 20px;
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .post-option-card .human-support {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 8px;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    .post-option-card .human-support i {
+      color: #25D366;
+      font-size: 0.85rem;
+    }
+
+    .post-option-card .whatsapp-steps {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+      text-align: left;
+    }
+
+    .post-option-card .whatsapp-steps .step {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      padding: 3px 0;
+    }
+
+    .post-option-card .whatsapp-steps .step i {
+      color: #25D366;
+      font-size: 0.7rem;
+      width: 16px;
+      text-align: center;
+    }
+
+    .post-option-card .whatsapp-steps .step .ai-tag {
+      background: #fefcbf;
+      color: #975a16;
+      font-size: 0.55rem;
+      padding: 1px 8px;
+      border-radius: 10px;
+      font-weight: 600;
+      margin-left: 4px;
+    }
+
+    [data-theme="dark"] .post-option-card .whatsapp-steps .step .ai-tag {
+      background: #2A3550;
+      color: #f5b342;
+    }
+
+    /* What to Expect Section */
+    .what-to-expect {
+      background: var(--surface);
+      border-radius: 20px;
+      padding: 24px 20px;
+      border: 1px solid var(--border);
+      margin: 16px 0 20px;
+    }
+
+    .what-to-expect h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .what-to-expect h3 i {
+      color: #1a3650;
+    }
+
+    [data-theme="dark"] .what-to-expect h3 i {
+      color: #4a7a9a;
+    }
+
+    .what-to-expect .expect-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .what-to-expect .expect-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 12px;
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+    }
+
+    .what-to-expect .expect-item i {
+      font-size: 1rem;
+      color: #1a3650;
+      flex-shrink: 0;
+    }
+
+    [data-theme="dark"] .what-to-expect .expect-item i {
+      color: #4a7a9a;
+    }
+
+    .what-to-expect .expect-item .expect-text {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .what-to-expect .expect-item .expect-text strong {
+      color: var(--text);
+    }
+
+    /* Verification Badge */
+    .verification-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #c6f6d5;
+      color: #276749;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+
+    [data-theme="dark"] .verification-badge {
+      background: #1A2540;
+      color: #68d391;
+    }
+
+    /* Coming Soon Modal */
+    .coming-soon-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--modal-overlay);
+      backdrop-filter: blur(4px);
+      z-index: 999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .coming-soon-modal.active {
+      display: flex;
+    }
+
+    .coming-soon-modal .modal-content {
+      background: var(--surface);
+      border-radius: 24px;
+      padding: 40px 32px;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      box-shadow: var(--shadow-hover);
+      animation: fadeSlideIn 0.3s ease;
+    }
+
+    .coming-soon-modal .modal-content i {
+      font-size: 3.5rem;
+      color: #f5b342;
+      margin-bottom: 16px;
+    }
+
+    .coming-soon-modal .modal-content h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .coming-soon-modal .modal-content p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+
+    .coming-soon-modal .modal-content .btn-close {
+      padding: 10px 32px;
+      background: #1a3650;
+      color: white;
+      border: none;
+      border-radius: 60px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .coming-soon-modal .modal-content .btn-close:hover {
+      background: #0f2940;
+    }
+
+    [data-theme="dark"] .coming-soon-modal .modal-content .btn-close {
+      background: #2A3550;
+      color: #F1F5F9;
+    }
+
+    [data-theme="dark"] .coming-soon-modal .modal-content .btn-close:hover {
+      background: #3A4560;
     }
 
     @keyframes fadeSlideIn {
@@ -117,452 +486,7 @@
       }
     }
 
-    .post-card {
-      background: var(--surface);
-      border-radius: 24px;
-      padding: 32px 28px;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-    }
-
-    .post-card .step-header {
-      margin-bottom: 24px;
-    }
-
-    .post-card .step-header h2 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 4px;
-    }
-
-    .post-card .step-header .subtitle {
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    .form-group label {
-      display: block;
-      font-weight: 600;
-      font-size: 0.85rem;
-      color: var(--text);
-      margin-bottom: 6px;
-    }
-
-    .form-group label .required {
-      color: #e74c3c;
-      margin-left: 2px;
-    }
-
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      width: 100%;
-      padding: 12px 16px;
-      border: 2px solid var(--border);
-      border-radius: 14px;
-      font-size: 0.95rem;
-      background: var(--input-bg);
-      color: var(--text);
-      transition: 0.2s;
-      font-family: inherit;
-      box-sizing: border-box;
-    }
-
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      border-color: #1a3650;
-      box-shadow: 0 0 0 4px rgba(26,54,80,0.08);
-      outline: none;
-    }
-
-    .form-group textarea {
-      min-height: 120px;
-      resize: vertical;
-    }
-
-    .form-group .help-text {
-      font-size: 0.75rem;
-      color: var(--text-secondary);
-      margin-top: 5px;
-    }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    .step-actions {
-      display: flex;
-      gap: 12px;
-      margin-top: 24px;
-      padding-top: 20px;
-      border-top: 1px solid var(--border);
-    }
-
-    .step-actions .btn-next {
-      flex: 1;
-      padding: 14px 24px;
-      background: #1a3650;
-      color: white;
-      border: none;
-      border-radius: 60px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      cursor: pointer;
-      transition: 0.2s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .step-actions .btn-next:hover {
-      background: #0f2940;
-      transform: translateY(-1px);
-      box-shadow: 0 8px 24px rgba(26,54,80,0.3);
-    }
-
-    .step-actions .btn-prev {
-      padding: 14px 24px;
-      background: transparent;
-      color: var(--text-secondary);
-      border: 2px solid var(--border);
-      border-radius: 60px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .step-actions .btn-prev:hover {
-      border-color: var(--text);
-      color: var(--text);
-    }
-
-    .step-actions .btn-submit {
-      flex: 1;
-      padding: 14px 24px;
-      background: #27ae60;
-      color: white;
-      border: none;
-      border-radius: 60px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      cursor: pointer;
-      transition: 0.2s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .step-actions .btn-submit:hover {
-      background: #219a52;
-      transform: translateY(-1px);
-      box-shadow: 0 8px 24px rgba(39,174,96,0.3);
-    }
-
-    .step-actions .btn-submit:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-      transform: none;
-      box-shadow: none;
-    }
-
-    .image-upload-area {
-      border: 2px dashed var(--border);
-      border-radius: 14px;
-      padding: 40px 20px;
-      text-align: center;
-      cursor: pointer;
-      transition: 0.3s;
-      background: var(--surface-alt);
-    }
-
-    .image-upload-area:hover {
-      border-color: #1a3650;
-      background: var(--surface);
-    }
-
-    .image-upload-area.dragover {
-      border-color: #1a3650;
-      background: rgba(26,54,80,0.05);
-    }
-
-    .image-upload-area i {
-      font-size: 2.5rem;
-      color: var(--text-secondary);
-      display: block;
-      margin-bottom: 10px;
-    }
-
-    .image-upload-area p {
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-      margin: 4px 0;
-    }
-
-    .image-upload-area .small-text {
-      font-size: 0.75rem;
-      color: var(--text-secondary);
-    }
-
-    .image-preview-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-      gap: 12px;
-      margin-top: 16px;
-    }
-
-    .image-preview-grid .preview-item {
-      position: relative;
-      border-radius: 12px;
-      overflow: hidden;
-      aspect-ratio: 1;
-      background: var(--surface-alt);
-      border: 2px solid var(--border);
-      transition: 0.2s;
-    }
-
-    .image-preview-grid .preview-item:hover {
-      border-color: #1a3650;
-    }
-
-    .image-preview-grid .preview-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .image-preview-grid .preview-item .remove-btn {
-      position: absolute;
-      top: 6px;
-      right: 6px;
-      background: rgba(0,0,0,0.75);
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 28px;
-      height: 28px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.7rem;
-      transition: 0.2s;
-    }
-
-    .image-preview-grid .preview-item .remove-btn:hover {
-      background: #e74c3c;
-      transform: scale(1.1);
-    }
-
-    .image-preview-grid .preview-item .index-badge {
-      position: absolute;
-      bottom: 6px;
-      left: 6px;
-      background: rgba(0,0,0,0.6);
-      color: white;
-      padding: 2px 10px;
-      border-radius: 12px;
-      font-size: 0.65rem;
-    }
-
-    .image-count-text {
-      font-size: 0.75rem;
-      color: var(--text-secondary);
-      margin-top: 8px;
-    }
-
-    .review-item {
-      display: flex;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .review-item:last-child {
-      border-bottom: none;
-    }
-
-    .review-item .label {
-      font-weight: 600;
-      color: var(--text-secondary);
-      width: 120px;
-      flex-shrink: 0;
-      font-size: 0.85rem;
-    }
-
-    .review-item .value {
-      color: var(--text);
-      font-size: 0.9rem;
-      word-break: break-word;
-    }
-
-    .review-item .value .price-tag {
-      font-weight: 700;
-      color: #1a3650;
-      font-size: 1.1rem;
-    }
-
-    .review-images {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 4px;
-    }
-
-    .review-images img {
-      width: 60px;
-      height: 60px;
-      border-radius: 8px;
-      object-fit: cover;
-      border: 1px solid var(--border);
-    }
-
-    .signup-section {
-      background: var(--surface-alt);
-      border-radius: 16px;
-      padding: 20px;
-      margin: 16px 0;
-      border: 1px solid var(--border);
-    }
-
-    .signup-section h4 {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 4px;
-    }
-
-    .signup-section p {
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-      margin-bottom: 12px;
-    }
-
-    .signup-section .signup-form-inline {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .signup-section .signup-form-inline .full-width {
-      grid-column: 1 / -1;
-    }
-
-    .signup-section .signup-form-inline input,
-    .signup-section .signup-form-inline select {
-      width: 100%;
-      padding: 10px 14px;
-      border: 2px solid var(--border);
-      border-radius: 12px;
-      font-size: 0.9rem;
-      background: var(--input-bg);
-      color: var(--text);
-      transition: 0.2s;
-      font-family: inherit;
-      box-sizing: border-box;
-    }
-
-    .signup-section .signup-form-inline input:focus,
-    .signup-section .signup-form-inline select:focus {
-      border-color: #1a3650;
-      box-shadow: 0 0 0 4px rgba(26,54,80,0.08);
-      outline: none;
-    }
-
-    .signup-section .already-signed-in {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 8px 0;
-    }
-
-    .signup-section .already-signed-in .user-badge {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--surface);
-      padding: 6px 16px 6px 12px;
-      border-radius: 60px;
-      border: 1px solid var(--border);
-    }
-
-    .signup-section .already-signed-in .user-badge .avatar-small {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: #1a3650;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 0.7rem;
-    }
-
-    /* ===== STATUS BAR - ALWAYS VISIBLE ===== */
-    .status-bar {
-      background: var(--surface);
-      border-radius: 12px;
-      padding: 14px 18px;
-      margin-bottom: 20px;
-      border: 2px solid var(--border);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 0.95rem;
-      min-height: 50px;
-    }
-
-    .status-bar .status-icon {
-      font-size: 1.5rem;
-      flex-shrink: 0;
-    }
-
-    .status-bar .status-icon.success {
-      color: #27ae60;
-    }
-
-    .status-bar .status-icon.error {
-      color: #e74c3c;
-    }
-
-    .status-bar .status-icon.loading {
-      color: #f5b342;
-      animation: spin 1s linear infinite;
-    }
-
-    .status-bar .status-icon.idle {
-      color: #1a3650;
-    }
-
-    .status-bar .status-text {
-      flex: 1;
-      color: var(--text);
-      font-weight: 500;
-    }
-
-    .status-bar .status-detail {
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-      font-weight: 400;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    /* ===== TOAST ===== */
+    /* Toast */
     .toast {
       position: fixed;
       bottom: 100px;
@@ -570,10 +494,10 @@
       transform: translateX(-50%);
       background: #1a3650;
       color: white;
-      padding: 14px 28px;
-      border-radius: 14px;
+      padding: 12px 24px;
+      border-radius: 12px;
       font-size: 0.9rem;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
       z-index: 9999;
       opacity: 0;
       transition: opacity 0.3s ease;
@@ -595,85 +519,120 @@
       background: #27ae60;
     }
 
-    .loading-spinner {
-      display: inline-block;
-      width: 22px;
-      height: 22px;
-      border: 2px solid rgba(255,255,255,0.3);
-      border-top-color: white;
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
+    /* Responsive */
+    @media (max-width: 768px) {
+      .flow-steps {
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+      }
+
+      .flow-step .step-arrow {
+        display: none !important;
+      }
     }
 
-    /* Responsive */
     @media (max-width: 640px) {
-      .post-card {
-        padding: 20px 16px;
-        border-radius: 16px;
-      }
-
-      .form-row {
+      .post-options {
         grid-template-columns: 1fr;
-        gap: 0;
+        gap: 12px;
       }
 
-      .wizard-progress .step-indicator .step-label {
-        font-size: 0.6rem;
+      .post-option-card {
+        padding: 20px 16px;
       }
 
-      .wizard-progress .step-indicator .step-circle {
-        width: 32px;
-        height: 32px;
-        font-size: 0.7rem;
+      .post-option-card .option-icon {
+        font-size: 2.2rem;
       }
 
-      .step-actions {
-        flex-direction: column;
+      .post-option-card .option-icon i {
+        font-size: 2.2rem;
       }
 
-      .step-actions .btn-prev {
-        order: 2;
-      }
-
-      .review-item {
-        flex-direction: column;
-        gap: 4px;
-      }
-
-      .review-item .label {
-        width: 100%;
-        font-size: 0.75rem;
-      }
-
-      .image-preview-grid {
-        grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+      .what-to-expect .expect-grid {
+        grid-template-columns: 1fr;
         gap: 8px;
       }
 
-      .signup-section .signup-form-inline {
-        grid-template-columns: 1fr;
-      }
-
-      .status-bar {
-        font-size: 0.85rem;
-        padding: 12px 14px;
-        flex-wrap: wrap;
-      }
-
-      .status-bar .status-icon {
+      .page-header h1 {
         font-size: 1.2rem;
+      }
+
+      .page-header p {
+        font-size: 0.85rem;
+      }
+
+      .what-to-expect {
+        padding: 16px;
+      }
+
+      .what-to-expect .expect-item {
+        padding: 6px 12px;
+      }
+
+      .info-box {
+        padding: 12px 16px;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .flow-steps {
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+      }
+
+      .flow-step {
+        padding: 10px 6px;
+      }
+
+      .flow-step .step-icon {
+        font-size: 1.2rem;
+      }
+
+      .flow-step .step-label {
+        font-size: 0.6rem;
+      }
+
+      .flow-step .step-desc {
+        font-size: 0.5rem;
       }
     }
 
-    @media (min-width: 768px) {
-      .post-container {
-        padding: 30px 0 50px;
+    @media (max-width: 400px) {
+      .flow-steps {
+        grid-template-columns: 1fr 1fr;
+        gap: 4px;
+      }
+
+      .flow-step {
+        padding: 8px 4px;
+        border-radius: 8px;
+      }
+
+      .flow-step .step-number {
+        width: 22px;
+        height: 22px;
+        font-size: 0.6rem;
+      }
+
+      .flow-step .step-icon {
+        font-size: 1rem;
+      }
+
+      .flow-step .step-label {
+        font-size: 0.55rem;
+      }
+
+      .flow-step .step-desc {
+        font-size: 0.45rem;
       }
     }
   </style>
 </head>
 <body>
 
+  <!-- ===== NAV ===== -->
   <nav class="navbar">
     <div class="container nav-container">
       <a href="/" class="logo-wrapper">
@@ -695,222 +654,134 @@
           <i class="fas fa-heart"></i>
           <span id="favBadge">0</span>
         </a>
-        <div id="headerUserArea">
-          <div class="avatar" id="userAvatar" onclick="openSignup()">ZA</div>
-        </div>
+        <div id="headerUserArea"></div>
       </div>
     </div>
   </nav>
 
+  <!-- ===== COMING SOON MODAL ===== -->
+  <div class="coming-soon-modal" id="comingSoonModal">
+    <div class="modal-content">
+      <i class="fas fa-rocket"></i>
+      <h3>Coming Soon!</h3>
+      <p>We're working on making it easier for you to post directly on our site. For now, use WhatsApp to list your items.</p>
+      <button class="btn-close" onclick="closeComingSoon()">Got it</button>
+    </div>
+  </div>
+
+  <!-- ===== MAIN CONTENT ===== -->
   <div class="container">
     <div class="post-container">
-      
-      <div id="postFormContainer">
-        <div class="post-card">
-          
-          <!-- ===== STATUS BAR - ALWAYS VISIBLE ===== -->
-          <div class="status-bar" id="statusBar">
-            <span class="status-icon idle" id="statusIcon">📋</span>
-            <span class="status-text" id="statusText">Ready to post your listing</span>
-            <span class="status-detail" id="statusDetail"></span>
-          </div>
 
-          <div class="wizard-progress" id="wizardProgress">
-            <div class="step-indicator active" data-step="1">
-              <div class="step-circle">1</div>
-              <span class="step-label">Details</span>
-            </div>
-            <div class="step-indicator" data-step="2">
-              <div class="step-circle">2</div>
-              <span class="step-label">Photos</span>
-            </div>
-            <div class="step-indicator" data-step="3">
-              <div class="step-circle">3</div>
-              <span class="step-label">Review</span>
-            </div>
-          </div>
+      <!-- Page Header -->
+      <div class="page-header">
+        <h1>📦 Post Your Listing</h1>
+        <p>Get your items seen by thousands of buyers</p>
+      </div>
 
-          <form id="postForm">
-            <!-- Step 1: Details -->
-            <div class="step-content active" data-step="1">
-              <div class="step-header">
-                <h2>📝 Item Details</h2>
-                <p class="subtitle">Tell buyers what you're selling. Be specific!</p>
-              </div>
-
-              <div class="form-group">
-                <label>What are you selling? <span class="required">*</span></label>
-                <input type="text" id="postTitle" placeholder="e.g., iPhone 14 Pro Max - 256GB" required maxlength="100">
-                <div class="help-text">Be descriptive. Max 100 characters.</div>
-              </div>
-
-              <div class="form-row">
-                <div class="form-group">
-                  <label>Price (₦) <span class="required">*</span></label>
-                  <input type="number" id="postPrice" placeholder="50000" required min="0" step="100">
-                </div>
-                <div class="form-group">
-                  <label>Category <span class="required">*</span></label>
-                  <select id="postCategory" required>
-                    <option value="">Select category</option>
-                    <option value="vehicles">🚗 Vehicles</option>
-                    <option value="electronics">📱 Electronics</option>
-                    <option value="furniture">🪑 Furniture</option>
-                    <option value="fashion">👗 Fashion</option>
-                    <option value="real-estate">🏠 Real Estate</option>
-                    <option value="services">🔧 Services</option>
-                    <option value="other">📦 Other</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label>Location <span class="required">*</span></label>
-                <input type="text" id="postLocation" placeholder="e.g., Lagos, Abuja, Kano" required>
-                <div class="help-text">City or state where the item is located.</div>
-              </div>
-
-              <div class="form-group">
-                <label>Description <span class="required">*</span></label>
-                <textarea id="postDescription" placeholder="Describe your item in detail..." required maxlength="2000"></textarea>
-                <div class="help-text">Max 2000 characters. Be thorough and honest.</div>
-              </div>
-
-              <div class="step-actions">
-                <button type="button" class="btn-next" onclick="goToStep(2)">
-                  Next Step <i class="fas fa-arrow-right"></i>
-                </button>
-              </div>
-            </div>
-
-            <!-- Step 2: Photos -->
-            <div class="step-content" data-step="2">
-              <div class="step-header">
-                <h2>📸 Upload Photos</h2>
-                <p class="subtitle">Show buyers what you're selling. Good photos sell faster!</p>
-              </div>
-
-              <div class="form-group">
-                <label>Upload Images <span class="required">*</span></label>
-                <div class="image-upload-area" id="imageUploadArea">
-                  <i class="fas fa-cloud-upload-alt"></i>
-                  <p><strong>Click to upload images</strong></p>
-                  <p class="small-text">or drag and drop</p>
-                  <p class="small-text" style="margin-top:6px;">Max 5 images · JPG, PNG, GIF · Up to 5MB each</p>
-                </div>
-                <input type="file" id="imageInput" accept="image/*" multiple style="display:none;">
-                <div class="image-preview-grid" id="imagePreviewGrid"></div>
-                <div class="image-count-text" id="imageCountText">No images selected</div>
-              </div>
-
-              <div class="step-actions">
-                <button type="button" class="btn-prev" onclick="goToStep(1)">
-                  <i class="fas fa-arrow-left"></i> Back
-                </button>
-                <button type="button" class="btn-next" onclick="goToStep(3)">
-                  Review Listing <i class="fas fa-arrow-right"></i>
-                </button>
-              </div>
-            </div>
-
-            <!-- Step 3: Review -->
-            <div class="step-content" data-step="3">
-              <div class="step-header">
-                <h2>✅ Review Your Listing</h2>
-                <p class="subtitle">Check everything looks good before posting.</p>
-              </div>
-
-              <div id="reviewContent">
-                <div class="review-item">
-                  <span class="label">Title</span>
-                  <span class="value" id="reviewTitle">-</span>
-                </div>
-                <div class="review-item">
-                  <span class="label">Price</span>
-                  <span class="value"><span class="price-tag" id="reviewPrice">-</span></span>
-                </div>
-                <div class="review-item">
-                  <span class="label">Category</span>
-                  <span class="value" id="reviewCategory">-</span>
-                </div>
-                <div class="review-item">
-                  <span class="label">Location</span>
-                  <span class="value" id="reviewLocation">-</span>
-                </div>
-                <div class="review-item">
-                  <span class="label">Description</span>
-                  <span class="value" id="reviewDescription">-</span>
-                </div>
-                <div class="review-item">
-                  <span class="label">Images</span>
-                  <div class="value">
-                    <div class="review-images" id="reviewImages"></div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Signup Section -->
-              <div class="signup-section" id="signupSection">
-                <div id="signupRequired">
-                  <h4>📝 Almost done!</h4>
-                  <p>Create a free account to post your listing. It takes less than a minute.</p>
-                  <div class="signup-form-inline">
-                    <div class="full-width">
-                      <input type="text" id="signupName" placeholder="Your full name" required>
-                    </div>
-                    <div>
-                      <input type="tel" id="signupPhone" placeholder="Phone number" required>
-                    </div>
-                    <div>
-                      <select id="signupState" required>
-                        <option value="">Select state</option>
-                        <option value="Abia">Abia</option><option value="Adamawa">Adamawa</option>
-                        <option value="Akwa Ibom">Akwa Ibom</option><option value="Anambra">Anambra</option>
-                        <option value="Bauchi">Bauchi</option><option value="Bayelsa">Bayelsa</option>
-                        <option value="Benue">Benue</option><option value="Borno">Borno</option>
-                        <option value="Cross River">Cross River</option><option value="Delta">Delta</option>
-                        <option value="Ebonyi">Ebonyi</option><option value="Edo">Edo</option>
-                        <option value="Ekiti">Ekiti</option><option value="Enugu">Enugu</option>
-                        <option value="FCT">FCT (Abuja)</option><option value="Gombe">Gombe</option>
-                        <option value="Imo">Imo</option><option value="Jigawa">Jigawa</option>
-                        <option value="Kaduna">Kaduna</option><option value="Kano">Kano</option>
-                        <option value="Katsina">Katsina</option><option value="Kebbi">Kebbi</option>
-                        <option value="Kogi">Kogi</option><option value="Kwara">Kwara</option>
-                        <option value="Lagos">Lagos</option><option value="Nasarawa">Nasarawa</option>
-                        <option value="Niger">Niger</option><option value="Ogun">Ogun</option>
-                        <option value="Ondo">Ondo</option><option value="Osun">Osun</option>
-                        <option value="Oyo">Oyo</option><option value="Plateau">Plateau</option>
-                        <option value="Rivers">Rivers</option><option value="Sokoto">Sokoto</option>
-                        <option value="Taraba">Taraba</option><option value="Yobe">Yobe</option>
-                        <option value="Zamfara">Zamfara</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div id="alreadySignedIn" style="display:none;">
-                  <div class="already-signed-in">
-                    <span>✅ You're signed in as</span>
-                    <div class="user-badge">
-                      <span class="avatar-small" id="signedInAvatar">U</span>
-                      <span id="signedInName">User</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="step-actions">
-                <button type="button" class="btn-prev" onclick="goToStep(2)">
-                  <i class="fas fa-arrow-left"></i> Back
-                </button>
-                <button type="submit" class="btn-submit" id="submitBtn">
-                  <i class="fas fa-rocket"></i> Post Listing
-                </button>
-              </div>
-            </div>
-          </form>
-
+      <!-- Info Box -->
+      <div class="info-box">
+        <i class="fas fa-robot"></i>
+        <div class="info-text">
+          <strong>AI-Powered + Human Support:</strong> Our AI will guide you through the process, 
+          and a real human will verify your listing before it goes live. <span class="verification-badge" style="margin-left:6px;"><i class="fas fa-check-circle"></i> Verified</span>
         </div>
       </div>
+
+      <!-- How It Works - Flow Steps -->
+      <div class="flow-steps">
+        <div class="flow-step highlight">
+          <span class="step-number">1</span>
+          <span class="step-icon">💬</span>
+          <span class="step-label">Chat on WhatsApp</span>
+          <span class="step-desc">Start a conversation</span>
+          <span class="step-arrow"><i class="fas fa-chevron-right"></i></span>
+        </div>
+        <div class="flow-step">
+          <span class="step-number">2</span>
+          <span class="step-icon">🤖</span>
+          <span class="step-label">AI Assistant</span>
+          <span class="step-desc">Guides you step by step</span>
+          <span class="step-arrow"><i class="fas fa-chevron-right"></i></span>
+        </div>
+        <div class="flow-step">
+          <span class="step-number">3</span>
+          <span class="step-icon">👤</span>
+          <span class="step-label">Human Verification</span>
+          <span class="step-desc">Real person reviews</span>
+          <span class="step-arrow"><i class="fas fa-chevron-right"></i></span>
+        </div>
+        <div class="flow-step highlight">
+          <span class="step-number">4</span>
+          <span class="step-icon">🚀</span>
+          <span class="step-label">Live on Zaure</span>
+          <span class="step-desc">Your listing goes live!</span>
+        </div>
+      </div>
+
+      <!-- Post Options -->
+      <div class="post-options">
+
+        <!-- Option 1: WhatsApp - Primary -->
+        <a class="post-option-card whatsapp" id="whatsappBtn" href="#" target="_blank" rel="noopener">
+          <span class="option-icon">
+            <i class="fab fa-whatsapp"></i>
+          </span>
+          <h3>Post via WhatsApp</h3>
+          <p>Chat with our AI assistant to list your item.<br>Get help and support in real-time.</p>
+          <span class="option-badge whatsapp-badge">💬 Chat Now</span>
+          <div class="human-support">
+            <i class="fas fa-user-circle"></i> AI + Human support
+          </div>
+          <div class="whatsapp-steps">
+            <div class="step"><i class="fas fa-check-circle"></i> Share item details <span class="ai-tag">AI</span></div>
+            <div class="step"><i class="fas fa-check-circle"></i> Upload photos <span class="ai-tag">AI</span></div>
+            <div class="step"><i class="fas fa-check-circle"></i> Human verification <span class="ai-tag" style="background:#c6f6d5;color:#276749;">👤 Human</span></div>
+            <div class="step"><i class="fas fa-check-circle"></i> Auto-uploaded to site</div>
+          </div>
+        </a>
+
+        <!-- Option 2: Post on Site - Disabled -->
+        <div class="post-option-card site" onclick="showComingSoon()">
+          <span class="coming-soon-overlay">Coming Soon</span>
+          <span class="option-icon">
+            <i class="fas fa-globe"></i>
+          </span>
+          <h3>Post on Site</h3>
+          <p>Fill the form directly on Zaure.<br>Quick and easy listing process.</p>
+          <span class="option-badge coming-soon">⏳ Coming Soon</span>
+        </div>
+
+      </div>
+
+      <!-- What to Expect Section -->
+      <div class="what-to-expect">
+        <h3><i class="fas fa-list-check"></i> What to expect</h3>
+        <div class="expect-grid">
+          <div class="expect-item">
+            <i class="fas fa-robot"></i>
+            <div class="expect-text"><strong>AI-Powered</strong> — Smart assistant guides you</div>
+          </div>
+          <div class="expect-item">
+            <i class="fas fa-user-check"></i>
+            <div class="expect-text"><strong>Human Verified</strong> — Real person reviews</div>
+          </div>
+          <div class="expect-item">
+            <i class="fas fa-bolt"></i>
+            <div class="expect-text"><strong>Auto-Upload</strong> — Goes live automatically</div>
+          </div>
+          <div class="expect-item">
+            <i class="fas fa-shield-alt"></i>
+            <div class="expect-text"><strong>Secure</strong> — Verified and trusted</div>
+          </div>
+        </div>
+      </div>
+
+      <p style="text-align:center;color:var(--text-secondary);font-size:0.75rem;margin-top:8px;">
+        <i class="fas fa-phone" style="color:#25D366;margin-right:4px;"></i>
+        Questions? Chat with us on WhatsApp
+      </p>
+
     </div>
   </div>
 
@@ -998,42 +869,37 @@
 
   <script src="/js/main.js"></script>
   
+  <!-- ===== POST PAGE SPECIFIC JAVASCRIPT ===== -->
   <script>
     // ============================================================
-    // POST PAGE - WITH ALWAYS VISIBLE STATUS BAR
+    // POST PAGE - WhatsApp + AI Auto-Upload with Verification
     // ============================================================
     
-    let currentStep = 1;
-    let selectedFiles = [];
-    let isSubmitting = false;
-    let formData = {};
-
-    // DOM Elements
-    const imageUploadArea = document.getElementById('imageUploadArea');
-    const imageInput = document.getElementById('imageInput');
-    const imagePreviewGrid = document.getElementById('imagePreviewGrid');
-    const imageCountText = document.getElementById('imageCountText');
-    const submitBtn = document.getElementById('submitBtn');
-    const signupRequired = document.getElementById('signupRequired');
-    const alreadySignedIn = document.getElementById('alreadySignedIn');
-    const signedInName = document.getElementById('signedInName');
-    const signedInAvatar = document.getElementById('signedInAvatar');
-    
-    // Status Bar Elements
-    const statusIcon = document.getElementById('statusIcon');
-    const statusText = document.getElementById('statusText');
-    const statusDetail = document.getElementById('statusDetail');
+    // WhatsApp Number - Change to your actual number
+    const WHATSAPP_NUMBER = '2348000000000';
+    const WHATSAPP_MESSAGE = encodeURIComponent(
+      'Hello Zaure AI! I want to post a listing. Please help me get started. 🚀'
+    );
 
     // ============================================================
-    // Status Bar Functions
+    // Device Detection for WhatsApp Link
     // ============================================================
-    function setStatus(icon, text, detail = '', type = 'idle') {
-      statusIcon.textContent = icon;
-      statusIcon.className = 'status-icon ' + type;
-      statusText.textContent = text;
-      statusDetail.textContent = detail;
+    function isMobile() {
+      return /Android|iPhone|iPad|iPod|BlackBerry|Windows Phone/i.test(navigator.userAgent) || window.innerWidth < 768;
     }
 
+    function getWhatsAppUrl() {
+      const isMobileDevice = isMobile();
+      if (isMobileDevice) {
+        return `whatsapp://send?phone=${WHATSAPP_NUMBER}&text=${WHATSAPP_MESSAGE}`;
+      } else {
+        return `https://web.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${WHATSAPP_MESSAGE}`;
+      }
+    }
+
+    // ============================================================
+    // Toast Notification
+    // ============================================================
     function showToast(message, type = 'success') {
       const toast = document.getElementById('toast');
       if (!toast) return;
@@ -1046,379 +912,58 @@
     }
 
     // ============================================================
-    // Check User
+    // Coming Soon Modal
     // ============================================================
-    function checkUserInSignup() {
-      const user = getCurrentUser();
-      if (user) {
-        signupRequired.style.display = 'none';
-        alreadySignedIn.style.display = 'block';
-        signedInName.textContent = user.name || 'User';
-        signedInAvatar.textContent = (user.name || 'U').charAt(0).toUpperCase();
-        setStatus('👤', 'Signed in as ' + user.name, 'Ready to post', 'success');
-      } else {
-        signupRequired.style.display = 'block';
-        alreadySignedIn.style.display = 'none';
-        setStatus('📝', 'Sign up to post', 'Fill in your details below', 'idle');
-      }
-    }
-
-    // ============================================================
-    // Step Navigation
-    // ============================================================
-    window.goToStep = function(step) {
-      if (step > currentStep) {
-        if (currentStep === 1 && !validateStep1()) {
-          showToast('Please fill in all required fields', 'error');
-          return;
-        }
-        if (currentStep === 2 && selectedFiles.length === 0) {
-          showToast('Please upload at least one image', 'error');
-          return;
-        }
-      }
-      
-      currentStep = step;
-      
-      document.querySelectorAll('.step-content').forEach(el => {
-        el.classList.remove('active');
-      });
-      const target = document.querySelector(`.step-content[data-step="${step}"]`);
-      if (target) target.classList.add('active');
-      
-      document.querySelectorAll('.step-indicator').forEach(el => {
-        const s = parseInt(el.dataset.step);
-        el.classList.remove('active', 'completed');
-        if (s === step) el.classList.add('active');
-        else if (s < step) el.classList.add('completed');
-      });
-      
-      if (step === 3) {
-        updateReview();
-        checkUserInSignup();
-      }
-      
-      const stepNames = ['', 'Details', 'Photos', 'Review'];
-      setStatus('📋', 'Step ' + step + ': ' + stepNames[step], 'Fill in your details', 'idle');
-      
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.showComingSoon = function() {
+      document.getElementById('comingSoonModal').classList.add('active');
     };
 
-    // ============================================================
-    // Validate Step 1
-    // ============================================================
-    function validateStep1() {
-      const title = document.getElementById('postTitle')?.value.trim() || '';
-      const price = document.getElementById('postPrice')?.value || '';
-      const category = document.getElementById('postCategory')?.value || '';
-      const location = document.getElementById('postLocation')?.value.trim() || '';
-      const description = document.getElementById('postDescription')?.value.trim() || '';
-      
-      formData = { title, price, category, location, description };
-      
-      if (title && price && category && location && description) {
-        setStatus('✅', 'All details filled', 'Ready for photos', 'success');
-        return true;
-      } else {
-        setStatus('⚠️', 'Please fill all required fields', 'Missing some details', 'error');
-        return false;
-      }
-    }
-
-    // ============================================================
-    // Update Review
-    // ============================================================
-    function updateReview() {
-      const data = formData;
-      
-      document.getElementById('reviewTitle').textContent = data.title || '-';
-      document.getElementById('reviewPrice').textContent = data.price ? `₦${parseFloat(data.price).toLocaleString()}` : '-';
-      
-      const categoryMap = {
-        'vehicles': '🚗 Vehicles',
-        'electronics': '📱 Electronics',
-        'furniture': '🪑 Furniture',
-        'fashion': '👗 Fashion',
-        'real-estate': '🏠 Real Estate',
-        'services': '🔧 Services',
-        'other': '📦 Other'
-      };
-      document.getElementById('reviewCategory').textContent = categoryMap[data.category] || data.category || '-';
-      document.getElementById('reviewLocation').textContent = data.location || '-';
-      document.getElementById('reviewDescription').textContent = data.description || '-';
-      
-      const reviewImages = document.getElementById('reviewImages');
-      if (selectedFiles.length > 0) {
-        reviewImages.innerHTML = selectedFiles.map((file, i) => {
-          const url = URL.createObjectURL(file);
-          return `<img src="${url}" alt="Image ${i+1}">`;
-        }).join('');
-      } else {
-        reviewImages.innerHTML = '<span style="color:var(--text-secondary);font-size:0.85rem;">No images selected</span>';
-      }
-    }
-
-    // ============================================================
-    // Image Upload
-    // ============================================================
-    if (imageUploadArea) {
-      imageUploadArea.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        imageUploadArea.classList.add('dragover');
-      });
-
-      imageUploadArea.addEventListener('dragleave', () => {
-        imageUploadArea.classList.remove('dragover');
-      });
-
-      imageUploadArea.addEventListener('drop', (e) => {
-        e.preventDefault();
-        imageUploadArea.classList.remove('dragover');
-        const files = Array.from(e.dataTransfer.files);
-        handleFiles(files);
-      });
-
-      imageUploadArea.addEventListener('click', () => {
-        if (imageInput) imageInput.click();
-      });
-
-      if (imageInput) {
-        imageInput.addEventListener('change', (e) => {
-          const files = Array.from(e.target.files);
-          handleFiles(files);
-          e.target.value = '';
-        });
-      }
-    }
-
-    function handleFiles(files) {
-      const maxFiles = 5;
-      const remaining = maxFiles - selectedFiles.length;
-      const newFiles = files.slice(0, remaining);
-      
-      if (remaining <= 0) {
-        showToast('Maximum 5 images allowed', 'error');
-        return;
-      }
-      
-      const validFiles = newFiles.filter(file => {
-        const validTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
-        const maxSize = 5 * 1024 * 1024;
-        
-        if (!validTypes.includes(file.type)) {
-          showToast(`${file.name} - Invalid format. Use JPG, PNG, or GIF.`, 'error');
-          return false;
-        }
-        if (file.size > maxSize) {
-          showToast(`${file.name} - File too large. Max 5MB.`, 'error');
-          return false;
-        }
-        return true;
-      });
-      
-      if (validFiles.length > 0) {
-        selectedFiles = [...selectedFiles, ...validFiles];
-        renderPreviews();
-        updateImageCount();
-        setStatus('📸', selectedFiles.length + ' images uploaded', 'Ready to review', 'success');
-        showToast(`${validFiles.length} image(s) added successfully`);
-      }
-    }
-
-    function renderPreviews() {
-      if (!imagePreviewGrid) return;
-      
-      imagePreviewGrid.innerHTML = selectedFiles.map((file, index) => {
-        const url = URL.createObjectURL(file);
-        return `
-          <div class="preview-item">
-            <img src="${url}" alt="Image ${index + 1}">
-            <button class="remove-btn" onclick="removeImage(${index})" type="button">
-              <i class="fas fa-times"></i>
-            </button>
-            <span class="index-badge">#${index + 1}</span>
-          </div>
-        `;
-      }).join('');
-    }
-
-    window.removeImage = function(index) {
-      URL.revokeObjectURL(selectedFiles[index]);
-      selectedFiles.splice(index, 1);
-      renderPreviews();
-      updateImageCount();
-      if (selectedFiles.length === 0) {
-        setStatus('⚠️', 'No images selected', 'Upload at least one image', 'error');
-      } else {
-        setStatus('📸', selectedFiles.length + ' images uploaded', 'Ready to review', 'success');
-      }
+    window.closeComingSoon = function() {
+      document.getElementById('comingSoonModal').classList.remove('active');
     };
 
-    function updateImageCount() {
-      if (imageCountText) {
-        imageCountText.textContent = selectedFiles.length === 0 
-          ? 'No images selected' 
-          : `${selectedFiles.length} of 5 images selected`;
-      }
-    }
-
-    function generateSlug(title) {
-      return title
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, '-')
-        .replace(/^-+|-+$/g, '')
-        .substring(0, 60);
-    }
-
-    // ============================================================
-    // SUBMIT HANDLER - WITH VISUAL STATUS UPDATES
-    // ============================================================
-    document.addEventListener('submit', async function(e) {
-      const form = e.target;
-      if (!form || form.id !== 'postForm') return;
-      
-      e.preventDefault();
-      
-      // Validate
-      if (!validateStep1()) {
-        showToast('Please fill in all required fields', 'error');
-        goToStep(1);
-        return;
-      }
-      
-      if (selectedFiles.length === 0) {
-        showToast('Please upload at least one image', 'error');
-        goToStep(2);
-        return;
-      }
-      
-      // Get user
-      let user = getCurrentUser();
-      let signupName, signupPhone, signupState;
-      
-      if (!user) {
-        signupName = document.getElementById('signupName')?.value.trim();
-        signupPhone = document.getElementById('signupPhone')?.value.trim();
-        signupState = document.getElementById('signupState')?.value;
-        
-        if (!signupName || !signupPhone || !signupState) {
-          showToast('Please fill in all signup fields', 'error');
-          setStatus('⚠️', 'Please fill in all signup fields', 'Name, phone, and state required', 'error');
-          return;
-        }
-        
-        if (signupPhone.length < 10) {
-          showToast('Please enter a valid phone number', 'error');
-          setStatus('⚠️', 'Invalid phone number', 'Must be at least 10 digits', 'error');
-          return;
-        }
-      }
-      
-      // Disable submit
-      isSubmitting = true;
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = `<span class="loading-spinner"></span> Publishing...`;
-      }
-      
-      try {
-        // Sign up if needed
-        if (!user) {
-          setStatus('⏳', 'Creating your account...', 'Please wait', 'loading');
-          showToast('Creating your account...');
-          user = await signupUser(signupName, signupPhone, signupState);
-          if (!user) {
-            throw new Error('Failed to create account');
-          }
-          setStatus('✅', 'Account created!', 'Now posting your listing', 'success');
-          showToast('Account created! Posting your listing...');
-        }
-        
-        // Upload images
-        setStatus('⏳', 'Uploading images...', selectedFiles.length + ' images', 'loading');
-        showToast('Uploading images...');
-        const imageUrls = await uploadMultipleImages(selectedFiles);
-        
-        if (imageUrls.length === 0) {
-          setStatus('❌', 'Image upload failed', 'Please try again', 'error');
-          showToast('Failed to upload images. Please try again.', 'error');
-          return;
-        }
-        setStatus('✅', imageUrls.length + ' images uploaded', 'Saving your listing', 'success');
-        
-        // Generate slug
-        const slug = generateSlug(formData.title);
-        
-        // Save product
-        setStatus('⏳', 'Saving your listing...', 'Please wait', 'loading');
-        showToast('Saving your listing...');
-        
-        const productData = {
-          title: formData.title,
-          price: parseFloat(formData.price),
-          category: formData.category,
-          location: formData.location,
-          description: formData.description,
-          images: imageUrls.join(','),
-          slug: slug,
-          sellerId: user.id,
-          sellerName: user.name,
-          sellerPhone: user.phone,
-          featured: false,
-          boosted: false
-        };
-        
-        const result = await addProductToSheet(productData);
-        
-        if (result.success) {
-          setStatus('🎉', 'LISTING LIVE!', 'ID: ' + result.productId, 'success');
-          showToast('🎉 Your listing is live!');
-          
-          // Reset
-          const postForm = document.getElementById('postForm');
-          if (postForm) postForm.reset();
-          selectedFiles = [];
-          renderPreviews();
-          updateImageCount();
-          formData = {};
-          
-          setTimeout(() => {
-            window.location.href = `/p/${slug}`;
-          }, 1500);
-        } else {
-          setStatus('❌', 'Error: ' + (result.error || 'Unknown'), 'Please try again', 'error');
-          showToast(result.error || 'Failed to post listing', 'error');
-        }
-      } catch (error) {
-        setStatus('❌', 'Error: ' + error.message, 'Please try again', 'error');
-        showToast(error.message || 'Something went wrong. Please try again.', 'error');
-        console.error(error);
-      } finally {
-        isSubmitting = false;
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = `<i class="fas fa-rocket"></i> Post Listing`;
-        }
+    // Close modal on click outside
+    document.getElementById('comingSoonModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeComingSoon();
       }
     });
 
     // ============================================================
-    // INIT
+    // WhatsApp Button Handler
     // ============================================================
-    document.addEventListener('DOMContentLoaded', async function() {
-      await loadUser();
-      initTheme();
-      updateFavoriteBadge();
-      checkUserInSignup();
-      setStatus('✅', 'Ready to post!', 'Fill in your details', 'success');
+    document.addEventListener('DOMContentLoaded', function() {
+      const whatsappBtn = document.getElementById('whatsappBtn');
       
+      if (whatsappBtn) {
+        whatsappBtn.href = getWhatsAppUrl();
+        
+        whatsappBtn.addEventListener('click', function(e) {
+          const isMobileDevice = isMobile();
+          if (!isMobileDevice) {
+            showToast('Opening WhatsApp Web in a new tab...', 'success');
+          } else {
+            showToast('Opening WhatsApp app...', 'success');
+          }
+        });
+      }
+
+      // Handle FAB post button
       const fabPostAd = document.getElementById('fabPostAd');
       if (fabPostAd) {
         fabPostAd.addEventListener('click', function() {
           window.location.href = '/post.html';
         });
       }
+
+      // Load user and theme
+      loadUser();
+      initTheme();
+      updateFavoriteBadge();
     });
+
+    console.log('📦 Post page loaded - WhatsApp + AI Auto-Upload');
+    console.log('📱 Mobile detected:', isMobile());
   </script>
 </body>
 </html>
