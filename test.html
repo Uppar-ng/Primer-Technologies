@@ -153,6 +153,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            flex-wrap: wrap;
         }
         .proxy-toggle input[type="checkbox"] {
             width: 18px;
@@ -165,6 +166,13 @@
             color: #4a5568;
             cursor: pointer;
         }
+        .proxy-toggle select {
+            padding: 4px 10px;
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            background: white;
+        }
         .test-result {
             margin-top: 8px;
             padding: 8px 12px;
@@ -176,6 +184,21 @@
             color: #276749;
         }
         .test-result.fail {
+            background: #fed7d7;
+            color: #9b2c2c;
+        }
+        .proxy-status {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .proxy-status.on {
+            background: #c6f6d5;
+            color: #276749;
+        }
+        .proxy-status.off {
             background: #fed7d7;
             color: #9b2c2c;
         }
@@ -197,12 +220,17 @@
             <span>17fw2y7VQw2Z_IOVhBi4UQlxI2n3320Sn1v_7iek1YwM</span>
         </div>
         <div class="config-box">
-            <strong>Using CORS Proxy:</strong><br>
-            <span id="proxyStatus">✅ Enabled (fixes CORS issues)</span>
+            <strong>CORS Proxy:</strong><br>
+            <span id="proxyStatusDisplay"><span class="proxy-status on">✅ thingproxy (active)</span></span>
         </div>
         <div class="proxy-toggle">
             <input type="checkbox" id="useProxy" checked>
-            <label for="useProxy">Use CORS Proxy (enable if you get "Failed to fetch")</label>
+            <label for="useProxy">Enable CORS Proxy</label>
+            <select id="proxySelect">
+                <option value="thingproxy">thingproxy.freeboard.io</option>
+                <option value="corsproxy">corsproxy.io</option>
+                <option value="corsanywhere">cors-anywhere.herokuapp.com</option>
+            </select>
         </div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;">
             <button class="btn btn-primary btn-sm" onclick="testGetProducts()">📦 Test GET Products</button>
@@ -223,7 +251,7 @@
         <div id="corsWarning" class="error-box hidden">
             ⚠️ <strong>Failed to Fetch / CORS Error</strong><br>
             Make sure the CORS Proxy is enabled (checkbox above).<br>
-            Also verify your web app is deployed with <strong>"Anyone"</strong> access.
+            Try selecting a different proxy from the dropdown.
         </div>
         <div id="successBox" class="success-box hidden">
             ✅ <strong>API is working!</strong>
@@ -321,22 +349,35 @@
 
     <script>
         // ============================================================
-        // API CONFIGURATION - YOUR NEW WEB APP URL
+        // API CONFIGURATION
         // ============================================================
         
         const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwfy8j8TDBxkv5n-mYv7eMyZS9ooLbN5ZAzLdYfmMydPiXtU8-nKD5VVQckKtiB3Mgp/exec';
         const SPREADSHEET_ID = '17fw2y7VQw2Z_IOVhBi4UQlxI2n3320Sn1v_7iek1YwM';
-        const CORS_PROXY = 'https://corsproxy.io/?';
+        
+        const PROXY_URLS = {
+            'thingproxy': 'https://thingproxy.freeboard.io/fetch/',
+            'corsproxy': 'https://corsproxy.io/?',
+            'corsanywhere': 'https://cors-anywhere.herokuapp.com/'
+        };
 
         // ============================================================
         // Get API URL based on proxy setting
         // ============================================================
         function getApiUrl() {
             const useProxy = document.getElementById('useProxy').checked;
-            const url = useProxy ? CORS_PROXY + encodeURIComponent(WEB_APP_URL) : WEB_APP_URL;
+            const proxyKey = document.getElementById('proxySelect').value;
+            const proxyUrl = PROXY_URLS[proxyKey] || PROXY_URLS['thingproxy'];
             
-            document.getElementById('proxyStatus').textContent = useProxy ? '✅ Enabled (fixes CORS issues)' : '❌ Disabled (may cause CORS errors)';
-            document.getElementById('proxyStatus').style.color = useProxy ? '#276749' : '#9b2c2c';
+            const url = useProxy ? proxyUrl + encodeURIComponent(WEB_APP_URL) : WEB_APP_URL;
+            
+            // Update status display
+            const statusEl = document.getElementById('proxyStatusDisplay');
+            if (useProxy) {
+                statusEl.innerHTML = `<span class="proxy-status on">✅ ${proxyKey} (active)</span>`;
+            } else {
+                statusEl.innerHTML = `<span class="proxy-status off">❌ Disabled</span>`;
+            }
             
             return url;
         }
@@ -598,7 +639,7 @@
         console.log('🧪 API Test Tool loaded!');
         console.log('📡 Web App URL:', WEB_APP_URL);
         console.log('📊 Spreadsheet ID:', SPREADSHEET_ID);
-        console.log('💡 Make sure CORS Proxy is enabled (checkbox above).');
+        console.log('💡 Try different proxies from the dropdown if you get CORS errors.');
         console.log('ℹ️ Click buttons to test API endpoints.');
     </script>
 </body>
