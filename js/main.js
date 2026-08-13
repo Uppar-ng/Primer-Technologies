@@ -57,7 +57,7 @@ window.toggleTheme = function() {
 };
 
 // ============================================================
-// USER MANAGEMENT - FIXED HEADER
+// USER MANAGEMENT - FIXED
 // ============================================================
 let currentUser = null;
 
@@ -110,20 +110,51 @@ function updateUserProfile(data) {
   return updatedUser;
 }
 
+// ============================================================
+// RENDER USER AREA - FIXED WITH INLINE STYLES
+// ============================================================
 function renderUserArea() {
   const headerUserArea = document.getElementById('headerUserArea');
   if (!headerUserArea) return;
   
   if (currentUser) {
+    // Using inline styles to ensure it works
     headerUserArea.innerHTML = `
-      <a href="/profile.html" class="user-greeting">
-        <i class="fas fa-user-circle"></i>
+      <a href="/profile.html" style="
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        text-decoration: none !important;
+        color: #151e28 !important;
+        font-weight: 500 !important;
+        padding: 6px 14px !important;
+        border-radius: 30px !important;
+        background: #f0f5fc !important;
+        border: 1px solid #e5ecf3 !important;
+        font-size: 0.85rem !important;
+        white-space: nowrap !important;
+        transition: all 0.2s ease !important;
+      ">
+        <i class="fas fa-user-circle" style="font-size: 1rem; color: #1a3650;"></i>
         <span>${currentUser.name.split(' ')[0]}</span>
       </a>
     `;
   } else {
     headerUserArea.innerHTML = `
-      <div class="avatar" id="userAvatar" onclick="openSignup()">ZA</div>
+      <div onclick="openSignup()" style="
+        cursor: pointer;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: #1a3650;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 0.8rem;
+        flex-shrink: 0;
+      ">ZA</div>
     `;
   }
 }
@@ -171,22 +202,17 @@ document.addEventListener('DOMContentLoaded', function() {
 // DATA LOADING - FROM JSON FILES WITH CACHING
 // ============================================================
 
-// ----- Load products from JSON with caching -----
 async function loadProducts() {
-  // First check if we have cached products in localStorage
   const cached = localStorage.getItem('zaure_products_cache');
   if (cached) {
     try {
       const parsed = JSON.parse(cached);
       if (parsed && parsed.length > 0) {
-        // Return cached data immediately, but also fetch fresh data in background
         fetchFreshProducts();
         return parsed;
       }
     } catch (e) {}
   }
-  
-  // If no cache, fetch from JSON
   return fetchFreshProducts();
 }
 
@@ -195,7 +221,6 @@ async function fetchFreshProducts() {
     const response = await fetch('/data/products.json');
     if (!response.ok) throw new Error('Products not found');
     const products = await response.json();
-    // Cache for later
     localStorage.setItem('zaure_products_cache', JSON.stringify(products));
     return products;
   } catch (error) {
@@ -204,22 +229,16 @@ async function fetchFreshProducts() {
   }
 }
 
-// ----- Load categories from JSON -----
 async function loadCategories() {
   try {
     const response = await fetch('/data/categories.json');
     if (!response.ok) throw new Error('Categories not found');
     const categories = await response.json();
-    
-    // Get products to count items per category
     const products = await loadProducts();
-    
-    // Update category counts based on products
     const updatedCategories = categories.map(cat => {
       const count = products.filter(p => p.category === cat.slug).length;
       return { ...cat, count: count };
     });
-    
     return updatedCategories;
   } catch (error) {
     console.error('Error loading categories:', error);
@@ -227,7 +246,6 @@ async function loadCategories() {
   }
 }
 
-// ----- Load sellers from JSON -----
 async function loadTopSellers() {
   try {
     const response = await fetch('/data/sellers.json');
@@ -239,7 +257,6 @@ async function loadTopSellers() {
   }
 }
 
-// ----- Load trending keywords from JSON -----
 async function loadTrendingKeywords() {
   try {
     const response = await fetch('/data/trending.json');
@@ -251,7 +268,6 @@ async function loadTrendingKeywords() {
   }
 }
 
-// ----- Synchronous version for pages that need it (Favorites, Profile) -----
 function getProductsSync() {
   const cached = localStorage.getItem('zaure_products_cache');
   if (cached) {
@@ -414,9 +430,6 @@ window.viewProduct = function(productId) {
   window.location.href = `/detail.html?id=${productId}`;
 };
 
-// ============================================================
-// LOAD CATEGORY
-// ============================================================
 window.loadCategory = function(slug) {
   window.location.href = `/category.html?slug=${slug}`;
 };
@@ -427,7 +440,6 @@ window.loadCategory = function(slug) {
 document.addEventListener('DOMContentLoaded', function() {
   const postAdCta = document.getElementById('postAdCta');
   const fabPostAd = document.getElementById('fabPostAd');
-  const sellNavBtn = document.getElementById('sellNavBtn');
   
   const postAction = () => {
     if (!currentUser) {
@@ -439,7 +451,6 @@ document.addEventListener('DOMContentLoaded', function() {
   
   if (postAdCta) postAdCta.addEventListener('click', postAction);
   if (fabPostAd) fabPostAd.addEventListener('click', postAction);
-  if (sellNavBtn) sellNavBtn.addEventListener('click', postAction);
   
   initTheme();
   updateFavoriteBadge();
