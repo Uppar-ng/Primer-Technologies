@@ -57,7 +57,7 @@ window.toggleTheme = function() {
 };
 
 // ============================================================
-// USER MANAGEMENT - FIXED
+// USER MANAGEMENT - NO AVATAR
 // ============================================================
 let currentUser = null;
 
@@ -111,51 +111,35 @@ function updateUserProfile(data) {
 }
 
 // ============================================================
-// RENDER USER AREA - FIXED WITH INLINE STYLES
+// RENDER USER AREA - NO AVATAR, NO PROFILE LINK
 // ============================================================
 function renderUserArea() {
   const headerUserArea = document.getElementById('headerUserArea');
   if (!headerUserArea) return;
   
   if (currentUser) {
-    // Using inline styles to ensure it works
+    // Show just the user name - clean and simple
     headerUserArea.innerHTML = `
-      <a href="/profile.html" style="
-        display: inline-flex !important;
-        align-items: center !important;
-        gap: 6px !important;
-        text-decoration: none !important;
-        color: #151e28 !important;
-        font-weight: 500 !important;
-        padding: 6px 14px !important;
-        border-radius: 30px !important;
-        background: #f0f5fc !important;
-        border: 1px solid #e5ecf3 !important;
-        font-size: 0.85rem !important;
-        white-space: nowrap !important;
-        transition: all 0.2s ease !important;
+      <span style="
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--text, #151e28);
+        font-weight: 500;
+        padding: 6px 12px;
+        border-radius: 30px;
+        background: var(--surface-alt, #f0f5fc);
+        border: 1px solid var(--border, #e5ecf3);
+        font-size: 0.85rem;
+        white-space: nowrap;
       ">
         <i class="fas fa-user-circle" style="font-size: 1rem; color: #1a3650;"></i>
         <span>${currentUser.name.split(' ')[0]}</span>
-      </a>
+      </span>
     `;
   } else {
-    headerUserArea.innerHTML = `
-      <div onclick="openSignup()" style="
-        cursor: pointer;
-        width: 34px;
-        height: 34px;
-        border-radius: 50%;
-        background: #1a3650;
-        color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 700;
-        font-size: 0.8rem;
-        flex-shrink: 0;
-      ">ZA</div>
-    `;
+    // Show nothing when not logged in
+    headerUserArea.innerHTML = '';
   }
 }
 
