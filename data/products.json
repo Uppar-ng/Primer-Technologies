@@ -42,7 +42,6 @@
     "tags": ["iphone", "apple", "smartphone", "new", "electronics"],
     "images": [
       "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=800&h=600&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=800&h=600&fit=crop&q=80",
       "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=800&h=600&fit=crop&q=80"
     ],
     "seller": {
@@ -72,8 +71,7 @@
     "tags": ["bike", "trek", "mountain", "cycling", "outdoor"],
     "images": [
       "https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=800&h=600&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=800&h=600&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?w=800&h=600&fit=crop&q=80"
+      "https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=800&h=600&fit=crop&q=80"
     ],
     "seller": {
       "name": "Cycle City",
@@ -102,8 +100,7 @@
     "tags": ["lamp", "desk", "office", "modern", "designer"],
     "images": [
       "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=800&h=600&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=800&h=600&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1534073828943-f801091bb18c?w=800&h=600&fit=crop&q=80"
+      "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=800&h=600&fit=crop&q=80"
     ],
     "seller": {
       "name": "Vintage Vault",
@@ -132,8 +129,7 @@
     "tags": ["samsung", "tv", "4k", "smart", "entertainment"],
     "images": [
       "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=800&h=600&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=800&h=600&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1593784991095-a205069470b6?w=800&h=600&fit=crop&q=80"
+      "https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=800&h=600&fit=crop&q=80"
     ],
     "seller": {
       "name": "ElectroWorld",
@@ -162,8 +158,7 @@
     "tags": ["nike", "air max", "sneakers", "fashion", "size 10"],
     "images": [
       "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&h=600&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1605348532760-6753d2c43329?w=800&h=600&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=800&h=600&fit=crop&q=80"
+      "https://images.unsplash.com/photo-1605348532760-6753d2c43329?w=800&h=600&fit=crop&q=80"
     ],
     "seller": {
       "name": "Fashion Forward",
@@ -192,8 +187,7 @@
     "tags": ["apartment", "rent", "furnished", "secure", "family"],
     "images": [
       "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&h=600&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop&q=80"
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&h=600&fit=crop&q=80"
     ],
     "seller": {
       "name": "Prime Properties",
@@ -222,8 +216,7 @@
     "tags": ["photography", "service", "events", "professional"],
     "images": [
       "https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=800&h=600&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1504208434309-cb69f4fe52b0?w=800&h=600&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&h=600&fit=crop&q=80"
+      "https://images.unsplash.com/photo-1504208434309-cb69f4fe52b0?w=800&h=600&fit=crop&q=80"
     ],
     "seller": {
       "name": "Captured Moments",
@@ -252,8 +245,7 @@
     "tags": ["macbook", "apple", "laptop", "pro", "m3"],
     "images": [
       "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=800&h=600&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=800&h=600&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=800&h=600&fit=crop&q=80"
+      "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=800&h=600&fit=crop&q=80"
     ],
     "seller": {
       "name": "Tech Junction",
@@ -282,7 +274,6 @@
     "tags": ["dining", "table", "chairs", "modern", "furniture"],
     "images": [
       "https://images.unsplash.com/photo-1618220179428-22790b461013?w=800&h=600&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1617806118233-18e1de247200?w=800&h=600&fit=crop&q=80",
       "https://images.unsplash.com/photo-1617806118233-18e1de247200?w=800&h=600&fit=crop&q=80"
     ],
     "seller": {
@@ -312,8 +303,7 @@
     "tags": ["toyota", "camry", "car", "2022", "used"],
     "images": [
       "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=800&h=600&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=800&h=600&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1590362891991-f776e747a588?w=800&h=600&fit=crop&q=80"
+      "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=800&h=600&fit=crop&q=80"
     ],
     "seller": {
       "name": "Auto Motors",
@@ -342,8 +332,7 @@
     "tags": ["record", "player", "vinyl", "vintage", "audio"],
     "images": [
       "https://images.unsplash.com/photo-1526470608268-f674ce90a6cd?w=800&h=600&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1561149875-7d11f50dd38e?w=800&h=600&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1535611180840-1304784f0fe0?w=800&h=600&fit=crop&q=80"
+      "https://images.unsplash.com/photo-1561149875-7d11f50dd38e?w=800&h=600&fit=crop&q=80"
     ],
     "seller": {
       "name": "Vintage Vault",

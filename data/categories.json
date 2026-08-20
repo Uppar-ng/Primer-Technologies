@@ -1,50 +1,62 @@
 [
   {
-    "name": "Vehicles",
     "slug": "vehicles",
-    "icon": "fas fa-car",
-    "count": 45
+    "name": "Vehicles",
+    "icon": "fas fa-car"
   },
   {
-    "name": "Electronics",
     "slug": "electronics",
-    "icon": "fas fa-laptop",
-    "count": 128
+    "name": "Electronics",
+    "icon": "fas fa-mobile-alt"
   },
   {
-    "name": "Furniture",
     "slug": "furniture",
-    "icon": "fas fa-couch",
-    "count": 67
+    "name": "Furniture",
+    "icon": "fas fa-couch"
   },
   {
-    "name": "Fashion",
     "slug": "fashion",
-    "icon": "fas fa-tshirt",
-    "count": 93
+    "name": "Fashion",
+    "icon": "fas fa-tshirt"
   },
   {
-    "name": "Real Estate",
     "slug": "real-estate",
-    "icon": "fas fa-house-chimney",
-    "count": 34
+    "name": "Real Estate",
+    "icon": "fas fa-home"
   },
   {
-    "name": "Services",
     "slug": "services",
-    "icon": "fas fa-handshake",
-    "count": 56
+    "name": "Services",
+    "icon": "fas fa-tools"
   },
   {
-    "name": "Pets & Animals",
+    "slug": "jobs",
+    "name": "Jobs",
+    "icon": "fas fa-briefcase"
+  },
+  {
     "slug": "pets",
-    "icon": "fas fa-dog",
-    "count": 22
+    "name": "Pets",
+    "icon": "fas fa-paw"
   },
   {
-    "name": "Books & Media",
+    "slug": "sports",
+    "name": "Sports & Fitness",
+    "icon": "fas fa-dumbbell"
+  },
+  {
     "slug": "books",
-    "icon": "fas fa-book",
-    "count": 41
+    "name": "Books & Stationery",
+    "icon": "fas fa-book"
+  },
+  {
+    "slug": "beauty",
+    "name": "Beauty & Health",
+    "icon": "fas fa-spa"
+  },
+  {
+    "slug": "food",
+    "name": "Food & Drinks",
+    "icon": "fas fa-utensils"
   }
 ]
