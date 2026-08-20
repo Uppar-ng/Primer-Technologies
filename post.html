@@ -4,13 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>Post Your Ad – Zaure</title>
-  <meta name="description" content="Post your listing on Zaure, Nigeria's most trusted online marketplace. Fill out the form and reach thousands of local buyers.">
+  <meta name="description" content="Post your listing on Zaure, Nigeria's most trusted online marketplace. Contact us via WhatsApp to list your item for free.">
   <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
   <style>
-    /* Post page specific styles */
     .post-header {
       margin: 30px 0 20px;
       text-align: center;
@@ -25,40 +24,151 @@
     }
     .post-header p {
       color: var(--text-secondary);
-      font-size: 1rem;
-      margin-top: 6px;
+      font-size: 0.95rem;
+      margin-top: 8px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
     }
-    .post-form-container {
-      max-width: 700px;
-      margin: 0 auto 40px;
-      background: var(--surface);
-      border-radius: 24px;
-      padding: 16px;
+
+    .coming-soon-banner {
+      background: linear-gradient(135deg, #1a3650, #2a4a6a);
+      border-radius: 20px;
+      padding: 24px;
+      text-align: center;
+      margin-bottom: 24px;
       border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      overflow: hidden;
     }
-    .post-form-container iframe {
-      width: 100%;
-      height: 850px;
-      border: none;
-      border-radius: 16px;
+    .coming-soon-banner .banner-icon {
+      font-size: 2.5rem;
+      color: #B49450;
+      margin-bottom: 8px;
+    }
+    .coming-soon-banner h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 4px;
+    }
+    .coming-soon-banner p {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.6;
+    }
+
+    .post-cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+    @media (min-width: 640px) {
+      .post-cards { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .post-card {
+      background: var(--surface);
+      border-radius: 20px;
+      padding: 30px 24px;
+      text-align: center;
+      border: 1px solid var(--border);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+      text-decoration: none;
+      color: var(--text);
       display: block;
-      background: var(--surface-alt);
     }
-    @media (max-width: 768px) {
-      .post-form-container {
-        padding: 8px;
-        border-radius: 16px;
-      }
-      .post-form-container iframe {
-        height: 700px;
-        border-radius: 12px;
-      }
+    .post-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+      border-color: #B49450;
     }
-    @media (max-width: 480px) {
-      .post-header h1 { font-size: 1.6rem; }
-      .post-form-container iframe { height: 650px; }
+    .post-card .post-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      font-size: 2rem;
+    }
+    .post-card.individual .post-icon {
+      background: rgba(31,93,138,0.1);
+      color: #1a3650;
+    }
+    .post-card.business .post-icon {
+      background: rgba(180,148,80,0.15);
+      color: #B49450;
+    }
+    .post-card h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .post-card p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .post-card .btn-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #25D366;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .post-card .btn-whatsapp:hover {
+      background: #1DA851;
+      transform: scale(1.05);
+    }
+
+    .post-info-section {
+      background: var(--surface);
+      border-radius: 20px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      margin-bottom: 30px;
+    }
+    .post-info-section h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .post-info-section h3 i {
+      color: #B49450;
+    }
+    .post-info-section ul {
+      list-style: none;
+      padding: 0;
+    }
+    .post-info-section ul li {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      padding: 6px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .post-info-section ul li i {
+      color: #25D366;
+      margin-top: 4px;
+      font-size: 0.7rem;
     }
   </style>
 </head>
@@ -94,14 +204,60 @@
 
   <div class="container">
 
+    <!-- ===== POST HEADER ===== -->
     <div class="post-header">
       <h1>Post Your Ad</h1>
-      <p>Fill out the form below to list your item for free on Zaure</p>
+      <p>Contact us via WhatsApp to get your listing on Zaure. Our team will review and publish your listing within 24 hours.</p>
     </div>
 
-    <div class="post-form-container">
-      <!-- Google Form Embed -->
-      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScKt_HKSwGVMHfLbog-fzLjYel3kbZFhzr_VnRpQed1qsleLQ/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+    <!-- ===== COMING SOON BANNER ===== -->
+    <div class="coming-soon-banner">
+      <div class="banner-icon"><i class="fas fa-tools"></i></div>
+      <h2>🚀 Direct Listing Coming Soon!</h2>
+      <p>Listing directly on the platform will be available soon. In the meantime, contact us via WhatsApp to get your items listed.</p>
+    </div>
+
+    <!-- ===== POST CARDS ===== -->
+    <div class="post-cards">
+
+      <!-- Individual Users -->
+      <a href="https://wa.me/2349042339411?text=Hello%20Zaure%2C%20I%20want%20to%20post%20a%20listing.%20Here%20are%20the%20details%3A%0A%0AItem%20Title%3A%20%0ACategory%3A%20%0APrice%3A%20%0ALocation%3A%20%0ADescription%3A%20%0AImages%3A%20" target="_blank" class="post-card individual">
+        <div class="post-icon"><i class="fas fa-user"></i></div>
+        <h2>Individual Listing</h2>
+        <p>Post your personal items for free. Send us your item details via WhatsApp and we'll list it for you.</p>
+        <span class="btn-whatsapp"><i class="fab fa-whatsapp"></i> Post via WhatsApp</span>
+      </a>
+
+      <!-- Business/Retail Users -->
+      <a href="https://wa.me/2349042339411?text=Hello%20Zaure%2C%20I%20am%20a%20business%2Fretailer%20and%20I%20want%20to%20list%20my%20products%20on%20your%20platform.%20Please%20contact%20me%20with%20more%20details." target="_blank" class="post-card business">
+        <div class="post-icon"><i class="fas fa-store"></i></div>
+        <h2>Business / Retailer</h2>
+        <p>Are you a business or retailer? Contact us via WhatsApp to get your store and products listed on Zaure.</p>
+        <span class="btn-whatsapp"><i class="fab fa-whatsapp"></i> Contact Us</span>
+      </a>
+
+    </div>
+
+    <!-- ===== INFO SECTION ===== -->
+    <div class="post-info-section">
+      <h3><i class="fas fa-info-circle"></i> What to Include in Your Message</h3>
+      <ul>
+        <li><i class="fas fa-circle"></i> Item title and category (e.g., iPhone 15 Pro – Electronics)</li>
+        <li><i class="fas fa-circle"></i> Price in Naira (₦)</li>
+        <li><i class="fas fa-circle"></i> Location (city/state)</li>
+        <li><i class="fas fa-circle"></i> Detailed description of the item</li>
+        <li><i class="fas fa-circle"></i> Up to 5 clear images of the item</li>
+        <li><i class="fas fa-circle"></i> Your contact information (name and phone number)</li>
+      </ul>
+    </div>
+
+    <!-- ===== FREE LISTINGS INFO ===== -->
+    <div style="text-align:center;padding:20px;background:var(--surface);border-radius:16px;border:1px solid var(--border);margin-bottom:30px;">
+      <p style="color:var(--text-secondary);font-size:0.9rem;">
+        🎉 <strong style="color:var(--text);">You have 5 FREE listings!</strong> 
+        To get more listings, contact us via WhatsApp: 
+        <a href="https://wa.me/2349042339411" target="_blank" style="color:#D4B87A;text-decoration:none;font-weight:600;">+2349042339411</a>
+      </p>
     </div>
 
   </div>
@@ -204,7 +360,7 @@
         <input type="hidden" id="signupState" value="">
         <label class="terms-checkbox">
           <input type="checkbox" id="termsCheckbox" required>
-          <span>By creating an account, you agree to Zaure's <a href="/terms.html" target="_blank">Terms</a>, <a href="/conditions.html" target="_blank">Conditions of Use</a>, and <a href="/privacy.html" target="_blank">Privacy Policy</a>.</span>
+          <span>By creating an account, you agree to Zaure's <a href="/terms.html" target="_blank">Terms & Conditions</a> and <a href="/privacy.html" target="_blank">Privacy Policy</a>.</span>
         </label>
         <button type="submit" class="btn-primary">Sign Up</button>
       </form>
@@ -215,11 +371,9 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       initStateDropdown();
-
       document.getElementById('fabPostAd').addEventListener('click', function() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
-
       loadUser();
       initTheme();
       updateFavoriteBadge();
