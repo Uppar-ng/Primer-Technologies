@@ -57,7 +57,7 @@ window.toggleTheme = function() {
 };
 
 // ============================================================
-// USER MANAGEMENT - COMPLETELY CLEAN HEADER
+// USER MANAGEMENT
 // ============================================================
 let currentUser = null;
 
@@ -111,14 +111,25 @@ function updateUserProfile(data) {
 }
 
 // ============================================================
-// RENDER USER AREA - COMPLETELY EMPTY
+// RENDER USER AREA
 // ============================================================
 function renderUserArea() {
   const headerUserArea = document.getElementById('headerUserArea');
   if (!headerUserArea) return;
   
-  // Show NOTHING - completely empty
-  headerUserArea.innerHTML = '';
+  const user = getCurrentUser();
+  if (user && user.name) {
+    const initial = user.name.charAt(0).toUpperCase();
+    headerUserArea.innerHTML = `
+      <a href="/profile.html" class="user-greeting">
+        <i class="fas fa-user-circle"></i> ${user.name.split(' ')[0]}
+      </a>
+    `;
+  } else {
+    headerUserArea.innerHTML = `
+      <div class="avatar" id="userAvatar" onclick="openSignup()">ZA</div>
+    `;
+  }
 }
 
 window.openSignup = function() {
@@ -148,22 +159,84 @@ document.addEventListener('DOMContentLoaded', function() {
       const name = document.getElementById('signupName').value.trim();
       const phone = document.getElementById('signupPhone').value.trim();
       const state = document.getElementById('signupState').value;
-      if (name && phone && state) {
+      const termsChecked = document.getElementById('termsCheckbox')?.checked;
+      
+      if (name && phone && state && termsChecked) {
         signupUser(name, phone, state);
         signupModal.classList.remove('active');
         signupForm.reset();
         renderUserArea();
         updateFavoriteBadge();
-        location.reload();
+      } else {
+        alert('Please fill all fields and accept the terms.');
       }
     });
   }
 });
 
 // ============================================================
-// DATA LOADING - FROM JSON FILES WITH CACHING
+// CUSTOM STATE DROPDOWN
 // ============================================================
+const nigerianStates = [
+  'Abia', 'Adamawa', 'Akwa Ibom', 'Anambra', 'Bauchi', 'Bayelsa', 'Benue',
+  'Borno', 'Cross River', 'Delta', 'Ebonyi', 'Edo', 'Ekiti', 'Enugu', 'FCT',
+  'Gombe', 'Imo', 'Jigawa', 'Kaduna', 'Kano', 'Katsina', 'Kebbi', 'Kogi',
+  'Kwara', 'Lagos', 'Nasarawa', 'Niger', 'Ogun', 'Ondo', 'Osun', 'Oyo',
+  'Plateau', 'Rivers', 'Sokoto', 'Taraba', 'Yobe', 'Zamfara'
+];
 
+function initStateDropdown() {
+  const selectContainer = document.getElementById('stateSelect');
+  if (!selectContainer) return;
+  
+  const trigger = document.getElementById('stateTrigger');
+  const dropdown = document.getElementById('stateDropdown');
+  const searchInput = document.getElementById('stateSearchInput');
+  const optionsList = document.getElementById('stateOptionsList');
+  const hiddenInput = document.getElementById('signupState');
+  
+  function renderOptions(filter = '') {
+    const filtered = nigerianStates.filter(state => 
+      state.toLowerCase().includes(filter.toLowerCase())
+    );
+    optionsList.innerHTML = filtered.map(state => 
+      `<li data-value="${state}">${state}</li>`
+    ).join('');
+    
+    optionsList.querySelectorAll('li').forEach(li => {
+      li.addEventListener('click', function() {
+        const selected = this.dataset.value;
+        hiddenInput.value = selected;
+        trigger.querySelector('span').textContent = selected;
+        selectContainer.classList.remove('active');
+      });
+    });
+  }
+  
+  renderOptions();
+  
+  trigger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    selectContainer.classList.toggle('active');
+    if (selectContainer.classList.contains('active')) {
+      searchInput.focus();
+    }
+  });
+  
+  searchInput.addEventListener('input', function() {
+    renderOptions(this.value);
+  });
+  
+  document.addEventListener('click', function(e) {
+    if (!selectContainer.contains(e.target)) {
+      selectContainer.classList.remove('active');
+    }
+  });
+}
+
+// ============================================================
+// DATA LOADING
+// ============================================================
 async function loadProducts() {
   const cached = localStorage.getItem('zaure_products_cache');
   if (cached) {
@@ -243,9 +316,59 @@ function getProductsSync() {
 }
 
 // ============================================================
+// RECOMMENDATION ALGORITHM
+// ============================================================
+function getUserState() {
+  const user = getCurrentUser();
+  if (user && user.state) {
+    return user.state;
+  }
+  return new Promise((resolve) => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          resolve('Lagos');
+        },
+        () => {
+          resolve(null);
+        },
+        { timeout: 5000 }
+      );
+    } else {
+      resolve(null);
+    }
+  });
+}
+
+function shuffleArray(array) {
+  const arr = [...array];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function recommendProducts(products, state, count) {
+  if (!products || products.length === 0) return [];
+  
+  let pool = products;
+  if (state) {
+    const stateFiltered = products.filter(p => p.location && p.location.includes(state));
+    if (stateFiltered.length >= count) {
+      pool = stateFiltered;
+    } else if (stateFiltered.length > 0) {
+      const others = products.filter(p => !p.location || !p.location.includes(state));
+      pool = [...stateFiltered, ...shuffleArray(others).slice(0, count - stateFiltered.length)];
+    }
+  }
+  
+  return shuffleArray(pool).slice(0, count);
+}
+
+// ============================================================
 // FAVORITES MANAGEMENT
 // ============================================================
-
 function getFavorites() {
   const saved = localStorage.getItem('zaure_favorites');
   if (saved) {
@@ -338,7 +461,7 @@ function renderListings(products, containerId) {
   if (!products || products.length === 0) {
     grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--text-secondary);">
       <i class="fas fa-box" style="font-size:2rem;display:block;margin-bottom:12px;"></i>
-      No items found. Be the first to post!
+      No items found.
     </div>`;
     return;
   }
@@ -386,7 +509,7 @@ function renderListings(products, containerId) {
 }
 
 // ============================================================
-// VIEW PRODUCT
+// VIEW PRODUCT / CATEGORY / STORE
 // ============================================================
 window.viewProduct = function(productId) {
   window.location.href = `/detail.html?id=${productId}`;
@@ -394,6 +517,10 @@ window.viewProduct = function(productId) {
 
 window.loadCategory = function(slug) {
   window.location.href = `/category.html?slug=${slug}`;
+};
+
+window.viewStore = function(sellerId) {
+  window.location.href = `/store.html?id=${sellerId}`;
 };
 
 // ============================================================
@@ -491,6 +618,9 @@ document.addEventListener('DOMContentLoaded', function() {
   loadUser();
   initTheme();
   updateFavoriteBadge();
+  if (document.getElementById('stateSelect')) {
+    initStateDropdown();
+  }
 });
 
 // ============================================================
@@ -518,5 +648,8 @@ window.toggleTheme = toggleTheme;
 window.viewProduct = viewProduct;
 window.loadCategory = loadCategory;
 window.openSignup = openSignup;
+window.viewStore = viewStore;
+window.getUserState = getUserState;
+window.recommendProducts = recommendProducts;
 
-console.log('Zaure – Nigeria\'s trusted classified marketplace.');
+console.log('Zaure – Nigeria\'s most trusted online marketplace.');
