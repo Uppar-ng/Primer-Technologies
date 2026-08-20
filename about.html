@@ -3,234 +3,257 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>About Zaure – Nigeria's Trusted Classified Marketplace</title>
-  <meta name="description" content="Learn about Zaure - Nigeria's leading free classified marketplace. We connect buyers and sellers directly with no commission, no middlemen.">
+  <title>About Us – Zaure</title>
+  <meta name="description" content="Learn about Zaure, Nigeria's most trusted online marketplace.">
   <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
   <style>
-    .about-hero {
+    .about-header {
+      margin: 30px 0 20px;
+      text-align: center;
+    }
+    .about-header h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #1a3650, #B49450);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .about-header p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      margin-top: 6px;
+    }
+    .about-content {
       background: var(--surface);
       border-radius: 20px;
-      padding: 40px 32px;
-      border: 1px solid var(--border);
-      margin-bottom: 24px;
-      text-align: center;
-    }
-    .about-hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.2rem;
-      font-weight: 700;
-      color: var(--text);
-    }
-    .about-hero p {
-      color: var(--text-secondary);
-      font-size: 1.05rem;
-      max-width: 600px;
-      margin: 12px auto 0;
-    }
-    .about-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      margin: 24px 0;
-    }
-    .about-card {
-      background: var(--surface);
-      border-radius: 16px;
       padding: 24px;
       border: 1px solid var(--border);
-      text-align: center;
+      margin-bottom: 20px;
+      line-height: 1.8;
+      color: var(--text);
     }
-    .about-card .icon {
-      font-size: 2.2rem;
-      color: #B49450;
+    .about-content h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 16px 0 8px;
+      color: var(--text);
+    }
+    .about-content p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
       margin-bottom: 12px;
     }
-    .about-card h3 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 6px;
-    }
-    .about-card p {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-    .values-list {
+    .about-stats {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-    }
-    .value-item {
-      background: var(--surface);
-      border-radius: 12px;
-      padding: 16px 20px;
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
+      grid-template-columns: repeat(2, 1fr);
       gap: 12px;
+      margin-bottom: 20px;
     }
-    .value-item i {
-      color: #B49450;
-      font-size: 1.2rem;
+    @media (min-width: 640px) {
+      .about-stats { grid-template-columns: repeat(4, 1fr); }
     }
-    .value-item span {
+    .about-stats .stat-card {
+      background: var(--surface);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      border: 1px solid var(--border);
+    }
+    .about-stats .stat-card .stat-icon {
+      font-size: 2rem;
+      color: #1a3650;
+      margin-bottom: 8px;
+    }
+    .about-stats .stat-card .stat-number {
+      font-size: 1.5rem;
+      font-weight: 800;
       color: var(--text);
-      font-weight: 500;
     }
-    @media (max-width: 640px) {
-      .about-hero { padding: 24px 16px; }
-      .about-hero h1 { font-size: 1.6rem; }
+    .about-stats .stat-card .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
     }
   </style>
 </head>
 <body>
-
-  <!-- ===== NAV ===== -->
   <nav class="navbar">
     <div class="container nav-container">
       <a href="/" class="logo-wrapper">
-        <img src="/assets/logo-icon.svg" alt="Zaure" class="logo-icon">
-        <div class="logo-text"><span class="brand">Zaure</span><span class="tagline">Your Entrance to Home</span></div>
+        <div class="logo-text">
+          <span class="brand">Zaure</span>
+          <span class="tagline">Buy with Confidence</span>
+        </div>
       </a>
       <div class="nav-links">
         <a href="/">Home</a>
-        <a href="/category.html?slug=all">Browse</a>
+        <a href="/categories.html">Categories</a>
+        <a href="/stores.html">Stores</a>
         <a href="/about.html" class="active">About</a>
         <a href="/contact.html">Contact</a>
       </div>
       <div class="nav-actions">
         <button class="icon-btn" id="themeToggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
-        <a href="/favorites.html" class="icon-btn" style="position:relative;text-decoration:none;"><i class="fas fa-heart"></i><span id="favBadge">0</span></a>
-        <div id="headerUserArea"><div class="avatar" id="userAvatar" onclick="openSignup()">ZA</div></div>
+        <a href="/favorites.html" class="icon-btn" style="position:relative;text-decoration:none;">
+          <i class="fas fa-heart"></i>
+          <span id="favBadge">0</span>
+        </a>
+        <div id="headerUserArea">
+          <div class="avatar" id="userAvatar" onclick="openSignup()">ZA</div>
+        </div>
       </div>
     </div>
   </nav>
 
   <div class="container">
-
-    <div class="breadcrumb">
-      <a href="/">Home</a>
-      <span class="separator"><i class="fas fa-chevron-right"></i></span>
-      <span class="current">About Us</span>
+    <div class="about-header">
+      <h1>About Zaure</h1>
+      <p>Nigeria's most trusted online marketplace</p>
     </div>
 
-    <div class="about-hero">
-      <h1>Your Entrance to Home</h1>
-      <p>Zaure is Nigeria's leading free classified marketplace, connecting buyers and sellers directly across the country. No commission, no middlemen — just real people making real connections.</p>
-    </div>
-
-    <div class="about-grid">
-      <div class="about-card">
-        <div class="icon"><i class="fas fa-rocket"></i></div>
-        <h3>Our Mission</h3>
-        <p>To democratize commerce in Nigeria by providing a free, safe, and accessible platform where anyone can buy or sell anything locally.</p>
+    <div class="about-stats">
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-users"></i></div>
+        <div class="stat-number">10K+</div>
+        <div class="stat-label">Active Users</div>
       </div>
-      <div class="about-card">
-        <div class="icon"><i class="fas fa-eye"></i></div>
-        <h3>Our Vision</h3>
-        <p>To become the most trusted and widely used classified marketplace in Nigeria, empowering communities and driving local economies.</p>
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-box"></i></div>
+        <div class="stat-number">5K+</div>
+        <div class="stat-label">Listings</div>
       </div>
-      <div class="about-card">
-        <div class="icon"><i class="fas fa-heart"></i></div>
-        <h3>Our Values</h3>
-        <p>Trust, transparency, and community. We believe in direct connections, fair deals, and empowering Nigerians to trade freely.</p>
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-store"></i></div>
+        <div class="stat-number">500+</div>
+        <div class="stat-label">Verified Sellers</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-shield-alt"></i></div>
+        <div class="stat-number">0%</div>
+        <div class="stat-label">Commission Fees</div>
       </div>
     </div>
 
-    <h2 class="section-title">Our Core Values</h2>
-    <div class="values-list">
-      <div class="value-item"><i class="fas fa-shield-alt"></i><span>Trust & Safety</span></div>
-      <div class="value-item"><i class="fas fa-handshake"></i><span>No Commission</span></div>
-      <div class="value-item"><i class="fas fa-users"></i><span>Community First</span></div>
-      <div class="value-item"><i class="fas fa-lock"></i><span>Privacy & Security</span></div>
-      <div class="value-item"><i class="fas fa-clock"></i><span>24/7 Availability</span></div>
-      <div class="value-item"><i class="fas fa-star"></i><span>Quality Service</span></div>
-    </div>
+    <div class="about-content">
+      <h2><i class="fas fa-bullseye" style="color:#1a3650;"></i> Our Mission</h2>
+      <p>Zaure was founded with a simple mission: to make buying and selling in Nigeria safe, easy, and accessible to everyone. We believe that commerce should be transparent, commission-free, and built on trust.</p>
 
+      <h2><i class="fas fa-star" style="color:#1a3650;"></i> Why Choose Zaure?</h2>
+      <p><strong>100% Free:</strong> Post unlimited listings at zero cost. No commission, no hidden fees, no middlemen.</p>
+      <p><strong>Scam-Free:</strong> We prioritize user safety with verified sellers, safety tips, and a dedicated reporting system.</p>
+      <p><strong>Local Focus:</strong> Connect with buyers and sellers in your state. Our location-based recommendations help you find what you need nearby.</p>
+      <p><strong>Trusted Community:</strong> Join thousands of Nigerians who buy, sell, and trade with confidence on Zaure.</p>
+
+      <h2><i class="fas fa-handshake" style="color:#1a3650;"></i> Our Values</h2>
+      <p><strong>Trust:</strong> We verify sellers and promote transparency in every transaction.</p>
+      <p><strong>Accessibility:</strong> Our platform is free and open to everyone across Nigeria.</p>
+      <p><strong>Community:</strong> We're building a marketplace where Nigerians help Nigerians.</p>
+
+      <h2><i class="fas fa-phone" style="color:#1a3650;"></i> Contact Us</h2>
+      <p>For info or to report an issue, contact us on WhatsApp: <a href="https://wa.me/2349042339411" target="_blank" style="color:#1a3650;font-weight:600;">+2349042339411</a></p>
+    </div>
   </div>
 
-  <!-- ===== FOOTER (same as index.html) ===== -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col brand">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
-            <img src="/assets/logo-icon.svg" alt="Zaure" style="width:32px;height:32px;">
-            <span style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:white;">Zaure</span>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <span style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:white;">Zaure</span>
+            <span style="font-size:0.7rem;color:#94A3B8;">Buy with Confidence</span>
           </div>
-          <p>Nigeria's leading free classified marketplace. Buy, sell, or trade locally. No commission, no middlemen.</p>
-          <div class="social" style="margin-top:12px;">
-            <a href="https://twitter.com/zauretech" target="_blank"><i class="fab fa-twitter"></i></a>
-            <a href="https://instagram.com/zauretech" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://linkedin.com/company/zauretech" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://facebook.com/zauretech" target="_blank"><i class="fab fa-facebook-f"></i></a>
-          </div>
-        </div>
-        <div class="footer-col"><h4>Browse</h4><a href="/category.html?slug=all">All Items</a><a href="/category.html?slug=vehicles">Vehicles</a><a href="/category.html?slug=electronics">Electronics</a><a href="/category.html?slug=furniture">Furniture</a><a href="/category.html?slug=fashion">Fashion</a><a href="/category.html?slug=real-estate">Real Estate</a></div>
-        <div class="footer-col"><h4>Support</h4><a href="/help.html">Help Center</a><a href="/safety.html">Safety Tips</a><a href="/contact.html">Contact Us</a><a href="/support.html">Support</a></div>
-        <div class="footer-col"><h4>Company</h4><a href="/about.html">About Us</a><a href="/careers.html">Careers</a><a href="/privacy.html">Privacy Policy</a><a href="/terms.html">Terms of Service</a></div>
-        <div class="footer-col trust-badges" style="grid-column:1/-1;border-top:1px solid #2E3548;padding-top:16px;margin-top:8px;">
-          <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;">
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-shield-alt" style="color:#B49450;"></i> Verified Users</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-handshake" style="color:#B49450;"></i> No Commission</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-user-check" style="color:#B49450;"></i> Identity Verified</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-lock" style="color:#B49450;"></i> Secure Platform</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-clock" style="color:#B49450;"></i> 24/7 Support</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-star" style="color:#B49450;"></i> Trusted by Thousands</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-phone" style="color:#B49450;"></i> Direct Contact</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-credit-card" style="color:#B49450;"></i> Secure Payments</div>
+          <p>Nigeria's most trusted online marketplace. Buy, sell, or trade locally. No commission, no middlemen.</p>
+          <div class="social">
+            <a href="https://twitter.com/zauretech" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com/zauretech" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://linkedin.com/company/zauretech" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://facebook.com/zauretech" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
           </div>
         </div>
-        <div class="footer-bottom"><span>&copy; 2026 <strong style="color:white;">Zaure Technologies</strong>. All rights reserved.</span><span><i class="fas fa-globe"></i> Nigeria · English</span></div>
+        <div class="footer-col">
+          <h4>Browse</h4>
+          <a href="/category.html?slug=all">All Items</a>
+          <a href="/category.html?slug=vehicles">Vehicles</a>
+          <a href="/category.html?slug=electronics">Electronics</a>
+          <a href="/category.html?slug=furniture">Furniture</a>
+          <a href="/category.html?slug=fashion">Fashion</a>
+          <a href="/category.html?slug=real-estate">Real Estate</a>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <a href="/help.html">Help Center</a>
+          <a href="/safety.html">Safety Tips</a>
+          <a href="/contact.html">Contact Us</a>
+          <a href="/support.html">Support</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="/about.html">About Us</a>
+          <a href="/careers.html">Careers</a>
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Service</a>
+        </div>
+        <div class="trust-badges">
+          <div class="badges-row">
+            <span class="badge-item"><i class="fas fa-shield-alt"></i> Verified Users</span>
+            <span class="badge-item"><i class="fas fa-handshake"></i> No Commission</span>
+            <span class="badge-item"><i class="fas fa-user-check"></i> Identity Verified</span>
+            <span class="badge-item"><i class="fas fa-lock"></i> Secure Platform</span>
+            <span class="badge-item"><i class="fas fa-clock"></i> 24/7 Support</span>
+            <span class="badge-item"><i class="fas fa-star"></i> Trusted by Thousands</span>
+            <span class="badge-item"><i class="fas fa-phone"></i> Direct Contact</span>
+            <span class="badge-item"><i class="fas fa-credit-card"></i> Secure Payments</span>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>&copy; 2026 <strong>Zaure Technologies</strong>. All rights reserved.</span>
+          <span class="footer-lang"><i class="fas fa-globe"></i> Nigeria · English</span>
+        </div>
+        <div style="grid-column: 1/-1; text-align: center; margin-top: 8px; font-size: 0.8rem; color: #94A3B8;">
+          For info or to report an issue, contact us on WhatsApp: <a href="https://wa.me/2349042339411" target="_blank" style="color: #D4B87A; text-decoration: none; font-weight: 600;">+2349042339411</a>
+        </div>
       </div>
     </div>
   </footer>
 
-  <!-- ===== BOTTOM NAV ===== -->
   <div class="bottom-nav">
     <a href="/" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
-    <button class="nav-item" onclick="window.location.href='/'"><i class="fas fa-search"></i><span>Search</span></button>
+    <a href="/categories.html" class="nav-item"><i class="fas fa-th-large"></i><span>Categories</span></a>
     <button class="post-btn" id="fabPostAd"><i class="fas fa-plus"></i></button>
     <a href="/favorites.html" class="nav-item"><i class="fas fa-heart"></i><span>Favorites</span></a>
     <a href="/profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
   </div>
 
-  <!-- ===== SIGNUP MODAL ===== -->
   <div class="modal-overlay" id="signupModal">
     <div class="modal">
-      <div class="modal-header"><h3>Create your account</h3><button class="modal-close" id="closeSignupModalBtn"><i class="fas fa-times"></i></button></div>
+      <div class="modal-header">
+        <h3>Create your account</h3>
+        <button class="modal-close" id="closeSignupModalBtn"><i class="fas fa-times"></i></button>
+      </div>
       <form id="signupForm" class="modal-form">
         <label for="signupName">Full Name</label>
         <input type="text" id="signupName" placeholder="Enter your full name" required>
         <label for="signupPhone">Phone Number</label>
         <input type="tel" id="signupPhone" placeholder="Enter your phone number" required>
-        <label for="signupState">State</label>
-        <select id="signupState" required>
-          <option value="">Select your state</option>
-          <option value="Abia">Abia</option><option value="Adamawa">Adamawa</option>
-          <option value="Akwa Ibom">Akwa Ibom</option><option value="Anambra">Anambra</option>
-          <option value="Bauchi">Bauchi</option><option value="Bayelsa">Bayelsa</option>
-          <option value="Benue">Benue</option><option value="Borno">Borno</option>
-          <option value="Cross River">Cross River</option><option value="Delta">Delta</option>
-          <option value="Ebonyi">Ebonyi</option><option value="Edo">Edo</option>
-          <option value="Ekiti">Ekiti</option><option value="Enugu">Enugu</option>
-          <option value="FCT">FCT (Abuja)</option><option value="Gombe">Gombe</option>
-          <option value="Imo">Imo</option><option value="Jigawa">Jigawa</option>
-          <option value="Kaduna">Kaduna</option><option value="Kano">Kano</option>
-          <option value="Katsina">Katsina</option><option value="Kebbi">Kebbi</option>
-          <option value="Kogi">Kogi</option><option value="Kwara">Kwara</option>
-          <option value="Lagos">Lagos</option><option value="Nasarawa">Nasarawa</option>
-          <option value="Niger">Niger</option><option value="Ogun">Ogun</option>
-          <option value="Ondo">Ondo</option><option value="Osun">Osun</option>
-          <option value="Oyo">Oyo</option><option value="Plateau">Plateau</option>
-          <option value="Rivers">Rivers</option><option value="Sokoto">Sokoto</option>
-          <option value="Taraba">Taraba</option><option value="Yobe">Yobe</option>
-          <option value="Zamfara">Zamfara</option>
-        </select>
+        <label>State</label>
+        <div class="custom-select" id="stateSelect">
+          <div class="custom-select-trigger" id="stateTrigger">
+            <span>Select your state</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="custom-select-dropdown" id="stateDropdown">
+            <input type="text" id="stateSearchInput" placeholder="Search state...">
+            <ul class="custom-select-options" id="stateOptionsList"></ul>
+          </div>
+        </div>
+        <input type="hidden" id="signupState" value="">
+        <label class="terms-checkbox">
+          <input type="checkbox" id="termsCheckbox" required>
+          <span>By creating an account, you agree to Zaure's <a href="/terms.html" target="_blank">Terms</a>, <a href="/conditions.html" target="_blank">Conditions of Use</a>, and <a href="/privacy.html" target="_blank">Privacy Policy</a>.</span>
+        </label>
         <button type="submit" class="btn-primary">Sign Up</button>
       </form>
     </div>
@@ -239,6 +262,10 @@
   <script src="/js/main.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+      initStateDropdown();
+      document.getElementById('fabPostAd')?.addEventListener('click', function() {
+        if (!currentUser) { openSignup(); } else { window.location.href = '/post.html'; }
+      });
       loadUser();
       initTheme();
       updateFavoriteBadge();

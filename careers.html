@@ -3,265 +3,235 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>Careers at Zaure – Join Our Team</title>
-  <meta name="description" content="Join the Zaure team! We're hiring talented individuals to help build Nigeria's leading classified marketplace.">
+  <title>Careers – Zaure</title>
+  <meta name="description" content="Join the Zaure team and help build Nigeria's most trusted online marketplace.">
   <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
   <style>
-    .careers-hero {
+    .careers-header {
+      margin: 30px 0 20px;
+      text-align: center;
+    }
+    .careers-header h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #1a3650, #B49450);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .careers-header p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      margin-top: 6px;
+    }
+    .careers-content {
       background: var(--surface);
       border-radius: 20px;
-      padding: 32px 24px;
+      padding: 24px;
       border: 1px solid var(--border);
-      margin-bottom: 24px;
+      margin-bottom: 20px;
       text-align: center;
     }
-    .careers-hero h1 { font-size: 1.8rem; font-weight: 700; color: var(--text); }
-    .careers-hero p { color: var(--text-secondary); max-width: 600px; margin: 8px auto 0; }
-    .job-listings {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
-      margin: 24px 0;
+    .careers-content h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
     }
-    .job-card {
-      background: var(--surface);
-      border-radius: 16px;
-      padding: 20px 24px;
-      border: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
+    .careers-content p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .careers-content .btn-apply {
+      display: inline-flex;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-      transition: 0.2s;
+      gap: 8px;
+      background: #1a3650;
+      color: white;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      text-decoration: none;
+      margin-top: 16px;
+      transition: background 0.3s;
     }
-    .job-card:hover { border-color: #B49450; }
-    .job-card .job-info h3 { font-size: 1.05rem; font-weight: 600; color: var(--text); }
-    .job-card .job-info .job-meta { display: flex; gap: 16px; font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px; }
-    .job-card .job-info .job-meta i { margin-right: 4px; }
-    .job-card .btn-apply {
-      background: #1a3650; color: white; border: none; padding: 8px 24px;
-      border-radius: 60px; font-weight: 600; cursor: pointer; transition: 0.2s;
+    .careers-content .btn-apply:hover {
+      background: #0f2940;
     }
-    .job-card .btn-apply:hover { background: #0f2940; }
-    [data-theme="dark"] .job-card .btn-apply { background: #2A3550; }
-    [data-theme="dark"] .job-card .btn-apply:hover { background: #3A4560; }
-    .values-section {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-      margin: 24px 0;
+    [data-theme="dark"] .careers-content .btn-apply {
+      background: #2A3550;
+      color: #F1F5F9;
     }
-    .values-section .value-item {
-      background: var(--surface);
-      border-radius: 12px;
-      padding: 16px;
-      border: 1px solid var(--border);
-      text-align: center;
-    }
-    .values-section .value-item i { font-size: 1.5rem; color: #B49450; margin-bottom: 8px; }
-    .values-section .value-item h4 { font-size: 0.9rem; font-weight: 600; color: var(--text); }
-    .values-section .value-item p { font-size: 0.8rem; color: var(--text-secondary); }
   </style>
 </head>
 <body>
-
-  <!-- ===== NAV ===== -->
   <nav class="navbar">
     <div class="container nav-container">
       <a href="/" class="logo-wrapper">
-        <img src="/assets/logo-icon.svg" alt="Zaure" class="logo-icon">
-        <div class="logo-text"><span class="brand">Zaure</span><span class="tagline">Your Entrance to Home</span></div>
+        <div class="logo-text">
+          <span class="brand">Zaure</span>
+          <span class="tagline">Buy with Confidence</span>
+        </div>
       </a>
       <div class="nav-links">
         <a href="/">Home</a>
-        <a href="/category.html?slug=all">Browse</a>
+        <a href="/categories.html">Categories</a>
+        <a href="/stores.html">Stores</a>
         <a href="/about.html">About</a>
         <a href="/contact.html">Contact</a>
       </div>
       <div class="nav-actions">
         <button class="icon-btn" id="themeToggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
-        <a href="/favorites.html" class="icon-btn" style="position:relative;text-decoration:none;"><i class="fas fa-heart"></i><span id="favBadge">0</span></a>
-        <div id="headerUserArea"><div class="avatar" id="userAvatar" onclick="openSignup()">ZA</div></div>
+        <a href="/favorites.html" class="icon-btn" style="position:relative;text-decoration:none;">
+          <i class="fas fa-heart"></i>
+          <span id="favBadge">0</span>
+        </a>
+        <div id="headerUserArea">
+          <div class="avatar" id="userAvatar" onclick="openSignup()">ZA</div>
+        </div>
       </div>
     </div>
   </nav>
 
   <div class="container">
-
-    <div class="breadcrumb">
-      <a href="/">Home</a>
-      <span class="separator"><i class="fas fa-chevron-right"></i></span>
-      <span class="current">Careers</span>
+    <div class="careers-header">
+      <h1>Careers at Zaure</h1>
+      <p>Help us build Nigeria's most trusted online marketplace</p>
     </div>
 
-    <div class="careers-hero">
-      <h1><i class="fas fa-users" style="color:#B49450;margin-right:8px;"></i> Join the Zaure Team</h1>
-      <p>We're building Nigeria's leading classified marketplace. Come be part of something big.</p>
+    <div class="careers-content">
+      <h2><i class="fas fa-rocket" style="color:#1a3650;"></i> Join Our Team</h2>
+      <p>We're a growing team passionate about making commerce safe, easy, and accessible for every Nigerian. We're looking for talented individuals who share our mission.</p>
+      <a href="https://wa.me/2349042339411?text=Hello%20Zaure%2C%20I%20am%20interested%20in%20career%20opportunities" target="_blank" class="btn-apply">
+        <i class="fab fa-whatsapp"></i> Apply via WhatsApp
+      </a>
     </div>
 
-    <h2 class="section-title" style="text-align:left;">Our Values</h2>
-    <div class="values-section">
-      <div class="value-item">
-        <i class="fas fa-lightbulb"></i>
-        <h4>Innovation</h4>
-        <p>We embrace new ideas and technologies</p>
-      </div>
-      <div class="value-item">
-        <i class="fas fa-heart"></i>
-        <h4>Integrity</h4>
-        <p>We do what's right, always</p>
-      </div>
-      <div class="value-item">
-        <i class="fas fa-users"></i>
-        <h4>Collaboration</h4>
-        <p>We achieve more together</p>
-      </div>
-      <div class="value-item">
-        <i class="fas fa-rocket"></i>
-        <h4>Excellence</h4>
-        <p>We strive for the best</p>
-      </div>
+    <div class="careers-content">
+      <h2><i class="fas fa-users" style="color:#1a3650;"></i> Why Work With Us?</h2>
+      <p>
+        <strong>Mission-Driven:</strong> We're solving real problems for millions of Nigerians.<br>
+        <strong>Growth:</strong> Be part of a fast-growing startup.<br>
+        <strong>Remote-First:</strong> Work from anywhere in Nigeria.<br>
+        <strong>Impact:</strong> Your work directly helps people buy and sell with confidence.
+      </p>
     </div>
 
-    <h2 class="section-title" style="text-align:left;">Open Positions</h2>
-    <div class="job-listings">
-      <div class="job-card">
-        <div class="job-info">
-          <h3>Full Stack Developer</h3>
-          <div class="job-meta">
-            <span><i class="fas fa-map-marker-alt"></i> Remote (Nigeria)</span>
-            <span><i class="fas fa-clock"></i> Full-time</span>
-            <span><i class="fas fa-tag"></i> Engineering</span>
-          </div>
-        </div>
-        <button class="btn-apply" onclick="alert('Apply for Full Stack Developer position. Send your CV to get.zaure@proton.me')">Apply Now</button>
-      </div>
-
-      <div class="job-card">
-        <div class="job-info">
-          <h3>Product Designer</h3>
-          <div class="job-meta">
-            <span><i class="fas fa-map-marker-alt"></i> Remote (Nigeria)</span>
-            <span><i class="fas fa-clock"></i> Full-time</span>
-            <span><i class="fas fa-tag"></i> Design</span>
-          </div>
-        </div>
-        <button class="btn-apply" onclick="alert('Apply for Product Designer position. Send your portfolio to get.zaure@proton.me')">Apply Now</button>
-      </div>
-
-      <div class="job-card">
-        <div class="job-info">
-          <h3>Community Manager</h3>
-          <div class="job-meta">
-            <span><i class="fas fa-map-marker-alt"></i> Remote (Nigeria)</span>
-            <span><i class="fas fa-clock"></i> Full-time</span>
-            <span><i class="fas fa-tag"></i> Marketing</span>
-          </div>
-        </div>
-        <button class="btn-apply" onclick="alert('Apply for Community Manager position. Send your CV to get.zaure@proton.me')">Apply Now</button>
-      </div>
-
-      <div class="job-card">
-        <div class="job-info">
-          <h3>Customer Support Specialist</h3>
-          <div class="job-meta">
-            <span><i class="fas fa-map-marker-alt"></i> Remote (Nigeria)</span>
-            <span><i class="fas fa-clock"></i> Full-time</span>
-            <span><i class="fas fa-tag"></i> Support</span>
-          </div>
-        </div>
-        <button class="btn-apply" onclick="alert('Apply for Customer Support Specialist position. Send your CV to get.zaure@proton.me')">Apply Now</button>
-      </div>
+    <div class="careers-content">
+      <h2><i class="fas fa-envelope" style="color:#1a3650;"></i> How to Apply</h2>
+      <p>Send us a message on WhatsApp with your CV and a brief introduction. We'll get back to you if there's a match.</p>
+      <a href="https://wa.me/2349042339411?text=Hello%20Zaure%2C%20I%20would%20like%20to%20apply%20for%20a%20position" target="_blank" class="btn-apply">
+        <i class="fab fa-whatsapp"></i> Contact Us
+      </a>
     </div>
-
-    <div style="background:var(--surface);border-radius:16px;padding:24px;border:1px solid var(--border);text-align:center;">
-      <p style="color:var(--text-secondary);">Don't see the right role? Send us your CV anyway at <strong style="color:var(--text);">get.zaure@proton.me</strong></p>
-    </div>
-
   </div>
 
-  <!-- ===== FOOTER ===== -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col brand">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
-            <img src="/assets/logo-icon.svg" alt="Zaure" style="width:32px;height:32px;">
-            <span style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:white;">Zaure</span>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <span style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:white;">Zaure</span>
+            <span style="font-size:0.7rem;color:#94A3B8;">Buy with Confidence</span>
           </div>
-          <p>Nigeria's leading free classified marketplace. Buy, sell, or trade locally. No commission, no middlemen.</p>
-          <div class="social" style="margin-top:12px;">
-            <a href="https://twitter.com/zauretech" target="_blank"><i class="fab fa-twitter"></i></a>
-            <a href="https://instagram.com/zauretech" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://linkedin.com/company/zauretech" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://facebook.com/zauretech" target="_blank"><i class="fab fa-facebook-f"></i></a>
-          </div>
-        </div>
-        <div class="footer-col"><h4>Browse</h4><a href="/category.html?slug=all">All Items</a><a href="/category.html?slug=vehicles">Vehicles</a><a href="/category.html?slug=electronics">Electronics</a><a href="/category.html?slug=furniture">Furniture</a><a href="/category.html?slug=fashion">Fashion</a><a href="/category.html?slug=real-estate">Real Estate</a></div>
-        <div class="footer-col"><h4>Support</h4><a href="/help.html">Help Center</a><a href="/safety.html">Safety Tips</a><a href="/contact.html">Contact Us</a><a href="/support.html">Support</a></div>
-        <div class="footer-col"><h4>Company</h4><a href="/about.html">About Us</a><a href="/careers.html">Careers</a><a href="/privacy.html">Privacy Policy</a><a href="/terms.html">Terms of Service</a></div>
-        <div class="footer-col trust-badges" style="grid-column:1/-1;border-top:1px solid #2E3548;padding-top:16px;margin-top:8px;">
-          <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;">
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-shield-alt" style="color:#B49450;"></i> Verified Users</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-handshake" style="color:#B49450;"></i> No Commission</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-user-check" style="color:#B49450;"></i> Identity Verified</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-lock" style="color:#B49450;"></i> Secure Platform</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-clock" style="color:#B49450;"></i> 24/7 Support</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-star" style="color:#B49450;"></i> Trusted by Thousands</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-phone" style="color:#B49450;"></i> Direct Contact</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-credit-card" style="color:#B49450;"></i> Secure Payments</div>
+          <p>Nigeria's most trusted online marketplace. Buy, sell, or trade locally. No commission, no middlemen.</p>
+          <div class="social">
+            <a href="https://twitter.com/zauretech" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com/zauretech" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://linkedin.com/company/zauretech" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://facebook.com/zauretech" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
           </div>
         </div>
-        <div class="footer-bottom"><span>&copy; 2026 <strong style="color:white;">Zaure Technologies</strong>. All rights reserved.</span><span><i class="fas fa-globe"></i> Nigeria · English</span></div>
+        <div class="footer-col">
+          <h4>Browse</h4>
+          <a href="/category.html?slug=all">All Items</a>
+          <a href="/category.html?slug=vehicles">Vehicles</a>
+          <a href="/category.html?slug=electronics">Electronics</a>
+          <a href="/category.html?slug=furniture">Furniture</a>
+          <a href="/category.html?slug=fashion">Fashion</a>
+          <a href="/category.html?slug=real-estate">Real Estate</a>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <a href="/help.html">Help Center</a>
+          <a href="/safety.html">Safety Tips</a>
+          <a href="/contact.html">Contact Us</a>
+          <a href="/support.html">Support</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="/about.html">About Us</a>
+          <a href="/careers.html">Careers</a>
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Service</a>
+        </div>
+        <div class="trust-badges">
+          <div class="badges-row">
+            <span class="badge-item"><i class="fas fa-shield-alt"></i> Verified Users</span>
+            <span class="badge-item"><i class="fas fa-handshake"></i> No Commission</span>
+            <span class="badge-item"><i class="fas fa-user-check"></i> Identity Verified</span>
+            <span class="badge-item"><i class="fas fa-lock"></i> Secure Platform</span>
+            <span class="badge-item"><i class="fas fa-clock"></i> 24/7 Support</span>
+            <span class="badge-item"><i class="fas fa-star"></i> Trusted by Thousands</span>
+            <span class="badge-item"><i class="fas fa-phone"></i> Direct Contact</span>
+            <span class="badge-item"><i class="fas fa-credit-card"></i> Secure Payments</span>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>&copy; 2026 <strong>Zaure Technologies</strong>. All rights reserved.</span>
+          <span class="footer-lang"><i class="fas fa-globe"></i> Nigeria · English</span>
+        </div>
+        <div style="grid-column: 1/-1; text-align: center; margin-top: 8px; font-size: 0.8rem; color: #94A3B8;">
+          For info or to report an issue, contact us on WhatsApp: <a href="https://wa.me/2349042339411" target="_blank" style="color: #D4B87A; text-decoration: none; font-weight: 600;">+2349042339411</a>
+        </div>
       </div>
     </div>
   </footer>
 
-  <!-- ===== BOTTOM NAV ===== -->
   <div class="bottom-nav">
     <a href="/" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
-    <button class="nav-item" onclick="window.location.href='/'"><i class="fas fa-search"></i><span>Search</span></button>
+    <a href="/categories.html" class="nav-item"><i class="fas fa-th-large"></i><span>Categories</span></a>
     <button class="post-btn" id="fabPostAd"><i class="fas fa-plus"></i></button>
     <a href="/favorites.html" class="nav-item"><i class="fas fa-heart"></i><span>Favorites</span></a>
     <a href="/profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
   </div>
 
-  <!-- ===== SIGNUP MODAL ===== -->
   <div class="modal-overlay" id="signupModal">
     <div class="modal">
-      <div class="modal-header"><h3>Create your account</h3><button class="modal-close" id="closeSignupModalBtn"><i class="fas fa-times"></i></button></div>
+      <div class="modal-header">
+        <h3>Create your account</h3>
+        <button class="modal-close" id="closeSignupModalBtn"><i class="fas fa-times"></i></button>
+      </div>
       <form id="signupForm" class="modal-form">
         <label for="signupName">Full Name</label>
         <input type="text" id="signupName" placeholder="Enter your full name" required>
         <label for="signupPhone">Phone Number</label>
         <input type="tel" id="signupPhone" placeholder="Enter your phone number" required>
-        <label for="signupState">State</label>
-        <select id="signupState" required>
-          <option value="">Select your state</option>
-          <option value="Abia">Abia</option><option value="Adamawa">Adamawa</option>
-          <option value="Akwa Ibom">Akwa Ibom</option><option value="Anambra">Anambra</option>
-          <option value="Bauchi">Bauchi</option><option value="Bayelsa">Bayelsa</option>
-          <option value="Benue">Benue</option><option value="Borno">Borno</option>
-          <option value="Cross River">Cross River</option><option value="Delta">Delta</option>
-          <option value="Ebonyi">Ebonyi</option><option value="Edo">Edo</option>
-          <option value="Ekiti">Ekiti</option><option value="Enugu">Enugu</option>
-          <option value="FCT">FCT (Abuja)</option><option value="Gombe">Gombe</option>
-          <option value="Imo">Imo</option><option value="Jigawa">Jigawa</option>
-          <option value="Kaduna">Kaduna</option><option value="Kano">Kano</option>
-          <option value="Katsina">Katsina</option><option value="Kebbi">Kebbi</option>
-          <option value="Kogi">Kogi</option><option value="Kwara">Kwara</option>
-          <option value="Lagos">Lagos</option><option value="Nasarawa">Nasarawa</option>
-          <option value="Niger">Niger</option><option value="Ogun">Ogun</option>
-          <option value="Ondo">Ondo</option><option value="Osun">Osun</option>
-          <option value="Oyo">Oyo</option><option value="Plateau">Plateau</option>
-          <option value="Rivers">Rivers</option><option value="Sokoto">Sokoto</option>
-          <option value="Taraba">Taraba</option><option value="Yobe">Yobe</option>
-          <option value="Zamfara">Zamfara</option>
-        </select>
+        <label>State</label>
+        <div class="custom-select" id="stateSelect">
+          <div class="custom-select-trigger" id="stateTrigger">
+            <span>Select your state</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="custom-select-dropdown" id="stateDropdown">
+            <input type="text" id="stateSearchInput" placeholder="Search state...">
+            <ul class="custom-select-options" id="stateOptionsList"></ul>
+          </div>
+        </div>
+        <input type="hidden" id="signupState" value="">
+        <label class="terms-checkbox">
+          <input type="checkbox" id="termsCheckbox" required>
+          <span>By creating an account, you agree to Zaure's <a href="/terms.html" target="_blank">Terms & Conditions</a> and <a href="/privacy.html" target="_blank">Privacy Policy</a>.</span>
+        </label>
         <button type="submit" class="btn-primary">Sign Up</button>
       </form>
     </div>
@@ -270,6 +240,10 @@
   <script src="/js/main.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+      initStateDropdown();
+      document.getElementById('fabPostAd')?.addEventListener('click', function() {
+        if (!currentUser) { openSignup(); } else { window.location.href = '/post.html'; }
+      });
       loadUser();
       initTheme();
       updateFavoriteBadge();

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>Search Results – Zaure</title>
-  <meta name="description" content="Search results on Zaure - Nigeria's trusted classified marketplace.">
+  <meta name="description" content="Search results on Zaure - Nigeria's most trusted online marketplace.">
   <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -25,11 +25,25 @@
     }
     .refine-section .refine-group { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
     .refine-section .refine-group label { font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); }
-    .refine-section select {
+    .refine-section .refine-group .custom-select { min-width: 150px; }
+    .refine-section .refine-group .custom-select-trigger {
       padding: 6px 12px; border: 1px solid var(--border); border-radius: 8px;
-      font-size: 0.85rem; background: var(--input-bg); color: var(--text); outline: none;
+      font-size: 0.85rem; background: var(--input-bg); color: var(--text);
+      cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 8px;
     }
-    .refine-section select:focus { border-color: #1a3650; box-shadow: 0 0 0 2px rgba(26,54,80,0.1); }
+    .refine-section .refine-group .custom-select-dropdown {
+      position: absolute; top: calc(100% + 4px); left: 0; right: 0;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+      box-shadow: var(--shadow-hover); z-index: 10; max-height: 200px; overflow-y: auto;
+      display: none;
+    }
+    .refine-section .refine-group .custom-select.active .custom-select-dropdown { display: block; }
+    .refine-section .refine-group .custom-select-options { list-style: none; padding: 0; margin: 0; }
+    .refine-section .refine-group .custom-select-options li {
+      padding: 8px 12px; cursor: pointer; font-size: 0.85rem; color: var(--text);
+      transition: background 0.2s;
+    }
+    .refine-section .refine-group .custom-select-options li:hover { background: var(--surface-alt); }
     .filter-chips { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0; }
     .filter-chips .chip {
       background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
@@ -75,8 +89,10 @@
   <nav class="navbar">
     <div class="container nav-container">
       <a href="/" class="logo-wrapper">
-        <img src="/assets/logo-icon.svg" alt="Zaure" class="logo-icon">
-        <div class="logo-text"><span class="brand">Zaure</span><span class="tagline">Your Entrance to Home</span></div>
+        <div class="logo-text">
+          <span class="brand">Zaure</span>
+          <span class="tagline">Buy with Confidence</span>
+        </div>
       </a>
       <div class="nav-links">
         <a href="/">Home</a>
@@ -86,8 +102,13 @@
       </div>
       <div class="nav-actions">
         <button class="icon-btn" id="themeToggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
-        <a href="/favorites.html" class="icon-btn" style="position:relative;text-decoration:none;"><i class="fas fa-heart"></i><span id="favBadge">0</span></a>
-        <div id="headerUserArea"><div class="avatar" id="userAvatar" onclick="openSignup()">ZA</div></div>
+        <a href="/favorites.html" class="icon-btn" style="position:relative;text-decoration:none;">
+          <i class="fas fa-heart"></i>
+          <span id="favBadge">0</span>
+        </a>
+        <div id="headerUserArea">
+          <div class="avatar" id="userAvatar" onclick="openSignup()">ZA</div>
+        </div>
       </div>
     </div>
   </nav>
@@ -112,16 +133,38 @@
     <div class="refine-section">
       <div class="refine-group">
         <label><i class="fas fa-sliders-h"></i> Refine:</label>
-        <select id="refineSort">
-          <option value="relevance">Relevance</option>
-          <option value="newest">Newest First</option>
-          <option value="price-low">Price: Low to High</option>
-          <option value="price-high">Price: High to Low</option>
-          <option value="popular">Most Popular</option>
-        </select>
-        <select id="refineCategory"><option value="all">All Categories</option></select>
+        <!-- Custom sort dropdown -->
+        <div class="custom-select" id="sortSelect">
+          <div class="custom-select-trigger" id="sortTrigger">
+            <span>Relevance</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="custom-select-dropdown">
+            <ul class="custom-select-options" id="sortOptions">
+              <li data-value="relevance">Relevance</li>
+              <li data-value="newest">Newest First</li>
+              <li data-value="price-low">Price: Low to High</li>
+              <li data-value="price-high">Price: High to Low</li>
+              <li data-value="popular">Most Popular</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Custom category dropdown -->
+        <div class="custom-select" id="categorySelect">
+          <div class="custom-select-trigger" id="categoryTrigger">
+            <span>All Categories</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="custom-select-dropdown">
+            <ul class="custom-select-options" id="categoryOptions">
+              <li data-value="all">All Categories</li>
+            </ul>
+          </div>
+        </div>
       </div>
-      <div class="refine-group"><span style="font-size:0.85rem;color:var(--text-secondary);" id="showingCount">Showing 0 results</span></div>
+      <div class="refine-group">
+        <span style="font-size:0.85rem;color:var(--text-secondary);" id="showingCount">Showing 0 results</span>
+      </div>
     </div>
 
     <div class="filter-chips" id="filterChips">
@@ -151,34 +194,60 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col brand">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
-            <img src="/assets/logo-icon.svg" alt="Zaure" style="width:32px;height:32px;">
-            <span style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:white;">Zaure</span>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <span style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:white;">Zaure</span>
+            <span style="font-size:0.7rem;color:#94A3B8;">Buy with Confidence</span>
           </div>
-          <p>Nigeria's leading free classified marketplace. Buy, sell, or trade locally. No commission, no middlemen.</p>
-          <div class="social" style="margin-top:12px;">
-            <a href="https://twitter.com/zauretech" target="_blank"><i class="fab fa-twitter"></i></a>
-            <a href="https://instagram.com/zauretech" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://linkedin.com/company/zauretech" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://facebook.com/zauretech" target="_blank"><i class="fab fa-facebook-f"></i></a>
-          </div>
-        </div>
-        <div class="footer-col"><h4>Browse</h4><a href="/category.html?slug=all">All Items</a><a href="/category.html?slug=vehicles">Vehicles</a><a href="/category.html?slug=electronics">Electronics</a><a href="/category.html?slug=furniture">Furniture</a><a href="/category.html?slug=fashion">Fashion</a><a href="/category.html?slug=real-estate">Real Estate</a></div>
-        <div class="footer-col"><h4>Support</h4><a href="/help.html">Help Center</a><a href="/safety.html">Safety Tips</a><a href="/contact.html">Contact Us</a><a href="/support.html">Support</a></div>
-        <div class="footer-col"><h4>Company</h4><a href="/about.html">About Us</a><a href="/careers.html">Careers</a><a href="/privacy.html">Privacy Policy</a><a href="/terms.html">Terms of Service</a></div>
-        <div class="footer-col trust-badges" style="grid-column:1/-1;border-top:1px solid #2E3548;padding-top:16px;margin-top:8px;">
-          <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;">
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-shield-alt" style="color:#B49450;"></i> Verified Users</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-handshake" style="color:#B49450;"></i> No Commission</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-user-check" style="color:#B49450;"></i> Identity Verified</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-lock" style="color:#B49450;"></i> Secure Platform</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-clock" style="color:#B49450;"></i> 24/7 Support</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-star" style="color:#B49450;"></i> Trusted by Thousands</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-phone" style="color:#B49450;"></i> Direct Contact</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-credit-card" style="color:#B49450;"></i> Secure Payments</div>
+          <p>Nigeria's most trusted online marketplace. Buy, sell, or trade locally. No commission, no middlemen.</p>
+          <div class="social">
+            <a href="https://twitter.com/zauretech" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com/zauretech" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://linkedin.com/company/zauretech" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://facebook.com/zauretech" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
           </div>
         </div>
-        <div class="footer-bottom"><span>&copy; 2026 <strong style="color:white;">Zaure Technologies</strong>. All rights reserved.</span><span><i class="fas fa-globe"></i> Nigeria · English</span></div>
+        <div class="footer-col">
+          <h4>Browse</h4>
+          <a href="/category.html?slug=all">All Items</a>
+          <a href="/category.html?slug=vehicles">Vehicles</a>
+          <a href="/category.html?slug=electronics">Electronics</a>
+          <a href="/category.html?slug=furniture">Furniture</a>
+          <a href="/category.html?slug=fashion">Fashion</a>
+          <a href="/category.html?slug=real-estate">Real Estate</a>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <a href="/help.html">Help Center</a>
+          <a href="/safety.html">Safety Tips</a>
+          <a href="/contact.html">Contact Us</a>
+          <a href="/support.html">Support</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="/about.html">About Us</a>
+          <a href="/careers.html">Careers</a>
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Service</a>
+        </div>
+        <div class="trust-badges">
+          <div class="badges-row">
+            <span class="badge-item"><i class="fas fa-shield-alt"></i> Verified Users</span>
+            <span class="badge-item"><i class="fas fa-handshake"></i> No Commission</span>
+            <span class="badge-item"><i class="fas fa-user-check"></i> Identity Verified</span>
+            <span class="badge-item"><i class="fas fa-lock"></i> Secure Platform</span>
+            <span class="badge-item"><i class="fas fa-clock"></i> 24/7 Support</span>
+            <span class="badge-item"><i class="fas fa-star"></i> Trusted by Thousands</span>
+            <span class="badge-item"><i class="fas fa-phone"></i> Direct Contact</span>
+            <span class="badge-item"><i class="fas fa-credit-card"></i> Secure Payments</span>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>&copy; 2026 <strong>Zaure Technologies</strong>. All rights reserved.</span>
+          <span class="footer-lang"><i class="fas fa-globe"></i> Nigeria · English</span>
+        </div>
+        <div style="grid-column: 1/-1; text-align: center; margin-top: 8px; font-size: 0.8rem; color: #94A3B8;">
+          For info or to report an issue, contact us on WhatsApp: <a href="https://wa.me/2349042339411" target="_blank" style="color: #D4B87A; text-decoration: none; font-weight: 600;">+2349042339411</a>
+        </div>
       </div>
     </div>
   </footer>
@@ -186,7 +255,7 @@
   <!-- ===== BOTTOM NAV ===== -->
   <div class="bottom-nav">
     <a href="/" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
-    <button class="nav-item active"><i class="fas fa-search"></i><span>Search</span></button>
+    <a href="/categories.html" class="nav-item"><i class="fas fa-th-large"></i><span>Categories</span></a>
     <button class="post-btn" id="fabPostAd"><i class="fas fa-plus"></i></button>
     <a href="/favorites.html" class="nav-item"><i class="fas fa-heart"></i><span>Favorites</span></a>
     <a href="/profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
@@ -195,35 +264,31 @@
   <!-- ===== SIGNUP MODAL ===== -->
   <div class="modal-overlay" id="signupModal">
     <div class="modal">
-      <div class="modal-header"><h3>Create your account</h3><button class="modal-close" id="closeSignupModalBtn"><i class="fas fa-times"></i></button></div>
+      <div class="modal-header">
+        <h3>Create your account</h3>
+        <button class="modal-close" id="closeSignupModalBtn"><i class="fas fa-times"></i></button>
+      </div>
       <form id="signupForm" class="modal-form">
         <label for="signupName">Full Name</label>
         <input type="text" id="signupName" placeholder="Enter your full name" required>
         <label for="signupPhone">Phone Number</label>
         <input type="tel" id="signupPhone" placeholder="Enter your phone number" required>
-        <label for="signupState">State</label>
-        <select id="signupState" required>
-          <option value="">Select your state</option>
-          <option value="Abia">Abia</option><option value="Adamawa">Adamawa</option>
-          <option value="Akwa Ibom">Akwa Ibom</option><option value="Anambra">Anambra</option>
-          <option value="Bauchi">Bauchi</option><option value="Bayelsa">Bayelsa</option>
-          <option value="Benue">Benue</option><option value="Borno">Borno</option>
-          <option value="Cross River">Cross River</option><option value="Delta">Delta</option>
-          <option value="Ebonyi">Ebonyi</option><option value="Edo">Edo</option>
-          <option value="Ekiti">Ekiti</option><option value="Enugu">Enugu</option>
-          <option value="FCT">FCT (Abuja)</option><option value="Gombe">Gombe</option>
-          <option value="Imo">Imo</option><option value="Jigawa">Jigawa</option>
-          <option value="Kaduna">Kaduna</option><option value="Kano">Kano</option>
-          <option value="Katsina">Katsina</option><option value="Kebbi">Kebbi</option>
-          <option value="Kogi">Kogi</option><option value="Kwara">Kwara</option>
-          <option value="Lagos">Lagos</option><option value="Nasarawa">Nasarawa</option>
-          <option value="Niger">Niger</option><option value="Ogun">Ogun</option>
-          <option value="Ondo">Ondo</option><option value="Osun">Osun</option>
-          <option value="Oyo">Oyo</option><option value="Plateau">Plateau</option>
-          <option value="Rivers">Rivers</option><option value="Sokoto">Sokoto</option>
-          <option value="Taraba">Taraba</option><option value="Yobe">Yobe</option>
-          <option value="Zamfara">Zamfara</option>
-        </select>
+        <label>State</label>
+        <div class="custom-select" id="stateSelect">
+          <div class="custom-select-trigger" id="stateTrigger">
+            <span>Select your state</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="custom-select-dropdown" id="stateDropdown">
+            <input type="text" id="stateSearchInput" placeholder="Search state...">
+            <ul class="custom-select-options" id="stateOptionsList"></ul>
+          </div>
+        </div>
+        <input type="hidden" id="signupState" value="">
+        <label class="terms-checkbox">
+          <input type="checkbox" id="termsCheckbox" required>
+          <span>By creating an account, you agree to Zaure's <a href="/terms.html" target="_blank">Terms</a>, <a href="/conditions.html" target="_blank">Conditions of Use</a>, and <a href="/privacy.html" target="_blank">Privacy Policy</a>.</span>
+        </label>
         <button type="submit" class="btn-primary">Sign Up</button>
       </form>
     </div>
@@ -232,17 +297,20 @@
   <script src="/js/main.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', async function() {
+      initStateDropdown();
+
       let allResults = [];
       let filteredResults = [];
       let currentPage = 1;
       const itemsPerPage = 12;
       let currentChipFilter = 'all';
       let searchQuery = '';
+      let currentSort = 'relevance';
+      let currentCategory = 'all';
 
       const grid = document.getElementById('searchResultsGrid');
-      const container = document.getElementById('searchResultsContainer');
-      const refineSort = document.getElementById('refineSort');
-      const refineCategory = document.getElementById('refineCategory');
+      const refineSort = document.getElementById('sortSelect');
+      const refineCategory = document.getElementById('categorySelect');
       const prevPageBtn = document.getElementById('prevPage');
       const nextPageBtn = document.getElementById('nextPage');
       const pageNumbers = document.getElementById('pageNumbers');
@@ -256,13 +324,45 @@
       searchQuery = localStorage.getItem('zaure_search_query') || '';
 
       const categories = await loadCategories();
-      const categorySelect = document.getElementById('refineCategory');
-      categorySelect.innerHTML = '<option value="all">All Categories</option>' + categories.map(c => `<option value="${c.slug}">${c.name}</option>`).join('');
+      const categoryOptionsList = document.getElementById('categoryOptions');
+      categoryOptionsList.innerHTML = '<li data-value="all">All Categories</li>' + categories.map(c => `<li data-value="${c.slug}">${c.name}</li>`).join('');
+
+      // Custom dropdown helpers
+      function initCustomDropdown(containerId, triggerId, optionsListId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        const trigger = document.getElementById(triggerId);
+        const optionsList = document.getElementById(optionsListId);
+
+        trigger.addEventListener('click', function(e) {
+          e.stopPropagation();
+          container.classList.toggle('active');
+        });
+
+        optionsList.querySelectorAll('li').forEach(li => {
+          li.addEventListener('click', function() {
+            trigger.querySelector('span').textContent = this.textContent;
+            container.classList.remove('active');
+            if (containerId === 'sortSelect') {
+              currentSort = this.dataset.value;
+            } else if (containerId === 'categorySelect') {
+              currentCategory = this.dataset.value;
+            }
+            applyFilters();
+          });
+        });
+
+        document.addEventListener('click', function(e) {
+          if (!container.contains(e.target)) container.classList.remove('active');
+        });
+      }
+
+      initCustomDropdown('sortSelect', 'sortTrigger', 'sortOptions');
+      initCustomDropdown('categorySelect', 'categoryTrigger', 'categoryOptions');
 
       function applyFilters() {
         let filtered = [...allResults];
-        const categoryFilter = refineCategory.value;
-        if (categoryFilter !== 'all') filtered = filtered.filter(p => p.category === categoryFilter);
+        if (currentCategory !== 'all') filtered = filtered.filter(p => p.category === currentCategory);
         switch(currentChipFilter) {
           case 'featured': filtered = filtered.filter(p => p.featured); break;
           case 'boosted': filtered = filtered.filter(p => p.boosted); break;
@@ -270,8 +370,7 @@
           case 'high-price': filtered = filtered.filter(p => p.price > 1000000); break;
           default: break;
         }
-        const sort = refineSort.value;
-        switch(sort) {
+        switch(currentSort) {
           case 'newest': filtered.sort((a, b) => new Date(b.date || '') - new Date(a.date || '')); break;
           case 'price-low': filtered.sort((a, b) => a.price - b.price); break;
           case 'price-high': filtered.sort((a, b) => b.price - a.price); break;
@@ -329,10 +428,12 @@
         applyFilters();
       };
 
-      window.refineSearch = function(term) { document.getElementById('refineCategory').value = term; applyFilters(); };
+      window.refineSearch = function(term) {
+        currentCategory = term;
+        document.getElementById('categoryTrigger').querySelector('span').textContent = categories.find(c => c.slug === term)?.name || term;
+        applyFilters();
+      };
 
-      refineSort.addEventListener('change', applyFilters);
-      refineCategory.addEventListener('change', applyFilters);
       prevPageBtn.addEventListener('click', () => goToPage(currentPage - 1));
       nextPageBtn.addEventListener('click', () => goToPage(currentPage + 1));
 

@@ -3,259 +3,245 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>Contact Zaure – Get in Touch</title>
-  <meta name="description" content="Contact Zaure support team. We're here to help with your questions, feedback, or support needs.">
+  <title>Contact Us – Zaure</title>
+  <meta name="description" content="Contact Zaure support team for help, inquiries, or to report issues.">
   <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
   <style>
-    .contact-grid {
+    .contact-header {
+      margin: 30px 0 20px;
+      text-align: center;
+    }
+    .contact-header h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #1a3650, #B49450);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .contact-header p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      margin-top: 6px;
+    }
+    .contact-cards {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      margin: 24px 0;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-bottom: 30px;
     }
-    .contact-info {
+    @media (min-width: 640px) {
+      .contact-cards { grid-template-columns: repeat(3, 1fr); }
+    }
+    .contact-card {
       background: var(--surface);
-      border-radius: 16px;
+      border-radius: 20px;
       padding: 24px;
+      text-align: center;
       border: 1px solid var(--border);
+      transition: transform 0.3s, box-shadow 0.3s;
     }
-    .contact-info h3 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 16px;
+    .contact-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
     }
-    .contact-info .info-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 10px 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .contact-info .info-item:last-child { border-bottom: none; }
-    .contact-info .info-item i {
-      width: 36px;
-      height: 36px;
-      background: var(--surface-alt);
+    .contact-card .contact-icon {
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
+      background: var(--surface-alt);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #B49450;
+      margin: 0 auto 12px;
+      font-size: 1.5rem;
+      color: #1a3650;
+    }
+    .contact-card h3 {
       font-size: 1rem;
-      flex-shrink: 0;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
     }
-    .contact-info .info-item .text { font-size: 0.9rem; color: var(--text); }
-    .contact-info .info-item .text .label { font-weight: 600; display: block; }
-    .contact-info .info-item .text .value { color: var(--text-secondary); }
-    .contact-form {
-      background: var(--surface);
-      border-radius: 16px;
-      padding: 24px;
-      border: 1px solid var(--border);
+    .contact-card p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
     }
-    .contact-form h3 { font-size: 1.1rem; font-weight: 600; color: var(--text); margin-bottom: 16px; }
-    .contact-form .form-group { margin-bottom: 14px; }
-    .contact-form .form-group label { display: block; font-weight: 500; font-size: 0.85rem; color: var(--text); margin-bottom: 4px; }
-    .contact-form .form-group input,
-    .contact-form .form-group textarea,
-    .contact-form .form-group select {
-      width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: 12px;
-      font-size: 0.95rem; background: var(--input-bg); color: var(--text); transition: 0.2s;
+    .contact-card a {
+      display: inline-block;
+      margin-top: 8px;
+      color: #1a3650;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.9rem;
     }
-    .contact-form .form-group input:focus,
-    .contact-form .form-group textarea:focus,
-    .contact-form .form-group select:focus {
-      border-color: #1a3650; outline: none; box-shadow: 0 0 0 2px rgba(26,54,80,0.1);
-    }
-    .contact-form .form-group textarea { min-height: 120px; resize: vertical; }
-    .contact-form .btn-submit {
-      background: #1a3650; color: white; border: none; padding: 12px 28px;
-      border-radius: 60px; font-weight: 600; cursor: pointer; width: 100%;
-      transition: 0.2s;
-    }
-    .contact-form .btn-submit:hover { background: #0f2940; }
-    [data-theme="dark"] .contact-form .btn-submit { background: #2A3550; }
-    [data-theme="dark"] .contact-form .btn-submit:hover { background: #3A4560; }
-    @media (max-width: 768px) {
-      .contact-grid { grid-template-columns: 1fr; }
-    }
+    .contact-card a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
-
-  <!-- ===== NAV ===== -->
   <nav class="navbar">
     <div class="container nav-container">
       <a href="/" class="logo-wrapper">
-        <img src="/assets/logo-icon.svg" alt="Zaure" class="logo-icon">
-        <div class="logo-text"><span class="brand">Zaure</span><span class="tagline">Your Entrance to Home</span></div>
+        <div class="logo-text">
+          <span class="brand">Zaure</span>
+          <span class="tagline">Buy with Confidence</span>
+        </div>
       </a>
       <div class="nav-links">
         <a href="/">Home</a>
-        <a href="/category.html?slug=all">Browse</a>
+        <a href="/categories.html">Categories</a>
+        <a href="/stores.html">Stores</a>
         <a href="/about.html">About</a>
         <a href="/contact.html" class="active">Contact</a>
       </div>
       <div class="nav-actions">
         <button class="icon-btn" id="themeToggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
-        <a href="/favorites.html" class="icon-btn" style="position:relative;text-decoration:none;"><i class="fas fa-heart"></i><span id="favBadge">0</span></a>
-        <div id="headerUserArea"><div class="avatar" id="userAvatar" onclick="openSignup()">ZA</div></div>
+        <a href="/favorites.html" class="icon-btn" style="position:relative;text-decoration:none;">
+          <i class="fas fa-heart"></i>
+          <span id="favBadge">0</span>
+        </a>
+        <div id="headerUserArea">
+          <div class="avatar" id="userAvatar" onclick="openSignup()">ZA</div>
+        </div>
       </div>
     </div>
   </nav>
 
   <div class="container">
-
-    <div class="breadcrumb">
-      <a href="/">Home</a>
-      <span class="separator"><i class="fas fa-chevron-right"></i></span>
-      <span class="current">Contact Us</span>
+    <div class="contact-header">
+      <h1>Contact Us</h1>
+      <p>We're here to help with any questions or concerns</p>
     </div>
 
-    <h1 class="section-title" style="text-align:left;">Get in Touch</h1>
-    <p style="color:var(--text-secondary);margin-bottom:20px;">Have questions, feedback, or need help? We're here for you.</p>
-
-    <div class="contact-grid">
-      <div class="contact-info">
-        <h3><i class="fas fa-address-card" style="color:#B49450;margin-right:8px;"></i> Contact Information</h3>
-        <div class="info-item">
-          <i class="fas fa-envelope"></i>
-          <div class="text"><span class="label">Email</span><span class="value">get.zaure@proton.me</span></div>
-        </div>
-        <div class="info-item">
-          <i class="fas fa-phone"></i>
-          <div class="text"><span class="label">Phone</span><span class="value">+234 801 234 5678</span></div>
-        </div>
-        <div class="info-item">
-          <i class="fas fa-map-marker-alt"></i>
-          <div class="text"><span class="label">Location</span><span class="value">Northern Nigeria</span></div>
-        </div>
-        <div class="info-item">
-          <i class="fas fa-clock"></i>
-          <div class="text"><span class="label">Support Hours</span><span class="value">24/7 - We're always here</span></div>
-        </div>
-        <div style="margin-top:16px;display:flex;gap:12px;">
-          <a href="https://twitter.com/zauretech" target="_blank" style="color:var(--text-secondary);font-size:1.3rem;"><i class="fab fa-twitter"></i></a>
-          <a href="https://instagram.com/zauretech" target="_blank" style="color:var(--text-secondary);font-size:1.3rem;"><i class="fab fa-instagram"></i></a>
-          <a href="https://linkedin.com/company/zauretech" target="_blank" style="color:var(--text-secondary);font-size:1.3rem;"><i class="fab fa-linkedin-in"></i></a>
-          <a href="https://facebook.com/zauretech" target="_blank" style="color:var(--text-secondary);font-size:1.3rem;"><i class="fab fa-facebook-f"></i></a>
-        </div>
+    <div class="contact-cards">
+      <div class="contact-card">
+        <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
+        <h3>WhatsApp</h3>
+        <p>Fastest way to reach us</p>
+        <a href="https://wa.me/2349042339411" target="_blank">+234 904 233 9411</a>
       </div>
-
-      <div class="contact-form">
-        <h3><i class="fas fa-paper-plane" style="color:#B49450;margin-right:8px;"></i> Send a Message</h3>
-        <form id="contactForm">
-          <div class="form-group">
-            <label for="contactName">Full Name *</label>
-            <input type="text" id="contactName" placeholder="Enter your name" required>
-          </div>
-          <div class="form-group">
-            <label for="contactEmail">Email Address *</label>
-            <input type="email" id="contactEmail" placeholder="Enter your email" required>
-          </div>
-          <div class="form-group">
-            <label for="contactSubject">Subject</label>
-            <select id="contactSubject">
-              <option value="general">General Inquiry</option>
-              <option value="support">Support</option>
-              <option value="feedback">Feedback</option>
-              <option value="partnership">Partnership</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="contactMessage">Message *</label>
-            <textarea id="contactMessage" placeholder="Write your message here..." required></textarea>
-          </div>
-          <button type="submit" class="btn-submit"><i class="fas fa-paper-plane"></i> Send Message</button>
-        </form>
+      <div class="contact-card">
+        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+        <h3>Email</h3>
+        <p>For detailed inquiries</p>
+        <a href="mailto:support@zauretech.vercel.app">support@zauretech.vercel.app</a>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon"><i class="fas fa-clock"></i></div>
+        <h3>Support Hours</h3>
+        <p>Monday – Saturday</p>
+        <p style="font-weight:600;color:var(--text);">9:00 AM – 6:00 PM WAT</p>
       </div>
     </div>
 
+    <div style="text-align:center;padding:20px;background:var(--surface);border-radius:16px;border:1px solid var(--border);margin-bottom:30px;">
+      <p style="color:var(--text-secondary);font-size:0.9rem;">
+        For info or to report an issue, contact us on WhatsApp: 
+        <a href="https://wa.me/2349042339411" target="_blank" style="color:#D4B87A;text-decoration:none;font-weight:600;">+2349042339411</a>
+      </p>
+    </div>
   </div>
 
-  <!-- ===== FOOTER (same as index.html) ===== -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col brand">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
-            <img src="/assets/logo-icon.svg" alt="Zaure" style="width:32px;height:32px;">
-            <span style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:white;">Zaure</span>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <span style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:white;">Zaure</span>
+            <span style="font-size:0.7rem;color:#94A3B8;">Buy with Confidence</span>
           </div>
-          <p>Nigeria's leading free classified marketplace. Buy, sell, or trade locally. No commission, no middlemen.</p>
-          <div class="social" style="margin-top:12px;">
-            <a href="https://twitter.com/zauretech" target="_blank"><i class="fab fa-twitter"></i></a>
-            <a href="https://instagram.com/zauretech" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://linkedin.com/company/zauretech" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://facebook.com/zauretech" target="_blank"><i class="fab fa-facebook-f"></i></a>
-          </div>
-        </div>
-        <div class="footer-col"><h4>Browse</h4><a href="/category.html?slug=all">All Items</a><a href="/category.html?slug=vehicles">Vehicles</a><a href="/category.html?slug=electronics">Electronics</a><a href="/category.html?slug=furniture">Furniture</a><a href="/category.html?slug=fashion">Fashion</a><a href="/category.html?slug=real-estate">Real Estate</a></div>
-        <div class="footer-col"><h4>Support</h4><a href="/help.html">Help Center</a><a href="/safety.html">Safety Tips</a><a href="/contact.html">Contact Us</a><a href="/support.html">Support</a></div>
-        <div class="footer-col"><h4>Company</h4><a href="/about.html">About Us</a><a href="/careers.html">Careers</a><a href="/privacy.html">Privacy Policy</a><a href="/terms.html">Terms of Service</a></div>
-        <div class="footer-col trust-badges" style="grid-column:1/-1;border-top:1px solid #2E3548;padding-top:16px;margin-top:8px;">
-          <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;">
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-shield-alt" style="color:#B49450;"></i> Verified Users</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-handshake" style="color:#B49450;"></i> No Commission</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-user-check" style="color:#B49450;"></i> Identity Verified</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-lock" style="color:#B49450;"></i> Secure Platform</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-clock" style="color:#B49450;"></i> 24/7 Support</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-star" style="color:#B49450;"></i> Trusted by Thousands</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-phone" style="color:#B49450;"></i> Direct Contact</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-credit-card" style="color:#B49450;"></i> Secure Payments</div>
+          <p>Nigeria's most trusted online marketplace. Buy, sell, or trade locally. No commission, no middlemen.</p>
+          <div class="social">
+            <a href="https://twitter.com/zauretech" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com/zauretech" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://linkedin.com/company/zauretech" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://facebook.com/zauretech" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
           </div>
         </div>
-        <div class="footer-bottom"><span>&copy; 2026 <strong style="color:white;">Zaure Technologies</strong>. All rights reserved.</span><span><i class="fas fa-globe"></i> Nigeria · English</span></div>
+        <div class="footer-col">
+          <h4>Browse</h4>
+          <a href="/category.html?slug=all">All Items</a>
+          <a href="/category.html?slug=vehicles">Vehicles</a>
+          <a href="/category.html?slug=electronics">Electronics</a>
+          <a href="/category.html?slug=furniture">Furniture</a>
+          <a href="/category.html?slug=fashion">Fashion</a>
+          <a href="/category.html?slug=real-estate">Real Estate</a>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <a href="/help.html">Help Center</a>
+          <a href="/safety.html">Safety Tips</a>
+          <a href="/contact.html">Contact Us</a>
+          <a href="/support.html">Support</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="/about.html">About Us</a>
+          <a href="/careers.html">Careers</a>
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Service</a>
+        </div>
+        <div class="trust-badges">
+          <div class="badges-row">
+            <span class="badge-item"><i class="fas fa-shield-alt"></i> Verified Users</span>
+            <span class="badge-item"><i class="fas fa-handshake"></i> No Commission</span>
+            <span class="badge-item"><i class="fas fa-user-check"></i> Identity Verified</span>
+            <span class="badge-item"><i class="fas fa-lock"></i> Secure Platform</span>
+            <span class="badge-item"><i class="fas fa-clock"></i> 24/7 Support</span>
+            <span class="badge-item"><i class="fas fa-star"></i> Trusted by Thousands</span>
+            <span class="badge-item"><i class="fas fa-phone"></i> Direct Contact</span>
+            <span class="badge-item"><i class="fas fa-credit-card"></i> Secure Payments</span>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>&copy; 2026 <strong>Zaure Technologies</strong>. All rights reserved.</span>
+          <span class="footer-lang"><i class="fas fa-globe"></i> Nigeria · English</span>
+        </div>
+        <div style="grid-column: 1/-1; text-align: center; margin-top: 8px; font-size: 0.8rem; color: #94A3B8;">
+          For info or to report an issue, contact us on WhatsApp: <a href="https://wa.me/2349042339411" target="_blank" style="color: #D4B87A; text-decoration: none; font-weight: 600;">+2349042339411</a>
+        </div>
       </div>
     </div>
   </footer>
 
-  <!-- ===== BOTTOM NAV ===== -->
   <div class="bottom-nav">
     <a href="/" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
-    <button class="nav-item" onclick="window.location.href='/'"><i class="fas fa-search"></i><span>Search</span></button>
+    <a href="/categories.html" class="nav-item"><i class="fas fa-th-large"></i><span>Categories</span></a>
     <button class="post-btn" id="fabPostAd"><i class="fas fa-plus"></i></button>
     <a href="/favorites.html" class="nav-item"><i class="fas fa-heart"></i><span>Favorites</span></a>
     <a href="/profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
   </div>
 
-  <!-- ===== SIGNUP MODAL ===== -->
   <div class="modal-overlay" id="signupModal">
     <div class="modal">
-      <div class="modal-header"><h3>Create your account</h3><button class="modal-close" id="closeSignupModalBtn"><i class="fas fa-times"></i></button></div>
+      <div class="modal-header">
+        <h3>Create your account</h3>
+        <button class="modal-close" id="closeSignupModalBtn"><i class="fas fa-times"></i></button>
+      </div>
       <form id="signupForm" class="modal-form">
         <label for="signupName">Full Name</label>
         <input type="text" id="signupName" placeholder="Enter your full name" required>
         <label for="signupPhone">Phone Number</label>
         <input type="tel" id="signupPhone" placeholder="Enter your phone number" required>
-        <label for="signupState">State</label>
-        <select id="signupState" required>
-          <option value="">Select your state</option>
-          <option value="Abia">Abia</option><option value="Adamawa">Adamawa</option>
-          <option value="Akwa Ibom">Akwa Ibom</option><option value="Anambra">Anambra</option>
-          <option value="Bauchi">Bauchi</option><option value="Bayelsa">Bayelsa</option>
-          <option value="Benue">Benue</option><option value="Borno">Borno</option>
-          <option value="Cross River">Cross River</option><option value="Delta">Delta</option>
-          <option value="Ebonyi">Ebonyi</option><option value="Edo">Edo</option>
-          <option value="Ekiti">Ekiti</option><option value="Enugu">Enugu</option>
-          <option value="FCT">FCT (Abuja)</option><option value="Gombe">Gombe</option>
-          <option value="Imo">Imo</option><option value="Jigawa">Jigawa</option>
-          <option value="Kaduna">Kaduna</option><option value="Kano">Kano</option>
-          <option value="Katsina">Katsina</option><option value="Kebbi">Kebbi</option>
-          <option value="Kogi">Kogi</option><option value="Kwara">Kwara</option>
-          <option value="Lagos">Lagos</option><option value="Nasarawa">Nasarawa</option>
-          <option value="Niger">Niger</option><option value="Ogun">Ogun</option>
-          <option value="Ondo">Ondo</option><option value="Osun">Osun</option>
-          <option value="Oyo">Oyo</option><option value="Plateau">Plateau</option>
-          <option value="Rivers">Rivers</option><option value="Sokoto">Sokoto</option>
-          <option value="Taraba">Taraba</option><option value="Yobe">Yobe</option>
-          <option value="Zamfara">Zamfara</option>
-        </select>
+        <label>State</label>
+        <div class="custom-select" id="stateSelect">
+          <div class="custom-select-trigger" id="stateTrigger">
+            <span>Select your state</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="custom-select-dropdown" id="stateDropdown">
+            <input type="text" id="stateSearchInput" placeholder="Search state...">
+            <ul class="custom-select-options" id="stateOptionsList"></ul>
+          </div>
+        </div>
+        <input type="hidden" id="signupState" value="">
+        <label class="terms-checkbox">
+          <input type="checkbox" id="termsCheckbox" required>
+          <span>By creating an account, you agree to Zaure's <a href="/terms.html" target="_blank">Terms</a>, <a href="/conditions.html" target="_blank">Conditions of Use</a>, and <a href="/privacy.html" target="_blank">Privacy Policy</a>.</span>
+        </label>
         <button type="submit" class="btn-primary">Sign Up</button>
       </form>
     </div>
@@ -264,15 +250,13 @@
   <script src="/js/main.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+      initStateDropdown();
+      document.getElementById('fabPostAd')?.addEventListener('click', function() {
+        if (!currentUser) { openSignup(); } else { window.location.href = '/post.html'; }
+      });
       loadUser();
       initTheme();
       updateFavoriteBadge();
-
-      document.getElementById('contactForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        alert('Thank you for your message! We\'ll get back to you within 24 hours.');
-        this.reset();
-      });
     });
   </script>
 </body>

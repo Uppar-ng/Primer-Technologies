@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Store Profile – Zaure</title>
+  <meta name="description" content="View store profile and products from verified sellers on Zaure.">
+  <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .store-profile-header {
+      position: relative;
+      margin: 24px 0 20px;
+      padding: 30px 20px;
+      background: var(--surface);
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      animation: slideDown 0.5s ease;
+    }
+    .store-profile-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, #1a3650, #B49450, #1a3650);
+    }
+    .store-top-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .store-avatar-large {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      background: linear-gradient(135deg, #1a3650, #2a4a6a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: white;
+      transition: transform 0.4s;
+      animation: pulse 2s infinite;
+    }
+    .store-avatar-large img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(180,148,80,0.4); }
+      70% { box-shadow: 0 0 0 15px rgba(180,148,80,0); }
+      100% { box-shadow: 0 0 0 0 rgba(180,148,80,0); }
+    }
+    .store-main-info {
+      flex: 1;
+      min-width: 200px;
+    }
+    .store-main-info h1 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .store-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #1f5d8a;
+      margin-bottom: 6px;
+      background: rgba(31,93,138,0.1);
+      padding: 2px 10px;
+      border-radius: 30px;
+    }
+    .store-category {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+    .store-rating-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      flex-wrap: wrap;
+    }
+    .store-rating-row i { color: #f5b342; }
+    .store-rating-row .rating-value { font-weight: 700; color: var(--text); }
+
+    .store-bio {
+      margin-top: 16px;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      border-left: 3px solid #B49450;
+      padding-left: 16px;
+      animation: fadeIn 0.8s ease;
+    }
+
+    .contact-buttons {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .contact-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      border: 1px solid transparent;
+    }
+    .call-btn {
+      background: #1a3650;
+      color: white;
+    }
+    .call-btn:hover {
+      background: #0f2940;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(26,54,80,0.3);
+    }
+    .whatsapp-btn {
+      background: #25D366;
+      color: white;
+    }
+    .whatsapp-btn:hover {
+      background: #1DA851;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(37,211,102,0.3);
+    }
+
+    .products-section {
+      margin-top: 30px;
+    }
+    .products-section h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 16px;
+      position: relative;
+      display: inline-block;
+    }
+    .products-section h2::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 50%;
+      height: 3px;
+      background: #B49450;
+      border-radius: 2px;
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @media (max-width: 480px) {
+      .store-profile-header { padding: 20px 16px; }
+      .store-avatar-large { width: 70px; height: 70px; font-size: 1.8rem; }
+      .store-main-info h1 { font-size: 1.3rem; }
+      .contact-btn { padding: 8px 16px; font-size: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== TOP NAVBAR ===== -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="/" class="logo-wrapper">
+        <div class="logo-text">
+          <span class="brand">Zaure</span>
+          <span class="tagline">Buy with Confidence</span>
+        </div>
+      </a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/categories.html">Categories</a>
+        <a href="/stores.html">Stores</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <button class="icon-btn" id="themeToggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
+        <a href="/favorites.html" class="icon-btn" style="position:relative;text-decoration:none;">
+          <i class="fas fa-heart"></i>
+          <span id="favBadge">0</span>
+        </a>
+        <div id="headerUserArea">
+          <div class="avatar" id="userAvatar" onclick="openSignup()">ZA</div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div id="storeProfileContainer">
+      <div class="store-profile-header">
+        <div class="store-top-row">
+          <div class="store-avatar-large">...</div>
+          <div class="store-main-info">
+            <h1>Loading...</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="products-section">
+      <h2>Products from this store</h2>
+      <div class="grid-2col-listings" id="storeProductsGrid">
+        <div class="listing-card">
+          <div class="listing-img"><i class="fas fa-spinner fa-spin"></i></div>
+          <div class="listing-body"><div class="price">Loading...</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== BOTTOM NAVIGATION ===== -->
+  <div class="bottom-nav">
+    <a href="/" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
+    <a href="/categories.html" class="nav-item"><i class="fas fa-th-large"></i><span>Categories</span></a>
+    <button class="post-btn" id="fabPostAd"><i class="fas fa-plus"></i></button>
+    <a href="/favorites.html" class="nav-item"><i class="fas fa-heart"></i><span>Favorites</span></a>
+    <a href="/profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col brand">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <span style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:white;">Zaure</span>
+            <span style="font-size:0.7rem;color:#94A3B8;">Buy with Confidence</span>
+          </div>
+          <p>Nigeria's most trusted online marketplace. Buy, sell, or trade locally. No commission, no middlemen.</p>
+          <div class="social">
+            <a href="https://twitter.com/zauretech" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com/zauretech" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://linkedin.com/company/zauretech" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://facebook.com/zauretech" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Browse</h4>
+          <a href="/category.html?slug=all">All Items</a>
+          <a href="/category.html?slug=vehicles">Vehicles</a>
+          <a href="/category.html?slug=electronics">Electronics</a>
+          <a href="/category.html?slug=furniture">Furniture</a>
+          <a href="/category.html?slug=fashion">Fashion</a>
+          <a href="/category.html?slug=real-estate">Real Estate</a>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <a href="/help.html">Help Center</a>
+          <a href="/safety.html">Safety Tips</a>
+          <a href="/contact.html">Contact Us</a>
+          <a href="/support.html">Support</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="/about.html">About Us</a>
+          <a href="/careers.html">Careers</a>
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Service</a>
+        </div>
+        <div class="trust-badges">
+          <div class="badges-row">
+            <span class="badge-item"><i class="fas fa-shield-alt"></i> Verified Users</span>
+            <span class="badge-item"><i class="fas fa-handshake"></i> No Commission</span>
+            <span class="badge-item"><i class="fas fa-user-check"></i> Identity Verified</span>
+            <span class="badge-item"><i class="fas fa-lock"></i> Secure Platform</span>
+            <span class="badge-item"><i class="fas fa-clock"></i> 24/7 Support</span>
+            <span class="badge-item"><i class="fas fa-star"></i> Trusted by Thousands</span>
+            <span class="badge-item"><i class="fas fa-phone"></i> Direct Contact</span>
+            <span class="badge-item"><i class="fas fa-credit-card"></i> Secure Payments</span>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>&copy; 2026 <strong>Zaure Technologies</strong>. All rights reserved.</span>
+          <span class="footer-lang"><i class="fas fa-globe"></i> Nigeria · English</span>
+        </div>
+        <div style="grid-column: 1/-1; text-align: center; margin-top: 8px; font-size: 0.8rem; color: #94A3B8;">
+          For info or to report an issue, contact us on WhatsApp: <a href="https://wa.me/2349042339411" target="_blank" style="color: #D4B87A; text-decoration: none; font-weight: 600;">+2349042339411</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== SIGNUP MODAL ===== -->
+  <div class="modal-overlay" id="signupModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Create your account</h3>
+        <button class="modal-close" id="closeSignupModalBtn"><i class="fas fa-times"></i></button>
+      </div>
+      <form id="signupForm" class="modal-form">
+        <label for="signupName">Full Name</label>
+        <input type="text" id="signupName" placeholder="Enter your full name" required>
+        <label for="signupPhone">Phone Number</label>
+        <input type="tel" id="signupPhone" placeholder="Enter your phone number" required>
+        <label>State</label>
+        <div class="custom-select" id="stateSelect">
+          <div class="custom-select-trigger" id="stateTrigger">
+            <span>Select your state</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="custom-select-dropdown" id="stateDropdown">
+            <input type="text" id="stateSearchInput" placeholder="Search state...">
+            <ul class="custom-select-options" id="stateOptionsList"></ul>
+          </div>
+        </div>
+        <input type="hidden" id="signupState" value="">
+        <label class="terms-checkbox">
+          <input type="checkbox" id="termsCheckbox" required>
+          <span>By creating an account, you agree to Zaure's <a href="/terms.html" target="_blank">Terms</a>, <a href="/conditions.html" target="_blank">Conditions of Use</a>, and <a href="/privacy.html" target="_blank">Privacy Policy</a>.</span>
+        </label>
+        <button type="submit" class="btn-primary">Sign Up</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const storeId = urlParams.get('id');
+      
+      if (!storeId) {
+        document.getElementById('storeProfileContainer').innerHTML = '<div style="text-align:center;padding:3rem;">Store not found.</div>';
+        return;
+      }
+
+      const sellers = await loadTopSellers();
+      const seller = sellers.find(s => s.id === storeId);
+      
+      if (!seller) {
+        document.getElementById('storeProfileContainer').innerHTML = '<div style="text-align:center;padding:3rem;">Store not found.</div>';
+        return;
+      }
+
+      // Render store header
+      document.getElementById('storeProfileContainer').innerHTML = `
+        <div class="store-profile-header">
+          <div class="store-top-row">
+            <div class="store-avatar-large">
+              ${seller.profilePic ? `<img src="${seller.profilePic}" alt="${seller.name}" onerror="this.style.display='none';this.parentElement.textContent='${seller.initials || seller.name.charAt(0)}';">` : (seller.initials || seller.name.charAt(0))}
+            </div>
+            <div class="store-main-info">
+              <h1>${seller.name}</h1>
+              <div class="store-badge"><i class="fas fa-check-circle"></i> ${seller.badge || 'verified'}</div>
+              <div class="store-category"><i class="fas fa-tag"></i> ${seller.category || 'General'}</div>
+              <div class="store-rating-row">
+                <span><i class="fas fa-star"></i> <span class="rating-value">${seller.rating || '5.0'}</span></span>
+                <span>•</span>
+                <span>${seller.sales || 0} sales</span>
+                <span>•</span>
+                <span>Joined ${seller.joined || 'N/A'}</span>
+                <span>•</span>
+                <span><i class="fas fa-map-pin"></i> ${seller.location || 'Nigeria'}</span>
+              </div>
+            </div>
+          </div>
+          <div class="store-bio">${seller.bio || 'Trusted seller on Zaure. Browse their latest products below.'}</div>
+          <div class="contact-buttons">
+            <a href="tel:${seller.phone}" class="contact-btn call-btn"><i class="fas fa-phone-alt"></i> Call</a>
+            <a href="https://wa.me/${seller.whatsapp || seller.phone}?text=Hello%20${encodeURIComponent(seller.name)}%2C%20I%20found%20you%20on%20Zaure" target="_blank" class="contact-btn whatsapp-btn"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+          </div>
+        </div>
+      `;
+
+      // Load and filter products
+      const products = await loadProducts();
+      let storeProducts = products.filter(p => 
+        p.seller && p.seller.name && p.seller.name.toLowerCase() === seller.name.toLowerCase()
+      );
+      
+      if (storeProducts.length === 0) {
+        storeProducts = products.filter(p => 
+          p.category && p.category.toLowerCase() === seller.category.toLowerCase()
+        );
+      }
+      
+      renderListings(storeProducts.slice(0, 12), 'storeProductsGrid');
+
+      document.getElementById('fabPostAd')?.addEventListener('click', function() {
+        if (!currentUser) { openSignup(); } else { window.location.href = '/post.html'; }
+      });
+
+      initTheme();
+      updateFavoriteBadge();
+    });
+  </script>
+</body>
+</html>

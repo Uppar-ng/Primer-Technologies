@@ -44,11 +44,25 @@
     }
     .filter-bar .filter-group { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
     .filter-bar .filter-group label { font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); }
-    .filter-bar select {
+    .filter-bar .filter-group .custom-select { min-width: 150px; }
+    .filter-bar .filter-group .custom-select-trigger {
       padding: 6px 12px; border: 1px solid var(--border); border-radius: 8px;
-      font-size: 0.85rem; background: var(--input-bg); color: var(--text); outline: none;
+      font-size: 0.85rem; background: var(--input-bg); color: var(--text);
+      cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 8px;
     }
-    .filter-bar select:focus { border-color: #1a3650; box-shadow: 0 0 0 2px rgba(26,54,80,0.1); }
+    .filter-bar .filter-group .custom-select-dropdown {
+      position: absolute; top: calc(100% + 4px); left: 0; right: 0;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+      box-shadow: var(--shadow-hover); z-index: 10; max-height: 200px; overflow-y: auto;
+      display: none;
+    }
+    .filter-bar .filter-group .custom-select.active .custom-select-dropdown { display: block; }
+    .filter-bar .filter-group .custom-select-options { list-style: none; padding: 0; margin: 0; }
+    .filter-bar .filter-group .custom-select-options li {
+      padding: 8px 12px; cursor: pointer; font-size: 0.85rem; color: var(--text);
+      transition: background 0.2s;
+    }
+    .filter-bar .filter-group .custom-select-options li:hover { background: var(--surface-alt); }
     .filter-bar .filter-results { font-size: 0.85rem; color: var(--text-secondary); font-weight: 500; }
     .filter-bar .filter-results strong { color: var(--text); }
     .view-toggle {
@@ -127,8 +141,10 @@
   <nav class="navbar">
     <div class="container nav-container">
       <a href="/" class="logo-wrapper">
-        <img src="/assets/logo-icon.svg" alt="Zaure" class="logo-icon">
-        <div class="logo-text"><span class="brand">Zaure</span><span class="tagline">Your Entrance to Home</span></div>
+        <div class="logo-text">
+          <span class="brand">Zaure</span>
+          <span class="tagline">Buy with Confidence</span>
+        </div>
       </a>
       <div class="nav-links">
         <a href="/">Home</a>
@@ -138,8 +154,13 @@
       </div>
       <div class="nav-actions">
         <button class="icon-btn" id="themeToggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
-        <a href="/favorites.html" class="icon-btn" style="position:relative;text-decoration:none;"><i class="fas fa-heart"></i><span id="favBadge">0</span></a>
-        <div id="headerUserArea"><div class="avatar" id="userAvatar" onclick="openSignup()">ZA</div></div>
+        <a href="/favorites.html" class="icon-btn" style="position:relative;text-decoration:none;">
+          <i class="fas fa-heart"></i>
+          <span id="favBadge">0</span>
+        </a>
+        <div id="headerUserArea">
+          <div class="avatar" id="userAvatar" onclick="openSignup()">ZA</div>
+        </div>
       </div>
     </div>
   </nav>
@@ -178,15 +199,33 @@
     <div class="filter-bar">
       <div class="filter-group">
         <label><i class="fas fa-sliders-h"></i> Filter:</label>
-        <select id="filterSort">
-          <option value="newest">Newest First</option>
-          <option value="oldest">Oldest First</option>
-          <option value="price-low">Price: Low to High</option>
-          <option value="price-high">Price: High to Low</option>
-        </select>
-        <select id="filterCategory">
-          <option value="all">All Categories</option>
-        </select>
+        <!-- Custom sort dropdown -->
+        <div class="custom-select" id="sortSelect">
+          <div class="custom-select-trigger" id="sortTrigger">
+            <span>Newest First</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="custom-select-dropdown">
+            <ul class="custom-select-options" id="sortOptions">
+              <li data-value="newest">Newest First</li>
+              <li data-value="oldest">Oldest First</li>
+              <li data-value="price-low">Price: Low to High</li>
+              <li data-value="price-high">Price: High to Low</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Custom category dropdown -->
+        <div class="custom-select" id="categorySelect">
+          <div class="custom-select-trigger" id="categoryTrigger">
+            <span>All Categories</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="custom-select-dropdown">
+            <ul class="custom-select-options" id="categoryOptions">
+              <li data-value="all">All Categories</li>
+            </ul>
+          </div>
+        </div>
       </div>
       <div class="filter-group">
         <span class="filter-results" id="filterResults">Showing <strong id="showingCount">0</strong> favorites</span>
@@ -216,34 +255,60 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col brand">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
-            <img src="/assets/logo-icon.svg" alt="Zaure" style="width:32px;height:32px;">
-            <span style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:white;">Zaure</span>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <span style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:white;">Zaure</span>
+            <span style="font-size:0.7rem;color:#94A3B8;">Buy with Confidence</span>
           </div>
-          <p>Nigeria's leading free classified marketplace. Buy, sell, or trade locally. No commission, no middlemen.</p>
-          <div class="social" style="margin-top:12px;">
-            <a href="https://twitter.com/zauretech" target="_blank"><i class="fab fa-twitter"></i></a>
-            <a href="https://instagram.com/zauretech" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://linkedin.com/company/zauretech" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://facebook.com/zauretech" target="_blank"><i class="fab fa-facebook-f"></i></a>
-          </div>
-        </div>
-        <div class="footer-col"><h4>Browse</h4><a href="/category.html?slug=all">All Items</a><a href="/category.html?slug=vehicles">Vehicles</a><a href="/category.html?slug=electronics">Electronics</a><a href="/category.html?slug=furniture">Furniture</a><a href="/category.html?slug=fashion">Fashion</a><a href="/category.html?slug=real-estate">Real Estate</a></div>
-        <div class="footer-col"><h4>Support</h4><a href="/help.html">Help Center</a><a href="/safety.html">Safety Tips</a><a href="/contact.html">Contact Us</a><a href="/support.html">Support</a></div>
-        <div class="footer-col"><h4>Company</h4><a href="/about.html">About Us</a><a href="/careers.html">Careers</a><a href="/privacy.html">Privacy Policy</a><a href="/terms.html">Terms of Service</a></div>
-        <div class="footer-col trust-badges" style="grid-column:1/-1;border-top:1px solid #2E3548;padding-top:16px;margin-top:8px;">
-          <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;">
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-shield-alt" style="color:#B49450;"></i> Verified Users</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-handshake" style="color:#B49450;"></i> No Commission</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-user-check" style="color:#B49450;"></i> Identity Verified</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-lock" style="color:#B49450;"></i> Secure Platform</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-clock" style="color:#B49450;"></i> 24/7 Support</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-star" style="color:#B49450;"></i> Trusted by Thousands</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-phone" style="color:#B49450;"></i> Direct Contact</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-credit-card" style="color:#B49450;"></i> Secure Payments</div>
+          <p>Nigeria's most trusted online marketplace. Buy, sell, or trade locally. No commission, no middlemen.</p>
+          <div class="social">
+            <a href="https://twitter.com/zauretech" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com/zauretech" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://linkedin.com/company/zauretech" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://facebook.com/zauretech" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
           </div>
         </div>
-        <div class="footer-bottom"><span>&copy; 2026 <strong style="color:white;">Zaure Technologies</strong>. All rights reserved.</span><span><i class="fas fa-globe"></i> Nigeria · English</span></div>
+        <div class="footer-col">
+          <h4>Browse</h4>
+          <a href="/category.html?slug=all">All Items</a>
+          <a href="/category.html?slug=vehicles">Vehicles</a>
+          <a href="/category.html?slug=electronics">Electronics</a>
+          <a href="/category.html?slug=furniture">Furniture</a>
+          <a href="/category.html?slug=fashion">Fashion</a>
+          <a href="/category.html?slug=real-estate">Real Estate</a>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <a href="/help.html">Help Center</a>
+          <a href="/safety.html">Safety Tips</a>
+          <a href="/contact.html">Contact Us</a>
+          <a href="/support.html">Support</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="/about.html">About Us</a>
+          <a href="/careers.html">Careers</a>
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Service</a>
+        </div>
+        <div class="trust-badges">
+          <div class="badges-row">
+            <span class="badge-item"><i class="fas fa-shield-alt"></i> Verified Users</span>
+            <span class="badge-item"><i class="fas fa-handshake"></i> No Commission</span>
+            <span class="badge-item"><i class="fas fa-user-check"></i> Identity Verified</span>
+            <span class="badge-item"><i class="fas fa-lock"></i> Secure Platform</span>
+            <span class="badge-item"><i class="fas fa-clock"></i> 24/7 Support</span>
+            <span class="badge-item"><i class="fas fa-star"></i> Trusted by Thousands</span>
+            <span class="badge-item"><i class="fas fa-phone"></i> Direct Contact</span>
+            <span class="badge-item"><i class="fas fa-credit-card"></i> Secure Payments</span>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>&copy; 2026 <strong>Zaure Technologies</strong>. All rights reserved.</span>
+          <span class="footer-lang"><i class="fas fa-globe"></i> Nigeria · English</span>
+        </div>
+        <div style="grid-column: 1/-1; text-align: center; margin-top: 8px; font-size: 0.8rem; color: #94A3B8;">
+          For info or to report an issue, contact us on WhatsApp: <a href="https://wa.me/2349042339411" target="_blank" style="color: #D4B87A; text-decoration: none; font-weight: 600;">+2349042339411</a>
+        </div>
       </div>
     </div>
   </footer>
@@ -251,7 +316,7 @@
   <!-- ===== BOTTOM NAV ===== -->
   <div class="bottom-nav">
     <a href="/" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
-    <button class="nav-item" onclick="window.location.href='/'"><i class="fas fa-search"></i><span>Search</span></button>
+    <a href="/categories.html" class="nav-item"><i class="fas fa-th-large"></i><span>Categories</span></a>
     <button class="post-btn" id="fabPostAd"><i class="fas fa-plus"></i></button>
     <a href="/favorites.html" class="nav-item active"><i class="fas fa-heart"></i><span>Favorites</span></a>
     <a href="/profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
@@ -260,35 +325,31 @@
   <!-- ===== SIGNUP MODAL ===== -->
   <div class="modal-overlay" id="signupModal">
     <div class="modal">
-      <div class="modal-header"><h3>Create your account</h3><button class="modal-close" id="closeSignupModalBtn"><i class="fas fa-times"></i></button></div>
+      <div class="modal-header">
+        <h3>Create your account</h3>
+        <button class="modal-close" id="closeSignupModalBtn"><i class="fas fa-times"></i></button>
+      </div>
       <form id="signupForm" class="modal-form">
         <label for="signupName">Full Name</label>
         <input type="text" id="signupName" placeholder="Enter your full name" required>
         <label for="signupPhone">Phone Number</label>
         <input type="tel" id="signupPhone" placeholder="Enter your phone number" required>
-        <label for="signupState">State</label>
-        <select id="signupState" required>
-          <option value="">Select your state</option>
-          <option value="Abia">Abia</option><option value="Adamawa">Adamawa</option>
-          <option value="Akwa Ibom">Akwa Ibom</option><option value="Anambra">Anambra</option>
-          <option value="Bauchi">Bauchi</option><option value="Bayelsa">Bayelsa</option>
-          <option value="Benue">Benue</option><option value="Borno">Borno</option>
-          <option value="Cross River">Cross River</option><option value="Delta">Delta</option>
-          <option value="Ebonyi">Ebonyi</option><option value="Edo">Edo</option>
-          <option value="Ekiti">Ekiti</option><option value="Enugu">Enugu</option>
-          <option value="FCT">FCT (Abuja)</option><option value="Gombe">Gombe</option>
-          <option value="Imo">Imo</option><option value="Jigawa">Jigawa</option>
-          <option value="Kaduna">Kaduna</option><option value="Kano">Kano</option>
-          <option value="Katsina">Katsina</option><option value="Kebbi">Kebbi</option>
-          <option value="Kogi">Kogi</option><option value="Kwara">Kwara</option>
-          <option value="Lagos">Lagos</option><option value="Nasarawa">Nasarawa</option>
-          <option value="Niger">Niger</option><option value="Ogun">Ogun</option>
-          <option value="Ondo">Ondo</option><option value="Osun">Osun</option>
-          <option value="Oyo">Oyo</option><option value="Plateau">Plateau</option>
-          <option value="Rivers">Rivers</option><option value="Sokoto">Sokoto</option>
-          <option value="Taraba">Taraba</option><option value="Yobe">Yobe</option>
-          <option value="Zamfara">Zamfara</option>
-        </select>
+        <label>State</label>
+        <div class="custom-select" id="stateSelect">
+          <div class="custom-select-trigger" id="stateTrigger">
+            <span>Select your state</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="custom-select-dropdown" id="stateDropdown">
+            <input type="text" id="stateSearchInput" placeholder="Search state...">
+            <ul class="custom-select-options" id="stateOptionsList"></ul>
+          </div>
+        </div>
+        <input type="hidden" id="signupState" value="">
+        <label class="terms-checkbox">
+          <input type="checkbox" id="termsCheckbox" required>
+          <span>By creating an account, you agree to Zaure's <a href="/terms.html" target="_blank">Terms</a>, <a href="/conditions.html" target="_blank">Conditions of Use</a>, and <a href="/privacy.html" target="_blank">Privacy Policy</a>.</span>
+        </label>
         <button type="submit" class="btn-primary">Sign Up</button>
       </form>
     </div>
@@ -296,17 +357,19 @@
 
   <script src="/js/main.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', async function() {
+      initStateDropdown();
+
       let favoriteIds = [];
       let favoriteProducts = [];
       let filteredFavorites = [];
       let currentPage = 1;
       const itemsPerPage = 12;
+      let currentSort = 'newest';
+      let currentCategory = 'all';
 
       const grid = document.getElementById('favoritesGrid');
       const container = document.getElementById('favoritesContainer');
-      const filterSort = document.getElementById('filterSort');
-      const filterCategory = document.getElementById('filterCategory');
       const prevPageBtn = document.getElementById('prevPage');
       const nextPageBtn = document.getElementById('nextPage');
       const pageNumbers = document.getElementById('pageNumbers');
@@ -344,6 +407,44 @@
         return favoriteProducts;
       }
 
+      // Custom dropdown helpers
+      function initCustomDropdown(containerId, triggerId, optionsListId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        const trigger = document.getElementById(triggerId);
+        const optionsList = document.getElementById(optionsListId);
+
+        trigger.addEventListener('click', function(e) {
+          e.stopPropagation();
+          container.classList.toggle('active');
+        });
+
+        optionsList.querySelectorAll('li').forEach(li => {
+          li.addEventListener('click', function() {
+            trigger.querySelector('span').textContent = this.textContent;
+            container.classList.remove('active');
+            if (containerId === 'sortSelect') {
+              currentSort = this.dataset.value;
+            } else if (containerId === 'categorySelect') {
+              currentCategory = this.dataset.value;
+            }
+            applyFilters();
+          });
+        });
+
+        document.addEventListener('click', function(e) {
+          if (!container.contains(e.target)) container.classList.remove('active');
+        });
+      }
+
+      initCustomDropdown('sortSelect', 'sortTrigger', 'sortOptions');
+
+      // Load categories for filter dropdown
+      const categories = await loadCategories();
+      const categoryOptionsList = document.getElementById('categoryOptions');
+      categoryOptionsList.innerHTML = '<li data-value="all">All Categories</li>' + categories.map(c => `<li data-value="${c.slug}">${c.name}</li>`).join('');
+      initCustomDropdown('categorySelect', 'categoryTrigger', 'categoryOptions');
+
       function updateStats(products) {
         const total = products.length;
         const featured = products.filter(p => p.featured).length;
@@ -361,10 +462,8 @@
 
       function applyFilters() {
         let filtered = [...favoriteProducts];
-        const categoryFilter = filterCategory.value;
-        if (categoryFilter !== 'all') filtered = filtered.filter(p => p.category === categoryFilter);
-        const sort = filterSort.value;
-        switch(sort) {
+        if (currentCategory !== 'all') filtered = filtered.filter(p => p.category === currentCategory);
+        switch(currentSort) {
           case 'newest': filtered.sort((a, b) => new Date(b.date || '') - new Date(a.date || '')); break;
           case 'oldest': filtered.sort((a, b) => new Date(a.date || '') - new Date(b.date || '')); break;
           case 'price-low': filtered.sort((a, b) => a.price - b.price); break;
@@ -398,7 +497,7 @@
           const price = p.price >= 1e6 ? `₦${(p.price/1e6).toFixed(1)}M` : `₦${p.price.toLocaleString()}`;
           const firstImage = p.images && p.images.length > 0 ? p.images[0] : null;
           const imageHtml = firstImage ? `<img src="${firstImage}" alt="${p.title}" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\\'fas fa-box\\' style=\\'font-size:2.5rem;color:var(--text-secondary);\\'></i>';">` : `<i class="fas fa-box" style="font-size:2.5rem;color:var(--text-secondary);"></i>`;
-          return `<div class="listing-card" data-id="${p.id}"><button class="remove-fav" onclick="removeFavorite(${p.id})" title="Remove from favorites"><i class="fas fa-times"></i></button><div class="listing-img" style="background:${p.bg || 'var(--surface-alt)'};" onclick="viewProduct(${p.id})">${imageHtml}${badges}</div><div class="listing-body" onclick="viewProduct(${p.id})"><div class="price">${price}</div><div class="title">${p.title}</div><div class="meta"><span><i class="fas fa-map-pin"></i> ${p.location}</span><span><i class="far fa-clock"></i> ${p.date}</span></div><div class="listing-footer"><span><i class="fas fa-store"></i> ${p.seller?.name || 'Unknown'}</span><span><i class="far fa-heart"></i> Saved</span></div></div></div>`;
+          return `<div class="listing-card" data-id="${p.id}"><button class="remove-fav" onclick="removeFavorite(${p.id})" title="Remove from favorites"><i class="fas fa-times"></i></button><div class="listing-img" onclick="viewProduct(${p.id})">${imageHtml}${badges}</div><div class="listing-body" onclick="viewProduct(${p.id})"><div class="price">${price}</div><div class="title">${p.title}</div><div class="meta"><span><i class="fas fa-map-pin"></i> ${p.location}</span><span><i class="far fa-clock"></i> ${p.date}</span></div><div class="listing-footer"><span><i class="fas fa-store"></i> ${p.seller?.name || 'Unknown'}</span><span><i class="far fa-heart"></i> Saved</span></div></div></div>`;
         }).join('');
       }
 
@@ -434,10 +533,9 @@
           favoriteIds.splice(index, 1);
           localStorage.setItem('zaure_favorites', JSON.stringify(favoriteIds));
           favoriteProducts = favoriteProducts.filter(p => p.id !== productId);
-          const product = favoriteProducts.find(p => p.id === productId);
-          showToast(`Removed "${product?.title || 'item'}" from favorites`);
           applyFilters();
           updateFavoriteBadge();
+          showToast('Removed from favorites');
         }
       };
 
@@ -450,8 +548,6 @@
         this.classList.add('active'); gridViewBtn.classList.remove('active');
       });
 
-      filterSort.addEventListener('change', applyFilters);
-      filterCategory.addEventListener('change', applyFilters);
       prevPageBtn.addEventListener('click', () => goToPage(currentPage - 1));
       nextPageBtn.addEventListener('click', () => goToPage(currentPage + 1));
 
@@ -483,22 +579,12 @@
         if (!currentUser) { openSignup(); } else { window.location.href = '/post.html'; }
       });
 
-      function initFavorites() {
-        loadFavorites();
-        getFavoriteProducts();
-        const categories = loadCategories();
-        categories.then(cats => {
-          const categorySelect = document.getElementById('filterCategory');
-          categorySelect.innerHTML = '<option value="all">All Categories</option>' + cats.map(c => `<option value="${c.slug}">${c.name}</option>`).join('');
-          applyFilters();
-        }).catch(() => { applyFilters(); });
-        updateStats(favoriteProducts);
-        updateFavoriteBadge();
-      }
-
+      loadFavorites();
+      getFavoriteProducts();
+      applyFilters();
       loadUser();
       initTheme();
-      initFavorites();
+      updateFavoriteBadge();
     });
   </script>
 </body>

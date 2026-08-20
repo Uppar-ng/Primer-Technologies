@@ -3,229 +3,272 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>Help Center – Zaure Support</title>
-  <meta name="description" content="Get help with buying, selling, and using Zaure. Find answers to common questions and support resources.">
+  <title>Help Center – Zaure</title>
+  <meta name="description" content="Get help with buying, selling, and using Zaure marketplace.">
   <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
   <style>
-    .help-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      margin: 24px 0;
+    .help-header {
+      margin: 30px 0 20px;
+      text-align: center;
     }
-    .help-card {
+    .help-header h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #1a3650, #B49450);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .help-header p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      margin-top: 6px;
+    }
+    .help-section {
       background: var(--surface);
-      border-radius: 16px;
+      border-radius: 20px;
       padding: 24px;
       border: 1px solid var(--border);
-      cursor: pointer;
-      transition: all 0.2s;
+      margin-bottom: 20px;
     }
-    .help-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
-    .help-card .icon { font-size: 2rem; color: #B49450; margin-bottom: 12px; }
-    .help-card h3 { font-size: 1.05rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
-    .help-card p { font-size: 0.9rem; color: var(--text-secondary); }
+    .help-section h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .help-section h2 i {
+      color: #1a3650;
+    }
     .faq-item {
-      background: var(--surface);
-      border-radius: 12px;
-      padding: 16px 20px;
-      border: 1px solid var(--border);
-      margin-bottom: 12px;
-      cursor: pointer;
-      transition: 0.2s;
+      border-bottom: 1px solid var(--border);
+      padding: 12px 0;
     }
-    .faq-item:hover { border-color: #B49450; }
-    .faq-item .question {
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+    .faq-item .faq-question {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text);
+      cursor: pointer;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-weight: 600;
-      color: var(--text);
     }
-    .faq-item .question i { color: #B49450; transition: 0.2s; }
-    .faq-item .answer {
-      display: none;
-      margin-top: 8px;
+    .faq-item .faq-question i {
+      transition: transform 0.3s;
       color: var(--text-secondary);
-      font-size: 0.9rem;
-      line-height: 1.6;
     }
-    .faq-item.open .answer { display: block; }
-    .faq-item.open .question i { transform: rotate(180deg); }
+    .faq-item .faq-question.active i {
+      transform: rotate(180deg);
+    }
+    .faq-item .faq-answer {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-top: 8px;
+      display: none;
+    }
+    .faq-item .faq-answer.show {
+      display: block;
+    }
   </style>
 </head>
 <body>
-
-  <!-- ===== NAV ===== -->
   <nav class="navbar">
     <div class="container nav-container">
       <a href="/" class="logo-wrapper">
-        <img src="/assets/logo-icon.svg" alt="Zaure" class="logo-icon">
-        <div class="logo-text"><span class="brand">Zaure</span><span class="tagline">Your Entrance to Home</span></div>
+        <div class="logo-text">
+          <span class="brand">Zaure</span>
+          <span class="tagline">Buy with Confidence</span>
+        </div>
       </a>
       <div class="nav-links">
         <a href="/">Home</a>
-        <a href="/category.html?slug=all">Browse</a>
+        <a href="/categories.html">Categories</a>
+        <a href="/stores.html">Stores</a>
         <a href="/about.html">About</a>
         <a href="/contact.html">Contact</a>
       </div>
       <div class="nav-actions">
         <button class="icon-btn" id="themeToggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
-        <a href="/favorites.html" class="icon-btn" style="position:relative;text-decoration:none;"><i class="fas fa-heart"></i><span id="favBadge">0</span></a>
-        <div id="headerUserArea"><div class="avatar" id="userAvatar" onclick="openSignup()">ZA</div></div>
+        <a href="/favorites.html" class="icon-btn" style="position:relative;text-decoration:none;">
+          <i class="fas fa-heart"></i>
+          <span id="favBadge">0</span>
+        </a>
+        <div id="headerUserArea">
+          <div class="avatar" id="userAvatar" onclick="openSignup()">ZA</div>
+        </div>
       </div>
     </div>
   </nav>
 
   <div class="container">
-
-    <div class="breadcrumb">
-      <a href="/">Home</a>
-      <span class="separator"><i class="fas fa-chevron-right"></i></span>
-      <span class="current">Help Center</span>
+    <div class="help-header">
+      <h1>Help Center</h1>
+      <p>Find answers to common questions about Zaure</p>
     </div>
 
-    <h1 class="section-title" style="text-align:left;">Help Center</h1>
-    <p style="color:var(--text-secondary);margin-bottom:20px;">Find answers to common questions and learn how to make the most of Zaure.</p>
-
-    <div class="help-grid">
-      <div class="help-card" onclick="window.location.href='#buying'">
-        <div class="icon"><i class="fas fa-shopping-bag"></i></div>
-        <h3>Buying on Zaure</h3>
-        <p>Learn how to find and purchase items safely and securely.</p>
+    <div class="help-section">
+      <h2><i class="fas fa-shopping-cart"></i> Buying on Zaure</h2>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">How do I contact a seller? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-answer">Open the product listing and click the "Call Seller" or "WhatsApp" button to contact the seller directly.</div>
       </div>
-      <div class="help-card" onclick="window.location.href='#selling'">
-        <div class="icon"><i class="fas fa-tags"></i></div>
-        <h3>Selling on Zaure</h3>
-        <p>Discover how to list your items and reach more buyers.</p>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">Is it safe to buy on Zaure? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-answer">Yes! We verify sellers and provide safety tips. Always meet in public places, inspect items before purchase, and avoid advance payments.</div>
       </div>
-      <div class="help-card" onclick="window.location.href='#account'">
-        <div class="icon"><i class="fas fa-user-cog"></i></div>
-        <h3>Account Management</h3>
-        <p>Manage your profile, settings, and preferences.</p>
-      </div>
-      <div class="help-card" onclick="window.location.href='#safety'">
-        <div class="icon"><i class="fas fa-shield-alt"></i></div>
-        <h3>Safety & Security</h3>
-        <p>Stay safe while transacting on Zaure.</p>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">How do I save items to favorites? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-answer">Click the heart icon on any listing to save it to your favorites. You must be signed in to use this feature.</div>
       </div>
     </div>
 
-    <h2 class="section-title" style="text-align:left;font-size:1.3rem;" id="faq">Frequently Asked Questions</h2>
-
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="question"><span>How do I create an account on Zaure?</span> <i class="fas fa-chevron-down"></i></div>
-      <div class="answer">Click on the "Sign Up" button in the top right corner. Fill in your name, phone number, and select your state. Once submitted, you'll have full access to buy, sell, and save favorites.</div>
+    <div class="help-section">
+      <h2><i class="fas fa-tag"></i> Selling on Zaure</h2>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">How do I post an ad? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-answer">Click the "+" button in the bottom navigation, or go to the Post page and fill out the Google Form to submit your listing.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">Is posting free? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-answer">Yes! Posting on Zaure is 100% free. No commission, no hidden fees.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">How do I boost my listing? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-answer">Contact us on WhatsApp at +2349042339411 to boost your listing and get 10x more views.</div>
+      </div>
     </div>
 
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="question"><span>Is Zaure really free to use?</span> <i class="fas fa-chevron-down"></i></div>
-      <div class="answer">Yes! Zaure is completely free. There are no listing fees, no commission charges, and no hidden costs. We believe in connecting buyers and sellers directly.</div>
+    <div class="help-section">
+      <h2><i class="fas fa-user"></i> Account Help</h2>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">How do I create an account? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-answer">Click the avatar icon in the header and fill out the signup form with your name, phone number, and state.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">How do I edit my profile? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-answer">Go to your Profile page, click "Edit Profile," make your changes, and click "Save Changes."</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">How do I delete my account? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-answer">Go to Profile → Settings → Account and click "Delete Account." This action is permanent.</div>
+      </div>
     </div>
 
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="question"><span>How do I list an item for sale?</span> <i class="fas fa-chevron-down"></i></div>
-      <div class="answer">Click the "Post a listing" button or the "+" icon in the bottom navigation. Fill in your product details, upload images, and submit. Your listing will appear immediately on the platform.</div>
+    <div style="text-align:center;padding:20px;background:var(--surface);border-radius:16px;border:1px solid var(--border);margin-bottom:30px;">
+      <p style="color:var(--text-secondary);font-size:0.9rem;">
+        Still need help? Contact us on WhatsApp: 
+        <a href="https://wa.me/2349042339411" target="_blank" style="color:#D4B87A;text-decoration:none;font-weight:600;">+2349042339411</a>
+      </p>
     </div>
-
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="question"><span>How do I contact a seller?</span> <i class="fas fa-chevron-down"></i></div>
-      <div class="answer">Each product listing has a "Contact Seller" button with the seller's phone number. You can call or WhatsApp them directly. No middlemen involved.</div>
-    </div>
-
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="question"><span>How do I save my favorite items?</span> <i class="fas fa-chevron-down"></i></div>
-      <div class="answer">Click the heart icon on any product card or the "Save" button on the product detail page. Your favorites will appear in the Favorites section.</div>
-    </div>
-
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="question"><span>Is my personal information safe?</span> <i class="fas fa-chevron-down"></i></div>
-      <div class="answer">Absolutely. We take privacy and security seriously. Your data is stored securely and never shared with third parties. Read our Privacy Policy for more details.</div>
-    </div>
-
   </div>
 
-  <!-- ===== FOOTER (same as index.html) ===== -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col brand">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
-            <img src="/assets/logo-icon.svg" alt="Zaure" style="width:32px;height:32px;">
-            <span style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:white;">Zaure</span>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <span style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:white;">Zaure</span>
+            <span style="font-size:0.7rem;color:#94A3B8;">Buy with Confidence</span>
           </div>
-          <p>Nigeria's leading free classified marketplace. Buy, sell, or trade locally. No commission, no middlemen.</p>
-          <div class="social" style="margin-top:12px;">
-            <a href="https://twitter.com/zauretech" target="_blank"><i class="fab fa-twitter"></i></a>
-            <a href="https://instagram.com/zauretech" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://linkedin.com/company/zauretech" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://facebook.com/zauretech" target="_blank"><i class="fab fa-facebook-f"></i></a>
-          </div>
-        </div>
-        <div class="footer-col"><h4>Browse</h4><a href="/category.html?slug=all">All Items</a><a href="/category.html?slug=vehicles">Vehicles</a><a href="/category.html?slug=electronics">Electronics</a><a href="/category.html?slug=furniture">Furniture</a><a href="/category.html?slug=fashion">Fashion</a><a href="/category.html?slug=real-estate">Real Estate</a></div>
-        <div class="footer-col"><h4>Support</h4><a href="/help.html">Help Center</a><a href="/safety.html">Safety Tips</a><a href="/contact.html">Contact Us</a><a href="/support.html">Support</a></div>
-        <div class="footer-col"><h4>Company</h4><a href="/about.html">About Us</a><a href="/careers.html">Careers</a><a href="/privacy.html">Privacy Policy</a><a href="/terms.html">Terms of Service</a></div>
-        <div class="footer-col trust-badges" style="grid-column:1/-1;border-top:1px solid #2E3548;padding-top:16px;margin-top:8px;">
-          <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;">
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-shield-alt" style="color:#B49450;"></i> Verified Users</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-handshake" style="color:#B49450;"></i> No Commission</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-user-check" style="color:#B49450;"></i> Identity Verified</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-lock" style="color:#B49450;"></i> Secure Platform</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-clock" style="color:#B49450;"></i> 24/7 Support</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-star" style="color:#B49450;"></i> Trusted by Thousands</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-phone" style="color:#B49450;"></i> Direct Contact</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-credit-card" style="color:#B49450;"></i> Secure Payments</div>
+          <p>Nigeria's most trusted online marketplace. Buy, sell, or trade locally. No commission, no middlemen.</p>
+          <div class="social">
+            <a href="https://twitter.com/zauretech" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com/zauretech" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://linkedin.com/company/zauretech" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://facebook.com/zauretech" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
           </div>
         </div>
-        <div class="footer-bottom"><span>&copy; 2026 <strong style="color:white;">Zaure Technologies</strong>. All rights reserved.</span><span><i class="fas fa-globe"></i> Nigeria · English</span></div>
+        <div class="footer-col">
+          <h4>Browse</h4>
+          <a href="/category.html?slug=all">All Items</a>
+          <a href="/category.html?slug=vehicles">Vehicles</a>
+          <a href="/category.html?slug=electronics">Electronics</a>
+          <a href="/category.html?slug=furniture">Furniture</a>
+          <a href="/category.html?slug=fashion">Fashion</a>
+          <a href="/category.html?slug=real-estate">Real Estate</a>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <a href="/help.html">Help Center</a>
+          <a href="/safety.html">Safety Tips</a>
+          <a href="/contact.html">Contact Us</a>
+          <a href="/support.html">Support</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="/about.html">About Us</a>
+          <a href="/careers.html">Careers</a>
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Service</a>
+        </div>
+        <div class="trust-badges">
+          <div class="badges-row">
+            <span class="badge-item"><i class="fas fa-shield-alt"></i> Verified Users</span>
+            <span class="badge-item"><i class="fas fa-handshake"></i> No Commission</span>
+            <span class="badge-item"><i class="fas fa-user-check"></i> Identity Verified</span>
+            <span class="badge-item"><i class="fas fa-lock"></i> Secure Platform</span>
+            <span class="badge-item"><i class="fas fa-clock"></i> 24/7 Support</span>
+            <span class="badge-item"><i class="fas fa-star"></i> Trusted by Thousands</span>
+            <span class="badge-item"><i class="fas fa-phone"></i> Direct Contact</span>
+            <span class="badge-item"><i class="fas fa-credit-card"></i> Secure Payments</span>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>&copy; 2026 <strong>Zaure Technologies</strong>. All rights reserved.</span>
+          <span class="footer-lang"><i class="fas fa-globe"></i> Nigeria · English</span>
+        </div>
+        <div style="grid-column: 1/-1; text-align: center; margin-top: 8px; font-size: 0.8rem; color: #94A3B8;">
+          For info or to report an issue, contact us on WhatsApp: <a href="https://wa.me/2349042339411" target="_blank" style="color: #D4B87A; text-decoration: none; font-weight: 600;">+2349042339411</a>
+        </div>
       </div>
     </div>
   </footer>
 
-  <!-- ===== BOTTOM NAV ===== -->
   <div class="bottom-nav">
     <a href="/" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
-    <button class="nav-item" onclick="window.location.href='/'"><i class="fas fa-search"></i><span>Search</span></button>
+    <a href="/categories.html" class="nav-item"><i class="fas fa-th-large"></i><span>Categories</span></a>
     <button class="post-btn" id="fabPostAd"><i class="fas fa-plus"></i></button>
     <a href="/favorites.html" class="nav-item"><i class="fas fa-heart"></i><span>Favorites</span></a>
     <a href="/profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
   </div>
 
-  <!-- ===== SIGNUP MODAL ===== -->
   <div class="modal-overlay" id="signupModal">
     <div class="modal">
-      <div class="modal-header"><h3>Create your account</h3><button class="modal-close" id="closeSignupModalBtn"><i class="fas fa-times"></i></button></div>
+      <div class="modal-header">
+        <h3>Create your account</h3>
+        <button class="modal-close" id="closeSignupModalBtn"><i class="fas fa-times"></i></button>
+      </div>
       <form id="signupForm" class="modal-form">
         <label for="signupName">Full Name</label>
         <input type="text" id="signupName" placeholder="Enter your full name" required>
         <label for="signupPhone">Phone Number</label>
         <input type="tel" id="signupPhone" placeholder="Enter your phone number" required>
-        <label for="signupState">State</label>
-        <select id="signupState" required>
-          <option value="">Select your state</option>
-          <option value="Abia">Abia</option><option value="Adamawa">Adamawa</option>
-          <option value="Akwa Ibom">Akwa Ibom</option><option value="Anambra">Anambra</option>
-          <option value="Bauchi">Bauchi</option><option value="Bayelsa">Bayelsa</option>
-          <option value="Benue">Benue</option><option value="Borno">Borno</option>
-          <option value="Cross River">Cross River</option><option value="Delta">Delta</option>
-          <option value="Ebonyi">Ebonyi</option><option value="Edo">Edo</option>
-          <option value="Ekiti">Ekiti</option><option value="Enugu">Enugu</option>
-          <option value="FCT">FCT (Abuja)</option><option value="Gombe">Gombe</option>
-          <option value="Imo">Imo</option><option value="Jigawa">Jigawa</option>
-          <option value="Kaduna">Kaduna</option><option value="Kano">Kano</option>
-          <option value="Katsina">Katsina</option><option value="Kebbi">Kebbi</option>
-          <option value="Kogi">Kogi</option><option value="Kwara">Kwara</option>
-          <option value="Lagos">Lagos</option><option value="Nasarawa">Nasarawa</option>
-          <option value="Niger">Niger</option><option value="Ogun">Ogun</option>
-          <option value="Ondo">Ondo</option><option value="Osun">Osun</option>
-          <option value="Oyo">Oyo</option><option value="Plateau">Plateau</option>
-          <option value="Rivers">Rivers</option><option value="Sokoto">Sokoto</option>
-          <option value="Taraba">Taraba</option><option value="Yobe">Yobe</option>
-          <option value="Zamfara">Zamfara</option>
-        </select>
+        <label>State</label>
+        <div class="custom-select" id="stateSelect">
+          <div class="custom-select-trigger" id="stateTrigger">
+            <span>Select your state</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="custom-select-dropdown" id="stateDropdown">
+            <input type="text" id="stateSearchInput" placeholder="Search state...">
+            <ul class="custom-select-options" id="stateOptionsList"></ul>
+          </div>
+        </div>
+        <input type="hidden" id="signupState" value="">
+        <label class="terms-checkbox">
+          <input type="checkbox" id="termsCheckbox" required>
+          <span>By creating an account, you agree to Zaure's <a href="/terms.html" target="_blank">Terms</a>, <a href="/conditions.html" target="_blank">Conditions of Use</a>, and <a href="/privacy.html" target="_blank">Privacy Policy</a>.</span>
+        </label>
         <button type="submit" class="btn-primary">Sign Up</button>
       </form>
     </div>
@@ -233,10 +276,15 @@
 
   <script src="/js/main.js"></script>
   <script>
-    function toggleFaq(el) {
-      el.classList.toggle('open');
+    function toggleFaq(element) {
+      element.classList.toggle('active');
+      element.nextElementSibling.classList.toggle('show');
     }
     document.addEventListener('DOMContentLoaded', function() {
+      initStateDropdown();
+      document.getElementById('fabPostAd')?.addEventListener('click', function() {
+        if (!currentUser) { openSignup(); } else { window.location.href = '/post.html'; }
+      });
       loadUser();
       initTheme();
       updateFavoriteBadge();

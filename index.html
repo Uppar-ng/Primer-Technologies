@@ -3,30 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>Zaure – Buy & Sell Locally in Nigeria | Free Classified Marketplace</title>
-  <meta name="description" content="Zaure is Nigeria's leading free classified marketplace. Buy, sell, or trade items locally in Lagos, Abuja, Kano & across Nigeria. Post free ads, no commission, connect with verified buyers & sellers instantly.">
-  <meta name="keywords" content="classifieds Nigeria, buy and sell Nigeria, free ads Nigeria, online marketplace Nigeria, property for sale Nigeria, cars for sale Nigeria, electronics Nigeria, furniture Nigeria, fashion Nigeria, real estate Nigeria">
+  <title>Zaure – Buy & Sell Locally in Nigeria | Online Marketplace</title>
+  <meta name="description" content="Zaure is Nigeria's most trusted online marketplace. Buy, sell, or trade items locally in Lagos, Abuja, Kano & across Nigeria. Post free ads, no commission, connect with verified buyers & sellers instantly.">
+  <meta name="keywords" content="online marketplace Nigeria, buy and sell Nigeria, free ads Nigeria, marketplace Nigeria, property for sale Nigeria, cars for sale Nigeria, electronics Nigeria, furniture Nigeria, fashion Nigeria, real estate Nigeria">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://zauretech.vercel.app/">
-  
-  <!-- Google Verification -->
   <meta name="google-site-verification" content="google136f38ae653f16ba">
-  
-  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://zauretech.vercel.app/">
-  <meta property="og:title" content="Zaure – Buy & Sell Locally in Nigeria | Free Classified Marketplace">
-  <meta property="og:description" content="Zaure is Nigeria's leading free classified marketplace. Buy, sell, or trade items locally. Post free ads, no commission.">
+  <meta property="og:title" content="Zaure – Buy & Sell Locally in Nigeria | Online Marketplace">
+  <meta property="og:description" content="Zaure is Nigeria's most trusted online marketplace. Buy, sell, or trade items locally. Post free ads, no commission.">
   <meta property="og:image" content="https://zauretech.vercel.app/assets/og-image.jpg">
   <meta property="og:site_name" content="Zaure Technologies">
-  
-  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@zauretech">
   <meta name="twitter:title" content="Zaure – Buy & Sell Locally in Nigeria">
-  <meta name="twitter:description" content="Zaure is Nigeria's leading free classified marketplace. Buy, sell, or trade items locally. Post free ads, no commission.">
-  
-  <!-- JSON-LD Schema -->
+  <meta name="twitter:description" content="Zaure is Nigeria's most trusted online marketplace. Buy, sell, or trade items locally. Post free ads, no commission.">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -35,7 +27,7 @@
     "alternateName": "Zaure",
     "url": "https://zauretech.vercel.app",
     "logo": "https://zauretech.vercel.app/assets/logo-icon.svg",
-    "description": "Nigeria's leading free classified marketplace",
+    "description": "Nigeria's most trusted online marketplace",
     "foundingDate": "2024",
     "founder": {
       "@type": "Person",
@@ -50,13 +42,11 @@
     ]
   }
   </script>
-
   <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
   <style>
-    /* ===== HERO SLIDER STYLES ===== */
     .hero {
       position: relative;
       overflow: hidden;
@@ -67,8 +57,6 @@
       display: flex;
       align-items: center;
     }
-
-    /* Background Slider */
     .hero-slider {
       position: absolute;
       top: 0;
@@ -77,7 +65,6 @@
       height: 100%;
       z-index: 0;
     }
-
     .hero-slider .slide {
       position: absolute;
       top: 0;
@@ -90,8 +77,6 @@
       transition: opacity 1.5s ease-in-out;
       animation: slideFade 18s infinite;
     }
-
-    /* 10 Unique Background Images */
     .hero-slider .slide:nth-child(1) { 
       background-image: url('https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=1200&h=600&fit=crop&q=80');
       animation-delay: 0s;
@@ -132,14 +117,11 @@
       background-image: url('https://images.unsplash.com/photo-1488590528505-98d2b853aba4?w=1200&h=600&fit=crop&q=80');
       animation-delay: 16.2s;
     }
-
     @keyframes slideFade {
       0%, 8% { opacity: 1; transform: scale(1); }
       10%, 18% { opacity: 1; transform: scale(1.05); }
       20%, 100% { opacity: 0; transform: scale(1.1); }
     }
-
-    /* Overlay */
     .hero-overlay {
       position: absolute;
       top: 0;
@@ -149,19 +131,15 @@
       background: linear-gradient(135deg, rgba(26,31,46,0.75) 0%, rgba(26,31,46,0.55) 50%, rgba(26,31,46,0.7) 100%);
       z-index: 1;
     }
-
     [data-theme="dark"] .hero-overlay {
       background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.65) 50%, rgba(0,0,0,0.8) 100%);
     }
-
-    /* Hero Content */
     .hero-content-wrapper {
       position: relative;
       z-index: 2;
       padding: 40px 24px;
       width: 100%;
     }
-
     .hero-content-wrapper .hero-tagline {
       font-size: 0.75rem;
       font-weight: 600;
@@ -176,29 +154,24 @@
       backdrop-filter: blur(4px);
       background: rgba(255,255,255,0.05);
     }
-
-    /* Rotating Text */
     .hero-rotating-text {
       display: flex;
       align-items: baseline;
       flex-wrap: wrap;
       gap: 6px;
     }
-
     .hero-rotating-text .static-text {
       font-size: 1.8rem;
       font-weight: 800;
       color: white;
       line-height: 1.2;
     }
-
     .hero-rotating-text .dynamic-text-wrapper {
       display: inline-block;
       height: 2.2rem;
       overflow: hidden;
       vertical-align: bottom;
     }
-
     .hero-rotating-text .dynamic-text-wrapper .dynamic-text {
       display: block;
       font-size: 1.8rem;
@@ -208,7 +181,6 @@
       animation: textRotate 20s infinite;
       white-space: nowrap;
     }
-
     @keyframes textRotate {
       0%, 8% { transform: translateY(0); }
       10%, 18% { transform: translateY(0); }
@@ -222,8 +194,6 @@
       90%, 98% { transform: translateY(-8.8rem); }
       100% { transform: translateY(-11rem); }
     }
-
-    /* 10 Rotating Texts - Stacked vertically */
     .dynamic-text:nth-child(1) { animation-delay: 0s; }
     .dynamic-text:nth-child(2) { animation-delay: 2s; }
     .dynamic-text:nth-child(3) { animation-delay: 4s; }
@@ -234,64 +204,50 @@
     .dynamic-text:nth-child(8) { animation-delay: 14s; }
     .dynamic-text:nth-child(9) { animation-delay: 16s; }
     .dynamic-text:nth-child(10) { animation-delay: 18s; }
-
     .hero-subtitle {
       color: rgba(255,255,255,0.8);
       font-size: 0.95rem;
       margin-top: 8px;
       max-width: 500px;
     }
-
-    /* Search Box in Hero */
     .hero .search-wrapper {
       position: relative;
       z-index: 2;
       margin-top: 16px;
     }
-
     .hero .search-box {
       background: rgba(255,255,255,0.95);
       backdrop-filter: blur(8px);
       border: 1px solid rgba(255,255,255,0.2);
       box-shadow: 0 8px 32px rgba(0,0,0,0.12);
     }
-
     [data-theme="dark"] .hero .search-box {
       background: rgba(19,28,49,0.95);
       border-color: rgba(255,255,255,0.05);
     }
-
     .hero .search-box input {
       color: var(--text);
     }
-
     .hero .search-box input::placeholder {
       color: var(--text-secondary);
     }
-
-    /* Trending Keywords in Hero */
     .hero .trending-keywords {
       position: relative;
       z-index: 2;
     }
-
     .hero .trending-keywords .keyword {
       background: rgba(255,255,255,0.1);
       backdrop-filter: blur(4px);
       border: 1px solid rgba(255,255,255,0.08);
       color: rgba(255,255,255,0.7);
     }
-
     .hero .trending-keywords .keyword:hover {
       background: rgba(255,255,255,0.2);
       color: white;
     }
-
     .hero .trending-keywords .keyword i {
       color: #D4B87A;
     }
-
-    /* Slide Indicators */
     .hero-indicators {
       position: absolute;
       bottom: 16px;
@@ -300,7 +256,6 @@
       display: flex;
       gap: 6px;
     }
-
     .hero-indicators .dot {
       width: 8px;
       height: 8px;
@@ -309,7 +264,6 @@
       transition: all 0.3s ease;
       animation: dotPulse 18s infinite;
     }
-
     .hero-indicators .dot:nth-child(1) { animation-delay: 0s; }
     .hero-indicators .dot:nth-child(2) { animation-delay: 1.8s; }
     .hero-indicators .dot:nth-child(3) { animation-delay: 3.6s; }
@@ -320,13 +274,10 @@
     .hero-indicators .dot:nth-child(8) { animation-delay: 12.6s; }
     .hero-indicators .dot:nth-child(9) { animation-delay: 14.4s; }
     .hero-indicators .dot:nth-child(10) { animation-delay: 16.2s; }
-
     @keyframes dotPulse {
       0%, 8% { background: #D4B87A; transform: scale(1.2); }
       10%, 100% { background: rgba(255,255,255,0.3); transform: scale(1); }
     }
-
-    /* Responsive */
     @media (max-width: 640px) {
       .hero { min-height: 280px; }
       .hero-content-wrapper { padding: 28px 16px; }
@@ -353,7 +304,6 @@
       .hero .hero-tagline { font-size: 0.6rem; letter-spacing: 2px; }
       .hero-subtitle { font-size: 0.8rem; }
     }
-
     @media (min-width: 768px) {
       .hero-content-wrapper { padding: 50px 40px; }
       .hero-rotating-text .static-text,
@@ -385,21 +335,20 @@
   <nav class="navbar">
     <div class="container nav-container">
       <a href="/" class="logo-wrapper">
-        <img src="/assets/logo-icon.svg" alt="Zaure" class="logo-icon">
         <div class="logo-text">
           <span class="brand">Zaure</span>
-          <span class="tagline">Your Entrance to Home</span>
+          <span class="tagline">Buy with Confidence</span>
         </div>
       </a>
       <div class="nav-links">
         <a href="/">Home</a>
-        <a href="/category?slug=all">Browse</a>
-        <a href="/about">About</a>
-        <a href="/contact">Contact</a>
+        <a href="/category.html?slug=all">Browse</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
       </div>
       <div class="nav-actions">
         <button class="icon-btn" id="themeToggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
-        <a href="/favorites" class="icon-btn" style="position:relative;text-decoration:none;">
+        <a href="/favorites.html" class="icon-btn" style="position:relative;text-decoration:none;">
           <i class="fas fa-heart"></i>
           <span id="favBadge">0</span>
         </a>
@@ -414,8 +363,6 @@
 
     <!-- ===== DYNAMIC HERO ===== -->
     <section class="hero" aria-label="Find anything near you">
-
-      <!-- Background Slider -->
       <div class="hero-slider">
         <div class="slide"></div>
         <div class="slide"></div>
@@ -428,14 +375,9 @@
         <div class="slide"></div>
         <div class="slide"></div>
       </div>
-
-      <!-- Overlay -->
       <div class="hero-overlay"></div>
-
-      <!-- Content -->
       <div class="hero-content-wrapper">
-        <span class="hero-tagline"><i class="fas fa-fire" style="margin-right:4px;"></i> Nigeria's #1 Marketplace</span>
-
+        <span class="hero-tagline"><i class="fas fa-shield-alt" style="margin-right:4px;"></i> Nigeria's Most Trusted Marketplace</span>
         <div class="hero-rotating-text">
           <span class="static-text">Find</span>
           <span class="dynamic-text-wrapper">
@@ -452,24 +394,20 @@
           </span>
           <span class="static-text">near you.</span>
         </div>
-
-        <p class="hero-subtitle">Nigeria's leading free classified marketplace — buy, sell, and trade locally with zero commission.</p>
-
+        <p class="hero-subtitle">Nigeria's most trusted online marketplace – buy, sell and trade locally, scam‑free.</p>
         <div class="search-wrapper" id="searchWrapper">
           <div class="search-box" role="search">
             <i class="fas fa-search" aria-hidden="true"></i>
             <input type="text" id="searchInput" placeholder="Search for anything..." autocomplete="off" aria-label="Search for items">
+            <button class="search-location-btn" id="searchLocationBtn" title="Use my location"><i class="fas fa-location-arrow"></i></button>
             <button id="searchBtn" aria-label="Search"><i class="fas fa-arrow-right" style="margin-right:4px;" aria-hidden="true"></i> Search</button>
           </div>
           <div class="autocomplete-dropdown" id="acDropdown" role="listbox"></div>
         </div>
-
         <div class="trending-keywords" id="trendingKeywords" aria-label="Trending searches">
           <span class="keyword"><i class="fas fa-fire" aria-hidden="true"></i> Loading...</span>
         </div>
       </div>
-
-      <!-- Indicators -->
       <div class="hero-indicators">
         <span class="dot"></span>
         <span class="dot"></span>
@@ -482,18 +420,32 @@
         <span class="dot"></span>
         <span class="dot"></span>
       </div>
-
     </section>
 
     <!-- ===== PROMO CAROUSEL ===== -->
     <div class="promo-carousel">
-      <div class="promo-card"><h3>List for Free</h3><p>Post your items at zero cost</p><span class="btn-outline-light">Learn more</span></div>
-      <div class="promo-card" style="background-image: radial-gradient(circle at 70% 30%, #1f5d8a, #0a1b2b);"><h3>Top Sellers</h3><p>Shop from verified local stores</p><span class="btn-outline-light">Explore</span></div>
-      <div class="promo-card" style="background-image: radial-gradient(circle at 30% 70%, #4a6f8f, #0d1f30);"><h3>Boost your listing</h3><p>Get 10x more views</p><span class="btn-outline-light">Boost now</span></div>
+      <div class="promo-card animate-promo">
+        <h3>List for Free</h3>
+        <p>Post your items at zero cost</p>
+        <a href="/post.html" class="btn-outline-light">Post Now</a>
+      </div>
+      <div class="promo-card animate-promo" style="background-image: radial-gradient(circle at 70% 30%, #1f5d8a, #0a1b2b);">
+        <h3>Top Sellers</h3>
+        <p>Shop from verified local stores</p>
+        <a href="/stores.html" class="btn-outline-light">Explore</a>
+      </div>
+      <div class="promo-card animate-promo" style="background-image: radial-gradient(circle at 30% 70%, #4a6f8f, #0d1f30);">
+        <h3>Boost your listing</h3>
+        <p>Get 10x more views</p>
+        <button class="btn-outline-light" id="boostNowBtn">Boost now</button>
+      </div>
     </div>
 
-    <!-- ===== CATEGORIES ===== -->
-    <h2 class="section-title">Categories</h2>
+    <!-- ===== CATEGORIES (Limited to 6 + View all) ===== -->
+    <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap;">
+      <h2 class="section-title" style="margin-top:4px;">Categories</h2>
+      <a href="/categories.html" style="color:var(--text-secondary); font-weight:500; font-size:0.8rem; text-decoration:none;">View all</a>
+    </div>
     <div class="grid-2col" id="categoryGrid">
       <div class="category-card"><div class="icon-circle"><i class="fas fa-spinner fa-spin"></i></div><h3>Loading...</h3></div>
     </div>
@@ -513,7 +465,7 @@
     <!-- ===== TRENDING NEAR YOU ===== -->
     <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap;">
       <h2 class="section-title" style="margin-top:4px;" id="trendingTitle">Trending Near You</h2>
-      <a href="/category?slug=all" style="color:var(--text-secondary); font-weight:500; font-size:0.8rem; text-decoration:none;">View all</a>
+      <a href="/category.html?slug=all" style="color:var(--text-secondary); font-weight:500; font-size:0.8rem; text-decoration:none;">View all</a>
     </div>
     <div class="grid-2col-listings" id="listingGrid">
       <div class="listing-card"><div class="listing-img"><i class="fas fa-spinner fa-spin"></i></div><div class="listing-body"><div class="price">Loading...</div></div></div>
@@ -531,13 +483,12 @@
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
-
         <div class="footer-col brand">
           <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
-            <img src="/assets/logo-icon.svg" alt="Zaure" style="width:28px;height:28px;">
             <span style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:white;">Zaure</span>
+            <span style="font-size:0.7rem;color:#94A3B8;">Buy with Confidence</span>
           </div>
-          <p>Nigeria's leading free classified marketplace. Buy, sell, or trade locally. No commission, no middlemen.</p>
+          <p>Nigeria's most trusted online marketplace. Buy, sell, or trade locally. No commission, no middlemen.</p>
           <div class="social">
             <a href="https://twitter.com/zauretech" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
             <a href="https://instagram.com/zauretech" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -545,33 +496,29 @@
             <a href="https://facebook.com/zauretech" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
           </div>
         </div>
-
         <div class="footer-col">
           <h4>Browse</h4>
-          <a href="/category?slug=all">All Items</a>
-          <a href="/category?slug=vehicles">Vehicles</a>
-          <a href="/category?slug=electronics">Electronics</a>
-          <a href="/category?slug=furniture">Furniture</a>
-          <a href="/category?slug=fashion">Fashion</a>
-          <a href="/category?slug=real-estate">Real Estate</a>
+          <a href="/category.html?slug=all">All Items</a>
+          <a href="/category.html?slug=vehicles">Vehicles</a>
+          <a href="/category.html?slug=electronics">Electronics</a>
+          <a href="/category.html?slug=furniture">Furniture</a>
+          <a href="/category.html?slug=fashion">Fashion</a>
+          <a href="/category.html?slug=real-estate">Real Estate</a>
         </div>
-
         <div class="footer-col">
           <h4>Support</h4>
-          <a href="/help">Help Center</a>
-          <a href="/safety">Safety Tips</a>
-          <a href="/contact">Contact Us</a>
-          <a href="/support">Support</a>
+          <a href="/help.html">Help Center</a>
+          <a href="/safety.html">Safety Tips</a>
+          <a href="/contact.html">Contact Us</a>
+          <a href="/support.html">Support</a>
         </div>
-
         <div class="footer-col">
           <h4>Company</h4>
-          <a href="/about">About Us</a>
-          <a href="/careers">Careers</a>
-          <a href="/privacy">Privacy Policy</a>
-          <a href="/terms">Terms of Service</a>
+          <a href="/about.html">About Us</a>
+          <a href="/careers.html">Careers</a>
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Service</a>
         </div>
-
         <div class="trust-badges">
           <div class="badges-row">
             <span class="badge-item"><i class="fas fa-shield-alt"></i> Verified Users</span>
@@ -584,12 +531,13 @@
             <span class="badge-item"><i class="fas fa-credit-card"></i> Secure Payments</span>
           </div>
         </div>
-
         <div class="footer-bottom">
           <span>&copy; 2026 <strong>Zaure Technologies</strong>. All rights reserved.</span>
           <span class="footer-lang"><i class="fas fa-globe"></i> Nigeria · English</span>
         </div>
-
+        <div style="grid-column: 1/-1; text-align: center; margin-top: 8px; font-size: 0.8rem; color: #94A3B8;">
+          For info or to report an issue, contact us on WhatsApp: <a href="https://wa.me/2349042339411" target="_blank" style="color: #D4B87A; text-decoration: none; font-weight: 600;">+2349042339411</a>
+        </div>
       </div>
     </div>
   </footer>
@@ -597,10 +545,10 @@
   <!-- ===== BOTTOM NAV ===== -->
   <div class="bottom-nav">
     <a href="/" class="nav-item active"><i class="fas fa-home"></i><span>Home</span></a>
-    <button class="nav-item" onclick="document.getElementById('searchInput')?.focus();"><i class="fas fa-search"></i><span>Search</span></button>
+    <a href="/categories.html" class="nav-item"><i class="fas fa-th-large"></i><span>Categories</span></a>
     <button class="post-btn" id="fabPostAd"><i class="fas fa-plus"></i></button>
-    <a href="/favorites" class="nav-item"><i class="fas fa-heart"></i><span>Favorites</span></a>
-    <a href="/profile" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
+    <a href="/favorites.html" class="nav-item"><i class="fas fa-heart"></i><span>Favorites</span></a>
+    <a href="/profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
   </div>
 
   <!-- ===== SIGNUP MODAL ===== -->
@@ -615,29 +563,22 @@
         <input type="text" id="signupName" placeholder="Enter your full name" required>
         <label for="signupPhone">Phone Number</label>
         <input type="tel" id="signupPhone" placeholder="Enter your phone number" required>
-        <label for="signupState">State</label>
-        <select id="signupState" required>
-          <option value="">Select your state</option>
-          <option value="Abia">Abia</option><option value="Adamawa">Adamawa</option>
-          <option value="Akwa Ibom">Akwa Ibom</option><option value="Anambra">Anambra</option>
-          <option value="Bauchi">Bauchi</option><option value="Bayelsa">Bayelsa</option>
-          <option value="Benue">Benue</option><option value="Borno">Borno</option>
-          <option value="Cross River">Cross River</option><option value="Delta">Delta</option>
-          <option value="Ebonyi">Ebonyi</option><option value="Edo">Edo</option>
-          <option value="Ekiti">Ekiti</option><option value="Enugu">Enugu</option>
-          <option value="FCT">FCT (Abuja)</option><option value="Gombe">Gombe</option>
-          <option value="Imo">Imo</option><option value="Jigawa">Jigawa</option>
-          <option value="Kaduna">Kaduna</option><option value="Kano">Kano</option>
-          <option value="Katsina">Katsina</option><option value="Kebbi">Kebbi</option>
-          <option value="Kogi">Kogi</option><option value="Kwara">Kwara</option>
-          <option value="Lagos">Lagos</option><option value="Nasarawa">Nasarawa</option>
-          <option value="Niger">Niger</option><option value="Ogun">Ogun</option>
-          <option value="Ondo">Ondo</option><option value="Osun">Osun</option>
-          <option value="Oyo">Oyo</option><option value="Plateau">Plateau</option>
-          <option value="Rivers">Rivers</option><option value="Sokoto">Sokoto</option>
-          <option value="Taraba">Taraba</option><option value="Yobe">Yobe</option>
-          <option value="Zamfara">Zamfara</option>
-        </select>
+        <label>State</label>
+        <div class="custom-select" id="stateSelect">
+          <div class="custom-select-trigger" id="stateTrigger">
+            <span>Select your state</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="custom-select-dropdown" id="stateDropdown">
+            <input type="text" id="stateSearchInput" placeholder="Search state...">
+            <ul class="custom-select-options" id="stateOptionsList"></ul>
+          </div>
+        </div>
+        <input type="hidden" id="signupState" value="">
+        <label class="terms-checkbox">
+          <input type="checkbox" id="termsCheckbox" required>
+          <span>By creating an account, you agree to Zaure's <a href="/terms.html" target="_blank">Terms</a>, <a href="/conditions.html" target="_blank">Conditions of Use</a>, and <a href="/privacy.html" target="_blank">Privacy Policy</a>.</span>
+        </label>
         <button type="submit" class="btn-primary">Sign Up</button>
       </form>
     </div>
@@ -646,32 +587,29 @@
   <script src="/js/main.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', async function() {
-      // Load categories with correct counts
       const categories = await loadCategories();
       const categoryGrid = document.getElementById('categoryGrid');
-      categoryGrid.innerHTML = categories.map(cat => `
+      const limitedCategories = categories.slice(0, 6);
+      categoryGrid.innerHTML = limitedCategories.map(cat => `
         <div class="category-card" onclick="loadCategory('${cat.slug}')">
           <div class="icon-circle"><i class="${cat.icon}"></i></div>
           <h3>${cat.name}</h3>
-          <p>${cat.count || 0} items</p>
         </div>
       `).join('');
 
-      // Load products
       const products = await loadProducts();
+      const userState = await getUserState();
       
-      // Featured products
-      const featured = products.filter(p => p.featured).slice(0, 6);
+      const featured = recommendProducts(products, userState, 6);
       renderListings(featured, 'featuredGrid');
 
-      // Trending near you (default first 6)
-      renderListings(products.slice(0, 6), 'listingGrid');
+      const trending = recommendProducts(products, userState, 6);
+      renderListings(trending, 'listingGrid');
 
-      // Load top sellers
       const sellers = await loadTopSellers();
       const sellersGrid = document.getElementById('topSellersGrid');
       sellersGrid.innerHTML = sellers.map(s => `
-        <div class="storefront-card" onclick="loadCategory('${s.category || 'all'}')">
+        <div class="storefront-card" onclick="viewStore('${s.id}')">
           <div class="store-avatar">${s.initials || s.name.charAt(0)}</div>
           <div>
             <div class="store-name">${s.name}</div>
@@ -680,7 +618,6 @@
         </div>
       `).join('');
 
-      // Load trending keywords
       const keywords = await loadTrendingKeywords();
       const keywordsContainer = document.getElementById('trendingKeywords');
       keywordsContainer.innerHTML = keywords.map(k => `
@@ -689,10 +626,21 @@
         </span>
       `).join('');
 
-      // Load user and theme
       loadUser();
       initTheme();
       updateFavoriteBadge();
+      initStateDropdown();
+      
+      document.getElementById('boostNowBtn')?.addEventListener('click', function() {
+        const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|Opera Mini|IEMobile/i.test(navigator.userAgent);
+        const phoneNumber = '2349042339411';
+        const message = encodeURIComponent('Hello Zaure! I want to boost my listing.');
+        if (isMobile) {
+          window.location.href = `https://wa.me/${phoneNumber}?text=${message}`;
+        } else {
+          window.location.href = `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${message}`;
+        }
+      });
     });
   </script>
 </body>

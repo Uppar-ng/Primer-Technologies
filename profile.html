@@ -58,14 +58,12 @@
     }
     .profile-form .form-group { margin-bottom: 16px; }
     .profile-form .form-group label { display: block; font-weight: 600; font-size: 0.85rem; color: var(--text); margin-bottom: 4px; }
-    .profile-form .form-group input,
-    .profile-form .form-group select {
+    .profile-form .form-group input {
       width: 100%; padding: 10px 14px; border: 1px solid var(--border);
       border-radius: 12px; font-size: 0.95rem; background: var(--input-bg);
       color: var(--text); transition: 0.2s;
     }
-    .profile-form .form-group input:focus,
-    .profile-form .form-group select:focus {
+    .profile-form .form-group input:focus {
       border-color: #1a3650; box-shadow: 0 0 0 2px rgba(26,54,80,0.1); outline: none;
     }
     .profile-form .form-group input:disabled { background: var(--surface-alt); cursor: not-allowed; }
@@ -111,10 +109,6 @@
       transition: 0.2s; font-size: 0.85rem;
     }
     .settings-section .setting-item .btn-danger:hover { background: #e74c3c; color: white; }
-    .settings-section .setting-item select {
-      padding: 6px 12px; border: 1px solid var(--border); border-radius: 8px;
-      font-size: 0.85rem; background: var(--input-bg); color: var(--text);
-    }
     .my-listings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .my-listing-card {
       background: var(--surface); border-radius: 16px; overflow: hidden;
@@ -171,8 +165,10 @@
   <nav class="navbar">
     <div class="container nav-container">
       <a href="/" class="logo-wrapper">
-        <img src="/assets/logo-icon.svg" alt="Zaure" class="logo-icon">
-        <div class="logo-text"><span class="brand">Zaure</span><span class="tagline">Your Entrance to Home</span></div>
+        <div class="logo-text">
+          <span class="brand">Zaure</span>
+          <span class="tagline">Buy with Confidence</span>
+        </div>
       </a>
       <div class="nav-links">
         <a href="/">Home</a>
@@ -182,8 +178,13 @@
       </div>
       <div class="nav-actions">
         <button class="icon-btn" id="themeToggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
-        <a href="/favorites.html" class="icon-btn" style="position:relative;text-decoration:none;"><i class="fas fa-heart"></i><span id="favBadge">0</span></a>
-        <div id="headerUserArea"><div class="avatar" id="userAvatar" onclick="openSignup()">ZA</div></div>
+        <a href="/favorites.html" class="icon-btn" style="position:relative;text-decoration:none;">
+          <i class="fas fa-heart"></i>
+          <span id="favBadge">0</span>
+        </a>
+        <div id="headerUserArea">
+          <div class="avatar" id="userAvatar" onclick="openSignup()">ZA</div>
+        </div>
       </div>
     </div>
   </nav>
@@ -238,28 +239,18 @@
               <div class="form-group"><label>Email Address</label><input type="email" id="profileEmail" placeholder="Your email address" disabled></div>
               <div class="form-group">
                 <label>State</label>
-                <select id="profileState" disabled>
-                  <option value="">Select your state</option>
-                  <option value="Abia">Abia</option><option value="Adamawa">Adamawa</option>
-                  <option value="Akwa Ibom">Akwa Ibom</option><option value="Anambra">Anambra</option>
-                  <option value="Bauchi">Bauchi</option><option value="Bayelsa">Bayelsa</option>
-                  <option value="Benue">Benue</option><option value="Borno">Borno</option>
-                  <option value="Cross River">Cross River</option><option value="Delta">Delta</option>
-                  <option value="Ebonyi">Ebonyi</option><option value="Edo">Edo</option>
-                  <option value="Ekiti">Ekiti</option><option value="Enugu">Enugu</option>
-                  <option value="FCT">FCT (Abuja)</option><option value="Gombe">Gombe</option>
-                  <option value="Imo">Imo</option><option value="Jigawa">Jigawa</option>
-                  <option value="Kaduna">Kaduna</option><option value="Kano">Kano</option>
-                  <option value="Katsina">Katsina</option><option value="Kebbi">Kebbi</option>
-                  <option value="Kogi">Kogi</option><option value="Kwara">Kwara</option>
-                  <option value="Lagos">Lagos</option><option value="Nasarawa">Nasarawa</option>
-                  <option value="Niger">Niger</option><option value="Ogun">Ogun</option>
-                  <option value="Ondo">Ondo</option><option value="Osun">Osun</option>
-                  <option value="Oyo">Oyo</option><option value="Plateau">Plateau</option>
-                  <option value="Rivers">Rivers</option><option value="Sokoto">Sokoto</option>
-                  <option value="Taraba">Taraba</option><option value="Yobe">Yobe</option>
-                  <option value="Zamfara">Zamfara</option>
-                </select>
+                <!-- Custom state dropdown -->
+                <div class="custom-select" id="profileStateSelect">
+                  <div class="custom-select-trigger" id="profileStateTrigger">
+                    <span>Select your state</span>
+                    <i class="fas fa-chevron-down"></i>
+                  </div>
+                  <div class="custom-select-dropdown">
+                    <input type="text" id="profileStateSearchInput" placeholder="Search state...">
+                    <ul class="custom-select-options" id="profileStateOptionsList"></ul>
+                  </div>
+                </div>
+                <input type="hidden" id="profileState" value="">
               </div>
               <div class="form-group"><label>Bio / About You</label><input type="text" id="profileBio" placeholder="Tell buyers a little about yourself" disabled></div>
               <button type="submit" class="btn-save" id="saveProfileBtn" style="display:none;"><i class="fas fa-save"></i> Save Changes</button>
@@ -282,9 +273,22 @@
             <div class="setting-item"><div class="setting-info"><h4>Push Notifications</h4><p>Get alerts when someone messages you</p></div><div class="toggle active" id="pushToggle"><div class="toggle-knob"></div></div></div>
             <div class="setting-item">
               <div class="setting-info"><h4>Language</h4><p>Change your preferred language</p></div>
-              <select style="padding:6px 12px;border:1px solid var(--border);border-radius:8px;font-size:0.85rem;background:var(--input-bg);color:var(--text);">
-                <option value="en">English</option><option value="ha">Hausa</option><option value="yo">Yoruba</option><option value="ig">Igbo</option><option value="pcm">Pidgin</option>
-              </select>
+              <!-- Custom language dropdown -->
+              <div class="custom-select" id="languageSelect">
+                <div class="custom-select-trigger" id="languageTrigger">
+                  <span>English</span>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="custom-select-dropdown">
+                  <ul class="custom-select-options" id="languageOptions">
+                    <li data-value="en">English</li>
+                    <li data-value="ha">Hausa</li>
+                    <li data-value="yo">Yoruba</li>
+                    <li data-value="ig">Igbo</li>
+                    <li data-value="pcm">Pidgin</li>
+                  </ul>
+                </div>
+              </div>
             </div>
             <div class="setting-item">
               <div class="setting-info"><h4>Account</h4><p>Delete your account and all data</p></div>
@@ -302,34 +306,60 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col brand">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
-            <img src="/assets/logo-icon.svg" alt="Zaure" style="width:32px;height:32px;">
-            <span style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:white;">Zaure</span>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <span style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:white;">Zaure</span>
+            <span style="font-size:0.7rem;color:#94A3B8;">Buy with Confidence</span>
           </div>
-          <p>Nigeria's leading free classified marketplace. Buy, sell, or trade locally. No commission, no middlemen.</p>
-          <div class="social" style="margin-top:12px;">
-            <a href="https://twitter.com/zauretech" target="_blank"><i class="fab fa-twitter"></i></a>
-            <a href="https://instagram.com/zauretech" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://linkedin.com/company/zauretech" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://facebook.com/zauretech" target="_blank"><i class="fab fa-facebook-f"></i></a>
-          </div>
-        </div>
-        <div class="footer-col"><h4>Browse</h4><a href="/category.html?slug=all">All Items</a><a href="/category.html?slug=vehicles">Vehicles</a><a href="/category.html?slug=electronics">Electronics</a><a href="/category.html?slug=furniture">Furniture</a><a href="/category.html?slug=fashion">Fashion</a><a href="/category.html?slug=real-estate">Real Estate</a></div>
-        <div class="footer-col"><h4>Support</h4><a href="/help.html">Help Center</a><a href="/safety.html">Safety Tips</a><a href="/contact.html">Contact Us</a><a href="/support.html">Support</a></div>
-        <div class="footer-col"><h4>Company</h4><a href="/about.html">About Us</a><a href="/careers.html">Careers</a><a href="/privacy.html">Privacy Policy</a><a href="/terms.html">Terms of Service</a></div>
-        <div class="footer-col trust-badges" style="grid-column:1/-1;border-top:1px solid #2E3548;padding-top:16px;margin-top:8px;">
-          <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;">
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-shield-alt" style="color:#B49450;"></i> Verified Users</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-handshake" style="color:#B49450;"></i> No Commission</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-user-check" style="color:#B49450;"></i> Identity Verified</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-lock" style="color:#B49450;"></i> Secure Platform</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-clock" style="color:#B49450;"></i> 24/7 Support</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-star" style="color:#B49450;"></i> Trusted by Thousands</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-phone" style="color:#B49450;"></i> Direct Contact</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-credit-card" style="color:#B49450;"></i> Secure Payments</div>
+          <p>Nigeria's most trusted online marketplace. Buy, sell, or trade locally. No commission, no middlemen.</p>
+          <div class="social">
+            <a href="https://twitter.com/zauretech" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com/zauretech" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://linkedin.com/company/zauretech" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://facebook.com/zauretech" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
           </div>
         </div>
-        <div class="footer-bottom"><span>&copy; 2026 <strong style="color:white;">Zaure Technologies</strong>. All rights reserved.</span><span><i class="fas fa-globe"></i> Nigeria · English</span></div>
+        <div class="footer-col">
+          <h4>Browse</h4>
+          <a href="/category.html?slug=all">All Items</a>
+          <a href="/category.html?slug=vehicles">Vehicles</a>
+          <a href="/category.html?slug=electronics">Electronics</a>
+          <a href="/category.html?slug=furniture">Furniture</a>
+          <a href="/category.html?slug=fashion">Fashion</a>
+          <a href="/category.html?slug=real-estate">Real Estate</a>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <a href="/help.html">Help Center</a>
+          <a href="/safety.html">Safety Tips</a>
+          <a href="/contact.html">Contact Us</a>
+          <a href="/support.html">Support</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="/about.html">About Us</a>
+          <a href="/careers.html">Careers</a>
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Service</a>
+        </div>
+        <div class="trust-badges">
+          <div class="badges-row">
+            <span class="badge-item"><i class="fas fa-shield-alt"></i> Verified Users</span>
+            <span class="badge-item"><i class="fas fa-handshake"></i> No Commission</span>
+            <span class="badge-item"><i class="fas fa-user-check"></i> Identity Verified</span>
+            <span class="badge-item"><i class="fas fa-lock"></i> Secure Platform</span>
+            <span class="badge-item"><i class="fas fa-clock"></i> 24/7 Support</span>
+            <span class="badge-item"><i class="fas fa-star"></i> Trusted by Thousands</span>
+            <span class="badge-item"><i class="fas fa-phone"></i> Direct Contact</span>
+            <span class="badge-item"><i class="fas fa-credit-card"></i> Secure Payments</span>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>&copy; 2026 <strong>Zaure Technologies</strong>. All rights reserved.</span>
+          <span class="footer-lang"><i class="fas fa-globe"></i> Nigeria · English</span>
+        </div>
+        <div style="grid-column: 1/-1; text-align: center; margin-top: 8px; font-size: 0.8rem; color: #94A3B8;">
+          For info or to report an issue, contact us on WhatsApp: <a href="https://wa.me/2349042339411" target="_blank" style="color: #D4B87A; text-decoration: none; font-weight: 600;">+2349042339411</a>
+        </div>
       </div>
     </div>
   </footer>
@@ -337,7 +367,7 @@
   <!-- ===== BOTTOM NAV ===== -->
   <div class="bottom-nav">
     <a href="/" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
-    <button class="nav-item" onclick="window.location.href='/'"><i class="fas fa-search"></i><span>Search</span></button>
+    <a href="/categories.html" class="nav-item"><i class="fas fa-th-large"></i><span>Categories</span></a>
     <button class="post-btn" id="fabPostAd"><i class="fas fa-plus"></i></button>
     <a href="/favorites.html" class="nav-item"><i class="fas fa-heart"></i><span>Favorites</span></a>
     <a href="/profile.html" class="nav-item active"><i class="fas fa-user"></i><span>Profile</span></a>
@@ -346,35 +376,31 @@
   <!-- ===== SIGNUP MODAL ===== -->
   <div class="modal-overlay" id="signupModal">
     <div class="modal">
-      <div class="modal-header"><h3>Create your account</h3><button class="modal-close" id="closeSignupModalBtn"><i class="fas fa-times"></i></button></div>
+      <div class="modal-header">
+        <h3>Create your account</h3>
+        <button class="modal-close" id="closeSignupModalBtn"><i class="fas fa-times"></i></button>
+      </div>
       <form id="signupForm" class="modal-form">
         <label for="signupName">Full Name</label>
         <input type="text" id="signupName" placeholder="Enter your full name" required>
         <label for="signupPhone">Phone Number</label>
         <input type="tel" id="signupPhone" placeholder="Enter your phone number" required>
-        <label for="signupState">State</label>
-        <select id="signupState" required>
-          <option value="">Select your state</option>
-          <option value="Abia">Abia</option><option value="Adamawa">Adamawa</option>
-          <option value="Akwa Ibom">Akwa Ibom</option><option value="Anambra">Anambra</option>
-          <option value="Bauchi">Bauchi</option><option value="Bayelsa">Bayelsa</option>
-          <option value="Benue">Benue</option><option value="Borno">Borno</option>
-          <option value="Cross River">Cross River</option><option value="Delta">Delta</option>
-          <option value="Ebonyi">Ebonyi</option><option value="Edo">Edo</option>
-          <option value="Ekiti">Ekiti</option><option value="Enugu">Enugu</option>
-          <option value="FCT">FCT (Abuja)</option><option value="Gombe">Gombe</option>
-          <option value="Imo">Imo</option><option value="Jigawa">Jigawa</option>
-          <option value="Kaduna">Kaduna</option><option value="Kano">Kano</option>
-          <option value="Katsina">Katsina</option><option value="Kebbi">Kebbi</option>
-          <option value="Kogi">Kogi</option><option value="Kwara">Kwara</option>
-          <option value="Lagos">Lagos</option><option value="Nasarawa">Nasarawa</option>
-          <option value="Niger">Niger</option><option value="Ogun">Ogun</option>
-          <option value="Ondo">Ondo</option><option value="Osun">Osun</option>
-          <option value="Oyo">Oyo</option><option value="Plateau">Plateau</option>
-          <option value="Rivers">Rivers</option><option value="Sokoto">Sokoto</option>
-          <option value="Taraba">Taraba</option><option value="Yobe">Yobe</option>
-          <option value="Zamfara">Zamfara</option>
-        </select>
+        <label>State</label>
+        <div class="custom-select" id="stateSelect">
+          <div class="custom-select-trigger" id="stateTrigger">
+            <span>Select your state</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="custom-select-dropdown" id="stateDropdown">
+            <input type="text" id="stateSearchInput" placeholder="Search state...">
+            <ul class="custom-select-options" id="stateOptionsList"></ul>
+          </div>
+        </div>
+        <input type="hidden" id="signupState" value="">
+        <label class="terms-checkbox">
+          <input type="checkbox" id="termsCheckbox" required>
+          <span>By creating an account, you agree to Zaure's <a href="/terms.html" target="_blank">Terms</a>, <a href="/conditions.html" target="_blank">Conditions of Use</a>, and <a href="/privacy.html" target="_blank">Privacy Policy</a>.</span>
+        </label>
         <button type="submit" class="btn-primary">Sign Up</button>
       </form>
     </div>
@@ -383,6 +409,8 @@
   <script src="/js/main.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+      initStateDropdown();
+
       let toastTimeout;
       let currentUserData = null;
 
@@ -400,6 +428,72 @@
         const user = JSON.parse(localStorage.getItem('zaure_user'));
         return user;
       }
+
+      // Custom dropdown helper
+      function initCustomDropdown(containerId, triggerId, optionsListId, hiddenInputId, options, defaultValue, hasSearch) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        const trigger = document.getElementById(triggerId);
+        const optionsList = document.getElementById(optionsListId);
+        const hiddenInput = hiddenInputId ? document.getElementById(hiddenInputId) : null;
+        const searchInput = document.getElementById(containerId + 'SearchInput');
+
+        function renderOptions(filter = '') {
+          const filtered = options.filter(opt => opt.toLowerCase().includes(filter.toLowerCase()));
+          optionsList.innerHTML = filtered.map(opt => `<li data-value="${opt}">${opt}</li>`).join('');
+          optionsList.querySelectorAll('li').forEach(li => {
+            li.addEventListener('click', function() {
+              const selected = this.dataset.value;
+              if (hiddenInput) hiddenInput.value = selected;
+              trigger.querySelector('span').textContent = selected;
+              container.classList.remove('active');
+              if (searchInput) searchInput.value = '';
+              renderOptions();
+            });
+          });
+        }
+
+        function setSelected(value) {
+          if (hiddenInput) hiddenInput.value = value;
+          trigger.querySelector('span').textContent = value;
+        }
+
+        if (defaultValue) setSelected(defaultValue);
+        else if (hiddenInput && hiddenInput.value) setSelected(hiddenInput.value);
+        else if (options.length > 0) setSelected(options[0]);
+
+        renderOptions();
+
+        trigger.addEventListener('click', function(e) {
+          e.stopPropagation();
+          container.classList.toggle('active');
+          if (searchInput && container.classList.contains('active')) searchInput.focus();
+        });
+
+        if (searchInput) {
+          searchInput.addEventListener('input', function() {
+            renderOptions(this.value);
+          });
+        }
+
+        document.addEventListener('click', function(e) {
+          if (!container.contains(e.target)) container.classList.remove('active');
+        });
+      }
+
+      // Initialize profile state dropdown
+      const nigerianStates = [
+        'Abia', 'Adamawa', 'Akwa Ibom', 'Anambra', 'Bauchi', 'Bayelsa', 'Benue',
+        'Borno', 'Cross River', 'Delta', 'Ebonyi', 'Edo', 'Ekiti', 'Enugu', 'FCT',
+        'Gombe', 'Imo', 'Jigawa', 'Kaduna', 'Kano', 'Katsina', 'Kebbi', 'Kogi',
+        'Kwara', 'Lagos', 'Nasarawa', 'Niger', 'Ogun', 'Ondo', 'Osun', 'Oyo',
+        'Plateau', 'Rivers', 'Sokoto', 'Taraba', 'Yobe', 'Zamfara'
+      ];
+      initCustomDropdown('profileStateSelect', 'profileStateTrigger', 'profileStateOptionsList', 'profileState', nigerianStates, '', true);
+
+      // Initialize language dropdown
+      const languages = ['English', 'Hausa', 'Yoruba', 'Igbo', 'Pidgin'];
+      initCustomDropdown('languageSelect', 'languageTrigger', 'languageOptions', null, languages, 'English', false);
 
       function renderProfile() {
         const user = loadUserData();
@@ -420,7 +514,10 @@
         document.getElementById('profileName').value = user.name || '';
         document.getElementById('profilePhone').value = user.phone || '';
         document.getElementById('profileEmail').value = user.email || '';
-        document.getElementById('profileState').value = user.state || '';
+        if (user.state) {
+          document.getElementById('profileState').value = user.state;
+          document.getElementById('profileStateTrigger').querySelector('span').textContent = user.state;
+        }
         document.getElementById('profileBio').value = user.bio || '';
 
         const favorites = JSON.parse(localStorage.getItem('zaure_favorites') || '[]');
@@ -442,7 +539,7 @@
         document.getElementById('profileEmailDisplay').textContent = user.email || `${user.phone}@zaure.com`;
         document.getElementById('profileLocationDisplay').textContent = user.state ? `${user.state}, Nigeria` : 'Nigeria';
         document.getElementById('avatarInitials').textContent = user.name ? user.name.charAt(0).toUpperCase() : 'U';
-        document.querySelectorAll('#profileForm input, #profileForm select').forEach(el => el.disabled = true);
+        document.querySelectorAll('#profileForm input, #profileForm .custom-select-trigger').forEach(el => el.disabled = true);
         document.getElementById('saveProfileBtn').style.display = 'none';
         document.getElementById('editProfileBtn').style.display = 'inline-block';
         renderUserArea();
@@ -450,7 +547,7 @@
       });
 
       document.getElementById('editProfileBtn').addEventListener('click', function() {
-        document.querySelectorAll('#profileForm input, #profileForm select').forEach(el => el.disabled = false);
+        document.querySelectorAll('#profileForm input, #profileForm .custom-select-trigger').forEach(el => el.disabled = false);
         document.getElementById('saveProfileBtn').style.display = 'block';
         this.style.display = 'none';
       });

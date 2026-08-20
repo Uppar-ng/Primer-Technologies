@@ -3,480 +3,62 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>Post a Listing – Zaure</title>
-  <meta name="description" content="Post your items for free on Zaure - Nigeria's leading classified marketplace.">
+  <title>Post Your Ad – Zaure</title>
+  <meta name="description" content="Post your listing on Zaure, Nigeria's most trusted online marketplace. Fill out the form and reach thousands of local buyers.">
   <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
   <style>
-    .post-container {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 20px 0 40px;
-    }
-
-    .page-header {
+    /* Post page specific styles */
+    .post-header {
+      margin: 30px 0 20px;
       text-align: center;
-      margin-bottom: 24px;
     }
-
-    .page-header h1 {
-      font-size: 1.5rem;
+    .post-header h1 {
+      font-size: 2rem;
       font-weight: 800;
-      color: var(--text);
-      margin-bottom: 4px;
+      background: linear-gradient(135deg, #1a3650, #B49450);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-
-    .page-header p {
+    .post-header p {
       color: var(--text-secondary);
-      font-size: 0.95rem;
+      font-size: 1rem;
+      margin-top: 6px;
     }
-
-    .info-box {
-      background: var(--surface-alt);
-      border-radius: 16px;
-      padding: 16px 20px;
-      margin-bottom: 20px;
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-    }
-
-    .info-box i {
-      font-size: 1.2rem;
-      color: #1a3650;
-      margin-top: 2px;
-      flex-shrink: 0;
-    }
-
-    [data-theme="dark"] .info-box i {
-      color: #4a7a9a;
-    }
-
-    .info-box .info-text {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-
-    .info-box .info-text strong {
-      color: var(--text);
-    }
-
-    .verification-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: #c6f6d5;
-      color: #276749;
-      padding: 4px 14px;
-      border-radius: 20px;
-      font-size: 0.7rem;
-      font-weight: 600;
-    }
-
-    [data-theme="dark"] .verification-badge {
-      background: #1A2540;
-      color: #68d391;
-    }
-
-    .post-options {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin: 16px 0 20px;
-    }
-
-    .post-option-card {
+    .post-form-container {
+      max-width: 700px;
+      margin: 0 auto 40px;
       background: var(--surface);
       border-radius: 24px;
-      padding: 28px 20px;
-      border: 2px solid var(--border);
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-decoration: none;
-      color: var(--text);
-      position: relative;
+      padding: 16px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
       overflow: hidden;
     }
-
-    .post-option-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.08);
-    }
-
-    .post-option-card:active {
-      transform: scale(0.97);
-    }
-
-    .post-option-card.whatsapp {
-      border-color: #25D366;
-      background: linear-gradient(145deg, var(--surface), rgba(37, 211, 102, 0.05));
-    }
-
-    .post-option-card.whatsapp:hover {
-      border-color: #1da851;
-      box-shadow: 0 12px 40px rgba(37, 211, 102, 0.15);
-    }
-
-    [data-theme="dark"] .post-option-card.whatsapp {
-      background: linear-gradient(145deg, var(--surface), rgba(37, 211, 102, 0.08));
-    }
-
-    .post-option-card.site {
-      opacity: 0.6;
-      cursor: not-allowed;
-      position: relative;
-    }
-
-    .post-option-card.site:hover {
-      transform: none;
-      box-shadow: none;
-    }
-
-    .post-option-card .option-icon {
-      font-size: 2.8rem;
-      margin-bottom: 10px;
-      display: block;
-    }
-
-    .post-option-card .option-icon i {
-      font-size: 2.8rem;
-    }
-
-    .post-option-card .option-icon .fa-whatsapp {
-      color: #25D366;
-    }
-
-    .post-option-card .option-icon .fa-globe {
-      color: var(--text-secondary);
-      opacity: 0.5;
-    }
-
-    .post-option-card h3 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 4px;
-    }
-
-    .post-option-card p {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      margin: 0;
-      line-height: 1.5;
-    }
-
-    .post-option-card .option-badge {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 4px 14px;
-      border-radius: 20px;
-      font-size: 0.65rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .post-option-card .option-badge.whatsapp-badge {
-      background: #25D366;
-      color: white;
-    }
-
-    .post-option-card .option-badge.coming-soon {
-      background: var(--surface-alt);
-      color: var(--text-secondary);
-    }
-
-    .post-option-card .coming-soon-overlay {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      background: #e74c3c;
-      color: white;
-      padding: 2px 12px;
-      border-radius: 20px;
-      font-size: 0.6rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .post-option-card .whatsapp-steps {
-      margin-top: 10px;
-      padding-top: 10px;
-      border-top: 1px solid var(--border);
-      text-align: left;
-    }
-
-    .post-option-card .whatsapp-steps .step {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.75rem;
-      color: var(--text-secondary);
-      padding: 3px 0;
-    }
-
-    .post-option-card .whatsapp-steps .step i {
-      color: #25D366;
-      font-size: 0.7rem;
-      width: 16px;
-      text-align: center;
-    }
-
-    .post-option-card .whatsapp-steps .step .tag {
-      font-size: 0.55rem;
-      padding: 1px 8px;
-      border-radius: 10px;
-      font-weight: 600;
-      margin-left: 4px;
-    }
-
-    .post-option-card .whatsapp-steps .step .tag.team {
-      background: #c6f6d5;
-      color: #276749;
-    }
-
-    .post-option-card .whatsapp-steps .step .tag.ai {
-      background: #fefcbf;
-      color: #975a16;
-    }
-
-    [data-theme="dark"] .post-option-card .whatsapp-steps .step .tag.team {
-      background: #1A2540;
-      color: #68d391;
-    }
-
-    [data-theme="dark"] .post-option-card .whatsapp-steps .step .tag.ai {
-      background: #2A3550;
-      color: #f5b342;
-    }
-
-    .what-to-expect {
-      background: var(--surface);
-      border-radius: 20px;
-      padding: 24px 20px;
-      border: 1px solid var(--border);
-      margin: 16px 0 20px;
-    }
-
-    .what-to-expect h3 {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .what-to-expect h3 i {
-      color: #1a3650;
-    }
-
-    [data-theme="dark"] .what-to-expect h3 i {
-      color: #4a7a9a;
-    }
-
-    .what-to-expect .expect-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    .what-to-expect .expect-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 12px;
-      border-radius: 12px;
-      background: var(--surface-alt);
-      border: 1px solid var(--border);
-    }
-
-    .what-to-expect .expect-item i {
-      font-size: 1rem;
-      color: #1a3650;
-      flex-shrink: 0;
-    }
-
-    [data-theme="dark"] .what-to-expect .expect-item i {
-      color: #4a7a9a;
-    }
-
-    .what-to-expect .expect-item .expect-text {
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-    }
-
-    .what-to-expect .expect-item .expect-text strong {
-      color: var(--text);
-    }
-
-    .coming-soon-modal {
-      position: fixed;
-      top: 0;
-      left: 0;
+    .post-form-container iframe {
       width: 100%;
-      height: 100%;
-      background: var(--modal-overlay);
-      backdrop-filter: blur(4px);
-      z-index: 999;
-      display: none;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .coming-soon-modal.active {
-      display: flex;
-    }
-
-    .coming-soon-modal .modal-content {
-      background: var(--surface);
-      border-radius: 24px;
-      padding: 40px 32px;
-      max-width: 400px;
-      width: 90%;
-      text-align: center;
-      box-shadow: var(--shadow-hover);
-      animation: fadeSlideIn 0.3s ease;
-    }
-
-    .coming-soon-modal .modal-content i {
-      font-size: 3.5rem;
-      color: #f5b342;
-      margin-bottom: 16px;
-    }
-
-    .coming-soon-modal .modal-content h3 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 8px;
-    }
-
-    .coming-soon-modal .modal-content p {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      margin-bottom: 20px;
-    }
-
-    .coming-soon-modal .modal-content .btn-close {
-      padding: 10px 32px;
-      background: #1a3650;
-      color: white;
+      height: 850px;
       border: none;
-      border-radius: 60px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.2s;
+      border-radius: 16px;
+      display: block;
+      background: var(--surface-alt);
     }
-
-    .coming-soon-modal .modal-content .btn-close:hover {
-      background: #0f2940;
-    }
-
-    [data-theme="dark"] .coming-soon-modal .modal-content .btn-close {
-      background: #2A3550;
-      color: #F1F5F9;
-    }
-
-    [data-theme="dark"] .coming-soon-modal .modal-content .btn-close:hover {
-      background: #3A4560;
-    }
-
-    @keyframes fadeSlideIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
+    @media (max-width: 768px) {
+      .post-form-container {
+        padding: 8px;
+        border-radius: 16px;
       }
-      to {
-        opacity: 1;
-        transform: translateY(0);
+      .post-form-container iframe {
+        height: 700px;
+        border-radius: 12px;
       }
     }
-
-    .toast {
-      position: fixed;
-      bottom: 100px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #1a3650;
-      color: white;
-      padding: 12px 24px;
-      border-radius: 12px;
-      font-size: 0.9rem;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-      z-index: 9999;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      max-width: 90%;
-      text-align: center;
-      pointer-events: none;
-    }
-
-    .toast.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .toast.error {
-      background: #e74c3c;
-    }
-
-    .toast.success {
-      background: #27ae60;
-    }
-
-    @media (max-width: 640px) {
-      .post-options {
-        grid-template-columns: 1fr;
-        gap: 12px;
-      }
-
-      .post-option-card {
-        padding: 20px 16px;
-      }
-
-      .post-option-card .option-icon {
-        font-size: 2.2rem;
-      }
-
-      .post-option-card .option-icon i {
-        font-size: 2.2rem;
-      }
-
-      .what-to-expect .expect-grid {
-        grid-template-columns: 1fr;
-        gap: 8px;
-      }
-
-      .page-header h1 {
-        font-size: 1.2rem;
-      }
-
-      .page-header p {
-        font-size: 0.85rem;
-      }
-
-      .what-to-expect {
-        padding: 16px;
-      }
-
-      .what-to-expect .expect-item {
-        padding: 6px 12px;
-      }
-
-      .info-box {
-        padding: 12px 16px;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-      }
+    @media (max-width: 480px) {
+      .post-header h1 { font-size: 1.6rem; }
+      .post-form-container iframe { height: 650px; }
     }
   </style>
 </head>
@@ -486,10 +68,9 @@
   <nav class="navbar">
     <div class="container nav-container">
       <a href="/" class="logo-wrapper">
-        <img src="/assets/logo-icon.svg" alt="Zaure" class="logo-icon">
         <div class="logo-text">
           <span class="brand">Zaure</span>
-          <span class="tagline">Your Entrance to Home</span>
+          <span class="tagline">Buy with Confidence</span>
         </div>
       </a>
       <div class="nav-links">
@@ -504,118 +85,42 @@
           <i class="fas fa-heart"></i>
           <span id="favBadge">0</span>
         </a>
-        <div id="headerUserArea"></div>
+        <div id="headerUserArea">
+          <div class="avatar" id="userAvatar" onclick="openSignup()">ZA</div>
+        </div>
       </div>
     </div>
   </nav>
 
-  <!-- ===== COMING SOON MODAL ===== -->
-  <div class="coming-soon-modal" id="comingSoonModal">
-    <div class="modal-content">
-      <i class="fas fa-rocket"></i>
-      <h3>Coming Soon!</h3>
-      <p>We're working on making it easier for you to post directly on our site. For now, use WhatsApp to list your items.</p>
-      <button class="btn-close" onclick="closeComingSoon()">Got it</button>
-    </div>
-  </div>
-
-  <!-- ===== MAIN CONTENT ===== -->
   <div class="container">
-    <div class="post-container">
 
-      <div class="page-header">
-        <h1>📦 Post Your Listing</h1>
-        <p>Get your items seen by thousands of buyers</p>
-      </div>
-
-      <!-- SINGLE EXPLANATION -->
-      <div class="info-box">
-        <i class="fas fa-robot"></i>
-        <div class="info-text">
-          <strong>How it works:</strong> Our team collects your product details, 
-          AI + Team verify the information, then AI automatically posts your listing to Zaure. 
-          <span class="verification-badge"><i class="fas fa-check-circle"></i> AI + Team Verified</span>
-        </div>
-      </div>
-
-      <!-- Post Options -->
-      <div class="post-options">
-
-        <a class="post-option-card whatsapp" id="whatsappBtn" href="#" target="_blank" rel="noopener">
-          <span class="option-icon">
-            <i class="fab fa-whatsapp"></i>
-          </span>
-          <h3>Post via WhatsApp</h3>
-          <p>Team collects info, AI + Team verify,<br>AI auto-posts your listing.</p>
-          <span class="option-badge whatsapp-badge">💬 Chat Now</span>
-          <div class="whatsapp-steps">
-            <div class="step"><i class="fas fa-check-circle"></i> Team collects your info <span class="tag team">👤 Team</span></div>
-            <div class="step"><i class="fas fa-check-circle"></i> AI + Team verify details <span class="tag ai">🤖+👤</span></div>
-            <div class="step"><i class="fas fa-check-circle"></i> AI auto-posts to Zaure</div>
-          </div>
-        </a>
-
-        <div class="post-option-card site" onclick="showComingSoon()">
-          <span class="coming-soon-overlay">Coming Soon</span>
-          <span class="option-icon">
-            <i class="fas fa-globe"></i>
-          </span>
-          <h3>Post on Site</h3>
-          <p>Fill the form directly on Zaure.<br>Quick and easy listing process.</p>
-          <span class="option-badge coming-soon">⏳ Coming Soon</span>
-        </div>
-
-      </div>
-
-      <!-- What to Expect -->
-      <div class="what-to-expect">
-        <h3><i class="fas fa-list-check"></i> What to expect</h3>
-        <div class="expect-grid">
-          <div class="expect-item">
-            <i class="fas fa-users"></i>
-            <div class="expect-text"><strong>Human Team</strong> — Real people collect your info</div>
-          </div>
-          <div class="expect-item">
-            <i class="fas fa-robot"></i>
-            <div class="expect-text"><strong>AI Verification</strong> — Smart checks for accuracy</div>
-          </div>
-          <div class="expect-item">
-            <i class="fas fa-bolt"></i>
-            <div class="expect-text"><strong>Auto-Post</strong> — AI posts instantly</div>
-          </div>
-          <div class="expect-item">
-            <i class="fas fa-shield-alt"></i>
-            <div class="expect-text"><strong>Trusted</strong> — Verified by team + AI</div>
-          </div>
-        </div>
-      </div>
-
-      <p style="text-align:center;color:var(--text-secondary);font-size:0.75rem;margin-top:8px;">
-        <i class="fas fa-phone" style="color:#25D366;margin-right:4px;"></i>
-        Questions? Chat with us on WhatsApp
-      </p>
-
+    <div class="post-header">
+      <h1>Post Your Ad</h1>
+      <p>Fill out the form below to list your item for free on Zaure</p>
     </div>
-  </div>
 
-  <!-- ===== TOAST ===== -->
-  <div class="toast" id="toast"></div>
+    <div class="post-form-container">
+      <!-- Google Form Embed -->
+      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScKt_HKSwGVMHfLbog-fzLjYel3kbZFhzr_VnRpQed1qsleLQ/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+    </div>
+
+  </div>
 
   <!-- ===== FOOTER ===== -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col brand">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
-            <img src="/assets/logo-icon.svg" alt="Zaure" style="width:32px;height:32px;">
-            <span style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:white;">Zaure</span>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <span style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:white;">Zaure</span>
+            <span style="font-size:0.7rem;color:#94A3B8;">Buy with Confidence</span>
           </div>
-          <p>Nigeria's leading free classified marketplace. Buy, sell, or trade locally. No commission, no middlemen.</p>
-          <div class="social" style="margin-top:12px;">
-            <a href="https://twitter.com/zauretech" target="_blank"><i class="fab fa-twitter"></i></a>
-            <a href="https://instagram.com/zauretech" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://linkedin.com/company/zauretech" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://facebook.com/zauretech" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <p>Nigeria's most trusted online marketplace. Buy, sell, or trade locally. No commission, no middlemen.</p>
+          <div class="social">
+            <a href="https://twitter.com/zauretech" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com/zauretech" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://linkedin.com/company/zauretech" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://facebook.com/zauretech" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
           </div>
         </div>
         <div class="footer-col">
@@ -641,31 +146,24 @@
           <a href="/privacy.html">Privacy Policy</a>
           <a href="/terms.html">Terms of Service</a>
         </div>
-        <div class="footer-col trust-badges" style="grid-column:1/-1;border-top:1px solid #2E3548;padding-top:16px;margin-top:8px;">
-          <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;">
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;">
-              <i class="fas fa-shield-alt" style="color:#B49450;"></i> Verified Users
-            </div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;">
-              <i class="fas fa-handshake" style="color:#B49450;"></i> No Commission
-            </div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;">
-              <i class="fas fa-user-check" style="color:#B49450;"></i> Identity Verified
-            </div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;">
-              <i class="fas fa-lock" style="color:#B49450;"></i> Secure Platform
-            </div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;">
-              <i class="fas fa-clock" style="color:#B49450;"></i> 24/7 Support
-            </div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;">
-              <i class="fas fa-star" style="color:#B49450;"></i> Trusted by Thousands
-            </div>
+        <div class="trust-badges">
+          <div class="badges-row">
+            <span class="badge-item"><i class="fas fa-shield-alt"></i> Verified Users</span>
+            <span class="badge-item"><i class="fas fa-handshake"></i> No Commission</span>
+            <span class="badge-item"><i class="fas fa-user-check"></i> Identity Verified</span>
+            <span class="badge-item"><i class="fas fa-lock"></i> Secure Platform</span>
+            <span class="badge-item"><i class="fas fa-clock"></i> 24/7 Support</span>
+            <span class="badge-item"><i class="fas fa-star"></i> Trusted by Thousands</span>
+            <span class="badge-item"><i class="fas fa-phone"></i> Direct Contact</span>
+            <span class="badge-item"><i class="fas fa-credit-card"></i> Secure Payments</span>
           </div>
         </div>
         <div class="footer-bottom">
-          <span>&copy; 2026 <strong style="color:white;">Zaure Technologies</strong>. All rights reserved.</span>
-          <span><i class="fas fa-globe"></i> Nigeria · English</span>
+          <span>&copy; 2026 <strong>Zaure Technologies</strong>. All rights reserved.</span>
+          <span class="footer-lang"><i class="fas fa-globe"></i> Nigeria · English</span>
+        </div>
+        <div style="grid-column: 1/-1; text-align: center; margin-top: 8px; font-size: 0.8rem; color: #94A3B8;">
+          For info or to report an issue, contact us on WhatsApp: <a href="https://wa.me/2349042339411" target="_blank" style="color: #D4B87A; text-decoration: none; font-weight: 600;">+2349042339411</a>
         </div>
       </div>
     </div>
@@ -674,80 +172,58 @@
   <!-- ===== BOTTOM NAV ===== -->
   <div class="bottom-nav">
     <a href="/" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
-    <button class="nav-item" onclick="window.location.href='/'"><i class="fas fa-search"></i><span>Search</span></button>
+    <a href="/categories.html" class="nav-item"><i class="fas fa-th-large"></i><span>Categories</span></a>
     <button class="post-btn" id="fabPostAd"><i class="fas fa-plus"></i></button>
     <a href="/favorites.html" class="nav-item"><i class="fas fa-heart"></i><span>Favorites</span></a>
     <a href="/profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
   </div>
 
+  <!-- ===== SIGNUP MODAL ===== -->
+  <div class="modal-overlay" id="signupModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Create your account</h3>
+        <button class="modal-close" id="closeSignupModalBtn"><i class="fas fa-times"></i></button>
+      </div>
+      <form id="signupForm" class="modal-form">
+        <label for="signupName">Full Name</label>
+        <input type="text" id="signupName" placeholder="Enter your full name" required>
+        <label for="signupPhone">Phone Number</label>
+        <input type="tel" id="signupPhone" placeholder="Enter your phone number" required>
+        <label>State</label>
+        <div class="custom-select" id="stateSelect">
+          <div class="custom-select-trigger" id="stateTrigger">
+            <span>Select your state</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="custom-select-dropdown" id="stateDropdown">
+            <input type="text" id="stateSearchInput" placeholder="Search state...">
+            <ul class="custom-select-options" id="stateOptionsList"></ul>
+          </div>
+        </div>
+        <input type="hidden" id="signupState" value="">
+        <label class="terms-checkbox">
+          <input type="checkbox" id="termsCheckbox" required>
+          <span>By creating an account, you agree to Zaure's <a href="/terms.html" target="_blank">Terms</a>, <a href="/conditions.html" target="_blank">Conditions of Use</a>, and <a href="/privacy.html" target="_blank">Privacy Policy</a>.</span>
+        </label>
+        <button type="submit" class="btn-primary">Sign Up</button>
+      </form>
+    </div>
+  </div>
+
   <script src="/js/main.js"></script>
-  
   <script>
-    // WhatsApp Number
-    const WHATSAPP_NUMBER = '2349042339411';
-    const WHATSAPP_MESSAGE = encodeURIComponent(
-      'Hello Zaure Team! I want to post a listing. Please help me get started. 🚀'
-    );
-
-    function isMobile() {
-      return /Android|iPhone|iPad|iPod|BlackBerry|Windows Phone/i.test(navigator.userAgent) || window.innerWidth < 768;
-    }
-
-    function getWhatsAppUrl() {
-      if (isMobile()) {
-        return `whatsapp://send?phone=${WHATSAPP_NUMBER}&text=${WHATSAPP_MESSAGE}`;
-      } else {
-        return `https://web.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${WHATSAPP_MESSAGE}`;
-      }
-    }
-
-    function showToast(message, type = 'success') {
-      const toast = document.getElementById('toast');
-      if (!toast) return;
-      toast.textContent = message;
-      toast.className = 'toast show ' + type;
-      clearTimeout(toast._timeout);
-      toast._timeout = setTimeout(() => {
-        toast.classList.remove('show');
-      }, 4000);
-    }
-
-    window.showComingSoon = function() {
-      document.getElementById('comingSoonModal').classList.add('active');
-    };
-
-    window.closeComingSoon = function() {
-      document.getElementById('comingSoonModal').classList.remove('active');
-    };
-
-    document.getElementById('comingSoonModal').addEventListener('click', function(e) {
-      if (e.target === this) {
-        closeComingSoon();
-      }
-    });
-
     document.addEventListener('DOMContentLoaded', function() {
-      const whatsappBtn = document.getElementById('whatsappBtn');
-      if (whatsappBtn) {
-        whatsappBtn.href = getWhatsAppUrl();
-        whatsappBtn.addEventListener('click', function(e) {
-          showToast(isMobile() ? 'Opening WhatsApp app...' : 'Opening WhatsApp Web...', 'success');
-        });
-      }
+      initStateDropdown();
 
-      const fabPostAd = document.getElementById('fabPostAd');
-      if (fabPostAd) {
-        fabPostAd.addEventListener('click', function() {
-          window.location.href = '/post.html';
-        });
-      }
+      document.getElementById('fabPostAd').addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
 
       loadUser();
       initTheme();
       updateFavoriteBadge();
     });
-
-    console.log('📦 Post page loaded - Team collects, AI+Team verify, AI auto-posts');
   </script>
 </body>
 </html>

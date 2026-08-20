@@ -3,215 +3,267 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>Terms of Service – Zaure</title>
-  <meta name="description" content="Zaure Terms of Service - Read the terms and conditions for using our classified marketplace.">
+  <title>Terms & Conditions – Zaure</title>
+  <meta name="description" content="Terms and conditions for using Zaure marketplace.">
   <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
   <style>
-    .legal-content {
-      background: var(--surface);
-      border-radius: 16px;
-      padding: 32px;
-      border: 1px solid var(--border);
-      margin: 24px 0;
+    .terms-header {
+      margin: 30px 0 20px;
+      text-align: center;
     }
-    .legal-content h2 { font-size: 1.3rem; font-weight: 700; color: var(--text); margin: 24px 0 12px; }
-    .legal-content h2:first-child { margin-top: 0; }
-    .legal-content p { color: var(--text-secondary); line-height: 1.7; margin-bottom: 12px; font-size: 0.95rem; }
-    .legal-content ul { color: var(--text-secondary); padding-left: 24px; margin-bottom: 12px; }
-    .legal-content ul li { margin-bottom: 6px; line-height: 1.6; }
-    .legal-content .last-updated { color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 16px; }
+    .terms-header h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #1a3650, #B49450);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .terms-header p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-top: 6px;
+    }
+    .terms-content {
+      background: var(--surface);
+      border-radius: 20px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      margin-bottom: 30px;
+      line-height: 1.8;
+    }
+    .terms-content h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 16px 0 8px;
+    }
+    .terms-content p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+    .terms-content ul {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 8px;
+    }
+    .terms-content ul li {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      padding: 4px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .terms-content ul li i {
+      color: #B49450;
+      margin-top: 4px;
+      font-size: 0.7rem;
+    }
   </style>
 </head>
 <body>
-
-  <!-- ===== NAV ===== -->
   <nav class="navbar">
     <div class="container nav-container">
       <a href="/" class="logo-wrapper">
-        <img src="/assets/logo-icon.svg" alt="Zaure" class="logo-icon">
-        <div class="logo-text"><span class="brand">Zaure</span><span class="tagline">Your Entrance to Home</span></div>
+        <div class="logo-text">
+          <span class="brand">Zaure</span>
+          <span class="tagline">Buy with Confidence</span>
+        </div>
       </a>
       <div class="nav-links">
         <a href="/">Home</a>
-        <a href="/category.html?slug=all">Browse</a>
+        <a href="/categories.html">Categories</a>
+        <a href="/stores.html">Stores</a>
         <a href="/about.html">About</a>
         <a href="/contact.html">Contact</a>
       </div>
       <div class="nav-actions">
         <button class="icon-btn" id="themeToggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
-        <a href="/favorites.html" class="icon-btn" style="position:relative;text-decoration:none;"><i class="fas fa-heart"></i><span id="favBadge">0</span></a>
-        <div id="headerUserArea"><div class="avatar" id="userAvatar" onclick="openSignup()">ZA</div></div>
+        <a href="/favorites.html" class="icon-btn" style="position:relative;text-decoration:none;">
+          <i class="fas fa-heart"></i>
+          <span id="favBadge">0</span>
+        </a>
+        <div id="headerUserArea">
+          <div class="avatar" id="userAvatar" onclick="openSignup()">ZA</div>
+        </div>
       </div>
     </div>
   </nav>
 
   <div class="container">
-
-    <div class="breadcrumb">
-      <a href="/">Home</a>
-      <span class="separator"><i class="fas fa-chevron-right"></i></span>
-      <span class="current">Terms of Service</span>
+    <div class="terms-header">
+      <h1>Terms & Conditions</h1>
+      <p>Last updated: January 2026</p>
     </div>
 
-    <h1 class="section-title" style="text-align:left;">Terms of Service</h1>
+    <div class="terms-content">
+      <h2><i class="fas fa-gavel" style="color:#1a3650;"></i> 1. Acceptance of Terms</h2>
+      <p>By accessing or using Zaure, you agree to be bound by these Terms & Conditions. If you do not agree, please do not use our platform.</p>
 
-    <div class="legal-content">
-      <p class="last-updated"><strong>Last Updated:</strong> January 23, 2026</p>
-
-      <p>Welcome to Zaure Technologies ("Zaure", "we", "us", or "our"). By using our platform, you agree to these Terms of Service. Please read them carefully.</p>
-
-      <h2>1. Acceptance of Terms</h2>
-      <p>By creating an account or using Zaure, you agree to be bound by these Terms. If you do not agree, please do not use our platform.</p>
-
-      <h2>2. Eligibility</h2>
-      <p>You must be at least 18 years old to use Zaure. By using our platform, you represent that you are at least 18 and capable of entering into a binding agreement.</p>
-
-      <h2>3. User Accounts</h2>
+      <h2><i class="fas fa-user" style="color:#1a3650;"></i> 2. User Accounts</h2>
+      <p>To use certain features, you must create an account. You agree to:</p>
       <ul>
-        <li>You must provide accurate and complete information when creating an account</li>
-        <li>You are responsible for maintaining the security of your account</li>
-        <li>You may not share your account credentials with others</li>
-        <li>You are responsible for all activity that occurs under your account</li>
+        <li><i class="fas fa-circle"></i> Provide accurate and complete information</li>
+        <li><i class="fas fa-circle"></i> Keep your account details secure</li>
+        <li><i class="fas fa-circle"></i> Not share your account with others</li>
+        <li><i class="fas fa-circle"></i> Notify us of any unauthorized access</li>
       </ul>
 
-      <h2>4. Listings and Content</h2>
+      <h2><i class="fas fa-tag" style="color:#1a3650;"></i> 3. Buying & Selling</h2>
+      <p>Zaure is a platform that connects buyers and sellers. We do not own, buy, or sell any items listed on our platform.</p>
       <ul>
-        <li>You are solely responsible for the content you post on Zaure</li>
-        <li>Listings must be accurate, truthful, and not misleading</li>
-        <li>You must have the right to sell the items you list</li>
-        <li>Prohibited items include illegal goods, counterfeit products, and offensive content</li>
-        <li>We reserve the right to remove any listing that violates these terms</li>
+        <li><i class="fas fa-circle"></i> Sellers are responsible for their listings and must provide accurate descriptions</li>
+        <li><i class="fas fa-circle"></i> Buyers are responsible for inspecting items before purchase</li>
+        <li><i class="fas fa-circle"></i> Zaure is not a party to any transaction between users</li>
+        <li><i class="fas fa-circle"></i> All transactions are at the user's own risk</li>
       </ul>
 
-      <h2>5. Prohibited Activities</h2>
-      <p>You may not:</p>
+      <h2><i class="fas fa-ban" style="color:#1a3650;"></i> 4. Prohibited Items</h2>
+      <p>The following items are not allowed on Zaure:</p>
       <ul>
-        <li>Post false, misleading, or fraudulent listings</li>
-        <li>Infringe on the intellectual property of others</li>
-        <li>Harass, abuse, or harm other users</li>
-        <li>Use the platform for illegal activities</li>
-        <li>Attempt to bypass our security measures</li>
-        <li>Collect user information without consent</li>
+        <li><i class="fas fa-circle"></i> Illegal drugs or controlled substances</li>
+        <li><i class="fas fa-circle"></i> Weapons, firearms, or explosives</li>
+        <li><i class="fas fa-circle"></i> Stolen or counterfeit goods</li>
+        <li><i class="fas fa-circle"></i> Adult content or services</li>
+        <li><i class="fas fa-circle"></i> Human trafficking or exploitation</li>
+        <li><i class="fas fa-circle"></i> Any item that violates Nigerian law</li>
       </ul>
 
-      <h2>6. Transactions</h2>
-      <p>Zaure is a classified marketplace connecting buyers and sellers. We:</p>
+      <h2><i class="fas fa-shield-alt" style="color:#1a3650;"></i> 5. User Conduct</h2>
+      <p>You agree not to:</p>
       <ul>
-        <li>Do not participate in transactions between users</li>
-        <li>Do not guarantee the quality or authenticity of listings</li>
-        <li>Are not responsible for disputes between users</li>
-        <li>Encourage users to exercise caution and common sense</li>
+        <li><i class="fas fa-circle"></i> Harass, threaten, or abuse other users</li>
+        <li><i class="fas fa-circle"></i> Post false or misleading information</li>
+        <li><i class="fas fa-circle"></i> Attempt to scam or defraud other users</li>
+        <li><i class="fas fa-circle"></i> Use the platform for illegal activities</li>
+        <li><i class="fas fa-circle"></i> Interfere with the platform's operation</li>
       </ul>
 
-      <h2>7. Intellectual Property</h2>
-      <p>All content on Zaure, including logos, text, images, and code, is the property of Zaure Technologies and protected by copyright laws. You may not copy, modify, or distribute our content without permission.</p>
+      <h2><i class="fas fa-exclamation-triangle" style="color:#1a3650;"></i> 6. Disclaimer of Liability</h2>
+      <p>Zaure is provided "as is" without warranties of any kind. We are not responsible for:</p>
+      <ul>
+        <li><i class="fas fa-circle"></i> The quality, safety, or legality of listed items</li>
+        <li><i class="fas fa-circle"></i> The accuracy of user-provided information</li>
+        <li><i class="fas fa-circle"></i> Any disputes between buyers and sellers</li>
+        <li><i class="fas fa-circle"></i> Any damages resulting from transactions</li>
+      </ul>
 
-      <h2>8. Termination</h2>
-      <p>We reserve the right to suspend or terminate your account at our discretion, without notice, for violations of these Terms or for any other reason.</p>
+      <h2><i class="fas fa-copyright" style="color:#1a3650;"></i> 7. Intellectual Property</h2>
+      <p>All content on Zaure, including logos, designs, and software, is owned by Zaure Technologies. You may not copy, modify, or distribute our content without permission.</p>
 
-      <h2>9. Disclaimers</h2>
-      <p>Zaure is provided "as is" without warranties of any kind. We do not guarantee that our platform will be uninterrupted, error-free, or secure. We are not responsible for the actions of other users.</p>
+      <h2><i class="fas fa-trash" style="color:#1a3650;"></i> 8. Account Termination</h2>
+      <p>We reserve the right to suspend or terminate accounts that violate these terms or engage in fraudulent activity.</p>
 
-      <h2>10. Limitation of Liability</h2>
-      <p>To the maximum extent permitted by law, Zaure Technologies shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of our platform.</p>
+      <h2><i class="fas fa-file-contract" style="color:#1a3650;"></i> 9. Changes to Terms</h2>
+      <p>We may update these Terms & Conditions at any time. Continued use of Zaure after changes constitutes acceptance of the updated terms.</p>
 
-      <h2>11. Indemnification</h2>
-      <p>You agree to indemnify and hold harmless Zaure Technologies from any claims, damages, or expenses arising from your use of the platform or violation of these Terms.</p>
-
-      <h2>12. Changes to Terms</h2>
-      <p>We may update these Terms from time to time. We will notify you of any changes by posting the new Terms on this page. Your continued use of Zaure constitutes acceptance of the updated Terms.</p>
-
-      <h2>13. Governing Law</h2>
-      <p>These Terms shall be governed by and construed in accordance with the laws of the Federal Republic of Nigeria.</p>
-
-      <h2>14. Contact Us</h2>
-      <p>If you have questions about these Terms, please contact us at:</p>
-      <p><strong>Email:</strong> get.zaure@proton.me</p>
+      <h2><i class="fas fa-phone" style="color:#1a3650;"></i> 10. Contact Us</h2>
+      <p>Questions about these Terms? Contact us on WhatsApp: <a href="https://wa.me/2349042339411" target="_blank" style="color:#D4B87A;font-weight:600;">+2349042339411</a></p>
     </div>
-
   </div>
 
-  <!-- ===== FOOTER ===== -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col brand">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
-            <img src="/assets/logo-icon.svg" alt="Zaure" style="width:32px;height:32px;">
-            <span style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:white;">Zaure</span>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <span style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:white;">Zaure</span>
+            <span style="font-size:0.7rem;color:#94A3B8;">Buy with Confidence</span>
           </div>
-          <p>Nigeria's leading free classified marketplace. Buy, sell, or trade locally. No commission, no middlemen.</p>
-          <div class="social" style="margin-top:12px;">
-            <a href="https://twitter.com/zauretech" target="_blank"><i class="fab fa-twitter"></i></a>
-            <a href="https://instagram.com/zauretech" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://linkedin.com/company/zauretech" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://facebook.com/zauretech" target="_blank"><i class="fab fa-facebook-f"></i></a>
-          </div>
-        </div>
-        <div class="footer-col"><h4>Browse</h4><a href="/category.html?slug=all">All Items</a><a href="/category.html?slug=vehicles">Vehicles</a><a href="/category.html?slug=electronics">Electronics</a><a href="/category.html?slug=furniture">Furniture</a><a href="/category.html?slug=fashion">Fashion</a><a href="/category.html?slug=real-estate">Real Estate</a></div>
-        <div class="footer-col"><h4>Support</h4><a href="/help.html">Help Center</a><a href="/safety.html">Safety Tips</a><a href="/contact.html">Contact Us</a><a href="/support.html">Support</a></div>
-        <div class="footer-col"><h4>Company</h4><a href="/about.html">About Us</a><a href="/careers.html">Careers</a><a href="/privacy.html">Privacy Policy</a><a href="/terms.html">Terms of Service</a></div>
-        <div class="footer-col trust-badges" style="grid-column:1/-1;border-top:1px solid #2E3548;padding-top:16px;margin-top:8px;">
-          <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;">
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-shield-alt" style="color:#B49450;"></i> Verified Users</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-handshake" style="color:#B49450;"></i> No Commission</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-user-check" style="color:#B49450;"></i> Identity Verified</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-lock" style="color:#B49450;"></i> Secure Platform</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-clock" style="color:#B49450;"></i> 24/7 Support</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-star" style="color:#B49450;"></i> Trusted by Thousands</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-phone" style="color:#B49450;"></i> Direct Contact</div>
-            <div style="display:flex;align-items:center;gap:6px;color:#94A3B8;font-size:0.75rem;"><i class="fas fa-credit-card" style="color:#B49450;"></i> Secure Payments</div>
+          <p>Nigeria's most trusted online marketplace. Buy, sell, or trade locally. No commission, no middlemen.</p>
+          <div class="social">
+            <a href="https://twitter.com/zauretech" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com/zauretech" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://linkedin.com/company/zauretech" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://facebook.com/zauretech" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
           </div>
         </div>
-        <div class="footer-bottom"><span>&copy; 2026 <strong style="color:white;">Zaure Technologies</strong>. All rights reserved.</span><span><i class="fas fa-globe"></i> Nigeria · English</span></div>
+        <div class="footer-col">
+          <h4>Browse</h4>
+          <a href="/category.html?slug=all">All Items</a>
+          <a href="/category.html?slug=vehicles">Vehicles</a>
+          <a href="/category.html?slug=electronics">Electronics</a>
+          <a href="/category.html?slug=furniture">Furniture</a>
+          <a href="/category.html?slug=fashion">Fashion</a>
+          <a href="/category.html?slug=real-estate">Real Estate</a>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <a href="/help.html">Help Center</a>
+          <a href="/safety.html">Safety Tips</a>
+          <a href="/contact.html">Contact Us</a>
+          <a href="/support.html">Support</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="/about.html">About Us</a>
+          <a href="/careers.html">Careers</a>
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Service</a>
+        </div>
+        <div class="trust-badges">
+          <div class="badges-row">
+            <span class="badge-item"><i class="fas fa-shield-alt"></i> Verified Users</span>
+            <span class="badge-item"><i class="fas fa-handshake"></i> No Commission</span>
+            <span class="badge-item"><i class="fas fa-user-check"></i> Identity Verified</span>
+            <span class="badge-item"><i class="fas fa-lock"></i> Secure Platform</span>
+            <span class="badge-item"><i class="fas fa-clock"></i> 24/7 Support</span>
+            <span class="badge-item"><i class="fas fa-star"></i> Trusted by Thousands</span>
+            <span class="badge-item"><i class="fas fa-phone"></i> Direct Contact</span>
+            <span class="badge-item"><i class="fas fa-credit-card"></i> Secure Payments</span>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>&copy; 2026 <strong>Zaure Technologies</strong>. All rights reserved.</span>
+          <span class="footer-lang"><i class="fas fa-globe"></i> Nigeria · English</span>
+        </div>
+        <div style="grid-column: 1/-1; text-align: center; margin-top: 8px; font-size: 0.8rem; color: #94A3B8;">
+          For info or to report an issue, contact us on WhatsApp: <a href="https://wa.me/2349042339411" target="_blank" style="color: #D4B87A; text-decoration: none; font-weight: 600;">+2349042339411</a>
+        </div>
       </div>
     </div>
   </footer>
 
-  <!-- ===== BOTTOM NAV ===== -->
   <div class="bottom-nav">
     <a href="/" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
-    <button class="nav-item" onclick="window.location.href='/'"><i class="fas fa-search"></i><span>Search</span></button>
+    <a href="/categories.html" class="nav-item"><i class="fas fa-th-large"></i><span>Categories</span></a>
     <button class="post-btn" id="fabPostAd"><i class="fas fa-plus"></i></button>
     <a href="/favorites.html" class="nav-item"><i class="fas fa-heart"></i><span>Favorites</span></a>
     <a href="/profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
   </div>
 
-  <!-- ===== SIGNUP MODAL ===== -->
   <div class="modal-overlay" id="signupModal">
     <div class="modal">
-      <div class="modal-header"><h3>Create your account</h3><button class="modal-close" id="closeSignupModalBtn"><i class="fas fa-times"></i></button></div>
+      <div class="modal-header">
+        <h3>Create your account</h3>
+        <button class="modal-close" id="closeSignupModalBtn"><i class="fas fa-times"></i></button>
+      </div>
       <form id="signupForm" class="modal-form">
         <label for="signupName">Full Name</label>
         <input type="text" id="signupName" placeholder="Enter your full name" required>
         <label for="signupPhone">Phone Number</label>
         <input type="tel" id="signupPhone" placeholder="Enter your phone number" required>
-        <label for="signupState">State</label>
-        <select id="signupState" required>
-          <option value="">Select your state</option>
-          <option value="Abia">Abia</option><option value="Adamawa">Adamawa</option>
-          <option value="Akwa Ibom">Akwa Ibom</option><option value="Anambra">Anambra</option>
-          <option value="Bauchi">Bauchi</option><option value="Bayelsa">Bayelsa</option>
-          <option value="Benue">Benue</option><option value="Borno">Borno</option>
-          <option value="Cross River">Cross River</option><option value="Delta">Delta</option>
-          <option value="Ebonyi">Ebonyi</option><option value="Edo">Edo</option>
-          <option value="Ekiti">Ekiti</option><option value="Enugu">Enugu</option>
-          <option value="FCT">FCT (Abuja)</option><option value="Gombe">Gombe</option>
-          <option value="Imo">Imo</option><option value="Jigawa">Jigawa</option>
-          <option value="Kaduna">Kaduna</option><option value="Kano">Kano</option>
-          <option value="Katsina">Katsina</option><option value="Kebbi">Kebbi</option>
-          <option value="Kogi">Kogi</option><option value="Kwara">Kwara</option>
-          <option value="Lagos">Lagos</option><option value="Nasarawa">Nasarawa</option>
-          <option value="Niger">Niger</option><option value="Ogun">Ogun</option>
-          <option value="Ondo">Ondo</option><option value="Osun">Osun</option>
-          <option value="Oyo">Oyo</option><option value="Plateau">Plateau</option>
-          <option value="Rivers">Rivers</option><option value="Sokoto">Sokoto</option>
-          <option value="Taraba">Taraba</option><option value="Yobe">Yobe</option>
-          <option value="Zamfara">Zamfara</option>
-        </select>
+        <label>State</label>
+        <div class="custom-select" id="stateSelect">
+          <div class="custom-select-trigger" id="stateTrigger">
+            <span>Select your state</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="custom-select-dropdown" id="stateDropdown">
+            <input type="text" id="stateSearchInput" placeholder="Search state...">
+            <ul class="custom-select-options" id="stateOptionsList"></ul>
+          </div>
+        </div>
+        <input type="hidden" id="signupState" value="">
+        <label class="terms-checkbox">
+          <input type="checkbox" id="termsCheckbox" required>
+          <span>By creating an account, you agree to Zaure's <a href="/terms.html" target="_blank">Terms & Conditions</a> and <a href="/privacy.html" target="_blank">Privacy Policy</a>.</span>
+        </label>
         <button type="submit" class="btn-primary">Sign Up</button>
       </form>
     </div>
@@ -220,6 +272,10 @@
   <script src="/js/main.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+      initStateDropdown();
+      document.getElementById('fabPostAd')?.addEventListener('click', function() {
+        if (!currentUser) { openSignup(); } else { window.location.href = '/post.html'; }
+      });
       loadUser();
       initTheme();
       updateFavoriteBadge();
