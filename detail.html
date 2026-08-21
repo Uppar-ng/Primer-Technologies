@@ -275,7 +275,7 @@
           </div>
           <div class="seller-bio" id="sellerBio">Professional seller with a passion for quality products.</div>
           <div class="seller-actions">
-            <button class="btn-seller" id="viewSellerBtn"><i class="fas fa-store"></i> View All Listings</button>
+            <button class="btn-seller" id="visitStoreBtn"><i class="fas fa-store"></i> Visit Store</button>
             <a class="btn-whatsapp" id="whatsappBtn" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
           </div>
         </div>
@@ -341,9 +341,9 @@
         <div class="footer-col">
           <h4>Support</h4>
           <a href="/help.html">Help Center</a>
+          <a href="/faq.html">FAQ</a>
           <a href="/safety.html">Safety Tips</a>
           <a href="/contact.html">Contact Us</a>
-          <a href="/support.html">Support</a>
         </div>
         <div class="footer-col">
           <h4>Company</h4>
@@ -410,7 +410,7 @@
         <input type="hidden" id="signupState" value="">
         <label class="terms-checkbox">
           <input type="checkbox" id="termsCheckbox" required>
-          <span>By creating an account, you agree to Zaure's <a href="/terms.html" target="_blank">Terms</a>, <a href="/conditions.html" target="_blank">Conditions of Use</a>, and <a href="/privacy.html" target="_blank">Privacy Policy</a>.</span>
+          <span>By creating an account, you agree to Zaure's <a href="/terms.html" target="_blank">Terms & Conditions</a> and <a href="/privacy.html" target="_blank">Privacy Policy</a>.</span>
         </label>
         <button type="submit" class="btn-primary">Sign Up</button>
       </form>
@@ -513,6 +513,26 @@
       const cleanNumber = whatsappNumber.replace(/[^0-9]/g, '');
       whatsappBtn.href = `https://wa.me/${cleanNumber}?text=Hello%20${encodeURIComponent(seller.name)}%2C%20I%20am%20interested%20in%20your%20listing%3A%20${encodeURIComponent(product.title)}%20on%20Zaure.`;
 
+      // Visit Store button - redirects to seller's store page
+      const visitStoreBtn = document.getElementById('visitStoreBtn');
+      visitStoreBtn.addEventListener('click', async function() {
+        try {
+          const sellers = await loadTopSellers();
+          const matchedSeller = sellers.find(s => 
+            s.name.toLowerCase() === seller.name.toLowerCase()
+          );
+          if (matchedSeller && matchedSeller.id) {
+            window.location.href = `/store.html?id=${matchedSeller.id}`;
+          } else {
+            const slug = seller.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+            window.location.href = `/store.html?id=${slug}`;
+          }
+        } catch (error) {
+          const slug = seller.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+          window.location.href = `/store.html?id=${slug}`;
+        }
+      });
+
       const favoriteBtn = document.getElementById('favoriteBtn');
       const isFav = isFavorite(product.id);
       if (isFav) { favoriteBtn.classList.add('liked'); favoriteBtn.innerHTML = '<i class="fas fa-heart"></i> Saved'; }
@@ -537,10 +557,12 @@
 
       document.getElementById('reportBtn').addEventListener('click', function() {
         if (!currentUser) { openSignup(); }
-        else { if (confirm('Are you sure you want to report this listing?')) { alert('Thank you for reporting. Our team will review this listing within 24 hours.'); } }
+        else { 
+          const reportNumber = '2349042339411';
+          const reportMessage = encodeURIComponent(`Hello Zaure, I want to report this listing: ${product.title} (ID: ${product.id})`);
+          window.location.href = `https://wa.me/${reportNumber}?text=${reportMessage}`;
+        }
       });
-
-      document.getElementById('viewSellerBtn').addEventListener('click', function() { window.location.href = `/category.html?slug=${product.category}`; });
 
       document.getElementById('fabPostAd').addEventListener('click', function() {
         if (!currentUser) { openSignup(); } else { window.location.href = '/post.html'; }
