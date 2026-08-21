@@ -93,18 +93,33 @@
     }
     .seller-card .seller-header { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
     .seller-card .seller-avatar-large {
-      width: 72px; height: 72px; border-radius: 50%; background: #1a3650;
-      display: flex; align-items: center; justify-content: center; color: white;
-      font-size: 1.8rem; font-weight: 700; flex-shrink: 0;
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: #1a3650;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.8rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      overflow: hidden;
     }
     [data-theme="dark"] .seller-card .seller-avatar-large { background: #2A3550; color: #F1F5F9; }
+    .seller-card .seller-avatar-large img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
     .seller-card .seller-info { flex: 1; }
     .seller-card .seller-info .seller-name { font-size: 1.1rem; font-weight: 700; color: var(--text); }
     .seller-card .seller-info .seller-badge {
       display: inline-flex; align-items: center; gap: 4px; font-size: 0.75rem;
       color: #1f5d8a; background: var(--surface-alt); padding: 2px 10px; border-radius: 12px; margin-top: 4px;
     }
-    .seller-card .seller-info .seller-meta { display: flex; gap: 16px; font-size: 0.8rem; color: var(--text-secondary); margin-top: 6px; }
+    .seller-card .seller-info .seller-meta { display: flex; gap: 16px; font-size: 0.8rem; color: var(--text-secondary); margin-top: 6px; flex-wrap: wrap; }
     .seller-card .seller-info .seller-meta span i { margin-right: 4px; }
     .seller-card .seller-stats {
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
@@ -492,7 +507,20 @@
         phone: '08012345678', whatsapp: '08012345678'
       };
 
-      document.getElementById('sellerAvatar').textContent = seller.initials || seller.name.charAt(0);
+      // Load sellers data to find matching profile picture
+      const sellersData = await loadTopSellers();
+      const matchedSellerData = sellersData.find(s => 
+        s.name.toLowerCase() === seller.name.toLowerCase()
+      );
+
+      // Seller Avatar - Show profile picture from sellers.json if available
+      const sellerAvatarEl = document.getElementById('sellerAvatar');
+      if (matchedSellerData && matchedSellerData.profilePic) {
+        sellerAvatarEl.innerHTML = `<img src="${matchedSellerData.profilePic}" alt="${seller.name}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.style.display='none';this.parentElement.textContent='${seller.initials || seller.name.charAt(0)}';">`;
+      } else {
+        sellerAvatarEl.textContent = seller.initials || seller.name.charAt(0);
+      }
+
       document.getElementById('sellerName').textContent = seller.name;
       document.getElementById('sellerBadge').innerHTML = seller.verified ? '<i class="fas fa-check-circle"></i> Verified' : '<i class="fas fa-clock"></i> New Seller';
       document.getElementById('sellerBadge').style.color = seller.verified ? '#1f5d8a' : '#f5b342';
@@ -515,19 +543,10 @@
 
       // Visit Store button - redirects to seller's store page
       const visitStoreBtn = document.getElementById('visitStoreBtn');
-      visitStoreBtn.addEventListener('click', async function() {
-        try {
-          const sellers = await loadTopSellers();
-          const matchedSeller = sellers.find(s => 
-            s.name.toLowerCase() === seller.name.toLowerCase()
-          );
-          if (matchedSeller && matchedSeller.id) {
-            window.location.href = `/store.html?id=${matchedSeller.id}`;
-          } else {
-            const slug = seller.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-            window.location.href = `/store.html?id=${slug}`;
-          }
-        } catch (error) {
+      visitStoreBtn.addEventListener('click', function() {
+        if (matchedSellerData && matchedSellerData.id) {
+          window.location.href = `/store.html?id=${matchedSellerData.id}`;
+        } else {
           const slug = seller.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
           window.location.href = `/store.html?id=${slug}`;
         }
@@ -556,12 +575,9 @@
       });
 
       document.getElementById('reportBtn').addEventListener('click', function() {
-        if (!currentUser) { openSignup(); }
-        else { 
-          const reportNumber = '2349042339411';
-          const reportMessage = encodeURIComponent(`Hello Zaure, I want to report this listing: ${product.title} (ID: ${product.id})`);
-          window.location.href = `https://wa.me/${reportNumber}?text=${reportMessage}`;
-        }
+        const reportNumber = '2349042339411';
+        const reportMessage = encodeURIComponent(`Hello Zaure, I want to report this listing: ${product.title} (ID: ${product.id})`);
+        window.location.href = `https://wa.me/${reportNumber}?text=${reportMessage}`;
       });
 
       document.getElementById('fabPostAd').addEventListener('click', function() {
