@@ -119,7 +119,6 @@ function renderUserArea() {
   
   const user = getCurrentUser();
   if (user && user.name) {
-    const initial = user.name.charAt(0).toUpperCase();
     headerUserArea.innerHTML = `
       <a href="/profile.html" class="user-greeting">
         <i class="fas fa-user-circle"></i> ${user.name.split(' ')[0]}
@@ -175,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ============================================================
-// CUSTOM STATE DROPDOWN - FIXED VERSION
+// CUSTOM STATE DROPDOWN
 // ============================================================
 const nigerianStates = [
   'Abia', 'Adamawa', 'Akwa Ibom', 'Anambra', 'Bauchi', 'Bayelsa', 'Benue',
@@ -187,10 +186,7 @@ const nigerianStates = [
 
 function initStateDropdown() {
   const selectContainer = document.getElementById('stateSelect');
-  if (!selectContainer) {
-    console.log('State dropdown container not found');
-    return;
-  }
+  if (!selectContainer) return;
   
   const trigger = document.getElementById('stateTrigger');
   const dropdown = document.getElementById('stateDropdown');
@@ -198,19 +194,14 @@ function initStateDropdown() {
   const optionsList = document.getElementById('stateOptionsList');
   const hiddenInput = document.getElementById('signupState');
   
-  if (!trigger || !dropdown || !searchInput || !optionsList || !hiddenInput) {
-    console.log('State dropdown elements missing');
-    return;
-  }
-  
-  console.log('Initializing state dropdown...');
+  if (!trigger || !dropdown || !searchInput || !optionsList || !hiddenInput) return;
   
   function renderOptions(filter = '') {
     const filtered = nigerianStates.filter(state => 
       state.toLowerCase().includes(filter.toLowerCase())
     );
     optionsList.innerHTML = filtered.map(state => 
-      `<li data-value="${state}" style="padding:10px 16px;cursor:pointer;font-size:0.9rem;color:var(--text);transition:background 0.2s;">${state}</li>`
+      `<li data-value="${state}">${state}</li>`
     ).join('');
     
     optionsList.querySelectorAll('li').forEach(li => {
@@ -222,29 +213,20 @@ function initStateDropdown() {
         if (searchInput) searchInput.value = '';
         renderOptions();
       });
-      li.addEventListener('mouseenter', function() {
-        this.style.background = 'var(--surface-alt)';
-      });
-      li.addEventListener('mouseleave', function() {
-        this.style.background = 'transparent';
-      });
     });
   }
   
   renderOptions();
   
-  // Toggle dropdown on trigger click
   trigger.addEventListener('click', function(e) {
     e.preventDefault();
     e.stopPropagation();
     selectContainer.classList.toggle('active');
-    console.log('Dropdown toggled:', selectContainer.classList.contains('active'));
     if (selectContainer.classList.contains('active') && searchInput) {
       searchInput.focus();
     }
   });
   
-  // Search filter
   if (searchInput) {
     searchInput.addEventListener('input', function() {
       renderOptions(this.value);
@@ -254,14 +236,12 @@ function initStateDropdown() {
     });
   }
   
-  // Close dropdown when clicking outside
   document.addEventListener('click', function(e) {
     if (!selectContainer.contains(e.target)) {
       selectContainer.classList.remove('active');
     }
   });
   
-  // Close dropdown on Escape key
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
       selectContainer.classList.remove('active');
@@ -361,12 +341,8 @@ function getUserState() {
   return new Promise((resolve) => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        (position) => {
-          resolve('Lagos');
-        },
-        () => {
-          resolve(null);
-        },
+        () => { resolve('Lagos'); },
+        () => { resolve(null); },
         { timeout: 5000 }
       );
     } else {
@@ -518,15 +494,15 @@ function renderListings(products, containerId) {
     
     return `
       <div class="listing-card" data-id="${p.id}" style="cursor:pointer;border-radius:16px;overflow:hidden;background:var(--surface);border:1px solid var(--border);transition:transform 0.2s,box-shadow 0.2s;position:relative;">
-        <button class="fav-btn" onclick="event.stopPropagation(); toggleFavoriteCard(${p.id}, this)" 
+        <button class="fav-btn" onclick="event.stopPropagation(); toggleFavoriteCard('${p.id}', this)" 
                 style="position:absolute;top:12px;right:12px;z-index:2;background:rgba(255,255,255,0.9);border:none;border-radius:50%;width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;box-shadow:0 2px 8px rgba(0,0,0,0.1);${heartColor}">
           <i class="${heartIcon}"></i>
         </button>
-        <div class="listing-img" style="height:180px;background:var(--surface-alt);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;" onclick="viewProduct(${p.id})">
+        <div class="listing-img" style="height:180px;background:var(--surface-alt);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;" onclick="viewProduct('${p.id}')">
           ${imageHtml}
           ${badges}
         </div>
-        <div class="listing-body" style="padding:12px 14px 14px;" onclick="viewProduct(${p.id})">
+        <div class="listing-body" style="padding:12px 14px 14px;" onclick="viewProduct('${p.id}')">
           <div class="price" style="font-weight:700;font-size:1.1rem;color:var(--text);">${price}</div>
           <div class="title" style="font-weight:600;font-size:0.9rem;margin:4px 0;color:var(--text);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${p.title}</div>
           <div class="meta" style="display:flex;gap:12px;font-size:0.7rem;color:var(--text-secondary);margin-top:4px;">
@@ -609,7 +585,7 @@ document.addEventListener('DOMContentLoaded', function() {
         acDropdown.innerHTML = results.map(p => {
           const firstImage = p.images && p.images.length > 0 ? p.images[0] : null;
           return `
-            <div class="ac-item" onclick="viewProduct(${p.id})">
+            <div class="ac-item" onclick="viewProduct('${p.id}')">
               <img src="${firstImage || 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2236%22 height=%2236%22%3E%3Crect width=%2236%22 height=%2236%22 fill=%22%23d6e1ed%22/%3E%3Ctext x=%228%22 y=%2224%22 font-size=%2220%22%3E📦%3C/text%3E%3C/svg%3E'}" alt="">
               <span>${p.title}</span>
               <small>${p.category}</small>
@@ -647,14 +623,13 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ============================================================
-// INIT - Called on every page load
+// INIT
 // ============================================================
 document.addEventListener('DOMContentLoaded', function() {
   loadUser();
   initTheme();
   updateFavoriteBadge();
   
-  // Initialize state dropdown if elements exist
   if (document.getElementById('stateSelect')) {
     initStateDropdown();
   }
