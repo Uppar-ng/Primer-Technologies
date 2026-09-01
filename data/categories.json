@@ -1,8 +1,8 @@
 [
   {
-    "slug": "vehicles",
-    "name": "Vehicles",
-    "icon": "fas fa-car"
+    "slug": "fashion",
+    "name": "Fashion",
+    "icon": "fas fa-tshirt"
   },
   {
     "slug": "electronics",
@@ -10,53 +10,18 @@
     "icon": "fas fa-mobile-alt"
   },
   {
-    "slug": "furniture",
-    "name": "Furniture",
-    "icon": "fas fa-couch"
-  },
-  {
-    "slug": "fashion",
-    "name": "Fashion",
-    "icon": "fas fa-tshirt"
-  },
-  {
-    "slug": "real-estate",
-    "name": "Real Estate",
-    "icon": "fas fa-home"
-  },
-  {
-    "slug": "services",
-    "name": "Services",
-    "icon": "fas fa-tools"
-  },
-  {
-    "slug": "jobs",
-    "name": "Jobs",
-    "icon": "fas fa-briefcase"
-  },
-  {
-    "slug": "pets",
-    "name": "Pets",
-    "icon": "fas fa-paw"
-  },
-  {
-    "slug": "sports",
-    "name": "Sports & Fitness",
-    "icon": "fas fa-dumbbell"
-  },
-  {
-    "slug": "books",
-    "name": "Books & Stationery",
-    "icon": "fas fa-book"
-  },
-  {
-    "slug": "beauty",
+    "slug": "beauty-health",
     "name": "Beauty & Health",
     "icon": "fas fa-spa"
   },
   {
-    "slug": "food",
+    "slug": "food-drinks",
     "name": "Food & Drinks",
     "icon": "fas fa-utensils"
+  },
+  {
+    "slug": "home-kitchen",
+    "name": "Home & Kitchen",
+    "icon": "fas fa-blender"
   }
 ]
