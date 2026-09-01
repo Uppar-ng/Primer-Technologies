@@ -278,7 +278,7 @@
               <div class="seller-name" id="sellerName">Seller Name</div>
               <div class="seller-badge" id="sellerBadge"><i class="fas fa-check-circle"></i> Verified</div>
               <div class="seller-meta">
-                <span><i class="fas fa-calendar-alt"></i> Member since <span id="sellerJoined">2024</span></span>
+                <span><i class="fas fa-calendar-alt"></i> Member since <span id="sellerJoined">2026</span></span>
                 <span><i class="fas fa-store"></i> <span id="sellerListings">0</span> listings</span>
               </div>
             </div>
@@ -438,7 +438,7 @@
       initStateDropdown();
 
       const params = new URLSearchParams(window.location.search);
-      const productId = parseInt(params.get('id'));
+      const productId = params.get('id'); // STRING ID - No parseInt
       
       if (!productId) {
         document.getElementById('loadingState').innerHTML = `<div style="text-align:center;padding:40px;"><i class="fas fa-exclamation-circle" style="font-size:2rem;color:#e74c3c;"></i><p style="margin-top:12px;color:var(--text-secondary);">Product not found.</p><a href="/" class="btn-primary" style="margin-top:16px;width:auto;padding:10px 28px;">Go Home</a></div>`;
@@ -446,7 +446,7 @@
       }
 
       const products = await loadProducts();
-      const product = products.find(p => p.id === productId);
+      const product = products.find(p => p.id === productId); // String comparison
       
       if (!product) {
         document.getElementById('loadingState').innerHTML = `<div style="text-align:center;padding:40px;"><i class="fas fa-exclamation-circle" style="font-size:2rem;color:#e74c3c;"></i><p style="margin-top:12px;color:var(--text-secondary);">Product not found.</p><a href="/" class="btn-primary" style="margin-top:16px;width:auto;padding:10px 28px;">Go Home</a></div>`;
@@ -501,10 +501,10 @@
       document.getElementById('galleryBadge').style.background = product.featured ? 'rgba(26,54,80,0.9)' : 'rgba(0,0,0,0.7)';
 
       const seller = product.seller || {
-        name: 'Verified Seller', initials: 'VS', verified: true, joined: '2024',
-        listings: 12, rating: 4.9, sales: 47, response: '95%',
-        bio: 'Professional seller with a passion for quality products.',
-        phone: '08012345678', whatsapp: '08012345678'
+        name: 'Zaure Home Essentials', initials: 'ZH', verified: true, joined: '2026',
+        listings: 25, rating: 4.9, sales: 150, response: '98%',
+        bio: 'Official Zaure store for home essentials. Quality products at affordable prices. Fast delivery available.',
+        phone: '09042339411', whatsapp: '09042339411'
       };
 
       // Load sellers data to find matching profile picture
@@ -524,20 +524,20 @@
       document.getElementById('sellerName').textContent = seller.name;
       document.getElementById('sellerBadge').innerHTML = seller.verified ? '<i class="fas fa-check-circle"></i> Verified' : '<i class="fas fa-clock"></i> New Seller';
       document.getElementById('sellerBadge').style.color = seller.verified ? '#1f5d8a' : '#f5b342';
-      document.getElementById('sellerJoined').textContent = seller.joined || '2024';
+      document.getElementById('sellerJoined').textContent = seller.joined || '2026';
       document.getElementById('sellerListings').textContent = seller.listings || 0;
       document.getElementById('sellerRating').textContent = seller.rating || '4.9';
       document.getElementById('sellerSales').textContent = seller.sales || 0;
-      document.getElementById('sellerResponse').textContent = seller.response || '95%';
-      document.getElementById('sellerBio').textContent = seller.bio || 'Professional seller dedicated to quality.';
+      document.getElementById('sellerResponse').textContent = seller.response || '98%';
+      document.getElementById('sellerBio').textContent = seller.bio || 'Official Zaure store.';
 
       const contactBtn = document.getElementById('contactBtn');
-      const phoneNumber = seller.phone || '08012345678';
+      const phoneNumber = seller.phone || '09042339411';
       contactBtn.href = `tel:${phoneNumber}`;
       contactBtn.innerHTML = `<i class="fas fa-phone"></i> Call ${seller.name}`;
 
       const whatsappBtn = document.getElementById('whatsappBtn');
-      const whatsappNumber = seller.whatsapp || seller.phone || '08012345678';
+      const whatsappNumber = seller.whatsapp || seller.phone || '09042339411';
       const cleanNumber = whatsappNumber.replace(/[^0-9]/g, '');
       whatsappBtn.href = `https://wa.me/${cleanNumber}?text=Hello%20${encodeURIComponent(seller.name)}%2C%20I%20am%20interested%20in%20your%20listing%3A%20${encodeURIComponent(product.title)}%20on%20Zaure.`;
 
