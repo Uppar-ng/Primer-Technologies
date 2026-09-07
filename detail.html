@@ -64,17 +64,23 @@
     .action-buttons {
       display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap;
     }
-    .action-buttons .btn-contact {
+    .action-buttons .btn-buy {
       flex: 2; background: #1a3650; color: white; border: none; padding: 14px 24px;
       border-radius: 60px; font-weight: 600; font-size: 1rem; cursor: pointer;
       display: flex; align-items: center; justify-content: center; gap: 8px;
       transition: 0.2s; text-decoration: none;
     }
-    .action-buttons .btn-contact:hover { background: #0f2940; }
-    [data-theme="dark"] .action-buttons .btn-contact { background: #2A3550; color: #F1F5F9; }
-    [data-theme="dark"] .action-buttons .btn-contact:hover { background: #3A4560; }
-    .action-buttons .btn-favorite {
+    .action-buttons .btn-buy:hover { background: #0f2940; transform: translateY(-2px); }
+    [data-theme="dark"] .action-buttons .btn-buy { background: #2A3550; color: #F1F5F9; }
+    .action-buttons .btn-contact {
       flex: 1; background: var(--surface); color: var(--text); border: 2px solid var(--border);
+      padding: 14px 20px; border-radius: 60px; font-weight: 600; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s;
+      text-decoration: none;
+    }
+    .action-buttons .btn-contact:hover { border-color: var(--text); }
+    .action-buttons .btn-favorite {
+      flex: 0.5; background: var(--surface); color: var(--text); border: 2px solid var(--border);
       padding: 14px 20px; border-radius: 60px; font-weight: 600; cursor: pointer;
       display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s;
     }
@@ -106,7 +112,6 @@
       flex-shrink: 0;
       overflow: hidden;
     }
-    [data-theme="dark"] .seller-card .seller-avatar-large { background: #2A3550; color: #F1F5F9; }
     .seller-card .seller-avatar-large img {
       width: 100%;
       height: 100%;
@@ -181,6 +186,174 @@
     .detail-back .back-btn { background: transparent; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text); text-decoration: none; }
     .detail-back h2 { font-size: 1.1rem; font-weight: 600; color: var(--text); }
 
+    /* ============================================
+       CHECKOUT MODAL – Buy Now Flow
+       ============================================ */
+    .checkout-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(4px);
+      z-index: 400;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+    }
+    .checkout-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .checkout-modal {
+      background: var(--surface);
+      border-radius: 20px;
+      padding: 24px;
+      max-width: 420px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      box-shadow: var(--shadow-hover);
+      transform: translateY(20px);
+      transition: transform 0.3s;
+    }
+    .checkout-overlay.active .checkout-modal {
+      transform: translateY(0);
+    }
+    .checkout-modal .checkout-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .checkout-modal .checkout-header h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .checkout-modal .checkout-close {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: var(--text-secondary);
+    }
+    .checkout-modal .checkout-product {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding: 12px;
+      background: var(--surface-alt);
+      border-radius: 12px;
+    }
+    .checkout-modal .checkout-product img {
+      width: 60px;
+      height: 60px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+    .checkout-modal .checkout-product .checkout-product-info h4 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .checkout-modal .checkout-product .checkout-product-info .checkout-price {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #1a3650;
+      margin-top: 4px;
+    }
+    .checkout-modal .checkout-details {
+      margin-bottom: 16px;
+    }
+    .checkout-modal .checkout-details .detail-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+    .checkout-modal .checkout-details .detail-row .label {
+      color: var(--text-secondary);
+    }
+    .checkout-modal .checkout-details .detail-row .value {
+      font-weight: 600;
+      color: var(--text);
+    }
+    .checkout-modal .checkout-details .detail-row.total {
+      border-bottom: none;
+      font-size: 1.1rem;
+    }
+    .checkout-modal .checkout-details .detail-row.total .value {
+      font-weight: 800;
+      color: #1a3650;
+      font-size: 1.3rem;
+    }
+    .checkout-modal .bank-details {
+      background: var(--surface-alt);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .checkout-modal .bank-details h5 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .checkout-modal .bank-details .bank-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 0;
+      font-size: 0.85rem;
+    }
+    .checkout-modal .bank-details .bank-row .bank-label {
+      color: var(--text-secondary);
+    }
+    .checkout-modal .bank-details .bank-row .bank-value {
+      font-weight: 600;
+      color: var(--text);
+    }
+    .checkout-modal .how-to {
+      margin-bottom: 16px;
+    }
+    .checkout-modal .how-to h5 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .checkout-modal .how-to ol {
+      padding-left: 20px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+    .checkout-modal .btn-confirm-payment {
+      width: 100%;
+      background: #25D366;
+      color: white;
+      border: none;
+      padding: 14px 24px;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background 0.3s;
+    }
+    .checkout-modal .btn-confirm-payment:hover {
+      background: #1DA851;
+    }
+
     @media (min-width: 768px) {
       .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
       .detail-grid .product-gallery { grid-column: 1 / -1; }
@@ -192,7 +365,7 @@
     }
     @media (max-width: 767px) {
       .product-gallery .main-image { height: 250px; }
-      .action-buttons .btn-favorite { flex: 0.5; }
+      .action-buttons .btn-favorite { flex: 0.4; }
       .action-buttons .btn-share { flex: 0.3; }
       .seller-card .seller-stats { grid-template-columns: repeat(3, 1fr); }
       .seller-card .seller-actions { flex-direction: column; }
@@ -264,7 +437,8 @@
           <div class="product-tags" id="productTags"></div>
           <div class="product-description" id="productDescription">Product description goes here.</div>
           <div class="action-buttons">
-            <a class="btn-contact" id="contactBtn"><i class="fas fa-phone"></i> Call Seller</a>
+            <button class="btn-buy" id="buyNowBtn"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+            <a class="btn-contact" id="contactBtn"><i class="fas fa-phone"></i> Call</a>
             <button class="btn-favorite" id="favoriteBtn"><i class="far fa-heart"></i> Save</button>
             <button class="btn-share" id="shareBtn"><i class="fas fa-share-alt"></i></button>
           </div>
@@ -327,6 +501,75 @@
 
   </div>
 
+  <!-- ===== CHECKOUT MODAL ===== -->
+  <div class="checkout-overlay" id="checkoutOverlay">
+    <div class="checkout-modal">
+      <div class="checkout-header">
+        <h3><i class="fas fa-shopping-cart" style="color:#1a3650;"></i> Confirm Your Order</h3>
+        <button class="checkout-close" id="checkoutCloseBtn"><i class="fas fa-times"></i></button>
+      </div>
+      
+      <div class="checkout-product">
+        <img src="" alt="Product" id="checkoutProductImage">
+        <div class="checkout-product-info">
+          <h4 id="checkoutProductTitle">Product Title</h4>
+          <div class="checkout-price" id="checkoutProductPrice">₦0</div>
+        </div>
+      </div>
+
+      <div class="checkout-details">
+        <div class="detail-row">
+          <span class="label">Product Price</span>
+          <span class="value" id="checkoutPrice">₦0</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">Delivery Fee (Kaduna)</span>
+          <span class="value" id="checkoutDelivery">₦1,500</span>
+        </div>
+        <div class="detail-row total">
+          <span class="label">Total</span>
+          <span class="value" id="checkoutTotal">₦0</span>
+        </div>
+      </div>
+
+      <div class="bank-details">
+        <h5><i class="fas fa-university" style="color:#1a3650;"></i> Bank Transfer Details</h5>
+        <div class="bank-row">
+          <span class="bank-label">Bank Name</span>
+          <span class="bank-value">[Your Bank Name]</span>
+        </div>
+        <div class="bank-row">
+          <span class="bank-label">Account Name</span>
+          <span class="bank-value">Zaure Technologies</span>
+        </div>
+        <div class="bank-row">
+          <span class="bank-label">Account Number</span>
+          <span class="bank-value" style="font-weight:800;color:#1a3650;">[Your Account Number]</span>
+        </div>
+        <div class="bank-row">
+          <span class="bank-label">Order Reference</span>
+          <span class="bank-value" id="checkoutOrderId">ZA-00000000-0000</span>
+        </div>
+      </div>
+
+      <div class="how-to">
+        <h5><i class="fas fa-info-circle" style="color:#1a3650;"></i> How to Pay</h5>
+        <ol>
+          <li>Copy the account details above</li>
+          <li>Open your bank app or use USSD</li>
+          <li>Transfer the total amount</li>
+          <li>Use Order Reference as payment description</li>
+          <li>Take a screenshot of your transfer receipt</li>
+          <li>Click "I've Paid" below to send proof</li>
+        </ol>
+      </div>
+
+      <a href="#" class="btn-confirm-payment" id="confirmPaymentBtn">
+        <i class="fab fa-whatsapp"></i> I've Paid – Send Proof
+      </a>
+    </div>
+  </div>
+
   <!-- ===== FOOTER ===== -->
   <footer class="footer">
     <div class="container">
@@ -347,11 +590,11 @@
         <div class="footer-col">
           <h4>Browse</h4>
           <a href="/category.html?slug=all">All Items</a>
-          <a href="/category.html?slug=vehicles">Vehicles</a>
-          <a href="/category.html?slug=electronics">Electronics</a>
-          <a href="/category.html?slug=furniture">Furniture</a>
           <a href="/category.html?slug=fashion">Fashion</a>
-          <a href="/category.html?slug=real-estate">Real Estate</a>
+          <a href="/category.html?slug=electronics">Electronics</a>
+          <a href="/category.html?slug=beauty-health">Beauty & Health</a>
+          <a href="/category.html?slug=food-drinks">Food & Drinks</a>
+          <a href="/category.html?slug=home-kitchen">Home & Kitchen</a>
         </div>
         <div class="footer-col">
           <h4>Support</h4>
@@ -438,7 +681,12 @@
       initStateDropdown();
 
       const params = new URLSearchParams(window.location.search);
-      const productId = params.get('id'); // STRING ID - No parseInt
+      const productId = params.get('id');
+      const DELIVERY_FEE = 1500;
+      const BANK_NAME = '[Your Bank Name]';
+      const ACCOUNT_NUMBER = '[Your Account Number]';
+      const ACCOUNT_NAME = 'Zaure Technologies';
+      const WHATSAPP_NUMBER = '2349042339411';
       
       if (!productId) {
         document.getElementById('loadingState').innerHTML = `<div style="text-align:center;padding:40px;"><i class="fas fa-exclamation-circle" style="font-size:2rem;color:#e74c3c;"></i><p style="margin-top:12px;color:var(--text-secondary);">Product not found.</p><a href="/" class="btn-primary" style="margin-top:16px;width:auto;padding:10px 28px;">Go Home</a></div>`;
@@ -446,7 +694,7 @@
       }
 
       const products = await loadProducts();
-      const product = products.find(p => p.id === productId); // String comparison
+      const product = products.find(p => p.id === productId);
       
       if (!product) {
         document.getElementById('loadingState').innerHTML = `<div style="text-align:center;padding:40px;"><i class="fas fa-exclamation-circle" style="font-size:2rem;color:#e74c3c;"></i><p style="margin-top:12px;color:var(--text-secondary);">Product not found.</p><a href="/" class="btn-primary" style="margin-top:16px;width:auto;padding:10px 28px;">Go Home</a></div>`;
@@ -457,6 +705,8 @@
       document.getElementById('productDetailContainer').style.display = 'block';
 
       const price = product.price >= 1e6 ? `₦${(product.price/1e6).toFixed(1)}M` : `₦${product.price.toLocaleString()}`;
+      const total = product.price + DELIVERY_FEE;
+      const totalFormatted = total >= 1e6 ? `₦${(total/1e6).toFixed(1)}M` : `₦${total.toLocaleString()}`;
       
       document.getElementById('productTitle').textContent = product.title;
       document.getElementById('productPrice').textContent = price;
@@ -482,12 +732,12 @@
       }
 
       thumbnailStrip.innerHTML = images.map((img, index) => `
-        <img src="${img || 'https://placehold.co/60x60?text=Zaure'}" alt="Thumbnail ${index + 1}" class="thumb ${index === 0 ? 'active' : ''}" onclick="changeImage(${index})" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22%3E%3Crect width=%2260%22 height=%2260%22 fill=%22%23d6e1ed%22/%3E%3Ctext x=%2218%22 y=%2236%22 font-size=%2216%22%3E📦%3C/text%3E%3C/svg%3E'">
+        <img src="${img}" alt="Thumbnail ${index + 1}" class="thumb ${index === 0 ? 'active' : ''}" onclick="changeImage(${index})" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22%3E%3Crect width=%2260%22 height=%2260%22 fill=%22%23d6e1ed%22/%3E%3Ctext x=%2218%22 y=%2236%22 font-size=%2216%22%3E📦%3C/text%3E%3C/svg%3E'">
       `).join('');
 
       window.changeImage = function(index) {
         currentImageIndex = index;
-        mainImage.src = images[index] || 'https://placehold.co/600x400?text=Zaure';
+        mainImage.src = images[index];
         document.querySelectorAll('.thumb').forEach((el, i) => { el.classList.toggle('active', i === index); });
       };
 
@@ -500,20 +750,67 @@
       document.getElementById('galleryBadge').textContent = product.featured ? 'Featured' : 'Available';
       document.getElementById('galleryBadge').style.background = product.featured ? 'rgba(26,54,80,0.9)' : 'rgba(0,0,0,0.7)';
 
+      // ============================================
+      // BUY NOW BUTTON & CHECKOUT MODAL
+      // ============================================
+      const checkoutOverlay = document.getElementById('checkoutOverlay');
+      const checkoutCloseBtn = document.getElementById('checkoutCloseBtn');
+      const buyNowBtn = document.getElementById('buyNowBtn');
+
+      // Generate Order ID
+      function generateOrderId() {
+        const now = new Date();
+        const dateStr = now.getFullYear().toString() + 
+          String(now.getMonth() + 1).padStart(2, '0') + 
+          String(now.getDate()).padStart(2, '0');
+        let counter = parseInt(localStorage.getItem('zaure_order_counter') || '0');
+        counter++;
+        localStorage.setItem('zaure_order_counter', counter.toString());
+        return `ZA-${dateStr}-${String(counter).padStart(4, '0')}`;
+      }
+
+      buyNowBtn.addEventListener('click', function() {
+        // Fill checkout modal
+        document.getElementById('checkoutProductImage').src = images[0] || 'https://placehold.co/60x60?text=Zaure';
+        document.getElementById('checkoutProductTitle').textContent = product.title;
+        document.getElementById('checkoutProductPrice').textContent = price;
+        document.getElementById('checkoutPrice').textContent = price;
+        document.getElementById('checkoutDelivery').textContent = `₦${DELIVERY_FEE.toLocaleString()}`;
+        document.getElementById('checkoutTotal').textContent = totalFormatted;
+        document.getElementById('checkoutOrderId').textContent = generateOrderId();
+        
+        // Show modal
+        checkoutOverlay.classList.add('active');
+      });
+
+      checkoutCloseBtn.addEventListener('click', function() {
+        checkoutOverlay.classList.remove('active');
+      });
+
+      checkoutOverlay.addEventListener('click', function(e) {
+        if (e.target === checkoutOverlay) checkoutOverlay.classList.remove('active');
+      });
+
+      // Confirm Payment Button
+      document.getElementById('confirmPaymentBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        const orderId = document.getElementById('checkoutOrderId').textContent;
+        const message = encodeURIComponent(`Hello Zaure, I have made payment for my order.\n\nOrder ID: ${orderId}\nProduct: ${product.title}\nAmount: ${totalFormatted}\n\nAttached is my transfer receipt.`);
+        window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
+      });
+
       const seller = product.seller || {
-        name: 'Zaure Home Essentials', initials: 'ZH', verified: true, joined: '2026',
-        listings: 25, rating: 4.9, sales: 150, response: '98%',
-        bio: 'Official Zaure store for home essentials. Quality products at affordable prices. Fast delivery available.',
+        name: 'Zaure Official Store', initials: 'ZA', verified: true, joined: '2026',
+        listings: 13, rating: 5.0, sales: 800, response: '100%',
+        bio: 'Welcome to the official Zaure store.',
         phone: '09042339411', whatsapp: '09042339411'
       };
 
-      // Load sellers data to find matching profile picture
       const sellersData = await loadTopSellers();
       const matchedSellerData = sellersData.find(s => 
         s.name.toLowerCase() === seller.name.toLowerCase()
       );
 
-      // Seller Avatar - Show profile picture from sellers.json if available
       const sellerAvatarEl = document.getElementById('sellerAvatar');
       if (matchedSellerData && matchedSellerData.profilePic) {
         sellerAvatarEl.innerHTML = `<img src="${matchedSellerData.profilePic}" alt="${seller.name}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.style.display='none';this.parentElement.textContent='${seller.initials || seller.name.charAt(0)}';">`;
@@ -523,32 +820,24 @@
 
       document.getElementById('sellerName').textContent = seller.name;
       document.getElementById('sellerBadge').innerHTML = seller.verified ? '<i class="fas fa-check-circle"></i> Verified' : '<i class="fas fa-clock"></i> New Seller';
-      document.getElementById('sellerBadge').style.color = seller.verified ? '#1f5d8a' : '#f5b342';
       document.getElementById('sellerJoined').textContent = seller.joined || '2026';
       document.getElementById('sellerListings').textContent = seller.listings || 0;
-      document.getElementById('sellerRating').textContent = seller.rating || '4.9';
+      document.getElementById('sellerRating').textContent = seller.rating || '5.0';
       document.getElementById('sellerSales').textContent = seller.sales || 0;
-      document.getElementById('sellerResponse').textContent = seller.response || '98%';
+      document.getElementById('sellerResponse').textContent = seller.response || '100%';
       document.getElementById('sellerBio').textContent = seller.bio || 'Official Zaure store.';
 
       const contactBtn = document.getElementById('contactBtn');
-      const phoneNumber = seller.phone || '09042339411';
-      contactBtn.href = `tel:${phoneNumber}`;
-      contactBtn.innerHTML = `<i class="fas fa-phone"></i> Call ${seller.name}`;
+      contactBtn.href = `tel:${seller.phone}`;
 
       const whatsappBtn = document.getElementById('whatsappBtn');
-      const whatsappNumber = seller.whatsapp || seller.phone || '09042339411';
-      const cleanNumber = whatsappNumber.replace(/[^0-9]/g, '');
-      whatsappBtn.href = `https://wa.me/${cleanNumber}?text=Hello%20${encodeURIComponent(seller.name)}%2C%20I%20am%20interested%20in%20your%20listing%3A%20${encodeURIComponent(product.title)}%20on%20Zaure.`;
+      const cleanNumber = (seller.whatsapp || '09042339411').replace(/[^0-9]/g, '');
+      whatsappBtn.href = `https://wa.me/${cleanNumber}?text=Hello%2C%20I%20am%20interested%20in%20${encodeURIComponent(product.title)}%20on%20Zaure.`;
 
-      // Visit Store button - redirects to seller's store page
       const visitStoreBtn = document.getElementById('visitStoreBtn');
       visitStoreBtn.addEventListener('click', function() {
         if (matchedSellerData && matchedSellerData.id) {
           window.location.href = `/store.html?id=${matchedSellerData.id}`;
-        } else {
-          const slug = seller.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-          window.location.href = `/store.html?id=${slug}`;
         }
       });
 
@@ -576,7 +865,7 @@
 
       document.getElementById('reportBtn').addEventListener('click', function() {
         const reportNumber = '2349042339411';
-        const reportMessage = encodeURIComponent(`Hello Zaure, I want to report this listing: ${product.title} (ID: ${product.id})`);
+        const reportMessage = encodeURIComponent(`Hello Zaure, I want to report this listing: ${product.title}`);
         window.location.href = `https://wa.me/${reportNumber}?text=${reportMessage}`;
       });
 
