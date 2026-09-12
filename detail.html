@@ -160,451 +160,199 @@
     .detail-back .back-btn { background: transparent; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text); text-decoration: none; }
     .detail-back h2 { font-size: 1.1rem; font-weight: 600; color: var(--text); }
 
-    /* ============================================
-       CHECKOUT MODAL – Multi-Step Flow
-       ============================================ */
+    /* Checkout Modal */
     .checkout-overlay {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.6);
-      backdrop-filter: blur(4px);
-      z-index: 400;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.3s, visibility 0.3s;
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
+      z-index: 400; display: flex; align-items: center; justify-content: center;
+      opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s;
       padding: 16px;
     }
     .checkout-overlay.active { opacity: 1; visibility: visible; }
 
     .checkout-modal {
-      background: var(--surface);
-      border-radius: 24px;
-      padding: 0;
-      max-width: 480px;
-      width: 100%;
-      max-height: 90vh;
-      overflow-y: auto;
-      box-shadow: var(--shadow-hover);
-      transform: translateY(20px);
+      background: var(--surface); border-radius: 24px; padding: 0;
+      max-width: 480px; width: 100%; max-height: 90vh; overflow-y: auto;
+      box-shadow: var(--shadow-hover); transform: translateY(20px);
       transition: transform 0.3s;
     }
     .checkout-overlay.active .checkout-modal { transform: translateY(0); }
 
     .checkout-modal .checkout-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 24px;
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      background: var(--surface);
-      z-index: 10;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 24px; border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; background: var(--surface); z-index: 10;
       border-radius: 24px 24px 0 0;
     }
-    .checkout-modal .checkout-header h3 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--text);
-    }
-    .checkout-modal .checkout-close {
-      background: none;
-      border: none;
-      font-size: 1.2rem;
-      cursor: pointer;
-      color: var(--text-secondary);
-      padding: 4px;
-    }
+    .checkout-modal .checkout-header h3 { font-size: 1.1rem; font-weight: 700; color: var(--text); }
+    .checkout-modal .checkout-close { background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-secondary); padding: 4px; }
 
-    /* Progress Steps */
     .checkout-progress {
-      display: flex;
-      padding: 20px 24px;
-      gap: 8px;
-      background: var(--surface-alt);
-      border-bottom: 1px solid var(--border);
+      display: flex; padding: 20px 24px; gap: 8px;
+      background: var(--surface-alt); border-bottom: 1px solid var(--border);
     }
     .checkout-progress .progress-step {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      position: relative;
+      flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px;
     }
     .checkout-progress .progress-step .step-num {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: var(--surface);
-      border: 2px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--text-secondary);
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--surface); border: 2px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; font-weight: 700; color: var(--text-secondary);
       transition: all 0.3s;
     }
     .checkout-progress .progress-step.active .step-num {
-      background: #1a3650;
-      color: white;
-      border-color: #1a3650;
+      background: #1a3650; color: white; border-color: #1a3650;
     }
     .checkout-progress .progress-step.completed .step-num {
-      background: #25D366;
-      color: white;
-      border-color: #25D366;
+      background: #25D366; color: white; border-color: #25D366;
     }
     .checkout-progress .progress-step .step-label {
-      font-size: 0.65rem;
-      font-weight: 600;
-      color: var(--text-secondary);
-      text-align: center;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      font-size: 0.65rem; font-weight: 600; color: var(--text-secondary);
+      text-align: center; text-transform: uppercase; letter-spacing: 0.5px;
     }
     .checkout-progress .progress-step.active .step-label { color: #1a3650; }
     .checkout-progress .progress-step.completed .step-label { color: #25D366; }
 
-    .checkout-modal .checkout-body {
-      padding: 24px;
-    }
-
+    .checkout-modal .checkout-body { padding: 24px; }
     .checkout-step { display: none; }
     .checkout-step.active { display: block; animation: fadeInStep 0.3s ease; }
-
     @keyframes fadeInStep {
       from { opacity: 0; transform: translateX(10px); }
       to { opacity: 1; transform: translateX(0); }
     }
 
-    /* Step 1 - Payment Method */
     .payment-options { display: flex; flex-direction: column; gap: 12px; }
     .payment-option {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 18px;
-      background: var(--surface);
-      border: 2px solid var(--border);
-      border-radius: 16px;
-      cursor: pointer;
-      transition: all 0.2s;
+      display: flex; align-items: center; gap: 16px; padding: 18px;
+      background: var(--surface); border: 2px solid var(--border);
+      border-radius: 16px; cursor: pointer; transition: all 0.2s;
     }
     .payment-option:hover { border-color: #A0AEC0; }
-    .payment-option.selected {
-      border-color: #1a3650;
-      background: rgba(26,54,80,0.04);
-    }
+    .payment-option.selected { border-color: #1a3650; background: rgba(26,54,80,0.04); }
     .payment-option .payment-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      background: var(--surface-alt);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.3rem;
-      color: #1a3650;
-      flex-shrink: 0;
+      width: 48px; height: 48px; border-radius: 12px;
+      background: var(--surface-alt); display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; color: #1a3650; flex-shrink: 0;
     }
-    .payment-option.selected .payment-icon {
-      background: #1a3650;
-      color: white;
-    }
+    .payment-option.selected .payment-icon { background: #1a3650; color: white; }
     .payment-option .payment-info { flex: 1; }
-    .payment-option .payment-info h4 {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 2px;
-    }
-    .payment-option .payment-info p {
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-    }
+    .payment-option .payment-info h4 { font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+    .payment-option .payment-info p { font-size: 0.8rem; color: var(--text-secondary); }
     .payment-option .payment-check {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      border: 2px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
+      width: 24px; height: 24px; border-radius: 50%;
+      border: 2px solid var(--border); display: flex;
+      align-items: center; justify-content: center; flex-shrink: 0;
     }
-    .payment-option.selected .payment-check {
-      background: #1a3650;
-      border-color: #1a3650;
-      color: white;
-    }
+    .payment-option.selected .payment-check { background: #1a3650; border-color: #1a3650; color: white; }
     .payment-option .payment-check i { font-size: 0.7rem; display: none; }
     .payment-option.selected .payment-check i { display: block; }
 
-    /* Step 2 - Customer Info */
     .form-group { margin-bottom: 16px; }
-    .form-group label {
-      display: block;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 6px;
-    }
+    .form-group label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
     .form-group input,
     .form-group textarea {
-      width: 100%;
-      padding: 12px 16px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      font-size: 0.9rem;
-      background: var(--input-bg);
-      color: var(--text);
-      font-family: inherit;
-      transition: border-color 0.2s;
+      width: 100%; padding: 12px 16px; border: 1px solid var(--border);
+      border-radius: 12px; font-size: 0.9rem; background: var(--input-bg);
+      color: var(--text); font-family: inherit; transition: border-color 0.2s;
     }
     .form-group input:focus,
     .form-group textarea:focus {
-      outline: none;
-      border-color: #1a3650;
-      box-shadow: 0 0 0 3px rgba(26,54,80,0.1);
+      outline: none; border-color: #1a3650; box-shadow: 0 0 0 3px rgba(26,54,80,0.1);
     }
     .form-group textarea { resize: vertical; min-height: 80px; }
 
-    /* Step 3 - Review & Confirm */
     .review-product {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 16px;
-      padding: 16px;
-      background: var(--surface-alt);
-      border-radius: 12px;
+      display: flex; gap: 12px; margin-bottom: 16px; padding: 16px;
+      background: var(--surface-alt); border-radius: 12px;
     }
-    .review-product img {
-      width: 70px;
-      height: 70px;
-      border-radius: 8px;
-      object-fit: cover;
-    }
-    .review-product .review-product-info h4 {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--text);
-    }
-    .review-product .review-product-info .review-price {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: #1a3650;
-      margin-top: 4px;
-    }
-    .review-details {
-      background: var(--surface-alt);
-      border-radius: 12px;
-      padding: 16px;
-      margin-bottom: 16px;
-    }
-    .review-details .review-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 6px 0;
-      font-size: 0.85rem;
-    }
+    .review-product img { width: 70px; height: 70px; border-radius: 8px; object-fit: cover; }
+    .review-product .review-product-info h4 { font-size: 0.9rem; font-weight: 600; color: var(--text); }
+    .review-product .review-product-info .review-price { font-size: 1.1rem; font-weight: 700; color: #1a3650; margin-top: 4px; }
+    .review-details { background: var(--surface-alt); border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+    .review-details .review-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 0.85rem; }
     .review-details .review-row .review-label { color: var(--text-secondary); }
-    .review-details .review-row .review-value { font-weight: 600; color: var(--text); text-align: right; }
+    .review-details .review-row .review-value { font-weight: 600; color: var(--text); text-align: right; max-width: 60%; word-wrap: break-word; }
     .review-details .review-row.total {
-      border-top: 1px solid var(--border);
-      margin-top: 8px;
-      padding-top: 12px;
-      font-size: 1rem;
+      border-top: 1px solid var(--border); margin-top: 8px; padding-top: 12px; font-size: 1rem;
     }
-    .review-details .review-row.total .review-value {
-      font-weight: 800;
-      color: #1a3650;
-      font-size: 1.2rem;
-    }
+    .review-details .review-row.total .review-value { font-weight: 800; color: #1a3650; font-size: 1.2rem; }
 
-    /* Bank Details */
     .bank-details {
       background: linear-gradient(135deg, #1a3650, #0f2940);
-      border-radius: 16px;
-      padding: 20px;
-      margin-bottom: 16px;
-      color: white;
+      border-radius: 16px; padding: 20px; margin-bottom: 16px; color: white;
     }
     .bank-details h5 {
-      font-size: 0.85rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-      color: #D4B87A;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+      font-size: 0.85rem; font-weight: 700; margin-bottom: 12px;
+      color: #D4B87A; text-transform: uppercase; letter-spacing: 1px;
     }
     .bank-details .bank-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 6px 0;
-      font-size: 0.85rem;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      display: flex; justify-content: space-between; padding: 6px 0;
+      font-size: 0.85rem; border-bottom: 1px solid rgba(255,255,255,0.1);
     }
     .bank-details .bank-row:last-child { border-bottom: none; }
     .bank-details .bank-row .bank-label { color: rgba(255,255,255,0.7); }
     .bank-details .bank-row .bank-value { font-weight: 700; color: white; }
-    .bank-details .bank-row .bank-value.highlight {
-      color: #D4B87A;
-      font-size: 1rem;
-      letter-spacing: 1px;
-    }
+    .bank-details .bank-row .bank-value.highlight { color: #D4B87A; font-size: 1rem; letter-spacing: 1px; }
     .copy-btn {
-      background: rgba(255,255,255,0.15);
-      border: none;
-      color: white;
-      padding: 2px 8px;
-      border-radius: 6px;
-      font-size: 0.7rem;
-      cursor: pointer;
-      margin-left: 6px;
-      transition: background 0.2s;
+      background: rgba(255,255,255,0.15); border: none; color: white;
+      padding: 2px 8px; border-radius: 6px; font-size: 0.7rem;
+      cursor: pointer; margin-left: 6px; transition: background 0.2s;
     }
     .copy-btn:hover { background: rgba(255,255,255,0.25); }
 
-    /* How to Pay */
     .how-to-pay {
-      background: var(--surface-alt);
-      border-radius: 12px;
-      padding: 16px;
-      margin-bottom: 16px;
+      background: var(--surface-alt); border-radius: 12px;
+      padding: 16px; margin-bottom: 16px;
     }
-    .how-to-pay h5 {
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 10px;
-    }
-    .how-to-pay ol {
-      padding-left: 20px;
-      font-size: 0.82rem;
-      color: var(--text-secondary);
-      line-height: 1.9;
-    }
+    .how-to-pay h5 { font-size: 0.85rem; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+    .how-to-pay ol { padding-left: 20px; font-size: 0.82rem; color: var(--text-secondary); line-height: 1.9; }
 
-    /* Buttons */
-    .checkout-btn-row {
-      display: flex;
-      gap: 10px;
-      margin-top: 20px;
-    }
+    .checkout-btn-row { display: flex; gap: 10px; margin-top: 20px; }
     .checkout-btn {
-      flex: 1;
-      padding: 14px 20px;
-      border-radius: 60px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      cursor: pointer;
-      border: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      transition: all 0.2s;
-      text-decoration: none;
-      font-family: inherit;
+      flex: 1; padding: 14px 20px; border-radius: 60px;
+      font-weight: 600; font-size: 0.9rem; cursor: pointer; border: none;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      transition: all 0.2s; text-decoration: none; font-family: inherit;
     }
-    .checkout-btn.primary {
-      background: #1a3650;
-      color: white;
-    }
+    .checkout-btn.primary { background: #1a3650; color: white; }
     .checkout-btn.primary:hover { background: #0f2940; }
-    .checkout-btn.secondary {
-      background: transparent;
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
+    .checkout-btn.secondary { background: transparent; color: var(--text); border: 1px solid var(--border); }
     .checkout-btn.secondary:hover { border-color: var(--text); }
-    .checkout-btn.success {
-      background: #25D366;
-      color: white;
-    }
+    .checkout-btn.success { background: #25D366; color: white; }
     .checkout-btn.success:hover { background: #1DA851; }
-    .checkout-btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
+    .checkout-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-    /* Success Screen */
-    .checkout-success {
-      text-align: center;
-      padding: 20px 0;
-    }
+    .checkout-success { text-align: center; padding: 20px 0; }
     .success-icon {
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      background: rgba(37,211,102,0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 20px;
-      font-size: 2.8rem;
-      color: #25D366;
-      animation: successPop 0.5s ease;
+      width: 90px; height: 90px; border-radius: 50%;
+      background: rgba(37,211,102,0.1); display: flex; align-items: center;
+      justify-content: center; margin: 0 auto 20px; font-size: 2.8rem;
+      color: #25D366; animation: successPop 0.5s ease;
     }
     @keyframes successPop {
       0% { transform: scale(0); }
       50% { transform: scale(1.1); }
       100% { transform: scale(1); }
     }
-    .checkout-success h3 {
-      font-size: 1.4rem;
-      font-weight: 800;
-      color: var(--text);
-      margin-bottom: 8px;
-    }
-    .checkout-success p {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
+    .checkout-success h3 { font-size: 1.4rem; font-weight: 800; color: var(--text); margin-bottom: 8px; }
+    .checkout-success p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px; }
     .order-reference-box {
-      background: var(--surface-alt);
-      border-radius: 12px;
-      padding: 16px;
-      margin-bottom: 20px;
-      border: 2px dashed #B49450;
+      background: var(--surface-alt); border-radius: 12px; padding: 16px;
+      margin-bottom: 20px; border: 2px dashed #B49450;
     }
     .order-reference-box .ref-label {
-      font-size: 0.7rem;
-      font-weight: 600;
-      color: var(--text-secondary);
-      text-transform: uppercase;
-      letter-spacing: 1px;
+      font-size: 0.7rem; font-weight: 600; color: var(--text-secondary);
+      text-transform: uppercase; letter-spacing: 1px;
     }
     .order-reference-box .ref-number {
-      font-size: 1.3rem;
-      font-weight: 800;
-      color: #1a3650;
-      letter-spacing: 1px;
-      margin-top: 6px;
-      font-family: monospace;
+      font-size: 1.3rem; font-weight: 800; color: #1a3650;
+      letter-spacing: 1px; margin-top: 6px; font-family: monospace;
     }
-    .success-details {
-      background: var(--surface-alt);
-      border-radius: 12px;
-      padding: 16px;
-      margin-bottom: 20px;
-      text-align: left;
-    }
-    .success-details .success-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 6px 0;
-      font-size: 0.85rem;
-    }
+    .success-details { background: var(--surface-alt); border-radius: 12px; padding: 16px; margin-bottom: 20px; text-align: left; }
+    .success-details .success-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 0.85rem; }
     .success-details .success-row .label { color: var(--text-secondary); }
-    .success-details .success-row .value { font-weight: 600; color: var(--text); text-align: right; }
+    .success-details .success-row .value { font-weight: 600; color: var(--text); text-align: right; max-width: 60%; }
 
     @media (min-width: 768px) {
       .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -753,7 +501,6 @@
         <button class="checkout-close" id="checkoutCloseBtn"><i class="fas fa-times"></i></button>
       </div>
 
-      <!-- Progress Steps -->
       <div class="checkout-progress">
         <div class="progress-step active" data-step="1">
           <div class="step-num">1</div>
@@ -771,7 +518,7 @@
 
       <div class="checkout-body">
 
-        <!-- STEP 1: Choose Payment Method -->
+        <!-- STEP 1 -->
         <div class="checkout-step active" id="step1">
           <h4 style="font-size:1rem;font-weight:700;color:var(--text);margin-bottom:16px;">Choose Payment Method</h4>
           <div class="payment-options">
@@ -799,7 +546,7 @@
           </div>
         </div>
 
-        <!-- STEP 2: Customer Details -->
+        <!-- STEP 2 -->
         <div class="checkout-step" id="step2">
           <h4 style="font-size:1rem;font-weight:700;color:var(--text);margin-bottom:16px;">Your Details</h4>
           <form id="customerForm">
@@ -826,7 +573,7 @@
           </div>
         </div>
 
-        <!-- STEP 3: Review & Confirm -->
+        <!-- STEP 3 -->
         <div class="checkout-step" id="step3">
           <h4 style="font-size:1rem;font-weight:700;color:var(--text);margin-bottom:16px;">Review Your Order</h4>
           
@@ -869,7 +616,6 @@
             </div>
           </div>
 
-          <!-- Bank Details (only for bank transfer) -->
           <div id="bankDetailsSection">
             <div class="bank-details">
               <h5><i class="fas fa-university"></i> Bank Transfer Details</h5>
@@ -921,7 +667,7 @@
           </div>
         </div>
 
-        <!-- SUCCESS SCREEN -->
+        <!-- SUCCESS -->
         <div class="checkout-step" id="successStep">
           <div class="checkout-success">
             <div class="success-icon"><i class="fas fa-check-circle"></i></div>
@@ -1080,7 +826,7 @@
     const ACCOUNT_NUMBER = '[Your Account Number]';
     const ACCOUNT_NAME = 'Zaure Technologies';
     const WHATSAPP_NUMBER = '2349042339411';
-    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORMSPREE_ID';
+    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mwvpled';
 
     let currentProduct = null;
     let selectedPaymentMethod = null;
@@ -1223,7 +969,6 @@
       const checkoutCloseBtn = document.getElementById('checkoutCloseBtn');
       const buyNowBtn = document.getElementById('buyNowBtn');
 
-      // Order ID generator
       function generateOrderId() {
         const now = new Date();
         const dateStr = now.getFullYear().toString() + 
@@ -1242,17 +987,12 @@
         document.querySelectorAll('.progress-step').forEach(p => {
           const num = parseInt(p.dataset.step);
           p.classList.remove('active', 'completed');
-          if (step === 'success') {
-            p.classList.add('completed');
-          } else if (num < step) {
-            p.classList.add('completed');
-          } else if (num === step) {
-            p.classList.add('active');
-          }
+          if (step === 'success') p.classList.add('completed');
+          else if (num < step) p.classList.add('completed');
+          else if (num === step) p.classList.add('active');
         });
       }
 
-      // Open checkout
       buyNowBtn.addEventListener('click', function() {
         document.getElementById('reviewProductImage').src = images[0] || '';
         document.getElementById('reviewProductTitle').textContent = product.title;
@@ -1262,7 +1002,6 @@
         document.getElementById('reviewTotal').textContent = totalFormatted;
         document.getElementById('bankAmount').textContent = totalFormatted;
         
-        // Reset
         selectedPaymentMethod = null;
         document.querySelectorAll('.payment-option').forEach(p => p.classList.remove('selected'));
         document.getElementById('step1Next').disabled = true;
@@ -1275,7 +1014,6 @@
         if (e.target === checkoutOverlay) checkoutOverlay.classList.remove('active');
       });
 
-      // Step 1: Payment method selection
       document.querySelectorAll('.payment-option').forEach(option => {
         option.addEventListener('click', function() {
           document.querySelectorAll('.payment-option').forEach(p => p.classList.remove('selected'));
@@ -1291,7 +1029,6 @@
         goToStep(2);
       });
 
-      // Step 2: Customer details
       document.getElementById('step2Back').addEventListener('click', () => goToStep(1));
       
       document.getElementById('step2Next').addEventListener('click', function() {
@@ -1308,7 +1045,6 @@
         document.getElementById('reviewCustomerPhone').textContent = phone;
         document.getElementById('reviewCustomerAddress').textContent = address;
 
-        // Show/hide bank details based on payment method
         document.getElementById('bankDetailsSection').style.display = 
           selectedPaymentMethod === 'bank' ? 'block' : 'none';
 
@@ -1317,7 +1053,6 @@
 
       document.getElementById('step3Back').addEventListener('click', () => goToStep(2));
 
-      // Step 3: Place Order
       document.getElementById('placeOrderBtn').addEventListener('click', async function() {
         const btn = this;
         btn.disabled = true;
@@ -1329,7 +1064,6 @@
         const customerAddress = document.getElementById('customerAddress').value.trim();
         const customerNotes = document.getElementById('customerNotes').value.trim();
 
-        // Prepare order data
         const orderData = {
           order_reference: orderId,
           product_id: product.id,
@@ -1347,7 +1081,6 @@
           _subject: `New Zaure Order: ${orderId} – ${product.title}`
         };
 
-        // Send to Formspree
         try {
           const response = await fetch(FORMSPREE_ENDPOINT, {
             method: 'POST',
@@ -1360,19 +1093,16 @@
 
           if (!response.ok) throw new Error('Form submission failed');
 
-          // Save order to localStorage
           let orders = JSON.parse(localStorage.getItem('zaure_orders') || '[]');
           orders.push(orderData);
           localStorage.setItem('zaure_orders', JSON.stringify(orders));
 
-          // Show success screen
           document.getElementById('successOrderRef').textContent = orderId;
           document.getElementById('successProduct').textContent = product.title;
           document.getElementById('successAmount').textContent = totalFormatted;
           document.getElementById('successPaymentMethod').textContent = orderData.payment_method;
           document.getElementById('successAddress').textContent = customerAddress;
 
-          // WhatsApp message
           const waMessage = encodeURIComponent(
             `Hello Zaure! I just placed an order.\n\n` +
             `Order Reference: ${orderId}\n` +
@@ -1404,12 +1134,10 @@
       updateFavoriteBadge();
     });
 
-    // Copy to clipboard helper
     function copyToClipboard(text) {
       navigator.clipboard.writeText(text).then(() => {
         alert('Copied to clipboard!');
       }).catch(() => {
-        // Fallback
         const temp = document.createElement('textarea');
         temp.value = text;
         document.body.appendChild(temp);
@@ -1419,6 +1147,37 @@
         alert('Copied to clipboard!');
       });
     }
+
+    // ============================================
+    // AUTO-FILL CUSTOMER DETAILS FROM SIGNUP
+    // ============================================
+    function prefillCustomerDetails() {
+      const user = getCurrentUser();
+      if (!user) return;
+
+      const nameField = document.getElementById('customerName');
+      const phoneField = document.getElementById('customerPhone');
+      const addressField = document.getElementById('customerAddress');
+
+      // Only prefill if user is logged in
+      if (user.name && nameField) {
+        nameField.value = user.name;
+      }
+      if (user.phone && phoneField) {
+        phoneField.value = user.phone;
+      }
+      // Prefill address with state if user has one
+      if (user.state && addressField && !addressField.value) {
+        addressField.value = user.state + ', Nigeria';
+      }
+    }
+
+    // Run prefill when Buy Now is clicked
+    document.addEventListener('click', function(e) {
+      if (e.target.closest('#buyNowBtn')) {
+        setTimeout(prefillCustomerDetails, 100);
+      }
+    });
   </script>
 </body>
 </html>
