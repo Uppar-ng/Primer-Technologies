@@ -823,7 +823,7 @@
       ACCOUNT_NUMBER: '[Your Account Number]',
       ACCOUNT_NAME: 'Zaure Technologies',
       WHATSAPP_NUMBER: '2349042339411',
-      FORMSPREE_ENDPOINT: 'https://formspree.io/f/mwvpled',
+      FORMSPREE_ENDPOINT: 'https://formspree.io/f/xgaeqgaa',
       MAX_RETRIES: 3,
       RETRY_DELAY: 2000
     };
@@ -959,13 +959,11 @@
 
       document.getElementById('locationFull').textContent = `${product.location || 'Nigeria'} - View on map`;
 
-      // Recommendations
       const products = getProductsSync();
       const recs = products.filter(p => p.id !== product.id && p.category === product.category).slice(0, 6);
       const fallback = products.filter(p => p.id !== product.id).slice(0, 6);
       renderListings(recs.length ? recs : fallback, 'recommendationsGrid');
 
-      // Share
       document.getElementById('shareBtn').addEventListener('click', function() {
         if (navigator.share) {
           navigator.share({ title: product.title, url: window.location.href });
@@ -974,17 +972,14 @@
         }
       });
 
-      // Report
       document.getElementById('reportBtn').addEventListener('click', function() {
         window.location.href = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent('I want to report: ' + product.title)}`;
       });
 
-      // FAB Post
       document.getElementById('fabPostAd').addEventListener('click', function() {
         if (!currentUser) { openSignup(); } else { window.location.href = '/post.html'; }
       });
 
-      // Favorite
       const favoriteBtn = document.getElementById('favoriteBtn');
       if (isFavorite(product.id)) {
         favoriteBtn.classList.add('liked');
@@ -1056,7 +1051,6 @@
       const total = product.price + CONFIG.DELIVERY_FEE;
       const totalFormatted = formatPrice(total);
 
-      // Fill product info
       document.getElementById('reviewProductImage').src = product.images?.[0] || '';
       document.getElementById('reviewProductTitle').textContent = product.title;
       document.getElementById('reviewProductPrice').textContent = price;
@@ -1065,7 +1059,6 @@
       document.getElementById('reviewTotal').textContent = totalFormatted;
       document.getElementById('bankAmount').textContent = totalFormatted;
 
-      // Copy buttons
       document.getElementById('copyAccountBtn').addEventListener('click', function(e) {
         e.stopPropagation();
         copyToClipboard(CONFIG.ACCOUNT_NUMBER, this);
@@ -1205,7 +1198,6 @@
         const customerAddress = document.getElementById('customerAddress').value.trim();
         const customerNotes = document.getElementById('customerNotes').value.trim();
 
-        // Set the order reference in the bank details for user reference
         document.getElementById('bankOrderRef').childNodes[0].textContent = orderId + ' ';
 
         const orderData = {
@@ -1229,14 +1221,12 @@
 
         const success = await submitWithRetry(orderData);
 
-        // Save locally regardless
         try {
           const orders = JSON.parse(localStorage.getItem('zaure_orders') || '[]');
           orders.push({ ...orderData, submitted: success });
           localStorage.setItem('zaure_orders', JSON.stringify(orders));
         } catch(e) { console.warn('Local save failed:', e); }
 
-        // Populate success screen
         document.getElementById('successOrderRef').textContent = orderId;
         document.getElementById('successProduct').textContent = product.title;
         document.getElementById('successAmount').textContent = totalFormatted;
