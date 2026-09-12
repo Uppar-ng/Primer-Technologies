@@ -518,7 +518,6 @@
 
       <div class="checkout-body">
 
-        <!-- STEP 1 -->
         <div class="checkout-step active" id="step1">
           <h4 style="font-size:1rem;font-weight:700;color:var(--text);margin-bottom:16px;">Choose Payment Method</h4>
           <div class="payment-options">
@@ -546,7 +545,6 @@
           </div>
         </div>
 
-        <!-- STEP 2 -->
         <div class="checkout-step" id="step2">
           <h4 style="font-size:1rem;font-weight:700;color:var(--text);margin-bottom:16px;">Your Details</h4>
           <form id="customerForm">
@@ -573,7 +571,6 @@
           </div>
         </div>
 
-        <!-- STEP 3 -->
         <div class="checkout-step" id="step3">
           <h4 style="font-size:1rem;font-weight:700;color:var(--text);margin-bottom:16px;">Review Your Order</h4>
           
@@ -630,7 +627,7 @@
               <div class="bank-row">
                 <span class="bank-label">Account Number</span>
                 <span class="bank-value highlight" id="bankAccountNumber">[Your Account Number]
-                  <button class="copy-btn" onclick="copyToClipboard('[Your Account Number]')"><i class="fas fa-copy"></i> Copy</button>
+                  <button class="copy-btn" id="copyAccountBtn"><i class="fas fa-copy"></i> Copy</button>
                 </span>
               </div>
               <div class="bank-row">
@@ -640,7 +637,7 @@
               <div class="bank-row">
                 <span class="bank-label">Order Reference</span>
                 <span class="bank-value highlight" id="bankOrderRef">ZA-00000000-0000
-                  <button class="copy-btn" onclick="copyToClipboard(document.getElementById('bankOrderRef').childNodes[0].textContent.trim())"><i class="fas fa-copy"></i> Copy</button>
+                  <button class="copy-btn" id="copyOrderBtn"><i class="fas fa-copy"></i> Copy</button>
                 </span>
               </div>
             </div>
@@ -667,7 +664,6 @@
           </div>
         </div>
 
-        <!-- SUCCESS -->
         <div class="checkout-step" id="successStep">
           <div class="checkout-success">
             <div class="success-icon"><i class="fas fa-check-circle"></i></div>
@@ -821,15 +817,20 @@
     // ============================================
     // CONFIGURATION
     // ============================================
-    const DELIVERY_FEE = 1500;
-    const BANK_NAME = '[Your Bank Name]';
-    const ACCOUNT_NUMBER = '[Your Account Number]';
-    const ACCOUNT_NAME = 'Zaure Technologies';
-    const WHATSAPP_NUMBER = '2349042339411';
-    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mwvpled';
+    const CONFIG = {
+      DELIVERY_FEE: 1500,
+      BANK_NAME: '[Your Bank Name]',
+      ACCOUNT_NUMBER: '[Your Account Number]',
+      ACCOUNT_NAME: 'Zaure Technologies',
+      WHATSAPP_NUMBER: '2349042339411',
+      FORMSPREE_ENDPOINT: 'https://formspree.io/f/mwvpled',
+      MAX_RETRIES: 3,
+      RETRY_DELAY: 2000
+    };
 
     let currentProduct = null;
     let selectedPaymentMethod = null;
+    let isSubmitting = false;
 
     document.addEventListener('DOMContentLoaded', async function() {
       initStateDropdown();
@@ -837,26 +838,75 @@
       const params = new URLSearchParams(window.location.search);
       const productId = params.get('id');
       
-      if (!productId) {
-        document.getElementById('loadingState').innerHTML = `<div style="text-align:center;padding:40px;"><i class="fas fa-exclamation-circle" style="font-size:2rem;color:#e74c3c;"></i><p style="margin-top:12px;">Product not found.</p><a href="/" class="btn-primary" style="margin-top:16px;width:auto;padding:10px 28px;">Go Home</a></div>`;
-        return;
-      }
+      if (!productId) { showNotFound(); return; }
 
       const products = await loadProducts();
       const product = products.find(p => p.id === productId);
       
-      if (!product) {
-        document.getElementById('loadingState').innerHTML = `<div style="text-align:center;padding:40px;"><i class="fas fa-exclamation-circle" style="font-size:2rem;color:#e74c3c;"></i><p style="margin-top:12px;">Product not found.</p><a href="/" class="btn-primary" style="margin-top:16px;width:auto;padding:10px 28px;">Go Home</a></div>`;
-        return;
-      }
+      if (!product) { showNotFound(); return; }
 
       currentProduct = product;
       document.getElementById('loadingState').style.display = 'none';
       document.getElementById('productDetailContainer').style.display = 'block';
 
-      const price = product.price >= 1e6 ? `₦${(product.price/1e6).toFixed(1)}M` : `₦${product.price.toLocaleString()}`;
-      const total = product.price + DELIVERY_FEE;
-      const totalFormatted = total >= 1e6 ? `₦${(total/1e6).toFixed(1)}M` : `₦${total.toLocaleString()}`;
+      renderProduct(product);
+      await renderSeller(product);
+
+      await loadUser();
+      initTheme();
+      updateFavoriteBadge();
+      setupCheckoutFlow(product);
+    });
+
+    // ============================================
+    // HELPERS
+    // ============================================
+    function showNotFound() {
+      document.getElementById('loadingState').innerHTML = `
+        <div style="text-align:center;padding:40px;">
+          <i class="fas fa-exclamation-circle" style="font-size:2rem;color:#e74c3c;"></i>
+          <p style="margin-top:12px;">Product not found.</p>
+          <a href="/" class="btn-primary" style="margin-top:16px;width:auto;padding:10px 28px;">Go Home</a>
+        </div>`;
+    }
+
+    function formatPrice(n) {
+      return n >= 1e6 ? `₦${(n/1e6).toFixed(1)}M` : `₦${n.toLocaleString()}`;
+    }
+
+    function copyToClipboard(text, btnEl) {
+      const fallback = () => {
+        const temp = document.createElement('textarea');
+        temp.value = text;
+        temp.style.position = 'fixed';
+        temp.style.opacity = '0';
+        document.body.appendChild(temp);
+        temp.select();
+        try { document.execCommand('copy'); } catch(e) {}
+        document.body.removeChild(temp);
+      };
+
+      const onSuccess = () => {
+        if (btnEl) {
+          const original = btnEl.innerHTML;
+          btnEl.innerHTML = '<i class="fas fa-check"></i> Copied';
+          setTimeout(() => { btnEl.innerHTML = original; }, 1500);
+        }
+      };
+
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(onSuccess).catch(() => { fallback(); onSuccess(); });
+      } else {
+        fallback();
+        onSuccess();
+      }
+    }
+
+    // ============================================
+    // RENDER PRODUCT
+    // ============================================
+    function renderProduct(product) {
+      const price = formatPrice(product.price);
       
       document.getElementById('productTitle').textContent = product.title;
       document.getElementById('productPrice').textContent = price;
@@ -866,7 +916,7 @@
       document.getElementById('productDescription').textContent = product.description || 'No description available.';
 
       const tagsContainer = document.getElementById('productTags');
-      const tags = product.tags || [product.category, product.location];
+      const tags = product.tags || [product.category, product.location].filter(Boolean);
       tagsContainer.innerHTML = tags.map(t => `<span class="tag">#${t}</span>`).join('');
 
       const images = product.images || [];
@@ -874,12 +924,8 @@
       const thumbnailStrip = document.getElementById('thumbnailStrip');
       let currentImageIndex = 0;
 
-      if (images.length > 0 && images[0]) {
-        mainImage.src = images[0];
-        mainImage.alt = product.title;
-      } else {
-        mainImage.src = 'https://placehold.co/600x400?text=Zaure';
-      }
+      mainImage.src = images[0] || 'https://placehold.co/600x400?text=Zaure';
+      mainImage.alt = product.title;
 
       thumbnailStrip.innerHTML = images.map((img, index) => `
         <img src="${img}" alt="Thumbnail ${index + 1}" class="thumb ${index === 0 ? 'active' : ''}" onclick="changeImage(${index})">
@@ -888,15 +934,80 @@
       window.changeImage = function(index) {
         currentImageIndex = index;
         mainImage.src = images[index];
-        document.querySelectorAll('.thumb').forEach((el, i) => { el.classList.toggle('active', i === index); });
+        document.querySelectorAll('.thumb').forEach((el, i) => {
+          el.classList.toggle('active', i === index);
+        });
       };
 
       const galleryPrev = document.getElementById('galleryPrev');
       const galleryNext = document.getElementById('galleryNext');
-      galleryPrev.addEventListener('click', function() { const prev = (currentImageIndex - 1 + images.length) % images.length; changeImage(prev); });
-      galleryNext.addEventListener('click', function() { const next = (currentImageIndex + 1) % images.length; changeImage(next); });
-      if (images.length <= 1) { galleryPrev.classList.add('hidden'); galleryNext.classList.add('hidden'); }
+      galleryPrev.addEventListener('click', () => {
+        const prev = (currentImageIndex - 1 + images.length) % images.length;
+        window.changeImage(prev);
+      });
+      galleryNext.addEventListener('click', () => {
+        const next = (currentImageIndex + 1) % images.length;
+        window.changeImage(next);
+      });
+      if (images.length <= 1) {
+        galleryPrev.classList.add('hidden');
+        galleryNext.classList.add('hidden');
+      }
 
+      document.getElementById('galleryBadge').textContent = product.featured ? 'Featured' : 'Available';
+      document.getElementById('galleryBadge').style.background = product.featured ? 'rgba(26,54,80,0.9)' : 'rgba(0,0,0,0.7)';
+
+      document.getElementById('locationFull').textContent = `${product.location || 'Nigeria'} - View on map`;
+
+      // Recommendations
+      const products = getProductsSync();
+      const recs = products.filter(p => p.id !== product.id && p.category === product.category).slice(0, 6);
+      const fallback = products.filter(p => p.id !== product.id).slice(0, 6);
+      renderListings(recs.length ? recs : fallback, 'recommendationsGrid');
+
+      // Share
+      document.getElementById('shareBtn').addEventListener('click', function() {
+        if (navigator.share) {
+          navigator.share({ title: product.title, url: window.location.href });
+        } else {
+          copyToClipboard(window.location.href, this);
+        }
+      });
+
+      // Report
+      document.getElementById('reportBtn').addEventListener('click', function() {
+        window.location.href = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent('I want to report: ' + product.title)}`;
+      });
+
+      // FAB Post
+      document.getElementById('fabPostAd').addEventListener('click', function() {
+        if (!currentUser) { openSignup(); } else { window.location.href = '/post.html'; }
+      });
+
+      // Favorite
+      const favoriteBtn = document.getElementById('favoriteBtn');
+      if (isFavorite(product.id)) {
+        favoriteBtn.classList.add('liked');
+        favoriteBtn.innerHTML = '<i class="fas fa-heart"></i> Saved';
+      }
+      favoriteBtn.addEventListener('click', function() {
+        if (!currentUser) { openSignup(); return; }
+        const isNowFav = toggleFavorite(product.id);
+        if (isNowFav) {
+          this.classList.add('liked');
+          this.innerHTML = '<i class="fas fa-heart"></i> Saved';
+        } else {
+          this.classList.remove('liked');
+          this.innerHTML = '<i class="far fa-heart"></i> Save';
+        }
+        updateFavoriteBadge();
+      });
+    }
+
+    // ============================================
+    // RENDER SELLER
+    // ============================================
+    async function renderSeller(product) {
       const seller = product.seller || {
         name: 'Zaure Official Store', initials: 'ZA', verified: true, joined: '2026',
         listings: 13, rating: 5.0, sales: 800, response: '100%',
@@ -905,13 +1016,13 @@
       };
 
       const sellersData = await loadTopSellers();
-      const matchedSellerData = sellersData.find(s => s.name.toLowerCase() === seller.name.toLowerCase());
+      const matched = sellersData.find(s => s.name.toLowerCase() === seller.name.toLowerCase());
 
-      const sellerAvatarEl = document.getElementById('sellerAvatar');
-      if (matchedSellerData && matchedSellerData.profilePic) {
-        sellerAvatarEl.innerHTML = `<img src="${matchedSellerData.profilePic}" alt="${seller.name}" onerror="this.style.display='none';this.parentElement.textContent='${seller.initials || 'ZA'}';" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`;
+      const avatarEl = document.getElementById('sellerAvatar');
+      if (matched && matched.profilePic) {
+        avatarEl.innerHTML = `<img src="${matched.profilePic}" alt="${seller.name}" onerror="this.style.display='none';this.parentElement.textContent='${seller.initials || 'ZA'}';" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`;
       } else {
-        sellerAvatarEl.textContent = seller.initials || 'ZA';
+        avatarEl.textContent = seller.initials || 'ZA';
       }
 
       document.getElementById('sellerName').textContent = seller.name;
@@ -928,54 +1039,49 @@
       document.getElementById('whatsappBtn').href = `https://wa.me/${cleanNumber}?text=Hello%2C%20I%20am%20interested%20in%20${encodeURIComponent(product.title)}%20on%20Zaure.`;
 
       document.getElementById('visitStoreBtn').addEventListener('click', function() {
-        if (matchedSellerData && matchedSellerData.id) {
-          window.location.href = `/store.html?id=${matchedSellerData.id}`;
+        if (matched && matched.id) {
+          window.location.href = `/store.html?id=${matched.id}`;
         }
       });
+    }
 
-      const favoriteBtn = document.getElementById('favoriteBtn');
-      if (isFavorite(product.id)) { favoriteBtn.classList.add('liked'); favoriteBtn.innerHTML = '<i class="fas fa-heart"></i> Saved'; }
-      favoriteBtn.addEventListener('click', function() {
-        if (!currentUser) { openSignup(); return; }
-        const isNowFav = toggleFavorite(product.id);
-        if (isNowFav) { this.classList.add('liked'); this.innerHTML = '<i class="fas fa-heart"></i> Saved'; }
-        else { this.classList.remove('liked'); this.innerHTML = '<i class="far fa-heart"></i> Save'; }
-        updateFavoriteBadge();
-      });
-
-      document.getElementById('locationFull').textContent = `${product.location || 'Nigeria'} - View on map`;
-
-      const recommendations = products.filter(p => p.id !== product.id && p.category === product.category).slice(0, 6);
-      if (recommendations.length === 0) { renderListings(products.filter(p => p.id !== product.id).slice(0, 6), 'recommendationsGrid'); }
-      else { renderListings(recommendations, 'recommendationsGrid'); }
-
-      document.getElementById('shareBtn').addEventListener('click', function() {
-        if (navigator.share) { navigator.share({ title: product.title, url: window.location.href }); }
-        else { navigator.clipboard.writeText(window.location.href).then(() => alert('Link copied!')); }
-      });
-
-      document.getElementById('reportBtn').addEventListener('click', function() {
-        window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('I want to report: ' + product.title)}`;
-      });
-
-      document.getElementById('fabPostAd').addEventListener('click', function() {
-        if (!currentUser) { openSignup(); } else { window.location.href = '/post.html'; }
-      });
-
-      // ============================================
-      // CHECKOUT FLOW
-      // ============================================
-      const checkoutOverlay = document.getElementById('checkoutOverlay');
-      const checkoutCloseBtn = document.getElementById('checkoutCloseBtn');
+    // ============================================
+    // CHECKOUT FLOW
+    // ============================================
+    function setupCheckoutFlow(product) {
+      const overlay = document.getElementById('checkoutOverlay');
+      const closeBtn = document.getElementById('checkoutCloseBtn');
       const buyNowBtn = document.getElementById('buyNowBtn');
+      const price = formatPrice(product.price);
+      const total = product.price + CONFIG.DELIVERY_FEE;
+      const totalFormatted = formatPrice(total);
+
+      // Fill product info
+      document.getElementById('reviewProductImage').src = product.images?.[0] || '';
+      document.getElementById('reviewProductTitle').textContent = product.title;
+      document.getElementById('reviewProductPrice').textContent = price;
+      document.getElementById('reviewPrice').textContent = price;
+      document.getElementById('reviewDelivery').textContent = `₦${CONFIG.DELIVERY_FEE.toLocaleString()}`;
+      document.getElementById('reviewTotal').textContent = totalFormatted;
+      document.getElementById('bankAmount').textContent = totalFormatted;
+
+      // Copy buttons
+      document.getElementById('copyAccountBtn').addEventListener('click', function(e) {
+        e.stopPropagation();
+        copyToClipboard(CONFIG.ACCOUNT_NUMBER, this);
+      });
+      document.getElementById('copyOrderBtn').addEventListener('click', function(e) {
+        e.stopPropagation();
+        const ref = document.getElementById('bankOrderRef').childNodes[0].textContent.trim();
+        copyToClipboard(ref, this);
+      });
 
       function generateOrderId() {
         const now = new Date();
-        const dateStr = now.getFullYear().toString() + 
-          String(now.getMonth() + 1).padStart(2, '0') + 
+        const dateStr = now.getFullYear().toString() +
+          String(now.getMonth() + 1).padStart(2, '0') +
           String(now.getDate()).padStart(2, '0');
-        let counter = parseInt(localStorage.getItem('zaure_order_counter') || '0');
-        counter++;
+        let counter = parseInt(localStorage.getItem('zaure_order_counter') || '0') + 1;
         localStorage.setItem('zaure_order_counter', counter.toString());
         return `ZA-${dateStr}-${String(counter).padStart(4, '0')}`;
       }
@@ -991,28 +1097,48 @@
           else if (num < step) p.classList.add('completed');
           else if (num === step) p.classList.add('active');
         });
+
+        document.querySelector('.checkout-modal').scrollTop = 0;
       }
+      window.goToStep = goToStep;
 
       buyNowBtn.addEventListener('click', function() {
-        document.getElementById('reviewProductImage').src = images[0] || '';
-        document.getElementById('reviewProductTitle').textContent = product.title;
-        document.getElementById('reviewProductPrice').textContent = price;
-        document.getElementById('reviewPrice').textContent = price;
-        document.getElementById('reviewDelivery').textContent = `₦${DELIVERY_FEE.toLocaleString()}`;
-        document.getElementById('reviewTotal').textContent = totalFormatted;
-        document.getElementById('bankAmount').textContent = totalFormatted;
-        
         selectedPaymentMethod = null;
+        isSubmitting = false;
         document.querySelectorAll('.payment-option').forEach(p => p.classList.remove('selected'));
         document.getElementById('step1Next').disabled = true;
+        
+        prefillFromUser();
+        
         goToStep(1);
-        checkoutOverlay.classList.add('active');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
       });
 
-      checkoutCloseBtn.addEventListener('click', () => checkoutOverlay.classList.remove('active'));
-      checkoutOverlay.addEventListener('click', function(e) {
-        if (e.target === checkoutOverlay) checkoutOverlay.classList.remove('active');
+      function closeModal() {
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      closeBtn.addEventListener('click', closeModal);
+      overlay.addEventListener('click', e => {
+        if (e.target === overlay) closeModal();
       });
+
+      function prefillFromUser() {
+        const user = getCurrentUser();
+        if (!user) return;
+
+        const nameField = document.getElementById('customerName');
+        const phoneField = document.getElementById('customerPhone');
+        const addressField = document.getElementById('customerAddress');
+
+        if (user.name) nameField.value = user.name;
+        if (user.phone) phoneField.value = user.phone;
+        if (user.state && !addressField.value) {
+          addressField.value = `${user.state}, Nigeria`;
+        }
+      }
 
       document.querySelectorAll('.payment-option').forEach(option => {
         option.addEventListener('click', function() {
@@ -1024,20 +1150,31 @@
       });
 
       document.getElementById('step1Next').addEventListener('click', function() {
-        document.getElementById('reviewPaymentMethod').textContent = 
+        document.getElementById('reviewPaymentMethod').textContent =
           selectedPaymentMethod === 'bank' ? 'Bank Transfer' : 'Cash on Delivery';
         goToStep(2);
       });
 
       document.getElementById('step2Back').addEventListener('click', () => goToStep(1));
-      
+
       document.getElementById('step2Next').addEventListener('click', function() {
         const name = document.getElementById('customerName').value.trim();
         const phone = document.getElementById('customerPhone').value.trim();
         const address = document.getElementById('customerAddress').value.trim();
 
-        if (!name || !phone || !address) {
-          alert('Please fill in all required fields.');
+        if (!name || name.length < 2) {
+          alert('Please enter your full name.');
+          document.getElementById('customerName').focus();
+          return;
+        }
+        if (!phone || !/^[0-9+\s-]{10,15}$/.test(phone)) {
+          alert('Please enter a valid phone number (10-15 digits).');
+          document.getElementById('customerPhone').focus();
+          return;
+        }
+        if (!address || address.length < 5) {
+          alert('Please enter your full delivery address.');
+          document.getElementById('customerAddress').focus();
           return;
         }
 
@@ -1045,7 +1182,7 @@
         document.getElementById('reviewCustomerPhone').textContent = phone;
         document.getElementById('reviewCustomerAddress').textContent = address;
 
-        document.getElementById('bankDetailsSection').style.display = 
+        document.getElementById('bankDetailsSection').style.display =
           selectedPaymentMethod === 'bank' ? 'block' : 'none';
 
         goToStep(3);
@@ -1054,9 +1191,13 @@
       document.getElementById('step3Back').addEventListener('click', () => goToStep(2));
 
       document.getElementById('placeOrderBtn').addEventListener('click', async function() {
+        if (isSubmitting) return;
+        isSubmitting = true;
+
         const btn = this;
+        const originalText = btn.innerHTML;
         btn.disabled = true;
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Placing Order...';
 
         const orderId = generateOrderId();
         const customerName = document.getElementById('customerName').value.trim();
@@ -1064,120 +1205,112 @@
         const customerAddress = document.getElementById('customerAddress').value.trim();
         const customerNotes = document.getElementById('customerNotes').value.trim();
 
+        // Set the order reference in the bank details for user reference
+        document.getElementById('bankOrderRef').childNodes[0].textContent = orderId + ' ';
+
         const orderData = {
           order_reference: orderId,
           product_id: product.id,
           product_title: product.title,
-          product_price: `₦${product.price.toLocaleString()}`,
-          delivery_fee: `₦${DELIVERY_FEE.toLocaleString()}`,
+          product_price: price,
+          delivery_fee: `₦${CONFIG.DELIVERY_FEE.toLocaleString()}`,
           total_amount: totalFormatted,
           payment_method: selectedPaymentMethod === 'bank' ? 'Bank Transfer' : 'Cash on Delivery',
           customer_name: customerName,
           customer_phone: customerPhone,
           customer_address: customerAddress,
           customer_notes: customerNotes || 'None',
-          seller_name: seller.name,
+          seller_name: product.seller?.name || 'Zaure Official Store',
           order_date: new Date().toLocaleString('en-NG'),
-          _subject: `New Zaure Order: ${orderId} – ${product.title}`
+          _subject: `🛒 New Zaure Order: ${orderId} – ${product.title}`
         };
 
+        console.log('📤 Submitting order:', orderData);
+
+        const success = await submitWithRetry(orderData);
+
+        // Save locally regardless
         try {
-          const response = await fetch(FORMSPREE_ENDPOINT, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-            },
-            body: JSON.stringify(orderData)
-          });
-
-          if (!response.ok) throw new Error('Form submission failed');
-
-          let orders = JSON.parse(localStorage.getItem('zaure_orders') || '[]');
-          orders.push(orderData);
+          const orders = JSON.parse(localStorage.getItem('zaure_orders') || '[]');
+          orders.push({ ...orderData, submitted: success });
           localStorage.setItem('zaure_orders', JSON.stringify(orders));
+        } catch(e) { console.warn('Local save failed:', e); }
 
-          document.getElementById('successOrderRef').textContent = orderId;
-          document.getElementById('successProduct').textContent = product.title;
-          document.getElementById('successAmount').textContent = totalFormatted;
-          document.getElementById('successPaymentMethod').textContent = orderData.payment_method;
-          document.getElementById('successAddress').textContent = customerAddress;
+        // Populate success screen
+        document.getElementById('successOrderRef').textContent = orderId;
+        document.getElementById('successProduct').textContent = product.title;
+        document.getElementById('successAmount').textContent = totalFormatted;
+        document.getElementById('successPaymentMethod').textContent = orderData.payment_method;
+        document.getElementById('successAddress').textContent = customerAddress;
 
-          const waMessage = encodeURIComponent(
-            `Hello Zaure! I just placed an order.\n\n` +
-            `Order Reference: ${orderId}\n` +
-            `Product: ${product.title}\n` +
-            `Total: ${totalFormatted}\n` +
-            `Payment Method: ${orderData.payment_method}\n` +
-            `Name: ${customerName}\n` +
-            `Phone: ${customerPhone}\n` +
-            `Address: ${customerAddress}\n\n` +
-            (selectedPaymentMethod === 'bank' 
-              ? `I will send my transfer receipt shortly.` 
-              : `Please confirm my order for Cash on Delivery.`)
-          );
-          document.getElementById('successWhatsappBtn').href = 
-            `https://wa.me/${WHATSAPP_NUMBER}?text=${waMessage}`;
+        const waMessage = encodeURIComponent(
+          `Hello Zaure! I just placed an order.\n\n` +
+          `Order Reference: ${orderId}\n` +
+          `Product: ${product.title}\n` +
+          `Total: ${totalFormatted}\n` +
+          `Payment Method: ${orderData.payment_method}\n` +
+          `Name: ${customerName}\n` +
+          `Phone: ${customerPhone}\n` +
+          `Address: ${customerAddress}\n\n` +
+          (selectedPaymentMethod === 'bank'
+            ? `I will send my transfer receipt shortly.`
+            : `Please confirm my order for Cash on Delivery.`)
+        );
+        document.getElementById('successWhatsappBtn').href =
+          `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${waMessage}`;
 
-          goToStep('success');
-        } catch (error) {
-          console.error('Order submission error:', error);
-          alert('There was an issue submitting your order. Please try again or contact us on WhatsApp.');
-        } finally {
-          btn.disabled = false;
-          btn.innerHTML = '<i class="fas fa-check-circle"></i> Place Order';
+        goToStep('success');
+
+        btn.disabled = false;
+        btn.innerHTML = originalText;
+        isSubmitting = false;
+      });
+    }
+
+    // ============================================
+    // FORMSPREE SUBMISSION WITH RETRY
+    // ============================================
+    async function submitWithRetry(data, attempt = 1) {
+      try {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 15000);
+
+        const response = await fetch(CONFIG.FORMSPREE_ENDPOINT, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(data),
+          signal: controller.signal
+        });
+
+        clearTimeout(timeout);
+
+        console.log(`📥 Formspree response (attempt ${attempt}):`, response.status);
+
+        if (!response.ok) {
+          const errorBody = await response.json().catch(() => ({}));
+          throw new Error(`HTTP ${response.status}: ${errorBody.error || response.statusText}`);
         }
-      });
 
-      await loadUser();
-      initTheme();
-      updateFavoriteBadge();
-    });
+        const result = await response.json().catch(() => ({}));
+        console.log('✅ Formspree success:', result);
+        return true;
 
-    function copyToClipboard(text) {
-      navigator.clipboard.writeText(text).then(() => {
-        alert('Copied to clipboard!');
-      }).catch(() => {
-        const temp = document.createElement('textarea');
-        temp.value = text;
-        document.body.appendChild(temp);
-        temp.select();
-        document.execCommand('copy');
-        document.body.removeChild(temp);
-        alert('Copied to clipboard!');
-      });
-    }
+      } catch (error) {
+        console.error(`❌ Formspree attempt ${attempt} failed:`, error.message);
 
-    // ============================================
-    // AUTO-FILL CUSTOMER DETAILS FROM SIGNUP
-    // ============================================
-    function prefillCustomerDetails() {
-      const user = getCurrentUser();
-      if (!user) return;
+        if (attempt < CONFIG.MAX_RETRIES) {
+          console.log(`🔄 Retrying in ${CONFIG.RETRY_DELAY}ms...`);
+          await new Promise(r => setTimeout(r, CONFIG.RETRY_DELAY));
+          return submitWithRetry(data, attempt + 1);
+        }
 
-      const nameField = document.getElementById('customerName');
-      const phoneField = document.getElementById('customerPhone');
-      const addressField = document.getElementById('customerAddress');
-
-      // Only prefill if user is logged in
-      if (user.name && nameField) {
-        nameField.value = user.name;
-      }
-      if (user.phone && phoneField) {
-        phoneField.value = user.phone;
-      }
-      // Prefill address with state if user has one
-      if (user.state && addressField && !addressField.value) {
-        addressField.value = user.state + ', Nigeria';
+        console.error('🚨 All Formspree retries failed. Order saved locally. WhatsApp fallback available.');
+        return false;
       }
     }
-
-    // Run prefill when Buy Now is clicked
-    document.addEventListener('click', function(e) {
-      if (e.target.closest('#buyNowBtn')) {
-        setTimeout(prefillCustomerDetails, 100);
-      }
-    });
   </script>
 </body>
 </html>
