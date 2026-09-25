@@ -18,8 +18,6 @@
   <meta property="og:site_name" content="Zaure Technologies">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@zauretech">
-  <meta name="twitter:title" content="Zaure – Buy & Sell Locally in Nigeria">
-  <meta name="twitter:description" content="Zaure is Nigeria's most trusted online marketplace. Buy, sell, or trade items locally. Post free ads, no commission.">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -30,11 +28,7 @@
     "logo": "https://zauretech.vercel.app/assets/logo-icon.svg",
     "description": "Nigeria's most trusted online marketplace",
     "foundingDate": "2025",
-    "founder": {
-      "@type": "Person",
-      "name": "Alamin Ahmed",
-      "jobTitle": "Founder & President"
-    },
+    "founder": { "@type": "Person", "name": "Alamin Ahmed", "jobTitle": "Founder & President" },
     "sameAs": [
       "https://twitter.com/zauretech",
       "https://instagram.com/zauretech",
@@ -48,79 +42,45 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
   <style>
-    /* ============================================
-       STATE DROPDOWN — FORCED INLINE
-       ============================================ */
-    .custom-select {
-      position: relative !important;
-      width: 100% !important;
-      user-select: none !important;
-      z-index: 9999 !important;
-    }
+    /* State dropdown */
+    .custom-select { position: relative !important; width: 100% !important; user-select: none !important; z-index: 9999 !important; }
     .custom-select-trigger {
-      display: flex !important;
-      justify-content: space-between !important;
-      align-items: center !important;
-      padding: 0.8rem 1rem !important;
-      border: 1px solid #e5ecf3 !important;
-      border-radius: 12px !important;
-      background: #ffffff !important;
-      cursor: pointer !important;
-      font-size: 0.95rem !important;
-      color: #151e28 !important;
-      transition: border-color 0.2s !important;
+      display: flex !important; justify-content: space-between !important; align-items: center !important;
+      padding: 0.8rem 1rem !important; border: 1px solid #e5ecf3 !important; border-radius: 12px !important;
+      background: #ffffff !important; cursor: pointer !important; font-size: 0.95rem !important;
+      color: #151e28 !important; transition: border-color 0.2s !important;
     }
     .custom-select-trigger:hover { border-color: #1a3650 !important; }
     .custom-select-dropdown {
-      position: absolute !important;
-      top: calc(100% + 4px) !important;
-      left: 0 !important; right: 0 !important;
-      background: #ffffff !important;
-      border: 1px solid #e5ecf3 !important;
-      border-radius: 12px !important;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.15) !important;
-      max-height: 220px !important;
-      overflow-y: auto !important;
-      z-index: 99999 !important;
-      display: none !important;
+      position: absolute !important; top: calc(100% + 4px) !important;
+      left: 0 !important; right: 0 !important; background: #ffffff !important;
+      border: 1px solid #e5ecf3 !important; border-radius: 12px !important;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15) !important; max-height: 220px !important;
+      overflow-y: auto !important; z-index: 99999 !important; display: none !important;
     }
     .custom-select.active .custom-select-dropdown { display: block !important; }
     .custom-select-dropdown input[type="text"] {
-      width: calc(100% - 20px) !important;
-      margin: 10px !important;
-      padding: 8px 10px !important;
-      border: 1px solid #e5ecf3 !important;
-      border-radius: 8px !important;
-      font-size: 0.85rem !important;
-      background: #ffffff !important;
-      color: #151e28 !important;
-      outline: none !important;
+      width: calc(100% - 20px) !important; margin: 10px !important; padding: 8px 10px !important;
+      border: 1px solid #e5ecf3 !important; border-radius: 8px !important; font-size: 0.85rem !important;
+      background: #ffffff !important; color: #151e28 !important; outline: none !important;
     }
     .custom-select-options { list-style: none !important; padding: 0 !important; margin: 0 !important; }
     .custom-select-options li {
-      padding: 10px 16px !important;
-      cursor: pointer !important;
-      font-size: 0.9rem !important;
-      color: #151e28 !important;
-      transition: background 0.2s !important;
+      padding: 10px 16px !important; cursor: pointer !important; font-size: 0.9rem !important;
+      color: #151e28 !important; transition: background 0.2s !important;
     }
     .custom-select-options li:hover { background: #f0f5fc !important; }
 
-    /* ============================================
-       HERO
-       ============================================ */
+    /* Hero */
     .hero {
-      position: relative; overflow: hidden;
-      border-radius: 28px; padding: 0;
-      margin: 8px 0 16px; min-height: 320px;
-      display: flex; align-items: center;
+      position: relative; overflow: hidden; border-radius: 28px; padding: 0;
+      margin: 8px 0 16px; min-height: 320px; display: flex; align-items: center;
     }
     .hero-slider { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
     .hero-slider .slide {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      background-size: cover; background-position: center;
-      opacity: 0; transition: opacity 1.5s ease-in-out;
-      animation: slideFade 18s infinite;
+      background-size: cover; background-position: center; opacity: 0;
+      transition: opacity 1.5s ease-in-out; animation: slideFade 18s infinite;
     }
     .hero-slider .slide:nth-child(1) { background-image: url('https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=1200&h=600&fit=crop&q=80'); animation-delay: 0s; }
     .hero-slider .slide:nth-child(2) { background-image: url('https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1200&h=600&fit=crop&q=80'); animation-delay: 1.8s; }
@@ -142,37 +102,28 @@
       background: linear-gradient(135deg, rgba(26,31,46,0.75) 0%, rgba(26,31,46,0.55) 50%, rgba(26,31,46,0.7) 100%);
       z-index: 1;
     }
-    [data-theme="dark"] .hero-overlay {
-      background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.65) 50%, rgba(0,0,0,0.8) 100%);
-    }
+    [data-theme="dark"] .hero-overlay { background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.65) 50%, rgba(0,0,0,0.8) 100%); }
     .hero-content-wrapper { position: relative; z-index: 2; padding: 40px 24px; width: 100%; }
     .hero-content-wrapper .hero-tagline {
       font-size: 0.75rem; font-weight: 600; color: rgba(255,255,255,0.6);
-      text-transform: uppercase; letter-spacing: 3px;
-      margin-bottom: 8px; display: inline-block;
-      padding: 4px 16px; border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 40px; backdrop-filter: blur(4px);
-      background: rgba(255,255,255,0.05);
+      text-transform: uppercase; letter-spacing: 3px; margin-bottom: 8px;
+      display: inline-block; padding: 4px 16px;
+      border: 1px solid rgba(255,255,255,0.1); border-radius: 40px;
+      backdrop-filter: blur(4px); background: rgba(255,255,255,0.05);
     }
     .hero-rotating-text { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px; }
     .hero-rotating-text .static-text { font-size: 1.8rem; font-weight: 800; color: white; line-height: 1.2; }
     .hero-rotating-text .dynamic-text-wrapper { display: inline-block; height: 2.2rem; overflow: hidden; vertical-align: bottom; }
     .hero-rotating-text .dynamic-text-wrapper .dynamic-text {
       display: block; font-size: 1.8rem; font-weight: 800;
-      color: #D4B87A; line-height: 1.2;
-      animation: textRotate 20s infinite; white-space: nowrap;
+      color: #D4B87A; line-height: 1.2; animation: textRotate 20s infinite; white-space: nowrap;
     }
     @keyframes textRotate {
-      0%, 8% { transform: translateY(0); }
-      10%, 18% { transform: translateY(0); }
-      20%, 28% { transform: translateY(-2.2rem); }
-      30%, 38% { transform: translateY(-2.2rem); }
-      40%, 48% { transform: translateY(-4.4rem); }
-      50%, 58% { transform: translateY(-4.4rem); }
-      60%, 68% { transform: translateY(-6.6rem); }
-      70%, 78% { transform: translateY(-6.6rem); }
-      80%, 88% { transform: translateY(-8.8rem); }
-      90%, 98% { transform: translateY(-8.8rem); }
+      0%, 8% { transform: translateY(0); } 10%, 18% { transform: translateY(0); }
+      20%, 28% { transform: translateY(-2.2rem); } 30%, 38% { transform: translateY(-2.2rem); }
+      40%, 48% { transform: translateY(-4.4rem); } 50%, 58% { transform: translateY(-4.4rem); }
+      60%, 68% { transform: translateY(-6.6rem); } 70%, 78% { transform: translateY(-6.6rem); }
+      80%, 88% { transform: translateY(-8.8rem); } 90%, 98% { transform: translateY(-8.8rem); }
       100% { transform: translateY(-11rem); }
     }
     .dynamic-text:nth-child(1) { animation-delay: 0s; }
@@ -189,13 +140,9 @@
     .hero .search-wrapper { position: relative; z-index: 2; margin-top: 16px; }
     .hero .search-box {
       background: rgba(255,255,255,0.95); backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,0.2);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+      border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 8px 32px rgba(0,0,0,0.12);
     }
-    [data-theme="dark"] .hero .search-box {
-      background: rgba(19,28,49,0.95);
-      border-color: rgba(255,255,255,0.05);
-    }
+    [data-theme="dark"] .hero .search-box { background: rgba(19,28,49,0.95); border-color: rgba(255,255,255,0.05); }
     .hero .search-box input { color: var(--text); }
     .hero .search-box input::placeholder { color: var(--text-secondary); }
     .hero .trending-keywords { position: relative; z-index: 2; }
@@ -207,8 +154,7 @@
     .hero .trending-keywords .keyword i { color: #D4B87A; }
     .hero-indicators { position: absolute; bottom: 16px; right: 24px; z-index: 3; display: flex; gap: 6px; }
     .hero-indicators .dot {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: rgba(255,255,255,0.3);
+      width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.3);
       transition: all 0.3s ease; animation: dotPulse 18s infinite;
     }
     .hero-indicators .dot:nth-child(1) { animation-delay: 0s; }
@@ -232,16 +178,11 @@
       .hero-rotating-text .dynamic-text-wrapper .dynamic-text { font-size: 1.4rem; }
       .hero-rotating-text .dynamic-text-wrapper { height: 1.8rem; }
       @keyframes textRotate {
-        0%, 8% { transform: translateY(0); }
-        10%, 18% { transform: translateY(0); }
-        20%, 28% { transform: translateY(-1.8rem); }
-        30%, 38% { transform: translateY(-1.8rem); }
-        40%, 48% { transform: translateY(-3.6rem); }
-        50%, 58% { transform: translateY(-3.6rem); }
-        60%, 68% { transform: translateY(-5.4rem); }
-        70%, 78% { transform: translateY(-5.4rem); }
-        80%, 88% { transform: translateY(-7.2rem); }
-        90%, 98% { transform: translateY(-7.2rem); }
+        0%, 8% { transform: translateY(0); } 10%, 18% { transform: translateY(0); }
+        20%, 28% { transform: translateY(-1.8rem); } 30%, 38% { transform: translateY(-1.8rem); }
+        40%, 48% { transform: translateY(-3.6rem); } 50%, 58% { transform: translateY(-3.6rem); }
+        60%, 68% { transform: translateY(-5.4rem); } 70%, 78% { transform: translateY(-5.4rem); }
+        80%, 88% { transform: translateY(-7.2rem); } 90%, 98% { transform: translateY(-7.2rem); }
         100% { transform: translateY(-9rem); }
       }
       .hero .hero-tagline { font-size: 0.6rem; letter-spacing: 2px; }
@@ -253,63 +194,91 @@
       .hero-rotating-text .dynamic-text-wrapper .dynamic-text { font-size: 2.4rem; }
       .hero-rotating-text .dynamic-text-wrapper { height: 2.8rem; }
       @keyframes textRotate {
-        0%, 8% { transform: translateY(0); }
-        10%, 18% { transform: translateY(0); }
-        20%, 28% { transform: translateY(-2.8rem); }
-        30%, 38% { transform: translateY(-2.8rem); }
-        40%, 48% { transform: translateY(-5.6rem); }
-        50%, 58% { transform: translateY(-5.6rem); }
-        60%, 68% { transform: translateY(-8.4rem); }
-        70%, 78% { transform: translateY(-8.4rem); }
-        80%, 88% { transform: translateY(-11.2rem); }
-        90%, 98% { transform: translateY(-11.2rem); }
+        0%, 8% { transform: translateY(0); } 10%, 18% { transform: translateY(0); }
+        20%, 28% { transform: translateY(-2.8rem); } 30%, 38% { transform: translateY(-2.8rem); }
+        40%, 48% { transform: translateY(-5.6rem); } 50%, 58% { transform: translateY(-5.6rem); }
+        60%, 68% { transform: translateY(-8.4rem); } 70%, 78% { transform: translateY(-8.4rem); }
+        80%, 88% { transform: translateY(-11.2rem); } 90%, 98% { transform: translateY(-11.2rem); }
         100% { transform: translateY(-14rem); }
       }
     }
 
     /* ============================================
-       MOBILE WHATSAPP CONTACT STRIP
+       MOBILE WHATSAPP STRIP — slim & elegant
        ============================================ */
-    .mobile-wa-strip {
-      display: none;
-    }
+    .mobile-wa-strip { display: none; }
     @media (max-width: 1023px) {
       .mobile-wa-strip {
         display: flex;
         align-items: center;
-        gap: 12px;
-        background: linear-gradient(135deg, #25D366, #1DA851);
-        color: white;
-        padding: 12px 14px;
-        border-radius: 16px;
-        margin: 14px 0;
+        gap: 10px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        color: var(--text);
+        padding: 10px 14px;
+        border-radius: 40px;
+        margin: 12px 0;
         text-decoration: none;
-        box-shadow: 0 6px 20px rgba(37,211,102,0.3);
+        box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.2s;
+      }
+      .mobile-wa-strip::before {
+        content: '';
+        position: absolute;
+        top: 0; left: -100%;
+        width: 100%; height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(37,211,102,0.08), transparent);
+        animation: waShimmer 3s infinite;
+      }
+      @keyframes waShimmer {
+        0% { left: -100%; }
+        100% { left: 200%; }
+      }
+      .mobile-wa-strip:active { transform: scale(0.98); }
+      .mobile-wa-strip .wa-dot {
+        width: 8px; height: 8px;
+        border-radius: 50%;
+        background: #25D366;
+        flex-shrink: 0;
+        box-shadow: 0 0 0 0 rgba(37,211,102,0.6);
+        animation: waPulse 2s infinite;
+      }
+      @keyframes waPulse {
+        0% { box-shadow: 0 0 0 0 rgba(37,211,102,0.6); }
+        70% { box-shadow: 0 0 0 10px rgba(37,211,102,0); }
+        100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
       }
       .mobile-wa-strip .wa-icon {
-        width: 40px; height: 40px;
+        width: 32px; height: 32px;
         border-radius: 50%;
-        background: rgba(255,255,255,0.2);
+        background: linear-gradient(135deg, #25D366, #1DA851);
+        color: white;
         display: flex; align-items: center; justify-content: center;
-        font-size: 1.3rem;
+        font-size: 1rem;
         flex-shrink: 0;
+        position: relative;
+        z-index: 2;
       }
       .mobile-wa-strip .wa-text {
         flex: 1;
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: var(--text);
+        position: relative;
+        z-index: 2;
       }
       .mobile-wa-strip .wa-text strong {
-        display: block;
-        font-size: 0.9rem;
+        color: #1a3650;
         font-weight: 700;
-        margin-bottom: 2px;
       }
-      .mobile-wa-strip .wa-text span {
-        font-size: 0.72rem;
-        opacity: 0.9;
-      }
+      [data-theme="dark"] .mobile-wa-strip .wa-text strong { color: #D4B87A; }
       .mobile-wa-strip .wa-arrow {
-        font-size: 1.1rem;
-        opacity: 0.7;
+        color: var(--text-secondary);
+        font-size: 0.85rem;
+        position: relative;
+        z-index: 2;
       }
     }
 
@@ -366,7 +335,7 @@
     }
 
     /* ============================================
-       DESKTOP ADS SECTION (side panel)
+       DESKTOP ADS SECTION — animated product cards
        ============================================ */
     .hero-side-promos { display: none; }
     @media (min-width: 1024px) {
@@ -376,143 +345,170 @@
       }
       .hero-side-promos .hero { margin: 0; }
       .hero-side-promos .side-stack {
-        display: flex; flex-direction: column; gap: 16px;
+        display: flex; flex-direction: column; gap: 12px;
+        position: relative;
       }
       .hero-side-promos .ad-label {
-        font-size: 0.65rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
+        font-size: 0.62rem; font-weight: 700;
+        text-transform: uppercase; letter-spacing: 1.5px;
         color: var(--text-secondary);
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        margin-bottom: -8px;
+        display: flex; align-items: center; gap: 6px;
+        margin-bottom: -4px;
       }
-      .hero-side-promos .ad-card {
+      .hero-side-promos .ad-label i {
+        color: #B49450;
+      }
+      .hero-side-promos .ad-slot {
         flex: 1;
         border-radius: 20px;
-        padding: 20px;
-        color: white;
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
+        min-height: 0;
+      }
+      .hero-side-promos .ad-slot .ad-slide {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        opacity: 0;
+        transform: scale(1.05);
+        transition: opacity 0.8s ease, transform 1.2s ease;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
-        cursor: pointer;
-        transition: transform 0.3s, box-shadow 0.3s;
-        position: relative;
-        overflow: hidden;
-        min-height: 140px;
+        justify-content: flex-end;
+        padding: 16px;
+        color: white;
+        background-size: cover;
+        background-position: center;
       }
-      .hero-side-promos .ad-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 12px 30px rgba(0,0,0,0.2);
-      }
-      .hero-side-promos .ad-card .ad-tag {
+      .hero-side-promos .ad-slot .ad-slide::before {
+        content: '';
         position: absolute;
-        top: 10px;
-        right: 10px;
-        background: rgba(255,255,255,0.18);
-        padding: 2px 8px;
+        inset: 0;
+        background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.85) 100%);
+        z-index: 1;
+      }
+      .hero-side-promos .ad-slot .ad-slide.active {
+        opacity: 1;
+        transform: scale(1);
+      }
+      .hero-side-promos .ad-slot .ad-slide .ad-tag {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        background: rgba(255,255,255,0.2);
+        backdrop-filter: blur(8px);
+        padding: 3px 10px;
         border-radius: 20px;
-        font-size: 0.6rem;
+        font-size: 0.58rem;
         font-weight: 700;
         letter-spacing: 1px;
         text-transform: uppercase;
+        z-index: 2;
       }
-      .hero-side-promos .ad-card h3 {
-        font-size: 1.05rem;
+      .hero-side-promos .ad-slot .ad-slide .ad-content {
+        position: relative;
+        z-index: 2;
+      }
+      .hero-side-promos .ad-slot .ad-slide .ad-content .ad-cat {
+        font-size: 0.62rem;
+        font-weight: 700;
+        color: #D4B87A;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-bottom: 4px;
+      }
+      .hero-side-promos .ad-slot .ad-slide .ad-content h3 {
+        font-size: 0.95rem;
         font-weight: 700;
         margin-bottom: 4px;
-        line-height: 1.2;
+        line-height: 1.25;
       }
-      .hero-side-promos .ad-card p {
-        font-size: 0.78rem;
-        opacity: 0.9;
-        margin-bottom: 12px;
-        line-height: 1.4;
+      .hero-side-promos .ad-slot .ad-slide .ad-content .ad-price {
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: #D4B87A;
+        margin-bottom: 8px;
       }
-      .hero-side-promos .ad-card a {
-        color: white;
-        text-decoration: none;
-        font-size: 0.72rem;
+      .hero-side-promos .ad-slot .ad-slide .ad-content .ad-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 0.7rem;
         font-weight: 700;
         border: 1px solid rgba(255,255,255,0.4);
-        padding: 6px 14px;
+        padding: 5px 12px;
         border-radius: 40px;
-        align-self: flex-start;
-        transition: background 0.2s;
+        background: rgba(255,255,255,0.1);
+        backdrop-filter: blur(4px);
       }
-      .hero-side-promos .ad-card a:hover {
-        background: rgba(255,255,255,0.15);
+      .hero-side-promos .ad-slot .ad-slide:hover .ad-content .ad-cta {
+        background: rgba(255,255,255,0.25);
+      }
+      .hero-side-promos .ad-progress {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        background: #D4B87A;
+        width: 0%;
+        transition: width 0.1s linear;
+        z-index: 3;
       }
     }
 
-    /* Hover preview */
+    /* Hover preview, Recently viewed, Keyboard */
     .hover-preview {
-      display: none; position: fixed;
-      z-index: 500; width: 320px;
-      background: var(--surface); border-radius: 16px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.25);
-      border: 1px solid var(--border);
-      padding: 16px; pointer-events: none;
-      opacity: 0; transition: opacity 0.2s ease;
+      display: none; position: fixed; z-index: 500;
+      width: 320px; background: var(--surface);
+      border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+      border: 1px solid var(--border); padding: 16px;
+      pointer-events: none; opacity: 0; transition: opacity 0.2s ease;
     }
     @media (min-width: 1024px) { .hover-preview { display: block; } }
     .hover-preview.show { opacity: 1; }
     .hover-preview .hp-img {
       width: 100%; height: 180px; object-fit: cover;
-      border-radius: 10px; margin-bottom: 12px;
-      background: var(--surface-alt);
+      border-radius: 10px; margin-bottom: 12px; background: var(--surface-alt);
     }
     .hover-preview .hp-title { font-weight: 700; font-size: 1rem; color: var(--text); margin-bottom: 6px; }
     .hover-preview .hp-price { font-size: 1.3rem; font-weight: 800; color: #1a3650; margin-bottom: 8px; }
     [data-theme="dark"] .hover-preview .hp-price { color: #D4B87A; }
     .hover-preview .hp-meta {
       font-size: 0.75rem; color: var(--text-secondary);
-      display: flex; gap: 12px; padding-top: 8px;
-      border-top: 1px solid var(--border);
+      display: flex; gap: 12px; padding-top: 8px; border-top: 1px solid var(--border);
     }
     .hover-preview .hp-hint {
-      margin-top: 10px; font-size: 0.7rem;
-      color: var(--text-secondary); text-align: center;
-      padding-top: 8px; border-top: 1px dashed var(--border);
+      margin-top: 10px; font-size: 0.7rem; color: var(--text-secondary);
+      text-align: center; padding-top: 8px; border-top: 1px dashed var(--border);
     }
 
-    /* Recently viewed */
     .recently-viewed-panel {
-      display: none; position: fixed;
-      bottom: 24px; right: 24px; z-index: 300;
-      width: 280px; background: var(--surface);
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      border: 1px solid var(--border);
-      overflow: hidden; transform: translateY(20px);
-      opacity: 0; transition: all 0.3s ease;
+      display: none; position: fixed; bottom: 24px; right: 24px;
+      z-index: 300; width: 280px; background: var(--surface);
+      border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      border: 1px solid var(--border); overflow: hidden;
+      transform: translateY(20px); opacity: 0; transition: all 0.3s ease;
     }
     @media (min-width: 1024px) { .recently-viewed-panel { display: block; } }
     .recently-viewed-panel.show { transform: translateY(0); opacity: 1; }
     .recently-viewed-panel .rv-header {
-      display: flex; justify-content: space-between;
-      align-items: center; padding: 12px 16px;
-      background: #1a3650; color: white;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 16px; background: #1a3650; color: white;
     }
     .recently-viewed-panel .rv-header h4 { font-size: 0.85rem; font-weight: 700; }
     .recently-viewed-panel .rv-header .rv-close {
-      background: none; border: none; color: white;
-      cursor: pointer; font-size: 0.9rem; opacity: 0.7;
+      background: none; border: none; color: white; cursor: pointer;
+      font-size: 0.9rem; opacity: 0.7;
     }
-    .recently-viewed-panel .rv-header .rv-close:hover { opacity: 1; }
     .recently-viewed-panel .rv-list { padding: 8px; max-height: 280px; overflow-y: auto; }
     .recently-viewed-panel .rv-item {
-      display: flex; align-items: center; gap: 10px;
-      padding: 8px; border-radius: 10px;
-      cursor: pointer; transition: background 0.2s;
+      display: flex; align-items: center; gap: 10px; padding: 8px;
+      border-radius: 10px; cursor: pointer; transition: background 0.2s;
     }
     .recently-viewed-panel .rv-item:hover { background: var(--surface-alt); }
     .recently-viewed-panel .rv-item img {
-      width: 42px; height: 42px; border-radius: 8px;
-      object-fit: cover; flex-shrink: 0;
-      background: var(--surface-alt);
+      width: 42px; height: 42px; border-radius: 8px; object-fit: cover;
+      flex-shrink: 0; background: var(--surface-alt);
     }
     .recently-viewed-panel .rv-item .rv-info { flex: 1; min-width: 0; }
     .recently-viewed-panel .rv-item .rv-title {
@@ -523,70 +519,55 @@
       font-size: 0.75rem; font-weight: 700; color: #B49450; margin-top: 2px;
     }
 
-    /* Keyboard shortcuts */
     .kbd-hint { display: none; position: fixed; bottom: 24px; left: 24px; z-index: 300; }
     @media (min-width: 1024px) { .kbd-hint { display: block; } }
     .kbd-hint .kbd-btn {
       width: 44px; height: 44px; border-radius: 50%;
       background: var(--surface); border: 1px solid var(--border);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      cursor: pointer; font-size: 1rem;
-      color: var(--text-secondary);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1); cursor: pointer;
+      font-size: 1rem; color: var(--text-secondary);
       display: flex; align-items: center; justify-content: center;
       transition: all 0.2s;
     }
-    .kbd-hint .kbd-btn:hover {
-      background: #1a3650; color: white; border-color: #1a3650;
-    }
+    .kbd-hint .kbd-btn:hover { background: #1a3650; color: white; border-color: #1a3650; }
     .kbd-panel {
-      position: fixed; bottom: 80px; left: 24px;
-      width: 260px; background: var(--surface);
-      border-radius: 14px;
+      position: fixed; bottom: 80px; left: 24px; width: 260px;
+      background: var(--surface); border-radius: 14px;
       box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-      border: 1px solid var(--border);
-      padding: 16px; z-index: 301;
-      opacity: 0; visibility: hidden;
-      transform: translateY(10px); transition: all 0.2s;
+      border: 1px solid var(--border); padding: 16px; z-index: 301;
+      opacity: 0; visibility: hidden; transform: translateY(10px);
+      transition: all 0.2s;
     }
     .kbd-panel.show { opacity: 1; visibility: visible; transform: translateY(0); }
     .kbd-panel h5 {
-      font-size: 0.75rem; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 1px;
-      color: var(--text-secondary); margin-bottom: 12px;
+      font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--text-secondary); margin-bottom: 12px;
     }
     .kbd-panel .kbd-row {
-      display: flex; justify-content: space-between;
-      align-items: center; padding: 6px 0;
-      font-size: 0.8rem; color: var(--text);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 6px 0; font-size: 0.8rem; color: var(--text);
     }
     .kbd-panel .kbd-row kbd {
       background: var(--surface-alt); border: 1px solid var(--border);
-      border-radius: 6px; padding: 2px 8px;
-      font-size: 0.7rem; font-family: monospace;
-      font-weight: 700; color: var(--text);
+      border-radius: 6px; padding: 2px 8px; font-size: 0.7rem;
+      font-family: monospace; font-weight: 700; color: var(--text);
     }
 
-    /* Desktop hover animations */
     @media (min-width: 1024px) {
       .listing-card, .category-card, .storefront-card {
         transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
       }
-      .listing-card:hover {
-        transform: translateY(-6px) scale(1.02);
-        box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-      }
+      .listing-card:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
       .category-card:hover { transform: translateY(-6px) scale(1.05); }
       .promo-card { transition: transform 0.3s ease; }
       .promo-card:hover { transform: translateY(-4px); }
     }
 
-    /* PTR indicator */
     .ptr-indicator {
       display: none; position: fixed; top: 0; left: 0; right: 0;
       height: 0; background: #1a3650; color: white;
       align-items: center; justify-content: center;
-      font-size: 0.8rem; z-index: 400;
-      transition: height 0.2s;
+      font-size: 0.8rem; z-index: 400; transition: height 0.2s;
     }
     @media (max-width: 1023px) {
       .ptr-indicator { display: flex; }
@@ -596,22 +577,19 @@
 </head>
 <body>
 
-  <!-- Pull-to-refresh indicator -->
   <div class="ptr-indicator" id="ptrIndicator">
     <i class="fas fa-spinner fa-spin" style="margin-right:8px;"></i> Release to refresh
   </div>
 
-  <!-- Desktop trending bar -->
   <div class="desktop-trending-bar">
     <div class="container">
       <span class="trend-label"><i class="fas fa-fire"></i> Trending now</span>
       <div class="trend-items" id="desktopTrendingItems">
-        <a href="/category.html?slug=fashion">Loading...</a>
+        <a href="javascript:void(0)">Loading...</a>
       </div>
     </div>
   </div>
 
-  <!-- ===== NAV ===== -->
   <nav class="navbar">
     <div class="container nav-container">
       <a href="/" class="logo-wrapper">
@@ -641,7 +619,6 @@
 
   <div class="container">
 
-    <!-- ===== DESKTOP HERO + ADS ===== -->
     <div class="hero-side-promos">
       <section class="hero" aria-label="Find anything near you">
         <div class="hero-slider">
@@ -691,25 +668,18 @@
         </div>
       </section>
 
-      <!-- Desktop Ads Section -->
+      <!-- Desktop Ads — Dynamic Random Products -->
       <div class="side-stack">
-        <div class="ad-label"><i class="fas fa-bullhorn"></i> Sponsored</div>
-        <div class="ad-card" style="background: radial-gradient(circle at 70% 30%, #1f5d8a, #0a1b2b);" onclick="window.location.href='/stores.html'">
-          <span class="ad-tag">Ad</span>
-          <h3>Zaure Home Essentials</h3>
-          <p>Premium kitchenware & home goods delivered across Northern Nigeria</p>
-          <a href="/stores.html">Shop Now →</a>
+        <div class="ad-label"><i class="fas fa-bullhorn"></i> Featured products</div>
+        <div class="ad-slot" id="adSlot1">
+          <div class="ad-progress" id="adProgress1"></div>
         </div>
-        <div class="ad-card" style="background: radial-gradient(circle at 30% 70%, #4a6f8f, #0d1f30);" onclick="window.location.href='/post.html'">
-          <span class="ad-tag">Ad</span>
-          <h3>Sell on Zaure</h3>
-          <p>Zero commission. 5 free listings. Reach thousands of buyers.</p>
-          <a href="/post.html">Start Selling →</a>
+        <div class="ad-slot" id="adSlot2">
+          <div class="ad-progress" id="adProgress2"></div>
         </div>
       </div>
     </div>
 
-    <!-- ===== MOBILE HERO ===== -->
     <section class="hero mobile-hero" style="display:none;" aria-label="Find anything near you">
       <div class="hero-slider">
         <div class="slide"></div><div class="slide"></div><div class="slide"></div>
@@ -750,17 +720,14 @@
       </div>
     </section>
 
-    <!-- ===== MOBILE WHATSAPP CONTACT STRIP ===== -->
+    <!-- Mobile WhatsApp strip — slim -->
     <a href="https://wa.me/2349042339411?text=Hello%20Zaure%2C%20I%20want%20to%20order%20or%20report%20something." target="_blank" class="mobile-wa-strip">
-      <div class="wa-icon"><i class="fab fa-whatsapp"></i></div>
-      <div class="wa-text">
-        <strong>Order or Report via WhatsApp</strong>
-        <span>Tap to chat with us — +234 904 233 9411</span>
-      </div>
-      <div class="wa-arrow"><i class="fas fa-chevron-right"></i></div>
+      <span class="wa-dot"></span>
+      <span class="wa-icon"><i class="fab fa-whatsapp"></i></span>
+      <span class="wa-text">Order or report on <strong>WhatsApp</strong></span>
+      <span class="wa-arrow"><i class="fas fa-chevron-right"></i></span>
     </a>
 
-    <!-- ===== PROMO CAROUSEL ===== -->
     <div class="promo-carousel">
       <div class="promo-card animate-promo">
         <h3>List for Free</h3>
@@ -812,7 +779,6 @@
 
   </div>
 
-  <!-- Hover preview, Recently viewed, Keyboard panels -->
   <div class="hover-preview" id="hoverPreview">
     <img class="hp-img" id="hpImage" src="" alt="">
     <div class="hp-title" id="hpTitle">—</div>
@@ -846,7 +812,6 @@
     <div class="kbd-row"><span>Close panel</span><kbd>Esc</kbd></div>
   </div>
 
-  <!-- Footer, Bottom nav, Signup modal -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
@@ -953,7 +918,7 @@
   <script src="/js/main.js"></script>
   <script>
     // ============================================
-    // STATE DROPDOWN — INLINE
+    // STATE DROPDOWN
     // ============================================
     (function initStateDropdownInline() {
       const nigerianStates = [
@@ -1014,14 +979,12 @@
     window.addEventListener('resize', toggleHeroLayout);
 
     // ============================================
-    // SEARCH — DESKTOP & MOBILE
+    // SEARCH
     // ============================================
     function performSearch(query) {
       if (!query) return;
       const trimmed = query.trim();
       if (!trimmed) return;
-
-      // Save search for search.html page
       const products = getProductsSync();
       const q = trimmed.toLowerCase();
       const filtered = products.filter(p =>
@@ -1034,27 +997,21 @@
       localStorage.setItem('zaure_search_query', trimmed);
       window.location.href = '/search.html';
     }
+    window.performSearch = performSearch;
 
     function initSearch() {
-      // Desktop
       const inputD = document.getElementById('searchInput');
       const btnD = document.getElementById('searchBtn');
       const wrapperD = document.getElementById('searchWrapper');
       const acD = document.getElementById('acDropdown');
-
-      // Mobile
       const inputM = document.getElementById('searchInputMobile');
       const btnM = document.getElementById('searchBtnMobile');
 
       if (inputD && btnD) {
-        btnD.addEventListener('click', e => {
-          e.preventDefault();
-          performSearch(inputD.value);
-        });
+        btnD.addEventListener('click', e => { e.preventDefault(); performSearch(inputD.value); });
         inputD.addEventListener('keydown', e => {
           if (e.key === 'Enter') { e.preventDefault(); performSearch(inputD.value); }
         });
-        // Autocomplete
         inputD.addEventListener('input', async function() {
           const query = this.value.trim();
           if (query.length < 2) {
@@ -1085,18 +1042,31 @@
           if (wrapperD && !wrapperD.contains(e.target)) wrapperD.classList.remove('show-autocomplete');
         });
       }
-
       if (inputM && btnM) {
-        btnM.addEventListener('click', e => {
-          e.preventDefault();
-          performSearch(inputM.value);
-        });
+        btnM.addEventListener('click', e => { e.preventDefault(); performSearch(inputM.value); });
         inputM.addEventListener('keydown', e => {
           if (e.key === 'Enter') { e.preventDefault(); performSearch(inputM.value); }
         });
       }
     }
     initSearch();
+
+    // ============================================
+    // POST WITHOUT SIGNUP — removed gate
+    // ============================================
+    function setupPostButtons() {
+      // FAB (bottom nav)
+      const fab = document.getElementById('fabPostAd');
+      if (fab) {
+        fab.onclick = () => { window.location.href = '/post.html'; };
+      }
+      // CTA banner
+      const cta = document.getElementById('postAdCta');
+      if (cta) {
+        cta.onclick = () => { window.location.href = '/post.html'; };
+      }
+    }
+    setupPostButtons();
 
     // ============================================
     // DESKTOP HOVER PREVIEW
@@ -1196,7 +1166,7 @@
     });
 
     // ============================================
-    // MOBILE HAPTIC
+    // MOBILE HAPTIC + PTR
     // ============================================
     function vibrate(ms = 10) {
       if (window.innerWidth < 1024 && navigator.vibrate) navigator.vibrate(ms);
@@ -1206,10 +1176,6 @@
       if (e.target.closest('.post-btn')) vibrate(20);
       if (e.target.closest('.listing-card')) vibrate(8);
     });
-
-    // ============================================
-    // MOBILE PULL-TO-REFRESH
-    // ============================================
     (function initPullToRefresh() {
       if (window.innerWidth >= 1024) return;
       let startY = 0, pulling = false;
@@ -1235,6 +1201,84 @@
         pulling = false;
       });
     })();
+
+    // ============================================
+    // DESKTOP ADS — RANDOM PRODUCTS ANIMATION
+    // ============================================
+    function initAdSlots(products) {
+      if (window.innerWidth < 1024) return;
+      if (!products || products.length === 0) return;
+
+      // Pick 8 random products
+      const shuffled = [...products].sort(() => Math.random() - 0.5);
+      const pool = shuffled.slice(0, 8);
+
+      // Split into two slots (4 each)
+      const slot1Items = pool.slice(0, 4);
+      const slot2Items = pool.slice(4, 8);
+
+      function buildSlide(p, idx) {
+        const img = (p.images && p.images[0]) || 'https://placehold.co/400x400?text=Zaure';
+        const price = p.price >= 1e6 ? `₦${(p.price/1e6).toFixed(1)}M` : `₦${p.price.toLocaleString()}`;
+        return `
+          <div class="ad-slide" style="background-image: url('${img}');" onclick="viewProduct('${p.id}')">
+            <span class="ad-tag">Featured</span>
+            <div class="ad-content">
+              <div class="ad-cat">${p.category || 'Product'}</div>
+              <h3>${p.title}</h3>
+              <div class="ad-price">${price}</div>
+              <span class="ad-cta">View <i class="fas fa-arrow-right"></i></span>
+            </div>
+          </div>
+        `;
+      }
+
+      const slot1 = document.getElementById('adSlot1');
+      const slot2 = document.getElementById('adSlot2');
+
+      if (slot1) {
+        slot1.innerHTML = '<div class="ad-progress" id="adProgress1"></div>' + slot1Items.map(buildSlide).join('');
+        cycleAdSlot(slot1, 'adProgress1', 4500);
+      }
+      if (slot2) {
+        slot2.innerHTML = '<div class="ad-progress" id="adProgress2"></div>' + slot2Items.map(buildSlide).join('');
+        cycleAdSlot(slot2, 'adProgress2', 5500);
+      }
+    }
+
+    function cycleAdSlot(slot, progressId, duration) {
+      const slides = slot.querySelectorAll('.ad-slide');
+      const progress = document.getElementById(progressId);
+      if (slides.length === 0) return;
+
+      let current = 0;
+      slides[0].classList.add('active');
+
+      function nextSlide() {
+        slides[current].classList.remove('active');
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('active');
+        // Reset progress
+        if (progress) {
+          progress.style.transition = 'none';
+          progress.style.width = '0%';
+          setTimeout(() => {
+            progress.style.transition = `width ${duration}ms linear`;
+            progress.style.width = '100%';
+          }, 50);
+        }
+      }
+
+      // Kick off progress animation
+      if (progress) {
+        setTimeout(() => {
+          progress.style.transition = `width ${duration}ms linear`;
+          progress.style.width = '100%';
+        }, 50);
+      }
+
+      setInterval(nextSlide, duration);
+    }
 
     // ============================================
     // PAGE INIT
@@ -1279,13 +1323,16 @@
       if (kwD) kwD.innerHTML = trendHTML;
       if (kwM) kwM.innerHTML = trendHTML;
 
-      // Desktop trending bar — also dynamic
+      // Desktop trending bar
       const bar = document.getElementById('desktopTrendingItems');
       if (bar) {
         bar.innerHTML = keywords.slice(0, 8).map(k => `
           <a href="javascript:void(0)" onclick="performSearch('${k}')">${k}</a>
         `).join('');
       }
+
+      // Desktop ads — random products
+      initAdSlots(products);
 
       loadUser();
       initTheme();
