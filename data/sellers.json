@@ -30,5 +30,21 @@
     "sales": 150,
     "response": "98%",
     "joined": "2026"
+  },
+  {
+    "id": "teema-kitchenwares",
+    "name": "Teema Kitchenwares",
+    "initials": "TK",
+    "badge": "verified",
+    "category": "home-kitchen",
+    "location": "Kaduna",
+    "profilePic": "https://images.unsplash.com/photo-1584990347449-a2d4a41d2026?w=200&h=200&fit=crop&q=80",
+    "bio": "Premium kitchenware and home essentials. From elegant glass jugs to durable cookware, we bring quality products to your kitchen. Trusted, tested, and delivered with care across Northern Nigeria.",
+    "phone": "09042339411",
+    "whatsapp": "09042339411",
+    "rating": 4.8,
+    "sales": 85,
+    "response": "97%",
+    "joined": "2026"
   }
 ]
