@@ -48,76 +48,76 @@
   <link rel="stylesheet" href="/css/style.css">
   <style>
     /* ============================================
-       CUSTOM STATE DROPDOWN — FIXED
+       STATE DROPDOWN — FORCED INLINE STYLES
        ============================================ */
     .custom-select {
-      position: relative;
-      width: 100%;
-      user-select: none;
-      z-index: 100;
+      position: relative !important;
+      width: 100% !important;
+      user-select: none !important;
+      z-index: 9999 !important;
     }
     .custom-select-trigger {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.8rem 1rem;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: var(--input-bg);
-      cursor: pointer;
-      font-size: 0.95rem;
-      color: var(--text);
-      transition: border-color 0.2s, background 0.2s;
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      padding: 0.8rem 1rem !important;
+      border: 1px solid #e5ecf3 !important;
+      border-radius: 12px !important;
+      background: #ffffff !important;
+      cursor: pointer !important;
+      font-size: 0.95rem !important;
+      color: #151e28 !important;
+      transition: border-color 0.2s !important;
     }
     .custom-select-trigger:hover {
-      border-color: #1a3650;
+      border-color: #1a3650 !important;
     }
     .custom-select-dropdown {
-      position: absolute;
-      top: calc(100% + 4px);
-      left: 0;
-      right: 0;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-      max-height: 220px;
-      overflow-y: auto;
-      z-index: 9999;
-      display: none;
+      position: absolute !important;
+      top: calc(100% + 4px) !important;
+      left: 0 !important;
+      right: 0 !important;
+      background: #ffffff !important;
+      border: 1px solid #e5ecf3 !important;
+      border-radius: 12px !important;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15) !important;
+      max-height: 220px !important;
+      overflow-y: auto !important;
+      z-index: 99999 !important;
+      display: none !important;
     }
     .custom-select.active .custom-select-dropdown {
-      display: block;
+      display: block !important;
     }
     .custom-select-dropdown input[type="text"] {
-      width: calc(100% - 20px);
-      margin: 10px;
-      padding: 8px 10px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 0.85rem;
-      background: var(--input-bg);
-      color: var(--text);
-      outline: none;
+      width: calc(100% - 20px) !important;
+      margin: 10px !important;
+      padding: 8px 10px !important;
+      border: 1px solid #e5ecf3 !important;
+      border-radius: 8px !important;
+      font-size: 0.85rem !important;
+      background: #ffffff !important;
+      color: #151e28 !important;
+      outline: none !important;
     }
     .custom-select-options {
-      list-style: none;
-      padding: 0;
-      margin: 0;
+      list-style: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
     }
     .custom-select-options li {
-      padding: 10px 16px;
-      cursor: pointer;
-      font-size: 0.9rem;
-      color: var(--text);
-      transition: background 0.2s;
+      padding: 10px 16px !important;
+      cursor: pointer !important;
+      font-size: 0.9rem !important;
+      color: #151e28 !important;
+      transition: background 0.2s !important;
     }
     .custom-select-options li:hover {
-      background: var(--surface-alt, #f0f5fc);
+      background: #f0f5fc !important;
     }
 
     /* ============================================
-       HERO STYLES (unchanged)
+       HERO STYLES
        ============================================ */
     .hero {
       position: relative;
@@ -129,24 +129,11 @@
       display: flex;
       align-items: center;
     }
-    .hero-slider {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-    }
+    .hero-slider { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
     .hero-slider .slide {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-size: cover;
-      background-position: center;
-      opacity: 0;
-      transition: opacity 1.5s ease-in-out;
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background-size: cover; background-position: center;
+      opacity: 0; transition: opacity 1.5s ease-in-out;
       animation: slideFade 18s infinite;
     }
     .hero-slider .slide:nth-child(1) { background-image: url('https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=1200&h=600&fit=crop&q=80'); animation-delay: 0s; }
@@ -165,29 +152,20 @@
       20%, 100% { opacity: 0; transform: scale(1.1); }
     }
     .hero-overlay {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
       background: linear-gradient(135deg, rgba(26,31,46,0.75) 0%, rgba(26,31,46,0.55) 50%, rgba(26,31,46,0.7) 100%);
       z-index: 1;
     }
     [data-theme="dark"] .hero-overlay {
       background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.65) 50%, rgba(0,0,0,0.8) 100%);
     }
-    .hero-content-wrapper {
-      position: relative;
-      z-index: 2;
-      padding: 40px 24px;
-      width: 100%;
-    }
+    .hero-content-wrapper { position: relative; z-index: 2; padding: 40px 24px; width: 100%; }
     .hero-content-wrapper .hero-tagline {
-      font-size: 0.75rem; font-weight: 600;
-      color: rgba(255,255,255,0.6);
+      font-size: 0.75rem; font-weight: 600; color: rgba(255,255,255,0.6);
       text-transform: uppercase; letter-spacing: 3px;
       margin-bottom: 8px; display: inline-block;
-      padding: 4px 16px;
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 40px;
-      backdrop-filter: blur(4px);
+      padding: 4px 16px; border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 40px; backdrop-filter: blur(4px);
       background: rgba(255,255,255,0.05);
     }
     .hero-rotating-text { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px; }
@@ -237,22 +215,16 @@
     .hero .search-box input::placeholder { color: var(--text-secondary); }
     .hero .trending-keywords { position: relative; z-index: 2; }
     .hero .trending-keywords .keyword {
-      background: rgba(255,255,255,0.1);
-      backdrop-filter: blur(4px);
-      border: 1px solid rgba(255,255,255,0.08);
-      color: rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.1); backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,0.08); color: rgba(255,255,255,0.7);
     }
     .hero .trending-keywords .keyword:hover { background: rgba(255,255,255,0.2); color: white; }
     .hero .trending-keywords .keyword i { color: #D4B87A; }
-    .hero-indicators {
-      position: absolute; bottom: 16px; right: 24px;
-      z-index: 3; display: flex; gap: 6px;
-    }
+    .hero-indicators { position: absolute; bottom: 16px; right: 24px; z-index: 3; display: flex; gap: 6px; }
     .hero-indicators .dot {
       width: 8px; height: 8px; border-radius: 50%;
       background: rgba(255,255,255,0.3);
-      transition: all 0.3s ease;
-      animation: dotPulse 18s infinite;
+      transition: all 0.3s ease; animation: dotPulse 18s infinite;
     }
     .hero-indicators .dot:nth-child(1) { animation-delay: 0s; }
     .hero-indicators .dot:nth-child(2) { animation-delay: 1.8s; }
@@ -546,6 +518,103 @@
 
   <script src="/js/main.js"></script>
   <script>
+    // ============================================
+    // STATE DROPDOWN — INLINE, INDEPENDENT LOGIC
+    // ============================================
+    (function initStateDropdownInline() {
+      const nigerianStates = [
+        'Abia', 'Adamawa', 'Akwa Ibom', 'Anambra', 'Bauchi', 'Bayelsa', 'Benue',
+        'Borno', 'Cross River', 'Delta', 'Ebonyi', 'Edo', 'Ekiti', 'Enugu', 'FCT',
+        'Gombe', 'Imo', 'Jigawa', 'Kaduna', 'Kano', 'Katsina', 'Kebbi', 'Kogi',
+        'Kwara', 'Lagos', 'Nasarawa', 'Niger', 'Ogun', 'Ondo', 'Osun', 'Oyo',
+        'Plateau', 'Rivers', 'Sokoto', 'Taraba', 'Yobe', 'Zamfara'
+      ];
+
+      const selectContainer = document.getElementById('stateSelect');
+      const trigger = document.getElementById('stateTrigger');
+      const searchInput = document.getElementById('stateSearchInput');
+      const optionsList = document.getElementById('stateOptionsList');
+      const hiddenInput = document.getElementById('signupState');
+
+      if (!selectContainer || !trigger || !searchInput || !optionsList || !hiddenInput) {
+        console.warn('State dropdown elements not found');
+        return;
+      }
+
+      console.log('✅ State dropdown initialized with', nigerianStates.length, 'states');
+
+      function renderOptions(filter = '') {
+        const filtered = nigerianStates.filter(state =>
+          state.toLowerCase().includes(filter.toLowerCase())
+        );
+
+        if (filtered.length === 0) {
+          optionsList.innerHTML = '<li style="text-align:center;color:#94A3B8;">No state found</li>';
+          return;
+        }
+
+        optionsList.innerHTML = filtered.map(state =>
+          `<li data-value="${state}">${state}</li>`
+        ).join('');
+
+        optionsList.querySelectorAll('li').forEach(li => {
+          li.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const selected = this.dataset.value;
+            hiddenInput.value = selected;
+            trigger.querySelector('span').textContent = selected;
+            selectContainer.classList.remove('active');
+            searchInput.value = '';
+            renderOptions();
+          });
+        });
+      }
+
+      renderOptions();
+
+      // Toggle dropdown
+      trigger.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        const isActive = selectContainer.classList.contains('active');
+        // Close all other custom selects if any
+        document.querySelectorAll('.custom-select.active').forEach(el => {
+          if (el !== selectContainer) el.classList.remove('active');
+        });
+        selectContainer.classList.toggle('active');
+        if (!isActive) {
+          setTimeout(() => searchInput.focus(), 50);
+        }
+      });
+
+      // Search filter
+      searchInput.addEventListener('input', function(e) {
+        e.stopPropagation();
+        renderOptions(this.value);
+      });
+
+      searchInput.addEventListener('click', function(e) {
+        e.stopPropagation();
+      });
+
+      // Close on outside click
+      document.addEventListener('click', function(e) {
+        if (!selectContainer.contains(e.target)) {
+          selectContainer.classList.remove('active');
+        }
+      });
+
+      // Close on Escape
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          selectContainer.classList.remove('active');
+        }
+      });
+    })();
+
+    // ============================================
+    // PAGE INIT
+    // ============================================
     document.addEventListener('DOMContentLoaded', async function() {
       const categories = await loadCategories();
       const categoryGrid = document.getElementById('categoryGrid');
@@ -559,7 +628,7 @@
 
       const products = await loadProducts();
       const userState = await getUserState();
-      
+
       const featured = recommendProducts(products, userState, 6);
       renderListings(featured, 'featuredGrid');
 
@@ -589,8 +658,7 @@
       loadUser();
       initTheme();
       updateFavoriteBadge();
-      initStateDropdown();
-      
+
       document.getElementById('boostNowBtn')?.addEventListener('click', function() {
         const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|Opera Mini|IEMobile/i.test(navigator.userAgent);
         const phoneNumber = '2349042339411';
