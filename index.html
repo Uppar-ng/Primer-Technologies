@@ -28,11 +28,11 @@
     "url": "https://zauretech.vercel.app",
     "logo": "https://zauretech.vercel.app/assets/logo-icon.svg",
     "description": "Nigeria's most trusted online marketplace",
-    "foundingDate": "2024",
+    "foundingDate": "2025",
     "founder": {
       "@type": "Person",
       "name": "Alamin Ahmed",
-      "jobTitle": "Founder & CEO"
+      "jobTitle": "Founder & President"
     },
     "sameAs": [
       "https://twitter.com/zauretech",
@@ -47,6 +47,78 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
   <style>
+    /* ============================================
+       CUSTOM STATE DROPDOWN — FIXED
+       ============================================ */
+    .custom-select {
+      position: relative;
+      width: 100%;
+      user-select: none;
+      z-index: 100;
+    }
+    .custom-select-trigger {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--input-bg);
+      cursor: pointer;
+      font-size: 0.95rem;
+      color: var(--text);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .custom-select-trigger:hover {
+      border-color: #1a3650;
+    }
+    .custom-select-dropdown {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      right: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      max-height: 220px;
+      overflow-y: auto;
+      z-index: 9999;
+      display: none;
+    }
+    .custom-select.active .custom-select-dropdown {
+      display: block;
+    }
+    .custom-select-dropdown input[type="text"] {
+      width: calc(100% - 20px);
+      margin: 10px;
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.85rem;
+      background: var(--input-bg);
+      color: var(--text);
+      outline: none;
+    }
+    .custom-select-options {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .custom-select-options li {
+      padding: 10px 16px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      color: var(--text);
+      transition: background 0.2s;
+    }
+    .custom-select-options li:hover {
+      background: var(--surface-alt, #f0f5fc);
+    }
+
+    /* ============================================
+       HERO STYLES (unchanged)
+       ============================================ */
     .hero {
       position: relative;
       overflow: hidden;
@@ -77,46 +149,16 @@
       transition: opacity 1.5s ease-in-out;
       animation: slideFade 18s infinite;
     }
-    .hero-slider .slide:nth-child(1) { 
-      background-image: url('https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=1200&h=600&fit=crop&q=80');
-      animation-delay: 0s;
-    }
-    .hero-slider .slide:nth-child(2) { 
-      background-image: url('https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1200&h=600&fit=crop&q=80');
-      animation-delay: 1.8s;
-    }
-    .hero-slider .slide:nth-child(3) { 
-      background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&h=600&fit=crop&q=80');
-      animation-delay: 3.6s;
-    }
-    .hero-slider .slide:nth-child(4) { 
-      background-image: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200&h=600&fit=crop&q=80');
-      animation-delay: 5.4s;
-    }
-    .hero-slider .slide:nth-child(5) { 
-      background-image: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?w=1200&h=600&fit=crop&q=80');
-      animation-delay: 7.2s;
-    }
-    .hero-slider .slide:nth-child(6) { 
-      background-image: url('https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1200&h=600&fit=crop&q=80');
-      animation-delay: 9.0s;
-    }
-    .hero-slider .slide:nth-child(7) { 
-      background-image: url('https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1200&h=600&fit=crop&q=80');
-      animation-delay: 10.8s;
-    }
-    .hero-slider .slide:nth-child(8) { 
-      background-image: url('https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=1200&h=600&fit=crop&q=80');
-      animation-delay: 12.6s;
-    }
-    .hero-slider .slide:nth-child(9) { 
-      background-image: url('https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?w=1200&h=600&fit=crop&q=80');
-      animation-delay: 14.4s;
-    }
-    .hero-slider .slide:nth-child(10) { 
-      background-image: url('https://images.unsplash.com/photo-1488590528505-98d2b853aba4?w=1200&h=600&fit=crop&q=80');
-      animation-delay: 16.2s;
-    }
+    .hero-slider .slide:nth-child(1) { background-image: url('https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=1200&h=600&fit=crop&q=80'); animation-delay: 0s; }
+    .hero-slider .slide:nth-child(2) { background-image: url('https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1200&h=600&fit=crop&q=80'); animation-delay: 1.8s; }
+    .hero-slider .slide:nth-child(3) { background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&h=600&fit=crop&q=80'); animation-delay: 3.6s; }
+    .hero-slider .slide:nth-child(4) { background-image: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200&h=600&fit=crop&q=80'); animation-delay: 5.4s; }
+    .hero-slider .slide:nth-child(5) { background-image: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?w=1200&h=600&fit=crop&q=80'); animation-delay: 7.2s; }
+    .hero-slider .slide:nth-child(6) { background-image: url('https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1200&h=600&fit=crop&q=80'); animation-delay: 9.0s; }
+    .hero-slider .slide:nth-child(7) { background-image: url('https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1200&h=600&fit=crop&q=80'); animation-delay: 10.8s; }
+    .hero-slider .slide:nth-child(8) { background-image: url('https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=1200&h=600&fit=crop&q=80'); animation-delay: 12.6s; }
+    .hero-slider .slide:nth-child(9) { background-image: url('https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?w=1200&h=600&fit=crop&q=80'); animation-delay: 14.4s; }
+    .hero-slider .slide:nth-child(10) { background-image: url('https://images.unsplash.com/photo-1488590528505-98d2b853aba4?w=1200&h=600&fit=crop&q=80'); animation-delay: 16.2s; }
     @keyframes slideFade {
       0%, 8% { opacity: 1; transform: scale(1); }
       10%, 18% { opacity: 1; transform: scale(1.05); }
@@ -124,10 +166,7 @@
     }
     .hero-overlay {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0; width: 100%; height: 100%;
       background: linear-gradient(135deg, rgba(26,31,46,0.75) 0%, rgba(26,31,46,0.55) 50%, rgba(26,31,46,0.7) 100%);
       z-index: 1;
     }
@@ -141,45 +180,23 @@
       width: 100%;
     }
     .hero-content-wrapper .hero-tagline {
-      font-size: 0.75rem;
-      font-weight: 600;
+      font-size: 0.75rem; font-weight: 600;
       color: rgba(255,255,255,0.6);
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      margin-bottom: 8px;
-      display: inline-block;
+      text-transform: uppercase; letter-spacing: 3px;
+      margin-bottom: 8px; display: inline-block;
       padding: 4px 16px;
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: 40px;
       backdrop-filter: blur(4px);
       background: rgba(255,255,255,0.05);
     }
-    .hero-rotating-text {
-      display: flex;
-      align-items: baseline;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-    .hero-rotating-text .static-text {
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: white;
-      line-height: 1.2;
-    }
-    .hero-rotating-text .dynamic-text-wrapper {
-      display: inline-block;
-      height: 2.2rem;
-      overflow: hidden;
-      vertical-align: bottom;
-    }
+    .hero-rotating-text { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px; }
+    .hero-rotating-text .static-text { font-size: 1.8rem; font-weight: 800; color: white; line-height: 1.2; }
+    .hero-rotating-text .dynamic-text-wrapper { display: inline-block; height: 2.2rem; overflow: hidden; vertical-align: bottom; }
     .hero-rotating-text .dynamic-text-wrapper .dynamic-text {
-      display: block;
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: #D4B87A;
-      line-height: 1.2;
-      animation: textRotate 20s infinite;
-      white-space: nowrap;
+      display: block; font-size: 1.8rem; font-weight: 800;
+      color: #D4B87A; line-height: 1.2;
+      animation: textRotate 20s infinite; white-space: nowrap;
     }
     @keyframes textRotate {
       0%, 8% { transform: translateY(0); }
@@ -204,17 +221,8 @@
     .dynamic-text:nth-child(8) { animation-delay: 14s; }
     .dynamic-text:nth-child(9) { animation-delay: 16s; }
     .dynamic-text:nth-child(10) { animation-delay: 18s; }
-    .hero-subtitle {
-      color: rgba(255,255,255,0.8);
-      font-size: 0.95rem;
-      margin-top: 8px;
-      max-width: 500px;
-    }
-    .hero .search-wrapper {
-      position: relative;
-      z-index: 2;
-      margin-top: 16px;
-    }
+    .hero-subtitle { color: rgba(255,255,255,0.8); font-size: 0.95rem; margin-top: 8px; max-width: 500px; }
+    .hero .search-wrapper { position: relative; z-index: 2; margin-top: 16px; }
     .hero .search-box {
       background: rgba(255,255,255,0.95);
       backdrop-filter: blur(8px);
@@ -225,41 +233,23 @@
       background: rgba(19,28,49,0.95);
       border-color: rgba(255,255,255,0.05);
     }
-    .hero .search-box input {
-      color: var(--text);
-    }
-    .hero .search-box input::placeholder {
-      color: var(--text-secondary);
-    }
-    .hero .trending-keywords {
-      position: relative;
-      z-index: 2;
-    }
+    .hero .search-box input { color: var(--text); }
+    .hero .search-box input::placeholder { color: var(--text-secondary); }
+    .hero .trending-keywords { position: relative; z-index: 2; }
     .hero .trending-keywords .keyword {
       background: rgba(255,255,255,0.1);
       backdrop-filter: blur(4px);
       border: 1px solid rgba(255,255,255,0.08);
       color: rgba(255,255,255,0.7);
     }
-    .hero .trending-keywords .keyword:hover {
-      background: rgba(255,255,255,0.2);
-      color: white;
-    }
-    .hero .trending-keywords .keyword i {
-      color: #D4B87A;
-    }
+    .hero .trending-keywords .keyword:hover { background: rgba(255,255,255,0.2); color: white; }
+    .hero .trending-keywords .keyword i { color: #D4B87A; }
     .hero-indicators {
-      position: absolute;
-      bottom: 16px;
-      right: 24px;
-      z-index: 3;
-      display: flex;
-      gap: 6px;
+      position: absolute; bottom: 16px; right: 24px;
+      z-index: 3; display: flex; gap: 6px;
     }
     .hero-indicators .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
+      width: 8px; height: 8px; border-radius: 50%;
       background: rgba(255,255,255,0.3);
       transition: all 0.3s ease;
       animation: dotPulse 18s infinite;
@@ -282,12 +272,8 @@
       .hero { min-height: 280px; }
       .hero-content-wrapper { padding: 28px 16px; }
       .hero-rotating-text .static-text,
-      .hero-rotating-text .dynamic-text-wrapper .dynamic-text {
-        font-size: 1.4rem;
-      }
-      .hero-rotating-text .dynamic-text-wrapper {
-        height: 1.8rem;
-      }
+      .hero-rotating-text .dynamic-text-wrapper .dynamic-text { font-size: 1.4rem; }
+      .hero-rotating-text .dynamic-text-wrapper { height: 1.8rem; }
       @keyframes textRotate {
         0%, 8% { transform: translateY(0); }
         10%, 18% { transform: translateY(0); }
@@ -307,12 +293,8 @@
     @media (min-width: 768px) {
       .hero-content-wrapper { padding: 50px 40px; }
       .hero-rotating-text .static-text,
-      .hero-rotating-text .dynamic-text-wrapper .dynamic-text {
-        font-size: 2.4rem;
-      }
-      .hero-rotating-text .dynamic-text-wrapper {
-        height: 2.8rem;
-      }
+      .hero-rotating-text .dynamic-text-wrapper .dynamic-text { font-size: 2.4rem; }
+      .hero-rotating-text .dynamic-text-wrapper { height: 2.8rem; }
       @keyframes textRotate {
         0%, 8% { transform: translateY(0); }
         10%, 18% { transform: translateY(0); }
@@ -331,7 +313,6 @@
 </head>
 <body>
 
-  <!-- ===== NAV ===== -->
   <nav class="navbar">
     <div class="container nav-container">
       <a href="/" class="logo-wrapper">
@@ -361,18 +342,11 @@
 
   <div class="container">
 
-    <!-- ===== DYNAMIC HERO ===== -->
     <section class="hero" aria-label="Find anything near you">
       <div class="hero-slider">
-        <div class="slide"></div>
-        <div class="slide"></div>
-        <div class="slide"></div>
-        <div class="slide"></div>
-        <div class="slide"></div>
-        <div class="slide"></div>
-        <div class="slide"></div>
-        <div class="slide"></div>
-        <div class="slide"></div>
+        <div class="slide"></div><div class="slide"></div><div class="slide"></div>
+        <div class="slide"></div><div class="slide"></div><div class="slide"></div>
+        <div class="slide"></div><div class="slide"></div><div class="slide"></div>
         <div class="slide"></div>
       </div>
       <div class="hero-overlay"></div>
@@ -409,20 +383,13 @@
         </div>
       </div>
       <div class="hero-indicators">
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
         <span class="dot"></span>
       </div>
     </section>
 
-    <!-- ===== PROMO CAROUSEL ===== -->
     <div class="promo-carousel">
       <div class="promo-card animate-promo">
         <h3>List for Free</h3>
@@ -441,7 +408,6 @@
       </div>
     </div>
 
-    <!-- ===== CATEGORIES (Limited to 6 + View all) ===== -->
     <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap;">
       <h2 class="section-title" style="margin-top:4px;">Categories</h2>
       <a href="/categories.html" style="color:var(--text-secondary); font-weight:500; font-size:0.8rem; text-decoration:none;">View all</a>
@@ -450,19 +416,16 @@
       <div class="category-card"><div class="icon-circle"><i class="fas fa-spinner fa-spin"></i></div><h3>Loading...</h3></div>
     </div>
 
-    <!-- ===== FEATURED PRODUCTS ===== -->
     <h2 class="section-title">Featured Products</h2>
     <div class="grid-2col-listings" id="featuredGrid">
       <div class="listing-card"><div class="listing-img"><i class="fas fa-spinner fa-spin"></i></div><div class="listing-body"><div class="price">Loading...</div></div></div>
     </div>
 
-    <!-- ===== TOP SELLERS ===== -->
     <h2 class="section-title">Top Sellers</h2>
     <div class="storefronts" id="topSellersGrid">
       <div class="storefront-card"><div class="store-avatar">...</div><div><div class="store-name">Loading</div></div></div>
     </div>
 
-    <!-- ===== TRENDING NEAR YOU ===== -->
     <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap;">
       <h2 class="section-title" style="margin-top:4px;" id="trendingTitle">Trending Near You</h2>
       <a href="/category.html?slug=all" style="color:var(--text-secondary); font-weight:500; font-size:0.8rem; text-decoration:none;">View all</a>
@@ -471,7 +434,6 @@
       <div class="listing-card"><div class="listing-img"><i class="fas fa-spinner fa-spin"></i></div><div class="listing-body"><div class="price">Loading...</div></div></div>
     </div>
 
-    <!-- ===== CTA ===== -->
     <section class="cta-banner">
       <div><h2>Ready to sell?</h2><p>List your item in minutes – reach local buyers.</p></div>
       <div><button class="btn-primary" id="postAdCta"><i class="fas fa-plus-circle"></i> Post a listing</button></div>
@@ -479,7 +441,6 @@
 
   </div>
 
-  <!-- ===== FOOTER ===== -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
@@ -499,22 +460,23 @@
         <div class="footer-col">
           <h4>Browse</h4>
           <a href="/category.html?slug=all">All Items</a>
-          <a href="/category.html?slug=vehicles">Vehicles</a>
-          <a href="/category.html?slug=electronics">Electronics</a>
-          <a href="/category.html?slug=furniture">Furniture</a>
           <a href="/category.html?slug=fashion">Fashion</a>
-          <a href="/category.html?slug=real-estate">Real Estate</a>
+          <a href="/category.html?slug=electronics">Electronics</a>
+          <a href="/category.html?slug=beauty-health">Beauty & Health</a>
+          <a href="/category.html?slug=food-drinks">Food & Drinks</a>
+          <a href="/category.html?slug=home-kitchen">Home & Kitchen</a>
         </div>
         <div class="footer-col">
           <h4>Support</h4>
           <a href="/help.html">Help Center</a>
+          <a href="/faq.html">FAQ</a>
           <a href="/safety.html">Safety Tips</a>
           <a href="/contact.html">Contact Us</a>
-          <a href="/support.html">Support</a>
         </div>
         <div class="footer-col">
           <h4>Company</h4>
           <a href="/about.html">About Us</a>
+          <a href="/alamin-ahmed.html">Founder</a>
           <a href="/careers.html">Careers</a>
           <a href="/privacy.html">Privacy Policy</a>
           <a href="/terms.html">Terms of Service</a>
@@ -542,7 +504,6 @@
     </div>
   </footer>
 
-  <!-- ===== BOTTOM NAV ===== -->
   <div class="bottom-nav">
     <a href="/" class="nav-item active"><i class="fas fa-home"></i><span>Home</span></a>
     <a href="/categories.html" class="nav-item"><i class="fas fa-th-large"></i><span>Categories</span></a>
@@ -551,7 +512,6 @@
     <a href="/profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
   </div>
 
-  <!-- ===== SIGNUP MODAL ===== -->
   <div class="modal-overlay" id="signupModal">
     <div class="modal">
       <div class="modal-header">
@@ -577,7 +537,7 @@
         <input type="hidden" id="signupState" value="">
         <label class="terms-checkbox">
           <input type="checkbox" id="termsCheckbox" required>
-          <span>By creating an account, you agree to Zaure's <a href="/terms.html" target="_blank">Terms</a>, <a href="/conditions.html" target="_blank">Conditions of Use</a>, and <a href="/privacy.html" target="_blank">Privacy Policy</a>.</span>
+          <span>By creating an account, you agree to Zaure's <a href="/terms.html" target="_blank">Terms & Conditions</a> and <a href="/privacy.html" target="_blank">Privacy Policy</a>.</span>
         </label>
         <button type="submit" class="btn-primary">Sign Up</button>
       </form>
