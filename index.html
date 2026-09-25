@@ -69,14 +69,11 @@
       color: #151e28 !important;
       transition: border-color 0.2s !important;
     }
-    .custom-select-trigger:hover {
-      border-color: #1a3650 !important;
-    }
+    .custom-select-trigger:hover { border-color: #1a3650 !important; }
     .custom-select-dropdown {
       position: absolute !important;
       top: calc(100% + 4px) !important;
-      left: 0 !important;
-      right: 0 !important;
+      left: 0 !important; right: 0 !important;
       background: #ffffff !important;
       border: 1px solid #e5ecf3 !important;
       border-radius: 12px !important;
@@ -86,9 +83,7 @@
       z-index: 99999 !important;
       display: none !important;
     }
-    .custom-select.active .custom-select-dropdown {
-      display: block !important;
-    }
+    .custom-select.active .custom-select-dropdown { display: block !important; }
     .custom-select-dropdown input[type="text"] {
       width: calc(100% - 20px) !important;
       margin: 10px !important;
@@ -100,11 +95,7 @@
       color: #151e28 !important;
       outline: none !important;
     }
-    .custom-select-options {
-      list-style: none !important;
-      padding: 0 !important;
-      margin: 0 !important;
-    }
+    .custom-select-options { list-style: none !important; padding: 0 !important; margin: 0 !important; }
     .custom-select-options li {
       padding: 10px 16px !important;
       cursor: pointer !important;
@@ -112,22 +103,16 @@
       color: #151e28 !important;
       transition: background 0.2s !important;
     }
-    .custom-select-options li:hover {
-      background: #f0f5fc !important;
-    }
+    .custom-select-options li:hover { background: #f0f5fc !important; }
 
     /* ============================================
        HERO STYLES
        ============================================ */
     .hero {
-      position: relative;
-      overflow: hidden;
-      border-radius: 28px;
-      padding: 0;
-      margin: 8px 0 16px;
-      min-height: 320px;
-      display: flex;
-      align-items: center;
+      position: relative; overflow: hidden;
+      border-radius: 28px; padding: 0;
+      margin: 8px 0 16px; min-height: 320px;
+      display: flex; align-items: center;
     }
     .hero-slider { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
     .hero-slider .slide {
@@ -202,8 +187,7 @@
     .hero-subtitle { color: rgba(255,255,255,0.8); font-size: 0.95rem; margin-top: 8px; max-width: 500px; }
     .hero .search-wrapper { position: relative; z-index: 2; margin-top: 16px; }
     .hero .search-box {
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(8px);
+      background: rgba(255,255,255,0.95); backdrop-filter: blur(8px);
       border: 1px solid rgba(255,255,255,0.2);
       box-shadow: 0 8px 32px rgba(0,0,0,0.12);
     }
@@ -281,10 +265,385 @@
         100% { transform: translateY(-14rem); }
       }
     }
+
+    /* ============================================
+       DESKTOP-ONLY FEATURES
+       ============================================ */
+
+    /* 1. Trending bar at top */
+    .desktop-trending-bar {
+      display: none;
+    }
+    @media (min-width: 1024px) {
+      .desktop-trending-bar {
+        display: block;
+        background: linear-gradient(90deg, #1a3650, #0f2940);
+        color: #E5ECF3;
+        font-size: 0.72rem;
+        padding: 6px 0;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      .desktop-trending-bar .container {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+      .desktop-trending-bar .trend-label {
+        color: #D4B87A;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        font-size: 0.65rem;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-shrink: 0;
+      }
+      .desktop-trending-bar .trend-items {
+        display: flex;
+        gap: 16px;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+      .desktop-trending-bar .trend-items::-webkit-scrollbar { display: none; }
+      .desktop-trending-bar .trend-items a {
+        color: #E5ECF3;
+        text-decoration: none;
+        transition: color 0.2s;
+        flex-shrink: 0;
+      }
+      .desktop-trending-bar .trend-items a:hover { color: #D4B87A; }
+      .desktop-trending-bar .trend-items a:not(:last-child)::after {
+        content: '·';
+        margin-left: 16px;
+        color: #64748B;
+      }
+    }
+
+    /* 2. Hover quick-view popup */
+    .hover-preview {
+      display: none;
+      position: fixed;
+      z-index: 500;
+      width: 320px;
+      background: var(--surface);
+      border-radius: 16px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+      border: 1px solid var(--border);
+      padding: 16px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    @media (min-width: 1024px) {
+      .hover-preview {
+        display: block;
+      }
+      .hover-preview.show {
+        opacity: 1;
+      }
+    }
+    .hover-preview .hp-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 12px;
+      background: var(--surface-alt);
+    }
+    .hover-preview .hp-title {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .hover-preview .hp-price {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #1a3650;
+      margin-bottom: 8px;
+    }
+    [data-theme="dark"] .hover-preview .hp-price { color: #D4B87A; }
+    .hover-preview .hp-meta {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      display: flex;
+      gap: 12px;
+      padding-top: 8px;
+      border-top: 1px solid var(--border);
+    }
+    .hover-preview .hp-hint {
+      margin-top: 10px;
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      text-align: center;
+      padding-top: 8px;
+      border-top: 1px dashed var(--border);
+    }
+
+    /* 3. Recently viewed floating panel */
+    .recently-viewed-panel {
+      display: none;
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 300;
+      width: 280px;
+      background: var(--surface);
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+    @media (min-width: 1024px) {
+      .recently-viewed-panel { display: block; }
+      .recently-viewed-panel.show {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    .recently-viewed-panel .rv-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      background: #1a3650;
+      color: white;
+    }
+    .recently-viewed-panel .rv-header h4 {
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+    .recently-viewed-panel .rv-header .rv-close {
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+    .recently-viewed-panel .rv-header .rv-close:hover { opacity: 1; }
+    .recently-viewed-panel .rv-list {
+      padding: 8px;
+      max-height: 280px;
+      overflow-y: auto;
+    }
+    .recently-viewed-panel .rv-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .recently-viewed-panel .rv-item:hover { background: var(--surface-alt); }
+    .recently-viewed-panel .rv-item img {
+      width: 42px;
+      height: 42px;
+      border-radius: 8px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: var(--surface-alt);
+    }
+    .recently-viewed-panel .rv-item .rv-info { flex: 1; min-width: 0; }
+    .recently-viewed-panel .rv-item .rv-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .recently-viewed-panel .rv-item .rv-price {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #B49450;
+      margin-top: 2px;
+    }
+
+    /* 4. Keyboard shortcuts panel */
+    .kbd-hint {
+      display: none;
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      z-index: 300;
+    }
+    @media (min-width: 1024px) {
+      .kbd-hint { display: block; }
+    }
+    .kbd-hint .kbd-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      cursor: pointer;
+      font-size: 1rem;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .kbd-hint .kbd-btn:hover {
+      background: #1a3650;
+      color: white;
+      border-color: #1a3650;
+    }
+    .kbd-panel {
+      position: fixed;
+      bottom: 80px;
+      left: 24px;
+      width: 260px;
+      background: var(--surface);
+      border-radius: 14px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      border: 1px solid var(--border);
+      padding: 16px;
+      z-index: 301;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.2s;
+    }
+    .kbd-panel.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .kbd-panel h5 {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+    .kbd-panel .kbd-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 0;
+      font-size: 0.8rem;
+      color: var(--text);
+    }
+    .kbd-panel .kbd-row kbd {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2px 8px;
+      font-size: 0.7rem;
+      font-family: monospace;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    /* 5. Hover animations for cards */
+    @media (min-width: 1024px) {
+      .listing-card,
+      .category-card,
+      .storefront-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      }
+      .listing-card:hover {
+        transform: translateY(-6px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      }
+      .category-card:hover {
+        transform: translateY(-6px) scale(1.05);
+      }
+      .promo-card {
+        transition: transform 0.3s ease;
+      }
+      .promo-card:hover {
+        transform: translateY(-4px);
+      }
+    }
+
+    /* 6. Desktop-only hero side panel */
+    .hero-side-promos {
+      display: none;
+    }
+    @media (min-width: 1024px) {
+      .hero-side-promos {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 16px;
+        margin-bottom: 16px;
+      }
+      .hero-side-promos .hero { margin: 0; }
+      .hero-side-promos .side-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .hero-side-promos .side-promo {
+        flex: 1;
+        border-radius: 20px;
+        padding: 20px;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        cursor: pointer;
+        transition: transform 0.3s;
+      }
+      .hero-side-promos .side-promo:hover {
+        transform: translateY(-3px);
+      }
+      .hero-side-promos .side-promo h3 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 4px;
+      }
+      .hero-side-promos .side-promo p {
+        font-size: 0.8rem;
+        opacity: 0.85;
+        margin-bottom: 10px;
+      }
+      .hero-side-promos .side-promo a {
+        color: white;
+        text-decoration: none;
+        font-size: 0.75rem;
+        font-weight: 600;
+        border: 1px solid rgba(255,255,255,0.3);
+        padding: 6px 14px;
+        border-radius: 40px;
+        align-self: flex-start;
+        transition: background 0.2s;
+      }
+      .hero-side-promos .side-promo a:hover {
+        background: rgba(255,255,255,0.15);
+      }
+    }
   </style>
 </head>
 <body>
 
+  <!-- ===== DESKTOP TRENDING BAR ===== -->
+  <div class="desktop-trending-bar">
+    <div class="container">
+      <span class="trend-label"><i class="fas fa-fire"></i> Trending now</span>
+      <div class="trend-items" id="desktopTrendingItems">
+        <a href="/category.html?slug=fashion">Crocs</a>
+        <a href="/category.html?slug=electronics">JBL Speaker</a>
+        <a href="/category.html?slug=electronics">Acer Laptop</a>
+        <a href="/category.html?slug=home-kitchen">Kitchen Knife Set</a>
+        <a href="/category.html?slug=beauty-health">Al Haramain Attar</a>
+        <a href="/category.html?slug=food-drinks">Natural Honey</a>
+        <a href="/category.html?slug=fashion">Hanes Boxers</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== NAV ===== -->
   <nav class="navbar">
     <div class="container nav-container">
       <a href="/" class="logo-wrapper">
@@ -314,7 +673,73 @@
 
   <div class="container">
 
-    <section class="hero" aria-label="Find anything near you">
+    <!-- ===== HERO + SIDE PROMOS (desktop only layout) ===== -->
+    <div class="hero-side-promos">
+      <section class="hero" aria-label="Find anything near you">
+        <div class="hero-slider">
+          <div class="slide"></div><div class="slide"></div><div class="slide"></div>
+          <div class="slide"></div><div class="slide"></div><div class="slide"></div>
+          <div class="slide"></div><div class="slide"></div><div class="slide"></div>
+          <div class="slide"></div>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content-wrapper">
+          <span class="hero-tagline"><i class="fas fa-shield-alt" style="margin-right:4px;"></i> Nigeria's Most Trusted Marketplace</span>
+          <div class="hero-rotating-text">
+            <span class="static-text">Find</span>
+            <span class="dynamic-text-wrapper">
+              <span class="dynamic-text">anything</span>
+              <span class="dynamic-text">your dream home</span>
+              <span class="dynamic-text">a new car</span>
+              <span class="dynamic-text">great deals</span>
+              <span class="dynamic-text">local services</span>
+              <span class="dynamic-text">furniture</span>
+              <span class="dynamic-text">electronics</span>
+              <span class="dynamic-text">fashion</span>
+              <span class="dynamic-text">land</span>
+              <span class="dynamic-text">apartments</span>
+            </span>
+            <span class="static-text">near you.</span>
+          </div>
+          <p class="hero-subtitle">Nigeria's most trusted online marketplace – buy, sell and trade locally, scam‑free.</p>
+          <div class="search-wrapper" id="searchWrapper">
+            <div class="search-box" role="search">
+              <i class="fas fa-search" aria-hidden="true"></i>
+              <input type="text" id="searchInput" placeholder="Search for anything..." autocomplete="off" aria-label="Search for items">
+              <button class="search-location-btn" id="searchLocationBtn" title="Use my location"><i class="fas fa-location-arrow"></i></button>
+              <button id="searchBtn" aria-label="Search"><i class="fas fa-arrow-right" style="margin-right:4px;" aria-hidden="true"></i> Search</button>
+            </div>
+            <div class="autocomplete-dropdown" id="acDropdown" role="listbox"></div>
+          </div>
+          <div class="trending-keywords" id="trendingKeywords" aria-label="Trending searches">
+            <span class="keyword"><i class="fas fa-fire" aria-hidden="true"></i> Loading...</span>
+          </div>
+        </div>
+        <div class="hero-indicators">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+      </section>
+
+      <!-- Desktop only side promos -->
+      <div class="side-stack">
+        <div class="side-promo" style="background: radial-gradient(circle at 70% 30%, #1f5d8a, #0a1b2b);">
+          <h3>Top Sellers</h3>
+          <p>Shop from verified stores across Northern Nigeria</p>
+          <a href="/stores.html">Explore Stores →</a>
+        </div>
+        <div class="side-promo" style="background: radial-gradient(circle at 30% 70%, #4a6f8f, #0d1f30);">
+          <h3>List for Free</h3>
+          <p>Zero commission. Keep every naira.</p>
+          <a href="/post.html">Post Now →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== MOBILE HERO (shown below 1024px) ===== -->
+    <section class="hero mobile-hero" style="display:none;" aria-label="Find anything near you">
       <div class="hero-slider">
         <div class="slide"></div><div class="slide"></div><div class="slide"></div>
         <div class="slide"></div><div class="slide"></div><div class="slide"></div>
@@ -341,27 +766,21 @@
           <span class="static-text">near you.</span>
         </div>
         <p class="hero-subtitle">Nigeria's most trusted online marketplace – buy, sell and trade locally, scam‑free.</p>
-        <div class="search-wrapper" id="searchWrapper">
+        <div class="search-wrapper" id="searchWrapperMobile">
           <div class="search-box" role="search">
             <i class="fas fa-search" aria-hidden="true"></i>
-            <input type="text" id="searchInput" placeholder="Search for anything..." autocomplete="off" aria-label="Search for items">
-            <button class="search-location-btn" id="searchLocationBtn" title="Use my location"><i class="fas fa-location-arrow"></i></button>
-            <button id="searchBtn" aria-label="Search"><i class="fas fa-arrow-right" style="margin-right:4px;" aria-hidden="true"></i> Search</button>
+            <input type="text" id="searchInputMobile" placeholder="Search for anything..." autocomplete="off">
+            <button class="search-location-btn" id="searchLocationBtnMobile" title="Use my location"><i class="fas fa-location-arrow"></i></button>
+            <button id="searchBtnMobile" aria-label="Search"><i class="fas fa-arrow-right" style="margin-right:4px;" aria-hidden="true"></i> Search</button>
           </div>
-          <div class="autocomplete-dropdown" id="acDropdown" role="listbox"></div>
         </div>
-        <div class="trending-keywords" id="trendingKeywords" aria-label="Trending searches">
+        <div class="trending-keywords" id="trendingKeywordsMobile" aria-label="Trending searches">
           <span class="keyword"><i class="fas fa-fire" aria-hidden="true"></i> Loading...</span>
         </div>
       </div>
-      <div class="hero-indicators">
-        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-        <span class="dot"></span>
-      </div>
     </section>
 
+    <!-- ===== PROMO CAROUSEL ===== -->
     <div class="promo-carousel">
       <div class="promo-card animate-promo">
         <h3>List for Free</h3>
@@ -380,6 +799,7 @@
       </div>
     </div>
 
+    <!-- ===== CATEGORIES ===== -->
     <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap;">
       <h2 class="section-title" style="margin-top:4px;">Categories</h2>
       <a href="/categories.html" style="color:var(--text-secondary); font-weight:500; font-size:0.8rem; text-decoration:none;">View all</a>
@@ -413,6 +833,42 @@
 
   </div>
 
+  <!-- ===== DESKTOP HOVER PREVIEW ===== -->
+  <div class="hover-preview" id="hoverPreview">
+    <img class="hp-img" id="hpImage" src="" alt="">
+    <div class="hp-title" id="hpTitle">—</div>
+    <div class="hp-price" id="hpPrice">—</div>
+    <div class="hp-meta">
+      <span id="hpLocation">—</span>
+      <span id="hpSeller">—</span>
+    </div>
+    <div class="hp-hint"><i class="fas fa-mouse-pointer"></i> Click to view full details</div>
+  </div>
+
+  <!-- ===== DESKTOP RECENTLY VIEWED ===== -->
+  <div class="recently-viewed-panel" id="recentlyViewedPanel">
+    <div class="rv-header">
+      <h4><i class="fas fa-history"></i> Recently Viewed</h4>
+      <button class="rv-close" id="rvClose"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="rv-list" id="rvList"></div>
+  </div>
+
+  <!-- ===== DESKTOP KEYBOARD HINT ===== -->
+  <div class="kbd-hint">
+    <button class="kbd-btn" id="kbdBtn" title="Keyboard shortcuts (?)"><i class="fas fa-keyboard"></i></button>
+  </div>
+  <div class="kbd-panel" id="kbdPanel">
+    <h5>Keyboard Shortcuts</h5>
+    <div class="kbd-row"><span>Focus search</span><kbd>/</kbd></div>
+    <div class="kbd-row"><span>Go home</span><kbd>H</kbd></div>
+    <div class="kbd-row"><span>Categories</span><kbd>C</kbd></div>
+    <div class="kbd-row"><span>Favorites</span><kbd>F</kbd></div>
+    <div class="kbd-row"><span>Post listing</span><kbd>P</kbd></div>
+    <div class="kbd-row"><span>Close panel</span><kbd>Esc</kbd></div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
@@ -519,7 +975,7 @@
   <script src="/js/main.js"></script>
   <script>
     // ============================================
-    // STATE DROPDOWN — INLINE, INDEPENDENT LOGIC
+    // STATE DROPDOWN — INLINE
     // ============================================
     (function initStateDropdownInline() {
       const nigerianStates = [
@@ -535,28 +991,19 @@
       const searchInput = document.getElementById('stateSearchInput');
       const optionsList = document.getElementById('stateOptionsList');
       const hiddenInput = document.getElementById('signupState');
-
-      if (!selectContainer || !trigger || !searchInput || !optionsList || !hiddenInput) {
-        console.warn('State dropdown elements not found');
-        return;
-      }
-
-      console.log('✅ State dropdown initialized with', nigerianStates.length, 'states');
+      if (!selectContainer || !trigger || !searchInput || !optionsList || !hiddenInput) return;
 
       function renderOptions(filter = '') {
         const filtered = nigerianStates.filter(state =>
           state.toLowerCase().includes(filter.toLowerCase())
         );
-
         if (filtered.length === 0) {
           optionsList.innerHTML = '<li style="text-align:center;color:#94A3B8;">No state found</li>';
           return;
         }
-
         optionsList.innerHTML = filtered.map(state =>
           `<li data-value="${state}">${state}</li>`
         ).join('');
-
         optionsList.querySelectorAll('li').forEach(li => {
           li.addEventListener('click', function(e) {
             e.stopPropagation();
@@ -569,48 +1016,151 @@
           });
         });
       }
-
       renderOptions();
 
-      // Toggle dropdown
       trigger.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
-        const isActive = selectContainer.classList.contains('active');
-        // Close all other custom selects if any
-        document.querySelectorAll('.custom-select.active').forEach(el => {
-          if (el !== selectContainer) el.classList.remove('active');
-        });
         selectContainer.classList.toggle('active');
-        if (!isActive) {
+        if (selectContainer.classList.contains('active')) {
           setTimeout(() => searchInput.focus(), 50);
         }
       });
-
-      // Search filter
-      searchInput.addEventListener('input', function(e) {
-        e.stopPropagation();
-        renderOptions(this.value);
-      });
-
-      searchInput.addEventListener('click', function(e) {
-        e.stopPropagation();
-      });
-
-      // Close on outside click
+      searchInput.addEventListener('input', function(e) { e.stopPropagation(); renderOptions(this.value); });
+      searchInput.addEventListener('click', function(e) { e.stopPropagation(); });
       document.addEventListener('click', function(e) {
-        if (!selectContainer.contains(e.target)) {
-          selectContainer.classList.remove('active');
-        }
+        if (!selectContainer.contains(e.target)) selectContainer.classList.remove('active');
       });
-
-      // Close on Escape
       document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-          selectContainer.classList.remove('active');
-        }
+        if (e.key === 'Escape') selectContainer.classList.remove('active');
       });
     })();
+
+    // ============================================
+    // MOBILE VS DESKTOP HERO TOGGLE
+    // ============================================
+    function toggleHeroLayout() {
+      const isDesktop = window.innerWidth >= 1024;
+      const desktopHeroWrap = document.querySelector('.hero-side-promos');
+      const mobileHero = document.querySelector('.mobile-hero');
+      if (desktopHeroWrap) desktopHeroWrap.style.display = isDesktop ? 'grid' : 'none';
+      if (mobileHero) mobileHero.style.display = isDesktop ? 'none' : 'block';
+    }
+    toggleHeroLayout();
+    window.addEventListener('resize', toggleHeroLayout);
+
+    // ============================================
+    // DESKTOP HOVER QUICK-VIEW
+    // ============================================
+    const hoverPreview = document.getElementById('hoverPreview');
+    let hoverTimer = null;
+
+    function attachHoverPreview() {
+      if (window.innerWidth < 1024) return;
+      document.querySelectorAll('.listing-card').forEach(card => {
+        card.addEventListener('mouseenter', function(e) {
+          const id = this.dataset.id;
+          if (!id) return;
+          const products = getProductsSync();
+          const product = products.find(p => String(p.id) === String(id));
+          if (!product) return;
+
+          clearTimeout(hoverTimer);
+          hoverTimer = setTimeout(() => {
+            const img = (product.images && product.images[0]) || 'https://placehold.co/300x200?text=Zaure';
+            document.getElementById('hpImage').src = img;
+            document.getElementById('hpTitle').textContent = product.title;
+            const price = product.price >= 1e6 ? `₦${(product.price/1e6).toFixed(1)}M` : `₦${product.price.toLocaleString()}`;
+            document.getElementById('hpPrice').textContent = price;
+            document.getElementById('hpLocation').innerHTML = `<i class="fas fa-map-pin"></i> ${product.location || 'Nigeria'}`;
+            document.getElementById('hpSeller').innerHTML = `<i class="fas fa-store"></i> ${product.seller?.name || 'Zaure'}`;
+
+            const rect = this.getBoundingClientRect();
+            const previewWidth = 320;
+            let left = rect.right + 12;
+            let top = rect.top;
+            if (left + previewWidth > window.innerWidth - 12) left = rect.left - previewWidth - 12;
+            if (top + 320 > window.innerHeight - 12) top = window.innerHeight - 320 - 12;
+            if (top < 12) top = 12;
+            hoverPreview.style.left = left + 'px';
+            hoverPreview.style.top = top + 'px';
+            hoverPreview.classList.add('show');
+          }, 550);
+        });
+        card.addEventListener('mouseleave', function() {
+          clearTimeout(hoverTimer);
+          hoverPreview.classList.remove('show');
+        });
+      });
+    }
+
+    // ============================================
+    // RECENTLY VIEWED PANEL
+    // ============================================
+    function loadRecentlyViewed() {
+      const panel = document.getElementById('recentlyViewedPanel');
+      const list = document.getElementById('rvList');
+      if (!panel || !list) return;
+      const ids = JSON.parse(localStorage.getItem('zaure_recently_viewed') || '[]');
+      if (ids.length === 0) {
+        panel.classList.remove('show');
+        return;
+      }
+      const products = getProductsSync();
+      const items = ids.map(id => products.find(p => String(p.id) === String(id))).filter(Boolean).slice(0, 5);
+      if (items.length === 0) { panel.classList.remove('show'); return; }
+      list.innerHTML = items.map(p => {
+        const price = p.price >= 1e6 ? `₦${(p.price/1e6).toFixed(1)}M` : `₦${p.price.toLocaleString()}`;
+        const img = (p.images && p.images[0]) || 'https://placehold.co/60x60?text=Zaure';
+        return `
+          <div class="rv-item" onclick="viewProduct('${p.id}')">
+            <img src="${img}" alt="${p.title}">
+            <div class="rv-info">
+              <div class="rv-title">${p.title}</div>
+              <div class="rv-price">${price}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+      panel.classList.add('show');
+    }
+
+    document.getElementById('rvClose')?.addEventListener('click', function() {
+      document.getElementById('recentlyViewedPanel').classList.remove('show');
+    });
+
+    // ============================================
+    // KEYBOARD SHORTCUTS
+    // ============================================
+    document.getElementById('kbdBtn')?.addEventListener('click', function(e) {
+      e.stopPropagation();
+      document.getElementById('kbdPanel').classList.toggle('show');
+    });
+    document.addEventListener('click', function(e) {
+      const panel = document.getElementById('kbdPanel');
+      if (panel && !panel.contains(e.target) && e.target.id !== 'kbdBtn' && !e.target.closest('#kbdBtn')) {
+        panel.classList.remove('show');
+      }
+    });
+    document.addEventListener('keydown', function(e) {
+      // Ignore if typing in an input
+      if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName)) return;
+
+      const key = e.key.toLowerCase();
+      if (key === '/') {
+        e.preventDefault();
+        const si = document.getElementById('searchInput') || document.getElementById('searchInputMobile');
+        if (si) si.focus();
+      } else if (key === 'h') { window.location.href = '/'; }
+      else if (key === 'c') { window.location.href = '/categories.html'; }
+      else if (key === 'f') { window.location.href = '/favorites.html'; }
+      else if (key === 'p') { window.location.href = '/post.html'; }
+      else if (key === '?') { document.getElementById('kbdPanel')?.classList.toggle('show'); }
+      else if (e.key === 'Escape') {
+        document.getElementById('kbdPanel')?.classList.remove('show');
+        document.getElementById('signupModal')?.classList.remove('active');
+      }
+    });
 
     // ============================================
     // PAGE INIT
@@ -648,26 +1198,31 @@
       `).join('');
 
       const keywords = await loadTrendingKeywords();
-      const keywordsContainer = document.getElementById('trendingKeywords');
-      keywordsContainer.innerHTML = keywords.map(k => `
+      const keywordsHTML = keywords.map(k => `
         <span class="keyword" onclick="document.getElementById('searchInput').value='${k}';document.getElementById('searchBtn').click();">
           <i class="fas fa-fire"></i> ${k}
         </span>
       `).join('');
+      const kwDesktop = document.getElementById('trendingKeywords');
+      const kwMobile = document.getElementById('trendingKeywordsMobile');
+      if (kwDesktop) kwDesktop.innerHTML = keywordsHTML;
+      if (kwMobile) kwMobile.innerHTML = keywordsHTML;
 
       loadUser();
       initTheme();
       updateFavoriteBadge();
 
+      // Attach hover preview after products are rendered
+      setTimeout(attachHoverPreview, 300);
+      loadRecentlyViewed();
+
       document.getElementById('boostNowBtn')?.addEventListener('click', function() {
         const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|Opera Mini|IEMobile/i.test(navigator.userAgent);
         const phoneNumber = '2349042339411';
         const message = encodeURIComponent('Hello Zaure! I want to boost my listing.');
-        if (isMobile) {
-          window.location.href = `https://wa.me/${phoneNumber}?text=${message}`;
-        } else {
-          window.location.href = `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${message}`;
-        }
+        window.location.href = isMobile
+          ? `https://wa.me/${phoneNumber}?text=${message}`
+          : `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${message}`;
       });
     });
   </script>
