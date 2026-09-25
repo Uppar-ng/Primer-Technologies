@@ -268,50 +268,72 @@
     }
 
     /* ============================================
-       MOBILE-ONLY FEATURES
+       MOBILE WHATSAPP CONTACT STRIP
        ============================================ */
+    .mobile-wa-strip {
+      display: none;
+    }
+    @media (max-width: 1023px) {
+      .mobile-wa-strip {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: linear-gradient(135deg, #25D366, #1DA851);
+        color: white;
+        padding: 12px 14px;
+        border-radius: 16px;
+        margin: 14px 0;
+        text-decoration: none;
+        box-shadow: 0 6px 20px rgba(37,211,102,0.3);
+      }
+      .mobile-wa-strip .wa-icon {
+        width: 40px; height: 40px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.2);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 1.3rem;
+        flex-shrink: 0;
+      }
+      .mobile-wa-strip .wa-text {
+        flex: 1;
+      }
+      .mobile-wa-strip .wa-text strong {
+        display: block;
+        font-size: 0.9rem;
+        font-weight: 700;
+        margin-bottom: 2px;
+      }
+      .mobile-wa-strip .wa-text span {
+        font-size: 0.72rem;
+        opacity: 0.9;
+      }
+      .mobile-wa-strip .wa-arrow {
+        font-size: 1.1rem;
+        opacity: 0.7;
+      }
+    }
 
-    /* Prevent iOS auto-zoom on inputs */
+    /* Prevent iOS auto-zoom */
     @media (max-width: 1023px) {
       input, select, textarea { font-size: 16px !important; }
     }
-
-    /* Safe area support */
     @media (max-width: 1023px) {
-      .bottom-nav {
-        padding-bottom: calc(8px + env(safe-area-inset-bottom)) !important;
-      }
-      body {
-        padding-bottom: calc(80px + env(safe-area-inset-bottom)) !important;
-      }
+      .bottom-nav { padding-bottom: calc(8px + env(safe-area-inset-bottom)) !important; }
+      body { padding-bottom: calc(80px + env(safe-area-inset-bottom)) !important; }
     }
-
-    /* Tap-scale animation on mobile */
     @media (max-width: 1023px) {
-      .listing-card:active,
-      .category-card:active,
-      .storefront-card:active {
+      .listing-card:active, .category-card:active, .storefront-card:active {
         transform: scale(0.97) !important;
         transition: transform 0.08s ease;
       }
       .nav-actions .icon-btn:active,
       .bottom-nav .nav-item:active,
-      .post-btn:active {
-        transform: scale(0.92);
-      }
-    }
-
-    /* Mobile trending keyword chips */
-    @media (max-width: 1023px) {
-      .hero .trending-keywords { margin-top: 12px; }
-      .hero .trending-keywords .keyword { font-size: 0.72rem; padding: 7px 14px; }
+      .post-btn:active { transform: scale(0.92); }
     }
 
     /* ============================================
-       DESKTOP-ONLY FEATURES
+       DESKTOP TRENDING BAR
        ============================================ */
-
-    /* Trending bar */
     .desktop-trending-bar { display: none; }
     @media (min-width: 1024px) {
       .desktop-trending-bar {
@@ -340,6 +362,88 @@
       .desktop-trending-bar .trend-items a:hover { color: #D4B87A; }
       .desktop-trending-bar .trend-items a:not(:last-child)::after {
         content: '·'; margin-left: 16px; color: #64748B;
+      }
+    }
+
+    /* ============================================
+       DESKTOP ADS SECTION (side panel)
+       ============================================ */
+    .hero-side-promos { display: none; }
+    @media (min-width: 1024px) {
+      .hero-side-promos {
+        display: grid; grid-template-columns: 2fr 1fr;
+        gap: 16px; margin-bottom: 16px;
+      }
+      .hero-side-promos .hero { margin: 0; }
+      .hero-side-promos .side-stack {
+        display: flex; flex-direction: column; gap: 16px;
+      }
+      .hero-side-promos .ad-label {
+        font-size: 0.65rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: var(--text-secondary);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: -8px;
+      }
+      .hero-side-promos .ad-card {
+        flex: 1;
+        border-radius: 20px;
+        padding: 20px;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        cursor: pointer;
+        transition: transform 0.3s, box-shadow 0.3s;
+        position: relative;
+        overflow: hidden;
+        min-height: 140px;
+      }
+      .hero-side-promos .ad-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+      }
+      .hero-side-promos .ad-card .ad-tag {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: rgba(255,255,255,0.18);
+        padding: 2px 8px;
+        border-radius: 20px;
+        font-size: 0.6rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+      .hero-side-promos .ad-card h3 {
+        font-size: 1.05rem;
+        font-weight: 700;
+        margin-bottom: 4px;
+        line-height: 1.2;
+      }
+      .hero-side-promos .ad-card p {
+        font-size: 0.78rem;
+        opacity: 0.9;
+        margin-bottom: 12px;
+        line-height: 1.4;
+      }
+      .hero-side-promos .ad-card a {
+        color: white;
+        text-decoration: none;
+        font-size: 0.72rem;
+        font-weight: 700;
+        border: 1px solid rgba(255,255,255,0.4);
+        padding: 6px 14px;
+        border-radius: 40px;
+        align-self: flex-start;
+        transition: background 0.2s;
+      }
+      .hero-side-promos .ad-card a:hover {
+        background: rgba(255,255,255,0.15);
       }
     }
 
@@ -476,43 +580,7 @@
       .promo-card:hover { transform: translateY(-4px); }
     }
 
-    /* Desktop hero side promos */
-    .hero-side-promos { display: none; }
-    @media (min-width: 1024px) {
-      .hero-side-promos {
-        display: grid; grid-template-columns: 2fr 1fr;
-        gap: 16px; margin-bottom: 16px;
-      }
-      .hero-side-promos .hero { margin: 0; }
-      .hero-side-promos .side-stack {
-        display: flex; flex-direction: column; gap: 16px;
-      }
-      .hero-side-promos .side-promo {
-        flex: 1; border-radius: 20px; padding: 20px;
-        color: white; display: flex; flex-direction: column;
-        justify-content: center; cursor: pointer;
-        transition: transform 0.3s;
-      }
-      .hero-side-promos .side-promo:hover { transform: translateY(-3px); }
-      .hero-side-promos .side-promo h3 {
-        font-size: 1.1rem; font-weight: 700; margin-bottom: 4px;
-      }
-      .hero-side-promos .side-promo p {
-        font-size: 0.8rem; opacity: 0.85; margin-bottom: 10px;
-      }
-      .hero-side-promos .side-promo a {
-        color: white; text-decoration: none;
-        font-size: 0.75rem; font-weight: 600;
-        border: 1px solid rgba(255,255,255,0.3);
-        padding: 6px 14px; border-radius: 40px;
-        align-self: flex-start; transition: background 0.2s;
-      }
-      .hero-side-promos .side-promo a:hover { background: rgba(255,255,255,0.15); }
-    }
-
-    /* ============================================
-       PULL-TO-REFRESH (mobile)
-       ============================================ */
+    /* PTR indicator */
     .ptr-indicator {
       display: none; position: fixed; top: 0; left: 0; right: 0;
       height: 0; background: #1a3650; color: white;
@@ -521,62 +589,24 @@
       transition: height 0.2s;
     }
     @media (max-width: 1023px) {
-      .ptr-indicator {
-        display: flex;
-      }
-      .ptr-indicator.active {
-        height: 50px;
-      }
-    }
-
-    /* ============================================
-       MOBILE BOTTOM SHEET FILTERS
-       ============================================ */
-    .bottom-sheet {
-      display: none; position: fixed;
-      bottom: 0; left: 0; right: 0;
-      background: var(--surface);
-      border-radius: 24px 24px 0 0;
-      z-index: 500; padding: 24px 20px 32px;
-      box-shadow: 0 -8px 40px rgba(0,0,0,0.2);
-      transform: translateY(100%);
-      transition: transform 0.3s ease;
-      max-height: 80vh; overflow-y: auto;
-    }
-    @media (max-width: 1023px) {
-      .bottom-sheet { display: block; }
-      .bottom-sheet.show { transform: translateY(0); }
-    }
-    .bottom-sheet .bs-handle {
-      width: 40px; height: 4px;
-      background: var(--border); border-radius: 4px;
-      margin: 0 auto 16px;
-    }
-    .bottom-sheet h4 {
-      font-size: 1.1rem; font-weight: 700;
-      color: var(--text); margin-bottom: 16px;
+      .ptr-indicator { display: flex; }
+      .ptr-indicator.active { height: 50px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ===== PULL-TO-REFRESH INDICATOR ===== -->
+  <!-- Pull-to-refresh indicator -->
   <div class="ptr-indicator" id="ptrIndicator">
     <i class="fas fa-spinner fa-spin" style="margin-right:8px;"></i> Release to refresh
   </div>
 
-  <!-- ===== DESKTOP TRENDING BAR ===== -->
+  <!-- Desktop trending bar -->
   <div class="desktop-trending-bar">
     <div class="container">
       <span class="trend-label"><i class="fas fa-fire"></i> Trending now</span>
-      <div class="trend-items">
-        <a href="/category.html?slug=fashion">Crocs</a>
-        <a href="/category.html?slug=electronics">JBL Speaker</a>
-        <a href="/category.html?slug=electronics">Acer Laptop</a>
-        <a href="/category.html?slug=home-kitchen">Kitchen Knife Set</a>
-        <a href="/category.html?slug=beauty-health">Al Haramain Attar</a>
-        <a href="/category.html?slug=food-drinks">Natural Honey</a>
-        <a href="/category.html?slug=fashion">Hanes Boxers</a>
+      <div class="trend-items" id="desktopTrendingItems">
+        <a href="/category.html?slug=fashion">Loading...</a>
       </div>
     </div>
   </div>
@@ -611,7 +641,7 @@
 
   <div class="container">
 
-    <!-- ===== DESKTOP HERO + SIDE PROMOS ===== -->
+    <!-- ===== DESKTOP HERO + ADS ===== -->
     <div class="hero-side-promos">
       <section class="hero" aria-label="Find anything near you">
         <div class="hero-slider">
@@ -661,16 +691,20 @@
         </div>
       </section>
 
+      <!-- Desktop Ads Section -->
       <div class="side-stack">
-        <div class="side-promo" style="background: radial-gradient(circle at 70% 30%, #1f5d8a, #0a1b2b);">
-          <h3>Top Sellers</h3>
-          <p>Shop from verified stores across Northern Nigeria</p>
-          <a href="/stores.html">Explore Stores →</a>
+        <div class="ad-label"><i class="fas fa-bullhorn"></i> Sponsored</div>
+        <div class="ad-card" style="background: radial-gradient(circle at 70% 30%, #1f5d8a, #0a1b2b);" onclick="window.location.href='/stores.html'">
+          <span class="ad-tag">Ad</span>
+          <h3>Zaure Home Essentials</h3>
+          <p>Premium kitchenware & home goods delivered across Northern Nigeria</p>
+          <a href="/stores.html">Shop Now →</a>
         </div>
-        <div class="side-promo" style="background: radial-gradient(circle at 30% 70%, #4a6f8f, #0d1f30);">
-          <h3>List for Free</h3>
-          <p>Zero commission. Keep every naira.</p>
-          <a href="/post.html">Post Now →</a>
+        <div class="ad-card" style="background: radial-gradient(circle at 30% 70%, #4a6f8f, #0d1f30);" onclick="window.location.href='/post.html'">
+          <span class="ad-tag">Ad</span>
+          <h3>Sell on Zaure</h3>
+          <p>Zero commission. 5 free listings. Reach thousands of buyers.</p>
+          <a href="/post.html">Start Selling →</a>
         </div>
       </div>
     </div>
@@ -715,6 +749,16 @@
         </div>
       </div>
     </section>
+
+    <!-- ===== MOBILE WHATSAPP CONTACT STRIP ===== -->
+    <a href="https://wa.me/2349042339411?text=Hello%20Zaure%2C%20I%20want%20to%20order%20or%20report%20something." target="_blank" class="mobile-wa-strip">
+      <div class="wa-icon"><i class="fab fa-whatsapp"></i></div>
+      <div class="wa-text">
+        <strong>Order or Report via WhatsApp</strong>
+        <span>Tap to chat with us — +234 904 233 9411</span>
+      </div>
+      <div class="wa-arrow"><i class="fas fa-chevron-right"></i></div>
+    </a>
 
     <!-- ===== PROMO CAROUSEL ===== -->
     <div class="promo-carousel">
@@ -768,7 +812,7 @@
 
   </div>
 
-  <!-- ===== DESKTOP HOVER PREVIEW ===== -->
+  <!-- Hover preview, Recently viewed, Keyboard panels -->
   <div class="hover-preview" id="hoverPreview">
     <img class="hp-img" id="hpImage" src="" alt="">
     <div class="hp-title" id="hpTitle">—</div>
@@ -780,7 +824,6 @@
     <div class="hp-hint"><i class="fas fa-mouse-pointer"></i> Click to view full details</div>
   </div>
 
-  <!-- ===== DESKTOP RECENTLY VIEWED ===== -->
   <div class="recently-viewed-panel" id="recentlyViewedPanel">
     <div class="rv-header">
       <h4><i class="fas fa-history"></i> Recently Viewed</h4>
@@ -789,7 +832,6 @@
     <div class="rv-list" id="rvList"></div>
   </div>
 
-  <!-- ===== DESKTOP KEYBOARD HINT ===== -->
   <div class="kbd-hint">
     <button class="kbd-btn" id="kbdBtn" title="Keyboard shortcuts (?)"><i class="fas fa-keyboard"></i></button>
   </div>
@@ -804,7 +846,7 @@
     <div class="kbd-row"><span>Close panel</span><kbd>Esc</kbd></div>
   </div>
 
-  <!-- ===== FOOTER ===== -->
+  <!-- Footer, Bottom nav, Signup modal -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
@@ -926,7 +968,6 @@
       const optionsList = document.getElementById('stateOptionsList');
       const hiddenInput = document.getElementById('signupState');
       if (!selectContainer || !trigger || !searchInput || !optionsList || !hiddenInput) return;
-
       function renderOptions(filter = '') {
         const filtered = nigerianStates.filter(s => s.toLowerCase().includes(filter.toLowerCase()));
         optionsList.innerHTML = filtered.length
@@ -973,11 +1014,95 @@
     window.addEventListener('resize', toggleHeroLayout);
 
     // ============================================
+    // SEARCH — DESKTOP & MOBILE
+    // ============================================
+    function performSearch(query) {
+      if (!query) return;
+      const trimmed = query.trim();
+      if (!trimmed) return;
+
+      // Save search for search.html page
+      const products = getProductsSync();
+      const q = trimmed.toLowerCase();
+      const filtered = products.filter(p =>
+        (p.title && p.title.toLowerCase().includes(q)) ||
+        (p.category && p.category.toLowerCase().includes(q)) ||
+        (p.location && p.location.toLowerCase().includes(q)) ||
+        (p.tags && p.tags.some(t => t.toLowerCase().includes(q)))
+      );
+      localStorage.setItem('zaure_search_results', JSON.stringify(filtered));
+      localStorage.setItem('zaure_search_query', trimmed);
+      window.location.href = '/search.html';
+    }
+
+    function initSearch() {
+      // Desktop
+      const inputD = document.getElementById('searchInput');
+      const btnD = document.getElementById('searchBtn');
+      const wrapperD = document.getElementById('searchWrapper');
+      const acD = document.getElementById('acDropdown');
+
+      // Mobile
+      const inputM = document.getElementById('searchInputMobile');
+      const btnM = document.getElementById('searchBtnMobile');
+
+      if (inputD && btnD) {
+        btnD.addEventListener('click', e => {
+          e.preventDefault();
+          performSearch(inputD.value);
+        });
+        inputD.addEventListener('keydown', e => {
+          if (e.key === 'Enter') { e.preventDefault(); performSearch(inputD.value); }
+        });
+        // Autocomplete
+        inputD.addEventListener('input', async function() {
+          const query = this.value.trim();
+          if (query.length < 2) {
+            if (acD) acD.innerHTML = '';
+            if (wrapperD) wrapperD.classList.remove('show-autocomplete');
+            return;
+          }
+          const products = await loadProducts();
+          const results = products.filter(p =>
+            (p.title && p.title.toLowerCase().includes(query.toLowerCase())) ||
+            (p.category && p.category.toLowerCase().includes(query.toLowerCase()))
+          ).slice(0, 5);
+          if (acD) {
+            acD.innerHTML = results.length === 0
+              ? `<div class="ac-item" style="justify-content:center;color:var(--text-secondary);">No results found</div>`
+              : results.map(p => {
+                  const img = (p.images && p.images[0]) || 'https://placehold.co/36x36?text=Z';
+                  return `<div class="ac-item" onclick="viewProduct('${p.id}')">
+                    <img src="${img}" alt="">
+                    <span>${p.title}</span>
+                    <small>${p.category}</small>
+                  </div>`;
+                }).join('');
+            if (wrapperD) wrapperD.classList.add('show-autocomplete');
+          }
+        });
+        document.addEventListener('click', e => {
+          if (wrapperD && !wrapperD.contains(e.target)) wrapperD.classList.remove('show-autocomplete');
+        });
+      }
+
+      if (inputM && btnM) {
+        btnM.addEventListener('click', e => {
+          e.preventDefault();
+          performSearch(inputM.value);
+        });
+        inputM.addEventListener('keydown', e => {
+          if (e.key === 'Enter') { e.preventDefault(); performSearch(inputM.value); }
+        });
+      }
+    }
+    initSearch();
+
+    // ============================================
     // DESKTOP HOVER PREVIEW
     // ============================================
     const hoverPreview = document.getElementById('hoverPreview');
     let hoverTimer = null;
-
     function attachHoverPreview() {
       if (window.innerWidth < 1024) return;
       document.querySelectorAll('.listing-card').forEach(card => {
@@ -1029,7 +1154,7 @@
       if (items.length === 0) { panel.classList.remove('show'); return; }
       list.innerHTML = items.map(p => {
         const price = p.price >= 1e6 ? `₦${(p.price/1e6).toFixed(1)}M` : `₦${p.price.toLocaleString()}`;
-        const img = (p.images && p.images[0]) || 'https://placehold.co/60x60?text=Zaure';
+        const img = (p.images && p.images[0]) || 'https://placehold.co/60x60?text=Z';
         return `<div class="rv-item" onclick="viewProduct('${p.id}')">
           <img src="${img}" alt="${p.title}">
           <div class="rv-info">
@@ -1045,7 +1170,7 @@
     });
 
     // ============================================
-    // KEYBOARD SHORTCUTS (desktop)
+    // KEYBOARD SHORTCUTS
     // ============================================
     document.getElementById('kbdBtn')?.addEventListener('click', e => {
       e.stopPropagation();
@@ -1071,7 +1196,7 @@
     });
 
     // ============================================
-    // MOBILE HAPTIC FEEDBACK
+    // MOBILE HAPTIC
     // ============================================
     function vibrate(ms = 10) {
       if (window.innerWidth < 1024 && navigator.vibrate) navigator.vibrate(ms);
@@ -1087,38 +1212,25 @@
     // ============================================
     (function initPullToRefresh() {
       if (window.innerWidth >= 1024) return;
-      let startY = 0;
-      let pulling = false;
+      let startY = 0, pulling = false;
       const indicator = document.getElementById('ptrIndicator');
-
       document.addEventListener('touchstart', e => {
-        if (window.scrollY === 0) {
-          startY = e.touches[0].pageY;
-          pulling = true;
-        }
+        if (window.scrollY === 0) { startY = e.touches[0].pageY; pulling = true; }
       }, { passive: true });
-
       document.addEventListener('touchmove', e => {
         if (!pulling) return;
-        const y = e.touches[0].pageY;
-        const diff = y - startY;
+        const diff = e.touches[0].pageY - startY;
         if (diff > 80 && indicator) {
           indicator.classList.add('active');
           indicator.innerHTML = '<i class="fas fa-sync fa-spin" style="margin-right:8px;"></i> Release to refresh';
         }
       }, { passive: true });
-
       document.addEventListener('touchend', () => {
         if (!pulling) return;
-        const indicator = document.getElementById('ptrIndicator');
         if (indicator && indicator.classList.contains('active')) {
           indicator.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right:8px;"></i> Refreshing...';
           vibrate(20);
-          setTimeout(() => {
-            indicator.classList.remove('active');
-            indicator.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right:8px;"></i> Release to refresh';
-            window.location.reload();
-          }, 500);
+          setTimeout(() => { window.location.reload(); }, 500);
         }
         pulling = false;
       });
@@ -1128,23 +1240,22 @@
     // PAGE INIT
     // ============================================
     document.addEventListener('DOMContentLoaded', async function() {
+      // Categories
       const categories = await loadCategories();
-      const categoryGrid = document.getElementById('categoryGrid');
-      const limited = categories.slice(0, 6);
-      categoryGrid.innerHTML = limited.map(cat => `
+      document.getElementById('categoryGrid').innerHTML = categories.slice(0, 6).map(cat => `
         <div class="category-card" onclick="loadCategory('${cat.slug}')">
           <div class="icon-circle"><i class="${cat.icon}"></i></div>
           <h3>${cat.name}</h3>
         </div>
       `).join('');
 
+      // Products
       const products = await loadProducts();
       const userState = await getUserState();
-      const featured = recommendProducts(products, userState, 6);
-      renderListings(featured, 'featuredGrid');
-      const trending = recommendProducts(products, userState, 6);
-      renderListings(trending, 'listingGrid');
+      renderListings(recommendProducts(products, userState, 6), 'featuredGrid');
+      renderListings(recommendProducts(products, userState, 6), 'listingGrid');
 
+      // Sellers
       const sellers = await loadTopSellers();
       document.getElementById('topSellersGrid').innerHTML = sellers.map(s => `
         <div class="storefront-card" onclick="viewStore('${s.id}')">
@@ -1156,16 +1267,25 @@
         </div>
       `).join('');
 
+      // Trending — dynamic from trending.json
       const keywords = await loadTrendingKeywords();
-      const kwHTML = keywords.map(k => `
-        <span class="keyword" onclick="document.getElementById('searchInput').value='${k}';document.getElementById('searchBtn').click();">
+      const trendHTML = keywords.map(k => `
+        <span class="keyword" onclick="performSearch('${k}')">
           <i class="fas fa-fire"></i> ${k}
         </span>
       `).join('');
       const kwD = document.getElementById('trendingKeywords');
       const kwM = document.getElementById('trendingKeywordsMobile');
-      if (kwD) kwD.innerHTML = kwHTML;
-      if (kwM) kwM.innerHTML = kwHTML;
+      if (kwD) kwD.innerHTML = trendHTML;
+      if (kwM) kwM.innerHTML = trendHTML;
+
+      // Desktop trending bar — also dynamic
+      const bar = document.getElementById('desktopTrendingItems');
+      if (bar) {
+        bar.innerHTML = keywords.slice(0, 8).map(k => `
+          <a href="javascript:void(0)" onclick="performSearch('${k}')">${k}</a>
+        `).join('');
+      }
 
       loadUser();
       initTheme();
@@ -1174,6 +1294,7 @@
       setTimeout(attachHoverPreview, 300);
       loadRecentlyViewed();
 
+      // Boost
       document.getElementById('boostNowBtn')?.addEventListener('click', function() {
         const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|Opera Mini|IEMobile/i.test(navigator.userAgent);
         const phone = '2349042339411';
