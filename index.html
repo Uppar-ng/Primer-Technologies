@@ -85,7 +85,7 @@
     .hero-slider .slide:nth-child(1) { background-image: url('https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=1200&h=600&fit=crop&q=80'); animation-delay: 0s; }
     .hero-slider .slide:nth-child(2) { background-image: url('https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1200&h=600&fit=crop&q=80'); animation-delay: 1.8s; }
     .hero-slider .slide:nth-child(3) { background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&h=600&fit=crop&q=80'); animation-delay: 3.6s; }
-    .hero-slider .slide:nth-child(4) { background-image: url('https://www.dropbox.com/scl/fi/063exb2s2ncj9wbkzbycj/1790355129229.jpg?rlkey=u9gkqkysb2zeypi22d7ieokzn&st=wjl09o87&dl=0'); animation-delay: 5.4s; }
+    .hero-slider .slide:nth-child(4) { background-image: url('/assets/hero/zaure-primary.jpg'); animation-delay: 5.4s; }
     .hero-slider .slide:nth-child(5) { background-image: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?w=1200&h=600&fit=crop&q=80'); animation-delay: 7.2s; }
     .hero-slider .slide:nth-child(6) { background-image: url('https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1200&h=600&fit=crop&q=80'); animation-delay: 9.0s; }
     .hero-slider .slide:nth-child(7) { background-image: url('https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1200&h=600&fit=crop&q=80'); animation-delay: 10.8s; }
@@ -203,46 +203,28 @@
       }
     }
 
-    /* ============================================
-       MOBILE WHATSAPP STRIP — slim & elegant
-       ============================================ */
+    /* Mobile WhatsApp strip */
     .mobile-wa-strip { display: none; }
     @media (max-width: 1023px) {
       .mobile-wa-strip {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        background: var(--surface);
-        border: 1px solid var(--border);
-        color: var(--text);
-        padding: 10px 14px;
-        border-radius: 40px;
-        margin: 12px 0;
-        text-decoration: none;
+        display: flex; align-items: center; gap: 10px;
+        background: var(--surface); border: 1px solid var(--border);
+        color: var(--text); padding: 10px 14px; border-radius: 40px;
+        margin: 12px 0; text-decoration: none;
         box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-        position: relative;
-        overflow: hidden;
-        transition: transform 0.2s;
+        position: relative; overflow: hidden; transition: transform 0.2s;
       }
       .mobile-wa-strip::before {
-        content: '';
-        position: absolute;
-        top: 0; left: -100%;
+        content: ''; position: absolute; top: 0; left: -100%;
         width: 100%; height: 100%;
         background: linear-gradient(90deg, transparent, rgba(37,211,102,0.08), transparent);
         animation: waShimmer 3s infinite;
       }
-      @keyframes waShimmer {
-        0% { left: -100%; }
-        100% { left: 200%; }
-      }
+      @keyframes waShimmer { 0% { left: -100%; } 100% { left: 200%; } }
       .mobile-wa-strip:active { transform: scale(0.98); }
       .mobile-wa-strip .wa-dot {
-        width: 8px; height: 8px;
-        border-radius: 50%;
-        background: #25D366;
-        flex-shrink: 0;
-        box-shadow: 0 0 0 0 rgba(37,211,102,0.6);
+        width: 8px; height: 8px; border-radius: 50%; background: #25D366;
+        flex-shrink: 0; box-shadow: 0 0 0 0 rgba(37,211,102,0.6);
         animation: waPulse 2s infinite;
       }
       @keyframes waPulse {
@@ -251,38 +233,23 @@
         100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
       }
       .mobile-wa-strip .wa-icon {
-        width: 32px; height: 32px;
-        border-radius: 50%;
+        width: 32px; height: 32px; border-radius: 50%;
         background: linear-gradient(135deg, #25D366, #1DA851);
-        color: white;
-        display: flex; align-items: center; justify-content: center;
-        font-size: 1rem;
-        flex-shrink: 0;
-        position: relative;
-        z-index: 2;
+        color: white; display: flex; align-items: center; justify-content: center;
+        font-size: 1rem; flex-shrink: 0; position: relative; z-index: 2;
       }
       .mobile-wa-strip .wa-text {
-        flex: 1;
-        font-size: 0.82rem;
-        font-weight: 600;
-        color: var(--text);
-        position: relative;
-        z-index: 2;
+        flex: 1; font-size: 0.82rem; font-weight: 600;
+        color: var(--text); position: relative; z-index: 2;
       }
-      .mobile-wa-strip .wa-text strong {
-        color: #1a3650;
-        font-weight: 700;
-      }
+      .mobile-wa-strip .wa-text strong { color: #1a3650; font-weight: 700; }
       [data-theme="dark"] .mobile-wa-strip .wa-text strong { color: #D4B87A; }
       .mobile-wa-strip .wa-arrow {
-        color: var(--text-secondary);
-        font-size: 0.85rem;
-        position: relative;
-        z-index: 2;
+        color: var(--text-secondary); font-size: 0.85rem;
+        position: relative; z-index: 2;
       }
     }
 
-    /* Prevent iOS auto-zoom */
     @media (max-width: 1023px) {
       input, select, textarea { font-size: 16px !important; }
     }
@@ -300,16 +267,13 @@
       .post-btn:active { transform: scale(0.92); }
     }
 
-    /* ============================================
-       DESKTOP TRENDING BAR
-       ============================================ */
+    /* Desktop trending bar */
     .desktop-trending-bar { display: none; }
     @media (min-width: 1024px) {
       .desktop-trending-bar {
         display: block;
         background: linear-gradient(90deg, #1a3650, #0f2940);
-        color: #E5ECF3;
-        font-size: 0.72rem; padding: 6px 0;
+        color: #E5ECF3; font-size: 0.72rem; padding: 6px 0;
         overflow: hidden; white-space: nowrap;
       }
       .desktop-trending-bar .container { display: flex; align-items: center; gap: 20px; }
@@ -334,9 +298,7 @@
       }
     }
 
-    /* ============================================
-       DESKTOP ADS SECTION — animated product cards
-       ============================================ */
+    /* Desktop Ads */
     .hero-side-promos { display: none; }
     @media (min-width: 1024px) {
       .hero-side-promos {
@@ -355,108 +317,63 @@
         display: flex; align-items: center; gap: 6px;
         margin-bottom: -4px;
       }
-      .hero-side-promos .ad-label i {
-        color: #B49450;
-      }
+      .hero-side-promos .ad-label i { color: #B49450; }
       .hero-side-promos .ad-slot {
-        flex: 1;
-        border-radius: 20px;
-        overflow: hidden;
-        position: relative;
-        cursor: pointer;
-        min-height: 0;
+        flex: 1; border-radius: 20px; overflow: hidden;
+        position: relative; cursor: pointer; min-height: 0;
       }
       .hero-side-promos .ad-slot .ad-slide {
-        position: absolute;
-        top: 0; left: 0; width: 100%; height: 100%;
-        opacity: 0;
-        transform: scale(1.05);
+        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        opacity: 0; transform: scale(1.05);
         transition: opacity 0.8s ease, transform 1.2s ease;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        padding: 16px;
-        color: white;
-        background-size: cover;
-        background-position: center;
+        display: flex; flex-direction: column; justify-content: flex-end;
+        padding: 16px; color: white; background-size: cover; background-position: center;
       }
       .hero-side-promos .ad-slot .ad-slide::before {
-        content: '';
-        position: absolute;
-        inset: 0;
+        content: ''; position: absolute; inset: 0;
         background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.85) 100%);
         z-index: 1;
       }
-      .hero-side-promos .ad-slot .ad-slide.active {
-        opacity: 1;
-        transform: scale(1);
-      }
+      .hero-side-promos .ad-slot .ad-slide.active { opacity: 1; transform: scale(1); }
       .hero-side-promos .ad-slot .ad-slide .ad-tag {
-        position: absolute;
-        top: 12px;
-        right: 12px;
-        background: rgba(255,255,255,0.2);
-        backdrop-filter: blur(8px);
-        padding: 3px 10px;
-        border-radius: 20px;
-        font-size: 0.58rem;
-        font-weight: 700;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        z-index: 2;
+        position: absolute; top: 12px; right: 12px;
+        background: rgba(255,255,255,0.2); backdrop-filter: blur(8px);
+        padding: 3px 10px; border-radius: 20px;
+        font-size: 0.58rem; font-weight: 700;
+        letter-spacing: 1px; text-transform: uppercase; z-index: 2;
       }
       .hero-side-promos .ad-slot .ad-slide .ad-content {
-        position: relative;
-        z-index: 2;
+        position: relative; z-index: 2;
       }
       .hero-side-promos .ad-slot .ad-slide .ad-content .ad-cat {
-        font-size: 0.62rem;
-        font-weight: 700;
-        color: #D4B87A;
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-        margin-bottom: 4px;
+        font-size: 0.62rem; font-weight: 700; color: #D4B87A;
+        text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 4px;
       }
       .hero-side-promos .ad-slot .ad-slide .ad-content h3 {
-        font-size: 0.95rem;
-        font-weight: 700;
-        margin-bottom: 4px;
-        line-height: 1.25;
+        font-size: 0.95rem; font-weight: 700;
+        margin-bottom: 4px; line-height: 1.25;
       }
       .hero-side-promos .ad-slot .ad-slide .ad-content .ad-price {
-        font-size: 1.1rem;
-        font-weight: 800;
-        color: #D4B87A;
-        margin-bottom: 8px;
+        font-size: 1.1rem; font-weight: 800;
+        color: #D4B87A; margin-bottom: 8px;
       }
       .hero-side-promos .ad-slot .ad-slide .ad-content .ad-cta {
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-        font-size: 0.7rem;
-        font-weight: 700;
+        display: inline-flex; align-items: center; gap: 4px;
+        font-size: 0.7rem; font-weight: 700;
         border: 1px solid rgba(255,255,255,0.4);
-        padding: 5px 12px;
-        border-radius: 40px;
-        background: rgba(255,255,255,0.1);
-        backdrop-filter: blur(4px);
+        padding: 5px 12px; border-radius: 40px;
+        background: rgba(255,255,255,0.1); backdrop-filter: blur(4px);
       }
       .hero-side-promos .ad-slot .ad-slide:hover .ad-content .ad-cta {
         background: rgba(255,255,255,0.25);
       }
       .hero-side-promos .ad-progress {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        height: 2px;
-        background: #D4B87A;
-        width: 0%;
-        transition: width 0.1s linear;
-        z-index: 3;
+        position: absolute; bottom: 0; left: 0;
+        height: 2px; background: #D4B87A; width: 0%;
+        transition: width 0.1s linear; z-index: 3;
       }
     }
 
-    /* Hover preview, Recently viewed, Keyboard */
     .hover-preview {
       display: none; position: fixed; z-index: 500;
       width: 320px; background: var(--surface);
@@ -668,7 +585,6 @@
         </div>
       </section>
 
-      <!-- Desktop Ads — Dynamic Random Products -->
       <div class="side-stack">
         <div class="ad-label"><i class="fas fa-bullhorn"></i> Featured products</div>
         <div class="ad-slot" id="adSlot1">
@@ -720,7 +636,6 @@
       </div>
     </section>
 
-    <!-- Mobile WhatsApp strip — slim -->
     <a href="https://wa.me/2349042339411?text=Hello%20Zaure%2C%20I%20want%20to%20order%20or%20report%20something." target="_blank" class="mobile-wa-strip">
       <span class="wa-dot"></span>
       <span class="wa-icon"><i class="fab fa-whatsapp"></i></span>
@@ -917,9 +832,7 @@
 
   <script src="/js/main.js"></script>
   <script>
-    // ============================================
-    // STATE DROPDOWN
-    // ============================================
+    // State dropdown
     (function initStateDropdownInline() {
       const nigerianStates = [
         'Abia','Adamawa','Akwa Ibom','Anambra','Bauchi','Bayelsa','Benue','Borno',
@@ -965,9 +878,6 @@
       });
     })();
 
-    // ============================================
-    // HERO TOGGLE
-    // ============================================
     function toggleHeroLayout() {
       const isDesktop = window.innerWidth >= 1024;
       const d = document.querySelector('.hero-side-promos');
@@ -978,9 +888,6 @@
     toggleHeroLayout();
     window.addEventListener('resize', toggleHeroLayout);
 
-    // ============================================
-    // SEARCH
-    // ============================================
     function performSearch(query) {
       if (!query) return;
       const trimmed = query.trim();
@@ -1051,26 +958,14 @@
     }
     initSearch();
 
-    // ============================================
-    // POST WITHOUT SIGNUP — removed gate
-    // ============================================
     function setupPostButtons() {
-      // FAB (bottom nav)
       const fab = document.getElementById('fabPostAd');
-      if (fab) {
-        fab.onclick = () => { window.location.href = '/post.html'; };
-      }
-      // CTA banner
+      if (fab) fab.onclick = () => { window.location.href = '/post.html'; };
       const cta = document.getElementById('postAdCta');
-      if (cta) {
-        cta.onclick = () => { window.location.href = '/post.html'; };
-      }
+      if (cta) cta.onclick = () => { window.location.href = '/post.html'; };
     }
     setupPostButtons();
 
-    // ============================================
-    // DESKTOP HOVER PREVIEW
-    // ============================================
     const hoverPreview = document.getElementById('hoverPreview');
     let hoverTimer = null;
     function attachHoverPreview() {
@@ -1110,9 +1005,6 @@
       });
     }
 
-    // ============================================
-    // RECENTLY VIEWED
-    // ============================================
     function loadRecentlyViewed() {
       const panel = document.getElementById('recentlyViewedPanel');
       const list = document.getElementById('rvList');
@@ -1139,9 +1031,6 @@
       document.getElementById('recentlyViewedPanel').classList.remove('show');
     });
 
-    // ============================================
-    // KEYBOARD SHORTCUTS
-    // ============================================
     document.getElementById('kbdBtn')?.addEventListener('click', e => {
       e.stopPropagation();
       document.getElementById('kbdPanel').classList.toggle('show');
@@ -1165,9 +1054,6 @@
       }
     });
 
-    // ============================================
-    // MOBILE HAPTIC + PTR
-    // ============================================
     function vibrate(ms = 10) {
       if (window.innerWidth < 1024 && navigator.vibrate) navigator.vibrate(ms);
     }
@@ -1202,22 +1088,15 @@
       });
     })();
 
-    // ============================================
-    // DESKTOP ADS — RANDOM PRODUCTS ANIMATION
-    // ============================================
     function initAdSlots(products) {
       if (window.innerWidth < 1024) return;
       if (!products || products.length === 0) return;
-
-      // Pick 8 random products
       const shuffled = [...products].sort(() => Math.random() - 0.5);
       const pool = shuffled.slice(0, 8);
-
-      // Split into two slots (4 each)
       const slot1Items = pool.slice(0, 4);
       const slot2Items = pool.slice(4, 8);
 
-      function buildSlide(p, idx) {
+      function buildSlide(p) {
         const img = (p.images && p.images[0]) || 'https://placehold.co/400x400?text=Zaure';
         const price = p.price >= 1e6 ? `₦${(p.price/1e6).toFixed(1)}M` : `₦${p.price.toLocaleString()}`;
         return `
@@ -1250,15 +1129,12 @@
       const slides = slot.querySelectorAll('.ad-slide');
       const progress = document.getElementById(progressId);
       if (slides.length === 0) return;
-
       let current = 0;
       slides[0].classList.add('active');
-
       function nextSlide() {
         slides[current].classList.remove('active');
         current = (current + 1) % slides.length;
         slides[current].classList.add('active');
-        // Reset progress
         if (progress) {
           progress.style.transition = 'none';
           progress.style.width = '0%';
@@ -1268,23 +1144,16 @@
           }, 50);
         }
       }
-
-      // Kick off progress animation
       if (progress) {
         setTimeout(() => {
           progress.style.transition = `width ${duration}ms linear`;
           progress.style.width = '100%';
         }, 50);
       }
-
       setInterval(nextSlide, duration);
     }
 
-    // ============================================
-    // PAGE INIT
-    // ============================================
     document.addEventListener('DOMContentLoaded', async function() {
-      // Categories
       const categories = await loadCategories();
       document.getElementById('categoryGrid').innerHTML = categories.slice(0, 6).map(cat => `
         <div class="category-card" onclick="loadCategory('${cat.slug}')">
@@ -1293,13 +1162,11 @@
         </div>
       `).join('');
 
-      // Products
       const products = await loadProducts();
       const userState = await getUserState();
       renderListings(recommendProducts(products, userState, 6), 'featuredGrid');
       renderListings(recommendProducts(products, userState, 6), 'listingGrid');
 
-      // Sellers
       const sellers = await loadTopSellers();
       document.getElementById('topSellersGrid').innerHTML = sellers.map(s => `
         <div class="storefront-card" onclick="viewStore('${s.id}')">
@@ -1311,7 +1178,6 @@
         </div>
       `).join('');
 
-      // Trending — dynamic from trending.json
       const keywords = await loadTrendingKeywords();
       const trendHTML = keywords.map(k => `
         <span class="keyword" onclick="performSearch('${k}')">
@@ -1323,7 +1189,6 @@
       if (kwD) kwD.innerHTML = trendHTML;
       if (kwM) kwM.innerHTML = trendHTML;
 
-      // Desktop trending bar
       const bar = document.getElementById('desktopTrendingItems');
       if (bar) {
         bar.innerHTML = keywords.slice(0, 8).map(k => `
@@ -1331,7 +1196,6 @@
         `).join('');
       }
 
-      // Desktop ads — random products
       initAdSlots(products);
 
       loadUser();
@@ -1341,7 +1205,6 @@
       setTimeout(attachHoverPreview, 300);
       loadRecentlyViewed();
 
-      // Boost
       document.getElementById('boostNowBtn')?.addEventListener('click', function() {
         const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|Opera Mini|IEMobile/i.test(navigator.userAgent);
         const phone = '2349042339411';
