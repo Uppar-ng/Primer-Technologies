@@ -1,5 +1,99 @@
 [
   {
+    "id": "el-shoe-polish-black",
+    "title": "El Shoe Polish — Black",
+    "price": 1500,
+    "location": "Kaduna",
+    "date": "Just now",
+    "category": "fashion",
+    "boosted": true,
+    "featured": true,
+    "description": "Premium black shoe polish by El. Made for Northern Nigerian leather, trusted by professionals and everyday wearers. Deep shine, long-lasting protection, and a smooth finish every time. Step sharp, every day.",
+    "tags": ["shoe polish", "el", "black", "leather care", "footwear", "shine"],
+    "images": [
+      "https://i.imgur.com/L9Wlvax.jpeg",
+      "https://i.imgur.com/ufvgdUx.jpeg",
+      "https://i.imgur.com/OLAfdB5.jpeg",
+      "https://i.imgur.com/QvCQVNt.jpeg",
+      "https://i.imgur.com/MqsTKnL.jpeg"
+    ],
+    "seller": {
+      "name": "El",
+      "initials": "EL",
+      "verified": true,
+      "joined": "2026",
+      "listings": 3,
+      "rating": 5.0,
+      "sales": 0,
+      "response": "100%",
+      "bio": "El is a Nigerian lifestyle brand built on quality, pride, and everyday excellence. One name. Every detail.",
+      "phone": "09042339411",
+      "whatsapp": "09042339411"
+    }
+  },
+  {
+    "id": "el-shoe-polish-brown",
+    "title": "El Shoe Polish — Brown",
+    "price": 1500,
+    "location": "Kaduna",
+    "date": "Just now",
+    "category": "fashion",
+    "boosted": false,
+    "featured": true,
+    "description": "Premium brown shoe polish by El. Restores rich color and shine to brown and tan leather. Perfect for Hausa leather shoes and everyday footwear. Step sharp, every day.",
+    "tags": ["shoe polish", "el", "brown", "leather care", "footwear", "shine"],
+    "images": [
+      "https://i.imgur.com/4fXoVoE.jpeg",
+      "https://i.imgur.com/OLAfdB5.jpeg",
+      "https://i.imgur.com/QvCQVNt.jpeg",
+      "https://i.imgur.com/MqsTKnL.jpeg"
+    ],
+    "seller": {
+      "name": "El",
+      "initials": "EL",
+      "verified": true,
+      "joined": "2026",
+      "listings": 3,
+      "rating": 5.0,
+      "sales": 0,
+      "response": "100%",
+      "bio": "El is a Nigerian lifestyle brand built on quality, pride, and everyday excellence. One name. Every detail.",
+      "phone": "09042339411",
+      "whatsapp": "09042339411"
+    }
+  },
+  {
+    "id": "el-shoe-polish-neutral",
+    "title": "El Shoe Polish — Neutral",
+    "price": 1500,
+    "location": "Kaduna",
+    "date": "Just now",
+    "category": "fashion",
+    "boosted": false,
+    "featured": false,
+    "description": "Colorless neutral shoe polish by El. Cleans, conditions, and shines without changing the color of your leather. Safe for all leather types.",
+    "tags": ["shoe polish", "el", "neutral", "leather care", "footwear", "conditioner"],
+    "images": [
+      "https://i.imgur.com/4NxvCJ2.jpeg",
+      "https://i.imgur.com/OLAfdB5.jpeg",
+      "https://i.imgur.com/QvCQVNt.jpeg",
+      "https://i.imgur.com/MqsTKnL.jpeg"
+    ],
+    "seller": {
+      "name": "El",
+      "initials": "EL",
+      "verified": true,
+      "joined": "2026",
+      "listings": 3,
+      "rating": 5.0,
+      "sales": 0,
+      "response": "100%",
+      "bio": "El is a Nigerian lifestyle brand built on quality, pride, and everyday excellence. One name. Every detail.",
+      "phone": "09042339411",
+      "whatsapp": "09042339411"
+    }
+  },
+  {
     "id": "crocs-unisex-clogs",
     "title": "Crocs Classic Unisex Clogs",
     "price": 15000,
