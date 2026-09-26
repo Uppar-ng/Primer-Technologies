@@ -1,63 +1,29 @@
 [
   {
-    "id": "el-shoe-polish-black",
-    "title": "El Shoe Polish — Black",
-    "price": 1500,
+    "id": "jbl-go-3-speaker",
+    "title": "JBL Go 3 Bluetooth Speaker",
+    "price": 28000,
     "location": "Kaduna",
-    "date": "Just now",
-    "category": "fashion",
+    "date": "10 hours ago",
+    "category": "electronics",
     "boosted": true,
     "featured": true,
-    "description": "Premium black shoe polish by El. Made for Northern Nigerian leather, trusted by professionals and everyday wearers. Deep shine, long-lasting protection, and a smooth finish every time. Step sharp, every day.",
-    "tags": ["shoe polish", "el", "black", "leather care", "footwear", "shine"],
+    "description": "JBL Go 3 portable Bluetooth speaker. Powerful sound with punchy bass. Waterproof and dustproof (IP67). Up to 5 hours playtime. Available in multiple colors.",
+    "tags": ["speaker", "bluetooth", "jbl", "audio", "electronics", "portable"],
     "images": [
-      "https://i.imgur.com/L9Wlvax.jpeg",
-      "https://i.imgur.com/ufvgdUx.jpeg",
-      "https://i.imgur.com/OLAfdB5.jpeg",
-      "https://i.imgur.com/QvCQVNt.jpeg",
-      "https://i.imgur.com/MqsTKnL.jpeg"
+      "https://lh3.googleusercontent.com/d/1PkWfvj9eD4qHXZNIPZu5bnDhcJtglOcG",
+      "https://lh3.googleusercontent.com/d/1f4RXXDeLTbdIkBklFjGrxF6KJYzp_xrf"
     ],
     "seller": {
-      "name": "El",
-      "initials": "EL",
+      "name": "Zaure Official Store",
+      "initials": "ZA",
       "verified": true,
       "joined": "2026",
-      "listings": 3,
+      "listings": 13,
       "rating": 5.0,
-      "sales": 0,
+      "sales": 800,
       "response": "100%",
-      "bio": "El is a Nigerian lifestyle brand built on quality, pride, and everyday excellence. One name. Every detail.",
-      "phone": "09042339411",
-      "whatsapp": "09042339411"
-    }
-  },
-  {
-    "id": "el-shoe-polish-brown",
-    "title": "El Shoe Polish — Brown",
-    "price": 1500,
-    "location": "Kaduna",
-    "date": "Just now",
-    "category": "fashion",
-    "boosted": false,
-    "featured": true,
-    "description": "Premium brown shoe polish by El. Restores rich color and shine to brown and tan leather. Perfect for Hausa leather shoes and everyday footwear. Step sharp, every day.",
-    "tags": ["shoe polish", "el", "brown", "leather care", "footwear", "shine"],
-    "images": [
-      "https://i.imgur.com/4fXoVoE.jpeg",
-      "https://i.imgur.com/OLAfdB5.jpeg",
-      "https://i.imgur.com/QvCQVNt.jpeg",
-      "https://i.imgur.com/MqsTKnL.jpeg"
-    ],
-    "seller": {
-      "name": "El",
-      "initials": "EL",
-      "verified": true,
-      "joined": "2026",
-      "listings": 3,
-      "rating": 5.0,
-      "sales": 0,
-      "response": "100%",
-      "bio": "El is a Nigerian lifestyle brand built on quality, pride, and everyday excellence. One name. Every detail.",
+      "bio": "Welcome to the official Zaure store. Discover featured products, exclusive deals, and trusted services from Nigeria's most reliable marketplace.",
       "phone": "09042339411",
       "whatsapp": "09042339411"
     }
@@ -84,7 +50,7 @@
       "initials": "EL",
       "verified": true,
       "joined": "2026",
-      "listings": 3,
+      "listings": 4,
       "rating": 5.0,
       "sales": 0,
       "response": "100%",
@@ -94,77 +60,77 @@
     }
   },
   {
-    "id": "crocs-unisex-clogs",
-    "title": "Crocs Classic Unisex Clogs",
-    "price": 15000,
-    "location": "Kaduna",
-    "date": "2 hours ago",
-    "category": "fashion",
-    "boosted": true,
-    "featured": true,
-    "description": "Classic black clogs featuring a sporty white midsole stripe, breathable ventilation ports, and a pivoting heel strap for lightweight, everyday comfort.",
-    "tags": ["crocs", "clogs", "unisex", "footwear", "slippers", "comfortable"],
-    "images": [
-      "https://lh3.googleusercontent.com/d/1EprMMGEtPI_uuXUvTo66KS5LYtzgNH44"
-    ],
-    "seller": {
-      "name": "Zaure Official Store",
-      "initials": "ZA",
-      "verified": true,
-      "joined": "2026",
-      "listings": 13,
-      "rating": 5.0,
-      "sales": 800,
-      "response": "100%",
-      "bio": "Welcome to the official Zaure store. Discover featured products, exclusive deals, and trusted services from Nigeria's most reliable marketplace.",
-      "phone": "09042339411",
-      "whatsapp": "09042339411"
-    }
-  },
-  {
-    "id": "toms-leather-sandals-men",
-    "title": "TOMS Leather Sandals (Men)",
-    "price": 25000,
-    "location": "Kaduna",
-    "date": "3 hours ago",
-    "category": "fashion",
-    "boosted": false,
-    "featured": false,
-    "description": "Genuine leather sandals for men. Comfortable footbed with durable sole. Available in brown and black. Sizes 40-45.",
-    "tags": ["sandals", "leather", "men", "footwear", "toms"],
-    "images": [
-      "https://lh3.googleusercontent.com/d/1y1smiCGlb57n9Rzop6f2H3OL_yVsmaIJ",
-      "https://lh3.googleusercontent.com/d/1gyFS5uFDUUGCpb4WNY8Dhi49psU81fjf"
-    ],
-    "seller": {
-      "name": "Zaure Official Store",
-      "initials": "ZA",
-      "verified": true,
-      "joined": "2026",
-      "listings": 13,
-      "rating": 5.0,
-      "sales": 800,
-      "response": "100%",
-      "bio": "Welcome to the official Zaure store. Discover featured products, exclusive deals, and trusted services from Nigeria's most reliable marketplace.",
-      "phone": "09042339411",
-      "whatsapp": "09042339411"
-    }
-  },
-  {
-    "id": "adidas-adilette-slippers",
-    "title": "Adidas Adilette Bathroom Slippers",
+    "id": "levis-leather-belt",
+    "title": "Levi's Genuine Leather Belt",
     "price": 2500,
     "location": "Kaduna",
-    "date": "4 hours ago",
+    "date": "7 hours ago",
     "category": "fashion",
     "boosted": false,
     "featured": false,
-    "description": "Adidas Adilette comfort slippers. Soft cushioned footbed with quick-dry material. Perfect for bathroom and indoor use. Available in multiple colors.",
-    "tags": ["adidas", "slippers", "bathroom", "footwear", "indoor"],
+    "description": "Levi's genuine leather belt. Classic design with durable buckle. Available in black and brown. Sizes 32-42.",
+    "tags": ["belt", "leather", "levis", "fashion", "accessories", "men"],
     "images": [
-      "https://lh3.googleusercontent.com/d/1eAagc9Tz4CnsVmBmXe7OFjWJTfxulq2G",
-      "https://lh3.googleusercontent.com/d/1ee21BCBgUxwzvK2C8KPnFkXBG5YsTLOZ",
-      "https://lh3.googleusercontent.com/d/1dqG98F_DDm9va4L8i7GkDB4k-kdEsJKr"
+      "https://lh3.googleusercontent.com/d/1EqOoTr1FPv4a90hoosGv97r11tq8COj0"
+    ],
+    "seller": {
+      "name": "Zaure Official Store",
+      "initials": "ZA",
+      "verified": true,
+      "joined": "2026",
+      "listings": 13,
+      "rating": 5.0,
+      "sales": 800,
+      "response": "100%",
+      "bio": "Welcome to the official Zaure store. Discover featured products, exclusive deals, and trusted services from Nigeria's most reliable marketplace.",
+      "phone": "09042339411",
+      "whatsapp": "09042339411"
+    }
+  },
+  {
+    "id": "el-shampoo",
+    "title": "El Shampoo",
+    "price": 500,
+    "location": "Kaduna",
+    "date": "Just now",
+    "category": "beauty-health",
+    "boosted": false,
+    "featured": false,
+    "description": "El Shampoo — gentle everyday cleansing for healthy, shiny hair. Rich lather, fresh scent, and a clean rinse that leaves your scalp feeling light. Made for Nigerian hair. One name. Every detail.",
+    "tags": ["shampoo", "el", "hair care", "beauty"],
+    "images": [
+      "https://i.imgur.com/hgW0CPw.jpeg",
+      "https://i.imgur.com/Q4YU7Nq.jpeg"
+    ],
+    "seller": {
+      "name": "El",
+      "initials": "EL",
+      "verified": true,
+      "joined": "2026",
+      "listings": 4,
+      "rating": 5.0,
+      "sales": 0,
+      "response": "100%",
+      "bio": "El is a Nigerian lifestyle brand built on quality, pride, and everyday excellence. One name. Every detail.",
+      "phone": "09042339411",
+      "whatsapp": "09042339411"
+    }
+  },
+  {
+    "id": "casio-classic-watch",
+    "title": "Casio Classic Analog Wristwatch",
+    "price": 10000,
+    "location": "Kaduna",
+    "date": "6 hours ago",
+    "category": "fashion",
+    "boosted": false,
+    "featured": false,
+    "description": "Casio Classic analog wristwatch. Stainless steel case with genuine leather strap. Water-resistant. Perfect for everyday wear.",
+    "tags": ["watch", "wristwatch", "casio", "analog", "fashion", "accessories"],
+    "images": [
+      "https://lh3.googleusercontent.com/d/1p4zT6TwXNX3P2EDUwcprKan7YFRNjcMN",
+      "https://lh3.googleusercontent.com/d/13UfPY6n7OGgbiby9u5zggb_PjfRlT_O0",
+      "https://lh3.googleusercontent.com/d/1q3pZElW_KwEPA_iHxgbp9E0naYr-MORU"
     ],
     "seller": {
       "name": "Zaure Official Store",
@@ -210,20 +176,52 @@
     }
   },
   {
-    "id": "casio-classic-watch",
-    "title": "Casio Classic Analog Wristwatch",
-    "price": 10000,
+    "id": "el-shoe-polish-black",
+    "title": "El Shoe Polish — Black",
+    "price": 1500,
     "location": "Kaduna",
-    "date": "6 hours ago",
+    "date": "Just now",
+    "category": "fashion",
+    "boosted": true,
+    "featured": true,
+    "description": "Premium black shoe polish by El. Made for Northern Nigerian leather, trusted by professionals and everyday wearers. Deep shine, long-lasting protection, and a smooth finish every time. Step sharp, every day.",
+    "tags": ["shoe polish", "el", "black", "leather care", "footwear", "shine"],
+    "images": [
+      "https://i.imgur.com/L9Wlvax.jpeg",
+      "https://i.imgur.com/ufvgdUx.jpeg",
+      "https://i.imgur.com/OLAfdB5.jpeg",
+      "https://i.imgur.com/QvCQVNt.jpeg",
+      "https://i.imgur.com/MqsTKnL.jpeg"
+    ],
+    "seller": {
+      "name": "El",
+      "initials": "EL",
+      "verified": true,
+      "joined": "2026",
+      "listings": 4,
+      "rating": 5.0,
+      "sales": 0,
+      "response": "100%",
+      "bio": "El is a Nigerian lifestyle brand built on quality, pride, and everyday excellence. One name. Every detail.",
+      "phone": "09042339411",
+      "whatsapp": "09042339411"
+    }
+  },
+  {
+    "id": "adidas-adilette-slippers",
+    "title": "Adidas Adilette Bathroom Slippers",
+    "price": 2500,
+    "location": "Kaduna",
+    "date": "4 hours ago",
     "category": "fashion",
     "boosted": false,
     "featured": false,
-    "description": "Casio Classic analog wristwatch. Stainless steel case with genuine leather strap. Water-resistant. Perfect for everyday wear.",
-    "tags": ["watch", "wristwatch", "casio", "analog", "fashion", "accessories"],
+    "description": "Adidas Adilette comfort slippers. Soft cushioned footbed with quick-dry material. Perfect for bathroom and indoor use. Available in multiple colors.",
+    "tags": ["adidas", "slippers", "bathroom", "footwear", "indoor"],
     "images": [
-      "https://lh3.googleusercontent.com/d/1p4zT6TwXNX3P2EDUwcprKan7YFRNjcMN",
-      "https://lh3.googleusercontent.com/d/13UfPY6n7OGgbiby9u5zggb_PjfRlT_O0",
-      "https://lh3.googleusercontent.com/d/1q3pZElW_KwEPA_iHxgbp9E0naYr-MORU"
+      "https://lh3.googleusercontent.com/d/1eAagc9Tz4CnsVmBmXe7OFjWJTfxulq2G",
+      "https://lh3.googleusercontent.com/d/1ee21BCBgUxwzvK2C8KPnFkXBG5YsTLOZ",
+      "https://lh3.googleusercontent.com/d/1dqG98F_DDm9va4L8i7GkDB4k-kdEsJKr"
     ],
     "seller": {
       "name": "Zaure Official Store",
@@ -240,18 +238,107 @@
     }
   },
   {
-    "id": "levis-leather-belt",
-    "title": "Levi's Genuine Leather Belt",
-    "price": 2500,
+    "id": "toms-leather-sandals-men",
+    "title": "TOMS Leather Sandals (Men)",
+    "price": 25000,
     "location": "Kaduna",
-    "date": "7 hours ago",
+    "date": "3 hours ago",
     "category": "fashion",
     "boosted": false,
     "featured": false,
-    "description": "Levi's genuine leather belt. Classic design with durable buckle. Available in black and brown. Sizes 32-42.",
-    "tags": ["belt", "leather", "levis", "fashion", "accessories", "men"],
+    "description": "Genuine leather sandals for men. Comfortable footbed with durable sole. Available in brown and black. Sizes 40-45.",
+    "tags": ["sandals", "leather", "men", "footwear", "toms"],
     "images": [
-      "https://lh3.googleusercontent.com/d/1EqOoTr1FPv4a90hoosGv97r11tq8COj0"
+      "https://lh3.googleusercontent.com/d/1y1smiCGlb57n9Rzop6f2H3OL_yVsmaIJ",
+      "https://lh3.googleusercontent.com/d/1gyFS5uFDUUGCpb4WNY8Dhi49psU81fjf"
+    ],
+    "seller": {
+      "name": "Zaure Official Store",
+      "initials": "ZA",
+      "verified": true,
+      "joined": "2026",
+      "listings": 13,
+      "rating": 5.0,
+      "sales": 800,
+      "response": "100%",
+      "bio": "Welcome to the official Zaure store. Discover featured products, exclusive deals, and trusted services from Nigeria's most reliable marketplace.",
+      "phone": "09042339411",
+      "whatsapp": "09042339411"
+    }
+  },
+  {
+    "id": "el-shoe-polish-brown",
+    "title": "El Shoe Polish — Brown",
+    "price": 1500,
+    "location": "Kaduna",
+    "date": "Just now",
+    "category": "fashion",
+    "boosted": false,
+    "featured": true,
+    "description": "Premium brown shoe polish by El. Restores rich color and shine to brown and tan leather. Perfect for Hausa leather shoes and everyday footwear. Step sharp, every day.",
+    "tags": ["shoe polish", "el", "brown", "leather care", "footwear", "shine"],
+    "images": [
+      "https://i.imgur.com/4fXoVoE.jpeg",
+      "https://i.imgur.com/OLAfdB5.jpeg",
+      "https://i.imgur.com/QvCQVNt.jpeg",
+      "https://i.imgur.com/MqsTKnL.jpeg"
+    ],
+    "seller": {
+      "name": "El",
+      "initials": "EL",
+      "verified": true,
+      "joined": "2026",
+      "listings": 4,
+      "rating": 5.0,
+      "sales": 0,
+      "response": "100%",
+      "bio": "El is a Nigerian lifestyle brand built on quality, pride, and everyday excellence. One name. Every detail.",
+      "phone": "09042339411",
+      "whatsapp": "09042339411"
+    }
+  },
+  {
+    "id": "logitech-c270-webcam",
+    "title": "Logitech C270 HD Webcam",
+    "price": 15000,
+    "location": "Kaduna",
+    "date": "12 hours ago",
+    "category": "electronics",
+    "boosted": false,
+    "featured": false,
+    "description": "Logitech C270 HD webcam. 720p HD video calling with built-in microphone. Universal clip for laptops and monitors. Perfect for video calls, meetings, and online classes.",
+    "tags": ["webcam", "logitech", "camera", "electronics", "video", "computer"],
+    "images": [
+      "https://lh3.googleusercontent.com/d/1QD-eMKplx28uy3HaGT1lFXySTkTpnTvh",
+      "https://lh3.googleusercontent.com/d/1SwHH4624oUL5vb5PPHrhbApOmHG6U7sc"
+    ],
+    "seller": {
+      "name": "Zaure Official Store",
+      "initials": "ZA",
+      "verified": true,
+      "joined": "2026",
+      "listings": 13,
+      "rating": 5.0,
+      "sales": 800,
+      "response": "100%",
+      "bio": "Welcome to the official Zaure store. Discover featured products, exclusive deals, and trusted services from Nigeria's most reliable marketplace.",
+      "phone": "09042339411",
+      "whatsapp": "09042339411"
+    }
+  },
+  {
+    "id": "crocs-unisex-clogs",
+    "title": "Crocs Classic Unisex Clogs",
+    "price": 15000,
+    "location": "Kaduna",
+    "date": "2 hours ago",
+    "category": "fashion",
+    "boosted": true,
+    "featured": true,
+    "description": "Classic black clogs featuring a sporty white midsole stripe, breathable ventilation ports, and a pivoting heel strap for lightweight, everyday comfort.",
+    "tags": ["crocs", "clogs", "unisex", "footwear", "slippers", "comfortable"],
+    "images": [
+      "https://lh3.googleusercontent.com/d/1EprMMGEtPI_uuXUvTo66KS5LYtzgNH44"
     ],
     "seller": {
       "name": "Zaure Official Store",
@@ -280,64 +367,6 @@
     "tags": ["socks", "nike", "black", "pack", "fashion", "men"],
     "images": [
       "https://lh3.googleusercontent.com/d/1WYvmshtQuZzYO7kvsgOGaASs39AI3qAi"
-    ],
-    "seller": {
-      "name": "Zaure Official Store",
-      "initials": "ZA",
-      "verified": true,
-      "joined": "2026",
-      "listings": 13,
-      "rating": 5.0,
-      "sales": 800,
-      "response": "100%",
-      "bio": "Welcome to the official Zaure store. Discover featured products, exclusive deals, and trusted services from Nigeria's most reliable marketplace.",
-      "phone": "09042339411",
-      "whatsapp": "09042339411"
-    }
-  },
-  {
-    "id": "jbl-go-3-speaker",
-    "title": "JBL Go 3 Bluetooth Speaker",
-    "price": 28000,
-    "location": "Kaduna",
-    "date": "10 hours ago",
-    "category": "electronics",
-    "boosted": true,
-    "featured": true,
-    "description": "JBL Go 3 portable Bluetooth speaker. Powerful sound with punchy bass. Waterproof and dustproof (IP67). Up to 5 hours playtime. Available in multiple colors.",
-    "tags": ["speaker", "bluetooth", "jbl", "audio", "electronics", "portable"],
-    "images": [
-      "https://lh3.googleusercontent.com/d/1PkWfvj9eD4qHXZNIPZu5bnDhcJtglOcG",
-      "https://lh3.googleusercontent.com/d/1f4RXXDeLTbdIkBklFjGrxF6KJYzp_xrf"
-    ],
-    "seller": {
-      "name": "Zaure Official Store",
-      "initials": "ZA",
-      "verified": true,
-      "joined": "2026",
-      "listings": 13,
-      "rating": 5.0,
-      "sales": 800,
-      "response": "100%",
-      "bio": "Welcome to the official Zaure store. Discover featured products, exclusive deals, and trusted services from Nigeria's most reliable marketplace.",
-      "phone": "09042339411",
-      "whatsapp": "09042339411"
-    }
-  },
-  {
-    "id": "logitech-c270-webcam",
-    "title": "Logitech C270 HD Webcam",
-    "price": 15000,
-    "location": "Kaduna",
-    "date": "12 hours ago",
-    "category": "electronics",
-    "boosted": false,
-    "featured": false,
-    "description": "Logitech C270 HD webcam. 720p HD video calling with built-in microphone. Universal clip for laptops and monitors. Perfect for video calls, meetings, and online classes.",
-    "tags": ["webcam", "logitech", "camera", "electronics", "video", "computer"],
-    "images": [
-      "https://lh3.googleusercontent.com/d/1QD-eMKplx28uy3HaGT1lFXySTkTpnTvh",
-      "https://lh3.googleusercontent.com/d/1SwHH4624oUL5vb5PPHrhbApOmHG6U7sc"
     ],
     "seller": {
       "name": "Zaure Official Store",
