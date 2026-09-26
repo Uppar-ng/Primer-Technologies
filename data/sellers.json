@@ -16,6 +16,22 @@
     "joined": "2026"
   },
   {
+    "id": "el",
+    "name": "El",
+    "initials": "EL",
+    "badge": "verified",
+    "category": "brand",
+    "location": "Kaduna",
+    "profilePic": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=200&h=200&fit=crop&q=80",
+    "bio": "El is a Nigerian lifestyle brand built on quality, pride, and everyday excellence. One name. Every detail.",
+    "phone": "09042339411",
+    "whatsapp": "09042339411",
+    "rating": 5.0,
+    "sales": 0,
+    "response": "100%",
+    "joined": "2026"
+  },
+  {
     "id": "teema-kitchenwares",
     "name": "Teema Kitchenwares",
     "initials": "TK",
@@ -29,22 +45,6 @@
     "rating": 4.8,
     "sales": 85,
     "response": "97%",
-    "joined": "2026"
-  },
-  {
-    "id": "zaure-home-essentials",
-    "name": "Zaure Home Essentials",
-    "initials": "ZH",
-    "badge": "official",
-    "category": "home",
-    "location": "Kaduna",
-    "profilePic": "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=200&h=200&fit=crop&q=80",
-    "bio": "Official Zaure store for home essentials. Quality products at affordable prices. Fast delivery available.",
-    "phone": "09042339411",
-    "whatsapp": "09042339411",
-    "rating": 4.9,
-    "sales": 150,
-    "response": "98%",
     "joined": "2026"
   }
 ]
