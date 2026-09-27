@@ -250,7 +250,7 @@ function initStateDropdown() {
 }
 
 // ============================================================
-// DATA LOADING
+// DATA LOADING — PRODUCTS
 // ============================================================
 async function loadProducts() {
   const cached = localStorage.getItem('zaure_products_cache');
@@ -331,33 +331,31 @@ function getProductsSync() {
 }
 
 // ============================================================
-// SERVICES (Find a Pro) — same pattern as products
+// SERVICES (Find a Pro) — ALWAYS FRESH FROM services.json
 // ============================================================
 async function loadServices() {
-  const cached = localStorage.getItem('zaure_services_cache');
-  if (cached) {
-    try {
-      const parsed = JSON.parse(cached);
-      if (parsed && parsed.length > 0) {
-        fetchFreshServices();
-        return parsed;
-      }
-    } catch (e) {}
-  }
-  return fetchFreshServices();
-}
-
-async function fetchFreshServices() {
   try {
-    const response = await fetch('/data/services.json');
+    // Always hit the network first, no stale cache
+    const response = await fetch('/data/services.json', { cache: 'no-store' });
     if (!response.ok) throw new Error('Services not found');
     const services = await response.json();
+    // Save a copy for offline fallback only
     localStorage.setItem('zaure_services_cache', JSON.stringify(services));
     return services;
   } catch (error) {
-    console.error('Error loading services:', error);
+    console.warn('Services fetch failed, falling back to cache:', error);
+    // Only use cache if the network request actually failed
+    const cached = localStorage.getItem('zaure_services_cache');
+    if (cached) {
+      try { return JSON.parse(cached); } catch (e) { return []; }
+    }
     return [];
   }
+}
+
+// Kept for backward compatibility — now just calls loadServices()
+async function fetchFreshServices() {
+  return loadServices();
 }
 
 function getServicesSync() {
@@ -372,8 +370,66 @@ function getServicesSync() {
   return [];
 }
 
-// Normalize a service entry into the same shape as a product,
-// so the exact same card UI can render it.
+// ============================================================
+// SELLER FIELD HELPERS (robust — handles many field names)
+// ============================================================
+function getSellerName(s) {
+  if (!s) return 'Zaure Pro';
+  if (typeof s.seller === 'string' && s.seller.trim()) return s.seller;
+  const seller = (typeof s.seller === 'object' && s.seller) ? s.seller : {};
+  return seller.name
+      || seller.fullName
+      || seller.full_name
+      || s.provider
+      || s.providerName
+      || 'Zaure Pro';
+}
+
+function getSellerPic(s) {
+  if (!s) return '';
+  const seller = (typeof s.seller === 'object' && s.seller) ? s.seller : {};
+  let pic = seller.profilePic
+         || seller.profile_pic
+         || seller.profileImage
+         || seller.profile_image
+         || seller.avatar
+         || seller.avatarUrl
+         || seller.avatar_url
+         || seller.image
+         || seller.img
+         || seller.photo
+         || seller.photoUrl
+         || seller.photo_url
+         || seller.picture
+         || '';
+  if (!pic) {
+    pic = s.profilePic
+       || s.profile_pic
+       || s.avatar
+       || s.photo
+       || s.providerPic
+       || s.providerImage
+       || '';
+  }
+  return pic || '';
+}
+
+function getSellerRating(s) {
+  if (!s) return '5.0';
+  const seller = (typeof s.seller === 'object' && s.seller) ? s.seller : {};
+  return seller.rating || s.rating || '5.0';
+}
+
+function getSellerInitials(s) {
+  const name = getSellerName(s);
+  const parts = name.trim().split(/\s+/);
+  if (parts.length === 1) return parts[0].charAt(0).toUpperCase();
+  return (parts[0].charAt(0) + parts[parts.length - 1].charAt(0)).toUpperCase();
+}
+
+// ============================================================
+// NORMALIZE SERVICE (for card rendering)
+// ============================================================
 function normalizeService(s) {
   const images = (s.images && s.images.length) ? s.images
     : (s.image ? [s.image]
@@ -395,6 +451,9 @@ function normalizeService(s) {
   };
 }
 
+// ============================================================
+// RENDER SERVICES (homepage cards — no price)
+// ============================================================
 function renderServices(services, containerId) {
   const grid = document.getElementById(containerId);
   if (!grid) return;
@@ -409,6 +468,10 @@ function renderServices(services, containerId) {
   
   grid.innerHTML = services.map(raw => {
     const p = normalizeService(raw);
+    const sellerName = getSellerName(raw);
+    const profilePic = getSellerPic(raw);
+    const initials = getSellerInitials(raw);
+    
     let badges = '';
     if (p.boosted) badges += `<span class="badge-boosted"><i class="fas fa-bolt"></i> Boosted</span>`;
     if (p.featured) badges += `<span class="badge-featured">Featured</span>`;
@@ -439,7 +502,7 @@ function renderServices(services, containerId) {
             <span><i class="far fa-clock"></i> ${p.date}</span>
           </div>
           <div class="listing-footer" style="display:flex;justify-content:space-between;font-size:0.7rem;color:var(--text-secondary);margin-top:8px;padding-top:8px;border-top:1px solid var(--border);">
-            <span><i class="fas fa-user-tie"></i> ${p.seller?.name || 'Professional'}</span>
+            <span><i class="fas fa-user-tie"></i> ${sellerName}</span>
             <span><i class="far fa-heart"></i> ${isFav ? 'Saved' : 'Save'}</span>
           </div>
         </div>
@@ -581,7 +644,7 @@ window.toggleFavoriteCard = function(productId, buttonElement) {
 };
 
 // ============================================================
-// RENDER LISTINGS
+// RENDER LISTINGS (products)
 // ============================================================
 function renderListings(products, containerId) {
   const grid = document.getElementById(containerId);
@@ -790,5 +853,10 @@ window.viewStore = viewStore;
 window.getUserState = getUserState;
 window.recommendProducts = recommendProducts;
 window.initStateDropdown = initStateDropdown;
+window.getSellerName = getSellerName;
+window.getSellerPic = getSellerPic;
+window.getSellerRating = getSellerRating;
+window.getSellerInitials = getSellerInitials;
+window.normalizeService = normalizeService;
 
 console.log('Zaure – Nigeria\'s most trusted online marketplace.');
