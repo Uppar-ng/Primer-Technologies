@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Service Details – Zaure | Find a Pro</title>
+  <meta name="description" content="View service provider details, contact info, and reviews on Zaure.">
+  <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .service-hero-card {
+      background: var(--surface);
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      padding: 32px 28px;
+      margin: 24px 0 20px;
+      position: relative;
+      overflow: hidden;
+      animation: slideDown 0.5s ease;
+    }
+    .service-hero-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #1a3650, #D4B87A, #1a3650);
+    }
+    .service-hero-top {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .service-hero-avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1a3650, #0f2940);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.4rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(26,54,80,0.2);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(212,184,122,0.4); }
+      70% { box-shadow: 0 0 0 15px rgba(212,184,122,0); }
+      100% { box-shadow: 0 0 0 0 rgba(212,184,122,0); }
+    }
+    .service-hero-avatar img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .service-hero-info { flex: 1; min-width: 220px; }
+    .service-hero-info h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 6px;
+      line-height: 1.25;
+    }
+    .service-hero-provider {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(31,93,138,0.1);
+      color: #1f5d8a;
+      padding: 4px 12px;
+      border-radius: 30px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .service-hero-category {
+      font-size: 0.85rem;
+      color: #B49450;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .service-hero-meta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+    }
+    .service-hero-meta span { display: inline-flex; align-items: center; gap: 5px; }
+    .service-hero-meta span i { color: #1f5d8a; }
+
+    .service-description-card,
+    .service-meta-card,
+    .service-contact-card {
+      background: var(--surface);
+      border-radius: 20px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      margin-bottom: 16px;
+    }
+    .service-description-card h3,
+    .service-meta-card h3,
+    .service-contact-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .service-description-card h3 i,
+    .service-meta-card h3 i,
+    .service-contact-card h3 i { color: #D4B87A; }
+    .service-description-card p {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: var(--text-secondary);
+    }
+
+    .service-meta-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    @media (min-width: 640px) {
+      .service-meta-list { grid-template-columns: 1fr 1fr; }
+    }
+    .service-meta-list .meta-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 12px;
+      background: var(--surface-alt);
+      border-radius: 10px;
+      font-size: 0.85rem;
+    }
+    .service-meta-list .meta-item .label {
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+    .service-meta-list .meta-item .value {
+      color: var(--text);
+      font-weight: 600;
+      text-align: right;
+      max-width: 60%;
+    }
+
+    .service-contact-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .service-contact-actions .btn-call,
+    .service-contact-actions .btn-wa {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 20px;
+      border-radius: 60px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      text-decoration: none;
+      border: none;
+      font-family: inherit;
+      transition: all 0.2s;
+      min-width: 150px;
+    }
+    .service-contact-actions .btn-call {
+      background: #1a3650;
+      color: white;
+    }
+    .service-contact-actions .btn-call:hover {
+      background: #0f2940;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(26,54,80,0.25);
+    }
+    .service-contact-actions .btn-wa {
+      background: #25D366;
+      color: white;
+    }
+    .service-contact-actions .btn-wa:hover {
+      background: #1DA851;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(37,211,102,0.3);
+    }
+
+    .service-price-highlight {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 8px 0;
+    }
+    .service-price-highlight .price-value {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #1a3650;
+      line-height: 1;
+    }
+    [data-theme="dark"] .service-price-highlight .price-value { color: #D4B87A; }
+    .service-price-highlight .price-label {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 4px;
+      font-weight: 600;
+    }
+
+    .back-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 0;
+    }
+    .back-row a {
+      background: transparent;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .back-row h2 { font-size: 1.1rem; font-weight: 600; color: var(--text); }
+
+    .not-found {
+      text-align: center;
+      padding: 60px 20px;
+      background: var(--surface);
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      margin: 40px 0;
+    }
+    .not-found i {
+      font-size: 3rem;
+      color: #e74c3c;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .not-found h3 { color: var(--text); margin-bottom: 8px; }
+    .not-found p { color: var(--text-secondary); margin-bottom: 20px; }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAV ===== -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="/" class="logo-wrapper">
+        <div class="logo-text">
+          <span class="brand">Zaure</span>
+          <span class="tagline">Buy with Confidence</span>
+        </div>
+      </a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/categories.html">Categories</a>
+        <a href="/stores.html">Stores</a>
+        <a href="/services.html" class="active">Find a Pro</a>
+        <a href="/about.html">About</a>
+      </div>
+      <div class="nav-actions">
+        <button class="icon-btn" id="themeToggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
+        <a href="/favorites.html" class="icon-btn" style="position:relative;text-decoration:none;">
+          <i class="fas fa-heart"></i>
+          <span id="favBadge">0</span>
+        </a>
+        <div id="headerUserArea">
+          <div class="avatar" id="userAvatar" onclick="openSignup()">ZA</div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="back-row">
+      <a href="/services.html"><i class="fas fa-arrow-left"></i></a>
+      <h2>Service Details</h2>
+    </div>
+
+    <div id="loadingState" style="text-align:center;padding:40px;">
+      <i class="fas fa-spinner fa-spin" style="font-size:2rem;color:#1a3650;"></i>
+      <p style="margin-top:12px;color:var(--text-secondary);">Loading service details...</p>
+    </div>
+
+    <div id="serviceDetailContainer" style="display:none;"></div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col brand">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <span style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:white;">Zaure</span>
+            <span style="font-size:0.7rem;color:#94A3B8;">Buy with Confidence</span>
+          </div>
+          <p>Nigeria's most trusted online marketplace. Buy, sell, or trade locally. No commission, no middlemen.</p>
+          <div class="social">
+            <a href="https://twitter.com/zauretech" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com/zauretech" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://linkedin.com/company/zauretech" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://facebook.com/zauretech" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Browse</h4>
+          <a href="/category.html?slug=all">All Items</a>
+          <a href="/services.html">Services</a>
+          <a href="/category.html?slug=electronics">Electronics</a>
+          <a href="/category.html?slug=fashion">Fashion</a>
+          <a href="/category.html?slug=home-kitchen">Home & Kitchen</a>
+          <a href="/category.html?slug=real-estate">Real Estate</a>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <a href="/help.html">Help Center</a>
+          <a href="/faq.html">FAQ</a>
+          <a href="/safety.html">Safety Tips</a>
+          <a href="/contact.html">Contact Us</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="/about.html">About Us</a>
+          <a href="/alamin-ahmed.html">Founder</a>
+          <a href="/careers.html">Careers</a>
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Service</a>
+        </div>
+        <div class="footer-bottom">
+          <span>&copy; 2026 <strong>Zaure Technologies</strong>. All rights reserved.</span>
+          <span class="footer-lang"><i class="fas fa-globe"></i> Nigeria · English</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== BOTTOM NAV ===== -->
+  <div class="bottom-nav">
+    <a href="/" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
+    <a href="/categories.html" class="nav-item"><i class="fas fa-th-large"></i><span>Categories</span></a>
+    <button class="post-btn" id="fabPostAd"><i class="fas fa-plus"></i></button>
+    <a href="/favorites.html" class="nav-item"><i class="fas fa-heart"></i><span>Favorites</span></a>
+    <a href="/profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
+  </div>
+
+  <script src="/js/main.js"></script>
+  <script>
+    // ============================================
+    // GOOGLE SHEET LOGGING
+    // ============================================
+    const ZAURE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbyopnxgVhZo80kdR1Rrdr_SbivRJZXrE6cAkwOB9bWB1OklMmp3jWoe9c8W6SGM4XNhHA/exec';
+
+    function logServiceInteraction(serviceName, sellerName, action) {
+      const user = JSON.parse(localStorage.getItem('zaure_user') || '{}');
+      const payload = {
+        type: 'service_interaction',
+        action: action,
+        service: serviceName,
+        seller: sellerName,
+        user_name: user.name || 'Guest',
+        user_phone: user.phone || '',
+        user_state: user.state || '',
+        timestamp: new Date().toISOString()
+      };
+      fetch(ZAURE_SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: JSON.stringify(payload)
+      }).catch(err => console.warn('Logging failed', err));
+    }
+
+    // ============================================
+    // LOAD SERVICES
+    // ============================================
+    async function loadServices() {
+      try {
+        const response = await fetch('/data/services.json');
+        if (!response.ok) throw new Error('Services not found');
+        return await response.json();
+      } catch (error) {
+        console.error('Error loading services:', error);
+        return [];
+      }
+    }
+
+    function formatPrice(n) {
+      if (n >= 1e6) return `₦${(n/1e6).toFixed(1)}M`;
+      return `₦${n.toLocaleString()}`;
+    }
+
+    function getCategoryName(slug) {
+      const map = {
+        'home-services': 'Home Services',
+        'beauty-personal': 'Beauty & Personal',
+        'events': 'Events',
+        'tech': 'Tech Repair',
+        'education': 'Education',
+        'health': 'Health & Wellness',
+        'transport': 'Transport',
+        'cleaning': 'Cleaning',
+        'professional': 'Professional'
+      };
+      return map[slug] || 'Service';
+    }
+
+    // ============================================
+    // INIT PAGE
+    // ============================================
+    document.addEventListener('DOMContentLoaded', async function() {
+      const params = new URLSearchParams(window.location.search);
+      const serviceId = params.get('id');
+
+      if (!serviceId) {
+        showNotFound();
+        return;
+      }
+
+      const services = await loadServices();
+      const service = services.find(s => s.id === serviceId);
+
+      if (!service) {
+        showNotFound();
+        return;
+      }
+
+      renderService(service);
+      loadUser();
+      initTheme();
+      updateFavoriteBadge();
+
+      document.getElementById('fabPostAd')?.addEventListener('click', function() {
+        window.location.href = '/post.html';
+      });
+    });
+
+    function showNotFound() {
+      document.getElementById('loadingState').innerHTML = `
+        <div class="not-found">
+          <i class="fas fa-exclamation-circle"></i>
+          <h3>Service not found</h3>
+          <p>This service may have been removed or the link is incorrect.</p>
+          <a href="/services.html" class="btn-primary" style="width:auto;padding:10px 28px;">Browse Services</a>
+        </div>
+      `;
+    }
+
+    function renderService(service) {
+      document.getElementById('loadingState').style.display = 'none';
+      const container = document.getElementById('serviceDetailContainer');
+      container.style.display = 'block';
+
+      const priceLabel = service.priceType === 'starting' ? 'Starting from' :
+                        service.priceType === 'hourly' ? 'Per hour' :
+                        service.priceType === 'visit' ? 'Per visit' :
+                        service.priceType === 'quote' ? 'Quote on request' :
+                        'Fixed price';
+      const priceDisplay = service.priceType === 'quote' || service.price === 0
+        ? 'Free Quote'
+        : formatPrice(service.price);
+
+      const seller = service.seller || {};
+      const whatsappNumber = (seller.whatsapp || seller.phone || '09042339411').replace(/[^0-9]/g, '');
+      const waMessage = encodeURIComponent(`Hello ${seller.name || 'Zaure Pro'}, I found your service "${service.title}" on Zaure. I'd like to know more.`);
+
+      const avatarHTML = seller.profilePic
+        ? `<img src="${seller.profilePic}" alt="${seller.name}" onerror="this.style.display='none';this.parentElement.textContent='${seller.initials || seller.name?.charAt(0) || 'Z'}';">`
+        : (seller.initials || seller.name?.charAt(0) || 'Z');
+
+      container.innerHTML = `
+        <div class="service-hero-card">
+          <div class="service-hero-top">
+            <div class="service-hero-avatar">${avatarHTML}</div>
+            <div class="service-hero-info">
+              <div class="service-hero-category">
+                <i class="fas fa-tag"></i> ${getCategoryName(service.subcategory)}
+              </div>
+              <h1>${service.title}</h1>
+              <div class="service-hero-provider">
+                <i class="fas fa-check-circle"></i> ${seller.name || 'Zaure Pro'} — Verified
+              </div>
+              <div class="service-hero-meta">
+                <span><i class="fas fa-map-pin"></i> ${service.location || 'Nigeria'}</span>
+                <span><i class="fas fa-briefcase"></i> ${service.yearsExperience || 0}+ years experience</span>
+                <span><i class="fas fa-star" style="color:#f5b342;"></i> ${seller.rating || '5.0'}</span>
+              </div>
+            </div>
+            <div class="service-price-highlight">
+              <div class="price-value">${priceDisplay}</div>
+              <div class="price-label">${priceLabel}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-description-card">
+          <h3><i class="fas fa-align-left"></i> About This Service</h3>
+          <p>${service.description}</p>
+        </div>
+
+        <div class="service-meta-card">
+          <h3><i class="fas fa-info-circle"></i> Service Details</h3>
+          <div class="service-meta-list">
+            <div class="meta-item">
+              <span class="label">Service Area</span>
+              <span class="value">${service.serviceArea || service.location || 'Nigeria'}</span>
+            </div>
+            <div class="meta-item">
+              <span class="label">Availability</span>
+              <span class="value">${service.availability || 'By appointment'}</span>
+            </div>
+            <div class="meta-item">
+              <span class="label">Response Time</span>
+              <span class="value">${service.responseTime || 'Fast'}</span>
+            </div>
+            <div class="meta-item">
+              <span class="label">Experience</span>
+              <span class="value">${service.yearsExperience || 0}+ years</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-contact-card">
+          <h3><i class="fas fa-phone-alt"></i> Contact ${seller.name || 'Provider'}</h3>
+          <div class="service-contact-actions">
+            <a href="tel:${seller.phone || ''}" class="btn-call" id="callBtn">
+              <i class="fas fa-phone-alt"></i> Call Now
+            </a>
+            <a href="https://wa.me/${whatsappNumber}?text=${waMessage}" target="_blank" class="btn-wa" id="waBtn">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+          </div>
+        </div>
+      `;
+
+      // Attach logging to Call
+      document.getElementById('callBtn').addEventListener('click', function() {
+        logServiceInteraction(service.title, seller.name || 'Zaure Pro', 'call_click');
+      });
+
+      // Attach logging to WhatsApp
+      document.getElementById('waBtn').addEventListener('click', function() {
+        logServiceInteraction(service.title, seller.name || 'Zaure Pro', 'whatsapp_click');
+      });
+    }
+  </script>
+</body>
+</html>
