@@ -38,82 +38,126 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
   <style>
+    /* ============================================================
+       REFINED SERVICES PAGE — clean beauty
+       ============================================================ */
+
+    /* ---------- Hero ---------- */
     .services-hero {
-      background: linear-gradient(135deg, #1a3650 0%, #0f2940 100%);
-      border-radius: 24px;
-      padding: 44px 32px;
-      margin: 24px 0 20px;
-      color: white;
       position: relative;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(212,184,122,0.18) 0%, transparent 45%),
+        radial-gradient(circle at 85% 80%, rgba(47,111,158,0.22) 0%, transparent 50%),
+        linear-gradient(140deg, #0d2338 0%, #1a3650 55%, #0f2940 100%);
+      border-radius: 28px;
+      padding: 56px 32px 52px;
+      margin: 20px 0 24px;
+      color: #fff;
       overflow: hidden;
       text-align: center;
+      box-shadow: 0 24px 60px rgba(15,41,64,0.18);
     }
-    .services-hero::before {
+    .services-hero::before,
+    .services-hero::after {
       content: '';
       position: absolute;
-      top: -50%; right: -20%;
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(212,184,122,0.15) 0%, transparent 70%);
       border-radius: 50%;
+      pointer-events: none;
+    }
+    .services-hero::before {
+      top: -120px; right: -80px;
+      width: 340px; height: 340px;
+      background: radial-gradient(circle, rgba(212,184,122,0.18) 0%, transparent 70%);
+    }
+    .services-hero::after {
+      bottom: -140px; left: -60px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
     }
     .services-hero-inner {
       position: relative; z-index: 2;
-      max-width: 700px; margin: 0 auto;
+      max-width: 720px; margin: 0 auto;
     }
     .services-hero .hero-label {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      font-size: 0.7rem;
+      gap: 7px;
+      font-size: 0.68rem;
       font-weight: 700;
-      color: #D4B87A;
+      color: #E7D3A1;
       text-transform: uppercase;
-      letter-spacing: 3px;
-      padding: 5px 14px;
-      border: 1px solid rgba(212,184,122,0.3);
+      letter-spacing: 3.4px;
+      padding: 6px 16px;
+      border: 1px solid rgba(212,184,122,0.35);
       border-radius: 40px;
-      background: rgba(255,255,255,0.05);
-      backdrop-filter: blur(4px);
-      margin-bottom: 16px;
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      margin-bottom: 20px;
     }
+    .services-hero .hero-label i { font-size: 0.7rem; }
+
     .services-hero h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 2.4rem;
+      font-size: 2.6rem;
       font-weight: 800;
-      letter-spacing: -0.8px;
-      line-height: 1.15;
-      margin-bottom: 12px;
+      letter-spacing: -0.9px;
+      line-height: 1.12;
+      margin-bottom: 14px;
     }
-    .services-hero h1 span { color: #D4B87A; }
+    .services-hero h1 span {
+      color: #D4B87A;
+      font-style: italic;
+      position: relative;
+    }
+    .services-hero h1 span::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; bottom: 4px;
+      height: 6px;
+      background: linear-gradient(90deg, transparent, rgba(212,184,122,0.35), transparent);
+      border-radius: 4px;
+      z-index: -1;
+    }
     .services-hero p {
-      font-size: 0.95rem;
-      color: rgba(255,255,255,0.8);
-      line-height: 1.6;
-      margin-bottom: 24px;
+      font-size: 0.98rem;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.65;
+      max-width: 560px;
+      margin: 0 auto 30px;
     }
 
+    /* ---------- Refined search ---------- */
     .services-search {
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(8px);
+      background: rgba(255,255,255,0.98);
       border-radius: 60px;
-      padding: 6px 6px 6px 20px;
+      padding: 6px 6px 6px 22px;
       display: flex;
       align-items: center;
-      gap: 10px;
-      max-width: 560px;
+      gap: 12px;
+      max-width: 580px;
       margin: 0 auto;
-      box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+      box-shadow:
+        0 16px 40px rgba(0,0,0,0.22),
+        0 0 0 1px rgba(255,255,255,0.08) inset;
+      transition: box-shadow 0.25s;
     }
-    .services-search i {
+    .services-search:focus-within {
+      box-shadow:
+        0 20px 48px rgba(0,0,0,0.28),
+        0 0 0 3px rgba(212,184,122,0.35);
+    }
+    .services-search i.fa-search {
       color: #64748B;
       font-size: 0.95rem;
+      flex-shrink: 0;
     }
     .services-search input {
       border: none;
       outline: none;
       flex: 1;
-      padding: 10px 0;
-      font-size: 0.92rem;
+      padding: 12px 0;
+      font-size: 0.93rem;
       background: transparent;
       color: #151e28;
       font-family: inherit;
@@ -121,44 +165,55 @@
     }
     .services-search input::placeholder { color: #94A3B8; }
     .services-search button {
-      background: #1a3650;
-      color: white;
+      background: linear-gradient(135deg, #1a3650, #0f2940);
+      color: #fff;
       border: none;
-      padding: 12px 22px;
+      padding: 13px 24px;
       border-radius: 60px;
       font-weight: 600;
       font-size: 0.85rem;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: transform 0.2s, filter 0.2s;
       font-family: inherit;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 7px;
       white-space: nowrap;
     }
-    .services-search button:hover { background: #0f2940; }
-
-    @media (max-width: 640px) {
-      .services-hero { padding: 32px 20px; }
-      .services-hero h1 { font-size: 1.7rem; }
-      .services-hero p { font-size: 0.85rem; }
-      .services-search { padding: 4px 4px 4px 16px; gap: 6px; }
-      .services-search button { padding: 10px 16px; font-size: 0.78rem; }
+    .services-search button:hover {
+      filter: brightness(1.15);
+      transform: translateY(-1px);
     }
 
+    @media (max-width: 640px) {
+      .services-hero { padding: 40px 20px 44px; border-radius: 22px; }
+      .services-hero h1 { font-size: 1.85rem; }
+      .services-hero p { font-size: 0.87rem; }
+      .services-search { padding: 4px 4px 4px 16px; gap: 6px; }
+      .services-search input { padding: 10px 0; font-size: 0.88rem; }
+      .services-search button { padding: 11px 18px; font-size: 0.78rem; }
+    }
+
+    /* ---------- Chips (refined) ---------- */
     .service-chips-wrapper {
       position: sticky;
       top: 60px;
       z-index: 40;
       background: var(--bg);
-      padding: 12px 0;
-      margin-bottom: 8px;
-      border-bottom: 1px solid var(--border);
+      padding: 14px 0 12px;
+      margin-bottom: 6px;
       transition: background 0.3s;
+    }
+    .service-chips-wrapper::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border) 20%, var(--border) 80%, transparent);
     }
     .service-chips {
       display: flex;
-      gap: 8px;
+      gap: 9px;
       overflow-x: auto;
       scrollbar-width: none;
       padding-bottom: 4px;
@@ -168,321 +223,379 @@
       flex-shrink: 0;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 7px;
       background: var(--surface);
       border: 1px solid var(--border);
-      padding: 9px 16px;
+      padding: 10px 18px;
       border-radius: 40px;
       font-size: 0.82rem;
       font-weight: 600;
       color: var(--text-secondary);
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.22s ease;
       white-space: nowrap;
       font-family: inherit;
+      letter-spacing: 0.1px;
     }
-    .service-chip i { font-size: 0.85rem; }
+    .service-chip i { font-size: 0.82rem; }
     .service-chip:hover {
-      border-color: #1a3650;
+      border-color: rgba(26,54,80,0.5);
       color: var(--text);
+      transform: translateY(-1px);
     }
     .service-chip.active {
-      background: #1a3650;
-      color: white;
-      border-color: #1a3650;
+      background: linear-gradient(135deg, #1a3650, #0f2940);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 6px 16px rgba(26,54,80,0.25);
     }
     .service-chip.active i { color: #D4B87A; }
 
+    /* ---------- Filter row ---------- */
     .services-filter-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       gap: 12px;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
     .services-filter-row .result-count {
       font-size: 0.85rem;
       color: var(--text-secondary);
+      letter-spacing: 0.2px;
     }
-    .services-filter-row .result-count strong { color: var(--text); font-weight: 700; }
+    .services-filter-row .result-count strong {
+      color: var(--text);
+      font-weight: 700;
+    }
     .services-filter-row select {
-      padding: 8px 14px;
+      padding: 9px 16px;
       border: 1px solid var(--border);
-      border-radius: 10px;
+      border-radius: 12px;
       font-size: 0.82rem;
       font-family: inherit;
       background: var(--surface);
       color: var(--text);
       outline: none;
       cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
-    .services-filter-row select:focus { border-color: #1a3650; }
+    .services-filter-row select:hover { border-color: rgba(26,54,80,0.4); }
+    .services-filter-row select:focus {
+      border-color: #1a3650;
+      box-shadow: 0 0 0 3px rgba(26,54,80,0.12);
+    }
 
+    /* ---------- Grid ---------- */
     .services-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 16px;
-      margin-bottom: 40px;
+      gap: 20px;
+      margin-bottom: 44px;
     }
     @media (min-width: 640px) {
       .services-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (min-width: 1024px) {
-      .services-grid { grid-template-columns: repeat(3, 1fr); }
+      .services-grid { grid-template-columns: repeat(3, 1fr); gap: 22px; }
     }
 
+    /* ---------- Service card (refined, no price, big avatar) ---------- */
     .service-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 18px;
+      border-radius: 22px;
       overflow: hidden;
       cursor: pointer;
-      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+      transition:
+        transform 0.35s cubic-bezier(0.2, 0.8, 0.3, 1),
+        box-shadow 0.35s ease,
+        border-color 0.35s ease;
       position: relative;
       display: flex;
       flex-direction: column;
-      animation: fadeInUp 0.4s ease both;
-    }
-    .service-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 40px rgba(0,0,0,0.1);
-      border-color: #D4B87A;
+      animation: fadeInUp 0.5s ease both;
+      isolation: isolate;
     }
     .service-card::before {
       content: '';
       position: absolute;
-      top: 0; left: 0;
-      width: 4px; height: 100%;
-      background: linear-gradient(180deg, #1a3650, #D4B87A);
+      inset: 0;
+      border-radius: 22px;
+      background: linear-gradient(160deg, rgba(212,184,122,0.06) 0%, transparent 40%);
       opacity: 0;
-      transition: opacity 0.3s;
-      z-index: 2;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 48px rgba(15,41,64,0.14);
+      border-color: rgba(212,184,122,0.55);
     }
     .service-card:hover::before { opacity: 1; }
 
+    /* Header — bigger avatar, cleaner */
     .service-card-header {
       display: flex;
       align-items: center;
-      gap: 14px;
-      padding: 18px;
-      background: var(--surface-alt);
+      gap: 16px;
+      padding: 22px 20px 16px;
       position: relative;
+      z-index: 2;
     }
     .service-provider-avatar {
-      width: 52px; height: 52px;
+      width: 68px;
+      height: 68px;
       border-radius: 50%;
       background: linear-gradient(135deg, #1a3650, #0f2940);
-      color: white;
+      color: #E7D3A1;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 700;
-      font-size: 1.1rem;
+      font-size: 1.35rem;
       flex-shrink: 0;
       overflow: hidden;
-      box-shadow: 0 4px 12px rgba(26,54,80,0.2);
+      position: relative;
+      box-shadow:
+        0 8px 20px rgba(26,54,80,0.22),
+        0 0 0 3px var(--surface),
+        0 0 0 4.5px rgba(212,184,122,0.45);
+      transition: box-shadow 0.35s ease, transform 0.35s ease;
+    }
+    .service-card:hover .service-provider-avatar {
+      transform: scale(1.03);
+      box-shadow:
+        0 12px 28px rgba(26,54,80,0.28),
+        0 0 0 3px var(--surface),
+        0 0 0 5px rgba(212,184,122,0.7);
     }
     .service-provider-avatar img {
-      width: 100%; height: 100%;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
+      display: block;
     }
-    .service-provider-info { flex: 1; min-width: 0; }
+    .service-provider-info {
+      flex: 1;
+      min-width: 0;
+    }
     .service-provider-info .provider-name {
       font-weight: 700;
-      font-size: 0.95rem;
+      font-size: 1rem;
       color: var(--text);
-      margin-bottom: 2px;
+      margin-bottom: 4px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      letter-spacing: -0.2px;
     }
     .service-provider-info .provider-badge {
       display: inline-flex;
       align-items: center;
-      gap: 4px;
-      font-size: 0.68rem;
-      font-weight: 600;
+      gap: 5px;
+      font-size: 0.66rem;
+      font-weight: 700;
       color: #1f5d8a;
       background: rgba(31,93,138,0.1);
-      padding: 2px 8px;
+      padding: 3px 9px;
       border-radius: 12px;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
     }
     .service-provider-info .provider-badge i { font-size: 0.6rem; }
 
+    /* Featured tag */
     .service-tag-featured {
       position: absolute;
-      top: 10px; right: 10px;
-      background: #D4B87A;
+      top: 16px;
+      right: 16px;
+      background: linear-gradient(135deg, #E7D3A1, #D4B87A);
       color: #1a2c3d;
       font-size: 0.6rem;
       font-weight: 800;
-      padding: 3px 10px;
+      padding: 4px 11px;
       border-radius: 20px;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.7px;
       z-index: 3;
+      box-shadow: 0 4px 12px rgba(212,184,122,0.4);
     }
 
+    /* Body */
     .service-card-body {
-      padding: 16px 18px 18px;
+      padding: 0 20px 22px;
       flex: 1;
       display: flex;
       flex-direction: column;
+      position: relative;
+      z-index: 2;
     }
     .service-category-label {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
-      font-size: 0.65rem;
+      gap: 6px;
+      font-size: 0.64rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 1.4px;
       color: #B49450;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
+    .service-category-label i { font-size: 0.7rem; }
+
     .service-title {
       font-family: 'Playfair Display', serif;
-      font-size: 1.05rem;
+      font-size: 1.08rem;
       font-weight: 700;
       color: var(--text);
       line-height: 1.35;
-      margin-bottom: 8px;
+      margin-bottom: 9px;
+      letter-spacing: -0.2px;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
     .service-desc {
-      font-size: 0.82rem;
+      font-size: 0.83rem;
       color: var(--text-secondary);
-      line-height: 1.5;
-      margin-bottom: 14px;
+      line-height: 1.55;
+      margin-bottom: 16px;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
+
+    /* Meta grid */
     .service-meta-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 8px 14px;
-      font-size: 0.72rem;
+      gap: 10px 16px;
+      font-size: 0.73rem;
       color: var(--text-secondary);
-      margin-bottom: 14px;
-      padding-top: 12px;
-      border-top: 1px solid var(--border);
+      margin-bottom: 18px;
+      padding-top: 14px;
+      border-top: 1px dashed var(--border);
     }
     .service-meta-grid span {
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      font-weight: 500;
     }
-    .service-meta-grid span i { color: #1f5d8a; font-size: 0.7rem; flex-shrink: 0; }
+    .service-meta-grid span i {
+      color: #1f5d8a;
+      font-size: 0.72rem;
+      flex-shrink: 0;
+      opacity: 0.85;
+    }
 
+    /* Footer — contact only, no price */
     .service-card-footer {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 10px;
+      justify-content: stretch;
       margin-top: auto;
-      padding-top: 12px;
-      border-top: 1px solid var(--border);
-    }
-    .service-price {
-      display: flex;
-      flex-direction: column;
-    }
-    .service-price .price-value {
-      font-size: 1.1rem;
-      font-weight: 800;
-      color: #1a3650;
-      line-height: 1;
-    }
-    [data-theme="dark"] .service-price .price-value { color: #D4B87A; }
-    .service-price .price-label {
-      font-size: 0.62rem;
-      color: var(--text-secondary);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-top: 3px;
-      font-weight: 600;
+      padding-top: 4px;
     }
     .service-contact-btn {
-      background: #25D366;
-      color: white;
+      flex: 1;
+      background: linear-gradient(135deg, #25D366, #1DA851);
+      color: #fff;
       border: none;
-      padding: 9px 16px;
+      padding: 11px 18px;
       border-radius: 60px;
       font-weight: 700;
-      font-size: 0.78rem;
+      font-size: 0.82rem;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, filter 0.22s ease;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      justify-content: center;
+      gap: 8px;
       text-decoration: none;
       font-family: inherit;
+      letter-spacing: 0.2px;
+      box-shadow: 0 6px 16px rgba(37,211,102,0.28);
     }
+    .service-contact-btn i { font-size: 0.95rem; }
     .service-contact-btn:hover {
-      background: #1DA851;
+      filter: brightness(1.05);
       transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(37,211,102,0.35);
     }
+    .service-contact-btn:active { transform: translateY(0); }
 
+    /* ---------- Empty state ---------- */
     .services-empty {
       grid-column: 1/-1;
       text-align: center;
-      padding: 60px 24px;
+      padding: 70px 26px;
       background: var(--surface);
-      border-radius: 20px;
+      border-radius: 24px;
       border: 1px solid var(--border);
     }
     .services-empty i {
       font-size: 3rem;
-      color: var(--text-secondary);
-      margin-bottom: 16px;
+      color: #D4B87A;
+      margin-bottom: 18px;
       display: block;
+      opacity: 0.8;
     }
     .services-empty h3 {
-      font-size: 1.2rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
       color: var(--text);
       margin-bottom: 8px;
     }
     .services-empty p {
       color: var(--text-secondary);
       font-size: 0.9rem;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
+      max-width: 360px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
     }
     .services-empty .btn-primary {
       width: auto;
-      padding: 12px 28px;
+      padding: 12px 30px;
       display: inline-flex;
     }
 
+    /* ---------- CTA ---------- */
     .services-cta {
-      background: linear-gradient(135deg, #1a3650, #0f2940);
-      border-radius: 20px;
-      padding: 36px 28px;
-      margin: 40px 0;
-      color: white;
+      position: relative;
+      background:
+        radial-gradient(circle at 90% 20%, rgba(212,184,122,0.2) 0%, transparent 45%),
+        linear-gradient(135deg, #1a3650 0%, #0f2940 100%);
+      border-radius: 26px;
+      padding: 44px 36px;
+      margin: 44px 0 24px;
+      color: #fff;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 24px;
+      gap: 28px;
       flex-wrap: wrap;
-      position: relative;
       overflow: hidden;
+      box-shadow: 0 24px 56px rgba(15,41,64,0.18);
     }
     .services-cta::before {
       content: '';
       position: absolute;
-      top: -50%; left: -10%;
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(212,184,122,0.15) 0%, transparent 70%);
+      top: -100px; left: -60px;
+      width: 320px; height: 320px;
+      background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
       border-radius: 50%;
+      pointer-events: none;
     }
     .services-cta-content {
       flex: 1;
@@ -492,50 +605,62 @@
     }
     .services-cta h3 {
       font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       font-weight: 700;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
+      letter-spacing: -0.4px;
     }
     .services-cta p {
-      font-size: 0.9rem;
-      color: rgba(255,255,255,0.85);
-      line-height: 1.6;
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.65;
+      max-width: 480px;
     }
     .services-cta .btn-cta {
-      background: #D4B87A;
+      background: linear-gradient(135deg, #E7D3A1, #D4B87A);
       color: #1a2c3d;
       border: none;
-      padding: 14px 28px;
+      padding: 15px 30px;
       border-radius: 60px;
       font-weight: 700;
-      font-size: 0.9rem;
+      font-size: 0.92rem;
       cursor: pointer;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      transition: all 0.2s;
+      gap: 9px;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, filter 0.22s ease;
       position: relative;
       z-index: 2;
       font-family: inherit;
       white-space: nowrap;
+      letter-spacing: 0.2px;
+      box-shadow: 0 10px 26px rgba(212,184,122,0.32);
     }
     .services-cta .btn-cta:hover {
-      background: #e0c88a;
       transform: translateY(-2px);
+      filter: brightness(1.05);
+      box-shadow: 0 14px 32px rgba(212,184,122,0.42);
     }
 
+    /* ---------- Animation ---------- */
     @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(22px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
     .service-card:nth-child(1) { animation-delay: 0.03s; }
     .service-card:nth-child(2) { animation-delay: 0.06s; }
     .service-card:nth-child(3) { animation-delay: 0.09s; }
     .service-card:nth-child(4) { animation-delay: 0.12s; }
     .service-card:nth-child(5) { animation-delay: 0.15s; }
     .service-card:nth-child(6) { animation-delay: 0.18s; }
+    .service-card:nth-child(7) { animation-delay: 0.21s; }
+    .service-card:nth-child(8) { animation-delay: 0.24s; }
+    .service-card:nth-child(9) { animation-delay: 0.27s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .service-card { animation: none !important; }
+    }
   </style>
 </head>
 <body>
@@ -576,7 +701,7 @@
       <div class="services-hero-inner">
         <span class="hero-label"><i class="fas fa-tools"></i> Local Service Providers</span>
         <h1>Find a <span>Pro</span> Near You</h1>
-        <p>Trusted local service providers on Zaure. Plumbers, electricians, tailors, photographers, tutors, and more.</p>
+        <p>Trusted local service providers on Zaure. Plumbers, electricians, tailors, photographers, tutors, and more — verified and ready to serve.</p>
 
         <div class="services-search">
           <i class="fas fa-search"></i>
@@ -601,17 +726,15 @@
       <select id="servicesSortSelect">
         <option value="recommended">Recommended</option>
         <option value="rating-high">Highest Rated</option>
-        <option value="price-low">Price: Low to High</option>
-        <option value="price-high">Price: High to Low</option>
         <option value="experience-high">Most Experienced</option>
       </select>
     </div>
 
     <!-- ===== SERVICES GRID ===== -->
     <div class="services-grid" id="servicesGrid">
-      <div class="service-card" style="grid-column:1/-1;padding:40px;text-align:center;">
-        <i class="fas fa-spinner fa-spin" style="font-size:2rem;color:#1a3650;"></i>
-        <p style="margin-top:12px;color:var(--text-secondary);">Loading service providers...</p>
+      <div class="service-card" style="grid-column:1/-1;padding:48px 20px;text-align:center;pointer-events:none;">
+        <i class="fas fa-spinner fa-spin" style="font-size:2rem;color:#1a3650;display:block;margin-bottom:14px;"></i>
+        <p style="color:var(--text-secondary);font-size:0.9rem;">Loading service providers…</p>
       </div>
     </div>
 
@@ -833,12 +956,6 @@
         case 'rating-high':
           filtered.sort((a, b) => (b.seller?.rating || 0) - (a.seller?.rating || 0));
           break;
-        case 'price-low':
-          filtered.sort((a, b) => a.price - b.price);
-          break;
-        case 'price-high':
-          filtered.sort((a, b) => b.price - a.price);
-          break;
         case 'experience-high':
           filtered.sort((a, b) => (b.yearsExperience || 0) - (a.yearsExperience || 0));
           break;
@@ -861,7 +978,7 @@
       if (!services || services.length === 0) {
         grid.innerHTML = `
           <div class="services-empty">
-            <i class="fas fa-search"></i>
+            <i class="fas fa-user-tie"></i>
             <h3>No services found</h3>
             <p>Try a different category or search term. New providers join every week.</p>
             <a href="/post.html" class="btn-primary"><i class="fas fa-plus-circle"></i> List Your Service</a>
@@ -871,21 +988,20 @@
       }
 
       grid.innerHTML = services.map(s => {
-        const priceLabel = s.priceType === 'starting' ? 'Starting from' :
-                          s.priceType === 'hourly' ? 'Per hour' :
-                          s.priceType === 'visit' ? 'Per visit' :
-                          s.priceType === 'quote' ? 'Quote on request' :
-                          'Fixed price';
-        const priceDisplay = s.priceType === 'quote' || s.price === 0
-          ? 'Free Quote'
-          : formatPrice(s.price);
+        const sellerName = s.seller?.name || 'Zaure Pro';
+        const initials = s.seller?.initials || (sellerName.charAt(0).toUpperCase());
+        const profilePic = s.seller?.profilePic || s.seller?.avatar || s.seller?.image || '';
+        const rating = s.seller?.rating || '5.0';
+        const experience = s.yearsExperience || 0;
+        const responseTime = s.responseTime || 'Fast';
 
-        const avatarHTML = s.seller?.profilePic
-          ? `<img src="${s.seller.profilePic}" alt="${s.seller.name}" onerror="this.style.display='none';this.parentElement.textContent='${s.seller.initials || s.seller.name.charAt(0)}';">`
-          : (s.seller?.initials || s.seller?.name?.charAt(0) || 'Z');
+        // Build avatar: profile image if available, otherwise initials
+        const avatarHTML = profilePic
+          ? `<img src="${profilePic}" alt="${sellerName}" loading="lazy" onerror="this.replaceWith(document.createTextNode('${initials}'))">`
+          : initials;
 
         const whatsappNumber = (s.seller?.whatsapp || s.seller?.phone || '09042339411').replace(/[^0-9]/g, '');
-        const waMessage = encodeURIComponent(`Hello ${s.seller?.name}, I found your service "${s.title}" on Zaure. I'd like to know more.`);
+        const waMessage = encodeURIComponent(`Hello ${sellerName}, I found your service "${s.title}" on Zaure. I'd like to know more.`);
 
         return `
           <div class="service-card" onclick="window.location.href='/service.html?id=${s.id}'">
@@ -893,7 +1009,7 @@
             <div class="service-card-header">
               <div class="service-provider-avatar">${avatarHTML}</div>
               <div class="service-provider-info">
-                <div class="provider-name">${s.seller?.name || 'Zaure Pro'}</div>
+                <div class="provider-name">${sellerName}</div>
                 <div class="provider-badge"><i class="fas fa-check-circle"></i> Verified Provider</div>
               </div>
             </div>
@@ -906,22 +1022,18 @@
               <div class="service-desc">${s.description}</div>
               <div class="service-meta-grid">
                 <span><i class="fas fa-map-pin"></i> ${s.location || 'Nigeria'}</span>
-                <span><i class="fas fa-briefcase"></i> ${s.yearsExperience || 0}+ yrs</span>
-                <span><i class="fas fa-clock"></i> ${s.responseTime || 'Fast'}</span>
-                <span><i class="fas fa-star" style="color:#f5b342;"></i> ${s.seller?.rating || '5.0'}</span>
+                <span><i class="fas fa-briefcase"></i> ${experience}+ yrs</span>
+                <span><i class="fas fa-clock"></i> ${responseTime}</span>
+                <span><i class="fas fa-star" style="color:#D4B87A;"></i> ${rating}</span>
               </div>
               <div class="service-card-footer">
-                <div class="service-price">
-                  <div class="price-value">${priceDisplay}</div>
-                  <div class="price-label">${priceLabel}</div>
-                </div>
                 <a class="service-contact-btn"
                    href="https://wa.me/${whatsappNumber}?text=${waMessage}"
                    target="_blank"
                    onclick="event.stopPropagation();"
                    data-service="${s.title.replace(/"/g, '&quot;')}"
-                   data-seller="${(s.seller?.name || 'Zaure Pro').replace(/"/g, '&quot;')}">
-                  <i class="fab fa-whatsapp"></i> Contact
+                   data-seller="${sellerName.replace(/"/g, '&quot;')}">
+                  <i class="fab fa-whatsapp"></i> Contact Provider
                 </a>
               </div>
             </div>
@@ -946,11 +1058,6 @@
     function getCategoryName(slug) {
       const cat = SERVICE_CATEGORIES.find(c => c.slug === slug);
       return cat ? cat.name : 'Service';
-    }
-
-    function formatPrice(n) {
-      if (n >= 1e6) return `₦${(n/1e6).toFixed(1)}M`;
-      return `₦${n.toLocaleString()}`;
     }
 
     document.addEventListener('DOMContentLoaded', async function() {
