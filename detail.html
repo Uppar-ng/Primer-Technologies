@@ -160,7 +160,82 @@
     .detail-back .back-btn { background: transparent; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text); text-decoration: none; }
     .detail-back h2 { font-size: 1.1rem; font-weight: 600; color: var(--text); }
 
-    /* Checkout Modal */
+    /* ============================================
+       FLOATING GIFT ICON
+       ============================================ */
+    .gift-float {
+      position: fixed;
+      bottom: 100px;
+      right: 24px;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #D4B87A, #B49450);
+      color: #1a2c3d;
+      border: none;
+      cursor: pointer;
+      font-size: 1.5rem;
+      z-index: 250;
+      box-shadow: 0 8px 24px rgba(212,184,122,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: giftWiggle 3s infinite;
+      transition: transform 0.2s;
+    }
+    .gift-float:hover { transform: scale(1.08); }
+    .gift-float::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 2px solid rgba(212,184,122,0.4);
+      animation: giftRing 2s infinite;
+    }
+    @keyframes giftWiggle {
+      0%, 88%, 100% { transform: rotate(0deg); }
+      91% { transform: rotate(-12deg); }
+      94% { transform: rotate(12deg); }
+      97% { transform: rotate(-8deg); }
+    }
+    @keyframes giftRing {
+      0% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(1.4); opacity: 0; }
+    }
+    .gift-tooltip {
+      position: absolute;
+      bottom: 70px;
+      right: 0;
+      background: #1a3650;
+      color: white;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 0.78rem;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+      font-weight: 500;
+    }
+    .gift-tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      right: 24px;
+      border: 6px solid transparent;
+      border-top-color: #1a3650;
+    }
+    .gift-float:hover .gift-tooltip,
+    .gift-float.show-tip .gift-tooltip { opacity: 1; }
+
+    @media (max-width: 1023px) {
+      .gift-float { bottom: 100px; right: 16px; width: 52px; height: 52px; font-size: 1.3rem; }
+    }
+
+    /* ============================================
+       CHECKOUT MODAL
+       ============================================ */
     .checkout-overlay {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
@@ -248,6 +323,60 @@
     .payment-option .payment-check i { font-size: 0.7rem; display: none; }
     .payment-option.selected .payment-check i { display: block; }
 
+    /* ============================================
+       DELIVERY METHOD CHOICE
+       ============================================ */
+    .delivery-options { display: flex; flex-direction: column; gap: 12px; }
+    .delivery-option {
+      display: flex; align-items: flex-start; gap: 16px; padding: 18px;
+      background: var(--surface); border: 2px solid var(--border);
+      border-radius: 16px; cursor: pointer; transition: all 0.2s;
+      position: relative;
+    }
+    .delivery-option:hover { border-color: #A0AEC0; }
+    .delivery-option.selected { border-color: #1a3650; background: rgba(26,54,80,0.04); }
+    .delivery-option .delivery-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: var(--surface-alt); display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; color: #1a3650; flex-shrink: 0;
+    }
+    .delivery-option.selected .delivery-icon { background: #1a3650; color: white; }
+    .delivery-option .delivery-info { flex: 1; }
+    .delivery-option .delivery-info h4 {
+      font-size: 0.95rem; font-weight: 700; color: var(--text);
+      margin-bottom: 4px; display: flex; align-items: center; gap: 8px;
+      flex-wrap: wrap;
+    }
+    .delivery-option .delivery-info p {
+      font-size: 0.78rem; color: var(--text-secondary); line-height: 1.5;
+    }
+    .delivery-option .delivery-check {
+      width: 24px; height: 24px; border-radius: 50%;
+      border: 2px solid var(--border); display: flex;
+      align-items: center; justify-content: center; flex-shrink: 0;
+      margin-top: 4px;
+    }
+    .delivery-option.selected .delivery-check { background: #1a3650; border-color: #1a3650; color: white; }
+    .delivery-option .delivery-check i { font-size: 0.7rem; display: none; }
+    .delivery-option.selected .delivery-check i { display: block; }
+
+    .delivery-tag {
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      padding: 3px 8px;
+      border-radius: 40px;
+      text-transform: uppercase;
+    }
+    .delivery-tag.save {
+      background: rgba(37,211,102,0.15);
+      color: #1DA851;
+    }
+    .delivery-tag.gift {
+      background: rgba(212,184,122,0.2);
+      color: #B49450;
+    }
+
     .form-group { margin-bottom: 16px; }
     .form-group label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
     .form-group input,
@@ -277,6 +406,99 @@
       border-top: 1px solid var(--border); margin-top: 8px; padding-top: 12px; font-size: 1rem;
     }
     .review-details .review-row.total .review-value { font-weight: 800; color: #1a3650; font-size: 1.2rem; }
+    .review-details .review-row .review-value.strike {
+      text-decoration: line-through;
+      color: #94A3B8;
+      font-weight: 500;
+      font-size: 0.8rem;
+    }
+    .review-details .review-row .review-value.save {
+      color: #1DA851;
+      font-weight: 700;
+    }
+
+    /* ============================================
+       GIFT CONFIRMATION BLOCK (Step 3)
+       ============================================ */
+    .checkout-gift {
+      background: linear-gradient(135deg, rgba(212,184,122,0.18), rgba(180,148,80,0.08));
+      border: 1.5px dashed #D4B87A;
+      border-radius: 14px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+      animation: giftFadeIn 0.4s ease;
+    }
+    @keyframes giftFadeIn {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .checkout-gift-icon {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: #D4B87A;
+      color: #1a2c3d;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+      animation: giftShake 1.4s infinite;
+    }
+    @keyframes giftShake {
+      0%, 85%, 100% { transform: rotate(0deg); }
+      88% { transform: rotate(-12deg); }
+      92% { transform: rotate(12deg); }
+      96% { transform: rotate(-8deg); }
+    }
+    .checkout-gift-text strong {
+      display: block;
+      color: #1a3650;
+      font-size: 0.92rem;
+      margin-bottom: 3px;
+      font-weight: 700;
+    }
+    .checkout-gift-text span {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      line-height: 1.45;
+      display: block;
+    }
+
+    /* Delivery discount info block */
+    .checkout-saving {
+      background: linear-gradient(135deg, rgba(37,211,102,0.12), rgba(29,168,81,0.05));
+      border: 1.5px dashed #25D366;
+      border-radius: 14px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+      animation: giftFadeIn 0.4s ease;
+    }
+    .checkout-saving-icon {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: #25D366;
+      color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .checkout-saving-text strong {
+      display: block;
+      color: #1DA851;
+      font-size: 0.92rem;
+      margin-bottom: 3px;
+      font-weight: 700;
+    }
+    .checkout-saving-text span {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      line-height: 1.45;
+      display: block;
+    }
 
     .bank-details {
       background: linear-gradient(135deg, #1a3650, #0f2940);
@@ -493,6 +715,12 @@
     </div>
   </div>
 
+  <!-- ===== FLOATING GIFT ICON ===== -->
+  <button class="gift-float" id="giftFloat" aria-label="Gift offer">
+    <i class="fas fa-gift"></i>
+    <span class="gift-tooltip">🎁 Buy now — pick up yourself and get a FREE gift!</span>
+  </button>
+
   <!-- ===== CHECKOUT MODAL ===== -->
   <div class="checkout-overlay" id="checkoutOverlay">
     <div class="checkout-modal">
@@ -508,16 +736,21 @@
         </div>
         <div class="progress-step" data-step="2">
           <div class="step-num">2</div>
-          <div class="step-label">Details</div>
+          <div class="step-label">Method</div>
         </div>
         <div class="progress-step" data-step="3">
           <div class="step-num">3</div>
+          <div class="step-label">Details</div>
+        </div>
+        <div class="progress-step" data-step="4">
+          <div class="step-num">4</div>
           <div class="step-label">Confirm</div>
         </div>
       </div>
 
       <div class="checkout-body">
 
+        <!-- STEP 1: Payment Method -->
         <div class="checkout-step active" id="step1">
           <h4 style="font-size:1rem;font-weight:700;color:var(--text);margin-bottom:16px;">Choose Payment Method</h4>
           <div class="payment-options">
@@ -545,7 +778,39 @@
           </div>
         </div>
 
+        <!-- STEP 2: Delivery Method -->
         <div class="checkout-step" id="step2">
+          <h4 style="font-size:1rem;font-weight:700;color:var(--text);margin-bottom:16px;">How do you want to receive it?</h4>
+
+          <div class="delivery-options">
+            <div class="delivery-option" data-delivery="zaure">
+              <div class="delivery-icon"><i class="fas fa-truck"></i></div>
+              <div class="delivery-info">
+                <h4>Zaure Delivery <span class="delivery-tag save">Save ₦500</span></h4>
+                <p>Our rider delivers to your door. Lower delivery fee than standard.</p>
+              </div>
+              <div class="delivery-check"><i class="fas fa-check"></i></div>
+            </div>
+            <div class="delivery-option" data-delivery="pickup">
+              <div class="delivery-icon"><i class="fas fa-store"></i></div>
+              <div class="delivery-info">
+                <h4>Self Pickup <span class="delivery-tag gift">Free Gift</span></h4>
+                <p>Pick up from the seller. No delivery fee, and you get a free gift!</p>
+              </div>
+              <div class="delivery-check"><i class="fas fa-check"></i></div>
+            </div>
+          </div>
+
+          <div class="checkout-btn-row">
+            <button class="checkout-btn secondary" id="step2Back"><i class="fas fa-arrow-left"></i> Back</button>
+            <button class="checkout-btn primary" id="step2Next" disabled>
+              Continue <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 3: Customer Details -->
+        <div class="checkout-step" id="step3">
           <h4 style="font-size:1rem;font-weight:700;color:var(--text);margin-bottom:16px;">Your Details</h4>
           <form id="customerForm">
             <div class="form-group">
@@ -556,7 +821,7 @@
               <label>Phone Number (WhatsApp) *</label>
               <input type="tel" id="customerPhone" placeholder="e.g., 08012345678" required>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="addressGroup">
               <label>Delivery Address *</label>
               <textarea id="customerAddress" placeholder="Enter your full delivery address (street, area, city)" required></textarea>
             </div>
@@ -566,12 +831,13 @@
             </div>
           </form>
           <div class="checkout-btn-row">
-            <button class="checkout-btn secondary" id="step2Back"><i class="fas fa-arrow-left"></i> Back</button>
-            <button class="checkout-btn primary" id="step2Next">Continue <i class="fas fa-arrow-right"></i></button>
+            <button class="checkout-btn secondary" id="step3Back"><i class="fas fa-arrow-left"></i> Back</button>
+            <button class="checkout-btn primary" id="step3Next">Continue <i class="fas fa-arrow-right"></i></button>
           </div>
         </div>
 
-        <div class="checkout-step" id="step3">
+        <!-- STEP 4: Review & Confirm -->
+        <div class="checkout-step" id="step4">
           <h4 style="font-size:1rem;font-weight:700;color:var(--text);margin-bottom:16px;">Review Your Order</h4>
           
           <div class="review-product">
@@ -586,6 +852,10 @@
             <div class="review-row">
               <span class="review-label">Payment Method</span>
               <span class="review-value" id="reviewPaymentMethod">Bank Transfer</span>
+            </div>
+            <div class="review-row">
+              <span class="review-label">Delivery Method</span>
+              <span class="review-value" id="reviewDeliveryMethod">Zaure Delivery</span>
             </div>
             <div class="review-row">
               <span class="review-label">Customer Name</span>
@@ -603,13 +873,31 @@
               <span class="review-label">Product Price</span>
               <span class="review-value" id="reviewPrice">₦0</span>
             </div>
-            <div class="review-row">
+            <div class="review-row" id="reviewDeliveryRow">
               <span class="review-label">Delivery Fee</span>
               <span class="review-value" id="reviewDelivery">₦1,500</span>
             </div>
             <div class="review-row total">
               <span class="review-label">Total</span>
               <span class="review-value" id="reviewTotal">₦0</span>
+            </div>
+          </div>
+
+          <!-- Gift message (only for pickup) -->
+          <div class="checkout-gift" id="giftMessage" style="display:none;">
+            <div class="checkout-gift-icon"><i class="fas fa-gift"></i></div>
+            <div class="checkout-gift-text">
+              <strong>You're getting a FREE gift! 🎁</strong>
+              <span>Since you chose self pickup, we'll include a free gift with your order at no extra cost.</span>
+            </div>
+          </div>
+
+          <!-- Delivery saving message (only for Zaure delivery) -->
+          <div class="checkout-saving" id="savingMessage" style="display:none;">
+            <div class="checkout-saving-icon"><i class="fas fa-truck"></i></div>
+            <div class="checkout-saving-text">
+              <strong>You saved ₦500 on delivery!</strong>
+              <span>Zaure Delivery gives you a lower delivery fee than standard rates.</span>
             </div>
           </div>
 
@@ -657,13 +945,14 @@
           </div>
 
           <div class="checkout-btn-row">
-            <button class="checkout-btn secondary" id="step3Back"><i class="fas fa-arrow-left"></i> Back</button>
+            <button class="checkout-btn secondary" id="step4Back"><i class="fas fa-arrow-left"></i> Back</button>
             <button class="checkout-btn success" id="placeOrderBtn">
               <i class="fas fa-check-circle"></i> Place Order
             </button>
           </div>
         </div>
 
+        <!-- SUCCESS STEP -->
         <div class="checkout-step" id="successStep">
           <div class="checkout-success">
             <div class="success-icon"><i class="fas fa-check-circle"></i></div>
@@ -689,8 +978,8 @@
                 <span class="value" id="successPaymentMethod">-</span>
               </div>
               <div class="success-row">
-                <span class="label">Delivery To</span>
-                <span class="value" id="successAddress">-</span>
+                <span class="label">Delivery Method</span>
+                <span class="value" id="successDeliveryMethod">-</span>
               </div>
             </div>
 
@@ -818,7 +1107,10 @@
     // CONFIGURATION
     // ============================================
     const CONFIG = {
-      DELIVERY_FEE: 1500,
+      DELIVERY_FEE_STANDARD: 2000,   // shown before choice
+      DELIVERY_FEE_ZAURE: 1500,      // Zaure delivery (lower)
+      DELIVERY_FEE_PICKUP: 0,        // pickup has no delivery fee
+      DELIVERY_SAVING: 500,          // how much you save with Zaure delivery
       BANK_NAME: '[Your Bank Name]',
       ACCOUNT_NUMBER: '[Your Account Number]',
       ACCOUNT_NAME: 'Zaure Technologies',
@@ -830,6 +1122,7 @@
 
     let currentProduct = null;
     let selectedPaymentMethod = null;
+    let selectedDeliveryMethod = null;
     let isSubmitting = false;
 
     document.addEventListener('DOMContentLoaded', async function() {
@@ -856,6 +1149,7 @@
       initTheme();
       updateFavoriteBadge();
       setupCheckoutFlow(product);
+      setupFloatingGift();
     });
 
     // ============================================
@@ -900,6 +1194,28 @@
         fallback();
         onSuccess();
       }
+    }
+
+    // ============================================
+    // FLOATING GIFT ICON
+    // ============================================
+    function setupFloatingGift() {
+      const giftFloat = document.getElementById('giftFloat');
+      if (!giftFloat) return;
+
+      // Tap on mobile shows tooltip
+      giftFloat.addEventListener('click', function(e) {
+        e.stopPropagation();
+        this.classList.toggle('show-tip');
+        setTimeout(() => this.classList.remove('show-tip'), 3500);
+      });
+
+      // Close tooltip on outside tap
+      document.addEventListener('click', function(e) {
+        if (!e.target.closest('#giftFloat')) {
+          giftFloat.classList.remove('show-tip');
+        }
+      });
     }
 
     // ============================================
@@ -1047,17 +1363,12 @@
       const overlay = document.getElementById('checkoutOverlay');
       const closeBtn = document.getElementById('checkoutCloseBtn');
       const buyNowBtn = document.getElementById('buyNowBtn');
-      const price = formatPrice(product.price);
-      const total = product.price + CONFIG.DELIVERY_FEE;
-      const totalFormatted = formatPrice(total);
+      const productPrice = product.price;
 
       document.getElementById('reviewProductImage').src = product.images?.[0] || '';
       document.getElementById('reviewProductTitle').textContent = product.title;
-      document.getElementById('reviewProductPrice').textContent = price;
-      document.getElementById('reviewPrice').textContent = price;
-      document.getElementById('reviewDelivery').textContent = `₦${CONFIG.DELIVERY_FEE.toLocaleString()}`;
-      document.getElementById('reviewTotal').textContent = totalFormatted;
-      document.getElementById('bankAmount').textContent = totalFormatted;
+      document.getElementById('reviewProductPrice').textContent = formatPrice(productPrice);
+      document.getElementById('reviewPrice').textContent = formatPrice(productPrice);
 
       document.getElementById('copyAccountBtn').addEventListener('click', function(e) {
         e.stopPropagation();
@@ -1097,9 +1408,12 @@
 
       buyNowBtn.addEventListener('click', function() {
         selectedPaymentMethod = null;
+        selectedDeliveryMethod = null;
         isSubmitting = false;
         document.querySelectorAll('.payment-option').forEach(p => p.classList.remove('selected'));
+        document.querySelectorAll('.delivery-option').forEach(p => p.classList.remove('selected'));
         document.getElementById('step1Next').disabled = true;
+        document.getElementById('step2Next').disabled = true;
         
         prefillFromUser();
         
@@ -1133,6 +1447,7 @@
         }
       }
 
+      // Payment method selection
       document.querySelectorAll('.payment-option').forEach(option => {
         option.addEventListener('click', function() {
           document.querySelectorAll('.payment-option').forEach(p => p.classList.remove('selected'));
@@ -1148,9 +1463,40 @@
         goToStep(2);
       });
 
+      // Delivery method selection
+      document.querySelectorAll('.delivery-option').forEach(option => {
+        option.addEventListener('click', function() {
+          document.querySelectorAll('.delivery-option').forEach(p => p.classList.remove('selected'));
+          this.classList.add('selected');
+          selectedDeliveryMethod = this.dataset.delivery;
+          document.getElementById('step2Next').disabled = false;
+        });
+      });
+
       document.getElementById('step2Back').addEventListener('click', () => goToStep(1));
 
       document.getElementById('step2Next').addEventListener('click', function() {
+        const label = selectedDeliveryMethod === 'zaure' ? 'Zaure Delivery' : 'Self Pickup';
+        document.getElementById('reviewDeliveryMethod').textContent = label;
+
+        // Show/hide address field based on delivery choice
+        const addressGroup = document.getElementById('addressGroup');
+        const addressField = document.getElementById('customerAddress');
+        if (selectedDeliveryMethod === 'pickup') {
+          addressGroup.style.display = 'none';
+          addressField.required = false;
+          addressField.value = 'Self Pickup';
+        } else {
+          addressGroup.style.display = 'block';
+          addressField.required = true;
+        }
+
+        goToStep(3);
+      });
+
+      document.getElementById('step3Back').addEventListener('click', () => goToStep(2));
+
+      document.getElementById('step3Next').addEventListener('click', function() {
         const name = document.getElementById('customerName').value.trim();
         const phone = document.getElementById('customerPhone').value.trim();
         const address = document.getElementById('customerAddress').value.trim();
@@ -1165,7 +1511,7 @@
           document.getElementById('customerPhone').focus();
           return;
         }
-        if (!address || address.length < 5) {
+        if (selectedDeliveryMethod === 'zaure' && (!address || address.length < 5)) {
           alert('Please enter your full delivery address.');
           document.getElementById('customerAddress').focus();
           return;
@@ -1173,15 +1519,51 @@
 
         document.getElementById('reviewCustomerName').textContent = name;
         document.getElementById('reviewCustomerPhone').textContent = phone;
-        document.getElementById('reviewCustomerAddress').textContent = address;
+        document.getElementById('reviewCustomerAddress').textContent = 
+          selectedDeliveryMethod === 'pickup' ? 'Self Pickup at seller location' : address;
 
-        document.getElementById('bankDetailsSection').style.display =
-          selectedPaymentMethod === 'bank' ? 'block' : 'none';
+        // Update pricing based on delivery method
+        let deliveryFee = 0;
+        if (selectedDeliveryMethod === 'zaure') {
+          deliveryFee = CONFIG.DELIVERY_FEE_ZAURE;
+        } else {
+          deliveryFee = CONFIG.DELIVERY_FEE_PICKUP;
+        }
+        const total = productPrice + deliveryFee;
 
-        goToStep(3);
+        // Update the review row for delivery
+        const deliveryRow = document.getElementById('reviewDeliveryRow');
+        if (selectedDeliveryMethod === 'pickup') {
+          deliveryRow.innerHTML = `
+            <span class="review-label">Delivery Fee</span>
+            <span class="review-value save">FREE (Pickup)</span>
+          `;
+        } else {
+          deliveryRow.innerHTML = `
+            <span class="review-label">Delivery Fee</span>
+            <span class="review-value" id="reviewDelivery">${formatPrice(deliveryFee)} <span class="save">(You save ${formatPrice(CONFIG.DELIVERY_SAVING)})</span></span>
+          `;
+        }
+
+        document.getElementById('reviewTotal').textContent = formatPrice(total);
+        document.getElementById('bankAmount').textContent = formatPrice(total);
+
+        // Show the appropriate message
+        const giftMsg = document.getElementById('giftMessage');
+        const savingMsg = document.getElementById('savingMessage');
+
+        if (selectedDeliveryMethod === 'pickup') {
+          giftMsg.style.display = 'flex';
+          savingMsg.style.display = 'none';
+        } else {
+          giftMsg.style.display = 'none';
+          savingMsg.style.display = 'flex';
+        }
+
+        goToStep(4);
       });
 
-      document.getElementById('step3Back').addEventListener('click', () => goToStep(2));
+      document.getElementById('step4Back').addEventListener('click', () => goToStep(3));
 
       document.getElementById('placeOrderBtn').addEventListener('click', async function() {
         if (isSubmitting) return;
@@ -1200,17 +1582,23 @@
 
         document.getElementById('bankOrderRef').childNodes[0].textContent = orderId + ' ';
 
+        const deliveryFee = selectedDeliveryMethod === 'zaure' ? CONFIG.DELIVERY_FEE_ZAURE : 0;
+        const total = productPrice + deliveryFee;
+
         const orderData = {
           order_reference: orderId,
           product_id: product.id,
           product_title: product.title,
-          product_price: price,
-          delivery_fee: `₦${CONFIG.DELIVERY_FEE.toLocaleString()}`,
-          total_amount: totalFormatted,
+          product_price: formatPrice(productPrice),
+          delivery_fee: selectedDeliveryMethod === 'zaure' ? formatPrice(CONFIG.DELIVERY_FEE_ZAURE) : 'FREE (Pickup)',
+          total_amount: formatPrice(total),
           payment_method: selectedPaymentMethod === 'bank' ? 'Bank Transfer' : 'Cash on Delivery',
+          delivery_method: selectedDeliveryMethod === 'zaure' ? 'Zaure Delivery' : 'Self Pickup',
+          gift: selectedDeliveryMethod === 'pickup' ? 'Yes — Free Gift included' : 'No',
+          delivery_saving: selectedDeliveryMethod === 'zaure' ? formatPrice(CONFIG.DELIVERY_SAVING) : 'N/A',
           customer_name: customerName,
           customer_phone: customerPhone,
-          customer_address: customerAddress,
+          customer_address: selectedDeliveryMethod === 'pickup' ? 'Self Pickup' : customerAddress,
           customer_notes: customerNotes || 'None',
           seller_name: product.seller?.name || 'Zaure Official Store',
           order_date: new Date().toLocaleString('en-NG'),
@@ -1229,19 +1617,22 @@
 
         document.getElementById('successOrderRef').textContent = orderId;
         document.getElementById('successProduct').textContent = product.title;
-        document.getElementById('successAmount').textContent = totalFormatted;
+        document.getElementById('successAmount').textContent = formatPrice(total);
         document.getElementById('successPaymentMethod').textContent = orderData.payment_method;
-        document.getElementById('successAddress').textContent = customerAddress;
+        document.getElementById('successDeliveryMethod').textContent = orderData.delivery_method;
 
         const waMessage = encodeURIComponent(
           `Hello Zaure! I just placed an order.\n\n` +
           `Order Reference: ${orderId}\n` +
           `Product: ${product.title}\n` +
-          `Total: ${totalFormatted}\n` +
+          `Total: ${formatPrice(total)}\n` +
           `Payment Method: ${orderData.payment_method}\n` +
+          `Delivery Method: ${orderData.delivery_method}\n` +
+          (selectedDeliveryMethod === 'pickup' ? `🎁 I qualify for a FREE gift!\n` : '') +
           `Name: ${customerName}\n` +
           `Phone: ${customerPhone}\n` +
-          `Address: ${customerAddress}\n\n` +
+          (selectedDeliveryMethod === 'zaure' ? `Address: ${customerAddress}\n` : '') +
+          `\n` +
           (selectedPaymentMethod === 'bank'
             ? `I will send my transfer receipt shortly.`
             : `Please confirm my order for Cash on Delivery.`)
