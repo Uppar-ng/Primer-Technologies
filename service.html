@@ -3,258 +3,625 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>Service Details – Zaure | Find a Pro</title>
-  <meta name="description" content="View service provider details, contact info, and reviews on Zaure.">
+  <title>Provider Profile – Zaure | Find a Pro</title>
+  <meta name="description" content="View trusted service provider profiles, contact info, and details on Zaure.">
   <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
   <style>
-    .service-hero-card {
-      background: var(--surface);
-      border-radius: 24px;
-      border: 1px solid var(--border);
-      padding: 32px 28px;
-      margin: 24px 0 20px;
-      position: relative;
-      overflow: hidden;
-      animation: slideDown 0.5s ease;
-    }
-    .service-hero-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 5px;
-      background: linear-gradient(90deg, #1a3650, #D4B87A, #1a3650);
-    }
-    .service-hero-top {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
-    }
-    .service-hero-avatar {
-      width: 96px;
-      height: 96px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #1a3650, #0f2940);
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.4rem;
-      font-weight: 700;
-      flex-shrink: 0;
-      overflow: hidden;
-      box-shadow: 0 8px 24px rgba(26,54,80,0.2);
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(212,184,122,0.4); }
-      70% { box-shadow: 0 0 0 15px rgba(212,184,122,0); }
-      100% { box-shadow: 0 0 0 0 rgba(212,184,122,0); }
-    }
-    .service-hero-avatar img {
-      width: 100%; height: 100%; object-fit: cover;
-    }
-    .service-hero-info { flex: 1; min-width: 220px; }
-    .service-hero-info h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
-      font-weight: 800;
-      color: var(--text);
-      margin-bottom: 6px;
-      line-height: 1.25;
-    }
-    .service-hero-provider {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(31,93,138,0.1);
-      color: #1f5d8a;
-      padding: 4px 12px;
-      border-radius: 30px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-    .service-hero-category {
-      font-size: 0.85rem;
-      color: #B49450;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-    .service-hero-meta {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      font-size: 0.82rem;
-      color: var(--text-secondary);
-    }
-    .service-hero-meta span { display: inline-flex; align-items: center; gap: 5px; }
-    .service-hero-meta span i { color: #1f5d8a; }
+    /* ============================================================
+       PROVIDER PROFILE — clean beauty, Inter throughout
+       ============================================================ */
 
-    .service-description-card,
-    .service-meta-card,
-    .service-contact-card {
-      background: var(--surface);
-      border-radius: 20px;
-      padding: 24px;
-      border: 1px solid var(--border);
-      margin-bottom: 16px;
-    }
-    .service-description-card h3,
-    .service-meta-card h3,
-    .service-contact-card h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .service-description-card h3 i,
-    .service-meta-card h3 i,
-    .service-contact-card h3 i { color: #D4B87A; }
-    .service-description-card p {
-      font-size: 0.95rem;
-      line-height: 1.75;
-      color: var(--text-secondary);
-    }
-
-    .service-meta-list {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-    }
-    @media (min-width: 640px) {
-      .service-meta-list { grid-template-columns: 1fr 1fr; }
-    }
-    .service-meta-list .meta-item {
-      display: flex;
-      justify-content: space-between;
-      padding: 8px 12px;
-      background: var(--surface-alt);
-      border-radius: 10px;
-      font-size: 0.85rem;
-    }
-    .service-meta-list .meta-item .label {
-      color: var(--text-secondary);
-      font-weight: 500;
-    }
-    .service-meta-list .meta-item .value {
-      color: var(--text);
-      font-weight: 600;
-      text-align: right;
-      max-width: 60%;
-    }
-
-    .service-contact-actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    .service-contact-actions .btn-call,
-    .service-contact-actions .btn-wa {
-      flex: 1;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 14px 20px;
-      border-radius: 60px;
-      font-weight: 700;
-      font-size: 0.95rem;
-      cursor: pointer;
-      text-decoration: none;
-      border: none;
-      font-family: inherit;
-      transition: all 0.2s;
-      min-width: 150px;
-    }
-    .service-contact-actions .btn-call {
-      background: #1a3650;
-      color: white;
-    }
-    .service-contact-actions .btn-call:hover {
-      background: #0f2940;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(26,54,80,0.25);
-    }
-    .service-contact-actions .btn-wa {
-      background: #25D366;
-      color: white;
-    }
-    .service-contact-actions .btn-wa:hover {
-      background: #1DA851;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(37,211,102,0.3);
-    }
-
-    .service-price-highlight {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      justify-content: center;
-      padding: 8px 0;
-    }
-    .service-price-highlight .price-value {
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: #1a3650;
-      line-height: 1;
-    }
-    [data-theme="dark"] .service-price-highlight .price-value { color: #D4B87A; }
-    .service-price-highlight .price-label {
-      font-size: 0.75rem;
-      color: var(--text-secondary);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-top: 4px;
-      font-weight: 600;
-    }
-
+    /* ---------- Back row ---------- */
     .back-row {
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 16px 0;
+      padding: 18px 0 12px;
     }
     .back-row a {
-      background: transparent;
-      border: none;
-      font-size: 1.2rem;
-      cursor: pointer;
+      width: 40px; height: 40px;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 50%;
       color: var(--text);
       text-decoration: none;
+      transition: all 0.22s ease;
     }
-    .back-row h2 { font-size: 1.1rem; font-weight: 600; color: var(--text); }
+    .back-row a:hover {
+      background: #1a3650;
+      color: #fff;
+      border-color: #1a3650;
+      transform: translateX(-2px);
+    }
+    .back-row h2 {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.2px;
+    }
 
+    /* ---------- Profile hero ---------- */
+    .profile-hero {
+      position: relative;
+      background:
+        radial-gradient(circle at 15% 15%, rgba(212,184,122,0.16) 0%, transparent 42%),
+        radial-gradient(circle at 88% 85%, rgba(47,111,158,0.22) 0%, transparent 48%),
+        linear-gradient(140deg, #0d2338 0%, #1a3650 55%, #0f2940 100%);
+      border-radius: 28px;
+      padding: 42px 36px 36px;
+      margin: 6px 0 22px;
+      color: #fff;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(15,41,64,0.18);
+      animation: slideDown 0.5s ease both;
+    }
+    .profile-hero::before,
+    .profile-hero::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .profile-hero::before {
+      top: -120px; right: -80px;
+      width: 340px; height: 340px;
+      background: radial-gradient(circle, rgba(212,184,122,0.18) 0%, transparent 70%);
+    }
+    .profile-hero::after {
+      bottom: -140px; left: -60px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+    }
+
+    .profile-hero-top {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      flex-wrap: wrap;
+    }
+
+    /* Avatar */
+    .profile-avatar {
+      width: 118px;
+      height: 118px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      overflow: hidden;
+      background: linear-gradient(135deg, #1a3650, #0f2940);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 2.4rem;
+      color: #E7D3A1;
+      letter-spacing: 1px;
+      position: relative;
+      box-shadow:
+        0 16px 40px rgba(0,0,0,0.28),
+        0 0 0 4px rgba(255,255,255,0.08),
+        0 0 0 6px rgba(212,184,122,0.55);
+      animation: profileGlow 3.6s ease-in-out infinite;
+    }
+    @keyframes profileGlow {
+      0%, 100% {
+        box-shadow:
+          0 16px 40px rgba(0,0,0,0.28),
+          0 0 0 4px rgba(255,255,255,0.08),
+          0 0 0 6px rgba(212,184,122,0.55);
+      }
+      50% {
+        box-shadow:
+          0 20px 48px rgba(0,0,0,0.32),
+          0 0 0 4px rgba(255,255,255,0.1),
+          0 0 0 8px rgba(212,184,122,0.75);
+      }
+    }
+    .profile-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .profile-avatar .avatar-fallback {
+      width: 100%; height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #E7D3A1;
+      font-weight: 700;
+      font-size: 2.4rem;
+      letter-spacing: 1px;
+    }
+
+    /* Info */
+    .profile-hero-info {
+      flex: 1;
+      min-width: 220px;
+      position: relative;
+      z-index: 2;
+    }
+    .profile-category-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.64rem;
+      font-weight: 700;
+      color: #E7D3A1;
+      text-transform: uppercase;
+      letter-spacing: 2.4px;
+      padding: 5px 14px;
+      border: 1px solid rgba(212,184,122,0.35);
+      border-radius: 40px;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      margin-bottom: 12px;
+    }
+    .profile-category-chip i { font-size: 0.65rem; }
+
+    .profile-hero h1 {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.9px;
+      line-height: 1.15;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+    .profile-subtitle {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.55;
+      margin-bottom: 14px;
+      max-width: 520px;
+    }
+    .profile-badges {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .profile-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      padding: 5px 12px;
+      border-radius: 30px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.9);
+    }
+    .profile-badge.verified {
+      background: rgba(212,184,122,0.18);
+      border-color: rgba(212,184,122,0.4);
+      color: #E7D3A1;
+    }
+    .profile-badge.rating {
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+    }
+    .profile-badge.rating i { color: #D4B87A; }
+
+    .profile-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.82);
+      position: relative;
+      z-index: 2;
+    }
+    .profile-meta-row span {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-weight: 500;
+    }
+    .profile-meta-row span i {
+      color: #D4B87A;
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 640px) {
+      .profile-hero { padding: 30px 22px; border-radius: 22px; }
+      .profile-avatar { width: 88px; height: 88px; font-size: 1.8rem; }
+      .profile-avatar .avatar-fallback { font-size: 1.8rem; }
+      .profile-hero h1 { font-size: 1.5rem; }
+      .profile-hero-top { gap: 18px; }
+      .profile-subtitle { font-size: 0.86rem; }
+    }
+
+    /* ---------- Stats strip ---------- */
+    .profile-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin: 0 0 22px;
+    }
+    @media (min-width: 640px) {
+      .profile-stats { grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    }
+    .profile-stat {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px 16px;
+      text-align: center;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .profile-stat:hover {
+      transform: translateY(-3px);
+      border-color: rgba(212,184,122,0.5);
+      box-shadow: 0 12px 28px rgba(15,41,64,0.08);
+    }
+    .profile-stat .stat-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px; height: 40px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #1a3650, #0f2940);
+      color: #D4B87A;
+      font-size: 1rem;
+      margin-bottom: 10px;
+    }
+    .profile-stat .stat-value {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.4px;
+      margin-bottom: 2px;
+    }
+    .profile-stat .stat-label {
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+
+    /* ---------- Content cards ---------- */
+    .profile-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 26px 24px;
+      margin-bottom: 16px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .profile-card:hover {
+      border-color: rgba(212,184,122,0.35);
+      box-shadow: 0 12px 32px rgba(15,41,64,0.06);
+    }
+    .profile-card h3 {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      letter-spacing: -0.2px;
+    }
+    .profile-card h3 i {
+      color: #B49450;
+      font-size: 0.95rem;
+    }
+    .profile-card p {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: var(--text-secondary);
+      letter-spacing: 0.1px;
+    }
+
+    /* Details grid */
+    .details-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    @media (min-width: 640px) {
+      .details-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+    }
+    .detail-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 13px 16px;
+      background: var(--surface-alt);
+      border-radius: 12px;
+      font-size: 0.85rem;
+      transition: background 0.2s;
+    }
+    .detail-item:hover { background: rgba(26,54,80,0.05); }
+    .detail-item .label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-secondary);
+      font-weight: 600;
+      font-size: 0.78rem;
+      letter-spacing: 0.2px;
+    }
+    .detail-item .label i { color: #B49450; font-size: 0.8rem; }
+    .detail-item .value {
+      color: var(--text);
+      font-weight: 700;
+      text-align: right;
+      font-size: 0.85rem;
+      letter-spacing: -0.1px;
+    }
+
+    /* ---------- Contact card ---------- */
+    .contact-card {
+      background:
+        radial-gradient(circle at 90% 20%, rgba(212,184,122,0.14) 0%, transparent 45%),
+        linear-gradient(135deg, #1a3650 0%, #0f2940 100%);
+      border: 1px solid rgba(212,184,122,0.2);
+      border-radius: 22px;
+      padding: 26px 24px;
+      margin-bottom: 22px;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-card::before {
+      content: '';
+      position: absolute;
+      top: -80px; left: -60px;
+      width: 260px; height: 260px;
+      background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .contact-card h3 {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-size: 1.02rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      letter-spacing: -0.2px;
+      position: relative;
+      z-index: 2;
+      color: #fff;
+    }
+    .contact-card .contact-sub {
+      font-size: 0.83rem;
+      color: rgba(255,255,255,0.72);
+      margin-bottom: 18px;
+      line-height: 1.5;
+      position: relative;
+      z-index: 2;
+    }
+    .contact-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 2;
+    }
+    .contact-btn {
+      flex: 1;
+      min-width: 150px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 14px 22px;
+      border-radius: 60px;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 0.88rem;
+      letter-spacing: 0.2px;
+      cursor: pointer;
+      text-decoration: none;
+      border: none;
+      transition: transform 0.22s ease, filter 0.22s ease, box-shadow 0.22s ease;
+    }
+    .contact-btn.call {
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.25);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .contact-btn.call:hover {
+      background: rgba(255,255,255,0.18);
+      transform: translateY(-2px);
+    }
+    .contact-btn.whatsapp {
+      background: linear-gradient(135deg, #25D366, #1DA851);
+      color: #fff;
+      box-shadow: 0 10px 26px rgba(37,211,102,0.32);
+    }
+    .contact-btn.whatsapp:hover {
+      filter: brightness(1.06);
+      transform: translateY(-2px);
+      box-shadow: 0 14px 32px rgba(37,211,102,0.42);
+    }
+
+    /* ---------- Similar pros ---------- */
+    .similar-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 30px 0 14px;
+      flex-wrap: wrap;
+    }
+    .similar-head h2 {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.4px;
+    }
+    .similar-head a {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .similar-head a:hover { color: #B49450; }
+
+    .similar-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-bottom: 34px;
+    }
+    @media (min-width: 640px) {
+      .similar-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 1024px) {
+      .similar-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .similar-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    .similar-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(212,184,122,0.5);
+      box-shadow: 0 14px 32px rgba(15,41,64,0.1);
+    }
+    .similar-avatar {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, #1a3650, #0f2940);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: #E7D3A1;
+      box-shadow: 0 6px 16px rgba(26,54,80,0.18), 0 0 0 2.5px rgba(212,184,122,0.35);
+    }
+    .similar-avatar img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .similar-info { flex: 1; min-width: 0; }
+    .similar-info .s-name {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      letter-spacing: -0.2px;
+    }
+    .similar-info .s-title {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin-bottom: 4px;
+    }
+    .similar-info .s-rating {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #B49450;
+    }
+    .similar-info .s-rating i { font-size: 0.65rem; }
+
+    /* ---------- Not found ---------- */
     .not-found {
       text-align: center;
-      padding: 60px 20px;
+      padding: 70px 24px;
       background: var(--surface);
-      border-radius: 20px;
+      border-radius: 24px;
       border: 1px solid var(--border);
-      margin: 40px 0;
+      margin: 30px 0;
     }
     .not-found i {
       font-size: 3rem;
-      color: #e74c3c;
-      margin-bottom: 16px;
+      color: #D4B87A;
+      margin-bottom: 18px;
       display: block;
+      opacity: 0.85;
     }
-    .not-found h3 { color: var(--text); margin-bottom: 8px; }
-    .not-found p { color: var(--text-secondary); margin-bottom: 20px; }
+    .not-found h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .not-found p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 22px;
+      line-height: 1.6;
+    }
+    .not-found a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 26px;
+      background: linear-gradient(135deg, #1a3650, #0f2940);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      transition: filter 0.2s, transform 0.2s;
+    }
+    .not-found a:hover { filter: brightness(1.15); transform: translateY(-1px); }
 
+    /* ---------- Animations ---------- */
     @keyframes slideDown {
-      from { opacity: 0; transform: translateY(-20px); }
+      from { opacity: 0; transform: translateY(-14px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .profile-stats { animation: fadeUp 0.5s ease 0.1s both; }
+    .profile-card { animation: fadeUp 0.5s ease both; }
+    .profile-card:nth-of-type(1) { animation-delay: 0.15s; }
+    .profile-card:nth-of-type(2) { animation-delay: 0.2s; }
+    .contact-card { animation: fadeUp 0.5s ease 0.25s both; }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; }
     }
   </style>
 </head>
@@ -291,13 +658,13 @@
 
   <div class="container">
     <div class="back-row">
-      <a href="/services.html"><i class="fas fa-arrow-left"></i></a>
-      <h2>Service Details</h2>
+      <a href="/services.html" aria-label="Back to services"><i class="fas fa-arrow-left"></i></a>
+      <h2>Provider Profile</h2>
     </div>
 
-    <div id="loadingState" style="text-align:center;padding:40px;">
+    <div id="loadingState" style="text-align:center;padding:60px 20px;">
       <i class="fas fa-spinner fa-spin" style="font-size:2rem;color:#1a3650;"></i>
-      <p style="margin-top:12px;color:var(--text-secondary);">Loading service details...</p>
+      <p style="margin-top:14px;color:var(--text-secondary);font-size:0.9rem;">Loading provider profile…</p>
     </div>
 
     <div id="serviceDetailContainer" style="display:none;"></div>
@@ -388,6 +755,64 @@
     }
 
     // ============================================
+    // CATEGORY MAP
+    // ============================================
+    const CATEGORY_MAP = {
+      'home-services':   { name: 'Home Services',     icon: 'fas fa-home' },
+      'beauty-personal': { name: 'Beauty & Personal', icon: 'fas fa-cut' },
+      'events':          { name: 'Events',            icon: 'fas fa-camera' },
+      'tech':            { name: 'Tech Repair',       icon: 'fas fa-laptop-medical' },
+      'education':       { name: 'Education',         icon: 'fas fa-graduation-cap' },
+      'health':          { name: 'Health & Wellness', icon: 'fas fa-heartbeat' },
+      'transport':       { name: 'Transport',         icon: 'fas fa-truck' },
+      'cleaning':        { name: 'Cleaning',          icon: 'fas fa-broom' },
+      'professional':    { name: 'Professional',      icon: 'fas fa-briefcase' }
+    };
+    function getCategoryName(slug) { return (CATEGORY_MAP[slug] || {}).name || 'Service'; }
+    function getCategoryIcon(slug) { return (CATEGORY_MAP[slug] || {}).icon || 'fas fa-tools'; }
+
+    // ============================================
+    // ROBUST SELLER HELPERS (match services.html)
+    // ============================================
+    function getSellerName(s) {
+      if (!s) return 'Zaure Pro';
+      if (typeof s.seller === 'string' && s.seller.trim()) return s.seller;
+      const seller = (typeof s.seller === 'object' && s.seller) ? s.seller : {};
+      return seller.name || seller.fullName || seller.full_name
+          || s.provider || s.providerName || 'Zaure Pro';
+    }
+    function getSellerPic(s) {
+      if (!s) return '';
+      const seller = (typeof s.seller === 'object' && s.seller) ? s.seller : {};
+      return seller.profilePic || seller.profile_pic || seller.profileImage
+          || seller.profile_image || seller.avatar || seller.avatarUrl
+          || seller.avatar_url || seller.image || seller.img || seller.photo
+          || seller.photoUrl || seller.photo_url || seller.picture
+          || s.profilePic || s.profile_pic || s.avatar || s.photo
+          || s.providerPic || s.providerImage || '';
+    }
+    function getSellerRating(s) {
+      if (!s) return '5.0';
+      const seller = (typeof s.seller === 'object' && s.seller) ? s.seller : {};
+      return seller.rating || s.rating || '5.0';
+    }
+    function getSellerInitials(s) {
+      const name = getSellerName(s);
+      const parts = name.trim().split(/\s+/);
+      if (parts.length === 1) return parts[0].charAt(0).toUpperCase();
+      return (parts[0].charAt(0) + parts[parts.length - 1].charAt(0)).toUpperCase();
+    }
+    function getSellerPhone(s) {
+      const seller = (typeof s.seller === 'object' && s.seller) ? s.seller : {};
+      return seller.phone || seller.whatsapp || s.phone || '';
+    }
+    function getSellerWhatsApp(s) {
+      const seller = (typeof s.seller === 'object' && s.seller) ? s.seller : {};
+      const num = seller.whatsapp || seller.phone || s.whatsapp || s.phone || '09042339411';
+      return String(num).replace(/[^0-9]/g, '');
+    }
+
+    // ============================================
     // LOAD SERVICES
     // ============================================
     async function loadServices() {
@@ -399,26 +824,6 @@
         console.error('Error loading services:', error);
         return [];
       }
-    }
-
-    function formatPrice(n) {
-      if (n >= 1e6) return `₦${(n/1e6).toFixed(1)}M`;
-      return `₦${n.toLocaleString()}`;
-    }
-
-    function getCategoryName(slug) {
-      const map = {
-        'home-services': 'Home Services',
-        'beauty-personal': 'Beauty & Personal',
-        'events': 'Events',
-        'tech': 'Tech Repair',
-        'education': 'Education',
-        'health': 'Health & Wellness',
-        'transport': 'Transport',
-        'cleaning': 'Cleaning',
-        'professional': 'Professional'
-      };
-      return map[slug] || 'Service';
     }
 
     // ============================================
@@ -434,14 +839,15 @@
       }
 
       const services = await loadServices();
-      const service = services.find(s => s.id === serviceId);
+      const service = services.find(s => String(s.id) === String(serviceId));
 
       if (!service) {
         showNotFound();
         return;
       }
 
-      renderService(service);
+      renderProfile(service, services);
+
       loadUser();
       initTheme();
       updateFavoriteBadge();
@@ -452,111 +858,201 @@
     });
 
     function showNotFound() {
-      document.getElementById('loadingState').innerHTML = `
+      const el = document.getElementById('loadingState');
+      el.innerHTML = `
         <div class="not-found">
-          <i class="fas fa-exclamation-circle"></i>
-          <h3>Service not found</h3>
-          <p>This service may have been removed or the link is incorrect.</p>
-          <a href="/services.html" class="btn-primary" style="width:auto;padding:10px 28px;">Browse Services</a>
+          <i class="fas fa-user-slash"></i>
+          <h3>Provider not found</h3>
+          <p>This provider may have been removed or the link is incorrect.</p>
+          <a href="/services.html"><i class="fas fa-arrow-left"></i> Browse All Pros</a>
         </div>
       `;
     }
 
-    function renderService(service) {
+    // ============================================
+    // RENDER PROFILE
+    // ============================================
+    function renderProfile(service, allServices) {
       document.getElementById('loadingState').style.display = 'none';
       const container = document.getElementById('serviceDetailContainer');
       container.style.display = 'block';
 
-      const priceLabel = service.priceType === 'starting' ? 'Starting from' :
-                        service.priceType === 'hourly' ? 'Per hour' :
-                        service.priceType === 'visit' ? 'Per visit' :
-                        service.priceType === 'quote' ? 'Quote on request' :
-                        'Fixed price';
-      const priceDisplay = service.priceType === 'quote' || service.price === 0
-        ? 'Free Quote'
-        : formatPrice(service.price);
+      const sellerName = getSellerName(service);
+      const profilePic = getSellerPic(service);
+      const initials   = getSellerInitials(service);
+      const rating     = getSellerRating(service);
+      const category   = getCategoryName(service.subcategory);
+      const categoryIcon = getCategoryIcon(service.subcategory);
+      const experience = service.yearsExperience || 0;
+      const responseTime = service.responseTime || 'Fast';
+      const location   = service.location || 'Nigeria';
+      const phone      = getSellerPhone(service);
+      const whatsapp   = getSellerWhatsApp(service);
+      const serviceArea = service.serviceArea || service.location || 'Nigeria';
+      const availability = service.availability || 'By appointment';
 
-      const seller = service.seller || {};
-      const whatsappNumber = (seller.whatsapp || seller.phone || '09042339411').replace(/[^0-9]/g, '');
-      const waMessage = encodeURIComponent(`Hello ${seller.name || 'Zaure Pro'}, I found your service "${service.title}" on Zaure. I'd like to know more.`);
-
-      const avatarHTML = seller.profilePic
-        ? `<img src="${seller.profilePic}" alt="${seller.name}" onerror="this.style.display='none';this.parentElement.textContent='${seller.initials || seller.name?.charAt(0) || 'Z'}';">`
-        : (seller.initials || seller.name?.charAt(0) || 'Z');
-
-      container.innerHTML = `
-        <div class="service-hero-card">
-          <div class="service-hero-top">
-            <div class="service-hero-avatar">${avatarHTML}</div>
-            <div class="service-hero-info">
-              <div class="service-hero-category">
-                <i class="fas fa-tag"></i> ${getCategoryName(service.subcategory)}
-              </div>
-              <h1>${service.title}</h1>
-              <div class="service-hero-provider">
-                <i class="fas fa-check-circle"></i> ${seller.name || 'Zaure Pro'} — Verified
-              </div>
-              <div class="service-hero-meta">
-                <span><i class="fas fa-map-pin"></i> ${service.location || 'Nigeria'}</span>
-                <span><i class="fas fa-briefcase"></i> ${service.yearsExperience || 0}+ years experience</span>
-                <span><i class="fas fa-star" style="color:#f5b342;"></i> ${seller.rating || '5.0'}</span>
-              </div>
-            </div>
-            <div class="service-price-highlight">
-              <div class="price-value">${priceDisplay}</div>
-              <div class="price-label">${priceLabel}</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="service-description-card">
-          <h3><i class="fas fa-align-left"></i> About This Service</h3>
-          <p>${service.description}</p>
-        </div>
-
-        <div class="service-meta-card">
-          <h3><i class="fas fa-info-circle"></i> Service Details</h3>
-          <div class="service-meta-list">
-            <div class="meta-item">
-              <span class="label">Service Area</span>
-              <span class="value">${service.serviceArea || service.location || 'Nigeria'}</span>
-            </div>
-            <div class="meta-item">
-              <span class="label">Availability</span>
-              <span class="value">${service.availability || 'By appointment'}</span>
-            </div>
-            <div class="meta-item">
-              <span class="label">Response Time</span>
-              <span class="value">${service.responseTime || 'Fast'}</span>
-            </div>
-            <div class="meta-item">
-              <span class="label">Experience</span>
-              <span class="value">${service.yearsExperience || 0}+ years</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="service-contact-card">
-          <h3><i class="fas fa-phone-alt"></i> Contact ${seller.name || 'Provider'}</h3>
-          <div class="service-contact-actions">
-            <a href="tel:${seller.phone || ''}" class="btn-call" id="callBtn">
-              <i class="fas fa-phone-alt"></i> Call Now
-            </a>
-            <a href="https://wa.me/${whatsappNumber}?text=${waMessage}" target="_blank" class="btn-wa" id="waBtn">
-              <i class="fab fa-whatsapp"></i> WhatsApp
-            </a>
-          </div>
-        </div>
+      // Avatar HTML with graceful fallback
+      const avatarHTML = `
+        ${profilePic
+          ? `<img src="${profilePic}" alt="${sellerName}" loading="lazy"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+             <span class="avatar-fallback" style="display:none;">${initials}</span>`
+          : `<span class="avatar-fallback">${initials}</span>`
+        }
       `;
 
-      // Attach logging to Call
-      document.getElementById('callBtn').addEventListener('click', function() {
-        logServiceInteraction(service.title, seller.name || 'Zaure Pro', 'call_click');
-      });
+      // Find similar providers (same subcategory, excluding this one)
+      const similar = allServices
+        .filter(s => s.id !== service.id && s.subcategory === service.subcategory)
+        .slice(0, 3);
 
-      // Attach logging to WhatsApp
-      document.getElementById('waBtn').addEventListener('click', function() {
-        logServiceInteraction(service.title, seller.name || 'Zaure Pro', 'whatsapp_click');
+      // Build similar cards
+      const similarHTML = similar.map(s => {
+        const sName = getSellerName(s);
+        const sPic  = getSellerPic(s);
+        const sInit = getSellerInitials(s);
+        const sRating = getSellerRating(s);
+        const sAvatar = sPic
+          ? `<img src="${sPic}" alt="${sName}" loading="lazy" onerror="this.style.display='none';this.parentElement.textContent='${sInit}';">`
+          : sInit;
+        return `
+          <a class="similar-card" href="/service.html?id=${s.id}">
+            <div class="similar-avatar">${sAvatar}</div>
+            <div class="similar-info">
+              <div class="s-name">${sName}</div>
+              <div class="s-title">${s.title}</div>
+              <div class="s-rating"><i class="fas fa-star"></i> ${sRating}</div>
+            </div>
+          </a>
+        `;
+      }).join('');
+
+      const similarSection = similar.length > 0 ? `
+        <div class="similar-head">
+          <h2>More Pros Like This</h2>
+          <a href="/services.html?category=${service.subcategory || ''}">View all →</a>
+        </div>
+        <div class="similar-grid">${similarHTML}</div>
+      ` : '';
+
+      container.innerHTML = `
+        <!-- Profile Hero -->
+        <section class="profile-hero">
+          <div class="profile-hero-top">
+            <div class="profile-avatar">${avatarHTML}</div>
+            <div class="profile-hero-info">
+              <span class="profile-category-chip">
+                <i class="${categoryIcon}"></i> ${category}
+              </span>
+              <h1>${sellerName}</h1>
+              <p class="profile-subtitle">${service.title}</p>
+              <div class="profile-badges">
+                <span class="profile-badge verified">
+                  <i class="fas fa-check-circle"></i> Verified Provider
+                </span>
+                <span class="profile-badge rating">
+                  <i class="fas fa-star"></i> ${rating} rating
+                </span>
+              </div>
+              <div class="profile-meta-row">
+                <span><i class="fas fa-map-pin"></i> ${location}</span>
+                <span><i class="fas fa-clock"></i> ${responseTime}</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Stats Strip -->
+        <section class="profile-stats">
+          <div class="profile-stat">
+            <div class="stat-icon"><i class="fas fa-briefcase"></i></div>
+            <div class="stat-value">${experience}+</div>
+            <div class="stat-label">Years Exp</div>
+          </div>
+          <div class="profile-stat">
+            <div class="stat-icon"><i class="fas fa-star"></i></div>
+            <div class="stat-value">${rating}</div>
+            <div class="stat-label">Rating</div>
+          </div>
+          <div class="profile-stat">
+            <div class="stat-icon"><i class="fas fa-bolt"></i></div>
+            <div class="stat-value">${responseTime}</div>
+            <div class="stat-label">Response</div>
+          </div>
+          <div class="profile-stat">
+            <div class="stat-icon"><i class="fas fa-shield-alt"></i></div>
+            <div class="stat-value">100%</div>
+            <div class="stat-label">Verified</div>
+          </div>
+        </section>
+
+        <!-- About This Service -->
+        <section class="profile-card">
+          <h3><i class="fas fa-align-left"></i> About This Service</h3>
+          <p>${service.description || 'This provider has not added a description yet. Contact them directly to learn more about their services.'}</p>
+        </section>
+
+        <!-- Service Details -->
+        <section class="profile-card">
+          <h3><i class="fas fa-info-circle"></i> Service Details</h3>
+          <div class="details-grid">
+            <div class="detail-item">
+              <span class="label"><i class="fas fa-tag"></i> Category</span>
+              <span class="value">${category}</span>
+            </div>
+            <div class="detail-item">
+              <span class="label"><i class="fas fa-map-marked-alt"></i> Service Area</span>
+              <span class="value">${serviceArea}</span>
+            </div>
+            <div class="detail-item">
+              <span class="label"><i class="fas fa-calendar-check"></i> Availability</span>
+              <span class="value">${availability}</span>
+            </div>
+            <div class="detail-item">
+              <span class="label"><i class="fas fa-bolt"></i> Response Time</span>
+              <span class="value">${responseTime}</span>
+            </div>
+            <div class="detail-item">
+              <span class="label"><i class="fas fa-briefcase"></i> Experience</span>
+              <span class="value">${experience}+ years</span>
+            </div>
+            <div class="detail-item">
+              <span class="label"><i class="fas fa-certificate"></i> Status</span>
+              <span class="value">Verified Provider</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Contact Card -->
+        <section class="contact-card">
+          <h3>Contact ${sellerName}</h3>
+          <p class="contact-sub">Reach out directly for a free quote, availability check, or to book this service.</p>
+          <div class="contact-actions">
+            ${phone ? `
+              <a href="tel:${phone}" class="contact-btn call" id="callBtn">
+                <i class="fas fa-phone-alt"></i> Call Now
+              </a>
+            ` : ''}
+            <a href="https://wa.me/${whatsapp}?text=${encodeURIComponent(`Hello ${sellerName}, I found your service "${service.title}" on Zaure. I'd like to know more.`)}"
+               target="_blank"
+               rel="noopener"
+               class="contact-btn whatsapp"
+               id="waBtn">
+              <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+            </a>
+          </div>
+        </section>
+
+        <!-- Similar Pros -->
+        ${similarSection}
+      `;
+
+      // Attach logging
+      document.getElementById('callBtn')?.addEventListener('click', () => {
+        logServiceInteraction(service.title, sellerName, 'call_click');
+      });
+      document.getElementById('waBtn')?.addEventListener('click', () => {
+        logServiceInteraction(service.title, sellerName, 'whatsapp_click');
       });
     }
   </script>
