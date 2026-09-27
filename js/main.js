@@ -331,6 +331,132 @@ function getProductsSync() {
 }
 
 // ============================================================
+// SERVICES (Find a Pro) — same pattern as products
+// ============================================================
+async function loadServices() {
+  const cached = localStorage.getItem('zaure_services_cache');
+  if (cached) {
+    try {
+      const parsed = JSON.parse(cached);
+      if (parsed && parsed.length > 0) {
+        fetchFreshServices();
+        return parsed;
+      }
+    } catch (e) {}
+  }
+  return fetchFreshServices();
+}
+
+async function fetchFreshServices() {
+  try {
+    const response = await fetch('/data/services.json');
+    if (!response.ok) throw new Error('Services not found');
+    const services = await response.json();
+    localStorage.setItem('zaure_services_cache', JSON.stringify(services));
+    return services;
+  } catch (error) {
+    console.error('Error loading services:', error);
+    return [];
+  }
+}
+
+function getServicesSync() {
+  const cached = localStorage.getItem('zaure_services_cache');
+  if (cached) {
+    try {
+      return JSON.parse(cached);
+    } catch (e) {
+      return [];
+    }
+  }
+  return [];
+}
+
+// Normalize a service entry into the same shape as a product,
+// so the exact same card UI can render it.
+function normalizeService(s) {
+  const images = (s.images && s.images.length) ? s.images
+    : (s.image ? [s.image]
+    : (s.img ? [s.img]
+    : (s.photo ? [s.photo] : [])));
+  return {
+    id: s.id != null ? s.id : (s.slug || ''),
+    title: s.title || s.name || s.service || s.heading || 'Service',
+    price: s.price != null ? s.price
+         : (s.amount != null ? s.amount
+         : (s.rate != null ? s.rate : 0)),
+    images: images,
+    location: s.location || s.state || s.city || s.area || s.address || '',
+    date: s.date || s.availability || s.hours || 'Available now',
+    category: s.category || s.type || s.trade || s.group || 'Service',
+    seller: s.seller || {
+      name: s.provider || s.providerName || s.business || s.company || s.name || 'Professional'
+    },
+    boosted: !!s.boosted,
+    featured: !!(s.featured || s.verified),
+    rating: s.rating
+  };
+}
+
+function renderServices(services, containerId) {
+  const grid = document.getElementById(containerId);
+  if (!grid) return;
+  
+  if (!services || services.length === 0) {
+    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--text-secondary);">
+      <i class="fas fa-user-tie" style="font-size:2rem;display:block;margin-bottom:12px;"></i>
+      No services found.
+    </div>`;
+    return;
+  }
+  
+  grid.innerHTML = services.map(raw => {
+    const p = normalizeService(raw);
+    let badges = '';
+    if (p.boosted) badges += `<span class="badge-boosted"><i class="fas fa-bolt"></i> Boosted</span>`;
+    if (p.featured) badges += `<span class="badge-featured">Featured</span>`;
+    
+    const price = p.price >= 1e6
+      ? `₦${(p.price/1e6).toFixed(1)}M`
+      : (p.price ? `₦${Number(p.price).toLocaleString()}` : 'Contact');
+    
+    const firstImage = p.images && p.images.length > 0 ? p.images[0] : null;
+    const imageHtml = firstImage 
+      ? `<img src="${firstImage}" alt="${p.title}" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\\'fas fa-user-tie\\' style=\\'font-size:2.5rem;color:var(--text-secondary);\\'></i>';">`
+      : `<i class="fas fa-user-tie" style="font-size:2.5rem;color:var(--text-secondary);"></i>`;
+    
+    const isFav = isFavorite(p.id);
+    const heartIcon = isFav ? 'fas fa-heart' : 'far fa-heart';
+    const heartColor = isFav ? 'color:#e74c3c;' : '';
+    
+    return `
+      <div class="listing-card" data-id="${p.id}" style="cursor:pointer;border-radius:16px;overflow:hidden;background:var(--surface);border:1px solid var(--border);transition:transform 0.2s,box-shadow 0.2s;position:relative;">
+        <button class="fav-btn" onclick="event.stopPropagation(); toggleFavoriteCard('${p.id}', this)" 
+                style="position:absolute;top:12px;right:12px;z-index:2;background:rgba(255,255,255,0.9);border:none;border-radius:50%;width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;box-shadow:0 2px 8px rgba(0,0,0,0.1);${heartColor}">
+          <i class="${heartIcon}"></i>
+        </button>
+        <div class="listing-img" style="height:180px;background:var(--surface-alt);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;" onclick="viewService('${p.id}')">
+          ${imageHtml}
+          ${badges}
+        </div>
+        <div class="listing-body" style="padding:12px 14px 14px;" onclick="viewService('${p.id}')">
+          <div class="price" style="font-weight:700;font-size:1.1rem;color:var(--text);">${price}</div>
+          <div class="title" style="font-weight:600;font-size:0.9rem;margin:4px 0;color:var(--text);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${p.title}</div>
+          <div class="meta" style="display:flex;gap:12px;font-size:0.7rem;color:var(--text-secondary);margin-top:4px;">
+            <span><i class="fas fa-map-pin"></i> ${p.location || 'Nigeria'}</span>
+            <span><i class="far fa-clock"></i> ${p.date}</span>
+          </div>
+          <div class="listing-footer" style="display:flex;justify-content:space-between;font-size:0.7rem;color:var(--text-secondary);margin-top:8px;padding-top:8px;border-top:1px solid var(--border);">
+            <span><i class="fas fa-user-tie"></i> ${p.seller?.name || 'Professional'}</span>
+            <span><i class="far fa-heart"></i> ${isFav ? 'Saved' : 'Save'}</span>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// ============================================================
 // RECOMMENDATION ALGORITHM
 // ============================================================
 function getUserState() {
@@ -520,10 +646,14 @@ function renderListings(products, containerId) {
 }
 
 // ============================================================
-// VIEW PRODUCT / CATEGORY / STORE
+// VIEW PRODUCT / SERVICE / CATEGORY / STORE
 // ============================================================
 window.viewProduct = function(productId) {
   window.location.href = `/detail.html?id=${productId}`;
+};
+
+window.viewService = function(serviceId) {
+  window.location.href = `/service.html?id=${serviceId}`;
 };
 
 window.loadCategory = function(slug) {
@@ -643,6 +773,7 @@ window.loadUser = loadUser;
 window.signupUser = signupUser;
 window.updateUserProfile = updateUserProfile;
 window.loadProducts = loadProducts;
+window.loadServices = loadServices;
 window.loadCategories = loadCategories;
 window.loadTopSellers = loadTopSellers;
 window.loadTrendingKeywords = loadTrendingKeywords;
@@ -654,10 +785,13 @@ window.getFavoriteCount = getFavoriteCount;
 window.updateFavoriteBadge = updateFavoriteBadge;
 window.toggleFavoriteCard = toggleFavoriteCard;
 window.renderListings = renderListings;
+window.renderServices = renderServices;
 window.getProductsSync = getProductsSync;
+window.getServicesSync = getServicesSync;
 window.initTheme = initTheme;
 window.toggleTheme = toggleTheme;
 window.viewProduct = viewProduct;
+window.viewService = viewService;
 window.loadCategory = loadCategory;
 window.openSignup = openSignup;
 window.viewStore = viewStore;
