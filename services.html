@@ -39,7 +39,7 @@
   <link rel="stylesheet" href="/css/style.css">
   <style>
     /* ============================================================
-       REFINED SERVICES PAGE — clean beauty
+       REFINED SERVICES PAGE — clean beauty, Inter font throughout
        ============================================================ */
 
     /* ---------- Hero ---------- */
@@ -98,16 +98,17 @@
     .services-hero .hero-label i { font-size: 0.7rem; }
 
     .services-hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.6rem;
+      /* Matches index.html — Inter, no Playfair */
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-size: 2.5rem;
       font-weight: 800;
-      letter-spacing: -0.9px;
+      letter-spacing: -1px;
       line-height: 1.12;
       margin-bottom: 14px;
     }
     .services-hero h1 span {
       color: #D4B87A;
-      font-style: italic;
+      font-style: normal;
       position: relative;
     }
     .services-hero h1 span::after {
@@ -187,7 +188,7 @@
 
     @media (max-width: 640px) {
       .services-hero { padding: 40px 20px 44px; border-radius: 22px; }
-      .services-hero h1 { font-size: 1.85rem; }
+      .services-hero h1 { font-size: 1.8rem; }
       .services-hero p { font-size: 0.87rem; }
       .services-search { padding: 4px 4px 4px 16px; gap: 6px; }
       .services-search input { padding: 10px 0; font-size: 0.88rem; }
@@ -301,7 +302,7 @@
       .services-grid { grid-template-columns: repeat(3, 1fr); gap: 22px; }
     }
 
-    /* ---------- Service card (refined, no price, big avatar) ---------- */
+    /* ---------- Service card ---------- */
     .service-card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -336,7 +337,7 @@
     }
     .service-card:hover::before { opacity: 1; }
 
-    /* Header — bigger avatar, cleaner */
+    /* Header — avatar + provider info */
     .service-card-header {
       display: flex;
       align-items: center;
@@ -378,6 +379,19 @@
       object-fit: cover;
       display: block;
     }
+    .service-provider-avatar .avatar-fallback {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #E7D3A1;
+      font-weight: 700;
+      font-size: 1.35rem;
+      letter-spacing: 0.5px;
+      font-family: 'Inter', sans-serif;
+    }
+
     .service-provider-info {
       flex: 1;
       min-width: 0;
@@ -391,6 +405,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
       letter-spacing: -0.2px;
+      font-family: 'Inter', sans-serif;
     }
     .service-provider-info .provider-badge {
       display: inline-flex;
@@ -443,17 +458,19 @@
       letter-spacing: 1.4px;
       color: #B49450;
       margin-bottom: 10px;
+      font-family: 'Inter', sans-serif;
     }
     .service-category-label i { font-size: 0.7rem; }
 
     .service-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.08rem;
+      /* Matches index.html product card — Inter, no Playfair */
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-size: 1rem;
       font-weight: 700;
       color: var(--text);
-      line-height: 1.35;
+      line-height: 1.4;
       margin-bottom: 9px;
-      letter-spacing: -0.2px;
+      letter-spacing: -0.1px;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
@@ -497,7 +514,7 @@
       opacity: 0.85;
     }
 
-    /* Footer — contact only, no price */
+    /* Footer — View Profile button */
     .service-card-footer {
       display: flex;
       align-items: center;
@@ -507,10 +524,10 @@
     }
     .service-contact-btn {
       flex: 1;
-      background: linear-gradient(135deg, #25D366, #1DA851);
+      background: linear-gradient(135deg, #1a3650, #0f2940);
       color: #fff;
       border: none;
-      padding: 11px 18px;
+      padding: 12px 18px;
       border-radius: 60px;
       font-weight: 700;
       font-size: 0.82rem;
@@ -523,13 +540,13 @@
       text-decoration: none;
       font-family: inherit;
       letter-spacing: 0.2px;
-      box-shadow: 0 6px 16px rgba(37,211,102,0.28);
+      box-shadow: 0 6px 16px rgba(26,54,80,0.22);
     }
-    .service-contact-btn i { font-size: 0.95rem; }
+    .service-contact-btn i { font-size: 0.9rem; color: #D4B87A; }
     .service-contact-btn:hover {
-      filter: brightness(1.05);
+      filter: brightness(1.15);
       transform: translateY(-1px);
-      box-shadow: 0 10px 22px rgba(37,211,102,0.35);
+      box-shadow: 0 10px 22px rgba(26,54,80,0.32);
     }
     .service-contact-btn:active { transform: translateY(0); }
 
@@ -550,8 +567,8 @@
       opacity: 0.8;
     }
     .services-empty h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
+      font-weight: 700;
       color: var(--text);
       margin-bottom: 8px;
     }
@@ -604,11 +621,12 @@
       z-index: 2;
     }
     .services-cta h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
-      font-weight: 700;
+      /* Inter to match index */
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
       margin-bottom: 10px;
-      letter-spacing: -0.4px;
+      letter-spacing: -0.5px;
     }
     .services-cta p {
       font-size: 0.92rem;
@@ -916,6 +934,63 @@
       }
     }
 
+    // ---------- Robust seller field helpers ----------
+    function getSellerName(s) {
+      if (!s) return 'Zaure Pro';
+      if (typeof s.seller === 'string' && s.seller.trim()) return s.seller;
+      const seller = s.seller || {};
+      return seller.name
+          || seller.fullName
+          || seller.full_name
+          || s.provider
+          || s.providerName
+          || 'Zaure Pro';
+    }
+
+    function getSellerPic(s) {
+      if (!s) return '';
+      const seller = (typeof s.seller === 'object' && s.seller) ? s.seller : {};
+      // Try every plausible field on the seller object first
+      let pic = seller.profilePic
+             || seller.profile_pic
+             || seller.profileImage
+             || seller.profile_image
+             || seller.avatar
+             || seller.avatarUrl
+             || seller.avatar_url
+             || seller.image
+             || seller.img
+             || seller.photo
+             || seller.photoUrl
+             || seller.photo_url
+             || seller.picture
+             || '';
+      // Then look at the top-level service object
+      if (!pic) {
+        pic = s.profilePic
+           || s.profile_pic
+           || s.avatar
+           || s.photo
+           || s.providerPic
+           || s.providerImage
+           || '';
+      }
+      return pic || '';
+    }
+
+    function getSellerRating(s) {
+      if (!s) return '5.0';
+      const seller = (typeof s.seller === 'object' && s.seller) ? s.seller : {};
+      return seller.rating || s.rating || '5.0';
+    }
+
+    function getSellerInitials(s) {
+      const name = getSellerName(s);
+      const parts = name.trim().split(/\s+/);
+      if (parts.length === 1) return parts[0].charAt(0).toUpperCase();
+      return (parts[0].charAt(0) + parts[parts.length - 1].charAt(0)).toUpperCase();
+    }
+
     function renderChips() {
       const chipsContainer = document.getElementById('serviceChips');
       chipsContainer.innerHTML = SERVICE_CATEGORIES.map(cat => `
@@ -947,14 +1022,14 @@
           (s.title && s.title.toLowerCase().includes(q)) ||
           (s.description && s.description.toLowerCase().includes(q)) ||
           (s.tags && s.tags.some(t => t.toLowerCase().includes(q))) ||
-          (s.seller?.name && s.seller.name.toLowerCase().includes(q)) ||
+          (getSellerName(s).toLowerCase().includes(q)) ||
           (s.location && s.location.toLowerCase().includes(q))
         );
       }
 
       switch (activeSort) {
         case 'rating-high':
-          filtered.sort((a, b) => (b.seller?.rating || 0) - (a.seller?.rating || 0));
+          filtered.sort((a, b) => (parseFloat(getSellerRating(b)) || 0) - (parseFloat(getSellerRating(a)) || 0));
           break;
         case 'experience-high':
           filtered.sort((a, b) => (b.yearsExperience || 0) - (a.yearsExperience || 0));
@@ -963,7 +1038,7 @@
           filtered.sort((a, b) => {
             if (a.featured && !b.featured) return -1;
             if (!a.featured && b.featured) return 1;
-            return (b.seller?.rating || 0) - (a.seller?.rating || 0);
+            return (parseFloat(getSellerRating(b)) || 0) - (parseFloat(getSellerRating(a)) || 0);
           });
       }
 
@@ -988,20 +1063,22 @@
       }
 
       grid.innerHTML = services.map(s => {
-        const sellerName = s.seller?.name || 'Zaure Pro';
-        const initials = s.seller?.initials || (sellerName.charAt(0).toUpperCase());
-        const profilePic = s.seller?.profilePic || s.seller?.avatar || s.seller?.image || '';
-        const rating = s.seller?.rating || '5.0';
-        const experience = s.yearsExperience || 0;
+        const sellerName   = getSellerName(s);
+        const profilePic   = getSellerPic(s);
+        const initials     = getSellerInitials(s);
+        const rating       = getSellerRating(s);
+        const experience   = s.yearsExperience || 0;
         const responseTime = s.responseTime || 'Fast';
 
-        // Build avatar: profile image if available, otherwise initials
-        const avatarHTML = profilePic
-          ? `<img src="${profilePic}" alt="${sellerName}" loading="lazy" onerror="this.replaceWith(document.createTextNode('${initials}'))">`
-          : initials;
-
-        const whatsappNumber = (s.seller?.whatsapp || s.seller?.phone || '09042339411').replace(/[^0-9]/g, '');
-        const waMessage = encodeURIComponent(`Hello ${sellerName}, I found your service "${s.title}" on Zaure. I'd like to know more.`);
+        // Avatar: image with initials fallback stacked underneath
+        const avatarHTML = `
+          ${profilePic
+            ? `<img src="${profilePic}" alt="${sellerName}" loading="lazy"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+               <span class="avatar-fallback" style="display:none;">${initials}</span>`
+            : `<span class="avatar-fallback">${initials}</span>`
+          }
+        `;
 
         return `
           <div class="service-card" onclick="window.location.href='/service.html?id=${s.id}'">
@@ -1028,12 +1105,11 @@
               </div>
               <div class="service-card-footer">
                 <a class="service-contact-btn"
-                   href="https://wa.me/${whatsappNumber}?text=${waMessage}"
-                   target="_blank"
+                   href="/service.html?id=${s.id}"
                    onclick="event.stopPropagation();"
                    data-service="${s.title.replace(/"/g, '&quot;')}"
                    data-seller="${sellerName.replace(/"/g, '&quot;')}">
-                  <i class="fab fa-whatsapp"></i> Contact Provider
+                  <i class="fas fa-user-circle"></i> View Profile
                 </a>
               </div>
             </div>
@@ -1045,7 +1121,7 @@
         btn.addEventListener('click', function() {
           const service = this.dataset.service || 'Unknown';
           const seller = this.dataset.seller || 'Unknown';
-          logServiceInteraction(service, seller, 'whatsapp_click');
+          logServiceInteraction(service, seller, 'view_profile_click');
         });
       });
     }
