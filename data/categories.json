@@ -23,5 +23,10 @@
     "slug": "home-kitchen",
     "name": "Home & Kitchen",
     "icon": "fas fa-blender"
+  },
+  {
+    "slug": "services",
+    "name": "Find a pro",
+    "icon": "fas fa-tools"
   }
 ]
