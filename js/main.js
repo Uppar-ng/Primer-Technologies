@@ -382,15 +382,12 @@ function normalizeService(s) {
   return {
     id: s.id != null ? s.id : (s.slug || ''),
     title: s.title || s.name || s.service || s.heading || 'Service',
-    price: s.price != null ? s.price
-         : (s.amount != null ? s.amount
-         : (s.rate != null ? s.rate : 0)),
     images: images,
     location: s.location || s.state || s.city || s.area || s.address || '',
     date: s.date || s.availability || s.hours || 'Available now',
     category: s.category || s.type || s.trade || s.group || 'Service',
     seller: s.seller || {
-      name: s.provider || s.providerName || s.business || s.company || s.name || 'Professional'
+      name: s.provider || s.providerName || s.name || 'Professional'
     },
     boosted: !!s.boosted,
     featured: !!(s.featured || s.verified),
@@ -416,10 +413,6 @@ function renderServices(services, containerId) {
     if (p.boosted) badges += `<span class="badge-boosted"><i class="fas fa-bolt"></i> Boosted</span>`;
     if (p.featured) badges += `<span class="badge-featured">Featured</span>`;
     
-    const price = p.price >= 1e6
-      ? `₦${(p.price/1e6).toFixed(1)}M`
-      : (p.price ? `₦${Number(p.price).toLocaleString()}` : 'Contact');
-    
     const firstImage = p.images && p.images.length > 0 ? p.images[0] : null;
     const imageHtml = firstImage 
       ? `<img src="${firstImage}" alt="${p.title}" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\\'fas fa-user-tie\\' style=\\'font-size:2.5rem;color:var(--text-secondary);\\'></i>';">`
@@ -440,8 +433,7 @@ function renderServices(services, containerId) {
           ${badges}
         </div>
         <div class="listing-body" style="padding:12px 14px 14px;" onclick="viewService('${p.id}')">
-          <div class="price" style="font-weight:700;font-size:1.1rem;color:var(--text);">${price}</div>
-          <div class="title" style="font-weight:600;font-size:0.9rem;margin:4px 0;color:var(--text);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${p.title}</div>
+          <div class="title" style="font-weight:700;font-size:0.95rem;margin:0 0 6px;color:var(--text);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${p.title}</div>
           <div class="meta" style="display:flex;gap:12px;font-size:0.7rem;color:var(--text-secondary);margin-top:4px;">
             <span><i class="fas fa-map-pin"></i> ${p.location || 'Nigeria'}</span>
             <span><i class="far fa-clock"></i> ${p.date}</span>
