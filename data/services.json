@@ -3,320 +3,420 @@
     "id": "svc-001",
     "title": "Professional House Cleaning & Deep Sanitization",
     "price": 15000,
-    "images": [
-      "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&h=400&fit=crop&q=80"
-    ],
+    "images": ["https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&h=400&fit=crop&q=80"],
     "location": "Lekki, Lagos",
     "date": "Available today",
     "category": "Cleaning",
-    "seller": { "name": "Chinedu Okafor" },
+    "subcategory": "cleaning",
+    "yearsExperience": 8,
+    "responseTime": "Within 1 hr",
+    "seller": {
+      "name": "Chinedu Okafor",
+      "profilePic": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&q=80",
+      "rating": 4.9,
+      "phone": "08031234567"
+    },
     "boosted": true,
     "featured": true,
-    "rating": 4.9,
     "description": "Full home deep-cleaning, sanitization and post-construction cleanup by trained professionals."
   },
   {
     "id": "svc-002",
     "title": "Certified Electrician – Wiring, Repairs & Installation",
     "price": 8000,
-    "images": [
-      "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=600&h=400&fit=crop&q=80"
-    ],
+    "images": ["https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=600&h=400&fit=crop&q=80"],
     "location": "Wuse, Abuja",
     "date": "Available now",
     "category": "Electrical",
-    "seller": { "name": "Ibrahim Musa" },
+    "subcategory": "home-services",
+    "yearsExperience": 12,
+    "responseTime": "Within 30 min",
+    "seller": {
+      "name": "Ibrahim Musa",
+      "profilePic": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&q=80",
+      "rating": 4.8,
+      "phone": "08031234568"
+    },
     "boosted": false,
     "featured": true,
-    "rating": 4.8,
     "description": "House wiring, socket repairs, inverter installation and electrical fault diagnosis."
   },
   {
     "id": "svc-003",
     "title": "Plumbing Services – Leak Repair & Pipe Installation",
     "price": 7000,
-    "images": [
-      "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=600&h=400&fit=crop&q=80"
-    ],
+    "images": ["https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=600&h=400&fit=crop&q=80"],
     "location": "Ikeja, Lagos",
     "date": "Available today",
     "category": "Plumbing",
-    "seller": { "name": "Emeka Nwosu" },
+    "subcategory": "home-services",
+    "yearsExperience": 10,
+    "responseTime": "Within 1 hr",
+    "seller": {
+      "name": "Emeka Nwosu",
+      "profilePic": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&q=80",
+      "rating": 4.7,
+      "phone": "08031234569"
+    },
     "boosted": true,
     "featured": false,
-    "rating": 4.7,
     "description": "Emergency leak repairs, pipe fitting, water heater installation and bathroom plumbing."
   },
   {
     "id": "svc-004",
     "title": "AC Installation, Servicing & Gas Refill",
     "price": 12000,
-    "images": [
-      "https://images.unsplash.com/photo-1631545806609-25c2b3d1b8b3?w=600&h=400&fit=crop&q=80"
-    ],
+    "images": ["https://images.unsplash.com/photo-1631545806609-25c2b3d1b8b3?w=600&h=400&fit=crop&q=80"],
     "location": "Port Harcourt, Rivers",
     "date": "Available tomorrow",
     "category": "Appliance Repair",
-    "seller": { "name": "Tunde Adeyemi" },
+    "subcategory": "tech",
+    "yearsExperience": 9,
+    "responseTime": "Within 2 hrs",
+    "seller": {
+      "name": "Tunde Adeyemi",
+      "profilePic": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&h=200&fit=crop&q=80",
+      "rating": 4.9,
+      "phone": "08031234570"
+    },
     "boosted": false,
     "featured": true,
-    "rating": 4.9,
     "description": "Split & window AC installation, routine servicing, gas refill and compressor repair."
   },
   {
     "id": "svc-005",
     "title": "Professional Carpentry & Custom Furniture",
     "price": 25000,
-    "images": [
-      "https://images.unsplash.com/photo-1611021061285-6c4b3f6b8f5b?w=600&h=400&fit=crop&q=80"
-    ],
+    "images": ["https://images.unsplash.com/photo-1611021061285-6c4b3f6b8f5b?w=600&h=400&fit=crop&q=80"],
     "location": "Ibadan, Oyo",
     "date": "Available this week",
     "category": "Carpentry",
-    "seller": { "name": "Segun Ajayi" },
+    "subcategory": "home-services",
+    "yearsExperience": 15,
+    "responseTime": "Same day",
+    "seller": {
+      "name": "Segun Ajayi",
+      "profilePic": "https://images.unsplash.com/photo-1552058544-f2b08422138a?w=200&h=200&fit=crop&q=80",
+      "rating": 4.6,
+      "phone": "08031234571"
+    },
     "boosted": false,
     "featured": false,
-    "rating": 4.6,
     "description": "Custom wardrobes, kitchen cabinets, TV stands, doors and bespoke furniture."
   },
   {
     "id": "svc-006",
     "title": "House & Office Painting – Interior and Exterior",
     "price": 20000,
-    "images": [
-      "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&h=400&fit=crop&q=80"
-    ],
+    "images": ["https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&h=400&fit=crop&q=80"],
     "location": "Surulere, Lagos",
     "date": "Available now",
     "category": "Painting",
-    "seller": { "name": "Blessing Eze" },
+    "subcategory": "home-services",
+    "yearsExperience": 7,
+    "responseTime": "Within 3 hrs",
+    "seller": {
+      "name": "Blessing Eze",
+      "profilePic": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&q=80",
+      "rating": 4.8,
+      "phone": "08031234572"
+    },
     "boosted": true,
     "featured": false,
-    "rating": 4.8,
     "description": "Interior & exterior wall painting, POP finishing, screeding and wallpaper installation."
   },
   {
     "id": "svc-007",
     "title": "Professional Generator Repair & Maintenance",
     "price": 10000,
-    "images": [
-      "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=600&h=400&fit=crop&q=80"
-    ],
+    "images": ["https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=600&h=400&fit=crop&q=80"],
     "location": "Kano, Kano",
     "date": "Available today",
     "category": "Generator Repair",
-    "seller": { "name": "Abdulrahman Bello" },
+    "subcategory": "tech",
+    "yearsExperience": 11,
+    "responseTime": "Within 1 hr",
+    "seller": {
+      "name": "Abdulrahman Bello",
+      "profilePic": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&h=200&fit=crop&q=80",
+      "rating": 4.7,
+      "phone": "08031234573"
+    },
     "boosted": false,
     "featured": true,
-    "rating": 4.7,
     "description": "Generator servicing, engine repair, alternator rewinding and parts replacement."
   },
   {
     "id": "svc-008",
     "title": "Interior Design & Home Styling Consultation",
     "price": 50000,
-    "images": [
-      "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=600&h=400&fit=crop&q=80"
-    ],
+    "images": ["https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=600&h=400&fit=crop&q=80"],
     "location": "Victoria Island, Lagos",
     "date": "By appointment",
     "category": "Interior Design",
-    "seller": { "name": "Amara Okonkwo" },
+    "subcategory": "professional",
+    "yearsExperience": 10,
+    "responseTime": "Within 4 hrs",
+    "seller": {
+      "name": "Amara Okonkwo",
+      "profilePic": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&q=80",
+      "rating": 5.0,
+      "phone": "08031234574"
+    },
     "boosted": true,
     "featured": true,
-    "rating": 5.0,
     "description": "Full home & office interior design, space planning, mood boards and furniture sourcing."
   },
   {
     "id": "svc-009",
     "title": "Solar Panel Installation & Inverter Setup",
     "price": 75000,
-    "images": [
-      "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600&h=400&fit=crop&q=80"
-    ],
+    "images": ["https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600&h=400&fit=crop&q=80"],
     "location": "Gwarinpa, Abuja",
     "date": "Available this week",
     "category": "Solar & Inverter",
-    "seller": { "name": "Yusuf Aliyu" },
+    "subcategory": "tech",
+    "yearsExperience": 6,
+    "responseTime": "Within 5 hrs",
+    "seller": {
+      "name": "Yusuf Aliyu",
+      "profilePic": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&h=200&fit=crop&q=80",
+      "rating": 4.9,
+      "phone": "08031234575"
+    },
     "boosted": false,
     "featured": true,
-    "rating": 4.9,
     "description": "Solar panel installation, inverter & battery setup, and renewable energy consultation."
   },
   {
     "id": "svc-010",
     "title": "Tiling & Flooring Installation Services",
     "price": 18000,
-    "images": [
-      "https://images.unsplash.com/photo-1615971677499-5467cbab01c0?w=600&h=400&fit=crop&q=80"
-    ],
+    "images": ["https://images.unsplash.com/photo-1615971677499-5467cbab01c0?w=600&h=400&fit=crop&q=80"],
     "location": "Enugu, Enugu",
     "date": "Available tomorrow",
     "category": "Tiling",
-    "seller": { "name": "Nnamdi Okafor" },
+    "subcategory": "home-services",
+    "yearsExperience": 8,
+    "responseTime": "Within 2 hrs",
+    "seller": {
+      "name": "Nnamdi Okafor",
+      "profilePic": "https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=200&h=200&fit=crop&q=80",
+      "rating": 4.6,
+      "phone": "08031234576"
+    },
     "boosted": false,
     "featured": false,
-    "rating": 4.6,
     "description": "Floor and wall tiling, marble installation, POP ceiling design and screeding."
   },
   {
     "id": "svc-011",
     "title": "Event Planning & Decoration Services",
     "price": 80000,
-    "images": [
-      "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600&h=400&fit=crop&q=80"
-    ],
+    "images": ["https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600&h=400&fit=crop&q=80"],
     "location": "Ajah, Lagos",
     "date": "Book in advance",
     "category": "Event Services",
-    "seller": { "name": "Funmilayo Adebayo" },
+    "subcategory": "events",
+    "yearsExperience": 9,
+    "responseTime": "Within 6 hrs",
+    "seller": {
+      "name": "Funmilayo Adebayo",
+      "profilePic": "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=200&h=200&fit=crop&q=80",
+      "rating": 4.8,
+      "phone": "08031234577"
+    },
     "boosted": true,
     "featured": false,
-    "rating": 4.8,
     "description": "Weddings, birthdays, corporate events. Full decoration, lighting and coordination."
   },
   {
     "id": "svc-012",
     "title": "CCTV Camera Installation & Security Setup",
     "price": 45000,
-    "images": [
-      "https://images.unsplash.com/photo-1558002038-1055907df827?w=600&h=400&fit=crop&q=80"
-    ],
+    "images": ["https://images.unsplash.com/photo-1558002038-1055907df827?w=600&h=400&fit=crop&q=80"],
     "location": "Maitama, Abuja",
     "date": "Available now",
     "category": "Security",
-    "seller": { "name": "Sani Abubakar" },
+    "subcategory": "tech",
+    "yearsExperience": 7,
+    "responseTime": "Within 1 hr",
+    "seller": {
+      "name": "Sani Abubakar",
+      "profilePic": "https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=200&h=200&fit=crop&q=80",
+      "rating": 4.9,
+      "phone": "08031234578"
+    },
     "boosted": false,
     "featured": true,
-    "rating": 4.9,
     "description": "CCTV installation, DVR setup, remote monitoring, and full home security systems."
   },
   {
     "id": "svc-013",
     "title": "Masonry & Building Construction Services",
     "price": 60000,
-    "images": [
-      "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&h=400&fit=crop&q=80"
-    ],
+    "images": ["https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&h=400&fit=crop&q=80"],
     "location": "Abeokuta, Ogun",
     "date": "Available this month",
     "category": "Masonry",
-    "seller": { "name": "Kunle Ogunleye" },
+    "subcategory": "home-services",
+    "yearsExperience": 18,
+    "responseTime": "Same day",
+    "seller": {
+      "name": "Kunle Ogunleye",
+      "profilePic": "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=200&h=200&fit=crop&q=80",
+      "rating": 4.5,
+      "phone": "08031234579"
+    },
     "boosted": false,
     "featured": false,
-    "rating": 4.5,
     "description": "Blockwork, foundation laying, plastering, and general building construction."
   },
   {
     "id": "svc-014",
     "title": "Professional Home Moving & Packing Service",
     "price": 35000,
-    "images": [
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=400&fit=crop&q=80"
-    ],
+    "images": ["https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=400&fit=crop&q=80"],
     "location": "Yaba, Lagos",
     "date": "Available today",
     "category": "Moving",
-    "seller": { "name": "Chukwudi Eze" },
+    "subcategory": "transport",
+    "yearsExperience": 5,
+    "responseTime": "Within 2 hrs",
+    "seller": {
+      "name": "Chukwudi Eze",
+      "profilePic": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&q=80",
+      "rating": 4.7,
+      "phone": "08031234580"
+    },
     "boosted": true,
     "featured": false,
-    "rating": 4.7,
     "description": "Home and office relocation, packing, loading, transport and unpacking services."
   },
   {
     "id": "svc-015",
     "title": "Lawn Mowing & Garden Maintenance",
     "price": 5000,
-    "images": [
-      "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=600&h=400&fit=crop&q=80"
-    ],
+    "images": ["https://images.unsplash.com/photo-1558904541-efa843a96f01?w=600&h=400&fit=crop&q=80"],
     "location": "Asokoro, Abuja",
     "date": "Available weekly",
     "category": "Landscaping",
-    "seller": { "name": "Peter Danjuma" },
+    "subcategory": "home-services",
+    "yearsExperience": 6,
+    "responseTime": "Within 3 hrs",
+    "seller": {
+      "name": "Peter Danjuma",
+      "profilePic": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&q=80",
+      "rating": 4.6,
+      "phone": "08031234581"
+    },
     "boosted": false,
     "featured": false,
-    "rating": 4.6,
     "description": "Lawn mowing, hedge trimming, garden design, and full compound maintenance."
   },
   {
     "id": "svc-016",
     "title": "Hairstyling & Beauty Services at Home",
     "price": 10000,
-    "images": [
-      "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&h=400&fit=crop&q=80"
-    ],
+    "images": ["https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&h=400&fit=crop&q=80"],
     "location": "Ikoyi, Lagos",
     "date": "Available today",
     "category": "Beauty",
-    "seller": { "name": "Adaeze Nnamani" },
+    "subcategory": "beauty-personal",
+    "yearsExperience": 8,
+    "responseTime": "Within 1 hr",
+    "seller": {
+      "name": "Adaeze Nnamani",
+      "profilePic": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop&q=80",
+      "rating": 4.9,
+      "phone": "08031234582"
+    },
     "boosted": true,
     "featured": true,
-    "rating": 4.9,
     "description": "Home-service hairstyling, braiding, makeup, manicure and pedicure by certified stylists."
   },
   {
     "id": "svc-017",
     "title": "Borehole Drilling & Water Pump Installation",
     "price": 150000,
-    "images": [
-      "https://images.unsplash.com/photo-1544164559-2e64a6bd2e1b?w=600&h=400&fit=crop&q=80"
-    ],
+    "images": ["https://images.unsplash.com/photo-1544164559-2e64a6bd2e1b?w=600&h=400&fit=crop&q=80"],
     "location": "Benin City, Edo",
     "date": "Available this week",
     "category": "Water Systems",
-    "seller": { "name": "Osaze Igbinedion" },
+    "subcategory": "home-services",
+    "yearsExperience": 12,
+    "responseTime": "Within 4 hrs",
+    "seller": {
+      "name": "Osaze Igbinedion",
+      "profilePic": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&q=80",
+      "rating": 4.8,
+      "phone": "08031234583"
+    },
     "boosted": false,
     "featured": true,
-    "rating": 4.8,
     "description": "Borehole drilling, pump installation, overhead tank setup, and water treatment."
   },
   {
     "id": "svc-018",
     "title": "Auto Mechanic – Car Repair & Diagnostics",
     "price": 12000,
-    "images": [
-      "https://images.unsplash.com/photo-1625047509168-a7026f36de04?w=600&h=400&fit=crop&q=80"
-    ],
+    "images": ["https://images.unsplash.com/photo-1625047509168-a7026f36de04?w=600&h=400&fit=crop&q=80"],
     "location": "Kaduna, Kaduna",
     "date": "Available now",
     "category": "Auto Repair",
-    "seller": { "name": "Bashir Lawal" },
+    "subcategory": "transport",
+    "yearsExperience": 14,
+    "responseTime": "Within 1 hr",
+    "seller": {
+      "name": "Bashir Lawal",
+      "profilePic": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&h=200&fit=crop&q=80",
+      "rating": 4.7,
+      "phone": "08031234584"
+    },
     "boosted": false,
     "featured": false,
-    "rating": 4.7,
     "description": "Engine diagnostics, brake repair, oil change, suspension and general auto servicing."
   },
   {
     "id": "svc-019",
     "title": "Photography & Videography for Events",
     "price": 40000,
-    "images": [
-      "https://images.unsplash.com/photo-1554048612-b6a482bc67e5?w=600&h=400&fit=crop&q=80"
-    ],
+    "images": ["https://images.unsplash.com/photo-1554048612-b6a482bc67e5?w=600&h=400&fit=crop&q=80"],
     "location": "Uyo, Akwa Ibom",
     "date": "Book in advance",
     "category": "Photography",
-    "seller": { "name": "Ubong Essien" },
+    "subcategory": "events",
+    "yearsExperience": 7,
+    "responseTime": "Within 3 hrs",
+    "seller": {
+      "name": "Ubong Essien",
+      "profilePic": "https://images.unsplash.com/photo-1552058544-f2b08422138a?w=200&h=200&fit=crop&q=80",
+      "rating": 4.9,
+      "phone": "08031234585"
+    },
     "boosted": true,
     "featured": false,
-    "rating": 4.9,
     "description": "Wedding, birthday and corporate event photography, videography and drone coverage."
   },
   {
     "id": "svc-020",
     "title": "Satellite Dish & DSTV Installation",
     "price": 6000,
-    "images": [
-      "https://images.unsplash.com/photo-1585255318859-33d7d65b0f8b?w=600&h=400&fit=crop&q=80"
-    ],
+    "images": ["https://images.unsplash.com/photo-1585255318859-33d7d65b0f8b?w=600&h=400&fit=crop&q=80"],
     "location": "Jos, Plateau",
     "date": "Available today",
     "category": "Satellite",
-    "seller": { "name": "Daniel Pam" },
+    "subcategory": "tech",
+    "yearsExperience": 5,
+    "responseTime": "Within 1 hr",
+    "seller": {
+      "name": "Daniel Pam",
+      "profilePic": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&h=200&fit=crop&q=80",
+      "rating": 4.5,
+      "phone": "08031234586"
+    },
     "boosted": false,
     "featured": false,
-    "rating": 4.5,
     "description": "DSTV, GOtv and Startimes installation, dish alignment, decoder setup and repairs."
   }
 ]
