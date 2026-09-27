@@ -491,6 +491,267 @@
       .ptr-indicator.active { height: 50px; }
     }
   </style>
+
+  <!-- ================= ZAURE ADD-ON : GLAMOROUS BUTTON + SERVICES ADS ================= -->
+  <style id="zxAddonStyles">
+    /* ---------- Glamorous floating button ---------- */
+    #zxGlamBtn{
+      position:fixed; z-index:700;
+      right:16px;
+      bottom:calc(100px + env(safe-area-inset-bottom,0px));
+      display:inline-flex; align-items:center; gap:8px;
+      padding:12px 18px; border:0; border-radius:999px; cursor:pointer;
+      font-family:'Inter',system-ui,-apple-system,sans-serif;
+      font-size:.78rem; font-weight:600; letter-spacing:.2px; color:#fff;
+      isolation:isolate; overflow:hidden;
+      background:linear-gradient(115deg,#0f2940 0%,#1a3650 22%,#2f6f9e 48%,#B49450 76%,#E7D3A1 100%);
+      background-size:250% 250%;
+      animation:zxGlamShift 7s ease infinite, zxGlamPulse 3s ease-out infinite;
+      transition:transform .25s ease, filter .25s ease;
+      -webkit-tap-highlight-color:transparent;
+    }
+    #zxGlamBtn::before{
+      content:''; position:absolute; top:-20%; left:-70%;
+      width:45%; height:140%;
+      background:linear-gradient(100deg,transparent,rgba(255,255,255,.65),transparent);
+      transform:skewX(-22deg); z-index:-1;
+      animation:zxGlamSweep 3.6s ease-in-out infinite;
+    }
+    #zxGlamBtn .zx-glam-icon{ color:#FFE9B0; font-size:.9rem; filter:drop-shadow(0 0 6px rgba(255,233,176,.75)); }
+    #zxGlamBtn b{ color:#FFE9B0; font-weight:800; }
+    #zxGlamBtn .zx-glam-arrow{ font-size:.7rem; opacity:.85; transition:transform .25s ease; }
+    #zxGlamBtn:hover .zx-glam-arrow{ transform:translateX(4px); }
+    #zxGlamBtn:active{ transform:scale(.95); }
+
+    @keyframes zxGlamShift{
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+    @keyframes zxGlamSweep{
+      0%{left:-70%}
+      60%{left:140%}
+      100%{left:140%}
+    }
+    @keyframes zxGlamPulse{
+      0%{box-shadow:0 10px 26px rgba(15,41,64,.45), 0 0 0 0 rgba(212,184,122,.55)}
+      70%{box-shadow:0 10px 26px rgba(15,41,64,.45), 0 0 0 18px rgba(212,184,122,0)}
+      100%{box-shadow:0 10px 26px rgba(15,41,64,.45), 0 0 0 0 rgba(212,184,122,0)}
+    }
+
+    @media (min-width:1024px){
+      #zxGlamBtn{
+        left:50%; right:auto;
+        bottom:26px;
+        transform:translateX(-50%);
+        padding:14px 28px;
+        font-size:.88rem;
+      }
+      #zxGlamBtn:hover{ transform:translateX(-50%) translateY(-4px) scale(1.03); filter:brightness(1.08); }
+      #zxGlamBtn:active{ transform:translateX(-50%) scale(.97); }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      #zxGlamBtn, #zxGlamBtn::before{ animation:none !important; }
+    }
+
+    /* ---------- Services rail (homepage ads) ---------- */
+    .zx-services-section{ margin:30px 0 6px; }
+    .zx-services-head{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+    .zx-view-all{
+      background:none; border:0; cursor:pointer; font-family:inherit;
+      font-size:.8rem; font-weight:600; color:var(--text-secondary);
+      display:inline-flex; align-items:center; gap:6px; transition:color .2s;
+    }
+    .zx-view-all:hover{ color:#B49450; }
+
+    .zx-rail{
+      display:flex; gap:14px; overflow-x:auto;
+      padding:8px 2px 16px; margin:0 -2px;
+      scroll-snap-type:x mandatory;
+      scrollbar-width:none; -webkit-overflow-scrolling:touch;
+    }
+    .zx-rail::-webkit-scrollbar{ display:none; }
+
+    .zx-card{
+      position:relative; flex:0 0 240px; scroll-snap-align:start;
+      display:flex; flex-direction:column;
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:20px; overflow:hidden;
+      transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+    }
+    .zx-card:hover{
+      transform:translateY(-6px);
+      box-shadow:0 18px 40px rgba(0,0,0,.16);
+      border-color:rgba(212,184,122,.55);
+    }
+    .zx-card-media{
+      position:relative; height:132px; overflow:hidden;
+      background:linear-gradient(135deg,#1a3650,#0f2940);
+    }
+    .zx-card-media img{
+      width:100%; height:100%; object-fit:cover; display:block;
+      transition:transform .5s ease;
+    }
+    .zx-card:hover .zx-card-media img{ transform:scale(1.07); }
+    .zx-card-media.zx-noimg{ display:flex; align-items:center; justify-content:center; }
+    .zx-card-media.zx-noimg i{ font-size:1.8rem; color:#D4B87A; }
+    .zx-card-media::after{
+      content:''; position:absolute; inset:0; pointer-events:none;
+      background:linear-gradient(180deg,rgba(10,20,32,0) 40%,rgba(10,20,32,.55) 100%);
+    }
+    .zx-spon{
+      position:absolute; top:10px; left:10px; z-index:2;
+      font-size:.58rem; font-weight:700; letter-spacing:1px; text-transform:uppercase;
+      color:#fff; background:rgba(10,20,32,.55);
+      -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
+      border:1px solid rgba(255,255,255,.18);
+      padding:3px 9px; border-radius:20px;
+    }
+    .zx-badge{
+      position:absolute; top:10px; right:10px; z-index:2;
+      font-size:.58rem; font-weight:800; letter-spacing:.6px; text-transform:uppercase;
+      color:#1a1206; background:linear-gradient(135deg,#E7D3A1,#D4B87A);
+      padding:3px 9px; border-radius:20px;
+    }
+    .zx-card-body{ display:flex; flex-direction:column; gap:6px; padding:14px; flex:1; }
+    .zx-cat{
+      font-size:.6rem; font-weight:700; letter-spacing:1.4px;
+      text-transform:uppercase; color:#B49450;
+    }
+    .zx-card-title{ font-size:.92rem; font-weight:700; color:var(--text); line-height:1.3; }
+    .zx-card-desc{
+      font-size:.76rem; color:var(--text-secondary); line-height:1.45;
+      display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+    }
+    .zx-card-foot{
+      margin-top:auto; display:flex; align-items:center; justify-content:space-between;
+      gap:8px; padding-top:10px;
+    }
+    .zx-price{ font-size:.9rem; font-weight:800; color:#1a3650; }
+    [data-theme="dark"] .zx-price{ color:#D4B87A; }
+    .zx-cta{
+      display:inline-flex; align-items:center; gap:5px;
+      font-size:.7rem; font-weight:700; text-decoration:none; color:#fff;
+      background:linear-gradient(120deg,#1a3650,#2f6f9e);
+      padding:7px 12px; border-radius:40px; white-space:nowrap;
+      transition:filter .2s, transform .2s;
+    }
+    .zx-cta:hover{ filter:brightness(1.15); transform:translateY(-1px); }
+
+    @media (min-width:1024px){
+      .zx-rail{
+        display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+        overflow:visible; gap:16px; padding:8px 0 4px; margin:0;
+      }
+      .zx-card{ flex:1 1 auto; }
+    }
+
+    /* ---------- Modal ---------- */
+    .zx-overlay{
+      position:fixed; inset:0; z-index:1200;
+      display:flex; align-items:center; justify-content:center; padding:16px;
+      background:rgba(8,15,25,.7);
+      -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
+      opacity:0; visibility:hidden;
+      transition:opacity .25s ease, visibility .25s ease;
+    }
+    .zx-overlay.show{ opacity:1; visibility:visible; }
+    .zx-modal{
+      width:100%; max-width:600px; max-height:88vh;
+      display:flex; flex-direction:column;
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:24px; overflow:hidden;
+      box-shadow:0 40px 90px rgba(0,0,0,.45);
+      transform:translateY(18px) scale(.97);
+      transition:transform .3s cubic-bezier(.2,.8,.3,1);
+    }
+    .zx-overlay.show .zx-modal{ transform:none; }
+    .zx-modal-head{
+      position:relative; display:flex; align-items:flex-start; justify-content:space-between;
+      gap:12px; padding:20px 20px 18px;
+      background:linear-gradient(120deg,#0f2940,#1a3650 45%,#2f6f9e 100%);
+      color:#fff;
+    }
+    .zx-modal-kicker{
+      display:inline-flex; align-items:center; gap:6px;
+      font-size:.6rem; font-weight:800; letter-spacing:1.6px;
+      text-transform:uppercase; color:#D4B87A; margin-bottom:6px;
+    }
+    .zx-modal-head h3{
+      font-family:'Playfair Display',serif;
+      font-size:1.15rem; font-weight:700; line-height:1.25;
+    }
+    .zx-modal-close{
+      flex-shrink:0; width:34px; height:34px; border-radius:50%;
+      border:1px solid rgba(255,255,255,.25); background:rgba(255,255,255,.12);
+      color:#fff; cursor:pointer; display:flex; align-items:center; justify-content:center;
+      transition:background .2s, transform .2s;
+    }
+    .zx-modal-close:hover{ background:rgba(255,255,255,.25); transform:rotate(90deg); }
+    .zx-modal-body{
+      padding:14px; overflow-y:auto;
+      display:flex; flex-direction:column; gap:10px;
+    }
+    .zx-svc-row{
+      display:flex; align-items:center; gap:12px; padding:12px;
+      border:1px solid var(--border); border-radius:16px; background:var(--surface);
+      transition:border-color .2s, transform .2s, box-shadow .2s;
+    }
+    .zx-svc-row:hover{
+      border-color:rgba(212,184,122,.6);
+      transform:translateY(-2px);
+      box-shadow:0 10px 24px rgba(0,0,0,.08);
+    }
+    .zx-svc-thumb{
+      flex-shrink:0; width:52px; height:52px; border-radius:14px; overflow:hidden;
+      display:flex; align-items:center; justify-content:center;
+      background:linear-gradient(135deg,#1a3650,#0f2940); color:#D4B87A; font-size:1.1rem;
+    }
+    .zx-svc-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+    .zx-svc-info{ flex:1; min-width:0; }
+    .zx-svc-info h4{
+      font-size:.86rem; font-weight:700; color:var(--text);
+      display:flex; align-items:center; gap:6px; flex-wrap:wrap;
+    }
+    .zx-svc-badge{
+      font-size:.55rem; font-weight:800; letter-spacing:.6px; text-transform:uppercase;
+      color:#1a1206; background:linear-gradient(135deg,#E7D3A1,#D4B87A);
+      padding:2px 7px; border-radius:20px;
+    }
+    .zx-svc-info p{
+      font-size:.73rem; color:var(--text-secondary); line-height:1.4; margin-top:3px;
+      display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+    }
+    .zx-svc-price{
+      display:inline-block; margin-top:5px;
+      font-size:.78rem; font-weight:800; color:#B49450;
+    }
+    .zx-svc-cta{
+      flex-shrink:0; width:38px; height:38px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      color:#fff; text-decoration:none;
+      background:linear-gradient(135deg,#25D366,#1DA851);
+      transition:transform .2s, filter .2s;
+    }
+    .zx-svc-cta:hover{ transform:scale(1.1); filter:brightness(1.1); }
+    .zx-modal-foot{
+      padding:12px 14px calc(14px + env(safe-area-inset-bottom,0px));
+      border-top:1px solid var(--border); background:var(--surface);
+    }
+    .zx-modal-wa{
+      display:flex; align-items:center; justify-content:center; gap:8px;
+      width:100%; padding:12px; border-radius:14px; text-decoration:none;
+      font-size:.85rem; font-weight:700; color:#fff;
+      background:linear-gradient(135deg,#25D366,#1DA851);
+      transition:filter .2s, transform .2s;
+    }
+    .zx-modal-wa:hover{ filter:brightness(1.08); transform:translateY(-1px); }
+    .zx-loading{ padding:26px; text-align:center; color:var(--text-secondary); font-size:.85rem; }
+    .zx-empty{ padding:26px 18px; text-align:center; color:var(--text-secondary); font-size:.85rem; }
+    body.zx-lock{ overflow:hidden; }
+  </style>
+  <!-- ================= END ZAURE ADD-ON STYLES ================= -->
 </head>
 <body>
 
@@ -1215,5 +1476,330 @@
       });
     });
   </script>
+
+  <!-- ================= ZAURE ADD-ON : GLAMOROUS BUTTON + SERVICES ADS ================= -->
+
+  <!-- Glamorous independent button (mobile + desktop) -->
+  <button id="zxGlamBtn" type="button" aria-label="Open Zaure services">
+    <i class="fas fa-crown zx-glam-icon" aria-hidden="true"></i>
+    <span class="zx-glam-text">Zaure <b>Services</b></span>
+    <i class="fas fa-arrow-right zx-glam-arrow" aria-hidden="true"></i>
+  </button>
+
+  <!-- Services modal -->
+  <div class="zx-overlay" id="zxOverlay" role="dialog" aria-modal="true" aria-labelledby="zxModalTitle">
+    <div class="zx-modal">
+      <div class="zx-modal-head">
+        <div>
+          <span class="zx-modal-kicker"><i class="fas fa-bolt"></i> Zaure Services</span>
+          <h3 id="zxModalTitle">Grow faster with Zaure</h3>
+        </div>
+        <button class="zx-modal-close" id="zxModalClose" type="button" aria-label="Close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="zx-modal-body" id="zxModalBody">
+        <div class="zx-loading"><i class="fas fa-spinner fa-spin"></i> Loading services…</div>
+      </div>
+      <div class="zx-modal-foot">
+        <a class="zx-modal-wa"
+           href="https://wa.me/2349042339411?text=Hello%20Zaure%2C%20I%20want%20to%20know%20more%20about%20your%20services."
+           target="_blank" rel="noopener">
+          <i class="fab fa-whatsapp"></i> Chat with Zaure
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script id="zxAddonScript">
+  (function () {
+    'use strict';
+
+    var WA = '2349042339411';
+    var PATHS = [
+      '/data/services.json',
+      '/services.json',
+      '/js/services.json',
+      '/assets/services.json',
+      '/api/services.json',
+      'data/services.json',
+      'services.json'
+    ];
+
+    /* Used only if services.json cannot be reached, so the UI never looks broken */
+    var FALLBACK = [
+      { title:'Boost Your Listing', desc:'Push your ad to the top of search results and get up to 10x more views.', price:'₦2,000 / week', icon:'fa-rocket', badge:'Popular', category:'Promotion' },
+      { title:'Verified Seller Badge', desc:'Build buyer trust with an identity-verified badge on your profile.', price:'₦5,000', icon:'fa-user-check', badge:'Trust', category:'Account' },
+      { title:'Homepage Spotlight', desc:'Feature your product on the Zaure homepage banner for 7 days.', price:'₦7,500 / week', icon:'fa-star', badge:'Premium', category:'Advertising' },
+      { title:'Professional Product Photos', desc:'Get clean, high-converting photos for all your listings.', price:'From ₦3,000', icon:'fa-camera', badge:'New', category:'Media' },
+      { title:'Storefront Setup', desc:'Launch a branded seller storefront on Zaure in minutes.', price:'₦10,000', icon:'fa-store', badge:'Sellers', category:'Business' },
+      { title:'WhatsApp Order Support', desc:'Let buyers order directly from your WhatsApp Business line.', price:'Free', icon:'fab fa-whatsapp', badge:'Free', category:'Support' }
+    ];
+
+    var services = [];
+    var sectionBuilt = false;
+    var overlay, modalBody, glamBtn;
+
+    /* ---------------- helpers ---------------- */
+    function el(tag, cls, html) {
+      var n = document.createElement(tag);
+      if (cls) n.className = cls;
+      if (html != null) n.innerHTML = html;
+      return n;
+    }
+    function esc(s) {
+      return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+        return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
+      });
+    }
+    function iconClass(v, fb) {
+      v = String(v || '').trim();
+      if (!v) return 'fas ' + fb;
+      if (v.indexOf('fa-') === 0) return 'fas ' + v;
+      if (v.indexOf('fa') === 0) return v;
+      return 'fas ' + fb;
+    }
+    function money(p) {
+      if (p === null || p === undefined || p === '') return 'Contact for price';
+      if (typeof p === 'string' && /[^\d.,\s]/.test(p)) return p;   /* e.g. "From ₦3,000" */
+      var n = Number(String(p).replace(/[^\d.]/g, ''));
+      if (!isFinite(n) || n <= 0) return String(p);
+      return n >= 1e6
+        ? '₦' + (n / 1e6).toFixed(1).replace(/\.0$/, '') + 'M'
+        : '₦' + n.toLocaleString('en-NG');
+    }
+    function waLink(title, phone) {
+      var num = String(phone || '').replace(/\D/g, '') || WA;
+      return 'https://wa.me/' + num + '?text=' +
+        encodeURIComponent('Hello Zaure! I am interested in: ' + title);
+    }
+
+    /* ---------------- normalise any services.json shape ---------------- */
+    function normalize(data) {
+      var arr = [];
+      if (Array.isArray(data)) {
+        arr = data;
+      } else if (data && typeof data === 'object') {
+        var keys = ['services', 'ads', 'items', 'data', 'list', 'offers', 'products'];
+        for (var i = 0; i < keys.length; i++) {
+          if (Array.isArray(data[keys[i]])) { arr = data[keys[i]]; break; }
+        }
+        if (!arr.length && (data.title || data.name)) arr = [data];
+      }
+      return arr.filter(Boolean).map(function (s, i) {
+        return {
+          id:       s.id != null ? s.id : 'svc-' + i,
+          title:    s.title || s.name || s.service || s.heading || 'Zaure Service',
+          desc:     s.description || s.desc || s.details || s.subtitle || s.text || '',
+          price:    s.price != null ? s.price : (s.amount != null ? s.amount : (s.cost != null ? s.cost : null)),
+          image:    s.image || s.img || s.photo || s.imageUrl || s.thumbnail ||
+                    (Array.isArray(s.images) ? s.images[0] : '') || '',
+          icon:     s.icon || s.faIcon || '',
+          badge:    s.badge || s.tag || s.label || '',
+          category: s.category || s.type || s.group || 'Service',
+          phone:    s.whatsapp || s.whatsApp || s.phone || s.contact || '',
+          link:     s.link || s.url || s.href || ''
+        };
+      });
+    }
+
+    /* ---------------- fetch ---------------- */
+    function fetchServices() {
+      var idx = 0;
+      function tryNext() {
+        if (idx >= PATHS.length) return Promise.resolve([]);
+        var path = PATHS[idx++];
+        return fetch(path, { cache: 'no-cache' })
+          .then(function (r) {
+            if (!r.ok) throw new Error('HTTP ' + r.status);
+            var ct = r.headers.get('content-type') || '';
+            return ct.indexOf('json') > -1 ? r.json() : r.text().then(JSON.parse);
+          })
+          .then(function (data) {
+            var list = normalize(data);
+            if (list.length) {
+              console.log('[Zaure Add-on] services.json loaded from: ' + path);
+              return list;
+            }
+            return tryNext();
+          })
+          .catch(function () { return tryNext(); });
+      }
+      return tryNext();
+    }
+
+    /* ---------------- homepage rail ---------------- */
+    function buildCard(s) {
+      var card = el('article', 'zx-card');
+
+      var media = el('div', 'zx-card-media');
+      if (s.image) {
+        var img = document.createElement('img');
+        img.src = s.image;
+        img.alt = s.title;
+        img.loading = 'lazy';
+        img.onerror = function () {
+          media.classList.add('zx-noimg');
+          media.innerHTML = '<i class="' + iconClass(s.icon, 'fa-concierge-bell') + '"></i>';
+          media.appendChild(el('span', 'zx-spon', 'Sponsored'));
+          if (s.badge) media.appendChild(el('span', 'zx-badge', esc(s.badge)));
+        };
+        media.appendChild(img);
+      } else {
+        media.classList.add('zx-noimg');
+        media.innerHTML = '<i class="' + iconClass(s.icon, 'fa-concierge-bell') + '"></i>';
+      }
+      media.appendChild(el('span', 'zx-spon', 'Sponsored'));
+      if (s.badge) media.appendChild(el('span', 'zx-badge', esc(s.badge)));
+      card.appendChild(media);
+
+      var body = el('div', 'zx-card-body');
+      body.appendChild(el('span', 'zx-cat', esc(s.category)));
+      body.appendChild(el('h3', 'zx-card-title', esc(s.title)));
+      if (s.desc) body.appendChild(el('p', 'zx-card-desc', esc(s.desc)));
+
+      var foot = el('div', 'zx-card-foot');
+      foot.appendChild(el('span', 'zx-price', esc(money(s.price))));
+
+      var a = document.createElement('a');
+      a.className = 'zx-cta';
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.href = s.link ? s.link : waLink(s.title, s.phone);
+      a.innerHTML = (s.link ? 'View' : 'Chat') + ' <i class="fas fa-arrow-right"></i>';
+      foot.appendChild(a);
+
+      body.appendChild(foot);
+      card.appendChild(body);
+      return card;
+    }
+
+    function renderRail(list) {
+      if (sectionBuilt) return;
+      var banner = document.querySelector('.cta-banner');
+      var host = banner ? banner.parentNode : null;
+      if (!host) return;
+
+      var sec = el('section', 'zx-services-section');
+      sec.id = 'zxServicesSection';
+
+      var head = el('div', 'zx-services-head');
+      head.appendChild(el('h2', 'section-title', 'Services &amp; Offers'));
+      var viewAll = el('button', 'zx-view-all', 'View all <i class="fas fa-arrow-right"></i>');
+      viewAll.type = 'button';
+      viewAll.addEventListener('click', openModal);
+      head.appendChild(viewAll);
+      sec.appendChild(head);
+
+      var rail = el('div', 'zx-rail');
+      list.slice(0, 8).forEach(function (s) { rail.appendChild(buildCard(s)); });
+      sec.appendChild(rail);
+
+      host.insertBefore(sec, banner);
+      sectionBuilt = true;
+    }
+
+    /* ---------------- modal list ---------------- */
+    function buildRow(s) {
+      var row = el('div', 'zx-svc-row');
+
+      var thumb = el('div', 'zx-svc-thumb');
+      if (s.image) {
+        var img = document.createElement('img');
+        img.src = s.image;
+        img.alt = s.title;
+        img.loading = 'lazy';
+        img.onerror = function () {
+          thumb.innerHTML = '<i class="' + iconClass(s.icon, 'fa-concierge-bell') + '"></i>';
+        };
+        thumb.appendChild(img);
+      } else {
+        thumb.innerHTML = '<i class="' + iconClass(s.icon, 'fa-concierge-bell') + '"></i>';
+      }
+      row.appendChild(thumb);
+
+      var info = el('div', 'zx-svc-info');
+      var h4 = el('h4', null, esc(s.title));
+      if (s.badge) h4.appendChild(el('span', 'zx-svc-badge', esc(s.badge)));
+      info.appendChild(h4);
+      if (s.desc) info.appendChild(el('p', null, esc(s.desc)));
+      info.appendChild(el('span', 'zx-svc-price', esc(money(s.price))));
+      row.appendChild(info);
+
+      var cta = document.createElement('a');
+      cta.className = 'zx-svc-cta';
+      cta.target = '_blank';
+      cta.rel = 'noopener';
+      cta.href = s.link ? s.link : waLink(s.title, s.phone);
+      cta.setAttribute('aria-label', 'Contact about ' + s.title);
+      cta.innerHTML = '<i class="' + (s.link ? 'fas fa-arrow-right' : 'fab fa-whatsapp') + '"></i>';
+      row.appendChild(cta);
+
+      return row;
+    }
+
+    function renderModal(list) {
+      if (!modalBody) return;
+      modalBody.innerHTML = '';
+      if (!list.length) {
+        modalBody.appendChild(el('div', 'zx-empty',
+          '<i class="fas fa-circle-info" style="display:block;font-size:1.4rem;margin-bottom:8px;color:#B49450;"></i>' +
+          'No services available right now. Chat with us on WhatsApp and we will help you out.'));
+        return;
+      }
+      list.forEach(function (s) { modalBody.appendChild(buildRow(s)); });
+    }
+
+    /* ---------------- modal controls ---------------- */
+    function openModal() {
+      if (!overlay) return;
+      overlay.classList.add('show');
+      overlay.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('zx-lock');
+    }
+    function closeModal() {
+      if (!overlay) return;
+      overlay.classList.remove('show');
+      overlay.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('zx-lock');
+    }
+
+    /* ---------------- init ---------------- */
+    function init() {
+      overlay   = document.getElementById('zxOverlay');
+      modalBody = document.getElementById('zxModalBody');
+      glamBtn   = document.getElementById('zxGlamBtn');
+
+      if (glamBtn) {
+        glamBtn.addEventListener('click', function () {
+          if (window.innerWidth < 1024 && navigator.vibrate) navigator.vibrate(15);
+          openModal();
+        });
+      }
+      document.getElementById('zxModalClose').addEventListener('click', closeModal);
+      overlay.addEventListener('click', function (e) { if (e.target === overlay) closeModal(); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeModal();
+      });
+
+      fetchServices().then(function (list) {
+        services = list.length ? list : FALLBACK;
+        if (!list.length) {
+          console.warn('[Zaure Add-on] services.json not found in the usual paths — showing fallback services.');
+        }
+        renderRail(services);
+        renderModal(services);
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+  </script>
+  <!-- ================= END ZAURE ADD-ON ================= -->
+
 </body>
 </html>
