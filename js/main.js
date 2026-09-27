@@ -335,16 +335,13 @@ function getProductsSync() {
 // ============================================================
 async function loadServices() {
   try {
-    // Always hit the network first, no stale cache
     const response = await fetch('/data/services.json', { cache: 'no-store' });
     if (!response.ok) throw new Error('Services not found');
     const services = await response.json();
-    // Save a copy for offline fallback only
     localStorage.setItem('zaure_services_cache', JSON.stringify(services));
     return services;
   } catch (error) {
     console.warn('Services fetch failed, falling back to cache:', error);
-    // Only use cache if the network request actually failed
     const cached = localStorage.getItem('zaure_services_cache');
     if (cached) {
       try { return JSON.parse(cached); } catch (e) { return []; }
@@ -353,7 +350,6 @@ async function loadServices() {
   }
 }
 
-// Kept for backward compatibility — now just calls loadServices()
 async function fetchFreshServices() {
   return loadServices();
 }
@@ -428,17 +424,42 @@ function getSellerInitials(s) {
 }
 
 // ============================================================
+// TRADE MAP — converts category to profession name
+// ============================================================
+const TRADE_MAP = {
+  'Cleaning': 'Cleaner',
+  'Electrical': 'Electrician',
+  'Plumbing': 'Plumber',
+  'Appliance Repair': 'Appliance Technician',
+  'Carpentry': 'Carpenter',
+  'Painting': 'Painter',
+  'Generator Repair': 'Generator Technician',
+  'Interior Design': 'Interior Designer',
+  'Solar & Inverter': 'Solar Installer',
+  'Tiling': 'Tiler',
+  'Event Services': 'Event Planner',
+  'Security': 'Security Installer',
+  'Masonry': 'Mason',
+  'Moving': 'Mover',
+  'Landscaping': 'Landscaper',
+  'Beauty': 'Beautician',
+  'Water Systems': 'Borehole Specialist',
+  'Auto Repair': 'Auto Mechanic',
+  'Photography': 'Photographer',
+  'Satellite': 'Satellite Installer'
+};
+
+function getTradeName(category) {
+  return TRADE_MAP[category] || category || 'Professional';
+}
+
+// ============================================================
 // NORMALIZE SERVICE (for card rendering)
 // ============================================================
 function normalizeService(s) {
-  const images = (s.images && s.images.length) ? s.images
-    : (s.image ? [s.image]
-    : (s.img ? [s.img]
-    : (s.photo ? [s.photo] : [])));
   return {
     id: s.id != null ? s.id : (s.slug || ''),
     title: s.title || s.name || s.service || s.heading || 'Service',
-    images: images,
     location: s.location || s.state || s.city || s.area || s.address || '',
     date: s.date || s.availability || s.hours || 'Available now',
     category: s.category || s.type || s.trade || s.group || 'Service',
@@ -452,7 +473,7 @@ function normalizeService(s) {
 }
 
 // ============================================================
-// RENDER SERVICES (homepage cards — no price)
+// RENDER SERVICES (homepage cards — name + trade + avatar)
 // ============================================================
 function renderServices(services, containerId) {
   const grid = document.getElementById(containerId);
@@ -471,15 +492,18 @@ function renderServices(services, containerId) {
     const sellerName = getSellerName(raw);
     const profilePic = getSellerPic(raw);
     const initials = getSellerInitials(raw);
+    const trade = getTradeName(p.category);
     
     let badges = '';
     if (p.boosted) badges += `<span class="badge-boosted"><i class="fas fa-bolt"></i> Boosted</span>`;
     if (p.featured) badges += `<span class="badge-featured">Featured</span>`;
     
-    const firstImage = p.images && p.images.length > 0 ? p.images[0] : null;
-    const imageHtml = firstImage 
-      ? `<img src="${firstImage}" alt="${p.title}" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\\'fas fa-user-tie\\' style=\\'font-size:2.5rem;color:var(--text-secondary);\\'></i>';">`
-      : `<i class="fas fa-user-tie" style="font-size:2.5rem;color:var(--text-secondary);"></i>`;
+    const avatarInner = profilePic
+      ? `<img src="${profilePic}" alt="${sellerName}" loading="lazy"
+             style="width:100%;height:100%;object-fit:cover;display:block;"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+         <span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#1a3650;font-weight:700;font-size:2rem;">${initials}</span>`
+      : `<span style="display:flex;width:100%;height:100%;align-items:center;justify-content:center;color:#1a3650;font-weight:700;font-size:2rem;">${initials}</span>`;
     
     const isFav = isFavorite(p.id);
     const heartIcon = isFav ? 'fas fa-heart' : 'far fa-heart';
@@ -491,18 +515,28 @@ function renderServices(services, containerId) {
                 style="position:absolute;top:12px;right:12px;z-index:2;background:rgba(255,255,255,0.9);border:none;border-radius:50%;width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;box-shadow:0 2px 8px rgba(0,0,0,0.1);${heartColor}">
           <i class="${heartIcon}"></i>
         </button>
-        <div class="listing-img" style="height:180px;background:var(--surface-alt);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;" onclick="viewService('${p.id}')">
-          ${imageHtml}
+        
+        <div class="listing-img" onclick="viewService('${p.id}')"
+             style="height:180px;background:linear-gradient(135deg,#1a3650,#0f2940);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
+          <div style="position:absolute;inset:0;background:radial-gradient(circle at 30% 25%,rgba(212,184,122,0.16) 0%,transparent 60%);"></div>
+          <div style="width:96px;height:96px;border-radius:50%;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 4px rgba(255,255,255,0.15),0 0 0 6px rgba(212,184,122,0.55),0 12px 32px rgba(0,0,0,0.3);position:relative;z-index:1;">
+            ${avatarInner}
+          </div>
           ${badges}
         </div>
-        <div class="listing-body" style="padding:12px 14px 14px;" onclick="viewService('${p.id}')">
-          <div class="title" style="font-weight:700;font-size:0.95rem;margin:0 0 6px;color:var(--text);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${p.title}</div>
-          <div class="meta" style="display:flex;gap:12px;font-size:0.7rem;color:var(--text-secondary);margin-top:4px;">
+        
+        <div class="listing-body" style="padding:14px 14px 14px;" onclick="viewService('${p.id}')">
+          <div class="provider-name" style="font-weight:700;font-size:1rem;color:var(--text);line-height:1.25;letter-spacing:-0.2px;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;">${sellerName}</div>
+          <div class="provider-trade" style="display:inline-flex;align-items:center;gap:5px;font-size:0.7rem;font-weight:700;color:#B49450;text-transform:uppercase;letter-spacing:1px;margin:4px 0 8px;">
+            <i class="fas fa-tag" style="font-size:0.65rem;"></i> ${trade}
+          </div>
+          <div class="service-title-sub" style="font-weight:500;font-size:0.82rem;color:var(--text-secondary);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${p.title}</div>
+          <div class="meta" style="display:flex;gap:12px;font-size:0.7rem;color:var(--text-secondary);margin-top:8px;">
             <span><i class="fas fa-map-pin"></i> ${p.location || 'Nigeria'}</span>
             <span><i class="far fa-clock"></i> ${p.date}</span>
           </div>
-          <div class="listing-footer" style="display:flex;justify-content:space-between;font-size:0.7rem;color:var(--text-secondary);margin-top:8px;padding-top:8px;border-top:1px solid var(--border);">
-            <span><i class="fas fa-user-tie"></i> ${sellerName}</span>
+          <div class="listing-footer" style="display:flex;justify-content:space-between;font-size:0.7rem;color:var(--text-secondary);margin-top:10px;padding-top:10px;border-top:1px solid var(--border);">
+            <span><i class="fas fa-star" style="color:#D4B87A;"></i> ${getSellerRating(raw)}</span>
             <span><i class="far fa-heart"></i> ${isFav ? 'Saved' : 'Save'}</span>
           </div>
         </div>
@@ -857,6 +891,7 @@ window.getSellerName = getSellerName;
 window.getSellerPic = getSellerPic;
 window.getSellerRating = getSellerRating;
 window.getSellerInitials = getSellerInitials;
+window.getTradeName = getTradeName;
 window.normalizeService = normalizeService;
 
 console.log('Zaure – Nigeria\'s most trusted online marketplace.');
