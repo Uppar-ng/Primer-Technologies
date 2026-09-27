@@ -490,182 +490,57 @@
       .ptr-indicator { display: flex; }
       .ptr-indicator.active { height: 50px; }
     }
-  </style>
 
-  <!-- ================= ZAURE ADD-ON : FIND A PRO + SERVICE CARDS ================= -->
-  <style id="zxAddonStyles">
-    /* ---------- Glamorous floating "Find a Pro" button ---------- */
-    #zxGlamBtn{
-      position:fixed; z-index:700;
-      right:16px;
-      bottom:calc(100px + env(safe-area-inset-bottom,0px));
-      display:inline-flex; align-items:center; gap:8px;
-      padding:12px 18px; border:0; border-radius:999px; cursor:pointer;
-      font-family:'Inter',system-ui,-apple-system,sans-serif;
-      font-size:.78rem; font-weight:600; letter-spacing:.2px; color:#fff;
-      text-decoration:none;
-      isolation:isolate; overflow:hidden;
-      background:linear-gradient(115deg,#0f2940 0%,#1a3650 22%,#2f6f9e 48%,#B49450 76%,#E7D3A1 100%);
-      background-size:250% 250%;
-      animation:zxGlamShift 7s ease infinite, zxGlamPulse 3s ease-out infinite;
-      transition:transform .25s ease, filter .25s ease;
-      -webkit-tap-highlight-color:transparent;
+    /* Find a Pro floating button */
+    #findProBtn {
+      position: fixed;
+      right: 16px;
+      bottom: calc(100px + env(safe-area-inset-bottom, 0px));
+      z-index: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #fff;
+      background: linear-gradient(115deg, #0f2940 0%, #1a3650 25%, #2f6f9e 55%, #B49450 85%, #E7D3A1 100%);
+      background-size: 220% 220%;
+      box-shadow: 0 10px 26px rgba(15, 41, 64, 0.42);
+      animation: findProShift 7s ease infinite;
+      transition: transform 0.25s ease, filter 0.25s ease;
+      -webkit-tap-highlight-color: transparent;
     }
-    #zxGlamBtn::before{
-      content:''; position:absolute; top:-20%; left:-70%;
-      width:45%; height:140%;
-      background:linear-gradient(100deg,transparent,rgba(255,255,255,.65),transparent);
-      transform:skewX(-22deg); z-index:-1;
-      animation:zxGlamSweep 3.6s ease-in-out infinite;
+    #findProBtn:hover { filter: brightness(1.08); }
+    #findProBtn:active { transform: scale(0.96); }
+    #findProBtn i:first-child { color: #FFE9B0; }
+    #findProBtn b { color: #FFE9B0; font-weight: 800; }
+    #findProBtn i:last-child { font-size: 0.7rem; opacity: 0.85; transition: transform 0.25s; }
+    #findProBtn:hover i:last-child { transform: translateX(4px); }
+    @keyframes findProShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
-    #zxGlamBtn .zx-glam-icon{ color:#FFE9B0; font-size:.9rem; filter:drop-shadow(0 0 6px rgba(255,233,176,.75)); }
-    #zxGlamBtn b{ color:#FFE9B0; font-weight:800; }
-    #zxGlamBtn .zx-glam-arrow{ font-size:.7rem; opacity:.85; transition:transform .25s ease; }
-    #zxGlamBtn:hover .zx-glam-arrow{ transform:translateX(4px); }
-    #zxGlamBtn:active{ transform:scale(.95); }
-
-    @keyframes zxGlamShift{
-      0%{background-position:0% 50%}
-      50%{background-position:100% 50%}
-      100%{background-position:0% 50%}
-    }
-    @keyframes zxGlamSweep{
-      0%{left:-70%}
-      60%{left:140%}
-      100%{left:140%}
-    }
-    @keyframes zxGlamPulse{
-      0%{box-shadow:0 10px 26px rgba(15,41,64,.45), 0 0 0 0 rgba(212,184,122,.55)}
-      70%{box-shadow:0 10px 26px rgba(15,41,64,.45), 0 0 0 18px rgba(212,184,122,0)}
-      100%{box-shadow:0 10px 26px rgba(15,41,64,.45), 0 0 0 0 rgba(212,184,122,0)}
-    }
-
-    @media (min-width:1024px){
-      #zxGlamBtn{
-        left:50%; right:auto;
-        bottom:26px;
-        transform:translateX(-50%);
-        padding:14px 28px;
-        font-size:.88rem;
+    @media (min-width: 1024px) {
+      #findProBtn {
+        left: 50%;
+        right: auto;
+        bottom: 26px;
+        transform: translateX(-50%);
+        padding: 14px 26px;
+        font-size: 0.88rem;
       }
-      #zxGlamBtn:hover{ transform:translateX(-50%) translateY(-4px) scale(1.03); filter:brightness(1.08); }
-      #zxGlamBtn:active{ transform:translateX(-50%) scale(.97); }
+      #findProBtn:hover { transform: translateX(-50%) translateY(-4px) scale(1.03); }
+      #findProBtn:active { transform: translateX(-50%) scale(0.97); }
     }
-
-    @media (prefers-reduced-motion: reduce){
-      #zxGlamBtn, #zxGlamBtn::before{ animation:none !important; }
-    }
-
-    /* ---------- Service providers rail ---------- */
-    .zx-services-section{ margin:30px 0 6px; }
-    .zx-services-head{
-      display:flex; align-items:flex-end; justify-content:space-between;
-      gap:12px; flex-wrap:wrap; margin-bottom:2px;
-    }
-    .zx-services-head .zx-head-text{ min-width:0; }
-    .zx-services-head .zx-sub{
-      font-size:.8rem; color:var(--text-secondary); margin-top:4px;
-    }
-    .zx-view-all{
-      display:inline-flex; align-items:center; gap:6px;
-      font-size:.8rem; font-weight:600; text-decoration:none;
-      color:var(--text-secondary); transition:color .2s; flex-shrink:0;
-    }
-    .zx-view-all:hover{ color:#B49450; }
-
-    .zx-rail{
-      display:flex; gap:14px; overflow-x:auto;
-      padding:8px 2px 16px; margin:0 -2px;
-      scroll-snap-type:x mandatory;
-      scrollbar-width:none; -webkit-overflow-scrolling:touch;
-    }
-    .zx-rail::-webkit-scrollbar{ display:none; }
-
-    .zx-card{
-      position:relative; flex:0 0 240px; scroll-snap-align:start;
-      display:flex; flex-direction:column;
-      background:var(--surface); border:1px solid var(--border);
-      border-radius:20px; overflow:hidden;
-      text-decoration:none; color:inherit;
-      transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;
-    }
-    .zx-card:hover{
-      transform:translateY(-6px);
-      box-shadow:0 18px 40px rgba(0,0,0,.16);
-      border-color:rgba(212,184,122,.55);
-    }
-    .zx-card:active{ transform:scale(.98); }
-
-    .zx-card-media{
-      position:relative; height:140px; overflow:hidden;
-      background:linear-gradient(135deg,#1a3650,#0f2940);
-    }
-    .zx-card-media img{
-      width:100%; height:100%; object-fit:cover; display:block;
-      transition:transform .5s ease;
-    }
-    .zx-card:hover .zx-card-media img{ transform:scale(1.07); }
-    .zx-card-media.zx-noimg{
-      display:flex; align-items:center; justify-content:center;
-    }
-    .zx-card-media.zx-noimg i{ font-size:2rem; color:#D4B87A; }
-    .zx-card-media::after{
-      content:''; position:absolute; inset:0; pointer-events:none;
-      background:linear-gradient(180deg,rgba(10,20,32,0) 45%,rgba(10,20,32,.55) 100%);
-    }
-    .zx-badge{
-      position:absolute; top:10px; right:10px; z-index:2;
-      font-size:.58rem; font-weight:800; letter-spacing:.6px; text-transform:uppercase;
-      color:#1a1206; background:linear-gradient(135deg,#E7D3A1,#D4B87A);
-      padding:3px 9px; border-radius:20px;
-    }
-    .zx-card-body{ display:flex; flex-direction:column; gap:6px; padding:14px; flex:1; }
-    .zx-cat{
-      font-size:.6rem; font-weight:700; letter-spacing:1.4px;
-      text-transform:uppercase; color:#B49450;
-    }
-    .zx-card-title{
-      font-size:.92rem; font-weight:700; color:var(--text); line-height:1.3;
-      display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
-    }
-    .zx-provider{
-      display:flex; align-items:center; gap:6px;
-      font-size:.75rem; font-weight:600; color:var(--text);
-    }
-    .zx-provider i{ color:#B49450; font-size:.7rem; }
-    .zx-loc{
-      display:flex; align-items:center; gap:6px;
-      font-size:.72rem; color:var(--text-secondary);
-    }
-    .zx-loc i{ color:#B49450; font-size:.68rem; }
-    .zx-card-desc{
-      font-size:.75rem; color:var(--text-secondary); line-height:1.45;
-      display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
-    }
-    .zx-card-foot{
-      margin-top:auto; display:flex; align-items:center; justify-content:space-between;
-      gap:8px; padding-top:10px;
-    }
-    .zx-price{ font-size:.9rem; font-weight:800; color:#1a3650; }
-    [data-theme="dark"] .zx-price{ color:#D4B87A; }
-    .zx-cta{
-      display:inline-flex; align-items:center; gap:5px;
-      font-size:.7rem; font-weight:700; color:#fff;
-      background:linear-gradient(120deg,#1a3650,#2f6f9e);
-      padding:7px 12px; border-radius:40px; white-space:nowrap;
-      transition:filter .2s;
-    }
-    .zx-card:hover .zx-cta{ filter:brightness(1.15); }
-
-    @media (min-width:1024px){
-      .zx-rail{
-        display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
-        overflow:visible; gap:16px; padding:8px 0 4px; margin:0;
-      }
-      .zx-card{ flex:1 1 auto; }
+    @media (prefers-reduced-motion: reduce) {
+      #findProBtn { animation: none !important; }
     }
   </style>
-  <!-- ================= END ZAURE ADD-ON STYLES ================= -->
 </head>
 <body>
 
@@ -849,6 +724,14 @@
       <div class="listing-card"><div class="listing-img"><i class="fas fa-spinner fa-spin"></i></div><div class="listing-body"><div class="price">Loading...</div></div></div>
     </div>
 
+    <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap;">
+      <h2 class="section-title" style="margin-top:4px;">Find a Pro</h2>
+      <a href="/services.html" style="color:var(--text-secondary); font-weight:500; font-size:0.8rem; text-decoration:none;">View all</a>
+    </div>
+    <div class="grid-2col-listings" id="servicesGrid">
+      <div class="listing-card"><div class="listing-img"><i class="fas fa-spinner fa-spin"></i></div><div class="listing-body"><div class="price">Loading...</div></div></div>
+    </div>
+
     <h2 class="section-title">Top Sellers</h2>
     <div class="storefronts" id="topSellersGrid">
       <div class="storefront-card"><div class="store-avatar">...</div><div><div class="store-name">Loading</div></div></div>
@@ -964,6 +847,13 @@
       </div>
     </div>
   </footer>
+
+  <!-- Find a Pro floating button -->
+  <a id="findProBtn" href="/services.html" aria-label="Find a Pro">
+    <i class="fas fa-user-tie"></i>
+    <span>Find a <b>Pro</b></span>
+    <i class="fas fa-arrow-right"></i>
+  </a>
 
   <div class="bottom-nav">
     <a href="/" class="nav-item active"><i class="fas fa-home"></i><span>Home</span></a>
@@ -1342,6 +1232,10 @@
       renderListings(recommendProducts(products, userState, 6), 'featuredGrid');
       renderListings(recommendProducts(products, userState, 6), 'listingGrid');
 
+      // Find a Pro — same pattern as products
+      const services = await loadServices();
+      renderServices(services.slice(0, 6), 'servicesGrid');
+
       const sellers = await loadTopSellers();
       document.getElementById('topSellersGrid').innerHTML = sellers.map(s => `
         <div class="storefront-card" onclick="viewStore('${s.id}')">
@@ -1390,239 +1284,5 @@
       });
     });
   </script>
-
-  <!-- ================= ZAURE ADD-ON : FIND A PRO + SERVICE CARDS ================= -->
-
-  <!-- Glamorous floating "Find a Pro" button (mobile + desktop) -->
-  <a id="zxGlamBtn" href="/services.html" aria-label="Find a pro">
-    <i class="fas fa-user-tie zx-glam-icon" aria-hidden="true"></i>
-    <span class="zx-glam-text">Find a <b>Pro</b></span>
-    <i class="fas fa-arrow-right zx-glam-arrow" aria-hidden="true"></i>
-  </a>
-
-  <script id="zxAddonScript">
-  (function () {
-    'use strict';
-
-    /* Where to look for the services data. First match wins. */
-    var PATHS = [
-      '/data/services.json',
-      '/services.json',
-      '/js/services.json',
-      '/assets/services.json',
-      '/api/services.json',
-      'data/services.json',
-      'services.json'
-    ];
-
-    /* Detail page + list page */
-    var DETAIL_PAGE = '/service.html';
-    var LIST_PAGE   = '/services.html';
-
-    var sectionBuilt = false;
-
-    /* ---------------- helpers ---------------- */
-    function el(tag, cls, html) {
-      var n = document.createElement(tag);
-      if (cls) n.className = cls;
-      if (html != null) n.innerHTML = html;
-      return n;
-    }
-    function esc(s) {
-      return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
-        return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
-      });
-    }
-    function iconClass(v, fb) {
-      v = String(v || '').trim();
-      if (!v) return 'fas ' + fb;
-      if (v.indexOf('fa-') === 0) return 'fas ' + v;
-      if (v.indexOf('fa') === 0) return v;
-      return 'fas ' + fb;
-    }
-    function money(p) {
-      if (p === null || p === undefined || p === '') return 'Contact for price';
-      if (typeof p === 'string' && /[^\d.,\s]/.test(p)) return p; /* e.g. "From ₦3,000" */
-      var n = Number(String(p).replace(/[^\d.]/g, ''));
-      if (!isFinite(n) || n <= 0) return String(p);
-      return n >= 1e6
-        ? '₦' + (n / 1e6).toFixed(1).replace(/\.0$/, '') + 'M'
-        : '₦' + n.toLocaleString('en-NG');
-    }
-    function detailUrl(s) {
-      /* Prefer slug, then id, then index-based key */
-      var key = s.slug || s.id;
-      return DETAIL_PAGE + (key != null && key !== ''
-        ? '?id=' + encodeURIComponent(key)
-        : '');
-    }
-
-    /* ---------------- normalise any services.json shape ---------------- */
-    function normalize(data) {
-      var arr = [];
-      if (Array.isArray(data)) {
-        arr = data;
-      } else if (data && typeof data === 'object') {
-        var keys = ['services', 'providers', 'items', 'data', 'list', 'offers', 'results'];
-        for (var i = 0; i < keys.length; i++) {
-          if (Array.isArray(data[keys[i]])) { arr = data[keys[i]]; break; }
-        }
-        if (!arr.length && (data.title || data.name)) arr = [data];
-      }
-      return arr.filter(Boolean).map(function (s, i) {
-        var img = s.image || s.img || s.photo || s.imageUrl || s.thumbnail ||
-                  (Array.isArray(s.images) ? s.images[0] : '') || '';
-        return {
-          id:       s.id != null ? s.id : (s.slug != null ? s.slug : 'svc-' + i),
-          slug:     s.slug || '',
-          title:    s.title || s.service || s.name || s.heading || 'Service',
-          desc:     s.description || s.desc || s.details || s.subtitle || s.text || '',
-          price:    s.price != null ? s.price
-                    : (s.amount != null ? s.amount
-                    : (s.cost != null ? s.cost : (s.rate != null ? s.rate : null))),
-          image:    img,
-          icon:     s.icon || s.faIcon || '',
-          badge:    s.badge || s.tag || s.label || '',
-          category: s.category || s.type || s.group || s.trade || 'Service',
-          provider: s.provider || s.providerName || s.business || s.store ||
-                    s.seller || s.company || s.fullName || '',
-          location: s.location || s.state || s.city || s.area || s.address || '',
-          rating:   s.rating != null ? s.rating : (s.stars != null ? s.stars : '')
-        };
-      });
-    }
-
-    /* ---------------- fetch (no fallback data) ---------------- */
-    function fetchServices() {
-      var idx = 0;
-      function tryNext() {
-        if (idx >= PATHS.length) return Promise.resolve([]);
-        var path = PATHS[idx++];
-        return fetch(path, { cache: 'no-cache' })
-          .then(function (r) {
-            if (!r.ok) throw new Error('HTTP ' + r.status);
-            var ct = r.headers.get('content-type') || '';
-            return ct.indexOf('json') > -1 ? r.json() : r.text().then(JSON.parse);
-          })
-          .then(function (data) {
-            var list = normalize(data);
-            if (list.length) {
-              console.log('[Zaure Find a Pro] services.json loaded from: ' + path);
-              return list;
-            }
-            return tryNext();
-          })
-          .catch(function () { return tryNext(); });
-      }
-      return tryNext();
-    }
-
-    /* ---------------- card ---------------- */
-    function buildCard(s) {
-      var a = document.createElement('a');
-      a.className = 'zx-card';
-      a.href = detailUrl(s);
-
-      /* media */
-      var media = el('div', 'zx-card-media');
-      if (s.image) {
-        var img = document.createElement('img');
-        img.src = s.image;
-        img.alt = s.title;
-        img.loading = 'lazy';
-        img.onerror = function () {
-          media.classList.add('zx-noimg');
-          media.innerHTML = '<i class="' + iconClass(s.icon, 'fa-screwdriver-wrench') + '"></i>';
-          if (s.badge) media.appendChild(el('span', 'zx-badge', esc(s.badge)));
-        };
-        media.appendChild(img);
-      } else {
-        media.classList.add('zx-noimg');
-        media.innerHTML = '<i class="' + iconClass(s.icon, 'fa-screwdriver-wrench') + '"></i>';
-      }
-      if (s.badge) media.appendChild(el('span', 'zx-badge', esc(s.badge)));
-      a.appendChild(media);
-
-      /* body */
-      var body = el('div', 'zx-card-body');
-      body.appendChild(el('span', 'zx-cat', esc(s.category)));
-
-      var title = el('h3', 'zx-card-title', esc(s.title));
-      body.appendChild(title);
-
-      if (s.provider) {
-        body.appendChild(el('span', 'zx-provider',
-          '<i class="fas fa-user-tie"></i>' + esc(s.provider)));
-      }
-      if (s.location) {
-        body.appendChild(el('span', 'zx-loc',
-          '<i class="fas fa-map-pin"></i>' + esc(s.location)));
-      }
-      if (s.desc) {
-        body.appendChild(el('p', 'zx-card-desc', esc(s.desc)));
-      }
-
-      var foot = el('div', 'zx-card-foot');
-      foot.appendChild(el('span', 'zx-price', esc(money(s.price))));
-      foot.appendChild(el('span', 'zx-cta', 'View <i class="fas fa-arrow-right"></i>'));
-      body.appendChild(foot);
-
-      a.appendChild(body);
-      return a;
-    }
-
-    /* ---------------- homepage section ---------------- */
-    function renderSection(list) {
-      if (sectionBuilt || !list.length) return;
-      var banner = document.querySelector('.cta-banner');
-      var host = banner ? banner.parentNode : null;
-      if (!host) return;
-
-      var sec = el('section', 'zx-services-section');
-      sec.id = 'zxServicesSection';
-
-      var head = el('div', 'zx-services-head');
-
-      var textWrap = el('div', 'zx-head-text');
-      textWrap.appendChild(el('h2', 'section-title', 'Find a Pro'));
-      textWrap.appendChild(el('p', 'zx-sub', 'Verified service providers near you'));
-      head.appendChild(textWrap);
-
-      var viewAll = document.createElement('a');
-      viewAll.className = 'zx-view-all';
-      viewAll.href = LIST_PAGE;
-      viewAll.innerHTML = 'View all <i class="fas fa-arrow-right"></i>';
-      head.appendChild(viewAll);
-
-      sec.appendChild(head);
-
-      var rail = el('div', 'zx-rail');
-      list.slice(0, 8).forEach(function (s) { rail.appendChild(buildCard(s)); });
-      sec.appendChild(rail);
-
-      host.insertBefore(sec, banner);
-      sectionBuilt = true;
-    }
-
-    /* ---------------- init ---------------- */
-    function init() {
-      fetchServices().then(function (list) {
-        if (!list.length) {
-          console.warn('[Zaure Find a Pro] No services found in services.json — section not rendered.');
-          return;
-        }
-        renderSection(list);
-      });
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', init);
-    } else {
-      init();
-    }
-  })();
-  </script>
-  <!-- ================= END ZAURE ADD-ON ================= -->
-
 </body>
 </html>
