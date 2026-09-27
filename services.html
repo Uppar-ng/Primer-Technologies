@@ -1,496 +1,999 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Complete Property Solutions | Prima</title>
-    <meta name="description" content="Prima offers complete property solutions: listing, valuation, maintenance, moving, and handyman services in Nigeria. Call or WhatsApp us today.">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --primary: #2563EB;
-            --primary-dark: #1D4ED8;
-            --bg: #F8FAFC;
-            --white: #FFFFFF;
-            --text: #0F172A;
-            --text-light: #475569;
-            --border: #E2E8F0;
-            --shadow: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03);
-            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.025);
-            --radius: 12px;
-        }
-        body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.5;
-        }
-        .container { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
-        /* Header */
-        .main-header {
-            background: var(--white);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .main-header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 1.5rem;
-        }
-        .logo a {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--primary);
-            text-decoration: none;
-        }
-        .desktop-nav {
-            display: flex;
-            gap: 2rem;
-        }
-        .desktop-nav a {
-            text-decoration: none;
-            color: var(--text);
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-        .desktop-nav a:hover, .desktop-nav a.active { color: var(--primary); }
-        .header-actions { display: flex; gap: 1rem; }
-        .icon-btn {
-            background: none;
-            border: none;
-            font-size: 1.2rem;
-            cursor: pointer;
-            color: var(--text);
-            padding: 0.5rem;
-            border-radius: 8px;
-        }
-        .mobile-only { display: none; }
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            left: -100%;
-            width: 80%;
-            max-width: 300px;
-            height: 100%;
-            background: var(--white);
-            z-index: 200;
-            transition: left 0.3s ease;
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            box-shadow: var(--shadow-lg);
-        }
-        .mobile-menu.open { left: 0; }
-        .mobile-menu a {
-            text-decoration: none;
-            font-size: 1.2rem;
-            color: var(--text);
-            font-weight: 500;
-        }
-        /* Hero */
-        .hero {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            padding: 3rem 0;
-            text-align: center;
-        }
-        .hero h1 { font-size: 2.2rem; margin-bottom: 1rem; font-weight: 700; }
-        .hero p { font-size: 1.1rem; opacity: 0.9; max-width: 700px; margin: 0 auto; }
-        /* Section */
-        .section { padding: 4rem 0; }
-        .section-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-        .service-card {
-            background: var(--white);
-            border-radius: var(--radius);
-            padding: 1.5rem;
-            box-shadow: var(--shadow);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .service-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-        }
-        .service-icon {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-        .service-card h3 {
-            margin-bottom: 0.75rem;
-            font-size: 1.3rem;
-        }
-        .service-description {
-            color: var(--text-light);
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-        }
-        .service-features-list {
-            list-style: none;
-            margin: 1rem 0;
-            padding-left: 0;
-        }
-        .service-features-list li {
-            font-size: 0.85rem;
-            color: var(--text-light);
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .service-features-list li i {
-            color: var(--primary);
-            width: 18px;
-            font-size: 0.8rem;
-        }
-        .service-actions {
-            display: flex;
-            gap: 0.75rem;
-            flex-wrap: wrap;
-            margin-top: 1rem;
-        }
-        .btn-call, .btn-wa {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            border-radius: 2rem;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.85rem;
-            transition: 0.2s;
-        }
-        .btn-call { background: #10B981; color: white; }
-        .btn-call:hover { background: #059669; }
-        .btn-wa { background: #25D366; color: white; }
-        .btn-wa:hover { background: #128C7E; }
-        /* Handyman sub-services (within the handyman card) */
-        .sub-services {
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border);
-        }
-        .sub-services h4 {
-            font-size: 0.9rem;
-            margin-bottom: 0.75rem;
-            color: var(--text);
-        }
-        .sub-services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 0.75rem;
-        }
-        .sub-service-item {
-            background: var(--bg);
-            padding: 0.4rem 0.6rem;
-            border-radius: 2rem;
-            font-size: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            color: var(--text-light);
-        }
-        .sub-service-item i {
-            color: var(--primary);
-            font-size: 0.7rem;
-        }
-        .contact-prompt {
-            text-align: center;
-            margin-top: 2rem;
-            padding: 1.5rem;
-            background: var(--white);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-        }
-        .contact-prompt p { margin-bottom: 1rem; }
-        .btn-primary {
-            display: inline-block;
-            background: var(--primary);
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border-radius: 2rem;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        /* Footer */
-        .footer {
-            background: #0F172A;
-            color: #94A3B8;
-            padding: 3rem 0 1.5rem;
-            margin-top: 3rem;
-        }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-        .footer h4 { color: white; margin-bottom: 1rem; }
-        .footer a { color: #94A3B8; text-decoration: none; display: block; margin: 0.5rem 0; }
-        .social i { font-size: 1.2rem; margin-right: 1rem; cursor: pointer; }
-        .footer-bottom { text-align: center; padding-top: 1rem; border-top: 1px solid #1E293B; font-size: 0.85rem; }
-        @media (max-width: 768px) {
-            .desktop-nav { display: none; }
-            .mobile-only { display: block; }
-            .services-grid { grid-template-columns: 1fr; }
-        }
-        [data-theme="dark"] {
-            --bg: #0F172A;
-            --white: #1E293B;
-            --text: #F1F5F9;
-            --text-light: #94A3B8;
-            --border: #334155;
-        }
-    </style>
-    
-    <!-- Vercel Speed Insights -->
-    <script type="module">
-        import { injectSpeedInsights } from 'https://cdn.jsdelivr.net/npm/@vercel/speed-insights@2/dist/index.mjs';
-        injectSpeedInsights();
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Find a Pro – Zaure | Trusted Local Service Providers</title>
+  <meta name="description" content="Find trusted local service providers near you on Zaure. Plumbers, electricians, tailors, photographers, tutors, and more — verified and ready to serve.">
+  <meta name="keywords" content="find a pro Nigeria, local services Nigeria, plumber Kaduna, electrician Nigeria, tailor Nigeria, photographer Kaduna, services marketplace">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.zauretech.xyz/services.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.zauretech.xyz/services.html">
+  <meta property="og:title" content="Find a Pro – Zaure">
+  <meta property="og:description" content="Find trusted local service providers near you.">
+  <meta property="og:image" content="https://www.zauretech.xyz/assets/og-image.jpg">
+  <meta property="og:site_name" content="Zaure Technologies">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@zauretech">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Local Services Marketplace",
+    "provider": {
+      "@type": "Organization",
+      "name": "Zaure Technologies",
+      "url": "https://www.zauretech.xyz"
+    },
+    "areaServed": "Nigeria"
+  }
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .services-hero {
+      background: linear-gradient(135deg, #1a3650 0%, #0f2940 100%);
+      border-radius: 24px;
+      padding: 44px 32px;
+      margin: 24px 0 20px;
+      color: white;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    .services-hero::before {
+      content: '';
+      position: absolute;
+      top: -50%; right: -20%;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(212,184,122,0.15) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .services-hero-inner {
+      position: relative; z-index: 2;
+      max-width: 700px; margin: 0 auto;
+    }
+    .services-hero .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #D4B87A;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      padding: 5px 14px;
+      border: 1px solid rgba(212,184,122,0.3);
+      border-radius: 40px;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(4px);
+      margin-bottom: 16px;
+    }
+    .services-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+    .services-hero h1 span { color: #D4B87A; }
+    .services-hero p {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .services-search {
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-radius: 60px;
+      padding: 6px 6px 6px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      max-width: 560px;
+      margin: 0 auto;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+    }
+    .services-search i {
+      color: #64748B;
+      font-size: 0.95rem;
+    }
+    .services-search input {
+      border: none;
+      outline: none;
+      flex: 1;
+      padding: 10px 0;
+      font-size: 0.92rem;
+      background: transparent;
+      color: #151e28;
+      font-family: inherit;
+      min-width: 80px;
+    }
+    .services-search input::placeholder { color: #94A3B8; }
+    .services-search button {
+      background: #1a3650;
+      color: white;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+    .services-search button:hover { background: #0f2940; }
+
+    @media (max-width: 640px) {
+      .services-hero { padding: 32px 20px; }
+      .services-hero h1 { font-size: 1.7rem; }
+      .services-hero p { font-size: 0.85rem; }
+      .services-search { padding: 4px 4px 4px 16px; gap: 6px; }
+      .services-search button { padding: 10px 16px; font-size: 0.78rem; }
+    }
+
+    .service-chips-wrapper {
+      position: sticky;
+      top: 60px;
+      z-index: 40;
+      background: var(--bg);
+      padding: 12px 0;
+      margin-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s;
+    }
+    .service-chips {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding-bottom: 4px;
+    }
+    .service-chips::-webkit-scrollbar { display: none; }
+    .service-chip {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 9px 16px;
+      border-radius: 40px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+      font-family: inherit;
+    }
+    .service-chip i { font-size: 0.85rem; }
+    .service-chip:hover {
+      border-color: #1a3650;
+      color: var(--text);
+    }
+    .service-chip.active {
+      background: #1a3650;
+      color: white;
+      border-color: #1a3650;
+    }
+    .service-chip.active i { color: #D4B87A; }
+
+    .services-filter-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .services-filter-row .result-count {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+    .services-filter-row .result-count strong { color: var(--text); font-weight: 700; }
+    .services-filter-row select {
+      padding: 8px 14px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.82rem;
+      font-family: inherit;
+      background: var(--surface);
+      color: var(--text);
+      outline: none;
+      cursor: pointer;
+    }
+    .services-filter-row select:focus { border-color: #1a3650; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    @media (min-width: 640px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .service-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      animation: fadeInUp 0.4s ease both;
+    }
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.1);
+      border-color: #D4B87A;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px; height: 100%;
+      background: linear-gradient(180deg, #1a3650, #D4B87A);
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: 2;
+    }
+    .service-card:hover::before { opacity: 1; }
+
+    .service-card-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 18px;
+      background: var(--surface-alt);
+      position: relative;
+    }
+    .service-provider-avatar {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1a3650, #0f2940);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(26,54,80,0.2);
+    }
+    .service-provider-avatar img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .service-provider-info { flex: 1; min-width: 0; }
+    .service-provider-info .provider-name {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text);
+      margin-bottom: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .service-provider-info .provider-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: #1f5d8a;
+      background: rgba(31,93,138,0.1);
+      padding: 2px 8px;
+      border-radius: 12px;
+    }
+    .service-provider-info .provider-badge i { font-size: 0.6rem; }
+
+    .service-tag-featured {
+      position: absolute;
+      top: 10px; right: 10px;
+      background: #D4B87A;
+      color: #1a2c3d;
+      font-size: 0.6rem;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      z-index: 3;
+    }
+
+    .service-card-body {
+      padding: 16px 18px 18px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .service-category-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #B49450;
+      margin-bottom: 8px;
+    }
+    .service-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.35;
+      margin-bottom: 8px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .service-desc {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-bottom: 14px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .service-meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 14px;
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+    .service-meta-grid span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .service-meta-grid span i { color: #1f5d8a; font-size: 0.7rem; flex-shrink: 0; }
+
+    .service-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-top: auto;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+    .service-price {
+      display: flex;
+      flex-direction: column;
+    }
+    .service-price .price-value {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #1a3650;
+      line-height: 1;
+    }
+    [data-theme="dark"] .service-price .price-value { color: #D4B87A; }
+    .service-price .price-label {
+      font-size: 0.62rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 3px;
+      font-weight: 600;
+    }
+    .service-contact-btn {
+      background: #25D366;
+      color: white;
+      border: none;
+      padding: 9px 16px;
+      border-radius: 60px;
+      font-weight: 700;
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      font-family: inherit;
+    }
+    .service-contact-btn:hover {
+      background: #1DA851;
+      transform: translateY(-1px);
+    }
+
+    .services-empty {
+      grid-column: 1/-1;
+      text-align: center;
+      padding: 60px 24px;
+      background: var(--surface);
+      border-radius: 20px;
+      border: 1px solid var(--border);
+    }
+    .services-empty i {
+      font-size: 3rem;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      display: block;
+    }
+    .services-empty h3 {
+      font-size: 1.2rem;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .services-empty p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+    }
+    .services-empty .btn-primary {
+      width: auto;
+      padding: 12px 28px;
+      display: inline-flex;
+    }
+
+    .services-cta {
+      background: linear-gradient(135deg, #1a3650, #0f2940);
+      border-radius: 20px;
+      padding: 36px 28px;
+      margin: 40px 0;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+      position: relative;
+      overflow: hidden;
+    }
+    .services-cta::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -10%;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(212,184,122,0.15) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .services-cta-content {
+      flex: 1;
+      min-width: 260px;
+      position: relative;
+      z-index: 2;
+    }
+    .services-cta h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .services-cta p {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.6;
+    }
+    .services-cta .btn-cta {
+      background: #D4B87A;
+      color: #1a2c3d;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 60px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+      position: relative;
+      z-index: 2;
+      font-family: inherit;
+      white-space: nowrap;
+    }
+    .services-cta .btn-cta:hover {
+      background: #e0c88a;
+      transform: translateY(-2px);
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .service-card:nth-child(1) { animation-delay: 0.03s; }
+    .service-card:nth-child(2) { animation-delay: 0.06s; }
+    .service-card:nth-child(3) { animation-delay: 0.09s; }
+    .service-card:nth-child(4) { animation-delay: 0.12s; }
+    .service-card:nth-child(5) { animation-delay: 0.15s; }
+    .service-card:nth-child(6) { animation-delay: 0.18s; }
+  </style>
 </head>
 <body>
-    <header class="main-header">
-        <div class="container">
-            <div class="logo"><a href="index.html">Prima</a></div>
-            <nav class="desktop-nav">
-                <a href="index.html">Home</a>
-                <a href="browse.html">Buy</a>
-                <a href="browse.html?type=rent">Rent</a>
-                <a href="browse.html?type=shortlet">Short Let</a>
-                <a href="services.html" class="active">Services</a>
-                <a href="about.html">About</a>
-                <a href="blog.html">Blog</a>
-                <a href="contact.html">Contact</a>
-                <a href="favorites.html"><i class="fas fa-heart"></i> Saved</a>
-            </nav>
-            <div class="header-actions">
-                <button id="themeToggle" class="icon-btn"><i class="fas fa-moon"></i></button>
-                <button id="mobileMenuToggle" class="icon-btn mobile-only"><i class="fas fa-bars"></i></button>
-            </div>
-        </div>
-    </header>
 
-    <div class="mobile-menu" id="mobileMenu">
-        <button id="closeMenu"><i class="fas fa-times"></i></button>
-        <a href="index.html">Home</a>
-        <a href="browse.html">Buy</a>
-        <a href="browse.html?type=rent">Rent</a>
-        <a href="browse.html?type=shortlet">Short Let</a>
-        <a href="services.html">Services</a>
-        <a href="about.html">About</a>
-        <a href="blog.html">Blog</a>
-        <a href="contact.html">Contact</a>
-        <a href="favorites.html">Saved Properties</a>
+  <!-- ===== NAV ===== -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="/" class="logo-wrapper">
+        <div class="logo-text">
+          <span class="brand">Zaure</span>
+          <span class="tagline">Buy with Confidence</span>
+        </div>
+      </a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/categories.html">Categories</a>
+        <a href="/stores.html">Stores</a>
+        <a href="/services.html" class="active">Find a Pro</a>
+        <a href="/about.html">About</a>
+      </div>
+      <div class="nav-actions">
+        <button class="icon-btn" id="themeToggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
+        <a href="/favorites.html" class="icon-btn" style="position:relative;text-decoration:none;">
+          <i class="fas fa-heart"></i>
+          <span id="favBadge">0</span>
+        </a>
+        <div id="headerUserArea">
+          <div class="avatar" id="userAvatar" onclick="openSignup()">ZA</div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <!-- ===== HERO ===== -->
+    <section class="services-hero">
+      <div class="services-hero-inner">
+        <span class="hero-label"><i class="fas fa-tools"></i> Local Service Providers</span>
+        <h1>Find a <span>Pro</span> Near You</h1>
+        <p>Trusted local service providers on Zaure. Plumbers, electricians, tailors, photographers, tutors, and more.</p>
+
+        <div class="services-search">
+          <i class="fas fa-search"></i>
+          <input type="text" id="servicesSearchInput" placeholder="Search for a service..." autocomplete="off">
+          <button id="servicesSearchBtn">
+            Search <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CATEGORY CHIPS ===== -->
+    <div class="service-chips-wrapper">
+      <div class="service-chips" id="serviceChips">
+        <!-- Populated by JS -->
+      </div>
     </div>
 
-    <main>
-        <section class="hero">
-            <div class="container">
-                <h1>Complete Property Solutions</h1>
-                <p>Professional, reliable services for every property need – from valuation to handyman. Call or WhatsApp us.</p>
-            </div>
-        </section>
+    <!-- ===== FILTER ROW ===== -->
+    <div class="services-filter-row">
+      <span class="result-count">Showing <strong id="serviceCount">0</strong> service providers</span>
+      <select id="servicesSortSelect">
+        <option value="recommended">Recommended</option>
+        <option value="rating-high">Highest Rated</option>
+        <option value="price-low">Price: Low to High</option>
+        <option value="price-high">Price: High to Low</option>
+        <option value="experience-high">Most Experienced</option>
+      </select>
+    </div>
 
-        <section class="section">
-            <div class="container">
-                <h2 class="section-title">Our Services</h2>
-                <div class="services-grid" id="servicesGrid"></div>
-                <div class="contact-prompt">
-                    <p><strong>Need a service?</strong> Call or WhatsApp us – our team is ready to assist.</p>
-                    <a href="tel:+2341234567890" class="btn-primary" style="margin-right: 0.5rem;"><i class="fas fa-phone-alt"></i> Call Now</a>
-                    <a href="https://wa.me/2341234567890" class="btn-primary" style="background: #25D366;"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-                </div>
-            </div>
-        </section>
-    </main>
+    <!-- ===== SERVICES GRID ===== -->
+    <div class="services-grid" id="servicesGrid">
+      <div class="service-card" style="grid-column:1/-1;padding:40px;text-align:center;">
+        <i class="fas fa-spinner fa-spin" style="font-size:2rem;color:#1a3650;"></i>
+        <p style="margin-top:12px;color:var(--text-secondary);">Loading service providers...</p>
+      </div>
+    </div>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div><h4>Prima</h4><p>Complete property solutions for modern living in Nigeria.</p></div>
-                <div><h4>Company</h4><a href="about.html">About</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a></div>
-                <div><h4>Services</h4><a href="services.html">Listing</a><a href="services.html">Valuation</a><a href="services.html">Maintenance</a><a href="services.html">Moving</a><a href="services.html">Handyman</a></div>
-                <div><h4>Follow</h4><div class="social"><i class="fab fa-facebook"></i><i class="fab fa-instagram"></i><i class="fab fa-twitter"></i></div></div>
-            </div>
-            <div class="footer-bottom">© 2026 Prima. All rights reserved.</div>
+    <!-- ===== CTA ===== -->
+    <section class="services-cta">
+      <div class="services-cta-content">
+        <h3>Offer a service?</h3>
+        <p>List your service on Zaure for free. Reach customers in your area — no commission, no hidden fees.</p>
+      </div>
+      <a href="/post.html" class="btn-cta">
+        <i class="fas fa-plus-circle"></i> List Your Service
+      </a>
+    </section>
+
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col brand">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <span style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:white;">Zaure</span>
+            <span style="font-size:0.7rem;color:#94A3B8;">Buy with Confidence</span>
+          </div>
+          <p>Nigeria's most trusted online marketplace. Buy, sell, or trade locally. No commission, no middlemen.</p>
+          <div class="social">
+            <a href="https://twitter.com/zauretech" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com/zauretech" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://linkedin.com/company/zauretech" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://facebook.com/zauretech" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          </div>
         </div>
-    </footer>
+        <div class="footer-col">
+          <h4>Browse</h4>
+          <a href="/category.html?slug=all">All Items</a>
+          <a href="/services.html">Services</a>
+          <a href="/category.html?slug=electronics">Electronics</a>
+          <a href="/category.html?slug=fashion">Fashion</a>
+          <a href="/category.html?slug=home-kitchen">Home & Kitchen</a>
+          <a href="/category.html?slug=real-estate">Real Estate</a>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <a href="/help.html">Help Center</a>
+          <a href="/faq.html">FAQ</a>
+          <a href="/safety.html">Safety Tips</a>
+          <a href="/contact.html">Contact Us</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="/about.html">About Us</a>
+          <a href="/alamin-ahmed.html">Founder</a>
+          <a href="/careers.html">Careers</a>
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Service</a>
+        </div>
+        <div class="trust-badges">
+          <div class="badges-row">
+            <span class="badge-item"><i class="fas fa-shield-alt"></i> Verified Users</span>
+            <span class="badge-item"><i class="fas fa-handshake"></i> No Commission</span>
+            <span class="badge-item"><i class="fas fa-user-check"></i> Identity Verified</span>
+            <span class="badge-item"><i class="fas fa-lock"></i> Secure Platform</span>
+            <span class="badge-item"><i class="fas fa-clock"></i> 24/7 Support</span>
+            <span class="badge-item"><i class="fas fa-star"></i> Trusted by Thousands</span>
+            <span class="badge-item"><i class="fas fa-phone"></i> Direct Contact</span>
+            <span class="badge-item"><i class="fas fa-credit-card"></i> Secure Payments</span>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>&copy; 2026 <strong>Zaure Technologies</strong>. All rights reserved.</span>
+          <span class="footer-lang"><i class="fas fa-globe"></i> Nigeria · English</span>
+        </div>
+        <div style="grid-column: 1/-1; text-align: center; margin-top: 8px; font-size: 0.8rem; color: #94A3B8;">
+          For info or to report an issue, contact us on WhatsApp: <a href="https://wa.me/2349042339411" target="_blank" style="color: #D4B87A; text-decoration: none; font-weight: 600;">+2349042339411</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
-    <script>
-        // Theme toggle
-        const themeToggle = document.getElementById('themeToggle');
-        if (themeToggle) {
-            const savedTheme = localStorage.getItem('prima_theme') || 'light';
-            document.documentElement.setAttribute('data-theme', savedTheme);
-            themeToggle.innerHTML = savedTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-            themeToggle.addEventListener('click', () => {
-                const current = document.documentElement.getAttribute('data-theme');
-                const next = current === 'light' ? 'dark' : 'light';
-                document.documentElement.setAttribute('data-theme', next);
-                localStorage.setItem('prima_theme', next);
-                themeToggle.innerHTML = next === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-            });
-        }
+  <!-- ===== BOTTOM NAV ===== -->
+  <div class="bottom-nav">
+    <a href="/" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
+    <a href="/categories.html" class="nav-item"><i class="fas fa-th-large"></i><span>Categories</span></a>
+    <button class="post-btn" id="fabPostAd"><i class="fas fa-plus"></i></button>
+    <a href="/favorites.html" class="nav-item"><i class="fas fa-heart"></i><span>Favorites</span></a>
+    <a href="/profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
+  </div>
 
-        // Mobile menu
-        const mobileToggle = document.getElementById('mobileMenuToggle');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const closeMenu = document.getElementById('closeMenu');
-        if (mobileToggle && mobileMenu) {
-            mobileToggle.addEventListener('click', () => mobileMenu.classList.add('open'));
-            closeMenu.addEventListener('click', () => mobileMenu.classList.remove('open'));
-            mobileMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => mobileMenu.classList.remove('open'));
-            });
-        }
+  <!-- ===== SIGNUP MODAL ===== -->
+  <div class="modal-overlay" id="signupModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Create your account</h3>
+        <button class="modal-close" id="closeSignupModalBtn"><i class="fas fa-times"></i></button>
+      </div>
+      <form id="signupForm" class="modal-form">
+        <label for="signupName">Full Name</label>
+        <input type="text" id="signupName" placeholder="Enter your full name" required>
+        <label for="signupPhone">Phone Number</label>
+        <input type="tel" id="signupPhone" placeholder="Enter your phone number" required>
+        <label>State</label>
+        <div class="custom-select" id="stateSelect">
+          <div class="custom-select-trigger" id="stateTrigger">
+            <span>Select your state</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="custom-select-dropdown" id="stateDropdown">
+            <input type="text" id="stateSearchInput" placeholder="Search state...">
+            <ul class="custom-select-options" id="stateOptionsList"></ul>
+          </div>
+        </div>
+        <input type="hidden" id="signupState" value="">
+        <label class="terms-checkbox">
+          <input type="checkbox" id="termsCheckbox" required>
+          <span>By creating an account, you agree to Zaure's <a href="/terms.html" target="_blank">Terms & Conditions</a> and <a href="/privacy.html" target="_blank">Privacy Policy</a>.</span>
+        </label>
+        <button type="submit" class="btn-primary">Sign Up</button>
+      </form>
+    </div>
+  </div>
 
-        // Google Sheets logging (same webhook)
-        const SHEET_URL = 'https://script.google.com/macros/s/AKfycbyopnxgVhZo80kdR1Rrdr_SbivRJZXrE6cAkwOB9bWB1OklMmp3jWoe9c8W6SGM4XNhHA/exec';
-        const COMPANY_PHONE = '+2341234567890';
-        const COMPANY_PHONE_RAW = '2341234567890';
+  <script src="/js/main.js"></script>
+  <script>
+    // ============================================
+    // GOOGLE SHEET LOGGING
+    // ============================================
+    const ZAURE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbyopnxgVhZo80kdR1Rrdr_SbivRJZXrE6cAkwOB9bWB1OklMmp3jWoe9c8W6SGM4XNhHA/exec';
 
-        function logServiceInteraction(serviceName, action) {
-            const user = JSON.parse(localStorage.getItem('prima_user') || '{}');
-            const payload = {
-                type: 'service_interaction',
-                action: action,
-                service: serviceName,
-                company_phone: COMPANY_PHONE,
-                user_name: user.name || 'Guest',
-                user_phone: user.phone || '',
-                timestamp: new Date().toISOString()
-            };
-            fetch(SHEET_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) })
-                .catch(err => console.warn('Logging failed', err));
-        }
+    function logServiceInteraction(serviceName, sellerName, action) {
+      const user = JSON.parse(localStorage.getItem('zaure_user') || '{}');
+      const payload = {
+        type: 'service_interaction',
+        action: action,
+        service: serviceName,
+        seller: sellerName,
+        user_name: user.name || 'Guest',
+        user_phone: user.phone || '',
+        user_state: user.state || '',
+        timestamp: new Date().toISOString()
+      };
+      fetch(ZAURE_SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: JSON.stringify(payload)
+      }).catch(err => console.warn('Logging failed', err));
+    }
 
-        function handleCall(serviceName, e) {
-            e.preventDefault();
-            logServiceInteraction(serviceName, 'call_click');
-            window.location.href = `tel:${COMPANY_PHONE}`;
-        }
+    // ============================================
+    // SERVICE CATEGORIES (chips)
+    // ============================================
+    const SERVICE_CATEGORIES = [
+      { slug: 'all', name: 'All Services', icon: 'fas fa-th' },
+      { slug: 'home-services', name: 'Home Services', icon: 'fas fa-home' },
+      { slug: 'beauty-personal', name: 'Beauty & Personal', icon: 'fas fa-cut' },
+      { slug: 'events', name: 'Events', icon: 'fas fa-camera' },
+      { slug: 'tech', name: 'Tech Repair', icon: 'fas fa-laptop-medical' },
+      { slug: 'education', name: 'Education', icon: 'fas fa-graduation-cap' },
+      { slug: 'health', name: 'Health & Wellness', icon: 'fas fa-heartbeat' },
+      { slug: 'transport', name: 'Transport', icon: 'fas fa-truck' },
+      { slug: 'cleaning', name: 'Cleaning', icon: 'fas fa-broom' },
+      { slug: 'professional', name: 'Professional', icon: 'fas fa-briefcase' }
+    ];
 
-        function handleWhatsApp(serviceName, e) {
-            e.preventDefault();
-            logServiceInteraction(serviceName, 'whatsapp_click');
-            const user = JSON.parse(localStorage.getItem('prima_user') || '{}');
-            const text = `Hello Prima, I am interested in your ${serviceName} service. My name: ${user.name || 'Guest'}.`;
-            window.open(`https://wa.me/${COMPANY_PHONE_RAW}?text=${encodeURIComponent(text)}`, '_blank');
-        }
+    let allServices = [];
+    let filteredServices = [];
+    let activeCategory = 'all';
+    let activeSearch = '';
+    let activeSort = 'recommended';
 
-        // Render services with detailed info
-        const servicesData = [
-            {
-                name: "Property Listing",
-                icon: "fas fa-home",
-                description: "Get your property sold or rented fast with our comprehensive listing package.",
-                features: [
-                    "Professional photography & videography",
-                    "360° virtual tours",
-                    "Cross-platform syndication (MLS, PropertyPro, etc.)",
-                    "Social media & email marketing",
-                    "For sale/rent signs & open house coordination"
-                ]
-            },
-            {
-                name: "Property & Land Valuation",
-                icon: "fas fa-chart-line",
-                description: "Accurate, certified valuations for sales, purchases, mortgages, or legal purposes.",
-                features: [
-                    "Certified appraisers with local expertise",
-                    "Detailed valuation report within 48 hours",
-                    "Market comparison & replacement cost methods",
-                    "Valuations for land, residential, and commercial properties",
-                    "Accepted by banks and government agencies"
-                ]
-            },
-            {
-                name: "Property Maintenance",
-                icon: "fas fa-tools",
-                description: "Keep your property in perfect condition with our proactive maintenance plans.",
-                features: [
-                    "Monthly/quarterly inspections",
-                    "Emergency repairs (plumbing, electrical, HVAC)",
-                    "Seasonal services (cleaning, landscaping)",
-                    "24/7 support hotline",
-                    "Discounted rates for annual contracts"
-                ]
-            },
-            {
-                name: "Moving & Logistics",
-                icon: "fas fa-truck-moving",
-                description: "Stress‑free relocation – locally or across Nigeria.",
-                features: [
-                    "Packing & unpacking services",
-                    "Secure short/long-term storage",
-                    "Furniture disassembly & reassembly",
-                    "Vehicle transport available",
-                    "Fully insured and tracked"
-                ]
-            },
-            {
-                name: "Handyman Services",
-                icon: "fas fa-hammer",
-                description: "Fix it fast with our trusted handymen. All work guaranteed.",
-                features: [
-                    "Carpentry (furniture, shelving, repairs)",
-                    "Plumbing (leaks, pipe installation)",
-                    "Electrical (wiring, lighting, breaker fixes)",
-                    "Painting (interior/exterior)",
-                    "Appliance repair (AC, fridge, washing machine)"
-                ]
-            }
-        ];
+    async function loadServices() {
+      try {
+        const response = await fetch('/data/services.json');
+        if (!response.ok) throw new Error('Services not found');
+        return await response.json();
+      } catch (error) {
+        console.error('Error loading services:', error);
+        return [];
+      }
+    }
 
-        const gridContainer = document.getElementById('servicesGrid');
-        if (gridContainer) {
-            gridContainer.innerHTML = servicesData.map(service => `
-                <div class="service-card">
-                    <i class="${service.icon} service-icon"></i>
-                    <h3>${service.name}</h3>
-                    <p class="service-description">${service.description}</p>
-                    <ul class="service-features-list">
-                        ${service.features.map(f => `<li><i class="fas fa-check-circle"></i> ${f}</li>`).join('')}
-                    </ul>
-                    <div class="service-actions">
-                        <a href="#" class="btn-call" data-service="${service.name}"><i class="fas fa-phone-alt"></i> Call</a>
-                        <a href="#" class="btn-wa" data-service="${service.name}"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-                    </div>
-                </div>
-            `).join('');
-        }
+    function renderChips() {
+      const chipsContainer = document.getElementById('serviceChips');
+      chipsContainer.innerHTML = SERVICE_CATEGORIES.map(cat => `
+        <button class="service-chip ${cat.slug === activeCategory ? 'active' : ''}" data-slug="${cat.slug}">
+          <i class="${cat.icon}"></i> ${cat.name}
+        </button>
+      `).join('');
 
-        // Attach click handlers for Call/WhatsApp buttons
-        document.addEventListener('click', (e) => {
-            const callBtn = e.target.closest('.btn-call');
-            const waBtn = e.target.closest('.btn-wa');
-            if (callBtn) {
-                e.preventDefault();
-                const service = callBtn.dataset.service || 'General Service';
-                handleCall(service, e);
-            }
-            if (waBtn) {
-                e.preventDefault();
-                const service = waBtn.dataset.service || 'General Service';
-                handleWhatsApp(service, e);
-            }
+      chipsContainer.querySelectorAll('.service-chip').forEach(chip => {
+        chip.addEventListener('click', function() {
+          activeCategory = this.dataset.slug;
+          document.querySelectorAll('.service-chip').forEach(c => c.classList.remove('active'));
+          this.classList.add('active');
+          applyFiltersAndRender();
         });
-    </script>
+      });
+    }
+
+    function applyFiltersAndRender() {
+      let filtered = [...allServices];
+
+      if (activeCategory !== 'all') {
+        filtered = filtered.filter(s => s.subcategory === activeCategory);
+      }
+
+      if (activeSearch) {
+        const q = activeSearch.toLowerCase();
+        filtered = filtered.filter(s =>
+          (s.title && s.title.toLowerCase().includes(q)) ||
+          (s.description && s.description.toLowerCase().includes(q)) ||
+          (s.tags && s.tags.some(t => t.toLowerCase().includes(q))) ||
+          (s.seller?.name && s.seller.name.toLowerCase().includes(q)) ||
+          (s.location && s.location.toLowerCase().includes(q))
+        );
+      }
+
+      switch (activeSort) {
+        case 'rating-high':
+          filtered.sort((a, b) => (b.seller?.rating || 0) - (a.seller?.rating || 0));
+          break;
+        case 'price-low':
+          filtered.sort((a, b) => a.price - b.price);
+          break;
+        case 'price-high':
+          filtered.sort((a, b) => b.price - a.price);
+          break;
+        case 'experience-high':
+          filtered.sort((a, b) => (b.yearsExperience || 0) - (a.yearsExperience || 0));
+          break;
+        default:
+          filtered.sort((a, b) => {
+            if (a.featured && !b.featured) return -1;
+            if (!a.featured && b.featured) return 1;
+            return (b.seller?.rating || 0) - (a.seller?.rating || 0);
+          });
+      }
+
+      filteredServices = filtered;
+      renderServices(filtered);
+    }
+
+    function renderServices(services) {
+      const grid = document.getElementById('servicesGrid');
+      document.getElementById('serviceCount').textContent = services.length;
+
+      if (!services || services.length === 0) {
+        grid.innerHTML = `
+          <div class="services-empty">
+            <i class="fas fa-search"></i>
+            <h3>No services found</h3>
+            <p>Try a different category or search term. New providers join every week.</p>
+            <a href="/post.html" class="btn-primary"><i class="fas fa-plus-circle"></i> List Your Service</a>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = services.map(s => {
+        const priceLabel = s.priceType === 'starting' ? 'Starting from' :
+                          s.priceType === 'hourly' ? 'Per hour' :
+                          s.priceType === 'visit' ? 'Per visit' :
+                          s.priceType === 'quote' ? 'Quote on request' :
+                          'Fixed price';
+        const priceDisplay = s.priceType === 'quote' || s.price === 0
+          ? 'Free Quote'
+          : formatPrice(s.price);
+
+        const avatarHTML = s.seller?.profilePic
+          ? `<img src="${s.seller.profilePic}" alt="${s.seller.name}" onerror="this.style.display='none';this.parentElement.textContent='${s.seller.initials || s.seller.name.charAt(0)}';">`
+          : (s.seller?.initials || s.seller?.name?.charAt(0) || 'Z');
+
+        const whatsappNumber = (s.seller?.whatsapp || s.seller?.phone || '09042339411').replace(/[^0-9]/g, '');
+        const waMessage = encodeURIComponent(`Hello ${s.seller?.name}, I found your service "${s.title}" on Zaure. I'd like to know more.`);
+
+        return `
+          <div class="service-card" onclick="window.location.href='/service.html?id=${s.id}'">
+            ${s.featured ? '<span class="service-tag-featured">Featured</span>' : ''}
+            <div class="service-card-header">
+              <div class="service-provider-avatar">${avatarHTML}</div>
+              <div class="service-provider-info">
+                <div class="provider-name">${s.seller?.name || 'Zaure Pro'}</div>
+                <div class="provider-badge"><i class="fas fa-check-circle"></i> Verified Provider</div>
+              </div>
+            </div>
+            <div class="service-card-body">
+              <div class="service-category-label">
+                <i class="${getCategoryIcon(s.subcategory)}"></i>
+                ${getCategoryName(s.subcategory)}
+              </div>
+              <div class="service-title">${s.title}</div>
+              <div class="service-desc">${s.description}</div>
+              <div class="service-meta-grid">
+                <span><i class="fas fa-map-pin"></i> ${s.location || 'Nigeria'}</span>
+                <span><i class="fas fa-briefcase"></i> ${s.yearsExperience || 0}+ yrs</span>
+                <span><i class="fas fa-clock"></i> ${s.responseTime || 'Fast'}</span>
+                <span><i class="fas fa-star" style="color:#f5b342;"></i> ${s.seller?.rating || '5.0'}</span>
+              </div>
+              <div class="service-card-footer">
+                <div class="service-price">
+                  <div class="price-value">${priceDisplay}</div>
+                  <div class="price-label">${priceLabel}</div>
+                </div>
+                <a class="service-contact-btn"
+                   href="https://wa.me/${whatsappNumber}?text=${waMessage}"
+                   target="_blank"
+                   onclick="event.stopPropagation();"
+                   data-service="${s.title.replace(/"/g, '&quot;')}"
+                   data-seller="${(s.seller?.name || 'Zaure Pro').replace(/"/g, '&quot;')}">
+                  <i class="fab fa-whatsapp"></i> Contact
+                </a>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      document.querySelectorAll('.service-contact-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const service = this.dataset.service || 'Unknown';
+          const seller = this.dataset.seller || 'Unknown';
+          logServiceInteraction(service, seller, 'whatsapp_click');
+        });
+      });
+    }
+
+    function getCategoryIcon(slug) {
+      const cat = SERVICE_CATEGORIES.find(c => c.slug === slug);
+      return cat ? cat.icon : 'fas fa-tools';
+    }
+
+    function getCategoryName(slug) {
+      const cat = SERVICE_CATEGORIES.find(c => c.slug === slug);
+      return cat ? cat.name : 'Service';
+    }
+
+    function formatPrice(n) {
+      if (n >= 1e6) return `₦${(n/1e6).toFixed(1)}M`;
+      return `₦${n.toLocaleString()}`;
+    }
+
+    document.addEventListener('DOMContentLoaded', async function() {
+      renderChips();
+      allServices = await loadServices();
+      applyFiltersAndRender();
+
+      const searchInput = document.getElementById('servicesSearchInput');
+      const searchBtn = document.getElementById('servicesSearchBtn');
+
+      function runSearch() {
+        activeSearch = searchInput.value.trim();
+        applyFiltersAndRender();
+      }
+
+      if (searchInput) {
+        searchInput.addEventListener('input', function() {
+          activeSearch = this.value.trim();
+          applyFiltersAndRender();
+        });
+        searchInput.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter') { e.preventDefault(); runSearch(); }
+        });
+      }
+      if (searchBtn) {
+        searchBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          runSearch();
+        });
+      }
+
+      const sortSelect = document.getElementById('servicesSortSelect');
+      if (sortSelect) {
+        sortSelect.addEventListener('change', function() {
+          activeSort = this.value;
+          applyFiltersAndRender();
+        });
+      }
+
+      loadUser();
+      initTheme();
+      updateFavoriteBadge();
+    });
+  </script>
 </body>
 </html>
