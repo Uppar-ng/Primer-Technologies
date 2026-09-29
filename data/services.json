@@ -40,21 +40,21 @@
     "featured": true
   },
   {
-    "id": "shamwil-idris",
-    "title": "Professional Plumbing Services – Leak Repair & Pipe Installation",
-    "description": "Emergency leak repairs, pipe fitting, water heater installation and bathroom plumbing.",
+    "id": "animu-umar",
+    "title": "Solar Panel Installation & Inverter Setup",
+    "description": "Solar panel installation, inverter & battery setup, and renewable energy consultation.",
     "location": "Kaduna, Kaduna",
     "date": "Available now",
-    "category": "Plumbing",
-    "subcategory": "home-services",
-    "yearsExperience": 7,
-    "responseTime": "20 min",
+    "category": "Solar & Inverter",
+    "subcategory": "tech",
+    "yearsExperience": 5,
+    "responseTime": "30 min",
     "seller": {
-      "name": "Shamwil Idris",
-      "profilePic": "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=200&h=200&fit=crop&q=80",
+      "name": "Animu Umar",
+      "profilePic": "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=200&h=200&fit=crop&q=80",
       "rating": null,
-      "phone": "09014310809",
-      "whatsapp": "09014310809"
+      "phone": "",
+      "whatsapp": ""
     },
     "boosted": false,
     "featured": true
