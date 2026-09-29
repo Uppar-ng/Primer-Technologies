@@ -20,21 +20,21 @@
     "featured": true
   },
   {
-    "id": "ibrahim-musa",
+    "id": "najib-isa-ukissa",
     "title": "Certified Electrician – Wiring, Repairs & Installation",
     "description": "House wiring, socket repairs, inverter installation and electrical fault diagnosis.",
-    "location": "Wuse, Abuja",
+    "location": "Kaduna, Kaduna",
     "date": "Available now",
     "category": "Electrical",
     "subcategory": "home-services",
-    "yearsExperience": 12,
-    "responseTime": "Within 30 min",
+    "yearsExperience": 2,
+    "responseTime": "10 min",
     "seller": {
-      "name": "Ibrahim Musa",
-      "profilePic": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&q=80",
-      "rating": 4.8,
-      "phone": "08031234568",
-      "whatsapp": "08031234568"
+      "name": "Najib Isa Ukissa",
+      "profilePic": "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=200&h=200&fit=crop&q=80",
+      "rating": null,
+      "phone": "09162702769",
+      "whatsapp": "09162702769"
     },
     "boosted": false,
     "featured": true
