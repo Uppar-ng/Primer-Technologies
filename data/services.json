@@ -11,10 +11,10 @@
     "responseTime": "Within 1 hr",
     "seller": {
       "name": "Chinedu Okafor",
-      "profilePic": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&q=80",
+      "profilePic": "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=200&h=200&fit=crop&q=80",
       "rating": 4.9,
-      "phone": "08031234567",
-      "whatsapp": "08031234567"
+      "phone": "",
+      "whatsapp": ""
     },
     "boosted": true,
     "featured": true
@@ -40,21 +40,21 @@
     "featured": true
   },
   {
-    "id": "animu-umar",
-    "title": "Solar Panel Installation & Inverter Setup",
-    "description": "Solar panel installation, inverter & battery setup, and renewable energy consultation.",
+    "id": "shamwil-idris",
+    "title": "Professional Plumbing Services – Leak Repair & Pipe Installation",
+    "description": "Emergency leak repairs, pipe fitting, water heater installation and bathroom plumbing.",
     "location": "Kaduna, Kaduna",
     "date": "Available now",
-    "category": "Solar & Inverter",
-    "subcategory": "tech",
-    "yearsExperience": 5,
-    "responseTime": "30 min",
+    "category": "Plumbing",
+    "subcategory": "home-services",
+    "yearsExperience": 7,
+    "responseTime": "20 min",
     "seller": {
-      "name": "Animu Umar",
-      "profilePic": "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=200&h=200&fit=crop&q=80",
+      "name": "Shamwil Idris",
+      "profilePic": "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=200&h=200&fit=crop&q=80",
       "rating": null,
-      "phone": "",
-      "whatsapp": ""
+      "phone": "09014310809",
+      "whatsapp": "09014310809"
     },
     "boosted": false,
     "featured": true
@@ -71,10 +71,10 @@
     "responseTime": "Within 2 hrs",
     "seller": {
       "name": "Tunde Adeyemi",
-      "profilePic": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&h=200&fit=crop&q=80",
+      "profilePic": "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=200&h=200&fit=crop&q=80",
       "rating": 4.9,
-      "phone": "08031234570",
-      "whatsapp": "08031234570"
+      "phone": "",
+      "whatsapp": ""
     },
     "boosted": false,
     "featured": true
@@ -91,10 +91,10 @@
     "responseTime": "Same day",
     "seller": {
       "name": "Segun Ajayi",
-      "profilePic": "https://images.unsplash.com/photo-1552058544-f2b08422138a?w=200&h=200&fit=crop&q=80",
+      "profilePic": "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=200&h=200&fit=crop&q=80",
       "rating": 4.6,
-      "phone": "08031234571",
-      "whatsapp": "08031234571"
+      "phone": "",
+      "whatsapp": ""
     },
     "boosted": false,
     "featured": false
@@ -111,10 +111,10 @@
     "responseTime": "Within 3 hrs",
     "seller": {
       "name": "Blessing Eze",
-      "profilePic": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&q=80",
+      "profilePic": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=200&h=200&fit=crop&q=80",
       "rating": 4.8,
-      "phone": "08031234572",
-      "whatsapp": "08031234572"
+      "phone": "",
+      "whatsapp": ""
     },
     "boosted": true,
     "featured": false
@@ -131,10 +131,10 @@
     "responseTime": "Within 1 hr",
     "seller": {
       "name": "Abdulrahman Bello",
-      "profilePic": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&h=200&fit=crop&q=80",
+      "profilePic": "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=200&h=200&fit=crop&q=80",
       "rating": 4.7,
-      "phone": "08031234573",
-      "whatsapp": "08031234573"
+      "phone": "",
+      "whatsapp": ""
     },
     "boosted": false,
     "featured": true
@@ -151,10 +151,10 @@
     "responseTime": "Within 4 hrs",
     "seller": {
       "name": "Amara Okonkwo",
-      "profilePic": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&q=80",
+      "profilePic": "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=200&h=200&fit=crop&q=80",
       "rating": 5.0,
-      "phone": "08031234574",
-      "whatsapp": "08031234574"
+      "phone": "",
+      "whatsapp": ""
     },
     "boosted": true,
     "featured": true
@@ -171,10 +171,10 @@
     "responseTime": "Within 5 hrs",
     "seller": {
       "name": "Yusuf Aliyu",
-      "profilePic": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&h=200&fit=crop&q=80",
+      "profilePic": "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=200&h=200&fit=crop&q=80",
       "rating": 4.9,
-      "phone": "08031234575",
-      "whatsapp": "08031234575"
+      "phone": "",
+      "whatsapp": ""
     },
     "boosted": false,
     "featured": true
@@ -191,10 +191,10 @@
     "responseTime": "Within 2 hrs",
     "seller": {
       "name": "Nnamdi Okafor",
-      "profilePic": "https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=200&h=200&fit=crop&q=80",
+      "profilePic": "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=200&h=200&fit=crop&q=80",
       "rating": 4.6,
-      "phone": "08031234576",
-      "whatsapp": "08031234576"
+      "phone": "",
+      "whatsapp": ""
     },
     "boosted": false,
     "featured": false
@@ -211,10 +211,10 @@
     "responseTime": "Within 6 hrs",
     "seller": {
       "name": "Funmilayo Adebayo",
-      "profilePic": "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=200&h=200&fit=crop&q=80",
+      "profilePic": "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=200&h=200&fit=crop&q=80",
       "rating": 4.8,
-      "phone": "08031234577",
-      "whatsapp": "08031234577"
+      "phone": "",
+      "whatsapp": ""
     },
     "boosted": true,
     "featured": false
@@ -231,10 +231,10 @@
     "responseTime": "Within 1 hr",
     "seller": {
       "name": "Sani Abubakar",
-      "profilePic": "https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=200&h=200&fit=crop&q=80",
+      "profilePic": "https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=200&h=200&fit=crop&q=80",
       "rating": 4.9,
-      "phone": "08031234578",
-      "whatsapp": "08031234578"
+      "phone": "",
+      "whatsapp": ""
     },
     "boosted": false,
     "featured": true
@@ -251,10 +251,10 @@
     "responseTime": "Same day",
     "seller": {
       "name": "Kunle Ogunleye",
-      "profilePic": "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=200&h=200&fit=crop&q=80",
+      "profilePic": "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=200&h=200&fit=crop&q=80",
       "rating": 4.5,
-      "phone": "08031234579",
-      "whatsapp": "08031234579"
+      "phone": "",
+      "whatsapp": ""
     },
     "boosted": false,
     "featured": false
@@ -271,10 +271,10 @@
     "responseTime": "Within 2 hrs",
     "seller": {
       "name": "Chukwudi Eze",
-      "profilePic": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&q=80",
+      "profilePic": "https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=200&h=200&fit=crop&q=80",
       "rating": 4.7,
-      "phone": "08031234580",
-      "whatsapp": "08031234580"
+      "phone": "",
+      "whatsapp": ""
     },
     "boosted": true,
     "featured": false
@@ -291,10 +291,10 @@
     "responseTime": "Within 3 hrs",
     "seller": {
       "name": "Peter Danjuma",
-      "profilePic": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&q=80",
+      "profilePic": "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=200&h=200&fit=crop&q=80",
       "rating": 4.6,
-      "phone": "08031234581",
-      "whatsapp": "08031234581"
+      "phone": "",
+      "whatsapp": ""
     },
     "boosted": false,
     "featured": false
@@ -311,10 +311,10 @@
     "responseTime": "Within 1 hr",
     "seller": {
       "name": "Adaeze Nnamani",
-      "profilePic": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop&q=80",
+      "profilePic": "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=200&h=200&fit=crop&q=80",
       "rating": 4.9,
-      "phone": "08031234582",
-      "whatsapp": "08031234582"
+      "phone": "",
+      "whatsapp": ""
     },
     "boosted": true,
     "featured": true
@@ -331,10 +331,10 @@
     "responseTime": "Within 4 hrs",
     "seller": {
       "name": "Osaze Igbinedion",
-      "profilePic": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&q=80",
+      "profilePic": "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=200&h=200&fit=crop&q=80",
       "rating": 4.8,
-      "phone": "08031234583",
-      "whatsapp": "08031234583"
+      "phone": "",
+      "whatsapp": ""
     },
     "boosted": false,
     "featured": true
@@ -351,10 +351,10 @@
     "responseTime": "Within 1 hr",
     "seller": {
       "name": "Bashir Lawal",
-      "profilePic": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&h=200&fit=crop&q=80",
+      "profilePic": "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=200&h=200&fit=crop&q=80",
       "rating": 4.7,
-      "phone": "08031234584",
-      "whatsapp": "08031234584"
+      "phone": "",
+      "whatsapp": ""
     },
     "boosted": false,
     "featured": false
@@ -371,10 +371,10 @@
     "responseTime": "Within 3 hrs",
     "seller": {
       "name": "Ubong Essien",
-      "profilePic": "https://images.unsplash.com/photo-1552058544-f2b08422138a?w=200&h=200&fit=crop&q=80",
+      "profilePic": "https://images.unsplash.com/photo-1554048612-b6a482bc67e5?w=200&h=200&fit=crop&q=80",
       "rating": 4.9,
-      "phone": "08031234585",
-      "whatsapp": "08031234585"
+      "phone": "",
+      "whatsapp": ""
     },
     "boosted": true,
     "featured": false
@@ -391,10 +391,10 @@
     "responseTime": "Within 1 hr",
     "seller": {
       "name": "Daniel Pam",
-      "profilePic": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&h=200&fit=crop&q=80",
+      "profilePic": "https://images.unsplash.com/photo-1585060544812-6b45742d762f?w=200&h=200&fit=crop&q=80",
       "rating": 4.5,
-      "phone": "08031234586",
-      "whatsapp": "08031234586"
+      "phone": "",
+      "whatsapp": ""
     },
     "boosted": false,
     "featured": false
