@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Field Report – Zaure</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#1a3650">
+  <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: linear-gradient(180deg, #f0f5fb 0%, #e3ecf6 100%);
+      min-height: 100vh;
+      padding: 20px 14px 40px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap {
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .head {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+    .head .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #1a3650;
+      letter-spacing: -0.4px;
+    }
+    .head .logo i {
+      color: #D4B87A;
+      margin-right: 6px;
+    }
+    .head .tagline {
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 2.4px;
+      text-transform: uppercase;
+      color: #D4B87A;
+      margin-top: 4px;
+    }
+
+    /* Card */
+    .card {
+      background: #ffffff;
+      border-radius: 20px;
+      border: 1px solid #e5ecf3;
+      padding: 24px 22px 22px;
+      box-shadow:
+        0 1px 3px rgba(15, 41, 64, 0.04),
+        0 16px 40px rgba(15, 41, 64, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -70px; right: -70px;
+      width: 180px; height: 180px;
+      background: radial-gradient(circle, rgba(212,184,122,0.15) 0%, transparent 65%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .card > * { position: relative; z-index: 2; }
+
+    .card h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #1a3650;
+      letter-spacing: -0.4px;
+      margin-bottom: 4px;
+    }
+    .card .subtitle {
+      font-size: 0.8rem;
+      color: #64748b;
+      margin-bottom: 22px;
+      line-height: 1.5;
+    }
+
+    /* Field groups */
+    .field {
+      margin-bottom: 16px;
+    }
+    .field label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: #1a3650;
+      margin-bottom: 7px;
+    }
+    .field label .req { color: #D4B87A; }
+
+    .field input[type="text"],
+    .field input[type="number"],
+    .field input[type="tel"],
+    .field textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #e5ecf3;
+      border-radius: 12px;
+      font-size: 0.92rem;
+      font-family: inherit;
+      background: #f8fbfe;
+      color: #1a3650;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+      -webkit-appearance: none;
+    }
+    .field input:focus,
+    .field textarea:focus {
+      border-color: #1a3650;
+      background: #ffffff;
+      box-shadow: 0 0 0 3px rgba(26,54,80,0.1);
+    }
+    .field textarea {
+      resize: vertical;
+      min-height: 90px;
+      line-height: 1.55;
+    }
+    .field input::placeholder,
+    .field textarea::placeholder { color: #94a3b8; }
+
+    /* Number row (sellers + pros side by side) */
+    .row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    /* File upload */
+    .upload {
+      position: relative;
+      border: 2px dashed #d1dbe6;
+      border-radius: 14px;
+      padding: 20px 16px;
+      text-align: center;
+      background: #f8fbfe;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .upload:hover {
+      border-color: #D4B87A;
+      background: #ffffff;
+    }
+    .upload input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+    .upload .up-icon {
+      font-size: 1.6rem;
+      color: #D4B87A;
+      margin-bottom: 6px;
+    }
+    .upload .up-text {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #1a3650;
+    }
+    .upload .up-hint {
+      font-size: 0.7rem;
+      color: #94a3b8;
+      margin-top: 4px;
+    }
+
+    /* Photo preview */
+    .preview {
+      display: none;
+      margin-top: 10px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #e5ecf3;
+      background: #f8fbfe;
+      position: relative;
+    }
+    .preview.show { display: block; }
+    .preview img {
+      width: 100%;
+      height: auto;
+      max-height: 280px;
+      object-fit: cover;
+      display: block;
+    }
+    .preview .remove {
+      position: absolute;
+      top: 8px; right: 8px;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.95);
+      border: none;
+      color: #e63946;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    /* Submit button */
+    .submit {
+      width: 100%;
+      padding: 14px 20px;
+      border: none;
+      border-radius: 60px;
+      background: linear-gradient(135deg, #1a3650, #0f2940);
+      color: #ffffff;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 0.92rem;
+      letter-spacing: 0.2px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      box-shadow: 0 10px 24px rgba(26,54,80,0.24);
+      transition: transform 0.22s, filter 0.22s, box-shadow 0.22s;
+      margin-top: 8px;
+    }
+    .submit i { color: #D4B87A; }
+    .submit:hover:not(:disabled) {
+      transform: translateY(-2px);
+      filter: brightness(1.1);
+      box-shadow: 0 14px 30px rgba(26,54,80,0.32);
+    }
+    .submit:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    /* Success + error messages */
+    .msg {
+      display: none;
+      margin-top: 16px;
+      padding: 16px 18px;
+      border-radius: 14px;
+      text-align: center;
+      font-size: 0.85rem;
+      line-height: 1.55;
+      font-weight: 500;
+    }
+    .msg.show { display: block; }
+    .msg.success {
+      background: #e8f8ee;
+      border: 1px solid #b8e6c8;
+      color: #157a39;
+    }
+    .msg.success i {
+      display: block;
+      font-size: 2rem;
+      margin-bottom: 8px;
+      color: #25D366;
+    }
+    .msg.error {
+      background: #fdeaea;
+      border: 1px solid #f5c4c4;
+      color: #b91c1c;
+    }
+    .msg.error i {
+      display: block;
+      font-size: 1.6rem;
+      margin-bottom: 6px;
+    }
+    .msg strong {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    /* Reset button (after success) */
+    .reset-btn {
+      display: none;
+      width: 100%;
+      padding: 12px 20px;
+      margin-top: 12px;
+      border: 1px solid #e5ecf3;
+      border-radius: 60px;
+      background: #ffffff;
+      color: #1a3650;
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .reset-btn.show { display: block; }
+    .reset-btn:hover {
+      background: #f8fbfe;
+      border-color: #D4B87A;
+    }
+
+    /* Loading spinner in submit button */
+    .spin { animation: spin 1s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Footer */
+    .foot {
+      text-align: center;
+      font-size: 0.7rem;
+      color: #94a3b8;
+      margin-top: 20px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 420px) {
+      .row-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrap">
+
+    <!-- Header -->
+    <div class="head">
+      <div class="logo"><i class="fas fa-store-alt"></i>Zaure</div>
+      <div class="tagline">Buy with Confidence</div>
+    </div>
+
+    <!-- Card -->
+    <div class="card">
+      <h1>Field Report</h1>
+      <p class="subtitle">Submit your daily field activity. Reports reach the President in real time.</p>
+
+      <form id="reportForm" novalidate>
+
+        <!-- Operator name -->
+        <div class="field">
+          <label for="operatorName">Your Name <span class="req">*</span></label>
+          <input type="text" id="operatorName" name="operatorName" placeholder="e.g. Kabir Isa" required autocomplete="name">
+        </div>
+
+        <!-- Counts -->
+        <div class="field">
+          <label>Today's Onboardings <span class="req">*</span></label>
+          <div class="row-2">
+            <input type="number" id="sellersCount" name="sellersCount" placeholder="Sellers" min="0" value="0" required inputmode="numeric">
+            <input type="number" id="prosCount" name="prosCount" placeholder="Pros" min="0" value="0" required inputmode="numeric">
+          </div>
+        </div>
+
+        <!-- Location -->
+        <div class="field">
+          <label for="location">Area / Market <span class="req">*</span></label>
+          <input type="text" id="location" name="location" placeholder="e.g. Kawo Market, Kaduna" required>
+        </div>
+
+        <!-- Blockers -->
+        <div class="field">
+          <label for="blockers">Blockers (if any)</label>
+          <textarea id="blockers" name="blockers" placeholder="e.g. 3 shops closed early, 2 sellers wanted more time..."></textarea>
+        </div>
+
+        <!-- Intel -->
+        <div class="field">
+          <label for="intel">Market Intel</label>
+          <textarea id="intel" name="intel" placeholder="e.g. Jiji rep spotted in market, competitors offering ₦500 per listing..."></textarea>
+        </div>
+
+        <!-- Photo proof -->
+        <div class="field">
+          <label>Visual Proof <span class="req">*</span></label>
+          <div class="upload" id="uploadBox">
+            <input type="file" id="photoInput" accept="image/*" capture="environment" required>
+            <div class="up-icon"><i class="fas fa-camera"></i></div>
+            <div class="up-text">Tap to take a photo</div>
+            <div class="up-hint">Photograph the seller, shop, or listing</div>
+          </div>
+          <div class="preview" id="previewBox">
+            <img id="previewImg" src="" alt="Preview">
+            <button type="button" class="remove" id="removePhoto" aria-label="Remove photo">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" class="submit" id="submitBtn">
+          <i class="fas fa-paper-plane"></i> Submit Report
+        </button>
+
+        <!-- Success message -->
+        <div class="msg success" id="successMsg">
+          <i class="fas fa-check-circle"></i>
+          <strong>Report submitted!</strong>
+          <span>Your report reached the President. Thank you.</span>
+        </div>
+
+        <!-- Error message -->
+        <div class="msg error" id="errorMsg">
+          <i class="fas fa-exclamation-triangle"></i>
+          <strong>Could not submit</strong>
+          <span id="errorText">Please check your internet and try again.</span>
+        </div>
+
+        <!-- Reset button -->
+        <button type="button" class="reset-btn" id="resetBtn">Submit Another Report</button>
+
+      </form>
+    </div>
+
+    <div class="foot">
+      Reports go directly to the President.<br>
+      Every submission is logged with photo proof.
+    </div>
+
+  </div>
+
+  <script>
+    const form       = document.getElementById('reportForm');
+    const fileInput  = document.getElementById('photoInput');
+    const previewBox = document.getElementById('previewBox');
+    const previewImg = document.getElementById('previewImg');
+    const removeBtn  = document.getElementById('removePhoto');
+    const submitBtn  = document.getElementById('submitBtn');
+    const successMsg = document.getElementById('successMsg');
+    const errorMsg   = document.getElementById('errorMsg');
+    const errorText  = document.getElementById('errorText');
+    const resetBtn   = document.getElementById('resetBtn');
+
+    let selectedFile = null;
+
+    // ---------- Photo handling ----------
+    fileInput.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      if (!file.type.startsWith('image/')) {
+        alert('Please choose an image file.');
+        fileInput.value = '';
+        return;
+      }
+      if (file.size > 8 * 1024 * 1024) {
+        alert('Photo is too large. Please use a photo under 8 MB.');
+        fileInput.value = '';
+        return;
+      }
+      selectedFile = file;
+
+      // Show preview
+      const reader = new FileReader();
+      reader.onload = function(ev) {
+        previewImg.src = ev.target.result;
+        previewBox.classList.add('show');
+      };
+      reader.readAsDataURL(file);
+    });
+
+    removeBtn.addEventListener('click', function() {
+      selectedFile = null;
+      fileInput.value = '';
+      previewBox.classList.remove('show');
+      previewImg.src = '';
+    });
+
+    // ---------- Convert file to base64 ----------
+    function fileToBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const base64 = reader.result.split(',')[1];
+          resolve(base64);
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    // ---------- Submit ----------
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      // Validate
+      const operatorName = document.getElementById('operatorName').value.trim();
+      const sellersCount = parseInt(document.getElementById('sellersCount').value, 10) || 0;
+      const prosCount    = parseInt(document.getElementById('prosCount').value, 10) || 0;
+      const location     = document.getElementById('location').value.trim();
+      const blockers     = document.getElementById('blockers').value.trim();
+      const intel        = document.getElementById('intel').value.trim();
+
+      if (!operatorName) { alert('Please enter your name.'); return; }
+      if (!location) { alert('Please enter your area or market.'); return; }
+      if (!selectedFile) { alert('Please attach a photo as visual proof.'); return; }
+
+      // UI: loading
+      successMsg.classList.remove('show');
+      errorMsg.classList.remove('show');
+      resetBtn.classList.remove('show');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fas fa-spinner spin"></i> Submitting…';
+
+      try {
+        // Convert photo to base64
+        const base64 = await fileToBase64(selectedFile);
+
+        const payload = {
+          operatorName,
+          sellersCount,
+          prosCount,
+          location,
+          blockers,
+          intel,
+          photoName: selectedFile.name,
+          photoType: selectedFile.type,
+          photoBase64: base64
+        };
+
+        const res = await fetch('/api/field-report', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await res.json();
+
+        if (!res.ok || !result.ok) {
+          throw new Error(result.error || 'Server error');
+        }
+
+        // Success
+        successMsg.classList.add('show');
+        resetBtn.classList.add('show');
+        submitBtn.style.display = 'none';
+        form.reset();
+        selectedFile = null;
+        previewBox.classList.remove('show');
+        previewImg.src = '';
+
+        // Scroll to success
+        successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+      } catch (err) {
+        console.error(err);
+        errorText.textContent = err.message || 'Please check your internet and try again.';
+        errorMsg.classList.add('show');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Report';
+      }
+    });
+
+    // ---------- Reset after success ----------
+    resetBtn.addEventListener('click', function() {
+      successMsg.classList.remove('show');
+      errorMsg.classList.remove('show');
+      resetBtn.classList.remove('show');
+      submitBtn.style.display = 'flex';
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Report';
+      document.getElementById('sellersCount').value = 0;
+      document.getElementById('prosCount').value = 0;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+
+</body>
+</html>
