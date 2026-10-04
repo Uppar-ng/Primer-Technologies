@@ -1,5 +1,5 @@
 # robots.txt for Zaure Technologies
-# https://zauretech.vercel.app/robots.txt
+# https://zauretech.xyz/robots.txt
 
 User-agent: *
 Allow: /
@@ -28,10 +28,10 @@ Allow: /privacy$
 Allow: /terms$
 
 # Sitemap location
-Sitemap: https://zauretech.vercel.app/sitemap.xml
+Sitemap: https://zauretech.xyz/sitemap.xml
 
 # Crawl-delay for aggressive bots
 Crawl-delay: 5
 
 # Host
-Host: https://zauretech.vercel.app
+Host: https://zauretech.xyz
