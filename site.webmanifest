@@ -1,83 +1,51 @@
-
----
-
-## 5. `/site.webmanifest` (Web App Manifest)
-
-```json
 {
-  "name": "Zaure – Buy & Sell Locally in Nigeria",
+  "id": "/",
+  "name": "Zaure – Buy with Confidence",
   "short_name": "Zaure",
-  "description": "Nigeria's leading free classified marketplace. Buy, sell, or trade items locally. No commission, no middlemen.",
+  "description": "Nigeria's most trusted online marketplace. Buy, sell, or trade locally with confidence. No commission, no middlemen.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "orientation": "portrait",
-  "background_color": "#1A1F2E",
-  "theme_color": "#1A1F2E",
-  "categories": ["marketplace", "classifieds", "shopping", "real-estate", "vehicles"],
-  "lang": "en",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "portrait-primary",
+  "background_color": "#ffffff",
+  "theme_color": "#1a3650",
+  "categories": ["shopping", "business", "lifestyle"],
+  "lang": "en-NG",
   "dir": "ltr",
   "icons": [
     {
       "src": "/assets/logo-icon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/assets/favicon-16x16.png",
-      "sizes": "16x16",
-      "type": "image/png",
       "purpose": "any"
-    },
-    {
-      "src": "/assets/favicon-32x32.png",
-      "sizes": "32x32",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "/assets/apple-touch-icon.png",
-      "sizes": "180x180",
-      "type": "image/png",
-      "purpose": "apple touch icon"
-    }
-  ],
-  "screenshots": [
-    {
-      "src": "/assets/screenshot-mobile.jpg",
-      "sizes": "1080x1920",
-      "type": "image/jpeg",
-      "platform": "mobile"
-    },
-    {
-      "src": "/assets/screenshot-desktop.jpg",
-      "sizes": "1920x1080",
-      "type": "image/jpeg",
-      "platform": "desktop"
     }
   ],
   "shortcuts": [
     {
       "name": "Browse Listings",
-      "url": "/category?slug=all",
+      "short_name": "Browse",
+      "url": "/category.html",
       "description": "Browse all listings on Zaure"
     },
     {
+      "name": "Find a Pro",
+      "short_name": "Find a Pro",
+      "url": "/services.html",
+      "description": "Find trusted local service providers"
+    },
+    {
       "name": "Post an Ad",
-      "url": "/post",
-      "description": "Post your item for sale"
+      "short_name": "Post",
+      "url": "/post.html",
+      "description": "Post your item or service for free"
     },
     {
       "name": "My Favorites",
-      "url": "/favorites",
-      "description": "View your favorite items"
-    },
-    {
-      "name": "My Profile",
-      "url": "/profile",
-      "description": "Manage your profile"
+      "short_name": "Favorites",
+      "url": "/favorites.html",
+      "description": "View your saved items"
     }
   ],
-  "related_applications": [],
   "prefer_related_applications": false
 }
