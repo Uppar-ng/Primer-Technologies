@@ -2,9 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <title>Page Not Found – Zaure</title>
+  <meta name="description" content="The page you're looking for doesn't exist. Browse listings, find a pro, or search Zaure.">
   <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#1a3650">
   <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -15,154 +17,264 @@
       box-sizing: border-box;
     }
     body {
-      font-family: 'Inter', sans-serif;
-      background: #f4f7fb;
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: linear-gradient(180deg, #f0f5fb 0%, #e3ecf6 100%);
       display: flex;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
       padding: 20px;
+      -webkit-font-smoothing: antialiased;
     }
     .error-container {
       text-align: center;
-      max-width: 500px;
-      padding: 40px;
-      background: white;
+      max-width: 520px;
+      width: 100%;
+      padding: 44px 36px;
+      background: #ffffff;
       border-radius: 24px;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.06);
+      box-shadow:
+        0 1px 3px rgba(15, 41, 64, 0.04),
+        0 20px 50px rgba(15, 41, 64, 0.12);
       border: 1px solid #e5ecf3;
+      position: relative;
+      overflow: hidden;
     }
-    .error-container .error-icon {
-      font-size: 4rem;
-      color: #B49450;
-      margin-bottom: 16px;
+    /* Gold corner glow */
+    .error-container::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(212,184,122,0.15) 0%, transparent 65%);
+      border-radius: 50%;
+      pointer-events: none;
     }
-    .error-container .error-code {
+    .error-container > * { position: relative; z-index: 2; }
+
+    .logo {
       font-family: 'Playfair Display', serif;
-      font-size: 5rem;
+      font-size: 1.45rem;
       font-weight: 800;
-      color: #1A1F2E;
-      line-height: 1;
+      color: #1a3650;
+      margin-bottom: 6px;
+      display: inline-block;
+      letter-spacing: -0.3px;
     }
+    .logo i { color: #D4B87A; margin-right: 6px; }
+
+    .tagline {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 2.6px;
+      text-transform: uppercase;
+      color: #D4B87A;
+      margin-bottom: 22px;
+    }
+
+    .error-icon {
+      font-size: 3.2rem;
+      color: #D4B87A;
+      margin-bottom: 12px;
+      opacity: 0.9;
+    }
+
+    .error-code {
+      font-family: 'Playfair Display', serif;
+      font-size: 4.5rem;
+      font-weight: 800;
+      color: #1a3650;
+      line-height: 1;
+      letter-spacing: -2px;
+      margin-bottom: 4px;
+    }
+
     .error-container h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
-      color: #1A1F2E;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1a3650;
       margin: 8px 0 12px;
+      letter-spacing: -0.4px;
     }
-    .error-container p {
-      color: #4d6a87;
-      font-size: 0.95rem;
+
+    .error-container > p {
+      color: #64748b;
+      font-size: 0.92rem;
       line-height: 1.6;
       margin-bottom: 24px;
     }
-    .error-container .btn-home {
+
+    .btn-home {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: #1A1F2E;
-      color: white;
-      padding: 12px 32px;
+      background: linear-gradient(135deg, #1a3650, #0f2940);
+      color: #ffffff;
+      padding: 12px 30px;
       border-radius: 60px;
       text-decoration: none;
-      font-weight: 600;
-      transition: 0.2s;
+      font-weight: 700;
+      font-size: 0.88rem;
+      letter-spacing: 0.2px;
+      box-shadow: 0 8px 22px rgba(26,54,80,0.24);
+      transition: transform 0.22s ease, filter 0.22s ease, box-shadow 0.22s ease;
     }
-    .error-container .btn-home:hover {
-      background: #2E3548;
+    .btn-home i { color: #D4B87A; font-size: 0.85rem; }
+    .btn-home:hover {
       transform: translateY(-2px);
+      filter: brightness(1.1);
+      box-shadow: 0 12px 28px rgba(26,54,80,0.32);
     }
-    .error-container .search-box {
-      margin-top: 16px;
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 22px 0 16px;
+      color: #94a3b8;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #e5ecf3;
+    }
+
+    .search-box {
       display: flex;
       gap: 8px;
     }
-    .error-container .search-box input {
+    .search-box input {
       flex: 1;
-      padding: 10px 16px;
+      padding: 12px 18px;
       border: 1px solid #e5ecf3;
       border-radius: 60px;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
+      font-family: inherit;
       outline: none;
-      transition: 0.2s;
+      background: #f8fbfe;
+      color: #1a3650;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
     }
-    .error-container .search-box input:focus {
-      border-color: #1A1F2E;
-      box-shadow: 0 0 0 2px rgba(26,31,46,0.1);
+    .search-box input::placeholder { color: #94a3b8; }
+    .search-box input:focus {
+      border-color: #1a3650;
+      background: #ffffff;
+      box-shadow: 0 0 0 3px rgba(26,54,80,0.1);
     }
-    .error-container .search-box button {
-      padding: 10px 20px;
-      background: #1A1F2E;
-      color: white;
+    .search-box button {
+      padding: 12px 22px;
+      background: linear-gradient(135deg, #1a3650, #0f2940);
+      color: #ffffff;
       border: none;
       border-radius: 60px;
-      font-weight: 600;
+      font-weight: 700;
+      font-size: 0.85rem;
+      font-family: inherit;
       cursor: pointer;
-      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 6px 16px rgba(26,54,80,0.2);
+      transition: transform 0.2s, filter 0.2s;
     }
-    .error-container .search-box button:hover {
-      background: #2E3548;
+    .search-box button i { color: #D4B87A; }
+    .search-box button:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.12);
     }
-    .error-container .suggestions {
-      margin-top: 16px;
+
+    .suggestions-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: #94a3b8;
+      margin: 20px 0 12px;
+    }
+
+    .suggestions {
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
       justify-content: center;
     }
-    .error-container .suggestions a {
-      color: #4d6a87;
+    .suggestions a {
+      color: #475569;
       text-decoration: none;
-      font-size: 0.85rem;
-      padding: 4px 12px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 7px 14px;
       border: 1px solid #e5ecf3;
-      border-radius: 20px;
-      transition: 0.2s;
+      border-radius: 40px;
+      background: #f8fbfe;
+      transition: all 0.2s ease;
     }
-    .error-container .suggestions a:hover {
-      border-color: #1A1F2E;
-      color: #1A1F2E;
+    .suggestions a i {
+      color: #D4B87A;
+      font-size: 0.7rem;
+      margin-right: 4px;
     }
-    .logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: #1A1F2E;
-      margin-bottom: 8px;
-      display: inline-block;
+    .suggestions a:hover {
+      border-color: #D4B87A;
+      color: #1a3650;
+      background: #ffffff;
+      transform: translateY(-1px);
     }
-    .logo i { color: #B49450; margin-right: 4px; }
+
     @media (max-width: 480px) {
-      .error-container { padding: 24px; }
-      .error-container .error-code { font-size: 3.5rem; }
-      .error-container .search-box { flex-direction: column; }
+      .error-container { padding: 32px 22px; border-radius: 20px; }
+      .error-code { font-size: 3.4rem; letter-spacing: -1.5px; }
+      .error-container h1 { font-size: 1.25rem; }
+      .error-container > p { font-size: 0.85rem; }
+      .search-box { flex-direction: column; }
+      .search-box button { justify-content: center; }
+      .btn-home { padding: 11px 24px; font-size: 0.82rem; }
     }
   </style>
 </head>
 <body>
 
   <div class="error-container">
-    <div class="logo"><i class="fas fa-store-alt"></i> Zaure</div>
+
+    <!-- Logo + Tagline -->
+    <div class="logo"><i class="fas fa-store-alt"></i>Zaure</div>
+    <div class="tagline">Buy with Confidence</div>
+
+    <!-- Error visual -->
     <div class="error-icon"><i class="fas fa-map-signs"></i></div>
     <div class="error-code">404</div>
     <h1>Page Not Found</h1>
     <p>Oops! The page you're looking for doesn't exist or has been moved.</p>
-    
+
+    <!-- Primary CTA -->
     <a href="/" class="btn-home"><i class="fas fa-home"></i> Back to Home</a>
-    
+
+    <!-- Search -->
+    <div class="divider">Or search Zaure</div>
     <div class="search-box">
-      <input type="text" id="searchInput" placeholder="Search for items..." onkeydown="if(event.key==='Enter') search()">
-      <button onclick="search()"><i class="fas fa-search"></i></button>
+      <input type="text" id="searchInput" placeholder="Search for items, services, pros..." onkeydown="if(event.key==='Enter') search()">
+      <button onclick="search()"><i class="fas fa-search"></i> Search</button>
     </div>
 
+    <!-- Suggestions -->
+    <div class="suggestions-label">Popular on Zaure</div>
     <div class="suggestions">
-      <a href="/category?slug=vehicles">Vehicles</a>
-      <a href="/category?slug=electronics">Electronics</a>
-      <a href="/category?slug=furniture">Furniture</a>
-      <a href="/category?slug=fashion">Fashion</a>
-      <a href="/contact">Contact</a>
-      <a href="/help">Help</a>
+      <a href="/services"><i class="fas fa-user-tie"></i>Find a Pro</a>
+      <a href="/category?slug=vehicles"><i class="fas fa-car"></i>Vehicles</a>
+      <a href="/category?slug=electronics"><i class="fas fa-mobile-alt"></i>Electronics</a>
+      <a href="/category?slug=furniture"><i class="fas fa-couch"></i>Furniture</a>
+      <a href="/category?slug=fashion"><i class="fas fa-tshirt"></i>Fashion</a>
+      <a href="/contact"><i class="fas fa-envelope"></i>Contact</a>
+      <a href="/help"><i class="fas fa-question-circle"></i>Help</a>
     </div>
+
   </div>
 
   <script>
