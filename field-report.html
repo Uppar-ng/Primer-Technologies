@@ -31,15 +31,23 @@
       margin-bottom: 22px;
     }
     .head .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .head .logo img {
+      width: 40px;
+      height: 40px;
+      display: block;
+    }
+    .head .logo-text {
       font-family: 'Playfair Display', serif;
       font-size: 1.5rem;
       font-weight: 800;
       color: #1a3650;
       letter-spacing: -0.4px;
-    }
-    .head .logo i {
-      color: #D4B87A;
-      margin-right: 6px;
+      line-height: 1;
     }
     .head .tagline {
       font-size: 0.58rem;
@@ -47,7 +55,7 @@
       letter-spacing: 2.4px;
       text-transform: uppercase;
       color: #D4B87A;
-      margin-top: 4px;
+      margin-top: 6px;
     }
 
     /* Card */
@@ -132,6 +140,16 @@
     }
     .field input::placeholder,
     .field textarea::placeholder { color: #94a3b8; }
+
+    /* Hide number input spinners */
+    .field input[type="number"]::-webkit-outer-spin-button,
+    .field input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    .field input[type="number"] {
+      -moz-appearance: textfield;
+    }
 
     /* Number row (sellers + pros side by side) */
     .row-2 {
@@ -329,14 +347,17 @@
 
     <!-- Header -->
     <div class="head">
-      <div class="logo"><i class="fas fa-store-alt"></i>Zaure</div>
+      <a href="/" class="logo">
+        <img src="/assets/logo-icon.svg" alt="Zaure">
+        <span class="logo-text">Zaure</span>
+      </a>
       <div class="tagline">Buy with Confidence</div>
     </div>
 
     <!-- Card -->
     <div class="card">
       <h1>Field Report</h1>
-      <p class="subtitle">Submit your daily field activity. Reports reach the President in real time.</p>
+      <p class="subtitle">Submit your daily field activity. Reports are logged and reviewed by the Zaure team.</p>
 
       <form id="reportForm" novalidate>
 
@@ -348,10 +369,9 @@
 
         <!-- Counts -->
         <div class="field">
-          <label>Today's Onboardings <span class="req">*</span></label>
           <div class="row-2">
-            <input type="number" id="sellersCount" name="sellersCount" placeholder="Sellers" min="0" value="0" required inputmode="numeric">
-            <input type="number" id="prosCount" name="prosCount" placeholder="Pros" min="0" value="0" required inputmode="numeric">
+            <input type="number" id="sellersCount" name="sellersCount" placeholder="Sellers" min="0" required inputmode="numeric">
+            <input type="number" id="prosCount" name="prosCount" placeholder="Pros" min="0" required inputmode="numeric">
           </div>
         </div>
 
@@ -398,8 +418,8 @@
         <!-- Success message -->
         <div class="msg success" id="successMsg">
           <i class="fas fa-check-circle"></i>
-          <strong>Report submitted!</strong>
-          <span>Your report reached the President. Thank you.</span>
+          <strong>Report submitted successfully</strong>
+          <span>Your report has been logged and received. Thank you.</span>
         </div>
 
         <!-- Error message -->
@@ -416,8 +436,8 @@
     </div>
 
     <div class="foot">
-      Reports go directly to the President.<br>
-      Every submission is logged with photo proof.
+      Reports are logged and reviewed by the Zaure team.<br>
+      Every submission is stored securely with photo proof.
     </div>
 
   </div>
@@ -487,13 +507,15 @@
 
       // Validate
       const operatorName = document.getElementById('operatorName').value.trim();
-      const sellersCount = parseInt(document.getElementById('sellersCount').value, 10) || 0;
-      const prosCount    = parseInt(document.getElementById('prosCount').value, 10) || 0;
+      const sellersCount = parseInt(document.getElementById('sellersCount').value, 10);
+      const prosCount    = parseInt(document.getElementById('prosCount').value, 10);
       const location     = document.getElementById('location').value.trim();
       const blockers     = document.getElementById('blockers').value.trim();
       const intel        = document.getElementById('intel').value.trim();
 
       if (!operatorName) { alert('Please enter your name.'); return; }
+      if (isNaN(sellersCount) || sellersCount < 0) { alert('Please enter sellers onboarded.'); return; }
+      if (isNaN(prosCount) || prosCount < 0) { alert('Please enter pros onboarded.'); return; }
       if (!location) { alert('Please enter your area or market.'); return; }
       if (!selectedFile) { alert('Please attach a photo as visual proof.'); return; }
 
@@ -561,8 +583,8 @@
       submitBtn.style.display = 'flex';
       submitBtn.disabled = false;
       submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Report';
-      document.getElementById('sellersCount').value = 0;
-      document.getElementById('prosCount').value = 0;
+      document.getElementById('sellersCount').value = '';
+      document.getElementById('prosCount').value = '';
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   </script>
