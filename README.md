@@ -1,47 +1,56 @@
-# Zaure – Nigeria's Leading Classified Marketplace
+# Zaure
 
-![Zaure Logo](https://zauretech.vercel.app/assets/logo-icon.svg)
+**Buy with Confidence.**
 
-## Overview
-
-Zaure is Nigeria's leading free classified marketplace connecting buyers and sellers across the country. Buy, sell, or trade items locally with no commission and no middlemen.
-
-**Live Demo:** [https://zauretech.vercel.app](https://zauretech.vercel.app)
+Zaure is a Nigerian online marketplace that connects buyers, sellers, and
+service providers in one trusted space. No commission. No middlemen.
+Just honest trade.
 
 ---
 
-## Features
+## What Zaure Does
 
-### User Features
-- ✅ **Buy & Sell** – List items for free with no commission
-- ✅ **Favorites** – Save and manage your favorite listings
-- ✅ **Direct Contact** – Call or WhatsApp sellers directly
-- ✅ **User Profiles** – Manage your listings and profile settings
-- ✅ **Dark Mode** – Toggle between light and dark themes
-- ✅ **Search & Filter** – Find exactly what you're looking for
-
-### Technical Features
-- ✅ **Mobile-First Design** – Optimized for all devices
-- ✅ **SEO Optimized** – Meta tags, JSON-LD schema, sitemap
-- ✅ **Dark Mode** – Persistent theme preference
-- ✅ **Local Storage** – Data persistence for favorites and user settings
-- ✅ **Responsive** – Works on all screen sizes
-- ✅ **Accessibility** – ARIA labels and semantic HTML
+- **Buy & Sell Locally** — List items and reach buyers near you
+- **Find a Pro** — Discover verified local service providers
+- **Direct Contact** — Reach sellers and pros directly via call or WhatsApp
+- **Trust First** — Verified identities, safer transactions, real people
 
 ---
 
-## Tech Stack
+## Status
 
-| Technology | Purpose |
-|------------|---------|
-| **HTML5** | Structure |
-| **CSS3** | Styling with CSS Variables |
-| **JavaScript** | Interactivity |
-| **Font Awesome** | Icons |
-| **Google Fonts** | Playfair Display & Inter |
-| **Vercel** | Hosting & Deployment |
-| **JSON** | Data storage |
+Zaure is actively in development and growing across Nigeria.
 
 ---
 
-## File Structure
+## Built With
+
+A modern, lightweight stack focused on speed, reliability, and
+low-bandwidth performance for Nigerian networks.
+
+---
+
+## Contact
+
+- **Website:** [zauretech.xyz](https://zauretech.xyz)
+- **WhatsApp:** [+234 904 233 9411](https://wa.me/2349042339411)
+- **Email:** get.zaure@proton.me
+
+---
+
+## Careers
+
+We're hiring Field Operators to help onboard sellers and service
+providers across Nigeria. Visit [zauretech.xyz/careers](https://zauretech.xyz/careers)
+to learn more.
+
+---
+
+## Legal
+
+- [Terms of Service](https://zauretech.xyz/terms)
+- [Privacy Policy](https://zauretech.xyz/privacy)
+
+---
+
+© 2026 Zaure Technologies. All rights reserved.
