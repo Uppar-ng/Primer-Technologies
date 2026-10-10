@@ -2,102 +2,221 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>Alamin Ahmed – Founder & President of Zaure Technologies</title>
-  <meta name="description" content="Alamin Ahmed founded Zaure Technologies in 2025. Zaure's mission is to make commerce safe, free, and accessible for every Nigerian.">
-  <meta name="keywords" content="Alamin Ahmed, Zaure founder, Zaure president, Nigerian tech founder, Zaure Technologies">
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>Alamin Ahmed – Founder &amp; President of Zaure</title>
+  <meta name="description" content="Alamin Ahmed is the founder and president of Zaure, Nigeria's most trusted online marketplace. He founded the company in 2025 and launched the platform in Kaduna.">
+  <meta name="keywords" content="Alamin Ahmed, Zaure founder, Zaure president, Nigerian founder, Kaduna entrepreneur, Zaure Technologies, Nigerian marketplace founder">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://zauretech.xyz/alamin-ahmed.html">
+  <meta name="theme-color" content="#1a3650">
+
+  <!-- Open Graph -->
   <meta property="og:type" content="profile">
-  <meta property="og:url" content="https://zauretech.vercel.app/alamin-ahmed.html">
-  <meta property="og:title" content="Alamin Ahmed – Founder & President of Zaure Technologies">
-  <meta property="og:description" content="Alamin Ahmed founded Zaure in 2025 to make commerce safe, free, and accessible for every Nigerian.">
-  <meta property="og:image" content="https://zauretech.vercel.app/assets/founder.jpg">
-  
+  <meta property="og:url" content="https://zauretech.xyz/alamin-ahmed.html">
+  <meta property="og:title" content="Alamin Ahmed – Founder &amp; President of Zaure">
+  <meta property="og:description" content="Founder and president of Zaure, Nigeria's most trusted online marketplace. Founded at 23 in Kaduna.">
+  <meta property="og:image" content="https://zauretech.xyz/assets/logo-icon.svg">
+  <meta property="og:image:type" content="image/svg+xml">
+  <meta property="og:site_name" content="Zaure">
+
+  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@blvckel">
-  
+  <meta name="twitter:site" content="@zauretech">
+  <meta name="twitter:title" content="Alamin Ahmed – Founder &amp; President of Zaure">
+  <meta name="twitter:description" content="Building Nigeria's most trusted online marketplace.">
+  <meta name="twitter:image" content="https://zauretech.xyz/assets/logo-icon.svg">
+
+  <!-- Structured Data — Person -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Alamin Ahmed",
     "jobTitle": "Founder & President",
-    "worksFor": {
-      "@type": "Organization",
-      "name": "Zaure Technologies",
-      "foundingDate": "2025"
-    },
+    "url": "https://zauretech.xyz/alamin-ahmed.html",
+    "image": "https://zauretech.xyz/assets/logo-icon.svg",
+    "description": "Founder and president of Zaure, Nigeria's most trusted online marketplace.",
     "birthPlace": {
       "@type": "Place",
-      "name": "Kaduna, Nigeria"
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Kaduna",
+        "addressCountry": "NG"
+      }
     },
-    "url": "https://zauretech.vercel.app/alamin-ahmed.html",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Zaure",
+      "url": "https://zauretech.xyz"
+    },
+    "founder": {
+      "@type": "Organization",
+      "name": "Zaure",
+      "url": "https://zauretech.xyz"
+    },
     "sameAs": [
-      "https://twitter.com/blvckel",
-      "https://linkedin.com/in/blvckel"
-    ],
-    "email": "elaminahmed@proton.me"
+      "https://twitter.com/zauretech",
+      "https://instagram.com/zauretech",
+      "https://linkedin.com/company/zauretech",
+      "https://facebook.com/zauretech"
+    ]
   }
   </script>
-  
+
   <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
+  <link rel="apple-touch-icon" href="/assets/logo-icon.svg">
+  <link rel="manifest" href="/site.webmanifest">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
   <style>
-    .founder-page {
+    /* ============================================================
+       FOUNDER PAGE — clean, text-focused biography
+       ============================================================ */
+
+    .bio-wrap {
       max-width: 720px;
-      margin: 0 auto;
-      padding: 56px 0 80px;
+      margin: 24px auto 0;
+      padding: 0 4px;
     }
 
-    .founder-page h1 {
+    /* Header */
+    .bio-header {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      padding-bottom: 28px;
+      margin-bottom: 30px;
+      border-bottom: 1px solid var(--border);
+    }
+    .bio-avatar {
+      flex-shrink: 0;
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1a3650, #0f2940);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 800;
+      font-size: 2.2rem;
+      color: #E7D3A1;
+      letter-spacing: 1px;
+      box-shadow:
+        0 10px 28px rgba(15,41,64,0.2),
+        0 0 0 3px #ffffff,
+        0 0 0 5px rgba(212,184,122,0.45);
+    }
+    .bio-avatar img {
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+    }
+    .bio-header-text {
+      flex: 1;
+      min-width: 0;
+    }
+    .bio-header-text h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 2.6rem;
+      font-size: 2.2rem;
       font-weight: 800;
       color: var(--text);
-      letter-spacing: -1px;
-      line-height: 1.15;
-      margin-bottom: 32px;
+      letter-spacing: -0.8px;
+      line-height: 1.1;
+      margin-bottom: 6px;
     }
-
-    .founder-page-body {
-      font-size: 1.1rem;
-      line-height: 1.9;
-      color: var(--text);
-    }
-
-    .founder-page-body p {
-      margin-bottom: 0;
-    }
-
-    .founder-page-body strong {
+    .bio-header-text .role {
+      font-size: 0.85rem;
       font-weight: 600;
-      color: var(--text);
+      color: #B49450;
+      letter-spacing: 0.5px;
     }
 
-    .founder-connect {
-      margin-top: 56px;
-      padding-top: 32px;
+    @media (max-width: 640px) {
+      .bio-header { gap: 16px; padding-bottom: 22px; margin-bottom: 24px; }
+      .bio-avatar { width: 76px; height: 76px; font-size: 1.7rem; }
+      .bio-header-text h1 { font-size: 1.6rem; }
+      .bio-header-text .role { font-size: 0.78rem; }
+    }
+
+    /* Paragraphs */
+    .bio-content p {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+    .bio-content p strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+    .bio-content p:last-child { margin-bottom: 0; }
+
+    /* Section headings */
+    .bio-content h2 {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2.4px;
+      color: #B49450;
+      margin: 40px 0 18px;
+    }
+    .bio-content h2:first-child { margin-top: 0; }
+
+    /* Pull quote */
+    .bio-quote {
+      margin: 44px 0;
+      padding: 28px 30px;
+      background: var(--surface);
+      border-left: 3px solid #D4B87A;
+      border-radius: 4px 16px 16px 4px;
+      position: relative;
+    }
+    .bio-quote::before {
+      content: '"';
+      position: absolute;
+      top: -12px;
+      left: 24px;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 4rem;
+      color: #D4B87A;
+      line-height: 1;
+      opacity: 0.35;
+    }
+    .bio-quote p {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.2rem;
+      font-style: italic;
+      line-height: 1.55;
+      color: var(--text);
+      margin: 0;
+      letter-spacing: -0.2px;
+    }
+
+    /* Connect section */
+    .bio-connect {
+      margin: 40px 0 30px;
+      padding-top: 28px;
       border-top: 1px solid var(--border);
     }
-
-    .founder-connect h3 {
-      font-size: 0.75rem;
-      font-weight: 700;
+    .bio-connect h2 {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 2px;
-      color: var(--text-secondary);
-      margin-bottom: 16px;
+      letter-spacing: 2.4px;
+      color: #B49450;
+      margin-bottom: 14px;
     }
-
-    .founder-connect-links {
+    .bio-links {
       display: flex;
-      gap: 12px;
       flex-wrap: wrap;
+      gap: 10px;
     }
-
-    .founder-connect-links a {
+    .bio-link {
       display: inline-flex;
       align-items: center;
       gap: 8px;
@@ -107,21 +226,39 @@
       border-radius: 60px;
       color: var(--text);
       text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 500;
-      transition: all 0.2s;
+      font-size: 0.82rem;
+      font-weight: 600;
+      transition: border-color 0.2s, background 0.2s, transform 0.2s;
+    }
+    .bio-link i {
+      color: #1a3650;
+      font-size: 0.9rem;
+    }
+    .bio-link:hover {
+      border-color: #D4B87A;
+      background: #fafcff;
+      transform: translateY(-1px);
     }
 
-    .founder-connect-links a:hover {
-      background: #1a3650;
-      color: white;
-      border-color: #1a3650;
+    /* Back link */
+    .bio-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
     }
+    .bio-back:hover { color: #B49450; }
+    .bio-back i { font-size: 0.72rem; }
 
     @media (max-width: 640px) {
-      .founder-page { padding: 32px 0 60px; }
-      .founder-page h1 { font-size: 2rem; margin-bottom: 24px; }
-      .founder-page-body { font-size: 1rem; line-height: 1.85; }
+      .bio-content p { font-size: 0.94rem; line-height: 1.75; }
+      .bio-quote { padding: 24px 22px; margin: 34px 0; }
+      .bio-quote p { font-size: 1.05rem; }
     }
   </style>
 </head>
@@ -138,10 +275,9 @@
       </a>
       <div class="nav-links">
         <a href="/">Home</a>
-        <a href="/categories.html">Categories</a>
-        <a href="/stores.html">Stores</a>
+        <a href="/category.html?slug=all">Browse</a>
         <a href="/about.html">About</a>
-        <a href="/alamin-ahmed.html" class="active">Founder</a>
+        <a href="/contact.html">Contact</a>
       </div>
       <div class="nav-actions">
         <button class="icon-btn" id="themeToggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
@@ -157,45 +293,85 @@
   </nav>
 
   <div class="container">
+    <div class="bio-wrap">
 
-    <!-- Breadcrumb -->
-    <div class="breadcrumb">
-      <a href="/">Home</a>
-      <span class="separator"><i class="fas fa-chevron-right"></i></span>
-      <span class="current">Alamin Ahmed</span>
-    </div>
+      <a href="/about.html" class="bio-back">
+        <i class="fas fa-arrow-left"></i> Back to About
+      </a>
 
-    <!-- Founder Page -->
-    <article class="founder-page">
+      <!-- ===== Header ===== -->
+      <header class="bio-header">
+        <div class="bio-avatar">
+          <!-- Replace with real photo: <img src="/assets/alamin-ahmed.jpg" alt="Alamin Ahmed"> -->
+          AA
+        </div>
+        <div class="bio-header-text">
+          <h1>Alamin Ahmed</h1>
+          <div class="role">Founder &amp; President, Zaure</div>
+        </div>
+      </header>
 
-      <h1>Alamin Ahmed</h1>
+      <!-- ===== Biography ===== -->
+      <main class="bio-content">
 
-      <div class="founder-page-body">
         <p>
-          <strong>Alamin Ahmed</strong> founded Zaure Technologies in 2025. Zaure's mission is to make commerce safe, free, and accessible for every Nigerian. Zaure is a platform where buyers find the best products at the best prices, with verified sellers, fast delivery on thousands of items across all 36 states of Nigeria, and dedicated storefronts for trusted businesses. Ahmed is also the driving force behind Fulfillment by Zaure, which handles storage, packing, and delivery for the platform's most trusted sellers, and Zaure's trust-first checkout system, which protects both buyers and sellers in every transaction. Zaure is pursuing the long-term goal of becoming Africa's most trusted online marketplace. Ahmed founded the company at 23 after a gradual realization that Nigerian commerce had a trust problem, not a supply problem. He was born and raised in Kaduna, Nigeria, where he still lives and works.
+          Alamin Ahmed is the founder and president of Zaure, Nigeria's most trusted online marketplace. He founded the company in 2025 and launched the platform publicly in Kaduna on November 1, 2026.
         </p>
-      </div>
 
-      <div class="founder-connect">
-        <h3>Connect</h3>
-        <div class="founder-connect-links">
-          <a href="https://twitter.com/blvckel" target="_blank">
-            <i class="fab fa-twitter"></i> @blvckel
+        <h2>At Zaure</h2>
+
+        <p>
+          As founder and president, Alamin leads both the product and operations of the company — from the design of the marketplace experience to the daily work of onboarding sellers and service providers across Nigeria. He sets Zaure's product direction, oversees its trust and verification systems, and works directly with the field teams bringing new sellers and providers onto the platform.
+        </p>
+
+        <p>
+          Under his leadership, Zaure has onboarded <strong>30 verified service providers</strong> and expanded its coverage across <strong>Kaduna State</strong>, with plans to grow nationally in the years ahead. The platform operates on a zero-commission model, allowing sellers to list for free while reaching buyers directly through WhatsApp and phone contact.
+        </p>
+
+        <h2>The Founding Insight</h2>
+
+        <p>
+          Zaure was built on a simple observation: Nigerian commerce didn't have a supply problem — it had a trust problem. Across every existing marketplace, buyers faced the same fear: <em>how do I know this seller is real?</em> Sellers faced the reverse: <em>how do I reach serious buyers without paying for visibility?</em>
+        </p>
+
+        <p>
+          Zaure was founded to solve both sides of that problem at once. Alamin founded the company at 23.
+        </p>
+
+        <!-- Pull Quote -->
+        <blockquote class="bio-quote">
+          <p>If Nigerians can't trust who they're trading with, no marketplace can truly grow. Trust comes first. Everything else follows.</p>
+        </blockquote>
+
+        <h2>Background</h2>
+
+        <p>
+          Before founding Zaure, Alamin worked across product design, operations, and business strategy — building the skills that would later shape Zaure's approach to marketplace design. His long-term goal for the company is to become Africa's most trusted online marketplace — not necessarily the largest, but the one buyers and sellers actually feel safe using.
+        </p>
+
+        <p>
+          He was born and raised in Kaduna, Nigeria, where he still lives and works.
+        </p>
+
+      </main>
+
+      <!-- ===== Connect ===== -->
+      <section class="bio-connect">
+        <h2>Connect</h2>
+        <div class="bio-links">
+          <a href="https://twitter.com/zauretech" class="bio-link" target="_blank" rel="noopener">
+            <i class="fab fa-twitter"></i> Twitter
           </a>
-          <a href="https://linkedin.com/in/blvckel" target="_blank">
+          <a href="https://linkedin.com/company/zauretech" class="bio-link" target="_blank" rel="noopener">
             <i class="fab fa-linkedin-in"></i> LinkedIn
           </a>
-          <a href="mailto:elaminahmed@proton.me">
-            <i class="fas fa-envelope"></i> Email
-          </a>
-          <a href="https://wa.me/2349042339411" target="_blank">
-            <i class="fab fa-whatsapp"></i> WhatsApp
+          <a href="https://wa.me/2349042339411" class="bio-link" target="_blank" rel="noopener">
+            <i class="fab fa-whatsapp" style="color:#25D366;"></i> WhatsApp
           </a>
         </div>
-      </div>
+      </section>
 
-    </article>
-
+    </div>
   </div>
 
   <!-- ===== FOOTER ===== -->
@@ -271,49 +447,15 @@
     <a href="/profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
   </div>
 
-  <!-- ===== SIGNUP MODAL ===== -->
-  <div class="modal-overlay" id="signupModal">
-    <div class="modal">
-      <div class="modal-header">
-        <h3>Create your account</h3>
-        <button class="modal-close" id="closeSignupModalBtn"><i class="fas fa-times"></i></button>
-      </div>
-      <form id="signupForm" class="modal-form">
-        <label for="signupName">Full Name</label>
-        <input type="text" id="signupName" placeholder="Enter your full name" required>
-        <label for="signupPhone">Phone Number</label>
-        <input type="tel" id="signupPhone" placeholder="Enter your phone number" required>
-        <label>State</label>
-        <div class="custom-select" id="stateSelect">
-          <div class="custom-select-trigger" id="stateTrigger">
-            <span>Select your state</span>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          <div class="custom-select-dropdown" id="stateDropdown">
-            <input type="text" id="stateSearchInput" placeholder="Search state...">
-            <ul class="custom-select-options" id="stateOptionsList"></ul>
-          </div>
-        </div>
-        <input type="hidden" id="signupState" value="">
-        <label class="terms-checkbox">
-          <input type="checkbox" id="termsCheckbox" required>
-          <span>By creating an account, you agree to Zaure's <a href="/terms.html" target="_blank">Terms & Conditions</a> and <a href="/privacy.html" target="_blank">Privacy Policy</a>.</span>
-        </label>
-        <button type="submit" class="btn-primary">Sign Up</button>
-      </form>
-    </div>
-  </div>
-
   <script src="/js/main.js"></script>
   <script>
+    document.getElementById('fabPostAd')?.addEventListener('click', function() {
+      window.location.href = '/post.html';
+    });
     document.addEventListener('DOMContentLoaded', function() {
-      initStateDropdown();
-      document.getElementById('fabPostAd')?.addEventListener('click', function() {
-        if (!currentUser) { openSignup(); } else { window.location.href = '/post.html'; }
-      });
-      loadUser();
-      initTheme();
-      updateFavoriteBadge();
+      if (typeof loadUser === 'function') loadUser();
+      if (typeof initTheme === 'function') initTheme();
+      if (typeof updateFavoriteBadge === 'function') updateFavoriteBadge();
     });
   </script>
 </body>
