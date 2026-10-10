@@ -28,7 +28,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      margin-bottom: 26px;
+      margin-bottom: 22px;
       flex-wrap: wrap;
     }
     .head-left { display: flex; align-items: center; gap: 12px; }
@@ -71,6 +71,49 @@
     }
     .btn-icon.spin i { animation: spin 0.8s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 22px;
+      border-bottom: 1px solid #e5ecf3;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .tabs::-webkit-scrollbar { display: none; }
+    .tab {
+      padding: 12px 20px;
+      background: none;
+      border: none;
+      font-family: inherit;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #64748b;
+      cursor: pointer;
+      position: relative;
+      white-space: nowrap;
+      transition: color 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .tab i { font-size: 0.85rem; }
+    .tab:hover { color: #1a3650; }
+    .tab.active { color: #1a3650; }
+    .tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #1a3650, #D4B87A);
+      border-radius: 2px;
+    }
+
+    /* Panels */
+    .panel { display: none; }
+    .panel.active { display: block; animation: fadeUp 0.4s ease both; }
 
     /* Stats */
     .stats {
@@ -155,7 +198,7 @@
     }
     .filters .count strong { color: #1a3650; }
 
-    /* Reports grid */
+    /* Cards grid */
     .reports-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -214,7 +257,7 @@
       color: #64748b;
       margin-top: 2px;
     }
-    .report-badges { display: flex; gap: 6px; flex-shrink: 0; }
+    .report-badges { display: flex; gap: 6px; flex-shrink: 0; flex-wrap: wrap; justify-content: flex-end; }
     .report-pill {
       display: inline-flex;
       align-items: center;
@@ -226,6 +269,10 @@
     }
     .pill-sellers { background: rgba(26,54,80,0.08); color: #1a3650; }
     .pill-pros { background: rgba(0,135,81,0.1); color: #006b40; }
+    .pill-call { background: rgba(37,99,235,0.1); color: #1d4ed8; }
+    .pill-whatsapp { background: rgba(37,211,102,0.12); color: #15803d; }
+    .pill-primer { background: rgba(212,184,122,0.15); color: #8a6f36; }
+    .pill-test { background: rgba(148,163,184,0.15); color: #475569; }
 
     .report-body {
       padding: 14px 18px 16px;
@@ -265,6 +312,59 @@
       object-fit: cover;
       display: block;
       cursor: zoom-in;
+    }
+
+    /* Top providers list */
+    .top-providers {
+      background: #fff;
+      border: 1px solid #e5ecf3;
+      border-radius: 18px;
+      padding: 20px 22px;
+      margin-bottom: 22px;
+    }
+    .top-providers h3 {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #B49450;
+      margin-bottom: 14px;
+    }
+    .top-provider-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px dashed #f0f4f8;
+    }
+    .top-provider-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .top-provider-rank {
+      width: 26px; height: 26px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #1a3650, #0f2940);
+      color: #D4B87A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .top-provider-name {
+      flex: 1;
+      font-size: 0.87rem;
+      font-weight: 600;
+      color: #1a3650;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .top-provider-count {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: #B49450;
+      flex-shrink: 0;
     }
 
     /* States */
@@ -341,7 +441,7 @@
         <img src="/assets/logo-icon.svg" alt="Zaure">
         <div class="head-title">
           <span class="brand">Zaure</span>
-          <span class="sub">Field Reports</span>
+          <span class="sub">Admin Dashboard</span>
         </div>
       </div>
       <div class="head-right">
@@ -351,46 +451,111 @@
       </div>
     </header>
 
-    <!-- STATS -->
-    <div class="stats">
-      <div class="stat">
-        <div class="stat-icon"><i class="fas fa-file-alt"></i></div>
-        <div class="stat-value" id="statTotal">—</div>
-        <div class="stat-label">Total Reports</div>
-      </div>
-      <div class="stat">
-        <div class="stat-icon"><i class="fas fa-store"></i></div>
-        <div class="stat-value" id="statSellers">—</div>
-        <div class="stat-label">Sellers Onboarded</div>
-      </div>
-      <div class="stat">
-        <div class="stat-icon"><i class="fas fa-user-tie"></i></div>
-        <div class="stat-value" id="statPros">—</div>
-        <div class="stat-label">Pros Onboarded</div>
-      </div>
-      <div class="stat">
-        <div class="stat-icon"><i class="fas fa-users"></i></div>
-        <div class="stat-value" id="statOps">—</div>
-        <div class="stat-label">Active Operators</div>
-      </div>
+    <!-- TABS -->
+    <div class="tabs">
+      <button class="tab active" data-tab="reports">
+        <i class="fas fa-file-alt"></i> Field Reports
+      </button>
+      <button class="tab" data-tab="activity">
+        <i class="fas fa-mouse-pointer"></i> Click Activity
+      </button>
     </div>
 
-    <!-- FILTERS -->
-    <div class="filters">
-      <input type="text" id="searchInput" placeholder="Search by name, location, or intel...">
-      <select id="operatorFilter">
-        <option value="">All operators</option>
-      </select>
-      <span class="count">Showing <strong id="filteredCount">0</strong> reports</span>
-    </div>
+    <!-- ============ PANEL: FIELD REPORTS ============ -->
+    <section class="panel active" id="panel-reports">
 
-    <!-- REPORTS -->
-    <div class="reports-grid" id="reportsGrid">
-      <div class="state-msg">
-        <i class="fas fa-spinner fa-spin"></i>
-        <h3>Loading reports…</h3>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-icon"><i class="fas fa-file-alt"></i></div>
+          <div class="stat-value" id="statTotal">—</div>
+          <div class="stat-label">Total Reports</div>
+        </div>
+        <div class="stat">
+          <div class="stat-icon"><i class="fas fa-store"></i></div>
+          <div class="stat-value" id="statSellers">—</div>
+          <div class="stat-label">Sellers Onboarded</div>
+        </div>
+        <div class="stat">
+          <div class="stat-icon"><i class="fas fa-user-tie"></i></div>
+          <div class="stat-value" id="statPros">—</div>
+          <div class="stat-label">Pros Onboarded</div>
+        </div>
+        <div class="stat">
+          <div class="stat-icon"><i class="fas fa-users"></i></div>
+          <div class="stat-value" id="statOps">—</div>
+          <div class="stat-label">Active Operators</div>
+        </div>
       </div>
-    </div>
+
+      <div class="filters">
+        <input type="text" id="searchInput" placeholder="Search by name, location, or intel...">
+        <select id="operatorFilter">
+          <option value="">All operators</option>
+        </select>
+        <span class="count">Showing <strong id="filteredCount">0</strong> reports</span>
+      </div>
+
+      <div class="reports-grid" id="reportsGrid">
+        <div class="state-msg">
+          <i class="fas fa-spinner fa-spin"></i>
+          <h3>Loading reports…</h3>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============ PANEL: CLICK ACTIVITY ============ -->
+    <section class="panel" id="panel-activity">
+
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-icon"><i class="fas fa-mouse-pointer"></i></div>
+          <div class="stat-value" id="actTotal">—</div>
+          <div class="stat-label">Total Clicks</div>
+        </div>
+        <div class="stat">
+          <div class="stat-icon"><i class="fas fa-phone"></i></div>
+          <div class="stat-value" id="actCalls">—</div>
+          <div class="stat-label">Call Clicks</div>
+        </div>
+        <div class="stat">
+          <div class="stat-icon"><i class="fab fa-whatsapp"></i></div>
+          <div class="stat-value" id="actWhatsapp">—</div>
+          <div class="stat-label">WhatsApp Clicks</div>
+        </div>
+        <div class="stat">
+          <div class="stat-icon"><i class="fas fa-users"></i></div>
+          <div class="stat-value" id="actUsers">—</div>
+          <div class="stat-label">Unique Users</div>
+        </div>
+      </div>
+
+      <!-- Top providers -->
+      <div class="top-providers" id="topProvidersWrap" style="display:none;">
+        <h3><i class="fas fa-trophy" style="margin-right:6px;"></i> Most Clicked Providers</h3>
+        <div id="topProvidersList"></div>
+      </div>
+
+      <div class="filters">
+        <input type="text" id="actSearch" placeholder="Search by user, provider, or service...">
+        <select id="actTypeFilter">
+          <option value="">All actions</option>
+          <option value="call_click">Call clicks</option>
+          <option value="whatsapp_click">WhatsApp clicks</option>
+          <option value="whatsapp_click_detail">WhatsApp (detail)</option>
+          <option value="manual_test">Manual tests</option>
+        </select>
+        <span class="count">Showing <strong id="actFilteredCount">0</strong> clicks</span>
+      </div>
+
+      <div class="reports-grid" id="activityGrid">
+        <div class="state-msg">
+          <i class="fas fa-spinner fa-spin"></i>
+          <h3>Loading activity…</h3>
+        </div>
+      </div>
+
+    </section>
 
   </div>
 
@@ -403,18 +568,48 @@
   </div>
 
   <script>
-    const reportsGrid    = document.getElementById('reportsGrid');
-    const searchInput    = document.getElementById('searchInput');
-    const operatorFilter = document.getElementById('operatorFilter');
-    const filteredCount  = document.getElementById('filteredCount');
-    const refreshBtn     = document.getElementById('refreshBtn');
-    const lightbox       = document.getElementById('lightbox');
-    const lightboxImg    = document.getElementById('lightboxImg');
-    const lightboxClose  = document.getElementById('lightboxClose');
+    // ---------- Element refs ----------
+    const refreshBtn        = document.getElementById('refreshBtn');
+    const lightbox          = document.getElementById('lightbox');
+    const lightboxImg       = document.getElementById('lightboxImg');
+    const lightboxClose     = document.getElementById('lightboxClose');
+
+    // Reports
+    const reportsGrid       = document.getElementById('reportsGrid');
+    const searchInput       = document.getElementById('searchInput');
+    const operatorFilter    = document.getElementById('operatorFilter');
+    const filteredCount     = document.getElementById('filteredCount');
+
+    // Activity
+    const activityGrid       = document.getElementById('activityGrid');
+    const actSearch          = document.getElementById('actSearch');
+    const actTypeFilter      = document.getElementById('actTypeFilter');
+    const actFilteredCount   = document.getElementById('actFilteredCount');
+    const topProvidersWrap   = document.getElementById('topProvidersWrap');
+    const topProvidersList   = document.getElementById('topProvidersList');
 
     let allReports = [];
+    let allActivity = [];
+    let loadedReports = false;
+    let loadedActivity = false;
 
-    // ---------- Load ----------
+    // ---------- Tabs ----------
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('panel-' + tab.dataset.tab).classList.add('active');
+
+        if (tab.dataset.tab === 'activity' && !loadedActivity) {
+          loadActivity();
+        }
+      });
+    });
+
+    // ============================================================
+    // FIELD REPORTS
+    // ============================================================
     async function loadReports() {
       reportsGrid.innerHTML = `
         <div class="state-msg">
@@ -429,8 +624,22 @@
         if (!data.ok) throw new Error(data.error || 'Load failed');
 
         allReports = data.reports || [];
-        renderStats(allReports);
-        buildOperatorFilter(allReports);
+        loadedReports = true;
+
+        const total   = allReports.length;
+        const sellers = allReports.reduce((s, r) => s + (parseInt(r.sellers) || 0), 0);
+        const pros    = allReports.reduce((s, r) => s + (parseInt(r.pros) || 0), 0);
+        const ops     = new Set(allReports.map(r => (r.operator || '').trim()).filter(Boolean)).size;
+
+        document.getElementById('statTotal').textContent   = total;
+        document.getElementById('statSellers').textContent = sellers;
+        document.getElementById('statPros').textContent    = pros;
+        document.getElementById('statOps').textContent     = ops;
+
+        const opsList = [...new Set(allReports.map(r => (r.operator || '').trim()).filter(Boolean))].sort();
+        operatorFilter.innerHTML = '<option value="">All operators</option>' +
+          opsList.map(op => `<option value="${escapeHtml(op)}">${escapeHtml(op)}</option>`).join('');
+
         renderReports(allReports);
 
       } catch (err) {
@@ -439,32 +648,12 @@
           <div class="state-msg">
             <i class="fas fa-exclamation-triangle" style="color:#e63946;"></i>
             <h3>Could not load reports</h3>
-            <p>${err.message || 'Please try again.'}</p>
+            <p>${escapeHtml(err.message || 'Please try again.')}</p>
           </div>`;
       }
     }
 
-    // ---------- Stats ----------
-    function renderStats(reports) {
-      const total   = reports.length;
-      const sellers = reports.reduce((s, r) => s + (parseInt(r.sellers) || 0), 0);
-      const pros    = reports.reduce((s, r) => s + (parseInt(r.pros) || 0), 0);
-      const ops     = new Set(reports.map(r => (r.operator || '').trim()).filter(Boolean)).size;
-
-      document.getElementById('statTotal').textContent   = total;
-      document.getElementById('statSellers').textContent = sellers;
-      document.getElementById('statPros').textContent    = pros;
-      document.getElementById('statOps').textContent     = ops;
-    }
-
-    // ---------- Filters ----------
-    function buildOperatorFilter(reports) {
-      const ops = [...new Set(reports.map(r => (r.operator || '').trim()).filter(Boolean))].sort();
-      operatorFilter.innerHTML = '<option value="">All operators</option>' +
-        ops.map(op => `<option value="${escapeHtml(op)}">${escapeHtml(op)}</option>`).join('');
-    }
-
-    function applyFilters(reports) {
+    function applyReportFilters(reports) {
       const q  = searchInput.value.trim().toLowerCase();
       const op = operatorFilter.value;
 
@@ -477,9 +666,8 @@
       });
     }
 
-    // ---------- Render ----------
     function renderReports(reports) {
-      const filtered = applyFilters(reports);
+      const filtered = applyReportFilters(reports);
       filteredCount.textContent = filtered.length;
 
       if (filtered.length === 0) {
@@ -492,7 +680,7 @@
         return;
       }
 
-      reportsGrid.innerHTML = filtered.map(buildCard).join('');
+      reportsGrid.innerHTML = filtered.map(buildReportCard).join('');
 
       reportsGrid.querySelectorAll('.report-photo img').forEach(img => {
         img.addEventListener('click', function() {
@@ -502,7 +690,7 @@
       });
     }
 
-    function buildCard(r) {
+    function buildReportCard(r) {
       const name = r.operator || 'Unknown';
       const initials = getInitials(name);
       const date = formatDate(r.timestamp);
@@ -550,7 +738,189 @@
       `;
     }
 
-    // ---------- Helpers ----------
+    // ============================================================
+    // CLICK ACTIVITY
+    // ============================================================
+    async function loadActivity() {
+      activityGrid.innerHTML = `
+        <div class="state-msg">
+          <i class="fas fa-spinner fa-spin"></i>
+          <h3>Loading activity…</h3>
+        </div>`;
+
+      try {
+        const res = await fetch('/api/field-reports/activity', { cache: 'no-store' });
+        const data = await res.json();
+
+        if (!data.ok) throw new Error(data.error || 'Load failed');
+
+        allActivity = data.activity || [];
+        loadedActivity = true;
+
+        // Stats
+        const total = allActivity.length;
+        const calls = allActivity.filter(a => (a.action || '').startsWith('call_click')).length;
+        const whats = allActivity.filter(a => (a.action || '').startsWith('whatsapp_click')).length;
+        const users = new Set(allActivity.map(a => (a.user_phone || '').trim()).filter(Boolean)).size;
+
+        document.getElementById('actTotal').textContent    = total;
+        document.getElementById('actCalls').textContent    = calls;
+        document.getElementById('actWhatsapp').textContent = whats;
+        document.getElementById('actUsers').textContent    = users;
+
+        // Top providers
+        renderTopProviders(allActivity);
+
+        renderActivity(allActivity);
+
+      } catch (err) {
+        console.error(err);
+        activityGrid.innerHTML = `
+          <div class="state-msg">
+            <i class="fas fa-exclamation-triangle" style="color:#e63946;"></i>
+            <h3>Could not load activity</h3>
+            <p>${escapeHtml(err.message || 'Please try again.')}</p>
+          </div>`;
+      }
+    }
+
+    function renderTopProviders(activity) {
+      const counts = {};
+      activity.forEach(a => {
+        if ((a.action || '') === 'manual_test') return;
+        const name = (a.provider_name || '').trim();
+        if (!name) return;
+        counts[name] = (counts[name] || 0) + 1;
+      });
+
+      const sorted = Object.entries(counts)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 5);
+
+      if (sorted.length === 0) {
+        topProvidersWrap.style.display = 'none';
+        return;
+      }
+
+      topProvidersWrap.style.display = 'block';
+      topProvidersList.innerHTML = sorted.map(([name, count], i) => `
+        <div class="top-provider-row">
+          <div class="top-provider-rank">${i + 1}</div>
+          <div class="top-provider-name">${escapeHtml(name)}</div>
+          <div class="top-provider-count">${count} click${count !== 1 ? 's' : ''}</div>
+        </div>
+      `).join('');
+    }
+
+    function applyActivityFilters(activity) {
+      const q  = actSearch.value.trim().toLowerCase();
+      const type = actTypeFilter.value;
+
+      return activity.filter(a => {
+        if (type && (a.action || '') !== type) return false;
+        if (!q) return true;
+        const haystack = [
+          a.user_name, a.user_phone, a.user_city,
+          a.provider_name, a.provider_phone,
+          a.service, a.subject
+        ].filter(Boolean).join(' ').toLowerCase();
+        return haystack.includes(q);
+      });
+    }
+
+    function renderActivity(activity) {
+      const filtered = applyActivityFilters(activity);
+      actFilteredCount.textContent = filtered.length;
+
+      if (filtered.length === 0) {
+        activityGrid.innerHTML = `
+          <div class="state-msg">
+            <i class="fas fa-mouse-pointer"></i>
+            <h3>No clicks match your filters</h3>
+            <p>Try a different search or action type.</p>
+          </div>`;
+        return;
+      }
+
+      activityGrid.innerHTML = filtered.map(buildActivityCard).join('');
+    }
+
+    function buildActivityCard(a) {
+      const action = (a.action || '').toLowerCase();
+      const user = a.user_name || 'Anonymous';
+      const userInitials = getInitials(user);
+      const date = formatDate(a.timestamp);
+      const userPhone = a.user_phone || '';
+      const userCity = a.user_city || '';
+      const providerName = a.provider_name || '—';
+      const providerPhone = a.provider_phone || '';
+      const providerId = a.provider_id || '';
+      const service = a.service || '';
+      const isPrimer = String(a.is_primer_owned).toUpperCase() === 'TRUE';
+      const subject = a.subject || '';
+
+      // Action badge
+      let actionPill = '';
+      let actionIcon = 'fa-mouse-pointer';
+      if (action.startsWith('call_click')) {
+        actionPill = `<span class="report-pill pill-call"><i class="fas fa-phone"></i> Call</span>`;
+        actionIcon = 'fa-phone';
+      } else if (action.startsWith('whatsapp_click')) {
+        actionPill = `<span class="report-pill pill-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</span>`;
+        actionIcon = 'fa-whatsapp';
+      } else if (action === 'manual_test') {
+        actionPill = `<span class="report-pill pill-test"><i class="fas fa-flask"></i> Test</span>`;
+        actionIcon = 'fa-flask';
+      } else {
+        actionPill = `<span class="report-pill pill-sellers"><i class="fas fa-bolt"></i> ${escapeHtml(a.action || '')}</span>`;
+      }
+
+      return `
+        <article class="report-card">
+          <div class="report-head">
+            <div class="report-avatar">${escapeHtml(userInitials)}</div>
+            <div class="report-head-info">
+              <div class="report-name">${escapeHtml(user)}</div>
+              <div class="report-date"><i class="far fa-clock"></i> ${escapeHtml(date)}</div>
+            </div>
+            <div class="report-badges">
+              ${actionPill}
+              ${isPrimer ? `<span class="report-pill pill-primer"><i class="fas fa-star"></i> Primer</span>` : ''}
+            </div>
+          </div>
+          <div class="report-body">
+            <div class="report-row">
+              <i class="fas fa-user-tie"></i>
+              <div class="row-text"><strong>Provider:</strong> ${escapeHtml(providerName)}</div>
+            </div>
+            ${service ? `
+              <div class="report-row">
+                <i class="fas fa-briefcase"></i>
+                <div class="row-text"><strong>Service:</strong> ${escapeHtml(service)}</div>
+              </div>` : ''}
+            ${userCity ? `
+              <div class="report-row">
+                <i class="fas fa-map-marker-alt"></i>
+                <div class="row-text"><strong>City:</strong> ${escapeHtml(userCity)}</div>
+              </div>` : ''}
+            ${userPhone ? `
+              <div class="report-row">
+                <i class="fas fa-phone-alt"></i>
+                <div class="row-text"><strong>User Phone:</strong> ${escapeHtml(userPhone)}</div>
+              </div>` : ''}
+            ${providerPhone && providerPhone !== 'Not available' ? `
+              <div class="report-row">
+                <i class="fas fa-address-book"></i>
+                <div class="row-text"><strong>Provider Phone:</strong> ${escapeHtml(providerPhone)}</div>
+              </div>` : ''}
+          </div>
+        </article>
+      `;
+    }
+
+    // ============================================================
+    // HELPERS
+    // ============================================================
     function escapeHtml(s) {
       return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({
         '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
@@ -582,17 +952,26 @@
       } catch { return String(iso); }
     }
 
-    // ---------- Events ----------
+    // ============================================================
+    // EVENTS
+    // ============================================================
     searchInput.addEventListener('input', () => renderReports(allReports));
     operatorFilter.addEventListener('change', () => renderReports(allReports));
 
+    actSearch.addEventListener('input', () => renderActivity(allActivity));
+    actTypeFilter.addEventListener('change', () => renderActivity(allActivity));
+
     refreshBtn.addEventListener('click', async function() {
       this.classList.add('spin');
-      await loadReports();
+      const activeTab = document.querySelector('.tab.active')?.dataset.tab;
+      if (activeTab === 'activity') {
+        await loadActivity();
+      } else {
+        await loadReports();
+      }
       this.classList.remove('spin');
     });
 
-    // Lightbox
     lightbox.addEventListener('click', () => lightbox.classList.remove('show'));
     lightboxClose.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -602,9 +981,18 @@
       if (e.key === 'Escape') lightbox.classList.remove('show');
     });
 
-    // Boot + auto refresh
+    // ---------- Boot ----------
     loadReports();
-    setInterval(loadReports, 60000);
+
+    // Auto-refresh the active tab every 60s
+    setInterval(() => {
+      const activeTab = document.querySelector('.tab.active')?.dataset.tab;
+      if (activeTab === 'activity') {
+        loadActivity();
+      } else {
+        loadReports();
+      }
+    }, 60000);
   </script>
 
 </body>
