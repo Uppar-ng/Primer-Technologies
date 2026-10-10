@@ -2,84 +2,617 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>About Us – Zaure</title>
-  <meta name="description" content="Learn about Zaure, Nigeria's most trusted online marketplace.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>About Zaure – Nigeria's Most Trusted Online Marketplace</title>
+  <meta name="description" content="Zaure is Nigeria's most trusted online marketplace. Learn about our mission, our founder, and why we're building a safer way for Nigerians to buy, sell, and trade locally.">
+  <meta name="keywords" content="about Zaure, Zaure Technologies, Nigerian marketplace, who owns Zaure, Zaure mission, Alamin Ahmed, Kaduna startup, Nigerian e-commerce">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://zauretech.xyz/about.html">
+  <meta name="theme-color" content="#1a3650">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://zauretech.xyz/about.html">
+  <meta property="og:title" content="About Zaure – Nigeria's Most Trusted Online Marketplace">
+  <meta property="og:description" content="Learn about Zaure's mission, our founder, and why we're building a safer way for Nigerians to buy, sell, and trade locally.">
+  <meta property="og:image" content="https://zauretech.xyz/assets/logo-icon.svg">
+  <meta property="og:image:type" content="image/svg+xml">
+  <meta property="og:site_name" content="Zaure">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@zauretech">
+  <meta name="twitter:title" content="About Zaure – Buy with Confidence">
+  <meta name="twitter:description" content="Nigeria's most trusted online marketplace.">
+  <meta name="twitter:image" content="https://zauretech.xyz/assets/logo-icon.svg">
+
+  <!-- Structured Data — AboutPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": "About Zaure",
+    "url": "https://zauretech.xyz/about.html",
+    "description": "Learn about Zaure's mission, our founder, and why we're building a safer way for Nigerians to buy, sell, and trade locally.",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "Zaure",
+      "url": "https://zauretech.xyz",
+      "logo": "https://zauretech.xyz/assets/logo-icon.svg",
+      "description": "Nigeria's most trusted online marketplace. Buy with Confidence.",
+      "foundingDate": "2025",
+      "founder": {
+        "@type": "Person",
+        "name": "Alamin Ahmed",
+        "jobTitle": "Founder & President"
+      },
+      "sameAs": [
+        "https://twitter.com/zauretech",
+        "https://instagram.com/zauretech",
+        "https://linkedin.com/company/zauretech",
+        "https://facebook.com/zauretech"
+      ]
+    }
+  }
+  </script>
+
   <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
+  <link rel="apple-touch-icon" href="/assets/logo-icon.svg">
+  <link rel="manifest" href="/site.webmanifest">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
   <style>
-    .about-header {
-      margin: 30px 0 20px;
+    /* ============================================================
+       ABOUT PAGE
+       ============================================================ */
+
+    /* ---------- Hero ---------- */
+    .about-hero {
+      position: relative;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(212,184,122,0.16) 0%, transparent 45%),
+        radial-gradient(circle at 88% 80%, rgba(47,111,158,0.22) 0%, transparent 50%),
+        linear-gradient(140deg, #0d2338 0%, #1a3650 55%, #0f2940 100%);
+      border-radius: 28px;
+      padding: 60px 40px 56px;
+      margin: 20px 0 24px;
+      color: #fff;
+      overflow: hidden;
       text-align: center;
+      box-shadow: 0 24px 60px rgba(15,41,64,0.18);
     }
-    .about-header h1 {
-      font-size: 2rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, #1a3650, #B49450);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    .about-hero::before,
+    .about-hero::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
     }
-    .about-header p {
-      color: var(--text-secondary);
-      font-size: 1rem;
-      margin-top: 6px;
+    .about-hero::before {
+      top: -140px; right: -100px;
+      width: 380px; height: 380px;
+      background: radial-gradient(circle, rgba(212,184,122,0.18) 0%, transparent 70%);
     }
-    .about-content {
-      background: var(--surface);
-      border-radius: 20px;
-      padding: 24px;
-      border: 1px solid var(--border);
-      margin-bottom: 20px;
-      line-height: 1.8;
-      color: var(--text);
+    .about-hero::after {
+      bottom: -160px; left: -80px;
+      width: 340px; height: 340px;
+      background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
     }
-    .about-content h2 {
-      font-size: 1.2rem;
+    .about-hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .about-hero .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.68rem;
       font-weight: 700;
-      margin: 16px 0 8px;
+      color: #E7D3A1;
+      text-transform: uppercase;
+      letter-spacing: 3.4px;
+      padding: 6px 16px;
+      border: 1px solid rgba(212,184,122,0.35);
+      border-radius: 40px;
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      margin-bottom: 22px;
+    }
+    .about-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: -1.2px;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .about-hero h1 span {
+      color: #D4B87A;
+      font-style: italic;
+    }
+    .about-hero p {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.7;
+      max-width: 580px;
+      margin: 0 auto;
+    }
+    @media (max-width: 640px) {
+      .about-hero { padding: 40px 22px 44px; border-radius: 22px; }
+      .about-hero h1 { font-size: 2rem; letter-spacing: -0.8px; }
+      .about-hero p { font-size: 0.92rem; }
+    }
+
+    /* ---------- Section container ---------- */
+    .about-section {
+      margin-bottom: 44px;
+    }
+    .about-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.9rem;
+      font-weight: 800;
       color: var(--text);
+      letter-spacing: -0.6px;
+      margin-bottom: 16px;
+      line-height: 1.2;
     }
-    .about-content p {
-      font-size: 0.95rem;
+    .about-section h2 i {
+      color: #B49450;
+      margin-right: 10px;
+      font-size: 1.4rem;
+      vertical-align: middle;
+    }
+    .about-section p {
+      font-size: 0.98rem;
+      line-height: 1.8;
       color: var(--text-secondary);
-      margin-bottom: 12px;
+      margin-bottom: 16px;
+      max-width: 720px;
     }
-    .about-stats {
+    .about-section p:last-child { margin-bottom: 0; }
+
+    /* ---------- Values grid ---------- */
+    .values-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-bottom: 20px;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 8px;
     }
     @media (min-width: 640px) {
-      .about-stats { grid-template-columns: repeat(4, 1fr); }
+      .values-grid { grid-template-columns: 1fr 1fr; }
     }
-    .about-stats .stat-card {
+    @media (min-width: 1024px) {
+      .values-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .value-card {
       background: var(--surface);
-      border-radius: 16px;
-      padding: 20px;
-      text-align: center;
       border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 26px 22px;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
     }
-    .about-stats .stat-card .stat-icon {
-      font-size: 2rem;
-      color: #1a3650;
+    .value-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: linear-gradient(90deg, #1a3650, #D4B87A);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .value-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(212,184,122,0.5);
+      box-shadow: 0 16px 36px rgba(15,41,64,0.1);
+    }
+    .value-card:hover::before { opacity: 1; }
+    .value-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #1a3650, #0f2940);
+      color: #D4B87A;
+      font-size: 1.1rem;
+      margin-bottom: 16px;
+    }
+    .value-card h3 {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
       margin-bottom: 8px;
+      letter-spacing: -0.2px;
     }
-    .about-stats .stat-card .stat-number {
+    .value-card p {
+      font-size: 0.87rem;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+
+    /* ---------- Story / two column ---------- */
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+      align-items: center;
+    }
+    @media (min-width: 1024px) {
+      .story-grid {
+        grid-template-columns: 1.2fr 1fr;
+        gap: 48px;
+      }
+    }
+    .story-text p {
+      font-size: 0.98rem;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+    .story-text p:last-child { margin-bottom: 0; }
+    .story-text strong { color: var(--text); font-weight: 600; }
+
+    .story-visual {
+      position: relative;
+      background:
+        radial-gradient(circle at 70% 30%, rgba(212,184,122,0.18) 0%, transparent 55%),
+        linear-gradient(140deg, #1a3650 0%, #0f2940 100%);
+      border-radius: 24px;
+      padding: 40px 32px;
+      color: #fff;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(15,41,64,0.2);
+      text-align: center;
+    }
+    .story-visual::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -60px;
+      width: 220px; height: 220px;
+      background: radial-gradient(circle, rgba(212,184,122,0.25) 0%, transparent 65%);
+      border-radius: 50%;
+    }
+    .story-visual > * { position: relative; z-index: 2; }
+    .story-visual .visual-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 70px;
+      height: 70px;
+      border-radius: 20px;
+      background: rgba(212,184,122,0.15);
+      border: 1px solid rgba(212,184,122,0.35);
+      color: #E7D3A1;
+      font-size: 1.7rem;
+      margin-bottom: 20px;
+    }
+    .story-visual h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      letter-spacing: -0.3px;
+    }
+    .story-visual p {
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.82);
+      margin-bottom: 22px;
+    }
+    .story-visual .visual-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #E7D3A1, #D4B87A);
+      color: #1a2c3d;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-decoration: none;
+      border-radius: 60px;
+      transition: transform 0.2s, filter 0.2s, box-shadow 0.2s;
+      box-shadow: 0 8px 20px rgba(212,184,122,0.35);
+    }
+    .story-visual .visual-cta:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+      box-shadow: 0 12px 28px rgba(212,184,122,0.45);
+    }
+
+    /* ---------- Trust strip ---------- */
+    .trust-strip {
+      background: linear-gradient(135deg, #1a3650, #0f2940);
+      border-radius: 24px;
+      padding: 40px 32px;
+      margin-bottom: 44px;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    .trust-strip::before {
+      content: '';
+      position: absolute;
+      top: -100px; left: 40%;
+      width: 320px; height: 320px;
+      background: radial-gradient(circle, rgba(212,184,122,0.15) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .trust-strip h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 2;
+    }
+    .trust-strip h2 span { color: #D4B87A; font-style: italic; }
+    .trust-badges-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      position: relative;
+      z-index: 2;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    @media (min-width: 640px) {
+      .trust-badges-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    .trust-badge-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 10px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .trust-badge-item:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(212,184,122,0.4);
+    }
+    .trust-badge-item i {
+      color: #D4B87A;
+      font-size: 1.2rem;
+    }
+    .trust-badge-item span {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      color: rgba(255,255,255,0.9);
+      text-align: center;
+    }
+
+    /* ---------- Founder preview card ---------- */
+    .founder-preview {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 34px 30px;
+      margin-bottom: 44px;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      flex-wrap: wrap;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .founder-preview::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -60px;
+      width: 220px; height: 220px;
+      background: radial-gradient(circle, rgba(212,184,122,0.12) 0%, transparent 65%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .founder-preview:hover {
+      border-color: rgba(212,184,122,0.5);
+      box-shadow: 0 16px 40px rgba(15,41,64,0.08);
+    }
+    .founder-avatar {
+      flex-shrink: 0;
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1a3650, #0f2940);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 800;
+      font-size: 2.4rem;
+      color: #E7D3A1;
+      letter-spacing: 1px;
+      box-shadow:
+        0 12px 32px rgba(15,41,64,0.22),
+        0 0 0 3px var(--surface),
+        0 0 0 5px rgba(212,184,122,0.45);
+      position: relative;
+      z-index: 2;
+    }
+    .founder-avatar img {
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+    }
+    .founder-info {
+      flex: 1;
+      min-width: 220px;
+      position: relative;
+      z-index: 2;
+    }
+    .founder-info .role {
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 2.4px;
+      text-transform: uppercase;
+      color: #B49450;
+      margin-bottom: 6px;
+    }
+    .founder-info h3 {
+      font-family: 'Playfair Display', serif;
       font-size: 1.5rem;
       font-weight: 800;
       color: var(--text);
+      letter-spacing: -0.4px;
+      margin-bottom: 8px;
     }
-    .about-stats .stat-card .stat-label {
-      font-size: 0.75rem;
+    .founder-info p {
+      font-size: 0.9rem;
+      line-height: 1.65;
       color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+    .founder-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      background: linear-gradient(135deg, #1a3650, #0f2940);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 60px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.2px;
+      transition: transform 0.2s, filter 0.2s, box-shadow 0.2s;
+      box-shadow: 0 8px 20px rgba(26,54,80,0.22);
+    }
+    .founder-link i { color: #D4B87A; }
+    .founder-link:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.12);
+      box-shadow: 0 12px 26px rgba(26,54,80,0.32);
+    }
+
+    @media (max-width: 640px) {
+      .founder-preview { padding: 26px 22px; gap: 20px; }
+      .founder-avatar { width: 88px; height: 88px; font-size: 1.9rem; }
+      .founder-info h3 { font-size: 1.25rem; }
+    }
+
+    /* ---------- CTA ---------- */
+    .about-cta {
+      position: relative;
+      background:
+        radial-gradient(circle at 85% 30%, rgba(212,184,122,0.2) 0%, transparent 45%),
+        linear-gradient(135deg, #1a3650 0%, #0f2940 100%);
+      border-radius: 26px;
+      padding: 46px 36px;
+      margin: 20px 0 30px;
+      color: #fff;
+      text-align: center;
+      overflow: hidden;
+      box-shadow: 0 24px 56px rgba(15,41,64,0.18);
+    }
+    .about-cta::before {
+      content: '';
+      position: absolute;
+      top: -100px; left: 40%;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .about-cta h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -0.6px;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 2;
+    }
+    .about-cta h2 span { color: #D4B87A; font-style: italic; }
+    .about-cta p {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.65;
+      max-width: 520px;
+      margin: 0 auto 26px;
+      position: relative;
+      z-index: 2;
+    }
+    .about-cta-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 2;
+    }
+    .about-cta .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 30px;
+      border-radius: 60px;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.22s ease, filter 0.22s ease, box-shadow 0.22s ease;
+      letter-spacing: 0.2px;
+    }
+    .about-cta .btn-primary {
+      background: linear-gradient(135deg, #E7D3A1, #D4B87A);
+      color: #1a2c3d;
+      box-shadow: 0 12px 30px rgba(212,184,122,0.35);
+    }
+    .about-cta .btn-primary:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+      box-shadow: 0 18px 38px rgba(212,184,122,0.45);
+    }
+    .about-cta .btn-ghost {
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.22);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .about-cta .btn-ghost:hover {
+      background: rgba(255,255,255,0.18);
+      transform: translateY(-2px);
+    }
+    @media (max-width: 640px) {
+      .about-cta { padding: 34px 22px; border-radius: 22px; }
+      .about-cta h2 { font-size: 1.45rem; }
+      .about-cta-actions { flex-direction: column; }
+      .about-cta .btn-cta { width: 100%; justify-content: center; }
+    }
+
+    /* Animation */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .about-section { animation: fadeUp 0.5s ease both; }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; }
     }
   </style>
 </head>
 <body>
+
   <nav class="navbar">
     <div class="container nav-container">
       <a href="/" class="logo-wrapper">
@@ -90,8 +623,7 @@
       </a>
       <div class="nav-links">
         <a href="/">Home</a>
-        <a href="/categories.html">Categories</a>
-        <a href="/stores.html">Stores</a>
+        <a href="/category.html?slug=all">Browse</a>
         <a href="/about.html" class="active">About</a>
         <a href="/contact.html">Contact</a>
       </div>
@@ -109,54 +641,167 @@
   </nav>
 
   <div class="container">
-    <div class="about-header">
-      <h1>About Zaure</h1>
-      <p>Nigeria's most trusted online marketplace</p>
-    </div>
 
-    <div class="about-stats">
-      <div class="stat-card">
-        <div class="stat-icon"><i class="fas fa-users"></i></div>
-        <div class="stat-number">10K+</div>
-        <div class="stat-label">Active Users</div>
+    <!-- ============ HERO ============ -->
+    <section class="about-hero">
+      <div class="about-hero-inner">
+        <span class="hero-label"><i class="fas fa-info-circle"></i> About Zaure</span>
+        <h1>Buy with <span>Confidence</span></h1>
+        <p>Zaure is Nigeria's most trusted online marketplace — a place where buyers, sellers, and service providers meet without middlemen, without commission, and without fear of being scammed.</p>
       </div>
-      <div class="stat-card">
-        <div class="stat-icon"><i class="fas fa-box"></i></div>
-        <div class="stat-number">5K+</div>
-        <div class="stat-label">Listings</div>
+    </section>
+
+    <!-- ============ OUR STORY ============ -->
+    <section class="about-section">
+      <h2><i class="fas fa-book-open"></i> Our Story</h2>
+      <div class="story-grid">
+        <div class="story-text">
+          <p>
+            Zaure was born from a simple observation: <strong>Nigerian commerce doesn't have a supply problem — it has a trust problem.</strong>
+          </p>
+          <p>
+            Nigerians buy and sell every day. Markets are full. WhatsApp groups overflow with listings. Facebook Marketplace and Jiji buzz with activity. But across every platform, the same complaint echoes: <em>"How do I know this seller is real?"</em>
+          </p>
+          <p>
+            In 2025, our founder decided to fix that. Not with another ad platform. Not with another commission-based marketplace. But with something that treats trust as the foundation, not the afterthought.
+          </p>
+          <p>
+            That's Zaure — a marketplace where every seller is verifiable, every listing can be trusted, and every transaction can happen with confidence. No middlemen. No hidden fees. Just real people, trading honestly.
+          </p>
+        </div>
+        <div class="story-visual">
+          <div class="visual-icon"><i class="fas fa-shield-alt"></i></div>
+          <h3>Trust First. Always.</h3>
+          <p>Every feature we build starts with the same question: "Does this make trading safer?" If it doesn't, we don't ship it.</p>
+          <a href="/safety.html" class="visual-cta">
+            <i class="fas fa-lock"></i> See our safety approach
+          </a>
+        </div>
       </div>
-      <div class="stat-card">
-        <div class="stat-icon"><i class="fas fa-store"></i></div>
-        <div class="stat-number">500+</div>
-        <div class="stat-label">Verified Sellers</div>
+    </section>
+
+    <!-- ============ VALUES ============ -->
+    <section class="about-section">
+      <h2><i class="fas fa-heart"></i> What We Stand For</h2>
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-icon"><i class="fas fa-handshake"></i></div>
+          <h3>No Commission</h3>
+          <p>We don't take a cut from your sale. What you earn is what you keep. Sellers list for free, and always will.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon"><i class="fas fa-user-check"></i></div>
+          <h3>Verification</h3>
+          <p>Sellers and service providers verify their identity. Buyers know exactly who they're dealing with before making contact.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon"><i class="fas fa-bolt"></i></div>
+          <h3>Direct Contact</h3>
+          <p>No chatbots, no waiting. Buyers reach sellers instantly on WhatsApp or call — the same way Nigerians already trade.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <h3>Local First</h3>
+          <p>Zaure connects you to sellers and pros in your city, not across the country. Buy close. Support local.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon"><i class="fas fa-shield-alt"></i></div>
+          <h3>Safety by Default</h3>
+          <p>Every listing goes through review. Bad actors are removed quickly. Reporting a scam takes one tap.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon"><i class="fas fa-users"></i></div>
+          <h3>Both Sides Win</h3>
+          <p>Buyers get better prices. Sellers keep more of what they earn. When both sides win, the platform grows itself.</p>
+        </div>
       </div>
-      <div class="stat-card">
-        <div class="stat-icon"><i class="fas fa-shield-alt"></i></div>
-        <div class="stat-number">0%</div>
-        <div class="stat-label">Commission Fees</div>
+    </section>
+
+    <!-- ============ TRUST STRIP ============ -->
+    <section class="trust-strip">
+      <h2>The Zaure <span>Promise</span></h2>
+      <div class="trust-badges-grid">
+        <div class="trust-badge-item">
+          <i class="fas fa-shield-alt"></i>
+          <span>Verified Users</span>
+        </div>
+        <div class="trust-badge-item">
+          <i class="fas fa-handshake"></i>
+          <span>No Commission</span>
+        </div>
+        <div class="trust-badge-item">
+          <i class="fas fa-user-check"></i>
+          <span>Identity Verified</span>
+        </div>
+        <div class="trust-badge-item">
+          <i class="fas fa-lock"></i>
+          <span>Secure Platform</span>
+        </div>
+        <div class="trust-badge-item">
+          <i class="fas fa-clock"></i>
+          <span>24/7 Support</span>
+        </div>
+        <div class="trust-badge-item">
+          <i class="fas fa-star"></i>
+          <span>Trusted by Thousands</span>
+        </div>
+        <div class="trust-badge-item">
+          <i class="fas fa-phone"></i>
+          <span>Direct Contact</span>
+        </div>
+        <div class="trust-badge-item">
+          <i class="fas fa-globe"></i>
+          <span>Nationwide Reach</span>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <div class="about-content">
-      <h2><i class="fas fa-bullseye" style="color:#1a3650;"></i> Our Mission</h2>
-      <p>Zaure was founded with a simple mission: to make buying and selling in Nigeria safe, easy, and accessible to everyone. We believe that commerce should be transparent, commission-free, and built on trust.</p>
+    <!-- ============ FOUNDER PREVIEW ============ -->
+    <section class="about-section">
+      <h2><i class="fas fa-user-tie"></i> Meet the Founder</h2>
+      <div class="founder-preview">
+        <div class="founder-avatar">AA</div>
+        <div class="founder-info">
+          <div class="role">Founder &amp; President</div>
+          <h3>Alamin Ahmed</h3>
+          <p>
+            Born and raised in Kaduna, Alamin founded Zaure at 23 after realizing Nigerian commerce needed trust more than it needed supply. He's building Africa's most trusted marketplace — one honest sale at a time.
+          </p>
+          <a href="/alamin-ahmed.html" class="founder-link">
+            <i class="fas fa-arrow-right"></i> Read his full story
+          </a>
+        </div>
+      </div>
+    </section>
 
-      <h2><i class="fas fa-star" style="color:#1a3650;"></i> Why Choose Zaure?</h2>
-      <p><strong>100% Free:</strong> Post unlimited listings at zero cost. No commission, no hidden fees, no middlemen.</p>
-      <p><strong>Scam-Free:</strong> We prioritize user safety with verified sellers, safety tips, and a dedicated reporting system.</p>
-      <p><strong>Local Focus:</strong> Connect with buyers and sellers in your state. Our location-based recommendations help you find what you need nearby.</p>
-      <p><strong>Trusted Community:</strong> Join thousands of Nigerians who buy, sell, and trade with confidence on Zaure.</p>
+    <!-- ============ MISSION ============ -->
+    <section class="about-section">
+      <h2><i class="fas fa-bullseye"></i> Our Mission</h2>
+      <p>
+        To make buying, selling, and trading in Nigeria safe, free, and accessible for every Nigerian — from Lagos to Kano, from market traders to online entrepreneurs.
+      </p>
+      <p>
+        Our long-term goal is simple: become the most trusted online marketplace in Africa. Not the biggest, not the loudest — the most trusted. Because when trust is the foundation, scale follows naturally.
+      </p>
+    </section>
 
-      <h2><i class="fas fa-handshake" style="color:#1a3650;"></i> Our Values</h2>
-      <p><strong>Trust:</strong> We verify sellers and promote transparency in every transaction.</p>
-      <p><strong>Accessibility:</strong> Our platform is free and open to everyone across Nigeria.</p>
-      <p><strong>Community:</strong> We're building a marketplace where Nigerians help Nigerians.</p>
+    <!-- ============ CTA ============ -->
+    <section class="about-cta">
+      <h2>Join the <span>movement</span></h2>
+      <p>Whether you're buying, selling, or offering a service — there's a place for you on Zaure. Start today, free.</p>
+      <div class="about-cta-actions">
+        <a href="/post.html" class="btn-cta btn-primary">
+          <i class="fas fa-plus-circle"></i> Start Selling
+        </a>
+        <a href="/category.html?slug=all" class="btn-cta btn-ghost">
+          <i class="fas fa-search"></i> Browse Listings
+        </a>
+      </div>
+    </section>
 
-      <h2><i class="fas fa-phone" style="color:#1a3650;"></i> Contact Us</h2>
-      <p>For info or to report an issue, contact us on WhatsApp: <a href="https://wa.me/2349042339411" target="_blank" style="color:#1a3650;font-weight:600;">+2349042339411</a></p>
-    </div>
   </div>
 
+  <!-- ============ FOOTER ============ -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
@@ -176,22 +821,23 @@
         <div class="footer-col">
           <h4>Browse</h4>
           <a href="/category.html?slug=all">All Items</a>
-          <a href="/category.html?slug=vehicles">Vehicles</a>
-          <a href="/category.html?slug=electronics">Electronics</a>
-          <a href="/category.html?slug=furniture">Furniture</a>
           <a href="/category.html?slug=fashion">Fashion</a>
-          <a href="/category.html?slug=real-estate">Real Estate</a>
+          <a href="/category.html?slug=electronics">Electronics</a>
+          <a href="/category.html?slug=beauty-health">Beauty & Health</a>
+          <a href="/category.html?slug=food-drinks">Food & Drinks</a>
+          <a href="/category.html?slug=home-kitchen">Home & Kitchen</a>
         </div>
         <div class="footer-col">
           <h4>Support</h4>
           <a href="/help.html">Help Center</a>
+          <a href="/faq.html">FAQ</a>
           <a href="/safety.html">Safety Tips</a>
           <a href="/contact.html">Contact Us</a>
-          <a href="/support.html">Support</a>
         </div>
         <div class="footer-col">
           <h4>Company</h4>
           <a href="/about.html">About Us</a>
+          <a href="/alamin-ahmed.html">Founder</a>
           <a href="/careers.html">Careers</a>
           <a href="/privacy.html">Privacy Policy</a>
           <a href="/terms.html">Terms of Service</a>
@@ -219,6 +865,7 @@
     </div>
   </footer>
 
+  <!-- ============ BOTTOM NAV ============ -->
   <div class="bottom-nav">
     <a href="/" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
     <a href="/categories.html" class="nav-item"><i class="fas fa-th-large"></i><span>Categories</span></a>
@@ -227,48 +874,18 @@
     <a href="/profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
   </div>
 
-  <div class="modal-overlay" id="signupModal">
-    <div class="modal">
-      <div class="modal-header">
-        <h3>Create your account</h3>
-        <button class="modal-close" id="closeSignupModalBtn"><i class="fas fa-times"></i></button>
-      </div>
-      <form id="signupForm" class="modal-form">
-        <label for="signupName">Full Name</label>
-        <input type="text" id="signupName" placeholder="Enter your full name" required>
-        <label for="signupPhone">Phone Number</label>
-        <input type="tel" id="signupPhone" placeholder="Enter your phone number" required>
-        <label>State</label>
-        <div class="custom-select" id="stateSelect">
-          <div class="custom-select-trigger" id="stateTrigger">
-            <span>Select your state</span>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          <div class="custom-select-dropdown" id="stateDropdown">
-            <input type="text" id="stateSearchInput" placeholder="Search state...">
-            <ul class="custom-select-options" id="stateOptionsList"></ul>
-          </div>
-        </div>
-        <input type="hidden" id="signupState" value="">
-        <label class="terms-checkbox">
-          <input type="checkbox" id="termsCheckbox" required>
-          <span>By creating an account, you agree to Zaure's <a href="/terms.html" target="_blank">Terms</a>, <a href="/conditions.html" target="_blank">Conditions of Use</a>, and <a href="/privacy.html" target="_blank">Privacy Policy</a>.</span>
-        </label>
-        <button type="submit" class="btn-primary">Sign Up</button>
-      </form>
-    </div>
-  </div>
-
   <script src="/js/main.js"></script>
   <script>
+    // Post button
+    document.getElementById('fabPostAd')?.addEventListener('click', function() {
+      window.location.href = '/post.html';
+    });
+
+    // Init user + theme
     document.addEventListener('DOMContentLoaded', function() {
-      initStateDropdown();
-      document.getElementById('fabPostAd')?.addEventListener('click', function() {
-        if (!currentUser) { openSignup(); } else { window.location.href = '/post.html'; }
-      });
-      loadUser();
-      initTheme();
-      updateFavoriteBadge();
+      if (typeof loadUser === 'function') loadUser();
+      if (typeof initTheme === 'function') initTheme();
+      if (typeof updateFavoriteBadge === 'function') updateFavoriteBadge();
     });
   </script>
 </body>
