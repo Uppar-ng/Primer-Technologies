@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Field Reports – Zaure</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#1a3650">
+  <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: linear-gradient(180deg, #f0f5fb 0%, #e3ecf6 100%);
+      min-height: 100vh;
+      padding: 24px 16px 60px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap { max-width: 1200px; margin: 0 auto; }
+
+    /* Header */
+    .head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 26px;
+      flex-wrap: wrap;
+    }
+    .head-left { display: flex; align-items: center; gap: 12px; }
+    .head-left img { width: 42px; height: 42px; display: block; }
+    .head-title { display: flex; flex-direction: column; }
+    .head-title .brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #1a3650;
+      letter-spacing: -0.4px;
+      line-height: 1;
+    }
+    .head-title .sub {
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 2.4px;
+      text-transform: uppercase;
+      color: #D4B87A;
+      margin-top: 4px;
+    }
+    .head-right { display: flex; gap: 8px; align-items: center; }
+    .btn-icon {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      border: 1px solid #d1dbe6;
+      background: #fff;
+      color: #1a3650;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    }
+    .btn-icon:hover {
+      border-color: #D4B87A;
+      background: #fafcff;
+      transform: translateY(-1px);
+    }
+    .btn-icon.spin i { animation: spin 0.8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Stats */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 26px;
+    }
+    @media (min-width: 640px) {
+      .stats { grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    }
+    .stat {
+      background: #fff;
+      border: 1px solid #e5ecf3;
+      border-radius: 16px;
+      padding: 18px 16px;
+      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    }
+    .stat:hover {
+      transform: translateY(-2px);
+      border-color: rgba(212,184,122,0.5);
+      box-shadow: 0 10px 24px rgba(15,41,64,0.06);
+    }
+    .stat-icon {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #1a3650, #0f2940);
+      color: #D4B87A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+    }
+    .stat-value {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: #1a3650;
+      letter-spacing: -0.5px;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .stat-label {
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: #64748b;
+    }
+
+    /* Filters */
+    .filters {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+      align-items: center;
+    }
+    .filters input[type="text"],
+    .filters select {
+      padding: 10px 14px;
+      border: 1px solid #e5ecf3;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-family: inherit;
+      background: #fff;
+      color: #1a3650;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .filters input[type="text"]:focus,
+    .filters select:focus {
+      border-color: #1a3650;
+      box-shadow: 0 0 0 3px rgba(26,54,80,0.1);
+    }
+    .filters input[type="text"] { flex: 1; min-width: 200px; }
+    .filters .count {
+      font-size: 0.8rem;
+      color: #64748b;
+      margin-left: auto;
+      white-space: nowrap;
+    }
+    .filters .count strong { color: #1a3650; }
+
+    /* Reports grid */
+    .reports-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    @media (min-width: 900px) {
+      .reports-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .report-card {
+      background: #fff;
+      border: 1px solid #e5ecf3;
+      border-radius: 18px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+      animation: fadeUp 0.4s ease both;
+    }
+    .report-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(212,184,122,0.55);
+      box-shadow: 0 14px 36px rgba(15,41,64,0.1);
+    }
+
+    .report-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 18px 12px;
+      border-bottom: 1px solid #f0f4f8;
+    }
+    .report-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1a3650, #0f2940);
+      color: #E7D3A1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+    }
+    .report-head-info { flex: 1; min-width: 0; }
+    .report-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #1a3650;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .report-date {
+      font-size: 0.7rem;
+      color: #64748b;
+      margin-top: 2px;
+    }
+    .report-badges { display: flex; gap: 6px; flex-shrink: 0; }
+    .report-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 10px;
+      border-radius: 30px;
+      font-size: 0.68rem;
+      font-weight: 700;
+    }
+    .pill-sellers { background: rgba(26,54,80,0.08); color: #1a3650; }
+    .pill-pros { background: rgba(0,135,81,0.1); color: #006b40; }
+
+    .report-body {
+      padding: 14px 18px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+    }
+    .report-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.83rem;
+      color: #475569;
+      line-height: 1.5;
+    }
+    .report-row i {
+      color: #B49450;
+      margin-top: 3px;
+      flex-shrink: 0;
+      width: 14px;
+      text-align: center;
+    }
+    .report-row .row-text { flex: 1; min-width: 0; }
+    .report-row strong { color: #1a3650; font-weight: 700; }
+
+    .report-photo {
+      margin-top: 4px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #e5ecf3;
+      background: #f8fbfe;
+    }
+    .report-photo img {
+      width: 100%;
+      max-height: 220px;
+      object-fit: cover;
+      display: block;
+      cursor: zoom-in;
+    }
+
+    /* States */
+    .state-msg {
+      grid-column: 1/-1;
+      text-align: center;
+      padding: 60px 24px;
+      background: #fff;
+      border: 1px solid #e5ecf3;
+      border-radius: 20px;
+      color: #64748b;
+    }
+    .state-msg i {
+      font-size: 2.4rem;
+      color: #D4B87A;
+      display: block;
+      margin-bottom: 14px;
+      opacity: 0.85;
+    }
+    .state-msg h3 { font-size: 1.05rem; color: #1a3650; margin-bottom: 6px; }
+    .state-msg p { font-size: 0.85rem; }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15,41,64,0.92);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      cursor: zoom-out;
+    }
+    .lightbox.show { display: flex; }
+    .lightbox img {
+      max-width: 100%;
+      max-height: 90vh;
+      border-radius: 12px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: #fff;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrap">
+
+    <!-- HEADER -->
+    <header class="head">
+      <div class="head-left">
+        <img src="/assets/logo-icon.svg" alt="Zaure">
+        <div class="head-title">
+          <span class="brand">Zaure</span>
+          <span class="sub">Field Reports</span>
+        </div>
+      </div>
+      <div class="head-right">
+        <button class="btn-icon" id="refreshBtn" title="Refresh">
+          <i class="fas fa-sync-alt"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- STATS -->
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-icon"><i class="fas fa-file-alt"></i></div>
+        <div class="stat-value" id="statTotal">—</div>
+        <div class="stat-label">Total Reports</div>
+      </div>
+      <div class="stat">
+        <div class="stat-icon"><i class="fas fa-store"></i></div>
+        <div class="stat-value" id="statSellers">—</div>
+        <div class="stat-label">Sellers Onboarded</div>
+      </div>
+      <div class="stat">
+        <div class="stat-icon"><i class="fas fa-user-tie"></i></div>
+        <div class="stat-value" id="statPros">—</div>
+        <div class="stat-label">Pros Onboarded</div>
+      </div>
+      <div class="stat">
+        <div class="stat-icon"><i class="fas fa-users"></i></div>
+        <div class="stat-value" id="statOps">—</div>
+        <div class="stat-label">Active Operators</div>
+      </div>
+    </div>
+
+    <!-- FILTERS -->
+    <div class="filters">
+      <input type="text" id="searchInput" placeholder="Search by name, location, or intel...">
+      <select id="operatorFilter">
+        <option value="">All operators</option>
+      </select>
+      <span class="count">Showing <strong id="filteredCount">0</strong> reports</span>
+    </div>
+
+    <!-- REPORTS -->
+    <div class="reports-grid" id="reportsGrid">
+      <div class="state-msg">
+        <i class="fas fa-spinner fa-spin"></i>
+        <h3>Loading reports…</h3>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close">
+      <i class="fas fa-times"></i>
+    </button>
+    <img id="lightboxImg" src="" alt="Report photo">
+  </div>
+
+  <script>
+    const reportsGrid    = document.getElementById('reportsGrid');
+    const searchInput    = document.getElementById('searchInput');
+    const operatorFilter = document.getElementById('operatorFilter');
+    const filteredCount  = document.getElementById('filteredCount');
+    const refreshBtn     = document.getElementById('refreshBtn');
+    const lightbox       = document.getElementById('lightbox');
+    const lightboxImg    = document.getElementById('lightboxImg');
+    const lightboxClose  = document.getElementById('lightboxClose');
+
+    let allReports = [];
+
+    // ---------- Load ----------
+    async function loadReports() {
+      reportsGrid.innerHTML = `
+        <div class="state-msg">
+          <i class="fas fa-spinner fa-spin"></i>
+          <h3>Loading reports…</h3>
+        </div>`;
+
+      try {
+        const res = await fetch('/api/field-reports/list', { cache: 'no-store' });
+        const data = await res.json();
+
+        if (!data.ok) throw new Error(data.error || 'Load failed');
+
+        allReports = data.reports || [];
+        renderStats(allReports);
+        buildOperatorFilter(allReports);
+        renderReports(allReports);
+
+      } catch (err) {
+        console.error(err);
+        reportsGrid.innerHTML = `
+          <div class="state-msg">
+            <i class="fas fa-exclamation-triangle" style="color:#e63946;"></i>
+            <h3>Could not load reports</h3>
+            <p>${err.message || 'Please try again.'}</p>
+          </div>`;
+      }
+    }
+
+    // ---------- Stats ----------
+    function renderStats(reports) {
+      const total   = reports.length;
+      const sellers = reports.reduce((s, r) => s + (parseInt(r.sellers) || 0), 0);
+      const pros    = reports.reduce((s, r) => s + (parseInt(r.pros) || 0), 0);
+      const ops     = new Set(reports.map(r => (r.operator || '').trim()).filter(Boolean)).size;
+
+      document.getElementById('statTotal').textContent   = total;
+      document.getElementById('statSellers').textContent = sellers;
+      document.getElementById('statPros').textContent    = pros;
+      document.getElementById('statOps').textContent     = ops;
+    }
+
+    // ---------- Filters ----------
+    function buildOperatorFilter(reports) {
+      const ops = [...new Set(reports.map(r => (r.operator || '').trim()).filter(Boolean))].sort();
+      operatorFilter.innerHTML = '<option value="">All operators</option>' +
+        ops.map(op => `<option value="${escapeHtml(op)}">${escapeHtml(op)}</option>`).join('');
+    }
+
+    function applyFilters(reports) {
+      const q  = searchInput.value.trim().toLowerCase();
+      const op = operatorFilter.value;
+
+      return reports.filter(r => {
+        if (op && (r.operator || '').trim() !== op) return false;
+        if (!q) return true;
+        const haystack = [r.operator, r.location, r.intel, r.blockers]
+          .filter(Boolean).join(' ').toLowerCase();
+        return haystack.includes(q);
+      });
+    }
+
+    // ---------- Render ----------
+    function renderReports(reports) {
+      const filtered = applyFilters(reports);
+      filteredCount.textContent = filtered.length;
+
+      if (filtered.length === 0) {
+        reportsGrid.innerHTML = `
+          <div class="state-msg">
+            <i class="fas fa-inbox"></i>
+            <h3>No reports match your filters</h3>
+            <p>Try a different search or operator.</p>
+          </div>`;
+        return;
+      }
+
+      reportsGrid.innerHTML = filtered.map(buildCard).join('');
+
+      reportsGrid.querySelectorAll('.report-photo img').forEach(img => {
+        img.addEventListener('click', function() {
+          lightboxImg.src = this.src;
+          lightbox.classList.add('show');
+        });
+      });
+    }
+
+    function buildCard(r) {
+      const name = r.operator || 'Unknown';
+      const initials = getInitials(name);
+      const date = formatDate(r.timestamp);
+      const sellers = parseInt(r.sellers) || 0;
+      const pros = parseInt(r.pros) || 0;
+      const location = r.location || '—';
+      const blockers = r.blockers || '';
+      const intel = r.intel || '';
+      const photo = r.photo_link || r.photo || '';
+
+      return `
+        <article class="report-card">
+          <div class="report-head">
+            <div class="report-avatar">${escapeHtml(initials)}</div>
+            <div class="report-head-info">
+              <div class="report-name">${escapeHtml(name)}</div>
+              <div class="report-date"><i class="far fa-clock"></i> ${escapeHtml(date)}</div>
+            </div>
+            <div class="report-badges">
+              ${sellers > 0 ? `<span class="report-pill pill-sellers"><i class="fas fa-store"></i> ${sellers}</span>` : ''}
+              ${pros > 0 ? `<span class="report-pill pill-pros"><i class="fas fa-user-tie"></i> ${pros}</span>` : ''}
+            </div>
+          </div>
+          <div class="report-body">
+            <div class="report-row">
+              <i class="fas fa-map-marker-alt"></i>
+              <div class="row-text"><strong>Location:</strong> ${escapeHtml(location)}</div>
+            </div>
+            ${blockers ? `
+              <div class="report-row">
+                <i class="fas fa-exclamation-circle"></i>
+                <div class="row-text"><strong>Blockers:</strong> ${escapeHtml(blockers)}</div>
+              </div>` : ''}
+            ${intel ? `
+              <div class="report-row">
+                <i class="fas fa-binoculars"></i>
+                <div class="row-text"><strong>Intel:</strong> ${escapeHtml(intel)}</div>
+              </div>` : ''}
+            ${photo ? `
+              <div class="report-photo">
+                <img src="${photo}" alt="Report photo" loading="lazy">
+              </div>` : ''}
+          </div>
+        </article>
+      `;
+    }
+
+    // ---------- Helpers ----------
+    function escapeHtml(s) {
+      return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({
+        '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
+      }[c]));
+    }
+
+    function getInitials(name) {
+      const parts = String(name || '?').trim().split(/\s+/);
+      if (parts.length === 1) return parts[0].charAt(0).toUpperCase();
+      return (parts[0].charAt(0) + parts[parts.length - 1].charAt(0)).toUpperCase();
+    }
+
+    function formatDate(iso) {
+      if (!iso) return '—';
+      try {
+        const d = new Date(iso);
+        if (isNaN(d.getTime())) return String(iso);
+        const now = new Date();
+        const diffMs  = now - d;
+        const diffMin = Math.floor(diffMs / 60000);
+        const diffHr  = Math.floor(diffMs / 3600000);
+        const diffDay = Math.floor(diffMs / 86400000);
+
+        if (diffMin < 1) return 'Just now';
+        if (diffMin < 60) return `${diffMin} min ago`;
+        if (diffHr < 24) return `${diffHr} hr ago`;
+        if (diffDay < 7) return `${diffDay} day${diffDay > 1 ? 's' : ''} ago`;
+        return d.toLocaleDateString('en-NG', { day: 'numeric', month: 'short', year: 'numeric' });
+      } catch { return String(iso); }
+    }
+
+    // ---------- Events ----------
+    searchInput.addEventListener('input', () => renderReports(allReports));
+    operatorFilter.addEventListener('change', () => renderReports(allReports));
+
+    refreshBtn.addEventListener('click', async function() {
+      this.classList.add('spin');
+      await loadReports();
+      this.classList.remove('spin');
+    });
+
+    // Lightbox
+    lightbox.addEventListener('click', () => lightbox.classList.remove('show'));
+    lightboxClose.addEventListener('click', (e) => {
+      e.stopPropagation();
+      lightbox.classList.remove('show');
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') lightbox.classList.remove('show');
+    });
+
+    // Boot + auto refresh
+    loadReports();
+    setInterval(loadReports, 60000);
+  </script>
+
+</body>
+</html>
