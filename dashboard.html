@@ -3,996 +3,2337 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Field Reports – Zaure</title>
+  <title>Dashboard – Zaure</title>
   <meta name="robots" content="noindex, nofollow">
-  <meta name="theme-color" content="#1a3650">
+  <meta name="theme-color" content="#0f2940">
   <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    body {
-      font-family: 'Inter', -apple-system, sans-serif;
-      background: linear-gradient(180deg, #f0f5fb 0%, #e3ecf6 100%);
-      min-height: 100vh;
-      padding: 24px 16px 60px;
-      -webkit-font-smoothing: antialiased;
+    :root {
+      --navy: #0f2940;
+      --navy-2: #1a3650;
+      --gold: #D4B87A;
+      --gold-2: #B49450;
+      --bg: #f4f7fb;
+      --surface: #ffffff;
+      --border: #e5ecf3;
+      --text: #0f2940;
+      --text-2: #64748b;
+      --text-3: #94a3b8;
+      --green: #16a34a;
+      --red: #e63946;
     }
 
-    .wrap { max-width: 1200px; margin: 0 auto; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      min-height: 100vh;
+    }
 
-    /* Header */
-    .head {
+    /* ============================================================
+       SIDEBAR
+       ============================================================ */
+    .sidebar {
+      width: 240px;
+      background: linear-gradient(180deg, #0f2940 0%, #0a1c2d 100%);
+      color: #fff;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      flex-direction: column;
+      z-index: 100;
+      transition: transform 0.3s ease;
+    }
+    .sidebar-brand {
+      padding: 22px 22px 20px;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .sidebar-brand img { width: 34px; height: 34px; display: block; }
+    .sidebar-brand .brand-text .name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.3px;
+      line-height: 1;
+    }
+    .sidebar-brand .brand-text .sub {
+      font-size: 0.52rem;
+      font-weight: 700;
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 4px;
+    }
+
+    .sidebar-nav {
+      flex: 1;
+      padding: 16px 12px;
+      overflow-y: auto;
+    }
+    .nav-section {
+      font-size: 0.6rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      padding: 12px 12px 6px;
+      margin-top: 6px;
+    }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 14px;
+      margin-bottom: 2px;
+      border-radius: 11px;
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 0.86rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s;
+      border: none;
+      background: none;
+      width: 100%;
+      font-family: inherit;
+      text-align: left;
+    }
+    .nav-item i {
+      font-size: 0.92rem;
+      width: 18px;
+      text-align: center;
+      color: rgba(212,184,122,0.75);
+    }
+    .nav-item:hover {
+      background: rgba(255,255,255,0.06);
+      color: #fff;
+    }
+    .nav-item.active {
+      background: linear-gradient(135deg, rgba(212,184,122,0.18), rgba(212,184,122,0.08));
+      color: #fff;
+      box-shadow: inset 0 0 0 1px rgba(212,184,122,0.25);
+    }
+    .nav-item.active i { color: var(--gold); }
+    .nav-item.hidden { display: none; }
+
+    .sidebar-footer {
+      padding: 16px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .user-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .user-avatar {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-2));
+      color: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+    }
+    .user-info { flex: 1; min-width: 0; }
+    .user-info .name {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .user-info .role {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 1px;
+    }
+    .logout-btn {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.5);
+      cursor: pointer;
+      padding: 4px;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .logout-btn:hover { color: #e63946; }
+
+    /* ============================================================
+       MAIN CONTENT
+       ============================================================ */
+    .main {
+      flex: 1;
+      margin-left: 240px;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .topbar {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      padding: 14px 26px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      margin-bottom: 22px;
-      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(8px);
     }
-    .head-left { display: flex; align-items: center; gap: 12px; }
-    .head-left img { width: 42px; height: 42px; display: block; }
-    .head-title { display: flex; flex-direction: column; }
-    .head-title .brand {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.35rem;
-      font-weight: 800;
-      color: #1a3650;
-      letter-spacing: -0.4px;
-      line-height: 1;
-    }
-    .head-title .sub {
-      font-size: 0.58rem;
-      font-weight: 700;
-      letter-spacing: 2.4px;
-      text-transform: uppercase;
-      color: #D4B87A;
-      margin-top: 4px;
-    }
-    .head-right { display: flex; gap: 8px; align-items: center; }
-    .btn-icon {
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      border: 1px solid #d1dbe6;
-      background: #fff;
-      color: #1a3650;
-      cursor: pointer;
+    .topbar-left {
       display: flex;
       align-items: center;
-      justify-content: center;
+      gap: 14px;
+      flex: 1;
+      min-width: 0;
+    }
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      width: 38px;
+      height: 38px;
+      cursor: pointer;
+      color: var(--navy);
       font-size: 0.95rem;
-      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+      align-items: center;
+      justify-content: center;
     }
-    .btn-icon:hover {
-      border-color: #D4B87A;
-      background: #fafcff;
-      transform: translateY(-1px);
+    .page-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.2px;
     }
-    .btn-icon.spin i { animation: spin 0.8s linear infinite; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* Tabs */
-    .tabs {
+    .page-subtitle {
+      font-size: 0.72rem;
+      color: var(--text-2);
+      margin-top: 1px;
+    }
+    .topbar-right {
       display: flex;
       gap: 8px;
-      margin-bottom: 22px;
-      border-bottom: 1px solid #e5ecf3;
-      overflow-x: auto;
-      scrollbar-width: none;
+      align-items: center;
     }
-    .tabs::-webkit-scrollbar { display: none; }
-    .tab {
-      padding: 12px 20px;
-      background: none;
-      border: none;
+    .top-btn {
+      padding: 9px 16px;
+      border-radius: 40px;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--navy);
       font-family: inherit;
-      font-size: 0.88rem;
+      font-size: 0.82rem;
       font-weight: 600;
-      color: #64748b;
       cursor: pointer;
-      position: relative;
-      white-space: nowrap;
-      transition: color 0.2s;
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      transition: background 0.15s, border-color 0.15s, transform 0.15s;
+      text-decoration: none;
     }
-    .tab i { font-size: 0.85rem; }
-    .tab:hover { color: #1a3650; }
-    .tab.active { color: #1a3650; }
-    .tab.active::after {
-      content: '';
-      position: absolute;
-      bottom: -1px;
-      left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, #1a3650, #D4B87A);
-      border-radius: 2px;
+    .top-btn i { font-size: 0.8rem; color: var(--gold-2); }
+    .top-btn:hover {
+      background: #f8fbfe;
+      border-color: rgba(212,184,122,0.5);
+      transform: translateY(-1px);
+    }
+    .top-btn.primary {
+      background: linear-gradient(135deg, var(--navy-2), var(--navy));
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 6px 16px rgba(15,41,64,0.22);
+    }
+    .top-btn.primary i { color: var(--gold); }
+    .top-btn.primary:hover { filter: brightness(1.1); }
+
+    .content {
+      padding: 26px;
+      flex: 1;
     }
 
-    /* Panels */
-    .panel { display: none; }
-    .panel.active { display: block; animation: fadeUp 0.4s ease both; }
+    /* ============================================================
+       SECTIONS
+       ============================================================ */
+    .section { display: none; animation: fadeUp 0.35s ease both; }
+    .section.active { display: block; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
     /* Stats */
-    .stats {
+    .stats-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-bottom: 26px;
+      gap: 14px;
+      margin-bottom: 22px;
     }
-    @media (min-width: 640px) {
-      .stats { grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    @media (min-width: 720px) {
+      .stats-grid { grid-template-columns: repeat(4, 1fr); }
     }
-    .stat {
+    .stat-card {
       background: #fff;
-      border: 1px solid #e5ecf3;
+      border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 18px 16px;
+      padding: 18px 18px 16px;
+      position: relative;
+      overflow: hidden;
       transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
     }
-    .stat:hover {
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--navy), var(--gold));
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+    .stat-card:hover {
       transform: translateY(-2px);
       border-color: rgba(212,184,122,0.5);
-      box-shadow: 0 10px 24px rgba(15,41,64,0.06);
+      box-shadow: 0 12px 28px rgba(15,41,64,0.08);
     }
+    .stat-card:hover::before { opacity: 1; }
     .stat-icon {
       width: 36px; height: 36px;
       border-radius: 10px;
-      background: linear-gradient(135deg, #1a3650, #0f2940);
-      color: #D4B87A;
+      background: linear-gradient(135deg, var(--navy-2), var(--navy));
+      color: var(--gold);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 0.9rem;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
     .stat-value {
-      font-size: 1.45rem;
+      font-size: 1.6rem;
       font-weight: 800;
-      color: #1a3650;
-      letter-spacing: -0.5px;
+      color: var(--navy);
+      letter-spacing: -0.6px;
       line-height: 1;
-      margin-bottom: 4px;
+      margin-bottom: 5px;
     }
     .stat-label {
-      font-size: 0.66rem;
+      font-size: 0.62rem;
       font-weight: 700;
-      letter-spacing: 1.2px;
+      letter-spacing: 1.3px;
       text-transform: uppercase;
-      color: #64748b;
+      color: var(--text-2);
     }
+
+    /* Panels */
+    .panel {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px 22px;
+      margin-bottom: 18px;
+    }
+    .panel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+    .panel-title {
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: var(--gold-2);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .panel-title i { font-size: 0.75rem; }
 
     /* Filters */
     .filters {
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
-      margin-bottom: 20px;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+    .filter-group {
+      position: relative;
+      display: flex;
       align-items: center;
     }
+    .filter-group i {
+      position: absolute;
+      left: 12px;
+      color: var(--text-3);
+      font-size: 0.8rem;
+      pointer-events: none;
+    }
     .filters input[type="text"],
+    .filters input[type="date"],
     .filters select {
       padding: 10px 14px;
-      border: 1px solid #e5ecf3;
-      border-radius: 12px;
-      font-size: 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      font-size: 0.83rem;
       font-family: inherit;
       background: #fff;
-      color: #1a3650;
+      color: var(--navy);
       outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      transition: border-color 0.18s, box-shadow 0.18s;
+      min-height: 40px;
     }
+    .filter-group input { padding-left: 34px; }
     .filters input[type="text"]:focus,
+    .filters input[type="date"]:focus,
     .filters select:focus {
-      border-color: #1a3650;
-      box-shadow: 0 0 0 3px rgba(26,54,80,0.1);
+      border-color: var(--navy);
+      box-shadow: 0 0 0 3px rgba(15,41,64,0.08);
     }
-    .filters input[type="text"] { flex: 1; min-width: 200px; }
-    .filters .count {
-      font-size: 0.8rem;
-      color: #64748b;
+    .filters input[type="text"] { flex: 1; min-width: 220px; }
+    .filters .result-count {
+      font-size: 0.78rem;
+      color: var(--text-2);
       margin-left: auto;
       white-space: nowrap;
     }
-    .filters .count strong { color: #1a3650; }
+    .filters .result-count strong { color: var(--navy); }
 
-    /* Cards grid */
-    .reports-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
-    @media (min-width: 900px) {
-      .reports-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    .report-card {
+    .filter-chip {
+      padding: 8px 14px;
+      border-radius: 40px;
+      border: 1px solid var(--border);
       background: #fff;
-      border: 1px solid #e5ecf3;
-      border-radius: 18px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
-      animation: fadeUp 0.4s ease both;
+      color: var(--text-2);
+      font-family: inherit;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.18s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
     }
-    .report-card:hover {
-      transform: translateY(-3px);
-      border-color: rgba(212,184,122,0.55);
-      box-shadow: 0 14px 36px rgba(15,41,64,0.1);
+    .filter-chip:hover {
+      border-color: rgba(212,184,122,0.5);
+      color: var(--navy);
     }
+    .filter-chip.active {
+      background: var(--navy);
+      color: #fff;
+      border-color: var(--navy);
+    }
+    .filter-chip.active i { color: var(--gold); }
 
-    .report-head {
+    /* Data table */
+    .data-table-wrap {
+      overflow-x: auto;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+    }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.83rem;
+    }
+    .data-table thead th {
+      background: #f8fbfe;
+      padding: 12px 14px;
+      text-align: left;
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+      color: var(--text-2);
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    .data-table tbody td {
+      padding: 12px 14px;
+      border-bottom: 1px solid #f0f4f8;
+      color: var(--navy);
+      vertical-align: middle;
+    }
+    .data-table tbody tr {
+      transition: background 0.15s;
+    }
+    .data-table tbody tr:hover { background: #fafcff; }
+    .data-table tbody tr:last-child td { border-bottom: none; }
+
+    .table-person {
       display: flex;
       align-items: center;
-      gap: 12px;
-      padding: 16px 18px 12px;
-      border-bottom: 1px solid #f0f4f8;
+      gap: 10px;
+      cursor: pointer;
     }
-    .report-avatar {
-      width: 44px; height: 44px;
+    .table-avatar {
+      width: 32px; height: 32px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #1a3650, #0f2940);
+      background: linear-gradient(135deg, var(--navy-2), var(--navy));
       color: #E7D3A1;
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 0.68rem;
       font-weight: 800;
-      font-size: 0.95rem;
       flex-shrink: 0;
     }
-    .report-head-info { flex: 1; min-width: 0; }
-    .report-name {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: #1a3650;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+    .table-person:hover .table-avatar {
+      box-shadow: 0 0 0 2px var(--gold);
     }
-    .report-date {
-      font-size: 0.7rem;
-      color: #64748b;
-      margin-top: 2px;
-    }
-    .report-badges { display: flex; gap: 6px; flex-shrink: 0; flex-wrap: wrap; justify-content: flex-end; }
-    .report-pill {
+
+    .pill {
       display: inline-flex;
       align-items: center;
       gap: 5px;
-      padding: 5px 10px;
+      padding: 4px 10px;
       border-radius: 30px;
-      font-size: 0.68rem;
+      font-size: 0.66rem;
       font-weight: 700;
-    }
-    .pill-sellers { background: rgba(26,54,80,0.08); color: #1a3650; }
-    .pill-pros { background: rgba(0,135,81,0.1); color: #006b40; }
-    .pill-call { background: rgba(37,99,235,0.1); color: #1d4ed8; }
-    .pill-whatsapp { background: rgba(37,211,102,0.12); color: #15803d; }
-    .pill-primer { background: rgba(212,184,122,0.15); color: #8a6f36; }
-    .pill-test { background: rgba(148,163,184,0.15); color: #475569; }
-
-    .report-body {
-      padding: 14px 18px 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      flex: 1;
-    }
-    .report-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-size: 0.83rem;
-      color: #475569;
-      line-height: 1.5;
-    }
-    .report-row i {
-      color: #B49450;
-      margin-top: 3px;
-      flex-shrink: 0;
-      width: 14px;
-      text-align: center;
-    }
-    .report-row .row-text { flex: 1; min-width: 0; }
-    .report-row strong { color: #1a3650; font-weight: 700; }
-
-    .report-photo {
-      margin-top: 4px;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid #e5ecf3;
-      background: #f8fbfe;
-    }
-    .report-photo img {
-      width: 100%;
-      max-height: 220px;
-      object-fit: cover;
-      display: block;
-      cursor: zoom-in;
-    }
-
-    /* Top providers list */
-    .top-providers {
-      background: #fff;
-      border: 1px solid #e5ecf3;
-      border-radius: 18px;
-      padding: 20px 22px;
-      margin-bottom: 22px;
-    }
-    .top-providers h3 {
-      font-size: 0.72rem;
-      font-weight: 800;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: #B49450;
-      margin-bottom: 14px;
-    }
-    .top-provider-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 10px 0;
-      border-bottom: 1px dashed #f0f4f8;
-    }
-    .top-provider-row:last-child { border-bottom: none; padding-bottom: 0; }
-    .top-provider-rank {
-      width: 26px; height: 26px;
-      border-radius: 8px;
-      background: linear-gradient(135deg, #1a3650, #0f2940);
-      color: #D4B87A;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.72rem;
-      font-weight: 800;
-      flex-shrink: 0;
-    }
-    .top-provider-name {
-      flex: 1;
-      font-size: 0.87rem;
-      font-weight: 600;
-      color: #1a3650;
-      min-width: 0;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      letter-spacing: 0.2px;
       white-space: nowrap;
     }
-    .top-provider-count {
-      font-size: 0.82rem;
-      font-weight: 800;
-      color: #B49450;
-      flex-shrink: 0;
-    }
+    .pill.gold { background: rgba(212,184,122,0.15); color: #8a6f36; }
+    .pill.blue { background: rgba(37,99,235,0.1); color: #1d4ed8; }
+    .pill.green { background: rgba(22,163,74,0.1); color: #15803d; }
+    .pill.gray { background: rgba(148,163,184,0.15); color: #475569; }
+    .pill.red { background: rgba(230,57,70,0.1); color: #b91c1c; }
 
-    /* States */
-    .state-msg {
-      grid-column: 1/-1;
-      text-align: center;
-      padding: 60px 24px;
+    .table-actions {
+      display: flex;
+      gap: 6px;
+    }
+    .icon-btn-sm {
+      width: 30px; height: 30px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
       background: #fff;
-      border: 1px solid #e5ecf3;
-      border-radius: 20px;
-      color: #64748b;
-    }
-    .state-msg i {
-      font-size: 2.4rem;
-      color: #D4B87A;
-      display: block;
-      margin-bottom: 14px;
-      opacity: 0.85;
-    }
-    .state-msg h3 { font-size: 1.05rem; color: #1a3650; margin-bottom: 6px; }
-    .state-msg p { font-size: 0.85rem; }
-
-    /* Lightbox */
-    .lightbox {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(15,41,64,0.92);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      z-index: 9999;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      cursor: zoom-out;
-    }
-    .lightbox.show { display: flex; }
-    .lightbox img {
-      max-width: 100%;
-      max-height: 90vh;
-      border-radius: 12px;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.5);
-    }
-    .lightbox-close {
-      position: absolute;
-      top: 24px;
-      right: 24px;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.25);
-      color: #fff;
-      font-size: 1.1rem;
+      color: var(--text-2);
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 0.75rem;
+      transition: all 0.15s;
+    }
+    .icon-btn-sm:hover {
+      border-color: var(--navy);
+      color: var(--navy);
+      transform: translateY(-1px);
+    }
+    .icon-btn-sm.danger:hover {
+      border-color: var(--red);
+      color: var(--red);
     }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* Empty state */
+    .empty-state {
+      padding: 60px 24px;
+      text-align: center;
+      color: var(--text-2);
+    }
+    .empty-state i {
+      font-size: 2.4rem;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 12px;
+      opacity: 0.7;
+    }
+    .empty-state h3 {
+      font-size: 1rem;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+    .empty-state p {
+      font-size: 0.83rem;
+    }
+
+    /* ============================================================
+       USER PROFILE DRAWER
+       ============================================================ */
+    .drawer-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15,41,64,0.5);
+      backdrop-filter: blur(4px);
+      z-index: 200;
+      animation: fadeIn 0.2s ease;
+    }
+    .drawer-overlay.show { display: block; }
+
+    .drawer {
+      position: fixed;
+      top: 0; right: 0; bottom: 0;
+      width: 100%;
+      max-width: 540px;
+      background: #fff;
+      z-index: 201;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.3, 1);
+      box-shadow: -20px 0 60px rgba(15,41,64,0.15);
+    }
+    .drawer.show { transform: translateX(0); }
+
+    .drawer-head {
+      padding: 22px 24px;
+      background: linear-gradient(135deg, var(--navy-2), var(--navy));
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .drawer-head::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 180px; height: 180px;
+      background: radial-gradient(circle, rgba(212,184,122,0.2) 0%, transparent 65%);
+      border-radius: 50%;
+    }
+    .drawer-head > * { position: relative; z-index: 2; }
+    .drawer-head-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    .drawer-avatar {
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-2));
+      color: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.2rem;
+      letter-spacing: 0.5px;
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.15), 0 0 0 5px rgba(212,184,122,0.4);
+    }
+    .drawer-close {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      cursor: pointer;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .drawer-close:hover { background: rgba(255,255,255,0.2); }
+    .drawer-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.45rem;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+      margin-bottom: 4px;
+    }
+    .drawer-sub {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.75);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .drawer-sub span { display: inline-flex; align-items: center; gap: 6px; }
+    .drawer-sub i { color: var(--gold); font-size: 0.75rem; }
+
+    .drawer-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 24px 30px;
+    }
+    .drawer-stat-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .drawer-stat {
+      background: #f8fbfe;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 10px;
+      text-align: center;
+    }
+    .drawer-stat .v {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.4px;
+      line-height: 1;
+    }
+    .drawer-stat .l {
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 1.1px;
+      text-transform: uppercase;
+      color: var(--text-2);
+      margin-top: 5px;
+    }
+
+    .drawer-section {
+      margin-bottom: 22px;
+    }
+    .drawer-section-title {
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: var(--gold-2);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .drawer-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .drawer-item {
+      background: #f8fbfe;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-size: 0.83rem;
+      color: var(--navy);
+      line-height: 1.5;
+    }
+    .drawer-item .top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 4px;
+      align-items: baseline;
+    }
+    .drawer-item .top .t {
+      font-weight: 700;
+    }
+    .drawer-item .top .d {
+      font-size: 0.68rem;
+      color: var(--text-3);
+      white-space: nowrap;
+    }
+    .drawer-item .sub {
+      font-size: 0.72rem;
+      color: var(--text-2);
+    }
+
+    /* ============================================================
+       MODAL
+       ============================================================ */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15,41,64,0.55);
+      backdrop-filter: blur(4px);
+      z-index: 300;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.show { display: flex; }
+    .modal {
+      background: #fff;
+      border-radius: 18px;
+      width: 100%;
+      max-width: 460px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 26px 26px 22px;
+      animation: popIn 0.25s ease;
+    }
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .modal h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 4px;
+      letter-spacing: -0.3px;
+    }
+    .modal .modal-sub {
+      font-size: 0.8rem;
+      color: var(--text-2);
+      margin-bottom: 20px;
+    }
+    .modal-field {
+      margin-bottom: 14px;
+    }
+    .modal-field label {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+    .modal-field input,
+    .modal-field select {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      font-size: 0.88rem;
+      font-family: inherit;
+      background: #f8fbfe;
+      color: var(--navy);
+      outline: none;
+      transition: border-color 0.18s, box-shadow 0.18s;
+    }
+    .modal-field input:focus,
+    .modal-field select:focus {
+      border-color: var(--navy);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(15,41,64,0.08);
+    }
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .modal-actions button {
+      flex: 1;
+      padding: 12px 20px;
+      border-radius: 60px;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 0.88rem;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.15s, filter 0.15s;
+    }
+    .modal-actions .btn-primary {
+      background: linear-gradient(135deg, var(--navy-2), var(--navy));
+      color: #fff;
+      box-shadow: 0 8px 20px rgba(15,41,64,0.22);
+    }
+    .modal-actions .btn-primary:hover:not(:disabled) {
+      transform: translateY(-1px);
+      filter: brightness(1.1);
+    }
+    .modal-actions .btn-secondary {
+      background: #f1f5f9;
+      color: var(--navy);
+    }
+    .modal-actions .btn-secondary:hover {
+      background: #e2e8f0;
+    }
+    .modal-actions button:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--navy);
+      color: #fff;
+      padding: 12px 22px;
+      border-radius: 40px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      box-shadow: 0 14px 32px rgba(0,0,0,0.25);
+      opacity: 0;
+      transition: all 0.3s ease;
+      z-index: 9999;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      max-width: 90%;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .toast i { color: var(--gold); }
+    .toast.error i { color: #ff8585; }
+    .toast.success i { color: #4ade80; }
+
+    /* Skeleton */
+    .skeleton {
+      background: linear-gradient(90deg, #f1f5f9 0%, #e2e8f0 50%, #f1f5f9 100%);
+      background-size: 200% 100%;
+      animation: shimmer 1.2s infinite;
+      border-radius: 8px;
+    }
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* Mobile */
+    .mobile-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15,41,64,0.5);
+      z-index: 99;
+    }
+    @media (max-width: 900px) {
+      .sidebar { transform: translateX(-100%); }
+      .sidebar.open { transform: translateX(0); }
+      .main { margin-left: 0; }
+      .mobile-toggle { display: flex; }
+      .mobile-backdrop.show { display: block; }
+      .content { padding: 18px 14px; }
+      .topbar { padding: 12px 14px; }
+    }
+    @media (max-width: 640px) {
+      .stats-grid { gap: 10px; }
+      .stat-card { padding: 14px 14px 12px; }
+      .stat-value { font-size: 1.3rem; }
+      .filter-group input { min-width: 160px; }
+      .filters input[type="text"] { min-width: 0; }
     }
   </style>
 </head>
 <body>
 
-  <div class="wrap">
+  <!-- ============================================================
+       SIDEBAR
+       ============================================================ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <img src="/assets/logo-icon.svg" alt="Zaure">
+      <div class="brand-text">
+        <div class="name">Zaure</div>
+        <div class="sub">Admin Panel</div>
+      </div>
+    </div>
 
-    <!-- HEADER -->
-    <header class="head">
-      <div class="head-left">
-        <img src="/assets/logo-icon.svg" alt="Zaure">
-        <div class="head-title">
-          <span class="brand">Zaure</span>
-          <span class="sub">Admin Dashboard</span>
+    <nav class="sidebar-nav">
+      <div class="nav-section">Overview</div>
+      <a class="nav-item active" data-section="overview">
+        <i class="fas fa-chart-pie"></i> Dashboard
+      </a>
+
+      <div class="nav-section">Data</div>
+      <a class="nav-item" data-section="reports" data-perm="view_reports">
+        <i class="fas fa-file-alt"></i> Field Reports
+      </a>
+      <a class="nav-item" data-section="activity" data-perm="view_activity">
+        <i class="fas fa-mouse-pointer"></i> Click Activity
+      </a>
+      <a class="nav-item" data-section="providers" data-perm="view_activity">
+        <i class="fas fa-user-tie"></i> Providers
+      </a>
+      <a class="nav-item" data-section="users" data-perm="view_activity">
+        <i class="fas fa-users"></i> Users
+      </a>
+
+      <div class="nav-section">Manage</div>
+      <a class="nav-item" data-section="staff" data-perm="manage_staff">
+        <i class="fas fa-user-shield"></i> Staff & Permissions
+      </a>
+
+      <div class="nav-section">Actions</div>
+      <a class="nav-item" href="/field-report" id="submitReportNav" data-perm="submit_reports">
+        <i class="fas fa-paper-plane"></i> Submit Report
+      </a>
+      <a class="nav-item" href="/" target="_blank">
+        <i class="fas fa-external-link-alt"></i> View Site
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-box">
+        <div class="user-avatar" id="userAvatar">—</div>
+        <div class="user-info">
+          <div class="name" id="userName">Loading…</div>
+          <div class="role" id="userRole">—</div>
+        </div>
+        <button class="logout-btn" id="logoutBtn" title="Sign out">
+          <i class="fas fa-sign-out-alt"></i>
+        </button>
+      </div>
+    </div>
+  </aside>
+  <div class="mobile-backdrop" id="mobileBackdrop"></div>
+
+  <!-- ============================================================
+       MAIN
+       ============================================================ -->
+  <main class="main">
+
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="mobile-toggle" id="mobileToggle">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div>
+          <div class="page-title" id="pageTitle">Dashboard</div>
+          <div class="page-subtitle" id="pageSubtitle">Overview of Zaure activity</div>
         </div>
       </div>
-      <div class="head-right">
-        <button class="btn-icon" id="refreshBtn" title="Refresh">
-          <i class="fas fa-sync-alt"></i>
+      <div class="topbar-right">
+        <button class="top-btn" id="refreshBtn">
+          <i class="fas fa-sync-alt"></i> Refresh
         </button>
+        <a class="top-btn primary" href="/field-report" id="reportBtn" style="display:none;">
+          <i class="fas fa-paper-plane"></i> Submit Report
+        </a>
       </div>
     </header>
 
-    <!-- TABS -->
-    <div class="tabs">
-      <button class="tab active" data-tab="reports">
-        <i class="fas fa-file-alt"></i> Field Reports
-      </button>
-      <button class="tab" data-tab="activity">
-        <i class="fas fa-mouse-pointer"></i> Click Activity
-      </button>
+    <div class="content">
+
+      <!-- ============================================================
+           OVERVIEW
+           ============================================================ -->
+      <section class="section active" data-section="overview">
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-file-alt"></i></div>
+            <div class="stat-value" id="ovTotalReports">—</div>
+            <div class="stat-label">Total Reports</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-store"></i></div>
+            <div class="stat-value" id="ovSellers">—</div>
+            <div class="stat-label">Sellers Onboarded</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-user-tie"></i></div>
+            <div class="stat-value" id="ovPros">—</div>
+            <div class="stat-label">Pros Onboarded</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-mouse-pointer"></i></div>
+            <div class="stat-value" id="ovClicks">—</div>
+            <div class="stat-label">Total Clicks</div>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-phone"></i></div>
+            <div class="stat-value" id="ovCalls">—</div>
+            <div class="stat-label">Call Clicks</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fab fa-whatsapp"></i></div>
+            <div class="stat-value" id="ovWhats">—</div>
+            <div class="stat-label">WhatsApp Clicks</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-users"></i></div>
+            <div class="stat-value" id="ovUniqueUsers">—</div>
+            <div class="stat-label">Unique Users</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-user-shield"></i></div>
+            <div class="stat-value" id="ovOperators">—</div>
+            <div class="stat-label">Active Operators</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <div class="panel-title"><i class="fas fa-trophy"></i> Top Providers by Clicks</div>
+          </div>
+          <div id="ovTopProviders"><div class="empty-state"><i class="fas fa-spinner fa-spin"></i></div></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <div class="panel-title"><i class="fas fa-clock"></i> Recent Field Reports</div>
+          </div>
+          <div id="ovRecentReports"><div class="empty-state"><i class="fas fa-spinner fa-spin"></i></div></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <div class="panel-title"><i class="fas fa-bolt"></i> Recent Activity</div>
+          </div>
+          <div id="ovRecentActivity"><div class="empty-state"><i class="fas fa-spinner fa-spin"></i></div></div>
+        </div>
+
+      </section>
+
+      <!-- ============================================================
+           FIELD REPORTS
+           ============================================================ -->
+      <section class="section" data-section="reports">
+        <div class="filters">
+          <div class="filter-group">
+            <i class="fas fa-search"></i>
+            <input type="text" id="repSearch" placeholder="Search name, location, intel, blockers…">
+          </div>
+          <select id="repOperator"><option value="">All operators</option></select>
+          <select id="repLocation"><option value="">All locations</option></select>
+          <select id="repContent">
+            <option value="">Any content</option>
+            <option value="blockers">Has blockers</option>
+            <option value="intel">Has intel</option>
+            <option value="photo">Has photo</option>
+          </select>
+          <input type="date" id="repDateFrom">
+          <input type="date" id="repDateTo">
+          <span class="result-count">Showing <strong id="repCount">0</strong> reports</span>
+        </div>
+
+        <div class="panel" style="padding:0;overflow:hidden;">
+          <div class="data-table-wrap" id="repTableWrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Operator</th>
+                  <th>Location</th>
+                  <th>Sellers</th>
+                  <th>Pros</th>
+                  <th>Blockers</th>
+                  <th>Intel</th>
+                  <th>When</th>
+                </tr>
+              </thead>
+              <tbody id="repTableBody">
+                <tr><td colspan="7" style="text-align:center;padding:40px;color:var(--text-2);">
+                  <i class="fas fa-spinner fa-spin"></i> Loading…
+                </td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           CLICK ACTIVITY
+           ============================================================ -->
+      <section class="section" data-section="activity">
+        <div class="filters">
+          <div class="filter-group">
+            <i class="fas fa-search"></i>
+            <input type="text" id="actSearch" placeholder="Search user, provider, service, phone…">
+          </div>
+          <select id="actType">
+            <option value="">All actions</option>
+            <option value="call_click">Call clicks</option>
+            <option value="whatsapp_click">WhatsApp clicks</option>
+            <option value="whatsapp_click_detail">WhatsApp (detail)</option>
+            <option value="manual_test">Manual tests</option>
+          </select>
+          <select id="actProvider"><option value="">All providers</option></select>
+          <select id="actUser"><option value="">All users</option></select>
+          <select id="actPrimer">
+            <option value="">All listings</option>
+            <option value="true">Primer-owned only</option>
+            <option value="false">External only</option>
+          </select>
+          <input type="date" id="actDateFrom">
+          <input type="date" id="actDateTo">
+          <span class="result-count">Showing <strong id="actCount">0</strong> clicks</span>
+        </div>
+
+        <div class="panel" style="padding:0;overflow:hidden;">
+          <div class="data-table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>User</th>
+                  <th>Action</th>
+                  <th>Provider</th>
+                  <th>Service</th>
+                  <th>City</th>
+                  <th>When</th>
+                </tr>
+              </thead>
+              <tbody id="actTableBody">
+                <tr><td colspan="6" style="text-align:center;padding:40px;color:var(--text-2);">
+                  <i class="fas fa-spinner fa-spin"></i> Loading…
+                </td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           PROVIDERS
+           ============================================================ -->
+      <section class="section" data-section="providers">
+        <div class="filters">
+          <div class="filter-group">
+            <i class="fas fa-search"></i>
+            <input type="text" id="provSearch" placeholder="Search providers…">
+          </div>
+          <select id="provService"><option value="">All services</option></select>
+          <select id="provPrimer">
+            <option value="">All</option>
+            <option value="true">Primer-owned</option>
+            <option value="false">External</option>
+          </select>
+          <span class="result-count">Showing <strong id="provCount">0</strong> providers</span>
+        </div>
+
+        <div class="panel" style="padding:0;overflow:hidden;">
+          <div class="data-table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Provider</th>
+                  <th>Service</th>
+                  <th>Calls</th>
+                  <th>WhatsApp</th>
+                  <th>Total Clicks</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="provTableBody">
+                <tr><td colspan="6" style="text-align:center;padding:40px;color:var(--text-2);">
+                  <i class="fas fa-spinner fa-spin"></i> Loading…
+                </td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           USERS
+           ============================================================ -->
+      <section class="section" data-section="users">
+        <div class="filters">
+          <div class="filter-group">
+            <i class="fas fa-search"></i>
+            <input type="text" id="usrSearch" placeholder="Search users…">
+          </div>
+          <select id="usrCity"><option value="">All cities</option></select>
+          <span class="result-count">Showing <strong id="usrCount">0</strong> users</span>
+        </div>
+
+        <div class="panel" style="padding:0;overflow:hidden;">
+          <div class="data-table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>User</th>
+                  <th>Phone</th>
+                  <th>City</th>
+                  <th>Total Clicks</th>
+                  <th>Unique Providers</th>
+                  <th>Last Active</th>
+                </tr>
+              </thead>
+              <tbody id="usrTableBody">
+                <tr><td colspan="6" style="text-align:center;padding:40px;color:var(--text-2);">
+                  <i class="fas fa-spinner fa-spin"></i> Loading…
+                </td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           STAFF
+           ============================================================ -->
+      <section class="section" data-section="staff">
+        <div class="filters">
+          <div class="filter-group">
+            <i class="fas fa-search"></i>
+            <input type="text" id="staffSearch" placeholder="Search staff…">
+          </div>
+          <select id="staffRole">
+            <option value="">All roles</option>
+            <option value="president">President</option>
+            <option value="admin">Admin</option>
+            <option value="manager">Manager</option>
+            <option value="operator">Field Operator</option>
+            <option value="viewer">Viewer</option>
+          </select>
+          <button class="top-btn primary" id="addStaffBtn" style="margin-left:auto;">
+            <i class="fas fa-plus"></i> Add Staff
+          </button>
+        </div>
+
+        <div class="panel" style="padding:0;overflow:hidden;">
+          <div class="data-table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                  <th>Status</th>
+                  <th>Created</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="staffTableBody">
+                <tr><td colspan="6" style="text-align:center;padding:40px;color:var(--text-2);">
+                  <i class="fas fa-spinner fa-spin"></i> Loading…
+                </td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
     </div>
+  </main>
 
-    <!-- ============ PANEL: FIELD REPORTS ============ -->
-    <section class="panel active" id="panel-reports">
-
-      <div class="stats">
-        <div class="stat">
-          <div class="stat-icon"><i class="fas fa-file-alt"></i></div>
-          <div class="stat-value" id="statTotal">—</div>
-          <div class="stat-label">Total Reports</div>
-        </div>
-        <div class="stat">
-          <div class="stat-icon"><i class="fas fa-store"></i></div>
-          <div class="stat-value" id="statSellers">—</div>
-          <div class="stat-label">Sellers Onboarded</div>
-        </div>
-        <div class="stat">
-          <div class="stat-icon"><i class="fas fa-user-tie"></i></div>
-          <div class="stat-value" id="statPros">—</div>
-          <div class="stat-label">Pros Onboarded</div>
-        </div>
-        <div class="stat">
-          <div class="stat-icon"><i class="fas fa-users"></i></div>
-          <div class="stat-value" id="statOps">—</div>
-          <div class="stat-label">Active Operators</div>
-        </div>
+  <!-- ============================================================
+       USER PROFILE DRAWER
+       ============================================================ -->
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <aside class="drawer" id="drawer">
+    <div class="drawer-head">
+      <div class="drawer-head-top">
+        <div class="drawer-avatar" id="drawerAvatar">—</div>
+        <button class="drawer-close" id="drawerClose"><i class="fas fa-times"></i></button>
       </div>
+      <div class="drawer-name" id="drawerName">—</div>
+      <div class="drawer-sub" id="drawerSub"></div>
+    </div>
+    <div class="drawer-body" id="drawerBody"></div>
+  </aside>
 
-      <div class="filters">
-        <input type="text" id="searchInput" placeholder="Search by name, location, or intel...">
-        <select id="operatorFilter">
-          <option value="">All operators</option>
-        </select>
-        <span class="count">Showing <strong id="filteredCount">0</strong> reports</span>
-      </div>
+  <!-- ============================================================
+       STAFF MODAL
+       ============================================================ -->
+  <div class="modal-overlay" id="staffModal">
+    <div class="modal">
+      <h3 id="staffModalTitle">Add Staff</h3>
+      <div class="modal-sub" id="staffModalSub">Create a new staff account</div>
 
-      <div class="reports-grid" id="reportsGrid">
-        <div class="state-msg">
-          <i class="fas fa-spinner fa-spin"></i>
-          <h3>Loading reports…</h3>
+      <form id="staffForm">
+        <input type="hidden" id="staffId">
+
+        <div class="modal-field">
+          <label for="staffName">Full Name</label>
+          <input type="text" id="staffName" placeholder="e.g. Kabir Isa" required>
         </div>
-      </div>
-
-    </section>
-
-    <!-- ============ PANEL: CLICK ACTIVITY ============ -->
-    <section class="panel" id="panel-activity">
-
-      <div class="stats">
-        <div class="stat">
-          <div class="stat-icon"><i class="fas fa-mouse-pointer"></i></div>
-          <div class="stat-value" id="actTotal">—</div>
-          <div class="stat-label">Total Clicks</div>
+        <div class="modal-field">
+          <label for="staffEmail">Email</label>
+          <input type="email" id="staffEmail" placeholder="staff@zauretech.xyz" required>
         </div>
-        <div class="stat">
-          <div class="stat-icon"><i class="fas fa-phone"></i></div>
-          <div class="stat-value" id="actCalls">—</div>
-          <div class="stat-label">Call Clicks</div>
+        <div class="modal-field">
+          <label for="staffPassword">Password <span id="pwHint" style="color:var(--text-3);text-transform:none;letter-spacing:0;font-weight:400;"></span></label>
+          <input type="password" id="staffPassword" placeholder="Min 8 characters">
         </div>
-        <div class="stat">
-          <div class="stat-icon"><i class="fab fa-whatsapp"></i></div>
-          <div class="stat-value" id="actWhatsapp">—</div>
-          <div class="stat-label">WhatsApp Clicks</div>
+        <div class="modal-field">
+          <label for="staffRoleSelect">Role</label>
+          <select id="staffRoleSelect">
+            <option value="admin">Admin — full data + staff management</option>
+            <option value="manager">Manager — data only</option>
+            <option value="operator" selected>Field Operator — submit reports</option>
+            <option value="viewer">Viewer — read-only</option>
+          </select>
         </div>
-        <div class="stat">
-          <div class="stat-icon"><i class="fas fa-users"></i></div>
-          <div class="stat-value" id="actUsers">—</div>
-          <div class="stat-label">Unique Users</div>
+        <div class="modal-field">
+          <label for="staffStatus">Status</label>
+          <select id="staffStatus">
+            <option value="active">Active</option>
+            <option value="disabled">Disabled</option>
+          </select>
         </div>
-      </div>
 
-      <!-- Top providers -->
-      <div class="top-providers" id="topProvidersWrap" style="display:none;">
-        <h3><i class="fas fa-trophy" style="margin-right:6px;"></i> Most Clicked Providers</h3>
-        <div id="topProvidersList"></div>
-      </div>
-
-      <div class="filters">
-        <input type="text" id="actSearch" placeholder="Search by user, provider, or service...">
-        <select id="actTypeFilter">
-          <option value="">All actions</option>
-          <option value="call_click">Call clicks</option>
-          <option value="whatsapp_click">WhatsApp clicks</option>
-          <option value="whatsapp_click_detail">WhatsApp (detail)</option>
-          <option value="manual_test">Manual tests</option>
-        </select>
-        <span class="count">Showing <strong id="actFilteredCount">0</strong> clicks</span>
-      </div>
-
-      <div class="reports-grid" id="activityGrid">
-        <div class="state-msg">
-          <i class="fas fa-spinner fa-spin"></i>
-          <h3>Loading activity…</h3>
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" id="staffCancel">Cancel</button>
+          <button type="submit" class="btn-primary" id="staffSubmit">
+            <i class="fas fa-check"></i> Save
+          </button>
         </div>
-      </div>
-
-    </section>
-
+      </form>
+    </div>
   </div>
 
-  <!-- LIGHTBOX -->
-  <div class="lightbox" id="lightbox">
-    <button class="lightbox-close" id="lightboxClose" aria-label="Close">
-      <i class="fas fa-times"></i>
-    </button>
-    <img id="lightboxImg" src="" alt="Report photo">
+  <!-- Toast -->
+  <div class="toast" id="toast">
+    <i class="fas fa-check-circle"></i> <span id="toastMsg">Done</span>
   </div>
 
   <script>
-    // ---------- Element refs ----------
-    const refreshBtn        = document.getElementById('refreshBtn');
-    const lightbox          = document.getElementById('lightbox');
-    const lightboxImg       = document.getElementById('lightboxImg');
-    const lightboxClose     = document.getElementById('lightboxClose');
-
-    // Reports
-    const reportsGrid       = document.getElementById('reportsGrid');
-    const searchInput       = document.getElementById('searchInput');
-    const operatorFilter    = document.getElementById('operatorFilter');
-    const filteredCount     = document.getElementById('filteredCount');
-
-    // Activity
-    const activityGrid       = document.getElementById('activityGrid');
-    const actSearch          = document.getElementById('actSearch');
-    const actTypeFilter      = document.getElementById('actTypeFilter');
-    const actFilteredCount   = document.getElementById('actFilteredCount');
-    const topProvidersWrap   = document.getElementById('topProvidersWrap');
-    const topProvidersList   = document.getElementById('topProvidersList');
-
+    // ============================================================
+    // STATE
+    // ============================================================
+    let currentStaff = null;
     let allReports = [];
     let allActivity = [];
-    let loadedReports = false;
-    let loadedActivity = false;
-
-    // ---------- Safe string helper ----------
-    // Google Sheets returns numbers for phone numbers, IDs, etc.
-    // This converts anything safely to a trimmed string.
-    function str(v) {
-      if (v === null || v === undefined) return '';
-      return String(v).trim();
-    }
-
-    // ---------- Tabs ----------
-    document.querySelectorAll('.tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-        tab.classList.add('active');
-        document.getElementById('panel-' + tab.dataset.tab).classList.add('active');
-
-        if (tab.dataset.tab === 'activity' && !loadedActivity) {
-          loadActivity();
-        }
-      });
-    });
-
-    // ============================================================
-    // FIELD REPORTS
-    // ============================================================
-    async function loadReports() {
-      reportsGrid.innerHTML = `
-        <div class="state-msg">
-          <i class="fas fa-spinner fa-spin"></i>
-          <h3>Loading reports…</h3>
-        </div>`;
-
-      try {
-        const res = await fetch('/api/field-reports/list', { cache: 'no-store' });
-        const data = await res.json();
-
-        if (!data.ok) throw new Error(data.error || 'Load failed');
-
-        allReports = data.reports || [];
-        loadedReports = true;
-
-        const total   = allReports.length;
-        const sellers = allReports.reduce((s, r) => s + (parseInt(r.sellers) || 0), 0);
-        const pros    = allReports.reduce((s, r) => s + (parseInt(r.pros) || 0), 0);
-        const ops     = new Set(allReports.map(r => str(r.operator)).filter(Boolean)).size;
-
-        document.getElementById('statTotal').textContent   = total;
-        document.getElementById('statSellers').textContent = sellers;
-        document.getElementById('statPros').textContent    = pros;
-        document.getElementById('statOps').textContent     = ops;
-
-        const opsList = [...new Set(allReports.map(r => str(r.operator)).filter(Boolean))].sort();
-        operatorFilter.innerHTML = '<option value="">All operators</option>' +
-          opsList.map(op => `<option value="${escapeHtml(op)}">${escapeHtml(op)}</option>`).join('');
-
-        renderReports(allReports);
-
-      } catch (err) {
-        console.error(err);
-        reportsGrid.innerHTML = `
-          <div class="state-msg">
-            <i class="fas fa-exclamation-triangle" style="color:#e63946;"></i>
-            <h3>Could not load reports</h3>
-            <p>${escapeHtml(err.message || 'Please try again.')}</p>
-          </div>`;
-      }
-    }
-
-    function applyReportFilters(reports) {
-      const q  = str(searchInput.value).toLowerCase();
-      const op = str(operatorFilter.value);
-
-      return reports.filter(r => {
-        if (op && str(r.operator) !== op) return false;
-        if (!q) return true;
-        const haystack = [r.operator, r.location, r.intel, r.blockers]
-          .map(str).join(' ').toLowerCase();
-        return haystack.includes(q);
-      });
-    }
-
-    function renderReports(reports) {
-      const filtered = applyReportFilters(reports);
-      filteredCount.textContent = filtered.length;
-
-      if (filtered.length === 0) {
-        reportsGrid.innerHTML = `
-          <div class="state-msg">
-            <i class="fas fa-inbox"></i>
-            <h3>No reports match your filters</h3>
-            <p>Try a different search or operator.</p>
-          </div>`;
-        return;
-      }
-
-      reportsGrid.innerHTML = filtered.map(buildReportCard).join('');
-
-      reportsGrid.querySelectorAll('.report-photo img').forEach(img => {
-        img.addEventListener('click', function() {
-          lightboxImg.src = this.src;
-          lightbox.classList.add('show');
-        });
-      });
-    }
-
-    function buildReportCard(r) {
-      const name = str(r.operator) || 'Unknown';
-      const initials = getInitials(name);
-      const date = formatDate(r.timestamp);
-      const sellers = parseInt(r.sellers) || 0;
-      const pros = parseInt(r.pros) || 0;
-      const location = str(r.location) || '—';
-      const blockers = str(r.blockers);
-      const intel = str(r.intel);
-      const photo = str(r.photo_link || r.photo);
-
-      return `
-        <article class="report-card">
-          <div class="report-head">
-            <div class="report-avatar">${escapeHtml(initials)}</div>
-            <div class="report-head-info">
-              <div class="report-name">${escapeHtml(name)}</div>
-              <div class="report-date"><i class="far fa-clock"></i> ${escapeHtml(date)}</div>
-            </div>
-            <div class="report-badges">
-              ${sellers > 0 ? `<span class="report-pill pill-sellers"><i class="fas fa-store"></i> ${sellers}</span>` : ''}
-              ${pros > 0 ? `<span class="report-pill pill-pros"><i class="fas fa-user-tie"></i> ${pros}</span>` : ''}
-            </div>
-          </div>
-          <div class="report-body">
-            <div class="report-row">
-              <i class="fas fa-map-marker-alt"></i>
-              <div class="row-text"><strong>Location:</strong> ${escapeHtml(location)}</div>
-            </div>
-            ${blockers ? `
-              <div class="report-row">
-                <i class="fas fa-exclamation-circle"></i>
-                <div class="row-text"><strong>Blockers:</strong> ${escapeHtml(blockers)}</div>
-              </div>` : ''}
-            ${intel ? `
-              <div class="report-row">
-                <i class="fas fa-binoculars"></i>
-                <div class="row-text"><strong>Intel:</strong> ${escapeHtml(intel)}</div>
-              </div>` : ''}
-            ${photo ? `
-              <div class="report-photo">
-                <img src="${photo}" alt="Report photo" loading="lazy">
-              </div>` : ''}
-          </div>
-        </article>
-      `;
-    }
-
-    // ============================================================
-    // CLICK ACTIVITY
-    // ============================================================
-    async function loadActivity() {
-      activityGrid.innerHTML = `
-        <div class="state-msg">
-          <i class="fas fa-spinner fa-spin"></i>
-          <h3>Loading activity…</h3>
-        </div>`;
-
-      try {
-        const res = await fetch('/api/field-reports/activity', { cache: 'no-store' });
-        const data = await res.json();
-
-        if (!data.ok) throw new Error(data.error || 'Load failed');
-
-        allActivity = data.activity || [];
-        loadedActivity = true;
-
-        // Stats — using str() everywhere so numbers don't crash
-        const total = allActivity.length;
-        const calls = allActivity.filter(a => str(a.action).startsWith('call_click')).length;
-        const whats = allActivity.filter(a => str(a.action).startsWith('whatsapp_click')).length;
-        const users = new Set(allActivity.map(a => str(a.user_phone)).filter(Boolean)).size;
-
-        document.getElementById('actTotal').textContent    = total;
-        document.getElementById('actCalls').textContent    = calls;
-        document.getElementById('actWhatsapp').textContent = whats;
-        document.getElementById('actUsers').textContent    = users;
-
-        // Top providers
-        renderTopProviders(allActivity);
-
-        renderActivity(allActivity);
-
-      } catch (err) {
-        console.error(err);
-        activityGrid.innerHTML = `
-          <div class="state-msg">
-            <i class="fas fa-exclamation-triangle" style="color:#e63946;"></i>
-            <h3>Could not load activity</h3>
-            <p>${escapeHtml(err.message || 'Please try again.')}</p>
-          </div>`;
-      }
-    }
-
-    function renderTopProviders(activity) {
-      const counts = {};
-      activity.forEach(a => {
-        if (str(a.action) === 'manual_test') return;
-        const name = str(a.provider_name);
-        if (!name) return;
-        counts[name] = (counts[name] || 0) + 1;
-      });
-
-      const sorted = Object.entries(counts)
-        .sort((a, b) => b[1] - a[1])
-        .slice(0, 5);
-
-      if (sorted.length === 0) {
-        topProvidersWrap.style.display = 'none';
-        return;
-      }
-
-      topProvidersWrap.style.display = 'block';
-      topProvidersList.innerHTML = sorted.map(([name, count], i) => `
-        <div class="top-provider-row">
-          <div class="top-provider-rank">${i + 1}</div>
-          <div class="top-provider-name">${escapeHtml(name)}</div>
-          <div class="top-provider-count">${count} click${count !== 1 ? 's' : ''}</div>
-        </div>
-      `).join('');
-    }
-
-    function applyActivityFilters(activity) {
-      const q  = str(actSearch.value).toLowerCase();
-      const type = str(actTypeFilter.value);
-
-      return activity.filter(a => {
-        if (type && str(a.action) !== type) return false;
-        if (!q) return true;
-        const haystack = [
-          a.user_name, a.user_phone, a.user_city,
-          a.provider_name, a.provider_phone,
-          a.service, a.subject
-        ].map(str).join(' ').toLowerCase();
-        return haystack.includes(q);
-      });
-    }
-
-    function renderActivity(activity) {
-      const filtered = applyActivityFilters(activity);
-      actFilteredCount.textContent = filtered.length;
-
-      if (filtered.length === 0) {
-        activityGrid.innerHTML = `
-          <div class="state-msg">
-            <i class="fas fa-mouse-pointer"></i>
-            <h3>No clicks match your filters</h3>
-            <p>Try a different search or action type.</p>
-          </div>`;
-        return;
-      }
-
-      activityGrid.innerHTML = filtered.map(buildActivityCard).join('');
-    }
-
-    function buildActivityCard(a) {
-      const action = str(a.action).toLowerCase();
-      const user = str(a.user_name) || 'Anonymous';
-      const userInitials = getInitials(user);
-      const date = formatDate(a.timestamp);
-      const userPhone = str(a.user_phone);
-      const userCity = str(a.user_city);
-      const providerName = str(a.provider_name) || '—';
-      const providerPhone = str(a.provider_phone);
-      const service = str(a.service);
-      const isPrimer = str(a.is_primer_owned).toUpperCase() === 'TRUE';
-
-      let actionPill = '';
-      if (action.startsWith('call_click')) {
-        actionPill = `<span class="report-pill pill-call"><i class="fas fa-phone"></i> Call</span>`;
-      } else if (action.startsWith('whatsapp_click')) {
-        actionPill = `<span class="report-pill pill-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</span>`;
-      } else if (action === 'manual_test') {
-        actionPill = `<span class="report-pill pill-test"><i class="fas fa-flask"></i> Test</span>`;
-      } else {
-        actionPill = `<span class="report-pill pill-sellers"><i class="fas fa-bolt"></i> ${escapeHtml(str(a.action))}</span>`;
-      }
-
-      return `
-        <article class="report-card">
-          <div class="report-head">
-            <div class="report-avatar">${escapeHtml(userInitials)}</div>
-            <div class="report-head-info">
-              <div class="report-name">${escapeHtml(user)}</div>
-              <div class="report-date"><i class="far fa-clock"></i> ${escapeHtml(date)}</div>
-            </div>
-            <div class="report-badges">
-              ${actionPill}
-              ${isPrimer ? `<span class="report-pill pill-primer"><i class="fas fa-star"></i> Primer</span>` : ''}
-            </div>
-          </div>
-          <div class="report-body">
-            <div class="report-row">
-              <i class="fas fa-user-tie"></i>
-              <div class="row-text"><strong>Provider:</strong> ${escapeHtml(providerName)}</div>
-            </div>
-            ${service ? `
-              <div class="report-row">
-                <i class="fas fa-briefcase"></i>
-                <div class="row-text"><strong>Service:</strong> ${escapeHtml(service)}</div>
-              </div>` : ''}
-            ${userCity ? `
-              <div class="report-row">
-                <i class="fas fa-map-marker-alt"></i>
-                <div class="row-text"><strong>City:</strong> ${escapeHtml(userCity)}</div>
-              </div>` : ''}
-            ${userPhone ? `
-              <div class="report-row">
-                <i class="fas fa-phone-alt"></i>
-                <div class="row-text"><strong>User Phone:</strong> ${escapeHtml(userPhone)}</div>
-              </div>` : ''}
-            ${providerPhone && providerPhone !== 'Not available' ? `
-              <div class="report-row">
-                <i class="fas fa-address-book"></i>
-                <div class="row-text"><strong>Provider Phone:</strong> ${escapeHtml(providerPhone)}</div>
-              </div>` : ''}
-          </div>
-        </article>
-      `;
-    }
+    let allStaff = [];
+    let roles = {};
 
     // ============================================================
     // HELPERS
     // ============================================================
+    function str(v) {
+      if (v === null || v === undefined) return '';
+      return String(v).trim();
+    }
     function escapeHtml(s) {
       return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({
         '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
       }[c]));
     }
-
     function getInitials(name) {
       const parts = str(name || '?').split(/\s+/);
       if (parts.length === 1) return parts[0].charAt(0).toUpperCase();
       return (parts[0].charAt(0) + parts[parts.length - 1].charAt(0)).toUpperCase();
     }
-
     function formatDate(iso) {
       if (!iso) return '—';
       try {
         const d = new Date(iso);
         if (isNaN(d.getTime())) return String(iso);
-        const now = new Date();
-        const diffMs  = now - d;
-        const diffMin = Math.floor(diffMs / 60000);
-        const diffHr  = Math.floor(diffMs / 3600000);
-        const diffDay = Math.floor(diffMs / 86400000);
-
-        if (diffMin < 1) return 'Just now';
-        if (diffMin < 60) return `${diffMin} min ago`;
-        if (diffHr < 24) return `${diffHr} hr ago`;
-        if (diffDay < 7) return `${diffDay} day${diffDay > 1 ? 's' : ''} ago`;
+        const diff = (Date.now() - d) / 1000;
+        if (diff < 60) return 'Just now';
+        if (diff < 3600) return Math.floor(diff / 60) + ' min ago';
+        if (diff < 86400) return Math.floor(diff / 3600) + ' hr ago';
+        if (diff < 604800) return Math.floor(diff / 86400) + ' day' + (Math.floor(diff / 86400) > 1 ? 's' : '') + ' ago';
         return d.toLocaleDateString('en-NG', { day: 'numeric', month: 'short', year: 'numeric' });
       } catch { return String(iso); }
     }
+    function formatPhone(num) {
+      const d = str(num).replace(/\D/g, '');
+      if (d.length === 13 && d.startsWith('234')) return `+234 ${d.slice(3,6)} ${d.slice(6,9)} ${d.slice(9)}`;
+      return str(num);
+    }
+    function hasPerm(perm) {
+      if (!currentStaff) return false;
+      const p = currentStaff.permissions || [];
+      return p.includes('*') || p.includes(perm);
+    }
+    function toast(msg, type = 'success') {
+      const t = document.getElementById('toast');
+      const m = document.getElementById('toastMsg');
+      m.textContent = msg;
+      t.className = 'toast ' + type;
+      t.querySelector('i').className = type === 'error' ? 'fas fa-exclamation-circle'
+        : type === 'success' ? 'fas fa-check-circle'
+        : 'fas fa-info-circle';
+      t.classList.add('show');
+      clearTimeout(window.__toastT);
+      window.__toastT = setTimeout(() => t.classList.remove('show'), 2800);
+    }
+    function inDateRange(iso, from, to) {
+      if (!from && !to) return true;
+      const t = new Date(iso).getTime();
+      if (isNaN(t)) return true;
+      if (from) {
+        const f = new Date(from + 'T00:00:00').getTime();
+        if (t < f) return false;
+      }
+      if (to) {
+        const e = new Date(to + 'T23:59:59').getTime();
+        if (t > e) return false;
+      }
+      return true;
+    }
 
     // ============================================================
-    // EVENTS
+    // AUTH
     // ============================================================
-    searchInput.addEventListener('input', () => renderReports(allReports));
-    operatorFilter.addEventListener('change', () => renderReports(allReports));
-
-    actSearch.addEventListener('input', () => renderActivity(allActivity));
-    actTypeFilter.addEventListener('change', () => renderActivity(allActivity));
-
-    refreshBtn.addEventListener('click', async function() {
-      this.classList.add('spin');
-      const activeTab = document.querySelector('.tab.active')?.dataset.tab;
-      if (activeTab === 'activity') {
-        await loadActivity();
-      } else {
-        await loadReports();
+    async function checkAuth() {
+      try {
+        const res = await fetch('/api/auth/me', { cache: 'no-store' });
+        if (!res.ok) { window.location.href = '/dashboard-login'; return false; }
+        const data = await res.json();
+        if (!data.ok) { window.location.href = '/dashboard-login'; return false; }
+        currentStaff = data.staff;
+        renderUserBox();
+        applyPermissions();
+        return true;
+      } catch {
+        window.location.href = '/dashboard-login';
+        return false;
       }
-      this.classList.remove('spin');
-    });
+    }
 
-    lightbox.addEventListener('click', () => lightbox.classList.remove('show'));
-    lightboxClose.addEventListener('click', (e) => {
-      e.stopPropagation();
-      lightbox.classList.remove('show');
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') lightbox.classList.remove('show');
-    });
+    function renderUserBox() {
+      document.getElementById('userAvatar').textContent = getInitials(currentStaff.name);
+      document.getElementById('userName').textContent = currentStaff.name;
+      document.getElementById('userRole').textContent = (roles[currentStaff.role] || {}).label || currentStaff.role;
+    }
 
-    // ---------- Boot ----------
-    loadReports();
-
-    setInterval(() => {
-      const activeTab = document.querySelector('.tab.active')?.dataset.tab;
-      if (activeTab === 'activity') {
-        loadActivity();
-      } else {
-        loadReports();
+    function applyPermissions() {
+      document.querySelectorAll('[data-perm]').forEach(el => {
+        const perm = el.dataset.perm;
+        if (!hasPerm(perm)) el.style.display = 'none';
+        else el.style.display = '';
+      });
+      if (hasPerm('submit_reports')) {
+        document.getElementById('reportBtn').style.display = 'inline-flex';
       }
-    }, 60000);
+    }
+
+    document.getElementById('logoutBtn').addEventListener('click', async () => {
+      if (!confirm('Sign out?')) return;
+      await fetch('/api/auth/logout', { method: 'POST' });
+      window.location.href = '/dashboard-login';
+    });
+
+    // ============================================================
+    // NAVIGATION
+    // ============================================================
+    const SECTION_META = {
+      overview: { title: 'Dashboard', subtitle: 'Overview of Zaure activity' },
+      reports: { title: 'Field Reports', subtitle: 'Every field submission in one place' },
+      activity: { title: 'Click Activity', subtitle: 'Every call and WhatsApp click tracked' },
+      providers: { title: 'Providers', subtitle: 'Service providers and their engagement' },
+      users: { title: 'Users', subtitle: 'Everyone interacting with your site' },
+      staff: { title: 'Staff & Permissions', subtitle: 'Manage team access' }
+    };
+
+    document.querySelectorAll('.nav-item[data-section]').forEach(item => {
+      item.addEventListener('click', () => {
+        const section = item.dataset.section;
+        if (item.style.display === 'none') return;
+
+        document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.querySelector(`.section[data-section="${section}"]`).classList.add('active');
+
+        const meta = SECTION_META[section];
+        if (meta) {
+          document.getElementById('pageTitle').textContent = meta.title;
+          document.getElementById('pageSubtitle').textContent = meta.subtitle;
+        }
+
+        // Close mobile sidebar
+        document.getElementById('sidebar').classList.remove('open');
+        document.getElementById('mobileBackdrop').classList.remove('show');
+
+        // Lazy load
+        if (section === 'reports' && allReports.length === 0) loadReports();
+        if (section === 'activity' && allActivity.length === 0) loadActivity();
+        if (section === 'providers' && allActivity.length === 0) loadActivity();
+        if (section === 'users' && allActivity.length === 0) loadActivity();
+        if (section === 'staff') loadStaff();
+      });
+    });
+
+    // Mobile sidebar
+    document.getElementById('mobileToggle').addEventListener('click', () => {
+      document.getElementById('sidebar').classList.toggle('open');
+      document.getElementById('mobileBackdrop').classList.toggle('show');
+    });
+    document.getElementById('mobileBackdrop').addEventListener('click', () => {
+      document.getElementById('sidebar').classList.remove('open');
+      document.getElementById('mobileBackdrop').classList.remove('show');
+    });
+
+    // ============================================================
+    // LOAD DATA
+    // ============================================================
+    async function loadReports() {
+      try {
+        const res = await fetch('/api/field-reports/list', { cache: 'no-store' });
+        if (res.status === 401) { window.location.href = '/dashboard-login'; return; }
+        if (res.status === 403) { allReports = []; renderReports(); return; }
+        const data = await res.json();
+        allReports = data.reports || [];
+        populateReportFilters();
+        renderReports();
+        renderRecentReports();
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    async function loadActivity() {
+      try {
+        const res = await fetch('/api/field-reports/activity', { cache: 'no-store' });
+        if (res.status === 401) { window.location.href = '/dashboard-login'; return; }
+        if (res.status === 403) { allActivity = []; renderActivity(); return; }
+        const data = await res.json();
+        allActivity = data.activity || [];
+        populateActivityFilters();
+        renderActivity();
+        renderProviders();
+        renderUsers();
+        renderRecentActivity();
+        renderOverviewStats();
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    // ============================================================
+    // OVERVIEW
+    // ============================================================
+    function renderOverviewStats() {
+      const total = allReports.length;
+      const sellers = allReports.reduce((s, r) => s + (parseInt(r.sellers) || 0), 0);
+      const pros = allReports.reduce((s, r) => s + (parseInt(r.pros) || 0), 0);
+      const clicks = allActivity.length;
+      const calls = allActivity.filter(a => str(a.action).startsWith('call_click')).length;
+      const whats = allActivity.filter(a => str(a.action).startsWith('whatsapp_click')).length;
+      const uniqueUsers = new Set(allActivity.map(a => str(a.user_phone)).filter(Boolean)).size;
+      const ops = new Set(allReports.map(r => str(r.operator)).filter(Boolean)).size;
+
+      document.getElementById('ovTotalReports').textContent = total;
+      document.getElementById('ovSellers').textContent = sellers;
+      document.getElementById('ovPros').textContent = pros;
+      document.getElementById('ovClicks').textContent = clicks;
+      document.getElementById('ovCalls').textContent = calls;
+      document.getElementById('ovWhats').textContent = whats;
+      document.getElementById('ovUniqueUsers').textContent = uniqueUsers;
+      document.getElementById('ovOperators').textContent = ops;
+
+      // Top providers
+      const providerCounts = {};
+      allActivity.forEach(a => {
+        if (str(a.action) === 'manual_test') return;
+        const name = str(a.provider_name);
+        if (!name) return;
+        providerCounts[name] = (providerCounts[name] || 0) + 1;
+      });
+      const sorted = Object.entries(providerCounts).sort((a, b) => b[1] - a[1]).slice(0, 5);
+
+      const el = document.getElementById('ovTopProviders');
+      if (sorted.length === 0) {
+        el.innerHTML = '<div class="empty-state"><i class="fas fa-inbox"></i><h3>No clicks yet</h3><p>Provider engagement will appear here.</p></div>';
+      } else {
+        el.innerHTML = '<div class="drawer-list">' + sorted.map(([name, count], i) => `
+          <div class="drawer-item" style="cursor:pointer;" onclick="openProvider('${escapeHtml(name).replace(/'/g,"\\'")}')">
+            <div class="top">
+              <span class="t">${i + 1}. ${escapeHtml(name)}</span>
+              <span class="d">${count} click${count !== 1 ? 's' : ''}</span>
+            </div>
+          </div>
+        `).join('') + '</div>';
+      }
+    }
+
+    function renderRecentReports() {
+      const el = document.getElementById('ovRecentReports');
+      const recent = allReports.slice(0, 5);
+      if (recent.length === 0) {
+        el.innerHTML = '<div class="empty-state"><i class="fas fa-inbox"></i><h3>No reports yet</h3></div>';
+        return;
+      }
+      el.innerHTML = '<div class="drawer-list">' + recent.map(r => `
+        <div class="drawer-item">
+          <div class="top">
+            <span class="t">${escapeHtml(str(r.operator) || 'Unknown')}</span>
+            <span class="d">${formatDate(r.timestamp)}</span>
+          </div>
+          <div class="sub">${escapeHtml(str(r.location))} · ${parseInt(r.sellers) || 0} sellers · ${parseInt(r.pros) || 0} pros</div>
+        </div>
+      `).join('') + '</div>';
+    }
+
+    function renderRecentActivity() {
+      const el = document.getElementById('ovRecentActivity');
+      const recent = allActivity.slice(0, 5);
+      if (recent.length === 0) {
+        el.innerHTML = '<div class="empty-state"><i class="fas fa-inbox"></i><h3>No activity yet</h3></div>';
+        return;
+      }
+      el.innerHTML = '<div class="drawer-list">' + recent.map(a => `
+        <div class="drawer-item">
+          <div class="top">
+            <span class="t">${escapeHtml(str(a.user_name) || 'Anonymous')}</span>
+            <span class="d">${formatDate(a.timestamp)}</span>
+          </div>
+          <div class="sub">${actionLabel(a.action)} → ${escapeHtml(str(a.provider_name))}</div>
+        </div>
+      `).join('') + '</div>';
+    }
+
+    function actionLabel(action) {
+      const a = str(action);
+      if (a.startsWith('call_click')) return '📞 Call';
+      if (a.startsWith('whatsapp_click')) return '💬 WhatsApp';
+      if (a === 'manual_test') return '🧪 Test';
+      return a;
+    }
+
+    // ============================================================
+    // FIELD REPORTS
+    // ============================================================
+    function populateReportFilters() {
+      const ops = [...new Set(allReports.map(r => str(r.operator)).filter(Boolean))].sort();
+      const locs = [...new Set(allReports.map(r => str(r.location)).filter(Boolean))].sort();
+      document.getElementById('repOperator').innerHTML = '<option value="">All operators</option>' +
+        ops.map(o => `<option value="${escapeHtml(o)}">${escapeHtml(o)}</option>`).join('');
+      document.getElementById('repLocation').innerHTML = '<option value="">All locations</option>' +
+        locs.map(l => `<option value="${escapeHtml(l)}">${escapeHtml(l)}</option>`).join('');
+    }
+
+    function renderReports() {
+      const q = str(document.getElementById('repSearch').value).toLowerCase();
+      const op = str(document.getElementById('repOperator').value);
+      const loc = str(document.getElementById('repLocation').value);
+      const content = str(document.getElementById('repContent').value);
+      const from = document.getElementById('repDateFrom').value;
+      const to = document.getElementById('repDateTo').value;
+
+      const filtered = allReports.filter(r => {
+        if (op && str(r.operator) !== op) return false;
+        if (loc && str(r.location) !== loc) return false;
+        if (content === 'blockers' && !str(r.blockers)) return false;
+        if (content === 'intel' && !str(r.intel)) return false;
+        if (content === 'photo' && !str(r.photo_link || r.photo)) return false;
+        if (!inDateRange(r.timestamp, from, to)) return false;
+        if (q) {
+          const hay = [r.operator, r.location, r.intel, r.blockers].map(str).join(' ').toLowerCase();
+          if (!hay.includes(q)) return false;
+        }
+        return true;
+      });
+
+      document.getElementById('repCount').textContent = filtered.length;
+
+      const tbody = document.getElementById('repTableBody');
+      if (filtered.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7"><div class="empty-state"><i class="fas fa-inbox"></i><h3>No reports match</h3><p>Try different filters.</p></div></td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(r => {
+        const name = str(r.operator) || 'Unknown';
+        const initials = getInitials(name);
+        return `<tr>
+          <td>
+            <div class="table-person" onclick="openOperator('${escapeHtml(name).replace(/'/g,"\\'")}')">
+              <div class="table-avatar">${escapeHtml(initials)}</div>
+              <strong>${escapeHtml(name)}</strong>
+            </div>
+          </td>
+          <td>${escapeHtml(str(r.location) || '—')}</td>
+          <td>${parseInt(r.sellers) || 0}</td>
+          <td>${parseInt(r.pros) || 0}</td>
+          <td>${str(r.blockers) ? '<span class="pill red"><i class="fas fa-exclamation-circle"></i> Yes</span>' : '<span class="pill gray">—</span>'}</td>
+          <td>${str(r.intel) ? '<span class="pill gold"><i class="fas fa-binoculars"></i> Yes</span>' : '<span class="pill gray">—</span>'}</td>
+          <td style="white-space:nowrap;">${escapeHtml(formatDate(r.timestamp))}</td>
+        </tr>`;
+      }).join('');
+    }
+
+    // ============================================================
+    // ACTIVITY
+    // ============================================================
+    function populateActivityFilters() {
+      const providers = [...new Set(allActivity.map(a => str(a.provider_name)).filter(Boolean))].sort();
+      const users = [...new Set(allActivity.map(a => str(a.user_name)).filter(Boolean))].sort();
+      document.getElementById('actProvider').innerHTML = '<option value="">All providers</option>' +
+        providers.map(p => `<option value="${escapeHtml(p)}">${escapeHtml(p)}</option>`).join('');
+      document.getElementById('actUser').innerHTML = '<option value="">All users</option>' +
+        users.map(u => `<option value="${escapeHtml(u)}">${escapeHtml(u)}</option>`).join('');
+    }
+
+    function renderActivity() {
+      const q = str(document.getElementById('actSearch').value).toLowerCase();
+      const type = str(document.getElementById('actType').value);
+      const prov = str(document.getElementById('actProvider').value);
+      const usr = str(document.getElementById('actUser').value);
+      const primer = str(document.getElementById('actPrimer').value);
+      const from = document.getElementById('actDateFrom').value;
+      const to = document.getElementById('actDateTo').value;
+
+      const filtered = allActivity.filter(a => {
+        if (type && str(a.action) !== type) return false;
+        if (prov && str(a.provider_name) !== prov) return false;
+        if (usr && str(a.user_name) !== usr) return false;
+        if (primer) {
+          const isP = str(a.is_primer_owned).toUpperCase() === 'TRUE';
+          if (primer === 'true' && !isP) return false;
+          if (primer === 'false' && isP) return false;
+        }
+        if (!inDateRange(a.timestamp, from, to)) return false;
+        if (q) {
+          const hay = [a.user_name, a.user_phone, a.provider_name, a.service, a.user_city].map(str).join(' ').toLowerCase();
+          if (!hay.includes(q)) return false;
+        }
+        return true;
+      });
+
+      document.getElementById('actCount').textContent = filtered.length;
+
+      const tbody = document.getElementById('actTableBody');
+      if (filtered.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6"><div class="empty-state"><i class="fas fa-mouse-pointer"></i><h3>No clicks match</h3><p>Try different filters.</p></div></td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(a => {
+        const action = str(a.action);
+        const userName = str(a.user_name) || 'Anonymous';
+        const initials = getInitials(userName);
+        let pillClass = 'gray', pillIcon = 'fa-mouse-pointer';
+        if (action.startsWith('call_click')) { pillClass = 'blue'; pillIcon = 'fa-phone'; }
+        else if (action.startsWith('whatsapp_click')) { pillClass = 'green'; pillIcon = 'fa-whatsapp'; }
+        else if (action === 'manual_test') { pillClass = 'gray'; pillIcon = 'fa-flask'; }
+
+        return `<tr>
+          <td>
+            <div class="table-person" onclick="openUser('${escapeHtml(str(a.user_phone)).replace(/'/g,"\\'")}')">
+              <div class="table-avatar">${escapeHtml(initials)}</div>
+              <strong>${escapeHtml(userName)}</strong>
+            </div>
+          </td>
+          <td><span class="pill ${pillClass}"><i class="fab ${pillIcon}"></i> ${escapeHtml(action)}</span></td>
+          <td>${escapeHtml(str(a.provider_name))}</td>
+          <td>${escapeHtml(str(a.service))}</td>
+          <td>${escapeHtml(str(a.user_city) || '—')}</td>
+          <td style="white-space:nowrap;">${escapeHtml(formatDate(a.timestamp))}</td>
+        </tr>`;
+      }).join('');
+    }
+
+    // ============================================================
+    // PROVIDERS
+    // ============================================================
+    function renderProviders() {
+      const q = str(document.getElementById('provSearch').value).toLowerCase();
+      const svc = str(document.getElementById('provService').value);
+      const primer = str(document.getElementById('provPrimer').value);
+
+      const map = {};
+      allActivity.forEach(a => {
+        const name = str(a.provider_name);
+        if (!name) return;
+        if (!map[name]) map[name] = {
+          name,
+          service: str(a.service),
+          isPrimer: str(a.is_primer_owned).toUpperCase() === 'TRUE',
+          calls: 0,
+          whatsapp: 0,
+          total: 0
+        };
+        const action = str(a.action);
+        if (action.startsWith('call_click')) map[name].calls++;
+        else if (action.startsWith('whatsapp_click')) map[name].whatsapp++;
+        if (action !== 'manual_test') map[name].total++;
+      });
+
+      let list = Object.values(map);
+
+      if (svc) list = list.filter(p => p.service === svc);
+      if (primer === 'true') list = list.filter(p => p.isPrimer);
+      if (primer === 'false') list = list.filter(p => !p.isPrimer);
+      if (q) list = list.filter(p => p.name.toLowerCase().includes(q));
+
+      list.sort((a, b) => b.total - a.total);
+
+      // Populate service filter
+      const svcs = [...new Set(Object.values(map).map(p => p.service).filter(Boolean))].sort();
+      const svcSel = document.getElementById('provService');
+      if (svcSel.options.length <= 1) {
+        svcSel.innerHTML = '<option value="">All services</option>' +
+          svcs.map(s => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join('');
+      }
+
+      document.getElementById('provCount').textContent = list.length;
+
+      const tbody = document.getElementById('provTableBody');
+      if (list.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6"><div class="empty-state"><i class="fas fa-user-tie"></i><h3>No providers yet</h3></div></td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = list.map(p => {
+        const initials = getInitials(p.name);
+        return `<tr>
+          <td>
+            <div class="table-person" onclick="openProvider('${escapeHtml(p.name).replace(/'/g,"\\'")}')">
+              <div class="table-avatar">${escapeHtml(initials)}</div>
+              <strong>${escapeHtml(p.name)}</strong>
+            </div>
+          </td>
+          <td>${escapeHtml(p.service || '—')}</td>
+          <td>${p.calls}</td>
+          <td>${p.whatsapp}</td>
+          <td><strong style="color:var(--gold-2);">${p.total}</strong></td>
+          <td>${p.isPrimer ? '<span class="pill gold">Primer</span>' : '<span class="pill gray">External</span>'}</td>
+        </tr>`;
+      }).join('');
+    }
+
+    // ============================================================
+    // USERS
+    // ============================================================
+    function renderUsers() {
+      const q = str(document.getElementById('usrSearch').value).toLowerCase();
+      const city = str(document.getElementById('usrCity').value);
+
+      const map = {};
+      allActivity.forEach(a => {
+        const phone = str(a.user_phone);
+        const name = str(a.user_name) || 'Anonymous';
+        if (!phone) return;
+        const key = phone;
+        if (!map[key]) map[key] = {
+          name, phone,
+          city: str(a.user_city),
+          clicks: 0,
+          providers: new Set(),
+          last: a.timestamp
+        };
+        map[key].clicks++;
+        const p = str(a.provider_name);
+        if (p) map[key].providers.add(p);
+        if (new Date(a.timestamp) > new Date(map[key].last)) map[key].last = a.timestamp;
+      });
+
+      let list = Object.values(map);
+      if (city) list = list.filter(u => u.city === city);
+      if (q) list = list.filter(u => u.name.toLowerCase().includes(q) || u.phone.includes(q));
+
+      list.sort((a, b) => b.clicks - a.clicks);
+
+      // Populate city filter
+      const cities = [...new Set(Object.values(map).map(u => u.city).filter(Boolean))].sort();
+      const citySel = document.getElementById('usrCity');
+      if (citySel.options.length <= 1) {
+        citySel.innerHTML = '<option value="">All cities</option>' +
+          cities.map(c => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join('');
+      }
+
+      document.getElementById('usrCount').textContent = list.length;
+
+      const tbody = document.getElementById('usrTableBody');
+      if (list.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6"><div class="empty-state"><i class="fas fa-users"></i><h3>No users yet</h3></div></td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = list.map(u => {
+        const initials = getInitials(u.name);
+        return `<tr>
+          <td>
+            <div class="table-person" onclick="openUser('${escapeHtml(u.phone).replace(/'/g,"\\'")}')">
+              <div class="table-avatar">${escapeHtml(initials)}</div>
+              <strong>${escapeHtml(u.name)}</strong>
+            </div>
+          </td>
+          <td>${escapeHtml(formatPhone(u.phone))}</td>
+          <td>${escapeHtml(u.city || '—')}</td>
+          <td><strong style="color:var(--gold-2);">${u.clicks}</strong></td>
+          <td>${u.providers.size}</td>
+          <td style="white-space:nowrap;">${escapeHtml(formatDate(u.last))}</td>
+        </tr>`;
+      }).join('');
+    }
+
+    // ============================================================
+    // STAFF
+    // ============================================================
+    async function loadStaff() {
+      try {
+        const res = await fetch('/api/auth/staff', { cache: 'no-store' });
+        if (res.status === 403) {
+          document.getElementById('staffTableBody').innerHTML = '<tr><td colspan="6"><div class="empty-state"><i class="fas fa-lock"></i><h3>Access denied</h3></div></td></tr>';
+          return;
+        }
+        const data = await res.json();
+        allStaff = data.staff || [];
+        roles = data.roles || {};
+        renderStaff();
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    function renderStaff() {
+      const q = str(document.getElementById('staffSearch').value).toLowerCase();
+      const role = str(document.getElementById('staffRole').value);
+
+      let list = allStaff.filter(s => {
+        if (role && s.role !== role) return false;
+        if (q) {
+          const hay = (s.name + ' ' + s.email).toLowerCase();
+          if (!hay.includes(q)) return false;
+        }
+        return true;
+      });
+
+      const tbody = document.getElementById('staffTableBody');
+      if (list.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6"><div class="empty-state"><i class="fas fa-user-shield"></i><h3>No staff match</h3></div></td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = list.map(s => {
+        const initials = getInitials(s.name);
+        const roleLabel = (roles[s.role] || {}).label || s.role;
+        const isSelf = s.id === currentStaff.staffId;
+        return `<tr>
+          <td>
+            <div class="table-person">
+              <div class="table-avatar">${escapeHtml(initials)}</div>
+              <strong>${escapeHtml(s.name)}${isSelf ? ' <span style="color:var(--gold-2);font-size:0.7rem;">(you)</span>' : ''}</strong>
+            </div>
+          </td>
+          <td>${escapeHtml(s.email)}</td>
+          <td><span class="pill gold">${escapeHtml(roleLabel)}</span></td>
+          <td>${s.status === 'active' ? '<span class="pill green">Active</span>' : '<span class="pill red">Disabled</span>'}</td>
+          <td style="white-space:nowrap;">${escapeHtml(formatDate(s.createdAt))}</td>
+          <td>
+            <div class="table-actions">
+              <button class="icon-btn-sm" title="Edit" onclick="editStaff('${s.id}')">
+                <i class="fas fa-pen"></i>
+              </button>
+              ${!isSelf ? `<button class="icon-btn-sm danger" title="Delete" onclick="deleteStaff('${s.id}', '${escapeHtml(s.name).replace(/'/g,"\\'")}')">
+                <i class="fas fa-trash"></i>
+              </button>` : ''}
+            </div>
+          </td>
+        </tr>`;
+      }).join('');
+    }
+
+    // ============================================================
+    // DRAWER — USER / PROVIDER / OPERATOR PROFILES
+    // ============================================================
+    function openDrawer() {
+      document.getElementById('drawerOverlay').classList.add('show');
+      document.getElementById('drawer').classList.add('show');
+    }
+    function closeDrawer() {
+      document.getElementById('drawerOverlay').classList.remove('show');
+      document.getElementById('drawer').classList.remove('show');
+    }
+    document.getElementById('drawerClose').addEventListener('click', closeDrawer);
+    document.getElementById('drawerOverlay').addEventListener('click', closeDrawer);
+
+    window.openUser = function(phone) {
+      const userActivity = allActivity.filter(a => str(a.user_phone) === phone);
+      if (userActivity.length === 0) return;
+
+      const name = str(userActivity[0].user_name) || 'Anonymous';
+      const city = str(userActivity[0].user_city);
+      const providers = new Set(userActivity.map(a => str(a.provider_name)).filter(Boolean));
+
+      document.getElementById('drawerAvatar').textContent = getInitials(name);
+      document.getElementById('drawerName').textContent = name;
+      document.getElementById('drawerSub').innerHTML = `
+        ${city ? `<span><i class="fas fa-map-marker-alt"></i> ${escapeHtml(city)}</span>` : ''}
+        <span><i class="fas fa-phone"></i> ${escapeHtml(formatPhone(phone))}</span>
+      `;
+
+      const calls = userActivity.filter(a => str(a.action).startsWith('call_click')).length;
+      const whats = userActivity.filter(a => str(a.action).startsWith('whatsapp_click')).length;
+
+      let html = `
+        <div class="drawer-stat-row">
+          <div class="drawer-stat"><div class="v">${userActivity.length}</div><div class="l">Total</div></div>
+          <div class="drawer-stat"><div class="v">${calls}</div><div class="l">Calls</div></div>
+          <div class="drawer-stat"><div class="v">${whats}</div><div class="l">WhatsApp</div></div>
+        </div>
+        <div class="drawer-section">
+          <div class="drawer-section-title"><i class="fas fa-user-tie"></i> Providers engaged (${providers.size})</div>
+          <div class="drawer-list">
+            ${[...providers].map(p => `<div class="drawer-item"><div class="top"><span class="t">${escapeHtml(p)}</span></div></div>`).join('') || '<div class="empty-state" style="padding:20px;"><p>No providers</p></div>'}
+          </div>
+        </div>
+        <div class="drawer-section">
+          <div class="drawer-section-title"><i class="fas fa-history"></i> Recent activity</div>
+          <div class="drawer-list">
+            ${userActivity.slice(0, 20).map(a => `
+              <div class="drawer-item">
+                <div class="top">
+                  <span class="t">${actionLabel(a.action)}</span>
+                  <span class="d">${escapeHtml(formatDate(a.timestamp))}</span>
+                </div>
+                <div class="sub">${escapeHtml(str(a.provider_name))} · ${escapeHtml(str(a.service))}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+
+      document.getElementById('drawerBody').innerHTML = html;
+      openDrawer();
+    };
+
+    window.openProvider = function(name) {
+      const provActivity = allActivity.filter(a => str(a.provider_name) === name);
+      if (provActivity.length === 0) return;
+
+      const service = str(provActivity[0].service);
+      const isPrimer = str(provActivity[0].is_primer_owned).toUpperCase() === 'TRUE';
+      const users = new Set(provActivity.map(a => str(a.user_phone)).filter(Boolean));
+
+      document.getElementById('drawerAvatar').textContent = getInitials(name);
+      document.getElementById('drawerName').textContent = name;
+      document.getElementById('drawerSub').innerHTML = `
+        ${service ? `<span><i class="fas fa-briefcase"></i> ${escapeHtml(service)}</span>` : ''}
+        ${isPrimer ? `<span><i class="fas fa-star" style="color:var(--gold);"></i> Primer-owned</span>` : ''}
+      `;
+
+      const calls = provActivity.filter(a => str(a.action).startsWith('call_click')).length;
+      const whats = provActivity.filter(a => str(a.action).startsWith('whatsapp_click')).length;
+
+      let html = `
+        <div class="drawer-stat-row">
+          <div class="drawer-stat"><div class="v">${provActivity.length}</div><div class="l">Total</div></div>
+          <div class="drawer-stat"><div class="v">${calls}</div><div class="l">Calls</div></div>
+          <div class="drawer-stat"><div class="v">${whats}</div><div class="l">WhatsApp</div></div>
+        </div>
+        <div class="drawer-section">
+          <div class="drawer-section-title"><i class="fas fa-users"></i> Users interested (${users.size})</div>
+          <div class="drawer-list">
+            ${[...users].slice(0, 20).map(phone => {
+              const u = provActivity.find(a => str(a.user_phone) === phone);
+              return `<div class="drawer-item" style="cursor:pointer;" onclick="closeDrawer();setTimeout(()=>openUser('${escapeHtml(phone).replace(/'/g,"\\'")}'),100);">
+                <div class="top">
+                  <span class="t">${escapeHtml(str(u.user_name) || 'Anonymous')}</span>
+                  <span class="d">${escapeHtml(formatPhone(phone))}</span>
+                </div>
+              </div>`;
+            }).join('') || '<div class="empty-state" style="padding:20px;"><p>No users</p></div>'}
+          </div>
+        </div>
+        <div class="drawer-section">
+          <div class="drawer-section-title"><i class="fas fa-history"></i> Recent clicks</div>
+          <div class="drawer-list">
+            ${provActivity.slice(0, 20).map(a => `
+              <div class="drawer-item">
+                <div class="top">
+                  <span class="t">${escapeHtml(str(a.user_name) || 'Anonymous')}</span>
+                  <span class="d">${escapeHtml(formatDate(a.timestamp))}</span>
+                </div>
+                <div class="sub">${actionLabel(a.action)} · ${escapeHtml(str(a.user_city))}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+
+      document.getElementById('drawerBody').innerHTML = html;
+      openDrawer();
+    };
+
+    window.openOperator = function(name) {
+      const opReports = allReports.filter(r => str(r.operator) === name);
+      if (opReports.length === 0) return;
+
+      document.getElementById('drawerAvatar').textContent = getInitials(name);
+      document.getElementById('drawerName').textContent = name;
+      document.getElementById('drawerSub').innerHTML = `
+        <span><i class="fas fa-briefcase"></i> Field Operator</span>
+        <span><i class="fas fa-file-alt"></i> ${opReports.length} reports</span>
+      `;
+
+      const sellers = opReports.reduce((s, r) => s + (parseInt(r.sellers) || 0), 0);
+      const pros = opReports.reduce((s, r) => s + (parseInt(r.pros) || 0), 0);
+      const locations = new Set(opReports.map(r => str(r.location)).filter(Boolean));
+
+      let html = `
+        <div class="drawer-stat-row">
+          <div class="drawer-stat"><div class="v">${opReports.length}</div><div class="l">Reports</div></div>
+          <div class="drawer-stat"><div class="v">${sellers}</div><div class="l">Sellers</div></div>
+          <div class="drawer-stat"><div class="v">${pros}</div><div class="l">Pros</div></div>
+        </div>
+        <div class="drawer-section">
+          <div class="drawer-section-title"><i class="fas fa-map-marker-alt"></i> Locations covered (${locations.size})</div>
+          <div class="drawer-list">
+            ${[...locations].map(l => `<div class="drawer-item"><div class="top"><span class="t">${escapeHtml(l)}</span></div></div>`).join('')}
+          </div>
+        </div>
+        <div class="drawer-section">
+          <div class="drawer-section-title"><i class="fas fa-history"></i> Recent reports</div>
+          <div class="drawer-list">
+            ${opReports.slice(0, 15).map(r => `
+              <div class="drawer-item">
+                <div class="top">
+                  <span class="t">${escapeHtml(str(r.location))}</span>
+                  <span class="d">${escapeHtml(formatDate(r.timestamp))}</span>
+                </div>
+                <div class="sub">${parseInt(r.sellers) || 0} sellers · ${parseInt(r.pros) || 0} pros${str(r.blockers) ? ' · ⚠️ blockers' : ''}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+
+      document.getElementById('drawerBody').innerHTML = html;
+      openDrawer();
+    };
+
+    // ============================================================
+    // STAFF MODAL
+    // ============================================================
+    const staffModal = document.getElementById('staffModal');
+    const staffForm = document.getElementById('staffForm');
+
+    document.getElementById('addStaffBtn').addEventListener('click', () => {
+      document.getElementById('staffModalTitle').textContent = 'Add Staff';
+      document.getElementById('staffModalSub').textContent = 'Create a new staff account';
+      document.getElementById('staffId').value = '';
+      document.getElementById('staffName').value = '';
+      document.getElementById('staffEmail').value = '';
+      document.getElementById('staffPassword').value = '';
+      document.getElementById('staffPassword').placeholder = 'Min 8 characters';
+      document.getElementById('pwHint').textContent = '';
+      document.getElementById('staffRoleSelect').value = 'operator';
+      document.getElementById('staffStatus').value = 'active';
+      document.getElementById('staffEmail').disabled = false;
+      staffModal.classList.add('show');
+    });
+
+    document.getElementById('staffCancel').addEventListener('click', () => {
+      staffModal.classList.remove('show');
+    });
+    staffModal.addEventListener('click', (e) => {
+      if (e.target === staffModal) staffModal.classList.remove('show');
+    });
+
+    window.editStaff = function(id) {
+      const s = allStaff.find(x => x.id === id);
+      if (!s) return;
+      document.getElementById('staffModalTitle').textContent = 'Edit Staff';
+      document.getElementById('staffModalSub').textContent = 'Update staff details';
+      document.getElementById('staffId').value = s.id;
+      document.getElementById('staffName').value = s.name;
+      document.getElementById('staffEmail').value = s.email;
+      document.getElementById('staffPassword').value = '';
+      document.getElementById('staffPassword').placeholder = 'Leave blank to keep current';
+      document.getElementById('pwHint').textContent = '(leave blank to keep)';
+      document.getElementById('staffRoleSelect').value = s.role;
+      document.getElementById('staffStatus').value = s.status;
+      document.getElementById('staffEmail').disabled = true;
+      staffModal.classList.add('show');
+    };
+
+    window.deleteStaff = async function(id, name) {
+      if (!confirm(`Delete staff "${name}"? This cannot be undone.`)) return;
+      try {
+        const res = await fetch(`/api/auth/staff?id=${id}`, { method: 'DELETE' });
+        const data = await res.json();
+        if (!data.ok) throw new Error(data.error);
+        toast('Staff deleted', 'success');
+        loadStaff();
+      } catch (err) {
+        toast(err.message || 'Delete failed', 'error');
+      }
+    };
+
+    staffForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const id = document.getElementById('staffId').value;
+      const name = document.getElementById('staffName').value.trim();
+      const email = document.getElementById('staffEmail').value.trim();
+      const password = document.getElementById('staffPassword').value;
+      const role = document.getElementById('staffRoleSelect').value;
+      const status = document.getElementById('staffStatus').value;
+
+      const submitBtn = document.getElementById('staffSubmit');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving…';
+
+      try {
+        let res, data;
+        if (id) {
+          res = await fetch(`/api/auth/staff?id=${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, role, status, password: password || undefined })
+          });
+        } else {
+          res = await fetch('/api/auth/staff', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, password, role })
+          });
+        }
+        data = await res.json();
+        if (!data.ok) throw new Error(data.error || 'Save failed');
+
+        toast(id ? 'Staff updated' : 'Staff added', 'success');
+        staffModal.classList.remove('show');
+        loadStaff();
+      } catch (err) {
+        toast(err.message, 'error');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fas fa-check"></i> Save';
+      }
+    });
+
+    // ============================================================
+    // FILTER LISTENERS
+    // ============================================================
+    ['repSearch','repOperator','repLocation','repContent','repDateFrom','repDateTo'].forEach(id => {
+      document.getElementById(id).addEventListener('input', renderReports);
+      document.getElementById(id).addEventListener('change', renderReports);
+    });
+    ['actSearch','actType','actProvider','actUser','actPrimer','actDateFrom','actDateTo'].forEach(id => {
+      document.getElementById(id).addEventListener('input', renderActivity);
+      document.getElementById(id).addEventListener('change', renderActivity);
+    });
+    ['provSearch','provService','provPrimer'].forEach(id => {
+      document.getElementById(id).addEventListener('input', renderProviders);
+      document.getElementById(id).addEventListener('change', renderProviders);
+    });
+    ['usrSearch','usrCity'].forEach(id => {
+      document.getElementById(id).addEventListener('input', renderUsers);
+      document.getElementById(id).addEventListener('change', renderUsers);
+    });
+    ['staffSearch','staffRole'].forEach(id => {
+      document.getElementById(id).addEventListener('input', renderStaff);
+      document.getElementById(id).addEventListener('change', renderStaff);
+    });
+
+    // Refresh button
+    document.getElementById('refreshBtn').addEventListener('click', async function() {
+      this.innerHTML = '<i class="fas fa-sync-alt fa-spin"></i> Refreshing';
+      this.disabled = true;
+      await Promise.all([loadReports(), loadActivity()]);
+      const activeSection = document.querySelector('.section.active')?.dataset.section;
+      if (activeSection === 'staff') await loadStaff();
+      this.innerHTML = '<i class="fas fa-sync-alt"></i> Refresh';
+      this.disabled = false;
+      toast('Data refreshed', 'success');
+    });
+
+    // ============================================================
+    // BOOT
+    // ============================================================
+    (async function boot() {
+      const ok = await checkAuth();
+      if (!ok) return;
+      await Promise.all([loadReports(), loadActivity()]);
+      renderOverviewStats();
+      renderRecentReports();
+      renderRecentActivity();
+    })();
   </script>
 
 </body>
