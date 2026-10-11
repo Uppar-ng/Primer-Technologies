@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In – Zaure Dashboard</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0f2940">
+  <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #0f2940;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background-image:
+        radial-gradient(circle at 15% 20%, rgba(212,184,122,0.12) 0%, transparent 45%),
+        radial-gradient(circle at 85% 80%, rgba(47,111,158,0.18) 0%, transparent 50%);
+      -webkit-font-smoothing: antialiased;
+    }
+    .login-card {
+      width: 100%;
+      max-width: 400px;
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 36px 32px 28px;
+      box-shadow: 0 30px 70px rgba(0,0,0,0.35);
+      position: relative;
+      overflow: hidden;
+    }
+    .login-card::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(212,184,122,0.15) 0%, transparent 65%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .login-card > * { position: relative; z-index: 2; }
+
+    .logo-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 22px;
+    }
+    .logo-wrap img {
+      width: 56px;
+      height: 56px;
+      display: block;
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #0f2940;
+      text-align: center;
+      letter-spacing: -0.5px;
+      margin-bottom: 4px;
+    }
+    .subtitle {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2.4px;
+      text-transform: uppercase;
+      color: #B49450;
+      text-align: center;
+      margin-bottom: 26px;
+    }
+
+    .field {
+      margin-bottom: 14px;
+    }
+    .field label {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: #0f2940;
+      margin-bottom: 7px;
+    }
+    .field input {
+      width: 100%;
+      padding: 13px 15px;
+      border: 1px solid #e5ecf3;
+      border-radius: 12px;
+      font-size: 0.92rem;
+      font-family: inherit;
+      background: #f8fbfe;
+      color: #0f2940;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+    .field input:focus {
+      border-color: #0f2940;
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(15,41,64,0.1);
+    }
+
+    .pw-wrap { position: relative; }
+    .pw-wrap input { padding-right: 44px; }
+    .pw-toggle {
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #94a3b8;
+      cursor: pointer;
+      font-size: 0.95rem;
+      padding: 4px;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 14px 20px;
+      margin-top: 8px;
+      border: none;
+      border-radius: 60px;
+      background: linear-gradient(135deg, #1a3650, #0f2940);
+      color: #fff;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 0.92rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      box-shadow: 0 12px 26px rgba(15,41,64,0.28);
+      transition: transform 0.2s, filter 0.2s, box-shadow 0.2s;
+      letter-spacing: 0.2px;
+    }
+    .login-btn i { color: #D4B87A; }
+    .login-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      filter: brightness(1.1);
+      box-shadow: 0 16px 32px rgba(15,41,64,0.36);
+    }
+    .login-btn:disabled { opacity: 0.7; cursor: not-allowed; }
+
+    .err {
+      display: none;
+      margin-top: 14px;
+      padding: 11px 14px;
+      background: #fdeaea;
+      border: 1px solid #f5c4c4;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      color: #b91c1c;
+      text-align: center;
+    }
+    .err.show { display: block; }
+
+    .footer-note {
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid #f0f4f8;
+      font-size: 0.7rem;
+      color: #94a3b8;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    .spin { animation: spin 0.9s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+
+  <div class="login-card">
+    <div class="logo-wrap">
+      <img src="/assets/logo-icon.svg" alt="Zaure">
+    </div>
+
+    <h1>Dashboard</h1>
+    <div class="subtitle">Zaure Admin Access</div>
+
+    <form id="loginForm" novalidate>
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="you@zauretech.xyz" required autocomplete="username">
+      </div>
+      <div class="field">
+        <label for="password">Password</label>
+        <div class="pw-wrap">
+          <input type="password" id="password" placeholder="Enter your password" required autocomplete="current-password">
+          <button type="button" class="pw-toggle" id="pwToggle" aria-label="Toggle password">
+            <i class="fas fa-eye"></i>
+          </button>
+        </div>
+      </div>
+      <button type="submit" class="login-btn" id="submitBtn">
+        <i class="fas fa-arrow-right"></i> Sign In
+      </button>
+      <div class="err" id="errBox">Invalid email or password.</div>
+    </form>
+
+    <div class="footer-note">
+      Authorized staff only.<br>
+      Contact the President for access.
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('loginForm');
+    const email = document.getElementById('email');
+    const password = document.getElementById('password');
+    const pwToggle = document.getElementById('pwToggle');
+    const submitBtn = document.getElementById('submitBtn');
+    const errBox = document.getElementById('errBox');
+
+    pwToggle.addEventListener('click', () => {
+      const isText = password.type === 'text';
+      password.type = isText ? 'password' : 'text';
+      pwToggle.innerHTML = isText ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+    });
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const e1 = email.value.trim();
+      const p1 = password.value;
+      if (!e1 || !p1) return;
+
+      errBox.classList.remove('show');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fas fa-spinner spin"></i> Signing in…';
+
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: e1, password: p1 })
+        });
+        const data = await res.json();
+
+        if (!res.ok || !data.ok) throw new Error(data.error || 'Invalid credentials');
+
+        window.location.href = '/dashboard';
+      } catch (err) {
+        errBox.textContent = err.message || 'Invalid email or password.';
+        errBox.classList.add('show');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fas fa-arrow-right"></i> Sign In';
+      }
+    });
+  </script>
+
+</body>
+</html>
