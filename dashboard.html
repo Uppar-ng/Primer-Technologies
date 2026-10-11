@@ -593,6 +593,14 @@
     let loadedReports = false;
     let loadedActivity = false;
 
+    // ---------- Safe string helper ----------
+    // Google Sheets returns numbers for phone numbers, IDs, etc.
+    // This converts anything safely to a trimmed string.
+    function str(v) {
+      if (v === null || v === undefined) return '';
+      return String(v).trim();
+    }
+
     // ---------- Tabs ----------
     document.querySelectorAll('.tab').forEach(tab => {
       tab.addEventListener('click', () => {
@@ -629,14 +637,14 @@
         const total   = allReports.length;
         const sellers = allReports.reduce((s, r) => s + (parseInt(r.sellers) || 0), 0);
         const pros    = allReports.reduce((s, r) => s + (parseInt(r.pros) || 0), 0);
-        const ops     = new Set(allReports.map(r => (r.operator || '').trim()).filter(Boolean)).size;
+        const ops     = new Set(allReports.map(r => str(r.operator)).filter(Boolean)).size;
 
         document.getElementById('statTotal').textContent   = total;
         document.getElementById('statSellers').textContent = sellers;
         document.getElementById('statPros').textContent    = pros;
         document.getElementById('statOps').textContent     = ops;
 
-        const opsList = [...new Set(allReports.map(r => (r.operator || '').trim()).filter(Boolean))].sort();
+        const opsList = [...new Set(allReports.map(r => str(r.operator)).filter(Boolean))].sort();
         operatorFilter.innerHTML = '<option value="">All operators</option>' +
           opsList.map(op => `<option value="${escapeHtml(op)}">${escapeHtml(op)}</option>`).join('');
 
@@ -654,14 +662,14 @@
     }
 
     function applyReportFilters(reports) {
-      const q  = searchInput.value.trim().toLowerCase();
-      const op = operatorFilter.value;
+      const q  = str(searchInput.value).toLowerCase();
+      const op = str(operatorFilter.value);
 
       return reports.filter(r => {
-        if (op && (r.operator || '').trim() !== op) return false;
+        if (op && str(r.operator) !== op) return false;
         if (!q) return true;
         const haystack = [r.operator, r.location, r.intel, r.blockers]
-          .filter(Boolean).join(' ').toLowerCase();
+          .map(str).join(' ').toLowerCase();
         return haystack.includes(q);
       });
     }
@@ -691,15 +699,15 @@
     }
 
     function buildReportCard(r) {
-      const name = r.operator || 'Unknown';
+      const name = str(r.operator) || 'Unknown';
       const initials = getInitials(name);
       const date = formatDate(r.timestamp);
       const sellers = parseInt(r.sellers) || 0;
       const pros = parseInt(r.pros) || 0;
-      const location = r.location || '—';
-      const blockers = r.blockers || '';
-      const intel = r.intel || '';
-      const photo = r.photo_link || r.photo || '';
+      const location = str(r.location) || '—';
+      const blockers = str(r.blockers);
+      const intel = str(r.intel);
+      const photo = str(r.photo_link || r.photo);
 
       return `
         <article class="report-card">
@@ -757,11 +765,11 @@
         allActivity = data.activity || [];
         loadedActivity = true;
 
-        // Stats
+        // Stats — using str() everywhere so numbers don't crash
         const total = allActivity.length;
-        const calls = allActivity.filter(a => (a.action || '').startsWith('call_click')).length;
-        const whats = allActivity.filter(a => (a.action || '').startsWith('whatsapp_click')).length;
-        const users = new Set(allActivity.map(a => (a.user_phone || '').trim()).filter(Boolean)).size;
+        const calls = allActivity.filter(a => str(a.action).startsWith('call_click')).length;
+        const whats = allActivity.filter(a => str(a.action).startsWith('whatsapp_click')).length;
+        const users = new Set(allActivity.map(a => str(a.user_phone)).filter(Boolean)).size;
 
         document.getElementById('actTotal').textContent    = total;
         document.getElementById('actCalls').textContent    = calls;
@@ -787,8 +795,8 @@
     function renderTopProviders(activity) {
       const counts = {};
       activity.forEach(a => {
-        if ((a.action || '') === 'manual_test') return;
-        const name = (a.provider_name || '').trim();
+        if (str(a.action) === 'manual_test') return;
+        const name = str(a.provider_name);
         if (!name) return;
         counts[name] = (counts[name] || 0) + 1;
       });
@@ -813,17 +821,17 @@
     }
 
     function applyActivityFilters(activity) {
-      const q  = actSearch.value.trim().toLowerCase();
-      const type = actTypeFilter.value;
+      const q  = str(actSearch.value).toLowerCase();
+      const type = str(actTypeFilter.value);
 
       return activity.filter(a => {
-        if (type && (a.action || '') !== type) return false;
+        if (type && str(a.action) !== type) return false;
         if (!q) return true;
         const haystack = [
           a.user_name, a.user_phone, a.user_city,
           a.provider_name, a.provider_phone,
           a.service, a.subject
-        ].filter(Boolean).join(' ').toLowerCase();
+        ].map(str).join(' ').toLowerCase();
         return haystack.includes(q);
       });
     }
@@ -846,33 +854,26 @@
     }
 
     function buildActivityCard(a) {
-      const action = (a.action || '').toLowerCase();
-      const user = a.user_name || 'Anonymous';
+      const action = str(a.action).toLowerCase();
+      const user = str(a.user_name) || 'Anonymous';
       const userInitials = getInitials(user);
       const date = formatDate(a.timestamp);
-      const userPhone = a.user_phone || '';
-      const userCity = a.user_city || '';
-      const providerName = a.provider_name || '—';
-      const providerPhone = a.provider_phone || '';
-      const providerId = a.provider_id || '';
-      const service = a.service || '';
-      const isPrimer = String(a.is_primer_owned).toUpperCase() === 'TRUE';
-      const subject = a.subject || '';
+      const userPhone = str(a.user_phone);
+      const userCity = str(a.user_city);
+      const providerName = str(a.provider_name) || '—';
+      const providerPhone = str(a.provider_phone);
+      const service = str(a.service);
+      const isPrimer = str(a.is_primer_owned).toUpperCase() === 'TRUE';
 
-      // Action badge
       let actionPill = '';
-      let actionIcon = 'fa-mouse-pointer';
       if (action.startsWith('call_click')) {
         actionPill = `<span class="report-pill pill-call"><i class="fas fa-phone"></i> Call</span>`;
-        actionIcon = 'fa-phone';
       } else if (action.startsWith('whatsapp_click')) {
         actionPill = `<span class="report-pill pill-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</span>`;
-        actionIcon = 'fa-whatsapp';
       } else if (action === 'manual_test') {
         actionPill = `<span class="report-pill pill-test"><i class="fas fa-flask"></i> Test</span>`;
-        actionIcon = 'fa-flask';
       } else {
-        actionPill = `<span class="report-pill pill-sellers"><i class="fas fa-bolt"></i> ${escapeHtml(a.action || '')}</span>`;
+        actionPill = `<span class="report-pill pill-sellers"><i class="fas fa-bolt"></i> ${escapeHtml(str(a.action))}</span>`;
       }
 
       return `
@@ -928,7 +929,7 @@
     }
 
     function getInitials(name) {
-      const parts = String(name || '?').trim().split(/\s+/);
+      const parts = str(name || '?').split(/\s+/);
       if (parts.length === 1) return parts[0].charAt(0).toUpperCase();
       return (parts[0].charAt(0) + parts[parts.length - 1].charAt(0)).toUpperCase();
     }
@@ -984,7 +985,6 @@
     // ---------- Boot ----------
     loadReports();
 
-    // Auto-refresh the active tab every 60s
     setInterval(() => {
       const activeTab = document.querySelector('.tab.active')?.dataset.tab;
       if (activeTab === 'activity') {
