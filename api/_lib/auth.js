@@ -4,12 +4,12 @@
 // ============================================================
 
 import crypto from 'crypto';
-
-const KV_URL   = process.env.KV_REST_API_URL;
-const KV_TOKEN = process.env.KV_REST_API_TOKEN;
+import { kv } from '@vercel/kv';
 
 // ------------------------------------------------------------
-// Bootstrap president (change password after first login)
+// Bootstrap president
+// ⚠️ Change the password below, then delete this block once
+//    you've created a real President account in the dashboard.
 // ------------------------------------------------------------
 export const BOOTSTRAP_ADMIN = {
   id: 'president',
@@ -85,52 +85,48 @@ export function makeId() {
 }
 
 // ------------------------------------------------------------
-// KV helpers (REST API — no npm package needed)
+// KV helpers — using @vercel/kv (handles all serialization)
 // ------------------------------------------------------------
 export async function kvGet(key) {
-  if (!KV_URL || !KV_TOKEN) return null;
-  const res = await fetch(`${KV_URL}/get/${encodeURIComponent(key)}`, {
-    headers: { Authorization: `Bearer ${KV_TOKEN}` }
-  });
-  if (!res.ok) return null;
-  const data = await res.json();
-  if (!data.result) return null;
-  try { return JSON.parse(data.result); } catch { return data.result; }
+  try {
+    return await kv.get(key);
+  } catch (err) {
+    console.error('[kvGet]', key, err.message);
+    return null;
+  }
 }
 
 export async function kvSet(key, value, exSeconds) {
-  if (!KV_URL || !KV_TOKEN) return false;
-  const url = exSeconds
-    ? `${KV_URL}/set/${encodeURIComponent(key)}?EX=${exSeconds}`
-    : `${KV_URL}/set/${encodeURIComponent(key)}`;
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${KV_TOKEN}`,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(value)
-  });
-  return res.ok;
+  try {
+    if (exSeconds) {
+      await kv.set(key, value, { ex: exSeconds });
+    } else {
+      await kv.set(key, value);
+    }
+    return true;
+  } catch (err) {
+    console.error('[kvSet]', key, err.message);
+    return false;
+  }
 }
 
 export async function kvDel(key) {
-  if (!KV_URL || !KV_TOKEN) return false;
-  const res = await fetch(`${KV_URL}/del/${encodeURIComponent(key)}`, {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${KV_TOKEN}` }
-  });
-  return res.ok;
+  try {
+    await kv.del(key);
+    return true;
+  } catch (err) {
+    console.error('[kvDel]', key, err.message);
+    return false;
+  }
 }
 
 export async function kvKeys(pattern) {
-  if (!KV_URL || !KV_TOKEN) return [];
-  const res = await fetch(`${KV_URL}/keys/${encodeURIComponent(pattern)}`, {
-    headers: { Authorization: `Bearer ${KV_TOKEN}` }
-  });
-  if (!res.ok) return [];
-  const data = await res.json();
-  return data.result || [];
+  try {
+    return await kv.keys(pattern);
+  } catch (err) {
+    console.error('[kvKeys]', pattern, err.message);
+    return [];
+  }
 }
 
 // ------------------------------------------------------------
