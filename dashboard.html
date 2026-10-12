@@ -25,6 +25,7 @@
       --text-3: #94a3b8;
       --green: #16a34a;
       --red: #e63946;
+      --blue: #2563eb;
     }
 
     body {
@@ -126,63 +127,22 @@
       box-shadow: inset 0 0 0 1px rgba(212,184,122,0.25);
     }
     .nav-item.active i { color: var(--gold); }
-    .nav-item.hidden { display: none; }
 
     .sidebar-footer {
       padding: 16px;
       border-top: 1px solid rgba(255,255,255,0.06);
+      font-size: 0.68rem;
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      line-height: 1.6;
     }
-    .user-box {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 12px;
-      background: rgba(255,255,255,0.04);
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-    .user-avatar {
-      width: 34px; height: 34px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--gold), var(--gold-2));
-      color: var(--navy);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 0.75rem;
-      flex-shrink: 0;
-    }
-    .user-info { flex: 1; min-width: 0; }
-    .user-info .name {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: #fff;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .user-info .role {
-      font-size: 0.62rem;
-      font-weight: 700;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
+    .sidebar-footer a {
       color: var(--gold);
-      margin-top: 1px;
+      text-decoration: none;
     }
-    .logout-btn {
-      background: none;
-      border: none;
-      color: rgba(255,255,255,0.5);
-      cursor: pointer;
-      padding: 4px;
-      font-size: 0.9rem;
-      transition: color 0.2s;
-    }
-    .logout-btn:hover { color: #e63946; }
 
     /* ============================================================
-       MAIN CONTENT
+       MAIN
        ============================================================ */
     .main {
       flex: 1;
@@ -203,7 +163,6 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      backdrop-filter: blur(8px);
     }
     .topbar-left {
       display: flex;
@@ -277,9 +236,7 @@
       flex: 1;
     }
 
-    /* ============================================================
-       SECTIONS
-       ============================================================ */
+    /* Sections */
     .section { display: none; animation: fadeUp 0.35s ease both; }
     .section.active { display: block; }
 
@@ -427,33 +384,6 @@
     }
     .filters .result-count strong { color: var(--navy); }
 
-    .filter-chip {
-      padding: 8px 14px;
-      border-radius: 40px;
-      border: 1px solid var(--border);
-      background: #fff;
-      color: var(--text-2);
-      font-family: inherit;
-      font-size: 0.78rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.18s;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      white-space: nowrap;
-    }
-    .filter-chip:hover {
-      border-color: rgba(212,184,122,0.5);
-      color: var(--navy);
-    }
-    .filter-chip.active {
-      background: var(--navy);
-      color: #fff;
-      border-color: var(--navy);
-    }
-    .filter-chip.active i { color: var(--gold); }
-
     /* Data table */
     .data-table-wrap {
       overflow-x: auto;
@@ -483,9 +413,7 @@
       color: var(--navy);
       vertical-align: middle;
     }
-    .data-table tbody tr {
-      transition: background 0.15s;
-    }
+    .data-table tbody tr { transition: background 0.15s; }
     .data-table tbody tr:hover { background: #fafcff; }
     .data-table tbody tr:last-child td { border-bottom: none; }
 
@@ -506,6 +434,7 @@
       font-size: 0.68rem;
       font-weight: 800;
       flex-shrink: 0;
+      transition: box-shadow 0.15s;
     }
     .table-person:hover .table-avatar {
       box-shadow: 0 0 0 2px var(--gold);
@@ -528,33 +457,6 @@
     .pill.gray { background: rgba(148,163,184,0.15); color: #475569; }
     .pill.red { background: rgba(230,57,70,0.1); color: #b91c1c; }
 
-    .table-actions {
-      display: flex;
-      gap: 6px;
-    }
-    .icon-btn-sm {
-      width: 30px; height: 30px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      background: #fff;
-      color: var(--text-2);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.75rem;
-      transition: all 0.15s;
-    }
-    .icon-btn-sm:hover {
-      border-color: var(--navy);
-      color: var(--navy);
-      transform: translateY(-1px);
-    }
-    .icon-btn-sm.danger:hover {
-      border-color: var(--red);
-      color: var(--red);
-    }
-
     /* Empty state */
     .empty-state {
       padding: 60px 24px;
@@ -573,12 +475,10 @@
       color: var(--navy);
       margin-bottom: 4px;
     }
-    .empty-state p {
-      font-size: 0.83rem;
-    }
+    .empty-state p { font-size: 0.83rem; }
 
     /* ============================================================
-       USER PROFILE DRAWER
+       DRAWER
        ============================================================ */
     .drawer-overlay {
       display: none;
@@ -590,6 +490,7 @@
       animation: fadeIn 0.2s ease;
     }
     .drawer-overlay.show { display: block; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
     .drawer {
       position: fixed;
@@ -708,9 +609,7 @@
       margin-top: 5px;
     }
 
-    .drawer-section {
-      margin-bottom: 22px;
-    }
+    .drawer-section { margin-bottom: 22px; }
     .drawer-section-title {
       font-size: 0.62rem;
       font-weight: 800;
@@ -743,9 +642,7 @@
       margin-bottom: 4px;
       align-items: baseline;
     }
-    .drawer-item .top .t {
-      font-weight: 700;
-    }
+    .drawer-item .top .t { font-weight: 700; }
     .drawer-item .top .d {
       font-size: 0.68rem;
       color: var(--text-3);
@@ -755,113 +652,6 @@
       font-size: 0.72rem;
       color: var(--text-2);
     }
-
-    /* ============================================================
-       MODAL
-       ============================================================ */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(15,41,64,0.55);
-      backdrop-filter: blur(4px);
-      z-index: 300;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-    .modal-overlay.show { display: flex; }
-    .modal {
-      background: #fff;
-      border-radius: 18px;
-      width: 100%;
-      max-width: 460px;
-      max-height: 90vh;
-      overflow-y: auto;
-      padding: 26px 26px 22px;
-      animation: popIn 0.25s ease;
-    }
-    @keyframes popIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
-    }
-    .modal h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      font-weight: 800;
-      color: var(--navy);
-      margin-bottom: 4px;
-      letter-spacing: -0.3px;
-    }
-    .modal .modal-sub {
-      font-size: 0.8rem;
-      color: var(--text-2);
-      margin-bottom: 20px;
-    }
-    .modal-field {
-      margin-bottom: 14px;
-    }
-    .modal-field label {
-      display: block;
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-      color: var(--navy);
-      margin-bottom: 6px;
-    }
-    .modal-field input,
-    .modal-field select {
-      width: 100%;
-      padding: 11px 14px;
-      border: 1px solid var(--border);
-      border-radius: 11px;
-      font-size: 0.88rem;
-      font-family: inherit;
-      background: #f8fbfe;
-      color: var(--navy);
-      outline: none;
-      transition: border-color 0.18s, box-shadow 0.18s;
-    }
-    .modal-field input:focus,
-    .modal-field select:focus {
-      border-color: var(--navy);
-      background: #fff;
-      box-shadow: 0 0 0 3px rgba(15,41,64,0.08);
-    }
-    .modal-actions {
-      display: flex;
-      gap: 10px;
-      margin-top: 20px;
-    }
-    .modal-actions button {
-      flex: 1;
-      padding: 12px 20px;
-      border-radius: 60px;
-      font-family: inherit;
-      font-weight: 700;
-      font-size: 0.88rem;
-      cursor: pointer;
-      border: none;
-      transition: transform 0.15s, filter 0.15s;
-    }
-    .modal-actions .btn-primary {
-      background: linear-gradient(135deg, var(--navy-2), var(--navy));
-      color: #fff;
-      box-shadow: 0 8px 20px rgba(15,41,64,0.22);
-    }
-    .modal-actions .btn-primary:hover:not(:disabled) {
-      transform: translateY(-1px);
-      filter: brightness(1.1);
-    }
-    .modal-actions .btn-secondary {
-      background: #f1f5f9;
-      color: var(--navy);
-    }
-    .modal-actions .btn-secondary:hover {
-      background: #e2e8f0;
-    }
-    .modal-actions button:disabled { opacity: 0.6; cursor: not-allowed; }
 
     /* Toast */
     .toast {
@@ -888,19 +678,6 @@
     .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
     .toast i { color: var(--gold); }
     .toast.error i { color: #ff8585; }
-    .toast.success i { color: #4ade80; }
-
-    /* Skeleton */
-    .skeleton {
-      background: linear-gradient(90deg, #f1f5f9 0%, #e2e8f0 50%, #f1f5f9 100%);
-      background-size: 200% 100%;
-      animation: shimmer 1.2s infinite;
-      border-radius: 8px;
-    }
-    @keyframes shimmer {
-      0% { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
-    }
 
     /* Mobile */
     .mobile-backdrop {
@@ -923,22 +700,19 @@
       .stats-grid { gap: 10px; }
       .stat-card { padding: 14px 14px 12px; }
       .stat-value { font-size: 1.3rem; }
-      .filter-group input { min-width: 160px; }
       .filters input[type="text"] { min-width: 0; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ============================================================
-       SIDEBAR
-       ============================================================ -->
+  <!-- SIDEBAR -->
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-brand">
       <img src="/assets/logo-icon.svg" alt="Zaure">
       <div class="brand-text">
         <div class="name">Zaure</div>
-        <div class="sub">Admin Panel</div>
+        <div class="sub">Dashboard</div>
       </div>
     </div>
 
@@ -949,26 +723,21 @@
       </a>
 
       <div class="nav-section">Data</div>
-      <a class="nav-item" data-section="reports" data-perm="view_reports">
+      <a class="nav-item" data-section="reports">
         <i class="fas fa-file-alt"></i> Field Reports
       </a>
-      <a class="nav-item" data-section="activity" data-perm="view_activity">
+      <a class="nav-item" data-section="activity">
         <i class="fas fa-mouse-pointer"></i> Click Activity
       </a>
-      <a class="nav-item" data-section="providers" data-perm="view_activity">
+      <a class="nav-item" data-section="providers">
         <i class="fas fa-user-tie"></i> Providers
       </a>
-      <a class="nav-item" data-section="users" data-perm="view_activity">
+      <a class="nav-item" data-section="users">
         <i class="fas fa-users"></i> Users
       </a>
 
-      <div class="nav-section">Manage</div>
-      <a class="nav-item" data-section="staff" data-perm="manage_staff">
-        <i class="fas fa-user-shield"></i> Staff & Permissions
-      </a>
-
       <div class="nav-section">Actions</div>
-      <a class="nav-item" href="/field-report" id="submitReportNav" data-perm="submit_reports">
+      <a class="nav-item" href="/field-report">
         <i class="fas fa-paper-plane"></i> Submit Report
       </a>
       <a class="nav-item" href="/" target="_blank">
@@ -977,26 +746,15 @@
     </nav>
 
     <div class="sidebar-footer">
-      <div class="user-box">
-        <div class="user-avatar" id="userAvatar">—</div>
-        <div class="user-info">
-          <div class="name" id="userName">Loading…</div>
-          <div class="role" id="userRole">—</div>
-        </div>
-        <button class="logout-btn" id="logoutBtn" title="Sign out">
-          <i class="fas fa-sign-out-alt"></i>
-        </button>
-      </div>
+      Zaure Admin Dashboard<br>
+      <a href="/">zauretech.xyz</a>
     </div>
   </aside>
   <div class="mobile-backdrop" id="mobileBackdrop"></div>
 
-  <!-- ============================================================
-       MAIN
-       ============================================================ -->
+  <!-- MAIN -->
   <main class="main">
 
-    <!-- Topbar -->
     <header class="topbar">
       <div class="topbar-left">
         <button class="mobile-toggle" id="mobileToggle">
@@ -1011,7 +769,7 @@
         <button class="top-btn" id="refreshBtn">
           <i class="fas fa-sync-alt"></i> Refresh
         </button>
-        <a class="top-btn primary" href="/field-report" id="reportBtn" style="display:none;">
+        <a class="top-btn primary" href="/field-report">
           <i class="fas fa-paper-plane"></i> Submit Report
         </a>
       </div>
@@ -1019,9 +777,7 @@
 
     <div class="content">
 
-      <!-- ============================================================
-           OVERVIEW
-           ============================================================ -->
+      <!-- OVERVIEW -->
       <section class="section active" data-section="overview">
 
         <div class="stats-grid">
@@ -1093,9 +849,7 @@
 
       </section>
 
-      <!-- ============================================================
-           FIELD REPORTS
-           ============================================================ -->
+      <!-- FIELD REPORTS -->
       <section class="section" data-section="reports">
         <div class="filters">
           <div class="filter-group">
@@ -1116,7 +870,7 @@
         </div>
 
         <div class="panel" style="padding:0;overflow:hidden;">
-          <div class="data-table-wrap" id="repTableWrap">
+          <div class="data-table-wrap">
             <table class="data-table">
               <thead>
                 <tr>
@@ -1139,9 +893,7 @@
         </div>
       </section>
 
-      <!-- ============================================================
-           CLICK ACTIVITY
-           ============================================================ -->
+      <!-- CLICK ACTIVITY -->
       <section class="section" data-section="activity">
         <div class="filters">
           <div class="filter-group">
@@ -1190,9 +942,7 @@
         </div>
       </section>
 
-      <!-- ============================================================
-           PROVIDERS
-           ============================================================ -->
+      <!-- PROVIDERS -->
       <section class="section" data-section="providers">
         <div class="filters">
           <div class="filter-group">
@@ -1231,9 +981,7 @@
         </div>
       </section>
 
-      <!-- ============================================================
-           USERS
-           ============================================================ -->
+      <!-- USERS -->
       <section class="section" data-section="users">
         <div class="filters">
           <div class="filter-group">
@@ -1267,57 +1015,10 @@
         </div>
       </section>
 
-      <!-- ============================================================
-           STAFF
-           ============================================================ -->
-      <section class="section" data-section="staff">
-        <div class="filters">
-          <div class="filter-group">
-            <i class="fas fa-search"></i>
-            <input type="text" id="staffSearch" placeholder="Search staff…">
-          </div>
-          <select id="staffRole">
-            <option value="">All roles</option>
-            <option value="president">President</option>
-            <option value="admin">Admin</option>
-            <option value="manager">Manager</option>
-            <option value="operator">Field Operator</option>
-            <option value="viewer">Viewer</option>
-          </select>
-          <button class="top-btn primary" id="addStaffBtn" style="margin-left:auto;">
-            <i class="fas fa-plus"></i> Add Staff
-          </button>
-        </div>
-
-        <div class="panel" style="padding:0;overflow:hidden;">
-          <div class="data-table-wrap">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Role</th>
-                  <th>Status</th>
-                  <th>Created</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody id="staffTableBody">
-                <tr><td colspan="6" style="text-align:center;padding:40px;color:var(--text-2);">
-                  <i class="fas fa-spinner fa-spin"></i> Loading…
-                </td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
     </div>
   </main>
 
-  <!-- ============================================================
-       USER PROFILE DRAWER
-       ============================================================ -->
+  <!-- DRAWER -->
   <div class="drawer-overlay" id="drawerOverlay"></div>
   <aside class="drawer" id="drawer">
     <div class="drawer-head">
@@ -1331,57 +1032,7 @@
     <div class="drawer-body" id="drawerBody"></div>
   </aside>
 
-  <!-- ============================================================
-       STAFF MODAL
-       ============================================================ -->
-  <div class="modal-overlay" id="staffModal">
-    <div class="modal">
-      <h3 id="staffModalTitle">Add Staff</h3>
-      <div class="modal-sub" id="staffModalSub">Create a new staff account</div>
-
-      <form id="staffForm">
-        <input type="hidden" id="staffId">
-
-        <div class="modal-field">
-          <label for="staffName">Full Name</label>
-          <input type="text" id="staffName" placeholder="e.g. Kabir Isa" required>
-        </div>
-        <div class="modal-field">
-          <label for="staffEmail">Email</label>
-          <input type="email" id="staffEmail" placeholder="staff@zauretech.xyz" required>
-        </div>
-        <div class="modal-field">
-          <label for="staffPassword">Password <span id="pwHint" style="color:var(--text-3);text-transform:none;letter-spacing:0;font-weight:400;"></span></label>
-          <input type="password" id="staffPassword" placeholder="Min 8 characters">
-        </div>
-        <div class="modal-field">
-          <label for="staffRoleSelect">Role</label>
-          <select id="staffRoleSelect">
-            <option value="admin">Admin — full data + staff management</option>
-            <option value="manager">Manager — data only</option>
-            <option value="operator" selected>Field Operator — submit reports</option>
-            <option value="viewer">Viewer — read-only</option>
-          </select>
-        </div>
-        <div class="modal-field">
-          <label for="staffStatus">Status</label>
-          <select id="staffStatus">
-            <option value="active">Active</option>
-            <option value="disabled">Disabled</option>
-          </select>
-        </div>
-
-        <div class="modal-actions">
-          <button type="button" class="btn-secondary" id="staffCancel">Cancel</button>
-          <button type="submit" class="btn-primary" id="staffSubmit">
-            <i class="fas fa-check"></i> Save
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- Toast -->
+  <!-- TOAST -->
   <div class="toast" id="toast">
     <i class="fas fa-check-circle"></i> <span id="toastMsg">Done</span>
   </div>
@@ -1390,11 +1041,8 @@
     // ============================================================
     // STATE
     // ============================================================
-    let currentStaff = null;
     let allReports = [];
     let allActivity = [];
-    let allStaff = [];
-    let roles = {};
 
     // ============================================================
     // HELPERS
@@ -1431,19 +1079,12 @@
       if (d.length === 13 && d.startsWith('234')) return `+234 ${d.slice(3,6)} ${d.slice(6,9)} ${d.slice(9)}`;
       return str(num);
     }
-    function hasPerm(perm) {
-      if (!currentStaff) return false;
-      const p = currentStaff.permissions || [];
-      return p.includes('*') || p.includes(perm);
-    }
     function toast(msg, type = 'success') {
       const t = document.getElementById('toast');
       const m = document.getElementById('toastMsg');
       m.textContent = msg;
       t.className = 'toast ' + type;
-      t.querySelector('i').className = type === 'error' ? 'fas fa-exclamation-circle'
-        : type === 'success' ? 'fas fa-check-circle'
-        : 'fas fa-info-circle';
+      t.querySelector('i').className = type === 'error' ? 'fas fa-exclamation-circle' : 'fas fa-check-circle';
       t.classList.add('show');
       clearTimeout(window.__toastT);
       window.__toastT = setTimeout(() => t.classList.remove('show'), 2800);
@@ -1462,48 +1103,13 @@
       }
       return true;
     }
-
-    // ============================================================
-    // AUTH
-    // ============================================================
-    async function checkAuth() {
-      try {
-        const res = await fetch('/api/auth/me', { cache: 'no-store' });
-        if (!res.ok) { window.location.href = '/dashboard-login'; return false; }
-        const data = await res.json();
-        if (!data.ok) { window.location.href = '/dashboard-login'; return false; }
-        currentStaff = data.staff;
-        renderUserBox();
-        applyPermissions();
-        return true;
-      } catch {
-        window.location.href = '/dashboard-login';
-        return false;
-      }
+    function actionLabel(action) {
+      const a = str(action);
+      if (a.startsWith('call_click')) return '📞 Call';
+      if (a.startsWith('whatsapp_click')) return '💬 WhatsApp';
+      if (a === 'manual_test') return '🧪 Test';
+      return a;
     }
-
-    function renderUserBox() {
-      document.getElementById('userAvatar').textContent = getInitials(currentStaff.name);
-      document.getElementById('userName').textContent = currentStaff.name;
-      document.getElementById('userRole').textContent = (roles[currentStaff.role] || {}).label || currentStaff.role;
-    }
-
-    function applyPermissions() {
-      document.querySelectorAll('[data-perm]').forEach(el => {
-        const perm = el.dataset.perm;
-        if (!hasPerm(perm)) el.style.display = 'none';
-        else el.style.display = '';
-      });
-      if (hasPerm('submit_reports')) {
-        document.getElementById('reportBtn').style.display = 'inline-flex';
-      }
-    }
-
-    document.getElementById('logoutBtn').addEventListener('click', async () => {
-      if (!confirm('Sign out?')) return;
-      await fetch('/api/auth/logout', { method: 'POST' });
-      window.location.href = '/dashboard-login';
-    });
 
     // ============================================================
     // NAVIGATION
@@ -1513,15 +1119,12 @@
       reports: { title: 'Field Reports', subtitle: 'Every field submission in one place' },
       activity: { title: 'Click Activity', subtitle: 'Every call and WhatsApp click tracked' },
       providers: { title: 'Providers', subtitle: 'Service providers and their engagement' },
-      users: { title: 'Users', subtitle: 'Everyone interacting with your site' },
-      staff: { title: 'Staff & Permissions', subtitle: 'Manage team access' }
+      users: { title: 'Users', subtitle: 'Everyone interacting with your site' }
     };
 
     document.querySelectorAll('.nav-item[data-section]').forEach(item => {
       item.addEventListener('click', () => {
         const section = item.dataset.section;
-        if (item.style.display === 'none') return;
-
         document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
         item.classList.add('active');
         document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -1533,20 +1136,11 @@
           document.getElementById('pageSubtitle').textContent = meta.subtitle;
         }
 
-        // Close mobile sidebar
         document.getElementById('sidebar').classList.remove('open');
         document.getElementById('mobileBackdrop').classList.remove('show');
-
-        // Lazy load
-        if (section === 'reports' && allReports.length === 0) loadReports();
-        if (section === 'activity' && allActivity.length === 0) loadActivity();
-        if (section === 'providers' && allActivity.length === 0) loadActivity();
-        if (section === 'users' && allActivity.length === 0) loadActivity();
-        if (section === 'staff') loadStaff();
       });
     });
 
-    // Mobile sidebar
     document.getElementById('mobileToggle').addEventListener('click', () => {
       document.getElementById('sidebar').classList.toggle('open');
       document.getElementById('mobileBackdrop').classList.toggle('show');
@@ -1562,24 +1156,24 @@
     async function loadReports() {
       try {
         const res = await fetch('/api/field-reports/list', { cache: 'no-store' });
-        if (res.status === 401) { window.location.href = '/dashboard-login'; return; }
-        if (res.status === 403) { allReports = []; renderReports(); return; }
         const data = await res.json();
+        if (!data.ok) throw new Error(data.error || 'Load failed');
         allReports = data.reports || [];
         populateReportFilters();
         renderReports();
         renderRecentReports();
       } catch (err) {
         console.error(err);
+        document.getElementById('repTableBody').innerHTML =
+          `<tr><td colspan="7"><div class="empty-state"><i class="fas fa-exclamation-triangle" style="color:var(--red);"></i><h3>Could not load reports</h3><p>${escapeHtml(err.message)}</p></div></td></tr>`;
       }
     }
 
     async function loadActivity() {
       try {
         const res = await fetch('/api/field-reports/activity', { cache: 'no-store' });
-        if (res.status === 401) { window.location.href = '/dashboard-login'; return; }
-        if (res.status === 403) { allActivity = []; renderActivity(); return; }
         const data = await res.json();
+        if (!data.ok) throw new Error(data.error || 'Load failed');
         allActivity = data.activity || [];
         populateActivityFilters();
         renderActivity();
@@ -1589,6 +1183,8 @@
         renderOverviewStats();
       } catch (err) {
         console.error(err);
+        document.getElementById('actTableBody').innerHTML =
+          `<tr><td colspan="6"><div class="empty-state"><i class="fas fa-exclamation-triangle" style="color:var(--red);"></i><h3>Could not load activity</h3><p>${escapeHtml(err.message)}</p></div></td></tr>`;
       }
     }
 
@@ -1614,7 +1210,6 @@
       document.getElementById('ovUniqueUsers').textContent = uniqueUsers;
       document.getElementById('ovOperators').textContent = ops;
 
-      // Top providers
       const providerCounts = {};
       allActivity.forEach(a => {
         if (str(a.action) === 'manual_test') return;
@@ -1673,14 +1268,6 @@
           <div class="sub">${actionLabel(a.action)} → ${escapeHtml(str(a.provider_name))}</div>
         </div>
       `).join('') + '</div>';
-    }
-
-    function actionLabel(action) {
-      const a = str(action);
-      if (a.startsWith('call_click')) return '📞 Call';
-      if (a.startsWith('whatsapp_click')) return '💬 WhatsApp';
-      if (a === 'manual_test') return '🧪 Test';
-      return a;
     }
 
     // ============================================================
@@ -1843,15 +1430,12 @@
       });
 
       let list = Object.values(map);
-
       if (svc) list = list.filter(p => p.service === svc);
       if (primer === 'true') list = list.filter(p => p.isPrimer);
       if (primer === 'false') list = list.filter(p => !p.isPrimer);
       if (q) list = list.filter(p => p.name.toLowerCase().includes(q));
-
       list.sort((a, b) => b.total - a.total);
 
-      // Populate service filter
       const svcs = [...new Set(Object.values(map).map(p => p.service).filter(Boolean))].sort();
       const svcSel = document.getElementById('provService');
       if (svcSel.options.length <= 1) {
@@ -1897,27 +1481,24 @@
         const phone = str(a.user_phone);
         const name = str(a.user_name) || 'Anonymous';
         if (!phone) return;
-        const key = phone;
-        if (!map[key]) map[key] = {
+        if (!map[phone]) map[phone] = {
           name, phone,
           city: str(a.user_city),
           clicks: 0,
           providers: new Set(),
           last: a.timestamp
         };
-        map[key].clicks++;
+        map[phone].clicks++;
         const p = str(a.provider_name);
-        if (p) map[key].providers.add(p);
-        if (new Date(a.timestamp) > new Date(map[key].last)) map[key].last = a.timestamp;
+        if (p) map[phone].providers.add(p);
+        if (new Date(a.timestamp) > new Date(map[phone].last)) map[phone].last = a.timestamp;
       });
 
       let list = Object.values(map);
       if (city) list = list.filter(u => u.city === city);
       if (q) list = list.filter(u => u.name.toLowerCase().includes(q) || u.phone.includes(q));
-
       list.sort((a, b) => b.clicks - a.clicks);
 
-      // Populate city filter
       const cities = [...new Set(Object.values(map).map(u => u.city).filter(Boolean))].sort();
       const citySel = document.getElementById('usrCity');
       if (citySel.options.length <= 1) {
@@ -1952,74 +1533,7 @@
     }
 
     // ============================================================
-    // STAFF
-    // ============================================================
-    async function loadStaff() {
-      try {
-        const res = await fetch('/api/auth/staff', { cache: 'no-store' });
-        if (res.status === 403) {
-          document.getElementById('staffTableBody').innerHTML = '<tr><td colspan="6"><div class="empty-state"><i class="fas fa-lock"></i><h3>Access denied</h3></div></td></tr>';
-          return;
-        }
-        const data = await res.json();
-        allStaff = data.staff || [];
-        roles = data.roles || {};
-        renderStaff();
-      } catch (err) {
-        console.error(err);
-      }
-    }
-
-    function renderStaff() {
-      const q = str(document.getElementById('staffSearch').value).toLowerCase();
-      const role = str(document.getElementById('staffRole').value);
-
-      let list = allStaff.filter(s => {
-        if (role && s.role !== role) return false;
-        if (q) {
-          const hay = (s.name + ' ' + s.email).toLowerCase();
-          if (!hay.includes(q)) return false;
-        }
-        return true;
-      });
-
-      const tbody = document.getElementById('staffTableBody');
-      if (list.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="6"><div class="empty-state"><i class="fas fa-user-shield"></i><h3>No staff match</h3></div></td></tr>';
-        return;
-      }
-
-      tbody.innerHTML = list.map(s => {
-        const initials = getInitials(s.name);
-        const roleLabel = (roles[s.role] || {}).label || s.role;
-        const isSelf = s.id === currentStaff.staffId;
-        return `<tr>
-          <td>
-            <div class="table-person">
-              <div class="table-avatar">${escapeHtml(initials)}</div>
-              <strong>${escapeHtml(s.name)}${isSelf ? ' <span style="color:var(--gold-2);font-size:0.7rem;">(you)</span>' : ''}</strong>
-            </div>
-          </td>
-          <td>${escapeHtml(s.email)}</td>
-          <td><span class="pill gold">${escapeHtml(roleLabel)}</span></td>
-          <td>${s.status === 'active' ? '<span class="pill green">Active</span>' : '<span class="pill red">Disabled</span>'}</td>
-          <td style="white-space:nowrap;">${escapeHtml(formatDate(s.createdAt))}</td>
-          <td>
-            <div class="table-actions">
-              <button class="icon-btn-sm" title="Edit" onclick="editStaff('${s.id}')">
-                <i class="fas fa-pen"></i>
-              </button>
-              ${!isSelf ? `<button class="icon-btn-sm danger" title="Delete" onclick="deleteStaff('${s.id}', '${escapeHtml(s.name).replace(/'/g,"\\'")}')">
-                <i class="fas fa-trash"></i>
-              </button>` : ''}
-            </div>
-          </td>
-        </tr>`;
-      }).join('');
-    }
-
-    // ============================================================
-    // DRAWER — USER / PROVIDER / OPERATOR PROFILES
+    // DRAWER PROFILES
     // ============================================================
     function openDrawer() {
       document.getElementById('drawerOverlay').classList.add('show');
@@ -2050,7 +1564,7 @@
       const calls = userActivity.filter(a => str(a.action).startsWith('call_click')).length;
       const whats = userActivity.filter(a => str(a.action).startsWith('whatsapp_click')).length;
 
-      let html = `
+      document.getElementById('drawerBody').innerHTML = `
         <div class="drawer-stat-row">
           <div class="drawer-stat"><div class="v">${userActivity.length}</div><div class="l">Total</div></div>
           <div class="drawer-stat"><div class="v">${calls}</div><div class="l">Calls</div></div>
@@ -2077,8 +1591,6 @@
           </div>
         </div>
       `;
-
-      document.getElementById('drawerBody').innerHTML = html;
       openDrawer();
     };
 
@@ -2100,7 +1612,7 @@
       const calls = provActivity.filter(a => str(a.action).startsWith('call_click')).length;
       const whats = provActivity.filter(a => str(a.action).startsWith('whatsapp_click')).length;
 
-      let html = `
+      document.getElementById('drawerBody').innerHTML = `
         <div class="drawer-stat-row">
           <div class="drawer-stat"><div class="v">${provActivity.length}</div><div class="l">Total</div></div>
           <div class="drawer-stat"><div class="v">${calls}</div><div class="l">Calls</div></div>
@@ -2135,8 +1647,6 @@
           </div>
         </div>
       `;
-
-      document.getElementById('drawerBody').innerHTML = html;
       openDrawer();
     };
 
@@ -2155,7 +1665,7 @@
       const pros = opReports.reduce((s, r) => s + (parseInt(r.pros) || 0), 0);
       const locations = new Set(opReports.map(r => str(r.location)).filter(Boolean));
 
-      let html = `
+      document.getElementById('drawerBody').innerHTML = `
         <div class="drawer-stat-row">
           <div class="drawer-stat"><div class="v">${opReports.length}</div><div class="l">Reports</div></div>
           <div class="drawer-stat"><div class="v">${sellers}</div><div class="l">Sellers</div></div>
@@ -2182,158 +1692,56 @@
           </div>
         </div>
       `;
-
-      document.getElementById('drawerBody').innerHTML = html;
       openDrawer();
     };
-
-    // ============================================================
-    // STAFF MODAL
-    // ============================================================
-    const staffModal = document.getElementById('staffModal');
-    const staffForm = document.getElementById('staffForm');
-
-    document.getElementById('addStaffBtn').addEventListener('click', () => {
-      document.getElementById('staffModalTitle').textContent = 'Add Staff';
-      document.getElementById('staffModalSub').textContent = 'Create a new staff account';
-      document.getElementById('staffId').value = '';
-      document.getElementById('staffName').value = '';
-      document.getElementById('staffEmail').value = '';
-      document.getElementById('staffPassword').value = '';
-      document.getElementById('staffPassword').placeholder = 'Min 8 characters';
-      document.getElementById('pwHint').textContent = '';
-      document.getElementById('staffRoleSelect').value = 'operator';
-      document.getElementById('staffStatus').value = 'active';
-      document.getElementById('staffEmail').disabled = false;
-      staffModal.classList.add('show');
-    });
-
-    document.getElementById('staffCancel').addEventListener('click', () => {
-      staffModal.classList.remove('show');
-    });
-    staffModal.addEventListener('click', (e) => {
-      if (e.target === staffModal) staffModal.classList.remove('show');
-    });
-
-    window.editStaff = function(id) {
-      const s = allStaff.find(x => x.id === id);
-      if (!s) return;
-      document.getElementById('staffModalTitle').textContent = 'Edit Staff';
-      document.getElementById('staffModalSub').textContent = 'Update staff details';
-      document.getElementById('staffId').value = s.id;
-      document.getElementById('staffName').value = s.name;
-      document.getElementById('staffEmail').value = s.email;
-      document.getElementById('staffPassword').value = '';
-      document.getElementById('staffPassword').placeholder = 'Leave blank to keep current';
-      document.getElementById('pwHint').textContent = '(leave blank to keep)';
-      document.getElementById('staffRoleSelect').value = s.role;
-      document.getElementById('staffStatus').value = s.status;
-      document.getElementById('staffEmail').disabled = true;
-      staffModal.classList.add('show');
-    };
-
-    window.deleteStaff = async function(id, name) {
-      if (!confirm(`Delete staff "${name}"? This cannot be undone.`)) return;
-      try {
-        const res = await fetch(`/api/auth/staff?id=${id}`, { method: 'DELETE' });
-        const data = await res.json();
-        if (!data.ok) throw new Error(data.error);
-        toast('Staff deleted', 'success');
-        loadStaff();
-      } catch (err) {
-        toast(err.message || 'Delete failed', 'error');
-      }
-    };
-
-    staffForm.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const id = document.getElementById('staffId').value;
-      const name = document.getElementById('staffName').value.trim();
-      const email = document.getElementById('staffEmail').value.trim();
-      const password = document.getElementById('staffPassword').value;
-      const role = document.getElementById('staffRoleSelect').value;
-      const status = document.getElementById('staffStatus').value;
-
-      const submitBtn = document.getElementById('staffSubmit');
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving…';
-
-      try {
-        let res, data;
-        if (id) {
-          res = await fetch(`/api/auth/staff?id=${id}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, role, status, password: password || undefined })
-          });
-        } else {
-          res = await fetch('/api/auth/staff', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, email, password, role })
-          });
-        }
-        data = await res.json();
-        if (!data.ok) throw new Error(data.error || 'Save failed');
-
-        toast(id ? 'Staff updated' : 'Staff added', 'success');
-        staffModal.classList.remove('show');
-        loadStaff();
-      } catch (err) {
-        toast(err.message, 'error');
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = '<i class="fas fa-check"></i> Save';
-      }
-    });
 
     // ============================================================
     // FILTER LISTENERS
     // ============================================================
     ['repSearch','repOperator','repLocation','repContent','repDateFrom','repDateTo'].forEach(id => {
-      document.getElementById(id).addEventListener('input', renderReports);
-      document.getElementById(id).addEventListener('change', renderReports);
+      const el = document.getElementById(id);
+      el.addEventListener('input', renderReports);
+      el.addEventListener('change', renderReports);
     });
     ['actSearch','actType','actProvider','actUser','actPrimer','actDateFrom','actDateTo'].forEach(id => {
-      document.getElementById(id).addEventListener('input', renderActivity);
-      document.getElementById(id).addEventListener('change', renderActivity);
+      const el = document.getElementById(id);
+      el.addEventListener('input', renderActivity);
+      el.addEventListener('change', renderActivity);
     });
     ['provSearch','provService','provPrimer'].forEach(id => {
-      document.getElementById(id).addEventListener('input', renderProviders);
-      document.getElementById(id).addEventListener('change', renderProviders);
+      const el = document.getElementById(id);
+      el.addEventListener('input', renderProviders);
+      el.addEventListener('change', renderProviders);
     });
     ['usrSearch','usrCity'].forEach(id => {
-      document.getElementById(id).addEventListener('input', renderUsers);
-      document.getElementById(id).addEventListener('change', renderUsers);
-    });
-    ['staffSearch','staffRole'].forEach(id => {
-      document.getElementById(id).addEventListener('input', renderStaff);
-      document.getElementById(id).addEventListener('change', renderStaff);
+      const el = document.getElementById(id);
+      el.addEventListener('input', renderUsers);
+      el.addEventListener('change', renderUsers);
     });
 
-    // Refresh button
+    // Refresh
     document.getElementById('refreshBtn').addEventListener('click', async function() {
       this.innerHTML = '<i class="fas fa-sync-alt fa-spin"></i> Refreshing';
       this.disabled = true;
       await Promise.all([loadReports(), loadActivity()]);
-      const activeSection = document.querySelector('.section.active')?.dataset.section;
-      if (activeSection === 'staff') await loadStaff();
       this.innerHTML = '<i class="fas fa-sync-alt"></i> Refresh';
       this.disabled = false;
       toast('Data refreshed', 'success');
     });
 
-    // ============================================================
-    // BOOT
-    // ============================================================
+    // Boot
     (async function boot() {
-      const ok = await checkAuth();
-      if (!ok) return;
       await Promise.all([loadReports(), loadActivity()]);
       renderOverviewStats();
       renderRecentReports();
       renderRecentActivity();
     })();
+
+    // Auto-refresh every 60s
+    setInterval(async () => {
+      await Promise.all([loadReports(), loadActivity()]);
+      renderOverviewStats();
+    }, 60000);
   </script>
 
 </body>
