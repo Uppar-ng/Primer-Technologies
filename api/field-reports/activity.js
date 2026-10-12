@@ -1,10 +1,8 @@
 // ============================================================
 // GET /api/field-reports/activity
 // Returns click activity rows from the second Google Sheet.
-// Requires the "view_activity" permission.
+// No auth — Sheet must be set to "Anyone with the link → Viewer"
 // ============================================================
-
-import { requirePermission } from '../_lib/auth.js';
 
 const SHEET_ID = '1dawpQ4Po9h37RZtwaP9EuxJ7U1lsD3wEdM8TsXOmZHc';
 const SHEET_TAB = 'Sheet1';
@@ -37,10 +35,6 @@ export default async function handler(req, res) {
   if (req.method !== 'GET') {
     return res.status(405).json({ ok: false, error: 'Method not allowed' });
   }
-
-  // Auth + permission check
-  const session = await requirePermission(req, res, 'view_activity');
-  if (!session) return;
 
   try {
     const upstream = await fetch(gvizUrl(), { cache: 'no-store' });
@@ -79,7 +73,7 @@ export default async function handler(req, res) {
       return db - da;
     });
 
-    res.setHeader('Cache-Control', 'private, s-maxage=30, stale-while-revalidate=60');
+    res.setHeader('Cache-Control', 'public, s-maxage=30, stale-while-revalidate=60');
     return res.status(200).json({
       ok: true,
       count: activity.length,
