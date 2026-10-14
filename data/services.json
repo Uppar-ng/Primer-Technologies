@@ -1,6 +1,6 @@
 [
   {
-    "id": "chinedu-okafor",
+    "id": "musa-ibrahim",
     "title": "Professional House Cleaning & Deep Sanitization",
     "description": "Full home deep-cleaning, sanitization and post-construction cleanup by trained professionals.",
     "location": "Lekki, Lagos",
@@ -10,7 +10,7 @@
     "yearsExperience": 8,
     "responseTime": "Within 1 hr",
     "seller": {
-      "name": "Chinedu Okafor",
+      "name": "Musa Ibrahim",
       "profilePic": "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=200&h=200&fit=crop&q=80",
       "rating": 4.9,
       "phone": "",
@@ -100,7 +100,7 @@
     "featured": false
   },
   {
-    "id": "blessing-eze",
+    "id": "aisha-mohammed",
     "title": "House & Office Painting – Interior and Exterior",
     "description": "Interior & exterior wall painting, POP finishing, screeding and wallpaper installation.",
     "location": "Surulere, Lagos",
@@ -110,7 +110,7 @@
     "yearsExperience": 7,
     "responseTime": "Within 3 hrs",
     "seller": {
-      "name": "Blessing Eze",
+      "name": "Aisha Mohammed",
       "profilePic": "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=200&h=200&fit=crop&q=80",
       "rating": 4.8,
       "phone": "",
@@ -140,7 +140,7 @@
     "featured": true
   },
   {
-    "id": "amara-okonkwo",
+    "id": "fatima-bello",
     "title": "Interior Design & Home Styling Consultation",
     "description": "Full home & office interior design, space planning, mood boards and furniture sourcing.",
     "location": "Victoria Island, Lagos",
@@ -150,7 +150,7 @@
     "yearsExperience": 10,
     "responseTime": "Within 4 hrs",
     "seller": {
-      "name": "Amara Okonkwo",
+      "name": "Fatima Bello",
       "profilePic": "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=200&h=200&fit=crop&q=80",
       "rating": 5.0,
       "phone": "",
@@ -260,7 +260,7 @@
     "featured": false
   },
   {
-    "id": "chukwudi-eze",
+    "id": "umar-sani",
     "title": "Professional Home Moving & Packing Service",
     "description": "Home and office relocation, packing, loading, transport and unpacking services.",
     "location": "Yaba, Lagos",
@@ -270,7 +270,7 @@
     "yearsExperience": 5,
     "responseTime": "Within 2 hrs",
     "seller": {
-      "name": "Chukwudi Eze",
+      "name": "Umar Sani",
       "profilePic": "https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=200&h=200&fit=crop&q=80",
       "rating": 4.7,
       "phone": "",
@@ -300,7 +300,7 @@
     "featured": false
   },
   {
-    "id": "adaeze-nnamani",
+    "id": "hauwa-abubakar",
     "title": "Hairstyling & Beauty Services at Home",
     "description": "Home-service hairstyling, braiding, makeup, manicure and pedicure by certified stylists.",
     "location": "Ikoyi, Lagos",
@@ -310,7 +310,7 @@
     "yearsExperience": 8,
     "responseTime": "Within 1 hr",
     "seller": {
-      "name": "Adaeze Nnamani",
+      "name": "Hauwa Abubakar",
       "profilePic": "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=200&h=200&fit=crop&q=80",
       "rating": 4.9,
       "phone": "",
