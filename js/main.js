@@ -473,6 +473,73 @@ function normalizeService(s) {
 }
 
 // ============================================================
+// RECOMMENDATION ALGORITHM
+// ============================================================
+function getUserState() {
+  const user = getCurrentUser();
+  if (user && user.state) {
+    return user.state;
+  }
+  return new Promise((resolve) => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        () => { resolve('Lagos'); },
+        () => { resolve(null); },
+        { timeout: 5000 }
+      );
+    } else {
+      resolve(null);
+    }
+  });
+}
+
+function shuffleArray(array) {
+  const arr = [...array];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function recommendProducts(products, state, count) {
+  if (!products || products.length === 0) return [];
+  
+  let pool = products;
+  if (state) {
+    const stateFiltered = products.filter(p => p.location && p.location.includes(state));
+    if (stateFiltered.length >= count) {
+      pool = stateFiltered;
+    } else if (stateFiltered.length > 0) {
+      const others = products.filter(p => !p.location || !p.location.includes(state));
+      pool = [...stateFiltered, ...shuffleArray(others).slice(0, count - stateFiltered.length)];
+    }
+  }
+  
+  return shuffleArray(pool).slice(0, count);
+}
+
+// ============================================================
+// RECOMMEND SERVICES (Find a Pro) — Same logic as products
+// ============================================================
+function recommendServices(services, state, count) {
+  if (!services || services.length === 0) return [];
+  
+  let pool = services;
+  if (state) {
+    const stateFiltered = services.filter(s => s.location && s.location.includes(state));
+    if (stateFiltered.length >= count) {
+      pool = stateFiltered;
+    } else if (stateFiltered.length > 0) {
+      const others = services.filter(s => !s.location || !s.location.includes(state));
+      pool = [...stateFiltered, ...shuffleArray(others).slice(0, count - stateFiltered.length)];
+    }
+  }
+  
+  return shuffleArray(pool).slice(0, count);
+}
+
+// ============================================================
 // RENDER SERVICES (homepage cards — name + trade + avatar)
 // ============================================================
 function renderServices(services, containerId) {
@@ -543,53 +610,6 @@ function renderServices(services, containerId) {
       </div>
     `;
   }).join('');
-}
-
-// ============================================================
-// RECOMMENDATION ALGORITHM
-// ============================================================
-function getUserState() {
-  const user = getCurrentUser();
-  if (user && user.state) {
-    return user.state;
-  }
-  return new Promise((resolve) => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        () => { resolve('Lagos'); },
-        () => { resolve(null); },
-        { timeout: 5000 }
-      );
-    } else {
-      resolve(null);
-    }
-  });
-}
-
-function shuffleArray(array) {
-  const arr = [...array];
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-  return arr;
-}
-
-function recommendProducts(products, state, count) {
-  if (!products || products.length === 0) return [];
-  
-  let pool = products;
-  if (state) {
-    const stateFiltered = products.filter(p => p.location && p.location.includes(state));
-    if (stateFiltered.length >= count) {
-      pool = stateFiltered;
-    } else if (stateFiltered.length > 0) {
-      const others = products.filter(p => !p.location || !p.location.includes(state));
-      pool = [...stateFiltered, ...shuffleArray(others).slice(0, count - stateFiltered.length)];
-    }
-  }
-  
-  return shuffleArray(pool).slice(0, count);
 }
 
 // ============================================================
@@ -886,6 +906,7 @@ window.openSignup = openSignup;
 window.viewStore = viewStore;
 window.getUserState = getUserState;
 window.recommendProducts = recommendProducts;
+window.recommendServices = recommendServices;
 window.initStateDropdown = initStateDropdown;
 window.getSellerName = getSellerName;
 window.getSellerPic = getSellerPic;
