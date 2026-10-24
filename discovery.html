@@ -2,1098 +2,842 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>Discover – Zaure</title>
-  <meta name="description" content="Swipe through products near you on Zaure.">
-  <meta name="theme-color" content="#000000">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="description" content="Discover products and services on Zaure - Nigeria's most trusted online marketplace.">
   <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    html, body {
-      height: 100%;
-      overflow: hidden;
-      background: #000;
-      font-family: 'Inter', -apple-system, sans-serif;
-      color: #fff;
-      -webkit-font-smoothing: antialiased;
-      overscroll-behavior: none;
-      -webkit-tap-highlight-color: transparent;
+    /* ============================================
+       UPDATED THEME (NAVY) - Matching Post Page
+       ============================================ */
+    :root {
+      --navy: #0f2940;
+      --navy-2: #1a3650;
+      --border: #e5ecf3;
+      --text: #0f2940;
+      --text-secondary: #64748b;
+      --surface: #ffffff;
+      --surface-alt: #f8fbfe;
     }
 
-    body {
+    .search-header {
+      background: var(--surface); border-radius: 20px; padding: 24px;
+      border: 1px solid var(--border); margin-bottom: 20px;
+    }
+    .search-header .search-query { font-size: 1.4rem; font-weight: 700; color: var(--text); }
+    .search-header .search-query span { color: var(--navy-2); }
+    .search-header .search-meta { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 8px; color: var(--text-secondary); font-size: 0.9rem; }
+    .search-header .search-meta i { color: var(--navy-2); }
+    .search-header .type-breakdown {
+      display: inline-flex; gap: 12px; align-items: center;
+    }
+    .search-header .type-breakdown span {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 2px 10px; border-radius: 20px;
+      background: var(--surface-alt);
+      font-size: 0.78rem; font-weight: 600;
+    }
+    .search-header .type-breakdown span.products { color: var(--navy-2); }
+    .search-header .type-breakdown span.services { color: var(--navy-2); background: rgba(26,54,80,0.1); }
+
+    .refine-section {
+      background: var(--surface); border-radius: 16px; padding: 16px 20px;
+      border: 1px solid var(--border); margin: 16px 0;
+      display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between;
+    }
+    .refine-section .refine-group { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .refine-section .refine-group label { font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); }
+    .refine-section .refine-group .custom-select { min-width: 150px; position: relative; }
+    .refine-section .refine-group .custom-select-trigger {
+      padding: 6px 12px; border: 1px solid var(--border); border-radius: 8px;
+      font-size: 0.85rem; background: var(--input-bg); color: var(--text);
+      cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    }
+    .refine-section .refine-group .custom-select-dropdown {
+      position: absolute; top: calc(100% + 4px); left: 0; right: 0;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+      box-shadow: var(--shadow-hover); z-index: 10; max-height: 200px; overflow-y: auto;
+      display: none;
+    }
+    .refine-section .refine-group .custom-select.active .custom-select-dropdown { display: block; }
+    .refine-section .refine-group .custom-select-options { list-style: none; padding: 0; margin: 0; }
+    .refine-section .refine-group .custom-select-options li {
+      padding: 8px 12px; cursor: pointer; font-size: 0.85rem; color: var(--text);
+      transition: background 0.2s;
+    }
+    .refine-section .refine-group .custom-select-options li:hover { background: var(--surface-alt); }
+
+    .filter-chips { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0; }
+    .filter-chips .chip {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
+      padding: 4px 14px; font-size: 0.75rem; font-weight: 500; color: var(--text-secondary);
+      cursor: pointer; transition: 0.2s;
+    }
+    .filter-chips .chip:hover { border-color: var(--text); color: var(--text); }
+    .filter-chips .chip.active { background: var(--navy-2); color: white; border-color: var(--navy-2); }
+    [data-theme="dark"] .filter-chips .chip.active { background: var(--navy-2); border-color: var(--navy-2); }
+    .filter-chips .chip i { margin-right: 4px; }
+    .filter-chips .chip.chip-type { border-style: dashed; }
+    .filter-chips .chip.chip-type.active { border-style: solid; }
+
+    .empty-state {
+      text-align: center; padding: 60px 20px; background: var(--surface);
+      border-radius: 20px; border: 1px solid var(--border);
+    }
+    .empty-state i { font-size: 3rem; color: var(--text-secondary); margin-bottom: 16px; }
+    .empty-state h3 { font-size: 1.2rem; color: var(--text); margin-bottom: 8px; }
+    .empty-state p { color: var(--text-secondary); font-size: 0.95rem; }
+    .empty-state .btn-primary { width: auto; padding: 10px 28px; margin-top: 16px; display: inline-flex; background: var(--navy-2); color: white; border-radius: 30px; text-decoration: none; }
+    .empty-state .suggestions { margin-top: 16px; display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+    .empty-state .suggestions .suggestion-chip {
+      background: var(--surface-alt); padding: 6px 16px; border-radius: 20px;
+      font-size: 0.85rem; cursor: pointer; color: var(--text); transition: 0.2s;
+    }
+    .empty-state .suggestions .suggestion-chip:hover { background: var(--text); color: var(--surface); }
+
+    .pagination {
+      display: flex; justify-content: center; gap: 6px; margin-top: 30px; padding: 20px 0;
+      align-items: center;
+    }
+    .pagination button {
+      padding: 8px 14px; border: 1px solid var(--border); border-radius: 8px;
+      background: var(--surface); color: var(--text); cursor: pointer; font-size: 0.85rem;
+      transition: 0.2s; min-width: 40px;
+    }
+    .pagination button:hover:not(:disabled) { background: var(--surface-alt); border-color: var(--text); }
+    .pagination button.active { background: var(--navy-2); color: white; border-color: var(--navy-2); }
+    [data-theme="dark"] .pagination button.active { background: var(--navy-2); border-color: var(--navy-2); }
+    .pagination button:disabled { opacity: 0.4; cursor: not-allowed; }
+    .pagination .ellipsis { display: flex; align-items: center; padding: 0 4px; color: var(--text-secondary); }
+
+    .service-result-marker {
+      position: absolute; top: 12px; left: 12px; z-index: 3;
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 4px 10px; border-radius: 20px;
+      background: var(--navy-2);
+      color: white; font-size: 0.58rem; font-weight: 800;
+      letter-spacing: 0.6px; text-transform: uppercase;
+      box-shadow: 0 4px 10px rgba(15,41,64,0.3);
+    }
+    .service-result-marker i { font-size: 0.6rem; }
+
+    /* FIX: Image container to prevent zoom */
+    .listing-img-container {
+      height: 180px;
+      background: #f8fbfe;
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-
-    /* ============================================================
-       STAGE — full screen on mobile, phone-frame on desktop
-       ============================================================ */
-    .stage {
       position: relative;
-      width: 100%;
-      height: 100vh;
-      height: 100dvh;
-      background: #000;
       overflow: hidden;
+      padding: 10px; /* Adds breathing room so images don't touch the edges */
     }
-
-    @media (min-width: 768px) {
-      body {
-        background:
-          radial-gradient(circle at 50% 20%, #1a3650 0%, #0f2940 45%, #000 100%);
-      }
-      .stage {
-        width: 420px;
-        height: 88vh;
-        max-height: 860px;
-        border-radius: 32px;
-        box-shadow:
-          0 60px 120px rgba(0,0,0,0.7),
-          0 0 0 8px rgba(255,255,255,0.06),
-          0 0 0 1px rgba(255,255,255,0.12);
-      }
-    }
-
-    /* ============================================================
-       TOP BAR
-       ============================================================ */
-    .topbar {
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      z-index: 20;
-      padding: calc(14px + env(safe-area-inset-top)) 14px 28px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      background: linear-gradient(180deg, rgba(0,0,0,0.72) 0%, transparent 100%);
-      pointer-events: none;
-    }
-    .topbar > * { pointer-events: auto; }
-
-    .back-btn {
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      background: rgba(0,0,0,0.5);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.15);
-      color: #fff;
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.95rem;
-      text-decoration: none;
-      transition: transform 0.2s, background 0.2s;
-    }
-    .back-btn:hover { background: rgba(0,0,0,0.7); transform: scale(1.05); }
-    .back-btn:active { transform: scale(0.95); }
-
-    .loc-toggle {
-      display: flex;
-      background: rgba(0,0,0,0.55);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 40px;
-      padding: 4px;
-      gap: 2px;
-    }
-    .loc-toggle button {
-      padding: 7px 14px;
-      border-radius: 30px;
-      border: none;
-      background: transparent;
-      color: rgba(255,255,255,0.7);
-      font-family: inherit;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.3px;
-      cursor: pointer;
-      transition: all 0.2s;
-      white-space: nowrap;
-    }
-    .loc-toggle button.active {
-      background: linear-gradient(135deg, #D4B87A, #B49450);
-      color: #1a2c3d;
-      box-shadow: 0 2px 8px rgba(212,184,122,0.4);
-    }
-
-    /* ============================================================
-       REELS CONTAINER (vertical scroll)
-       ============================================================ */
-    .reels {
-      width: 100%;
-      height: 100%;
-      overflow-y: scroll;
-      scroll-snap-type: y mandatory;
-      scrollbar-width: none;
-      -webkit-overflow-scrolling: touch;
-      overscroll-behavior-y: contain;
-    }
-    .reels::-webkit-scrollbar { display: none; }
-
-    .slide {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      scroll-snap-align: start;
-      scroll-snap-stop: always;
-      overflow: hidden;
-      background: #000;
-    }
-
-    /* ============================================================
-       IMAGE TRACK (horizontal scroll per slide)
-       ============================================================ */
-    .slide-images {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      overflow-x: auto;
-      overflow-y: hidden;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: none;
-      -webkit-overflow-scrolling: touch;
-      overscroll-behavior-x: contain;
-    }
-    .slide-images::-webkit-scrollbar { display: none; }
-
-    .slide-image {
-      flex-shrink: 0;
-      width: 100%;
-      height: 100%;
-      scroll-snap-align: start;
-      scroll-snap-stop: always;
-      position: relative;
-    }
-    .slide-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      user-select: none;
-      -webkit-user-drag: none;
-    }
-
-    /* Placeholder for products without images */
-    .slide-image-placeholder {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-      background:
-        radial-gradient(circle at 30% 30%, rgba(212,184,122,0.15) 0%, transparent 60%),
-        radial-gradient(circle at 70% 70%, rgba(47,111,158,0.2) 0%, transparent 60%),
-        linear-gradient(135deg, #1a3650 0%, #0f2940 100%);
-    }
-    .slide-image-placeholder i {
-      font-size: 4rem;
-      color: rgba(212,184,122,0.6);
-    }
-    .slide-image-placeholder span {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: rgba(255,255,255,0.55);
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-
-    /* Gradient overlay for readability */
-    .slide::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        180deg,
-        rgba(0,0,0,0.55) 0%,
-        rgba(0,0,0,0) 18%,
-        rgba(0,0,0,0) 42%,
-        rgba(0,0,0,0.72) 78%,
-        rgba(0,0,0,0.94) 100%
-      );
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    /* ============================================================
-       IMAGE DOTS
-       ============================================================ */
-    .image-dots {
-      position: absolute;
-      top: calc(62px + env(safe-area-inset-top));
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 5px;
-      z-index: 15;
-      padding: 6px 10px;
-      background: rgba(0,0,0,0.4);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-radius: 20px;
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-    .image-dots .dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.4);
-      transition: all 0.3s;
-      cursor: pointer;
-    }
-    .image-dots .dot.active {
-      background: #D4B87A;
-      width: 22px;
-      border-radius: 3px;
-    }
-
-    /* ============================================================
-       PRODUCT INFO (bottom-left)
-       ============================================================ */
-    .product-info {
-      position: absolute;
-      bottom: calc(24px + env(safe-area-inset-bottom));
-      left: 16px;
-      right: 88px;
-      z-index: 10;
-      color: #fff;
-    }
-
-    .product-badges {
-      display: flex;
-      gap: 6px;
-      margin-bottom: 10px;
-      flex-wrap: wrap;
-    }
-    .p-badge {
-      padding: 4px 10px;
-      border-radius: 20px;
-      font-size: 0.6rem;
-      font-weight: 800;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .p-badge.featured {
-      background: linear-gradient(135deg, #D4B87A, #B49450);
-      color: #1a2c3d;
-    }
-    .p-badge.boosted {
-      background: rgba(255,255,255,0.15);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      color: #fff;
-      border: 1px solid rgba(255,255,255,0.2);
-    }
-
-    .product-price {
-      font-size: 1.65rem;
-      font-weight: 800;
-      color: #D4B87A;
-      letter-spacing: -0.6px;
-      margin-bottom: 4px;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.6);
-      line-height: 1.1;
-    }
-    .product-title {
-      font-size: 1rem;
-      font-weight: 700;
-      line-height: 1.3;
-      margin-bottom: 10px;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.6);
-    }
-    .product-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      font-size: 0.75rem;
-      color: rgba(255,255,255,0.88);
-      margin-bottom: 12px;
-    }
-    .product-meta span {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .product-meta i {
-      color: #D4B87A;
-      font-size: 0.7rem;
-    }
-
-    .product-seller {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 6px 14px 6px 6px;
-      background: rgba(255,255,255,0.1);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 40px;
-      width: fit-content;
+    .listing-img-container img {
       max-width: 100%;
-    }
-    .seller-avatar {
-      width: 32px; height: 32px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #D4B87A, #B49450);
-      color: #1a2c3d;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.7rem; font-weight: 800;
-      flex-shrink: 0;
-      overflow: hidden;
-    }
-    .seller-avatar img {
-      width: 100%; height: 100%; object-fit: cover;
-    }
-    .seller-info { min-width: 0; }
-    .seller-name {
-      font-size: 0.8rem;
-      font-weight: 700;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 170px;
-    }
-    .seller-verified {
-      font-size: 0.65rem;
-      color: rgba(255,255,255,0.75);
-      display: flex;
-      align-items: center;
-      gap: 3px;
-      margin-top: 1px;
-    }
-    .seller-verified i {
-      color: #4ade80;
-      font-size: 0.6rem;
+      max-height: 100%;
+      object-fit: contain; /* Shows full image without cropping/zooming */
+      display: block;
     }
 
-    /* ============================================================
-       ACTION BUTTONS (right side)
-       ============================================================ */
-    .product-actions {
+    /* WhatsApp Button on Cards */
+    .card-wa-btn {
       position: absolute;
+      bottom: 12px;
       right: 12px;
-      bottom: calc(100px + env(safe-area-inset-bottom));
-      z-index: 10;
+      z-index: 4;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #25D366;
+      color: white;
       display: flex;
-      flex-direction: column;
-      gap: 18px;
       align-items: center;
-    }
-
-    .action-btn {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      background: none;
-      border: none;
-      color: #fff;
-      cursor: pointer;
-      font-family: inherit;
-      padding: 0;
-      transition: transform 0.2s;
+      justify-content: center;
       text-decoration: none;
-    }
-    .action-btn:active { transform: scale(0.9); }
-
-    .action-circle {
-      width: 48px; height: 48px;
-      border-radius: 50%;
-      background: rgba(0,0,0,0.45);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.15);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.15rem;
-      transition: all 0.2s;
-    }
-    .action-btn:hover .action-circle {
-      background: rgba(0,0,0,0.65);
-      transform: scale(1.08);
-    }
-    .action-circle.whatsapp {
-      background: linear-gradient(135deg, #25D366, #1DA851);
-      border-color: transparent;
-      box-shadow: 0 6px 20px rgba(37,211,102,0.45);
-      animation: waGlow 2.5s ease-in-out infinite;
-    }
-    @keyframes waGlow {
-      0%, 100% { box-shadow: 0 6px 20px rgba(37,211,102,0.45); }
-      50% { box-shadow: 0 6px 28px rgba(37,211,102,0.75); }
-    }
-    .action-circle.view {
-      background: linear-gradient(135deg, #D4B87A, #B49450);
-      color: #1a2c3d;
-      border-color: transparent;
-      box-shadow: 0 6px 20px rgba(212,184,122,0.45);
-    }
-    .action-circle.faved {
-      background: linear-gradient(135deg, #e63946, #c1121f);
-      border-color: transparent;
-    }
-    .action-label {
-      font-size: 0.62rem;
-      font-weight: 700;
-      letter-spacing: 0.3px;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.7);
-    }
-
-    /* ============================================================
-       PROGRESS BAR (very bottom)
-       ============================================================ */
-    .progress-bar {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 3px;
-      background: rgba(255,255,255,0.08);
-      z-index: 30;
-      pointer-events: none;
-    }
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #D4B87A, #B49450);
-      transition: width 0.2s ease;
-      border-radius: 0 3px 3px 0;
-    }
-
-    /* ============================================================
-       SWIPE HINT (first slide only)
-       ============================================================ */
-    .swipe-hint {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 25;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 14px;
-      color: #fff;
-      pointer-events: none;
-      animation: swipeHintFade 5s ease forwards;
-    }
-    .swipe-hint .arrow {
-      width: 48px; height: 48px;
-      border-radius: 50%;
-      background: rgba(0,0,0,0.5);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.25);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.15rem;
-      animation: swipeHintBounce 1.6s ease infinite;
-    }
-    .swipe-hint span {
-      font-size: 0.72rem;
-      font-weight: 800;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      text-shadow: 0 2px 6px rgba(0,0,0,0.8);
-      background: rgba(0,0,0,0.4);
-      padding: 6px 14px;
-      border-radius: 30px;
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-    }
-    @keyframes swipeHintFade {
-      0%, 55% { opacity: 1; }
-      100% { opacity: 0; visibility: hidden; }
-    }
-    @keyframes swipeHintBounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-
-    /* ============================================================
-       STATE OVERLAY (loading / empty)
-       ============================================================ */
-    .state-overlay {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      z-index: 5;
-      padding: 40px 24px;
-      text-align: center;
-      background:
-        radial-gradient(circle at 50% 40%, #1a3650 0%, #0f2940 50%, #000 100%);
-    }
-    .state-overlay i.state-icon {
-      font-size: 3rem;
-      color: #D4B87A;
-      opacity: 0.85;
-    }
-    .state-overlay h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4rem;
-      color: #fff;
-      letter-spacing: -0.3px;
-    }
-    .state-overlay p {
-      font-size: 0.9rem;
-      color: rgba(255,255,255,0.65);
-      line-height: 1.6;
-      max-width: 300px;
-    }
-    .state-overlay button {
-      padding: 12px 28px;
-      border-radius: 60px;
-      border: none;
-      background: linear-gradient(135deg, #D4B87A, #B49450);
-      color: #1a2c3d;
-      font-family: inherit;
-      font-weight: 700;
-      font-size: 0.85rem;
-      cursor: pointer;
-      margin-top: 8px;
-      box-shadow: 0 8px 24px rgba(212,184,122,0.35);
+      font-size: 1rem;
+      box-shadow: 0 4px 12px rgba(37,211,102,0.4);
       transition: transform 0.2s;
     }
-    .state-overlay button:hover { transform: translateY(-2px); }
-    .state-overlay button i { margin-right: 6px; }
-
-    /* ============================================================
-       TOAST
-       ============================================================ */
-    .toast {
-      position: fixed;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%) translateY(100px);
-      background: rgba(15,41,64,0.95);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      color: #fff;
-      padding: 12px 22px;
-      border-radius: 40px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      border: 1px solid rgba(255,255,255,0.12);
-      opacity: 0;
-      transition: all 0.3s cubic-bezier(0.2, 0.8, 0.3, 1);
-      z-index: 9999;
-      pointer-events: none;
-      white-space: nowrap;
-      max-width: 90%;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .toast.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
+    .card-wa-btn:hover { transform: scale(1.1); }
   </style>
 </head>
 <body>
 
-  <div class="stage" id="stage">
-    <!-- Top bar -->
-    <div class="topbar">
-      <a href="/" class="back-btn" aria-label="Back to home">
-        <i class="fas fa-arrow-left"></i>
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="/" class="logo-wrapper">
+        <div class="logo-text">
+          <span class="brand">Zaure</span>
+          <span class="tagline">Buy with Confidence</span>
+        </div>
       </a>
-      <div class="loc-toggle" id="locToggle">
-        <button data-filter="near" class="active">Near you</button>
-        <button data-filter="all">All Nigeria</button>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/category.html?slug=all">Browse</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <button class="icon-btn" id="themeToggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
+        <a href="/favorites.html" class="icon-btn" style="position:relative;text-decoration:none;">
+          <i class="fas fa-heart"></i>
+          <span id="favBadge">0</span>
+        </a>
+        <div id="headerUserArea">
+          <div class="avatar" id="userAvatar" onclick="openSignup()">ZA</div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <div class="breadcrumb">
+      <a href="/">Home</a>
+      <span class="separator"><i class="fas fa-chevron-right"></i></span>
+      <span class="current">Discovery</span>
+    </div>
+
+    <div class="search-header">
+      <div class="search-query">
+        <i class="fas fa-search" style="color:var(--navy-2);"></i>
+        Discover <span id="searchQueryText">all items</span>
+      </div>
+      <div class="search-meta">
+        <span><i class="fas fa-box"></i> <span id="resultCount">0</span> total results</span>
+        <div class="type-breakdown" id="typeBreakdown" style="display:none;">
+          <span class="products"><i class="fas fa-shopping-bag"></i> <span id="productCount">0</span> products</span>
+          <span class="services"><i class="fas fa-user-tie"></i> <span id="serviceCount">0</span> services</span>
+        </div>
+        <span><i class="fas fa-clock"></i> <span id="searchTime">0</span>s</span>
+        <span><i class="fas fa-tag"></i> <span id="categoryCount">0</span> categories</span>
       </div>
     </div>
 
-    <!-- Reels scroll container -->
-    <div class="reels" id="reelsContainer">
-      <!-- Slides injected by JS -->
+    <div class="refine-section">
+      <div class="refine-group">
+        <label><i class="fas fa-sliders-h"></i> Refine:</label>
+
+        <div class="custom-select" id="typeSelect">
+          <div class="custom-select-trigger" id="typeTrigger">
+            <span>All Results</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="custom-select-dropdown">
+            <ul class="custom-select-options" id="typeOptions">
+              <li data-value="all">All Results</li>
+              <li data-value="product">Products Only</li>
+              <li data-value="service">Services Only</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="custom-select" id="sortSelect">
+          <div class="custom-select-trigger" id="sortTrigger">
+            <span>Best Match</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="custom-select-dropdown">
+            <ul class="custom-select-options" id="sortOptions">
+              <li data-value="relevance">Best Match</li>
+              <li data-value="newest">Newest First</li>
+              <li data-value="price-low">Price: Low to High</li>
+              <li data-value="price-high">Price: High to Low</li>
+              <li data-value="popular">Most Popular</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="custom-select" id="categorySelect">
+          <div class="custom-select-trigger" id="categoryTrigger">
+            <span>All Categories</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="custom-select-dropdown">
+            <ul class="custom-select-options" id="categoryOptions">
+              <li data-value="all">All Categories</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="refine-group">
+        <span style="font-size:0.85rem;color:var(--text-secondary);" id="showingCount">Showing 0 results</span>
+      </div>
     </div>
 
-    <!-- Progress bar -->
-    <div class="progress-bar">
-      <div class="progress-fill" id="progressFill" style="width:0%"></div>
+    <div class="filter-chips" id="filterChips">
+      <span class="chip active" data-filter="all" onclick="applyChipFilter('all')"><i class="fas fa-th-list"></i> All</span>
+      <span class="chip" data-filter="featured" onclick="applyChipFilter('featured')"><i class="fas fa-star"></i> Featured</span>
+      <span class="chip" data-filter="boosted" onclick="applyChipFilter('boosted')"><i class="fas fa-bolt"></i> Boosted</span>
+      <span class="chip chip-type" data-filter="products-only" onclick="applyChipFilter('products-only')"><i class="fas fa-shopping-bag"></i> Products</span>
+      <span class="chip chip-type" data-filter="services-only" onclick="applyChipFilter('services-only')"><i class="fas fa-user-tie"></i> Services</span>
+      <span class="chip" data-filter="low-price" onclick="applyChipFilter('low-price')"><i class="fas fa-arrow-down"></i> Under ₦500K</span>
+      <span class="chip" data-filter="high-price" onclick="applyChipFilter('high-price')"><i class="fas fa-arrow-up"></i> Over ₦1M</span>
+    </div>
+
+    <div id="searchResultsContainer" class="grid-view">
+      <div class="grid-2col-listings" id="searchResultsGrid">
+        <div class="listing-card"><div class="listing-img"><i class="fas fa-spinner fa-spin"></i></div><div class="listing-body"><div class="price">Discovering...</div></div></div>
+      </div>
+    </div>
+
+    <div class="pagination" id="pagination">
+      <button id="prevPage" disabled><i class="fas fa-chevron-left"></i></button>
+      <div id="pageNumbers"></div>
+      <button id="nextPage"><i class="fas fa-chevron-right"></i></button>
+    </div>
+
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col brand">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <span style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:white;">Zaure</span>
+            <span style="font-size:0.7rem;color:#94A3B8;">Buy with Confidence</span>
+          </div>
+          <p>Nigeria's most trusted online marketplace. Buy, sell, or trade locally. No commission, no middlemen.</p>
+          <div class="social">
+            <a href="https://twitter.com/zauretech" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com/zauretech" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://linkedin.com/company/zauretech" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://facebook.com/zauretech" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Browse</h4>
+          <a href="/category.html?slug=all">All Items</a>
+          <a href="/category.html?slug=vehicles">Vehicles</a>
+          <a href="/category.html?slug=electronics">Electronics</a>
+          <a href="/category.html?slug=furniture">Furniture</a>
+          <a href="/category.html?slug=fashion">Fashion</a>
+          <a href="/category.html?slug=real-estate">Real Estate</a>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <a href="/help.html">Help Center</a>
+          <a href="/safety.html">Safety Tips</a>
+          <a href="/contact.html">Contact Us</a>
+          <a href="/support.html">Support</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="/about.html">About Us</a>
+          <a href="/careers.html">Careers</a>
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Service</a>
+        </div>
+        <div class="trust-badges">
+          <div class="badges-row">
+            <span class="badge-item"><i class="fas fa-shield-alt"></i> Verified Users</span>
+            <span class="badge-item"><i class="fas fa-handshake"></i> No Commission</span>
+            <span class="badge-item"><i class="fas fa-user-check"></i> Identity Verified</span>
+            <span class="badge-item"><i class="fas fa-lock"></i> Secure Platform</span>
+            <span class="badge-item"><i class="fas fa-clock"></i> 24/7 Support</span>
+            <span class="badge-item"><i class="fas fa-star"></i> Trusted by Thousands</span>
+            <span class="badge-item"><i class="fas fa-phone"></i> Direct Contact</span>
+            <span class="badge-item"><i class="fas fa-credit-card"></i> Secure Payments</span>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>&copy; 2026 <strong>Zaure Technologies</strong>. All rights reserved.</span>
+          <span class="footer-lang"><i class="fas fa-globe"></i> Nigeria · English</span>
+        </div>
+        <div style="grid-column: 1/-1; text-align: center; margin-top: 8px; font-size: 0.8rem; color: #94A3B8;">
+          For info or to report an issue, contact us on WhatsApp: <a href="https://wa.me/2349042339411" target="_blank" style="color: #D4B87A; text-decoration: none; font-weight: 600;">+2349042339411</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="bottom-nav">
+    <a href="/" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
+    <a href="/categories.html" class="nav-item"><i class="fas fa-th-large"></i><span>Categories</span></a>
+    <button class="post-btn" id="fabPostAd"><i class="fas fa-plus"></i></button>
+    <a href="/favorites.html" class="nav-item"><i class="fas fa-heart"></i><span>Favorites</span></a>
+    <a href="/profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
+  </div>
+
+  <div class="modal-overlay" id="signupModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Create your account</h3>
+        <button class="modal-close" id="closeSignupModalBtn"><i class="fas fa-times"></i></button>
+      </div>
+      <form id="signupForm" class="modal-form">
+        <label for="signupName">Full Name</label>
+        <input type="text" id="signupName" placeholder="Enter your full name" required>
+        <label for="signupPhone">Phone Number</label>
+        <input type="tel" id="signupPhone" placeholder="Enter your phone number" required>
+        <label>State</label>
+        <div class="custom-select" id="stateSelect">
+          <div class="custom-select-trigger" id="stateTrigger">
+            <span>Select your state</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="custom-select-dropdown" id="stateDropdown">
+            <input type="text" id="stateSearchInput" placeholder="Search state...">
+            <ul class="custom-select-options" id="stateOptionsList"></ul>
+          </div>
+        </div>
+        <input type="hidden" id="signupState" value="">
+        <label class="terms-checkbox">
+          <input type="checkbox" id="termsCheckbox" required>
+          <span>By creating an account, you agree to Zaure's <a href="/terms.html" target="_blank">Terms</a>, <a href="/conditions.html" target="_blank">Conditions of Use</a>, and <a href="/privacy.html" target="_blank">Privacy Policy</a>.</span>
+        </label>
+        <button type="submit" class="btn-primary">Sign Up</button>
+      </form>
     </div>
   </div>
 
-  <div class="toast" id="toast"></div>
-
   <script src="/js/main.js"></script>
   <script>
-  (function () {
-    'use strict';
+  // ============================================
+  // CONFIGURATION & TRACKING
+  // ============================================
+  const CONFIG = {
+    WHATSAPP_NUMBER: '2349042339411',
+    // ⚠️ PASTE YOUR GOOGLE APPS SCRIPT WEBHOOK URL HERE
+    // (or your Formspree URL if you want it to go to the same place as detail.html)
+    SHEET_WEBHOOK_URL: 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE'
+  };
 
-    // ============================================================
-    // STATE
-    // ============================================================
+  let guestDeviceInfo = null;
+  let guestGPS = { lat: null, lng: null, maps: null };
+
+  // Collect guest data silently in the background
+  async function collectGuestData() {
+    const user = getCurrentUser();
+    
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          guestGPS = {
+            lat: pos.coords.latitude.toFixed(6),
+            lng: pos.coords.longitude.toFixed(6),
+            maps: `https://www.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}`
+          };
+        },
+        () => { console.log('GPS permission denied'); },
+        { timeout: 5000 }
+      );
+    }
+
+    guestDeviceInfo = {
+      userAgent: navigator.userAgent,
+      platform: navigator.platform || 'Unknown',
+      language: navigator.language || 'en',
+      screen: `${screen.width}x${screen.height}`,
+      referrer: document.referrer || 'Direct',
+      pageUrl: window.location.href,
+      isGuest: !user
+    };
+  }
+
+  async function sendToSheet(data) {
+    if (!CONFIG.SHEET_WEBHOOK_URL || CONFIG.SHEET_WEBHOOK_URL.includes('YOUR_GOOGLE')) {
+      console.warn('⚠️ Sheet Webhook URL not configured. Skipping sheet tracking.');
+      return;
+    }
+    try {
+      await fetch(CONFIG.SHEET_WEBHOOK_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      console.log('✅ Sent to Sheet:', data);
+    } catch (err) {
+      console.error('❌ Sheet tracking failed:', err);
+    }
+  }
+
+  // Track WhatsApp Clicks
+  window.trackWhatsAppClick = function(e, type, id, title, sellerName, phone) {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const user = getCurrentUser();
+    const cleanNumber = String(phone || '09042339411').replace(/[^0-9]/g, '');
+    const waMsg = `Hello, I am interested in ${title} on Zaure.`;
+    const waLink = `https://wa.me/${cleanNumber}?text=${encodeURIComponent(waMsg)}`;
+
+    // Send tracking data
+    sendToSheet({
+      type: 'whatsapp_click_discovery',
+      item_type: type,
+      item_id: id,
+      item_title: title,
+      seller_name: sellerName,
+      seller_phone: cleanNumber,
+      user_name: user ? user.name : 'Guest',
+      user_phone: user ? user.phone : 'Not provided',
+      user_gps: guestGPS.maps || 'Not provided',
+      device_info: guestDeviceInfo,
+      timestamp: new Date().toISOString()
+    });
+
+    // Open link
+    setTimeout(() => { window.open(waLink, '_blank'); }, 150);
+  };
+
+  // ============================================
+  // PAGE LOGIC
+  // ============================================
+  document.addEventListener('DOMContentLoaded', async function() {
+    initStateDropdown();
+    collectGuestData();
+
+    let allResults = [];
+    let filteredResults = [];
+    let currentPage = 1;
+    const itemsPerPage = 12;
+    let currentChipFilter = 'all';
+    let currentSort = 'relevance';
+    let currentCategory = 'all';
+    let currentType = 'all';
+
+    const grid = document.getElementById('searchResultsGrid');
+    const prevPageBtn = document.getElementById('prevPage');
+    const nextPageBtn = document.getElementById('nextPage');
+    const pageNumbers = document.getElementById('pageNumbers');
+    const showingCount = document.getElementById('showingCount');
+    const resultCount = document.getElementById('resultCount');
+    const typeBreakdown = document.getElementById('typeBreakdown');
+    const productCountEl = document.getElementById('productCount');
+    const serviceCountEl = document.getElementById('serviceCount');
+
+    const startTime = performance.now();
+
     let allProducts = [];
-    let displayProducts = [];
-    let currentFilter = 'near';
-    let userState = null;
-    let slideObserver = null;
-    let currentSlideIndex = 0;
+    let allServices = [];
+    try { allProducts = await loadProducts(); } catch (e) { console.warn(e); }
+    try { allServices = await loadServices(); } catch (e) { console.warn(e); }
 
-    // ============================================================
-    // HELPERS
-    // ============================================================
-    function escapeHtml(s) {
-      return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({
-        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
-      }[c]));
+    const productCategories = await loadCategories();
+    const serviceCategories = [...new Set(allServices.map(s => s.category).filter(Boolean))]
+      .map(name => ({ slug: name.toLowerCase().replace(/\s+/g, '-'), name }));
+
+    const categoryOptionsList = document.getElementById('categoryOptions');
+    let categoryHtml = '<li data-value="all">All Categories</li>';
+    if (productCategories.length > 0) {
+      categoryHtml += `<li style="pointer-events:none;padding:8px 12px 4px;font-size:0.65rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--text-secondary);opacity:0.7;">Products</li>`;
+      productCategories.forEach(cat => { categoryHtml += `<li data-value="${cat.slug}">${cat.name}</li>`; });
     }
-
-    function formatPrice(price) {
-      if (!price && price !== 0) return 'Contact';
-      const n = Number(price);
-      if (isNaN(n) || n === 0) return 'Contact';
-      if (n >= 1e6) return '₦' + (n / 1e6).toFixed(1).replace(/\.0$/, '') + 'M';
-      return '₦' + n.toLocaleString();
+    if (serviceCategories.length > 0) {
+      categoryHtml += `<li style="pointer-events:none;padding:8px 12px 4px;font-size:0.65rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--text-secondary);opacity:0.7;">Services</li>`;
+      serviceCategories.forEach(cat => { categoryHtml += `<li data-value="${cat.slug}">${cat.name}</li>`; });
     }
+    categoryOptionsList.innerHTML = categoryHtml;
 
-    function getInitials(name) {
-      const parts = String(name || '?').trim().split(/\s+/);
-      if (parts.length === 1) return parts[0].charAt(0).toUpperCase();
-      return (parts[0].charAt(0) + parts[parts.length - 1].charAt(0)).toUpperCase();
-    }
+    function initCustomDropdown(containerId, triggerId, optionsListId, onSelect) {
+      const container = document.getElementById(containerId);
+      const trigger = document.getElementById(triggerId);
+      const optionsList = document.getElementById(optionsListId);
+      if (!container || !trigger || !optionsList) return;
 
-    function getCategoryIcon(cat) {
-      const map = {
-        'electronics': 'laptop',
-        'fashion': 'tshirt',
-        'beauty-health': 'spa',
-        'food-drinks': 'utensils',
-        'home-kitchen': 'couch',
-        'vehicles': 'car',
-        'real-estate': 'home',
-        'furniture': 'couch',
-        'services': 'tools'
-      };
-      return map[cat] || 'box';
-    }
-
-    function showToast(msg) {
-      const t = document.getElementById('toast');
-      t.textContent = msg;
-      t.classList.add('show');
-      clearTimeout(window.__toastT);
-      window.__toastT = setTimeout(() => t.classList.remove('show'), 2400);
-    }
-
-    function buildWhatsAppLink(product) {
-      const raw = product.seller?.whatsapp || product.seller?.phone || '';
-      const digits = String(raw).replace(/\D/g, '');
-      if (!digits) return '';
-      // Ensure Nigerian country code
-      let num = digits;
-      if (num.startsWith('0')) num = '234' + num.slice(1);
-      else if (!num.startsWith('234') && num.length === 10) num = '234' + num;
-      else if (!num.startsWith('234') && num.length > 10) num = '234' + num.replace(/^234/, '');
-      if (num.startsWith('234234')) num = num.slice(3);
-      const msg = encodeURIComponent(`Hi, I saw your listing "${product.title}" on Zaure. Is it still available?`);
-      return `https://wa.me/${num}?text=${msg}`;
-    }
-
-    // ============================================================
-    // FILTERING
-    // ============================================================
-    function filterByLocation(products, state) {
-      if (!state) return [];
-      const s = state.toLowerCase().trim();
-      return products.filter(p => {
-        if (!p.location) return false;
-        return p.location.toLowerCase().includes(s);
-      });
-    }
-
-    function refreshDisplay() {
-      if (currentFilter === 'near' && userState) {
-        const near = filterByLocation(allProducts, userState);
-        if (near.length > 0) {
-          displayProducts = near;
-          return;
-        }
-        // No results near — fall back gracefully and flip the toggle
-        currentFilter = 'all';
-        document.querySelectorAll('.loc-toggle button').forEach(b => {
-          b.classList.toggle('active', b.dataset.filter === 'all');
-        });
-      }
-      displayProducts = [...allProducts];
-    }
-
-    // ============================================================
-    // BUILD SLIDES
-    // ============================================================
-    function buildSlide(product, index) {
-      const slide = document.createElement('div');
-      slide.className = 'slide';
-      slide.dataset.index = String(index);
-      slide.dataset.productId = product.id;
-
-      const images = (product.images || []).filter(Boolean);
-      const hasMultiple = images.length > 1;
-
-      // Image track (horizontal)
-      const track = document.createElement('div');
-      track.className = 'slide-images';
-
-      if (images.length === 0) {
-        const ph = document.createElement('div');
-        ph.className = 'slide-image-placeholder';
-        ph.innerHTML = `
-          <i class="fas fa-${getCategoryIcon(product.category)}"></i>
-          <span>${escapeHtml(product.category || 'Product')}</span>
-        `;
-        track.appendChild(ph);
-      } else {
-        images.forEach((url, i) => {
-          const wrap = document.createElement('div');
-          wrap.className = 'slide-image';
-          const img = document.createElement('img');
-          img.src = url;
-          img.alt = product.title || 'Product image';
-          img.loading = index < 3 ? 'eager' : 'lazy';
-          img.draggable = false;
-          wrap.appendChild(img);
-          track.appendChild(wrap);
-        });
-      }
-
-      slide.appendChild(track);
-
-      // Image dots
-      if (hasMultiple) {
-        const dotsWrap = document.createElement('div');
-        dotsWrap.className = 'image-dots';
-        images.forEach((_, i) => {
-          const d = document.createElement('span');
-          d.className = 'dot' + (i === 0 ? ' active' : '');
-          d.dataset.index = i;
-          d.addEventListener('click', () => {
-            track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
-          });
-          dotsWrap.appendChild(d);
-        });
-        slide.appendChild(dotsWrap);
-
-        // Update dots on horizontal scroll
-        let scrollRaf = null;
-        track.addEventListener('scroll', () => {
-          if (scrollRaf) return;
-          scrollRaf = requestAnimationFrame(() => {
-            scrollRaf = null;
-            const idx = Math.round(track.scrollLeft / track.clientWidth);
-            dotsWrap.querySelectorAll('.dot').forEach((d, i) => {
-              d.classList.toggle('active', i === idx);
-            });
-          });
-        }, { passive: true });
-      }
-
-      // Product info
-      const info = document.createElement('div');
-      info.className = 'product-info';
-
-      const badges = [];
-      if (product.featured) badges.push('<span class="p-badge featured">⭐ Featured</span>');
-      if (product.boosted) badges.push('<span class="p-badge boosted"><i class="fas fa-bolt"></i> Boosted</span>');
-
-      const sellerName = product.seller?.name || 'Zaure Seller';
-      const sellerInitials = product.seller?.initials || getInitials(sellerName);
-      const sellerPic = product.seller?.profilePic || product.seller?.avatar || '';
-      const verified = product.seller?.verified;
-
-      info.innerHTML = `
-        ${badges.length > 0 ? `<div class="product-badges">${badges.join('')}</div>` : ''}
-        <div class="product-price">${formatPrice(product.price)}</div>
-        <div class="product-title">${escapeHtml(product.title)}</div>
-        <div class="product-meta">
-          <span><i class="fas fa-map-pin"></i> ${escapeHtml(product.location || 'Nigeria')}</span>
-          <span><i class="far fa-clock"></i> ${escapeHtml(product.date || '')}</span>
-        </div>
-        <div class="product-seller">
-          <div class="seller-avatar">
-            ${sellerPic
-              ? `<img src="${escapeHtml(sellerPic)}" alt="" onerror="this.style.display='none';this.parentElement.textContent='${sellerInitials}'">`
-              : sellerInitials}
-          </div>
-          <div class="seller-info">
-            <div class="seller-name">${escapeHtml(sellerName)}</div>
-            ${verified ? '<div class="seller-verified"><i class="fas fa-check-circle"></i> Verified</div>' : ''}
-          </div>
-        </div>
-      `;
-      slide.appendChild(info);
-
-      // Action buttons
-      const actions = document.createElement('div');
-      actions.className = 'product-actions';
-
-      const isFav = typeof isFavorite === 'function' ? isFavorite(product.id) : false;
-      const favCircleClass = isFav ? 'action-circle faved' : 'action-circle';
-      const favIcon = isFav ? 'fas fa-heart' : 'far fa-heart';
-      const favLabel = isFav ? 'Saved' : 'Save';
-
-      const waLink = buildWhatsAppLink(product);
-
-      actions.innerHTML = `
-        <button type="button" class="action-btn" data-action="fav" data-product-id="${escapeHtml(product.id)}">
-          <div class="${favCircleClass}"><i class="${favIcon}"></i></div>
-          <span class="action-label">${favLabel}</span>
-        </button>
-        ${waLink ? `
-        <a href="${waLink}" target="_blank" rel="noopener" class="action-btn" data-action="wa">
-          <div class="action-circle whatsapp"><i class="fab fa-whatsapp"></i></div>
-          <span class="action-label">Chat</span>
-        </a>` : ''}
-        <button type="button" class="action-btn" data-action="share" data-product-id="${escapeHtml(product.id)}" data-title="${escapeHtml(product.title)}">
-          <div class="action-circle"><i class="fas fa-share-alt"></i></div>
-          <span class="action-label">Share</span>
-        </button>
-        <button type="button" class="action-btn" data-action="view" data-product-id="${escapeHtml(product.id)}">
-          <div class="action-circle view"><i class="fas fa-shopping-bag"></i></div>
-          <span class="action-label">View</span>
-        </button>
-      `;
-      slide.appendChild(actions);
-
-      // Wire actions
-      actions.querySelector('[data-action="fav"]')?.addEventListener('click', function (e) {
+      trigger.addEventListener('click', function(e) {
         e.stopPropagation();
-        if (typeof getCurrentUser === 'function' && !getCurrentUser()) {
-          if (typeof openSignup === 'function') openSignup();
-          return;
-        }
-        const pid = this.dataset.productId;
-        const nowFav = typeof toggleFavorite === 'function' ? toggleFavorite(pid) : false;
-        const circle = this.querySelector('.action-circle');
-        const icon = circle.querySelector('i');
-        const label = this.querySelector('.action-label');
-        if (nowFav) {
-          circle.classList.add('faved');
-          icon.className = 'fas fa-heart';
-          label.textContent = 'Saved';
-          showToast('Saved to favorites');
-        } else {
-          circle.classList.remove('faved');
-          icon.className = 'far fa-heart';
-          label.textContent = 'Save';
-        }
+        document.querySelectorAll('.refine-section .custom-select.active').forEach(el => {
+          if (el !== container) el.classList.remove('active');
+        });
+        container.classList.toggle('active');
       });
 
-      actions.querySelector('[data-action="view"]')?.addEventListener('click', function () {
-        window.location.href = `/detail.html?id=${encodeURIComponent(this.dataset.productId)}`;
+      optionsList.querySelectorAll('li').forEach(li => {
+        if (!li.dataset.value) return;
+        li.addEventListener('click', function() {
+          trigger.querySelector('span').textContent = this.textContent;
+          container.classList.remove('active');
+          if (onSelect) onSelect(this.dataset.value);
+          applyFilters();
+        });
       });
 
-      actions.querySelector('[data-action="share"]')?.addEventListener('click', async function () {
-        const pid = this.dataset.productId;
-        const title = this.dataset.title || 'Zaure Listing';
-        const url = `${window.location.origin}/detail.html?id=${encodeURIComponent(pid)}`;
-        if (navigator.share) {
-          try { await navigator.share({ title, url }); }
-          catch (e) { /* user cancelled */ }
-        } else {
-          try {
-            await navigator.clipboard.writeText(url);
-            showToast('Link copied to clipboard');
-          } catch {
-            showToast('Could not share');
-          }
-        }
+      document.addEventListener('click', function(e) {
+        if (!container.contains(e.target)) container.classList.remove('active');
       });
-
-      return slide;
     }
 
-    // ============================================================
-    // RENDER ALL
-    // ============================================================
-    function render() {
-      const container = document.getElementById('reelsContainer');
-      container.innerHTML = '';
+    initCustomDropdown('typeSelect', 'typeTrigger', 'typeOptions', (v) => { currentType = v; });
+    initCustomDropdown('sortSelect', 'sortTrigger', 'sortOptions', (v) => { currentSort = v; });
+    initCustomDropdown('categorySelect', 'categoryTrigger', 'categoryOptions', (v) => { currentCategory = v; });
 
-      if (displayProducts.length === 0) {
-        container.innerHTML = `
-          <div class="state-overlay">
-            <i class="fas fa-box-open state-icon"></i>
-            <h2>Nothing to discover yet</h2>
-            <p>${currentFilter === 'near' && userState
-              ? `No listings near ${escapeHtml(userState)} right now. Try switching to "All Nigeria".`
-              : 'There are no listings yet. Come back soon.'}</p>
-            <button onclick="window.location.href='/'">
-              <i class="fas fa-home"></i> Go Home
-            </button>
+    // Discovery page loads all items by default
+    allResults = [
+      ...allProducts.map(p => ({ ...p, _type: 'product', _score: 1 })),
+      ...allServices.map(s => ({ ...s, _type: 'service', _score: 1 }))
+    ];
+
+    function applyFilters() {
+      let filtered = [...allResults];
+
+      if (currentType === 'product') filtered = filtered.filter(p => p._type === 'product');
+      if (currentType === 'service') filtered = filtered.filter(p => p._type === 'service');
+
+      switch (currentChipFilter) {
+        case 'featured': filtered = filtered.filter(p => p.featured); break;
+        case 'boosted': filtered = filtered.filter(p => p.boosted); break;
+        case 'products-only': filtered = filtered.filter(p => p._type === 'product'); break;
+        case 'services-only': filtered = filtered.filter(p => p._type === 'service'); break;
+        case 'low-price': filtered = filtered.filter(p => p._type === 'product' && (p.price || 0) < 500000); break;
+        case 'high-price': filtered = filtered.filter(p => p._type === 'product' && (p.price || 0) > 1000000); break;
+      }
+
+      if (currentCategory !== 'all') {
+        filtered = filtered.filter(p => {
+          const catSlug = p._type === 'service'
+            ? (p.category || '').toLowerCase().replace(/\s+/g, '-')
+            : p.category;
+          return catSlug === currentCategory;
+        });
+      }
+
+      switch (currentSort) {
+        case 'newest': {
+          const prods = filtered.filter(p => p._type === 'product').sort((a, b) => new Date(b.date || '') - new Date(a.date || ''));
+          const servs = filtered.filter(p => p._type === 'service');
+          filtered = [...prods, ...servs];
+          break;
+        }
+        case 'price-low':
+          filtered.sort((a, b) => (a._type === 'product' ? (a.price || 0) : Infinity) - (b._type === 'product' ? (b.price || 0) : Infinity));
+          break;
+        case 'price-high':
+          filtered.sort((a, b) => (b._type === 'product' ? (b.price || 0) : -Infinity) - (a._type === 'product' ? (a.price || 0) : -Infinity));
+          break;
+        case 'popular':
+          filtered.sort((a, b) => (b.views || parseFloat(getSellerRating(b)) || 0) - (a.views || parseFloat(getSellerRating(a)) || 0));
+          break;
+        default:
+          filtered.sort((a, b) => (b._score || 0) - (a._score || 0));
+          break;
+      }
+
+      filteredResults = filtered;
+      currentPage = 1;
+      updateStats(filtered);
+      renderPage();
+    }
+
+    function updateStats(filtered) {
+      resultCount.textContent = filtered.length;
+
+      const prodCount = filtered.filter(p => p._type === 'product').length;
+      const svcCount = filtered.filter(p => p._type === 'service').length;
+      productCountEl.textContent = prodCount;
+      serviceCountEl.textContent = svcCount;
+      typeBreakdown.style.display = (prodCount + svcCount) > 0 ? 'inline-flex' : 'none';
+
+      const uniqueCategories = new Set(filtered.map(p => p._type === 'service' ? (p.category || '').toLowerCase().replace(/\s+/g, '-') : p.category).filter(Boolean));
+      document.getElementById('categoryCount').textContent = uniqueCategories.size;
+    }
+
+    function renderProductCard(p) {
+      let badges = '';
+      if (p.boosted) badges += `<span class="badge-boosted"><i class="fas fa-bolt"></i> Boosted</span>`;
+      if (p.featured) badges += `<span class="badge-featured">Featured</span>`;
+      const price = p.price >= 1e6 ? `₦${(p.price/1e6).toFixed(1)}M` : `₦${(p.price || 0).toLocaleString()}`;
+      
+      const firstImage = p.images && p.images.length > 0 ? p.images[0] : null;
+      const imageHtml = firstImage
+        ? `<img src="${firstImage}" alt="${p.title}" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\\'fas fa-box\\' style=\\'font-size:2.5rem;color:var(--text-secondary);\\'></i>';">`
+        : `<i class="fas fa-box" style="font-size:2.5rem;color:var(--text-secondary);"></i>`;
+
+      const isFav = isFavorite(p.id);
+      const heartIcon = isFav ? 'fas fa-heart' : 'far fa-heart';
+      const heartColor = isFav ? 'color:#e74c3c;' : '';
+      const sellerPhone = p.seller?.whatsapp || p.seller?.phone || '09042339411';
+      const sellerName = p.seller?.name || 'Unknown';
+
+      return `
+        <div class="listing-card" data-id="${p.id}" style="cursor:pointer;border-radius:16px;overflow:hidden;background:var(--surface);border:1px solid var(--border);transition:transform 0.2s,box-shadow 0.2s;position:relative;">
+          <button class="fav-btn" onclick="event.stopPropagation(); toggleFavoriteCard('${p.id}', this)"
+                  style="position:absolute;top:12px;right:12px;z-index:2;background:rgba(255,255,255,0.9);border:none;border-radius:50%;width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;box-shadow:0 2px 8px rgba(0,0,0,0.1);${heartColor}">
+            <i class="${heartIcon}"></i>
+          </button>
+          
+          <div class="listing-img-container" onclick="viewProduct('${p.id}')">
+            ${imageHtml}
+            ${badges}
+            <a href="#" class="card-wa-btn" onclick="trackWhatsAppClick(event, 'product', '${p.id}', '${escapeHtml(p.title).replace(/'/g,"\\'")}', '${escapeHtml(sellerName).replace(/'/g,"\\'")}', '${sellerPhone}')" title="Chat on WhatsApp">
+              <i class="fab fa-whatsapp"></i>
+            </a>
           </div>
-        `;
-        document.getElementById('progressFill').style.width = '0%';
-        return;
-      }
-
-      // Build all slides
-      displayProducts.forEach((p, i) => {
-        container.appendChild(buildSlide(p, i));
-      });
-
-      // Show swipe hint on first slide only
-      if (displayProducts.length > 1) {
-        const firstSlide = container.querySelector('.slide');
-        const hint = document.createElement('div');
-        hint.className = 'swipe-hint';
-        hint.innerHTML = `
-          <div class="arrow"><i class="fas fa-chevron-up"></i></div>
-          <span>Swipe up</span>
-        `;
-        firstSlide.appendChild(hint);
-      }
-
-      // Track active slide via IntersectionObserver
-      if (slideObserver) slideObserver.disconnect();
-      slideObserver = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
-            const idx = parseInt(entry.target.dataset.index, 10);
-            currentSlideIndex = idx;
-            updateProgress(idx, displayProducts.length);
-          }
-        });
-      }, { threshold: [0.5], root: container });
-
-      container.querySelectorAll('.slide').forEach(s => slideObserver.observe(s));
-
-      // Reset progress bar on fresh render
-      updateProgress(0, displayProducts.length);
-
-      // Reset scroll position
-      container.scrollTop = 0;
-    }
-
-    function updateProgress(index, total) {
-      if (total <= 0) return;
-      const pct = ((index + 1) / total) * 100;
-      document.getElementById('progressFill').style.width = pct + '%';
-    }
-
-    // ============================================================
-    // FILTER TOGGLE
-    // ============================================================
-    function wireToggle() {
-      const toggle = document.getElementById('locToggle');
-      if (!toggle) return;
-      toggle.querySelectorAll('button').forEach(btn => {
-        btn.addEventListener('click', () => {
-          if (btn.dataset.filter === currentFilter) return;
-          currentFilter = btn.dataset.filter;
-          toggle.querySelectorAll('button').forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          refreshDisplay();
-          render();
-        });
-      });
-    }
-
-    // ============================================================
-    // KEYBOARD NAVIGATION (desktop)
-    // ============================================================
-    function wireKeyboard() {
-      const container = document.getElementById('reelsContainer');
-      document.addEventListener('keydown', e => {
-        if (['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) return;
-        if (e.key === 'ArrowDown' || e.key === 'PageDown') {
-          e.preventDefault();
-          container.scrollBy({ top: container.clientHeight, behavior: 'smooth' });
-        } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
-          e.preventDefault();
-          container.scrollBy({ top: -container.clientHeight, behavior: 'smooth' });
-        } else if (e.key === 'ArrowLeft') {
-          const slide = container.querySelectorAll('.slide')[currentSlideIndex];
-          const track = slide?.querySelector('.slide-images');
-          if (track) track.scrollBy({ left: -track.clientWidth, behavior: 'smooth' });
-        } else if (e.key === 'ArrowRight') {
-          const slide = container.querySelectorAll('.slide')[currentSlideIndex];
-          const track = slide?.querySelector('.slide-images');
-          if (track) track.scrollBy({ left: track.clientWidth, behavior: 'smooth' });
-        }
-      });
-    }
-
-    // ============================================================
-    // INIT
-    // ============================================================
-    async function init() {
-      // Get user state
-      if (typeof getCurrentUser === 'function') {
-        const user = getCurrentUser();
-        if (user && user.state) userState = user.state;
-      }
-
-      // Show loading
-      const container = document.getElementById('reelsContainer');
-      container.innerHTML = `
-        <div class="state-overlay">
-          <i class="fas fa-spinner fa-spin state-icon"></i>
-          <h2>Loading…</h2>
-          <p>Finding the best products near you.</p>
+          
+          <div class="listing-body" style="padding:12px 14px 14px;" onclick="viewProduct('${p.id}')">
+            <div class="price" style="font-weight:700;font-size:1.1rem;color:var(--text);">${price}</div>
+            <div class="title" style="font-weight:600;font-size:0.9rem;margin:4px 0;color:var(--text);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${p.title}</div>
+            <div class="meta" style="display:flex;gap:12px;font-size:0.7rem;color:var(--text-secondary);margin-top:4px;">
+              <span><i class="fas fa-map-pin"></i> ${p.location || 'Nigeria'}</span>
+              <span><i class="far fa-clock"></i> ${p.date || ''}</span>
+            </div>
+            <div class="listing-footer" style="display:flex;justify-content:space-between;font-size:0.7rem;color:var(--text-secondary);margin-top:8px;padding-top:8px;border-top:1px solid var(--border);">
+              <span><i class="fas fa-store"></i> ${sellerName}</span>
+              <span><i class="far fa-heart"></i> ${isFav ? 'Saved' : 'Save'}</span>
+            </div>
+          </div>
         </div>
       `;
-
-      // Load products
-      try {
-        if (typeof loadProducts === 'function') {
-          allProducts = await loadProducts();
-        }
-        if (!Array.isArray(allProducts)) allProducts = [];
-      } catch (e) {
-        console.warn('Could not load products', e);
-        allProducts = [];
-      }
-
-      // Filter for products that have at least a title (skip broken entries)
-      allProducts = allProducts.filter(p => p && p.id && p.title);
-
-      // If no user state, force "All Nigeria" mode from the start
-      if (!userState) {
-        currentFilter = 'all';
-        const toggle = document.getElementById('locToggle');
-        if (toggle) {
-          toggle.querySelectorAll('button').forEach(b => {
-            b.classList.toggle('active', b.dataset.filter === 'all');
-          });
-        }
-      }
-
-      refreshDisplay();
-
-      // Load theme
-      if (typeof initTheme === 'function') initTheme();
-      if (typeof updateFavoriteBadge === 'function') updateFavoriteBadge();
-
-      // Render
-      render();
-      wireToggle();
-      wireKeyboard();
     }
 
-    document.addEventListener('DOMContentLoaded', init);
-  })();
-  </script>
+    function renderServiceCard(raw) {
+      const p = normalizeService(raw);
+      const sellerName = getSellerName(raw);
+      const profilePic = getSellerPic(raw);
+      const initials = getSellerInitials(raw);
+      const trade = getTradeName(p.category);
 
+      let badges = '';
+      if (p.boosted) badges += `<span class="badge-boosted"><i class="fas fa-bolt"></i> Boosted</span>`;
+      if (p.featured) badges += `<span class="badge-featured">Featured</span>`;
+
+      const avatarInner = profilePic
+        ? `<img src="${profilePic}" alt="${sellerName}" loading="lazy"
+               style="width:100%;height:100%;object-fit:cover;display:block;"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+           <span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:var(--navy-2);font-weight:700;font-size:2rem;">${initials}</span>`
+        : `<span style="display:flex;width:100%;height:100%;align-items:center;justify-content:center;color:var(--navy-2);font-weight:700;font-size:2rem;">${initials}</span>`;
+
+      const isFav = isFavorite(p.id);
+      const heartIcon = isFav ? 'fas fa-heart' : 'far fa-heart';
+      const heartColor = isFav ? 'color:#e74c3c;' : '';
+      const sellerPhone = raw.seller?.whatsapp || raw.seller?.phone || '09042339411';
+
+      return `
+        <div class="listing-card" data-id="${p.id}" style="cursor:pointer;border-radius:16px;overflow:hidden;background:var(--surface);border:1px solid var(--border);transition:transform 0.2s,box-shadow 0.2s;position:relative;">
+          <button class="fav-btn" onclick="event.stopPropagation(); toggleFavoriteCard('${p.id}', this)"
+                  style="position:absolute;top:12px;right:12px;z-index:4;background:rgba(255,255,255,0.9);border:none;border-radius:50%;width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;box-shadow:0 2px 8px rgba(0,0,0,0.1);${heartColor}">
+            <i class="${heartIcon}"></i>
+          </button>
+
+          <div class="listing-img-container" onclick="viewService('${p.id}')" style="background:linear-gradient(135deg,var(--navy-2),var(--navy));">
+            <span class="service-result-marker"><i class="fas fa-user-tie"></i> Service</span>
+            <div style="position:absolute;inset:0;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,0.15) 0%,transparent 60%);"></div>
+            <div style="width:96px;height:96px;border-radius:50%;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 4px rgba(255,255,255,0.15),0 12px 32px rgba(0,0,0,0.3);position:relative;z-index:1;">
+              ${avatarInner}
+            </div>
+            ${badges}
+            <a href="#" class="card-wa-btn" onclick="trackWhatsAppClick(event, 'service', '${p.id}', '${escapeHtml(p.title).replace(/'/g,"\\'")}', '${escapeHtml(sellerName).replace(/'/g,"\\'")}', '${sellerPhone}')" title="Chat on WhatsApp">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+          </div>
+
+          <div class="listing-body" style="padding:14px 14px 14px;" onclick="viewService('${p.id}')">
+            <div class="provider-name" style="font-weight:700;font-size:1rem;color:var(--text);line-height:1.25;letter-spacing:-0.2px;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;">${sellerName}</div>
+            <div class="provider-trade" style="display:inline-flex;align-items:center;gap:5px;font-size:0.7rem;font-weight:700;color:var(--navy-2);text-transform:uppercase;letter-spacing:1px;margin:4px 0 8px;">
+              <i class="fas fa-tag" style="font-size:0.65rem;"></i> ${trade}
+            </div>
+            <div class="service-title-sub" style="font-weight:500;font-size:0.82rem;color:var(--text-secondary);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${p.title}</div>
+            <div class="meta" style="display:flex;gap:12px;font-size:0.7rem;color:var(--text-secondary);margin-top:8px;">
+              <span><i class="fas fa-map-pin"></i> ${p.location || 'Nigeria'}</span>
+              <span><i class="far fa-clock"></i> ${p.date}</span>
+            </div>
+            <div class="listing-footer" style="display:flex;justify-content:space-between;font-size:0.7rem;color:var(--text-secondary);margin-top:10px;padding-top:10px;border-top:1px solid var(--border);">
+              <span><i class="fas fa-star" style="color:var(--navy-2);"></i> ${getSellerRating(raw)}</span>
+              <span><i class="far fa-heart"></i> ${isFav ? 'Saved' : 'Save'}</span>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderPage() {
+      const start = (currentPage - 1) * itemsPerPage;
+      const end = Math.min(start + itemsPerPage, filteredResults.length);
+      const pageItems = filteredResults.slice(start, end);
+
+      showingCount.textContent = `Showing ${filteredResults.length === 0 ? 0 : start + 1}-${end} of ${filteredResults.length} results`;
+
+      if (filteredResults.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-state" style="grid-column:1/-1;">
+            <i class="fas fa-box-open"></i>
+            <h3>No items found</h3>
+            <p>Try adjusting your filters or check back later.</p>
+            <button class="btn-primary" onclick="window.location.href='/'"><i class="fas fa-home"></i> Go Home</button>
+          </div>`;
+      } else {
+        grid.innerHTML = pageItems.map(item => {
+          if (item._type === 'service') return renderServiceCard(item);
+          return renderProductCard(item);
+        }).join('');
+      }
+
+      updatePagination();
+    }
+
+    function updatePagination() {
+      const totalPages = Math.ceil(filteredResults.length / itemsPerPage);
+      prevPageBtn.disabled = currentPage <= 1;
+      nextPageBtn.disabled = currentPage >= totalPages;
+
+      let pagesHtml = '';
+      const maxVisible = 5;
+      let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+      let endPage = Math.min(totalPages, startPage + maxVisible - 1);
+      if (endPage - startPage < maxVisible - 1) startPage = Math.max(1, endPage - maxVisible + 1);
+
+      if (startPage > 1) {
+        pagesHtml += `<button onclick="goToPage(1)">1</button>`;
+        if (startPage > 2) pagesHtml += `<span class="ellipsis">…</span>`;
+      }
+      for (let i = startPage; i <= endPage; i++) {
+        pagesHtml += `<button class="${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
+      }
+      if (endPage < totalPages) {
+        if (endPage < totalPages - 1) pagesHtml += `<span class="ellipsis">…</span>`;
+        pagesHtml += `<button onclick="goToPage(${totalPages})">${totalPages}</button>`;
+      }
+      pageNumbers.innerHTML = pagesHtml;
+    }
+
+    window.goToPage = function(page) {
+      const totalPages = Math.ceil(filteredResults.length / itemsPerPage);
+      if (page < 1 || page > totalPages) return;
+      currentPage = page;
+      renderPage();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    window.applyChipFilter = function(filter) {
+      currentChipFilter = filter;
+      document.querySelectorAll('.filter-chips .chip').forEach(el => {
+        el.classList.toggle('active', el.dataset.filter === filter);
+      });
+      if (filter === 'products-only') {
+        currentType = 'product';
+        document.getElementById('typeTrigger').querySelector('span').textContent = 'Products Only';
+      } else if (filter === 'services-only') {
+        currentType = 'service';
+        document.getElementById('typeTrigger').querySelector('span').textContent = 'Services Only';
+      } else if (filter === 'all') {
+        currentType = 'all';
+        document.getElementById('typeTrigger').querySelector('span').textContent = 'All Results';
+      }
+      applyFilters();
+    };
+
+    prevPageBtn.addEventListener('click', () => goToPage(currentPage - 1));
+    nextPageBtn.addEventListener('click', () => goToPage(currentPage + 1));
+
+    document.getElementById('fabPostAd').addEventListener('click', function() {
+      if (!currentUser) { openSignup(); } else { window.location.href = '/post.html'; }
+    });
+
+    const endTime = performance.now();
+    document.getElementById('searchTime').textContent = ((endTime - startTime) / 1000).toFixed(2);
+
+    await loadUser();
+    initTheme();
+    updateFavoriteBadge();
+    applyFilters();
+  });
+  </script>
 </body>
 </html>
