@@ -16,16 +16,6 @@
     }
     .search-header .search-query { font-size: 1.4rem; font-weight: 700; color: var(--text); }
     .search-header .search-query span { color: #1f5d8a; }
-    .search-header .smart-badge {
-      display: inline-flex; align-items: center; gap: 5px;
-      margin-left: 8px; padding: 3px 10px;
-      background: linear-gradient(135deg, #D4B87A, #B49450);
-      color: #1a2c3d; border-radius: 20px;
-      font-size: 0.62rem; font-weight: 800;
-      letter-spacing: 0.6px; text-transform: uppercase;
-      vertical-align: middle;
-    }
-    .search-header .smart-badge i { font-size: 0.6rem; }
     .search-header .search-meta { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 8px; color: var(--text-secondary); font-size: 0.9rem; }
     .search-header .search-meta i { color: #1f5d8a; }
     .search-header .type-breakdown {
@@ -39,19 +29,6 @@
     }
     .search-header .type-breakdown span.products { color: #1a3650; }
     .search-header .type-breakdown span.services { color: #8a6f36; background: rgba(212,184,122,0.15); }
-
-    .smart-hint {
-      margin-top: 12px;
-      padding: 10px 14px;
-      background: rgba(212,184,122,0.08);
-      border: 1px solid rgba(212,184,122,0.25);
-      border-radius: 10px;
-      font-size: 0.8rem;
-      color: var(--text);
-      display: flex; align-items: center; gap: 8px;
-    }
-    .smart-hint i { color: #B49450; flex-shrink: 0; }
-    .smart-hint strong { color: #1a3650; }
 
     .refine-section {
       background: var(--surface); border-radius: 16px; padding: 16px 20px;
@@ -124,45 +101,19 @@
     .pagination .ellipsis { display: flex; align-items: center; padding: 0 4px; color: var(--text-secondary); }
 
     .service-result-marker {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      z-index: 3;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      padding: 4px 10px;
-      border-radius: 20px;
+      position: absolute; top: 12px; left: 12px; z-index: 3;
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 4px 10px; border-radius: 20px;
       background: linear-gradient(135deg, #D4B87A, #B49450);
-      color: #1a2c3d;
-      font-size: 0.58rem;
-      font-weight: 800;
-      letter-spacing: 0.6px;
-      text-transform: uppercase;
+      color: #1a2c3d; font-size: 0.58rem; font-weight: 800;
+      letter-spacing: 0.6px; text-transform: uppercase;
       box-shadow: 0 4px 10px rgba(212,184,122,0.4);
     }
     .service-result-marker i { font-size: 0.6rem; }
-
-    /* Smart match score indicator (subtle) */
-    .smart-match-tag {
-      position: absolute;
-      bottom: 8px;
-      right: 8px;
-      z-index: 3;
-      padding: 2px 7px;
-      border-radius: 20px;
-      background: rgba(15,41,64,0.75);
-      color: #fff;
-      font-size: 0.55rem;
-      font-weight: 700;
-      letter-spacing: 0.3px;
-      backdrop-filter: blur(4px);
-    }
   </style>
 </head>
 <body>
 
-  <!-- ===== NAV ===== -->
   <nav class="navbar">
     <div class="container nav-container">
       <a href="/" class="logo-wrapper">
@@ -202,7 +153,6 @@
       <div class="search-query">
         <i class="fas fa-search" style="color:#1f5d8a;"></i>
         Results for "<span id="searchQueryText">loading...</span>"
-        <span class="smart-badge" id="smartBadge" style="display:none;"><i class="fas fa-bolt"></i> Smart Search</span>
       </div>
       <div class="search-meta">
         <span><i class="fas fa-box"></i> <span id="resultCount">0</span> total results</span>
@@ -212,10 +162,6 @@
         </div>
         <span><i class="fas fa-clock"></i> <span id="searchTime">0</span>s</span>
         <span><i class="fas fa-tag"></i> <span id="categoryCount">0</span> categories</span>
-      </div>
-      <div class="smart-hint" id="smartHint" style="display:none;">
-        <i class="fas fa-lightbulb"></i>
-        <span>Smart search is on. We also matched related terms like <strong id="smartSynonyms">—</strong>.</span>
       </div>
     </div>
 
@@ -294,7 +240,6 @@
 
   </div>
 
-  <!-- ===== FOOTER ===== -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
@@ -357,7 +302,6 @@
     </div>
   </footer>
 
-  <!-- ===== BOTTOM NAV ===== -->
   <div class="bottom-nav">
     <a href="/" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
     <a href="/categories.html" class="nav-item"><i class="fas fa-th-large"></i><span>Categories</span></a>
@@ -366,7 +310,6 @@
     <a href="/profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
   </div>
 
-  <!-- ===== SIGNUP MODAL ===== -->
   <div class="modal-overlay" id="signupModal">
     <div class="modal">
       <div class="modal-header">
@@ -402,66 +345,67 @@
   <script src="/js/main.js"></script>
   <script>
   // ============================================================
-  // SMART SEARCH ENGINE
-  // Understands stems (mover/moving/move), synonyms (painter/paint),
-  // and typos (pluber → plumber).
+  // SMART SEARCH ENGINE — tightened
+  // - Word stemming (mover / moving / move)
+  // - Curated synonym groups (only unambiguous words)
+  // - Fuzzy matching with first-letter guard
   // ============================================================
 
-  // ---- Synonym groups: words in the same group are treated as equivalent ----
+  // Synonym groups — deliberately narrow. Every word here must clearly
+  // point to the same category and must not be a common English word
+  // that appears in unrelated content.
   const SYNONYM_GROUPS = [
-    // Home & Trade Services
-    ['move', 'moving', 'mover', 'movers', 'relocation', 'relocate', 'transport', 'truck', 'hauling', 'packing', 'shift', 'shift'],
+    // --- Trade Services ---
+    ['move', 'moving', 'mover', 'movers', 'relocation', 'relocate', 'hauling', 'haul'],
     ['paint', 'painter', 'painters', 'painting', 'repaint', 'coating'],
-    ['clean', 'cleaning', 'cleaner', 'cleaners', 'wash', 'washing', 'scrub', 'sanitize', 'sanitization', 'tidy', 'maid', 'housekeeping'],
-    ['plumb', 'plumber', 'plumbers', 'plumbing', 'pipe', 'pipes', 'leak', 'leaking', 'tap', 'faucet', 'drain', 'drainage', 'toilet', 'bathroom'],
-    ['electric', 'electrical', 'electrician', 'electricians', 'wire', 'wiring', 'socket', 'voltage', 'fuse', 'cable'],
-    ['carpenter', 'carpenters', 'carpentry', 'wood', 'wooden', 'furniture', 'cabinet', 'wardrobe', 'carpenter'],
-    ['beauty', 'beautician', 'hair', 'hairstyle', 'hairstyling', 'stylist', 'braid', 'braiding', 'makeup', 'manicure', 'pedicure', 'barber'],
-    ['photo', 'photographer', 'photographers', 'photography', 'video', 'videography', 'videographer', 'camera', 'shoot', 'shots'],
-    ['event', 'events', 'planner', 'planning', 'wedding', 'party', 'birthday', 'decoration', 'decorator', 'ceremony'],
-    ['solar', 'panel', 'panels', 'inverter', 'battery', 'renewable', 'energy'],
-    ['tile', 'tiles', 'tiler', 'tilers', 'tiling', 'marble', 'flooring', 'pop'],
-    ['mechanic', 'mechanics', 'auto', 'engine', 'brake', 'diagnostics', 'car'],
-    ['borehole', 'water', 'pump', 'well', 'drilling', 'tank', 'treatment'],
-    ['generator', 'gen', 'alternator', 'rewinding'],
-    ['mason', 'masons', 'masonry', 'blockwork', 'foundation', 'plaster', 'plastering', 'construct', 'construction', 'building'],
-    ['security', 'cctv', 'surveillance', 'monitoring', 'alarm', 'guard'],
-    ['satellite', 'dstv', 'gotv', 'startimes', 'dish', 'decoder'],
-    ['landscape', 'landscaping', 'landscaper', 'garden', 'gardening', 'gardener', 'lawn', 'mow', 'mowing', 'hedge', 'trimming'],
-    ['interior', 'design', 'designer', 'decoration', 'styling', 'decor', 'furnish', 'furnishing'],
-    ['appliance', 'ac', 'aircon', 'airconditioner', 'fridge', 'refrigerator', 'washer', 'microwave'],
+    ['clean', 'cleaning', 'cleaner', 'cleaners', 'scrub', 'sanitize', 'sanitization', 'tidy', 'housekeeping'],
+    ['plumb', 'plumber', 'plumbers', 'plumbing', 'pipe', 'pipes', 'faucet'],
+    ['electric', 'electrical', 'electrician', 'electricians', 'wiring', 'rewiring'],
+    ['carpenter', 'carpenters', 'carpentry', 'woodwork', 'cabinet', 'wardrobe'],
+    ['beauty', 'beautician', 'hairstyle', 'hairstyling', 'hairstylist', 'braiding', 'makeup', 'manicure', 'pedicure', 'barber'],
+    ['photographer', 'photographers', 'photography', 'videography', 'videographer'],
+    ['event', 'events', 'planner', 'wedding', 'birthday', 'decoration', 'decorator', 'ceremony'],
+    ['solar', 'inverter', 'renewable'],
+    ['tiler', 'tilers', 'tiling', 'marble', 'flooring'],
+    ['mechanic', 'mechanics', 'engine', 'diagnostics'],
+    ['borehole', 'drilling', 'waterpump'],
+    ['generator', 'alternator', 'rewinding'],
+    ['mason', 'masons', 'masonry', 'blockwork', 'plaster', 'plastering'],
+    ['security', 'cctv', 'surveillance', 'alarm'],
+    ['satellite', 'dstv', 'gotv', 'startimes', 'decoder'],
+    ['landscaper', 'landscaping', 'gardening', 'gardener', 'lawn', 'mowing'],
+    ['interior', 'designer', 'styling', 'furnishing'],
+    ['appliance', 'aircon', 'airconditioner', 'fridge', 'refrigerator'],
 
-    // Products — Electronics & Tech
-    ['phone', 'phones', 'mobile', 'cell', 'iphone', 'android', 'samsung', 'nokia', 'infinix', 'tecno', 'smartphone'],
-    ['laptop', 'laptops', 'computer', 'computers', 'pc', 'desktop', 'notebook', 'macbook'],
-    ['speaker', 'speakers', 'audio', 'sound', 'bluetooth', 'jbl', 'bose', 'soundbar', 'music'],
-    ['tv', 'television', 'screen', 'smarttv'],
-    ['electronic', 'electronics', 'gadget', 'gadgets', 'device', 'devices', 'tech'],
+    // --- Products: Electronics ---
+    ['phone', 'phones', 'iphone', 'android', 'samsung', 'nokia', 'infinix', 'tecno', 'smartphone'],
+    ['laptop', 'laptops', 'computer', 'computers', 'macbook', 'notebook'],
+    ['speaker', 'speakers', 'audio', 'bluetooth', 'jbl', 'soundbar'],
+    ['tv', 'television', 'smarttv'],
+    ['electronic', 'electronics', 'gadget', 'gadgets', 'device', 'devices'],
     ['earphone', 'earphones', 'headphone', 'headphones', 'earbuds', 'headset'],
 
-    // Products — Fashion & Footwear
-    ['shoe', 'shoes', 'footwear', 'sneaker', 'sneakers', 'sandal', 'sandals', 'slippers', 'boot', 'boots'],
+    // --- Products: Fashion ---
+    ['shoe', 'shoes', 'footwear', 'sneaker', 'sneakers', 'sandal', 'sandals', 'slippers'],
     ['bag', 'bags', 'handbag', 'purse', 'backpack', 'luggage'],
-    ['cloth', 'clothes', 'clothing', 'wear', 'shirt', 'shirts', 'pant', 'pants', 'trouser', 'trousers', 'dress', 'dresses', 'skirt', 'top', 'tops', 'jacket'],
+    ['shirt', 'shirts', 'trouser', 'trousers', 'dress', 'dresses', 'skirt', 'jacket'],
     ['watch', 'watches', 'wristwatch', 'timepiece', 'casio'],
-    ['belt', 'belts', 'leather'],
-    ['underwear', 'boxers', 'briefs', 'boxer'],
-    ['socks', 'sock', 'hosiery'],
-    ['fashion', 'outfit', 'style', 'apparel'],
+    ['belt', 'belts'],
+    ['underwear', 'boxers', 'briefs'],
+    ['socks', 'sock'],
+    ['fashion', 'outfit', 'apparel'],
 
-    // Products — Beauty & Health
+    // --- Products: Beauty & Health ---
     ['shampoo', 'soap', 'cream', 'lotion', 'perfume', 'cosmetic', 'cosmetics', 'skincare'],
-    ['polish', 'shoe polish', 'shoepolish'],
 
-    // Products — Home & Kitchen
-    ['food', 'foods', 'drink', 'drinks', 'beverage', 'snack', 'rice', 'oil', 'flour', 'spice'],
-    ['home', 'house', 'kitchen', 'living', 'bedroom', 'decor', 'appliance'],
+    // --- Products: Home & Kitchen ---
+    ['food', 'foods', 'drink', 'drinks', 'beverage', 'snack', 'rice', 'flour', 'spice'],
+    ['kitchen', 'cookware', 'utensils'],
 
-    // Jobs
-    ['job', 'jobs', 'work', 'career', 'employment', 'hire', 'hiring', 'vacancy', 'position']
+    // --- Jobs ---
+    ['job', 'jobs', 'career', 'employment', 'hiring', 'vacancy']
   ];
 
-  // Fast lookup: word → group index
   const SYNONYM_INDEX = {};
   SYNONYM_GROUPS.forEach((group, idx) => {
     group.forEach(w => {
@@ -469,7 +413,6 @@
     });
   });
 
-  // ---- Stemming: strip common English suffixes ----
   const SUFFIXES = ['ings', 'ing', 'ers', 'er', 'ed', 'es', 's', 'ly', 'ness', 'ment', 'tion', 'sion'];
 
   function stem(word) {
@@ -483,7 +426,6 @@
     return word;
   }
 
-  // ---- Text normalization ----
   function normalizeText(str) {
     return String(str || '')
       .toLowerCase()
@@ -496,7 +438,6 @@
     return normalizeText(str).split(' ').filter(w => w.length >= 2);
   }
 
-  // ---- Levenshtein distance for typo tolerance ----
   function levenshtein(a, b) {
     if (a === b) return 0;
     if (!a.length) return b.length;
@@ -515,33 +456,31 @@
     return prev[b.length];
   }
 
+  // Fuzzy matching — requires the FIRST LETTER to match.
+  // This kills false positives like mover ↔ cover, mover ↔ lover.
   function isFuzzyMatch(a, b) {
     if (a === b) return true;
     if (Math.abs(a.length - b.length) > 2) return false;
     const minLen = Math.min(a.length, b.length);
     if (minLen < 4) return false;
+    if (a[0] !== b[0]) return false;
     const maxDist = minLen <= 5 ? 1 : 2;
     return levenshtein(a, b) <= maxDist;
   }
 
-  // ---- Build rich variant set for a query token ----
   function buildQueryVariants(token) {
     const variants = new Set();
     const stemmed = stem(token);
     variants.add(token);
     variants.add(stemmed);
 
-    // Add "e" handling: "move" ↔ "mov"
     if (token.endsWith('e') && token.length > 3) {
       variants.add(token.slice(0, -1));
     }
     if (!token.endsWith('e') && token.length >= 4) {
-      // Stem may need "e" added back for matching "move"
-      // Only try if stem + 'e' looks plausible
       variants.add(stemmed + 'e');
     }
 
-    // Add synonyms
     const gIdx1 = SYNONYM_INDEX[token];
     if (gIdx1 !== undefined) {
       SYNONYM_GROUPS[gIdx1].forEach(w => {
@@ -561,7 +500,6 @@
     return variants;
   }
 
-  // ---- Build searchable text for an item ----
   function buildSearchText(item, type) {
     const parts = [];
     if (type === 'product') {
@@ -583,7 +521,6 @@
     return normalizeText(parts.filter(Boolean).join(' '));
   }
 
-  // ---- Score an item against the query ----
   function smartScore(item, itemType, queryTokens) {
     const text = buildSearchText(item, itemType);
     if (!text) return 0;
@@ -635,20 +572,6 @@
     return total;
   }
 
-  // ---- Detect which synonyms were used (for the smart hint) ----
-  function detectUsedSynonyms(queryTokens) {
-    const used = new Set();
-    for (const token of queryTokens) {
-      const gIdx = SYNONYM_INDEX[token] ?? SYNONYM_INDEX[stem(token)];
-      if (gIdx !== undefined) {
-        SYNONYM_GROUPS[gIdx].forEach(w => {
-          if (w !== token) used.add(w);
-        });
-      }
-    }
-    return Array.from(used).slice(0, 4);
-  }
-
   // ============================================================
   // PAGE LOGIC
   // ============================================================
@@ -676,20 +599,15 @@
     const typeBreakdown = document.getElementById('typeBreakdown');
     const productCountEl = document.getElementById('productCount');
     const serviceCountEl = document.getElementById('serviceCount');
-    const smartBadge = document.getElementById('smartBadge');
-    const smartHint = document.getElementById('smartHint');
-    const smartSynonyms = document.getElementById('smartSynonyms');
 
     const startTime = performance.now();
     searchQuery = (localStorage.getItem('zaure_search_query') || '').trim();
 
-    // ---- Load full datasets ----
     let allProducts = [];
     let allServices = [];
     try { allProducts = await loadProducts(); } catch (e) { console.warn(e); }
     try { allServices = await loadServices(); } catch (e) { console.warn(e); }
 
-    // ---- Category filter options ----
     const productCategories = await loadCategories();
     const serviceCategories = [...new Set(allServices.map(s => s.category).filter(Boolean))]
       .map(name => ({ slug: name.toLowerCase().replace(/\s+/g, '-'), name }));
@@ -710,7 +628,6 @@
     }
     categoryOptionsList.innerHTML = categoryHtml;
 
-    // ---- Custom dropdown handler ----
     function initCustomDropdown(containerId, triggerId, optionsListId, onSelect) {
       const container = document.getElementById(containerId);
       const trigger = document.getElementById(triggerId);
@@ -744,25 +661,20 @@
     initCustomDropdown('sortSelect', 'sortTrigger', 'sortOptions', (v) => { currentSort = v; });
     initCustomDropdown('categorySelect', 'categoryTrigger', 'categoryOptions', (v) => { currentCategory = v; });
 
-    // ============================================================
-    // SMART SEARCH — run scoring
-    // ============================================================
+    // ---- Score and build results ----
     const queryTokens = tokenize(searchQuery);
 
     if (queryTokens.length === 0) {
-      // Empty query → show everything
       allResults = [
         ...allProducts.map(p => ({ ...p, _type: 'product', _score: 1 })),
         ...allServices.map(s => ({ ...s, _type: 'service', _score: 1 }))
       ];
       searchQueryText.textContent = 'all items';
     } else {
-      // Score products
       const scoredProducts = allProducts
         .map(p => ({ ...p, _type: 'product', _score: smartScore(p, 'product', queryTokens) }))
         .filter(p => p._score > 0);
 
-      // Score services
       const scoredServices = allServices
         .map(s => ({ ...s, _type: 'service', _score: smartScore(s, 'service', queryTokens) }))
         .filter(s => s._score > 0);
@@ -771,27 +683,15 @@
         .sort((a, b) => b._score - a._score);
 
       searchQueryText.textContent = searchQuery;
-
-      // Smart badge — show when synonyms were involved
-      const usedSynonyms = detectUsedSynonyms(queryTokens);
-      if (usedSynonyms.length > 0 && allResults.length > 0) {
-        smartBadge.style.display = 'inline-flex';
-        smartHint.style.display = 'flex';
-        smartSynonyms.textContent = usedSynonyms.join(', ');
-      }
     }
 
-    // ============================================================
-    // FILTERS
-    // ============================================================
+    // ---- Filters ----
     function applyFilters() {
       let filtered = [...allResults];
 
-      // Type filter
       if (currentType === 'product') filtered = filtered.filter(p => p._type === 'product');
       if (currentType === 'service') filtered = filtered.filter(p => p._type === 'service');
 
-      // Chip filters
       switch (currentChipFilter) {
         case 'featured': filtered = filtered.filter(p => p.featured); break;
         case 'boosted': filtered = filtered.filter(p => p.boosted); break;
@@ -801,7 +701,6 @@
         case 'high-price': filtered = filtered.filter(p => p._type === 'product' && (p.price || 0) > 1000000); break;
       }
 
-      // Category filter
       if (currentCategory !== 'all') {
         filtered = filtered.filter(p => {
           const catSlug = p._type === 'service'
@@ -811,7 +710,6 @@
         });
       }
 
-      // Sort
       switch (currentSort) {
         case 'newest': {
           const prods = filtered.filter(p => p._type === 'product')
@@ -841,7 +739,7 @@
             return bv - av;
           });
           break;
-        default: // relevance / best match
+        default:
           filtered.sort((a, b) => (b._score || 0) - (a._score || 0));
           break;
       }
@@ -852,9 +750,6 @@
       renderPage();
     }
 
-    // ============================================================
-    // STATS
-    // ============================================================
     function updateStats(filtered) {
       resultCount.textContent = filtered.length;
 
@@ -873,9 +768,6 @@
       document.getElementById('categoryCount').textContent = uniqueCategories.size;
     }
 
-    // ============================================================
-    // RENDER HELPERS
-    // ============================================================
     function renderProductCard(p) {
       let badges = '';
       if (p.boosted) badges += `<span class="badge-boosted"><i class="fas fa-bolt"></i> Boosted</span>`;
@@ -975,9 +867,6 @@
       `;
     }
 
-    // ============================================================
-    // RENDER PAGE
-    // ============================================================
     function renderPage() {
       const start = (currentPage - 1) * itemsPerPage;
       const end = Math.min(start + itemsPerPage, filteredResults.length);
@@ -990,7 +879,7 @@
           <div class="empty-state" style="grid-column:1/-1;">
             <i class="fas fa-search"></i>
             <h3>No results found for "${searchQuery || 'your search'}"</h3>
-            <p>Try a different word — we already check synonyms and typos.</p>
+            <p>Try a different word or browse the suggestions below.</p>
             <div class="suggestions">
               <span class="suggestion-chip" onclick="refineSearch('electronics')">Electronics</span>
               <span class="suggestion-chip" onclick="refineSearch('fashion')">Fashion</span>
@@ -1035,9 +924,6 @@
       pageNumbers.innerHTML = pagesHtml;
     }
 
-    // ============================================================
-    // GLOBAL HANDLERS
-    // ============================================================
     window.goToPage = function(page) {
       const totalPages = Math.ceil(filteredResults.length / itemsPerPage);
       if (page < 1 || page > totalPages) return;
@@ -1081,7 +967,6 @@
       if (!currentUser) { openSignup(); } else { window.location.href = '/post.html'; }
     });
 
-    // ---- Initial render ----
     const endTime = performance.now();
     searchTime.textContent = ((endTime - startTime) / 1000).toFixed(2);
 
