@@ -18,6 +18,18 @@
     .search-header .search-query span { color: #1f5d8a; }
     .search-header .search-meta { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 8px; color: var(--text-secondary); font-size: 0.9rem; }
     .search-header .search-meta i { color: #1f5d8a; }
+    .search-header .search-meta .type-breakdown {
+      display: inline-flex; gap: 12px; align-items: center;
+    }
+    .search-header .search-meta .type-breakdown span {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 2px 10px; border-radius: 20px;
+      background: var(--surface-alt);
+      font-size: 0.78rem; font-weight: 600;
+    }
+    .search-header .search-meta .type-breakdown span.products { color: #1a3650; }
+    .search-header .search-meta .type-breakdown span.services { color: #8a6f36; background: rgba(212,184,122,0.15); }
+
     .refine-section {
       background: var(--surface); border-radius: 16px; padding: 16px 20px;
       border: 1px solid var(--border); margin: 16px 0;
@@ -25,7 +37,7 @@
     }
     .refine-section .refine-group { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
     .refine-section .refine-group label { font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); }
-    .refine-section .refine-group .custom-select { min-width: 150px; }
+    .refine-section .refine-group .custom-select { min-width: 150px; position: relative; }
     .refine-section .refine-group .custom-select-trigger {
       padding: 6px 12px; border: 1px solid var(--border); border-radius: 8px;
       font-size: 0.85rem; background: var(--input-bg); color: var(--text);
@@ -44,6 +56,7 @@
       transition: background 0.2s;
     }
     .refine-section .refine-group .custom-select-options li:hover { background: var(--surface-alt); }
+
     .filter-chips { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0; }
     .filter-chips .chip {
       background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
@@ -54,6 +67,9 @@
     .filter-chips .chip.active { background: #1a3650; color: white; border-color: #1a3650; }
     [data-theme="dark"] .filter-chips .chip.active { background: #2A3550; border-color: #2A3550; }
     .filter-chips .chip i { margin-right: 4px; }
+    .filter-chips .chip.chip-type { border-style: dashed; }
+    .filter-chips .chip.chip-type.active { border-style: solid; }
+
     .empty-state {
       text-align: center; padding: 60px 20px; background: var(--surface);
       border-radius: 20px; border: 1px solid var(--border);
@@ -68,19 +84,44 @@
       font-size: 0.85rem; cursor: pointer; color: var(--text); transition: 0.2s;
     }
     .empty-state .suggestions .suggestion-chip:hover { background: var(--text); color: var(--surface); }
+
     .pagination {
       display: flex; justify-content: center; gap: 6px; margin-top: 30px; padding: 20px 0;
+      align-items: center;
     }
     .pagination button {
       padding: 8px 14px; border: 1px solid var(--border); border-radius: 8px;
       background: var(--surface); color: var(--text); cursor: pointer; font-size: 0.85rem;
       transition: 0.2s; min-width: 40px;
     }
-    .pagination button:hover { background: var(--surface-alt); border-color: var(--text); }
+    .pagination button:hover:not(:disabled) { background: var(--surface-alt); border-color: var(--text); }
     .pagination button.active { background: #1a3650; color: white; border-color: #1a3650; }
     [data-theme="dark"] .pagination button.active { background: #2A3550; border-color: #2A3550; }
     .pagination button:disabled { opacity: 0.4; cursor: not-allowed; }
     .pagination .ellipsis { display: flex; align-items: center; padding: 0 4px; color: var(--text-secondary); }
+
+    /* Service card specific styles for search results */
+    .service-result-marker {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 3;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #D4B87A, #B49450);
+      color: #1a2c3d;
+      font-size: 0.58rem;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      box-shadow: 0 4px 10px rgba(212,184,122,0.4);
+    }
+    .service-result-marker i {
+      font-size: 0.6rem;
+    }
   </style>
 </head>
 <body>
@@ -124,8 +165,12 @@
     <div class="search-header">
       <div class="search-query"><i class="fas fa-search" style="color:#1f5d8a;"></i> Results for "<span id="searchQueryText">loading...</span>"</div>
       <div class="search-meta">
-        <span><i class="fas fa-box"></i> <span id="resultCount">0</span> items found</span>
-        <span><i class="fas fa-clock"></i> <span id="searchTime">0</span> seconds</span>
+        <span><i class="fas fa-box"></i> <span id="resultCount">0</span> total results</span>
+        <div class="type-breakdown" id="typeBreakdown" style="display:none;">
+          <span class="products"><i class="fas fa-shopping-bag"></i> <span id="productCount">0</span> products</span>
+          <span class="services"><i class="fas fa-user-tie"></i> <span id="serviceCount">0</span> services</span>
+        </div>
+        <span><i class="fas fa-clock"></i> <span id="searchTime">0</span>s</span>
         <span><i class="fas fa-tag"></i> <span id="categoryCount">0</span> categories</span>
       </div>
     </div>
@@ -133,7 +178,23 @@
     <div class="refine-section">
       <div class="refine-group">
         <label><i class="fas fa-sliders-h"></i> Refine:</label>
-        <!-- Custom sort dropdown -->
+
+        <!-- Type filter -->
+        <div class="custom-select" id="typeSelect">
+          <div class="custom-select-trigger" id="typeTrigger">
+            <span>All Results</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="custom-select-dropdown">
+            <ul class="custom-select-options" id="typeOptions">
+              <li data-value="all">All Results</li>
+              <li data-value="product">Products Only</li>
+              <li data-value="service">Services Only</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Sort -->
         <div class="custom-select" id="sortSelect">
           <div class="custom-select-trigger" id="sortTrigger">
             <span>Relevance</span>
@@ -149,7 +210,8 @@
             </ul>
           </div>
         </div>
-        <!-- Custom category dropdown -->
+
+        <!-- Category -->
         <div class="custom-select" id="categorySelect">
           <div class="custom-select-trigger" id="categoryTrigger">
             <span>All Categories</span>
@@ -171,6 +233,8 @@
       <span class="chip active" data-filter="all" onclick="applyChipFilter('all')"><i class="fas fa-th-list"></i> All</span>
       <span class="chip" data-filter="featured" onclick="applyChipFilter('featured')"><i class="fas fa-star"></i> Featured</span>
       <span class="chip" data-filter="boosted" onclick="applyChipFilter('boosted')"><i class="fas fa-bolt"></i> Boosted</span>
+      <span class="chip chip-type" data-filter="products-only" onclick="applyChipFilter('products-only')"><i class="fas fa-shopping-bag"></i> Products</span>
+      <span class="chip chip-type" data-filter="services-only" onclick="applyChipFilter('services-only')"><i class="fas fa-user-tie"></i> Services</span>
       <span class="chip" data-filter="low-price" onclick="applyChipFilter('low-price')"><i class="fas fa-arrow-down"></i> Under ₦500K</span>
       <span class="chip" data-filter="high-price" onclick="applyChipFilter('high-price')"><i class="fas fa-arrow-up"></i> Over ₦1M</span>
     </div>
@@ -307,10 +371,9 @@
       let searchQuery = '';
       let currentSort = 'relevance';
       let currentCategory = 'all';
+      let currentType = 'all';
 
       const grid = document.getElementById('searchResultsGrid');
-      const refineSort = document.getElementById('sortSelect');
-      const refineCategory = document.getElementById('categorySelect');
       const prevPageBtn = document.getElementById('prevPage');
       const nextPageBtn = document.getElementById('nextPage');
       const pageNumbers = document.getElementById('pageNumbers');
@@ -318,17 +381,68 @@
       const searchQueryText = document.getElementById('searchQueryText');
       const resultCount = document.getElementById('resultCount');
       const searchTime = document.getElementById('searchTime');
+      const typeBreakdown = document.getElementById('typeBreakdown');
+      const productCountEl = document.getElementById('productCount');
+      const serviceCountEl = document.getElementById('serviceCount');
 
       const startTime = performance.now();
-      const results = JSON.parse(localStorage.getItem('zaure_search_results') || '[]');
+      const productResults = JSON.parse(localStorage.getItem('zaure_search_results') || '[]');
       searchQuery = localStorage.getItem('zaure_search_query') || '';
 
-      const categories = await loadCategories();
-      const categoryOptionsList = document.getElementById('categoryOptions');
-      categoryOptionsList.innerHTML = '<li data-value="all">All Categories</li>' + categories.map(c => `<li data-value="${c.slug}">${c.name}</li>`).join('');
+      // ---- Load and filter services by the same query ----
+      let serviceResults = [];
+      try {
+        const allServices = await loadServices();
+        const q = searchQuery.toLowerCase().trim();
+        if (q) {
+          serviceResults = allServices.filter(s => {
+            const title = (s.title || '').toLowerCase();
+            const desc = (s.description || '').toLowerCase();
+            const cat = (s.category || '').toLowerCase();
+            const subcat = (s.subcategory || '').toLowerCase();
+            const loc = (s.location || '').toLowerCase();
+            const sellerName = (getSellerName(s) || '').toLowerCase();
+            return title.includes(q) || desc.includes(q) || cat.includes(q) ||
+                   subcat.includes(q) || loc.includes(q) || sellerName.includes(q);
+          });
+        }
+      } catch (err) {
+        console.warn('Could not load services for search:', err);
+      }
 
-      // Custom dropdown helpers
-      function initCustomDropdown(containerId, triggerId, optionsListId) {
+      // ---- Merge with type markers ----
+      const productMarked = productResults.map(p => ({ ...p, _type: 'product' }));
+      const serviceMarked = serviceResults.map(s => ({ ...s, _type: 'service' }));
+      allResults = [...productMarked, ...serviceMarked];
+
+      // ---- Load categories (from products.json for product categories) ----
+      const productCategories = await loadCategories();
+
+      // Service categories are different — build them from the services
+      const serviceCategories = [...new Set(serviceResults.map(s => s.category).filter(Boolean))]
+        .map(name => ({ slug: name.toLowerCase().replace(/\s+/g, '-'), name, isService: true }));
+
+      // ---- Build category dropdown ----
+      const categoryOptionsList = document.getElementById('categoryOptions');
+      const allCats = [];
+      if (productCategories.length > 0) {
+        allCats.push({ group: 'Products', items: productCategories });
+      }
+      if (serviceCategories.length > 0) {
+        allCats.push({ group: 'Services', items: serviceCategories });
+      }
+
+      let categoryHtml = '<li data-value="all">All Categories</li>';
+      allCats.forEach(group => {
+        categoryHtml += `<li style="pointer-events:none;padding:8px 12px 4px;font-size:0.65rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--text-secondary);opacity:0.7;">${group.group}</li>`;
+        group.items.forEach(cat => {
+          categoryHtml += `<li data-value="${cat.slug}">${cat.name}</li>`;
+        });
+      });
+      categoryOptionsList.innerHTML = categoryHtml;
+
+      // ---- Custom dropdown helper ----
+      function initCustomDropdown(containerId, triggerId, optionsListId, onSelect) {
         const container = document.getElementById(containerId);
         if (!container) return;
         const trigger = document.getElementById(triggerId);
@@ -336,18 +450,18 @@
 
         trigger.addEventListener('click', function(e) {
           e.stopPropagation();
+          document.querySelectorAll('.refine-section .custom-select.active').forEach(el => {
+            if (el !== container) el.classList.remove('active');
+          });
           container.classList.toggle('active');
         });
 
         optionsList.querySelectorAll('li').forEach(li => {
+          if (!li.dataset.value) return; // skip group labels
           li.addEventListener('click', function() {
             trigger.querySelector('span').textContent = this.textContent;
             container.classList.remove('active');
-            if (containerId === 'sortSelect') {
-              currentSort = this.dataset.value;
-            } else if (containerId === 'categorySelect') {
-              currentCategory = this.dataset.value;
-            }
+            if (onSelect) onSelect(this.dataset.value);
             applyFilters();
           });
         });
@@ -357,45 +471,242 @@
         });
       }
 
-      initCustomDropdown('sortSelect', 'sortTrigger', 'sortOptions');
-      initCustomDropdown('categorySelect', 'categoryTrigger', 'categoryOptions');
+      initCustomDropdown('typeSelect', 'typeTrigger', 'typeOptions', (v) => { currentType = v; });
+      initCustomDropdown('sortSelect', 'sortTrigger', 'sortOptions', (v) => { currentSort = v; });
+      initCustomDropdown('categorySelect', 'categoryTrigger', 'categoryOptions', (v) => { currentCategory = v; });
 
+      // ---- Apply filters ----
       function applyFilters() {
         let filtered = [...allResults];
-        if (currentCategory !== 'all') filtered = filtered.filter(p => p.category === currentCategory);
+
+        // Type filter
+        if (currentType === 'product') {
+          filtered = filtered.filter(p => p._type === 'product');
+        } else if (currentType === 'service') {
+          filtered = filtered.filter(p => p._type === 'service');
+        }
+
+        // Chip filters
         switch(currentChipFilter) {
-          case 'featured': filtered = filtered.filter(p => p.featured); break;
-          case 'boosted': filtered = filtered.filter(p => p.boosted); break;
-          case 'low-price': filtered = filtered.filter(p => p.price < 500000); break;
-          case 'high-price': filtered = filtered.filter(p => p.price > 1000000); break;
+          case 'featured':
+            filtered = filtered.filter(p => p.featured);
+            break;
+          case 'boosted':
+            filtered = filtered.filter(p => p.boosted);
+            break;
+          case 'products-only':
+            filtered = filtered.filter(p => p._type === 'product');
+            break;
+          case 'services-only':
+            filtered = filtered.filter(p => p._type === 'service');
+            break;
+          case 'low-price':
+            // Price filter only applies to products
+            filtered = filtered.filter(p => p._type === 'product' && p.price < 500000);
+            break;
+          case 'high-price':
+            filtered = filtered.filter(p => p._type === 'product' && p.price > 1000000);
+            break;
           default: break;
         }
+
+        // Category filter
+        if (currentCategory !== 'all') {
+          filtered = filtered.filter(p => {
+            const catSlug = p._type === 'service'
+              ? (p.category || '').toLowerCase().replace(/\s+/g, '-')
+              : p.category;
+            return catSlug === currentCategory;
+          });
+        }
+
+        // ---- Sorting ----
+        // Products and services sorted separately, then merged
+        const products = filtered.filter(p => p._type === 'product');
+        const services = filtered.filter(p => p._type === 'service');
+
         switch(currentSort) {
-          case 'newest': filtered.sort((a, b) => new Date(b.date || '') - new Date(a.date || '')); break;
-          case 'price-low': filtered.sort((a, b) => a.price - b.price); break;
-          case 'price-high': filtered.sort((a, b) => b.price - a.price); break;
-          case 'popular': filtered.sort((a, b) => (b.views || 0) - (a.views || 0)); break;
-          default: break;
+          case 'newest':
+            products.sort((a, b) => new Date(b.date || '') - new Date(a.date || ''));
+            // Services have non-date strings — keep original order
+            break;
+          case 'price-low':
+            products.sort((a, b) => (a.price || 0) - (b.price || 0));
+            break;
+          case 'price-high':
+            products.sort((a, b) => (b.price || 0) - (a.price || 0));
+            break;
+          case 'popular':
+            products.sort((a, b) => (b.views || 0) - (a.views || 0));
+            services.sort((a, b) => (parseFloat(getSellerRating(b)) || 0) - (parseFloat(getSellerRating(a)) || 0));
+            break;
+          default:
+            // Relevance — featured items first within each group
+            products.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
+            services.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
+            break;
         }
-        filteredResults = filtered;
+
+        // Products first, then services
+        filteredResults = [...products, ...services];
+
         currentPage = 1;
         updateStats(filtered);
         renderPage();
       }
 
+      // ---- Stats ----
       function updateStats(filtered) {
-        const uniqueCategories = new Set(filtered.map(p => p.category));
+        const uniqueCategories = new Set(
+          filtered.map(p => p._type === 'service'
+            ? (p.category || '').toLowerCase().replace(/\s+/g, '-')
+            : p.category
+          ).filter(Boolean)
+        );
         document.getElementById('categoryCount').textContent = uniqueCategories.size;
+
+        const prodCount = filtered.filter(p => p._type === 'product').length;
+        const svcCount = filtered.filter(p => p._type === 'service').length;
+
+        productCountEl.textContent = prodCount;
+        serviceCountEl.textContent = svcCount;
+        typeBreakdown.style.display = (prodCount + svcCount) > 0 ? 'inline-flex' : 'none';
       }
 
+      // ---- Render helpers ----
+      function getServiceTradeName(category) {
+        return getTradeName(category);
+      }
+
+      function renderProductCard(p) {
+        let badges = '';
+        if (p.boosted) badges += `<span class="badge-boosted"><i class="fas fa-bolt"></i> Boosted</span>`;
+        if (p.featured) badges += `<span class="badge-featured">Featured</span>`;
+        const price = p.price >= 1e6 ? `₦${(p.price/1e6).toFixed(1)}M` : `₦${p.price.toLocaleString()}`;
+
+        const firstImage = p.images && p.images.length > 0 ? p.images[0] : null;
+        const imageHtml = firstImage
+          ? `<img src="${firstImage}" alt="${p.title}" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\\'fas fa-box\\' style=\\'font-size:2.5rem;color:var(--text-secondary);\\'></i>';">`
+          : `<i class="fas fa-box" style="font-size:2.5rem;color:var(--text-secondary);"></i>`;
+
+        const isFav = isFavorite(p.id);
+        const heartIcon = isFav ? 'fas fa-heart' : 'far fa-heart';
+        const heartColor = isFav ? 'color:#e74c3c;' : '';
+
+        return `
+          <div class="listing-card" data-id="${p.id}" style="cursor:pointer;border-radius:16px;overflow:hidden;background:var(--surface);border:1px solid var(--border);transition:transform 0.2s,box-shadow 0.2s;position:relative;">
+            <button class="fav-btn" onclick="event.stopPropagation(); toggleFavoriteCard('${p.id}', this)"
+                    style="position:absolute;top:12px;right:12px;z-index:2;background:rgba(255,255,255,0.9);border:none;border-radius:50%;width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;box-shadow:0 2px 8px rgba(0,0,0,0.1);${heartColor}">
+              <i class="${heartIcon}"></i>
+            </button>
+            <div class="listing-img" style="height:180px;background:var(--surface-alt);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;" onclick="viewProduct('${p.id}')">
+              ${imageHtml}
+              ${badges}
+            </div>
+            <div class="listing-body" style="padding:12px 14px 14px;" onclick="viewProduct('${p.id}')">
+              <div class="price" style="font-weight:700;font-size:1.1rem;color:var(--text);">${price}</div>
+              <div class="title" style="font-weight:600;font-size:0.9rem;margin:4px 0;color:var(--text);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${p.title}</div>
+              <div class="meta" style="display:flex;gap:12px;font-size:0.7rem;color:var(--text-secondary);margin-top:4px;">
+                <span><i class="fas fa-map-pin"></i> ${p.location || 'Nigeria'}</span>
+                <span><i class="far fa-clock"></i> ${p.date || ''}</span>
+              </div>
+              <div class="listing-footer" style="display:flex;justify-content:space-between;font-size:0.7rem;color:var(--text-secondary);margin-top:8px;padding-top:8px;border-top:1px solid var(--border);">
+                <span><i class="fas fa-store"></i> ${p.seller?.name || 'Unknown'}</span>
+                <span><i class="far fa-heart"></i> ${isFav ? 'Saved' : 'Save'}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      function renderServiceCard(raw) {
+        const p = normalizeService(raw);
+        const sellerName = getSellerName(raw);
+        const profilePic = getSellerPic(raw);
+        const initials = getSellerInitials(raw);
+        const trade = getServiceTradeName(p.category);
+
+        let badges = '';
+        if (p.boosted) badges += `<span class="badge-boosted"><i class="fas fa-bolt"></i> Boosted</span>`;
+        if (p.featured) badges += `<span class="badge-featured">Featured</span>`;
+
+        const avatarInner = profilePic
+          ? `<img src="${profilePic}" alt="${sellerName}" loading="lazy"
+                 style="width:100%;height:100%;object-fit:cover;display:block;"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+             <span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#1a3650;font-weight:700;font-size:2rem;">${initials}</span>`
+          : `<span style="display:flex;width:100%;height:100%;align-items:center;justify-content:center;color:#1a3650;font-weight:700;font-size:2rem;">${initials}</span>`;
+
+        const isFav = isFavorite(p.id);
+        const heartIcon = isFav ? 'fas fa-heart' : 'far fa-heart';
+        const heartColor = isFav ? 'color:#e74c3c;' : '';
+
+        return `
+          <div class="listing-card" data-id="${p.id}" style="cursor:pointer;border-radius:16px;overflow:hidden;background:var(--surface);border:1px solid var(--border);transition:transform 0.2s,box-shadow 0.2s;position:relative;">
+            <button class="fav-btn" onclick="event.stopPropagation(); toggleFavoriteCard('${p.id}', this)"
+                    style="position:absolute;top:12px;right:12px;z-index:4;background:rgba(255,255,255,0.9);border:none;border-radius:50%;width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;box-shadow:0 2px 8px rgba(0,0,0,0.1);${heartColor}">
+              <i class="${heartIcon}"></i>
+            </button>
+
+            <div class="listing-img" onclick="viewService('${p.id}')"
+                 style="height:180px;background:linear-gradient(135deg,#1a3650,#0f2940);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
+              <span class="service-result-marker"><i class="fas fa-user-tie"></i> Service</span>
+              <div style="position:absolute;inset:0;background:radial-gradient(circle at 30% 25%,rgba(212,184,122,0.16) 0%,transparent 60%);"></div>
+              <div style="width:96px;height:96px;border-radius:50%;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 4px rgba(255,255,255,0.15),0 0 0 6px rgba(212,184,122,0.55),0 12px 32px rgba(0,0,0,0.3);position:relative;z-index:1;">
+                ${avatarInner}
+              </div>
+              ${badges}
+            </div>
+
+            <div class="listing-body" style="padding:14px 14px 14px;" onclick="viewService('${p.id}')">
+              <div class="provider-name" style="font-weight:700;font-size:1rem;color:var(--text);line-height:1.25;letter-spacing:-0.2px;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;">${sellerName}</div>
+              <div class="provider-trade" style="display:inline-flex;align-items:center;gap:5px;font-size:0.7rem;font-weight:700;color:#B49450;text-transform:uppercase;letter-spacing:1px;margin:4px 0 8px;">
+                <i class="fas fa-tag" style="font-size:0.65rem;"></i> ${trade}
+              </div>
+              <div class="service-title-sub" style="font-weight:500;font-size:0.82rem;color:var(--text-secondary);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${p.title}</div>
+              <div class="meta" style="display:flex;gap:12px;font-size:0.7rem;color:var(--text-secondary);margin-top:8px;">
+                <span><i class="fas fa-map-pin"></i> ${p.location || 'Nigeria'}</span>
+                <span><i class="far fa-clock"></i> ${p.date}</span>
+              </div>
+              <div class="listing-footer" style="display:flex;justify-content:space-between;font-size:0.7rem;color:var(--text-secondary);margin-top:10px;padding-top:10px;border-top:1px solid var(--border);">
+                <span><i class="fas fa-star" style="color:#D4B87A;"></i> ${getSellerRating(raw)}</span>
+                <span><i class="far fa-heart"></i> ${isFav ? 'Saved' : 'Save'}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      // ---- Render page ----
       function renderPage() {
         const start = (currentPage - 1) * itemsPerPage;
         const end = Math.min(start + itemsPerPage, filteredResults.length);
         const pageItems = filteredResults.slice(start, end);
-        showingCount.textContent = `Showing ${start + 1}-${end} of ${filteredResults.length} results`;
+
+        showingCount.textContent = `Showing ${filteredResults.length === 0 ? 0 : start + 1}-${end} of ${filteredResults.length} results`;
+
         if (filteredResults.length === 0) {
-          grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1;"><i class="fas fa-search"></i><h3>No results found for "${searchQuery}"</h3><p>Try adjusting your search terms or filters.</p><div class="suggestions"><span class="suggestion-chip" onclick="refineSearch('vehicles')">Vehicles</span><span class="suggestion-chip" onclick="refineSearch('electronics')">Electronics</span><span class="suggestion-chip" onclick="refineSearch('furniture')">Furniture</span><span class="suggestion-chip" onclick="refineSearch('fashion')">Fashion</span></div><button class="btn-primary" onclick="window.location.href='/'"><i class="fas fa-home"></i> Go Home</button></div>`;
-        } else { renderListings(pageItems, 'searchResultsGrid'); }
+          grid.innerHTML = `
+            <div class="empty-state" style="grid-column:1/-1;">
+              <i class="fas fa-search"></i>
+              <h3>No results found for "${searchQuery || 'your search'}"</h3>
+              <p>Try adjusting your search terms or filters.</p>
+              <div class="suggestions">
+                <span class="suggestion-chip" onclick="refineSearch('electronics')">Electronics</span>
+                <span class="suggestion-chip" onclick="refineSearch('fashion')">Fashion</span>
+                <span class="suggestion-chip" onclick="refineSearch('cleaning')">Cleaning</span>
+                <span class="suggestion-chip" onclick="refineSearch('plumbing')">Plumbing</span>
+                <span class="suggestion-chip" onclick="refineSearch('electrical')">Electrical</span>
+              </div>
+              <button class="btn-primary" onclick="window.location.href='/'"><i class="fas fa-home"></i> Go Home</button>
+            </div>`;
+        } else {
+          grid.innerHTML = pageItems.map(item => {
+            if (item._type === 'service') return renderServiceCard(item);
+            return renderProductCard(item);
+          }).join('');
+        }
+
         updatePagination();
       }
 
@@ -403,17 +714,28 @@
         const totalPages = Math.ceil(filteredResults.length / itemsPerPage);
         prevPageBtn.disabled = currentPage <= 1;
         nextPageBtn.disabled = currentPage >= totalPages;
+
         let pagesHtml = '';
         const maxVisible = 5;
         let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
         let endPage = Math.min(totalPages, startPage + maxVisible - 1);
         if (endPage - startPage < maxVisible - 1) startPage = Math.max(1, endPage - maxVisible + 1);
-        if (startPage > 1) { pagesHtml += `<button onclick="goToPage(1)">1</button>`; if (startPage > 2) pagesHtml += `<span class="ellipsis">…</span>`; }
-        for (let i = startPage; i <= endPage; i++) pagesHtml += `<button class="${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
-        if (endPage < totalPages) { if (endPage < totalPages - 1) pagesHtml += `<span class="ellipsis">…</span>`; pagesHtml += `<button onclick="goToPage(${totalPages})">${totalPages}</button>`; }
+
+        if (startPage > 1) {
+          pagesHtml += `<button onclick="goToPage(1)">1</button>`;
+          if (startPage > 2) pagesHtml += `<span class="ellipsis">…</span>`;
+        }
+        for (let i = startPage; i <= endPage; i++) {
+          pagesHtml += `<button class="${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
+        }
+        if (endPage < totalPages) {
+          if (endPage < totalPages - 1) pagesHtml += `<span class="ellipsis">…</span>`;
+          pagesHtml += `<button onclick="goToPage(${totalPages})">${totalPages}</button>`;
+        }
         pageNumbers.innerHTML = pagesHtml;
       }
 
+      // ---- Global handlers ----
       window.goToPage = function(page) {
         const totalPages = Math.ceil(filteredResults.length / itemsPerPage);
         if (page < 1 || page > totalPages) return;
@@ -424,13 +746,31 @@
 
       window.applyChipFilter = function(filter) {
         currentChipFilter = filter;
-        document.querySelectorAll('.filter-chips .chip').forEach(el => { el.classList.toggle('active', el.dataset.filter === filter); });
+        document.querySelectorAll('.filter-chips .chip').forEach(el => {
+          el.classList.toggle('active', el.dataset.filter === filter);
+        });
+        // Sync type dropdown with chip
+        if (filter === 'products-only') {
+          currentType = 'product';
+          document.getElementById('typeTrigger').querySelector('span').textContent = 'Products Only';
+        } else if (filter === 'services-only') {
+          currentType = 'service';
+          document.getElementById('typeTrigger').querySelector('span').textContent = 'Services Only';
+        } else if (filter === 'all') {
+          currentType = 'all';
+          document.getElementById('typeTrigger').querySelector('span').textContent = 'All Results';
+        }
         applyFilters();
       };
 
       window.refineSearch = function(term) {
         currentCategory = term;
-        document.getElementById('categoryTrigger').querySelector('span').textContent = categories.find(c => c.slug === term)?.name || term;
+        const allCatOptions = document.querySelectorAll('#categoryOptions li');
+        let foundLabel = term;
+        allCatOptions.forEach(li => {
+          if (li.dataset.value === term) foundLabel = li.textContent;
+        });
+        document.getElementById('categoryTrigger').querySelector('span').textContent = foundLabel;
         applyFilters();
       };
 
@@ -441,9 +781,10 @@
         if (!currentUser) { openSignup(); } else { window.location.href = '/post.html'; }
       });
 
-      allResults = results;
+      // ---- Initial render ----
       searchQueryText.textContent = searchQuery || 'all items';
-      resultCount.textContent = results.length;
+      resultCount.textContent = allResults.length;
+
       const endTime = performance.now();
       searchTime.textContent = ((endTime - startTime) / 1000).toFixed(2);
 
