@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Discovery Feed – Zaure</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Discovery – Zaure</title>
   <meta name="description" content="Discover products and services on Zaure - Nigeria's most trusted online marketplace.">
   <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -11,15 +11,16 @@
   <link rel="stylesheet" href="/css/style.css">
   <style>
     /* ============================================
-       THEME & GLOBAL RESET
+       PREMIUM TIKTOK FEED STYLES
        ============================================ */
     :root {
       --navy: #0f2940;
       --navy-2: #1a3650;
-      --border: rgba(255, 255, 255, 0.15);
+      --surface: #ffffff;
       --text: #ffffff;
       --text-secondary: rgba(255, 255, 255, 0.7);
-      --surface: #ffffff;
+      --glass-bg: rgba(255, 255, 255, 0.15);
+      --glass-border: rgba(255, 255, 255, 0.25);
     }
 
     body {
@@ -29,21 +30,21 @@
       height: 100vh;
       padding: 0 !important;
       margin: 0;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* ============================================
-       TIKTOK SCROLL CONTAINER
-       ============================================ */
+    /* The Vertical Feed Container */
     .tiktok-feed {
       height: 100vh;
       width: 100vw;
       overflow-y: scroll;
       scroll-snap-type: y mandatory;
-      scrollbar-width: none; /* Firefox */
-      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;
+      -ms-overflow-style: none;
     }
     .tiktok-feed::-webkit-scrollbar { display: none; }
 
+    /* Individual Item */
     .feed-item {
       height: 100vh;
       width: 100%;
@@ -52,156 +53,179 @@
       position: relative;
       background: #000;
       overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
     /* ============================================
-       IMMERSIVE MEDIA (FIXES ZOOMING)
+       CINEMATIC MEDIA & CAROUSEL
        ============================================ */
-    /* 1. Blurred background that fills the screen */
-    .media-bg {
+    /* Horizontal Carousel for Images */
+    .media-carousel {
       position: absolute;
       inset: 0;
-      background-size: cover;
-      background-position: center;
-      filter: blur(25px) brightness(0.4);
-      transform: scale(1.2); /* Prevent blur edges */
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
       z-index: 1;
     }
+    .media-carousel::-webkit-scrollbar { display: none; }
 
-    /* 2. Sharp main image (contained) */
-    .media-main {
-      position: relative;
-      z-index: 2;
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain; /* Shows full image without zooming */
-      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-      border-radius: 12px;
-    }
-
-    /* Service Specific Visual (Avatar) */
-    .media-service {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+    .carousel-slide {
+      flex: 0 0 100%;
       width: 100%;
       height: 100%;
+      scroll-snap-align: start;
+      position: relative;
+      /* Immersive background for letterboxing */
+      background: linear-gradient(135deg, #0a1015 0%, #1a2a3a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .service-avatar-large {
-      width: 180px; height: 180px;
+
+    /* Main Image - High Quality Display */
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Fills screen, crops slightly if needed */
+      /* If you prefer to see the FULL image without crop, change to 'contain' and remove the background gradient above */
+    }
+
+    /* Gradient Overlays for UI visibility */
+    .overlay-top {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 150px;
+      background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, transparent 100%);
+      z-index: 5;
+      pointer-events: none;
+    }
+    .overlay-bottom {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 250px;
+      background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, transparent 100%);
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    /* Pagination Dots */
+    .carousel-dots {
+      position: absolute;
+      bottom: 160px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+      z-index: 10;
+    }
+    .dot {
+      width: 6px; height: 6px;
       border-radius: 50%;
-      background: var(--navy-2);
-      display: flex; align-items: center; justify-content: center;
-      color: #fff; font-size: 4rem; font-weight: 800;
-      box-shadow: 0 0 0 8px rgba(26,54,80,0.3), 0 0 0 16px rgba(26,54,80,0.1);
-      overflow: hidden;
-      margin-bottom: 24px;
+      background: rgba(255,255,255,0.4);
+      transition: all 0.3s ease;
     }
-    .service-avatar-large img {
-      width: 100%; height: 100%; object-fit: cover;
+    .dot.active {
+      background: #fff;
+      transform: scale(1.3);
     }
 
     /* ============================================
-       UI OVERLAYS
+       TOP BAR (Brand & Stats)
        ============================================ */
-    /* Top Bar (Gamification) */
     .top-bar {
       position: absolute;
       top: 0; left: 0; right: 0;
-      padding: 20px;
+      padding: calc(16px + env(safe-area-inset-top)) 20px 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       z-index: 10;
-      background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, transparent 100%);
     }
-    .top-bar .brand {
+    .brand {
       font-family: 'Playfair Display', serif;
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       font-weight: 800;
       color: white;
       text-decoration: none;
       letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
     }
     .streak-badge {
-      background: rgba(255,255,255,0.15);
+      background: var(--glass-bg);
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.2);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
       padding: 6px 14px;
       border-radius: 30px;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 700;
       display: flex;
       align-items: center;
       gap: 6px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
-    .streak-badge i { color: #ff9800; animation: fireFlicker 1s infinite alternate; }
-    @keyframes fireFlicker { 0% { transform: scale(1); } 100% { transform: scale(1.15); } }
+    .streak-badge i { color: #ff9800; }
 
-    /* Bottom Info (Caption) */
+    /* ============================================
+       BOTTOM DETAILS
+       ============================================ */
     .bottom-info {
       position: absolute;
-      bottom: 24px;
+      bottom: calc(24px + env(safe-area-inset-bottom));
       left: 20px;
-      right: 80px; /* Leave space for right sidebar */
+      right: 80px; /* Leave room for actions */
       z-index: 10;
-      color: white;
-      background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, transparent 100%);
-      padding: 20px 20px 20px 0;
-      pointer-events: none;
     }
-    .bottom-info .badge-row {
+    .item-badges {
       display: flex;
       gap: 8px;
-      margin-bottom: 8px;
-      pointer-events: auto;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
     }
-    .tag {
+    .badge {
       background: var(--navy-2);
-      padding: 4px 10px;
+      padding: 5px 12px;
       border-radius: 20px;
       font-size: 0.65rem;
       font-weight: 800;
       letter-spacing: 1px;
       text-transform: uppercase;
+      backdrop-filter: blur(4px);
     }
-    .tag.price {
-      background: white;
+    .badge.price {
+      background: #fff;
       color: var(--navy);
-      font-size: 0.9rem;
-      padding: 4px 14px;
+      font-size: 1rem;
+      padding: 5px 16px;
+      letter-spacing: 0;
     }
-    .title {
-      font-size: 1.1rem;
+    .item-title {
+      font-size: 1.15rem;
       font-weight: 700;
       line-height: 1.3;
       margin-bottom: 8px;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
     }
-    .meta {
+    .item-meta {
       font-size: 0.85rem;
       color: var(--text-secondary);
       display: flex;
-      align-items: center;
+      flex-wrap: wrap;
       gap: 12px;
     }
-    .meta span { display: flex; align-items: center; gap: 4px; }
-    .meta i { color: var(--navy-2); background: white; padding: 2px; border-radius: 50%; font-size: 0.6rem; }
+    .item-meta span { display: flex; align-items: center; gap: 5px; }
 
-    /* Right Action Sidebar */
-    .right-actions {
+    /* ============================================
+       RIGHT ACTION SIDEBAR
+       ============================================ */
+    .action-sidebar {
       position: absolute;
-      bottom: 30px;
-      right: 16px;
+      bottom: calc(30px + env(safe-area-inset-bottom));
+      right: 12px;
       z-index: 10;
       display: flex;
       flex-direction: column;
@@ -209,33 +233,65 @@
       gap: 20px;
     }
     .action-btn {
-      width: 48px; height: 48px;
+      width: 50px; height: 50px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.15);
+      background: var(--glass-bg);
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.2);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
       color: white;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       cursor: pointer;
-      transition: transform 0.2s, background 0.2s;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
-    .action-btn:hover { background: rgba(255,255,255,0.3); transform: scale(1.05); }
-    .action-btn:active { transform: scale(0.9); }
-    .action-btn span {
-      font-size: 0.6rem;
-      font-weight: 700;
-      margin-top: 4px;
+    .action-btn:active { transform: scale(0.85); }
+    
+    /* The Like Button (State) */
+    .action-btn.liked {
+      color: #ff2d55; /* iOS/TikTok Red */
+      border-color: #ff2d55;
+      background: rgba(255, 45, 85, 0.15);
     }
-    .action-btn.wa { background: #25D366; border-color: #25D366; }
-    .action-btn.wa:hover { background: #1DA851; }
-    .action-btn.saved { color: #e74c3c; }
-    .action-btn.saved i { animation: popHeart 0.4s ease; }
+    .action-btn.liked i { animation: popHeartBtn 0.4s ease; }
+    
+    /* WhatsApp Button */
+    .action-btn.wa {
+      background: linear-gradient(135deg, #25D366, #1DA851);
+      border: none;
+      font-size: 1.5rem;
+    }
+    .action-btn.wa:active { transform: scale(0.85); }
 
-    @keyframes popHeart {
+    /* ============================================
+       GIANT DOUBLE-TAP HEART
+       ============================================ */
+    .giant-heart {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      font-size: 120px;
+      color: #ff2d55;
+      z-index: 50;
+      pointer-events: none;
+      opacity: 0;
+      filter: drop-shadow(0 0 20px rgba(255,45,85,0.5));
+    }
+    .giant-heart.animate {
+      animation: heartBurst 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+    @keyframes heartBurst {
+      0% { transform: translate(-50%, -50%) scale(0) rotate(-20deg); opacity: 1; }
+      50% { transform: translate(-50%, -50%) scale(1.2) rotate(10deg); opacity: 1; }
+      80% { transform: translate(-50%, -50%) scale(0.9) rotate(0deg); opacity: 1; }
+      100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 0; }
+    }
+
+    @keyframes popHeartBtn {
       0% { transform: scale(1); }
-      50% { transform: scale(1.5); }
+      50% { transform: scale(1.4); }
       100% { transform: scale(1); }
     }
 
@@ -245,8 +301,8 @@
       bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
-      color: rgba(255,255,255,0.6);
-      font-size: 0.8rem;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.75rem;
       font-weight: 600;
       display: flex;
       flex-direction: column;
@@ -255,85 +311,56 @@
       z-index: 10;
       animation: bounce 2s infinite;
       pointer-events: none;
-      transition: opacity 0.3s;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
     }
     @keyframes bounce {
       0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
-      40% { transform: translate(-50%, -10px); }
-      60% { transform: translate(-50%, -5px); }
-    }
-
-    /* Giant Heart Overlay (Double Tap) */
-    .heart-overlay {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%) scale(0);
-      font-size: 100px;
-      color: #e74c3c;
-      opacity: 0;
-      pointer-events: none;
-      z-index: 20;
-      text-shadow: 0 0 20px rgba(0,0,0,0.5);
-    }
-    .heart-overlay.animate {
-      animation: giantHeart 0.8s ease forwards;
-    }
-    @keyframes giantHeart {
-      0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
-      50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
-      100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+      40% { transform: translate(-50%, -8px); }
+      60% { transform: translate(-50%, -4px); }
     }
 
     /* Toast */
     .toast {
       position: fixed;
-      top: 60px;
+      top: calc(20px + env(safe-area-inset-top));
       left: 50%;
       transform: translateX(-50%) translateY(-20px);
       background: rgba(26,54,80,0.95);
       color: white;
       padding: 10px 20px;
       border-radius: 30px;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       font-weight: 600;
       opacity: 0;
       transition: all 0.3s;
       z-index: 1000;
       pointer-events: none;
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
     }
     .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-    /* Loading State */
-    .loading-container {
+    /* Loader */
+    .loader {
       height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 16px;
-      color: white;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 16px; color: white;
     }
-    .loading-spinner {
+    .spinner {
       width: 40px; height: 40px;
-      border: 4px solid rgba(255,255,255,0.1);
-      border-top-color: white;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
+      border: 3px solid rgba(255,255,255,0.1);
+      border-top-color: #fff; border-radius: 50%;
+      animation: spin 0.8s linear infinite;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
   </style>
 </head>
 <body>
 
-  <!-- Toast -->
   <div class="toast" id="toast"></div>
 
-  <!-- Feed Container -->
   <div class="tiktok-feed" id="tiktokFeed">
-    <div class="loading-container">
-      <div class="loading-spinner"></div>
+    <div class="loader">
+      <div class="spinner"></div>
       <p>Curating your feed...</p>
     </div>
   </div>
@@ -341,11 +368,10 @@
   <script src="/js/main.js"></script>
   <script>
     // ============================================
-    // CONFIGURATION & TRACKING
+    // TRACKING & SETUP
     // ============================================
     const CONFIG = {
       WHATSAPP_NUMBER: '2349042339411',
-      // ⚠️ PASTE YOUR GOOGLE APPS SCRIPT WEBHOOK URL HERE
       SHEET_WEBHOOK_URL: 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE'
     };
 
@@ -353,8 +379,8 @@
     let guestGPS = { lat: null, lng: null, maps: null };
     let viewedCount = 0;
 
-    // Collect guest data silently
-    async function collectGuestData() {
+    // 1. Collect Guest Data
+    (async function collectGuestData() {
       const user = typeof getCurrentUser === 'function' ? getCurrentUser() : null;
       
       if (navigator.geolocation) {
@@ -365,38 +391,29 @@
               lng: pos.coords.longitude.toFixed(6),
               maps: `https://www.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}`
             };
-            // Optional: showToast("📍 Location captured for local deals");
           },
-          () => { console.log('GPS permission denied'); },
+          () => {},
           { timeout: 5000 }
         );
       }
-
       guestDeviceInfo = {
         userAgent: navigator.userAgent,
         platform: navigator.platform || 'Unknown',
         screen: `${screen.width}x${screen.height}`,
-        referrer: document.referrer || 'Direct',
         isGuest: !user
       };
-    }
-    collectGuestData();
+    })();
 
+    // 2. Send Tracking
     async function sendToSheet(data) {
-      if (!CONFIG.SHEET_WEBHOOK_URL || CONFIG.SHEET_WEBHOOK_URL.includes('YOUR_GOOGLE')) {
-        console.warn('⚠️ Sheet Webhook URL not configured. Skipping tracking.');
-        return;
-      }
+      if (!CONFIG.SHEET_WEBHOOK_URL || CONFIG.SHEET_WEBHOOK_URL.includes('YOUR_GOOGLE')) return;
       try {
         await fetch(CONFIG.SHEET_WEBHOOK_URL, {
-          method: 'POST',
-          mode: 'no-cors',
+          method: 'POST', mode: 'no-cors',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data)
         });
-      } catch (err) {
-        console.error('❌ Tracking failed:', err);
-      }
+      } catch (e) {}
     }
 
     function showToast(msg) {
@@ -404,7 +421,7 @@
       t.textContent = msg;
       t.classList.add('show');
       clearTimeout(window.__toast);
-      window.__toast = setTimeout(() => t.classList.remove('show'), 3000);
+      window.__toast = setTimeout(() => t.classList.remove('show'), 2500);
     }
 
     // ============================================
@@ -415,14 +432,15 @@
     document.addEventListener('DOMContentLoaded', async function() {
       const feedContainer = document.getElementById('tiktokFeed');
 
-      // 1. Load Data
       let products = [];
       let services = [];
       try { products = await loadProducts(); } catch(e) {}
       try { services = await loadServices(); } catch(e) {}
 
-      // 2. Normalize
+      // Prepare Products
       const pItems = products.map(p => ({ ...p, _type: 'product' }));
+      
+      // Prepare Services
       const sItems = services.map(s => {
         const norm = normalizeService(s);
         return {
@@ -430,7 +448,6 @@
           title: norm.title,
           price: null, 
           location: norm.location,
-          date: norm.date,
           category: norm.category,
           seller: { 
             name: getSellerName(s), 
@@ -441,88 +458,93 @@
         };
       });
 
-      // 3. Mix & Shuffle
+      // Shuffle
       feedItems = [...pItems, ...sItems].sort(() => Math.random() - 0.5);
-
-      // 4. Render
-      feedContainer.innerHTML = ''; // Clear loader
+      feedContainer.innerHTML = '';
 
       if (feedItems.length === 0) {
-        feedContainer.innerHTML = `<div class="loading-container"><h2>No items found</h2><p>Be the first to post!</p></div>`;
+        feedContainer.innerHTML = `<div class="loader"><h2>No items found</h2></div>`;
         return;
       }
 
+      // Render all items
       feedItems.forEach((item, index) => {
         feedContainer.appendChild(createFeedItem(item, index));
       });
 
-      // Setup Intersection Observer for "Gamification"
       setupScrollTracking();
     });
 
     function createFeedItem(item, index) {
       const el = document.createElement('div');
       el.className = 'feed-item';
-      el.dataset.id = item.id;
-      el.dataset.type = item._type;
-
-      let mediaHtml = '';
-      let detailsHtml = '';
-
+      
+      // --- 1. Build Media Carousel ---
+      let slidesHtml = '';
+      let dotsHtml = '';
+      
       if (item._type === 'product') {
-        const img = (item.images && item.images.length > 0) ? item.images[0] : 'https://placehold.co/400x600?text=No+Image';
-        const price = item.price >= 1e6 ? `₦${(item.price/1e6).toFixed(1)}M` : `₦${(item.price || 0).toLocaleString()}`;
+        const images = (item.images && item.images.length > 0) ? item.images : ['https://placehold.co/400x600?text=No+Image'];
         
-        mediaHtml = `
-          <div class="media-bg" style="background-image: url('${img}')"></div>
-          <img src="${img}" class="media-main" alt="${item.title}" onerror="this.src='https://placehold.co/400x600?text=No+Image'">
-        `;
-
-        detailsHtml = `
-          <div class="badge-row">
-            <span class="tag price">${price}</span>
-            <span class="tag" style="background:white; color:var(--navy);">Product</span>
-          </div>
-          <div class="title">${item.title}</div>
-          <div class="meta">
-            <span><i class="fas fa-map-pin"></i> ${item.location || 'Nigeria'}</span>
-            <span><i class="fas fa-store"></i> ${item.seller?.name || 'Zaure Official'}</span>
-          </div>
-        `;
+        images.forEach((img, i) => {
+          slidesHtml += `
+            <div class="carousel-slide">
+              <img src="${img}" alt="${item.title}" loading="${i === 0 ? 'eager' : 'lazy'}" onerror="this.src='https://placehold.co/400x600?text=No+Image'">
+            </div>
+          `;
+          dotsHtml += `<div class="dot ${i === 0 ? 'active' : ''}" data-index="${i}"></div>`;
+        });
       } else {
-        // Service
+        // Service Media
         const raw = item._original;
         const profilePic = getSellerPic(raw);
         const initials = getSellerInitials(raw);
-        const trade = getTradeName(item.category);
-
-        mediaHtml = `
-          <div class="media-bg" style="background: linear-gradient(135deg, #1a3650, #0f2940);"></div>
-          <div class="media-service">
-            <div class="service-avatar-large">
-              ${profilePic ? `<img src="${profilePic}">` : initials}
+        const avatar = profilePic ? `<img src="${profilePic}">` : `<span style="font-size:4rem;color:var(--navy);">${initials}</span>`;
+        
+        slidesHtml = `
+          <div class="carousel-slide" style="background: linear-gradient(135deg, var(--navy-2), var(--navy));">
+            <div style="width:180px; height:180px; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center; box-shadow: 0 0 0 8px rgba(255,255,255,0.1), 0 0 0 16px rgba(255,255,255,0.05); overflow:hidden;">
+              ${avatar}
             </div>
-          </div>
-        `;
-
-        detailsHtml = `
-          <div class="badge-row">
-            <span class="tag price" style="background:var(--navy-2); color:white;">Available Now</span>
-            <span class="tag" style="background:white; color:var(--navy);">${trade}</span>
-          </div>
-          <div class="title">${item.title}</div>
-          <div class="meta">
-            <span><i class="fas fa-map-pin"></i> ${item.location || 'Nigeria'}</span>
-            <span><i class="fas fa-user-tie"></i> ${item.seller?.name}</span>
           </div>
         `;
       }
 
+      // --- 2. Build Details ---
+      let badgesHtml = '';
+      if (item._type === 'product') {
+        const price = item.price >= 1e6 ? `₦${(item.price/1e6).toFixed(1)}M` : `₦${(item.price || 0).toLocaleString()}`;
+        badgesHtml = `
+          <span class="badge price">${price}</span>
+          <span class="badge">Product</span>
+        `;
+      } else {
+        const trade = getTradeName(item.category);
+        badgesHtml = `
+          <span class="badge price" style="background:var(--navy-2); color:#fff;">Available Now</span>
+          <span class="badge">${trade}</span>
+        `;
+      }
+
       const isFav = typeof isFavorite === 'function' ? isFavorite(item.id) : false;
+      const sellerName = item.seller?.name || 'Zaure Official';
+      const sellerInitials = sellerName.charAt(0).toUpperCase();
 
       el.innerHTML = `
+        <!-- Overlays -->
+        <div class="overlay-top"></div>
+        <div class="overlay-bottom"></div>
+
         <!-- Media -->
-        ${mediaHtml}
+        <div class="media-carousel">
+          ${slidesHtml}
+        </div>
+
+        <!-- Pagination Dots -->
+        ${dotsHtml ? `<div class="carousel-dots">${dotsHtml}</div>` : ''}
+
+        <!-- Giant Heart (Hidden) -->
+        <i class="fas fa-heart giant-heart" id="heart-${index}"></i>
 
         <!-- Top Bar -->
         <div class="top-bar">
@@ -532,114 +554,157 @@
           </div>
         </div>
 
-        <!-- Giant Heart (Hidden by default) -->
-        <i class="fas fa-heart heart-overlay" id="heart-${index}"></i>
-
         <!-- Bottom Info -->
         <div class="bottom-info">
-          ${detailsHtml}
+          <div class="item-badges">${badgesHtml}</div>
+          <div class="item-title">${item.title}</div>
+          <div class="item-meta">
+            <span><i class="fas fa-map-pin"></i> ${item.location || 'Nigeria'}</span>
+            <span><i class="fas ${item._type === 'product' ? 'fa-store' : 'fa-user-tie'}"></i> ${sellerName}</span>
+          </div>
         </div>
 
-        <!-- Right Actions -->
-        <div class="right-actions">
-          <button class="action-btn save-btn ${isFav ? 'saved' : ''}" onclick="toggleSave(event, ${index})">
+        <!-- Action Sidebar -->
+        <div class="action-sidebar">
+          <button class="action-btn like-btn ${isFav ? 'liked' : ''}" onclick="toggleLike(event, ${index})">
             <i class="${isFav ? 'fas' : 'far'} fa-heart"></i>
-            <span>Save</span>
           </button>
           
           <button class="action-btn wa" onclick="contactSeller(event, ${index})">
             <i class="fab fa-whatsapp"></i>
-            <span>Chat</span>
           </button>
 
           <button class="action-btn" onclick="viewDetails(event, ${index})">
             <i class="fas fa-expand"></i>
-            <span>View</span>
           </button>
         </div>
 
-        <!-- Swipe Hint -->
+        <!-- Swipe Hint (Only first item) -->
         ${index === 0 ? '<div class="swipe-hint" id="swipeHint"><i class="fas fa-chevron-up"></i><span>Swipe up</span></div>' : ''}
       `;
 
-      // Double Tap to Like
-      let lastTap = 0;
-      const mediaArea = el.querySelector('.media-bg'); // Use BG as the tap target area
-      el.addEventListener('click', (e) => {
-        // Ignore clicks on buttons
-        if (e.target.closest('.action-btn') || e.target.closest('.top-bar')) return;
+      // --- 3. Attach Double Tap Logic ---
+      setupDoubleTap(el, index);
 
-        const now = Date.now();
-        if (now - lastTap < 300) {
-          // Double tap detected
-          triggerDoubleTapLike(el, index);
-          e.preventDefault();
-        }
-        lastTap = now;
-      });
+      // --- 4. Attach Carousel Sync ---
+      setupCarouselScroll(el);
 
       return el;
     }
 
     // ============================================
-    // ACTIONS & LOGIC
+    // CAROUSEL SCROLL LOGIC
     // ============================================
-    function toggleSave(e, index) {
-      e.stopPropagation();
-      const item = feedItems[index];
-      const btn = e.currentTarget;
+    function setupCarouselScroll(itemEl) {
+      const carousel = itemEl.querySelector('.media-carousel');
+      const dots = itemEl.querySelectorAll('.dot');
       
-      if (typeof toggleFavorite === 'function') {
-        if (!getCurrentUser()) { openSignup(); return; }
-        const isNowFav = toggleFavorite(item.id);
-        if (isNowFav) {
-          btn.classList.add('saved');
-          btn.innerHTML = `<i class="fas fa-heart"></i><span>Saved</span>`;
-          showToast('Saved to favorites!');
-        } else {
-          btn.classList.remove('saved');
-          btn.innerHTML = `<i class="far fa-heart"></i><span>Save</span>`;
+      if (!carousel || dots.length <= 1) return;
+
+      carousel.addEventListener('scroll', () => {
+        const index = Math.round(carousel.scrollLeft / carousel.offsetWidth);
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('active', i === index);
+        });
+      });
+    }
+
+    // ============================================
+    // DOUBLE TAP TO LIKE LOGIC
+    // ============================================
+    function setupDoubleTap(el, index) {
+      let lastTap = 0;
+      
+      // We attach to the carousel so they can double-tap anywhere on the image
+      const tapArea = el.querySelector('.media-carousel');
+
+      tapArea.addEventListener('click', (e) => {
+        const now = Date.now();
+        const DOUBLE_PRESS_DELAY = 300;
+        
+        if (now - lastTap < DOUBLE_PRESS_DELAY) {
+          // Double tap detected
+          triggerDoubleTapLike(el, index, e);
+          e.preventDefault();
+        }
+        lastTap = now;
+      });
+    }
+
+    function triggerDoubleTapLike(el, index, event) {
+      const heart = el.querySelector('.giant-heart');
+      const likeBtn = el.querySelector('.like-btn');
+      const item = feedItems[index];
+
+      // 1. Reset and trigger giant heart animation
+      heart.classList.remove('animate');
+      void heart.offsetWidth; // Force reflow
+      heart.classList.add('animate');
+
+      // 2. Update button UI
+      const icon = likeBtn.querySelector('i');
+      if (!likeBtn.classList.contains('liked')) {
+        likeBtn.classList.add('liked');
+        icon.className = 'fas fa-heart';
+        
+        // 3. Save to DB
+        if (typeof toggleFavorite === 'function') {
+          if (!getCurrentUser()) { 
+             // If guest, just show local state, don't open signup on double tap
+          } else {
+             toggleFavorite(item.id);
+          }
         }
       }
     }
 
-    function triggerDoubleTapLike(el, index) {
-      const heart = el.querySelector('.heart-overlay');
-      const btn = el.querySelector('.save-btn');
+    // ============================================
+    // BUTTON ACTIONS
+    // ============================================
+    function toggleLike(e, index) {
+      e.stopPropagation();
+      const btn = e.currentTarget;
       const item = feedItems[index];
+      
+      if (typeof getCurrentUser === 'function' && !getCurrentUser()) {
+        if (typeof openSignup === 'function') openSignup();
+        return;
+      }
 
-      heart.classList.remove('animate');
-      void heart.offsetWidth; // Trigger reflow
-      heart.classList.add('animate');
-
-      if (typeof isFavorite === 'function' && !isFavorite(item.id)) {
-        toggleSave({ currentTarget: btn, stopPropagation: () => {} }, index);
+      if (typeof toggleFavorite === 'function') {
+        const isNowFav = toggleFavorite(item.id);
+        const icon = btn.querySelector('i');
+        
+        if (isNowFav) {
+          btn.classList.add('liked');
+          icon.className = 'fas fa-heart';
+        } else {
+          btn.classList.remove('liked');
+          icon.className = 'far fa-heart';
+        }
       }
     }
 
     function viewDetails(e, index) {
       e.stopPropagation();
       const item = feedItems[index];
-      if (item._type === 'product') {
-        window.location.href = `/detail.html?id=${item.id}`;
-      } else {
-        window.location.href = `/service.html?id=${item.id}`;
-      }
+      window.location.href = item._type === 'product' 
+        ? `/detail.html?id=${item.id}` 
+        : `/service.html?id=${item.id}`;
     }
 
     function contactSeller(e, index) {
       e.stopPropagation();
       const item = feedItems[index];
       const sellerName = item.seller?.name || 'Seller';
-      const sellerPhone = item.seller?.phone || item.seller?.whatsapp || '09042339411';
+      const sellerPhone = item.seller?.phone || '09042339411';
       const cleanNumber = String(sellerPhone).replace(/[^0-9]/g, '');
       
       const waMsg = `Hello ${sellerName}, I saw your ${item._type} "${item.title}" on Zaure Discovery. Is it still available?`;
       const waLink = `https://wa.me/${cleanNumber}?text=${encodeURIComponent(waMsg)}`;
 
-      // TRACKING: Send to sheet
+      // Track Click
       const user = typeof getCurrentUser === 'function' ? getCurrentUser() : null;
-      
       sendToSheet({
         type: 'whatsapp_click_discovery',
         item_type: item._type,
@@ -655,41 +720,31 @@
       });
 
       showToast('Opening WhatsApp...');
-
-      // Open link
-      setTimeout(() => { window.open(waLink, '_blank'); }, 200);
+      setTimeout(() => { window.open(waLink, '_blank'); }, 150);
     }
 
     // ============================================
-    // GAMIFICATION: SCROLL TRACKING
+    // SCROLL TRACKING (GAMIFICATION)
     // ============================================
     function setupScrollTracking() {
-      const options = {
-        root: document.getElementById('tiktokFeed'),
-        threshold: 0.6 // Item must be 60% visible
-      };
-
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            // Hide swipe hint after first item
             const hint = document.getElementById('swipeHint');
             if (hint) hint.style.opacity = '0';
 
-            // Increment gamified counter
             viewedCount++;
-            const streakBadge = document.querySelector('.streak-badge'); // Top bar only on first item
-            if (streakBadge) {
-              streakBadge.style.display = 'flex';
-              document.getElementById('streakCount').textContent = viewedCount;
+            // Update the badge on the current visible item
+            const badge = entry.target.querySelector('.streak-badge');
+            if (badge) {
+              badge.style.display = 'flex';
+              badge.querySelector('span').textContent = viewedCount;
             }
           }
         });
-      }, options);
+      }, { root: document.getElementById('tiktokFeed'), threshold: 0.6 });
 
-      document.querySelectorAll('.feed-item').forEach(item => {
-        observer.observe(item);
-      });
+      document.querySelectorAll('.feed-item').forEach(item => observer.observe(item));
     }
   </script>
 </body>
