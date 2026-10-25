@@ -56,7 +56,7 @@
     }
 
     /* ============================================
-       CINEMATIC MEDIA (ZOOMED OUT + BLURRED BG)
+       CINEMATIC MEDIA (ZOOMED OUT + BLURRED BG + VIDEO)
        ============================================ */
     .media-carousel {
       position: absolute;
@@ -81,23 +81,21 @@
       overflow: hidden;
     }
 
-    /* The blurred background that fills the screen */
     .slide-bg {
       position: absolute;
-      inset: -20px; /* Prevents blur edges */
+      inset: -20px;
       background-size: cover;
       background-position: center;
       filter: blur(25px) brightness(0.3);
       z-index: 1;
     }
 
-    /* The main image - fully visible (zoomed out) */
-    .slide-img {
+    .slide-img, .slide-video {
       position: relative;
       z-index: 2;
       width: 100%;
       height: 100%;
-      object-fit: contain; /* Shows full image without cropping */
+      object-fit: contain;
       filter: drop-shadow(0 10px 30px rgba(0,0,0,0.6));
     }
 
@@ -105,15 +103,15 @@
     .overlay-top {
       position: absolute;
       top: 0; left: 0; right: 0;
-      height: 140px;
-      background: linear-gradient(180deg, rgba(0,0,0,0.85) 0%, transparent 100%);
+      height: 180px;
+      background: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, transparent 100%);
       z-index: 5;
       pointer-events: none;
     }
     .overlay-bottom {
       position: absolute;
       bottom: 0; left: 0; right: 0;
-      height: 280px;
+      height: 320px;
       background: linear-gradient(0deg, rgba(0,0,0,0.95) 0%, transparent 100%);
       z-index: 5;
       pointer-events: none;
@@ -122,7 +120,7 @@
     /* Pagination Dots */
     .carousel-dots {
       position: absolute;
-      bottom: 190px;
+      bottom: 210px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
@@ -142,16 +140,24 @@
     }
 
     /* ============================================
-       TOP BAR
+       TOP BAR & CATEGORY FILTER
        ============================================ */
-    .top-bar {
+    .top-header {
       position: absolute;
       top: 0; left: 0; right: 0;
-      padding: calc(16px + env(safe-area-inset-top)) 20px 16px;
+      z-index: 10;
+      padding-top: calc(16px + env(safe-area-inset-top));
+    }
+    .top-bar-main {
+      padding: 0 20px 12px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      z-index: 10;
+    }
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
     .brand {
       font-family: 'Playfair Display', serif;
@@ -165,15 +171,65 @@
       gap: 8px;
       text-shadow: 0 2px 10px rgba(0,0,0,0.5);
     }
+    
+    .near-me-btn {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 20px;
+      color: white;
+      padding: 4px 10px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s;
+      backdrop-filter: blur(4px);
+    }
+    .near-me-btn.active {
+      background: #25D366;
+      border-color: #25D366;
+      color: white;
+    }
+    .near-me-btn i { font-size: 0.8rem; }
+
+    /* Category Filter Bar */
+    .category-bar {
+      display: flex;
+      overflow-x: auto;
+      padding: 0 20px 10px;
+      gap: 8px;
+      scrollbar-width: none;
+    }
+    .category-bar::-webkit-scrollbar { display: none; }
+    .cat-chip {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: white;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      white-space: nowrap;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      transition: all 0.2s;
+    }
+    .cat-chip.active {
+      background: white;
+      color: var(--navy);
+      border-color: white;
+    }
 
     /* ============================================
-       BOTTOM DETAILS
+       BOTTOM DETAILS & SEE MORE
        ============================================ */
     .bottom-info {
       position: absolute;
       bottom: calc(24px + env(safe-area-inset-bottom));
       left: 20px;
-      right: 85px; /* Leave room for actions */
+      right: 85px;
       z-index: 10;
     }
     .item-badges {
@@ -203,17 +259,59 @@
       font-size: 1.15rem;
       font-weight: 700;
       line-height: 1.3;
-      margin-bottom: 8px;
+      margin-bottom: 4px;
       text-shadow: 0 2px 4px rgba(0,0,0,0.5);
     }
+    
+    /* Expandable Description */
+    .item-desc-wrapper {
+      position: relative;
+      margin-bottom: 10px;
+    }
+    .item-desc {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .item-desc.expanded {
+      -webkit-line-clamp: unset;
+      display: block;
+    }
+    .see-more-btn {
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0;
+      margin-top: 2px;
+      cursor: pointer;
+      display: inline-block;
+    }
+
     .item-meta {
       font-size: 0.85rem;
       color: var(--text-secondary);
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
+      align-items: center;
     }
-    .item-meta span { display: flex; align-items: center; gap: 5px; }
+    .item-seller-link {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .item-seller-link:hover { text-decoration: underline; }
 
     /* ============================================
        RIGHT ACTION SIDEBAR
@@ -226,7 +324,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
     }
     .action-btn-wrapper {
       display: flex;
@@ -235,7 +333,7 @@
       gap: 4px;
     }
     .action-btn {
-      width: 50px; height: 50px;
+      width: 48px; height: 48px;
       border-radius: 50%;
       background: var(--glass-bg);
       backdrop-filter: blur(10px);
@@ -243,41 +341,27 @@
       border: 1px solid var(--glass-border);
       color: white;
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       cursor: pointer;
       transition: all 0.2s ease;
       box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
     .action-btn:active { transform: scale(0.85); }
     
-    /* Button Labels */
     .action-label {
-      font-size: 0.65rem;
+      font-size: 0.6rem;
       font-weight: 600;
       color: white;
       text-shadow: 0 1px 3px rgba(0,0,0,0.8);
-      letter-spacing: 0.5px;
     }
 
-    /* Like Button State */
     .action-btn.liked {
       color: #ff2d55;
       border-color: #ff2d55;
       background: rgba(255, 45, 85, 0.15);
     }
     .action-btn.liked i { animation: popHeartBtn 0.4s ease; }
-
-    /* WhatsApp Button */
-    .action-btn.wa {
-      background: linear-gradient(135deg, #25D366, #1DA851);
-      border: none;
-    }
-    
-    /* Store Button */
-    .action-btn.store {
-      background: linear-gradient(135deg, #ffffff, #e2e8f0);
-      color: var(--navy);
-    }
+    .action-btn.wa { background: linear-gradient(135deg, #25D366, #1DA851); border: none; }
 
     /* ============================================
        GIANT DOUBLE-TAP HEART
@@ -302,36 +386,92 @@
       80% { transform: translate(-50%, -50%) scale(0.9) rotate(0deg); opacity: 1; }
       100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 0; }
     }
-
     @keyframes popHeartBtn {
       0% { transform: scale(1); }
       50% { transform: scale(1.5); }
       100% { transform: scale(1); }
     }
 
-    /* Swipe Up Hint */
-    .swipe-hint {
+    /* ============================================
+       SELLER QUICK-PEEK MODAL (BOTTOM SHEET)
+       ============================================ */
+    .seller-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+    }
+    .seller-modal-overlay.active {
+      opacity: 1; visibility: visible;
+    }
+    .seller-modal {
       position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      color: rgba(255,255,255,0.8);
-      font-size: 0.75rem;
-      font-weight: 600;
+      bottom: 0; left: 0; right: 0;
+      background: var(--surface);
+      color: var(--navy);
+      border-radius: 24px 24px 0 0;
+      padding: 24px 24px 40px;
+      transform: translateY(100%);
+      transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      box-shadow: 0 -10px 40px rgba(0,0,0,0.3);
+    }
+    .seller-modal-overlay.active .seller-modal {
+      transform: translateY(0);
+    }
+    .modal-drag-handle {
+      width: 40px; height: 4px;
+      background: #e2e8f0;
+      border-radius: 2px;
+      margin: 0 auto 20px;
+    }
+    .seller-profile-header {
       display: flex;
-      flex-direction: column;
       align-items: center;
-      gap: 4px;
-      z-index: 10;
-      animation: bounce 2s infinite;
-      pointer-events: none;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+      gap: 16px;
+      margin-bottom: 16px;
     }
-    @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
-      40% { transform: translate(-50%, -8px); }
-      60% { transform: translate(-50%, -4px); }
+    .seller-avatar-lg {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: var(--navy-2);
+      color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; font-weight: 700;
+      overflow: hidden;
     }
+    .seller-avatar-lg img { width: 100%; height: 100%; object-fit: cover; }
+    .seller-info-lg h3 {
+      font-size: 1.2rem; font-weight: 800; color: var(--navy);
+      margin-bottom: 2px;
+    }
+    .seller-info-lg .verified-badge {
+      font-size: 0.7rem; font-weight: 700; color: #1DA851;
+      display: flex; align-items: center; gap: 4px;
+    }
+    .seller-stats-row {
+      display: flex;
+      gap: 20px;
+      background: #f8fbfe;
+      padding: 16px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+    }
+    .seller-stat { flex: 1; text-align: center; }
+    .seller-stat .val { font-size: 1.1rem; font-weight: 800; color: var(--navy); }
+    .seller-stat .lbl { font-size: 0.65rem; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; margin-top: 2px; }
+    
+    .btn-visit-store {
+      display: flex; width: 100%;
+      padding: 14px; border-radius: 30px;
+      background: var(--navy-2); color: white;
+      font-weight: 700; font-size: 0.95rem;
+      text-decoration: none; justify-content: center; align-items: center; gap: 8px;
+      transition: background 0.2s;
+    }
+    .btn-visit-store:hover { background: var(--navy); }
 
     /* Toast */
     .toast {
@@ -347,7 +487,7 @@
       font-weight: 600;
       opacity: 0;
       transition: all 0.3s;
-      z-index: 1000;
+      z-index: 3000;
       pointer-events: none;
       backdrop-filter: blur(10px);
     }
@@ -372,6 +512,37 @@
 
   <div class="toast" id="toast"></div>
 
+  <!-- Seller Quick-Peek Modal -->
+  <div class="seller-modal-overlay" id="sellerModal" onclick="closeSellerModal(event)">
+    <div class="seller-modal" onclick="event.stopPropagation()">
+      <div class="modal-drag-handle"></div>
+      <div class="seller-profile-header">
+        <div class="seller-avatar-lg" id="modalSellerAvatar">ZA</div>
+        <div class="seller-info-lg">
+          <h3 id="modalSellerName">Seller Name</h3>
+          <div class="verified-badge"><i class="fas fa-check-circle"></i> Verified Seller</div>
+        </div>
+      </div>
+      <div class="seller-stats-row">
+        <div class="seller-stat">
+          <div class="val" id="modalSellerRating">5.0</div>
+          <div class="lbl">Rating</div>
+        </div>
+        <div class="seller-stat">
+          <div class="val" id="modalSellerListings">0</div>
+          <div class="lbl">Items</div>
+        </div>
+        <div class="seller-stat">
+          <div class="val" id="modalSellerResponse">100%</div>
+          <div class="lbl">Response</div>
+        </div>
+      </div>
+      <a href="#" class="btn-visit-store" id="modalStoreLink">
+        <i class="fas fa-store"></i> Visit Store
+      </a>
+    </div>
+  </div>
+
   <div class="tiktok-feed" id="tiktokFeed">
     <div class="loader">
       <div class="spinner"></div>
@@ -382,28 +553,31 @@
   <script src="/js/main.js"></script>
   <script>
     // ============================================
-    // TRACKING & SETUP
+    // TRACKING & SETUP (UPDATED TO MATCH SERVICE.HTML)
     // ============================================
-    const CONFIG = {
-      WHATSAPP_NUMBER: '2349042339411',
-      SHEET_WEBHOOK_URL: 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE'
-    };
-
+    const ZAURE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbyopnxgVhZo80kdR1Rrdr_SbivRJZXrE6cAkwOB9bWB1OklMmp3jWoe9c8W6SGM4XNhHA/exec';
+    
     let guestDeviceInfo = null;
-    let guestGPS = { lat: null, lng: null, maps: null };
+    let guestGPS = { lat: null, lng: null, maps: null, state: null };
+    let isNearMeActive = false;
 
     // 1. Collect Guest Data
     (async function collectGuestData() {
       const user = typeof getCurrentUser === 'function' ? getCurrentUser() : null;
       
+      if (user && user.state) {
+        guestGPS.state = user.state;
+      }
+
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           (pos) => {
-            guestGPS = {
-              lat: pos.coords.latitude.toFixed(6),
-              lng: pos.coords.longitude.toFixed(6),
-              maps: `https://www.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}`
-            };
+            guestGPS.lat = pos.coords.latitude.toFixed(6);
+            guestGPS.lng = pos.coords.longitude.toFixed(6);
+            guestGPS.maps = `https://www.google.com/maps?q=${guestGPS.lat},${guestGPS.lng}`;
+            
+            if (guestGPS.lat > 9.0) guestGPS.state = 'Kaduna'; 
+            else if (guestGPS.lat > 6.5) guestGPS.state = 'Lagos';
           },
           () => {},
           { timeout: 5000 }
@@ -417,16 +591,30 @@
       };
     })();
 
-    // 2. Send Tracking
-    async function sendToSheet(data) {
-      if (!CONFIG.SHEET_WEBHOOK_URL || CONFIG.SHEET_WEBHOOK_URL.includes('YOUR_GOOGLE')) return;
-      try {
-        await fetch(CONFIG.SHEET_WEBHOOK_URL, {
-          method: 'POST', mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
-        });
-      } catch (e) {}
+    // 2. Send Tracking (Exact format from service.html, plus guest data)
+    function logDiscoveryInteraction(item, sellerName, action) {
+      const user = JSON.parse(localStorage.getItem('zaure_user') || '{}');
+      
+      const payload = {
+        type: 'discovery_interaction',
+        action: action,
+        service: item.title, // 'service' is the key used in service.html
+        seller: sellerName,
+        item_id: item.id,
+        item_type: item._type,
+        user_name: user.name || 'Guest',
+        user_phone: user.phone || '',
+        user_state: user.state || guestGPS.state || '',
+        user_gps: guestGPS.maps || 'Not provided',
+        device_info: JSON.stringify(guestDeviceInfo),
+        timestamp: new Date().toISOString()
+      };
+      
+      fetch(ZAURE_SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: JSON.stringify(payload)
+      }).catch(err => console.warn('Logging failed', err));
     }
 
     function showToast(msg) {
@@ -441,6 +629,7 @@
     // BUILD FEED
     // ============================================
     let feedItems = [];
+    let currentCategory = 'All';
 
     document.addEventListener('DOMContentLoaded', async function() {
       const feedContainer = document.getElementById('tiktokFeed');
@@ -450,10 +639,7 @@
       try { products = await loadProducts(); } catch(e) {}
       try { services = await loadServices(); } catch(e) {}
 
-      // Prepare Products
       const pItems = products.map(p => ({ ...p, _type: 'product' }));
-      
-      // Prepare Services
       const sItems = services.map(s => {
         const norm = normalizeService(s);
         return {
@@ -462,16 +648,21 @@
           price: null, 
           location: norm.location,
           category: norm.category,
+          description: norm.description,
           seller: { 
             name: getSellerName(s), 
-            phone: s.seller?.phone || s.seller?.whatsapp || '09042339411' 
+            phone: s.seller?.phone || s.seller?.whatsapp || '09042339411',
+            id: s.seller?.id,
+            profilePic: getSellerPic(s),
+            rating: s.seller?.rating,
+            listings: 1,
+            response: '100%'
           },
           _type: 'service',
           _original: s
         };
       });
 
-      // Shuffle
       feedItems = [...pItems, ...sItems].sort(() => Math.random() - 0.5);
       feedContainer.innerHTML = '';
 
@@ -480,41 +671,51 @@
         return;
       }
 
-      // Render all items
-      feedItems.forEach((item, index) => {
-        feedContainer.appendChild(createFeedItem(item, index));
-      });
+      renderFeed(feedItems);
     });
 
-    function createFeedItem(item, index) {
+    function renderFeed(items) {
+      const feedContainer = document.getElementById('tiktokFeed');
+      feedContainer.innerHTML = '';
+
+      const categories = ['All', ...new Set(items.map(i => i.category).filter(Boolean))];
+
+      items.forEach((item, index) => {
+        feedContainer.appendChild(createFeedItem(item, index, categories));
+      });
+    }
+
+    function createFeedItem(item, index, categories) {
       const el = document.createElement('div');
       el.className = 'feed-item';
       
-      // --- 1. Build Media Carousel ---
+      // --- 1. Build Media Carousel (Image or Video) ---
       let slidesHtml = '';
       let dotsHtml = '';
       
       if (item._type === 'product') {
-        const images = (item.images && item.images.length > 0) ? item.images : ['https://placehold.co/400x600?text=No+Image'];
-        
-        images.forEach((img, i) => {
-          slidesHtml += `
+        if (item.video) {
+          slidesHtml = `
             <div class="carousel-slide">
-              <div class="slide-bg" style="background-image: url('${img}')"></div>
-              <img src="${img}" alt="${item.title}" class="slide-img" loading="${i === 0 ? 'eager' : 'lazy'}" onerror="this.src='https://placehold.co/400x600?text=No+Image'">
+              <video src="${item.video}" class="slide-video" autoplay loop muted playsinline></video>
             </div>
           `;
-          dotsHtml += `<div class="dot ${i === 0 ? 'active' : ''}" data-index="${i}"></div>`;
-        });
+        } else {
+          const images = (item.images && item.images.length > 0) ? item.images : ['https://placehold.co/400x600?text=No+Image'];
+          images.forEach((img, i) => {
+            slidesHtml += `
+              <div class="carousel-slide">
+                <div class="slide-bg" style="background-image: url('${img}')"></div>
+                <img src="${img}" alt="${item.title}" class="slide-img" loading="${i === 0 ? 'eager' : 'lazy'}" onerror="this.src='https://placehold.co/400x600?text=No+Image'">
+              </div>
+            `;
+            dotsHtml += `<div class="dot ${i === 0 ? 'active' : ''}" data-index="${i}"></div>`;
+          });
+        }
       } else {
-        // Service Media (Avatar)
-        const raw = item._original;
-        const profilePic = getSellerPic(raw);
-        const initials = getSellerInitials(raw);
-        
-        let avatarContent = profilePic 
-          ? `<img src="${profilePic}" style="width:100%; height:100%; object-fit:cover;">` 
-          : `<span style="font-size:5rem; font-weight:800; color:var(--navy-2);">${initials}</span>`;
+        const profilePic = item.seller?.profilePic;
+        const initials = item.seller?.name ? item.seller.name.charAt(0).toUpperCase() : 'Z';
+        let avatarContent = profilePic ? `<img src="${profilePic}">` : `<span style="font-size:5rem; font-weight:800; color:var(--navy-2);">${initials}</span>`;
         
         slidesHtml = `
           <div class="carousel-slide">
@@ -530,30 +731,19 @@
       let badgesHtml = '';
       if (item._type === 'product') {
         const price = item.price >= 1e6 ? `₦${(item.price/1e6).toFixed(1)}M` : `₦${(item.price || 0).toLocaleString()}`;
-        badgesHtml = `
-          <span class="badge price">${price}</span>
-          <span class="badge">Product</span>
-        `;
+        badgesHtml = `<span class="badge price">${price}</span><span class="badge">Product</span>`;
       } else {
         const trade = getTradeName(item.category);
-        badgesHtml = `
-          <span class="badge price" style="background:var(--navy-2); color:#fff;">Available Now</span>
-          <span class="badge">${trade}</span>
-        `;
+        badgesHtml = `<span class="badge price" style="background:var(--navy-2); color:#fff;">Available</span><span class="badge">${trade}</span>`;
       }
 
       const isFav = typeof isFavorite === 'function' ? isFavorite(item.id) : false;
       const sellerName = item.seller?.name || 'Zaure Official';
-      
-      // --- 3. Store Button Logic ---
-      // If it's a product and has a seller ID (or name we can use), show Store button. Otherwise, it just goes to Details.
-      const hasStore = item._type === 'product' && (item.seller && (item.seller.id || item.seller.name));
-      const storeBtnHtml = hasStore ? `
-        <div class="action-btn-wrapper">
-          <button class="action-btn store" onclick="goToStore(event, ${index})">
-            <i class="fas fa-store"></i>
-          </button>
-          <span class="action-label">Store</span>
+      const hasDesc = item.description && item.description.length > 50;
+
+      const catBarHtml = index === 0 ? `
+        <div class="category-bar" id="categoryBar">
+          ${categories.map(c => `<div class="cat-chip ${c === currentCategory ? 'active' : ''}" onclick="filterCategory('${c}')">${c}</div>`).join('')}
         </div>
       ` : '';
 
@@ -569,16 +759,34 @@
 
         <i class="fas fa-heart giant-heart" id="heart-${index}"></i>
 
-        <div class="top-bar">
-          <a href="/" class="brand"><i class="fas fa-bolt" style="color:#D4B87A;"></i> Zaure</a>
+        <div class="top-header">
+          <div class="top-bar-main">
+            <div class="brand-group">
+              <a href="/" class="brand"><i class="fas fa-bolt" style="color:#D4B87A;"></i> Zaure</a>
+              <button class="near-me-btn ${isNearMeActive ? 'active' : ''}" onclick="toggleNearMe()">
+                <i class="fas fa-location-arrow"></i> Near Me
+              </button>
+            </div>
+          </div>
+          ${catBarHtml}
         </div>
 
         <div class="bottom-info">
           <div class="item-badges">${badgesHtml}</div>
           <div class="item-title">${item.title}</div>
+          
+          ${item.description ? `
+            <div class="item-desc-wrapper">
+              <div class="item-desc" id="desc-${index}">${item.description}</div>
+              ${hasDesc ? `<button class="see-more-btn" onclick="toggleDesc(${index})" id="desc-btn-${index}">See more...</button>` : ''}
+            </div>
+          ` : ''}
+
           <div class="item-meta">
             <span><i class="fas fa-map-pin"></i> ${item.location || 'Nigeria'}</span>
-            <span><i class="fas ${item._type === 'product' ? 'fa-store' : 'fa-user-tie'}"></i> ${sellerName}</span>
+            <a class="item-seller-link" onclick="openSellerModal(${index})">
+              <i class="fas fa-user-circle"></i> ${sellerName}
+            </a>
           </div>
         </div>
 
@@ -597,7 +805,12 @@
             <span class="action-label">Chat</span>
           </div>
 
-          ${storeBtnHtml}
+          <div class="action-btn-wrapper">
+            <button class="action-btn" onclick="shareItem(event, ${index})">
+              <i class="fas fa-share-alt"></i>
+            </button>
+            <span class="action-label">Share</span>
+          </div>
 
           <div class="action-btn-wrapper">
             <button class="action-btn" onclick="viewDetails(event, ${index})">
@@ -617,42 +830,163 @@
     }
 
     // ============================================
-    // CAROUSEL SCROLL LOGIC
+    // FEATURE 1: CATEGORY FILTER
+    // ============================================
+    function filterCategory(cat) {
+      currentCategory = cat;
+      document.querySelectorAll('.cat-chip').forEach(c => {
+        c.classList.toggle('active', c.textContent === cat);
+      });
+      
+      let filtered = feedItems;
+      if (cat !== 'All') {
+        filtered = feedItems.filter(i => i.category === cat);
+      }
+      
+      if (filtered.length === 0) {
+        showToast('No items in this category.');
+        return;
+      }
+      
+      renderFeed(filtered);
+      document.getElementById('tiktokFeed').scrollTo({ top: 0, behavior: 'instant' });
+    }
+
+    // ============================================
+    // FEATURE 2: SEE MORE DESCRIPTION
+    // ============================================
+    function toggleDesc(index) {
+      const desc = document.getElementById(`desc-${index}`);
+      const btn = document.getElementById(`desc-btn-${index}`);
+      
+      if (desc.classList.contains('expanded')) {
+        desc.classList.remove('expanded');
+        btn.textContent = 'See more...';
+      } else {
+        desc.classList.add('expanded');
+        btn.textContent = 'See less';
+      }
+    }
+
+    // ============================================
+    // FEATURE 4: NEAR ME TOGGLE
+    // ============================================
+    function toggleNearMe() {
+      isNearMeActive = !isNearMeActive;
+      const btn = document.querySelector('.near-me-btn');
+      btn.classList.toggle('active', isNearMeActive);
+      
+      if (isNearMeActive) {
+        if (!guestGPS.state) {
+          showToast('Waiting for location...');
+        } else {
+          showToast(`Prioritizing ${guestGPS.state}`);
+        }
+        
+        feedItems.sort((a, b) => {
+          const aLoc = (a.location || '').toLowerCase();
+          const bLoc = (b.location || '').toLowerCase();
+          const stateLower = (guestGPS.state || '').toLowerCase();
+          
+          const aMatch = aLoc.includes(stateLower) ? 1 : 0;
+          const bMatch = bLoc.includes(stateLower) ? 1 : 0;
+          
+          return bMatch - aMatch; 
+        });
+      } else {
+        feedItems.sort(() => Math.random() - 0.5);
+      }
+      
+      renderFeed(feedItems);
+      document.getElementById('tiktokFeed').scrollTo({ top: 0, behavior: 'instant' });
+    }
+
+    // ============================================
+    // FEATURE 5: SHARE BUTTON
+    // ============================================
+    function shareItem(e, index) {
+      e.stopPropagation();
+      const item = feedItems[index];
+      const url = item._type === 'product' 
+        ? `${window.location.origin}/detail.html?id=${item.id}`
+        : `${window.location.origin}/service.html?id=${item.id}`;
+        
+      if (navigator.share) {
+        navigator.share({
+          title: item.title,
+          text: `Check out this ${item._type} on Zaure!`,
+          url: url
+        }).catch(() => {});
+      } else {
+        navigator.clipboard.writeText(url);
+        showToast('Link copied to clipboard!');
+      }
+    }
+
+    // ============================================
+    // FEATURE 7: SELLER QUICK-PEEK MODAL
+    // ============================================
+    function openSellerModal(index) {
+      const item = feedItems[index];
+      const seller = item.seller || {};
+      
+      document.getElementById('modalSellerName').textContent = seller.name || 'Zaure Official';
+      document.getElementById('modalSellerRating').textContent = seller.rating || '5.0';
+      document.getElementById('modalSellerListings').textContent = seller.listings || '1+';
+      document.getElementById('modalSellerResponse').textContent = seller.response || '100%';
+      
+      const avatarEl = document.getElementById('modalSellerAvatar');
+      if (seller.profilePic) {
+        avatarEl.innerHTML = `<img src="${seller.profilePic}">`;
+      } else {
+        avatarEl.textContent = (seller.name || 'Z').charAt(0).toUpperCase();
+      }
+
+      const storeLink = document.getElementById('modalStoreLink');
+      if (seller.id) {
+        storeLink.href = `/store.html?id=${seller.id}`;
+      } else {
+        storeLink.href = `/stores.html?search=${encodeURIComponent(seller.name)}`;
+      }
+
+      document.getElementById('sellerModal').classList.add('active');
+    }
+
+    function closeSellerModal(e) {
+      if (e.target.id === 'sellerModal') {
+        document.getElementById('sellerModal').classList.remove('active');
+      }
+    }
+
+    // ============================================
+    // CAROUSEL & GESTURES
     // ============================================
     function setupCarouselScroll(itemEl) {
       const carousel = itemEl.querySelector('.media-carousel');
       const dots = itemEl.querySelectorAll('.dot');
-      
       if (!carousel || dots.length <= 1) return;
 
       carousel.addEventListener('scroll', () => {
         const index = Math.round(carousel.scrollLeft / carousel.offsetWidth);
-        dots.forEach((dot, i) => {
-          dot.classList.toggle('active', i === index);
-        });
+        dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
       });
     }
 
-    // ============================================
-    // DOUBLE TAP TO LIKE LOGIC
-    // ============================================
     function setupDoubleTap(el, index) {
       let lastTap = 0;
       const tapArea = el.querySelector('.media-carousel');
 
       tapArea.addEventListener('click', (e) => {
         const now = Date.now();
-        const DOUBLE_PRESS_DELAY = 300;
-        
-        if (now - lastTap < DOUBLE_PRESS_DELAY) {
-          triggerDoubleTapLike(el, index, e);
+        if (now - lastTap < 300) {
+          triggerDoubleTapLike(el, index);
           e.preventDefault();
         }
         lastTap = now;
       });
     }
 
-    function triggerDoubleTapLike(el, index, event) {
+    function triggerDoubleTapLike(el, index) {
       const heart = el.querySelector('.giant-heart');
       const likeBtn = el.querySelector('.like-btn');
       const item = feedItems[index];
@@ -661,62 +995,24 @@
       void heart.offsetWidth; 
       heart.classList.add('animate');
 
-      const icon = likeBtn.querySelector('i');
       if (!likeBtn.classList.contains('liked')) {
         likeBtn.classList.add('liked');
-        icon.className = 'fas fa-heart';
-        
-        if (typeof toggleFavorite === 'function') {
-          if (!getCurrentUser()) { 
-             // Guest can double tap to see animation, but doesn't save to DB
-          } else {
-             toggleFavorite(item.id);
-          }
-        }
+        likeBtn.querySelector('i').className = 'fas fa-heart';
+        if (typeof toggleFavorite === 'function') toggleFavorite(item.id);
       }
     }
 
     // ============================================
-    // BUTTON ACTIONS
+    // BASIC ACTIONS
     // ============================================
     function toggleLike(e, index) {
       e.stopPropagation();
       const btn = e.currentTarget;
       const item = feedItems[index];
-      
-      if (typeof getCurrentUser === 'function' && !getCurrentUser()) {
-        if (typeof openSignup === 'function') openSignup();
-        return;
-      }
-
       if (typeof toggleFavorite === 'function') {
         const isNowFav = toggleFavorite(item.id);
-        const icon = btn.querySelector('i');
-        
-        if (isNowFav) {
-          btn.classList.add('liked');
-          icon.className = 'fas fa-heart';
-        } else {
-          btn.classList.remove('liked');
-          icon.className = 'far fa-heart';
-        }
-      }
-    }
-
-    function goToStore(e, index) {
-      e.stopPropagation();
-      const item = feedItems[index];
-      
-      // If product has a specific store ID, go there
-      if (item.seller && item.seller.id) {
-        window.location.href = `/store.html?id=${item.seller.id}`;
-      } 
-      // Fallback: If no ID but has a name, go to stores directory (or detail)
-      else if (item.seller && item.seller.name) {
-        window.location.href = `/stores.html?search=${encodeURIComponent(item.seller.name)}`;
-      } 
-      else {
-        window.location.href = `/detail.html?id=${item.id}`;
+        btn.classList.toggle('liked', isNowFav);
+        btn.querySelector('i').className = isNowFav ? 'fas fa-heart' : 'far fa-heart';
       }
     }
 
@@ -738,20 +1034,8 @@
       const waMsg = `Hello ${sellerName}, I saw your ${item._type} "${item.title}" on Zaure Discovery. Is it still available?`;
       const waLink = `https://wa.me/${cleanNumber}?text=${encodeURIComponent(waMsg)}`;
 
-      const user = typeof getCurrentUser === 'function' ? getCurrentUser() : null;
-      sendToSheet({
-        type: 'whatsapp_click_discovery',
-        item_type: item._type,
-        item_id: item.id,
-        item_title: item.title,
-        seller_name: sellerName,
-        seller_phone: cleanNumber,
-        user_name: user ? user.name : 'Guest',
-        user_phone: user ? user.phone : 'Not provided',
-        user_gps: guestGPS.maps || 'Not provided',
-        device_info: guestDeviceInfo,
-        timestamp: new Date().toISOString()
-      });
+      // Send to the exact same Google Sheet
+      logDiscoveryInteraction(item, sellerName, 'whatsapp_click');
 
       showToast('Opening WhatsApp...');
       setTimeout(() => { window.open(waLink, '_blank'); }, 150);
