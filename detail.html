@@ -448,17 +448,51 @@
     };
 
     let currentProduct = null;
-    let guestDeviceInfo = null;
-    let guestGPS = { lat: null, lng: null, maps: null };
 
-    // Collect Guest Data
-    (async function collectGuestData() {
-      const user = typeof getCurrentUser === 'function' ? getCurrentUser() : null;
-      
+    // ============================================
+    // SMART FALLBACK DATA COLLECTORS
+    // ============================================
+    let userIP = 'Unknown IP';
+    
+    // Fetch IP Address silently on load
+    (async function fetchUserIP() {
+      try {
+        const res = await fetch('https://api.ipify.org?format=json');
+        const data = await res.json();
+        userIP = data.ip;
+      } catch (e) {
+        userIP = 'IP Unavailable';
+      }
+    })();
+
+    function getDeviceType() {
+      const ua = navigator.userAgent;
+      if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) return 'Tablet User';
+      if (/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(ua)) return 'Mobile User';
+      return 'Desktop User';
+    }
+
+    function getFallbackCity() {
+      // Try to use the background GPS collection
+      if (window.guestGPS && window.guestGPS.maps) {
+        return `GPS: ${window.guestGPS.lat}, ${window.guestGPS.lng}`;
+      }
+      // Fallback to Timezone
+      try {
+        const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        return `Zone: ${tz}`;
+      } catch(e) {
+        return 'Unknown Location';
+      }
+    }
+
+    // Collect Guest GPS Silently
+    window.guestGPS = { lat: null, lng: null, maps: null };
+    (function collectGuestData() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           (pos) => {
-            guestGPS = {
+            window.guestGPS = {
               lat: pos.coords.latitude.toFixed(6),
               lng: pos.coords.longitude.toFixed(6),
               maps: `https://www.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}`
@@ -468,15 +502,9 @@
           { timeout: 5000 }
         );
       }
-      guestDeviceInfo = {
-        userAgent: navigator.userAgent,
-        platform: navigator.platform || 'Unknown',
-        screen: `${screen.width}x${screen.height}`,
-        isGuest: !user
-      };
     })();
 
-    // Send Tracking Data
+    // Send Tracking Data (Matching Exact Sheet Columns)
     async function sendToSheet(data) {
       if (!CONFIG.SHEET_WEBHOOK_URL || CONFIG.SHEET_WEBHOOK_URL.includes('YOUR_GOOGLE')) {
         console.warn('Sheet URL not set. Skipping.');
@@ -489,14 +517,6 @@
           body: JSON.stringify(data)
         });
       } catch (err) { console.error('Tracking failed', err); }
-    }
-
-    function showToast(msg) {
-      const t = document.getElementById('toast');
-      t.textContent = msg;
-      t.classList.add('show');
-      clearTimeout(window.__toast);
-      window.__toast = setTimeout(() => t.classList.remove('show'), 2500);
     }
 
     // ============================================
@@ -617,13 +637,11 @@
       document.getElementById('galleryBadge').textContent = product.featured ? 'Featured' : 'Available';
       document.getElementById('locationFull').textContent = `${product.location || 'Nigeria'} - View on map`;
 
-      // Recommendations
       const products = getProductsSync();
       const recs = products.filter(p => p.id !== product.id && p.category === product.category).slice(0, 6);
       const fallback = products.filter(p => p.id !== product.id).slice(0, 6);
       renderListings(recs.length ? recs : fallback, 'recommendationsGrid');
 
-      // Share
       document.getElementById('shareBtn').addEventListener('click', function() {
         if (navigator.share) {
           navigator.share({ title: product.title, url: window.location.href });
@@ -632,12 +650,10 @@
         }
       });
 
-      // Report
       document.getElementById('reportBtn').addEventListener('click', function() {
         window.location.href = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent('I want to report: ' + product.title)}`;
       });
 
-      // Favorite
       const favoriteBtn = document.getElementById('favoriteBtn');
       if (isFavorite(product.id)) {
         favoriteBtn.classList.add('liked');
@@ -714,18 +730,26 @@
         e.preventDefault();
         const user = typeof getCurrentUser === 'function' ? getCurrentUser() : null;
         
-        sendToSheet({
-          type: 'whatsapp_click_detail',
-          product_id: product.id,
-          product_title: product.title,
-          seller_name: seller.name,
-          seller_phone: cleanNumber,
-          user_name: user ? user.name : 'Guest',
-          user_phone: user ? user.phone : 'Not provided',
-          user_gps: guestGPS.maps || 'Not provided',
-          device_info: guestDeviceInfo,
-          timestamp: new Date().toISOString()
-        });
+        // Smart Fallbacks
+        const userName = (user && user.name) ? user.name : getDeviceType();
+        const userPhone = (user && user.phone) ? user.phone : userIP;
+        const userCity = (user && user.state) ? user.state : getFallbackCity();
+
+        const trackingData = {
+          Timestamp: new Date().toISOString(),
+          Action: 'whatsapp_click',
+          'User Name': userName,
+          'User Phone': userPhone,
+          'User City': userCity,
+          'Provider Name': seller.name,
+          'Provider Phone': cleanNumber,
+          'Provider ID': product.id,
+          'Service': product.category || 'General',
+          'Is Primer Owned': 'FALSE',
+          Page: 'detail'
+        };
+
+        sendToSheet(trackingData);
 
         setTimeout(() => { window.open(waLink, '_blank'); }, 150);
       };
@@ -737,20 +761,28 @@
       document.getElementById('contactBtn').addEventListener('click', function(e) {
         const user = typeof getCurrentUser === 'function' ? getCurrentUser() : null;
         
-        sendToSheet({
-          type: 'call_click_detail',
-          product_id: product.id,
-          product_title: product.title,
-          seller_name: seller.name,
-          seller_phone: callNumber,
-          user_name: user ? user.name : 'Guest',
-          user_phone: user ? user.phone : 'Not provided',
-          user_gps: guestGPS.maps || 'Not provided',
-          device_info: guestDeviceInfo,
-          timestamp: new Date().toISOString()
-        });
+        // Smart Fallbacks
+        const userName = (user && user.name) ? user.name : getDeviceType();
+        const userPhone = (user && user.phone) ? user.phone : userIP;
+        const userCity = (user && user.state) ? user.state : getFallbackCity();
+
+        const trackingData = {
+          Timestamp: new Date().toISOString(),
+          Action: 'call_click',
+          'User Name': userName,
+          'User Phone': userPhone,
+          'User City': userCity,
+          'Provider Name': seller.name,
+          'Provider Phone': callNumber,
+          'Provider ID': product.id,
+          'Service': product.category || 'General',
+          'Is Primer Owned': 'FALSE',
+          Page: 'detail'
+        };
+
+        sendToSheet(trackingData);
         
-        // Let the default tel: link proceed (no preventDefault)
+        // Let the default tel: link proceed
       });
     }
   </script>
