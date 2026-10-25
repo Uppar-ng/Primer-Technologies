@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>Discover – Zaure</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Discovery – Zaure</title>
   <meta name="description" content="Discover products and services on Zaure - Nigeria's most trusted online marketplace.">
   <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="/css/style.css">
   <style>
     /* ============================================
-       UPDATED THEME (NAVY) - Matching Post Page
+       THEME & GLOBAL RESET
        ============================================ */
     :root {
       --navy: #0f2940;
@@ -23,821 +23,647 @@
       --surface-alt: #f8fbfe;
     }
 
-    .search-header {
-      background: var(--surface); border-radius: 20px; padding: 24px;
-      border: 1px solid var(--border); margin-bottom: 20px;
-    }
-    .search-header .search-query { font-size: 1.4rem; font-weight: 700; color: var(--text); }
-    .search-header .search-query span { color: var(--navy-2); }
-    .search-header .search-meta { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 8px; color: var(--text-secondary); font-size: 0.9rem; }
-    .search-header .search-meta i { color: var(--navy-2); }
-    .search-header .type-breakdown {
-      display: inline-flex; gap: 12px; align-items: center;
-    }
-    .search-header .type-breakdown span {
-      display: inline-flex; align-items: center; gap: 4px;
-      padding: 2px 10px; border-radius: 20px;
-      background: var(--surface-alt);
-      font-size: 0.78rem; font-weight: 600;
-    }
-    .search-header .type-breakdown span.products { color: var(--navy-2); }
-    .search-header .type-breakdown span.services { color: var(--navy-2); background: rgba(26,54,80,0.1); }
-
-    .refine-section {
-      background: var(--surface); border-radius: 16px; padding: 16px 20px;
-      border: 1px solid var(--border); margin: 16px 0;
-      display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between;
-    }
-    .refine-section .refine-group { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-    .refine-section .refine-group label { font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); }
-    .refine-section .refine-group .custom-select { min-width: 150px; position: relative; }
-    .refine-section .refine-group .custom-select-trigger {
-      padding: 6px 12px; border: 1px solid var(--border); border-radius: 8px;
-      font-size: 0.85rem; background: var(--input-bg); color: var(--text);
-      cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 8px;
-    }
-    .refine-section .refine-group .custom-select-dropdown {
-      position: absolute; top: calc(100% + 4px); left: 0; right: 0;
-      background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
-      box-shadow: var(--shadow-hover); z-index: 10; max-height: 200px; overflow-y: auto;
-      display: none;
-    }
-    .refine-section .refine-group .custom-select.active .custom-select-dropdown { display: block; }
-    .refine-section .refine-group .custom-select-options { list-style: none; padding: 0; margin: 0; }
-    .refine-section .refine-group .custom-select-options li {
-      padding: 8px 12px; cursor: pointer; font-size: 0.85rem; color: var(--text);
-      transition: background 0.2s;
-    }
-    .refine-section .refine-group .custom-select-options li:hover { background: var(--surface-alt); }
-
-    .filter-chips { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0; }
-    .filter-chips .chip {
-      background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
-      padding: 4px 14px; font-size: 0.75rem; font-weight: 500; color: var(--text-secondary);
-      cursor: pointer; transition: 0.2s;
-    }
-    .filter-chips .chip:hover { border-color: var(--text); color: var(--text); }
-    .filter-chips .chip.active { background: var(--navy-2); color: white; border-color: var(--navy-2); }
-    [data-theme="dark"] .filter-chips .chip.active { background: var(--navy-2); border-color: var(--navy-2); }
-    .filter-chips .chip i { margin-right: 4px; }
-    .filter-chips .chip.chip-type { border-style: dashed; }
-    .filter-chips .chip.chip-type.active { border-style: solid; }
-
-    .empty-state {
-      text-align: center; padding: 60px 20px; background: var(--surface);
-      border-radius: 20px; border: 1px solid var(--border);
-    }
-    .empty-state i { font-size: 3rem; color: var(--text-secondary); margin-bottom: 16px; }
-    .empty-state h3 { font-size: 1.2rem; color: var(--text); margin-bottom: 8px; }
-    .empty-state p { color: var(--text-secondary); font-size: 0.95rem; }
-    .empty-state .btn-primary { width: auto; padding: 10px 28px; margin-top: 16px; display: inline-flex; background: var(--navy-2); color: white; border-radius: 30px; text-decoration: none; }
-    .empty-state .suggestions { margin-top: 16px; display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
-    .empty-state .suggestions .suggestion-chip {
-      background: var(--surface-alt); padding: 6px 16px; border-radius: 20px;
-      font-size: 0.85rem; cursor: pointer; color: var(--text); transition: 0.2s;
-    }
-    .empty-state .suggestions .suggestion-chip:hover { background: var(--text); color: var(--surface); }
-
-    .pagination {
-      display: flex; justify-content: center; gap: 6px; margin-top: 30px; padding: 20px 0;
-      align-items: center;
-    }
-    .pagination button {
-      padding: 8px 14px; border: 1px solid var(--border); border-radius: 8px;
-      background: var(--surface); color: var(--text); cursor: pointer; font-size: 0.85rem;
-      transition: 0.2s; min-width: 40px;
-    }
-    .pagination button:hover:not(:disabled) { background: var(--surface-alt); border-color: var(--text); }
-    .pagination button.active { background: var(--navy-2); color: white; border-color: var(--navy-2); }
-    [data-theme="dark"] .pagination button.active { background: var(--navy-2); border-color: var(--navy-2); }
-    .pagination button:disabled { opacity: 0.4; cursor: not-allowed; }
-    .pagination .ellipsis { display: flex; align-items: center; padding: 0 4px; color: var(--text-secondary); }
-
-    .service-result-marker {
-      position: absolute; top: 12px; left: 12px; z-index: 3;
-      display: inline-flex; align-items: center; gap: 4px;
-      padding: 4px 10px; border-radius: 20px;
-      background: var(--navy-2);
-      color: white; font-size: 0.58rem; font-weight: 800;
-      letter-spacing: 0.6px; text-transform: uppercase;
-      box-shadow: 0 4px 10px rgba(15,41,64,0.3);
-    }
-    .service-result-marker i { font-size: 0.6rem; }
-
-    /* FIX: Image container to prevent zoom */
-    .listing-img-container {
-      height: 180px;
-      background: #f8fbfe;
+    body {
+      background-color: var(--navy); /* Dark background for the feed */
+      color: var(--surface);
+      overflow: hidden; /* Prevent body scroll, rely on internal container */
+      height: 100vh;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-      padding: 10px; /* Adds breathing room so images don't touch the edges */
-    }
-    .listing-img-container img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain; /* Shows full image without cropping/zooming */
-      display: block;
+      flex-direction: column;
+      padding-bottom: 0; /* Override main.css if it forces padding */
     }
 
-    /* WhatsApp Button on Cards */
-    .card-wa-btn {
+    /* Hide default scrollbars */
+    ::-webkit-scrollbar { display: none; }
+
+    /* ============================================
+       NAVBAR (Minimal for Discovery)
+       ============================================ */
+    .discovery-nav {
       position: absolute;
-      bottom: 12px;
-      right: 12px;
-      z-index: 4;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: #25D366;
+      top: 0; left: 0; right: 0;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      background: linear-gradient(180deg, rgba(15,41,64,0.8) 0%, transparent 100%);
+      pointer-events: none; /* Let clicks pass through to cards */
+    }
+    .discovery-nav a, .discovery-nav button {
+      pointer-events: auto;
+    }
+    .discovery-nav .brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 800;
       color: white;
+      text-decoration: none;
+      letter-spacing: -0.5px;
       display: flex;
       align-items: center;
-      justify-content: center;
+      gap: 8px;
+    }
+    .discovery-nav .brand i {
+      color: var(--navy-2); /* Since bg is dark, use a lighter navy or white */
+      font-size: 1.2rem;
+    }
+    .discovery-nav .nav-btn {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: white;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
       text-decoration: none;
       font-size: 1rem;
-      box-shadow: 0 4px 12px rgba(37,211,102,0.4);
-      transition: transform 0.2s;
+      transition: background 0.2s;
     }
-    .card-wa-btn:hover { transform: scale(1.1); }
+    .discovery-nav .nav-btn:hover { background: rgba(255,255,255,0.2); }
+
+    /* ============================================
+       SWIPE FEED CONTAINER
+       ============================================ */
+    .feed-container {
+      flex: 1;
+      position: relative;
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+      perspective: 1000px;
+    }
+
+    /* Individual Card */
+    .feed-card {
+      position: absolute;
+      top: 16px; left: 16px; right: 16px; bottom: 90px;
+      background: var(--surface);
+      border-radius: 24px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.3s ease;
+      transform-origin: bottom center;
+      will-change: transform;
+      z-index: 1;
+    }
+
+    /* Stacking Effect */
+    .feed-card[data-index="0"] { z-index: 10; opacity: 1; transform: scale(1) translateY(0); }
+    .feed-card[data-index="1"] { z-index: 9; opacity: 0.8; transform: scale(0.95) translateY(15px); }
+    .feed-card[data-index="2"] { z-index: 8; opacity: 0.5; transform: scale(0.9) translateY(30px); }
+    .feed-card[data-index="3"] { z-index: 7; opacity: 0.2; transform: scale(0.85) translateY(45px); }
+    .feed-card[data-index="4"] { z-index: 6; opacity: 0; transform: scale(0.8) translateY(60px); }
+    .feed-card[data-index="5"] { z-index: 5; opacity: 0; }
+    .feed-card[data-index="6"] { z-index: 4; opacity: 0; }
+    .feed-card[data-index="7"] { z-index: 3; opacity: 0; }
+    .feed-card[data-index="8"] { z-index: 2; opacity: 0; }
+    .feed-card[data-index="9"] { z-index: 1; opacity: 0; }
+
+    /* Swipe Away Animations */
+    .feed-card.swipe-left {
+      transform: translateX(-150%) rotate(-20deg) !important;
+      opacity: 0 !important;
+    }
+    .feed-card.swipe-right {
+      transform: translateX(150%) rotate(20deg) !important;
+      opacity: 0 !important;
+    }
+
+    /* ============================================
+       CARD CONTENT
+       ============================================ */
+    /* Image Section (Top Half) */
+    .card-image-area {
+      position: relative;
+      flex: 1;
+      background: #0a1622; /* Very dark blue/black for contain letterboxing */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .card-image-area img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain; /* KEY FIX: Shows full image without zooming */
+    }
+    /* Service Avatar specific */
+    .card-image-area.is-service {
+      background: linear-gradient(135deg, var(--navy-2), var(--navy));
+    }
+    .card-image-area.is-service .service-avatar {
+      width: 140px; height: 140px;
+      border-radius: 50%;
+      background: white;
+      overflow: hidden;
+      box-shadow: 0 0 0 6px rgba(255,255,255,0.1), 0 0 0 10px rgba(255,255,255,0.05);
+      position: relative;
+      z-index: 2;
+    }
+    .card-image-area.is-service .service-avatar img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .card-image-area.is-service .service-avatar span {
+      display: flex; align-items: center; justify-content: center;
+      width: 100%; height: 100%; font-size: 3rem; font-weight: 800; color: var(--navy-2);
+    }
+
+    /* Top Badge */
+    .card-badge {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: var(--navy-2);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    /* Gradient Overlay at bottom of image */
+    .card-image-overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 100px;
+      background: linear-gradient(0deg, var(--surface) 0%, transparent 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Details Section (Bottom Half) */
+    .card-details {
+      padding: 12px 20px 20px;
+      background: var(--surface);
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .item-price {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--navy);
+    }
+    .item-trade {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--navy-2);
+      background: rgba(26,54,80,0.1);
+      padding: 4px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .item-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .item-meta {
+      display: flex;
+      gap: 12px;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+    .item-meta span { display: flex; align-items: center; gap: 4px; }
+    .item-meta i { color: var(--navy-2); }
+
+    .item-seller {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px dashed var(--border);
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+    .item-seller i { color: var(--navy-2); }
+
+    /* ============================================
+       ACTION BUTTONS
+       ============================================ */
+    .action-bar {
+      position: absolute;
+      bottom: 16px;
+      left: 0; right: 0;
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      z-index: 100;
+    }
+    .action-btn {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      transition: transform 0.2s, background 0.2s;
+    }
+    .action-btn:active { transform: scale(0.9); }
+
+    .btn-skip {
+      background: var(--surface);
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+    }
+    .btn-view {
+      background: var(--navy-2);
+      color: white;
+      width: 70px; height: 70px;
+      font-size: 1.6rem;
+    }
+    .btn-whatsapp {
+      background: #25D366;
+      color: white;
+    }
+
+    /* Toast for guest info collection */
+    .toast {
+      position: fixed;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: rgba(15,41,64,0.95);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      opacity: 0;
+      transition: all 0.3s;
+      z-index: 1000;
+      pointer-events: none;
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
   </style>
 </head>
 <body>
 
-  <nav class="navbar">
-    <div class="container nav-container">
-      <a href="/" class="logo-wrapper">
-        <div class="logo-text">
-          <span class="brand">Zaure</span>
-          <span class="tagline">Buy with Confidence</span>
-        </div>
-      </a>
-      <div class="nav-links">
-        <a href="/">Home</a>
-        <a href="/category.html?slug=all">Browse</a>
-        <a href="/about.html">About</a>
-        <a href="/contact.html">Contact</a>
-      </div>
-      <div class="nav-actions">
-        <button class="icon-btn" id="themeToggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
-        <a href="/favorites.html" class="icon-btn" style="position:relative;text-decoration:none;">
-          <i class="fas fa-heart"></i>
-          <span id="favBadge">0</span>
-        </a>
-        <div id="headerUserArea">
-          <div class="avatar" id="userAvatar" onclick="openSignup()">ZA</div>
-        </div>
-      </div>
+  <!-- Minimal Navbar -->
+  <nav class="discovery-nav">
+    <a href="/" class="brand"><i class="fas fa-bolt" style="color:#D4B87A;"></i> Discovery</a>
+    <div style="display:flex; gap:8px;">
+      <a href="/" class="nav-btn"><i class="fas fa-home"></i></a>
+      <a href="/search.html" class="nav-btn"><i class="fas fa-search"></i></a>
     </div>
   </nav>
 
-  <div class="container">
-
-    <div class="breadcrumb">
-      <a href="/">Home</a>
-      <span class="separator"><i class="fas fa-chevron-right"></i></span>
-      <span class="current">Discovery</span>
-    </div>
-
-    <div class="search-header">
-      <div class="search-query">
-        <i class="fas fa-search" style="color:var(--navy-2);"></i>
-        Discover <span id="searchQueryText">all items</span>
-      </div>
-      <div class="search-meta">
-        <span><i class="fas fa-box"></i> <span id="resultCount">0</span> total results</span>
-        <div class="type-breakdown" id="typeBreakdown" style="display:none;">
-          <span class="products"><i class="fas fa-shopping-bag"></i> <span id="productCount">0</span> products</span>
-          <span class="services"><i class="fas fa-user-tie"></i> <span id="serviceCount">0</span> services</span>
-        </div>
-        <span><i class="fas fa-clock"></i> <span id="searchTime">0</span>s</span>
-        <span><i class="fas fa-tag"></i> <span id="categoryCount">0</span> categories</span>
-      </div>
-    </div>
-
-    <div class="refine-section">
-      <div class="refine-group">
-        <label><i class="fas fa-sliders-h"></i> Refine:</label>
-
-        <div class="custom-select" id="typeSelect">
-          <div class="custom-select-trigger" id="typeTrigger">
-            <span>All Results</span>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          <div class="custom-select-dropdown">
-            <ul class="custom-select-options" id="typeOptions">
-              <li data-value="all">All Results</li>
-              <li data-value="product">Products Only</li>
-              <li data-value="service">Services Only</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="custom-select" id="sortSelect">
-          <div class="custom-select-trigger" id="sortTrigger">
-            <span>Best Match</span>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          <div class="custom-select-dropdown">
-            <ul class="custom-select-options" id="sortOptions">
-              <li data-value="relevance">Best Match</li>
-              <li data-value="newest">Newest First</li>
-              <li data-value="price-low">Price: Low to High</li>
-              <li data-value="price-high">Price: High to Low</li>
-              <li data-value="popular">Most Popular</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="custom-select" id="categorySelect">
-          <div class="custom-select-trigger" id="categoryTrigger">
-            <span>All Categories</span>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          <div class="custom-select-dropdown">
-            <ul class="custom-select-options" id="categoryOptions">
-              <li data-value="all">All Categories</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="refine-group">
-        <span style="font-size:0.85rem;color:var(--text-secondary);" id="showingCount">Showing 0 results</span>
-      </div>
-    </div>
-
-    <div class="filter-chips" id="filterChips">
-      <span class="chip active" data-filter="all" onclick="applyChipFilter('all')"><i class="fas fa-th-list"></i> All</span>
-      <span class="chip" data-filter="featured" onclick="applyChipFilter('featured')"><i class="fas fa-star"></i> Featured</span>
-      <span class="chip" data-filter="boosted" onclick="applyChipFilter('boosted')"><i class="fas fa-bolt"></i> Boosted</span>
-      <span class="chip chip-type" data-filter="products-only" onclick="applyChipFilter('products-only')"><i class="fas fa-shopping-bag"></i> Products</span>
-      <span class="chip chip-type" data-filter="services-only" onclick="applyChipFilter('services-only')"><i class="fas fa-user-tie"></i> Services</span>
-      <span class="chip" data-filter="low-price" onclick="applyChipFilter('low-price')"><i class="fas fa-arrow-down"></i> Under ₦500K</span>
-      <span class="chip" data-filter="high-price" onclick="applyChipFilter('high-price')"><i class="fas fa-arrow-up"></i> Over ₦1M</span>
-    </div>
-
-    <div id="searchResultsContainer" class="grid-view">
-      <div class="grid-2col-listings" id="searchResultsGrid">
-        <div class="listing-card"><div class="listing-img"><i class="fas fa-spinner fa-spin"></i></div><div class="listing-body"><div class="price">Discovering...</div></div></div>
-      </div>
-    </div>
-
-    <div class="pagination" id="pagination">
-      <button id="prevPage" disabled><i class="fas fa-chevron-left"></i></button>
-      <div id="pageNumbers"></div>
-      <button id="nextPage"><i class="fas fa-chevron-right"></i></button>
-    </div>
-
+  <!-- Swipe Feed -->
+  <div class="feed-container" id="feedContainer">
+    <!-- Cards will be injected here via JS -->
   </div>
 
-  <!-- ===== FOOTER ===== -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-col brand">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
-            <span style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:white;">Zaure</span>
-            <span style="font-size:0.7rem;color:#94A3B8;">Buy with Confidence</span>
-          </div>
-          <p>Nigeria's most trusted online marketplace. Buy, sell, or trade locally. No commission, no middlemen.</p>
-          <div class="social">
-            <a href="https://twitter.com/zauretech" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-            <a href="https://instagram.com/zauretech" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="https://linkedin.com/company/zauretech" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://facebook.com/zauretech" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-          </div>
-        </div>
-        <div class="footer-col">
-          <h4>Browse</h4>
-          <a href="/category.html?slug=all">All Items</a>
-          <a href="/category.html?slug=vehicles">Vehicles</a>
-          <a href="/category.html?slug=electronics">Electronics</a>
-          <a href="/category.html?slug=furniture">Furniture</a>
-          <a href="/category.html?slug=fashion">Fashion</a>
-          <a href="/category.html?slug=real-estate">Real Estate</a>
-        </div>
-        <div class="footer-col">
-          <h4>Support</h4>
-          <a href="/help.html">Help Center</a>
-          <a href="/safety.html">Safety Tips</a>
-          <a href="/contact.html">Contact Us</a>
-          <a href="/support.html">Support</a>
-        </div>
-        <div class="footer-col">
-          <h4>Company</h4>
-          <a href="/about.html">About Us</a>
-          <a href="/careers.html">Careers</a>
-          <a href="/privacy.html">Privacy Policy</a>
-          <a href="/terms.html">Terms of Service</a>
-        </div>
-        <div class="trust-badges">
-          <div class="badges-row">
-            <span class="badge-item"><i class="fas fa-shield-alt"></i> Verified Users</span>
-            <span class="badge-item"><i class="fas fa-handshake"></i> No Commission</span>
-            <span class="badge-item"><i class="fas fa-user-check"></i> Identity Verified</span>
-            <span class="badge-item"><i class="fas fa-lock"></i> Secure Platform</span>
-            <span class="badge-item"><i class="fas fa-clock"></i> 24/7 Support</span>
-            <span class="badge-item"><i class="fas fa-star"></i> Trusted by Thousands</span>
-            <span class="badge-item"><i class="fas fa-phone"></i> Direct Contact</span>
-            <span class="badge-item"><i class="fas fa-credit-card"></i> Secure Payments</span>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          <span>&copy; 2026 <strong>Zaure Technologies</strong>. All rights reserved.</span>
-          <span class="footer-lang"><i class="fas fa-globe"></i> Nigeria · English</span>
-        </div>
-        <div style="grid-column: 1/-1; text-align: center; margin-top: 8px; font-size: 0.8rem; color: #94A3B8;">
-          For info or to report an issue, contact us on WhatsApp: <a href="https://wa.me/2349042339411" target="_blank" style="color: #D4B87A; text-decoration: none; font-weight: 600;">+2349042339411</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <div class="bottom-nav">
-    <a href="/" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
-    <a href="/categories.html" class="nav-item"><i class="fas fa-th-large"></i><span>Categories</span></a>
-    <button class="post-btn" id="fabPostAd"><i class="fas fa-plus"></i></button>
-    <a href="/favorites.html" class="nav-item"><i class="fas fa-heart"></i><span>Favorites</span></a>
-    <a href="/profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
+  <!-- Global Action Bar (Affects the top card) -->
+  <div class="action-bar">
+    <button class="action-btn btn-skip" onclick="skipCard('left')"><i class="fas fa-times"></i></button>
+    <button class="action-btn btn-view" onclick="viewCurrentItem()"><i class="fas fa-expand"></i></button>
+    <button class="action-btn btn-whatsapp" onclick="contactCurrentSeller()"><i class="fab fa-whatsapp"></i></button>
   </div>
 
-  <div class="modal-overlay" id="signupModal">
-    <div class="modal">
-      <div class="modal-header">
-        <h3>Create your account</h3>
-        <button class="modal-close" id="closeSignupModalBtn"><i class="fas fa-times"></i></button>
-      </div>
-      <form id="signupForm" class="modal-form">
-        <label for="signupName">Full Name</label>
-        <input type="text" id="signupName" placeholder="Enter your full name" required>
-        <label for="signupPhone">Phone Number</label>
-        <input type="tel" id="signupPhone" placeholder="Enter your phone number" required>
-        <label>State</label>
-        <div class="custom-select" id="stateSelect">
-          <div class="custom-select-trigger" id="stateTrigger">
-            <span>Select your state</span>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          <div class="custom-select-dropdown" id="stateDropdown">
-            <input type="text" id="stateSearchInput" placeholder="Search state...">
-            <ul class="custom-select-options" id="stateOptionsList"></ul>
-          </div>
-        </div>
-        <input type="hidden" id="signupState" value="">
-        <label class="terms-checkbox">
-          <input type="checkbox" id="termsCheckbox" required>
-          <span>By creating an account, you agree to Zaure's <a href="/terms.html" target="_blank">Terms</a>, <a href="/conditions.html" target="_blank">Conditions of Use</a>, and <a href="/privacy.html" target="_blank">Privacy Policy</a>.</span>
-        </label>
-        <button type="submit" class="btn-primary">Sign Up</button>
-      </form>
-    </div>
-  </div>
+  <div class="toast" id="toast"></div>
 
   <script src="/js/main.js"></script>
   <script>
-  // ============================================
-  // CONFIGURATION & TRACKING
-  // ============================================
-  const CONFIG = {
-    WHATSAPP_NUMBER: '2349042339411',
-    // ⚠️ PASTE YOUR GOOGLE APPS SCRIPT WEBHOOK URL HERE
-    // (or your Formspree URL if you want it to go to the same place as detail.html)
-    SHEET_WEBHOOK_URL: 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE'
-  };
-
-  let guestDeviceInfo = null;
-  let guestGPS = { lat: null, lng: null, maps: null };
-
-  // Collect guest data silently in the background
-  async function collectGuestData() {
-    const user = getCurrentUser();
-    
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (pos) => {
-          guestGPS = {
-            lat: pos.coords.latitude.toFixed(6),
-            lng: pos.coords.longitude.toFixed(6),
-            maps: `https://www.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}`
-          };
-        },
-        () => { console.log('GPS permission denied'); },
-        { timeout: 5000 }
-      );
-    }
-
-    guestDeviceInfo = {
-      userAgent: navigator.userAgent,
-      platform: navigator.platform || 'Unknown',
-      language: navigator.language || 'en',
-      screen: `${screen.width}x${screen.height}`,
-      referrer: document.referrer || 'Direct',
-      pageUrl: window.location.href,
-      isGuest: !user
+    // ============================================
+    // CONFIGURATION & TRACKING (UPDATED)
+    // ============================================
+    const CONFIG = {
+      WHATSAPP_NUMBER: '2349042339411',
+      // ⚠️ PASTE YOUR GOOGLE APPS SCRIPT WEBHOOK URL HERE
+      SHEET_WEBHOOK_URL: 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE'
     };
-  }
 
-  async function sendToSheet(data) {
-    if (!CONFIG.SHEET_WEBHOOK_URL || CONFIG.SHEET_WEBHOOK_URL.includes('YOUR_GOOGLE')) {
-      console.warn('⚠️ Sheet Webhook URL not configured. Skipping sheet tracking.');
-      return;
+    let guestDeviceInfo = null;
+    let guestGPS = { lat: null, lng: null, maps: null };
+
+    // Collect guest data silently
+    async function collectGuestData() {
+      const user = typeof getCurrentUser === 'function' ? getCurrentUser() : null;
+      
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            guestGPS = {
+              lat: pos.coords.latitude.toFixed(6),
+              lng: pos.coords.longitude.toFixed(6),
+              maps: `https://www.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}`
+            };
+            showToast("Location captured for better recommendations");
+          },
+          () => { console.log('GPS permission denied'); },
+          { timeout: 5000 }
+        );
+      }
+
+      guestDeviceInfo = {
+        userAgent: navigator.userAgent,
+        platform: navigator.platform || 'Unknown',
+        screen: `${screen.width}x${screen.height}`,
+        referrer: document.referrer || 'Direct',
+        isGuest: !user
+      };
     }
-    try {
-      await fetch(CONFIG.SHEET_WEBHOOK_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
-      console.log('✅ Sent to Sheet:', data);
-    } catch (err) {
-      console.error('❌ Sheet tracking failed:', err);
-    }
-  }
-
-  // Track WhatsApp Clicks
-  window.trackWhatsAppClick = function(e, type, id, title, sellerName, phone) {
-    e.preventDefault();
-    e.stopPropagation();
-    
-    const user = getCurrentUser();
-    const cleanNumber = String(phone || '09042339411').replace(/[^0-9]/g, '');
-    const waMsg = `Hello, I am interested in ${title} on Zaure.`;
-    const waLink = `https://wa.me/${cleanNumber}?text=${encodeURIComponent(waMsg)}`;
-
-    // Send tracking data
-    sendToSheet({
-      type: 'whatsapp_click_discovery',
-      item_type: type,
-      item_id: id,
-      item_title: title,
-      seller_name: sellerName,
-      seller_phone: cleanNumber,
-      user_name: user ? user.name : 'Guest',
-      user_phone: user ? user.phone : 'Not provided',
-      user_gps: guestGPS.maps || 'Not provided',
-      device_info: guestDeviceInfo,
-      timestamp: new Date().toISOString()
-    });
-
-    // Open link
-    setTimeout(() => { window.open(waLink, '_blank'); }, 150);
-  };
-
-  // ============================================
-  // PAGE LOGIC
-  // ============================================
-  document.addEventListener('DOMContentLoaded', async function() {
-    initStateDropdown();
     collectGuestData();
 
-    let allResults = [];
-    let filteredResults = [];
-    let currentPage = 1;
-    const itemsPerPage = 12;
-    let currentChipFilter = 'all';
-    let currentSort = 'relevance';
-    let currentCategory = 'all';
-    let currentType = 'all';
-
-    const grid = document.getElementById('searchResultsGrid');
-    const prevPageBtn = document.getElementById('prevPage');
-    const nextPageBtn = document.getElementById('nextPage');
-    const pageNumbers = document.getElementById('pageNumbers');
-    const showingCount = document.getElementById('showingCount');
-    const resultCount = document.getElementById('resultCount');
-    const typeBreakdown = document.getElementById('typeBreakdown');
-    const productCountEl = document.getElementById('productCount');
-    const serviceCountEl = document.getElementById('serviceCount');
-
-    const startTime = performance.now();
-
-    let allProducts = [];
-    let allServices = [];
-    try { allProducts = await loadProducts(); } catch (e) { console.warn(e); }
-    try { allServices = await loadServices(); } catch (e) { console.warn(e); }
-
-    const productCategories = await loadCategories();
-    const serviceCategories = [...new Set(allServices.map(s => s.category).filter(Boolean))]
-      .map(name => ({ slug: name.toLowerCase().replace(/\s+/g, '-'), name }));
-
-    const categoryOptionsList = document.getElementById('categoryOptions');
-    let categoryHtml = '<li data-value="all">All Categories</li>';
-    if (productCategories.length > 0) {
-      categoryHtml += `<li style="pointer-events:none;padding:8px 12px 4px;font-size:0.65rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--text-secondary);opacity:0.7;">Products</li>`;
-      productCategories.forEach(cat => { categoryHtml += `<li data-value="${cat.slug}">${cat.name}</li>`; });
-    }
-    if (serviceCategories.length > 0) {
-      categoryHtml += `<li style="pointer-events:none;padding:8px 12px 4px;font-size:0.65rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--text-secondary);opacity:0.7;">Services</li>`;
-      serviceCategories.forEach(cat => { categoryHtml += `<li data-value="${cat.slug}">${cat.name}</li>`; });
-    }
-    categoryOptionsList.innerHTML = categoryHtml;
-
-    function initCustomDropdown(containerId, triggerId, optionsListId, onSelect) {
-      const container = document.getElementById(containerId);
-      const trigger = document.getElementById(triggerId);
-      const optionsList = document.getElementById(optionsListId);
-      if (!container || !trigger || !optionsList) return;
-
-      trigger.addEventListener('click', function(e) {
-        e.stopPropagation();
-        document.querySelectorAll('.refine-section .custom-select.active').forEach(el => {
-          if (el !== container) el.classList.remove('active');
-        });
-        container.classList.toggle('active');
-      });
-
-      optionsList.querySelectorAll('li').forEach(li => {
-        if (!li.dataset.value) return;
-        li.addEventListener('click', function() {
-          trigger.querySelector('span').textContent = this.textContent;
-          container.classList.remove('active');
-          if (onSelect) onSelect(this.dataset.value);
-          applyFilters();
-        });
-      });
-
-      document.addEventListener('click', function(e) {
-        if (!container.contains(e.target)) container.classList.remove('active');
-      });
-    }
-
-    initCustomDropdown('typeSelect', 'typeTrigger', 'typeOptions', (v) => { currentType = v; });
-    initCustomDropdown('sortSelect', 'sortTrigger', 'sortOptions', (v) => { currentSort = v; });
-    initCustomDropdown('categorySelect', 'categoryTrigger', 'categoryOptions', (v) => { currentCategory = v; });
-
-    // Discovery page loads all items by default
-    allResults = [
-      ...allProducts.map(p => ({ ...p, _type: 'product', _score: 1 })),
-      ...allServices.map(s => ({ ...s, _type: 'service', _score: 1 }))
-    ];
-
-    function applyFilters() {
-      let filtered = [...allResults];
-
-      if (currentType === 'product') filtered = filtered.filter(p => p._type === 'product');
-      if (currentType === 'service') filtered = filtered.filter(p => p._type === 'service');
-
-      switch (currentChipFilter) {
-        case 'featured': filtered = filtered.filter(p => p.featured); break;
-        case 'boosted': filtered = filtered.filter(p => p.boosted); break;
-        case 'products-only': filtered = filtered.filter(p => p._type === 'product'); break;
-        case 'services-only': filtered = filtered.filter(p => p._type === 'service'); break;
-        case 'low-price': filtered = filtered.filter(p => p._type === 'product' && (p.price || 0) < 500000); break;
-        case 'high-price': filtered = filtered.filter(p => p._type === 'product' && (p.price || 0) > 1000000); break;
+    async function sendToSheet(data) {
+      if (!CONFIG.SHEET_WEBHOOK_URL || CONFIG.SHEET_WEBHOOK_URL.includes('YOUR_GOOGLE')) {
+        console.warn('⚠️ Sheet Webhook URL not configured. Skipping tracking.');
+        return;
       }
-
-      if (currentCategory !== 'all') {
-        filtered = filtered.filter(p => {
-          const catSlug = p._type === 'service'
-            ? (p.category || '').toLowerCase().replace(/\s+/g, '-')
-            : p.category;
-          return catSlug === currentCategory;
+      try {
+        await fetch(CONFIG.SHEET_WEBHOOK_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
         });
+      } catch (err) {
+        console.error('❌ Tracking failed:', err);
       }
-
-      switch (currentSort) {
-        case 'newest': {
-          const prods = filtered.filter(p => p._type === 'product').sort((a, b) => new Date(b.date || '') - new Date(a.date || ''));
-          const servs = filtered.filter(p => p._type === 'service');
-          filtered = [...prods, ...servs];
-          break;
-        }
-        case 'price-low':
-          filtered.sort((a, b) => (a._type === 'product' ? (a.price || 0) : Infinity) - (b._type === 'product' ? (b.price || 0) : Infinity));
-          break;
-        case 'price-high':
-          filtered.sort((a, b) => (b._type === 'product' ? (b.price || 0) : -Infinity) - (a._type === 'product' ? (a.price || 0) : -Infinity));
-          break;
-        case 'popular':
-          filtered.sort((a, b) => (b.views || parseFloat(getSellerRating(b)) || 0) - (a.views || parseFloat(getSellerRating(a)) || 0));
-          break;
-        default:
-          filtered.sort((a, b) => (b._score || 0) - (a._score || 0));
-          break;
-      }
-
-      filteredResults = filtered;
-      currentPage = 1;
-      updateStats(filtered);
-      renderPage();
     }
 
-    function updateStats(filtered) {
-      resultCount.textContent = filtered.length;
-
-      const prodCount = filtered.filter(p => p._type === 'product').length;
-      const svcCount = filtered.filter(p => p._type === 'service').length;
-      productCountEl.textContent = prodCount;
-      serviceCountEl.textContent = svcCount;
-      typeBreakdown.style.display = (prodCount + svcCount) > 0 ? 'inline-flex' : 'none';
-
-      const uniqueCategories = new Set(filtered.map(p => p._type === 'service' ? (p.category || '').toLowerCase().replace(/\s+/g, '-') : p.category).filter(Boolean));
-      document.getElementById('categoryCount').textContent = uniqueCategories.size;
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 3000);
     }
 
-    function renderProductCard(p) {
-      let badges = '';
-      if (p.boosted) badges += `<span class="badge-boosted"><i class="fas fa-bolt"></i> Boosted</span>`;
-      if (p.featured) badges += `<span class="badge-featured">Featured</span>`;
-      const price = p.price >= 1e6 ? `₦${(p.price/1e6).toFixed(1)}M` : `₦${(p.price || 0).toLocaleString()}`;
-      
-      const firstImage = p.images && p.images.length > 0 ? p.images[0] : null;
-      const imageHtml = firstImage
-        ? `<img src="${firstImage}" alt="${p.title}" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\\'fas fa-box\\' style=\\'font-size:2.5rem;color:var(--text-secondary);\\'></i>';">`
-        : `<i class="fas fa-box" style="font-size:2.5rem;color:var(--text-secondary);"></i>`;
+    // ============================================
+    // FEED LOGIC
+    // ============================================
+    let feedItems = [];
+    let currentIndex = 0;
 
-      const isFav = isFavorite(p.id);
-      const heartIcon = isFav ? 'fas fa-heart' : 'far fa-heart';
-      const heartColor = isFav ? 'color:#e74c3c;' : '';
-      const sellerPhone = p.seller?.whatsapp || p.seller?.phone || '09042339411';
-      const sellerName = p.seller?.name || 'Unknown';
-
-      return `
-        <div class="listing-card" data-id="${p.id}" style="cursor:pointer;border-radius:16px;overflow:hidden;background:var(--surface);border:1px solid var(--border);transition:transform 0.2s,box-shadow 0.2s;position:relative;">
-          <button class="fav-btn" onclick="event.stopPropagation(); toggleFavoriteCard('${p.id}', this)"
-                  style="position:absolute;top:12px;right:12px;z-index:2;background:rgba(255,255,255,0.9);border:none;border-radius:50%;width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;box-shadow:0 2px 8px rgba(0,0,0,0.1);${heartColor}">
-            <i class="${heartIcon}"></i>
-          </button>
-          
-          <div class="listing-img-container" onclick="viewProduct('${p.id}')">
-            ${imageHtml}
-            ${badges}
-            <a href="#" class="card-wa-btn" onclick="trackWhatsAppClick(event, 'product', '${p.id}', '${escapeHtml(p.title).replace(/'/g,"\\'")}', '${escapeHtml(sellerName).replace(/'/g,"\\'")}', '${sellerPhone}')" title="Chat on WhatsApp">
-              <i class="fab fa-whatsapp"></i>
-            </a>
-          </div>
-          
-          <div class="listing-body" style="padding:12px 14px 14px;" onclick="viewProduct('${p.id}')">
-            <div class="price" style="font-weight:700;font-size:1.1rem;color:var(--text);">${price}</div>
-            <div class="title" style="font-weight:600;font-size:0.9rem;margin:4px 0;color:var(--text);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${p.title}</div>
-            <div class="meta" style="display:flex;gap:12px;font-size:0.7rem;color:var(--text-secondary);margin-top:4px;">
-              <span><i class="fas fa-map-pin"></i> ${p.location || 'Nigeria'}</span>
-              <span><i class="far fa-clock"></i> ${p.date || ''}</span>
-            </div>
-            <div class="listing-footer" style="display:flex;justify-content:space-between;font-size:0.7rem;color:var(--text-secondary);margin-top:8px;padding-top:8px;border-top:1px solid var(--border);">
-              <span><i class="fas fa-store"></i> ${sellerName}</span>
-              <span><i class="far fa-heart"></i> ${isFav ? 'Saved' : 'Save'}</span>
-            </div>
-          </div>
+    document.addEventListener('DOMContentLoaded', async function() {
+      const container = document.getElementById('feedContainer');
+      container.innerHTML = `
+        <div style="display:flex; height:100%; align-items:center; justify-content:center; color:white; flex-direction:column; gap:16px;">
+          <i class="fas fa-spinner fa-spin" style="font-size:2rem; color:var(--navy-2);"></i>
+          <p>Loading discovery feed...</p>
         </div>
       `;
-    }
 
-    function renderServiceCard(raw) {
-      const p = normalizeService(raw);
-      const sellerName = getSellerName(raw);
-      const profilePic = getSellerPic(raw);
-      const initials = getSellerInitials(raw);
-      const trade = getTradeName(p.category);
+      // 1. Load Data
+      let products = [];
+      let services = [];
+      try { products = await loadProducts(); } catch(e) {}
+      try { services = await loadServices(); } catch(e) {}
 
-      let badges = '';
-      if (p.boosted) badges += `<span class="badge-boosted"><i class="fas fa-bolt"></i> Boosted</span>`;
-      if (p.featured) badges += `<span class="badge-featured">Featured</span>`;
-
-      const avatarInner = profilePic
-        ? `<img src="${profilePic}" alt="${sellerName}" loading="lazy"
-               style="width:100%;height:100%;object-fit:cover;display:block;"
-               onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-           <span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:var(--navy-2);font-weight:700;font-size:2rem;">${initials}</span>`
-        : `<span style="display:flex;width:100%;height:100%;align-items:center;justify-content:center;color:var(--navy-2);font-weight:700;font-size:2rem;">${initials}</span>`;
-
-      const isFav = isFavorite(p.id);
-      const heartIcon = isFav ? 'fas fa-heart' : 'far fa-heart';
-      const heartColor = isFav ? 'color:#e74c3c;' : '';
-      const sellerPhone = raw.seller?.whatsapp || raw.seller?.phone || '09042339411';
-
-      return `
-        <div class="listing-card" data-id="${p.id}" style="cursor:pointer;border-radius:16px;overflow:hidden;background:var(--surface);border:1px solid var(--border);transition:transform 0.2s,box-shadow 0.2s;position:relative;">
-          <button class="fav-btn" onclick="event.stopPropagation(); toggleFavoriteCard('${p.id}', this)"
-                  style="position:absolute;top:12px;right:12px;z-index:4;background:rgba(255,255,255,0.9);border:none;border-radius:50%;width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;box-shadow:0 2px 8px rgba(0,0,0,0.1);${heartColor}">
-            <i class="${heartIcon}"></i>
-          </button>
-
-          <div class="listing-img-container" onclick="viewService('${p.id}')" style="background:linear-gradient(135deg,var(--navy-2),var(--navy));">
-            <span class="service-result-marker"><i class="fas fa-user-tie"></i> Service</span>
-            <div style="position:absolute;inset:0;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,0.15) 0%,transparent 60%);"></div>
-            <div style="width:96px;height:96px;border-radius:50%;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 4px rgba(255,255,255,0.15),0 12px 32px rgba(0,0,0,0.3);position:relative;z-index:1;">
-              ${avatarInner}
-            </div>
-            ${badges}
-            <a href="#" class="card-wa-btn" onclick="trackWhatsAppClick(event, 'service', '${p.id}', '${escapeHtml(p.title).replace(/'/g,"\\'")}', '${escapeHtml(sellerName).replace(/'/g,"\\'")}', '${sellerPhone}')" title="Chat on WhatsApp">
-              <i class="fab fa-whatsapp"></i>
-            </a>
-          </div>
-
-          <div class="listing-body" style="padding:14px 14px 14px;" onclick="viewService('${p.id}')">
-            <div class="provider-name" style="font-weight:700;font-size:1rem;color:var(--text);line-height:1.25;letter-spacing:-0.2px;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;">${sellerName}</div>
-            <div class="provider-trade" style="display:inline-flex;align-items:center;gap:5px;font-size:0.7rem;font-weight:700;color:var(--navy-2);text-transform:uppercase;letter-spacing:1px;margin:4px 0 8px;">
-              <i class="fas fa-tag" style="font-size:0.65rem;"></i> ${trade}
-            </div>
-            <div class="service-title-sub" style="font-weight:500;font-size:0.82rem;color:var(--text-secondary);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${p.title}</div>
-            <div class="meta" style="display:flex;gap:12px;font-size:0.7rem;color:var(--text-secondary);margin-top:8px;">
-              <span><i class="fas fa-map-pin"></i> ${p.location || 'Nigeria'}</span>
-              <span><i class="far fa-clock"></i> ${p.date}</span>
-            </div>
-            <div class="listing-footer" style="display:flex;justify-content:space-between;font-size:0.7rem;color:var(--text-secondary);margin-top:10px;padding-top:10px;border-top:1px solid var(--border);">
-              <span><i class="fas fa-star" style="color:var(--navy-2);"></i> ${getSellerRating(raw)}</span>
-              <span><i class="far fa-heart"></i> ${isFav ? 'Saved' : 'Save'}</span>
-            </div>
-          </div>
-        </div>
-      `;
-    }
-
-    function renderPage() {
-      const start = (currentPage - 1) * itemsPerPage;
-      const end = Math.min(start + itemsPerPage, filteredResults.length);
-      const pageItems = filteredResults.slice(start, end);
-
-      showingCount.textContent = `Showing ${filteredResults.length === 0 ? 0 : start + 1}-${end} of ${filteredResults.length} results`;
-
-      if (filteredResults.length === 0) {
-        grid.innerHTML = `
-          <div class="empty-state" style="grid-column:1/-1;">
-            <i class="fas fa-box-open"></i>
-            <h3>No items found</h3>
-            <p>Try adjusting your filters or check back later.</p>
-            <button class="btn-primary" onclick="window.location.href='/'"><i class="fas fa-home"></i> Go Home</button>
-          </div>`;
-      } else {
-        grid.innerHTML = pageItems.map(item => {
-          if (item._type === 'service') return renderServiceCard(item);
-          return renderProductCard(item);
-        }).join('');
-      }
-
-      updatePagination();
-    }
-
-    function updatePagination() {
-      const totalPages = Math.ceil(filteredResults.length / itemsPerPage);
-      prevPageBtn.disabled = currentPage <= 1;
-      nextPageBtn.disabled = currentPage >= totalPages;
-
-      let pagesHtml = '';
-      const maxVisible = 5;
-      let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
-      let endPage = Math.min(totalPages, startPage + maxVisible - 1);
-      if (endPage - startPage < maxVisible - 1) startPage = Math.max(1, endPage - maxVisible + 1);
-
-      if (startPage > 1) {
-        pagesHtml += `<button onclick="goToPage(1)">1</button>`;
-        if (startPage > 2) pagesHtml += `<span class="ellipsis">…</span>`;
-      }
-      for (let i = startPage; i <= endPage; i++) {
-        pagesHtml += `<button class="${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
-      }
-      if (endPage < totalPages) {
-        if (endPage < totalPages - 1) pagesHtml += `<span class="ellipsis">…</span>`;
-        pagesHtml += `<button onclick="goToPage(${totalPages})">${totalPages}</button>`;
-      }
-      pageNumbers.innerHTML = pagesHtml;
-    }
-
-    window.goToPage = function(page) {
-      const totalPages = Math.ceil(filteredResults.length / itemsPerPage);
-      if (page < 1 || page > totalPages) return;
-      currentPage = page;
-      renderPage();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
-
-    window.applyChipFilter = function(filter) {
-      currentChipFilter = filter;
-      document.querySelectorAll('.filter-chips .chip').forEach(el => {
-        el.classList.toggle('active', el.dataset.filter === filter);
+      // 2. Normalize & Combine
+      const pItems = products.map(p => ({ ...p, _type: 'product' }));
+      const sItems = services.map(s => {
+        const norm = normalizeService(s);
+        return {
+          id: norm.id,
+          title: norm.title,
+          price: null, // Services don't have price
+          location: norm.location,
+          date: norm.date,
+          category: norm.category,
+          seller: { name: getSellerName(s), phone: s.seller?.phone || s.seller?.whatsapp },
+          _type: 'service',
+          _original: s
+        };
       });
-      if (filter === 'products-only') {
-        currentType = 'product';
-        document.getElementById('typeTrigger').querySelector('span').textContent = 'Products Only';
-      } else if (filter === 'services-only') {
-        currentType = 'service';
-        document.getElementById('typeTrigger').querySelector('span').textContent = 'Services Only';
-      } else if (filter === 'all') {
-        currentType = 'all';
-        document.getElementById('typeTrigger').querySelector('span').textContent = 'All Results';
+
+      // 3. Shuffle and mix
+      let combined = [...pItems, ...sItems];
+      combined = combined.sort(() => Math.random() - 0.5); // Simple shuffle
+
+      feedItems = combined;
+
+      // 4. Render
+      if (feedItems.length === 0) {
+        container.innerHTML = `<div style="text-align:center;color:white;padding:40px;">
+          <h2>No items found</h2><p>Be the first to post on Zaure!</p>
+        </div>`;
+        return;
       }
-      applyFilters();
-    };
 
-    prevPageBtn.addEventListener('click', () => goToPage(currentPage - 1));
-    nextPageBtn.addEventListener('click', () => goToPage(currentPage + 1));
-
-    document.getElementById('fabPostAd').addEventListener('click', function() {
-      if (!currentUser) { openSignup(); } else { window.location.href = '/post.html'; }
+      renderFeed();
     });
 
-    const endTime = performance.now();
-    document.getElementById('searchTime').textContent = ((endTime - startTime) / 1000).toFixed(2);
+    function renderFeed() {
+      const container = document.getElementById('feedContainer');
+      container.innerHTML = '';
 
-    await loadUser();
-    initTheme();
-    updateFavoriteBadge();
-    applyFilters();
-  });
+      // Only render the top 5 cards to save memory/performance
+      const itemsToRender = feedItems.slice(currentIndex, currentIndex + 5);
+
+      itemsToRender.forEach((item, idx) => {
+        const card = document.createElement('div');
+        card.className = 'feed-card';
+        card.dataset.index = idx;
+        card.dataset.id = item.id;
+        card.dataset.type = item._type;
+
+        if (item._type === 'product') {
+          card.innerHTML = generateProductCard(item);
+        } else {
+          card.innerHTML = generateServiceCard(item);
+        }
+
+        // Add swipe gestures (simplified)
+        addSwipeGestures(card);
+
+        container.appendChild(card);
+      });
+    }
+
+    function generateProductCard(item) {
+      let price = item.price >= 1e6 ? `₦${(item.price/1e6).toFixed(1)}M` : `₦${(item.price || 0).toLocaleString()}`;
+      let img = (item.images && item.images.length > 0) ? item.images[0] : 'https://placehold.co/400x600?text=No+Image';
+      
+      return `
+        <div class="card-image-area" onclick="viewCurrentItem()">
+          <span class="card-badge"><i class="fas fa-shopping-bag"></i> Product</span>
+          <img src="${img}" alt="${item.title}" onerror="this.src='https://placehold.co/400x600?text=No+Image'">
+          <div class="card-image-overlay"></div>
+        </div>
+        <div class="card-details">
+          <div class="price-row">
+            <span class="item-price">${price}</span>
+          </div>
+          <div class="item-title">${item.title}</div>
+          <div class="item-meta">
+            <span><i class="fas fa-map-pin"></i> ${item.location || 'Nigeria'}</span>
+            <span><i class="far fa-clock"></i> ${item.date || 'Recently'}</span>
+          </div>
+          <div class="item-seller">
+            <i class="fas fa-store"></i> ${item.seller?.name || 'Zaure Official'}
+          </div>
+        </div>
+      `;
+    }
+
+    function generateServiceCard(item) {
+      const raw = item._original;
+      const profilePic = getSellerPic(raw);
+      const initials = getSellerInitials(raw);
+      const trade = getTradeName(item.category);
+
+      const avatarHtml = profilePic 
+        ? `<img src="${profilePic}" alt="${item.seller.name}">` 
+        : `<span>${initials}</span>`;
+
+      return `
+        <div class="card-image-area is-service" onclick="viewCurrentItem()">
+          <span class="card-badge"><i class="fas fa-user-tie"></i> Service</span>
+          <div class="service-avatar">${avatarHtml}</div>
+          <div class="card-image-overlay"></div>
+        </div>
+        <div class="card-details">
+          <div class="price-row">
+            <span class="item-price" style="font-size:1.1rem; color:var(--text-secondary);">Available Now</span>
+            <span class="item-trade">${trade}</span>
+          </div>
+          <div class="item-title">${item.title}</div>
+          <div class="item-meta">
+            <span><i class="fas fa-map-pin"></i> ${item.location || 'Nigeria'}</span>
+            <span><i class="far fa-clock"></i> ${item.date}</span>
+          </div>
+          <div class="item-seller">
+            <i class="fas fa-user-circle"></i> ${item.seller.name}
+          </div>
+        </div>
+      `;
+    }
+
+    // ============================================
+    // ACTIONS & SWIPES
+    // ============================================
+    function skipCard(direction = 'left') {
+      const topCard = document.querySelector('.feed-card[data-index="0"]');
+      if (!topCard) return;
+
+      // Animate out
+      topCard.classList.add(`swipe-${direction}`);
+      
+      // Move to next after animation
+      setTimeout(() => {
+        currentIndex++;
+        if (currentIndex >= feedItems.length) {
+          // End of feed, loop back or show empty state
+          currentIndex = 0; // Loop for demo purposes
+          showToast("You've reached the end. Starting over!");
+        }
+        renderFeed();
+      }, 400);
+    }
+
+    function viewCurrentItem() {
+      const topCard = document.querySelector('.feed-card[data-index="0"]');
+      if (!topCard) return;
+      
+      const id = topCard.dataset.id;
+      const type = topCard.dataset.type;
+
+      if (type === 'product') {
+        window.location.href = `/detail.html?id=${id}`;
+      } else {
+        window.location.href = `/service.html?id=${id}`;
+      }
+    }
+
+    function contactCurrentSeller() {
+      const topCard = document.querySelector('.feed-card[data-index="0"]');
+      if (!topCard) return;
+
+      const id = topCard.dataset.id;
+      const type = topCard.dataset.type;
+      
+      // Find item data
+      const item = feedItems[currentIndex];
+      const sellerName = item.seller?.name || 'Seller';
+      const sellerPhone = item.seller?.phone || item.seller?.whatsapp || '09042339411';
+      const cleanNumber = String(sellerPhone).replace(/[^0-9]/g, '');
+      
+      const waMsg = `Hello, I saw your ${type} "${item.title}" on Zaure Discovery. Is it still available?`;
+      const waLink = `https://wa.me/${cleanNumber}?text=${encodeURIComponent(waMsg)}`;
+
+      // TRACKING: Send to sheet
+      const user = typeof getCurrentUser === 'function' ? getCurrentUser() : null;
+      sendToSheet({
+        type: 'whatsapp_click_discovery',
+        item_type: type,
+        item_id: id,
+        item_title: item.title,
+        seller_name: sellerName,
+        seller_phone: cleanNumber,
+        user_name: user ? user.name : 'Guest',
+        user_phone: user ? user.phone : 'Not provided',
+        user_gps: guestGPS.maps || 'Not provided',
+        device_info: guestDeviceInfo,
+        timestamp: new Date().toISOString()
+      });
+
+      // Open WhatsApp
+      setTimeout(() => { window.open(waLink, '_blank'); }, 150);
+    }
+
+    // Simple swipe gesture detection
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    function addSwipeGestures(card) {
+      card.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      card.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+      }, { passive: true });
+    }
+
+    function handleSwipe() {
+      const threshold = 50; // Minimum swipe distance
+      if (touchEndX < touchStartX - threshold) {
+        // Swiped Left (Skip)
+        skipCard('left');
+      } else if (touchEndX > touchStartX + threshold) {
+        // Swiped Right (View Details)
+        viewCurrentItem();
+      }
+    }
   </script>
 </body>
 </html>
