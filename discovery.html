@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Discovery – Zaure</title>
+  <title>Discovery Feed – Zaure</title>
   <meta name="description" content="Discover products and services on Zaure - Nigeria's most trusted online marketplace.">
   <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -16,309 +16,281 @@
     :root {
       --navy: #0f2940;
       --navy-2: #1a3650;
-      --border: #e5ecf3;
-      --text: #0f2940;
-      --text-secondary: #64748b;
+      --border: rgba(255, 255, 255, 0.15);
+      --text: #ffffff;
+      --text-secondary: rgba(255, 255, 255, 0.7);
       --surface: #ffffff;
-      --surface-alt: #f8fbfe;
     }
 
     body {
-      background-color: var(--navy); /* Dark background for the feed */
-      color: var(--surface);
-      overflow: hidden; /* Prevent body scroll, rely on internal container */
+      background-color: #000;
+      color: var(--text);
+      overflow: hidden;
       height: 100vh;
-      display: flex;
-      flex-direction: column;
-      padding-bottom: 0; /* Override main.css if it forces padding */
+      padding: 0 !important;
+      margin: 0;
     }
 
-    /* Hide default scrollbars */
-    ::-webkit-scrollbar { display: none; }
+    /* ============================================
+       TIKTOK SCROLL CONTAINER
+       ============================================ */
+    .tiktok-feed {
+      height: 100vh;
+      width: 100vw;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none;  /* IE and Edge */
+    }
+    .tiktok-feed::-webkit-scrollbar { display: none; }
+
+    .feed-item {
+      height: 100vh;
+      width: 100%;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      position: relative;
+      background: #000;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
     /* ============================================
-       NAVBAR (Minimal for Discovery)
+       IMMERSIVE MEDIA (FIXES ZOOMING)
        ============================================ */
-    .discovery-nav {
+    /* 1. Blurred background that fills the screen */
+    .media-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      filter: blur(25px) brightness(0.4);
+      transform: scale(1.2); /* Prevent blur edges */
+      z-index: 1;
+    }
+
+    /* 2. Sharp main image (contained) */
+    .media-main {
+      position: relative;
+      z-index: 2;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain; /* Shows full image without zooming */
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      border-radius: 12px;
+    }
+
+    /* Service Specific Visual (Avatar) */
+    .media-service {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+    .service-avatar-large {
+      width: 180px; height: 180px;
+      border-radius: 50%;
+      background: var(--navy-2);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 4rem; font-weight: 800;
+      box-shadow: 0 0 0 8px rgba(26,54,80,0.3), 0 0 0 16px rgba(26,54,80,0.1);
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .service-avatar-large img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+
+    /* ============================================
+       UI OVERLAYS
+       ============================================ */
+    /* Top Bar (Gamification) */
+    .top-bar {
       position: absolute;
       top: 0; left: 0; right: 0;
-      padding: 16px 20px;
+      padding: 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      z-index: 100;
-      background: linear-gradient(180deg, rgba(15,41,64,0.8) 0%, transparent 100%);
-      pointer-events: none; /* Let clicks pass through to cards */
+      z-index: 10;
+      background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, transparent 100%);
     }
-    .discovery-nav a, .discovery-nav button {
-      pointer-events: auto;
-    }
-    .discovery-nav .brand {
+    .top-bar .brand {
       font-family: 'Playfair Display', serif;
       font-size: 1.4rem;
       font-weight: 800;
       color: white;
       text-decoration: none;
       letter-spacing: -0.5px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
     }
-    .discovery-nav .brand i {
-      color: var(--navy-2); /* Since bg is dark, use a lighter navy or white */
-      font-size: 1.2rem;
-    }
-    .discovery-nav .nav-btn {
-      background: rgba(255,255,255,0.1);
+    .streak-badge {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
       border: 1px solid rgba(255,255,255,0.2);
-      color: white;
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
-      backdrop-filter: blur(8px);
-      text-decoration: none;
-      font-size: 1rem;
-      transition: background 0.2s;
-    }
-    .discovery-nav .nav-btn:hover { background: rgba(255,255,255,0.2); }
-
-    /* ============================================
-       SWIPE FEED CONTAINER
-       ============================================ */
-    .feed-container {
-      flex: 1;
-      position: relative;
-      width: 100%;
-      max-width: 500px;
-      margin: 0 auto;
-      perspective: 1000px;
-    }
-
-    /* Individual Card */
-    .feed-card {
-      position: absolute;
-      top: 16px; left: 16px; right: 16px; bottom: 90px;
-      background: var(--surface);
-      border-radius: 24px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.3s ease;
-      transform-origin: bottom center;
-      will-change: transform;
-      z-index: 1;
-    }
-
-    /* Stacking Effect */
-    .feed-card[data-index="0"] { z-index: 10; opacity: 1; transform: scale(1) translateY(0); }
-    .feed-card[data-index="1"] { z-index: 9; opacity: 0.8; transform: scale(0.95) translateY(15px); }
-    .feed-card[data-index="2"] { z-index: 8; opacity: 0.5; transform: scale(0.9) translateY(30px); }
-    .feed-card[data-index="3"] { z-index: 7; opacity: 0.2; transform: scale(0.85) translateY(45px); }
-    .feed-card[data-index="4"] { z-index: 6; opacity: 0; transform: scale(0.8) translateY(60px); }
-    .feed-card[data-index="5"] { z-index: 5; opacity: 0; }
-    .feed-card[data-index="6"] { z-index: 4; opacity: 0; }
-    .feed-card[data-index="7"] { z-index: 3; opacity: 0; }
-    .feed-card[data-index="8"] { z-index: 2; opacity: 0; }
-    .feed-card[data-index="9"] { z-index: 1; opacity: 0; }
-
-    /* Swipe Away Animations */
-    .feed-card.swipe-left {
-      transform: translateX(-150%) rotate(-20deg) !important;
-      opacity: 0 !important;
-    }
-    .feed-card.swipe-right {
-      transform: translateX(150%) rotate(20deg) !important;
-      opacity: 0 !important;
-    }
-
-    /* ============================================
-       CARD CONTENT
-       ============================================ */
-    /* Image Section (Top Half) */
-    .card-image-area {
-      position: relative;
-      flex: 1;
-      background: #0a1622; /* Very dark blue/black for contain letterboxing */
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 700;
       display: flex;
       align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      cursor: pointer;
+      gap: 6px;
     }
-    .card-image-area img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain; /* KEY FIX: Shows full image without zooming */
-    }
-    /* Service Avatar specific */
-    .card-image-area.is-service {
-      background: linear-gradient(135deg, var(--navy-2), var(--navy));
-    }
-    .card-image-area.is-service .service-avatar {
-      width: 140px; height: 140px;
-      border-radius: 50%;
-      background: white;
-      overflow: hidden;
-      box-shadow: 0 0 0 6px rgba(255,255,255,0.1), 0 0 0 10px rgba(255,255,255,0.05);
-      position: relative;
-      z-index: 2;
-    }
-    .card-image-area.is-service .service-avatar img {
-      width: 100%; height: 100%; object-fit: cover;
-    }
-    .card-image-area.is-service .service-avatar span {
-      display: flex; align-items: center; justify-content: center;
-      width: 100%; height: 100%; font-size: 3rem; font-weight: 800; color: var(--navy-2);
-    }
+    .streak-badge i { color: #ff9800; animation: fireFlicker 1s infinite alternate; }
+    @keyframes fireFlicker { 0% { transform: scale(1); } 100% { transform: scale(1.15); } }
 
-    /* Top Badge */
-    .card-badge {
+    /* Bottom Info (Caption) */
+    .bottom-info {
       position: absolute;
-      top: 16px;
-      left: 16px;
-      background: var(--navy-2);
+      bottom: 24px;
+      left: 20px;
+      right: 80px; /* Leave space for right sidebar */
+      z-index: 10;
       color: white;
-      padding: 6px 12px;
+      background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, transparent 100%);
+      padding: 20px 20px 20px 0;
+      pointer-events: none;
+    }
+    .bottom-info .badge-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 8px;
+      pointer-events: auto;
+    }
+    .tag {
+      background: var(--navy-2);
+      padding: 4px 10px;
       border-radius: 20px;
       font-size: 0.65rem;
       font-weight: 800;
       letter-spacing: 1px;
       text-transform: uppercase;
-      z-index: 5;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
-
-    /* Gradient Overlay at bottom of image */
-    .card-image-overlay {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 100px;
-      background: linear-gradient(0deg, var(--surface) 0%, transparent 100%);
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    /* Details Section (Bottom Half) */
-    .card-details {
-      padding: 12px 20px 20px;
-      background: var(--surface);
-      position: relative;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .price-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .item-price {
-      font-size: 1.5rem;
-      font-weight: 800;
+    .tag.price {
+      background: white;
       color: var(--navy);
+      font-size: 0.9rem;
+      padding: 4px 14px;
     }
-    .item-trade {
-      font-size: 0.7rem;
-      font-weight: 700;
-      color: var(--navy-2);
-      background: rgba(26,54,80,0.1);
-      padding: 4px 10px;
-      border-radius: 20px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .item-title {
+    .title {
       font-size: 1.1rem;
       font-weight: 700;
-      color: var(--text);
       line-height: 1.3;
+      margin-bottom: 8px;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
-
-    .item-meta {
-      display: flex;
-      gap: 12px;
-      font-size: 0.8rem;
+    .meta {
+      font-size: 0.85rem;
       color: var(--text-secondary);
-      margin-top: 2px;
-    }
-    .item-meta span { display: flex; align-items: center; gap: 4px; }
-    .item-meta i { color: var(--navy-2); }
-
-    .item-seller {
       display: flex;
       align-items: center;
-      gap: 8px;
-      margin-top: 8px;
-      padding-top: 8px;
-      border-top: 1px dashed var(--border);
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-      font-weight: 600;
+      gap: 12px;
     }
-    .item-seller i { color: var(--navy-2); }
+    .meta span { display: flex; align-items: center; gap: 4px; }
+    .meta i { color: var(--navy-2); background: white; padding: 2px; border-radius: 50%; font-size: 0.6rem; }
 
-    /* ============================================
-       ACTION BUTTONS
-       ============================================ */
-    .action-bar {
+    /* Right Action Sidebar */
+    .right-actions {
       position: absolute;
-      bottom: 16px;
-      left: 0; right: 0;
+      bottom: 30px;
+      right: 16px;
+      z-index: 10;
       display: flex;
-      justify-content: center;
-      gap: 16px;
-      z-index: 100;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
     }
     .action-btn {
-      width: 60px;
-      height: 60px;
+      width: 48px; height: 48px;
       border-radius: 50%;
-      border: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: white;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      font-size: 1.2rem;
       cursor: pointer;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
       transition: transform 0.2s, background 0.2s;
     }
+    .action-btn:hover { background: rgba(255,255,255,0.3); transform: scale(1.05); }
     .action-btn:active { transform: scale(0.9); }
+    .action-btn span {
+      font-size: 0.6rem;
+      font-weight: 700;
+      margin-top: 4px;
+    }
+    .action-btn.wa { background: #25D366; border-color: #25D366; }
+    .action-btn.wa:hover { background: #1DA851; }
+    .action-btn.saved { color: #e74c3c; }
+    .action-btn.saved i { animation: popHeart 0.4s ease; }
 
-    .btn-skip {
-      background: var(--surface);
-      color: var(--text-secondary);
-      border: 1px solid var(--border);
-    }
-    .btn-view {
-      background: var(--navy-2);
-      color: white;
-      width: 70px; height: 70px;
-      font-size: 1.6rem;
-    }
-    .btn-whatsapp {
-      background: #25D366;
-      color: white;
+    @keyframes popHeart {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.5); }
+      100% { transform: scale(1); }
     }
 
-    /* Toast for guest info collection */
+    /* Swipe Up Hint */
+    .swipe-hint {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.6);
+      font-size: 0.8rem;
+      font-weight: 600;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      z-index: 10;
+      animation: bounce 2s infinite;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
+      40% { transform: translate(-50%, -10px); }
+      60% { transform: translate(-50%, -5px); }
+    }
+
+    /* Giant Heart Overlay (Double Tap) */
+    .heart-overlay {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      font-size: 100px;
+      color: #e74c3c;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 20;
+      text-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+    .heart-overlay.animate {
+      animation: giantHeart 0.8s ease forwards;
+    }
+    @keyframes giantHeart {
+      0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+      50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+      100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+    }
+
+    /* Toast */
     .toast {
       position: fixed;
-      bottom: 100px;
+      top: 60px;
       left: 50%;
-      transform: translateX(-50%) translateY(20px);
-      background: rgba(15,41,64,0.95);
+      transform: translateX(-50%) translateY(-20px);
+      background: rgba(26,54,80,0.95);
       color: white;
       padding: 10px 20px;
       border-radius: 30px;
@@ -332,37 +304,44 @@
       border: 1px solid rgba(255,255,255,0.1);
     }
     .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* Loading State */
+    .loading-container {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 16px;
+      color: white;
+    }
+    .loading-spinner {
+      width: 40px; height: 40px;
+      border: 4px solid rgba(255,255,255,0.1);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
   </style>
 </head>
 <body>
 
-  <!-- Minimal Navbar -->
-  <nav class="discovery-nav">
-    <a href="/" class="brand"><i class="fas fa-bolt" style="color:#D4B87A;"></i> Discovery</a>
-    <div style="display:flex; gap:8px;">
-      <a href="/" class="nav-btn"><i class="fas fa-home"></i></a>
-      <a href="/search.html" class="nav-btn"><i class="fas fa-search"></i></a>
-    </div>
-  </nav>
-
-  <!-- Swipe Feed -->
-  <div class="feed-container" id="feedContainer">
-    <!-- Cards will be injected here via JS -->
-  </div>
-
-  <!-- Global Action Bar (Affects the top card) -->
-  <div class="action-bar">
-    <button class="action-btn btn-skip" onclick="skipCard('left')"><i class="fas fa-times"></i></button>
-    <button class="action-btn btn-view" onclick="viewCurrentItem()"><i class="fas fa-expand"></i></button>
-    <button class="action-btn btn-whatsapp" onclick="contactCurrentSeller()"><i class="fab fa-whatsapp"></i></button>
-  </div>
-
+  <!-- Toast -->
   <div class="toast" id="toast"></div>
+
+  <!-- Feed Container -->
+  <div class="tiktok-feed" id="tiktokFeed">
+    <div class="loading-container">
+      <div class="loading-spinner"></div>
+      <p>Curating your feed...</p>
+    </div>
+  </div>
 
   <script src="/js/main.js"></script>
   <script>
     // ============================================
-    // CONFIGURATION & TRACKING (UPDATED)
+    // CONFIGURATION & TRACKING
     // ============================================
     const CONFIG = {
       WHATSAPP_NUMBER: '2349042339411',
@@ -372,6 +351,7 @@
 
     let guestDeviceInfo = null;
     let guestGPS = { lat: null, lng: null, maps: null };
+    let viewedCount = 0;
 
     // Collect guest data silently
     async function collectGuestData() {
@@ -385,7 +365,7 @@
               lng: pos.coords.longitude.toFixed(6),
               maps: `https://www.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}`
             };
-            showToast("Location captured for better recommendations");
+            // Optional: showToast("📍 Location captured for local deals");
           },
           () => { console.log('GPS permission denied'); },
           { timeout: 5000 }
@@ -423,23 +403,17 @@
       const t = document.getElementById('toast');
       t.textContent = msg;
       t.classList.add('show');
-      setTimeout(() => t.classList.remove('show'), 3000);
+      clearTimeout(window.__toast);
+      window.__toast = setTimeout(() => t.classList.remove('show'), 3000);
     }
 
     // ============================================
-    // FEED LOGIC
+    // BUILD FEED
     // ============================================
     let feedItems = [];
-    let currentIndex = 0;
 
     document.addEventListener('DOMContentLoaded', async function() {
-      const container = document.getElementById('feedContainer');
-      container.innerHTML = `
-        <div style="display:flex; height:100%; align-items:center; justify-content:center; color:white; flex-direction:column; gap:16px;">
-          <i class="fas fa-spinner fa-spin" style="font-size:2rem; color:var(--navy-2);"></i>
-          <p>Loading discovery feed...</p>
-        </div>
-      `;
+      const feedContainer = document.getElementById('tiktokFeed');
 
       // 1. Load Data
       let products = [];
@@ -447,184 +421,229 @@
       try { products = await loadProducts(); } catch(e) {}
       try { services = await loadServices(); } catch(e) {}
 
-      // 2. Normalize & Combine
+      // 2. Normalize
       const pItems = products.map(p => ({ ...p, _type: 'product' }));
       const sItems = services.map(s => {
         const norm = normalizeService(s);
         return {
           id: norm.id,
           title: norm.title,
-          price: null, // Services don't have price
+          price: null, 
           location: norm.location,
           date: norm.date,
           category: norm.category,
-          seller: { name: getSellerName(s), phone: s.seller?.phone || s.seller?.whatsapp },
+          seller: { 
+            name: getSellerName(s), 
+            phone: s.seller?.phone || s.seller?.whatsapp || '09042339411' 
+          },
           _type: 'service',
           _original: s
         };
       });
 
-      // 3. Shuffle and mix
-      let combined = [...pItems, ...sItems];
-      combined = combined.sort(() => Math.random() - 0.5); // Simple shuffle
-
-      feedItems = combined;
+      // 3. Mix & Shuffle
+      feedItems = [...pItems, ...sItems].sort(() => Math.random() - 0.5);
 
       // 4. Render
+      feedContainer.innerHTML = ''; // Clear loader
+
       if (feedItems.length === 0) {
-        container.innerHTML = `<div style="text-align:center;color:white;padding:40px;">
-          <h2>No items found</h2><p>Be the first to post on Zaure!</p>
-        </div>`;
+        feedContainer.innerHTML = `<div class="loading-container"><h2>No items found</h2><p>Be the first to post!</p></div>`;
         return;
       }
 
-      renderFeed();
+      feedItems.forEach((item, index) => {
+        feedContainer.appendChild(createFeedItem(item, index));
+      });
+
+      // Setup Intersection Observer for "Gamification"
+      setupScrollTracking();
     });
 
-    function renderFeed() {
-      const container = document.getElementById('feedContainer');
-      container.innerHTML = '';
+    function createFeedItem(item, index) {
+      const el = document.createElement('div');
+      el.className = 'feed-item';
+      el.dataset.id = item.id;
+      el.dataset.type = item._type;
 
-      // Only render the top 5 cards to save memory/performance
-      const itemsToRender = feedItems.slice(currentIndex, currentIndex + 5);
+      let mediaHtml = '';
+      let detailsHtml = '';
 
-      itemsToRender.forEach((item, idx) => {
-        const card = document.createElement('div');
-        card.className = 'feed-card';
-        card.dataset.index = idx;
-        card.dataset.id = item.id;
-        card.dataset.type = item._type;
+      if (item._type === 'product') {
+        const img = (item.images && item.images.length > 0) ? item.images[0] : 'https://placehold.co/400x600?text=No+Image';
+        const price = item.price >= 1e6 ? `₦${(item.price/1e6).toFixed(1)}M` : `₦${(item.price || 0).toLocaleString()}`;
+        
+        mediaHtml = `
+          <div class="media-bg" style="background-image: url('${img}')"></div>
+          <img src="${img}" class="media-main" alt="${item.title}" onerror="this.src='https://placehold.co/400x600?text=No+Image'">
+        `;
 
-        if (item._type === 'product') {
-          card.innerHTML = generateProductCard(item);
-        } else {
-          card.innerHTML = generateServiceCard(item);
-        }
-
-        // Add swipe gestures (simplified)
-        addSwipeGestures(card);
-
-        container.appendChild(card);
-      });
-    }
-
-    function generateProductCard(item) {
-      let price = item.price >= 1e6 ? `₦${(item.price/1e6).toFixed(1)}M` : `₦${(item.price || 0).toLocaleString()}`;
-      let img = (item.images && item.images.length > 0) ? item.images[0] : 'https://placehold.co/400x600?text=No+Image';
-      
-      return `
-        <div class="card-image-area" onclick="viewCurrentItem()">
-          <span class="card-badge"><i class="fas fa-shopping-bag"></i> Product</span>
-          <img src="${img}" alt="${item.title}" onerror="this.src='https://placehold.co/400x600?text=No+Image'">
-          <div class="card-image-overlay"></div>
-        </div>
-        <div class="card-details">
-          <div class="price-row">
-            <span class="item-price">${price}</span>
+        detailsHtml = `
+          <div class="badge-row">
+            <span class="tag price">${price}</span>
+            <span class="tag" style="background:white; color:var(--navy);">Product</span>
           </div>
-          <div class="item-title">${item.title}</div>
-          <div class="item-meta">
+          <div class="title">${item.title}</div>
+          <div class="meta">
             <span><i class="fas fa-map-pin"></i> ${item.location || 'Nigeria'}</span>
-            <span><i class="far fa-clock"></i> ${item.date || 'Recently'}</span>
+            <span><i class="fas fa-store"></i> ${item.seller?.name || 'Zaure Official'}</span>
           </div>
-          <div class="item-seller">
-            <i class="fas fa-store"></i> ${item.seller?.name || 'Zaure Official'}
-          </div>
-        </div>
-      `;
-    }
-
-    function generateServiceCard(item) {
-      const raw = item._original;
-      const profilePic = getSellerPic(raw);
-      const initials = getSellerInitials(raw);
-      const trade = getTradeName(item.category);
-
-      const avatarHtml = profilePic 
-        ? `<img src="${profilePic}" alt="${item.seller.name}">` 
-        : `<span>${initials}</span>`;
-
-      return `
-        <div class="card-image-area is-service" onclick="viewCurrentItem()">
-          <span class="card-badge"><i class="fas fa-user-tie"></i> Service</span>
-          <div class="service-avatar">${avatarHtml}</div>
-          <div class="card-image-overlay"></div>
-        </div>
-        <div class="card-details">
-          <div class="price-row">
-            <span class="item-price" style="font-size:1.1rem; color:var(--text-secondary);">Available Now</span>
-            <span class="item-trade">${trade}</span>
-          </div>
-          <div class="item-title">${item.title}</div>
-          <div class="item-meta">
-            <span><i class="fas fa-map-pin"></i> ${item.location || 'Nigeria'}</span>
-            <span><i class="far fa-clock"></i> ${item.date}</span>
-          </div>
-          <div class="item-seller">
-            <i class="fas fa-user-circle"></i> ${item.seller.name}
-          </div>
-        </div>
-      `;
-    }
-
-    // ============================================
-    // ACTIONS & SWIPES
-    // ============================================
-    function skipCard(direction = 'left') {
-      const topCard = document.querySelector('.feed-card[data-index="0"]');
-      if (!topCard) return;
-
-      // Animate out
-      topCard.classList.add(`swipe-${direction}`);
-      
-      // Move to next after animation
-      setTimeout(() => {
-        currentIndex++;
-        if (currentIndex >= feedItems.length) {
-          // End of feed, loop back or show empty state
-          currentIndex = 0; // Loop for demo purposes
-          showToast("You've reached the end. Starting over!");
-        }
-        renderFeed();
-      }, 400);
-    }
-
-    function viewCurrentItem() {
-      const topCard = document.querySelector('.feed-card[data-index="0"]');
-      if (!topCard) return;
-      
-      const id = topCard.dataset.id;
-      const type = topCard.dataset.type;
-
-      if (type === 'product') {
-        window.location.href = `/detail.html?id=${id}`;
+        `;
       } else {
-        window.location.href = `/service.html?id=${id}`;
+        // Service
+        const raw = item._original;
+        const profilePic = getSellerPic(raw);
+        const initials = getSellerInitials(raw);
+        const trade = getTradeName(item.category);
+
+        mediaHtml = `
+          <div class="media-bg" style="background: linear-gradient(135deg, #1a3650, #0f2940);"></div>
+          <div class="media-service">
+            <div class="service-avatar-large">
+              ${profilePic ? `<img src="${profilePic}">` : initials}
+            </div>
+          </div>
+        `;
+
+        detailsHtml = `
+          <div class="badge-row">
+            <span class="tag price" style="background:var(--navy-2); color:white;">Available Now</span>
+            <span class="tag" style="background:white; color:var(--navy);">${trade}</span>
+          </div>
+          <div class="title">${item.title}</div>
+          <div class="meta">
+            <span><i class="fas fa-map-pin"></i> ${item.location || 'Nigeria'}</span>
+            <span><i class="fas fa-user-tie"></i> ${item.seller?.name}</span>
+          </div>
+        `;
+      }
+
+      const isFav = typeof isFavorite === 'function' ? isFavorite(item.id) : false;
+
+      el.innerHTML = `
+        <!-- Media -->
+        ${mediaHtml}
+
+        <!-- Top Bar -->
+        <div class="top-bar">
+          <a href="/" class="brand"><i class="fas fa-bolt" style="color:#D4B87A;"></i> Zaure</a>
+          <div class="streak-badge" id="streakBadge" style="display:none;">
+            <i class="fas fa-fire"></i> <span id="streakCount">0</span> viewed
+          </div>
+        </div>
+
+        <!-- Giant Heart (Hidden by default) -->
+        <i class="fas fa-heart heart-overlay" id="heart-${index}"></i>
+
+        <!-- Bottom Info -->
+        <div class="bottom-info">
+          ${detailsHtml}
+        </div>
+
+        <!-- Right Actions -->
+        <div class="right-actions">
+          <button class="action-btn save-btn ${isFav ? 'saved' : ''}" onclick="toggleSave(event, ${index})">
+            <i class="${isFav ? 'fas' : 'far'} fa-heart"></i>
+            <span>Save</span>
+          </button>
+          
+          <button class="action-btn wa" onclick="contactSeller(event, ${index})">
+            <i class="fab fa-whatsapp"></i>
+            <span>Chat</span>
+          </button>
+
+          <button class="action-btn" onclick="viewDetails(event, ${index})">
+            <i class="fas fa-expand"></i>
+            <span>View</span>
+          </button>
+        </div>
+
+        <!-- Swipe Hint -->
+        ${index === 0 ? '<div class="swipe-hint" id="swipeHint"><i class="fas fa-chevron-up"></i><span>Swipe up</span></div>' : ''}
+      `;
+
+      // Double Tap to Like
+      let lastTap = 0;
+      const mediaArea = el.querySelector('.media-bg'); // Use BG as the tap target area
+      el.addEventListener('click', (e) => {
+        // Ignore clicks on buttons
+        if (e.target.closest('.action-btn') || e.target.closest('.top-bar')) return;
+
+        const now = Date.now();
+        if (now - lastTap < 300) {
+          // Double tap detected
+          triggerDoubleTapLike(el, index);
+          e.preventDefault();
+        }
+        lastTap = now;
+      });
+
+      return el;
+    }
+
+    // ============================================
+    // ACTIONS & LOGIC
+    // ============================================
+    function toggleSave(e, index) {
+      e.stopPropagation();
+      const item = feedItems[index];
+      const btn = e.currentTarget;
+      
+      if (typeof toggleFavorite === 'function') {
+        if (!getCurrentUser()) { openSignup(); return; }
+        const isNowFav = toggleFavorite(item.id);
+        if (isNowFav) {
+          btn.classList.add('saved');
+          btn.innerHTML = `<i class="fas fa-heart"></i><span>Saved</span>`;
+          showToast('Saved to favorites!');
+        } else {
+          btn.classList.remove('saved');
+          btn.innerHTML = `<i class="far fa-heart"></i><span>Save</span>`;
+        }
       }
     }
 
-    function contactCurrentSeller() {
-      const topCard = document.querySelector('.feed-card[data-index="0"]');
-      if (!topCard) return;
+    function triggerDoubleTapLike(el, index) {
+      const heart = el.querySelector('.heart-overlay');
+      const btn = el.querySelector('.save-btn');
+      const item = feedItems[index];
 
-      const id = topCard.dataset.id;
-      const type = topCard.dataset.type;
-      
-      // Find item data
-      const item = feedItems[currentIndex];
+      heart.classList.remove('animate');
+      void heart.offsetWidth; // Trigger reflow
+      heart.classList.add('animate');
+
+      if (typeof isFavorite === 'function' && !isFavorite(item.id)) {
+        toggleSave({ currentTarget: btn, stopPropagation: () => {} }, index);
+      }
+    }
+
+    function viewDetails(e, index) {
+      e.stopPropagation();
+      const item = feedItems[index];
+      if (item._type === 'product') {
+        window.location.href = `/detail.html?id=${item.id}`;
+      } else {
+        window.location.href = `/service.html?id=${item.id}`;
+      }
+    }
+
+    function contactSeller(e, index) {
+      e.stopPropagation();
+      const item = feedItems[index];
       const sellerName = item.seller?.name || 'Seller';
       const sellerPhone = item.seller?.phone || item.seller?.whatsapp || '09042339411';
       const cleanNumber = String(sellerPhone).replace(/[^0-9]/g, '');
       
-      const waMsg = `Hello, I saw your ${type} "${item.title}" on Zaure Discovery. Is it still available?`;
+      const waMsg = `Hello ${sellerName}, I saw your ${item._type} "${item.title}" on Zaure Discovery. Is it still available?`;
       const waLink = `https://wa.me/${cleanNumber}?text=${encodeURIComponent(waMsg)}`;
 
       // TRACKING: Send to sheet
       const user = typeof getCurrentUser === 'function' ? getCurrentUser() : null;
+      
       sendToSheet({
         type: 'whatsapp_click_discovery',
-        item_type: type,
-        item_id: id,
+        item_type: item._type,
+        item_id: item.id,
         item_title: item.title,
         seller_name: sellerName,
         seller_phone: cleanNumber,
@@ -635,34 +654,42 @@
         timestamp: new Date().toISOString()
       });
 
-      // Open WhatsApp
-      setTimeout(() => { window.open(waLink, '_blank'); }, 150);
+      showToast('Opening WhatsApp...');
+
+      // Open link
+      setTimeout(() => { window.open(waLink, '_blank'); }, 200);
     }
 
-    // Simple swipe gesture detection
-    let touchStartX = 0;
-    let touchEndX = 0;
+    // ============================================
+    // GAMIFICATION: SCROLL TRACKING
+    // ============================================
+    function setupScrollTracking() {
+      const options = {
+        root: document.getElementById('tiktokFeed'),
+        threshold: 0.6 // Item must be 60% visible
+      };
 
-    function addSwipeGestures(card) {
-      card.addEventListener('touchstart', e => {
-        touchStartX = e.changedTouches[0].screenX;
-      }, { passive: true });
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            // Hide swipe hint after first item
+            const hint = document.getElementById('swipeHint');
+            if (hint) hint.style.opacity = '0';
 
-      card.addEventListener('touchend', e => {
-        touchEndX = e.changedTouches[0].screenX;
-        handleSwipe();
-      }, { passive: true });
-    }
+            // Increment gamified counter
+            viewedCount++;
+            const streakBadge = document.querySelector('.streak-badge'); // Top bar only on first item
+            if (streakBadge) {
+              streakBadge.style.display = 'flex';
+              document.getElementById('streakCount').textContent = viewedCount;
+            }
+          }
+        });
+      }, options);
 
-    function handleSwipe() {
-      const threshold = 50; // Minimum swipe distance
-      if (touchEndX < touchStartX - threshold) {
-        // Swiped Left (Skip)
-        skipCard('left');
-      } else if (touchEndX > touchStartX + threshold) {
-        // Swiped Right (View Details)
-        viewCurrentItem();
-      }
+      document.querySelectorAll('.feed-item').forEach(item => {
+        observer.observe(item);
+      });
     }
   </script>
 </body>
