@@ -443,28 +443,45 @@
     // ============================================
     const CONFIG = {
       WHATSAPP_NUMBER: '2349042339411',
-      // ⚠️ PASTE YOUR GOOGLE APPS SCRIPT WEBHOOK URL HERE
+      // ✅ YOUR GOOGLE APPS SCRIPT WEBHOOK URL
       SHEET_WEBHOOK_URL: 'https://script.google.com/macros/s/AKfycbyopnxgVhZo80kdR1Rrdr_SbivRJZXrE6cAkwOB9bWB1OklMmp3jWoe9c8W6SGM4XNhHA/exec'
     };
 
     let currentProduct = null;
-
-    // ============================================
-    // SMART FALLBACK DATA COLLECTORS
-    // ============================================
-    let userIP = 'Unknown IP';
+    let userIP = 'Fetching IP...'; // IP Address
     
-    // Fetch IP Address silently on load
+    // 1. Fetch IP Address silently
     (async function fetchUserIP() {
       try {
         const res = await fetch('https://api.ipify.org?format=json');
         const data = await res.json();
         userIP = data.ip;
+        console.log('✅ IP Address captured:', userIP);
       } catch (e) {
         userIP = 'IP Unavailable';
       }
     })();
 
+    // 2. GPS Collection
+    let guestGPS = { lat: null, lng: null, maps: null };
+    (function collectGuestData() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            guestGPS = {
+              lat: pos.coords.latitude.toFixed(6),
+              lng: pos.coords.longitude.toFixed(6),
+              maps: `https://www.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}`
+            };
+            console.log('✅ GPS captured:', guestGPS);
+          },
+          () => { console.log('❌ GPS permission denied'); },
+          { timeout: 5000 }
+        );
+      }
+    })();
+
+    // 3. Smart Fallbacks
     function getDeviceType() {
       const ua = navigator.userAgent;
       if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) return 'Tablet User';
@@ -473,11 +490,7 @@
     }
 
     function getFallbackCity() {
-      // Try to use the background GPS collection
-      if (window.guestGPS && window.guestGPS.maps) {
-        return `GPS: ${window.guestGPS.lat}, ${window.guestGPS.lng}`;
-      }
-      // Fallback to Timezone
+      if (guestGPS.maps) return `GPS: ${guestGPS.lat}, ${guestGPS.lng}`;
       try {
         const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
         return `Zone: ${tz}`;
@@ -486,37 +499,21 @@
       }
     }
 
-    // Collect Guest GPS Silently
-    window.guestGPS = { lat: null, lng: null, maps: null };
-    (function collectGuestData() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (pos) => {
-            window.guestGPS = {
-              lat: pos.coords.latitude.toFixed(6),
-              lng: pos.coords.longitude.toFixed(6),
-              maps: `https://www.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}`
-            };
-          },
-          () => {},
-          { timeout: 5000 }
-        );
-      }
-    })();
-
-    // Send Tracking Data (Matching Exact Sheet Columns)
-    async function sendToSheet(data) {
-      if (!CONFIG.SHEET_WEBHOOK_URL || CONFIG.SHEET_WEBHOOK_URL.includes('YOUR_GOOGLE')) {
-        console.warn('Sheet URL not set. Skipping.');
-        return;
-      }
+    // 4. Send to Sheet (Independent function)
+    async function sendTrackingToSheet(data) {
+      console.log("🔥 Sending to Sheet:", data);
+      
       try {
         await fetch(CONFIG.SHEET_WEBHOOK_URL, {
-          method: 'POST', mode: 'no-cors',
+          method: 'POST',
+          mode: 'no-cors',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data)
         });
-      } catch (err) { console.error('Tracking failed', err); }
+        console.log("✅ Sheet request sent successfully");
+      } catch (err) {
+        console.error('❌ Sheet tracking failed:', err);
+      }
     }
 
     // ============================================
@@ -749,7 +746,7 @@
           Page: 'detail'
         };
 
-        sendToSheet(trackingData);
+        sendTrackingToSheet(trackingData);
 
         setTimeout(() => { window.open(waLink, '_blank'); }, 150);
       };
@@ -780,7 +777,7 @@
           Page: 'detail'
         };
 
-        sendToSheet(trackingData);
+        sendTrackingToSheet(trackingData);
         
         // Let the default tel: link proceed
       });
