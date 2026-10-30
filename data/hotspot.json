@@ -1,0 +1,74 @@
+[
+  {
+    "id": "jabi-lake-mall",
+    "name": "Jabi Lake Mall",
+    "category": "Entertainment",
+    "location": "Abuja, FCT",
+    "address": "Jabi Lake, Jabi, Abuja",
+    "description": "A beautiful waterfront mall with great restaurants, a cinema, and outdoor activities. Perfect for a weekend hangout.",
+    "image": "https://images.unsplash.com/photo-1519567770579-c2fc5436bd8b?w=600&h=400&fit=crop&q=80",
+    "rating": 4.7,
+    "coordinates": { "lat": 9.0712, "lng": 7.4168 },
+    "tags": ["mall", "waterfront", "cinema", "food"]
+  },
+  {
+    "id": "lekki-conservation-centre",
+    "name": "Lekki Conservation Centre",
+    "category": "Tourist",
+    "location": "Lagos",
+    "address": "Km 19, Lekki-Epe Expressway, Lagos",
+    "description": "Home to the famous longest canopy walkway in Africa. A must-visit for nature lovers and tourists.",
+    "image": "https://images.unsplash.com/photo-1590050193192-5e0c3a6a8a34?w=600&h=400&fit=crop&q=80",
+    "rating": 4.8,
+    "coordinates": { "lat": 6.4371, "lng": 3.5368 },
+    "tags": ["nature", "canopy", "walk", "tourism"]
+  },
+  {
+    "id": "co-lab-kaduna",
+    "name": "Co-Lab Kaduna",
+    "category": "Tech Hub",
+    "location": "Kaduna",
+    "address": "Yakubu Avenue, Kaduna",
+    "description": "A vibrant co-working space for tech entrepreneurs, freelancers, and digital nomads. Fast internet and great community.",
+    "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=400&fit=crop&q=80",
+    "rating": 4.9,
+    "coordinates": { "lat": 10.5222, "lng": 7.4383 },
+    "tags": ["coworking", "tech", "startup", "wifi"]
+  },
+  {
+    "id": "cafe-neo-lagos",
+    "name": "Cafe Neo",
+    "category": "Cafe",
+    "location": "Lagos",
+    "address": "Victoria Island, Lagos",
+    "description": "A cozy spot for premium coffee, pastries, and meetings. Known for its aesthetic interior and quiet atmosphere.",
+    "image": "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600&h=400&fit=crop&q=80",
+    "rating": 4.6,
+    "coordinates": { "lat": 6.4281, "lng": 3.4219 },
+    "tags": ["coffee", "quiet", "meetings", "pastries"]
+  },
+  {
+    "id": "kaduna-central-market",
+    "name": "Kaduna Central Market",
+    "category": "Market",
+    "location": "Kaduna",
+    "address": "Central Market, Kaduna",
+    "description": "The heartbeat of Kaduna commerce. Huge variety of goods, fabrics, and local spices. A true Nigerian market experience.",
+    "image": "https://images.unsplash.com/photo-1596642214476-1d1d3a3f2cbe?w=600&h=400&fit=crop&q=80",
+    "rating": 4.2,
+    "coordinates": { "lat": 10.5167, "lng": 7.4333 },
+    "tags": ["market", "shopping", "fabrics", "local"]
+  },
+  {
+    "id": "yaba-tech-zone",
+    "name": "Yaba Tech Zone",
+    "category": "Tech Hub",
+    "location": "Lagos",
+    "address": "Herbert Macaulay Way, Yaba, Lagos",
+    "description": "The Silicon Valley of Nigeria. Buzzing with startups, developers, and innovation hubs.",
+    "image": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop&q=80",
+    "rating": 4.5,
+    "coordinates": { "lat": 6.5158, "lng": 3.3711 },
+    "tags": ["tech", "startups", "developers", "innovation"]
+  }
+]
