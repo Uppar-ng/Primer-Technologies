@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>Hotspots – Discover Cool Locations | Zaure</title>
+  <meta name="description" content="Discover the coolest hotspots, cafes, tech hubs, and tourist locations near you on Zaure.">
+  <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    :root {
+      --navy: #0f2940;
+      --navy-2: #1a3650;
+      --gold: #D4B87A;
+      --border: #e5ecf3;
+      --text: #0f2940;
+      --text-secondary: #64748b;
+      --surface: #ffffff;
+      --surface-alt: #f8fbfe;
+    }
+
+    /* Hero Section */
+    .hotspot-hero {
+      position: relative;
+      background: linear-gradient(135deg, #0f2940 0%, #1a3650 100%);
+      border-radius: 28px;
+      padding: 60px 24px;
+      margin: 16px 0 24px;
+      text-align: center;
+      color: white;
+      overflow: hidden;
+    }
+    .hotspot-hero::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(212,184,122,0.15) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .hotspot-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: -80px;
+      width: 250px; height: 250px;
+      background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .hotspot-hero-content { position: relative; z-index: 2; max-width: 600px; margin: 0 auto; }
+    .hotspot-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+    .hotspot-hero h1 span { color: var(--gold); font-style: italic; }
+    .hotspot-hero p { font-size: 1rem; color: rgba(255,255,255,0.8); margin-bottom: 24px; line-height: 1.6; }
+
+    /* Search & Location Bar */
+    .hotspot-search-bar {
+      display: flex;
+      background: #fff;
+      border-radius: 60px;
+      padding: 6px 6px 6px 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      max-width: 540px;
+      margin: 0 auto;
+      gap: 8px;
+    }
+    .hotspot-search-bar i { color: var(--text-secondary); font-size: 0.95rem; margin-top: 12px; }
+    .hotspot-search-bar input {
+      flex: 1; border: none; outline: none; font-size: 0.95rem;
+      color: var(--text); font-family: inherit; padding: 10px 0; background: transparent;
+    }
+    .hotspot-search-bar .btn-loc {
+      background: var(--surface-alt); border: 1px solid var(--border);
+      color: var(--navy-2); padding: 10px 16px; border-radius: 40px;
+      font-size: 0.8rem; font-weight: 600; cursor: pointer;
+      display: flex; align-items: center; gap: 6px; transition: 0.2s;
+      white-space: nowrap;
+    }
+    .hotspot-search-bar .btn-loc:hover { background: var(--navy-2); color: #fff; border-color: var(--navy-2); }
+    .hotspot-search-bar .btn-search {
+      background: var(--navy-2); color: white; border: none;
+      padding: 10px 24px; border-radius: 40px; font-weight: 700;
+      font-size: 0.85rem; cursor: pointer; transition: 0.2s;
+    }
+    .hotspot-search-bar .btn-search:hover { background: var(--navy); }
+
+    /* Category Filters */
+    .hotspot-filters {
+      display: flex; gap: 8px; overflow-x: auto; padding: 16px 0 24px;
+      scrollbar-width: none; justify-content: center; flex-wrap: wrap;
+    }
+    .hotspot-filters::-webkit-scrollbar { display: none; }
+    .h-chip {
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 8px 16px; border-radius: 30px; font-size: 0.8rem;
+      font-weight: 600; color: var(--text-secondary); cursor: pointer;
+      white-space: nowrap; transition: 0.2s;
+    }
+    .h-chip i { margin-right: 6px; }
+    .h-chip:hover { border-color: var(--navy-2); color: var(--navy-2); }
+    .h-chip.active { background: var(--navy-2); color: white; border-color: var(--navy-2); }
+    .h-chip.active i { color: var(--gold); }
+
+    /* Grid */
+    .hotspot-grid {
+      display: grid; grid-template-columns: 1fr; gap: 20px; margin-bottom: 40px;
+    }
+    @media (min-width: 640px) { .hotspot-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .hotspot-grid { grid-template-columns: repeat(3, 1fr); } }
+
+    /* Cards */
+    .hotspot-card {
+      background: var(--surface); border-radius: 20px; border: 1px solid var(--border);
+      overflow: hidden; transition: transform 0.3s, box-shadow 0.3s;
+      position: relative; display: flex; flex-direction: column;
+    }
+    .hotspot-card:hover { transform: translateY(-6px); box-shadow: 0 16px 32px rgba(15,41,64,0.1); }
+    .hotspot-img { height: 200px; position: relative; overflow: hidden; background: var(--surface-alt); }
+    .hotspot-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+    .hotspot-card:hover .hotspot-img img { transform: scale(1.05); }
+    .hotspot-img .cat-badge {
+      position: absolute; top: 12px; left: 12px; background: rgba(255,255,255,0.95);
+      color: var(--navy-2); padding: 4px 12px; border-radius: 20px;
+      font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .hotspot-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+    .hotspot-name { font-size: 1.15rem; font-weight: 800; color: var(--text); margin-bottom: 4px; }
+    .hotspot-loc { font-size: 0.8rem; color: var(--text-secondary); display: flex; align-items: center; gap: 6px; margin-bottom: 12px; }
+    .hotspot-loc i { color: var(--navy-2); }
+    
+    .hotspot-desc {
+      font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;
+      margin-bottom: 16px; flex: 1;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    
+    .hotspot-footer {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 14px; border-top: 1px solid var(--border);
+    }
+    .hotspot-rating { font-size: 0.85rem; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 4px; }
+    .hotspot-rating i { color: #f5b342; }
+    
+    .btn-map {
+      background: var(--surface-alt); border: 1px solid var(--border);
+      color: var(--navy-2); padding: 8px 14px; border-radius: 40px;
+      font-size: 0.75rem; font-weight: 700; text-decoration: none;
+      display: flex; align-items: center; gap: 6px; transition: 0.2s;
+    }
+    .btn-map:hover { background: var(--navy-2); color: white; border-color: var(--navy-2); }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center; padding: 60px 20px; background: var(--surface);
+      border-radius: 20px; border: 1px solid var(--border); grid-column: 1/-1;
+    }
+    .empty-state i { font-size: 2.5rem; color: var(--gold); margin-bottom: 16px; display: block; }
+    .empty-state h3 { font-size: 1.2rem; color: var(--text); margin-bottom: 8px; }
+    .empty-state p { color: var(--text-secondary); font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="/" class="logo-wrapper">
+        <div class="logo-text">
+          <span class="brand">Zaure</span>
+          <span class="tagline">Buy with Confidence</span>
+        </div>
+      </a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/category.html?slug=all">Browse</a>
+        <a href="/hotspot.html" class="active" style="color:var(--navy-2); font-weight:700;">Hotspots 🔥</a>
+        <a href="/about.html">About</a>
+      </div>
+      <div class="nav-actions">
+        <button class="icon-btn" id="themeToggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
+        <a href="/favorites.html" class="icon-btn" style="position:relative;text-decoration:none;">
+          <i class="fas fa-heart"></i>
+          <span id="favBadge">0</span>
+        </a>
+        <div id="headerUserArea">
+          <div class="avatar" id="userAvatar" onclick="openSignup()">ZA</div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <!-- HERO -->
+    <section class="hotspot-hero">
+      <div class="hotspot-hero-content">
+        <h1>Discover Cool <span>Hotspots</span></h1>
+        <p>Find the best cafes, tech hubs, tourist attractions, and hidden gems around you.</p>
+        
+        <div class="hotspot-search-bar">
+          <i class="fas fa-search"></i>
+          <input type="text" id="hotspotSearch" placeholder="Search city, state, or place...">
+          <button class="btn-loc" id="btnLocate" title="Find near me"><i class="fas fa-location-arrow"></i> Near Me</button>
+          <button class="btn-search" id="btnSearch">Search</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FILTERS -->
+    <div class="hotspot-filters" id="hotspotFilters">
+      <div class="h-chip active" data-filter="all"><i class="fas fa-th-list"></i> All</div>
+      <div class="h-chip" data-filter="Tech Hub"><i class="fas fa-laptop-code"></i> Tech Hubs</div>
+      <div class="h-chip" data-filter="Cafe"><i class="fas fa-coffee"></i> Cafes</div>
+      <div class="h-chip" data-filter="Tourist"><i class="fas fa-camera"></i> Tourist</div>
+      <div class="h-chip" data-filter="Entertainment"><i class="fas fa-film"></i> Fun</div>
+      <div class="h-chip" data-filter="Market"><i class="fas fa-store"></i> Markets</div>
+    </div>
+
+    <!-- GRID -->
+    <div class="hotspot-grid" id="hotspotGrid">
+      <div class="empty-state"><i class="fas fa-spinner fa-spin"></i><p>Loading hotspots...</p></div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col brand">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <span style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:white;">Zaure</span>
+            <span style="font-size:0.7rem;color:#94A3B8;">Buy with Confidence</span>
+          </div>
+          <p>Nigeria's most trusted online marketplace. Buy, sell, or trade locally. No commission, no middlemen.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Browse</h4>
+          <a href="/category.html?slug=all">All Items</a>
+          <a href="/hotspot.html">Hotspots</a>
+          <a href="/category.html?slug=services">Services</a>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <a href="/help.html">Help Center</a>
+          <a href="/contact.html">Contact Us</a>
+        </div>
+        <div class="footer-bottom">
+          <span>&copy; 2026 <strong>Zaure Technologies</strong>. All rights reserved.</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <a href="/" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
+    <a href="/hotspot.html" class="nav-item active"><i class="fas fa-fire"></i><span>Hotspots</span></a>
+    <button class="post-btn" id="fabPostAd"><i class="fas fa-plus"></i></button>
+    <a href="/favorites.html" class="nav-item"><i class="fas fa-heart"></i><span>Favorites</span></a>
+    <a href="/profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
+  </div>
+
+  <script src="/js/main.js"></script>
+  <script>
+    let allHotspots = [];
+    let currentFilter = 'all';
+    let searchQuery = '';
+    let userLocationState = null;
+
+    document.addEventListener('DOMContentLoaded', async function() {
+      await loadUser();
+      initTheme();
+      updateFavoriteBadge();
+
+      // Load Hotspots
+      try {
+        const res = await fetch('/data/hotspot.json');
+        if (!res.ok) throw new Error('Hotspots not found');
+        allHotspots = await res.json();
+        renderHotspots(allHotspots);
+      } catch (err) {
+        console.error(err);
+        document.getElementById('hotspotGrid').innerHTML = `
+          <div class="empty-state">
+            <i class="fas fa-exclamation-triangle" style="color:#e74c3c;"></i>
+            <h3>Could not load hotspots</h3>
+            <p>Please check your connection and try again.</p>
+          </div>`;
+      }
+
+      // Search Input
+      document.getElementById('hotspotSearch').addEventListener('input', function() {
+        searchQuery = this.value.toLowerCase();
+        filterAndRender();
+      });
+
+      // Filters
+      document.querySelectorAll('.h-chip').forEach(chip => {
+        chip.addEventListener('click', function() {
+          document.querySelectorAll('.h-chip').forEach(c => c.classList.remove('active'));
+          this.classList.add('active');
+          currentFilter = this.dataset.filter;
+          filterAndRender();
+        });
+      });
+
+      // Near Me Button
+      document.getElementById('btnLocate').addEventListener('click', function() {
+        if (!navigator.geolocation) {
+          return alert('Geolocation is not supported by your browser');
+        }
+        this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Locating...';
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            // In a real app, you'd reverse-geocode this. 
+            // For this demo, we'll use a heuristic based on latitude to guess the state.
+            const lat = pos.coords.latitude;
+            let detectedCity = 'Lagos'; // Default
+            if (lat > 9.0) detectedCity = 'Kaduna';
+            else if (lat > 8.5 && lat < 9.5) detectedCity = 'Abuja';
+            
+            searchQuery = detectedCity.toLowerCase();
+            document.getElementById('hotspotSearch').value = detectedCity;
+            this.innerHTML = '<i class="fas fa-check"></i> Located';
+            filterAndRender();
+            setTimeout(() => { this.innerHTML = '<i class="fas fa-location-arrow"></i> Near Me'; }, 2000);
+          },
+          () => {
+            alert('Unable to get your location. Please allow location access.');
+            this.innerHTML = '<i class="fas fa-location-arrow"></i> Near Me';
+          },
+          { timeout: 5000 }
+        );
+      });
+
+      // Search Button
+      document.getElementById('btnSearch').addEventListener('click', function() {
+        searchQuery = document.getElementById('hotspotSearch').value.toLowerCase();
+        filterAndRender();
+      });
+    });
+
+    function filterAndRender() {
+      let filtered = [...allHotspots];
+
+      if (currentFilter !== 'all') {
+        filtered = filtered.filter(h => h.category === currentFilter);
+      }
+
+      if (searchQuery) {
+        filtered = filtered.filter(h => 
+          h.name.toLowerCase().includes(searchQuery) ||
+          h.location.toLowerCase().includes(searchQuery) ||
+          h.tags.some(t => t.toLowerCase().includes(searchQuery))
+        );
+      }
+
+      renderHotspots(filtered);
+    }
+
+    function renderHotspots(hotspots) {
+      const grid = document.getElementById('hotspotGrid');
+      
+      if (hotspots.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-state">
+            <i class="fas fa-map-marker-slash"></i>
+            <h3>No hotspots found</h3>
+            <p>Try a different search term or category.</p>
+          </div>`;
+        return;
+      }
+
+      grid.innerHTML = hotspots.map(h => {
+        const mapLink = `https://www.google.com/maps/search/?api=1&query=${h.coordinates.lat},${h.coordinates.lng}`;
+        return `
+          <div class="hotspot-card">
+            <div class="hotspot-img">
+              <span class="cat-badge">${h.category}</span>
+              <img src="${h.image}" alt="${h.name}" loading="lazy" onerror="this.src='https://placehold.co/600x400?text=Zaure+Hotspot'">
+            </div>
+            <div class="hotspot-body">
+              <div class="hotspot-name">${h.name}</div>
+              <div class="hotspot-loc"><i class="fas fa-map-pin"></i> ${h.location}</div>
+              <div class="hotspot-desc">${h.description}</div>
+              <div class="hotspot-footer">
+                <div class="hotspot-rating"><i class="fas fa-star"></i> ${h.rating}</div>
+                <a href="${mapLink}" target="_blank" rel="noopener" class="btn-map">
+                  <i class="fas fa-map-marked-alt"></i> View on Map
+                </a>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+  </script>
+</body>
+</html>
