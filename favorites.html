@@ -27,6 +27,25 @@
     }
     .favorites-header .page-actions .btn-action:hover { border-color: var(--text); background: var(--surface-alt); }
     .favorites-header .page-actions .btn-action.danger:hover { border-color: #e74c3c; color: #e74c3c; }
+
+    /* Type tabs (All / Products / Services / Hotspots) */
+    .type-tabs {
+      display: flex; gap: 6px; overflow-x: auto; padding: 4px 0;
+      margin-bottom: 16px; scrollbar-width: none;
+    }
+    .type-tabs::-webkit-scrollbar { display: none; }
+    .type-tab {
+      flex-shrink: 0; padding: 8px 18px; border-radius: 60px;
+      border: 1px solid var(--border); background: var(--surface);
+      color: var(--text-secondary); font-size: 0.82rem; font-weight: 600;
+      cursor: pointer; transition: 0.2s; font-family: inherit;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .type-tab:hover { border-color: var(--text); color: var(--text); }
+    .type-tab.active { background: #1a3650; border-color: #1a3650; color: white; }
+    [data-theme="dark"] .type-tab.active { background: #2A3550; border-color: #2A3550; }
+    .type-tab .count { font-size: 0.7rem; opacity: 0.75; }
+
     .quick-stats {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
       gap: 12px; margin-bottom: 20px;
@@ -37,6 +56,7 @@
     }
     .quick-stats .stat-box .stat-number { font-size: 1.3rem; font-weight: 700; color: var(--text); }
     .quick-stats .stat-box .stat-label { font-size: 0.7rem; color: var(--text-secondary); margin-top: 2px; }
+
     .filter-bar {
       background: var(--surface); border-radius: 16px; padding: 12px 16px;
       border: 1px solid var(--border); margin-bottom: 20px;
@@ -44,7 +64,7 @@
     }
     .filter-bar .filter-group { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
     .filter-bar .filter-group label { font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); }
-    .filter-bar .filter-group .custom-select { min-width: 150px; }
+    .filter-bar .filter-group .custom-select { position: relative; min-width: 150px; }
     .filter-bar .filter-group .custom-select-trigger {
       padding: 6px 12px; border: 1px solid var(--border); border-radius: 8px;
       font-size: 0.85rem; background: var(--input-bg); color: var(--text);
@@ -53,7 +73,7 @@
     .filter-bar .filter-group .custom-select-dropdown {
       position: absolute; top: calc(100% + 4px); left: 0; right: 0;
       background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
-      box-shadow: var(--shadow-hover); z-index: 10; max-height: 200px; overflow-y: auto;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12); z-index: 20; max-height: 200px; overflow-y: auto;
       display: none;
     }
     .filter-bar .filter-group .custom-select.active .custom-select-dropdown { display: block; }
@@ -65,28 +85,42 @@
     .filter-bar .filter-group .custom-select-options li:hover { background: var(--surface-alt); }
     .filter-bar .filter-results { font-size: 0.85rem; color: var(--text-secondary); font-weight: 500; }
     .filter-bar .filter-results strong { color: var(--text); }
-    .view-toggle {
-      display: flex; gap: 4px; background: var(--surface-alt); border-radius: 8px; padding: 4px;
-    }
+
+    .view-toggle { display: flex; gap: 4px; background: var(--surface-alt); border-radius: 8px; padding: 4px; }
     .view-toggle button {
       background: transparent; border: none; padding: 6px 12px; border-radius: 6px;
       cursor: pointer; font-size: 0.85rem; color: var(--text-secondary); transition: 0.2s;
       display: flex; align-items: center; gap: 4px;
     }
-    .view-toggle button.active { background: var(--surface); color: var(--text); box-shadow: var(--shadow); }
-    .view-toggle button:hover { color: var(--text); }
+    .view-toggle button.active { background: var(--surface); color: var(--text); box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+
     .grid-view .grid-2col-listings { grid-template-columns: 1fr 1fr; }
     .list-view .grid-2col-listings { grid-template-columns: 1fr; }
     .list-view .listing-card { display: flex; flex-direction: row; }
     .list-view .listing-card .listing-img { width: 200px; height: 150px; flex-shrink: 0; }
     .list-view .listing-card .listing-body { flex: 1; display: flex; flex-direction: column; justify-content: center; }
-    .list-view .listing-card .listing-body .title { white-space: normal; }
     @media (max-width: 640px) {
       .list-view .listing-card { flex-direction: column; }
       .list-view .listing-card .listing-img { width: 100%; height: 120px; }
       .filter-bar { flex-direction: column; align-items: stretch; }
       .view-toggle button span { display: none; }
     }
+
+    /* Type badge over the card image */
+    .type-badge {
+      position: absolute; top: 8px; left: 8px;
+      padding: 4px 10px; border-radius: 20px;
+      font-size: 0.62rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.8px; z-index: 3;
+      display: inline-flex; align-items: center; gap: 4px;
+      backdrop-filter: blur(6px);
+    }
+    .type-badge.product { background: rgba(26,54,80,0.92); color: white; }
+    .type-badge.service { background: rgba(180,148,80,0.95); color: white; }
+    .type-badge.hotspot { background: rgba(220,38,38,0.9); color: white; }
+
+    .listing-card { position: relative; }
+
     .listing-card .remove-fav {
       position: absolute; top: 8px; right: 8px; background: rgba(255,255,255,0.9);
       border: 1px solid var(--border); border-radius: 50%; width: 32px; height: 32px;
@@ -95,11 +129,12 @@
     }
     [data-theme="dark"] .listing-card .remove-fav { background: rgba(19,28,49,0.9); }
     .listing-card .remove-fav:hover { background: #e74c3c; color: white; border-color: #e74c3c; transform: scale(1.1); }
+
     .empty-state {
       text-align: center; padding: 60px 20px; background: var(--surface);
-      border-radius: 20px; border: 1px solid var(--border);
+      border-radius: 20px; border: 1px solid var(--border); grid-column: 1/-1;
     }
-    .empty-state i { font-size: 4rem; color: var(--text-secondary); margin-bottom: 16px; }
+    .empty-state i { font-size: 4rem; color: var(--text-secondary); margin-bottom: 16px; opacity: 0.5; }
     .empty-state h3 { font-size: 1.3rem; color: var(--text); margin-bottom: 8px; }
     .empty-state p { color: var(--text-secondary); font-size: 0.95rem; max-width: 400px; margin: 0 auto; }
     .empty-state .btn-primary { width: auto; padding: 10px 28px; margin-top: 16px; display: inline-flex; }
@@ -109,8 +144,10 @@
       font-size: 0.85rem; cursor: pointer; color: var(--text); transition: 0.2s; text-decoration: none;
     }
     .empty-state .suggestions .suggestion-chip:hover { background: var(--text); color: var(--surface); }
+
     .pagination {
       display: flex; justify-content: center; gap: 6px; margin-top: 30px; padding: 20px 0;
+      flex-wrap: wrap;
     }
     .pagination button {
       padding: 8px 14px; border: 1px solid var(--border); border-radius: 8px;
@@ -122,15 +159,16 @@
     [data-theme="dark"] .pagination button.active { background: #2A3550; border-color: #2A3550; }
     .pagination button:disabled { opacity: 0.4; cursor: not-allowed; }
     .pagination .ellipsis { display: flex; align-items: center; padding: 0 4px; color: var(--text-secondary); }
+
     .toast {
       position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%);
       background: #1a3650; color: white; padding: 12px 24px; border-radius: 12px;
       font-size: 0.9rem; box-shadow: 0 8px 24px rgba(0,0,0,0.15); z-index: 999;
       opacity: 0; transition: opacity 0.3s ease; pointer-events: none;
+      display: inline-flex; align-items: center; gap: 8px;
     }
     [data-theme="dark"] .toast { background: #2A3550; }
     .toast.show { opacity: 1; pointer-events: auto; }
-    .toast i { margin-right: 8px; }
   </style>
 </head>
 <body>
@@ -149,8 +187,8 @@
       <div class="nav-links">
         <a href="/">Home</a>
         <a href="/category.html?slug=all">Browse</a>
+        <a href="/hotspots.html">Hotspots</a>
         <a href="/about.html">About</a>
-        <a href="/contact.html">Contact</a>
       </div>
       <div class="nav-actions">
         <button class="icon-btn" id="themeToggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
@@ -179,8 +217,8 @@
         <h1>My Favorites</h1>
       </div>
       <div class="page-meta">
-        <span><i class="fas fa-box"></i> <span id="favoriteCount">0</span> items saved</span>
-        <span><i class="fas fa-clock"></i> Last updated: <span id="lastUpdated">Today</span></span>
+        <span><i class="fas fa-bookmark"></i> <span id="favoriteCount">0</span> items saved</span>
+        <span><i class="fas fa-clock"></i> Updated: <span id="lastUpdated">Just now</span></span>
         <span><i class="fas fa-tag"></i> <span id="categoryCount">0</span> categories</span>
       </div>
       <div class="page-actions">
@@ -190,16 +228,31 @@
     </div>
 
     <div class="quick-stats" id="quickStats">
-      <div class="stat-box"><div class="stat-number" id="statTotal">0</div><div class="stat-label">Total Items</div></div>
-      <div class="stat-box"><div class="stat-number" id="statFeatured">0</div><div class="stat-label">Featured</div></div>
-      <div class="stat-box"><div class="stat-number" id="statBoosted">0</div><div class="stat-label">Boosted</div></div>
-      <div class="stat-box"><div class="stat-number" id="statValue">₦0</div><div class="stat-label">Total Value</div></div>
+      <div class="stat-box"><div class="stat-number" id="statTotal">0</div><div class="stat-label">Total Saved</div></div>
+      <div class="stat-box"><div class="stat-number" id="statProducts">0</div><div class="stat-label">Products</div></div>
+      <div class="stat-box"><div class="stat-number" id="statServices">0</div><div class="stat-label">Services</div></div>
+      <div class="stat-box"><div class="stat-number" id="statHotspots">0</div><div class="stat-label">Hotspots</div></div>
+    </div>
+
+    <!-- Type tabs -->
+    <div class="type-tabs" id="typeTabs" role="tablist" aria-label="Filter by type">
+      <button class="type-tab active" data-type="all" role="tab">
+        <i class="fas fa-border-all"></i> All <span class="count" id="tabCountAll">0</span>
+      </button>
+      <button class="type-tab" data-type="product" role="tab">
+        <i class="fas fa-box"></i> Products <span class="count" id="tabCountProducts">0</span>
+      </button>
+      <button class="type-tab" data-type="service" role="tab">
+        <i class="fas fa-user-tie"></i> Services <span class="count" id="tabCountServices">0</span>
+      </button>
+      <button class="type-tab" data-type="hotspot" role="tab">
+        <i class="fas fa-fire"></i> Hotspots <span class="count" id="tabCountHotspots">0</span>
+      </button>
     </div>
 
     <div class="filter-bar">
       <div class="filter-group">
         <label><i class="fas fa-sliders-h"></i> Filter:</label>
-        <!-- Custom sort dropdown -->
         <div class="custom-select" id="sortSelect">
           <div class="custom-select-trigger" id="sortTrigger">
             <span>Newest First</span>
@@ -211,10 +264,10 @@
               <li data-value="oldest">Oldest First</li>
               <li data-value="price-low">Price: Low to High</li>
               <li data-value="price-high">Price: High to Low</li>
+              <li data-value="name">Name (A–Z)</li>
             </ul>
           </div>
         </div>
-        <!-- Custom category dropdown -->
         <div class="custom-select" id="categorySelect">
           <div class="custom-select-trigger" id="categoryTrigger">
             <span>All Categories</span>
@@ -244,7 +297,7 @@
 
     <div class="pagination" id="pagination">
       <button id="prevPage" disabled><i class="fas fa-chevron-left"></i></button>
-      <div id="pageNumbers"></div>
+      <div id="pageNumbers" style="display:flex;gap:6px;"></div>
       <button id="nextPage"><i class="fas fa-chevron-right"></i></button>
     </div>
 
@@ -270,18 +323,15 @@
         <div class="footer-col">
           <h4>Browse</h4>
           <a href="/category.html?slug=all">All Items</a>
-          <a href="/category.html?slug=vehicles">Vehicles</a>
-          <a href="/category.html?slug=electronics">Electronics</a>
-          <a href="/category.html?slug=furniture">Furniture</a>
+          <a href="/hotspots.html">Hotspots</a>
+          <a href="/services.html">Find a Pro</a>
           <a href="/category.html?slug=fashion">Fashion</a>
-          <a href="/category.html?slug=real-estate">Real Estate</a>
         </div>
         <div class="footer-col">
           <h4>Support</h4>
           <a href="/help.html">Help Center</a>
           <a href="/safety.html">Safety Tips</a>
           <a href="/contact.html">Contact Us</a>
-          <a href="/support.html">Support</a>
         </div>
         <div class="footer-col">
           <h4>Company</h4>
@@ -290,24 +340,9 @@
           <a href="/privacy.html">Privacy Policy</a>
           <a href="/terms.html">Terms of Service</a>
         </div>
-        <div class="trust-badges">
-          <div class="badges-row">
-            <span class="badge-item"><i class="fas fa-shield-alt"></i> Verified Users</span>
-            <span class="badge-item"><i class="fas fa-handshake"></i> No Commission</span>
-            <span class="badge-item"><i class="fas fa-user-check"></i> Identity Verified</span>
-            <span class="badge-item"><i class="fas fa-lock"></i> Secure Platform</span>
-            <span class="badge-item"><i class="fas fa-clock"></i> 24/7 Support</span>
-            <span class="badge-item"><i class="fas fa-star"></i> Trusted by Thousands</span>
-            <span class="badge-item"><i class="fas fa-phone"></i> Direct Contact</span>
-            <span class="badge-item"><i class="fas fa-credit-card"></i> Secure Payments</span>
-          </div>
-        </div>
         <div class="footer-bottom">
           <span>&copy; 2026 <strong>Zaure Technologies</strong>. All rights reserved.</span>
           <span class="footer-lang"><i class="fas fa-globe"></i> Nigeria · English</span>
-        </div>
-        <div style="grid-column: 1/-1; text-align: center; margin-top: 8px; font-size: 0.8rem; color: #94A3B8;">
-          For info or to report an issue, contact us on WhatsApp: <a href="https://wa.me/2349042339411" target="_blank" style="color: #D4B87A; text-decoration: none; font-weight: 600;">+2349042339411</a>
         </div>
       </div>
     </div>
@@ -357,235 +392,540 @@
 
   <script src="/js/main.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', async function() {
-      initStateDropdown();
+  /* ============================================================
+     FAVORITES PAGE — Universal Hub (Products + Services + Hotspots)
+     ============================================================ */
+  (function () {
+    'use strict';
 
-      let favoriteIds = [];
-      let favoriteProducts = [];
-      let filteredFavorites = [];
-      let currentPage = 1;
-      const itemsPerPage = 12;
-      let currentSort = 'newest';
-      let currentCategory = 'all';
+    const PRODUCT_FAV_KEY = 'zaure_favorites';
+    const HOTSPOT_FAV_KEY = 'zaure_hotspot_favorites';
 
-      const grid = document.getElementById('favoritesGrid');
-      const container = document.getElementById('favoritesContainer');
-      const prevPageBtn = document.getElementById('prevPage');
-      const nextPageBtn = document.getElementById('nextPage');
-      const pageNumbers = document.getElementById('pageNumbers');
-      const showingCount = document.getElementById('showingCount');
-      const favoriteCount = document.getElementById('favoriteCount');
-      const statTotal = document.getElementById('statTotal');
-      const statFeatured = document.getElementById('statFeatured');
-      const statBoosted = document.getElementById('statBoosted');
-      const statValue = document.getElementById('statValue');
-      const gridViewBtn = document.getElementById('gridViewBtn');
-      const listViewBtn = document.getElementById('listViewBtn');
-      const toast = document.getElementById('toast');
-      const toastMessage = document.getElementById('toastMessage');
+    const state = {
+      allItems: [],          // unified: { ...data, _type: 'product'|'service'|'hotspot' }
+      filtered: [],
+      typeFilter: 'all',     // all | product | service | hotspot
+      categoryFilter: 'all',
+      sort: 'newest',
+      page: 1,
+      perPage: 12
+    };
 
-      let toastTimeout;
+    const els = {
+      grid: document.getElementById('favoritesGrid'),
+      container: document.getElementById('favoritesContainer'),
+      prevPage: document.getElementById('prevPage'),
+      nextPage: document.getElementById('nextPage'),
+      pageNumbers: document.getElementById('pageNumbers'),
+      showingCount: document.getElementById('showingCount'),
+      favoriteCount: document.getElementById('favoriteCount'),
+      categoryCount: document.getElementById('categoryCount'),
+      lastUpdated: document.getElementById('lastUpdated'),
+      statTotal: document.getElementById('statTotal'),
+      statProducts: document.getElementById('statProducts'),
+      statServices: document.getElementById('statServices'),
+      statHotspots: document.getElementById('statHotspots'),
+      tabCountAll: document.getElementById('tabCountAll'),
+      tabCountProducts: document.getElementById('tabCountProducts'),
+      tabCountServices: document.getElementById('tabCountServices'),
+      tabCountHotspots: document.getElementById('tabCountHotspots'),
+      gridViewBtn: document.getElementById('gridViewBtn'),
+      listViewBtn: document.getElementById('listViewBtn'),
+      toast: document.getElementById('toast'),
+      toastMessage: document.getElementById('toastMessage')
+    };
 
-      function showToast(message, type = 'success') {
-        toastMessage.textContent = message;
-        toast.className = 'toast show';
-        toast.style.background = type === 'success' ? '#1a3650' : '#e74c3c';
-        clearTimeout(toastTimeout);
-        toastTimeout = setTimeout(() => { toast.classList.remove('show'); }, 3000);
+    /* ---------- Helpers ---------- */
+    let toastTimer;
+    function showToast(msg, type) {
+      els.toastMessage.textContent = msg;
+      els.toast.className = 'toast show';
+      els.toast.style.background = type === 'error' ? '#e74c3c' : '#1a3650';
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => els.toast.classList.remove('show'), 2800);
+    }
+
+    function escapeHtml(s) {
+      if (s == null) return '';
+      return String(s)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+    }
+
+    function getIds(key) {
+      try { return JSON.parse(localStorage.getItem(key) || '[]'); }
+      catch (e) { return []; }
+    }
+    function saveIds(key, arr) { localStorage.setItem(key, JSON.stringify(arr)); }
+
+    function getNumberPrice(p) {
+      if (typeof p.price === 'number') return p.price;
+      if (typeof p.price === 'string') {
+        const n = parseFloat(p.price.replace(/[^0-9.]/g, ''));
+        return isNaN(n) ? 0 : n;
+      }
+      return 0;
+    }
+
+    function formatPrice(n) {
+      if (!n || n <= 0) return '';
+      return n >= 1e6 ? `₦${(n / 1e6).toFixed(1)}M` : `₦${n.toLocaleString()}`;
+    }
+
+    function getFirstImage(p) {
+      if (Array.isArray(p.images) && p.images.length) return p.images[0];
+      if (p.image) return p.image;
+      return null;
+    }
+
+    /* ---------- Loading unified favorite items ---------- */
+    async function loadAllFavoriteItems() {
+      // IDs
+      const savedProductServiceIds = getIds(PRODUCT_FAV_KEY);
+      const savedHotspotIds = getIds(HOTSPOT_FAV_KEY);
+
+      if (savedProductServiceIds.length === 0 && savedHotspotIds.length === 0) {
+        return [];
       }
 
-      function loadFavorites() {
-        const saved = localStorage.getItem('zaure_favorites');
-        if (saved) { try { favoriteIds = JSON.parse(saved); } catch (e) { favoriteIds = []; } }
-        else { favoriteIds = []; }
-        return favoriteIds;
-      }
+      // Data sources — with graceful fallbacks
+      let products = [], services = [], hotspots = [];
+      try { products = (typeof loadProducts === 'function') ? await loadProducts() : []; } catch (e) {}
+      try { services = (typeof loadServices === 'function') ? await loadServices() : []; } catch (e) {}
+      try {
+        const res = await fetch('/data/hotspot.json', { cache: 'no-store' });
+        if (res.ok) hotspots = await res.json();
+      } catch (e) { hotspots = []; }
 
-      function getFavoriteProducts() {
-        const allProducts = getProductsSync();
-        favoriteProducts = allProducts.filter(p => favoriteIds.includes(p.id));
-        return favoriteProducts;
-      }
+      const items = [];
 
-      // Custom dropdown helpers
-      function initCustomDropdown(containerId, triggerId, optionsListId) {
-        const container = document.getElementById(containerId);
-        if (!container) return;
-        const trigger = document.getElementById(triggerId);
-        const optionsList = document.getElementById(optionsListId);
-
-        trigger.addEventListener('click', function(e) {
-          e.stopPropagation();
-          container.classList.toggle('active');
-        });
-
-        optionsList.querySelectorAll('li').forEach(li => {
-          li.addEventListener('click', function() {
-            trigger.querySelector('span').textContent = this.textContent;
-            container.classList.remove('active');
-            if (containerId === 'sortSelect') {
-              currentSort = this.dataset.value;
-            } else if (containerId === 'categorySelect') {
-              currentCategory = this.dataset.value;
-            }
-            applyFilters();
+      // Match each saved ID to either a product or a service
+      savedProductServiceIds.forEach(id => {
+        const prod = products.find(p => String(p.id) === String(id));
+        if (prod) {
+          items.push({ ...prod, _type: 'product' });
+          return;
+        }
+        const svc = services.find(s => String(s.id) === String(id));
+        if (svc) {
+          const normalized = (typeof normalizeService === 'function')
+            ? normalizeService(svc)
+            : svc;
+          items.push({
+            id: svc.id,
+            _type: 'service',
+            _raw: svc,
+            title: normalized.title || svc.title || svc.name || 'Service',
+            category: svc.category || svc.trade || 'Service',
+            location: svc.location || svc.state || svc.city || 'Nigeria',
+            date: svc.date || svc.availability || '',
+            price: getNumberPrice(svc),
+            images: Array.isArray(svc.images) ? svc.images : (svc.image ? [svc.image] : []),
+            seller: svc.seller || { name: svc.provider || svc.providerName || 'Professional' },
+            rating: svc.rating
           });
-        });
-
-        document.addEventListener('click', function(e) {
-          if (!container.contains(e.target)) container.classList.remove('active');
-        });
-      }
-
-      initCustomDropdown('sortSelect', 'sortTrigger', 'sortOptions');
-
-      // Load categories for filter dropdown
-      const categories = await loadCategories();
-      const categoryOptionsList = document.getElementById('categoryOptions');
-      categoryOptionsList.innerHTML = '<li data-value="all">All Categories</li>' + categories.map(c => `<li data-value="${c.slug}">${c.name}</li>`).join('');
-      initCustomDropdown('categorySelect', 'categoryTrigger', 'categoryOptions');
-
-      function updateStats(products) {
-        const total = products.length;
-        const featured = products.filter(p => p.featured).length;
-        const boosted = products.filter(p => p.boosted).length;
-        const totalValue = products.reduce((sum, p) => sum + p.price, 0);
-        statTotal.textContent = total;
-        statFeatured.textContent = featured;
-        statBoosted.textContent = boosted;
-        statValue.textContent = totalValue >= 1e6 ? `₦${(totalValue/1e6).toFixed(1)}M` : `₦${totalValue.toLocaleString()}`;
-        favoriteCount.textContent = total;
-        const uniqueCategories = new Set(products.map(p => p.category));
-        document.getElementById('categoryCount').textContent = uniqueCategories.size;
-        document.getElementById('lastUpdated').textContent = new Date().toLocaleString();
-      }
-
-      function applyFilters() {
-        let filtered = [...favoriteProducts];
-        if (currentCategory !== 'all') filtered = filtered.filter(p => p.category === currentCategory);
-        switch(currentSort) {
-          case 'newest': filtered.sort((a, b) => new Date(b.date || '') - new Date(a.date || '')); break;
-          case 'oldest': filtered.sort((a, b) => new Date(a.date || '') - new Date(b.date || '')); break;
-          case 'price-low': filtered.sort((a, b) => a.price - b.price); break;
-          case 'price-high': filtered.sort((a, b) => b.price - a.price); break;
-          default: break;
         }
-        filteredFavorites = filtered;
-        currentPage = 1;
-        updateStats(filtered);
-        renderPage();
+      });
+
+      // Match each hotspot ID
+      savedHotspotIds.forEach(id => {
+        const spot = hotspots.find(s => String(s.id) === String(id));
+        if (spot) {
+          items.push({
+            id: spot.id,
+            _type: 'hotspot',
+            _raw: spot,
+            title: spot.name || 'Hotspot',
+            category: spot.category || 'Hotspot',
+            location: spot.location || spot.address || 'Nigeria',
+            date: spot.addedAt ? new Date(spot.addedAt).toISOString() : '',
+            price: 0,
+            images: Array.isArray(spot.images) ? spot.images : (spot.image ? [spot.image] : []),
+            seller: { name: spot.contact ? 'Call or WhatsApp' : 'Zaure Hotspot' },
+            rating: spot.rating
+          });
+        }
+      });
+
+      return items;
+    }
+
+    /* ---------- Stats + tab counts ---------- */
+    function updateStats() {
+      const items = state.allItems;
+      const total = items.length;
+      const productCount = items.filter(i => i._type === 'product').length;
+      const serviceCount = items.filter(i => i._type === 'service').length;
+      const hotspotCount = items.filter(i => i._type === 'hotspot').length;
+
+      els.statTotal.textContent = total;
+      els.statProducts.textContent = productCount;
+      els.statServices.textContent = serviceCount;
+      els.statHotspots.textContent = hotspotCount;
+      els.favoriteCount.textContent = total;
+
+      els.tabCountAll.textContent = total;
+      els.tabCountProducts.textContent = productCount;
+      els.tabCountServices.textContent = serviceCount;
+      els.tabCountHotspots.textContent = hotspotCount;
+
+      const uniqueCats = new Set(items.map(i => i.category).filter(Boolean));
+      els.categoryCount.textContent = uniqueCats.size;
+      els.lastUpdated.textContent = new Date().toLocaleTimeString();
+
+      // Rebuild category dropdown options
+      const catOptions = document.getElementById('categoryOptions');
+      const current = state.categoryFilter;
+      catOptions.innerHTML = `<li data-value="all">All Categories</li>` +
+        Array.from(uniqueCats).sort().map(c =>
+          `<li data-value="${escapeHtml(c)}">${escapeHtml(c)}</li>`
+        ).join('');
+      // Restore selection label
+      const trigger = document.getElementById('categoryTrigger');
+      if (current === 'all') trigger.querySelector('span').textContent = 'All Categories';
+      else trigger.querySelector('span').textContent = current;
+    }
+
+    /* ---------- Filtering + sorting ---------- */
+    function applyFilters() {
+      let list = [...state.allItems];
+
+      if (state.typeFilter !== 'all') {
+        list = list.filter(i => i._type === state.typeFilter);
       }
 
-      function renderPage() {
-        const start = (currentPage - 1) * itemsPerPage;
-        const end = Math.min(start + itemsPerPage, filteredFavorites.length);
-        const pageItems = filteredFavorites.slice(start, end);
-        showingCount.textContent = filteredFavorites.length;
-        if (filteredFavorites.length === 0) {
-          grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1;"><i class="fas fa-heart"></i><h3>No favorites yet</h3><p>Start saving items you love! Browse our marketplace and click the heart icon on any listing.</p><a href="/" class="btn-primary"><i class="fas fa-store"></i> Browse Marketplace</a><div class="suggestions"><a href="/category.html?slug=vehicles" class="suggestion-chip">🚗 Vehicles</a><a href="/category.html?slug=electronics" class="suggestion-chip">📱 Electronics</a><a href="/category.html?slug=furniture" class="suggestion-chip">🪑 Furniture</a><a href="/category.html?slug=fashion" class="suggestion-chip">👗 Fashion</a></div></div>`;
-        } else { renderFavorites(pageItems, 'favoritesGrid'); }
+      if (state.categoryFilter !== 'all') {
+        list = list.filter(i => i.category === state.categoryFilter);
+      }
+
+      switch (state.sort) {
+        case 'oldest':
+          list.sort((a, b) => new Date(a.date || 0) - new Date(b.date || 0));
+          break;
+        case 'price-low':
+          list.sort((a, b) => getNumberPrice(a) - getNumberPrice(b));
+          break;
+        case 'price-high':
+          list.sort((a, b) => getNumberPrice(b) - getNumberPrice(a));
+          break;
+        case 'name':
+          list.sort((a, b) => (a.title || '').localeCompare(b.title || ''));
+          break;
+        default: // newest
+          list.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
+      }
+
+      state.filtered = list;
+      state.page = 1;
+      renderPage();
+    }
+
+    /* ---------- Rendering ---------- */
+    function renderPage() {
+      const start = (state.page - 1) * state.perPage;
+      const end = Math.min(start + state.perPage, state.filtered.length);
+      const pageItems = state.filtered.slice(start, end);
+
+      els.showingCount.textContent = state.filtered.length;
+
+      if (state.filtered.length === 0) {
+        const total = state.allItems.length;
+        if (total === 0) {
+          els.grid.innerHTML = `
+            <div class="empty-state">
+              <i class="far fa-heart"></i>
+              <h3>No favorites yet</h3>
+              <p>Start saving items you love! Tap the heart icon on any product, service, or hotspot to save it here.</p>
+              <a href="/" class="btn-primary"><i class="fas fa-store"></i> Browse Marketplace</a>
+              <div class="suggestions">
+                <a href="/category.html?slug=vehicles" class="suggestion-chip">🚗 Vehicles</a>
+                <a href="/category.html?slug=electronics" class="suggestion-chip">📱 Electronics</a>
+                <a href="/hotspots.html" class="suggestion-chip">🔥 Hotspots</a>
+                <a href="/services.html" class="suggestion-chip">🛠️ Services</a>
+              </div>
+            </div>`;
+        } else {
+          els.grid.innerHTML = `
+            <div class="empty-state">
+              <i class="fas fa-filter"></i>
+              <h3>No matches in this filter</h3>
+              <p>Try a different type or category to see more of your favorites.</p>
+              <button type="button" class="btn-primary" style="width:auto;padding:10px 28px;margin-top:16px;border:none;cursor:pointer;" onclick="window.resetFavoriteFilters()">
+                <i class="fas fa-undo"></i> Reset Filters
+              </button>
+            </div>`;
+        }
         updatePagination();
+        return;
       }
 
-      function renderFavorites(products, containerId) {
-        const grid = document.getElementById(containerId);
-        if (!grid) return;
-        grid.innerHTML = products.map(p => {
-          let badges = '';
-          if (p.boosted) badges += `<span class="badge-boosted"><i class="fas fa-bolt"></i> Boosted</span>`;
-          if (p.featured) badges += `<span class="badge-featured">Featured</span>`;
-          const price = p.price >= 1e6 ? `₦${(p.price/1e6).toFixed(1)}M` : `₦${p.price.toLocaleString()}`;
-          const firstImage = p.images && p.images.length > 0 ? p.images[0] : null;
-          const imageHtml = firstImage ? `<img src="${firstImage}" alt="${p.title}" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\\'fas fa-box\\' style=\\'font-size:2.5rem;color:var(--text-secondary);\\'></i>';">` : `<i class="fas fa-box" style="font-size:2.5rem;color:var(--text-secondary);"></i>`;
-          return `<div class="listing-card" data-id="${p.id}"><button class="remove-fav" onclick="removeFavorite(${p.id})" title="Remove from favorites"><i class="fas fa-times"></i></button><div class="listing-img" onclick="viewProduct(${p.id})">${imageHtml}${badges}</div><div class="listing-body" onclick="viewProduct(${p.id})"><div class="price">${price}</div><div class="title">${p.title}</div><div class="meta"><span><i class="fas fa-map-pin"></i> ${p.location}</span><span><i class="far fa-clock"></i> ${p.date}</span></div><div class="listing-footer"><span><i class="fas fa-store"></i> ${p.seller?.name || 'Unknown'}</span><span><i class="far fa-heart"></i> Saved</span></div></div></div>`;
-        }).join('');
+      els.grid.innerHTML = pageItems.map(renderCard).join('');
+      updatePagination();
+    }
+
+    function renderCard(item) {
+      const typeLabel = item._type === 'product' ? 'Product'
+                      : item._type === 'service' ? 'Service'
+                      : 'Hotspot';
+      const typeIcon = item._type === 'product' ? 'fa-box'
+                     : item._type === 'service' ? 'fa-user-tie'
+                     : 'fa-fire';
+      const price = formatPrice(getNumberPrice(item));
+      const img = getFirstImage(item);
+      const imgHtml = img
+        ? `<img src="${escapeHtml(img)}" alt="${escapeHtml(item.title)}" loading="lazy"
+               onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\\'fas ${typeIcon}\\' style=\\'font-size:2.5rem;color:var(--text-secondary);\\'></i>';">`
+        : `<i class="fas ${typeIcon}" style="font-size:2.5rem;color:var(--text-secondary);"></i>`;
+
+      let badges = '';
+      if (item.boosted) badges += `<span class="badge-boosted"><i class="fas fa-bolt"></i> Boosted</span>`;
+      if (item.featured) badges += `<span class="badge-featured">Featured</span>`;
+
+      const ratingLine = item.rating
+        ? `<span style="color:#B49450;font-weight:700;"><i class="fas fa-star"></i> ${escapeHtml(String(item.rating))}</span>`
+        : `<span><i class="far fa-heart"></i> Saved</span>`;
+
+      // Route per type via data attributes; click handled in JS below
+      return `
+        <div class="listing-card" data-id="${escapeHtml(String(item.id))}" data-type="${item._type}" tabindex="0" role="button">
+          <button class="remove-fav" data-id="${escapeHtml(String(item.id))}" data-type="${item._type}" title="Remove from favorites" aria-label="Remove from favorites">
+            <i class="fas fa-times"></i>
+          </button>
+          <span class="type-badge ${item._type}"><i class="fas ${typeIcon}"></i> ${typeLabel}</span>
+          <div class="listing-img">${imgHtml}${badges}</div>
+          <div class="listing-body">
+            ${price ? `<div class="price">${price}</div>` : ''}
+            <div class="title">${escapeHtml(item.title)}</div>
+            <div class="meta">
+              <span><i class="fas fa-map-pin"></i> ${escapeHtml(item.location || 'Nigeria')}</span>
+              <span><i class="fas fa-tag"></i> ${escapeHtml(item.category || '')}</span>
+            </div>
+            <div class="listing-footer">${ratingLine}</div>
+          </div>
+        </div>`;
+    }
+
+    /* ---------- Pagination ---------- */
+    function updatePagination() {
+      const totalPages = Math.ceil(state.filtered.length / state.perPage);
+      els.prevPage.disabled = state.page <= 1;
+      els.nextPage.disabled = state.page >= totalPages || totalPages === 0;
+
+      let html = '';
+      const maxVisible = 5;
+      let startPage = Math.max(1, state.page - Math.floor(maxVisible / 2));
+      let endPage = Math.min(totalPages, startPage + maxVisible - 1);
+      if (endPage - startPage < maxVisible - 1) {
+        startPage = Math.max(1, endPage - maxVisible + 1);
       }
 
-      function updatePagination() {
-        const totalPages = Math.ceil(filteredFavorites.length / itemsPerPage);
-        prevPageBtn.disabled = currentPage <= 1;
-        nextPageBtn.disabled = currentPage >= totalPages || totalPages === 0;
-        let pagesHtml = '';
-        const maxVisible = 5;
-        let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
-        let endPage = Math.min(totalPages, startPage + maxVisible - 1);
-        if (endPage - startPage < maxVisible - 1) startPage = Math.max(1, endPage - maxVisible + 1);
-        if (totalPages > 0) {
-          if (startPage > 1) { pagesHtml += `<button onclick="goToPage(1)">1</button>`; if (startPage > 2) pagesHtml += `<span class="ellipsis">…</span>`; }
-          for (let i = startPage; i <= endPage; i++) pagesHtml += `<button class="${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
-          if (endPage < totalPages) { if (endPage < totalPages - 1) pagesHtml += `<span class="ellipsis">…</span>`; pagesHtml += `<button onclick="goToPage(${totalPages})">${totalPages}</button>`; }
+      if (totalPages > 0) {
+        if (startPage > 1) {
+          html += `<button data-page="1">1</button>`;
+          if (startPage > 2) html += `<span class="ellipsis">…</span>`;
         }
-        pageNumbers.innerHTML = pagesHtml;
+        for (let i = startPage; i <= endPage; i++) {
+          html += `<button data-page="${i}" class="${i === state.page ? 'active' : ''}">${i}</button>`;
+        }
+        if (endPage < totalPages) {
+          if (endPage < totalPages - 1) html += `<span class="ellipsis">…</span>`;
+          html += `<button data-page="${totalPages}">${totalPages}</button>`;
+        }
       }
 
-      window.goToPage = function(page) {
-        const totalPages = Math.ceil(filteredFavorites.length / itemsPerPage);
-        if (page < 1 || page > totalPages) return;
-        currentPage = page;
-        renderPage();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      };
-
-      window.removeFavorite = function(productId) {
-        if (!currentUser) { openSignup(); return; }
-        const index = favoriteIds.indexOf(productId);
-        if (index > -1) {
-          favoriteIds.splice(index, 1);
-          localStorage.setItem('zaure_favorites', JSON.stringify(favoriteIds));
-          favoriteProducts = favoriteProducts.filter(p => p.id !== productId);
-          applyFilters();
-          updateFavoriteBadge();
-          showToast('Removed from favorites');
-        }
-      };
-
-      gridViewBtn.addEventListener('click', function() {
-        container.classList.remove('list-view'); container.classList.add('grid-view');
-        this.classList.add('active'); listViewBtn.classList.remove('active');
+      els.pageNumbers.innerHTML = html;
+      els.pageNumbers.querySelectorAll('button[data-page]').forEach(btn => {
+        btn.addEventListener('click', () => goToPage(parseInt(btn.dataset.page, 10)));
       });
-      listViewBtn.addEventListener('click', function() {
-        container.classList.remove('grid-view'); container.classList.add('list-view');
-        this.classList.add('active'); gridViewBtn.classList.remove('active');
-      });
+    }
 
-      prevPageBtn.addEventListener('click', () => goToPage(currentPage - 1));
-      nextPageBtn.addEventListener('click', () => goToPage(currentPage + 1));
+    function goToPage(page) {
+      const totalPages = Math.ceil(state.filtered.length / state.perPage);
+      if (page < 1 || page > totalPages) return;
+      state.page = page;
+      renderPage();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
-      document.getElementById('refreshFavorites').addEventListener('click', function() {
-        this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Refreshing...';
-        this.disabled = true;
-        loadFavorites();
-        getFavoriteProducts();
-        applyFilters();
-        this.innerHTML = '<i class="fas fa-sync"></i> Refresh';
-        this.disabled = false;
-        showToast('Favorites refreshed!');
-      });
+    /* ---------- Removing a favorite (routes by type) ---------- */
+    function removeFavoriteById(id, type) {
+      if (type === 'hotspot') {
+        const ids = getIds(HOTSPOT_FAV_KEY).filter(x => String(x) !== String(id));
+        saveIds(HOTSPOT_FAV_KEY, ids);
+      } else {
+        const ids = getIds(PRODUCT_FAV_KEY).filter(x => String(x) !== String(id));
+        saveIds(PRODUCT_FAV_KEY, ids);
+      }
+      if (typeof updateFavoriteBadge === 'function') updateFavoriteBadge();
+    }
 
-      document.getElementById('clearAllFavorites').addEventListener('click', function() {
-        if (!currentUser) { openSignup(); return; }
-        if (favoriteProducts.length === 0) { showToast('No favorites to clear', 'error'); return; }
-        if (confirm('Are you sure you want to remove all items from your favorites?')) {
-          favoriteIds = [];
-          localStorage.setItem('zaure_favorites', JSON.stringify(favoriteIds));
-          favoriteProducts = [];
-          applyFilters();
-          updateFavoriteBadge();
-          showToast('All favorites removed');
-        }
-      });
-
-      document.getElementById('fabPostAd').addEventListener('click', function() {
-        if (!currentUser) { openSignup(); } else { window.location.href = '/post.html'; }
-      });
-
-      loadFavorites();
-      getFavoriteProducts();
+    function removeAndRefresh(id, type) {
+      removeFavoriteById(id, type);
+      state.allItems = state.allItems.filter(i => !(String(i.id) === String(id) && i._type === type));
+      updateStats();
       applyFilters();
-      loadUser();
-      initTheme();
-      updateFavoriteBadge();
+      showToast('Removed from favorites');
+    }
+
+    /* ---------- Routing per type ---------- */
+    function openItem(id, type) {
+      if (type === 'product') {
+        window.location.href = `/detail.html?id=${encodeURIComponent(id)}`;
+      } else if (type === 'service') {
+        window.location.href = `/service.html?id=${encodeURIComponent(id)}`;
+      } else if (type === 'hotspot') {
+        window.location.href = `/hotspots.html#spot-${encodeURIComponent(id)}`;
+      }
+    }
+
+    /* ---------- Delegated event handling (remove + open) ---------- */
+    els.grid.addEventListener('click', function (e) {
+      const removeBtn = e.target.closest('.remove-fav');
+      if (removeBtn) {
+        e.stopPropagation();
+        removeAndRefresh(removeBtn.dataset.id, removeBtn.dataset.type);
+        return;
+      }
+      const card = e.target.closest('.listing-card[data-id]');
+      if (card) {
+        openItem(card.dataset.id, card.dataset.type);
+      }
     });
+    els.grid.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        const card = e.target.closest('.listing-card[data-id]');
+        if (card) {
+          e.preventDefault();
+          openItem(card.dataset.id, card.dataset.type);
+        }
+      }
+    });
+
+    /* ---------- Type tabs ---------- */
+    document.getElementById('typeTabs').addEventListener('click', function (e) {
+      const tab = e.target.closest('.type-tab');
+      if (!tab) return;
+      document.querySelectorAll('.type-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      state.typeFilter = tab.dataset.type;
+      applyFilters();
+    });
+
+    /* ---------- Custom dropdowns ---------- */
+    function initDropdown(containerId, triggerId, optionsId, onChange) {
+      const container = document.getElementById(containerId);
+      const trigger = document.getElementById(triggerId);
+      const optionsList = document.getElementById(optionsId);
+      if (!container || !trigger || !optionsList) return;
+
+      trigger.addEventListener('click', function (e) {
+        e.stopPropagation();
+        container.classList.toggle('active');
+      });
+
+      optionsList.addEventListener('click', function (e) {
+        const li = e.target.closest('li[data-value]');
+        if (!li) return;
+        trigger.querySelector('span').textContent = li.textContent;
+        container.classList.remove('active');
+        onChange(li.dataset.value);
+      });
+
+      document.addEventListener('click', function (e) {
+        if (!container.contains(e.target)) container.classList.remove('active');
+      });
+    }
+
+    initDropdown('sortSelect', 'sortTrigger', 'sortOptions', v => {
+      state.sort = v;
+      applyFilters();
+    });
+    initDropdown('categorySelect', 'categoryTrigger', 'categoryOptions', v => {
+      state.categoryFilter = v;
+      applyFilters();
+    });
+
+    /* ---------- View toggle ---------- */
+    els.gridViewBtn.addEventListener('click', () => {
+      els.container.classList.remove('list-view');
+      els.container.classList.add('grid-view');
+      els.gridViewBtn.classList.add('active');
+      els.listViewBtn.classList.remove('active');
+    });
+    els.listViewBtn.addEventListener('click', () => {
+      els.container.classList.remove('grid-view');
+      els.container.classList.add('list-view');
+      els.listViewBtn.classList.add('active');
+      els.gridViewBtn.classList.remove('active');
+    });
+
+    /* ---------- Pagination buttons ---------- */
+    els.prevPage.addEventListener('click', () => goToPage(state.page - 1));
+    els.nextPage.addEventListener('click', () => goToPage(state.page + 1));
+
+    /* ---------- Refresh / Clear All ---------- */
+    document.getElementById('refreshFavorites').addEventListener('click', async function () {
+      this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Refreshing...';
+      this.disabled = true;
+      state.allItems = await loadAllFavoriteItems();
+      updateStats();
+      applyFilters();
+      this.innerHTML = '<i class="fas fa-sync"></i> Refresh';
+      this.disabled = false;
+      showToast('Favorites refreshed!');
+    });
+
+    document.getElementById('clearAllFavorites').addEventListener('click', function () {
+      if (!currentUser) { openSignup(); return; }
+      if (state.allItems.length === 0) { showToast('No favorites to clear', 'error'); return; }
+      if (!confirm('Remove ALL favorites (products, services, and hotspots)? This cannot be undone.')) return;
+      saveIds(PRODUCT_FAV_KEY, []);
+      saveIds(HOTSPOT_FAV_KEY, []);
+      state.allItems = [];
+      state.filtered = [];
+      updateStats();
+      applyFilters();
+      if (typeof updateFavoriteBadge === 'function') updateFavoriteBadge();
+      showToast('All favorites removed');
+    });
+
+    /* ---------- Reset filters (exposed for empty state button) ---------- */
+    window.resetFavoriteFilters = function () {
+      state.typeFilter = 'all';
+      state.categoryFilter = 'all';
+      state.sort = 'newest';
+      document.querySelectorAll('.type-tab').forEach(t => t.classList.toggle('active', t.dataset.type === 'all'));
+      document.getElementById('sortTrigger').querySelector('span').textContent = 'Newest First';
+      document.getElementById('categoryTrigger').querySelector('span').textContent = 'All Categories';
+      applyFilters();
+    };
+
+    /* ---------- FAB (post) ---------- */
+    const fab = document.getElementById('fabPostAd');
+    if (fab) {
+      fab.addEventListener('click', function () {
+        const user = (typeof getCurrentUser === 'function') ? getCurrentUser() : null;
+        if (!user) {
+          if (typeof openSignup === 'function') openSignup();
+        } else {
+          window.location.href = '/post.html';
+        }
+      });
+    }
+
+    /* ---------- Init ---------- */
+    document.addEventListener('DOMContentLoaded', async function () {
+      if (typeof initStateDropdown === 'function') initStateDropdown();
+      if (typeof loadUser === 'function') loadUser();
+      if (typeof initTheme === 'function') initTheme();
+      if (typeof updateFavoriteBadge === 'function') updateFavoriteBadge();
+
+      state.allItems = await loadAllFavoriteItems();
+      updateStats();
+      applyFilters();
+    });
+
+  })();
   </script>
 </body>
 </html>
