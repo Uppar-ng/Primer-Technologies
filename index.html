@@ -1310,7 +1310,6 @@
         if (!res.ok) throw new Error('Failed to load');
         const hotspots = await res.json();
 
-        // Try real user location (non-blocking, 5s timeout)
         const coords = await new Promise(resolve => {
           if (!navigator.geolocation) return resolve(null);
           navigator.geolocation.getCurrentPosition(
@@ -1320,7 +1319,6 @@
           );
         });
 
-        // Sort: nearest first if we have coords, else newest first
         let sorted = [...hotspots];
         if (coords) {
           sorted.sort((a, b) => {
@@ -1387,17 +1385,16 @@
           `;
         }).join('');
 
-        // Wire card clicks + favorites
         grid.querySelectorAll('.hotspot-home-card').forEach(card => {
           const id = card.dataset.id;
 
           card.addEventListener('click', () => {
-            window.location.href = `/hotspots.html#spot-${encodeURIComponent(id)}`;
+            window.location.href = `/hotspot.html?id=${encodeURIComponent(id)}`;
           });
           card.addEventListener('keydown', e => {
             if (e.key === 'Enter' || e.key === ' ') {
               e.preventDefault();
-              window.location.href = `/hotspots.html#spot-${encodeURIComponent(id)}`;
+              window.location.href = `/hotspot.html?id=${encodeURIComponent(id)}`;
             }
           });
 
@@ -1421,7 +1418,6 @@
       }
     }
 
-    // Real-time Open/Closed: refresh every minute
     setInterval(() => {
       document.querySelectorAll('.hotspot-home-card[data-id]').forEach(card => {
         const id = card.dataset.id;
@@ -1469,7 +1465,6 @@
         </div>
       `).join('');
 
-      // Load hotspots section
       loadHotspotsSection();
 
       const keywords = await loadTrendingKeywords();
