@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-  <title>Hotspots – Zaure</title>
-  <meta name="description" content="Discover the coolest hotspots, restaurants, cafes, and hangout spots near you across Nigeria on Zaure.">
+  <title>Hotspot – Zaure</title>
+  <meta name="description" content="Discover details, photos, reviews, and directions for this hotspot on Zaure.">
   <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -24,461 +24,343 @@
       --closed-red: #dc2626;
     }
 
-    .hotspot-hero {
-      background: linear-gradient(135deg, var(--navy-2), var(--navy));
-      border-radius: 24px; padding: 44px 24px 40px; text-align: center; color: white;
-      margin: 16px 0 20px; position: relative; overflow: hidden;
+    /* ===== Loading / Error states ===== */
+    .detail-loading {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 100px 20px; text-align: center;
     }
-    .hotspot-hero::before, .hotspot-hero::after {
-      content: ''; position: absolute; border-radius: 50%; pointer-events: none;
+    .detail-loading .spinner {
+      width: 44px; height: 44px; border-radius: 50%;
+      border: 3px solid var(--border); border-top-color: var(--navy-2);
+      animation: spin 0.9s linear infinite; margin-bottom: 16px;
     }
-    .hotspot-hero::before {
-      top: -60px; right: -60px; width: 240px; height: 240px;
-      background: radial-gradient(circle, rgba(212,184,122,0.22) 0%, transparent 70%);
-    }
-    .hotspot-hero::after {
-      bottom: -80px; left: -80px; width: 260px; height: 260px;
-      background: radial-gradient(circle, rgba(212,184,122,0.12) 0%, transparent 70%);
-    }
-    .hotspot-hero .hero-tag {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px;
-      color: rgba(255,255,255,0.65); padding: 5px 14px;
-      border: 1px solid rgba(255,255,255,0.14); border-radius: 40px;
-      background: rgba(255,255,255,0.05); backdrop-filter: blur(6px);
-      margin-bottom: 14px; position: relative; z-index: 2;
-    }
-    .hotspot-hero .hero-tag i { color: var(--gold); }
-    .hotspot-hero h1 {
-      font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 800;
-      margin-bottom: 8px; position: relative; z-index: 2; line-height: 1.15;
-    }
-    .hotspot-hero h1 span { color: var(--gold); }
-    .hotspot-hero p {
-      font-size: 0.92rem; color: rgba(255,255,255,0.78);
-      position: relative; z-index: 2; max-width: 480px;
-      margin: 0 auto 20px; line-height: 1.55;
-    }
-    .hotspot-search {
-      position: relative; z-index: 2; max-width: 560px; margin: 0 auto;
-      display: flex; background: rgba(255,255,255,0.98); border-radius: 60px;
-      box-shadow: 0 10px 32px rgba(0,0,0,0.18); overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.2);
-    }
-    [data-theme="dark"] .hotspot-search { background: rgba(19,28,49,0.95); border-color: rgba(255,255,255,0.08); }
-    .hotspot-search i { align-self: center; padding-left: 20px; color: var(--text-secondary); font-size: 0.95rem; }
-    .hotspot-search input {
-      flex: 1; padding: 14px 16px; border: none; background: transparent;
-      font-size: 0.95rem; color: var(--text); outline: none; font-family: inherit;
-    }
-    .hotspot-search input::placeholder { color: var(--text-secondary); }
-    .hotspot-search button {
-      padding: 0 24px; background: var(--navy-2); color: white; border: none;
-      font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: background 0.2s;
-      display: flex; align-items: center; gap: 6px;
-    }
-    .hotspot-search button:hover { background: var(--navy); }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .detail-loading p { color: var(--text-secondary); font-size: 0.9rem; }
 
-    @media (min-width: 768px) {
-      .hotspot-hero { padding: 56px 32px 52px; }
-      .hotspot-hero h1 { font-size: 2.6rem; }
-      .hotspot-hero p { font-size: 1rem; }
-    }
-
-    .filter-bar { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
-    .category-pills {
-      display: flex; gap: 8px; overflow-x: auto; padding: 4px 0 6px;
-      scrollbar-width: none; -webkit-overflow-scrolling: touch;
-    }
-    .category-pills::-webkit-scrollbar { display: none; }
-    .category-pill {
-      flex-shrink: 0; padding: 8px 18px; border-radius: 60px;
-      border: 1px solid var(--border); background: var(--surface);
-      color: var(--text-secondary); font-size: 0.8rem; font-weight: 600;
-      cursor: pointer; transition: all 0.2s; white-space: nowrap; font-family: inherit;
-      display: inline-flex; align-items: center; gap: 6px;
-    }
-    .category-pill:hover { border-color: var(--navy-2); color: var(--text); }
-    .category-pill.active { background: var(--navy-2); border-color: var(--navy-2); color: white; }
-    .category-pill .count { font-size: 0.7rem; opacity: 0.7; margin-left: 2px; }
-    [data-theme="dark"] .category-pill { background: var(--surface-alt); }
-
-    .filter-toolbar {
-      display: flex; justify-content: space-between; align-items: center;
-      gap: 12px; flex-wrap: wrap;
-    }
-    .filter-count { font-size: 0.82rem; color: var(--text-secondary); font-weight: 500; }
-    .filter-count strong { color: var(--text); font-weight: 700; }
-
-    /* ====== CUSTOM SORT DROPDOWN (not native <select>) ====== */
-    .custom-select {
-      position: relative; min-width: 200px; user-select: none;
-    }
-    .custom-select-trigger {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 9px 14px; border: 1px solid var(--border); border-radius: 12px;
-      background: var(--surface); color: var(--text); font-size: 0.85rem;
-      font-weight: 600; cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s;
-      font-family: inherit;
-    }
-    .custom-select-trigger:hover { border-color: var(--navy-2); }
-    .custom-select.active .custom-select-trigger {
-      border-color: var(--navy-2);
-      box-shadow: 0 0 0 3px rgba(26,54,80,0.08);
-    }
-    [data-theme="dark"] .custom-select-trigger { background: var(--surface-alt); }
-    .custom-select-trigger .trigger-icon {
-      width: 20px; height: 20px; display: flex; align-items: center; justify-content: center;
-      color: var(--navy-2); margin-right: 8px; font-size: 0.75rem;
-    }
-    .custom-select-trigger .trigger-label {
-      flex: 1; display: flex; align-items: center; text-align: left;
-    }
-    .custom-select-trigger .chevron {
-      font-size: 0.7rem; color: var(--text-secondary);
-      transition: transform 0.2s;
-    }
-    .custom-select.active .custom-select-trigger .chevron { transform: rotate(180deg); }
-
-    .custom-select-dropdown {
-      position: absolute; top: calc(100% + 6px); left: 0; right: 0;
+    .detail-error {
+      max-width: 440px; margin: 60px auto; text-align: center;
+      padding: 48px 24px; border-radius: 24px;
       background: var(--surface); border: 1px solid var(--border);
-      border-radius: 12px; box-shadow: 0 12px 32px rgba(15,41,64,0.16);
-      overflow: hidden; z-index: 100; display: none;
-      animation: dropdownFade 0.15s ease;
     }
-    @keyframes dropdownFade {
-      from { opacity: 0; transform: translateY(-6px); }
-      to { opacity: 1; transform: translateY(0); }
+    .detail-error i {
+      font-size: 3rem; color: var(--text-secondary); opacity: 0.4; margin-bottom: 16px;
     }
-    .custom-select.active .custom-select-dropdown { display: block; }
-    .custom-select-options { list-style: none; padding: 4px; margin: 0; }
-    .custom-select-options li {
-      display: flex; align-items: center; gap: 10px;
-      padding: 10px 12px; border-radius: 8px;
-      cursor: pointer; font-size: 0.85rem; color: var(--text);
-      transition: background 0.15s;
+    .detail-error h2 { font-size: 1.3rem; color: var(--text); margin-bottom: 8px; }
+    .detail-error p { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px; }
+    .detail-error a {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 24px; background: var(--navy-2); color: white;
+      border-radius: 40px; text-decoration: none; font-weight: 600; font-size: 0.9rem;
+      transition: background 0.2s;
     }
-    .custom-select-options li:hover { background: var(--surface-alt); }
-    .custom-select-options li .opt-icon {
-      width: 20px; height: 20px; display: flex; align-items: center; justify-content: center;
-      color: var(--navy-2); font-size: 0.75rem;
+    .detail-error a:hover { background: var(--navy); }
+
+    /* ===== Layout ===== */
+    .detail-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin: 20px 0 40px;
+      align-items: start;
     }
-    .custom-select-options li .opt-hint {
-      margin-left: auto; font-size: 0.7rem; color: var(--text-secondary);
-      font-weight: 500;
-    }
-    .custom-select-options li.selected {
-      background: rgba(26,54,80,0.06);
-      color: var(--navy-2); font-weight: 700;
-    }
-    [data-theme="dark"] .custom-select-options li.selected {
-      background: rgba(212,184,122,0.12); color: var(--gold);
+    @media (min-width: 1024px) {
+      .detail-layout {
+        grid-template-columns: minmax(0, 1fr) 380px;
+        gap: 28px;
+      }
     }
 
-    /* ====== LOCATION NOTE ====== */
-    .location-note {
-      display: flex; align-items: center; gap: 8px;
-      font-size: 0.78rem; color: var(--text-secondary);
-      padding: 8px 14px; border-radius: 10px;
-      background: var(--surface); border: 1px solid var(--border);
-      margin-top: 4px;
-    }
-    .location-note i { color: var(--navy-2); font-size: 0.85rem; }
-    .location-note.granted i { color: var(--open-green); }
-    .location-note.denied i { color: var(--closed-red); }
-    .location-note button {
-      background: transparent; border: none; color: var(--navy-2);
-      font-weight: 600; font-size: 0.78rem; cursor: pointer;
-      text-decoration: underline; padding: 0; margin-left: auto;
-      font-family: inherit;
-    }
-
-    .hotspot-grid {
-      display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 40px;
-    }
-    @media (min-width: 640px) { .hotspot-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; } }
-    @media (min-width: 1024px) { .hotspot-grid { grid-template-columns: repeat(3, 1fr); } }
-
-    .hotspot-card {
-      background: var(--surface); border-radius: 20px; overflow: hidden;
-      border: 1px solid var(--border); cursor: pointer; position: relative;
-      display: flex; flex-direction: column; animation: cardFade 0.4s ease both;
-      transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.3s, border-color 0.3s;
-    }
-    @keyframes cardFade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-    .hotspot-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 16px 40px rgba(15,41,64,0.14);
-      border-color: rgba(212,184,122,0.4);
-    }
-    .hotspot-card:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
-
-    .hotspot-img-wrap {
-      position: relative; height: 200px; overflow: hidden; background: var(--surface-alt);
-    }
-    .hotspot-img {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform 0.5s ease; display: block;
-    }
-    .hotspot-card:hover .hotspot-img { transform: scale(1.05); }
-    .hotspot-tag {
-      position: absolute; top: 12px; left: 12px;
-      background: rgba(15,41,64,0.85); backdrop-filter: blur(4px);
-      color: white; padding: 5px 12px; border-radius: 20px;
-      font-size: 0.62rem; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 1px; z-index: 2;
-    }
-    .hotspot-badges {
-      position: absolute; top: 12px; right: 12px;
-      display: flex; flex-direction: column; gap: 6px; align-items: flex-end; z-index: 2;
-    }
-    .badge-spot {
-      padding: 4px 10px; border-radius: 20px; font-size: 0.6rem;
-      font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px;
-      backdrop-filter: blur(6px);
-    }
-    .badge-open {
-      background: rgba(22,163,74,0.92); color: white;
-      display: inline-flex; align-items: center; gap: 4px;
-    }
-    .badge-open::before {
-      content: ''; width: 6px; height: 6px; border-radius: 50%;
-      background: white; animation: pulseDot 1.8s infinite;
-    }
-    .badge-closed { background: rgba(220,38,38,0.92); color: white; }
-    @keyframes pulseDot { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-
-    .fav-btn {
-      position: absolute; bottom: 12px; right: 12px;
-      width: 38px; height: 38px; border-radius: 50%;
-      background: rgba(255,255,255,0.95); border: none; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1rem; color: var(--text-secondary);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      transition: all 0.2s; z-index: 3;
-    }
-    .fav-btn:hover { transform: scale(1.1); }
-    .fav-btn.active { color: #e74c3c; }
-
-    .hotspot-info { padding: 16px; flex: 1; display: flex; flex-direction: column; }
-    .hotspot-info h3 {
-      font-size: 1.05rem; font-weight: 700; color: var(--text);
-      margin-bottom: 4px; line-height: 1.25;
-      display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden;
-    }
-    .hotspot-info .loc {
-      font-size: 0.78rem; color: var(--text-secondary);
-      display: flex; align-items: center; gap: 6px; margin-bottom: 10px;
-    }
-    .hotspot-info .loc i { color: var(--navy-2); font-size: 0.75rem; }
-    .hotspot-info .card-footer {
-      display: flex; justify-content: space-between; align-items: center;
-      padding-top: 10px; margin-top: auto; border-top: 1px solid var(--border);
-    }
-    .card-distance {
-      display: inline-flex; align-items: center; gap: 5px;
-      font-size: 0.75rem; font-weight: 600; color: var(--navy-2);
-    }
-    .card-distance i { font-size: 0.7rem; }
-    .card-distance.hidden { display: none; }
-    .price-range {
-      font-size: 0.75rem; font-weight: 700;
-      color: var(--text-secondary); letter-spacing: 1px;
-    }
-
-    .skeleton-card {
-      background: var(--surface); border-radius: 20px; overflow: hidden;
+    /* ===== Gallery ===== */
+    .gallery {
+      position: relative; width: 100%;
+      aspect-ratio: 16/10;
+      border-radius: 20px; overflow: hidden;
+      background: var(--surface-alt);
       border: 1px solid var(--border);
     }
-    .sk-img {
-      height: 200px; background: linear-gradient(90deg, #f1f5f9 0%, #e2e8f0 50%, #f1f5f9 100%);
-      background-size: 200% 100%; animation: shimmer 1.4s infinite;
-    }
-    .sk-body { padding: 16px; }
-    .sk-line {
-      height: 12px; border-radius: 6px;
-      background: linear-gradient(90deg, #f1f5f9 0%, #e2e8f0 50%, #f1f5f9 100%);
-      background-size: 200% 100%; animation: shimmer 1.4s infinite; margin-bottom: 8px;
-    }
-    .sk-line.short { width: 60%; }
-    .sk-line.tiny { width: 40%; }
-    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+    @media (max-width: 639px) { .gallery { aspect-ratio: 4/3; border-radius: 16px; } }
 
-    .empty-state {
-      grid-column: 1/-1; text-align: center; padding: 60px 20px;
-      background: var(--surface); border: 1px dashed var(--border); border-radius: 20px;
+    .gallery .slide {
+      position: absolute; inset: 0;
+      opacity: 0; transition: opacity 0.4s ease;
     }
-    .empty-state i { font-size: 3rem; color: var(--text-secondary); margin-bottom: 14px; opacity: 0.4; }
-    .empty-state h3 { font-size: 1.15rem; color: var(--text); margin-bottom: 6px; }
-    .empty-state p { font-size: 0.9rem; color: var(--text-secondary); max-width: 340px; margin: 0 auto 16px; }
-    .empty-state button {
-      padding: 10px 24px; background: var(--navy-2); color: white;
-      border: none; border-radius: 40px; font-weight: 600; font-size: 0.85rem;
-      cursor: pointer; font-family: inherit;
+    .gallery .slide.active { opacity: 1; }
+    .gallery .slide img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
     }
-    .empty-state button:hover { background: var(--navy); }
 
-    /* ====== MODAL ====== */
-    .hotspot-modal-overlay {
-      position: fixed; inset: 0; background: rgba(15,41,64,0.75);
-      backdrop-filter: blur(8px); z-index: 1000;
-      display: flex; align-items: center; justify-content: center;
-      padding: 16px; opacity: 0; visibility: hidden;
-      transition: opacity 0.3s, visibility 0.3s;
-    }
-    .hotspot-modal-overlay.active { opacity: 1; visibility: visible; }
-    .hotspot-modal {
-      background: var(--surface); width: 100%; max-width: 640px;
-      max-height: 92vh; border-radius: 24px; overflow-y: auto;
-      position: relative; transform: translateY(30px);
-      transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.3, 1);
-    }
-    .hotspot-modal-overlay.active .hotspot-modal { transform: translateY(0); }
-
-    .modal-close-btn {
-      position: absolute; top: 16px; right: 16px; width: 38px; height: 38px;
-      border-radius: 50%; background: rgba(15,41,64,0.75);
-      backdrop-filter: blur(6px); color: white; border: none; cursor: pointer;
-      z-index: 10; display: flex; align-items: center; justify-content: center;
-      transition: background 0.2s, transform 0.2s; font-size: 0.95rem;
-    }
-    .modal-close-btn:hover { background: #e74c3c; transform: rotate(90deg); }
-
-    .modal-gallery { position: relative; width: 100%; height: 280px; background: var(--surface-alt); overflow: hidden; }
-    .modal-gallery .slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.4s ease; }
-    .modal-gallery .slide.active { opacity: 1; }
-    .modal-gallery .slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .gallery-nav {
       position: absolute; top: 50%; transform: translateY(-50%);
-      width: 38px; height: 38px; border-radius: 50%;
-      background: rgba(15,41,64,0.65); backdrop-filter: blur(6px);
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(15,41,64,0.7); backdrop-filter: blur(8px);
       color: white; border: none; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
-      font-size: 0.85rem; transition: background 0.2s; z-index: 3;
+      font-size: 0.95rem; transition: background 0.2s, transform 0.2s;
+      z-index: 3;
     }
-    .gallery-nav:hover { background: var(--navy); }
-    .gallery-nav.prev { left: 12px; }
-    .gallery-nav.next { right: 12px; }
+    .gallery-nav:hover { background: var(--navy); transform: translateY(-50%) scale(1.05); }
+    .gallery-nav.prev { left: 14px; }
+    .gallery-nav.next { right: 14px; }
+
     .gallery-dots {
-      position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+      position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%);
       display: flex; gap: 6px; z-index: 3;
     }
     .gallery-dots span {
       width: 8px; height: 8px; border-radius: 50%;
       background: rgba(255,255,255,0.5); cursor: pointer; transition: all 0.2s;
     }
-    .gallery-dots span.active { background: white; width: 22px; border-radius: 4px; }
+    .gallery-dots span.active { background: white; width: 24px; border-radius: 4px; }
 
-    .modal-content { padding: 24px; }
-    .modal-header {
+    .gallery-counter {
+      position: absolute; top: 14px; right: 14px;
+      padding: 6px 12px; border-radius: 20px;
+      background: rgba(15,41,64,0.7); backdrop-filter: blur(8px);
+      color: white; font-size: 0.72rem; font-weight: 600;
+      z-index: 3; display: flex; align-items: center; gap: 5px;
+    }
+
+    /* ===== Main info ===== */
+    .detail-main { min-width: 0; }
+
+    .detail-title-block { margin-top: 20px; }
+    .detail-breadcrumb {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .detail-breadcrumb a {
+      color: var(--text-secondary); text-decoration: none; transition: color 0.2s;
+    }
+    .detail-breadcrumb a:hover { color: var(--navy-2); }
+    .detail-breadcrumb i { font-size: 0.55rem; opacity: 0.6; }
+
+    .detail-title-row {
       display: flex; justify-content: space-between; align-items: flex-start;
-      margin-bottom: 12px; gap: 12px;
+      gap: 16px; flex-wrap: wrap;
     }
-    .modal-header h2 {
-      font-family: 'Playfair Display', serif; font-size: 1.5rem;
-      font-weight: 800; color: var(--text); line-height: 1.2; flex: 1;
+    .detail-title-row h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem; font-weight: 800; color: var(--text);
+      line-height: 1.2; letter-spacing: -0.4px; flex: 1; min-width: 0;
     }
-    .modal-header .category-badge {
+    @media (min-width: 768px) { .detail-title-row h1 { font-size: 2.1rem; } }
+
+    .category-pill {
+      padding: 6px 14px; border-radius: 30px;
       background: var(--surface-alt); color: var(--navy-2);
-      padding: 5px 12px; border-radius: 20px;
-      font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.5px; white-space: nowrap; border: 1px solid var(--border);
-    }
-    .modal-meta {
-      display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
-      margin-bottom: 16px; font-size: 0.8rem; color: var(--text-secondary);
-    }
-    .modal-meta .status-pill {
-      display: inline-flex; align-items: center; gap: 5px;
-      padding: 4px 12px; border-radius: 20px;
-      font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .modal-meta .status-pill.open { background: rgba(22,163,74,0.12); color: var(--open-green); }
-    .modal-meta .status-pill.open::before {
-      content: ''; width: 6px; height: 6px; border-radius: 50%;
-      background: var(--open-green); animation: pulseDot 1.8s infinite;
-    }
-    .modal-meta .status-pill.closed { background: rgba(220,38,38,0.1); color: var(--closed-red); }
-
-    .modal-address {
-      font-size: 0.9rem; color: var(--text-secondary);
-      display: flex; align-items: flex-start; gap: 8px; margin-bottom: 16px;
-      line-height: 1.5;
-    }
-    .modal-address i { color: var(--navy-2); margin-top: 3px; }
-    .modal-address .modal-distance {
-      display: inline-flex; align-items: center; gap: 4px;
-      margin-left: 6px; color: var(--navy-2); font-weight: 700; font-size: 0.82rem;
-    }
-
-    .modal-description {
-      font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 20px;
-    }
-    .modal-section-title {
-      font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 1.5px; color: var(--text-secondary); margin-bottom: 10px;
-    }
-    .modal-features { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
-    .modal-features span {
-      background: var(--surface-alt); padding: 6px 12px; border-radius: 8px;
-      font-size: 0.75rem; font-weight: 600; color: var(--text);
       border: 1px solid var(--border);
-      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.5px; white-space: nowrap;
     }
-    .modal-features span i { color: var(--gold-deep); font-size: 0.7rem; }
 
-    .map-container {
-      width: 100%; height: 200px; border-radius: 16px; overflow: hidden;
-      border: 1px solid var(--border); margin-bottom: 24px; background: var(--surface-alt);
+    .detail-meta-row {
+      display: flex; flex-wrap: wrap; gap: 16px;
+      align-items: center; margin-top: 12px;
+      font-size: 0.85rem; color: var(--text-secondary);
     }
-    .map-container iframe { width: 100%; height: 100%; border: none; }
+    .status-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 14px; border-radius: 20px;
+      font-size: 0.75rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .status-pill.open { background: rgba(22,163,74,0.12); color: var(--open-green); }
+    .status-pill.open::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--open-green); animation: statusPulse 1.8s infinite;
+    }
+    .status-pill.closed { background: rgba(220,38,38,0.1); color: var(--closed-red); }
+    @keyframes statusPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .meta-item {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.85rem; color: var(--text-secondary);
+    }
+    .meta-item i { color: var(--navy-2); }
+    [data-theme="dark"] .meta-item i { color: var(--gold); }
 
-    .action-row-primary { display: flex; gap: 10px; margin-bottom: 10px; }
-    .action-row-primary a {
-      flex: 1; padding: 14px; border-radius: 60px; font-weight: 700;
-      font-size: 0.9rem; text-align: center; text-decoration: none;
-      display: flex; align-items: center; justify-content: center;
-      gap: 8px; transition: 0.2s;
+    /* ===== Sections ===== */
+    .detail-section {
+      margin-top: 28px; padding-top: 24px;
+      border-top: 1px solid var(--border);
     }
-    .btn-call { background: var(--surface); color: var(--text); border: 2px solid var(--border); }
-    .btn-call:hover { border-color: var(--text); background: var(--surface-alt); }
-    .btn-wa { background: #25D366; color: white; border: none; box-shadow: 0 6px 18px rgba(37,211,102,0.25); }
-    .btn-wa:hover { background: #1DA851; }
+    .detail-section h2 {
+      font-size: 1.05rem; font-weight: 700; color: var(--text);
+      margin-bottom: 12px; letter-spacing: -0.2px;
+    }
+    .detail-section p {
+      font-size: 0.92rem; color: var(--text-secondary);
+      line-height: 1.7;
+    }
 
-    .action-row-secondary { display: flex; gap: 8px; margin-bottom: 24px; }
-    .action-row-secondary button {
-      flex: 1; padding: 10px; border-radius: 14px;
-      border: 1px solid var(--border); background: var(--surface);
-      color: var(--text); font-weight: 600; font-size: 0.75rem;
-      cursor: pointer; display: flex; flex-direction: column; align-items: center;
-      gap: 6px; transition: 0.2s; font-family: inherit;
+    .amenities-grid {
+      display: flex; flex-wrap: wrap; gap: 8px;
     }
-    .action-row-secondary button:hover { border-color: var(--navy-2); background: var(--surface-alt); }
-    .action-row-secondary button i { font-size: 1rem; color: var(--navy-2); }
-    .action-row-secondary button.active { color: #e74c3c; border-color: #e74c3c; }
-    .action-row-secondary button.active i { color: #e74c3c; }
+    .amenity-chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 14px; border-radius: 12px;
+      background: var(--surface-alt); border: 1px solid var(--border);
+      font-size: 0.8rem; font-weight: 600; color: var(--text);
+    }
+    .amenity-chip i { color: var(--gold-deep); font-size: 0.75rem; }
 
-    .related-wrap { padding-top: 20px; border-top: 1px solid var(--border); }
-    .related-scroll {
-      display: flex; gap: 12px; overflow-x: auto; padding: 4px 0 8px; scrollbar-width: none;
+    .map-embed {
+      width: 100%; aspect-ratio: 16/9;
+      border-radius: 16px; overflow: hidden;
+      border: 1px solid var(--border); background: var(--surface-alt);
     }
-    .related-scroll::-webkit-scrollbar { display: none; }
-    .related-mini {
-      flex-shrink: 0; width: 140px; cursor: pointer; border-radius: 12px;
-      overflow: hidden; background: var(--surface-alt);
-      border: 1px solid var(--border); transition: transform 0.2s;
-    }
-    .related-mini:hover { transform: translateY(-3px); }
-    .related-mini img { width: 100%; height: 80px; object-fit: cover; display: block; }
-    .related-mini .rm-info { padding: 8px 10px; }
-    .related-mini .rm-info h4 {
-      font-size: 0.78rem; font-weight: 700; color: var(--text); margin-bottom: 2px;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
-    .related-mini .rm-info span { font-size: 0.65rem; color: var(--text-secondary); }
+    .map-embed iframe { width: 100%; height: 100%; border: none; display: block; }
+    @media (max-width: 639px) { .map-embed { aspect-ratio: 4/3; } }
 
+    /* ===== Sticky sidebar ===== */
+    .detail-sidebar {
+      position: relative;
+    }
+    @media (min-width: 1024px) {
+      .detail-sidebar {
+        position: sticky; top: 90px;
+        align-self: flex-start;
+      }
+    }
+
+    .sidebar-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; padding: 22px;
+      box-shadow: 0 4px 16px rgba(15,41,64,0.04);
+    }
+
+    .sidebar-card .sidebar-status {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-card .sidebar-status .status-label {
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--text-secondary);
+    }
+
+    .sidebar-info-row {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 12px 0; border-bottom: 1px solid var(--border);
+      font-size: 0.88rem; color: var(--text);
+    }
+    .sidebar-info-row:last-of-type { border-bottom: none; }
+    .sidebar-info-row i {
+      color: var(--navy-2); font-size: 0.9rem; margin-top: 3px; flex-shrink: 0;
+      width: 16px; text-align: center;
+    }
+    [data-theme="dark"] .sidebar-info-row i { color: var(--gold); }
+    .sidebar-info-row .info-body { flex: 1; min-width: 0; }
+    .sidebar-info-row .info-label {
+      font-size: 0.65rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.8px;
+      color: var(--text-secondary); margin-bottom: 2px;
+    }
+    .sidebar-info-row .info-value { color: var(--text); font-weight: 500; line-height: 1.4; }
+    .sidebar-info-row .info-value.distance {
+      color: var(--gold-deep); font-weight: 700;
+    }
+    .sidebar-info-row .info-value.hours {
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .sidebar-info-row .info-value.hours .open-in {
+      font-size: 0.72rem; font-weight: 600; color: var(--open-green);
+    }
+    .sidebar-info-row .info-value.hours .closed-for {
+      font-size: 0.72rem; font-weight: 600; color: var(--closed-red);
+    }
+
+    .sidebar-actions {
+      display: flex; gap: 10px; margin-top: 16px;
+    }
+    .sidebar-actions .action-btn {
+      flex: 1; padding: 13px 14px; border-radius: 40px;
+      font-weight: 700; font-size: 0.85rem;
+      text-align: center; text-decoration: none;
+      display: flex; align-items: center; justify-content: center; gap: 7px;
+      transition: 0.2s; cursor: pointer; border: none; font-family: inherit;
+    }
+    .action-btn.call {
+      background: var(--surface-alt); color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .action-btn.call:hover { border-color: var(--navy-2); background: #eef4fb; }
+    [data-theme="dark"] .action-btn.call:hover { background: #334155; }
+
+    .action-btn.wa {
+      background: #25D366; color: white;
+      box-shadow: 0 6px 18px rgba(37,211,102,0.25);
+    }
+    .action-btn.wa:hover { background: #1DA851; }
+
+    .sidebar-secondary {
+      display: flex; gap: 8px; margin-top: 10px;
+    }
+    .sidebar-secondary button {
+      flex: 1; padding: 11px 8px;
+      border-radius: 14px; border: 1px solid var(--border);
+      background: var(--surface); color: var(--text);
+      font-weight: 600; font-size: 0.72rem; cursor: pointer;
+      display: flex; flex-direction: column; align-items: center; gap: 5px;
+      transition: 0.2s; font-family: inherit;
+    }
+    .sidebar-secondary button:hover {
+      border-color: var(--navy-2); background: var(--surface-alt);
+    }
+    .sidebar-secondary button i { font-size: 1rem; color: var(--navy-2); }
+    [data-theme="dark"] .sidebar-secondary button i { color: var(--gold); }
+    .sidebar-secondary button.active { color: #e74c3c; border-color: #e74c3c; }
+    .sidebar-secondary button.active i { color: #e74c3c; }
+
+    /* ===== Related ===== */
+    .related-section { margin-top: 40px; }
+    .related-section h2 {
+      font-size: 1.2rem; font-weight: 700; color: var(--text);
+      margin-bottom: 16px; letter-spacing: -0.3px;
+    }
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    @media (min-width: 640px) { .related-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; } }
+    @media (min-width: 1024px) { .related-grid { grid-template-columns: repeat(4, 1fr); gap: 18px; } }
+
+    .related-card {
+      cursor: pointer; border-radius: 14px; overflow: hidden;
+      background: var(--surface); border: 1px solid var(--border);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    .related-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(15,41,64,0.12);
+      border-color: rgba(212,184,122,0.4);
+    }
+    .related-card .rc-img {
+      height: 110px; overflow: hidden; background: var(--surface-alt); position: relative;
+    }
+    .related-card .rc-img img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.5s ease;
+    }
+    .related-card:hover .rc-img img { transform: scale(1.06); }
+    .related-card .rc-body { padding: 10px 12px 12px; }
+    .related-card .rc-body h4 {
+      font-size: 0.82rem; font-weight: 700; color: var(--text);
+      margin-bottom: 4px; line-height: 1.3;
+      display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .related-card .rc-body span {
+      font-size: 0.7rem; color: var(--text-secondary);
+      display: inline-flex; align-items: center; gap: 4px;
+    }
+    .related-card .rc-body span i { color: var(--navy-2); font-size: 0.65rem; }
+
+    /* ===== Toast ===== */
     .toast {
       position: fixed; bottom: 30px; left: 50%;
       transform: translateX(-50%) translateY(80px);
@@ -491,16 +373,9 @@
     .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
     @media (max-width: 639px) {
-      .hotspot-hero { padding: 32px 18px 28px; border-radius: 20px; }
-      .hotspot-hero h1 { font-size: 1.7rem; }
-      .hotspot-search input { padding: 12px 12px; font-size: 0.9rem; }
-      .hotspot-search button { padding: 0 18px; font-size: 0.8rem; }
-      .modal-content { padding: 20px; }
-      .modal-gallery { height: 220px; }
-      .modal-header h2 { font-size: 1.25rem; }
-      .hotspot-img-wrap { height: 180px; }
-      .custom-select { min-width: 100%; }
-      .filter-toolbar { flex-direction: column; align-items: stretch; }
+      .detail-title-row h1 { font-size: 1.4rem; }
+      .sidebar-card { padding: 18px; }
+      .sidebar-actions .action-btn { font-size: 0.8rem; padding: 12px 12px; }
     }
     @media (prefers-reduced-motion: reduce) {
       * { animation: none !important; transition: none !important; }
@@ -539,111 +414,157 @@
   </nav>
 
   <div class="container">
-    <section class="hotspot-hero">
-      <div class="hero-tag"><i class="fas fa-fire"></i> Trending in Nigeria</div>
-      <h1>Discover <span>Hotspots</span></h1>
-      <p>The coolest places to eat, relax, and hang out across Nigeria — all in one place.</p>
-      <div class="hotspot-search" role="search">
-        <i class="fas fa-search" aria-hidden="true"></i>
-        <input type="search" id="hotspotSearchInput" placeholder="Search by name, place, or category..." autocomplete="off" aria-label="Search hotspots">
-        <button type="button" onclick="clearSearch()" id="searchClearBtn" style="display:none;background:transparent;color:var(--text-secondary);padding:0 8px;">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-    </section>
 
-    <div class="filter-bar">
-      <div class="category-pills" id="categoryPills" role="tablist" aria-label="Filter by category"></div>
-      <div class="filter-toolbar">
-        <div class="filter-count" id="filterCount" aria-live="polite">Loading...</div>
-
-        <!-- Custom sort dropdown -->
-        <div class="custom-select" id="sortSelect">
-          <div class="custom-select-trigger" id="sortTrigger" tabindex="0" role="button" aria-haspopup="listbox" aria-expanded="false">
-            <span class="trigger-label">
-              <span class="trigger-icon"><i class="fas fa-magic" id="sortIcon"></i></span>
-              <span id="sortLabel">Recommended</span>
-            </span>
-            <i class="fas fa-chevron-down chevron"></i>
-          </div>
-          <div class="custom-select-dropdown" role="listbox">
-            <ul class="custom-select-options" id="sortOptions">
-              <li data-value="recommended" class="selected" role="option" aria-selected="true">
-                <span class="opt-icon"><i class="fas fa-location-dot"></i></span>
-                <span>Recommended</span>
-                <span class="opt-hint" id="recommendHint">Nearest</span>
-              </li>
-              <li data-value="name" role="option" aria-selected="false">
-                <span class="opt-icon"><i class="fas fa-arrow-down-a-z"></i></span>
-                <span>Name</span>
-                <span class="opt-hint">A–Z</span>
-              </li>
-              <li data-value="newest" role="option" aria-selected="false">
-                <span class="opt-icon"><i class="fas fa-clock"></i></span>
-                <span>Newest</span>
-                <span class="opt-hint">Recently added</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- Location status note -->
-      <div class="location-note" id="locationNote" style="display:none;">
-        <i class="fas fa-location-dot"></i>
-        <span id="locationNoteText">Getting your location...</span>
-        <button type="button" id="locationRetryBtn" style="display:none;">Retry</button>
-      </div>
+    <div id="detailLoading" class="detail-loading">
+      <div class="spinner"></div>
+      <p>Loading hotspot...</p>
     </div>
 
-    <div class="hotspot-grid" id="hotspotGrid" aria-live="polite"></div>
-  </div>
-
-  <div class="hotspot-modal-overlay" id="hotspotModal" role="dialog" aria-modal="true" aria-labelledby="modalName">
-    <div class="hotspot-modal">
-      <button class="modal-close-btn" onclick="closeHotspotModal()" aria-label="Close"><i class="fas fa-times"></i></button>
-      <div class="modal-gallery" id="modalGallery">
-        <button class="gallery-nav prev" id="galleryPrev" aria-label="Previous image" style="display:none;"><i class="fas fa-chevron-left"></i></button>
-        <button class="gallery-nav next" id="galleryNext" aria-label="Next image" style="display:none;"><i class="fas fa-chevron-right"></i></button>
-        <div class="gallery-dots" id="galleryDots"></div>
-      </div>
-      <div class="modal-content">
-        <div class="modal-header">
-          <h2 id="modalName">Hotspot Name</h2>
-          <span class="category-badge" id="modalCategory">Category</span>
-        </div>
-        <div class="modal-meta" id="modalMeta">
-          <span class="status-pill" id="modalStatus" style="display:none;"></span>
-          <span id="modalPriceRange" class="price-range"></span>
-        </div>
-        <div class="modal-address">
-          <i class="fas fa-map-marker-alt"></i>
-          <span id="modalAddress">Address</span>
-          <span class="modal-distance" id="modalDistance" style="display:none;"></span>
-        </div>
-        <p class="modal-description" id="modalDescription">Description</p>
-        <div id="modalFeaturesWrap">
-          <div class="modal-section-title">Amenities</div>
-          <div class="modal-features" id="modalFeatures"></div>
-        </div>
-        <div class="map-container">
-          <iframe id="modalMap" src="" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Location map"></iframe>
-        </div>
-        <div class="action-row-primary">
-          <a href="#" id="modalCallBtn" class="btn-call"><i class="fas fa-phone"></i> Call</a>
-          <a href="#" id="modalWaBtn" class="btn-wa" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-        </div>
-        <div class="action-row-secondary">
-          <button type="button" onclick="openDirections()"><i class="fas fa-diamond-turn-right"></i><span>Directions</span></button>
-          <button type="button" onclick="shareHotspot()"><i class="fas fa-share-nodes"></i><span>Share</span></button>
-          <button type="button" id="modalSaveBtn" onclick="toggleSaveCurrent()"><i class="far fa-heart"></i><span>Save</span></button>
-        </div>
-        <div class="related-wrap" id="relatedWrap" style="display:none;">
-          <div class="modal-section-title">You might also like</div>
-          <div class="related-scroll" id="relatedScroll"></div>
-        </div>
-      </div>
+    <div id="detailError" class="detail-error" style="display:none;">
+      <i class="fas fa-map-location-dot"></i>
+      <h2>Hotspot not found</h2>
+      <p>The hotspot you're looking for doesn't exist or may have been removed.</p>
+      <a href="/hotspots.html"><i class="fas fa-arrow-left"></i> Browse all hotspots</a>
     </div>
+
+    <div id="detailContent" style="display:none;">
+
+      <!-- Breadcrumb -->
+      <div class="detail-breadcrumb">
+        <a href="/">Home</a>
+        <i class="fas fa-chevron-right"></i>
+        <a href="/hotspots.html">Hotspots</a>
+        <i class="fas fa-chevron-right"></i>
+        <span id="crumbName">Hotspot</span>
+      </div>
+
+      <div class="detail-layout">
+
+        <!-- MAIN COLUMN -->
+        <div class="detail-main">
+
+          <!-- Gallery -->
+          <div class="gallery" id="gallery">
+            <button class="gallery-nav prev" id="galleryPrev" aria-label="Previous image"><i class="fas fa-chevron-left"></i></button>
+            <button class="gallery-nav next" id="galleryNext" aria-label="Next image"><i class="fas fa-chevron-right"></i></button>
+            <div class="gallery-dots" id="galleryDots"></div>
+            <div class="gallery-counter" id="galleryCounter" style="display:none;">
+              <i class="fas fa-image"></i> <span id="galleryCounterText">1 / 3</span>
+            </div>
+          </div>
+
+          <!-- Title -->
+          <div class="detail-title-block">
+            <div class="detail-title-row">
+              <h1 id="spotName">Hotspot</h1>
+              <span class="category-pill" id="spotCategory">Category</span>
+            </div>
+            <div class="detail-meta-row">
+              <span class="status-pill" id="spotStatus" style="display:none;"></span>
+              <span class="meta-item" id="spotHours" style="display:none;">
+                <i class="far fa-clock"></i> <span id="spotHoursText"></span>
+              </span>
+              <span class="meta-item" id="spotPrice" style="display:none;">
+                <i class="fas fa-tag"></i> <span id="spotPriceText"></span>
+              </span>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="detail-section">
+            <h2>About this place</h2>
+            <p id="spotDescription">—</p>
+          </div>
+
+          <!-- Amenities -->
+          <div class="detail-section" id="amenitiesSection" style="display:none;">
+            <h2>Amenities</h2>
+            <div class="amenities-grid" id="spotAmenities"></div>
+          </div>
+
+          <!-- Map -->
+          <div class="detail-section">
+            <h2>Location</h2>
+            <div class="map-embed">
+              <iframe id="spotMap" src="" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Location map"></iframe>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- SIDEBAR -->
+        <aside class="detail-sidebar">
+          <div class="sidebar-card">
+
+            <div class="sidebar-status">
+              <span class="status-label">Right now</span>
+              <span class="status-pill" id="sidebarStatus" style="display:none;"></span>
+            </div>
+
+            <div class="sidebar-info-row">
+              <i class="fas fa-map-marker-alt"></i>
+              <div class="info-body">
+                <div class="info-label">Address</div>
+                <div class="info-value" id="sidebarAddress">—</div>
+              </div>
+            </div>
+
+            <div class="sidebar-info-row" id="sidebarDistanceRow" style="display:none;">
+              <i class="fas fa-location-dot"></i>
+              <div class="info-body">
+                <div class="info-label">Distance</div>
+                <div class="info-value distance" id="sidebarDistance">—</div>
+              </div>
+            </div>
+
+            <div class="sidebar-info-row" id="sidebarHoursRow" style="display:none;">
+              <i class="far fa-clock"></i>
+              <div class="info-body">
+                <div class="info-label">Hours</div>
+                <div class="info-value hours">
+                  <span id="sidebarHoursText">—</span>
+                  <span id="sidebarHoursAux"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="sidebar-actions">
+              <a href="#" id="sidebarCallBtn" class="action-btn call">
+                <i class="fas fa-phone"></i> Call
+              </a>
+              <a href="#" id="sidebarWaBtn" class="action-btn wa" target="_blank" rel="noopener">
+                <i class="fab fa-whatsapp"></i> WhatsApp
+              </a>
+            </div>
+
+            <div class="sidebar-secondary">
+              <button type="button" onclick="openDirections()">
+                <i class="fas fa-diamond-turn-right"></i>
+                <span>Directions</span>
+              </button>
+              <button type="button" onclick="shareHotspot()">
+                <i class="fas fa-share-nodes"></i>
+                <span>Share</span>
+              </button>
+              <button type="button" id="saveBtn" onclick="toggleSave()">
+                <i class="far fa-heart"></i>
+                <span>Save</span>
+              </button>
+            </div>
+
+          </div>
+        </aside>
+
+      </div>
+
+      <!-- Related -->
+      <section class="related-section" id="relatedSection" style="display:none;">
+        <h2>You might also like</h2>
+        <div class="related-grid" id="relatedGrid"></div>
+      </section>
+
+    </div>
+
   </div>
 
   <footer class="footer">
@@ -666,8 +587,8 @@
           <h4>Browse</h4>
           <a href="/category.html?slug=all">All Items</a>
           <a href="/hotspots.html">Hotspots</a>
+          <a href="/services.html">Find a Pro</a>
           <a href="/category.html?slug=fashion">Fashion</a>
-          <a href="/category.html?slug=electronics">Electronics</a>
         </div>
         <div class="footer-col">
           <h4>Support</h4>
@@ -699,6 +620,38 @@
     <a href="/profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
   </div>
 
+  <div class="modal-overlay" id="signupModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Create your account</h3>
+        <button class="modal-close" id="closeSignupModalBtn"><i class="fas fa-times"></i></button>
+      </div>
+      <form id="signupForm" class="modal-form">
+        <label for="signupName">Full Name</label>
+        <input type="text" id="signupName" placeholder="Enter your full name" required>
+        <label for="signupPhone">Phone Number</label>
+        <input type="tel" id="signupPhone" placeholder="Enter your phone number" required>
+        <label>State</label>
+        <div class="custom-select" id="stateSelect">
+          <div class="custom-select-trigger" id="stateTrigger">
+            <span>Select your state</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="custom-select-dropdown" id="stateDropdown">
+            <input type="text" id="stateSearchInput" placeholder="Search state...">
+            <ul class="custom-select-options" id="stateOptionsList"></ul>
+          </div>
+        </div>
+        <input type="hidden" id="signupState" value="">
+        <label class="terms-checkbox">
+          <input type="checkbox" id="termsCheckbox" required>
+          <span>By creating an account, you agree to Zaure's <a href="/terms.html" target="_blank">Terms</a>, <a href="/privacy.html" target="_blank">Privacy Policy</a>.</span>
+        </label>
+        <button type="submit" class="btn-primary">Sign Up</button>
+      </form>
+    </div>
+  </div>
+
   <script src="/js/main.js"></script>
   <script>
   (function () {
@@ -706,16 +659,11 @@
 
     const FAV_KEY = 'zaure_hotspot_favorites';
     const state = {
+      spot: null,
       all: [],
-      filtered: [],
-      activeCategory: 'All',
-      searchQuery: '',
-      activeSort: 'recommended',
-      currentSpot: null,
-      galleryIndex: 0,
       galleryImages: [],
-      userLocation: null,
-      locationStatus: 'pending'
+      galleryIndex: 0,
+      userLocation: null
     };
 
     /* ---------- Utilities ---------- */
@@ -725,15 +673,9 @@
         .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;').replace(/'/g, '&#039;');
     }
-
-    function showToast(msg, icon) {
-      const toast = document.getElementById('toast');
-      toast.innerHTML = `<i class="fas ${icon || 'fa-check-circle'}"></i> ${escapeHtml(msg)}`;
-      toast.classList.add('show');
-      clearTimeout(showToast._t);
-      showToast._t = setTimeout(() => toast.classList.remove('show'), 2400);
+    function getParam(name) {
+      return new URLSearchParams(location.search).get(name);
     }
-
     function getFavorites() {
       try { return JSON.parse(localStorage.getItem(FAV_KEY) || '[]'); } catch (e) { return []; }
     }
@@ -749,7 +691,15 @@
       return idx === -1;
     }
 
-    /* ---------- Haversine distance (km) ---------- */
+    function showToast(msg, icon) {
+      const t = document.getElementById('toast');
+      t.innerHTML = `<i class="fas ${icon || 'fa-check-circle'}"></i> ${escapeHtml(msg)}`;
+      t.classList.add('show');
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(() => t.classList.remove('show'), 2400);
+    }
+
+    /* ---------- Distance ---------- */
     function haversine(lat1, lng1, lat2, lng2) {
       const R = 6371;
       const dLat = (lat2 - lat1) * Math.PI / 180;
@@ -759,12 +709,6 @@
                 Math.sin(dLng / 2) ** 2;
       return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     }
-
-    function getDistance(spot) {
-      if (!state.userLocation || spot.lat == null || spot.lng == null) return Infinity;
-      return haversine(state.userLocation.lat, state.userLocation.lng, spot.lat, spot.lng);
-    }
-
     function formatDistance(km) {
       if (!isFinite(km)) return '';
       if (km < 1) return `${Math.round(km * 1000)} m`;
@@ -772,35 +716,37 @@
       return `${Math.round(km)} km`;
     }
 
-    /* ---------- Real-time Open/Closed ---------- */
-    // Returns current hour as fraction in Nigeria time (Africa/Lagos)
-    function getNigeriaNow() {
+    function fetchUserLocation() {
+      return new Promise(resolve => {
+        if (!navigator.geolocation) return resolve(null);
+        navigator.geolocation.getCurrentPosition(
+          pos => resolve({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
+          () => resolve(null),
+          { timeout: 8000, maximumAge: 300000, enableHighAccuracy: false }
+        );
+      });
+    }
+
+    /* ---------- Open/Closed (real-time, Lagos) ---------- */
+    function getLagosNow() {
       try {
         const parts = new Intl.DateTimeFormat('en-NG', {
           timeZone: 'Africa/Lagos',
           hour: 'numeric', minute: 'numeric', hour12: false
         }).formatToParts(new Date());
-        const h = parseInt(parts.find(p => p.type === 'hour').value, 10);
-        const m = parseInt(parts.find(p => p.type === 'minute').value, 10);
-        return (h % 24) + m / 60;
+        return parseInt(parts.find(p => p.type === 'hour').value, 10) +
+               parseInt(parts.find(p => p.type === 'minute').value, 10) / 60;
       } catch (e) {
         const d = new Date();
         return d.getHours() + d.getMinutes() / 60;
       }
     }
-
-    function isOpenNow(spot) {
-      if (!spot) return null;
-      if (spot.isOpen24) return true;
-      const hours = spot.hours;
+    function parseHours(hours) {
       if (!hours || typeof hours !== 'string') return null;
-
       const h = hours.toLowerCase().trim();
-      if (h === '24/7' || h === '24 hours' || h === 'always open') return true;
-
+      if (h === '24/7' || h === '24 hours' || h === 'always open') return { always: true };
       const m = h.match(/(\d{1,2})(?::(\d{2}))?\s*(am|pm)?\s*[-–to]+\s*(\d{1,2})(?::(\d{2}))?\s*(am|pm)?/);
       if (!m) return null;
-
       const toHour = (hStr, minStr, ampm) => {
         let hr = parseInt(hStr, 10);
         const mi = parseInt(minStr || '0', 10);
@@ -808,333 +754,159 @@
         if (ampm === 'am' && hr === 12) hr = 0;
         return hr + mi / 60;
       };
-
-      const open = toHour(m[1], m[2], m[3]);
-      const close = toHour(m[4], m[5], m[6]);
-      const now = getNigeriaNow();
-
-      if (close < open) {
-        // Overnight — open if after open OR before close
-        return now >= open || now <= close;
-      }
+      return {
+        open: toHour(m[1], m[2], m[3]),
+        close: toHour(m[4], m[5], m[6])
+      };
+    }
+    function isOpenNow(spot) {
+      if (!spot) return null;
+      if (spot.isOpen24) return true;
+      const parsed = parseHours(spot.hours);
+      if (!parsed) return null;
+      if (parsed.always) return true;
+      const now = getLagosNow();
+      let { open, close } = parsed;
+      if (close < open) return now >= open || now <= close;
       return now >= open && now <= close;
     }
 
-    function statusBadgeHtml(open) {
-      if (open === true) return `<span class="badge-spot badge-open">Open</span>`;
-      if (open === false) return `<span class="badge-spot badge-closed">Closed</span>`;
-      return '';
-    }
+    /* ---------- Gallery ---------- */
+    function renderGallery() {
+      const gallery = document.getElementById('gallery');
+      const dots = document.getElementById('galleryDots');
+      const prev = document.getElementById('galleryPrev');
+      const next = document.getElementById('galleryNext');
+      const counter = document.getElementById('galleryCounter');
+      const counterText = document.getElementById('galleryCounterText');
 
-    let statusInterval = null;
-    function startStatusClock() {
-      if (statusInterval) clearInterval(statusInterval);
-      // Refresh every 60 seconds so a spot's Open/Closed state stays real-time
-      statusInterval = setInterval(refreshStatusBadges, 60000);
-    }
+      gallery.querySelectorAll('.slide').forEach(s => s.remove());
 
-    function refreshStatusBadges() {
-      // Update each card's badge in place
-      document.querySelectorAll('.hotspot-card[data-id]').forEach(card => {
-        const id = card.dataset.id;
-        const spot = state.all.find(s => String(s.id) === String(id));
-        if (!spot) return;
-        const container = card.querySelector('.hotspot-badges');
-        if (!container) return;
-        const open = isOpenNow(spot);
-        const html = statusBadgeHtml(open);
-        if (html) container.innerHTML = html;
-        else container.innerHTML = '';
+      state.galleryImages.forEach((src, i) => {
+        const slide = document.createElement('div');
+        slide.className = 'slide' + (i === 0 ? ' active' : '');
+        slide.innerHTML = `<img src="${escapeHtml(src)}" alt="Photo ${i + 1}" loading="lazy" onerror="this.src='https://placehold.co/800x500?text=Hotspot'">`;
+        gallery.insertBefore(slide, prev);
       });
-      // Update modal badge
-      if (state.currentSpot) updateModalStatus(state.currentSpot);
-    }
 
-    function updateModalStatus(spot) {
-      const el = document.getElementById('modalStatus');
-      const open = isOpenNow(spot);
-      if (open === null) { el.style.display = 'none'; return; }
-      el.style.display = 'inline-flex';
-      el.className = 'status-pill ' + (open ? 'open' : 'closed');
-      el.textContent = open ? 'Open now' : 'Closed';
-    }
-
-    /* ---------- Geolocation ---------- */
-    function fetchUserLocation() {
-      return new Promise(resolve => {
-        if (!navigator.geolocation) {
-          state.locationStatus = 'unavailable';
-          resolve(null);
-          return;
-        }
-        navigator.geolocation.getCurrentPosition(
-          pos => {
-            state.userLocation = { lat: pos.coords.latitude, lng: pos.coords.longitude };
-            state.locationStatus = 'granted';
-            resolve(state.userLocation);
-          },
-          err => {
-            state.locationStatus = err.code === 1 ? 'denied' : 'unavailable';
-            resolve(null);
-          },
-          { timeout: 10000, maximumAge: 300000, enableHighAccuracy: false }
-        );
-      });
-    }
-
-    function updateLocationNote() {
-      const note = document.getElementById('locationNote');
-      const text = document.getElementById('locationNoteText');
-      const retry = document.getElementById('locationRetryBtn');
-      const hint = document.getElementById('recommendHint');
-
-      if (state.locationStatus === 'granted') {
-        note.style.display = 'flex';
-        note.className = 'location-note granted';
-        text.textContent = 'Showing places nearest to your location.';
-        retry.style.display = 'none';
-        if (hint) hint.textContent = 'Nearest';
-      } else if (state.locationStatus === 'denied') {
-        note.style.display = 'flex';
-        note.className = 'location-note denied';
-        text.textContent = 'Location access denied — showing newest hotspots instead.';
-        retry.style.display = 'inline-block';
-        if (hint) hint.textContent = 'Enable location';
-      } else if (state.locationStatus === 'unavailable') {
-        note.style.display = 'flex';
-        note.className = 'location-note denied';
-        text.textContent = 'Location unavailable on this device.';
-        retry.style.display = 'none';
-        if (hint) hint.textContent = 'Newest';
-      } else {
-        note.style.display = 'flex';
-        note.className = 'location-note';
-        text.textContent = 'Detecting your location for nearby recommendations...';
-        retry.style.display = 'none';
-        if (hint) hint.textContent = 'Nearest';
-      }
-    }
-
-    /* ---------- Data loading ---------- */
-    function renderSkeletons(n = 6) {
-      const grid = document.getElementById('hotspotGrid');
-      grid.innerHTML = Array.from({ length: n }).map(() => `
-        <div class="skeleton-card" aria-hidden="true">
-          <div class="sk-img"></div>
-          <div class="sk-body">
-            <div class="sk-line short"></div>
-            <div class="sk-line tiny"></div>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    /* ---------- Category pills ---------- */
-    function buildCategories() {
-      const cats = {};
-      state.all.forEach(s => {
-        const c = s.category || 'Other';
-        cats[c] = (cats[c] || 0) + 1;
-      });
-      const pills = document.getElementById('categoryPills');
-      const total = state.all.length;
-      const items = [
-        `<button class="category-pill ${state.activeCategory === 'All' ? 'active' : ''}" data-cat="All" role="tab">
-           <i class="fas fa-border-all"></i> All <span class="count">${total}</span>
-         </button>`,
-        ...Object.entries(cats).sort((a, b) => b[1] - a[1]).map(([cat, count]) => `
-          <button class="category-pill ${state.activeCategory === cat ? 'active' : ''}" data-cat="${escapeHtml(cat)}" role="tab">
-            ${escapeHtml(cat)} <span class="count">${count}</span>
-          </button>
-        `)
-      ];
-      pills.innerHTML = items.join('');
-      pills.querySelectorAll('.category-pill').forEach(pill => {
-        pill.addEventListener('click', () => {
-          state.activeCategory = pill.dataset.cat;
-          pills.querySelectorAll('.category-pill').forEach(p => p.classList.remove('active'));
-          pill.classList.add('active');
-          applyFilters();
+      if (state.galleryImages.length > 1) {
+        prev.style.display = 'flex';
+        next.style.display = 'flex';
+        counter.style.display = 'flex';
+        counterText.textContent = `1 / ${state.galleryImages.length}`;
+        dots.innerHTML = state.galleryImages.map((_, i) =>
+          `<span data-idx="${i}" class="${i === 0 ? 'active' : ''}"></span>`
+        ).join('');
+        dots.querySelectorAll('span').forEach(dot => {
+          dot.addEventListener('click', () => {
+            state.galleryIndex = parseInt(dot.dataset.idx, 10);
+            updateGalleryUI();
+          });
         });
+      } else {
+        prev.style.display = 'none';
+        next.style.display = 'none';
+        counter.style.display = 'none';
+        dots.innerHTML = '';
+      }
+    }
+    function updateGalleryUI() {
+      document.querySelectorAll('#gallery .slide').forEach((s, i) => {
+        s.classList.toggle('active', i === state.galleryIndex);
       });
+      document.querySelectorAll('#galleryDots span').forEach((d, i) => {
+        d.classList.toggle('active', i === state.galleryIndex);
+      });
+      document.getElementById('galleryCounterText').textContent =
+        `${state.galleryIndex + 1} / ${state.galleryImages.length}`;
     }
 
-    /* ---------- Filtering / sorting ---------- */
-    function applyFilters() {
-      let list = [...state.all];
+    /* ---------- Populate sidebar status + distance ---------- */
+    function updateStatusUI() {
+      const spot = state.spot;
+      if (!spot) return;
 
-      if (state.activeCategory !== 'All') {
-        list = list.filter(s => (s.category || 'Other') === state.activeCategory);
-      }
+      const open = isOpenNow(spot);
+      const statusPill = document.getElementById('spotStatus');
+      const sidebarStatus = document.getElementById('sidebarStatus');
 
-      if (state.searchQuery) {
-        const q = state.searchQuery.toLowerCase();
-        list = list.filter(s =>
-          (s.name || '').toLowerCase().includes(q) ||
-          (s.location || '').toLowerCase().includes(q) ||
-          (s.address || '').toLowerCase().includes(q) ||
-          (s.category || '').toLowerCase().includes(q) ||
-          (Array.isArray(s.tags) && s.tags.some(t => String(t).toLowerCase().includes(q)))
-        );
-      }
-
-      switch (state.activeSort) {
-        case 'name':
-          list.sort((a, b) => (a.name || '').localeCompare(b.name || ''));
-          break;
-        case 'newest':
-          list.sort((a, b) => (b.addedAt || 0) - (a.addedAt || 0));
-          break;
-        case 'recommended':
-        default:
-          // Sort by proximity if we have the user's coordinates
-          if (state.userLocation) {
-            list.sort((a, b) => getDistance(a) - getDistance(b));
-          } else {
-            // Fallback: newest-first
-            list.sort((a, b) => (b.addedAt || 0) - (a.addedAt || 0));
-          }
-          break;
-      }
-
-      state.filtered = list;
-      renderGrid();
-      updateCount();
-    }
-
-    function updateCount() {
-      const el = document.getElementById('filterCount');
-      const n = state.filtered.length;
-      if (n === 0) el.innerHTML = 'No hotspots match your search';
-      else if (n === state.all.length) el.innerHTML = `<strong>${n}</strong> hotspots`;
-      else el.innerHTML = `<strong>${n}</strong> of ${state.all.length} hotspots`;
-    }
-
-    /* ---------- Grid rendering ---------- */
-    function renderGrid() {
-      const grid = document.getElementById('hotspotGrid');
-
-      if (state.filtered.length === 0) {
-        grid.innerHTML = `
-          <div class="empty-state">
-            <i class="fas fa-search"></i>
-            <h3>Nothing found here</h3>
-            <p>Try a different search or clear your filters to explore more hotspots.</p>
-            <button type="button" onclick="clearAllFilters()">Clear filters</button>
-          </div>
-        `;
+      if (open === null) {
+        statusPill.style.display = 'none';
+        sidebarStatus.style.display = 'none';
         return;
       }
 
-      grid.innerHTML = state.filtered.map((spot, idx) => {
-        const open = isOpenNow(spot);
-        const badges = statusBadgeHtml(open);
-        const favActive = isFav(spot.id);
-        const heartCls = favActive ? 'active fas fa-heart' : 'far fa-heart';
-        const priceRange = spot.priceRange ? `<span class="price-range">${escapeHtml(spot.priceRange)}</span>` : '';
-        const dist = getDistance(spot);
-        const distHtml = isFinite(dist)
-          ? `<span class="card-distance"><i class="fas fa-location-dot"></i> ${formatDistance(dist)}</span>`
-          : `<span class="card-distance hidden"></span>`;
+      const cls = open ? 'open' : 'closed';
+      const label = open ? 'Open now' : 'Closed';
 
-        return `
-          <div class="hotspot-card" tabindex="0" role="button"
-               aria-label="View ${escapeHtml(spot.name)}"
-               data-id="${escapeHtml(String(spot.id))}"
-               style="animation-delay:${Math.min(idx * 40, 320)}ms">
-            <div class="hotspot-img-wrap">
-              <img src="${escapeHtml(getSpotImage(spot))}"
-                   alt="${escapeHtml(spot.name)}"
-                   class="hotspot-img" loading="lazy"
-                   onerror="this.src='https://placehold.co/600x400?text=Hotspot'">
-              <div class="hotspot-tag">${escapeHtml(spot.category || 'Other')}</div>
-              <div class="hotspot-badges">${badges}</div>
-              <button class="fav-btn ${favActive ? 'active' : ''}"
-                      aria-label="${favActive ? 'Remove from favorites' : 'Save to favorites'}"
-                      aria-pressed="${favActive}">
-                <i class="${heartCls}"></i>
-              </button>
-            </div>
-            <div class="hotspot-info">
-              <h3>${escapeHtml(spot.name)}</h3>
-              <div class="loc"><i class="fas fa-map-marker-alt"></i> ${escapeHtml(spot.location || spot.address || 'Nigeria')}</div>
-              <div class="card-footer">
-                ${distHtml}
-                ${priceRange}
-              </div>
-            </div>
-          </div>
-        `;
-      }).join('');
+      statusPill.style.display = 'inline-flex';
+      statusPill.className = 'status-pill ' + cls;
+      statusPill.textContent = label;
 
-      grid.querySelectorAll('.hotspot-card').forEach(card => {
-        const id = card.dataset.id;
-        card.addEventListener('click', () => openHotspotModal(id));
-        card.addEventListener('keydown', e => {
-          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openHotspotModal(id); }
-        });
-        const favBtn = card.querySelector('.fav-btn');
-        favBtn.addEventListener('click', e => {
-          e.stopPropagation();
-          const nowActive = toggleFav(id);
-          favBtn.classList.toggle('active', nowActive);
-          favBtn.querySelector('i').className = nowActive ? 'fas fa-heart' : 'far fa-heart';
-          favBtn.setAttribute('aria-pressed', String(nowActive));
-          favBtn.setAttribute('aria-label', nowActive ? 'Remove from favorites' : 'Save to favorites');
-          showToast(nowActive ? 'Saved to favorites' : 'Removed from favorites', 'fa-heart');
-        });
-      });
+      sidebarStatus.style.display = 'inline-flex';
+      sidebarStatus.className = 'status-pill ' + cls;
+      sidebarStatus.textContent = label;
+
+      // Hours auxiliary
+      const parsed = parseHours(spot.hours);
+      const aux = document.getElementById('sidebarHoursAux');
+      if (parsed && !parsed.always && aux) {
+        const now = getLagosNow();
+        const pad = n => String(Math.floor(n)).padStart(2, '0') + ':' + String(Math.round((n % 1) * 60)).padStart(2, '0');
+        if (!open) {
+          // Just show hours text; aux left empty to keep it simple
+          aux.textContent = '';
+        } else {
+          aux.textContent = '';
+        }
+      }
     }
 
-    function getSpotImage(spot, index = 0) {
-      if (Array.isArray(spot.images) && spot.images.length > index) return spot.images[index];
-      if (spot.images && spot.images.length) return spot.images[0];
-      if (spot.image) return spot.image;
-      return 'https://placehold.co/600x400?text=Hotspot';
+    function updateDistanceUI() {
+      const spot = state.spot;
+      if (!spot || !state.userLocation || spot.lat == null || spot.lng == null) return;
+      const km = haversine(state.userLocation.lat, state.userLocation.lng, spot.lat, spot.lng);
+      document.getElementById('sidebarDistanceRow').style.display = 'flex';
+      document.getElementById('sidebarDistance').textContent = formatDistance(km) + ' away';
     }
 
-    /* ---------- Modal ---------- */
-    window.openHotspotModal = function (id) {
-      const spot = state.all.find(s => String(s.id) === String(id));
-      if (!spot) return;
-      state.currentSpot = spot;
+    /* ---------- Populate main ---------- */
+    function populateDetail() {
+      const spot = state.spot;
 
-      state.galleryImages = Array.isArray(spot.images) && spot.images.length ? spot.images : [getSpotImage(spot)];
-      state.galleryIndex = 0;
-      renderGallery();
+      document.title = `${spot.name} – Zaure Hotspots`;
+      document.getElementById('crumbName').textContent = spot.name;
+      document.getElementById('spotName').textContent = spot.name;
+      document.getElementById('spotCategory').textContent = spot.category || 'Hotspot';
+      document.getElementById('spotDescription').textContent = spot.description || 'No description available.';
 
-      document.getElementById('modalName').textContent = spot.name || 'Hotspot';
-      document.getElementById('modalCategory').textContent = spot.category || 'Other';
-      document.getElementById('modalPriceRange').textContent = spot.priceRange || '';
-
-      updateModalStatus(spot);
-
-      // Distance display
-      const distEl = document.getElementById('modalDistance');
-      const dist = getDistance(spot);
-      if (isFinite(dist)) {
-        distEl.style.display = 'inline-flex';
-        distEl.innerHTML = `<i class="fas fa-location-dot"></i> ${formatDistance(dist)} away`;
-      } else {
-        distEl.style.display = 'none';
+      // Hours meta
+      if (spot.hours) {
+        document.getElementById('spotHours').style.display = 'inline-flex';
+        document.getElementById('spotHoursText').textContent = spot.hours;
+        document.getElementById('sidebarHoursRow').style.display = 'flex';
+        document.getElementById('sidebarHoursText').textContent = spot.hours;
       }
 
-      document.getElementById('modalAddress').textContent = spot.address || spot.location || 'Nigeria';
-      document.getElementById('modalDescription').textContent = spot.description || '';
+      // Price
+      if (spot.priceRange) {
+        document.getElementById('spotPrice').style.display = 'inline-flex';
+        document.getElementById('spotPriceText').textContent = spot.priceRange;
+      }
 
-      const featuresWrap = document.getElementById('modalFeaturesWrap');
-      const featuresEl = document.getElementById('modalFeatures');
+      // Address
+      document.getElementById('sidebarAddress').textContent = spot.address || spot.location || 'Nigeria';
+
+      // Amenities
       if (Array.isArray(spot.features) && spot.features.length) {
-        featuresWrap.style.display = 'block';
-        featuresEl.innerHTML = spot.features.map(f =>
-          `<span><i class="fas fa-check"></i> ${escapeHtml(f)}</span>`
+        document.getElementById('amenitiesSection').style.display = 'block';
+        document.getElementById('spotAmenities').innerHTML = spot.features.map(f =>
+          `<span class="amenity-chip"><i class="fas fa-check"></i> ${escapeHtml(f)}</span>`
         ).join('');
-      } else {
-        featuresWrap.style.display = 'none';
       }
 
-      // Map — use lat/lng if present, else address text
-      const mapIframe = document.getElementById('modalMap');
+      // Map
+      const mapIframe = document.getElementById('spotMap');
       if (spot.lat != null && spot.lng != null) {
         mapIframe.src = `https://maps.google.com/maps?q=${spot.lat},${spot.lng}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
       } else {
@@ -1142,315 +914,154 @@
         mapIframe.src = `https://maps.google.com/maps?q=${q}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
       }
 
+      // Contact buttons
       const cleanNumber = (spot.contact || '').replace(/[^0-9]/g, '');
-      document.getElementById('modalCallBtn').href = cleanNumber ? `tel:${cleanNumber}` : '#';
-      document.getElementById('modalWaBtn').href = cleanNumber
+      document.getElementById('sidebarCallBtn').href = cleanNumber ? `tel:${cleanNumber}` : '#';
+      document.getElementById('sidebarWaBtn').href = cleanNumber
         ? `https://wa.me/${cleanNumber}?text=${encodeURIComponent('Hello, I found ' + spot.name + ' on Zaure Hotspots.')}`
         : '#';
 
-      updateModalSaveBtn();
-      renderRelated(spot);
+      // Save button
+      updateSaveBtn();
 
-      const overlay = document.getElementById('hotspotModal');
-      overlay.classList.add('active');
-      document.body.style.overflow = 'hidden';
-      setTimeout(() => document.querySelector('.modal-close-btn').focus(), 60);
-    };
+      // Status
+      updateStatusUI();
 
-    function renderGallery() {
-      const galleryEl = document.getElementById('modalGallery');
-      const dotsEl = document.getElementById('galleryDots');
-      const prevBtn = document.getElementById('galleryPrev');
-      const nextBtn = document.getElementById('galleryNext');
-
-      galleryEl.querySelectorAll('.slide').forEach(s => s.remove());
-
-      state.galleryImages.forEach((src, i) => {
-        const slide = document.createElement('div');
-        slide.className = 'slide' + (i === 0 ? ' active' : '');
-        slide.innerHTML = `<img src="${escapeHtml(src)}" alt="Photo ${i + 1}" loading="lazy" onerror="this.src='https://placehold.co/600x400?text=Hotspot'">`;
-        galleryEl.insertBefore(slide, prevBtn);
-      });
-
-      if (state.galleryImages.length > 1) {
-        prevBtn.style.display = 'flex';
-        nextBtn.style.display = 'flex';
-        dotsEl.innerHTML = state.galleryImages.map((_, i) =>
-          `<span data-idx="${i}" class="${i === 0 ? 'active' : ''}"></span>`
-        ).join('');
-        dotsEl.querySelectorAll('span').forEach(dot => {
-          dot.addEventListener('click', () => {
-            state.galleryIndex = parseInt(dot.dataset.idx, 10);
-            updateGallery();
-          });
-        });
-      } else {
-        prevBtn.style.display = 'none';
-        nextBtn.style.display = 'none';
-        dotsEl.innerHTML = '';
-      }
+      // Gallery
+      state.galleryImages = Array.isArray(spot.images) && spot.images.length ? spot.images : [spot.image || 'https://placehold.co/800x500?text=Hotspot'];
+      state.galleryIndex = 0;
+      renderGallery();
     }
 
-    function updateGallery() {
-      document.querySelectorAll('#modalGallery .slide').forEach((s, i) => {
-        s.classList.toggle('active', i === state.galleryIndex);
-      });
-      document.querySelectorAll('#galleryDots span').forEach((d, i) => {
-        d.classList.toggle('active', i === state.galleryIndex);
-      });
-    }
-
-    document.getElementById('galleryPrev').addEventListener('click', () => {
-      state.galleryIndex = (state.galleryIndex - 1 + state.galleryImages.length) % state.galleryImages.length;
-      updateGallery();
-    });
-    document.getElementById('galleryNext').addEventListener('click', () => {
-      state.galleryIndex = (state.galleryIndex + 1) % state.galleryImages.length;
-      updateGallery();
-    });
-
-    function updateModalSaveBtn() {
-      if (!state.currentSpot) return;
-      const btn = document.getElementById('modalSaveBtn');
-      const active = isFav(state.currentSpot.id);
+    function updateSaveBtn() {
+      if (!state.spot) return;
+      const active = isFav(state.spot.id);
+      const btn = document.getElementById('saveBtn');
       btn.classList.toggle('active', active);
       btn.querySelector('i').className = active ? 'fas fa-heart' : 'far fa-heart';
       btn.querySelector('span').textContent = active ? 'Saved' : 'Save';
     }
 
-    function renderRelated(spot) {
-      const wrap = document.getElementById('relatedWrap');
-      const scroll = document.getElementById('relatedScroll');
-      const related = state.all
-        .filter(s => String(s.id) !== String(spot.id) && s.category === spot.category)
-        .slice(0, 6);
-      if (related.length === 0) { wrap.style.display = 'none'; return; }
-      wrap.style.display = 'block';
-      scroll.innerHTML = related.map(s => `
-        <div class="related-mini" data-id="${escapeHtml(String(s.id))}" role="button" tabindex="0">
-          <img src="${escapeHtml(getSpotImage(s))}" alt="${escapeHtml(s.name)}" loading="lazy"
-               onerror="this.src='https://placehold.co/200x120?text=Hotspot'">
-          <div class="rm-info">
-            <h4>${escapeHtml(s.name)}</h4>
-            <span><i class="fas fa-location-dot" style="font-size:0.6rem;"></i> ${escapeHtml(s.location || '')}</span>
+    /* ---------- Related ---------- */
+    function renderRelated() {
+      const spot = state.spot;
+      const related = state.all.filter(s =>
+        String(s.id) !== String(spot.id) && s.category === spot.category
+      ).slice(0, 8);
+
+      if (related.length === 0) {
+        document.getElementById('relatedSection').style.display = 'none';
+        return;
+      }
+      document.getElementById('relatedSection').style.display = 'block';
+      document.getElementById('relatedGrid').innerHTML = related.map(s => {
+        const img = (Array.isArray(s.images) && s.images[0]) || s.image || 'https://placehold.co/400x300?text=Hotspot';
+        return `
+          <div class="related-card" data-id="${escapeHtml(s.id)}" role="button" tabindex="0">
+            <div class="rc-img">
+              <img src="${escapeHtml(img)}" alt="${escapeHtml(s.name)}" loading="lazy" onerror="this.src='https://placehold.co/400x300?text=Hotspot'">
+            </div>
+            <div class="rc-body">
+              <h4>${escapeHtml(s.name)}</h4>
+              <span><i class="fas fa-map-pin"></i> ${escapeHtml(s.location || 'Nigeria')}</span>
+            </div>
           </div>
-        </div>
-      `).join('');
-      scroll.querySelectorAll('.related-mini').forEach(el => {
-        el.addEventListener('click', () => openHotspotModal(el.dataset.id));
-        el.addEventListener('keydown', e => {
-          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openHotspotModal(el.dataset.id); }
+        `;
+      }).join('');
+      document.querySelectorAll('#relatedGrid .related-card').forEach(card => {
+        card.addEventListener('click', () => {
+          window.location.href = `/hotspot.html?id=${encodeURIComponent(card.dataset.id)}`;
+        });
+        card.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            window.location.href = `/hotspot.html?id=${encodeURIComponent(card.dataset.id)}`;
+          }
         });
       });
     }
 
-    window.closeHotspotModal = function () {
-      document.getElementById('hotspotModal').classList.remove('active');
-      document.body.style.overflow = '';
-      setTimeout(() => { document.getElementById('modalMap').src = ''; }, 300);
-      state.currentSpot = null;
-    };
-
-    window.toggleSaveCurrent = function () {
-      if (!state.currentSpot) return;
-      const active = toggleFav(state.currentSpot.id);
-      updateModalSaveBtn();
-      showToast(active ? 'Saved to favorites' : 'Removed from favorites', 'fa-heart');
-      const card = document.querySelector(`.hotspot-card[data-id="${CSS.escape(String(state.currentSpot.id))}"]`);
-      if (card) {
-        const btn = card.querySelector('.fav-btn');
-        btn.classList.toggle('active', active);
-        btn.querySelector('i').className = active ? 'fas fa-heart' : 'far fa-heart';
-      }
-    };
-
+    /* ---------- Actions ---------- */
     window.openDirections = function () {
-      if (!state.currentSpot) return;
-      const q = (state.currentSpot.lat != null && state.currentSpot.lng != null)
-        ? `${state.currentSpot.lat},${state.currentSpot.lng}`
-        : encodeURIComponent((state.currentSpot.address || state.currentSpot.location || state.currentSpot.name) + ', Nigeria');
+      if (!state.spot) return;
+      const q = (state.spot.lat != null && state.spot.lng != null)
+        ? `${state.spot.lat},${state.spot.lng}`
+        : encodeURIComponent((state.spot.address || state.spot.location || state.spot.name) + ', Nigeria');
       window.open(`https://www.google.com/maps/dir/?api=1&destination=${q}`, '_blank');
     };
 
     window.shareHotspot = async function () {
-      if (!state.currentSpot) return;
-      const spot = state.currentSpot;
-      const url = `${location.origin}/hotspots.html#spot-${spot.id}`;
-      const shareData = { title: spot.name, text: `Check out ${spot.name} on Zaure Hotspots`, url };
-      try {
-        if (navigator.share) await navigator.share(shareData);
-        else { await navigator.clipboard.writeText(url); showToast('Link copied to clipboard', 'fa-link'); }
-      } catch (e) {}
-    };
-
-    document.getElementById('hotspotModal').addEventListener('click', function (e) {
-      if (e.target === this) closeHotspotModal();
-    });
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && document.getElementById('hotspotModal').classList.contains('active')) closeHotspotModal();
-      if (document.getElementById('hotspotModal').classList.contains('active')) {
-        if (e.key === 'ArrowLeft') document.getElementById('galleryPrev').click();
-        if (e.key === 'ArrowRight') document.getElementById('galleryNext').click();
-      }
-    });
-
-    /* ---------- Search & sort ---------- */
-    window.clearSearch = function () {
-      const input = document.getElementById('hotspotSearchInput');
-      input.value = '';
-      state.searchQuery = '';
-      document.getElementById('searchClearBtn').style.display = 'none';
-      applyFilters();
-    };
-
-    window.clearAllFilters = function () {
-      state.activeCategory = 'All';
-      state.searchQuery = '';
-      state.activeSort = 'recommended';
-      document.getElementById('hotspotSearchInput').value = '';
-      document.getElementById('searchClearBtn').style.display = 'none';
-      setSortUI('recommended');
-      buildCategories();
-      applyFilters();
-    };
-
-    let searchDebounce;
-    function bindSearch() {
-      const input = document.getElementById('hotspotSearchInput');
-      const clearBtn = document.getElementById('searchClearBtn');
-      input.addEventListener('input', () => {
-        clearBtn.style.display = input.value ? 'flex' : 'none';
-        clearTimeout(searchDebounce);
-        searchDebounce = setTimeout(() => {
-          state.searchQuery = input.value.trim();
-          applyFilters();
-        }, 180);
-      });
-      input.addEventListener('keydown', e => { if (e.key === 'Escape') clearSearch(); });
-    }
-
-    /* ---------- Custom sort dropdown ---------- */
-    function setSortUI(value) {
-      state.activeSort = value;
-      const trigger = document.getElementById('sortTrigger');
-      const label = document.getElementById('sortLabel');
-      const icon = document.getElementById('sortIcon');
-      const options = document.getElementById('sortOptions');
-
-      const map = {
-        recommended: { label: 'Recommended', icon: 'fa-magic' },
-        name:        { label: 'Name',        icon: 'fa-arrow-down-a-z' },
-        newest:      { label: 'Newest',      icon: 'fa-clock' }
+      if (!state.spot) return;
+      const url = location.href;
+      const shareData = {
+        title: state.spot.name,
+        text: `Check out ${state.spot.name} on Zaure Hotspots`,
+        url
       };
-      const cfg = map[value] || map.recommended;
-      label.textContent = cfg.label;
-      icon.className = 'fas ' + cfg.icon;
-
-      options.querySelectorAll('li').forEach(li => {
-        const isSel = li.dataset.value === value;
-        li.classList.toggle('selected', isSel);
-        li.setAttribute('aria-selected', String(isSel));
-      });
-    }
-
-    function bindSort() {
-      const container = document.getElementById('sortSelect');
-      const trigger = document.getElementById('sortTrigger');
-      const options = document.getElementById('sortOptions');
-
-      trigger.addEventListener('click', e => {
-        e.stopPropagation();
-        const open = container.classList.toggle('active');
-        trigger.setAttribute('aria-expanded', String(open));
-      });
-      trigger.addEventListener('keydown', e => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          const open = container.classList.toggle('active');
-          trigger.setAttribute('aria-expanded', String(open));
-        }
-        if (e.key === 'Escape') container.classList.remove('active');
-      });
-      options.addEventListener('click', e => {
-        const li = e.target.closest('li[data-value]');
-        if (!li) return;
-        setSortUI(li.dataset.value);
-        container.classList.remove('active');
-        trigger.setAttribute('aria-expanded', 'false');
-        applyFilters();
-      });
-      document.addEventListener('click', e => {
-        if (!container.contains(e.target)) {
-          container.classList.remove('active');
-          trigger.setAttribute('aria-expanded', 'false');
-        }
-      });
-    }
-
-    /* ---------- Init ---------- */
-    async function init() {
-      renderSkeletons(6);
-      buildCategories_empty();
-
       try {
-        const res = await fetch('/data/hotspot.json', { cache: 'no-store' });
-        if (!res.ok) throw new Error('Failed to load hotspots');
-        state.all = await res.json();
-      } catch (err) {
-        console.error(err);
-        document.getElementById('hotspotGrid').innerHTML = `
-          <div class="empty-state">
-            <i class="fas fa-triangle-exclamation"></i>
-            <h3>Could not load hotspots</h3>
-            <p>Please check your connection and refresh the page.</p>
-            <button type="button" onclick="location.reload()">Retry</button>
-          </div>
-        `;
-        document.getElementById('filterCount').textContent = '';
-        return;
-      }
+        if (navigator.share) {
+          await navigator.share(shareData);
+        } else {
+          await navigator.clipboard.writeText(url);
+          showToast('Link copied to clipboard', 'fa-link');
+        }
+      } catch (e) { /* user cancelled */ }
+    };
 
-      buildCategories();
-      bindSearch();
-      bindSort();
-      applyFilters();
-      updateLocationNote();
-      startStatusClock();
+    window.toggleSave = function () {
+      if (!state.spot) return;
+      const active = toggleFav(state.spot.id);
+      updateSaveBtn();
+      showToast(active ? 'Saved to favorites' : 'Removed from favorites', 'fa-heart');
+    };
 
-      // Fetch location (non-blocking) then re-sort & re-render if we got it
-      fetchUserLocation().then(() => {
-        updateLocationNote();
-        applyFilters();
-      });
-
-      // Retry button
-      document.getElementById('locationRetryBtn').addEventListener('click', () => {
-        state.locationStatus = 'pending';
-        updateLocationNote();
-        fetchUserLocation().then(() => {
-          updateLocationNote();
-          applyFilters();
-        });
-      });
-
-      // Deep-link: /hotspots.html#spot-zuma-rock
-      const hash = location.hash.match(/^#spot-(.+)$/);
-      if (hash) {
-        const id = hash[1];
-        setTimeout(() => openHotspotModal(id), 200);
-      }
-    }
-
-    function buildCategories_empty() {
-      document.getElementById('categoryPills').innerHTML =
-        `<button class="category-pill active" disabled><i class="fas fa-border-all"></i> All</button>`;
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
+    /* ---------- Load ---------- */
+    async function init() {
       if (typeof loadUser === 'function') loadUser();
       if (typeof initTheme === 'function') initTheme();
       if (typeof updateFavoriteBadge === 'function') updateFavoriteBadge();
 
+      const id = getParam('id');
+      if (!id) {
+        document.getElementById('detailLoading').style.display = 'none';
+        document.getElementById('detailError').style.display = 'block';
+        return;
+      }
+
+      try {
+        const res = await fetch('/data/hotspot.json', { cache: 'no-store' });
+        if (!res.ok) throw new Error('Failed to load');
+        state.all = await res.json();
+      } catch (e) {
+        document.getElementById('detailLoading').style.display = 'none';
+        document.getElementById('detailError').style.display = 'block';
+        return;
+      }
+
+      const spot = state.all.find(s => String(s.id) === String(id));
+      if (!spot) {
+        document.getElementById('detailLoading').style.display = 'none';
+        document.getElementById('detailError').style.display = 'block';
+        return;
+      }
+
+      state.spot = spot;
+      populateDetail();
+      renderRelated();
+
+      document.getElementById('detailLoading').style.display = 'none';
+      document.getElementById('detailContent').style.display = 'block';
+
+      // Location (non-blocking)
+      fetchUserLocation().then(loc => {
+        state.userLocation = loc;
+        updateDistanceUI();
+      });
+
+      // Real-time status refresh every minute
+      setInterval(updateStatusUI, 60000);
+
+      // FAB
       const fab = document.getElementById('fabPostAd');
       if (fab) {
         fab.addEventListener('click', () => {
@@ -1459,9 +1070,25 @@
           else window.location.href = '/post.html';
         });
       }
+    }
 
-      init();
+    // Gallery buttons
+    document.getElementById('galleryPrev').addEventListener('click', () => {
+      if (state.galleryImages.length < 2) return;
+      state.galleryIndex = (state.galleryIndex - 1 + state.galleryImages.length) % state.galleryImages.length;
+      updateGalleryUI();
     });
+    document.getElementById('galleryNext').addEventListener('click', () => {
+      if (state.galleryImages.length < 2) return;
+      state.galleryIndex = (state.galleryIndex + 1) % state.galleryImages.length;
+      updateGalleryUI();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft') document.getElementById('galleryPrev').click();
+      if (e.key === 'ArrowRight') document.getElementById('galleryNext').click();
+    });
+
+    document.addEventListener('DOMContentLoaded', init);
   })();
   </script>
 </body>
