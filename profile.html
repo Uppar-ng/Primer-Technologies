@@ -273,20 +273,14 @@
             <div class="setting-item"><div class="setting-info"><h4>Push Notifications</h4><p>Get alerts when someone messages you</p></div><div class="toggle active" id="pushToggle"><div class="toggle-knob"></div></div></div>
             <div class="setting-item">
               <div class="setting-info"><h4>Language</h4><p>Change your preferred language</p></div>
-              <!-- Custom language dropdown -->
+              <!-- === UPDATED: The static list is a placeholder; main.js populates it and handles switching === -->
               <div class="custom-select" id="languageSelect">
                 <div class="custom-select-trigger" id="languageTrigger">
                   <span>English</span>
                   <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="custom-select-dropdown">
-                  <ul class="custom-select-options" id="languageOptions">
-                    <li data-value="en">English</li>
-                    <li data-value="ha">Hausa</li>
-                    <li data-value="yo">Yoruba</li>
-                    <li data-value="ig">Igbo</li>
-                    <li data-value="pcm">Pidgin</li>
-                  </ul>
+                  <ul class="custom-select-options" id="languageOptions"></ul>
                 </div>
               </div>
             </div>
@@ -409,6 +403,7 @@
   <script src="/js/main.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+      // State dropdown for signup modal (main.js provides initStateDropdown)
       initStateDropdown();
 
       let toastTimeout;
@@ -429,7 +424,7 @@
         return user;
       }
 
-      // Custom dropdown helper
+      // Custom dropdown helper (still used for the profile state field)
       function initCustomDropdown(containerId, triggerId, optionsListId, hiddenInputId, options, defaultValue, hasSearch) {
         const container = document.getElementById(containerId);
         if (!container) return;
@@ -481,7 +476,7 @@
         });
       }
 
-      // Initialize profile state dropdown
+      // Profile state dropdown
       const nigerianStates = [
         'Abia', 'Adamawa', 'Akwa Ibom', 'Anambra', 'Bauchi', 'Bayelsa', 'Benue',
         'Borno', 'Cross River', 'Delta', 'Ebonyi', 'Edo', 'Ekiti', 'Enugu', 'FCT',
@@ -491,9 +486,12 @@
       ];
       initCustomDropdown('profileStateSelect', 'profileStateTrigger', 'profileStateOptionsList', 'profileState', nigerianStates, '', true);
 
-      // Initialize language dropdown
-      const languages = ['English', 'Hausa', 'Yoruba', 'Igbo', 'Pidgin'];
-      initCustomDropdown('languageSelect', 'languageTrigger', 'languageOptions', null, languages, 'English', false);
+      /* === UPDATED === */
+      // REMOVED: The old language dropdown initialization
+      // (main.js now handles the language switcher automatically via #languageSelect)
+      // The following lines were deleted:
+      //   const languages = ['English', 'Hausa', 'Yoruba', 'Igbo', 'Pidgin'];
+      //   initCustomDropdown('languageSelect', 'languageTrigger', 'languageOptions', null, languages, 'English', false);
 
       function renderProfile() {
         const user = loadUserData();
@@ -510,7 +508,7 @@
         document.getElementById('profileEmailDisplay').textContent = user.email || `${user.phone || 'user'}@zaure.com`;
         document.getElementById('profileLocationDisplay').textContent = user.state ? `${user.state}, Nigeria` : 'Nigeria';
         document.getElementById('avatarInitials').textContent = user.name ? user.name.charAt(0).toUpperCase() : 'U';
-        
+
         document.getElementById('profileName').value = user.name || '';
         document.getElementById('profilePhone').value = user.phone || '';
         document.getElementById('profileEmail').value = user.email || '';
