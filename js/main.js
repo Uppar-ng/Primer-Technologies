@@ -3,6 +3,115 @@
 // ============================================================
 
 // ============================================================
+// SITE-WIDE TRANSLATION BOOTSTRAP (torchv-translate)
+// Runs on EVERY page. The profile page wires up a custom UI.
+// ============================================================
+(function initTranslate() {
+  if (window.translate) return;
+
+  const script = document.createElement('script');
+  script.src = 'https://cdn.staticfile.net/translate.js/3.18.66/translate.js';
+  script.onload = function () {
+    translate.language.setLocal('english');
+    translate.service.use('client.edge');
+    translate.listener.start();
+    translate.selectLanguageTag.show = false; // we use our own dropdown
+
+    // Restore the user's previously chosen language (if any)
+    const savedLang = localStorage.getItem('zaure_lang');
+    if (savedLang && savedLang !== 'english') {
+      translate.changeLanguage(savedLang);
+    }
+
+    translate.execute();
+  };
+  document.head.appendChild(script);
+})();
+
+// ============================================================
+// PROFILE LANGUAGE SWITCHER
+// Only activates when #languageSelect exists (profile.html)
+// ============================================================
+(function initLanguageSwitcher() {
+  document.addEventListener('DOMContentLoaded', function () {
+    const container = document.getElementById('languageSelect');
+    if (!container) return; // not on profile page
+
+    const trigger = document.getElementById('languageTrigger');
+    const optionsList = document.getElementById('languageOptions');
+    if (!trigger || !optionsList) return;
+
+    // Map display name → torchv-translate language code
+    // 'ff' is the ISO code for Fulani (Fulfulde). If the library
+    // needs a different alias, try 'fulfulde' or 'fula'.
+    const languageMap = {
+      'English': 'english',
+      'Arabic':  'arabic',
+      'Hausa':   'hausa',
+      'Fulani':  'ff',
+      'Yoruba':  'yoruba',
+      'Igbo':    'igbo'
+    };
+
+    // --- Render the language options ---
+    function renderOptions() {
+      optionsList.innerHTML = Object.entries(languageMap)
+        .map(([name, code]) => `<li data-lang="${code}" data-name="${name}">${name}</li>`)
+        .join('');
+
+      optionsList.querySelectorAll('li').forEach(li => {
+        li.addEventListener('click', function () {
+          const code = this.dataset.lang;
+          const name = this.dataset.name;
+
+          // 1. Update visible UI
+          trigger.querySelector('span').textContent = name;
+          container.classList.remove('active');
+
+          // 2. Persist choice
+          localStorage.setItem('zaure_lang', code);
+
+          // 3. Trigger translation
+          if (window.translate && typeof translate.changeLanguage === 'function') {
+            if (code === 'english') {
+              // Reverting to source language
+              if (typeof translate.reset === 'function') {
+                translate.reset();
+              } else {
+                translate.changeLanguage('english');
+              }
+            } else {
+              translate.changeLanguage(code);
+            }
+          } else {
+            console.warn('translate.changeLanguage not available yet.');
+          }
+        });
+      });
+    }
+
+    // --- Toggle dropdown open/close ---
+    trigger.addEventListener('click', function (e) {
+      e.stopPropagation();
+      container.classList.toggle('active');
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!container.contains(e.target)) container.classList.remove('active');
+    });
+
+    // --- Set the trigger label from saved language ---
+    const saved = localStorage.getItem('zaure_lang');
+    if (saved) {
+      const match = Object.entries(languageMap).find(([_, code]) => code === saved);
+      if (match) trigger.querySelector('span').textContent = match[0];
+    }
+
+    renderOptions();
+  });
+})();
+
+// ============================================================
 // DEVICE DETECTION
 // ============================================================
 function detectDevice() {
@@ -19,19 +128,18 @@ window.addEventListener('resize', detectDevice);
 function initTheme() {
   const storedTheme = localStorage.getItem('zaure_theme') || 'light';
   document.documentElement.setAttribute('data-theme', storedTheme);
-  
+
   const themeToggle = document.getElementById('themeToggle');
   if (themeToggle) {
-    themeToggle.innerHTML = storedTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    themeToggle.innerHTML = storedTheme === 'dark'
+      ? '<i class="fas fa-sun"></i>'
+      : '<i class="fas fa-moon"></i>';
   }
-  
+
   const darkModeToggle = document.getElementById('darkModeToggle');
   if (darkModeToggle) {
-    if (storedTheme === 'dark') {
-      darkModeToggle.classList.add('active');
-    } else {
-      darkModeToggle.classList.remove('active');
-    }
+    if (storedTheme === 'dark') darkModeToggle.classList.add('active');
+    else darkModeToggle.classList.remove('active');
   }
 }
 
@@ -40,19 +148,18 @@ window.toggleTheme = function() {
   const next = current === 'light' ? 'dark' : 'light';
   document.documentElement.setAttribute('data-theme', next);
   localStorage.setItem('zaure_theme', next);
-  
+
   const themeToggle = document.getElementById('themeToggle');
   if (themeToggle) {
-    themeToggle.innerHTML = next === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    themeToggle.innerHTML = next === 'dark'
+      ? '<i class="fas fa-sun"></i>'
+      : '<i class="fas fa-moon"></i>';
   }
-  
+
   const darkModeToggle = document.getElementById('darkModeToggle');
   if (darkModeToggle) {
-    if (next === 'dark') {
-      darkModeToggle.classList.add('active');
-    } else {
-      darkModeToggle.classList.remove('active');
-    }
+    if (next === 'dark') darkModeToggle.classList.add('active');
+    else darkModeToggle.classList.remove('active');
   }
 };
 
@@ -86,10 +193,10 @@ function loadUser() {
 }
 
 function signupUser(name, phone, state) {
-  currentUser = { 
+  currentUser = {
     id: Date.now(),
-    name: name, 
-    phone: phone, 
+    name: name,
+    phone: phone,
     state: state,
     joined: new Date().toISOString()
   };
@@ -102,7 +209,7 @@ function signupUser(name, phone, state) {
 function updateUserProfile(data) {
   const user = getCurrentUser();
   if (!user) return { error: 'Not logged in' };
-  
+
   const updatedUser = { ...user, ...data };
   localStorage.setItem('zaure_user', JSON.stringify(updatedUser));
   currentUser = updatedUser;
@@ -116,7 +223,7 @@ function updateUserProfile(data) {
 function renderUserArea() {
   const headerUserArea = document.getElementById('headerUserArea');
   if (!headerUserArea) return;
-  
+
   const user = getCurrentUser();
   if (user && user.name) {
     headerUserArea.innerHTML = `
@@ -159,7 +266,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const phone = document.getElementById('signupPhone').value.trim();
       const state = document.getElementById('signupState').value;
       const termsChecked = document.getElementById('termsCheckbox')?.checked;
-      
+
       if (name && phone && state && termsChecked) {
         signupUser(name, phone, state);
         signupModal.classList.remove('active');
@@ -187,23 +294,23 @@ const nigerianStates = [
 function initStateDropdown() {
   const selectContainer = document.getElementById('stateSelect');
   if (!selectContainer) return;
-  
+
   const trigger = document.getElementById('stateTrigger');
   const dropdown = document.getElementById('stateDropdown');
   const searchInput = document.getElementById('stateSearchInput');
   const optionsList = document.getElementById('stateOptionsList');
   const hiddenInput = document.getElementById('signupState');
-  
+
   if (!trigger || !dropdown || !searchInput || !optionsList || !hiddenInput) return;
-  
+
   function renderOptions(filter = '') {
-    const filtered = nigerianStates.filter(state => 
+    const filtered = nigerianStates.filter(state =>
       state.toLowerCase().includes(filter.toLowerCase())
     );
-    optionsList.innerHTML = filtered.map(state => 
+    optionsList.innerHTML = filtered.map(state =>
       `<li data-value="${state}">${state}</li>`
     ).join('');
-    
+
     optionsList.querySelectorAll('li').forEach(li => {
       li.addEventListener('click', function() {
         const selected = this.dataset.value;
@@ -215,9 +322,9 @@ function initStateDropdown() {
       });
     });
   }
-  
+
   renderOptions();
-  
+
   trigger.addEventListener('click', function(e) {
     e.preventDefault();
     e.stopPropagation();
@@ -226,7 +333,7 @@ function initStateDropdown() {
       searchInput.focus();
     }
   });
-  
+
   if (searchInput) {
     searchInput.addEventListener('input', function() {
       renderOptions(this.value);
@@ -235,13 +342,13 @@ function initStateDropdown() {
       e.stopPropagation();
     });
   }
-  
+
   document.addEventListener('click', function(e) {
     if (!selectContainer.contains(e.target)) {
       selectContainer.classList.remove('active');
     }
   });
-  
+
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
       selectContainer.classList.remove('active');
@@ -367,7 +474,7 @@ function getServicesSync() {
 }
 
 // ============================================================
-// SELLER FIELD HELPERS (robust — handles many field names)
+// SELLER FIELD HELPERS
 // ============================================================
 function getSellerName(s) {
   if (!s) return 'Zaure Pro';
@@ -424,7 +531,7 @@ function getSellerInitials(s) {
 }
 
 // ============================================================
-// TRADE MAP — converts category to profession name
+// TRADE MAP
 // ============================================================
 const TRADE_MAP = {
   'Cleaning': 'Cleaner',
@@ -454,7 +561,7 @@ function getTradeName(category) {
 }
 
 // ============================================================
-// NORMALIZE SERVICE (for card rendering)
+// NORMALIZE SERVICE
 // ============================================================
 function normalizeService(s) {
   return {
@@ -504,7 +611,7 @@ function shuffleArray(array) {
 
 function recommendProducts(products, state, count) {
   if (!products || products.length === 0) return [];
-  
+
   let pool = products;
   if (state) {
     const stateFiltered = products.filter(p => p.location && p.location.includes(state));
@@ -515,16 +622,13 @@ function recommendProducts(products, state, count) {
       pool = [...stateFiltered, ...shuffleArray(others).slice(0, count - stateFiltered.length)];
     }
   }
-  
+
   return shuffleArray(pool).slice(0, count);
 }
 
-// ============================================================
-// RECOMMEND SERVICES (Find a Pro) — Same logic as products
-// ============================================================
 function recommendServices(services, state, count) {
   if (!services || services.length === 0) return [];
-  
+
   let pool = services;
   if (state) {
     const stateFiltered = services.filter(s => s.location && s.location.includes(state));
@@ -535,17 +639,17 @@ function recommendServices(services, state, count) {
       pool = [...stateFiltered, ...shuffleArray(others).slice(0, count - stateFiltered.length)];
     }
   }
-  
+
   return shuffleArray(pool).slice(0, count);
 }
 
 // ============================================================
-// RENDER SERVICES (homepage cards — name + trade + avatar)
+// RENDER SERVICES (homepage cards)
 // ============================================================
 function renderServices(services, containerId) {
   const grid = document.getElementById(containerId);
   if (!grid) return;
-  
+
   if (!services || services.length === 0) {
     grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--text-secondary);">
       <i class="fas fa-user-tie" style="font-size:2rem;display:block;margin-bottom:12px;"></i>
@@ -553,36 +657,36 @@ function renderServices(services, containerId) {
     </div>`;
     return;
   }
-  
+
   grid.innerHTML = services.map(raw => {
     const p = normalizeService(raw);
     const sellerName = getSellerName(raw);
     const profilePic = getSellerPic(raw);
     const initials = getSellerInitials(raw);
     const trade = getTradeName(p.category);
-    
+
     let badges = '';
     if (p.boosted) badges += `<span class="badge-boosted"><i class="fas fa-bolt"></i> Boosted</span>`;
     if (p.featured) badges += `<span class="badge-featured">Featured</span>`;
-    
+
     const avatarInner = profilePic
       ? `<img src="${profilePic}" alt="${sellerName}" loading="lazy"
              style="width:100%;height:100%;object-fit:cover;display:block;"
              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
          <span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#1a3650;font-weight:700;font-size:2rem;">${initials}</span>`
       : `<span style="display:flex;width:100%;height:100%;align-items:center;justify-content:center;color:#1a3650;font-weight:700;font-size:2rem;">${initials}</span>`;
-    
+
     const isFav = isFavorite(p.id);
     const heartIcon = isFav ? 'fas fa-heart' : 'far fa-heart';
     const heartColor = isFav ? 'color:#e74c3c;' : '';
-    
+
     return `
       <div class="listing-card" data-id="${p.id}" style="cursor:pointer;border-radius:16px;overflow:hidden;background:var(--surface);border:1px solid var(--border);transition:transform 0.2s,box-shadow 0.2s;position:relative;">
-        <button class="fav-btn" onclick="event.stopPropagation(); toggleFavoriteCard('${p.id}', this)" 
+        <button class="fav-btn" onclick="event.stopPropagation(); toggleFavoriteCard('${p.id}', this)"
                 style="position:absolute;top:12px;right:12px;z-index:2;background:rgba(255,255,255,0.9);border:none;border-radius:50%;width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;box-shadow:0 2px 8px rgba(0,0,0,0.1);${heartColor}">
           <i class="${heartIcon}"></i>
         </button>
-        
+
         <div class="listing-img" onclick="viewService('${p.id}')"
              style="height:180px;background:linear-gradient(135deg,#1a3650,#0f2940);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
           <div style="position:absolute;inset:0;background:radial-gradient(circle at 30% 25%,rgba(212,184,122,0.16) 0%,transparent 60%);"></div>
@@ -591,7 +695,7 @@ function renderServices(services, containerId) {
           </div>
           ${badges}
         </div>
-        
+
         <div class="listing-body" style="padding:14px 14px 14px;" onclick="viewService('${p.id}')">
           <div class="provider-name" style="font-weight:700;font-size:1rem;color:var(--text);line-height:1.25;letter-spacing:-0.2px;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;">${sellerName}</div>
           <div class="provider-trade" style="display:inline-flex;align-items:center;gap:5px;font-size:0.7rem;font-weight:700;color:#B49450;text-transform:uppercase;letter-spacing:1px;margin:4px 0 8px;">
@@ -636,11 +740,11 @@ function toggleFavorite(productId) {
     openSignup();
     return false;
   }
-  
+
   let favorites = getFavorites();
   const index = favorites.indexOf(productId);
   let isFavorite = false;
-  
+
   if (index > -1) {
     favorites.splice(index, 1);
     isFavorite = false;
@@ -678,15 +782,15 @@ function updateFavoriteBadge() {
 
 window.toggleFavoriteCard = function(productId, buttonElement) {
   event.stopPropagation();
-  
+
   if (!currentUser) {
     openSignup();
     return;
   }
-  
+
   const isFav = toggleFavorite(productId);
   const icon = buttonElement.querySelector('i');
-  
+
   if (isFav) {
     icon.className = 'fas fa-heart';
     buttonElement.style.color = '#e74c3c';
@@ -703,7 +807,7 @@ window.toggleFavoriteCard = function(productId, buttonElement) {
 function renderListings(products, containerId) {
   const grid = document.getElementById(containerId);
   if (!grid) return;
-  
+
   if (!products || products.length === 0) {
     grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--text-secondary);">
       <i class="fas fa-box" style="font-size:2rem;display:block;margin-bottom:12px;"></i>
@@ -711,25 +815,25 @@ function renderListings(products, containerId) {
     </div>`;
     return;
   }
-  
+
   grid.innerHTML = products.map(p => {
     let badges = '';
     if (p.boosted) badges += `<span class="badge-boosted"><i class="fas fa-bolt"></i> Boosted</span>`;
     if (p.featured) badges += `<span class="badge-featured">Featured</span>`;
     const price = p.price >= 1e6 ? `₦${(p.price/1e6).toFixed(1)}M` : `₦${p.price.toLocaleString()}`;
-    
+
     const firstImage = p.images && p.images.length > 0 ? p.images[0] : null;
-    const imageHtml = firstImage 
+    const imageHtml = firstImage
       ? `<img src="${firstImage}" alt="${p.title}" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\\'fas fa-box\\' style=\\'font-size:2.5rem;color:var(--text-secondary);\\'></i>';">`
       : `<i class="fas fa-box" style="font-size:2.5rem;color:var(--text-secondary);"></i>`;
-    
+
     const isFav = isFavorite(p.id);
     const heartIcon = isFav ? 'fas fa-heart' : 'far fa-heart';
     const heartColor = isFav ? 'color:#e74c3c;' : '';
-    
+
     return `
       <div class="listing-card" data-id="${p.id}" style="cursor:pointer;border-radius:16px;overflow:hidden;background:var(--surface);border:1px solid var(--border);transition:transform 0.2s,box-shadow 0.2s;position:relative;">
-        <button class="fav-btn" onclick="event.stopPropagation(); toggleFavoriteCard('${p.id}', this)" 
+        <button class="fav-btn" onclick="event.stopPropagation(); toggleFavoriteCard('${p.id}', this)"
                 style="position:absolute;top:12px;right:12px;z-index:2;background:rgba(255,255,255,0.9);border:none;border-radius:50%;width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;box-shadow:0 2px 8px rgba(0,0,0,0.1);${heartColor}">
           <i class="${heartIcon}"></i>
         </button>
@@ -779,7 +883,7 @@ window.viewStore = function(sellerId) {
 document.addEventListener('DOMContentLoaded', function() {
   const postAdCta = document.getElementById('postAdCta');
   const fabPostAd = document.getElementById('fabPostAd');
-  
+
   const postAction = () => {
     if (!currentUser) {
       openSignup();
@@ -787,10 +891,10 @@ document.addEventListener('DOMContentLoaded', function() {
       window.location.href = '/post.html';
     }
   };
-  
+
   if (postAdCta) postAdCta.addEventListener('click', postAction);
   if (fabPostAd) fabPostAd.addEventListener('click', postAction);
-  
+
   initTheme();
   updateFavoriteBadge();
 });
@@ -813,11 +917,11 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
       }
       const products = await loadProducts();
-      const results = products.filter(p => 
+      const results = products.filter(p =>
         p.title.toLowerCase().includes(query.toLowerCase()) ||
         p.category.toLowerCase().includes(query.toLowerCase())
       ).slice(0, 5);
-      
+
       if (results.length === 0) {
         acDropdown.innerHTML = `<div class="ac-item" style="justify-content:center;color:var(--text-secondary);">No results found</div>`;
       } else {
@@ -847,7 +951,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const q = searchInput.value.trim();
         if (q) {
           const products = await loadProducts();
-          const filtered = products.filter(p => 
+          const filtered = products.filter(p =>
             p.title.toLowerCase().includes(q.toLowerCase()) ||
             p.category.toLowerCase().includes(q.toLowerCase()) ||
             p.location.toLowerCase().includes(q.toLowerCase())
@@ -868,7 +972,7 @@ document.addEventListener('DOMContentLoaded', function() {
   loadUser();
   initTheme();
   updateFavoriteBadge();
-  
+
   if (document.getElementById('stateSelect')) {
     initStateDropdown();
   }
