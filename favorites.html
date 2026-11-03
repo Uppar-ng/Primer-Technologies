@@ -28,7 +28,6 @@
     .favorites-header .page-actions .btn-action:hover { border-color: var(--text); background: var(--surface-alt); }
     .favorites-header .page-actions .btn-action.danger:hover { border-color: #e74c3c; color: #e74c3c; }
 
-    /* Type tabs (All / Products / Services / Hotspots) */
     .type-tabs {
       display: flex; gap: 6px; overflow-x: auto; padding: 4px 0;
       margin-bottom: 16px; scrollbar-width: none;
@@ -106,7 +105,6 @@
       .view-toggle button span { display: none; }
     }
 
-    /* Type badge over the card image */
     .type-badge {
       position: absolute; top: 8px; left: 8px;
       padding: 4px 10px; border-radius: 20px;
@@ -175,7 +173,6 @@
 
   <div class="toast" id="toast"><i class="fas fa-check-circle"></i> <span id="toastMessage">Item removed</span></div>
 
-  <!-- ===== NAV ===== -->
   <nav class="navbar">
     <div class="container nav-container">
       <a href="/" class="logo-wrapper">
@@ -234,7 +231,6 @@
       <div class="stat-box"><div class="stat-number" id="statHotspots">0</div><div class="stat-label">Hotspots</div></div>
     </div>
 
-    <!-- Type tabs -->
     <div class="type-tabs" id="typeTabs" role="tablist" aria-label="Filter by type">
       <button class="type-tab active" data-type="all" role="tab">
         <i class="fas fa-border-all"></i> All <span class="count" id="tabCountAll">0</span>
@@ -303,7 +299,6 @@
 
   </div>
 
-  <!-- ===== FOOTER ===== -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
@@ -348,7 +343,6 @@
     </div>
   </footer>
 
-  <!-- ===== BOTTOM NAV ===== -->
   <div class="bottom-nav">
     <a href="/" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
     <a href="/categories.html" class="nav-item"><i class="fas fa-th-large"></i><span>Categories</span></a>
@@ -357,7 +351,6 @@
     <a href="/profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
   </div>
 
-  <!-- ===== SIGNUP MODAL ===== -->
   <div class="modal-overlay" id="signupModal">
     <div class="modal">
       <div class="modal-header">
@@ -392,9 +385,6 @@
 
   <script src="/js/main.js"></script>
   <script>
-  /* ============================================================
-     FAVORITES PAGE — Universal Hub (Products + Services + Hotspots)
-     ============================================================ */
   (function () {
     'use strict';
 
@@ -402,9 +392,9 @@
     const HOTSPOT_FAV_KEY = 'zaure_hotspot_favorites';
 
     const state = {
-      allItems: [],          // unified: { ...data, _type: 'product'|'service'|'hotspot' }
+      allItems: [],
       filtered: [],
-      typeFilter: 'all',     // all | product | service | hotspot
+      typeFilter: 'all',
       categoryFilter: 'all',
       sort: 'newest',
       page: 1,
@@ -435,7 +425,6 @@
       toastMessage: document.getElementById('toastMessage')
     };
 
-    /* ---------- Helpers ---------- */
     let toastTimer;
     function showToast(msg, type) {
       els.toastMessage.textContent = msg;
@@ -466,21 +455,17 @@
       }
       return 0;
     }
-
     function formatPrice(n) {
       if (!n || n <= 0) return '';
       return n >= 1e6 ? `₦${(n / 1e6).toFixed(1)}M` : `₦${n.toLocaleString()}`;
     }
-
     function getFirstImage(p) {
       if (Array.isArray(p.images) && p.images.length) return p.images[0];
       if (p.image) return p.image;
       return null;
     }
 
-    /* ---------- Loading unified favorite items ---------- */
     async function loadAllFavoriteItems() {
-      // IDs
       const savedProductServiceIds = getIds(PRODUCT_FAV_KEY);
       const savedHotspotIds = getIds(HOTSPOT_FAV_KEY);
 
@@ -488,7 +473,6 @@
         return [];
       }
 
-      // Data sources — with graceful fallbacks
       let products = [], services = [], hotspots = [];
       try { products = (typeof loadProducts === 'function') ? await loadProducts() : []; } catch (e) {}
       try { services = (typeof loadServices === 'function') ? await loadServices() : []; } catch (e) {}
@@ -499,7 +483,6 @@
 
       const items = [];
 
-      // Match each saved ID to either a product or a service
       savedProductServiceIds.forEach(id => {
         const prod = products.find(p => String(p.id) === String(id));
         if (prod) {
@@ -508,9 +491,7 @@
         }
         const svc = services.find(s => String(s.id) === String(id));
         if (svc) {
-          const normalized = (typeof normalizeService === 'function')
-            ? normalizeService(svc)
-            : svc;
+          const normalized = (typeof normalizeService === 'function') ? normalizeService(svc) : svc;
           items.push({
             id: svc.id,
             _type: 'service',
@@ -527,7 +508,6 @@
         }
       });
 
-      // Match each hotspot ID
       savedHotspotIds.forEach(id => {
         const spot = hotspots.find(s => String(s.id) === String(id));
         if (spot) {
@@ -550,7 +530,6 @@
       return items;
     }
 
-    /* ---------- Stats + tab counts ---------- */
     function updateStats() {
       const items = state.allItems;
       const total = items.length;
@@ -573,27 +552,23 @@
       els.categoryCount.textContent = uniqueCats.size;
       els.lastUpdated.textContent = new Date().toLocaleTimeString();
 
-      // Rebuild category dropdown options
       const catOptions = document.getElementById('categoryOptions');
       const current = state.categoryFilter;
       catOptions.innerHTML = `<li data-value="all">All Categories</li>` +
         Array.from(uniqueCats).sort().map(c =>
           `<li data-value="${escapeHtml(c)}">${escapeHtml(c)}</li>`
         ).join('');
-      // Restore selection label
       const trigger = document.getElementById('categoryTrigger');
       if (current === 'all') trigger.querySelector('span').textContent = 'All Categories';
       else trigger.querySelector('span').textContent = current;
     }
 
-    /* ---------- Filtering + sorting ---------- */
     function applyFilters() {
       let list = [...state.allItems];
 
       if (state.typeFilter !== 'all') {
         list = list.filter(i => i._type === state.typeFilter);
       }
-
       if (state.categoryFilter !== 'all') {
         list = list.filter(i => i.category === state.categoryFilter);
       }
@@ -611,7 +586,7 @@
         case 'name':
           list.sort((a, b) => (a.title || '').localeCompare(b.title || ''));
           break;
-        default: // newest
+        default:
           list.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
       }
 
@@ -620,7 +595,6 @@
       renderPage();
     }
 
-    /* ---------- Rendering ---------- */
     function renderPage() {
       const start = (state.page - 1) * state.perPage;
       const end = Math.min(start + state.perPage, state.filtered.length);
@@ -685,7 +659,6 @@
         ? `<span style="color:#B49450;font-weight:700;"><i class="fas fa-star"></i> ${escapeHtml(String(item.rating))}</span>`
         : `<span><i class="far fa-heart"></i> Saved</span>`;
 
-      // Route per type via data attributes; click handled in JS below
       return `
         <div class="listing-card" data-id="${escapeHtml(String(item.id))}" data-type="${item._type}" tabindex="0" role="button">
           <button class="remove-fav" data-id="${escapeHtml(String(item.id))}" data-type="${item._type}" title="Remove from favorites" aria-label="Remove from favorites">
@@ -705,7 +678,6 @@
         </div>`;
     }
 
-    /* ---------- Pagination ---------- */
     function updatePagination() {
       const totalPages = Math.ceil(state.filtered.length / state.perPage);
       els.prevPage.disabled = state.page <= 1;
@@ -747,7 +719,6 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    /* ---------- Removing a favorite (routes by type) ---------- */
     function removeFavoriteById(id, type) {
       if (type === 'hotspot') {
         const ids = getIds(HOTSPOT_FAV_KEY).filter(x => String(x) !== String(id));
@@ -767,18 +738,17 @@
       showToast('Removed from favorites');
     }
 
-    /* ---------- Routing per type ---------- */
+    /* ============ ROUTING (UPDATED) ============ */
     function openItem(id, type) {
       if (type === 'product') {
         window.location.href = `/detail.html?id=${encodeURIComponent(id)}`;
       } else if (type === 'service') {
         window.location.href = `/service.html?id=${encodeURIComponent(id)}`;
       } else if (type === 'hotspot') {
-        window.location.href = `/hotspots.html#spot-${encodeURIComponent(id)}`;
+        window.location.href = `/hotspot.html?id=${encodeURIComponent(id)}`;
       }
     }
 
-    /* ---------- Delegated event handling (remove + open) ---------- */
     els.grid.addEventListener('click', function (e) {
       const removeBtn = e.target.closest('.remove-fav');
       if (removeBtn) {
@@ -801,7 +771,6 @@
       }
     });
 
-    /* ---------- Type tabs ---------- */
     document.getElementById('typeTabs').addEventListener('click', function (e) {
       const tab = e.target.closest('.type-tab');
       if (!tab) return;
@@ -811,7 +780,6 @@
       applyFilters();
     });
 
-    /* ---------- Custom dropdowns ---------- */
     function initDropdown(containerId, triggerId, optionsId, onChange) {
       const container = document.getElementById(containerId);
       const trigger = document.getElementById(triggerId);
@@ -822,7 +790,6 @@
         e.stopPropagation();
         container.classList.toggle('active');
       });
-
       optionsList.addEventListener('click', function (e) {
         const li = e.target.closest('li[data-value]');
         if (!li) return;
@@ -830,7 +797,6 @@
         container.classList.remove('active');
         onChange(li.dataset.value);
       });
-
       document.addEventListener('click', function (e) {
         if (!container.contains(e.target)) container.classList.remove('active');
       });
@@ -845,7 +811,6 @@
       applyFilters();
     });
 
-    /* ---------- View toggle ---------- */
     els.gridViewBtn.addEventListener('click', () => {
       els.container.classList.remove('list-view');
       els.container.classList.add('grid-view');
@@ -859,11 +824,9 @@
       els.gridViewBtn.classList.remove('active');
     });
 
-    /* ---------- Pagination buttons ---------- */
     els.prevPage.addEventListener('click', () => goToPage(state.page - 1));
     els.nextPage.addEventListener('click', () => goToPage(state.page + 1));
 
-    /* ---------- Refresh / Clear All ---------- */
     document.getElementById('refreshFavorites').addEventListener('click', async function () {
       this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Refreshing...';
       this.disabled = true;
@@ -889,7 +852,6 @@
       showToast('All favorites removed');
     });
 
-    /* ---------- Reset filters (exposed for empty state button) ---------- */
     window.resetFavoriteFilters = function () {
       state.typeFilter = 'all';
       state.categoryFilter = 'all';
@@ -900,7 +862,6 @@
       applyFilters();
     };
 
-    /* ---------- FAB (post) ---------- */
     const fab = document.getElementById('fabPostAd');
     if (fab) {
       fab.addEventListener('click', function () {
@@ -913,7 +874,6 @@
       });
     }
 
-    /* ---------- Init ---------- */
     document.addEventListener('DOMContentLoaded', async function () {
       if (typeof initStateDropdown === 'function') initStateDropdown();
       if (typeof loadUser === 'function') loadUser();
