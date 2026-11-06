@@ -10,186 +10,603 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
   <style>
-    .store-profile-header {
-      position: relative;
-      margin: 24px 0 20px;
-      padding: 30px 20px;
-      background: var(--surface);
-      border-radius: 24px;
-      border: 1px solid var(--border);
-      overflow: hidden;
-      animation: slideDown 0.5s ease;
+    /* ============================================================
+       BASE VARIABLES
+       ============================================================ */
+    :root {
+      --navy: #0f2940;
+      --navy-2: #1a3650;
+      --gold: #D4B87A;
+      --gold-deep: #B49450;
+      --open-green: #16a34a;
     }
-    .store-profile-header::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 5px;
-      background: linear-gradient(90deg, #1a3650, #B49450, #1a3650);
-    }
-    .store-top-row {
-      display: flex;
-      align-items: center;
-      gap: 20px;
+
+    /* ============================================================
+       BREADCRUMB
+       ============================================================ */
+    .store-breadcrumb {
+      display: flex; align-items: center; gap: 8px;
+      margin: 20px 0 16px;
+      font-size: 0.78rem; color: var(--text-secondary);
       flex-wrap: wrap;
     }
-    .store-avatar-large {
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      overflow: hidden;
+    .store-breadcrumb a {
+      color: var(--text-secondary); text-decoration: none; transition: color 0.2s;
+    }
+    .store-breadcrumb a:hover { color: var(--navy-2); }
+    .store-breadcrumb i { font-size: 0.55rem; opacity: 0.6; }
+    .store-breadcrumb .current {
+      color: var(--text); font-weight: 600;
+    }
+
+    /* ============================================================
+       LOADING SKELETON
+       ============================================================ */
+    .sk-line {
+      height: 12px; border-radius: 6px;
+      background: linear-gradient(90deg, #f1f5f9 0%, #e2e8f0 50%, #f1f5f9 100%);
+      background-size: 200% 100%; animation: shimmer 1.4s infinite;
+      margin-bottom: 8px;
+    }
+    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+    [data-theme="dark"] .sk-line {
+      background: linear-gradient(90deg, #1e293b 0%, #334155 50%, #1e293b 100%);
+      background-size: 200% 100%;
+    }
+    .sk-cover { height: 180px; border-radius: 24px 24px 0 0; }
+    .sk-avatar {
+      width: 110px; height: 110px; border-radius: 50%;
+      background: linear-gradient(90deg, #f1f5f9 0%, #e2e8f0 50%, #f1f5f9 100%);
+      background-size: 200% 100%; animation: shimmer 1.4s infinite;
+      border: 4px solid var(--surface); margin-top: -55px;
       flex-shrink: 0;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    [data-theme="dark"] .sk-avatar {
+      background: linear-gradient(90deg, #1e293b 0%, #334155 50%, #1e293b 100%);
+      background-size: 200% 100%;
+    }
+
+    /* ============================================================
+       ERROR STATE
+       ============================================================ */
+    .store-error {
+      text-align: center; padding: 80px 20px; margin: 20px 0;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 24px;
+    }
+    .store-error i {
+      font-size: 3.5rem; color: var(--text-secondary); opacity: 0.4; margin-bottom: 16px;
+    }
+    .store-error h2 { font-size: 1.4rem; color: var(--text); margin-bottom: 8px; }
+    .store-error p { color: var(--text-secondary); margin-bottom: 20px; font-size: 0.92rem; }
+    .store-error a {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 26px; background: var(--navy-2); color: white;
+      border-radius: 40px; text-decoration: none; font-weight: 600; font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+    .store-error a:hover { background: var(--navy); }
+
+    /* ============================================================
+       STORE HERO (cover + avatar overlap)
+       ============================================================ */
+    .store-hero {
+      border-radius: 24px; overflow: hidden; background: var(--surface);
+      border: 1px solid var(--border); margin-bottom: 20px;
+      box-shadow: 0 4px 20px rgba(15,41,64,0.04);
+    }
+    .store-cover {
+      height: 180px; position: relative; overflow: hidden;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(212,184,122,0.2) 0%, transparent 60%),
+        linear-gradient(135deg, #1a3650 0%, #0f2940 55%, #2a4a6a 100%);
+    }
+    .store-cover img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .store-cover::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.4) 100%);
+    }
+    @media (max-width: 639px) { .store-cover { height: 140px; } }
+
+    .store-hero-body {
+      padding: 0 24px 24px; position: relative;
+      display: flex; flex-wrap: wrap; align-items: flex-end; gap: 16px;
+    }
+    @media (max-width: 639px) { .store-hero-body { padding: 0 16px 20px; gap: 12px; } }
+
+    .store-avatar-large {
+      width: 110px; height: 110px; border-radius: 50%;
+      margin-top: -55px; border: 4px solid var(--surface);
       background: linear-gradient(135deg, #1a3650, #2a4a6a);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: white;
-      transition: transform 0.4s;
-      animation: pulse 2s infinite;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem; font-weight: 700; color: white;
+      overflow: hidden; flex-shrink: 0;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+      position: relative; z-index: 2;
     }
     .store-avatar-large img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      width: 100%; height: 100%; object-fit: cover;
     }
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(180,148,80,0.4); }
-      70% { box-shadow: 0 0 0 15px rgba(180,148,80,0); }
-      100% { box-shadow: 0 0 0 0 rgba(180,148,80,0); }
+    @media (max-width: 639px) {
+      .store-avatar-large { width: 84px; height: 84px; margin-top: -42px; font-size: 1.8rem; }
     }
-    .store-main-info {
-      flex: 1;
-      min-width: 200px;
+
+    .store-hero-info {
+      flex: 1; min-width: 0; padding-top: 12px;
     }
-    .store-main-info h1 {
-      font-size: 1.6rem;
-      font-weight: 800;
-      color: var(--text);
-      margin-bottom: 4px;
+    .store-hero-info h1 {
+      font-size: 1.55rem; font-weight: 800; color: var(--text);
+      line-height: 1.2; margin-bottom: 6px; letter-spacing: -0.4px;
     }
-    .store-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.75rem;
+    @media (min-width: 768px) { .store-hero-info h1 { font-size: 1.85rem; } }
+    .store-meta-row {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      align-items: center; font-size: 0.82rem; color: var(--text-secondary);
+    }
+    .store-meta-row .meta-chip {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 4px 10px; border-radius: 20px;
+      background: var(--surface-alt); border: 1px solid var(--border);
       font-weight: 600;
-      color: #1f5d8a;
-      margin-bottom: 6px;
-      background: rgba(31,93,138,0.1);
-      padding: 2px 10px;
-      border-radius: 30px;
     }
-    .store-category {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      margin-bottom: 6px;
+    .store-meta-row .meta-chip.verified {
+      background: rgba(22,163,74,0.1); color: var(--open-green);
+      border-color: rgba(22,163,74,0.2);
     }
-    .store-rating-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.85rem;
-      color: var(--text-secondary);
+    .store-meta-row .meta-chip i { font-size: 0.72rem; }
+
+    .store-actions {
+      display: flex; gap: 8px; margin-left: auto; padding-top: 12px;
       flex-wrap: wrap;
     }
-    .store-rating-row i { color: #f5b342; }
-    .store-rating-row .rating-value { font-weight: 700; color: var(--text); }
+    @media (max-width: 639px) { .store-actions { margin-left: 0; width: 100%; } }
+    .action-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 16px; border-radius: 40px;
+      border: 1px solid var(--border); background: var(--surface);
+      color: var(--text); font-size: 0.8rem; font-weight: 600;
+      cursor: pointer; transition: all 0.2s; font-family: inherit;
+    }
+    .action-pill:hover { border-color: var(--navy-2); background: var(--surface-alt); }
+    .action-pill i { font-size: 0.82rem; }
+    .action-pill.saved { background: #fef2f2; border-color: #e74c3c; color: #e74c3c; }
+    .action-pill.saved i { color: #e74c3c; }
+    .action-pill.following { background: var(--navy-2); border-color: var(--navy-2); color: white; }
+    [data-theme="dark"] .action-pill.saved { background: rgba(231,76,60,0.15); }
+    @media (max-width: 639px) { .action-pill { padding: 6px 12px; font-size: 0.72rem; } }
 
-    .store-bio {
-      margin-top: 16px;
-      font-size: 0.95rem;
-      line-height: 1.6;
-      color: var(--text-secondary);
-      border-left: 3px solid #B49450;
-      padding-left: 16px;
-      animation: fadeIn 0.8s ease;
+    /* ============================================================
+       STORE STATS BAR
+       ============================================================ */
+    .store-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+      gap: 8px; padding: 12px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; margin-bottom: 20px;
+    }
+    @media (max-width: 639px) {
+      .store-stats { grid-template-columns: repeat(2, 1fr); gap: 6px; padding: 8px; }
+    }
+    .stat-item {
+      text-align: center; padding: 12px 8px; border-radius: 12px;
+      background: var(--surface-alt);
+    }
+    .stat-value {
+      font-size: 1.25rem; font-weight: 800; color: var(--text);
+      line-height: 1.1; margin-bottom: 4px;
+      display: flex; align-items: center; justify-content: center; gap: 4px;
+    }
+    .stat-value.star { color: var(--gold-deep); }
+    .stat-value .stat-icon { font-size: 0.85rem; }
+    .stat-label {
+      font-size: 0.65rem; font-weight: 700;
+      color: var(--text-secondary); text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+    @media (min-width: 768px) { .stat-value { font-size: 1.35rem; } }
+
+    /* ============================================================
+       MOBILE CONTACT STRIP
+       ============================================================ */
+    .mobile-contact-strip {
+      display: none; gap: 10px; margin-bottom: 20px;
+    }
+    @media (max-width: 1023px) { .mobile-contact-strip { display: flex; } }
+    .mobile-contact-strip .contact-btn { flex: 1; justify-content: center; }
+
+    /* ============================================================
+       LAYOUT (main + sticky sidebar)
+       ============================================================ */
+    .store-layout {
+      display: grid; grid-template-columns: 1fr;
+      gap: 20px; align-items: start; margin-bottom: 40px;
+    }
+    @media (min-width: 1024px) {
+      .store-layout {
+        grid-template-columns: minmax(0, 1fr) 340px;
+        gap: 24px;
+      }
+      .store-sidebar {
+        position: sticky; top: 90px; align-self: start;
+        display: flex; flex-direction: column; gap: 16px;
+      }
+    }
+    @media (max-width: 1023px) {
+      .store-sidebar { display: none; }
     }
 
-    .contact-buttons {
-      display: flex;
+    /* ============================================================
+       SECTIONS
+       ============================================================ */
+    .store-section {
+      padding-top: 24px; margin-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    .store-section:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+    .store-section h2 {
+      font-size: 1.15rem; font-weight: 700; color: var(--text);
+      margin-bottom: 14px; letter-spacing: -0.2px;
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    }
+    .store-section h2 .count-badge {
+      font-size: 0.7rem; font-weight: 600;
+      padding: 3px 10px; border-radius: 20px;
+      background: var(--surface-alt); color: var(--text-secondary);
+      border: 1px solid var(--border);
+    }
+
+    /* ============================================================
+       ABOUT (expandable)
+       ============================================================ */
+    .about-text {
+      font-size: 0.92rem; color: var(--text-secondary);
+      line-height: 1.7; position: relative;
+    }
+    .about-text.collapsed {
+      max-height: 4.5em; overflow: hidden;
+    }
+    .about-text.collapsed::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 32px; pointer-events: none;
+      background: linear-gradient(transparent, var(--surface));
+    }
+    .about-toggle {
+      display: inline-block; margin-top: 6px;
+      background: transparent; border: none;
+      color: var(--navy-2); font-weight: 700; font-size: 0.82rem;
+      cursor: pointer; padding: 0; font-family: inherit;
+    }
+    .about-toggle:hover { text-decoration: underline; }
+    [data-theme="dark"] .about-toggle { color: var(--gold); }
+
+    /* ============================================================
+       POLICIES GRID
+       ============================================================ */
+    .policies-grid {
+      display: grid; grid-template-columns: 1fr; gap: 12px;
+    }
+    @media (min-width: 640px) {
+      .policies-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .policy-item {
+      padding: 16px; border-radius: 14px;
+      background: var(--surface-alt); border: 1px solid var(--border);
+    }
+    .policy-icon {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: var(--navy-2); color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; margin-bottom: 10px;
+    }
+    [data-theme="dark"] .policy-icon { background: #2A3550; }
+    .policy-item h4 {
+      font-size: 0.85rem; font-weight: 700; color: var(--text);
+      margin-bottom: 6px;
+    }
+    .policy-item p {
+      font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5;
+    }
+
+    /* ============================================================
+       FEATURED PRODUCTS
+       ============================================================ */
+    .featured-row {
+      display: flex; gap: 12px; overflow-x: auto;
+      padding: 4px 0 12px; scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .featured-row::-webkit-scrollbar { display: none; }
+    .featured-card {
+      flex: 0 0 190px; cursor: pointer;
+      border-radius: 14px; overflow: hidden;
+      background: var(--surface); border: 1px solid var(--border);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      position: relative;
+    }
+    .featured-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 30px rgba(15,41,64,0.12);
+      border-color: rgba(212,184,122,0.4);
+    }
+    .featured-card .fc-img {
+      height: 130px; overflow: hidden; background: var(--surface-alt);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .featured-card .fc-img img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .featured-card:hover .fc-img img { transform: scale(1.06); }
+    .featured-card .fc-img i {
+      font-size: 2.2rem; color: var(--text-secondary);
+    }
+    .featured-card .fc-body { padding: 10px 12px 12px; }
+    .featured-card .fc-price {
+      font-size: 0.92rem; font-weight: 800; color: var(--text);
+      margin-bottom: 3px;
+    }
+    .featured-card .fc-title {
+      font-size: 0.78rem; color: var(--text-secondary);
+      line-height: 1.35;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .featured-badge {
+      position: absolute; top: 8px; right: 8px;
+      padding: 3px 8px; border-radius: 20px;
+      background: rgba(212,184,122,0.95); color: var(--navy);
+      font-size: 0.58rem; font-weight: 800; text-transform: uppercase;
+      letter-spacing: 0.5px; z-index: 2;
+    }
+
+    /* ============================================================
+       PRODUCT FILTERS
+       ============================================================ */
+    .product-filters {
+      display: flex; gap: 8px; overflow-x: auto;
+      padding: 4px 0; margin-bottom: 14px;
+      scrollbar-width: none; -webkit-overflow-scrolling: touch;
+    }
+    .product-filters::-webkit-scrollbar { display: none; }
+    .filter-pill {
+      flex-shrink: 0; padding: 8px 16px; border-radius: 60px;
+      border: 1px solid var(--border); background: var(--surface);
+      color: var(--text-secondary); font-size: 0.8rem; font-weight: 600;
+      cursor: pointer; white-space: nowrap;
+      display: inline-flex; align-items: center; gap: 6px;
+      transition: all 0.2s; font-family: inherit;
+    }
+    .filter-pill:hover { border-color: var(--navy-2); color: var(--text); }
+    .filter-pill.active {
+      background: var(--navy-2); border-color: var(--navy-2); color: white;
+    }
+    .filter-pill .count {
+      font-size: 0.7rem; opacity: 0.75; margin-left: 2px;
+    }
+
+    .products-controls {
+      display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap;
+    }
+    .store-search {
+      flex: 1; min-width: 180px;
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 14px; border: 1px solid var(--border);
+      border-radius: 12px; background: var(--surface);
+      transition: border-color 0.2s;
+    }
+    .store-search:focus-within { border-color: var(--navy-2); }
+    .store-search i { color: var(--text-secondary); font-size: 0.85rem; }
+    .store-search input {
+      flex: 1; border: none; background: transparent; outline: none;
+      font-size: 0.85rem; color: var(--text); font-family: inherit;
+      min-width: 0;
+    }
+    .store-sort {
+      padding: 10px 14px; border: 1px solid var(--border);
+      border-radius: 12px; background: var(--surface);
+      color: var(--text); font-size: 0.85rem; font-weight: 600;
+      cursor: pointer; font-family: inherit;
+    }
+
+    /* Products grid — custom (3 cols on desktop to fit sidebar) */
+    .store-products-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px; margin-bottom: 16px;
+    }
+    @media (min-width: 640px) {
+      .store-products-grid { gap: 14px; }
+    }
+    @media (min-width: 1024px) {
+      .store-products-grid { grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    }
+    /* UX polish: hover state on product cards */
+    .store-products-grid .listing-card {
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease !important;
+    }
+    .store-products-grid .listing-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 32px rgba(15,41,64,0.12);
+      border-color: rgba(212,184,122,0.4) !important;
+    }
+
+    .view-all-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 26px; margin-top: 8px;
+      background: transparent; border: 1.5px solid var(--navy-2);
+      color: var(--navy-2); border-radius: 40px;
+      font-weight: 700; font-size: 0.85rem;
+      cursor: pointer; transition: all 0.2s; font-family: inherit;
+    }
+    .view-all-btn:hover {
+      background: var(--navy-2); color: white;
+    }
+    [data-theme="dark"] .view-all-btn { color: var(--gold); border-color: var(--gold); }
+    [data-theme="dark"] .view-all-btn:hover { background: var(--gold); color: var(--navy); }
+
+    /* ============================================================
+       EMPTY STATE
+       ============================================================ */
+    .store-empty {
+      grid-column: 1/-1; text-align: center;
+      padding: 60px 24px; background: var(--surface-alt);
+      border: 1px dashed var(--border); border-radius: 20px;
+    }
+    .store-empty i {
+      font-size: 3rem; color: var(--text-secondary);
+      margin-bottom: 14px; opacity: 0.5;
+    }
+    .store-empty h3 {
+      font-size: 1.1rem; color: var(--text); margin-bottom: 6px;
+    }
+    .store-empty p {
+      font-size: 0.88rem; color: var(--text-secondary);
+      max-width: 360px; margin: 0 auto 16px; line-height: 1.5;
+    }
+    .store-empty .contact-cta {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 10px 22px; background: var(--navy-2); color: white;
+      border-radius: 40px; text-decoration: none;
+      font-weight: 700; font-size: 0.82rem;
+      border: none; cursor: pointer; font-family: inherit;
+      transition: background 0.2s;
+    }
+    .store-empty .contact-cta:hover { background: var(--navy); }
+
+    /* ============================================================
+       RELATED STORES
+       ============================================================ */
+    .related-stores-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
       gap: 12px;
-      margin-top: 20px;
-      flex-wrap: wrap;
     }
+    .related-store-card {
+      padding: 18px 14px; border-radius: 16px;
+      background: var(--surface); border: 1px solid var(--border);
+      text-align: center; cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    .related-store-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 30px rgba(15,41,64,0.12);
+      border-color: rgba(212,184,122,0.4);
+    }
+    .related-store-avatar {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: linear-gradient(135deg, #1a3650, #2a4a6a);
+      color: white; font-size: 1.5rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 10px; overflow: hidden;
+    }
+    .related-store-avatar img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .related-store-name {
+      font-size: 0.85rem; font-weight: 700; color: var(--text);
+      margin-bottom: 3px; line-height: 1.25;
+      display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .related-store-category {
+      font-size: 0.7rem; color: var(--text-secondary);
+      display: inline-flex; align-items: center; gap: 4px;
+    }
+
+    /* ============================================================
+       SIDEBAR CARDS
+       ============================================================ */
+    .sidebar-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 20px;
+      box-shadow: 0 4px 16px rgba(15,41,64,0.04);
+    }
+    .sidebar-card h3 {
+      font-size: 0.78rem; font-weight: 700;
+      color: var(--text); margin-bottom: 14px;
+      text-transform: uppercase; letter-spacing: 0.8px;
+    }
+    .contact-buttons-col {
+      display: flex; flex-direction: column; gap: 8px;
+    }
+
+    /* Contact buttons (shared) */
     .contact-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 20px;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      cursor: pointer;
-      transition: all 0.3s;
-      text-decoration: none;
-      border: 1px solid transparent;
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 8px; padding: 12px 20px;
+      border-radius: 40px; font-weight: 700; font-size: 0.88rem;
+      cursor: pointer; transition: all 0.2s;
+      text-decoration: none; border: none; font-family: inherit;
     }
-    .call-btn {
-      background: #1a3650;
-      color: white;
+    .contact-btn.call-btn {
+      background: var(--navy-2); color: white;
     }
-    .call-btn:hover {
-      background: #0f2940;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(26,54,80,0.3);
+    .contact-btn.call-btn:hover {
+      background: var(--navy); transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(26,54,80,0.25);
     }
-    .whatsapp-btn {
-      background: #25D366;
-      color: white;
+    .contact-btn.whatsapp-btn {
+      background: #25D366; color: white;
     }
-    .whatsapp-btn:hover {
-      background: #1DA851;
-      transform: translateY(-2px);
+    .contact-btn.whatsapp-btn:hover {
+      background: #1DA851; transform: translateY(-1px);
       box-shadow: 0 6px 16px rgba(37,211,102,0.3);
     }
 
-    .products-section {
-      margin-top: 30px;
+    .response-info {
+      margin-top: 14px; padding-top: 14px;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.78rem; color: var(--text-secondary);
     }
-    .products-section h2 {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 16px;
-      position: relative;
-      display: inline-block;
+    .response-info i { color: var(--open-green); font-size: 0.6rem; }
+
+    .verification-list {
+      display: flex; flex-direction: column; gap: 10px;
     }
-    .products-section h2::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 50%;
-      height: 3px;
-      background: #B49450;
-      border-radius: 2px;
+    .verification-item {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.82rem; color: var(--text);
+    }
+    .verification-item i.verified {
+      color: var(--open-green); font-size: 0.85rem;
+    }
+    .verification-item i.pending {
+      color: var(--text-secondary); opacity: 0.5; font-size: 0.85rem;
+    }
+    .verification-item span.pending {
+      color: var(--text-secondary);
     }
 
-    @keyframes slideDown {
-      from { opacity: 0; transform: translateY(-30px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* ============================================================
+       TOAST
+       ============================================================ */
+    .toast {
+      position: fixed; bottom: 30px; left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--navy); color: white;
+      padding: 12px 24px; border-radius: 40px;
+      font-size: 0.85rem; font-weight: 600;
+      box-shadow: 0 14px 32px rgba(0,0,0,0.25);
+      opacity: 0; transition: all 0.3s ease;
+      z-index: 2000; pointer-events: none;
+      display: inline-flex; align-items: center; gap: 8px;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-    @media (max-width: 480px) {
-      .store-profile-header { padding: 20px 16px; }
-      .store-avatar-large { width: 70px; height: 70px; font-size: 1.8rem; }
-      .store-main-info h1 { font-size: 1.3rem; }
-      .contact-btn { padding: 8px 16px; font-size: 0.8rem; }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ===== TOP NAVBAR ===== -->
+  <div class="toast" id="toast"></div>
+
+  <!-- ===== NAVBAR ===== -->
   <nav class="navbar">
     <div class="container nav-container">
       <a href="/" class="logo-wrapper">
@@ -219,29 +636,162 @@
   </nav>
 
   <div class="container">
-    <div id="storeProfileContainer">
-      <div class="store-profile-header">
-        <div class="store-top-row">
-          <div class="store-avatar-large">...</div>
-          <div class="store-main-info">
-            <h1>Loading...</h1>
+
+    <!-- Breadcrumb -->
+    <div class="store-breadcrumb" id="breadcrumb">
+      <a href="/">Home</a>
+      <i class="fas fa-chevron-right"></i>
+      <a href="/stores.html">Stores</a>
+      <i class="fas fa-chevron-right"></i>
+      <span class="current" id="crumbStoreName">Store</span>
+    </div>
+
+    <!-- LOADING SKELETON -->
+    <div id="storeLoading">
+      <div class="store-hero" style="margin-bottom:20px;">
+        <div class="sk-cover"></div>
+        <div class="store-hero-body">
+          <div class="sk-avatar"></div>
+          <div class="store-hero-info" style="padding-top:20px;">
+            <div class="sk-line" style="width:220px;height:22px;margin-bottom:10px;"></div>
+            <div class="sk-line" style="width:140px;"></div>
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="products-section">
-      <h2>Products from this store</h2>
-      <div class="grid-2col-listings" id="storeProductsGrid">
-        <div class="listing-card">
-          <div class="listing-img"><i class="fas fa-spinner fa-spin"></i></div>
-          <div class="listing-body"><div class="price">Loading...</div></div>
-        </div>
+      <div class="store-stats">
+        <div class="stat-item"><div class="sk-line" style="width:40px;margin:0 auto 6px;"></div><div class="sk-line" style="width:60px;margin:0 auto;"></div></div>
+        <div class="stat-item"><div class="sk-line" style="width:40px;margin:0 auto 6px;"></div><div class="sk-line" style="width:60px;margin:0 auto;"></div></div>
+        <div class="stat-item"><div class="sk-line" style="width:40px;margin:0 auto 6px;"></div><div class="sk-line" style="width:60px;margin:0 auto;"></div></div>
+        <div class="stat-item"><div class="sk-line" style="width:40px;margin:0 auto 6px;"></div><div class="sk-line" style="width:60px;margin:0 auto;"></div></div>
       </div>
     </div>
+
+    <!-- ERROR STATE -->
+    <div id="storeError" class="store-error" style="display:none;">
+      <i class="fas fa-store-slash"></i>
+      <h2>Store not found</h2>
+      <p>The store you're looking for doesn't exist or may have been removed.</p>
+      <a href="/stores.html"><i class="fas fa-arrow-left"></i> Browse all stores</a>
+    </div>
+
+    <!-- STORE CONTENT -->
+    <div id="storeContent" style="display:none;">
+
+      <!-- HERO -->
+      <div class="store-hero">
+        <div class="store-cover" id="storeCover">
+          <img id="storeCoverImg" src="" alt="" onerror="this.style.display='none'">
+        </div>
+        <div class="store-hero-body">
+          <div class="store-avatar-large" id="storeAvatar"></div>
+          <div class="store-hero-info">
+            <h1 id="storeName">Store</h1>
+            <div class="store-meta-row" id="storeMetaRow"></div>
+          </div>
+          <div class="store-actions">
+            <button type="button" class="action-pill" id="saveStoreBtn" aria-pressed="false">
+              <i class="far fa-bookmark"></i> <span>Save</span>
+            </button>
+            <button type="button" class="action-pill" id="followStoreBtn" aria-pressed="false">
+              <i class="far fa-bell"></i> <span>Follow</span>
+            </button>
+            <button type="button" class="action-pill" id="shareStoreBtn">
+              <i class="fas fa-share-nodes"></i> <span>Share</span>
+            </button>
+            <button type="button" class="action-pill" id="reportStoreBtn">
+              <i class="fas fa-flag"></i> <span>Report</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STATS -->
+      <div class="store-stats" id="storeStats"></div>
+
+      <!-- MOBILE CONTACT STRIP -->
+      <div class="mobile-contact-strip">
+        <a href="#" class="contact-btn call-btn" id="callBtnMobile"><i class="fas fa-phone"></i> Call</a>
+        <a href="#" class="contact-btn whatsapp-btn" id="waBtnMobile" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+      </div>
+
+      <!-- MAIN + SIDEBAR -->
+      <div class="store-layout">
+
+        <div class="store-main">
+
+          <!-- ABOUT -->
+          <div class="store-section" id="aboutSection" style="display:none;">
+            <h2>About this store</h2>
+            <p class="about-text collapsed" id="storeBio"></p>
+            <button type="button" class="about-toggle" id="aboutToggle">Read more</button>
+          </div>
+
+          <!-- POLICIES -->
+          <div class="store-section">
+            <h2>Store policies</h2>
+            <div class="policies-grid" id="policiesGrid"></div>
+          </div>
+
+          <!-- FEATURED PRODUCTS -->
+          <div class="store-section" id="featuredSection" style="display:none;">
+            <h2>Featured products</h2>
+            <div class="featured-row" id="featuredRow"></div>
+          </div>
+
+          <!-- ALL PRODUCTS -->
+          <div class="store-section">
+            <h2>
+              Products from this store
+              <span class="count-badge" id="productsCountBadge">0</span>
+            </h2>
+            <div class="product-filters" id="productFilters"></div>
+            <div class="products-controls" id="productsControls">
+              <div class="store-search">
+                <i class="fas fa-search"></i>
+                <input type="search" id="storeSearchInput" placeholder="Search this store..." autocomplete="off">
+              </div>
+              <select class="store-sort" id="storeSort" aria-label="Sort products">
+                <option value="newest">Newest first</option>
+                <option value="price-low">Price: Low to high</option>
+                <option value="price-high">Price: High to low</option>
+              </select>
+            </div>
+            <div class="store-products-grid" id="storeProductsGrid"></div>
+            <button type="button" class="view-all-btn" id="viewAllBtn" style="display:none;"></button>
+          </div>
+
+          <!-- RELATED STORES -->
+          <div class="store-section" id="relatedStoresSection" style="display:none;">
+            <h2>Similar stores</h2>
+            <div class="related-stores-grid" id="relatedStoresGrid"></div>
+          </div>
+
+        </div>
+
+        <!-- SIDEBAR -->
+        <aside class="store-sidebar">
+          <div class="sidebar-card">
+            <h3>Contact seller</h3>
+            <div class="contact-buttons-col">
+              <a href="#" class="contact-btn call-btn" id="callBtnDesktop"><i class="fas fa-phone"></i> Call</a>
+              <a href="#" class="contact-btn whatsapp-btn" id="waBtnDesktop" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            </div>
+            <div class="response-info" id="responseInfo" style="display:none;"></div>
+          </div>
+
+          <div class="sidebar-card" id="verificationCard" style="display:none;">
+            <h3>Verification</h3>
+            <div class="verification-list" id="verificationList"></div>
+          </div>
+        </aside>
+
+      </div>
+
+    </div>
+
   </div>
 
-  <!-- ===== BOTTOM NAVIGATION ===== -->
+  <!-- ===== BOTTOM NAV ===== -->
   <div class="bottom-nav">
     <a href="/" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
     <a href="/categories.html" class="nav-item"><i class="fas fa-th-large"></i><span>Categories</span></a>
@@ -348,74 +898,785 @@
 
   <script src="/js/main.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', async function() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const storeId = urlParams.get('id');
-      
-      if (!storeId) {
-        document.getElementById('storeProfileContainer').innerHTML = '<div style="text-align:center;padding:3rem;">Store not found.</div>';
-        return;
+  (function () {
+    'use strict';
+
+    /* ============================================================
+       STORAGE KEYS
+       ============================================================ */
+    const SAVED_KEY    = 'zaure_saved_stores';
+    const FOLLOWED_KEY = 'zaure_followed_stores';
+
+    /* ============================================================
+       STATE
+       ============================================================ */
+    const state = {
+      seller: null,
+      allProducts: [],
+      filteredProducts: [],
+      featuredProducts: [],
+      activeCategory: 'All',
+      searchQuery: '',
+      sort: 'newest',
+      showAll: false,
+      initialLimit: 8
+    };
+
+    /* ============================================================
+       UTILITIES
+       ============================================================ */
+    function escapeHtml(s) {
+      if (s == null) return '';
+      return String(s)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+    }
+    function showToast(msg, icon) {
+      const t = document.getElementById('toast');
+      t.innerHTML = `<i class="fas ${icon || 'fa-check-circle'}"></i> ${escapeHtml(msg)}`;
+      t.classList.add('show');
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(() => t.classList.remove('show'), 2600);
+    }
+    function getInitials(seller) {
+      const raw = (seller.initials || '').trim();
+      if (raw) return raw;
+      const name = (seller.name || 'Z').trim();
+      const parts = name.split(/\s+/);
+      if (parts.length === 1) return parts[0].charAt(0).toUpperCase();
+      return (parts[0].charAt(0) + parts[parts.length - 1].charAt(0)).toUpperCase();
+    }
+    function getAvatarSrc(seller) {
+      return seller.profilePic || seller.avatar || seller.image || '';
+    }
+    function getCoverSrc(seller) {
+      return seller.coverImage || seller.bannerImage || seller.banner || seller.cover || '';
+    }
+    function getPhoneRaw(seller) {
+      return seller.phone || seller.phoneNumber || '';
+    }
+    function getWhatsappRaw(seller) {
+      return seller.whatsapp || seller.whatsApp || seller.phone || '';
+    }
+    function normalizePhone(phone) {
+      const digits = String(phone || '').replace(/[^0-9]/g, '');
+      if (digits.length === 11 && digits.startsWith('0')) {
+        return '234' + digits.slice(1);
       }
+      return digits;
+    }
 
-      const sellers = await loadTopSellers();
-      const seller = sellers.find(s => s.id === storeId);
-      
-      if (!seller) {
-        document.getElementById('storeProfileContainer').innerHTML = '<div style="text-align:center;padding:3rem;">Store not found.</div>';
-        return;
+    /* ============================================================
+       STORAGE HELPERS
+       ============================================================ */
+    function getList(key) {
+      try { return JSON.parse(localStorage.getItem(key) || '[]'); } catch { return []; }
+    }
+    function isSaved(id) { return getList(SAVED_KEY).includes(String(id)); }
+    function isFollowed(id) { return getList(FOLLOWED_KEY).includes(String(id)); }
+    function toggleSaved(id) {
+      const list = getList(SAVED_KEY); const sid = String(id);
+      const idx = list.indexOf(sid);
+      if (idx > -1) list.splice(idx, 1); else list.push(sid);
+      localStorage.setItem(SAVED_KEY, JSON.stringify(list));
+      return idx === -1;
+    }
+    function toggleFollowed(id) {
+      const list = getList(FOLLOWED_KEY); const sid = String(id);
+      const idx = list.indexOf(sid);
+      if (idx > -1) list.splice(idx, 1); else list.push(sid);
+      localStorage.setItem(FOLLOWED_KEY, JSON.stringify(list));
+      return idx === -1;
+    }
+
+    /* ============================================================
+       LOADING / ERROR STATE
+       ============================================================ */
+    function showLoading() {
+      document.getElementById('storeLoading').style.display = 'block';
+      document.getElementById('storeError').style.display = 'none';
+      document.getElementById('storeContent').style.display = 'none';
+    }
+    function showError() {
+      document.getElementById('storeLoading').style.display = 'none';
+      document.getElementById('storeError').style.display = 'block';
+      document.getElementById('storeContent').style.display = 'none';
+    }
+    function showContent() {
+      document.getElementById('storeLoading').style.display = 'none';
+      document.getElementById('storeError').style.display = 'none';
+      document.getElementById('storeContent').style.display = 'block';
+    }
+
+    /* ============================================================
+       STORE PRODUCTS — resolve products belonging to this seller
+       ============================================================ */
+    function getStoreProducts(allProducts, seller) {
+      // 1. If seller declares productIds, use them
+      if (Array.isArray(seller.productIds) && seller.productIds.length) {
+        const idSet = new Set(seller.productIds.map(String));
+        return allProducts.filter(p => idSet.has(String(p.id)));
       }
-
-      // Render store header
-      document.getElementById('storeProfileContainer').innerHTML = `
-        <div class="store-profile-header">
-          <div class="store-top-row">
-            <div class="store-avatar-large">
-              ${seller.profilePic ? `<img src="${seller.profilePic}" alt="${seller.name}" onerror="this.style.display='none';this.parentElement.textContent='${seller.initials || seller.name.charAt(0)}';">` : (seller.initials || seller.name.charAt(0))}
-            </div>
-            <div class="store-main-info">
-              <h1>${seller.name}</h1>
-              <div class="store-badge"><i class="fas fa-check-circle"></i> ${seller.badge || 'verified'}</div>
-              <div class="store-category"><i class="fas fa-tag"></i> ${seller.category || 'General'}</div>
-              <div class="store-rating-row">
-                <span><i class="fas fa-star"></i> <span class="rating-value">${seller.rating || '5.0'}</span></span>
-                <span>•</span>
-                <span>${seller.sales || 0} sales</span>
-                <span>•</span>
-                <span>Joined ${seller.joined || 'N/A'}</span>
-                <span>•</span>
-                <span><i class="fas fa-map-pin"></i> ${seller.location || 'Nigeria'}</span>
-              </div>
-            </div>
-          </div>
-          <div class="store-bio">${seller.bio || 'Trusted seller on Zaure. Browse their latest products below.'}</div>
-          <div class="contact-buttons">
-            <a href="tel:${seller.phone}" class="contact-btn call-btn"><i class="fas fa-phone-alt"></i> Call</a>
-            <a href="https://wa.me/${seller.whatsapp || seller.phone}?text=Hello%20${encodeURIComponent(seller.name)}%2C%20I%20found%20you%20on%20Zaure" target="_blank" class="contact-btn whatsapp-btn"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-          </div>
-        </div>
-      `;
-
-      // Load and filter products
-      const products = await loadProducts();
-      let storeProducts = products.filter(p => 
-        p.seller && p.seller.name && p.seller.name.toLowerCase() === seller.name.toLowerCase()
+      // 2. Match by sellerId or p.seller.id
+      const byId = allProducts.filter(p =>
+        (p.sellerId && String(p.sellerId) === String(seller.id)) ||
+        (p.seller && p.seller.id && String(p.seller.id) === String(seller.id))
       );
-      
-      if (storeProducts.length === 0) {
-        storeProducts = products.filter(p => 
-          p.category && p.category.toLowerCase() === seller.category.toLowerCase()
+      if (byId.length) return byId;
+      // 3. Fall back to name match
+      return allProducts.filter(p =>
+        p.seller && p.seller.name &&
+        p.seller.name.toLowerCase() === seller.name.toLowerCase()
+      );
+    }
+
+    /* ============================================================
+       RENDER: BREADCRUMB + META + TITLE
+       ============================================================ */
+    function updatePageMeta(seller) {
+      document.title = `${seller.name} – Zaure`;
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) {
+        metaDesc.setAttribute('content',
+          seller.bio || `Browse products from ${seller.name} on Zaure, Nigeria's most trusted online marketplace.`
         );
       }
-      
-      renderListings(storeProducts.slice(0, 12), 'storeProductsGrid');
+      const crumb = document.getElementById('crumbStoreName');
+      if (crumb) crumb.textContent = seller.name;
+    }
 
-      document.getElementById('fabPostAd')?.addEventListener('click', function() {
-        if (!currentUser) { openSignup(); } else { window.location.href = '/post.html'; }
+    /* ============================================================
+       RENDER: HERO
+       ============================================================ */
+    function renderHero(seller) {
+      // Cover
+      const coverImg = document.getElementById('storeCoverImg');
+      const coverSrc = getCoverSrc(seller);
+      if (coverSrc) {
+        coverImg.src = coverSrc;
+        coverImg.alt = `${seller.name} cover`;
+      } else {
+        coverImg.style.display = 'none';
+      }
+
+      // Avatar
+      const avatarEl = document.getElementById('storeAvatar');
+      const avatarSrc = getAvatarSrc(seller);
+      if (avatarSrc) {
+        avatarEl.innerHTML = `<img src="${escapeHtml(avatarSrc)}" alt="${escapeHtml(seller.name)}" onerror="this.style.display='none';this.parentElement.textContent='${escapeHtml(getInitials(seller))}';this.parentElement.style.fontSize='2rem';this.parentElement.style.fontWeight='700';">`;
+      } else {
+        avatarEl.textContent = getInitials(seller);
+      }
+
+      // Name
+      document.getElementById('storeName').textContent = seller.name || 'Store';
+
+      // Meta row
+      const meta = document.getElementById('storeMetaRow');
+      const items = [];
+      if (seller.category) {
+        items.push(`<span class="meta-chip"><i class="fas fa-tag"></i> ${escapeHtml(seller.category)}</span>`);
+      }
+      if (seller.location) {
+        items.push(`<span class="meta-chip"><i class="fas fa-map-pin"></i> ${escapeHtml(seller.location)}</span>`);
+      }
+      if (seller.badge) {
+        items.push(`<span class="meta-chip verified"><i class="fas fa-check-circle"></i> ${escapeHtml(seller.badge)}</span>`);
+      } else {
+        items.push(`<span class="meta-chip verified"><i class="fas fa-check-circle"></i> Verified</span>`);
+      }
+      meta.innerHTML = items.join('');
+
+      // Action buttons state
+      updateActionButtons();
+    }
+
+    function updateActionButtons() {
+      const seller = state.seller;
+      if (!seller) return;
+
+      const saveBtn = document.getElementById('saveStoreBtn');
+      const followBtn = document.getElementById('followStoreBtn');
+
+      const saved = isSaved(seller.id);
+      saveBtn.classList.toggle('saved', saved);
+      saveBtn.setAttribute('aria-pressed', String(saved));
+      saveBtn.querySelector('i').className = saved ? 'fas fa-bookmark' : 'far fa-bookmark';
+      saveBtn.querySelector('span').textContent = saved ? 'Saved' : 'Save';
+
+      const followed = isFollowed(seller.id);
+      followBtn.classList.toggle('following', followed);
+      followBtn.setAttribute('aria-pressed', String(followed));
+      followBtn.querySelector('i').className = followed ? 'fas fa-bell' : 'far fa-bell';
+      followBtn.querySelector('span').textContent = followed ? 'Following' : 'Follow';
+    }
+
+    /* ============================================================
+       RENDER: STATS BAR
+       ============================================================ */
+    function renderStats(seller, productCount) {
+      const stats = [];
+
+      stats.push({
+        label: 'Products',
+        value: productCount,
+        icon: null
       });
 
-      initTheme();
-      updateFavoriteBadge();
-    });
+      if (seller.rating != null && seller.rating !== '') {
+        stats.push({
+          label: 'Rating',
+          value: seller.rating,
+          icon: 'fa-star',
+          star: true
+        });
+      }
+
+      if (seller.sales != null && seller.sales !== '') {
+        stats.push({ label: 'Sales', value: seller.sales });
+      }
+
+      // Followers = base + (user following ? +1 : 0)
+      const baseFollowers = parseInt(seller.followers || 0, 10);
+      const liveFollowers = baseFollowers + (isFollowed(seller.id) ? 1 : 0);
+      if (baseFollowers > 0 || isFollowed(seller.id)) {
+        stats.push({ label: 'Followers', value: liveFollowers });
+      }
+
+      if (seller.joined) {
+        const yearMatch = String(seller.joined).match(/\d{4}/);
+        stats.push({
+          label: 'Since',
+          value: yearMatch ? yearMatch[0] : seller.joined
+        });
+      }
+
+      document.getElementById('storeStats').innerHTML = stats.map(s => `
+        <div class="stat-item">
+          <div class="stat-value ${s.star ? 'star' : ''}">
+            ${s.icon ? `<i class="fas ${s.icon} stat-icon"></i>` : ''}${escapeHtml(String(s.value))}
+          </div>
+          <div class="stat-label">${escapeHtml(s.label)}</div>
+        </div>
+      `).join('');
+    }
+
+    /* ============================================================
+       RENDER: ABOUT (expandable)
+       ============================================================ */
+    function renderAbout(seller) {
+      const bio = seller.bio || '';
+      if (!bio.trim()) {
+        document.getElementById('aboutSection').style.display = 'none';
+        return;
+      }
+      document.getElementById('aboutSection').style.display = 'block';
+      const bioEl = document.getElementById('storeBio');
+      const toggle = document.getElementById('aboutToggle');
+      bioEl.textContent = bio;
+
+      if (bio.length > 180) {
+        bioEl.classList.add('collapsed');
+        toggle.style.display = 'inline-block';
+        toggle.textContent = 'Read more';
+        toggle.onclick = () => {
+          const collapsed = bioEl.classList.toggle('collapsed');
+          toggle.textContent = collapsed ? 'Read more' : 'Show less';
+        };
+      } else {
+        bioEl.classList.remove('collapsed');
+        toggle.style.display = 'none';
+      }
+    }
+
+    /* ============================================================
+       RENDER: POLICIES
+       ============================================================ */
+    function renderPolicies(seller) {
+      const p = seller.policies || {};
+      const policies = [
+        {
+          icon: 'fa-rotate-left',
+          title: 'Returns',
+          text: p.returns || 'Contact seller for return policy'
+        },
+        {
+          icon: 'fa-truck-fast',
+          title: 'Shipping',
+          text: p.shipping || 'Delivery arranged with seller'
+        },
+        {
+          icon: 'fa-shield-halved',
+          title: 'Warranty',
+          text: p.warranty || 'Ask seller for warranty info'
+        }
+      ];
+      document.getElementById('policiesGrid').innerHTML = policies.map(pol => `
+        <div class="policy-item">
+          <div class="policy-icon"><i class="fas ${pol.icon}"></i></div>
+          <h4>${escapeHtml(pol.title)}</h4>
+          <p>${escapeHtml(pol.text)}</p>
+        </div>
+      `).join('');
+    }
+
+    /* ============================================================
+       RENDER: FEATURED PRODUCTS
+       ============================================================ */
+    function renderFeatured(products) {
+      const featured = products.filter(p => p.featured === true || p.boosted === true);
+      // If not enough featured, top up with newest products
+      let pool = featured.slice(0, 5);
+      if (pool.length < 2) {
+        const extra = products.filter(p => !featured.includes(p)).slice(0, 5 - pool.length);
+        pool = pool.concat(extra);
+      }
+
+      if (pool.length < 2) {
+        document.getElementById('featuredSection').style.display = 'none';
+        return;
+      }
+
+      document.getElementById('featuredSection').style.display = 'block';
+      state.featuredProducts = pool;
+
+      const row = document.getElementById('featuredRow');
+      row.innerHTML = pool.map(p => {
+        const img = Array.isArray(p.images) && p.images[0] ? p.images[0] : null;
+        const price = p.price
+          ? (p.price >= 1e6 ? `₦${(p.price / 1e6).toFixed(1)}M` : `₦${Number(p.price).toLocaleString()}`)
+          : '';
+        const imgHtml = img
+          ? `<img src="${escapeHtml(img)}" alt="${escapeHtml(p.title || '')}" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\\'fas fa-box\\'></i>';">`
+          : `<i class="fas fa-box"></i>`;
+        const isFeatured = p.featured || p.boosted;
+        return `
+          <div class="featured-card" data-id="${escapeHtml(String(p.id))}">
+            ${isFeatured ? '<span class="featured-badge">Featured</span>' : ''}
+            <div class="fc-img">${imgHtml}</div>
+            <div class="fc-body">
+              ${price ? `<div class="fc-price">${price}</div>` : ''}
+              <div class="fc-title">${escapeHtml(p.title || '')}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      row.querySelectorAll('.featured-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const id = card.dataset.id;
+          if (typeof viewProduct === 'function') viewProduct(id);
+          else location.href = `/detail.html?id=${encodeURIComponent(id)}`;
+        });
+      });
+    }
+
+    /* ============================================================
+       RENDER: PRODUCT FILTERS
+       ============================================================ */
+    function buildProductFilters() {
+      const cats = {};
+      state.allProducts.forEach(p => {
+        const c = p.category || 'Other';
+        cats[c] = (cats[c] || 0) + 1;
+      });
+      const filters = document.getElementById('productFilters');
+      const total = state.allProducts.length;
+      filters.innerHTML = `
+        <button class="filter-pill ${state.activeCategory === 'All' ? 'active' : ''}" data-cat="All" type="button">
+          All <span class="count">${total}</span>
+        </button>
+        ${Object.entries(cats).sort((a, b) => b[1] - a[1]).map(([cat, count]) => `
+          <button class="filter-pill ${state.activeCategory === cat ? 'active' : ''}" data-cat="${escapeHtml(cat)}" type="button">
+            ${escapeHtml(cat)} <span class="count">${count}</span>
+          </button>
+        `).join('')}
+      `;
+      filters.querySelectorAll('.filter-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+          state.activeCategory = pill.dataset.cat;
+          filters.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+          state.showAll = false;
+          applyProductFilters();
+        });
+      });
+    }
+
+    /* ============================================================
+       APPLY FILTERS + SORT
+       ============================================================ */
+    function applyProductFilters() {
+      let list = [...state.allProducts];
+
+      if (state.activeCategory !== 'All') {
+        list = list.filter(p => (p.category || 'Other') === state.activeCategory);
+      }
+
+      if (state.searchQuery) {
+        const q = state.searchQuery.toLowerCase();
+        list = list.filter(p => (p.title || '').toLowerCase().includes(q));
+      }
+
+      switch (state.sort) {
+        case 'price-low':
+          list.sort((a, b) => (Number(a.price) || 0) - (Number(b.price) || 0));
+          break;
+        case 'price-high':
+          list.sort((a, b) => (Number(b.price) || 0) - (Number(a.price) || 0));
+          break;
+        case 'newest':
+        default:
+          list.sort((a, b) => {
+            const da = a.addedAt || a.date || '';
+            const db = b.addedAt || b.date || '';
+            return String(db).localeCompare(String(da));
+          });
+      }
+
+      state.filteredProducts = list;
+      renderProducts();
+    }
+
+    /* ============================================================
+       RENDER: PRODUCTS GRID
+       ============================================================ */
+    function renderProducts() {
+      const grid = document.getElementById('storeProductsGrid');
+      const total = state.filteredProducts.length;
+
+      // Update count badge
+      const badge = document.getElementById('productsCountBadge');
+      if (state.allProducts.length === total) {
+        badge.textContent = String(total);
+      } else {
+        badge.textContent = `${total} of ${state.allProducts.length}`;
+      }
+
+      // Store has zero products at all
+      if (state.allProducts.length === 0) {
+        document.getElementById('productFilters').style.display = 'none';
+        document.getElementById('productsControls').style.display = 'none';
+        document.getElementById('viewAllBtn').style.display = 'none';
+        grid.innerHTML = `
+          <div class="store-empty">
+            <i class="fas fa-box-open"></i>
+            <h3>No products listed yet</h3>
+            <p>This store hasn't listed any products. Contact them directly to ask about available items.</p>
+            <button type="button" class="contact-cta" onclick="document.getElementById('callBtnMobile').click()">
+              <i class="fas fa-phone"></i> Contact seller
+            </button>
+          </div>`;
+        return;
+      }
+
+      // Products exist but none match filter/search
+      if (total === 0) {
+        document.getElementById('productFilters').style.display = 'flex';
+        document.getElementById('productsControls').style.display = 'flex';
+        document.getElementById('viewAllBtn').style.display = 'none';
+        grid.innerHTML = `
+          <div class="store-empty">
+            <i class="fas fa-search"></i>
+            <h3>No matches</h3>
+            <p>Try a different search or clear your filters.</p>
+          </div>`;
+        return;
+      }
+
+      // Normal render
+      document.getElementById('productFilters').style.display = 'flex';
+      document.getElementById('productsControls').style.display = 'flex';
+
+      const limit = state.showAll ? total : state.initialLimit;
+      const items = state.filteredProducts.slice(0, limit);
+
+      if (typeof renderListings === 'function') {
+        renderListings(items, 'storeProductsGrid');
+      } else {
+        grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:2rem;">Products could not be displayed.</div>`;
+      }
+
+      // View All button
+      const btn = document.getElementById('viewAllBtn');
+      if (total > state.initialLimit && !state.showAll) {
+        btn.style.display = 'inline-flex';
+        btn.innerHTML = `<i class="fas fa-arrow-down"></i> View all ${total} products`;
+      } else {
+        btn.style.display = 'none';
+      }
+    }
+
+    /* ============================================================
+       RENDER: RELATED STORES
+       ============================================================ */
+    async function renderRelatedStores(seller, allSellers) {
+      let similar = allSellers.filter(s =>
+        String(s.id) !== String(seller.id) &&
+        s.category && seller.category &&
+        s.category.toLowerCase() === seller.category.toLowerCase()
+      );
+
+      if (similar.length < 2) {
+        // Fallback: fill with other stores
+        const others = allSellers.filter(s =>
+          String(s.id) !== String(seller.id) &&
+          !similar.find(x => String(x.id) === String(s.id))
+        );
+        similar = similar.concat(others);
+      }
+
+      similar = similar.slice(0, 4);
+
+      if (similar.length === 0) {
+        document.getElementById('relatedStoresSection').style.display = 'none';
+        return;
+      }
+
+      document.getElementById('relatedStoresSection').style.display = 'block';
+      const grid = document.getElementById('relatedStoresGrid');
+      grid.innerHTML = similar.map(s => {
+        const avatarSrc = getAvatarSrc(s);
+        const initials = getInitials(s);
+        const avatarInner = avatarSrc
+          ? `<img src="${escapeHtml(avatarSrc)}" alt="${escapeHtml(s.name || '')}" onerror="this.style.display='none';this.parentElement.textContent='${escapeHtml(initials)}';">`
+          : initials;
+        return `
+          <div class="related-store-card" data-id="${escapeHtml(String(s.id))}" role="button" tabindex="0">
+            <div class="related-store-avatar">${avatarInner}</div>
+            <div class="related-store-name">${escapeHtml(s.name || 'Store')}</div>
+            <div class="related-store-category"><i class="fas fa-tag"></i> ${escapeHtml(s.category || 'Store')}</div>
+          </div>
+        `;
+      }).join('');
+
+      grid.querySelectorAll('.related-store-card').forEach(card => {
+        const go = () => {
+          location.href = `/store.html?id=${encodeURIComponent(card.dataset.id)}`;
+        };
+        card.addEventListener('click', go);
+        card.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); }
+        });
+      });
+    }
+
+    /* ============================================================
+       RENDER: CONTACT BUTTONS
+       ============================================================ */
+    function renderContactButtons(seller) {
+      const phoneDigits = normalizePhone(getPhoneRaw(seller));
+      const waDigits = normalizePhone(getWhatsappRaw(seller));
+
+      const callBtns = [
+        document.getElementById('callBtnMobile'),
+        document.getElementById('callBtnDesktop')
+      ];
+      const waBtns = [
+        document.getElementById('waBtnMobile'),
+        document.getElementById('waBtnDesktop')
+      ];
+
+      callBtns.forEach(btn => {
+        if (phoneDigits) {
+          btn.href = `tel:${getPhoneRaw(seller)}`;
+          btn.style.display = '';
+        } else {
+          btn.style.display = 'none';
+        }
+      });
+
+      waBtns.forEach(btn => {
+        if (waDigits) {
+          btn.href = `https://wa.me/${waDigits}?text=${encodeURIComponent(`Hello ${seller.name}, I found your store on Zaure.`)}`;
+          btn.style.display = '';
+        } else {
+          btn.style.display = 'none';
+        }
+      });
+
+      // If neither mobile contact exists, hide the strip
+      const strip = document.querySelector('.mobile-contact-strip');
+      if (!phoneDigits && !waDigits) {
+        strip.style.display = 'none';
+      }
+
+      // Response time
+      const respInfo = document.getElementById('responseInfo');
+      if (seller.responseTime) {
+        respInfo.style.display = 'flex';
+        respInfo.innerHTML = `<i class="fas fa-circle"></i> Usually responds in ${escapeHtml(seller.responseTime)}`;
+      } else {
+        respInfo.style.display = 'none';
+      }
+    }
+
+    /* ============================================================
+       RENDER: VERIFICATION CARD
+       ============================================================ */
+    function renderVerification(seller) {
+      const v = seller.verification || {};
+      const items = [
+        { key: 'phone',   label: 'Phone number' },
+        { key: 'email',   label: 'Email address' },
+        { key: 'id',      label: 'Government ID' },
+        { key: 'address', label: 'Address' }
+      ];
+
+      // Only show if seller has at least one verification field declared
+      const hasAny = items.some(i => typeof v[i.key] === 'boolean');
+      if (!hasAny) {
+        document.getElementById('verificationCard').style.display = 'none';
+        return;
+      }
+
+      document.getElementById('verificationCard').style.display = 'block';
+      document.getElementById('verificationList').innerHTML = items.map(i => {
+        const verified = v[i.key] === true;
+        return `
+          <div class="verification-item">
+            <i class="fas ${verified ? 'fa-circle-check verified' : 'fa-circle-minus pending'}"></i>
+            <span class="${verified ? '' : 'pending'}">${escapeHtml(i.label)}${verified ? '' : ' – not verified'}</span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    /* ============================================================
+       ACTION HANDLERS
+       ============================================================ */
+    function bindActions() {
+      // Save store
+      document.getElementById('saveStoreBtn').addEventListener('click', () => {
+        if (!state.seller) return;
+        const saved = toggleSaved(state.seller.id);
+        updateActionButtons();
+        showToast(saved ? 'Store saved' : 'Removed from saved', saved ? 'fa-bookmark' : 'fa-bookmark');
+      });
+
+      // Follow store
+      document.getElementById('followStoreBtn').addEventListener('click', () => {
+        if (!state.seller) return;
+        const followed = toggleFollowed(state.seller.id);
+        updateActionButtons();
+        // Refresh follower count
+        renderStats(state.seller, state.allProducts.length);
+        showToast(followed ? `Now following ${state.seller.name}` : 'Unfollowed', 'fa-bell');
+      });
+
+      // Share store
+      document.getElementById('shareStoreBtn').addEventListener('click', async () => {
+        if (!state.seller) return;
+        const url = location.href;
+        const shareData = {
+          title: `${state.seller.name} on Zaure`,
+          text: `Check out ${state.seller.name} on Zaure — Nigeria's most trusted online marketplace.`,
+          url
+        };
+        try {
+          if (navigator.share) await navigator.share(shareData);
+          else {
+            await navigator.clipboard.writeText(url);
+            showToast('Link copied to clipboard', 'fa-link');
+          }
+        } catch (e) { /* user cancelled */ }
+      });
+
+      // Report store
+      document.getElementById('reportStoreBtn').addEventListener('click', () => {
+        if (!state.seller) return;
+        if (confirm(`Report "${state.seller.name}" to Zaure support?\n\nOur team will review this store.`)) {
+          showToast('Report submitted. Thank you!', 'fa-check-circle');
+        }
+      });
+
+      // View all products
+      document.getElementById('viewAllBtn').addEventListener('click', () => {
+        state.showAll = true;
+        renderProducts();
+      });
+
+      // Product search (debounced)
+      let searchTimer;
+      document.getElementById('storeSearchInput').addEventListener('input', e => {
+        clearTimeout(searchTimer);
+        searchTimer = setTimeout(() => {
+          state.searchQuery = e.target.value.trim();
+          state.showAll = false;
+          applyProductFilters();
+        }, 180);
+      });
+
+      // Sort change
+      document.getElementById('storeSort').addEventListener('change', e => {
+        state.sort = e.target.value;
+        state.showAll = false;
+        applyProductFilters();
+      });
+    }
+
+    /* ============================================================
+       FAB
+       ============================================================ */
+    function bindFab() {
+      document.getElementById('fabPostAd')?.addEventListener('click', () => {
+        const user = (typeof getCurrentUser === 'function') ? getCurrentUser() : null;
+        if (!user) {
+          if (typeof openSignup === 'function') openSignup();
+        } else {
+          location.href = '/post.html';
+        }
+      });
+    }
+
+    /* ============================================================
+       INIT
+       ============================================================ */
+    async function init() {
+      if (typeof loadUser === 'function') loadUser();
+      if (typeof initTheme === 'function') initTheme();
+      if (typeof updateFavoriteBadge === 'function') updateFavoriteBadge();
+      bindFab();
+
+      const storeId = new URLSearchParams(location.search).get('id');
+      if (!storeId) { showError(); return; }
+
+      showLoading();
+
+      let seller, allSellers, allProducts;
+      try {
+        allSellers = (typeof loadTopSellers === 'function') ? await loadTopSellers() : [];
+        seller = allSellers.find(s => String(s.id) === String(storeId));
+        if (!seller) { showError(); return; }
+        allProducts = (typeof loadProducts === 'function') ? await loadProducts() : [];
+      } catch (e) {
+        console.error('Store load error:', e);
+        showError();
+        return;
+      }
+
+      state.seller = seller;
+      state.allProducts = getStoreProducts(allProducts, seller);
+
+      // Render all
+      updatePageMeta(seller);
+      renderHero(seller);
+      renderStats(seller, state.allProducts.length);
+      renderAbout(seller);
+      renderPolicies(seller);
+      renderFeatured(state.allProducts);
+      buildProductFilters();
+      applyProductFilters();
+      renderContactButtons(seller);
+      renderVerification(seller);
+      renderRelatedStores(seller, allSellers);
+
+      bindActions();
+      showContent();
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+  })();
   </script>
 </body>
 </html>
