@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>Product – Zaure</title>
-  <meta name="description" content="Buy single or in bulk on Zaure. Nigeria's most trusted marketplace.">
+  <title>Zaure – Product Details</title>
+  <meta name="description" content="View product details, buy single or in bulk, and contact sellers on Zaure.">
   <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -13,310 +13,351 @@
     :root {
       --navy: #0f2940;
       --navy-2: #1a3650;
+      --border: #e5ecf3;
+      --text: #0f2940;
+      --text-secondary: #64748b;
+      --surface: #ffffff;
+      --surface-alt: #f8fbfe;
       --gold: #D4B87A;
       --gold-deep: #B49450;
       --wa-green: #25D366;
-      --wa-green-dark: #1DA851;
-    }
-
-    /* ============================================================
-       BASE
-       ============================================================ */
-    body {
-      background: var(--bg, #f5f7fa);
-    }
-    @media (max-width: 1023px) {
-      body { padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px)) !important; }
-    }
-
-    /* ============================================================
-       BREADCRUMB
-       ============================================================ */
-    .detail-breadcrumb {
-      display: flex; align-items: center; gap: 7px;
-      margin: 20px 0 16px; font-size: 0.76rem;
-      color: var(--text-secondary); flex-wrap: wrap;
-      min-width: 0;
-    }
-    .detail-breadcrumb a {
-      color: var(--text-secondary); text-decoration: none;
-      transition: color 0.2s; white-space: nowrap;
-    }
-    .detail-breadcrumb a:hover { color: var(--navy-2); }
-    .detail-breadcrumb i { font-size: 0.5rem; opacity: 0.6; flex-shrink: 0; }
-    .detail-breadcrumb .current {
-      color: var(--text); font-weight: 600;
-      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-      max-width: 240px;
-    }
-
-    /* ============================================================
-       LAYOUT
-       ============================================================ */
-    .detail-layout {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 20px;
-      margin-bottom: 40px;
-      align-items: start;
-    }
-    @media (min-width: 1024px) {
-      .detail-layout {
-        grid-template-columns: minmax(0, 1fr) 420px;
-        gap: 32px;
-      }
     }
 
     /* ============================================================
        GALLERY
        ============================================================ */
-    .gallery {
+    .product-gallery {
       position: relative;
-      width: 100%;
-      aspect-ratio: 1 / 1;
       background: var(--surface);
-      border: 1px solid var(--border);
       border-radius: 20px;
       overflow: hidden;
+      border: 1px solid var(--border);
       margin-bottom: 16px;
     }
-    @media (min-width: 1024px) {
-      .gallery { aspect-ratio: 4 / 3; }
+    .product-gallery .main-image {
+      width: 100%;
+      height: 350px;
+      object-fit: contain;
+      background: var(--surface-alt);
     }
+    @media (max-width: 767px) {
+      .product-gallery .main-image { height: 280px; }
+    }
+    .product-gallery .thumbnail-strip {
+      display: flex;
+      gap: 8px;
+      padding: 12px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .product-gallery .thumbnail-strip::-webkit-scrollbar { display: none; }
+    .product-gallery .thumbnail-strip .thumb {
+      width: 60px;
+      height: 60px;
+      border-radius: 8px;
+      object-fit: cover;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: 0.2s;
+      flex-shrink: 0;
+      background: var(--surface-alt);
+    }
+    .product-gallery .thumbnail-strip .thumb.active { border-color: var(--navy-2); }
 
-    .gallery .slide {
-      position: absolute; inset: 0;
-      opacity: 0; transition: opacity 0.4s ease;
+    .gallery-badge {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      z-index: 2;
     }
-    .gallery .slide.active { opacity: 1; }
-    .gallery .slide img {
-      width: 100%; height: 100%; object-fit: cover; display: block;
+    .gallery-badge.featured {
+      background: linear-gradient(135deg, #B49450, #D4B87A);
     }
 
     .gallery-nav {
-      position: absolute; top: 50%; transform: translateY(-50%);
-      width: 42px; height: 42px; border-radius: 50%;
-      background: rgba(15,41,64,0.7);
-      -webkit-backdrop-filter: blur(8px);
-      backdrop-filter: blur(8px);
-      color: white; border: none; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.9rem; transition: all 0.2s;
-      z-index: 3;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.9);
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transition: 0.2s;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .gallery-nav:hover { background: var(--navy); transform: translateY(-50%) scale(1.05); }
+    .gallery-nav:hover { background: white; transform: translateY(-50%) scale(1.05); }
     .gallery-nav.prev { left: 12px; }
     .gallery-nav.next { right: 12px; }
-
-    .gallery-counter {
-      position: absolute; top: 12px; right: 12px;
-      padding: 5px 11px; border-radius: 20px;
-      background: rgba(15,41,64,0.7);
-      -webkit-backdrop-filter: blur(8px);
-      backdrop-filter: blur(8px);
-      color: white; font-size: 0.7rem; font-weight: 600;
-      z-index: 3;
-    }
-
-    .gallery-dots {
-      position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
-      display: flex; gap: 5px; z-index: 3;
-    }
-    .gallery-dots span {
-      width: 7px; height: 7px; border-radius: 50%;
-      background: rgba(255,255,255,0.5); cursor: pointer; transition: all 0.2s;
-    }
-    .gallery-dots span.active { background: white; width: 20px; border-radius: 4px; }
+    .gallery-nav.hidden { display: none; }
 
     /* ============================================================
-       INFO CARD
+       PRODUCT INFO CARD
        ============================================================ */
-    .info-card {
+    .product-info-card {
       background: var(--surface);
-      border: 1px solid var(--border);
       border-radius: 20px;
-      padding: 20px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      margin-bottom: 16px;
     }
-    @media (min-width: 640px) {
-      .info-card { padding: 24px; }
+    @media (max-width: 767px) {
+      .product-info-card { padding: 18px; }
     }
 
     .product-title {
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       font-weight: 800;
       color: var(--text);
-      line-height: 1.3;
-      letter-spacing: -0.4px;
       margin-bottom: 10px;
+      line-height: 1.3;
+      letter-spacing: -0.3px;
     }
-    @media (min-width: 640px) {
-      .product-title { font-size: 1.55rem; }
-    }
-
-    .product-meta-row {
-      display: flex; flex-wrap: wrap; gap: 8px;
-      margin-bottom: 18px; align-items: center;
+    @media (max-width: 767px) {
+      .product-title { font-size: 1.2rem; }
     }
 
-    .meta-chip {
-      display: inline-flex; align-items: center; gap: 5px;
-      padding: 4px 10px; border-radius: 20px;
-      background: var(--surface-alt); border: 1px solid var(--border);
-      font-size: 0.72rem; font-weight: 600; color: var(--text-secondary);
-      white-space: nowrap;
+    .product-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
     }
-    .meta-chip i { font-size: 0.65rem; }
-    .meta-chip.verified {
-      background: rgba(22,163,74,0.1); color: #16a34a;
-      border-color: rgba(22,163,74,0.2);
-    }
+    .product-meta span { display: inline-flex; align-items: center; gap: 5px; }
+    .product-meta span i { color: var(--navy-2); font-size: 0.75rem; }
+    [data-theme="dark"] .product-meta span i { color: var(--gold); }
 
     /* ============================================================
-       PURCHASE MODES
+       PRICE HERO
        ============================================================ */
-    .purchase-section {
+    .price-hero {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 18px;
+    }
+    .price-hero-row {
       display: flex;
-      flex-direction: column;
-      gap: 14px;
+      align-items: baseline;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .price-hero-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-secondary);
+      width: 100%;
+      margin-bottom: 4px;
+    }
+    .price-hero-value {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--text);
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+    @media (min-width: 640px) {
+      .price-hero-value { font-size: 2.4rem; }
+    }
+    .price-hero-bulk {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--gold-deep);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 8px;
+      padding: 5px 12px;
+      background: rgba(212,184,122,0.12);
+      border: 1px solid rgba(212,184,122,0.35);
+      border-radius: 20px;
+    }
+    .price-hero-bulk i { font-size: 0.7rem; }
+
+    /* ============================================================
+       TAGS + DESCRIPTION
+       ============================================================ */
+    .product-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+    .product-tags .tag {
+      background: var(--surface-alt);
+      padding: 4px 11px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+    }
+
+    .product-description {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.7;
       margin-bottom: 20px;
     }
 
+    /* ============================================================
+       MODE CARDS
+       ============================================================ */
     .mode-card {
       background: var(--surface-alt);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 18px;
-      transition: border-color 0.2s;
-    }
-    .mode-card:hover { border-color: rgba(26,54,80,0.2); }
-
-    .mode-header {
-      display: flex; align-items: center; gap: 10px;
+      border-radius: 14px;
+      padding: 16px;
       margin-bottom: 12px;
     }
 
-    .mode-icon {
-      width: 38px; height: 38px; border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.95rem; flex-shrink: 0;
+    .mode-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
     }
-    .mode-card.retail .mode-icon {
-      background: linear-gradient(135deg, #1a3650, #2a4a6a);
+
+    .mode-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
       color: white;
     }
-    .mode-card.bulk .mode-icon {
-      background: linear-gradient(135deg, #B49450, #D4B87A);
-      color: white;
+    .mode-badge.retail { background: var(--navy-2); }
+    .mode-badge.bulk { background: linear-gradient(135deg, #B49450, #D4B87A); }
+    .mode-badge i { font-size: 0.65rem; }
+
+    .mode-hint {
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+      font-weight: 500;
     }
 
-    .mode-title {
-      flex: 1; min-width: 0;
+    .stock-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.74rem;
+      font-weight: 600;
     }
-    .mode-title h3 {
-      font-size: 0.92rem; font-weight: 800;
-      color: var(--text); line-height: 1.2;
-      margin-bottom: 2px;
-    }
-    .mode-title p {
-      font-size: 0.72rem; color: var(--text-secondary);
-      line-height: 1.3;
-    }
+    .stock-pill.in-stock { color: #16a34a; }
+    .stock-pill.low-stock { color: #f59e0b; }
+    .stock-pill.out-of-stock { color: #e74c3c; }
+    .stock-pill i { font-size: 0.55rem; }
 
-    /* Retail card */
-    .retail-price {
-      font-size: 1.9rem; font-weight: 900;
-      color: var(--text); letter-spacing: -1px;
-      line-height: 1; margin-bottom: 4px;
+    /* ---- Bulk tier table ---- */
+    .bulk-from-row {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
     }
-    @media (min-width: 640px) {
-      .retail-price { font-size: 2.2rem; }
+    .bulk-from-row .label {
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
-    .retail-stock {
-      font-size: 0.75rem; color: var(--text-secondary);
-      margin-bottom: 14px;
-      display: flex; align-items: center; gap: 5px;
+    .bulk-from-row .price {
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: var(--gold-deep);
+      letter-spacing: -0.5px;
     }
-    .retail-stock.in-stock { color: #16a34a; font-weight: 600; }
-    .retail-stock i { font-size: 0.55rem; }
-
-    /* Bulk card */
-    .bulk-preview {
-      display: flex; align-items: baseline; gap: 8px;
-      margin-bottom: 14px; flex-wrap: wrap;
+    .bulk-from-row .unit {
+      font-size: 0.7rem;
+      color: var(--text-secondary);
     }
-    .bulk-preview .from-label {
-      font-size: 0.72rem; color: var(--text-secondary);
-      font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
-    }
-    .bulk-preview .from-price {
-      font-size: 1.4rem; font-weight: 900;
-      color: var(--gold-deep); letter-spacing: -0.5px;
-    }
-    .bulk-preview .moq-note {
-      font-size: 0.72rem; color: var(--text-secondary);
+    .bulk-from-row .moq {
+      font-size: 0.7rem;
+      color: var(--text-secondary);
       margin-left: auto;
+      font-weight: 700;
     }
 
-    /* Tier table */
     .tier-table {
-      display: flex; flex-direction: column; gap: 4px;
-      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      margin-bottom: 14px;
       border-radius: 10px;
       overflow: hidden;
       border: 1px solid var(--border);
     }
     .tier-row {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 8px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 9px 12px;
       background: var(--surface);
-      font-size: 0.76rem;
-      transition: all 0.2s;
+      font-size: 0.75rem;
+      transition: background 0.2s;
     }
-    .tier-row.active {
-      background: rgba(212,184,122,0.15);
-      font-weight: 700;
-    }
-    .tier-row.active .tier-qty { color: var(--gold-deep); }
+    .tier-row.active { background: rgba(212,184,122,0.18); }
+    .tier-qty { color: var(--text-secondary); font-weight: 600; }
+    .tier-price { color: var(--text); font-weight: 700; font-variant-numeric: tabular-nums; }
+    .tier-row.active .tier-qty,
     .tier-row.active .tier-price { color: var(--gold-deep); }
-    .tier-qty {
-      color: var(--text-secondary);
-      font-weight: 600;
-      font-size: 0.72rem;
-    }
-    .tier-price {
-      color: var(--text);
-      font-weight: 700;
-      font-variant-numeric: tabular-nums;
-    }
 
-    /* Quantity selector */
-    .qty-selector {
-      display: flex; align-items: center; gap: 8px;
-      margin-bottom: 12px;
-    }
+    /* ---- Quantity controls ---- */
     .qty-label {
-      font-size: 0.72rem; font-weight: 700;
-      color: var(--text-secondary);
-      text-transform: uppercase; letter-spacing: 0.5px;
-      margin-bottom: 8px;
       display: block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
     }
     .qty-controls {
-      display: flex; align-items: center;
+      display: flex;
+      align-items: center;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 12px;
       overflow: hidden;
-      flex: 1;
+      margin-bottom: 10px;
       transition: border-color 0.2s;
     }
     .qty-controls:focus-within { border-color: var(--navy-2); }
     .qty-controls button {
-      width: 44px; height: 44px;
-      border: none; background: transparent;
-      color: var(--text); font-size: 1.1rem;
+      width: 46px;
+      height: 44px;
+      border: none;
+      background: transparent;
+      color: var(--text);
+      font-size: 1rem;
       cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       transition: background 0.15s;
       flex-shrink: 0;
       font-family: inherit;
@@ -325,36 +366,41 @@
       background: var(--surface-alt);
       color: var(--navy-2);
     }
-    .qty-controls button:disabled {
-      opacity: 0.3; cursor: not-allowed;
-    }
+    .qty-controls button:disabled { opacity: 0.3; cursor: not-allowed; }
     .qty-controls input {
-      flex: 1; min-width: 0;
-      border: none; background: transparent;
+      flex: 1;
+      min-width: 0;
+      border: none;
+      background: transparent;
       text-align: center;
-      font-size: 1rem; font-weight: 700;
+      font-size: 0.95rem;
+      font-weight: 700;
       color: var(--text);
-      outline: none; padding: 10px 0;
+      outline: none;
+      padding: 10px 0;
       font-family: inherit;
       -moz-appearance: textfield;
     }
     .qty-controls input::-webkit-outer-spin-button,
     .qty-controls input::-webkit-inner-spin-button {
-      -webkit-appearance: none; margin: 0;
+      -webkit-appearance: none;
+      margin: 0;
     }
 
-    /* Quick select */
     .qty-quick {
-      display: flex; gap: 6px; flex-wrap: wrap;
-      margin-bottom: 14px;
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
     }
     .qty-quick button {
-      padding: 5px 12px;
+      padding: 5px 11px;
       border-radius: 20px;
       border: 1px solid var(--border);
       background: var(--surface);
       color: var(--text-secondary);
-      font-size: 0.72rem; font-weight: 700;
+      font-size: 0.7rem;
+      font-weight: 700;
       cursor: pointer;
       transition: all 0.15s;
       font-family: inherit;
@@ -362,36 +408,40 @@
     .qty-quick button:hover,
     .qty-quick button.active {
       border-color: var(--gold-deep);
-      background: rgba(212,184,122,0.1);
+      background: rgba(212,184,122,0.12);
       color: var(--gold-deep);
     }
 
-    /* Calculated total panel */
+    /* ---- Calculator ---- */
     .calc-panel {
       background: linear-gradient(135deg, #0f2940, #1a3650);
       border-radius: 12px;
-      padding: 16px;
-      margin-bottom: 14px;
+      padding: 14px 16px;
+      margin-bottom: 12px;
       color: white;
       position: relative;
       overflow: hidden;
     }
     .calc-panel::before {
       content: '';
-      position: absolute; top: -40px; right: -40px;
-      width: 120px; height: 120px;
-      background: radial-gradient(circle, rgba(212,184,122,0.2) 0%, transparent 70%);
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(circle, rgba(212,184,122,0.22) 0%, transparent 70%);
       border-radius: 50%;
       pointer-events: none;
     }
     .calc-panel > * { position: relative; z-index: 1; }
 
     .calc-row {
-      display: flex; justify-content: space-between;
+      display: flex;
+      justify-content: space-between;
       align-items: baseline;
-      margin-bottom: 6px;
-      font-size: 0.78rem;
-      color: rgba(255,255,255,0.7);
+      margin-bottom: 5px;
+      font-size: 0.76rem;
+      color: rgba(255,255,255,0.72);
     }
     .calc-row span:last-child {
       color: white;
@@ -401,175 +451,331 @@
     .calc-divider {
       height: 1px;
       background: rgba(255,255,255,0.15);
-      margin: 10px 0;
+      margin: 9px 0;
     }
     .calc-total {
-      display: flex; justify-content: space-between;
+      display: flex;
+      justify-content: space-between;
       align-items: baseline;
-      margin-bottom: 4px;
     }
     .calc-total .label {
-      font-size: 0.7rem; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 1px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
       color: rgba(255,255,255,0.6);
     }
     .calc-total .value {
-      font-size: 1.5rem; font-weight: 900;
+      font-size: 1.35rem;
+      font-weight: 900;
       color: var(--gold);
       letter-spacing: -0.5px;
       font-variant-numeric: tabular-nums;
     }
     .calc-savings {
-      display: inline-flex; align-items: center; gap: 5px;
-      padding: 4px 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 9px;
       background: rgba(22,163,74,0.2);
       border: 1px solid rgba(22,163,74,0.4);
       border-radius: 20px;
-      font-size: 0.68rem; font-weight: 700;
+      font-size: 0.66rem;
+      font-weight: 700;
       color: #4ade80;
       margin-top: 6px;
     }
-    .calc-savings i { font-size: 0.6rem; }
+    .calc-savings i { font-size: 0.55rem; }
 
-    /* WhatsApp CTA */
+    /* ---- WhatsApp CTA ---- */
     .wa-cta {
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       gap: 8px;
       width: 100%;
-      padding: 14px 20px;
+      padding: 13px 20px;
       border-radius: 40px;
       background: var(--wa-green);
       color: white;
       border: none;
-      font-size: 0.9rem; font-weight: 800;
+      font-size: 0.88rem;
+      font-weight: 800;
       cursor: pointer;
       transition: all 0.2s;
       text-decoration: none;
       font-family: inherit;
       box-shadow: 0 6px 20px rgba(37,211,102,0.25);
     }
-    .wa-cta:hover {
-      background: var(--wa-green-dark);
+    .wa-cta:hover:not(:disabled) {
+      background: #1DA851;
       transform: translateY(-1px);
       box-shadow: 0 8px 24px rgba(37,211,102,0.35);
     }
     .wa-cta:disabled {
-      opacity: 0.5; cursor: not-allowed;
+      opacity: 0.5;
+      cursor: not-allowed;
       background: var(--text-secondary);
       box-shadow: none;
       transform: none;
     }
-    .wa-cta i { font-size: 1.05rem; }
-    @media (min-width: 640px) {
-      .wa-cta { padding: 15px 24px; font-size: 0.95rem; }
-    }
-
-    /* Retail CTA */
-    .retail-cta {
-      background: var(--navy-2);
-      box-shadow: 0 6px 20px rgba(26,54,80,0.25);
-    }
-    .retail-cta:hover {
-      background: var(--navy);
-      box-shadow: 0 8px 24px rgba(26,54,80,0.35);
-    }
+    .wa-cta i { font-size: 1rem; }
 
     /* ============================================================
-       DESCRIPTION
+       SECONDARY ACTIONS
        ============================================================ */
-    .detail-section {
-      margin-top: 28px;
-      padding-top: 24px;
-      border-top: 1px solid var(--border);
+    .secondary-actions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 6px;
     }
-    .detail-section h2 {
-      font-size: 1rem;
-      font-weight: 800;
-      color: var(--text);
-      margin-bottom: 12px;
-    }
-    .detail-description {
-      font-size: 0.88rem;
+    .secondary-actions button {
+      padding: 11px 10px;
+      border-radius: 40px;
+      border: 1px solid var(--border);
+      background: var(--surface);
       color: var(--text-secondary);
-      line-height: 1.7;
-      white-space: pre-line;
+      font-size: 0.74rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: 0.2s;
+      font-family: inherit;
     }
+    .secondary-actions button:hover {
+      border-color: var(--navy-2);
+      color: var(--navy-2);
+    }
+    .secondary-actions button.liked {
+      border-color: #e74c3c;
+      color: #e74c3c;
+      background: #fef2f2;
+    }
+    [data-theme="dark"] .secondary-actions button.liked { background: rgba(231,76,60,0.15); }
 
     /* ============================================================
        SELLER CARD
        ============================================================ */
     .seller-card {
-      margin-top: 24px;
-      padding: 18px;
       background: var(--surface);
+      border-radius: 20px;
+      padding: 24px;
       border: 1px solid var(--border);
-      border-radius: 16px;
+      margin-bottom: 16px;
     }
-    .seller-card-head {
-      display: flex; align-items: center; gap: 12px;
-      margin-bottom: 12px;
+    .seller-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
     }
-    .seller-avatar {
-      width: 48px; height: 48px; border-radius: 50%;
-      background: linear-gradient(135deg, #1a3650, #2a4a6a);
-      color: white; font-weight: 800; font-size: 1.1rem;
-      display: flex; align-items: center; justify-content: center;
-      overflow: hidden; flex-shrink: 0;
+    .seller-avatar-large {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: var(--navy-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.6rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      overflow: hidden;
     }
-    .seller-avatar img {
-      width: 100%; height: 100%; object-fit: cover;
+    .seller-avatar-large img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
     }
     .seller-info { flex: 1; min-width: 0; }
     .seller-name {
-      font-size: 0.9rem; font-weight: 700;
-      color: var(--text); line-height: 1.2; margin-bottom: 2px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.2;
     }
     .seller-badge {
-      display: inline-flex; align-items: center; gap: 4px;
-      font-size: 0.68rem; font-weight: 600; color: #16a34a;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #16a34a;
+      background: rgba(22,163,74,0.1);
+      padding: 2px 10px;
+      border-radius: 12px;
+      margin-top: 4px;
     }
-    .seller-badge i { font-size: 0.6rem; }
-
-    .view-store-btn {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 8px 16px;
-      border: 1px solid var(--border);
-      border-radius: 40px;
-      background: transparent;
+    .seller-meta {
+      display: flex;
+      gap: 14px;
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      margin-top: 6px;
+      flex-wrap: wrap;
+    }
+    .seller-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      padding: 14px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin: 12px 0;
+    }
+    .seller-stats .stat-item { text-align: center; }
+    .seller-stats .number {
+      font-size: 1.1rem;
+      font-weight: 800;
       color: var(--text);
-      font-size: 0.78rem; font-weight: 700;
-      text-decoration: none;
-      transition: all 0.2s;
+    }
+    .seller-stats .label {
+      font-size: 0.66rem;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+    .seller-bio {
+      font-size: 0.86rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin: 10px 0;
+    }
+    .seller-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .btn-seller {
+      flex: 1;
+      background: var(--surface-alt);
+      border: none;
+      padding: 10px 16px;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: var(--text);
+      cursor: pointer;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
       font-family: inherit;
     }
-    .view-store-btn:hover {
-      border-color: var(--navy-2);
-      background: var(--surface-alt);
+    .btn-seller:hover { background: var(--border); }
+    .btn-whatsapp-seller {
+      background: var(--wa-green);
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      text-decoration: none;
+      flex: 1;
+      font-family: inherit;
+    }
+    .btn-whatsapp-seller:hover { background: #1DA851; }
+
+    /* ============================================================
+       LOCATION + SAFETY
+       ============================================================ */
+    .location-card,
+    .safety-tips {
+      background: var(--surface);
+      border-radius: 20px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      margin-bottom: 16px;
+    }
+    .location-title,
+    .safety-tips h4 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .location-title i,
+    .safety-tips h4 i { color: var(--navy-2); }
+    .location-address {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-secondary);
+      font-size: 0.86rem;
+    }
+    .location-address i { color: var(--navy-2); }
+    .safety-tips ul { list-style: none; padding: 0; }
+    .safety-tips ul li {
+      padding: 4px 0;
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .safety-tips ul li i {
       color: var(--navy-2);
+      font-size: 0.7rem;
+      flex-shrink: 0;
     }
 
     /* ============================================================
-       RELATED PRODUCTS
+       RECOMMENDATIONS
        ============================================================ */
-    .related-section {
-      margin-top: 40px;
-      padding-top: 24px;
-      border-top: 1px solid var(--border);
+    .recommendations-section {
+      margin: 24px 0;
+      grid-column: 1 / -1;
     }
-    .related-section h2 {
-      font-size: 1.15rem; font-weight: 700;
-      color: var(--text); margin-bottom: 16px;
+    .rec-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text);
     }
-    .related-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
+    .rec-title i { color: var(--navy-2); }
+
+    /* ============================================================
+       BACK BUTTON
+       ============================================================ */
+    .detail-back {
+      display: flex;
+      align-items: center;
       gap: 12px;
+      padding: 16px 0;
     }
-    @media (min-width: 640px) {
-      .related-grid { grid-template-columns: repeat(3, 1fr); }
+    .back-btn {
+      background: transparent;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: var(--text);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
     }
-    @media (min-width: 1024px) {
-      .related-grid { grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .detail-back h2 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
     }
 
     /* ============================================================
@@ -577,64 +783,42 @@
        ============================================================ */
     .toast {
       position: fixed;
-      bottom: calc(100px + env(safe-area-inset-bottom, 0px));
+      top: 20px;
       left: 50%;
-      transform: translateX(-50%) translateY(20px);
-      background: var(--navy);
+      transform: translateX(-50%) translateY(-20px);
+      background: rgba(26,54,80,0.95);
       color: white;
-      padding: 11px 22px;
-      border-radius: 40px;
+      padding: 10px 20px;
+      border-radius: 30px;
       font-size: 0.82rem;
       font-weight: 600;
-      box-shadow: 0 10px 28px rgba(0,0,0,0.25);
       opacity: 0;
       transition: all 0.3s;
-      z-index: 2000;
+      z-index: 1000;
       pointer-events: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
       max-width: calc(100vw - 32px);
     }
     .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-    @media (min-width: 1024px) { .toast { bottom: 30px; } }
 
     /* ============================================================
-       LOADING / ERROR
+       DESKTOP GRID
        ============================================================ */
-    .loading-state, .error-state {
-      text-align: center;
-      padding: 80px 20px;
-    }
-    .spinner {
-      width: 42px; height: 42px; border-radius: 50%;
-      border: 3px solid var(--border);
-      border-top-color: var(--navy-2);
-      animation: spin 0.9s linear infinite;
-      margin: 0 auto 16px;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .error-state i {
-      font-size: 3rem; color: var(--text-secondary);
-      opacity: 0.4; margin-bottom: 16px;
-    }
-    .error-state h2 {
-      font-size: 1.2rem; color: var(--text); margin-bottom: 6px;
-    }
-    .error-state p {
-      color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 20px;
-    }
-    .error-state a {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 11px 24px;
-      background: var(--navy-2); color: white;
-      border-radius: 40px; text-decoration: none;
-      font-weight: 700; font-size: 0.85rem;
+    @media (min-width: 1024px) {
+      .detail-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+      .detail-grid .product-gallery { grid-column: 1 / -1; }
+      .detail-grid .product-info-card { grid-column: 1 / 2; }
+      .detail-grid .seller-card { grid-column: 2 / 3; }
+      .detail-grid .location-card { grid-column: 2 / 3; }
+      .detail-grid .safety-tips { grid-column: 1 / 2; }
     }
 
-    /* ============================================================
-       REDUCED MOTION
-       ============================================================ */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation: none !important;
@@ -676,183 +860,191 @@
   </nav>
 
   <div class="container">
-
-    <div id="loadingState" class="loading-state">
-      <div class="spinner"></div>
-      <p style="color: var(--text-secondary); font-size: 0.88rem;">Loading product...</p>
+    <div class="detail-back">
+      <a href="/" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+      <h2>Product Details</h2>
     </div>
 
-    <div id="errorState" class="error-state" style="display: none;">
-      <i class="fas fa-box-open"></i>
-      <h2>Product not found</h2>
-      <p>This product doesn't exist or may have been removed.</p>
-      <a href="/"><i class="fas fa-arrow-left"></i> Back to homepage</a>
+    <div id="loadingState" style="text-align:center;padding:40px;">
+      <i class="fas fa-spinner fa-spin" style="font-size:2rem;color:var(--navy-2);"></i>
+      <p style="margin-top:12px;color:var(--text-secondary);">Loading product...</p>
     </div>
 
-    <div id="detailContent" style="display: none;">
-
-      <div class="detail-breadcrumb">
-        <a href="/">Home</a>
-        <i class="fas fa-chevron-right"></i>
-        <a href="/category.html?slug=all">Browse</a>
-        <i class="fas fa-chevron-right"></i>
-        <span class="current" id="crumbTitle">Product</span>
+    <div id="productDetailContainer" style="display:none;">
+      <div class="product-gallery" id="productGallery">
+        <img src="" alt="Product image" class="main-image" id="mainImage">
+        <div class="thumbnail-strip" id="thumbnailStrip"></div>
+        <span class="gallery-badge" id="galleryBadge">Available</span>
+        <button class="gallery-nav prev" id="galleryPrev" aria-label="Previous image"><i class="fas fa-chevron-left"></i></button>
+        <button class="gallery-nav next" id="galleryNext" aria-label="Next image"><i class="fas fa-chevron-right"></i></button>
       </div>
 
-      <div class="detail-layout">
+      <div class="detail-grid">
+        <!-- ===== PRODUCT INFO ===== -->
+        <div class="product-info-card">
+          <h1 class="product-title" id="productTitle">Product Title</h1>
 
-        <!-- LEFT: Gallery -->
-        <div class="detail-gallery-column">
-          <div class="gallery" id="gallery">
-            <button class="gallery-nav prev" id="galleryPrev" aria-label="Previous image">
-              <i class="fas fa-chevron-left"></i>
-            </button>
-            <button class="gallery-nav next" id="galleryNext" aria-label="Next image">
-              <i class="fas fa-chevron-right"></i>
-            </button>
-            <div class="gallery-counter" id="galleryCounter" style="display: none;">
-              <span id="galleryCounterText">1 / 3</span>
-            </div>
-            <div class="gallery-dots" id="galleryDots"></div>
-          </div>
-        </div>
-
-        <!-- RIGHT: Info -->
-        <div class="detail-info-column">
-          <div class="info-card">
-
-            <h1 class="product-title" id="productTitle">Product Title</h1>
-
-            <div class="product-meta-row" id="productMeta">
-              <span class="meta-chip verified">
-                <i class="fas fa-shield-halved"></i> Verified seller
-              </span>
-            </div>
-
-            <!-- PURCHASE MODES -->
-            <div class="purchase-section" id="purchaseSection">
-
-              <!-- RETAIL CARD -->
-              <div class="mode-card retail" id="retailCard" style="display: none;">
-                <div class="mode-header">
-                  <div class="mode-icon">
-                    <i class="fas fa-shopping-bag"></i>
-                  </div>
-                  <div class="mode-title">
-                    <h3>Buy Single</h3>
-                    <p>Just one — perfect for personal use</p>
-                  </div>
-                </div>
-                <div class="retail-price" id="retailPrice">₦0</div>
-                <div class="retail-stock in-stock" id="retailStock">
-                  <i class="fas fa-circle"></i> In stock
-                </div>
-                <a href="#" id="retailWaBtn" class="wa-cta retail-cta" target="_blank" rel="noopener">
-                  <i class="fab fa-whatsapp"></i> Message on WhatsApp
-                </a>
-              </div>
-
-              <!-- BULK CARD -->
-              <div class="mode-card bulk" id="bulkCard" style="display: none;">
-                <div class="mode-header">
-                  <div class="mode-icon">
-                    <i class="fas fa-cubes"></i>
-                  </div>
-                  <div class="mode-title">
-                    <h3>Buy in Bulk</h3>
-                    <p>Wholesale pricing — for shops, businesses, resellers</p>
-                  </div>
-                </div>
-
-                <div class="bulk-preview">
-                  <span class="from-label">From</span>
-                  <span class="from-price" id="bulkFromPrice">₦0</span>
-                  <span class="moq-note" id="bulkMoqNote">Min. 10 units</span>
-                </div>
-
-                <!-- TIER TABLE -->
-                <div class="tier-table" id="tierTable"></div>
-
-                <!-- QUANTITY -->
-                <div class="qty-label">How many units?</div>
-                <div class="qty-selector">
-                  <div class="qty-controls">
-                    <button type="button" id="qtyMinus" aria-label="Decrease quantity">
-                      <i class="fas fa-minus"></i>
-                    </button>
-                    <input type="number" id="qtyInput" value="10" min="10" step="1" aria-label="Quantity">
-                    <button type="button" id="qtyPlus" aria-label="Increase quantity">
-                      <i class="fas fa-plus"></i>
-                    </button>
-                  </div>
-                </div>
-
-                <div class="qty-quick" id="qtyQuick"></div>
-
-                <!-- CALCULATED PANEL -->
-                <div class="calc-panel" id="calcPanel">
-                  <div class="calc-row">
-                    <span>Quantity</span>
-                    <span id="calcQty">10 units</span>
-                  </div>
-                  <div class="calc-row">
-                    <span>Price per unit</span>
-                    <span id="calcUnitPrice">₦0</span>
-                  </div>
-                  <div class="calc-divider"></div>
-                  <div class="calc-total">
-                    <span class="label">Total</span>
-                    <span class="value" id="calcTotal">₦0</span>
-                  </div>
-                  <div class="calc-savings" id="calcSavings" style="display: none;">
-                    <i class="fas fa-tag"></i>
-                    <span id="calcSavingsText">You save ₦0 vs retail</span>
-                  </div>
-                </div>
-
-                <a href="#" id="bulkWaBtn" class="wa-cta" target="_blank" rel="noopener">
-                  <i class="fab fa-whatsapp"></i> Send quote on WhatsApp
-                </a>
-              </div>
-
-            </div>
-
+          <div class="product-meta" id="productMeta">
+            <span><i class="fas fa-map-pin"></i> <span id="productLocation">Location</span></span>
+            <span id="productDateWrap" style="display:none;"><i class="far fa-clock"></i> <span id="productDate"></span></span>
+            <span><i class="fas fa-tag"></i> <span id="productCategory">Category</span></span>
           </div>
 
-          <!-- SELLER -->
-          <div class="seller-card" id="sellerCard">
-            <div class="seller-card-head">
-              <div class="seller-avatar" id="sellerAvatar">S</div>
-              <div class="seller-info">
-                <div class="seller-name" id="sellerName">Seller</div>
-                <div class="seller-badge">
-                  <i class="fas fa-check-circle"></i> Verified
-                </div>
-              </div>
+          <!-- PRICE HERO -->
+          <div class="price-hero">
+            <div class="price-hero-label">Starting price</div>
+            <div class="price-hero-row">
+              <div class="price-hero-value" id="priceHeroValue">₦0</div>
             </div>
-            <a href="#" id="viewStoreBtn" class="view-store-btn">
-              <i class="fas fa-store"></i> View store
-            </a>
+            <div class="price-hero-bulk" id="priceHeroBulk" style="display:none;">
+              <i class="fas fa-cubes"></i> <span id="priceHeroBulkText">Bulk from ₦0 · MOQ 10</span>
+            </div>
           </div>
+
+          <!-- TAGS -->
+          <div class="product-tags" id="productTags"></div>
 
           <!-- DESCRIPTION -->
-          <div class="detail-section" id="descSection">
-            <h2>Description</h2>
-            <div class="detail-description" id="productDescription"></div>
+          <div class="product-description" id="productDescription"></div>
+
+          <!-- PURCHASE MODES -->
+          <div class="purchase-modes" id="purchaseModes">
+
+            <!-- RETAIL MODE -->
+            <div class="mode-card" id="retailMode" style="display:none;">
+              <div class="mode-head">
+                <span class="mode-badge retail"><i class="fas fa-shopping-bag"></i> Buy Single</span>
+                <span class="stock-pill in-stock" id="retailStock">
+                  <i class="fas fa-circle"></i> In stock
+                </span>
+              </div>
+              <a href="#" class="wa-cta" id="retailWhatsappBtn" target="_blank" rel="noopener">
+                <i class="fab fa-whatsapp"></i> Buy Single on WhatsApp
+              </a>
+            </div>
+
+            <!-- BULK MODE -->
+            <div class="mode-card" id="bulkMode" style="display:none;">
+              <div class="mode-head">
+                <span class="mode-badge bulk"><i class="fas fa-cubes"></i> Buy in Bulk</span>
+                <span class="mode-hint">Wholesale pricing</span>
+              </div>
+
+              <div class="bulk-from-row">
+                <span class="label">From</span>
+                <span class="price" id="bulkFromPrice">₦0</span>
+                <span class="unit">per unit</span>
+                <span class="moq" id="bulkMoqNote">Min. 10 units</span>
+              </div>
+
+              <div class="tier-table" id="tierTable"></div>
+
+              <label class="qty-label">How many units?</label>
+              <div class="qty-controls">
+                <button type="button" id="qtyMinus" aria-label="Decrease"><i class="fas fa-minus"></i></button>
+                <input type="number" id="qtyInput" value="10" min="10" step="1" aria-label="Quantity">
+                <button type="button" id="qtyPlus" aria-label="Increase"><i class="fas fa-plus"></i></button>
+              </div>
+
+              <div class="qty-quick" id="qtyQuick"></div>
+
+              <div class="calc-panel">
+                <div class="calc-row">
+                  <span>Quantity</span>
+                  <span id="calcQty">10 units</span>
+                </div>
+                <div class="calc-row">
+                  <span>Price per unit</span>
+                  <span id="calcUnitPrice">₦0</span>
+                </div>
+                <div class="calc-divider"></div>
+                <div class="calc-total">
+                  <span class="label">Total</span>
+                  <span class="value" id="calcTotal">₦0</span>
+                </div>
+                <div class="calc-savings" id="calcSavings" style="display:none;">
+                  <i class="fas fa-tag"></i>
+                  <span id="calcSavingsText">You save ₦0 vs retail</span>
+                </div>
+              </div>
+
+              <a href="#" class="wa-cta" id="bulkWhatsappBtn" target="_blank" rel="noopener">
+                <i class="fab fa-whatsapp"></i> Send Quote on WhatsApp
+              </a>
+            </div>
+
           </div>
 
+          <!-- SECONDARY ACTIONS -->
+          <div class="secondary-actions">
+            <button id="favoriteBtn"><i class="far fa-heart"></i> <span>Save</span></button>
+            <button id="shareBtn"><i class="fas fa-share-alt"></i> <span>Share</span></button>
+            <button id="reportBtn"><i class="fas fa-flag"></i> <span>Report</span></button>
+          </div>
         </div>
 
-      </div>
+        <!-- ===== SELLER CARD ===== -->
+        <div class="seller-card">
+          <div class="seller-header">
+            <div class="seller-avatar-large" id="sellerAvatar">ZA</div>
+            <div class="seller-info">
+              <div class="seller-name" id="sellerName">Seller</div>
+              <div class="seller-badge"><i class="fas fa-check-circle"></i> Verified</div>
+              <div class="seller-meta">
+                <span><i class="fas fa-calendar-alt"></i> Since <span id="sellerJoined">2026</span></span>
+                <span><i class="fas fa-store"></i> <span id="sellerListings">0</span> listings</span>
+              </div>
+            </div>
+          </div>
+          <div class="seller-stats">
+            <div class="stat-item">
+              <div class="number" id="sellerRating">5.0</div>
+              <div class="label"><i class="fas fa-star" style="color:#f5b342;"></i> Rating</div>
+            </div>
+            <div class="stat-item">
+              <div class="number" id="sellerSales">0</div>
+              <div class="label">Items Sold</div>
+            </div>
+            <div class="stat-item">
+              <div class="number" id="sellerResponse">100%</div>
+              <div class="label">Response</div>
+            </div>
+          </div>
+          <div class="seller-bio" id="sellerBio">Trusted seller on Zaure.</div>
+          <div class="seller-actions">
+            <button class="btn-seller" id="visitStoreBtn"><i class="fas fa-store"></i> Visit Store</button>
+            <a class="btn-whatsapp-seller" id="sidebarWhatsappBtn" target="_blank" rel="noopener">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+          </div>
+        </div>
 
-      <!-- RELATED -->
-      <div class="related-section" id="relatedSection" style="display: none;">
-        <h2>You might also like</h2>
-        <div class="related-grid" id="relatedGrid"></div>
-      </div>
+        <!-- ===== LOCATION ===== -->
+        <div class="location-card">
+          <div class="location-title"><i class="fas fa-map-pin"></i> Location</div>
+          <div class="location-address">
+            <i class="fas fa-location-dot"></i> <span id="locationFull">Loading...</span>
+          </div>
+        </div>
 
+        <!-- ===== SAFETY ===== -->
+        <div class="safety-tips">
+          <h4><i class="fas fa-shield-alt"></i> Safety Tips</h4>
+          <ul>
+            <li><i class="fas fa-check-circle"></i> Meet in a public place</li>
+            <li><i class="fas fa-check-circle"></i> Inspect the item before purchase</li>
+            <li><i class="fas fa-check-circle"></i> Avoid advance payments</li>
+            <li><i class="fas fa-check-circle"></i> Trust your instincts</li>
+          </ul>
+        </div>
+
+        <!-- ===== RECOMMENDATIONS ===== -->
+        <div class="recommendations-section">
+          <div class="rec-title"><i class="fas fa-lightbulb"></i> You Might Also Like</div>
+          <div class="grid-2col-listings" id="recommendationsGrid"></div>
+        </div>
+      </div>
     </div>
-
   </div>
 
   <!-- ===== BOTTOM NAV ===== -->
@@ -903,17 +1095,27 @@
     'use strict';
 
     /* ============================================================
-       STATE
+       CONFIG
        ============================================================ */
-    const state = {
-      product: null,
-      galleryIndex: 0,
-      galleryImages: [],
-      qty: 10
+    const CONFIG = {
+      WHATSAPP_NUMBER: '2349042339411',
+      SHEET_WEBHOOK_URL: 'https://script.google.com/macros/s/AKfycbyopnxgVhZo80kdR1Rrdr_SbivRJZXrE6cAkwOB9bWB1OklMmp3jWoe9c8W6SGM4XNhHA/exec'
     };
 
     /* ============================================================
-       UTILITIES
+       STATE
+       ============================================================ */
+    const STATE = {
+      product: null,
+      qty: 10,
+      galleryIndex: 0,
+      galleryImages: [],
+      userIP: 'Fetching IP...',
+      guestGPS: { lat: null, lng: null, maps: null }
+    };
+
+    /* ============================================================
+       HELPERS
        ============================================================ */
     function escapeHtml(s) {
       if (s == null) return '';
@@ -927,77 +1129,11 @@
       return '₦' + n.toLocaleString();
     }
 
-    function showToast(msg, icon) {
-      const t = document.getElementById('toast');
-      t.innerHTML = `<i class="fas ${icon || 'fa-check-circle'}"></i> ${escapeHtml(msg)}`;
-      t.classList.add('show');
-      clearTimeout(showToast._t);
-      showToast._t = setTimeout(() => t.classList.remove('show'), 2400);
-    }
-
-    function showLoading() {
-      document.getElementById('loadingState').style.display = 'block';
-      document.getElementById('errorState').style.display = 'none';
-      document.getElementById('detailContent').style.display = 'none';
-    }
-    function showError() {
-      document.getElementById('loadingState').style.display = 'none';
-      document.getElementById('errorState').style.display = 'block';
-      document.getElementById('detailContent').style.display = 'none';
-    }
-    function showContent() {
-      document.getElementById('loadingState').style.display = 'none';
-      document.getElementById('errorState').style.display = 'none';
-      document.getElementById('detailContent').style.display = 'block';
-    }
-
-    /* ============================================================
-       PRODUCT DATA NORMALIZATION
-       Handles both old format (single `price`) and new format
-       (retail + wholesale blocks).
-       ============================================================ */
-    function normalizeProduct(p) {
-      const normalized = { ...p };
-
-      // If product has explicit retail/wholesale blocks, use them
-      if (p.retail || p.wholesale) {
-        normalized.retail = p.retail || { enabled: false };
-        normalized.wholesale = p.wholesale || { enabled: false };
-        return normalized;
-      }
-
-      // Otherwise, derive from legacy `price` field
-      if (p.price) {
-        normalized.retail = {
-          enabled: true,
-          price: Number(p.price),
-          stock: p.stock || null
-        };
-        normalized.wholesale = { enabled: false };
-      } else {
-        normalized.retail = { enabled: false };
-        normalized.wholesale = { enabled: false };
-      }
-      return normalized;
-    }
-
-    /* ============================================================
-       PHONE NORMALIZATION
-       ============================================================ */
     function normalizePhone(raw) {
       const digits = String(raw || '').replace(/[^0-9]/g, '');
-      if (digits.length === 11 && digits.startsWith('0')) {
-        return '234' + digits.slice(1);
-      }
-      if (digits.length === 10 && !digits.startsWith('0')) {
-        return '234' + digits;
-      }
+      if (digits.length === 11 && digits.startsWith('0')) return '234' + digits.slice(1);
+      if (digits.length === 10 && !digits.startsWith('0')) return '234' + digits;
       return digits;
-    }
-
-    function getSellerWhatsApp(product) {
-      const s = product.seller || {};
-      return normalizePhone(s.whatsapp || s.whatsApp || s.phone || product.sellerPhone || '');
     }
 
     function getSellerName(product) {
@@ -1005,149 +1141,284 @@
       return s.name || product.sellerName || 'Seller';
     }
 
+    function getSellerWhatsApp(product) {
+      const s = product.seller || {};
+      const raw = s.whatsapp || s.whatsApp || s.phone || product.sellerPhone || '';
+      return normalizePhone(raw);
+    }
+
+    function getSellerPhone(product) {
+      const s = product.seller || {};
+      return s.phone || s.phoneNumber || product.sellerPhone || '';
+    }
+
+    function getFirstImage(product) {
+      if (Array.isArray(product.images) && product.images.length) return product.images[0];
+      if (product.image) return product.image;
+      return 'https://placehold.co/800x800?text=Zaure';
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(() => t.classList.remove('show'), 2400);
+    }
+
+    function copyToClipboard(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(() => showToast('Link copied'));
+        return;
+      }
+      const temp = document.createElement('textarea');
+      temp.value = text;
+      document.body.appendChild(temp);
+      temp.select();
+      try { document.execCommand('copy'); showToast('Link copied'); } catch(e) {}
+      document.body.removeChild(temp);
+    }
+
+    /* ============================================================
+       NORMALIZE PRODUCT
+       Handles both new JSON (retail + wholesale blocks) and legacy
+       (single price) format.
+       ============================================================ */
+    function normalizeProduct(p) {
+      const n = { ...p };
+      if (p.retail || p.wholesale) {
+        n.retail = p.retail || { enabled: false };
+        n.wholesale = p.wholesale || { enabled: false };
+        return n;
+      }
+      // Legacy fallback
+      if (p.price) {
+        n.retail = { enabled: true, price: Number(p.price), stock: null };
+        n.wholesale = { enabled: false };
+      } else {
+        n.retail = { enabled: false };
+        n.wholesale = { enabled: false };
+      }
+      return n;
+    }
+
+    /* ============================================================
+       TRACKING
+       ============================================================ */
+    (async function fetchUserIP() {
+      try {
+        const res = await fetch('https://api.ipify.org?format=json');
+        const data = await res.json();
+        STATE.userIP = data.ip;
+      } catch (e) { STATE.userIP = 'IP Unavailable'; }
+    })();
+
+    (function collectGuestGPS() {
+      if (!navigator.geolocation) return;
+      navigator.geolocation.getCurrentPosition(
+        pos => {
+          STATE.guestGPS = {
+            lat: pos.coords.latitude.toFixed(6),
+            lng: pos.coords.longitude.toFixed(6),
+            maps: `https://www.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}`
+          };
+        },
+        () => {},
+        { timeout: 5000 }
+      );
+    })();
+
+    function getDeviceType() {
+      const ua = navigator.userAgent;
+      if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) return 'Tablet User';
+      if (/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(ua)) return 'Mobile User';
+      return 'Desktop User';
+    }
+
+    function getFallbackCity() {
+      if (STATE.guestGPS.maps) return `GPS: ${STATE.guestGPS.lat}, ${STATE.guestGPS.lng}`;
+      try {
+        return `Zone: ${Intl.DateTimeFormat().resolvedOptions().timeZone}`;
+      } catch (e) { return 'Unknown'; }
+    }
+
+    async function sendTracking(data) {
+      try {
+        await fetch(CONFIG.SHEET_WEBHOOK_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+      } catch (e) { console.warn('Tracking failed:', e); }
+    }
+
+    function trackAction(action, extra) {
+      const user = (typeof getCurrentUser === 'function') ? getCurrentUser() : null;
+      const p = STATE.product;
+      const seller = p.seller || {};
+
+      sendTracking({
+        Timestamp: new Date().toISOString(),
+        Action: action,
+        'User Name': (user && user.name) ? user.name : getDeviceType(),
+        'User Phone': (user && user.phone) ? user.phone : STATE.userIP,
+        'User City': (user && user.state) ? user.state : getFallbackCity(),
+        'Provider Name': getSellerName(p),
+        'Provider Phone': normalizePhone(getSellerWhatsApp(p)),
+        'Provider ID': p.id,
+        'Service': p.category || 'General',
+        'Is Primer Owned': (seller.name === 'Zaure Official Store' || seller.name === 'El') ? 'TRUE' : 'FALSE',
+        Page: 'detail',
+        ...extra
+      });
+    }
+
     /* ============================================================
        GALLERY
        ============================================================ */
-    function getImageList(product) {
-      if (Array.isArray(product.images) && product.images.length) {
-        return product.images;
-      }
-      if (product.image) return [product.image];
-      return ['https://placehold.co/800x800?text=Zaure'];
-    }
+    function renderGallery(product) {
+      STATE.galleryImages = Array.isArray(product.images) && product.images.length
+        ? product.images
+        : [getFirstImage(product)];
+      STATE.galleryIndex = 0;
 
-    function renderGallery() {
-      const gallery = document.getElementById('gallery');
-      const dots = document.getElementById('galleryDots');
-      const counter = document.getElementById('galleryCounter');
-      const counterText = document.getElementById('galleryCounterText');
+      const mainImage = document.getElementById('mainImage');
+      const strip = document.getElementById('thumbnailStrip');
       const prev = document.getElementById('galleryPrev');
       const next = document.getElementById('galleryNext');
 
-      gallery.querySelectorAll('.slide').forEach(s => s.remove());
-
-      state.galleryImages.forEach((src, i) => {
-        const slide = document.createElement('div');
-        slide.className = 'slide' + (i === 0 ? ' active' : '');
-        slide.innerHTML = `<img src="${escapeHtml(src)}" alt="Product photo ${i + 1}"
-          loading="${i === 0 ? 'eager' : 'lazy'}"
-          onerror="this.src='https://placehold.co/800x800?text=Zaure'">`;
-        gallery.insertBefore(slide, prev);
-      });
-
-      if (state.galleryImages.length > 1) {
-        prev.style.display = 'flex';
-        next.style.display = 'flex';
-        counter.style.display = 'block';
-        counterText.textContent = `1 / ${state.galleryImages.length}`;
-        dots.innerHTML = state.galleryImages.map((_, i) =>
-          `<span data-idx="${i}" class="${i === 0 ? 'active' : ''}"></span>`
-        ).join('');
-        dots.querySelectorAll('span').forEach(dot => {
-          dot.addEventListener('click', () => {
-            state.galleryIndex = parseInt(dot.dataset.idx, 10);
-            updateGalleryUI();
-          });
+      function update() {
+        mainImage.src = STATE.galleryImages[STATE.galleryIndex];
+        document.querySelectorAll('.thumb').forEach((el, i) => {
+          el.classList.toggle('active', i === STATE.galleryIndex);
         });
-      } else {
-        prev.style.display = 'none';
-        next.style.display = 'none';
-        counter.style.display = 'none';
-        dots.innerHTML = '';
-      }
-    }
-
-    function updateGalleryUI() {
-      document.querySelectorAll('#gallery .slide').forEach((s, i) => {
-        s.classList.toggle('active', i === state.galleryIndex);
-      });
-      document.querySelectorAll('#galleryDots span').forEach((d, i) => {
-        d.classList.toggle('active', i === state.galleryIndex);
-      });
-      document.getElementById('galleryCounterText').textContent =
-        `${state.galleryIndex + 1} / ${state.galleryImages.length}`;
-    }
-
-    /* ============================================================
-       CALCULATOR LOGIC
-       ============================================================ */
-    function getActiveTier(qty) {
-      const tiers = state.product.wholesale.tiers || [];
-      for (const tier of tiers) {
-        if (qty >= tier.minQty && (tier.maxQty == null || qty <= tier.maxQty)) {
-          return tier;
-        }
-      }
-      // If qty is below all tiers (shouldn't happen if MOQ enforced), return first
-      return tiers[0] || null;
-    }
-
-    function calculateBulk(qty) {
-      const ws = state.product.wholesale;
-      if (!ws || !ws.enabled) return null;
-
-      const tier = getActiveTier(qty);
-      if (!tier) return null;
-
-      const unitPrice = Number(tier.price);
-      const total = unitPrice * qty;
-
-      let savings = 0;
-      if (state.product.retail && state.product.retail.enabled) {
-        const retailPrice = Number(state.product.retail.price);
-        savings = (retailPrice - unitPrice) * qty;
       }
 
-      return {
-        tier,
-        unitPrice,
-        total,
-        savings,
-        qty
+      mainImage.src = STATE.galleryImages[0];
+      mainImage.alt = product.title || 'Product';
+
+      strip.innerHTML = STATE.galleryImages.map((img, i) =>
+        `<img src="${escapeHtml(img)}" alt="Thumbnail ${i + 1}"
+          class="thumb ${i === 0 ? 'active' : ''}"
+          onclick="window.__gallerySet(${i})"
+          onerror="this.src='https://placehold.co/100x100?text=Z'">`
+      ).join('');
+
+      window.__gallerySet = function(i) {
+        STATE.galleryIndex = i;
+        update();
       };
+
+      if (STATE.galleryImages.length > 1) {
+        prev.classList.remove('hidden');
+        next.classList.remove('hidden');
+        prev.onclick = () => {
+          STATE.galleryIndex = (STATE.galleryIndex - 1 + STATE.galleryImages.length) % STATE.galleryImages.length;
+          update();
+        };
+        next.onclick = () => {
+          STATE.galleryIndex = (STATE.galleryIndex + 1) % STATE.galleryImages.length;
+          update();
+        };
+      } else {
+        prev.classList.add('hidden');
+        next.classList.add('hidden');
+      }
     }
 
     /* ============================================================
-       RENDER: BULK CARD
+       RENDER: RETAIL MODE
        ============================================================ */
-    function renderBulkCard() {
-      const ws = state.product.wholesale;
-      if (!ws || !ws.enabled || !Array.isArray(ws.tiers) || !ws.tiers.length) {
-        document.getElementById('bulkCard').style.display = 'none';
+    function renderRetailMode(product) {
+      const card = document.getElementById('retailMode');
+      const r = product.retail;
+
+      if (!r || !r.enabled || !r.price) {
+        card.style.display = 'none';
         return;
       }
 
-      document.getElementById('bulkCard').style.display = 'block';
+      card.style.display = 'block';
 
-      // From price (lowest tier price = largest discount)
-      const lowestPrice = Math.min(...ws.tiers.map(t => Number(t.price)));
-      document.getElementById('bulkFromPrice').textContent = formatNaira(lowestPrice);
+      // Stock display — null = "In stock"
+      const stockEl = document.getElementById('retailStock');
+      const waBtn = document.getElementById('retailWhatsappBtn');
 
-      // MOQ note
+      if (r.stock === 0) {
+        stockEl.className = 'stock-pill out-of-stock';
+        stockEl.innerHTML = '<i class="fas fa-circle"></i> Out of stock';
+        waBtn.style.opacity = '0.5';
+        waBtn.style.pointerEvents = 'none';
+        waBtn.innerHTML = '<i class="fas fa-ban"></i> Out of stock';
+      } else if (r.stock != null && r.stock <= 3) {
+        stockEl.className = 'stock-pill low-stock';
+        stockEl.innerHTML = `<i class="fas fa-circle"></i> Only ${r.stock} left`;
+      } else if (r.stock != null) {
+        stockEl.className = 'stock-pill in-stock';
+        stockEl.innerHTML = `<i class="fas fa-circle"></i> In stock · ${r.stock}`;
+      } else {
+        stockEl.className = 'stock-pill in-stock';
+        stockEl.innerHTML = '<i class="fas fa-circle"></i> In stock';
+      }
+
+      // WhatsApp link
+      const waNum = getSellerWhatsApp(product);
+      if (!waNum) {
+        waBtn.href = '#';
+        waBtn.style.opacity = '0.5';
+        waBtn.style.pointerEvents = 'none';
+        return;
+      }
+
+      const seller = getSellerName(product);
+      const msg = `Hello ${seller}, I found this on Zaure 👋\n\n📦 ${product.title}\n🛒 Quantity: 1 unit\n💰 Price: ${formatNaira(r.price)}\n\nIs it still available?`;
+
+      waBtn.href = `https://wa.me/${waNum}?text=${encodeURIComponent(msg)}`;
+      waBtn.addEventListener('click', () => {
+        trackAction('whatsapp_retail_click', {
+          'Price': r.price,
+          'Quantity': 1
+        });
+      });
+    }
+
+    /* ============================================================
+       RENDER: BULK MODE + CALCULATOR
+       ============================================================ */
+    function renderBulkMode(product) {
+      const card = document.getElementById('bulkMode');
+      const ws = product.wholesale;
+
+      if (!ws || !ws.enabled || !Array.isArray(ws.tiers) || !ws.tiers.length) {
+        card.style.display = 'none';
+        return;
+      }
+
+      card.style.display = 'block';
+
       const moq = ws.minQty || ws.tiers[0].minQty || 1;
-      document.getElementById('bulkMoqNote').textContent = `Min. ${moq} units`;
+      const lowestPrice = Math.min(...ws.tiers.map(t => Number(t.price)));
 
-      // Initialize quantity
-      state.qty = moq;
+      document.getElementById('bulkFromPrice').textContent = formatNaira(lowestPrice);
+      document.getElementById('bulkMoqNote').textContent = `Min. ${moq} units`;
 
       // Tier table
       const tierTable = document.getElementById('tierTable');
       tierTable.innerHTML = ws.tiers.map(tier => `
         <div class="tier-row" data-min="${tier.minQty}" data-max="${tier.maxQty ?? ''}">
-          <span class="tier-qty">${formatTierRange(tier)}</span>
+          <span class="tier-qty">${tier.minQty}–${tier.maxQty ?? '∞'} units</span>
           <span class="tier-price">${formatNaira(tier.price)} each</span>
         </div>
       `).join('');
 
-      // Quick select buttons — one per tier
-      const qtyQuick = document.getElementById('qtyQuick');
-      qtyQuick.innerHTML = ws.tiers.map(tier => `
-        <button type="button" data-qty="${tier.minQty}">${tier.minQty}${tier.maxQty ? '–' + tier.maxQty : '+'}</button>
+      // Quick buttons
+      const quick = document.getElementById('qtyQuick');
+      quick.innerHTML = ws.tiers.map(t => `
+        <button type="button" data-qty="${t.minQty}">${t.minQty}${t.maxQty ? '–' + t.maxQty : '+'}</button>
       `).join('');
-      qtyQuick.querySelectorAll('button').forEach(btn => {
-        btn.addEventListener('click', () => {
-          setQuantity(parseInt(btn.dataset.qty, 10));
-        });
+      quick.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', () => setQty(parseInt(btn.dataset.qty, 10)));
       });
 
       // Quantity input
@@ -1155,64 +1426,81 @@
       qtyInput.min = moq;
       qtyInput.value = moq;
 
-      // Bind qty controls
-      document.getElementById('qtyMinus').addEventListener('click', () => {
-        setQuantity(state.qty - 1);
-      });
-      document.getElementById('qtyPlus').addEventListener('click', () => {
-        setQuantity(state.qty + 1);
-      });
-      qtyInput.addEventListener('input', function () {
-        const v = parseInt(this.value, 10);
-        if (!isNaN(v)) setQuantity(v, false);
-      });
-      qtyInput.addEventListener('blur', function () {
-        const v = parseInt(this.value, 10);
-        if (isNaN(v) || v < moq) setQuantity(moq);
-        else setQuantity(v);
+      document.getElementById('qtyMinus').onclick = () => setQty(STATE.qty - 1);
+      document.getElementById('qtyPlus').onclick = () => setQty(STATE.qty + 1);
+      qtyInput.oninput = e => {
+        const v = parseInt(e.target.value, 10);
+        if (!isNaN(v)) setQty(v, false);
+      };
+      qtyInput.onblur = e => {
+        const v = parseInt(e.target.value, 10);
+        if (isNaN(v) || v < moq) setQty(moq);
+        else setQty(v);
+      };
+
+      // Bulk WhatsApp click tracking
+      document.getElementById('bulkWhatsappBtn').addEventListener('click', () => {
+        const calc = calculateBulk(STATE.qty);
+        if (calc) {
+          trackAction('whatsapp_bulk_click', {
+            'Quantity': calc.qty,
+            'Unit Price': calc.unitPrice,
+            'Total': calc.total
+          });
+        }
       });
 
-      // Initial calc
+      STATE.qty = moq;
       updateCalculator();
     }
 
-    function formatTierRange(tier) {
-      if (tier.maxQty == null) {
-        return `${tier.minQty}+ units`;
-      }
-      return `${tier.minQty}–${tier.maxQty} units`;
-    }
-
-    /* ============================================================
-       SET QUANTITY + RECALCULATE
-       ============================================================ */
-    function setQuantity(qty, syncInput = true) {
-      const ws = state.product.wholesale;
+    function setQty(qty, syncInput = true) {
+      const ws = STATE.product.wholesale;
       const moq = ws.minQty || ws.tiers[0].minQty || 1;
-
       qty = Math.max(moq, Math.floor(qty));
       if (qty > 999999) qty = 999999;
-      state.qty = qty;
+      STATE.qty = qty;
 
       if (syncInput) {
         const input = document.getElementById('qtyInput');
         if (input) input.value = qty;
       }
-
       updateCalculator();
     }
 
-    function updateCalculator() {
-      const qty = state.qty;
-      const calc = calculateBulk(qty);
+    function getActiveTier(qty) {
+      const tiers = STATE.product.wholesale.tiers || [];
+      for (const tier of tiers) {
+        if (qty >= tier.minQty && (tier.maxQty == null || qty <= tier.maxQty)) {
+          return tier;
+        }
+      }
+      return tiers[0] || null;
+    }
 
+    function calculateBulk(qty) {
+      const ws = STATE.product.wholesale;
+      if (!ws || !ws.enabled) return null;
+      const tier = getActiveTier(qty);
+      if (!tier) return null;
+      const unitPrice = Number(tier.price);
+      const total = unitPrice * qty;
+      let savings = 0;
+      const r = STATE.product.retail;
+      if (r && r.enabled && r.price) {
+        savings = (Number(r.price) - unitPrice) * qty;
+      }
+      return { tier, unitPrice, total, savings, qty };
+    }
+
+    function updateCalculator() {
+      const calc = calculateBulk(STATE.qty);
       if (!calc) return;
 
-      document.getElementById('calcQty').textContent = `${qty.toLocaleString()} units`;
+      document.getElementById('calcQty').textContent = `${calc.qty.toLocaleString()} units`;
       document.getElementById('calcUnitPrice').textContent = formatNaira(calc.unitPrice);
       document.getElementById('calcTotal').textContent = formatNaira(calc.total);
 
-      // Savings
       const savingsEl = document.getElementById('calcSavings');
       if (calc.savings > 0) {
         savingsEl.style.display = 'inline-flex';
@@ -1222,291 +1510,307 @@
         savingsEl.style.display = 'none';
       }
 
-      // Highlight active tier row
+      // Highlight active tier
       document.querySelectorAll('#tierTable .tier-row').forEach(row => {
         const min = parseInt(row.dataset.min, 10);
         const maxRaw = row.dataset.max;
         const max = maxRaw === '' ? Infinity : parseInt(maxRaw, 10);
-        const isActive = qty >= min && qty <= max;
-        row.classList.toggle('active', isActive);
+        row.classList.toggle('active', STATE.qty >= min && STATE.qty <= max);
       });
 
       // Highlight active quick button
       document.querySelectorAll('#qtyQuick button').forEach(btn => {
-        const q = parseInt(btn.dataset.qty, 10);
-        btn.classList.toggle('active', q === qty);
+        btn.classList.toggle('active', parseInt(btn.dataset.qty, 10) === STATE.qty);
       });
 
-      // Update WhatsApp button
       updateBulkWhatsApp(calc);
 
-      // Update +/- disabled state
-      const moq = state.product.wholesale.minQty || state.product.wholesale.tiers[0].minQty || 1;
-      document.getElementById('qtyMinus').disabled = qty <= moq;
+      const moq = STATE.product.wholesale.minQty || STATE.product.wholesale.tiers[0].minQty || 1;
+      document.getElementById('qtyMinus').disabled = STATE.qty <= moq;
     }
 
-    /* ============================================================
-       WHATSAPP MESSAGES
-       ============================================================ */
-    function buildRetailWhatsApp() {
-      const p = state.product;
+    function updateBulkWhatsApp(calc) {
+      const btn = document.getElementById('bulkWhatsappBtn');
+      const waNum = getSellerWhatsApp(STATE.product);
+      if (!waNum) {
+        btn.href = '#';
+        btn.style.opacity = '0.5';
+        btn.style.pointerEvents = 'none';
+        return;
+      }
+
+      const p = STATE.product;
       const seller = getSellerName(p);
-      const price = Number(p.retail.price);
-
-      const msg = `Hello ${seller}, I found this on Zaure 👋
-
-📦 ${p.title}
-🛒 Quantity: 1 unit
-💰 Price: ${formatNaira(price)}
-
-Is it still available?`;
-
-      return msg;
-    }
-
-    function buildBulkWhatsApp(calc) {
-      const p = state.product;
-      const seller = getSellerName(p);
-
       const tierLabel = calc.tier.maxQty
         ? `${calc.tier.minQty}–${calc.tier.maxQty} units`
         : `${calc.tier.minQty}+ units`;
 
-      const msg = `Hello ${seller}, I'd like to place a bulk order on Zaure 📦
+      const msg = `Hello ${seller}, I'd like to place a bulk order on Zaure 📦\n\n` +
+                  `📦 Product: ${p.title}\n` +
+                  `🔢 Quantity: ${calc.qty.toLocaleString()} units\n` +
+                  `💵 Unit price: ${formatNaira(calc.unitPrice)}\n` +
+                  `📊 Tier: ${tierLabel}\n` +
+                  `💰 Total: ${formatNaira(calc.total)}\n\n` +
+                  `Is this available? What's the lead time?`;
 
-📦 Product: ${p.title}
-🔢 Quantity: ${calc.qty.toLocaleString()} units
-💵 Unit price: ${formatNaira(calc.unitPrice)}
-📊 Tier: ${tierLabel}
-💰 Total: ${formatNaira(calc.total)}
-
-Is this available? What's the lead time?`;
-
-      return msg;
-    }
-
-    function updateRetailWhatsApp() {
-      const btn = document.getElementById('retailWaBtn');
-      const waNumber = getSellerWhatsApp(state.product);
-      if (!waNumber) {
-        btn.style.display = 'none';
-        return;
-      }
-      const msg = buildRetailWhatsApp();
-      btn.href = `https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`;
-    }
-
-    function updateBulkWhatsApp(calc) {
-      const btn = document.getElementById('bulkWaBtn');
-      const waNumber = getSellerWhatsApp(state.product);
-      if (!waNumber) {
-        btn.style.display = 'none';
-        return;
-      }
-      const msg = buildBulkWhatsApp(calc);
-      btn.href = `https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`;
+      btn.href = `https://wa.me/${waNum}?text=${encodeURIComponent(msg)}`;
     }
 
     /* ============================================================
-       RENDER: RETAIL CARD
+       RENDER: MAIN PRODUCT
        ============================================================ */
-    function renderRetailCard() {
-      const r = state.product.retail;
-      if (!r || !r.enabled || !r.price) {
-        document.getElementById('retailCard').style.display = 'none';
-        return;
-      }
+    function renderProduct(product) {
+      document.title = `${product.title} – Zaure`;
 
-      document.getElementById('retailCard').style.display = 'block';
-      document.getElementById('retailPrice').textContent = formatNaira(r.price);
+      // Title
+      document.getElementById('productTitle').textContent = product.title || 'Product';
 
-      // Stock
-      const stockEl = document.getElementById('retailStock');
-      if (r.stock != null && r.stock > 0) {
-        stockEl.className = 'retail-stock in-stock';
-        stockEl.innerHTML = `<i class="fas fa-circle"></i> In stock · ${r.stock} available`;
-      } else if (r.stock === 0) {
-        stockEl.className = 'retail-stock';
-        stockEl.innerHTML = `<i class="fas fa-circle" style="color:#e74c3c;"></i> <span style="color:#e74c3c;">Out of stock</span>`;
-        document.getElementById('retailWaBtn').style.opacity = '0.5';
-        document.getElementById('retailWaBtn').style.pointerEvents = 'none';
+      // Meta — location + category + date (only if present)
+      document.getElementById('productLocation').textContent = product.location || 'Nigeria';
+      document.getElementById('productCategory').textContent = product.category || 'General';
+
+      if (product.date && String(product.date).trim()) {
+        document.getElementById('productDateWrap').style.display = 'inline-flex';
+        document.getElementById('productDate').textContent = product.date;
       } else {
-        stockEl.className = 'retail-stock in-stock';
-        stockEl.innerHTML = `<i class="fas fa-circle"></i> In stock`;
+        document.getElementById('productDateWrap').style.display = 'none';
       }
 
-      updateRetailWhatsApp();
+      // Price hero — shows retail price + bulk "from" chip
+      const r = product.retail;
+      const ws = product.wholesale;
+      const heroVal = document.getElementById('priceHeroValue');
+      const heroBulk = document.getElementById('priceHeroBulk');
+      const heroBulkText = document.getElementById('priceHeroBulkText');
+
+      // Determine main price
+      let mainPrice = 0;
+      let mainLabel = 'Starting price';
+      if (r && r.enabled && r.price) {
+        mainPrice = r.price;
+        mainLabel = 'Retail price';
+      } else if (ws && ws.enabled && ws.tiers && ws.tiers.length) {
+        mainPrice = Math.min(...ws.tiers.map(t => Number(t.price)));
+        mainLabel = 'Wholesale price from';
+      }
+
+      document.querySelector('.price-hero-label').textContent = mainLabel;
+      heroVal.textContent = formatNaira(mainPrice);
+
+      // Bulk chip
+      if (ws && ws.enabled && ws.tiers && ws.tiers.length) {
+        const lowest = Math.min(...ws.tiers.map(t => Number(t.price)));
+        const moq = ws.minQty || ws.tiers[0].minQty || 1;
+        heroBulk.style.display = 'inline-flex';
+        heroBulkText.textContent = `Bulk from ${formatNaira(lowest)} · MOQ ${moq}`;
+      } else {
+        heroBulk.style.display = 'none';
+      }
+
+      // Tags
+      const tagsContainer = document.getElementById('productTags');
+      const tags = Array.isArray(product.tags) ? product.tags : [];
+      tagsContainer.innerHTML = tags.map(t => `<span class="tag">#${escapeHtml(t)}</span>`).join('');
+
+      // Description
+      document.getElementById('productDescription').textContent =
+        product.description || 'No description available.';
+
+      // Gallery
+      renderGallery(product);
+
+      // Badge
+      const badge = document.getElementById('galleryBadge');
+      if (product.featured) {
+        badge.textContent = 'Featured';
+        badge.classList.add('featured');
+      } else if (product.boosted) {
+        badge.textContent = 'Boosted';
+        badge.classList.remove('featured');
+      } else {
+        badge.textContent = 'Available';
+        badge.classList.remove('featured');
+      }
+
+      // Location
+      document.getElementById('locationFull').textContent = product.location || 'Nigeria';
+
+      // Purchase modes
+      renderRetailMode(product);
+      renderBulkMode(product);
+
+      // Neither mode enabled
+      if (!product.retail?.enabled && !product.wholesale?.enabled) {
+        document.getElementById('purchaseModes').innerHTML = `
+          <div style="text-align:center;padding:24px 12px;color:var(--text-secondary);font-size:0.85rem;">
+            <i class="fas fa-info-circle" style="font-size:1.4rem;margin-bottom:8px;display:block;opacity:0.5;"></i>
+            Pricing not available. Please contact the seller.
+          </div>`;
+      }
+
+      // Recommendations
+      const all = (typeof getProductsSync === 'function') ? getProductsSync() : [];
+      const recs = all.filter(p => String(p.id) !== String(product.id) && p.category === product.category).slice(0, 6);
+      const fallback = all.filter(p => String(p.id) !== String(product.id)).slice(0, 6);
+      if (typeof renderListings === 'function') {
+        renderListings(recs.length ? recs : fallback, 'recommendationsGrid');
+      }
+
+      // Favorite button
+      const favBtn = document.getElementById('favoriteBtn');
+      if (typeof isFavorite === 'function' && isFavorite(product.id)) {
+        favBtn.classList.add('liked');
+        favBtn.innerHTML = '<i class="fas fa-heart"></i> <span>Saved</span>';
+      }
+      favBtn.addEventListener('click', function() {
+        if (typeof currentUser !== 'undefined' && !currentUser) {
+          if (typeof openSignup === 'function') openSignup();
+          return;
+        }
+        const isNowFav = (typeof toggleFavorite === 'function') ? toggleFavorite(product.id) : false;
+        if (isNowFav) {
+          this.classList.add('liked');
+          this.innerHTML = '<i class="fas fa-heart"></i> <span>Saved</span>';
+        } else {
+          this.classList.remove('liked');
+          this.innerHTML = '<i class="far fa-heart"></i> <span>Save</span>';
+        }
+        if (typeof updateFavoriteBadge === 'function') updateFavoriteBadge();
+      });
+
+      // Share
+      document.getElementById('shareBtn').addEventListener('click', function() {
+        const url = location.href;
+        if (navigator.share) {
+          navigator.share({ title: product.title, url }).catch(() => {});
+        } else {
+          copyToClipboard(url);
+        }
+      });
+
+      // Report
+      document.getElementById('reportBtn').addEventListener('click', function() {
+        const msg = `I want to report this listing on Zaure:\n\n"${product.title}"\n${location.href}`;
+        window.open(`https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+      });
+
+      // FAB
+      document.getElementById('fabPostAd').addEventListener('click', function() {
+        if (typeof currentUser !== 'undefined' && !currentUser) {
+          if (typeof openSignup === 'function') openSignup();
+        } else {
+          location.href = '/post.html';
+        }
+      });
     }
 
     /* ============================================================
-       RENDER: SELLER CARD
+       RENDER: SELLER
        ============================================================ */
-    function renderSellerCard() {
-      const p = state.product;
-      const seller = p.seller || {};
-      const name = getSellerName(p);
+    async function renderSeller(product) {
+      const seller = product.seller || {
+        name: 'Zaure Official Store', initials: 'ZA', joined: '2026',
+        phone: '09042339411', whatsapp: '09042339411'
+      };
+
+      const sellersData = (typeof loadTopSellers === 'function') ? await loadTopSellers() : [];
+      const matched = Array.isArray(sellersData)
+        ? sellersData.find(s => s.name.toLowerCase() === seller.name.toLowerCase())
+        : null;
 
       // Avatar
       const avatarEl = document.getElementById('sellerAvatar');
-      const avatarSrc = seller.profilePic || seller.avatar || '';
-      if (avatarSrc) {
-        avatarEl.innerHTML = `<img src="${escapeHtml(avatarSrc)}" alt="${escapeHtml(name)}"
-          onerror="this.style.display='none';this.parentElement.textContent='${escapeHtml(name.charAt(0).toUpperCase())}';">`;
+      if (matched && matched.profilePic) {
+        avatarEl.innerHTML = `<img src="${escapeHtml(matched.profilePic)}" alt="${escapeHtml(seller.name)}"
+          onerror="this.style.display='none';this.parentElement.textContent='${escapeHtml(seller.initials || 'ZA')}';">`;
       } else {
-        avatarEl.textContent = name.charAt(0).toUpperCase();
+        avatarEl.textContent = seller.initials || 'ZA';
       }
 
-      document.getElementById('sellerName').textContent = name;
+      // Info
+      document.getElementById('sellerName').textContent = seller.name;
+      document.getElementById('sellerJoined').textContent = matched?.joined || seller.joined || '2026';
 
-      const storeId = seller.id || p.sellerId;
-      const viewStoreBtn = document.getElementById('viewStoreBtn');
-      if (storeId) {
-        viewStoreBtn.href = `/store.html?id=${encodeURIComponent(storeId)}`;
-        viewStoreBtn.style.display = 'inline-flex';
+      // Listing count
+      const all = (typeof getProductsSync === 'function') ? getProductsSync() : [];
+      const sellerProducts = all.filter(p =>
+        p.seller && p.seller.name &&
+        p.seller.name.toLowerCase() === seller.name.toLowerCase()
+      );
+      document.getElementById('sellerListings').textContent = sellerProducts.length || 0;
+
+      // Stats
+      document.getElementById('sellerRating').textContent = seller.rating || '5.0';
+      document.getElementById('sellerSales').textContent = seller.sales || 0;
+      document.getElementById('sellerResponse').textContent = seller.response || '100%';
+      document.getElementById('sellerBio').textContent = matched?.bio || seller.bio || 'Trusted seller on Zaure.';
+
+      // WhatsApp
+      const waNum = getSellerWhatsApp(product);
+      const sidebarWa = document.getElementById('sidebarWhatsappBtn');
+      if (waNum) {
+        const msg = `Hello ${seller.name}, I'm interested in "${product.title}" on Zaure.`;
+        sidebarWa.href = `https://wa.me/${waNum}?text=${encodeURIComponent(msg)}`;
+        sidebarWa.addEventListener('click', () => trackAction('whatsapp_seller_click'));
       } else {
-        viewStoreBtn.style.display = 'none';
+        sidebarWa.style.display = 'none';
       }
-    }
 
-    /* ============================================================
-       RENDER: DESCRIPTION
-       ============================================================ */
-    function renderDescription() {
-      const p = state.product;
-      const desc = p.description || p.desc || '';
-      if (!desc.trim()) {
-        document.getElementById('descSection').style.display = 'none';
-        return;
-      }
-      document.getElementById('descSection').style.display = 'block';
-      document.getElementById('productDescription').textContent = desc;
-    }
-
-    /* ============================================================
-       RENDER: RELATED
-       ============================================================ */
-    async function renderRelated() {
-      const p = state.product;
-      if (typeof loadProducts !== 'function') return;
-
-      try {
-        const all = await loadProducts();
-        const related = all.filter(x =>
-          String(x.id) !== String(p.id) &&
-          x.category && p.category &&
-          x.category === p.category
-        ).slice(0, 8);
-
-        if (related.length === 0) return;
-
-        document.getElementById('relatedSection').style.display = 'block';
-        const grid = document.getElementById('relatedGrid');
-        grid.innerHTML = related.map(r => {
-          const price = r.retail?.price || r.price;
-          const priceHtml = price ? formatNaira(price) : '';
-          const img = (Array.isArray(r.images) && r.images[0]) || r.image || '';
-          return `
-            <a href="/detail.html?id=${encodeURIComponent(r.id)}" class="related-card" style="text-decoration:none;">
-              <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden;">
-                <div style="aspect-ratio: 1; background: var(--surface-alt); display: flex; align-items: center; justify-content: center; overflow: hidden;">
-                  ${img
-                    ? `<img src="${escapeHtml(img)}" alt="${escapeHtml(r.title || '')}" loading="lazy" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\\'fas fa-box\\' style=\\'font-size:2rem;color:var(--text-secondary);\\'></i>';">`
-                    : `<i class="fas fa-box" style="font-size:2rem;color:var(--text-secondary);"></i>`}
-                </div>
-                <div style="padding: 10px 12px 12px;">
-                  ${priceHtml ? `<div style="font-size: 0.88rem; font-weight: 800; color: var(--text); margin-bottom: 2px;">${priceHtml}</div>` : ''}
-                  <div style="font-size: 0.76rem; color: var(--text-secondary); line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${escapeHtml(r.title || '')}</div>
-                </div>
-              </div>
-            </a>
-          `;
-        }).join('');
-      } catch (e) {
-        console.warn('Could not load related products', e);
+      // Visit store
+      const storeBtn = document.getElementById('visitStoreBtn');
+      if (matched && matched.id) {
+        storeBtn.onclick = () => {
+          location.href = `/store.html?id=${encodeURIComponent(matched.id)}`;
+        };
+      } else {
+        storeBtn.onclick = () => {
+          location.href = `/stores.html?search=${encodeURIComponent(seller.name)}`;
+        };
       }
     }
 
     /* ============================================================
        INIT
        ============================================================ */
-    async function init() {
+    document.addEventListener('DOMContentLoaded', async function() {
+      if (typeof initStateDropdown === 'function') initStateDropdown();
+
+      const params = new URLSearchParams(location.search);
+      const productId = params.get('id');
+
+      if (!productId) { showNotFound(); return; }
+
+      let product = null;
+      try {
+        const all = (typeof loadProducts === 'function') ? await loadProducts() : [];
+        product = all.find(p => String(p.id) === String(productId));
+      } catch (e) {
+        console.error('Load failed', e);
+      }
+
+      if (!product) { showNotFound(); return; }
+
+      STATE.product = normalizeProduct(product);
+
+      document.getElementById('loadingState').style.display = 'none';
+      document.getElementById('productDetailContainer').style.display = 'block';
+
+      renderProduct(STATE.product);
+      await renderSeller(STATE.product);
+
       if (typeof loadUser === 'function') loadUser();
       if (typeof initTheme === 'function') initTheme();
       if (typeof updateFavoriteBadge === 'function') updateFavoriteBadge();
-      if (typeof initStateDropdown === 'function') initStateDropdown();
+    });
 
-      // FAB
-      document.getElementById('fabPostAd')?.addEventListener('click', () => {
-        const user = (typeof getCurrentUser === 'function') ? getCurrentUser() : null;
-        if (!user) { if (typeof openSignup === 'function') openSignup(); }
-        else location.href = '/post.html';
-      });
-
-      // Gallery nav
-      document.getElementById('galleryPrev').addEventListener('click', () => {
-        if (state.galleryImages.length < 2) return;
-        state.galleryIndex = (state.galleryIndex - 1 + state.galleryImages.length) % state.galleryImages.length;
-        updateGalleryUI();
-      });
-      document.getElementById('galleryNext').addEventListener('click', () => {
-        if (state.galleryImages.length < 2) return;
-        state.galleryIndex = (state.galleryIndex + 1) % state.galleryImages.length;
-        updateGalleryUI();
-      });
-
-      // Load product
-      const productId = new URLSearchParams(location.search).get('id');
-      if (!productId) { showError(); return; }
-
-      showLoading();
-
-      let rawProduct = null;
-      try {
-        if (typeof loadProducts === 'function') {
-          const all = await loadProducts();
-          rawProduct = all.find(x => String(x.id) === String(productId));
-        }
-      } catch (e) {
-        console.error('Could not load product', e);
-      }
-
-      if (!rawProduct) { showError(); return; }
-
-      state.product = normalizeProduct(rawProduct);
-
-      // Page title & crumb
-      document.title = `${state.product.title || 'Product'} – Zaure`;
-      document.getElementById('crumbTitle').textContent = state.product.title || 'Product';
-
-      // Title
-      document.getElementById('productTitle').textContent = state.product.title || 'Product';
-
-      // Gallery
-      state.galleryImages = getImageList(state.product);
-      renderGallery();
-
-      // Cards
-      renderRetailCard();
-      renderBulkCard();
-
-      // If neither mode is available, show a fallback message
-      if (!state.product.retail?.enabled && !state.product.wholesale?.enabled) {
-        document.getElementById('purchaseSection').innerHTML = `
-          <div style="text-align: center; padding: 24px 12px; color: var(--text-secondary); font-size: 0.85rem;">
-            <i class="fas fa-info-circle" style="font-size: 1.4rem; margin-bottom: 8px; display: block; opacity: 0.5;"></i>
-            Pricing not yet available for this item. Please contact the seller.
-          </div>`;
-      }
-
-      // Seller + description + related
-      renderSellerCard();
-      renderDescription();
-      renderRelated();
-
-      showContent();
+    function showNotFound() {
+      document.getElementById('loadingState').innerHTML = `
+        <div style="text-align:center;padding:40px;">
+          <i class="fas fa-exclamation-circle" style="font-size:2rem;color:#e74c3c;"></i>
+          <p style="margin-top:12px;">Product not found.</p>
+          <a href="/" class="btn-primary" style="margin-top:16px;width:auto;padding:28px;display:inline-flex;">Go Home</a>
+        </div>`;
     }
-
-    document.addEventListener('DOMContentLoaded', init);
   })();
   </script>
 </body>
