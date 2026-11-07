@@ -3,200 +3,643 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>Zaure – Product Details</title>
-  <meta name="description" content="View product details, seller information, and similar listings on Zaure.">
+  <title>Product – Zaure</title>
+  <meta name="description" content="Buy single or in bulk on Zaure. Nigeria's most trusted marketplace.">
   <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
   <style>
     :root {
       --navy: #0f2940;
       --navy-2: #1a3650;
-      --border: #e5ecf3;
-      --text: #0f2940;
-      --text-secondary: #64748b;
-      --surface: #ffffff;
-      --surface-alt: #f8fbfe;
-      --input-bg: #f8fbfe;
+      --gold: #D4B87A;
+      --gold-deep: #B49450;
+      --wa-green: #25D366;
+      --wa-green-dark: #1DA851;
     }
 
-    .product-gallery {
+    /* ============================================================
+       BASE
+       ============================================================ */
+    body {
+      background: var(--bg, #f5f7fa);
+    }
+    @media (max-width: 1023px) {
+      body { padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px)) !important; }
+    }
+
+    /* ============================================================
+       BREADCRUMB
+       ============================================================ */
+    .detail-breadcrumb {
+      display: flex; align-items: center; gap: 7px;
+      margin: 20px 0 16px; font-size: 0.76rem;
+      color: var(--text-secondary); flex-wrap: wrap;
+      min-width: 0;
+    }
+    .detail-breadcrumb a {
+      color: var(--text-secondary); text-decoration: none;
+      transition: color 0.2s; white-space: nowrap;
+    }
+    .detail-breadcrumb a:hover { color: var(--navy-2); }
+    .detail-breadcrumb i { font-size: 0.5rem; opacity: 0.6; flex-shrink: 0; }
+    .detail-breadcrumb .current {
+      color: var(--text); font-weight: 600;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+      max-width: 240px;
+    }
+
+    /* ============================================================
+       LAYOUT
+       ============================================================ */
+    .detail-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      margin-bottom: 40px;
+      align-items: start;
+    }
+    @media (min-width: 1024px) {
+      .detail-layout {
+        grid-template-columns: minmax(0, 1fr) 420px;
+        gap: 32px;
+      }
+    }
+
+    /* ============================================================
+       GALLERY
+       ============================================================ */
+    .gallery {
       position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1;
       background: var(--surface);
+      border: 1px solid var(--border);
       border-radius: 20px;
       overflow: hidden;
-      border: 1px solid var(--border);
       margin-bottom: 16px;
     }
-    .product-gallery .main-image { width: 100%; height: 350px; object-fit: contain; background: var(--surface-alt); }
-    .product-gallery .thumbnail-strip { display: flex; gap: 8px; padding: 12px; overflow-x: auto; scrollbar-width: none; }
-    .product-gallery .thumbnail-strip::-webkit-scrollbar { display: none; }
-    .product-gallery .thumbnail-strip .thumb {
-      width: 60px; height: 60px; border-radius: 8px; object-fit: cover; cursor: pointer;
-      border: 2px solid transparent; transition: 0.2s; flex-shrink: 0;
+    @media (min-width: 1024px) {
+      .gallery { aspect-ratio: 4 / 3; }
     }
-    .product-gallery .thumbnail-strip .thumb.active { border-color: var(--navy-2); }
-    .product-gallery .gallery-badge {
-      position: absolute; top: 16px; left: 16px; background: rgba(0,0,0,0.7); color: white;
-      padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: 600; z-index: 2;
+
+    .gallery .slide {
+      position: absolute; inset: 0;
+      opacity: 0; transition: opacity 0.4s ease;
     }
-    .product-gallery .gallery-nav {
+    .gallery .slide.active { opacity: 1; }
+    .gallery .slide img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+
+    .gallery-nav {
       position: absolute; top: 50%; transform: translateY(-50%);
-      background: rgba(255,255,255,0.9); border: none; width: 40px; height: 40px;
-      border-radius: 50%; cursor: pointer; font-size: 1rem; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      transition: 0.2s; z-index: 2;
-    }
-    .product-gallery .gallery-nav.prev { left: 12px; }
-    .product-gallery .gallery-nav.next { right: 12px; }
-    .product-gallery .gallery-nav.hidden { display: none; }
-
-    .product-info-card {
-      background: var(--surface); border-radius: 20px; padding: 24px;
-      border: 1px solid var(--border); margin-bottom: 16px;
-    }
-    .product-info-card .product-title { font-size: 1.5rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
-    .product-info-card .product-price { font-size: 2rem; font-weight: 800; color: var(--navy-2); margin: 8px 0; }
-    .product-info-card .product-meta {
-      display: flex; flex-wrap: wrap; gap: 16px; font-size: 0.85rem;
-      color: var(--text-secondary); padding: 12px 0; border-top: 1px solid var(--border); margin-top: 8px;
-    }
-    .product-info-card .product-meta span i { margin-right: 4px; color: var(--navy-2); }
-    .product-info-card .product-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
-    .product-info-card .product-tags .tag {
-      background: var(--surface-alt); padding: 4px 12px; border-radius: 20px;
-      font-size: 0.75rem; font-weight: 500; color: var(--text);
-    }
-    .product-info-card .product-description { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; margin: 12px 0; }
-
-    /* Action Buttons */
-    .action-buttons { display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
-    .action-buttons .btn-whatsapp-action {
-      flex: 2; background: #25D366; color: white; border: none; padding: 14px 24px;
-      border-radius: 60px; font-weight: 600; font-size: 1rem; cursor: pointer;
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      transition: 0.2s; text-decoration: none;
-    }
-    .action-buttons .btn-whatsapp-action:hover { background: #1DA851; transform: translateY(-2px); }
-    
-    .action-buttons .btn-contact {
-      flex: 1; background: var(--surface); color: var(--text); border: 2px solid var(--border);
-      padding: 14px 20px; border-radius: 60px; font-weight: 600; cursor: pointer;
-      display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s;
-      text-decoration: none;
-    }
-    .action-buttons .btn-contact:hover { border-color: var(--text); }
-    
-    .action-buttons .btn-favorite {
-      flex: 1; background: var(--surface); color: var(--text); border: 2px solid var(--border);
-      padding: 14px 20px; border-radius: 60px; font-weight: 600; cursor: pointer;
-      display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s;
-    }
-    .action-buttons .btn-favorite.liked { border-color: #e74c3c; color: #e74c3c; }
-    
-    .action-buttons .btn-share {
-      flex: 1; background: var(--surface); color: var(--text); border: 2px solid var(--border);
-      padding: 14px 20px; border-radius: 60px; cursor: pointer; transition: 0.2s;
+      width: 42px; height: 42px; border-radius: 50%;
+      background: rgba(15,41,64,0.7);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      color: white; border: none; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; transition: all 0.2s;
+      z-index: 3;
+    }
+    .gallery-nav:hover { background: var(--navy); transform: translateY(-50%) scale(1.05); }
+    .gallery-nav.prev { left: 12px; }
+    .gallery-nav.next { right: 12px; }
+
+    .gallery-counter {
+      position: absolute; top: 12px; right: 12px;
+      padding: 5px 11px; border-radius: 20px;
+      background: rgba(15,41,64,0.7);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      color: white; font-size: 0.7rem; font-weight: 600;
+      z-index: 3;
     }
 
+    .gallery-dots {
+      position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 5px; z-index: 3;
+    }
+    .gallery-dots span {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: rgba(255,255,255,0.5); cursor: pointer; transition: all 0.2s;
+    }
+    .gallery-dots span.active { background: white; width: 20px; border-radius: 4px; }
+
+    /* ============================================================
+       INFO CARD
+       ============================================================ */
+    .info-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 20px;
+    }
+    @media (min-width: 640px) {
+      .info-card { padding: 24px; }
+    }
+
+    .product-title {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.3;
+      letter-spacing: -0.4px;
+      margin-bottom: 10px;
+    }
+    @media (min-width: 640px) {
+      .product-title { font-size: 1.55rem; }
+    }
+
+    .product-meta-row {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-bottom: 18px; align-items: center;
+    }
+
+    .meta-chip {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 4px 10px; border-radius: 20px;
+      background: var(--surface-alt); border: 1px solid var(--border);
+      font-size: 0.72rem; font-weight: 600; color: var(--text-secondary);
+      white-space: nowrap;
+    }
+    .meta-chip i { font-size: 0.65rem; }
+    .meta-chip.verified {
+      background: rgba(22,163,74,0.1); color: #16a34a;
+      border-color: rgba(22,163,74,0.2);
+    }
+
+    /* ============================================================
+       PURCHASE MODES
+       ============================================================ */
+    .purchase-section {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .mode-card {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      transition: border-color 0.2s;
+    }
+    .mode-card:hover { border-color: rgba(26,54,80,0.2); }
+
+    .mode-header {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .mode-icon {
+      width: 38px; height: 38px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.95rem; flex-shrink: 0;
+    }
+    .mode-card.retail .mode-icon {
+      background: linear-gradient(135deg, #1a3650, #2a4a6a);
+      color: white;
+    }
+    .mode-card.bulk .mode-icon {
+      background: linear-gradient(135deg, #B49450, #D4B87A);
+      color: white;
+    }
+
+    .mode-title {
+      flex: 1; min-width: 0;
+    }
+    .mode-title h3 {
+      font-size: 0.92rem; font-weight: 800;
+      color: var(--text); line-height: 1.2;
+      margin-bottom: 2px;
+    }
+    .mode-title p {
+      font-size: 0.72rem; color: var(--text-secondary);
+      line-height: 1.3;
+    }
+
+    /* Retail card */
+    .retail-price {
+      font-size: 1.9rem; font-weight: 900;
+      color: var(--text); letter-spacing: -1px;
+      line-height: 1; margin-bottom: 4px;
+    }
+    @media (min-width: 640px) {
+      .retail-price { font-size: 2.2rem; }
+    }
+    .retail-stock {
+      font-size: 0.75rem; color: var(--text-secondary);
+      margin-bottom: 14px;
+      display: flex; align-items: center; gap: 5px;
+    }
+    .retail-stock.in-stock { color: #16a34a; font-weight: 600; }
+    .retail-stock i { font-size: 0.55rem; }
+
+    /* Bulk card */
+    .bulk-preview {
+      display: flex; align-items: baseline; gap: 8px;
+      margin-bottom: 14px; flex-wrap: wrap;
+    }
+    .bulk-preview .from-label {
+      font-size: 0.72rem; color: var(--text-secondary);
+      font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .bulk-preview .from-price {
+      font-size: 1.4rem; font-weight: 900;
+      color: var(--gold-deep); letter-spacing: -0.5px;
+    }
+    .bulk-preview .moq-note {
+      font-size: 0.72rem; color: var(--text-secondary);
+      margin-left: auto;
+    }
+
+    /* Tier table */
+    .tier-table {
+      display: flex; flex-direction: column; gap: 4px;
+      margin-bottom: 16px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .tier-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 8px 12px;
+      background: var(--surface);
+      font-size: 0.76rem;
+      transition: all 0.2s;
+    }
+    .tier-row.active {
+      background: rgba(212,184,122,0.15);
+      font-weight: 700;
+    }
+    .tier-row.active .tier-qty { color: var(--gold-deep); }
+    .tier-row.active .tier-price { color: var(--gold-deep); }
+    .tier-qty {
+      color: var(--text-secondary);
+      font-weight: 600;
+      font-size: 0.72rem;
+    }
+    .tier-price {
+      color: var(--text);
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Quantity selector */
+    .qty-selector {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 12px;
+    }
+    .qty-label {
+      font-size: 0.72rem; font-weight: 700;
+      color: var(--text-secondary);
+      text-transform: uppercase; letter-spacing: 0.5px;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .qty-controls {
+      display: flex; align-items: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      flex: 1;
+      transition: border-color 0.2s;
+    }
+    .qty-controls:focus-within { border-color: var(--navy-2); }
+    .qty-controls button {
+      width: 44px; height: 44px;
+      border: none; background: transparent;
+      color: var(--text); font-size: 1.1rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s;
+      flex-shrink: 0;
+      font-family: inherit;
+    }
+    .qty-controls button:hover:not(:disabled) {
+      background: var(--surface-alt);
+      color: var(--navy-2);
+    }
+    .qty-controls button:disabled {
+      opacity: 0.3; cursor: not-allowed;
+    }
+    .qty-controls input {
+      flex: 1; min-width: 0;
+      border: none; background: transparent;
+      text-align: center;
+      font-size: 1rem; font-weight: 700;
+      color: var(--text);
+      outline: none; padding: 10px 0;
+      font-family: inherit;
+      -moz-appearance: textfield;
+    }
+    .qty-controls input::-webkit-outer-spin-button,
+    .qty-controls input::-webkit-inner-spin-button {
+      -webkit-appearance: none; margin: 0;
+    }
+
+    /* Quick select */
+    .qty-quick {
+      display: flex; gap: 6px; flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .qty-quick button {
+      padding: 5px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-secondary);
+      font-size: 0.72rem; font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+      font-family: inherit;
+    }
+    .qty-quick button:hover,
+    .qty-quick button.active {
+      border-color: var(--gold-deep);
+      background: rgba(212,184,122,0.1);
+      color: var(--gold-deep);
+    }
+
+    /* Calculated total panel */
+    .calc-panel {
+      background: linear-gradient(135deg, #0f2940, #1a3650);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 14px;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .calc-panel::before {
+      content: '';
+      position: absolute; top: -40px; right: -40px;
+      width: 120px; height: 120px;
+      background: radial-gradient(circle, rgba(212,184,122,0.2) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .calc-panel > * { position: relative; z-index: 1; }
+
+    .calc-row {
+      display: flex; justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 6px;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.7);
+    }
+    .calc-row span:last-child {
+      color: white;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+    .calc-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.15);
+      margin: 10px 0;
+    }
+    .calc-total {
+      display: flex; justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 4px;
+    }
+    .calc-total .label {
+      font-size: 0.7rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px;
+      color: rgba(255,255,255,0.6);
+    }
+    .calc-total .value {
+      font-size: 1.5rem; font-weight: 900;
+      color: var(--gold);
+      letter-spacing: -0.5px;
+      font-variant-numeric: tabular-nums;
+    }
+    .calc-savings {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 4px 10px;
+      background: rgba(22,163,74,0.2);
+      border: 1px solid rgba(22,163,74,0.4);
+      border-radius: 20px;
+      font-size: 0.68rem; font-weight: 700;
+      color: #4ade80;
+      margin-top: 6px;
+    }
+    .calc-savings i { font-size: 0.6rem; }
+
+    /* WhatsApp CTA */
+    .wa-cta {
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: 40px;
+      background: var(--wa-green);
+      color: white;
+      border: none;
+      font-size: 0.9rem; font-weight: 800;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      font-family: inherit;
+      box-shadow: 0 6px 20px rgba(37,211,102,0.25);
+    }
+    .wa-cta:hover {
+      background: var(--wa-green-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(37,211,102,0.35);
+    }
+    .wa-cta:disabled {
+      opacity: 0.5; cursor: not-allowed;
+      background: var(--text-secondary);
+      box-shadow: none;
+      transform: none;
+    }
+    .wa-cta i { font-size: 1.05rem; }
+    @media (min-width: 640px) {
+      .wa-cta { padding: 15px 24px; font-size: 0.95rem; }
+    }
+
+    /* Retail CTA */
+    .retail-cta {
+      background: var(--navy-2);
+      box-shadow: 0 6px 20px rgba(26,54,80,0.25);
+    }
+    .retail-cta:hover {
+      background: var(--navy);
+      box-shadow: 0 8px 24px rgba(26,54,80,0.35);
+    }
+
+    /* ============================================================
+       DESCRIPTION
+       ============================================================ */
+    .detail-section {
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    .detail-section h2 {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .detail-description {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+
+    /* ============================================================
+       SELLER CARD
+       ============================================================ */
     .seller-card {
-      background: var(--surface); border-radius: 20px; padding: 24px;
-      border: 1px solid var(--border); margin-bottom: 16px;
+      margin-top: 24px;
+      padding: 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
     }
-    .seller-card .seller-header { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
-    .seller-card .seller-avatar-large {
-      width: 72px; height: 72px; border-radius: 50%; background: var(--navy-2);
-      display: flex; align-items: center; justify-content: center; color: white;
-      font-size: 1.8rem; font-weight: 700; flex-shrink: 0; overflow: hidden;
+    .seller-card-head {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 12px;
     }
-    .seller-card .seller-avatar-large img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
-    .seller-card .seller-info { flex: 1; }
-    .seller-card .seller-info .seller-name { font-size: 1.1rem; font-weight: 700; color: var(--text); }
-    .seller-card .seller-info .seller-badge {
-      display: inline-flex; align-items: center; gap: 4px; font-size: 0.75rem;
-      color: var(--navy-2); background: var(--surface-alt); padding: 2px 10px; border-radius: 12px; margin-top: 4px;
+    .seller-avatar {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: linear-gradient(135deg, #1a3650, #2a4a6a);
+      color: white; font-weight: 800; font-size: 1.1rem;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; flex-shrink: 0;
     }
-    .seller-card .seller-info .seller-meta { display: flex; gap: 16px; font-size: 0.8rem; color: var(--text-secondary); margin-top: 6px; flex-wrap: wrap; }
-    .seller-card .seller-stats {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
-      padding: 16px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin: 12px 0;
+    .seller-avatar img {
+      width: 100%; height: 100%; object-fit: cover;
     }
-    .seller-card .seller-stats .stat-item { text-align: center; }
-    .seller-card .seller-stats .stat-item .number { font-size: 1.2rem; font-weight: 700; color: var(--text); }
-    .seller-card .seller-stats .stat-item .label { font-size: 0.7rem; color: var(--text-secondary); }
-    .seller-card .seller-bio { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin: 12px 0; }
-    .seller-card .seller-actions { display: flex; gap: 12px; margin-top: 12px; }
-    .seller-card .seller-actions .btn-seller {
-      flex: 1; background: var(--surface-alt); border: none; padding: 10px 16px;
-      border-radius: 60px; font-weight: 600; font-size: 0.85rem; color: var(--text);
-      cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 6px;
+    .seller-info { flex: 1; min-width: 0; }
+    .seller-name {
+      font-size: 0.9rem; font-weight: 700;
+      color: var(--text); line-height: 1.2; margin-bottom: 2px;
     }
-    .seller-card .seller-actions .btn-whatsapp {
-      background: #25D366; color: white; border: none; padding: 10px 16px;
-      border-radius: 60px; font-weight: 600; font-size: 0.85rem; cursor: pointer;
-      transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 6px;
-      text-decoration: none; flex: 1;
+    .seller-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 0.68rem; font-weight: 600; color: #16a34a;
+    }
+    .seller-badge i { font-size: 0.6rem; }
+
+    .view-store-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 16px;
+      border: 1px solid var(--border);
+      border-radius: 40px;
+      background: transparent;
+      color: var(--text);
+      font-size: 0.78rem; font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .view-store-btn:hover {
+      border-color: var(--navy-2);
+      background: var(--surface-alt);
+      color: var(--navy-2);
     }
 
-    .location-card {
-      background: var(--surface); border-radius: 20px; padding: 24px;
-      border: 1px solid var(--border); margin-bottom: 16px;
+    /* ============================================================
+       RELATED PRODUCTS
+       ============================================================ */
+    .related-section {
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
     }
-    .location-card .location-title { font-weight: 600; margin-bottom: 8px; color: var(--text); }
-    .location-card .location-address { display: flex; align-items: center; gap: 8px; color: var(--text-secondary); font-size: 0.9rem; }
-    .location-card .location-map {
-      width: 100%; height: 150px; background: var(--surface-alt); border-radius: 12px;
-      margin-top: 12px; display: flex; align-items: center; justify-content: center;
-      color: var(--text-secondary); font-size: 0.9rem;
+    .related-section h2 {
+      font-size: 1.15rem; font-weight: 700;
+      color: var(--text); margin-bottom: 16px;
+    }
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    @media (min-width: 640px) {
+      .related-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (min-width: 1024px) {
+      .related-grid { grid-template-columns: repeat(4, 1fr); gap: 16px; }
     }
 
-    .recommendations-section { margin: 24px 0; }
-    .recommendations-section .rec-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; color: var(--text); }
-    .recommendations-section .rec-title i { color: var(--navy-2); }
-
-    .safety-tips {
-      background: var(--surface-alt); border-radius: 16px; padding: 20px;
-      border: 1px solid var(--border); margin: 16px 0;
-    }
-    .safety-tips h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 12px; color: var(--text); }
-    .safety-tips ul { list-style: none; padding: 0; }
-    .safety-tips ul li { padding: 4px 0; font-size: 0.85rem; color: var(--text-secondary); display: flex; align-items: center; gap: 8px; }
-    .safety-tips ul li i { color: var(--navy-2); font-size: 0.8rem; }
-
-    .report-btn {
-      background: transparent; border: none; color: var(--text-secondary);
-      font-size: 0.8rem; cursor: pointer; padding: 8px; display: flex;
-      align-items: center; gap: 4px; transition: 0.2s; margin-top: 8px;
-    }
-    .report-btn:hover { color: #e74c3c; }
-
-    .detail-back { display: flex; align-items: center; gap: 12px; padding: 16px 0; }
-    .detail-back .back-btn { background: transparent; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text); text-decoration: none; }
-    .detail-back h2 { font-size: 1.1rem; font-weight: 600; color: var(--text); }
-
-    /* Toast */
+    /* ============================================================
+       TOAST
+       ============================================================ */
     .toast {
-      position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-20px);
-      background: rgba(26,54,80,0.95); color: white; padding: 10px 20px;
-      border-radius: 30px; font-size: 0.85rem; font-weight: 600; opacity: 0;
-      transition: all 0.3s; z-index: 1000; pointer-events: none;
-      backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1);
+      position: fixed;
+      bottom: calc(100px + env(safe-area-inset-bottom, 0px));
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--navy);
+      color: white;
+      padding: 11px 22px;
+      border-radius: 40px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.25);
+      opacity: 0;
+      transition: all 0.3s;
+      z-index: 2000;
+      pointer-events: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      max-width: calc(100vw - 32px);
     }
     .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    @media (min-width: 1024px) { .toast { bottom: 30px; } }
 
-    @media (min-width: 768px) {
-      .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-      .detail-grid .product-gallery { grid-column: 1 / -1; }
-      .detail-grid .product-info-card { grid-column: 1 / 2; }
-      .detail-grid .seller-card { grid-column: 2 / 3; }
-      .detail-grid .location-card { grid-column: 1 / 2; }
-      .detail-grid .safety-tips { grid-column: 2 / 3; }
-      .detail-grid .recommendations-section { grid-column: 1 / -1; }
+    /* ============================================================
+       LOADING / ERROR
+       ============================================================ */
+    .loading-state, .error-state {
+      text-align: center;
+      padding: 80px 20px;
     }
-    @media (max-width: 767px) {
-      .product-gallery .main-image { height: 250px; }
-      .seller-card .seller-actions { flex-direction: column; }
+    .spinner {
+      width: 42px; height: 42px; border-radius: 50%;
+      border: 3px solid var(--border);
+      border-top-color: var(--navy-2);
+      animation: spin 0.9s linear infinite;
+      margin: 0 auto 16px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .error-state i {
+      font-size: 3rem; color: var(--text-secondary);
+      opacity: 0.4; margin-bottom: 16px;
+    }
+    .error-state h2 {
+      font-size: 1.2rem; color: var(--text); margin-bottom: 6px;
+    }
+    .error-state p {
+      color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 20px;
+    }
+    .error-state a {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 24px;
+      background: var(--navy-2); color: white;
+      border-radius: 40px; text-decoration: none;
+      font-weight: 700; font-size: 0.85rem;
+    }
+
+    /* ============================================================
+       REDUCED MOTION
+       ============================================================ */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
     }
   </style>
 </head>
@@ -216,8 +659,8 @@
       <div class="nav-links">
         <a href="/">Home</a>
         <a href="/category.html?slug=all">Browse</a>
+        <a href="/hotspots.html">Hotspots</a>
         <a href="/about.html">About</a>
-        <a href="/contact.html">Contact</a>
       </div>
       <div class="nav-actions">
         <button class="icon-btn" id="themeToggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
@@ -233,166 +676,184 @@
   </nav>
 
   <div class="container">
-    <div class="detail-back">
-      <a href="/" class="back-btn"><i class="fas fa-arrow-left"></i></a>
-      <h2>Product Details</h2>
+
+    <div id="loadingState" class="loading-state">
+      <div class="spinner"></div>
+      <p style="color: var(--text-secondary); font-size: 0.88rem;">Loading product...</p>
     </div>
 
-    <div id="loadingState" style="text-align:center;padding:40px;">
-      <i class="fas fa-spinner fa-spin" style="font-size:2rem;color:var(--navy-2);"></i>
-      <p style="margin-top:12px;color:var(--text-secondary);">Loading product details...</p>
+    <div id="errorState" class="error-state" style="display: none;">
+      <i class="fas fa-box-open"></i>
+      <h2>Product not found</h2>
+      <p>This product doesn't exist or may have been removed.</p>
+      <a href="/"><i class="fas fa-arrow-left"></i> Back to homepage</a>
     </div>
 
-    <div id="productDetailContainer" style="display:none;">
-      <div class="product-gallery" id="productGallery">
-        <img src="" alt="Product image" class="main-image" id="mainImage">
-        <div class="thumbnail-strip" id="thumbnailStrip"></div>
-        <span class="gallery-badge" id="galleryBadge">Featured</span>
-        <button class="gallery-nav prev" id="galleryPrev"><i class="fas fa-chevron-left"></i></button>
-        <button class="gallery-nav next" id="galleryNext"><i class="fas fa-chevron-right"></i></button>
+    <div id="detailContent" style="display: none;">
+
+      <div class="detail-breadcrumb">
+        <a href="/">Home</a>
+        <i class="fas fa-chevron-right"></i>
+        <a href="/category.html?slug=all">Browse</a>
+        <i class="fas fa-chevron-right"></i>
+        <span class="current" id="crumbTitle">Product</span>
       </div>
 
-      <div class="detail-grid">
-        <div class="product-info-card">
-          <div class="product-title" id="productTitle">Product Title</div>
-          <div class="product-price" id="productPrice">₦0</div>
-          <div class="product-meta" id="productMeta">
-            <span><i class="fas fa-map-pin"></i> <span id="productLocation">Location</span></span>
-            <span><i class="far fa-clock"></i> <span id="productDate">Date</span></span>
-            <span><i class="fas fa-tag"></i> <span id="productCategory">Category</span></span>
+      <div class="detail-layout">
+
+        <!-- LEFT: Gallery -->
+        <div class="detail-gallery-column">
+          <div class="gallery" id="gallery">
+            <button class="gallery-nav prev" id="galleryPrev" aria-label="Previous image">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="gallery-nav next" id="galleryNext" aria-label="Next image">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+            <div class="gallery-counter" id="galleryCounter" style="display: none;">
+              <span id="galleryCounterText">1 / 3</span>
+            </div>
+            <div class="gallery-dots" id="galleryDots"></div>
           </div>
-          <div class="product-tags" id="productTags"></div>
-          <div class="product-description" id="productDescription">Product description goes here.</div>
-          
-          <div class="action-buttons">
-            <a class="btn-whatsapp-action" id="mainWhatsappBtn" target="_blank">
-              <i class="fab fa-whatsapp"></i> WhatsApp Seller
-            </a>
-            <a class="btn-contact" id="contactBtn">
-              <i class="fas fa-phone"></i> Call
-            </a>
-            <button class="btn-favorite" id="favoriteBtn"><i class="far fa-heart"></i> Save</button>
-            <button class="btn-share" id="shareBtn"><i class="fas fa-share-alt"></i></button>
-          </div>
-          <button class="report-btn" id="reportBtn"><i class="fas fa-flag"></i> Report this listing</button>
         </div>
 
-        <div class="seller-card" id="sellerCard">
-          <div class="seller-header">
-            <div class="seller-avatar-large" id="sellerAvatar">ZA</div>
-            <div class="seller-info">
-              <div class="seller-name" id="sellerName">Seller Name</div>
-              <div class="seller-badge" id="sellerBadge"><i class="fas fa-check-circle"></i> Verified</div>
-              <div class="seller-meta">
-                <span><i class="fas fa-calendar-alt"></i> Member since <span id="sellerJoined">2026</span></span>
-                <span><i class="fas fa-store"></i> <span id="sellerListings">0</span> listings</span>
+        <!-- RIGHT: Info -->
+        <div class="detail-info-column">
+          <div class="info-card">
+
+            <h1 class="product-title" id="productTitle">Product Title</h1>
+
+            <div class="product-meta-row" id="productMeta">
+              <span class="meta-chip verified">
+                <i class="fas fa-shield-halved"></i> Verified seller
+              </span>
+            </div>
+
+            <!-- PURCHASE MODES -->
+            <div class="purchase-section" id="purchaseSection">
+
+              <!-- RETAIL CARD -->
+              <div class="mode-card retail" id="retailCard" style="display: none;">
+                <div class="mode-header">
+                  <div class="mode-icon">
+                    <i class="fas fa-shopping-bag"></i>
+                  </div>
+                  <div class="mode-title">
+                    <h3>Buy Single</h3>
+                    <p>Just one — perfect for personal use</p>
+                  </div>
+                </div>
+                <div class="retail-price" id="retailPrice">₦0</div>
+                <div class="retail-stock in-stock" id="retailStock">
+                  <i class="fas fa-circle"></i> In stock
+                </div>
+                <a href="#" id="retailWaBtn" class="wa-cta retail-cta" target="_blank" rel="noopener">
+                  <i class="fab fa-whatsapp"></i> Message on WhatsApp
+                </a>
+              </div>
+
+              <!-- BULK CARD -->
+              <div class="mode-card bulk" id="bulkCard" style="display: none;">
+                <div class="mode-header">
+                  <div class="mode-icon">
+                    <i class="fas fa-cubes"></i>
+                  </div>
+                  <div class="mode-title">
+                    <h3>Buy in Bulk</h3>
+                    <p>Wholesale pricing — for shops, businesses, resellers</p>
+                  </div>
+                </div>
+
+                <div class="bulk-preview">
+                  <span class="from-label">From</span>
+                  <span class="from-price" id="bulkFromPrice">₦0</span>
+                  <span class="moq-note" id="bulkMoqNote">Min. 10 units</span>
+                </div>
+
+                <!-- TIER TABLE -->
+                <div class="tier-table" id="tierTable"></div>
+
+                <!-- QUANTITY -->
+                <div class="qty-label">How many units?</div>
+                <div class="qty-selector">
+                  <div class="qty-controls">
+                    <button type="button" id="qtyMinus" aria-label="Decrease quantity">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <input type="number" id="qtyInput" value="10" min="10" step="1" aria-label="Quantity">
+                    <button type="button" id="qtyPlus" aria-label="Increase quantity">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="qty-quick" id="qtyQuick"></div>
+
+                <!-- CALCULATED PANEL -->
+                <div class="calc-panel" id="calcPanel">
+                  <div class="calc-row">
+                    <span>Quantity</span>
+                    <span id="calcQty">10 units</span>
+                  </div>
+                  <div class="calc-row">
+                    <span>Price per unit</span>
+                    <span id="calcUnitPrice">₦0</span>
+                  </div>
+                  <div class="calc-divider"></div>
+                  <div class="calc-total">
+                    <span class="label">Total</span>
+                    <span class="value" id="calcTotal">₦0</span>
+                  </div>
+                  <div class="calc-savings" id="calcSavings" style="display: none;">
+                    <i class="fas fa-tag"></i>
+                    <span id="calcSavingsText">You save ₦0 vs retail</span>
+                  </div>
+                </div>
+
+                <a href="#" id="bulkWaBtn" class="wa-cta" target="_blank" rel="noopener">
+                  <i class="fab fa-whatsapp"></i> Send quote on WhatsApp
+                </a>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- SELLER -->
+          <div class="seller-card" id="sellerCard">
+            <div class="seller-card-head">
+              <div class="seller-avatar" id="sellerAvatar">S</div>
+              <div class="seller-info">
+                <div class="seller-name" id="sellerName">Seller</div>
+                <div class="seller-badge">
+                  <i class="fas fa-check-circle"></i> Verified
+                </div>
               </div>
             </div>
+            <a href="#" id="viewStoreBtn" class="view-store-btn">
+              <i class="fas fa-store"></i> View store
+            </a>
           </div>
-          <div class="seller-stats">
-            <div class="stat-item"><div class="number" id="sellerRating">4.9</div><div class="label"><i class="fas fa-star" style="color:#f5b342;"></i> Rating</div></div>
-            <div class="stat-item"><div class="number" id="sellerSales">0</div><div class="label">Items Sold</div></div>
-            <div class="stat-item"><div class="number" id="sellerResponse">95%</div><div class="label">Response Rate</div></div>
+
+          <!-- DESCRIPTION -->
+          <div class="detail-section" id="descSection">
+            <h2>Description</h2>
+            <div class="detail-description" id="productDescription"></div>
           </div>
-          <div class="seller-bio" id="sellerBio">Professional seller with a passion for quality products.</div>
-          <div class="seller-actions">
-            <button class="btn-seller" id="visitStoreBtn"><i class="fas fa-store"></i> Visit Store</button>
-            <a class="btn-whatsapp" id="sidebarWhatsappBtn" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-          </div>
+
         </div>
 
-        <div class="location-card">
-          <div class="location-title"><i class="fas fa-map-pin" style="color:var(--navy-2);"></i> Location</div>
-          <div class="location-address" id="locationAddress">
-            <i class="fas fa-location-dot"></i> <span id="locationFull">Loading location...</span>
-          </div>
-          <div class="location-map" id="locationMap">
-            <i class="fas fa-map" style="font-size:2rem;margin-right:8px;color:var(--navy-2);"></i> Map view coming soon
-          </div>
-        </div>
-
-        <div class="safety-tips">
-          <h4><i class="fas fa-shield-alt" style="color:var(--navy-2);"></i> Safety Tips</h4>
-          <ul>
-            <li><i class="fas fa-check-circle"></i> Meet in a public place</li>
-            <li><i class="fas fa-check-circle"></i> Inspect the item before purchase</li>
-            <li><i class="fas fa-check-circle"></i> Avoid advance payments</li>
-            <li><i class="fas fa-check-circle"></i> Trust your instincts</li>
-          </ul>
-        </div>
-
-        <div class="recommendations-section">
-          <div class="rec-title"><i class="fas fa-lightbulb"></i> You Might Also Like</div>
-          <div class="grid-2col-listings" id="recommendationsGrid">
-            <div class="listing-card"><div class="listing-img"><i class="fas fa-spinner fa-spin"></i></div><div class="listing-body"><div class="price">Loading...</div></div></div>
-          </div>
-        </div>
       </div>
+
+      <!-- RELATED -->
+      <div class="related-section" id="relatedSection" style="display: none;">
+        <h2>You might also like</h2>
+        <div class="related-grid" id="relatedGrid"></div>
+      </div>
+
     </div>
+
   </div>
-
-  <!-- ===== FOOTER ===== -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-col brand">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
-            <span style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:white;">Zaure</span>
-            <span style="font-size:0.7rem;color:#94A3B8;">Buy with Confidence</span>
-          </div>
-          <p>Nigeria's most trusted online marketplace. Buy, sell, or trade locally. No commission, no middlemen.</p>
-          <div class="social">
-            <a href="https://twitter.com/zauretech" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-            <a href="https://instagram.com/zauretech" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="https://linkedin.com/company/zauretech" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://facebook.com/zauretech" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-          </div>
-        </div>
-        <div class="footer-col">
-          <h4>Browse</h4>
-          <a href="/category.html?slug=all">All Items</a>
-          <a href="/category.html?slug=fashion">Fashion</a>
-          <a href="/category.html?slug=electronics">Electronics</a>
-          <a href="/category.html?slug=beauty-health">Beauty & Health</a>
-          <a href="/category.html?slug=food-drinks">Food & Drinks</a>
-          <a href="/category.html?slug=home-kitchen">Home & Kitchen</a>
-        </div>
-        <div class="footer-col">
-          <h4>Support</h4>
-          <a href="/help.html">Help Center</a>
-          <a href="/faq.html">FAQ</a>
-          <a href="/safety.html">Safety Tips</a>
-          <a href="/contact.html">Contact Us</a>
-        </div>
-        <div class="footer-col">
-          <h4>Company</h4>
-          <a href="/about.html">About Us</a>
-          <a href="/careers.html">Careers</a>
-          <a href="/privacy.html">Privacy Policy</a>
-          <a href="/terms.html">Terms of Service</a>
-        </div>
-        <div class="trust-badges">
-          <div class="badges-row">
-            <span class="badge-item"><i class="fas fa-shield-alt"></i> Verified Users</span>
-            <span class="badge-item"><i class="fas fa-handshake"></i> No Commission</span>
-            <span class="badge-item"><i class="fas fa-user-check"></i> Identity Verified</span>
-            <span class="badge-item"><i class="fas fa-lock"></i> Secure Platform</span>
-            <span class="badge-item"><i class="fas fa-clock"></i> 24/7 Support</span>
-            <span class="badge-item"><i class="fas fa-star"></i> Trusted by Thousands</span>
-            <span class="badge-item"><i class="fas fa-phone"></i> Direct Contact</span>
-            <span class="badge-item"><i class="fas fa-credit-card"></i> Secure Payments</span>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          <span>&copy; 2026 <strong>Zaure Technologies</strong>. All rights reserved.</span>
-          <span class="footer-lang"><i class="fas fa-globe"></i> Nigeria · English</span>
-        </div>
-        <div style="grid-column: 1/-1; text-align: center; margin-top: 8px; font-size: 0.8rem; color: #94A3B8;">
-          For info or to report an issue, contact us on WhatsApp: <a href="https://wa.me/2349042339411" target="_blank" style="color: #D4B87A; text-decoration: none; font-weight: 600;">+2349042339411</a>
-        </div>
-      </div>
-    </div>
-  </footer>
 
   <!-- ===== BOTTOM NAV ===== -->
   <div class="bottom-nav">
@@ -429,7 +890,7 @@
         <input type="hidden" id="signupState" value="">
         <label class="terms-checkbox">
           <input type="checkbox" id="termsCheckbox" required>
-          <span>By creating an account, you agree to Zaure's <a href="/terms.html" target="_blank">Terms & Conditions</a> and <a href="/privacy.html" target="_blank">Privacy Policy</a>.</span>
+          <span>By creating an account, you agree to Zaure's <a href="/terms.html" target="_blank">Terms</a> and <a href="/privacy.html" target="_blank">Privacy Policy</a>.</span>
         </label>
         <button type="submit" class="btn-primary">Sign Up</button>
       </form>
@@ -438,350 +899,615 @@
 
   <script src="/js/main.js"></script>
   <script>
-    // ============================================
-    // TRACKING CONFIGURATION
-    // ============================================
-    const CONFIG = {
-      WHATSAPP_NUMBER: '2349042339411',
-      // ✅ YOUR GOOGLE APPS SCRIPT WEBHOOK URL
-      SHEET_WEBHOOK_URL: 'https://script.google.com/macros/s/AKfycbyopnxgVhZo80kdR1Rrdr_SbivRJZXrE6cAkwOB9bWB1OklMmp3jWoe9c8W6SGM4XNhHA/exec'
+  (function () {
+    'use strict';
+
+    /* ============================================================
+       STATE
+       ============================================================ */
+    const state = {
+      product: null,
+      galleryIndex: 0,
+      galleryImages: [],
+      qty: 10
     };
 
-    let currentProduct = null;
-    let userIP = 'Fetching IP...'; // IP Address
-    
-    // 1. Fetch IP Address silently
-    (async function fetchUserIP() {
-      try {
-        const res = await fetch('https://api.ipify.org?format=json');
-        const data = await res.json();
-        userIP = data.ip;
-        console.log('✅ IP Address captured:', userIP);
-      } catch (e) {
-        userIP = 'IP Unavailable';
-      }
-    })();
-
-    // 2. GPS Collection
-    let guestGPS = { lat: null, lng: null, maps: null };
-    (function collectGuestData() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (pos) => {
-            guestGPS = {
-              lat: pos.coords.latitude.toFixed(6),
-              lng: pos.coords.longitude.toFixed(6),
-              maps: `https://www.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}`
-            };
-            console.log('✅ GPS captured:', guestGPS);
-          },
-          () => { console.log('❌ GPS permission denied'); },
-          { timeout: 5000 }
-        );
-      }
-    })();
-
-    // 3. Smart Fallbacks
-    function getDeviceType() {
-      const ua = navigator.userAgent;
-      if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) return 'Tablet User';
-      if (/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(ua)) return 'Mobile User';
-      return 'Desktop User';
+    /* ============================================================
+       UTILITIES
+       ============================================================ */
+    function escapeHtml(s) {
+      if (s == null) return '';
+      return String(s)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#039;');
     }
 
-    function getFallbackCity() {
-      if (guestGPS.maps) return `GPS: ${guestGPS.lat}, ${guestGPS.lng}`;
-      try {
-        const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-        return `Zone: ${tz}`;
-      } catch(e) {
-        return 'Unknown Location';
-      }
+    function formatNaira(n) {
+      n = Math.round(Number(n) || 0);
+      return '₦' + n.toLocaleString();
     }
 
-    // 4. Send to Sheet (Independent function)
-    async function sendTrackingToSheet(data) {
-      console.log("🔥 Sending to Sheet:", data);
-      
-      try {
-        await fetch(CONFIG.SHEET_WEBHOOK_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
-        });
-        console.log("✅ Sheet request sent successfully");
-      } catch (err) {
-        console.error('❌ Sheet tracking failed:', err);
-      }
+    function showToast(msg, icon) {
+      const t = document.getElementById('toast');
+      t.innerHTML = `<i class="fas ${icon || 'fa-check-circle'}"></i> ${escapeHtml(msg)}`;
+      t.classList.add('show');
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(() => t.classList.remove('show'), 2400);
     }
 
-    // ============================================
-    // PAGE INIT
-    // ============================================
-    document.addEventListener('DOMContentLoaded', async function() {
-      initStateDropdown();
-
-      const params = new URLSearchParams(window.location.search);
-      const productId = params.get('id');
-      
-      if (!productId) { showNotFound(); return; }
-
-      const products = await loadProducts();
-      const product = products.find(p => p.id === productId);
-      
-      if (!product) { showNotFound(); return; }
-
-      currentProduct = product;
+    function showLoading() {
+      document.getElementById('loadingState').style.display = 'block';
+      document.getElementById('errorState').style.display = 'none';
+      document.getElementById('detailContent').style.display = 'none';
+    }
+    function showError() {
       document.getElementById('loadingState').style.display = 'none';
-      document.getElementById('productDetailContainer').style.display = 'block';
-
-      renderProduct(product);
-      await renderSeller(product);
-
-      await loadUser();
-      initTheme();
-      updateFavoriteBadge();
-    });
-
-    // ============================================
-    // HELPERS
-    // ============================================
-    function showNotFound() {
-      document.getElementById('loadingState').innerHTML = `
-        <div style="text-align:center;padding:40px;">
-          <i class="fas fa-exclamation-circle" style="font-size:2rem;color:#e74c3c;"></i>
-          <p style="margin-top:12px;">Product not found.</p>
-          <a href="/" class="btn-primary" style="margin-top:16px;width:auto;padding:10px 28px;">Go Home</a>
-        </div>`;
+      document.getElementById('errorState').style.display = 'block';
+      document.getElementById('detailContent').style.display = 'none';
+    }
+    function showContent() {
+      document.getElementById('loadingState').style.display = 'none';
+      document.getElementById('errorState').style.display = 'none';
+      document.getElementById('detailContent').style.display = 'block';
     }
 
-    function formatPrice(n) {
-      return n >= 1e6 ? `₦${(n/1e6).toFixed(1)}M` : `₦${n.toLocaleString()}`;
-    }
+    /* ============================================================
+       PRODUCT DATA NORMALIZATION
+       Handles both old format (single `price`) and new format
+       (retail + wholesale blocks).
+       ============================================================ */
+    function normalizeProduct(p) {
+      const normalized = { ...p };
 
-    function copyToClipboard(text, btnEl) {
-      const fallback = () => {
-        const temp = document.createElement('textarea');
-        temp.value = text;
-        document.body.appendChild(temp);
-        temp.select();
-        try { document.execCommand('copy'); } catch(e) {}
-        document.body.removeChild(temp);
-      };
-      if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(text).then(() => {
-          if (btnEl) { btnEl.innerHTML = '<i class="fas fa-check"></i>'; setTimeout(() => btnEl.innerHTML = '<i class="fas fa-share-alt"></i>', 1500); }
-        }).catch(fallback);
+      // If product has explicit retail/wholesale blocks, use them
+      if (p.retail || p.wholesale) {
+        normalized.retail = p.retail || { enabled: false };
+        normalized.wholesale = p.wholesale || { enabled: false };
+        return normalized;
+      }
+
+      // Otherwise, derive from legacy `price` field
+      if (p.price) {
+        normalized.retail = {
+          enabled: true,
+          price: Number(p.price),
+          stock: p.stock || null
+        };
+        normalized.wholesale = { enabled: false };
       } else {
-        fallback();
+        normalized.retail = { enabled: false };
+        normalized.wholesale = { enabled: false };
+      }
+      return normalized;
+    }
+
+    /* ============================================================
+       PHONE NORMALIZATION
+       ============================================================ */
+    function normalizePhone(raw) {
+      const digits = String(raw || '').replace(/[^0-9]/g, '');
+      if (digits.length === 11 && digits.startsWith('0')) {
+        return '234' + digits.slice(1);
+      }
+      if (digits.length === 10 && !digits.startsWith('0')) {
+        return '234' + digits;
+      }
+      return digits;
+    }
+
+    function getSellerWhatsApp(product) {
+      const s = product.seller || {};
+      return normalizePhone(s.whatsapp || s.whatsApp || s.phone || product.sellerPhone || '');
+    }
+
+    function getSellerName(product) {
+      const s = product.seller || {};
+      return s.name || product.sellerName || 'Seller';
+    }
+
+    /* ============================================================
+       GALLERY
+       ============================================================ */
+    function getImageList(product) {
+      if (Array.isArray(product.images) && product.images.length) {
+        return product.images;
+      }
+      if (product.image) return [product.image];
+      return ['https://placehold.co/800x800?text=Zaure'];
+    }
+
+    function renderGallery() {
+      const gallery = document.getElementById('gallery');
+      const dots = document.getElementById('galleryDots');
+      const counter = document.getElementById('galleryCounter');
+      const counterText = document.getElementById('galleryCounterText');
+      const prev = document.getElementById('galleryPrev');
+      const next = document.getElementById('galleryNext');
+
+      gallery.querySelectorAll('.slide').forEach(s => s.remove());
+
+      state.galleryImages.forEach((src, i) => {
+        const slide = document.createElement('div');
+        slide.className = 'slide' + (i === 0 ? ' active' : '');
+        slide.innerHTML = `<img src="${escapeHtml(src)}" alt="Product photo ${i + 1}"
+          loading="${i === 0 ? 'eager' : 'lazy'}"
+          onerror="this.src='https://placehold.co/800x800?text=Zaure'">`;
+        gallery.insertBefore(slide, prev);
+      });
+
+      if (state.galleryImages.length > 1) {
+        prev.style.display = 'flex';
+        next.style.display = 'flex';
+        counter.style.display = 'block';
+        counterText.textContent = `1 / ${state.galleryImages.length}`;
+        dots.innerHTML = state.galleryImages.map((_, i) =>
+          `<span data-idx="${i}" class="${i === 0 ? 'active' : ''}"></span>`
+        ).join('');
+        dots.querySelectorAll('span').forEach(dot => {
+          dot.addEventListener('click', () => {
+            state.galleryIndex = parseInt(dot.dataset.idx, 10);
+            updateGalleryUI();
+          });
+        });
+      } else {
+        prev.style.display = 'none';
+        next.style.display = 'none';
+        counter.style.display = 'none';
+        dots.innerHTML = '';
       }
     }
 
-    // ============================================
-    // RENDER PRODUCT
-    // ============================================
-    function renderProduct(product) {
-      const price = formatPrice(product.price);
-      
-      document.getElementById('productTitle').textContent = product.title;
-      document.getElementById('productPrice').textContent = price;
-      document.getElementById('productLocation').textContent = product.location || 'Nigeria';
-      document.getElementById('productDate').textContent = product.date || 'Recently';
-      document.getElementById('productCategory').textContent = product.category || 'General';
-      document.getElementById('productDescription').textContent = product.description || 'No description available.';
+    function updateGalleryUI() {
+      document.querySelectorAll('#gallery .slide').forEach((s, i) => {
+        s.classList.toggle('active', i === state.galleryIndex);
+      });
+      document.querySelectorAll('#galleryDots span').forEach((d, i) => {
+        d.classList.toggle('active', i === state.galleryIndex);
+      });
+      document.getElementById('galleryCounterText').textContent =
+        `${state.galleryIndex + 1} / ${state.galleryImages.length}`;
+    }
 
-      const tagsContainer = document.getElementById('productTags');
-      const tags = product.tags || [product.category, product.location].filter(Boolean);
-      tagsContainer.innerHTML = tags.map(t => `<span class="tag">#${t}</span>`).join('');
+    /* ============================================================
+       CALCULATOR LOGIC
+       ============================================================ */
+    function getActiveTier(qty) {
+      const tiers = state.product.wholesale.tiers || [];
+      for (const tier of tiers) {
+        if (qty >= tier.minQty && (tier.maxQty == null || qty <= tier.maxQty)) {
+          return tier;
+        }
+      }
+      // If qty is below all tiers (shouldn't happen if MOQ enforced), return first
+      return tiers[0] || null;
+    }
 
-      const images = product.images || [];
-      const mainImage = document.getElementById('mainImage');
-      const thumbnailStrip = document.getElementById('thumbnailStrip');
-      let currentImageIndex = 0;
+    function calculateBulk(qty) {
+      const ws = state.product.wholesale;
+      if (!ws || !ws.enabled) return null;
 
-      mainImage.src = images[0] || 'https://placehold.co/600x400?text=Zaure';
-      mainImage.alt = product.title;
+      const tier = getActiveTier(qty);
+      if (!tier) return null;
 
-      thumbnailStrip.innerHTML = images.map((img, index) => `
-        <img src="${img}" alt="Thumbnail ${index + 1}" class="thumb ${index === 0 ? 'active' : ''}" onclick="changeImage(${index})">
+      const unitPrice = Number(tier.price);
+      const total = unitPrice * qty;
+
+      let savings = 0;
+      if (state.product.retail && state.product.retail.enabled) {
+        const retailPrice = Number(state.product.retail.price);
+        savings = (retailPrice - unitPrice) * qty;
+      }
+
+      return {
+        tier,
+        unitPrice,
+        total,
+        savings,
+        qty
+      };
+    }
+
+    /* ============================================================
+       RENDER: BULK CARD
+       ============================================================ */
+    function renderBulkCard() {
+      const ws = state.product.wholesale;
+      if (!ws || !ws.enabled || !Array.isArray(ws.tiers) || !ws.tiers.length) {
+        document.getElementById('bulkCard').style.display = 'none';
+        return;
+      }
+
+      document.getElementById('bulkCard').style.display = 'block';
+
+      // From price (lowest tier price = largest discount)
+      const lowestPrice = Math.min(...ws.tiers.map(t => Number(t.price)));
+      document.getElementById('bulkFromPrice').textContent = formatNaira(lowestPrice);
+
+      // MOQ note
+      const moq = ws.minQty || ws.tiers[0].minQty || 1;
+      document.getElementById('bulkMoqNote').textContent = `Min. ${moq} units`;
+
+      // Initialize quantity
+      state.qty = moq;
+
+      // Tier table
+      const tierTable = document.getElementById('tierTable');
+      tierTable.innerHTML = ws.tiers.map(tier => `
+        <div class="tier-row" data-min="${tier.minQty}" data-max="${tier.maxQty ?? ''}">
+          <span class="tier-qty">${formatTierRange(tier)}</span>
+          <span class="tier-price">${formatNaira(tier.price)} each</span>
+        </div>
       `).join('');
 
-      window.changeImage = function(index) {
-        currentImageIndex = index;
-        mainImage.src = images[index];
-        document.querySelectorAll('.thumb').forEach((el, i) => {
-          el.classList.toggle('active', i === index);
+      // Quick select buttons — one per tier
+      const qtyQuick = document.getElementById('qtyQuick');
+      qtyQuick.innerHTML = ws.tiers.map(tier => `
+        <button type="button" data-qty="${tier.minQty}">${tier.minQty}${tier.maxQty ? '–' + tier.maxQty : '+'}</button>
+      `).join('');
+      qtyQuick.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          setQuantity(parseInt(btn.dataset.qty, 10));
         });
-      };
-
-      const galleryPrev = document.getElementById('galleryPrev');
-      const galleryNext = document.getElementById('galleryNext');
-      if (images.length <= 1) {
-        galleryPrev.classList.add('hidden');
-        galleryNext.classList.add('hidden');
-      } else {
-        galleryPrev.addEventListener('click', () => {
-          const prev = (currentImageIndex - 1 + images.length) % images.length;
-          window.changeImage(prev);
-        });
-        galleryNext.addEventListener('click', () => {
-          const next = (currentImageIndex + 1) % images.length;
-          window.changeImage(next);
-        });
-      }
-
-      document.getElementById('galleryBadge').textContent = product.featured ? 'Featured' : 'Available';
-      document.getElementById('locationFull').textContent = `${product.location || 'Nigeria'} - View on map`;
-
-      const products = getProductsSync();
-      const recs = products.filter(p => p.id !== product.id && p.category === product.category).slice(0, 6);
-      const fallback = products.filter(p => p.id !== product.id).slice(0, 6);
-      renderListings(recs.length ? recs : fallback, 'recommendationsGrid');
-
-      document.getElementById('shareBtn').addEventListener('click', function() {
-        if (navigator.share) {
-          navigator.share({ title: product.title, url: window.location.href });
-        } else {
-          copyToClipboard(window.location.href, this);
-        }
       });
 
-      document.getElementById('reportBtn').addEventListener('click', function() {
-        window.location.href = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent('I want to report: ' + product.title)}`;
+      // Quantity input
+      const qtyInput = document.getElementById('qtyInput');
+      qtyInput.min = moq;
+      qtyInput.value = moq;
+
+      // Bind qty controls
+      document.getElementById('qtyMinus').addEventListener('click', () => {
+        setQuantity(state.qty - 1);
+      });
+      document.getElementById('qtyPlus').addEventListener('click', () => {
+        setQuantity(state.qty + 1);
+      });
+      qtyInput.addEventListener('input', function () {
+        const v = parseInt(this.value, 10);
+        if (!isNaN(v)) setQuantity(v, false);
+      });
+      qtyInput.addEventListener('blur', function () {
+        const v = parseInt(this.value, 10);
+        if (isNaN(v) || v < moq) setQuantity(moq);
+        else setQuantity(v);
       });
 
-      const favoriteBtn = document.getElementById('favoriteBtn');
-      if (isFavorite(product.id)) {
-        favoriteBtn.classList.add('liked');
-        favoriteBtn.innerHTML = '<i class="fas fa-heart"></i> Saved';
-      }
-      favoriteBtn.addEventListener('click', function() {
-        if (!currentUser) { openSignup(); return; }
-        const isNowFav = toggleFavorite(product.id);
-        if (isNowFav) {
-          this.classList.add('liked');
-          this.innerHTML = '<i class="fas fa-heart"></i> Saved';
-        } else {
-          this.classList.remove('liked');
-          this.innerHTML = '<i class="far fa-heart"></i> Save';
-        }
-        updateFavoriteBadge();
-      });
-
-      document.getElementById('fabPostAd').addEventListener('click', function() {
-        if (!currentUser) { openSignup(); } else { window.location.href = '/post.html'; }
-      });
+      // Initial calc
+      updateCalculator();
     }
 
-    // ============================================
-    // RENDER SELLER & TRACKING
-    // ============================================
-    async function renderSeller(product) {
-      const seller = product.seller || {
-        name: 'Zaure Official Store', initials: 'ZA', verified: true, joined: '2026',
-        listings: 13, rating: 5.0, sales: 800, response: '100%',
-        bio: 'Welcome to the official Zaure store.',
-        phone: '09042339411', whatsapp: '09042339411'
-      };
+    function formatTierRange(tier) {
+      if (tier.maxQty == null) {
+        return `${tier.minQty}+ units`;
+      }
+      return `${tier.minQty}–${tier.maxQty} units`;
+    }
 
-      const sellersData = await loadTopSellers();
-      const matched = sellersData.find(s => s.name.toLowerCase() === seller.name.toLowerCase());
+    /* ============================================================
+       SET QUANTITY + RECALCULATE
+       ============================================================ */
+    function setQuantity(qty, syncInput = true) {
+      const ws = state.product.wholesale;
+      const moq = ws.minQty || ws.tiers[0].minQty || 1;
 
+      qty = Math.max(moq, Math.floor(qty));
+      if (qty > 999999) qty = 999999;
+      state.qty = qty;
+
+      if (syncInput) {
+        const input = document.getElementById('qtyInput');
+        if (input) input.value = qty;
+      }
+
+      updateCalculator();
+    }
+
+    function updateCalculator() {
+      const qty = state.qty;
+      const calc = calculateBulk(qty);
+
+      if (!calc) return;
+
+      document.getElementById('calcQty').textContent = `${qty.toLocaleString()} units`;
+      document.getElementById('calcUnitPrice').textContent = formatNaira(calc.unitPrice);
+      document.getElementById('calcTotal').textContent = formatNaira(calc.total);
+
+      // Savings
+      const savingsEl = document.getElementById('calcSavings');
+      if (calc.savings > 0) {
+        savingsEl.style.display = 'inline-flex';
+        document.getElementById('calcSavingsText').textContent =
+          `You save ${formatNaira(calc.savings)} vs retail`;
+      } else {
+        savingsEl.style.display = 'none';
+      }
+
+      // Highlight active tier row
+      document.querySelectorAll('#tierTable .tier-row').forEach(row => {
+        const min = parseInt(row.dataset.min, 10);
+        const maxRaw = row.dataset.max;
+        const max = maxRaw === '' ? Infinity : parseInt(maxRaw, 10);
+        const isActive = qty >= min && qty <= max;
+        row.classList.toggle('active', isActive);
+      });
+
+      // Highlight active quick button
+      document.querySelectorAll('#qtyQuick button').forEach(btn => {
+        const q = parseInt(btn.dataset.qty, 10);
+        btn.classList.toggle('active', q === qty);
+      });
+
+      // Update WhatsApp button
+      updateBulkWhatsApp(calc);
+
+      // Update +/- disabled state
+      const moq = state.product.wholesale.minQty || state.product.wholesale.tiers[0].minQty || 1;
+      document.getElementById('qtyMinus').disabled = qty <= moq;
+    }
+
+    /* ============================================================
+       WHATSAPP MESSAGES
+       ============================================================ */
+    function buildRetailWhatsApp() {
+      const p = state.product;
+      const seller = getSellerName(p);
+      const price = Number(p.retail.price);
+
+      const msg = `Hello ${seller}, I found this on Zaure 👋
+
+📦 ${p.title}
+🛒 Quantity: 1 unit
+💰 Price: ${formatNaira(price)}
+
+Is it still available?`;
+
+      return msg;
+    }
+
+    function buildBulkWhatsApp(calc) {
+      const p = state.product;
+      const seller = getSellerName(p);
+
+      const tierLabel = calc.tier.maxQty
+        ? `${calc.tier.minQty}–${calc.tier.maxQty} units`
+        : `${calc.tier.minQty}+ units`;
+
+      const msg = `Hello ${seller}, I'd like to place a bulk order on Zaure 📦
+
+📦 Product: ${p.title}
+🔢 Quantity: ${calc.qty.toLocaleString()} units
+💵 Unit price: ${formatNaira(calc.unitPrice)}
+📊 Tier: ${tierLabel}
+💰 Total: ${formatNaira(calc.total)}
+
+Is this available? What's the lead time?`;
+
+      return msg;
+    }
+
+    function updateRetailWhatsApp() {
+      const btn = document.getElementById('retailWaBtn');
+      const waNumber = getSellerWhatsApp(state.product);
+      if (!waNumber) {
+        btn.style.display = 'none';
+        return;
+      }
+      const msg = buildRetailWhatsApp();
+      btn.href = `https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`;
+    }
+
+    function updateBulkWhatsApp(calc) {
+      const btn = document.getElementById('bulkWaBtn');
+      const waNumber = getSellerWhatsApp(state.product);
+      if (!waNumber) {
+        btn.style.display = 'none';
+        return;
+      }
+      const msg = buildBulkWhatsApp(calc);
+      btn.href = `https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`;
+    }
+
+    /* ============================================================
+       RENDER: RETAIL CARD
+       ============================================================ */
+    function renderRetailCard() {
+      const r = state.product.retail;
+      if (!r || !r.enabled || !r.price) {
+        document.getElementById('retailCard').style.display = 'none';
+        return;
+      }
+
+      document.getElementById('retailCard').style.display = 'block';
+      document.getElementById('retailPrice').textContent = formatNaira(r.price);
+
+      // Stock
+      const stockEl = document.getElementById('retailStock');
+      if (r.stock != null && r.stock > 0) {
+        stockEl.className = 'retail-stock in-stock';
+        stockEl.innerHTML = `<i class="fas fa-circle"></i> In stock · ${r.stock} available`;
+      } else if (r.stock === 0) {
+        stockEl.className = 'retail-stock';
+        stockEl.innerHTML = `<i class="fas fa-circle" style="color:#e74c3c;"></i> <span style="color:#e74c3c;">Out of stock</span>`;
+        document.getElementById('retailWaBtn').style.opacity = '0.5';
+        document.getElementById('retailWaBtn').style.pointerEvents = 'none';
+      } else {
+        stockEl.className = 'retail-stock in-stock';
+        stockEl.innerHTML = `<i class="fas fa-circle"></i> In stock`;
+      }
+
+      updateRetailWhatsApp();
+    }
+
+    /* ============================================================
+       RENDER: SELLER CARD
+       ============================================================ */
+    function renderSellerCard() {
+      const p = state.product;
+      const seller = p.seller || {};
+      const name = getSellerName(p);
+
+      // Avatar
       const avatarEl = document.getElementById('sellerAvatar');
-      if (matched && matched.profilePic) {
-        avatarEl.innerHTML = `<img src="${matched.profilePic}" alt="${seller.name}" onerror="this.style.display='none';this.parentElement.textContent='${seller.initials || 'ZA'}';" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`;
+      const avatarSrc = seller.profilePic || seller.avatar || '';
+      if (avatarSrc) {
+        avatarEl.innerHTML = `<img src="${escapeHtml(avatarSrc)}" alt="${escapeHtml(name)}"
+          onerror="this.style.display='none';this.parentElement.textContent='${escapeHtml(name.charAt(0).toUpperCase())}';">`;
       } else {
-        avatarEl.textContent = seller.initials || 'ZA';
+        avatarEl.textContent = name.charAt(0).toUpperCase();
       }
 
-      document.getElementById('sellerName').textContent = seller.name;
-      document.getElementById('sellerBadge').innerHTML = '<i class="fas fa-check-circle"></i> Verified';
-      document.getElementById('sellerJoined').textContent = seller.joined || '2026';
-      document.getElementById('sellerListings').textContent = seller.listings || 0;
-      document.getElementById('sellerRating').textContent = seller.rating || '5.0';
-      document.getElementById('sellerSales').textContent = seller.sales || 0;
-      document.getElementById('sellerResponse').textContent = seller.response || '100%';
-      document.getElementById('sellerBio').textContent = seller.bio || 'Official Zaure store.';
+      document.getElementById('sellerName').textContent = name;
 
-      const cleanNumber = (seller.whatsapp || '09042339411').replace(/[^0-9]/g, '');
-      const callNumber = seller.phone || '09042339411';
-      const waMsg = `Hello ${seller.name}, I am interested in "${product.title}" on Zaure.`;
-      const waLink = `https://wa.me/${cleanNumber}?text=${encodeURIComponent(waMsg)}`;
-      
-      // Setup Links
-      document.getElementById('mainWhatsappBtn').href = waLink;
-      document.getElementById('sidebarWhatsappBtn').href = waLink;
-      document.getElementById('contactBtn').href = `tel:${callNumber}`;
-
-      document.getElementById('visitStoreBtn').addEventListener('click', function() {
-        if (matched && matched.id) {
-          window.location.href = `/store.html?id=${matched.id}`;
-        } else {
-          window.location.href = `/stores.html?search=${encodeURIComponent(seller.name)}`;
-        }
-      });
-
-      // --- TRACKING: WhatsApp Click ---
-      const trackWhatsApp = function(e) {
-        e.preventDefault();
-        const user = typeof getCurrentUser === 'function' ? getCurrentUser() : null;
-        
-        // Smart Fallbacks
-        const userName = (user && user.name) ? user.name : getDeviceType();
-        const userPhone = (user && user.phone) ? user.phone : userIP;
-        const userCity = (user && user.state) ? user.state : getFallbackCity();
-
-        const trackingData = {
-          Timestamp: new Date().toISOString(),
-          Action: 'whatsapp_click',
-          'User Name': userName,
-          'User Phone': userPhone,
-          'User City': userCity,
-          'Provider Name': seller.name,
-          'Provider Phone': cleanNumber,
-          'Provider ID': product.id,
-          'Service': product.category || 'General',
-          'Is Primer Owned': 'FALSE',
-          Page: 'detail'
-        };
-
-        sendTrackingToSheet(trackingData);
-
-        setTimeout(() => { window.open(waLink, '_blank'); }, 150);
-      };
-
-      document.getElementById('mainWhatsappBtn').addEventListener('click', trackWhatsApp);
-      document.getElementById('sidebarWhatsappBtn').addEventListener('click', trackWhatsApp);
-
-      // --- TRACKING: Call Click ---
-      document.getElementById('contactBtn').addEventListener('click', function(e) {
-        const user = typeof getCurrentUser === 'function' ? getCurrentUser() : null;
-        
-        // Smart Fallbacks
-        const userName = (user && user.name) ? user.name : getDeviceType();
-        const userPhone = (user && user.phone) ? user.phone : userIP;
-        const userCity = (user && user.state) ? user.state : getFallbackCity();
-
-        const trackingData = {
-          Timestamp: new Date().toISOString(),
-          Action: 'call_click',
-          'User Name': userName,
-          'User Phone': userPhone,
-          'User City': userCity,
-          'Provider Name': seller.name,
-          'Provider Phone': callNumber,
-          'Provider ID': product.id,
-          'Service': product.category || 'General',
-          'Is Primer Owned': 'FALSE',
-          Page: 'detail'
-        };
-
-        sendTrackingToSheet(trackingData);
-        
-        // Let the default tel: link proceed
-      });
+      const storeId = seller.id || p.sellerId;
+      const viewStoreBtn = document.getElementById('viewStoreBtn');
+      if (storeId) {
+        viewStoreBtn.href = `/store.html?id=${encodeURIComponent(storeId)}`;
+        viewStoreBtn.style.display = 'inline-flex';
+      } else {
+        viewStoreBtn.style.display = 'none';
+      }
     }
+
+    /* ============================================================
+       RENDER: DESCRIPTION
+       ============================================================ */
+    function renderDescription() {
+      const p = state.product;
+      const desc = p.description || p.desc || '';
+      if (!desc.trim()) {
+        document.getElementById('descSection').style.display = 'none';
+        return;
+      }
+      document.getElementById('descSection').style.display = 'block';
+      document.getElementById('productDescription').textContent = desc;
+    }
+
+    /* ============================================================
+       RENDER: RELATED
+       ============================================================ */
+    async function renderRelated() {
+      const p = state.product;
+      if (typeof loadProducts !== 'function') return;
+
+      try {
+        const all = await loadProducts();
+        const related = all.filter(x =>
+          String(x.id) !== String(p.id) &&
+          x.category && p.category &&
+          x.category === p.category
+        ).slice(0, 8);
+
+        if (related.length === 0) return;
+
+        document.getElementById('relatedSection').style.display = 'block';
+        const grid = document.getElementById('relatedGrid');
+        grid.innerHTML = related.map(r => {
+          const price = r.retail?.price || r.price;
+          const priceHtml = price ? formatNaira(price) : '';
+          const img = (Array.isArray(r.images) && r.images[0]) || r.image || '';
+          return `
+            <a href="/detail.html?id=${encodeURIComponent(r.id)}" class="related-card" style="text-decoration:none;">
+              <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden;">
+                <div style="aspect-ratio: 1; background: var(--surface-alt); display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                  ${img
+                    ? `<img src="${escapeHtml(img)}" alt="${escapeHtml(r.title || '')}" loading="lazy" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\\'fas fa-box\\' style=\\'font-size:2rem;color:var(--text-secondary);\\'></i>';">`
+                    : `<i class="fas fa-box" style="font-size:2rem;color:var(--text-secondary);"></i>`}
+                </div>
+                <div style="padding: 10px 12px 12px;">
+                  ${priceHtml ? `<div style="font-size: 0.88rem; font-weight: 800; color: var(--text); margin-bottom: 2px;">${priceHtml}</div>` : ''}
+                  <div style="font-size: 0.76rem; color: var(--text-secondary); line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${escapeHtml(r.title || '')}</div>
+                </div>
+              </div>
+            </a>
+          `;
+        }).join('');
+      } catch (e) {
+        console.warn('Could not load related products', e);
+      }
+    }
+
+    /* ============================================================
+       INIT
+       ============================================================ */
+    async function init() {
+      if (typeof loadUser === 'function') loadUser();
+      if (typeof initTheme === 'function') initTheme();
+      if (typeof updateFavoriteBadge === 'function') updateFavoriteBadge();
+      if (typeof initStateDropdown === 'function') initStateDropdown();
+
+      // FAB
+      document.getElementById('fabPostAd')?.addEventListener('click', () => {
+        const user = (typeof getCurrentUser === 'function') ? getCurrentUser() : null;
+        if (!user) { if (typeof openSignup === 'function') openSignup(); }
+        else location.href = '/post.html';
+      });
+
+      // Gallery nav
+      document.getElementById('galleryPrev').addEventListener('click', () => {
+        if (state.galleryImages.length < 2) return;
+        state.galleryIndex = (state.galleryIndex - 1 + state.galleryImages.length) % state.galleryImages.length;
+        updateGalleryUI();
+      });
+      document.getElementById('galleryNext').addEventListener('click', () => {
+        if (state.galleryImages.length < 2) return;
+        state.galleryIndex = (state.galleryIndex + 1) % state.galleryImages.length;
+        updateGalleryUI();
+      });
+
+      // Load product
+      const productId = new URLSearchParams(location.search).get('id');
+      if (!productId) { showError(); return; }
+
+      showLoading();
+
+      let rawProduct = null;
+      try {
+        if (typeof loadProducts === 'function') {
+          const all = await loadProducts();
+          rawProduct = all.find(x => String(x.id) === String(productId));
+        }
+      } catch (e) {
+        console.error('Could not load product', e);
+      }
+
+      if (!rawProduct) { showError(); return; }
+
+      state.product = normalizeProduct(rawProduct);
+
+      // Page title & crumb
+      document.title = `${state.product.title || 'Product'} – Zaure`;
+      document.getElementById('crumbTitle').textContent = state.product.title || 'Product';
+
+      // Title
+      document.getElementById('productTitle').textContent = state.product.title || 'Product';
+
+      // Gallery
+      state.galleryImages = getImageList(state.product);
+      renderGallery();
+
+      // Cards
+      renderRetailCard();
+      renderBulkCard();
+
+      // If neither mode is available, show a fallback message
+      if (!state.product.retail?.enabled && !state.product.wholesale?.enabled) {
+        document.getElementById('purchaseSection').innerHTML = `
+          <div style="text-align: center; padding: 24px 12px; color: var(--text-secondary); font-size: 0.85rem;">
+            <i class="fas fa-info-circle" style="font-size: 1.4rem; margin-bottom: 8px; display: block; opacity: 0.5;"></i>
+            Pricing not yet available for this item. Please contact the seller.
+          </div>`;
+      }
+
+      // Seller + description + related
+      renderSellerCard();
+      renderDescription();
+      renderRelated();
+
+      showContent();
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+  })();
   </script>
 </body>
 </html>
