@@ -20,6 +20,26 @@
     "featured": true
   },
   {
+    "id": "zaure-clean",
+    "title": "Post-Construction, Carpet, Pest Control & Weed Control",
+    "description": "Post-construction cleaning (dust, cement film, paint splatter, debris), hot-water extraction carpet cleaning, insecticide pest control and weed control for homes, shops, offices and building sites.",
+    "location": "Kaduna, Kaduna",
+    "date": "Available today",
+    "category": "Cleaning",
+    "subcategory": "cleaning",
+    "yearsExperience": 3,
+    "responseTime": "Within 1 hr",
+    "seller": {
+      "name": "Zaure Clean",
+      "profilePic": "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?w=200&h=200&fit=crop&q=80",
+      "rating": null,
+      "phone": "09042339411",
+      "whatsapp": "09042339411"
+    },
+    "boosted": true,
+    "featured": true
+  },
+  {
     "id": "najib-isa-ukissa",
     "title": "Certified Electrician – Wiring, Repairs & Installation",
     "description": "House wiring, socket repairs, inverter installation and electrical fault diagnosis.",
