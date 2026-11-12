@@ -4,15 +4,13 @@
     "name": "Zaure Clean",
     "initial": "Z",
     "badge": "Official Service",
-    "phone": "2349042339411",
-    "whatsappMessage": "Hi Zaure Clean, I'd like to book a cleaning service.\n\nService needed: "
+    "page": "zaure-clean.html"
   },
-{
-  "id": "zaure-movers",
-  "name": "Zaure Movers",
-  "initial": "Z",
-  "badge": "Official Service",
-  "phone": "2349042339411",
-  "whatsappMessage": "Hi Zaure Movers, I need help with a move.\n\nMoving from: \nMoving to: "
-}
+  {
+    "id": "zaure-movers",
+    "name": "Zaure Movers",
+    "initial": "Z",
+    "badge": "Official Service",
+    "page": "zaure-movers.html"
+  }
 ]
