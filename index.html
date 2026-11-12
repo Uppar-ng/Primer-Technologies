@@ -99,11 +99,6 @@
         border-color: rgba(212,184,122,0.4);
       }
       .category-card:hover { transform: translateY(-4px) scale(1.02); }
-      .storefront-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 12px 28px rgba(15,41,64,0.12);
-        border-color: rgba(212,184,122,0.4);
-      }
     }
 
     /* ===== Hotspots section (home) ===== */
@@ -1259,10 +1254,8 @@
 
         grid.innerHTML = services.map(s => {
           const initial = (s.initial || s.name?.charAt(0) || 'Z').toUpperCase();
-          const waText = encodeURIComponent(s.whatsappMessage || `Hi ${s.name}, I'd like to book a service.`);
-          const waUrl = `https://wa.me/${s.phone}?text=${waText}`;
           return `
-            <a href="${waUrl}" target="_blank" rel="noopener"
+            <a href="/${s.page}"
                class="storefront-card" style="text-decoration:none;">
               <div class="store-avatar" style="background: linear-gradient(135deg, #1a3650, #2a4a6a); color: #D4B87A; font-family: 'Playfair Display', serif; font-weight: 900;">${initial}</div>
               <div>
