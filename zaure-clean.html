@@ -97,6 +97,16 @@
       font-family: inherit;
       border: none; cursor: pointer;
     }
+    .svc-btn.primary {
+      background: var(--gold);
+      color: var(--navy);
+      box-shadow: 0 6px 20px rgba(212,184,122,0.35);
+    }
+    .svc-btn.primary:hover {
+      background: #E7D3A1;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(212,184,122,0.45);
+    }
     .svc-btn.wa {
       background: var(--wa); color: white;
       box-shadow: 0 6px 20px rgba(37,211,102,0.3);
@@ -224,12 +234,284 @@
       color: rgba(255,255,255,0.75);
       line-height: 1.55;
     }
-    .svc-contact .svc-btn.wa {
+    .svc-contact-actions {
+      display: flex; flex-direction: column;
+      gap: 8px; flex-shrink: 0;
+    }
+    .svc-contact .svc-btn { width: 100%; }
+    @media (max-width: 519px) {
+      .svc-contact-actions { width: 100%; }
+    }
+
+    /* ============================================================
+       QUOTE MODAL
+       ============================================================ */
+    .qm-overlay {
+      position: fixed; inset: 0;
+      background: rgba(15,41,64,0.75);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      z-index: 9999;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      padding: 0;
+    }
+    @media (min-width: 640px) {
+      .qm-overlay { align-items: center; padding: 20px; }
+    }
+    .qm-overlay.active { opacity: 1; visibility: visible; }
+
+    .qm-modal {
+      background: var(--surface);
+      width: 100%;
+      max-width: 640px;
+      max-height: 92vh;
+      border-radius: 22px 22px 0 0;
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      transform: translateY(40px);
+      transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.3, 1);
+      box-shadow: 0 -10px 60px rgba(15,41,64,0.3);
+    }
+    @media (min-width: 640px) {
+      .qm-modal {
+        border-radius: 22px;
+        max-height: 88vh;
+        box-shadow: 0 30px 80px rgba(15,41,64,0.4);
+      }
+    }
+    .qm-overlay.active .qm-modal { transform: translateY(0); }
+
+    .qm-header {
+      padding: 20px 22px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 12px;
+      background: linear-gradient(135deg, #0f2940 0%, #1a3650 100%);
+      color: white;
       flex-shrink: 0;
     }
-    @media (max-width: 519px) {
-      .svc-contact .svc-btn.wa { width: 100%; }
+    .qm-header-text h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin-bottom: 3px;
+      letter-spacing: -0.3px;
+      line-height: 1.2;
     }
+    .qm-header-text p {
+      font-size: 0.74rem;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.4;
+    }
+    .qm-close {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: white;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s;
+      flex-shrink: 0;
+      font-size: 0.85rem;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .qm-close:hover { background: rgba(255,255,255,0.2); }
+
+    .qm-body {
+      padding: 22px;
+      overflow-y: auto;
+      flex: 1;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .qm-form {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    @media (min-width: 640px) {
+      .qm-form { grid-template-columns: 1fr 1fr; gap: 14px 16px; }
+    }
+
+    .qm-field { display: flex; flex-direction: column; min-width: 0; }
+    .qm-field.full { grid-column: 1 / -1; }
+    .qm-field label {
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+      display: flex; align-items: center; gap: 4px;
+    }
+    .qm-field label .req { color: #e74c3c; font-weight: 800; }
+    .qm-field input,
+    .qm-field select,
+    .qm-field textarea {
+      width: 100%;
+      padding: 11px 13px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.88rem;
+      color: var(--text);
+      background: var(--surface);
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .qm-field input:focus,
+    .qm-field select:focus,
+    .qm-field textarea:focus {
+      border-color: var(--navy-2);
+      box-shadow: 0 0 0 3px rgba(26,54,80,0.08);
+    }
+    .qm-field input::placeholder,
+    .qm-field textarea::placeholder { color: #94a3b8; }
+    .qm-field textarea {
+      resize: vertical;
+      min-height: 70px;
+      line-height: 1.5;
+    }
+    .qm-field select {
+      -webkit-appearance: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 34px;
+      cursor: pointer;
+    }
+
+    /* Services checkbox group */
+    .qm-services-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-top: 2px;
+    }
+    .qm-check {
+      display: flex; align-items: center; gap: 7px;
+      padding: 9px 11px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      cursor: pointer;
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--text);
+      background: var(--surface);
+      transition: all 0.15s;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .qm-check:hover { border-color: var(--navy-2); background: rgba(26,54,80,0.03); }
+    .qm-check input {
+      accent-color: var(--navy-2);
+      width: 14px; height: 14px;
+      cursor: pointer;
+      flex-shrink: 0;
+      margin: 0;
+      padding: 0;
+    }
+    .qm-check.checked {
+      border-color: var(--navy-2);
+      background: rgba(26,54,80,0.06);
+    }
+
+    /* Submit area */
+    .qm-footer {
+      padding: 16px 22px calc(16px + env(safe-area-inset-bottom, 0px));
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+      flex-shrink: 0;
+    }
+    .qm-submit {
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: 40px;
+      background: var(--navy-2);
+      color: white;
+      border: none;
+      font-weight: 800;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px;
+      font-family: inherit;
+      transition: all 0.2s;
+      box-shadow: 0 6px 20px rgba(26,54,80,0.25);
+    }
+    .qm-submit:hover:not(:disabled) {
+      background: var(--navy);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(26,54,80,0.35);
+    }
+    .qm-submit:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .qm-submit i { font-size: 0.9rem; }
+
+    .qm-fine-print {
+      margin-top: 10px;
+      text-align: center;
+      font-size: 0.68rem;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    /* Success state */
+    .qm-success {
+      text-align: center;
+      padding: 44px 24px;
+    }
+    .qm-success-icon {
+      width: 68px; height: 68px;
+      border-radius: 50%;
+      background: rgba(22,163,74,0.1);
+      color: #16a34a;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem;
+      margin: 0 auto 20px;
+    }
+    .qm-success h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 8px;
+      letter-spacing: -0.3px;
+    }
+    .qm-success p {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      max-width: 380px;
+      margin: 0 auto 20px;
+    }
+    .qm-success-actions {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      justify-content: center;
+    }
+
+    /* Error state */
+    .qm-error {
+      padding: 14px 16px;
+      background: rgba(231,76,60,0.08);
+      border: 1px solid rgba(231,76,60,0.25);
+      border-radius: 10px;
+      color: #c0392b;
+      font-size: 0.82rem;
+      line-height: 1.5;
+      margin-bottom: 14px;
+      display: none;
+    }
+    .qm-error.show { display: block; }
+    .qm-error i { margin-right: 6px; }
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -290,6 +572,9 @@
         developers across Northern Nigeria.
       </p>
       <div class="svc-hero-actions">
+        <button type="button" class="svc-btn primary" id="requestQuoteBtn">
+          <i class="fas fa-file-pen"></i> Request a quote
+        </button>
         <a href="#" id="heroWhatsApp" class="svc-btn wa" target="_blank" rel="noopener">
           <i class="fab fa-whatsapp"></i> Send a job
         </a>
@@ -405,13 +690,121 @@
     <section class="svc-contact">
       <div class="svc-contact-text">
         <h3>Have a site that needs the final clean?</h3>
-        <p>Send us the project details on WhatsApp — location, size, and handover date. We'll respond with availability and a quote.</p>
+        <p>Send us the project details and we'll respond with availability and a quote — usually within a few hours.</p>
       </div>
-      <a href="#" id="contactWhatsApp" class="svc-btn wa" target="_blank" rel="noopener">
-        <i class="fab fa-whatsapp"></i> Message on WhatsApp
-      </a>
+      <div class="svc-contact-actions">
+        <button type="button" class="svc-btn primary" id="contactQuoteBtn">
+          <i class="fas fa-file-pen"></i> Request a quote
+        </button>
+        <a href="#" id="contactWhatsApp" class="svc-btn wa" target="_blank" rel="noopener">
+          <i class="fab fa-whatsapp"></i> WhatsApp instead
+        </a>
+      </div>
     </section>
 
+  </div>
+
+  <!-- ============================================================
+       QUOTE MODAL
+       ============================================================ -->
+  <div class="qm-overlay" id="quoteModal" role="dialog" aria-modal="true" aria-labelledby="qmTitle">
+    <div class="qm-modal">
+
+      <div class="qm-header">
+        <div class="qm-header-text">
+          <h2 id="qmTitle">Request a quote</h2>
+          <p>Tell us about the site — we'll respond with availability and pricing.</p>
+        </div>
+        <button type="button" class="qm-close" id="qmClose" aria-label="Close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="qm-body" id="qmBody">
+        <div class="qm-error" id="qmError">
+          <i class="fas fa-exclamation-circle"></i> <span id="qmErrorText">Something went wrong. Please try again or message us on WhatsApp.</span>
+        </div>
+
+        <form class="qm-form" id="quoteForm">
+          <!-- Contact info -->
+          <div class="qm-field">
+            <label>Full name <span class="req">*</span></label>
+            <input type="text" name="name" id="qmName" placeholder="Your full name" required>
+          </div>
+
+          <div class="qm-field">
+            <label>Company / business</label>
+            <input type="text" name="company" id="qmCompany" placeholder="Company name">
+          </div>
+
+          <div class="qm-field">
+            <label>Phone / WhatsApp <span class="req">*</span></label>
+            <input type="tel" name="phone" id="qmPhone" placeholder="08012345678" required>
+          </div>
+
+          <div class="qm-field">
+            <label>Email <span class="req">*</span></label>
+            <input type="email" name="email" id="qmEmail" placeholder="you@company.com" required>
+          </div>
+
+          <!-- Project details -->
+          <div class="qm-field full">
+            <label>Project location <span class="req">*</span></label>
+            <input type="text" name="location" id="qmLocation" placeholder="Address, area, or site name" required>
+          </div>
+
+          <div class="qm-field">
+            <label>Project type</label>
+            <select name="project_type" id="qmType">
+              <option value="">Select type</option>
+              <option value="New construction">New construction</option>
+              <option value="Renovation / remodel">Renovation / remodel</option>
+              <option value="Commercial / office">Commercial / office</option>
+              <option value="Residential">Residential</option>
+              <option value="Industrial">Industrial</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="qm-field">
+            <label>Approx. size</label>
+            <input type="text" name="size" id="qmSize" placeholder="e.g. 4 bedrooms, 250 sqm">
+          </div>
+
+          <div class="qm-field full">
+            <label>Handover date</label>
+            <input type="text" name="handover_date" id="qmHandover" placeholder="e.g. 15 December or 2 weeks">
+          </div>
+
+          <!-- Services needed -->
+          <div class="qm-field full">
+            <label>Services needed</label>
+            <div class="qm-services-grid">
+              <label class="qm-check"><input type="checkbox" name="services[]" value="Post-construction clean"> Post-construction</label>
+              <label class="qm-check"><input type="checkbox" name="services[]" value="Pest control"> Pest control</label>
+              <label class="qm-check"><input type="checkbox" name="services[]" value="Weed control"> Weed control</label>
+              <label class="qm-check"><input type="checkbox" name="services[]" value="Carpet cleaning"> Carpet cleaning</label>
+              <label class="qm-check"><input type="checkbox" name="services[]" value="Glass & frame polish"> Glass &amp; frames</label>
+              <label class="qm-check"><input type="checkbox" name="services[]" value="Final handover clean"> Final handover</label>
+            </div>
+          </div>
+
+          <!-- Notes -->
+          <div class="qm-field full">
+            <label>Additional notes</label>
+            <textarea name="notes" id="qmNotes" placeholder="Anything else we should know about the site?"></textarea>
+          </div>
+        </form>
+      </div>
+
+      <div class="qm-footer" id="qmFooter">
+        <button type="submit" form="quoteForm" class="qm-submit" id="qmSubmit">
+          <i class="fas fa-paper-plane"></i> Send request
+        </button>
+        <p class="qm-fine-print">We respond by WhatsApp or email — usually within a few hours.</p>
+      </div>
+
+    </div>
   </div>
 
   <div class="bottom-nav">
@@ -459,6 +852,12 @@
   (function () {
     'use strict';
 
+    /* ============================================================
+       FORMSPREE ENDPOINT — replace with your own form ID
+       Get one at https://formspree.io → New Form → copy the URL
+       ============================================================ */
+    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
+
     const WHATSAPP_PHONE = '2349042339411';
     const WHATSAPP_MESSAGE =
       "Hi Zaure Clean, I have a post-construction cleaning job.\n\n" +
@@ -469,6 +868,128 @@
 
     const waUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
+    /* ============================================================
+       MODAL SETUP
+       ============================================================ */
+    const modal = document.getElementById('quoteModal');
+    const modalBody = document.getElementById('qmBody');
+    const modalFooter = document.getElementById('qmFooter');
+    const form = document.getElementById('quoteForm');
+    const submitBtn = document.getElementById('qmSubmit');
+    const errorBox = document.getElementById('qmError');
+    const errorText = document.getElementById('qmErrorText');
+
+    let lastFocused = null;
+
+    function openModal(triggerBtn) {
+      lastFocused = triggerBtn || document.activeElement;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      // Focus first input after transition
+      setTimeout(() => document.getElementById('qmName')?.focus(), 320);
+    }
+
+    function closeModal() {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+      if (lastFocused && typeof lastFocused.focus === 'function') {
+        setTimeout(() => lastFocused.focus(), 320);
+      }
+    }
+
+    document.getElementById('requestQuoteBtn')?.addEventListener('click', function () { openModal(this); });
+    document.getElementById('contactQuoteBtn')?.addEventListener('click', function () { openModal(this); });
+    document.getElementById('qmClose')?.addEventListener('click', closeModal);
+
+    // Close on backdrop click
+    modal?.addEventListener('click', function (e) {
+      if (e.target === modal) closeModal();
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+    });
+
+    // Visual state for service checkboxes
+    document.querySelectorAll('.qm-check input').forEach(function (input) {
+      input.addEventListener('change', function () {
+        this.closest('.qm-check').classList.toggle('checked', this.checked);
+      });
+    });
+
+    /* ============================================================
+       FORM SUBMISSION — fetch → Formspree
+       ============================================================ */
+    form?.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      errorBox.classList.remove('show');
+
+      // Sanity: check Formspree endpoint is configured
+      if (FORMSPREE_ENDPOINT.includes('YOUR_FORM_ID')) {
+        errorText.textContent = 'Form is not yet connected. Please message us on WhatsApp instead.';
+        errorBox.classList.add('show');
+        return;
+      }
+
+      // Build FormData
+      const formData = new FormData(form);
+
+      // Loading state
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+      try {
+        const res = await fetch(FORMSPREE_ENDPOINT, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (!res.ok) {
+          // Try to read Formspree error message
+          let msg = 'Could not send your request. Please try again.';
+          try {
+            const data = await res.json();
+            if (data && data.errors && data.errors.length) {
+              msg = data.errors.map(x => x.message).join(' ');
+            }
+          } catch (_) {}
+          throw new Error(msg);
+        }
+
+        // Success
+        showSuccess();
+      } catch (err) {
+        errorText.textContent = err.message || 'Something went wrong. Please try again.';
+        errorBox.classList.add('show');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send request';
+      }
+    });
+
+    function showSuccess() {
+      modalBody.innerHTML = `
+        <div class="qm-success">
+          <div class="qm-success-icon"><i class="fas fa-check"></i></div>
+          <h3>Request received</h3>
+          <p>Thank you — we've got your details. We'll review the project and get back to you by WhatsApp or email, usually within a few hours.</p>
+          <div class="qm-success-actions">
+            <a href="${waUrl}" target="_blank" rel="noopener" class="svc-btn wa" style="padding: 11px 22px; font-size: 0.82rem;">
+              <i class="fab fa-whatsapp"></i> Message us now
+            </a>
+            <button type="button" class="svc-btn primary" onclick="location.reload()" style="padding: 11px 22px; font-size: 0.82rem;">
+              <i class="fas fa-check"></i> Done
+            </button>
+          </div>
+        </div>
+      `;
+      modalFooter.style.display = 'none';
+    }
+
+    /* ============================================================
+       INIT
+       ============================================================ */
     document.addEventListener('DOMContentLoaded', function () {
       if (typeof loadUser === 'function') loadUser();
       if (typeof initTheme === 'function') initTheme();
