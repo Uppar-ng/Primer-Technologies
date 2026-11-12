@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-  <title>Zaure Service – Zaure</title>
-  <meta name="description" content="Official Zaure services — trusted, professional, and fully backed.">
+  <title>Zaure Clean – Post-Construction Cleaning | Zaure Services</title>
+  <meta name="description" content="Zaure Clean — post-construction cleaning specialists for contractors, engineers, and developers across Northern Nigeria.">
   <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -19,26 +19,7 @@
       --wa-dark: #1DA851;
     }
 
-    body { padding-bottom: 96px; }
-    @media (min-width: 1024px) { body { padding-bottom: 0; } }
-
-    .svc-loading, .svc-error { text-align: center; padding: 100px 20px; }
-    .svc-loading .spinner {
-      width: 42px; height: 42px; border-radius: 50%;
-      border: 3px solid var(--border); border-top-color: var(--navy-2);
-      animation: spin 0.9s linear infinite; margin: 0 auto 16px;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .svc-loading p { color: var(--text-secondary); font-size: 0.88rem; }
-    .svc-error i { font-size: 3rem; color: var(--text-secondary); opacity: 0.4; margin-bottom: 16px; }
-    .svc-error h2 { font-size: 1.3rem; color: var(--text); margin-bottom: 8px; }
-    .svc-error p { color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9rem; }
-    .svc-error a {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 12px 24px; background: var(--navy-2); color: white;
-      border-radius: 40px; text-decoration: none; font-weight: 700; font-size: 0.88rem;
-    }
-
+    /* ============ BREADCRUMB ============ */
     .svc-breadcrumb {
       display: flex; align-items: center; gap: 7px;
       margin: 20px 0 16px; font-size: 0.76rem;
@@ -50,413 +31,214 @@
     .svc-breadcrumb .current {
       color: var(--text); font-weight: 600;
       overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-      max-width: 200px;
+      max-width: 220px;
     }
 
+    /* ============ HERO ============ */
     .svc-hero {
       position: relative; overflow: hidden; isolation: isolate;
       background: linear-gradient(135deg, #0f2940 0%, #1a3650 55%, #2a4a6a 100%);
-      border-radius: 24px;
-      padding: 52px 24px 48px;
-      text-align: center;
+      border-radius: 20px;
+      padding: 44px 28px 40px;
       color: white;
-      margin-bottom: 24px;
-      box-shadow: 0 16px 40px rgba(15,41,64,0.2);
+      margin-bottom: 32px;
     }
     .svc-hero::before {
       content: ''; position: absolute;
-      top: -25%; right: -15%;
-      width: 420px; height: 420px;
-      background: radial-gradient(circle, rgba(212,184,122,0.28) 0%, transparent 65%);
-      border-radius: 50%; pointer-events: none; z-index: 0;
-    }
-    .svc-hero::after {
-      content: ''; position: absolute;
-      bottom: -30%; left: -15%;
+      top: -30%; right: -10%;
       width: 380px; height: 380px;
-      background: radial-gradient(circle, rgba(212,184,122,0.12) 0%, transparent 65%);
+      background: radial-gradient(circle, rgba(212,184,122,0.2) 0%, transparent 65%);
       border-radius: 50%; pointer-events: none; z-index: 0;
     }
+    .svc-hero > * { position: relative; z-index: 1; }
 
-    .svc-hero-content {
-      position: relative; z-index: 2;
-      max-width: 640px; margin: 0 auto;
-      animation: floatY 6s ease-in-out infinite;
-    }
-    @keyframes floatY {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
-    }
-
-    .svc-monogram {
-      width: 64px; height: 64px;
-      margin: 0 auto 18px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #1a3650, #2a4a6a);
+    .svc-hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.62rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 1.8px;
       color: var(--gold);
-      font-family: 'Playfair Display', serif;
-      font-size: 2.4rem; font-weight: 900;
-      display: flex; align-items: center; justify-content: center;
-      position: relative;
-      box-shadow:
-        inset 0 0 0 1px rgba(212,184,122,0.4),
-        0 8px 24px rgba(0,0,0,0.35);
-      line-height: 1;
-    }
-    .svc-monogram::after {
-      content: '';
-      position: absolute; inset: 4px;
-      border: 1px solid rgba(212,184,122,0.28);
-      border-radius: 8px;
-      pointer-events: none;
-    }
-    @media (min-width: 640px) {
-      .svc-monogram { width: 76px; height: 76px; font-size: 2.8rem; }
-    }
-
-    .svc-hero-badge {
-      display: inline-flex; align-items: center; gap: 5px;
-      padding: 4px 12px;
-      background: rgba(212,184,122,0.15);
-      border: 1px solid rgba(212,184,122,0.4);
+      padding: 5px 12px;
+      background: rgba(212,184,122,0.12);
+      border: 1px solid rgba(212,184,122,0.35);
       border-radius: 40px;
-      font-size: 0.6rem; font-weight: 800;
-      text-transform: uppercase; letter-spacing: 1.4px;
-      color: var(--gold);
-      margin-bottom: 12px;
+      margin-bottom: 16px;
     }
-    .svc-hero-badge i { font-size: 0.55rem; }
+    .svc-hero-eyebrow i { font-size: 0.55rem; }
 
     .svc-hero h1 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 7vw, 3.4rem);
-      font-weight: 900;
-      line-height: 1.05;
-      letter-spacing: -1px;
-      margin-bottom: 12px;
-      color: white;
-    }
-
-    .svc-hero-tagline {
-      font-size: clamp(0.95rem, 2.5vw, 1.15rem);
-      font-style: italic;
-      color: var(--gold);
+      font-size: clamp(1.85rem, 5.5vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.8px;
       margin-bottom: 14px;
-      font-weight: 500;
+      max-width: 640px;
     }
 
     .svc-hero-desc {
-      font-size: clamp(0.85rem, 2vw, 0.95rem);
-      color: rgba(255,255,255,0.8);
-      line-height: 1.6;
-      max-width: 520px;
-      margin: 0 auto 24px;
+      font-size: clamp(0.9rem, 2vw, 1rem);
+      color: rgba(255,255,255,0.82);
+      line-height: 1.65;
+      max-width: 580px;
+      margin-bottom: 26px;
     }
 
-    .svc-hero-meta {
-      display: flex; flex-wrap: wrap; justify-content: center;
-      gap: 8px; margin-bottom: 24px;
+    .svc-hero-actions {
+      display: flex; flex-wrap: wrap; gap: 10px;
     }
-    .svc-hero-pill {
-      display: inline-flex; align-items: center; gap: 5px;
-      padding: 5px 12px;
-      background: rgba(255,255,255,0.08);
-      -webkit-backdrop-filter: blur(10px);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.14);
-      border-radius: 40px;
-      font-size: 0.72rem; font-weight: 600;
-      color: rgba(255,255,255,0.9);
-    }
-    .svc-hero-pill i { color: var(--gold); font-size: 0.65rem; }
-
-    .svc-hero-cta {
+    .svc-btn {
       display: inline-flex; align-items: center; justify-content: center;
       gap: 8px;
-      padding: 14px 30px;
-      background: var(--wa); color: white;
+      padding: 13px 26px;
       border-radius: 40px;
       text-decoration: none;
-      font-size: 0.92rem; font-weight: 800;
+      font-weight: 700; font-size: 0.88rem;
       transition: all 0.2s;
-      box-shadow: 0 8px 24px rgba(37,211,102,0.35);
+      font-family: inherit;
+      border: none; cursor: pointer;
     }
-    .svc-hero-cta:hover {
+    .svc-btn.wa {
+      background: var(--wa); color: white;
+      box-shadow: 0 6px 20px rgba(37,211,102,0.3);
+    }
+    .svc-btn.wa:hover {
       background: var(--wa-dark);
-      transform: translateY(-2px);
-      box-shadow: 0 12px 32px rgba(37,211,102,0.45);
+      transform: translateY(-1px);
     }
-    .svc-hero-cta i { font-size: 1rem; }
-
-    .svc-layout {
-      display: grid; grid-template-columns: 1fr;
-      gap: 20px; margin-bottom: 40px;
+    .svc-btn.ghost {
+      background: rgba(255,255,255,0.08);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.2);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
     }
-    @media (min-width: 1024px) {
-      .svc-layout {
-        grid-template-columns: minmax(0, 1fr) 340px;
-        gap: 28px;
-      }
+    .svc-btn.ghost:hover {
+      background: rgba(255,255,255,0.15);
     }
 
-    .svc-main { min-width: 0; }
-
-    .svc-section { margin-bottom: 36px; }
-    .svc-section:last-child { margin-bottom: 0; }
-
+    /* ============ SECTION ============ */
+    .svc-section {
+      margin-bottom: 40px;
+      max-width: 780px;
+    }
     .svc-section-title {
       font-family: 'Playfair Display', serif;
-      font-size: 1.35rem; font-weight: 800;
+      font-size: 1.5rem;
+      font-weight: 800;
       color: var(--text);
-      margin-bottom: 14px;
-      letter-spacing: -0.3px;
-      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 6px;
+      letter-spacing: -0.4px;
+      line-height: 1.2;
     }
-    .svc-section-title::before {
-      content: '';
-      width: 22px; height: 3px;
-      background: linear-gradient(90deg, var(--gold), var(--gold-deep));
-      border-radius: 2px;
-      flex-shrink: 0;
+    .svc-section-sub {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+      line-height: 1.6;
+      max-width: 640px;
     }
-
     .svc-body-text {
-      font-size: 0.92rem; color: var(--text-secondary);
-      line-height: 1.75;
-      max-width: 680px;
+      font-size: 0.94rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
     }
+    .svc-body-text + .svc-body-text { margin-top: 14px; }
 
-    .svc-offerings {
-      display: grid; grid-template-columns: 1fr;
+    /* ============ SERVICE LIST ============ */
+    .svc-list {
+      display: grid;
+      grid-template-columns: 1fr;
       gap: 10px;
+      margin-top: 20px;
     }
     @media (min-width: 640px) {
-      .svc-offerings { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .svc-list { grid-template-columns: repeat(2, 1fr); gap: 12px; }
     }
 
-    .svc-offer-item {
+    .svc-item {
       display: flex; gap: 12px;
       padding: 16px;
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 14px;
+      border-radius: 12px;
       transition: border-color 0.2s, box-shadow 0.2s;
     }
-    .svc-offer-item:hover {
+    .svc-item:hover {
       border-color: rgba(212,184,122,0.5);
-      box-shadow: 0 6px 18px rgba(15,41,64,0.06);
+      box-shadow: 0 4px 14px rgba(15,41,64,0.06);
     }
-
-    .svc-offer-icon {
-      width: 40px; height: 40px;
-      border-radius: 10px;
+    .svc-item-icon {
+      width: 36px; height: 36px;
+      border-radius: 9px;
       background: linear-gradient(135deg, var(--navy-2), #2a4a6a);
       color: var(--gold);
       display: flex; align-items: center; justify-content: center;
-      font-size: 0.9rem; flex-shrink: 0;
+      font-size: 0.85rem; flex-shrink: 0;
     }
-
-    .svc-offer-body h4 {
-      font-size: 0.88rem; font-weight: 800;
-      color: var(--text); margin-bottom: 3px;
+    .svc-item-body h4 {
+      font-size: 0.88rem; font-weight: 700;
+      color: var(--text); margin-bottom: 4px;
       line-height: 1.3;
     }
-    .svc-offer-body p {
+    .svc-item-body p {
       font-size: 0.78rem; color: var(--text-secondary);
-      line-height: 1.5;
+      line-height: 1.55;
     }
 
-    .svc-pricing {
-      display: grid; grid-template-columns: 1fr;
+    /* ============ CLIENTS LIST ============ */
+    .svc-clients {
+      display: flex;
+      flex-wrap: wrap;
       gap: 8px;
+      margin-top: 16px;
     }
-
-    .svc-price-row {
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 12px;
-      padding: 14px 16px;
+    .svc-client-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      transition: border-color 0.2s;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text);
     }
-    .svc-price-row:hover { border-color: rgba(212,184,122,0.5); }
+    .svc-client-chip i {
+      color: var(--gold-deep);
+      font-size: 0.72rem;
+    }
 
-    .svc-price-info { flex: 1; min-width: 0; }
-    .svc-price-tier {
-      font-size: 0.88rem; font-weight: 700;
-      color: var(--text); line-height: 1.3;
-      margin-bottom: 2px;
+    /* ============ CONTACT ============ */
+    .svc-contact {
+      background: linear-gradient(135deg, #0f2940 0%, #1a3650 100%);
+      border-radius: 18px;
+      padding: 32px 26px;
+      color: white;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 20px;
     }
-    .svc-price-note {
-      font-size: 0.72rem; color: var(--text-secondary);
-    }
-    .svc-price-value {
+    .svc-contact-text { flex: 1; min-width: 220px; }
+    .svc-contact-text h3 {
       font-family: 'Playfair Display', serif;
-      font-size: 1.05rem; font-weight: 800;
-      color: var(--gold-deep);
-      white-space: nowrap;
-      text-align: right;
+      font-size: 1.2rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+      letter-spacing: -0.3px;
     }
-
-    .svc-faq { display: flex; flex-direction: column; gap: 8px; }
-
-    .svc-faq-item {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      transition: border-color 0.2s;
+    .svc-contact-text p {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.55;
     }
-    .svc-faq-item[open] { border-color: rgba(212,184,122,0.5); }
-
-    .svc-faq-item summary {
-      padding: 14px 16px;
-      font-size: 0.88rem; font-weight: 700;
-      color: var(--text);
-      cursor: pointer;
-      list-style: none;
-      display: flex; justify-content: space-between; align-items: center;
-      gap: 12px;
-      transition: background 0.15s;
-      user-select: none;
-    }
-    .svc-faq-item summary::-webkit-details-marker { display: none; }
-    .svc-faq-item summary:hover { background: var(--surface-alt); }
-    .svc-faq-item summary::after {
-      content: '+';
-      font-size: 1.3rem; font-weight: 400;
-      color: var(--gold-deep);
-      transition: transform 0.2s;
+    .svc-contact .svc-btn.wa {
       flex-shrink: 0;
-      line-height: 1;
     }
-    .svc-faq-item[open] summary::after { content: '−'; }
-
-    .svc-faq-answer {
-      padding: 0 16px 16px;
-      font-size: 0.85rem; color: var(--text-secondary);
-      line-height: 1.65;
-    }
-
-    .svc-sidebar {
-      display: flex; flex-direction: column;
-      gap: 14px;
-    }
-    @media (min-width: 1024px) {
-      .svc-sidebar {
-        position: sticky; top: 90px;
-        align-self: flex-start;
-      }
-    }
-
-    .svc-side-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 18px;
-      box-shadow: 0 4px 14px rgba(15,41,64,0.04);
-    }
-
-    .svc-side-label {
-      font-size: 0.68rem; font-weight: 800;
-      color: var(--text-secondary);
-      text-transform: uppercase; letter-spacing: 1.2px;
-      margin-bottom: 10px;
-    }
-
-    .svc-side-contact-btn {
-      display: flex; align-items: center; justify-content: center;
-      gap: 8px;
-      width: 100%;
-      padding: 13px 18px;
-      background: var(--wa); color: white;
-      border-radius: 40px;
-      text-decoration: none;
-      font-weight: 800; font-size: 0.88rem;
-      transition: all 0.2s;
-      box-shadow: 0 4px 14px rgba(37,211,102,0.3);
-      margin-bottom: 8px;
-    }
-    .svc-side-contact-btn:hover { background: var(--wa-dark); transform: translateY(-1px); }
-    .svc-side-contact-btn i { font-size: 0.95rem; }
-
-    .svc-side-hours {
-      display: flex; align-items: center; gap: 8px;
-      font-size: 0.78rem; color: var(--text-secondary);
-      padding-top: 10px;
-      border-top: 1px solid var(--border);
-      margin-top: 8px;
-    }
-    .svc-side-hours i { color: var(--open-green, #16a34a); font-size: 0.6rem; }
-
-    .svc-coverage-chips {
-      display: flex; flex-wrap: wrap; gap: 5px;
-    }
-    .svc-coverage-chip {
-      padding: 5px 10px;
-      background: var(--surface-alt);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      font-size: 0.72rem; font-weight: 600;
-      color: var(--text);
-      display: inline-flex; align-items: center; gap: 4px;
-    }
-    .svc-coverage-chip i { color: var(--gold-deep); font-size: 0.6rem; }
-
-    .svc-features-list {
-      list-style: none;
-      display: flex; flex-direction: column;
-      gap: 9px;
-    }
-    .svc-features-list li {
-      display: flex; align-items: flex-start; gap: 9px;
-      font-size: 0.8rem; color: var(--text);
-      line-height: 1.5;
-    }
-    .svc-features-list i {
-      color: var(--open-green, #16a34a);
-      font-size: 0.82rem;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-
-    .svc-sticky-cta {
-      position: fixed;
-      bottom: 0; left: 0; right: 0;
-      padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
-      background: rgba(255,255,255,0.96);
-      -webkit-backdrop-filter: blur(12px);
-      backdrop-filter: blur(12px);
-      border-top: 1px solid var(--border);
-      z-index: 500;
-      display: flex; align-items: center; gap: 10px;
-      box-shadow: 0 -8px 24px rgba(15,41,64,0.08);
-    }
-    .svc-sticky-info { flex: 1; min-width: 0; }
-    .svc-sticky-info .label {
-      font-size: 0.62rem; font-weight: 700;
-      color: var(--text-secondary);
-      text-transform: uppercase; letter-spacing: 0.8px;
-      margin-bottom: 2px;
-    }
-    .svc-sticky-info .name {
-      font-size: 0.88rem; font-weight: 800;
-      color: var(--text);
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
-    .svc-sticky-cta a {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 11px 20px;
-      background: var(--wa); color: white;
-      border-radius: 40px;
-      text-decoration: none;
-      font-size: 0.82rem; font-weight: 800;
-      white-space: nowrap;
-      box-shadow: 0 4px 12px rgba(37,211,102,0.3);
-    }
-    @media (min-width: 1024px) {
-      .svc-sticky-cta { display: none; }
+    @media (max-width: 519px) {
+      .svc-contact .svc-btn.wa { width: 100%; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -503,87 +285,122 @@
       <i class="fas fa-chevron-right"></i>
       <a href="/">Zaure Services</a>
       <i class="fas fa-chevron-right"></i>
-      <span class="current" id="crumbName">Service</span>
+      <span class="current">Zaure Clean</span>
     </div>
 
+    <!-- ============ HERO ============ -->
     <section class="svc-hero">
-      <div class="svc-hero-content">
-        <div class="svc-monogram">Z</div>
-        <span class="svc-hero-badge" id="heroBadge">
-          <i class="fas fa-check-circle"></i> Official Service
-        </span>
-        <h1 id="heroName">Zaure Service</h1>
-        <p class="svc-hero-tagline" id="heroTagline"></p>
-        <p class="svc-hero-desc" id="heroDesc"></p>
-        <div class="svc-hero-meta" id="heroMeta"></div>
-        <a href="#" id="heroCta" class="svc-hero-cta" target="_blank" rel="noopener">
-          <i class="fab fa-whatsapp"></i> Book on WhatsApp
+      <span class="svc-hero-eyebrow">
+        <i class="fas fa-check-circle"></i> Post-Construction Specialists
+      </span>
+      <h1>Zaure Clean</h1>
+      <p class="svc-hero-desc">
+        We handle the final clean on construction and renovation projects — from debris
+        removal to handover-ready finishes. Trusted by contractors, engineers, and property
+        developers across Northern Nigeria.
+      </p>
+      <div class="svc-hero-actions">
+        <a href="#" id="heroWhatsApp" class="svc-btn wa" target="_blank" rel="noopener">
+          <i class="fab fa-whatsapp"></i> Send a job
         </a>
       </div>
     </section>
 
-    <div class="svc-layout">
+    <!-- ============ ABOUT ============ -->
+    <section class="svc-section">
+      <h2 class="svc-section-title">Built for the people who finish buildings</h2>
+      <p class="svc-body-text">
+        Zaure Clean is a specialist post-construction cleaning sub-contractor. We don't do
+        routine house cleaning — we take on the last job on the site, after the plaster has
+        dried, the tiles are laid, and the electrical work is done. When your client walks in
+        for the final inspection, we've already been through.
+      </p>
+      <p class="svc-body-text">
+        Contractors call us because we work to their schedule, not the other way around.
+        Same-week mobilisation, documented completion, and a clean-site report after every job.
+      </p>
+    </section>
 
-      <div class="svc-main">
-
-        <section class="svc-section">
-          <h2 class="svc-section-title">About this service</h2>
-          <p class="svc-body-text" id="aboutText"></p>
-        </section>
-
-        <section class="svc-section" id="servicesSection">
-          <h2 class="svc-section-title">What we offer</h2>
-          <div class="svc-offerings" id="servicesGrid"></div>
-        </section>
-
-        <section class="svc-section" id="pricingSection">
-          <h2 class="svc-section-title">Pricing</h2>
-          <div class="svc-pricing" id="pricingList"></div>
-        </section>
-
-        <section class="svc-section" id="faqSection">
-          <h2 class="svc-section-title">Frequently asked</h2>
-          <div class="svc-faq" id="faqList"></div>
-        </section>
-
-      </div>
-
-      <aside class="svc-sidebar">
-
-        <div class="svc-side-card">
-          <div class="svc-side-label">Book this service</div>
-          <a href="#" id="sideCta" class="svc-side-contact-btn" target="_blank" rel="noopener">
-            <i class="fab fa-whatsapp"></i> Book on WhatsApp
-          </a>
-          <div class="svc-side-hours" id="sideHours" style="display:none;">
-            <i class="fas fa-circle"></i> <span id="sideHoursText"></span>
+    <!-- ============ WHAT WE DO ============ -->
+    <section class="svc-section">
+      <h2 class="svc-section-title">What we do on site</h2>
+      <p class="svc-section-sub">
+        Full post-construction cleaning scope — everything from rough debris to final polish,
+        in one mobilisation.
+      </p>
+      <div class="svc-list">
+        <div class="svc-item">
+          <div class="svc-item-icon"><i class="fas fa-trowel-bricks"></i></div>
+          <div class="svc-item-body">
+            <h4>Rough Clean</h4>
+            <p>Debris removal, packaging disposal, and site clearing after trades have finished.</p>
           </div>
         </div>
-
-        <div class="svc-side-card" id="coverageCard" style="display:none;">
-          <div class="svc-side-label">We serve</div>
-          <div class="svc-coverage-chips" id="coverageChips"></div>
+        <div class="svc-item">
+          <div class="svc-item-icon"><i class="fas fa-wind"></i></div>
+          <div class="svc-item-body">
+            <h4>Dust Extraction</h4>
+            <p>Full extraction from walls, ceilings, vents, and every surface dust settles on.</p>
+          </div>
         </div>
-
-        <div class="svc-side-card" id="featuresCard" style="display:none;">
-          <div class="svc-side-label">Why choose us</div>
-          <ul class="svc-features-list" id="featuresList"></ul>
+        <div class="svc-item">
+          <div class="svc-item-icon"><i class="fas fa-brush"></i></div>
+          <div class="svc-item-body">
+            <h4>Deep Surface Clean</h4>
+            <p>Floors, tiles, skirting, doors, frames, windows — cleaned to spec, room by room.</p>
+          </div>
         </div>
+        <div class="svc-item">
+          <div class="svc-item-icon"><i class="fas fa-border-all"></i></div>
+          <div class="svc-item-body">
+            <h4>Glass &amp; Frame Polish</h4>
+            <p>Interior and exterior glass, aluminium frames, and window tracks — no streaks.</p>
+          </div>
+        </div>
+        <div class="svc-item">
+          <div class="svc-item-icon"><i class="fas fa-soap"></i></div>
+          <div class="svc-item-body">
+            <h4>Paint &amp; Cement Removal</h4>
+            <p>Careful removal of splatter and residue without damaging finished surfaces.</p>
+          </div>
+        </div>
+        <div class="svc-item">
+          <div class="svc-item-icon"><i class="fas fa-clipboard-check"></i></div>
+          <div class="svc-item-body">
+            <h4>Final Handover Clean</h4>
+            <p>Handover-ready finish — the last pass before your client's walk-through.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      </aside>
+    <!-- ============ WHO WE WORK WITH ============ -->
+    <section class="svc-section">
+      <h2 class="svc-section-title">Who we work with</h2>
+      <p class="svc-section-sub">
+        We're a sub-contractor — we slot into your project team and report to you.
+      </p>
+      <div class="svc-clients">
+        <span class="svc-client-chip"><i class="fas fa-helmet-safety"></i> Building Contractors</span>
+        <span class="svc-client-chip"><i class="fas fa-drafting-compass"></i> Civil Engineers</span>
+        <span class="svc-client-chip"><i class="fas fa-hard-hat"></i> Project Managers</span>
+        <span class="svc-client-chip"><i class="fas fa-city"></i> Property Developers</span>
+        <span class="svc-client-chip"><i class="fas fa-building"></i> Facility Managers</span>
+        <span class="svc-client-chip"><i class="fas fa-house"></i> Landlords &amp; Handover Teams</span>
+      </div>
+    </section>
 
-    </div>
+    <!-- ============ CONTACT ============ -->
+    <section class="svc-contact">
+      <div class="svc-contact-text">
+        <h3>Have a site that needs the final clean?</h3>
+        <p>Send us the project details on WhatsApp — location, size, and handover date. We'll respond with availability and a quote.</p>
+      </div>
+      <a href="#" id="contactWhatsApp" class="svc-btn wa" target="_blank" rel="noopener">
+        <i class="fab fa-whatsapp"></i> Message on WhatsApp
+      </a>
+    </section>
 
-  </div>
-
-  <div class="svc-sticky-cta" id="stickyCta">
-    <div class="svc-sticky-info">
-      <div class="label">Service</div>
-      <div class="name" id="stickyName">Zaure Service</div>
-    </div>
-    <a href="#" id="stickyBtn" target="_blank" rel="noopener">
-      <i class="fab fa-whatsapp"></i> Book
-    </a>
   </div>
 
   <div class="bottom-nav">
@@ -628,192 +445,18 @@
 
   <script src="/js/main.js"></script>
   <script>
-  /* ============================================================
-     SERVICE DATA — hardcoded per page
-     To create a new service: copy this file, change this object.
-     ============================================================ */
-  const SERVICE = {
-    name: "Zaure Clean",
-    badge: "Official Service",
-    tagline: "From dirty to move-in ready.",
-    shortDescription: "Professional cleaning for homes, shops, and construction sites across Kaduna.",
-    longDescription: "Zaure Clean is Zaure's in-house cleaning service — the same people who run the marketplace, now showing up at your door. We specialise in the tough jobs most cleaning companies avoid: post-construction dust, carpet restoration, pest control aftermath, and overgrown compound cleanup. Every job is done by trained staff using eco-friendly products, and every clean is backed by our satisfaction guarantee. If it's not right, we come back — no questions asked.",
-    phone: "2349042339411",
-    whatsappMessage: "Hi Zaure Clean, I'd like to book a cleaning service.\n\nService needed: \nLocation: \nPreferred date: ",
-    hours: "Mon–Sat · 8am–6pm",
-    coverage: ["Kaduna", "Zaria", "Kafanchan", "Barnawa", "Kujama"],
-    services: [
-      { icon: "fa-trowel-bricks", title: "Post-Construction", description: "Complete cleanup after renovations and new builds — dust, debris, paint splatter, cement residue." },
-      { icon: "fa-rug", title: "Carpet Deep Clean", description: "Steam extraction for carpets and rugs. Removes stains, odours, and years of embedded dirt." },
-      { icon: "fa-bug", title: "Pest Control Cleanup", description: "Post-fumigation sanitation, nesting removal, and disinfecting for homes and shops." },
-      { icon: "fa-seedling", title: "Weed & Overgrowth", description: "Compound clearing, weeding, and waste disposal for residential and commercial sites." }
-    ],
-    pricing: [
-      { tier: "Single room", price: "₦15,000", note: "2–3 hours" },
-      { tier: "Full apartment (1–2 bed)", price: "₦35,000", note: "Half day" },
-      { tier: "Full house (3–4 bed)", price: "₦60,000", note: "Full day" },
-      { tier: "Post-construction (custom)", price: "From ₦80,000", note: "Site visit required" },
-      { tier: "Carpet (per room)", price: "₦8,000", note: "Steam extraction" },
-      { tier: "Weed clearing (compound)", price: "From ₦20,000", note: "Based on size" }
-    ],
-    features: [
-      "Trained and vetted cleaning staff",
-      "Eco-friendly products safe for kids and pets",
-      "Fully insured work — damage covered",
-      "Satisfaction guarantee or we come back free",
-      "Uniforms, ID badges, and professional conduct"
-    ],
-    faq: [
-      { q: "Do you bring your own cleaning supplies?", a: "Yes. We arrive with all equipment and products needed for the job, including vacuums, steam cleaners, and specialised cleaning agents. You don't need to prepare anything." },
-      { q: "How far in advance should I book?", a: "For standard home cleaning, 24–48 hours is usually enough. For post-construction or large commercial jobs, please give us 3–5 days so we can plan the team and equipment." },
-      { q: "What if I'm not satisfied with the clean?", a: "Contact us within 24 hours and we'll return to re-clean any area free of charge. If you're still not satisfied, we'll refund you in full." },
-      { q: "Do you clean shops and offices too?", a: "Yes. We serve residential, commercial, and construction site clients. WhatsApp us the property type and square footage and we'll send a quote." },
-      { q: "How do I pay?", a: "50% deposit to confirm the booking, balance on completion. Bank transfer only — no cash collection. We send a receipt after every job." }
-    ]
-  };
-
   (function () {
     'use strict';
 
-    function escapeHtml(s) {
-      if (s == null) return '';
-      return String(s)
-        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;').replace(/'/g, '&#039;');
-    }
+    const WHATSAPP_PHONE = '2349042339411';
+    const WHATSAPP_MESSAGE =
+      "Hi Zaure Clean, I have a post-construction cleaning job.\n\n" +
+      "Project type: \n" +
+      "Location: \n" +
+      "Size / floors: \n" +
+      "Handover date: ";
 
-    function buildWhatsAppUrl(service) {
-      const phone = String(service.phone || '').replace(/[^0-9]/g, '');
-      const msg = service.whatsappMessage || `Hi ${service.name}, I'd like to book a service.`;
-      return `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
-    }
-
-    function renderService(service) {
-      document.title = `${service.name} – Zaure Services`;
-      const metaDesc = document.querySelector('meta[name="description"]');
-      if (metaDesc) {
-        metaDesc.setAttribute('content', service.shortDescription || service.tagline || 'Official Zaure service.');
-      }
-
-      const waUrl = buildWhatsAppUrl(service);
-
-      document.getElementById('crumbName').textContent = service.name;
-
-      document.getElementById('heroName').textContent = service.name;
-      document.getElementById('heroTagline').textContent = service.tagline || '';
-      document.getElementById('heroDesc').textContent = service.shortDescription || service.longDescription || '';
-
-      const heroBadge = document.getElementById('heroBadge');
-      if (service.badge) {
-        heroBadge.innerHTML = `<i class="fas fa-check-circle"></i> ${escapeHtml(service.badge)}`;
-        heroBadge.style.display = 'inline-flex';
-      } else {
-        heroBadge.style.display = 'none';
-      }
-
-      const heroMeta = document.getElementById('heroMeta');
-      const pills = [];
-      if (service.hours) {
-        pills.push(`<span class="svc-hero-pill"><i class="far fa-clock"></i> ${escapeHtml(service.hours)}</span>`);
-      }
-      if (Array.isArray(service.coverage) && service.coverage.length) {
-        pills.push(`<span class="svc-hero-pill"><i class="fas fa-location-dot"></i> ${escapeHtml(service.coverage[0])}${service.coverage.length > 1 ? ' +' + (service.coverage.length - 1) : ''}</span>`);
-      }
-      if (Array.isArray(service.services) && service.services.length) {
-        pills.push(`<span class="svc-hero-pill"><i class="fas fa-list-check"></i> ${service.services.length} services</span>`);
-      }
-      heroMeta.innerHTML = pills.join('');
-
-      document.getElementById('heroCta').href = waUrl;
-
-      document.getElementById('aboutText').textContent =
-        service.longDescription || service.shortDescription || 'No description available.';
-
-      const servicesSection = document.getElementById('servicesSection');
-      const servicesGrid = document.getElementById('servicesGrid');
-      if (Array.isArray(service.services) && service.services.length) {
-        servicesSection.style.display = 'block';
-        servicesGrid.innerHTML = service.services.map(s => `
-          <div class="svc-offer-item">
-            <div class="svc-offer-icon"><i class="fas ${escapeHtml(s.icon || 'fa-check')}"></i></div>
-            <div class="svc-offer-body">
-              <h4>${escapeHtml(s.title || '')}</h4>
-              <p>${escapeHtml(s.description || '')}</p>
-            </div>
-          </div>
-        `).join('');
-      } else {
-        servicesSection.style.display = 'none';
-      }
-
-      const pricingSection = document.getElementById('pricingSection');
-      const pricingList = document.getElementById('pricingList');
-      if (Array.isArray(service.pricing) && service.pricing.length) {
-        pricingSection.style.display = 'block';
-        pricingList.innerHTML = service.pricing.map(p => `
-          <div class="svc-price-row">
-            <div class="svc-price-info">
-              <div class="svc-price-tier">${escapeHtml(p.tier || '')}</div>
-              ${p.note ? `<div class="svc-price-note">${escapeHtml(p.note)}</div>` : ''}
-            </div>
-            <div class="svc-price-value">${escapeHtml(p.price || '')}</div>
-          </div>
-        `).join('');
-      } else {
-        pricingSection.style.display = 'none';
-      }
-
-      const faqSection = document.getElementById('faqSection');
-      const faqList = document.getElementById('faqList');
-      if (Array.isArray(service.faq) && service.faq.length) {
-        faqSection.style.display = 'block';
-        faqList.innerHTML = service.faq.map(item => `
-          <details class="svc-faq-item">
-            <summary>${escapeHtml(item.q || '')}</summary>
-            <div class="svc-faq-answer">${escapeHtml(item.a || '')}</div>
-          </details>
-        `).join('');
-      } else {
-        faqSection.style.display = 'none';
-      }
-
-      document.getElementById('sideCta').href = waUrl;
-
-      const sideHours = document.getElementById('sideHours');
-      if (service.hours) {
-        sideHours.style.display = 'flex';
-        document.getElementById('sideHoursText').textContent = service.hours;
-      } else {
-        sideHours.style.display = 'none';
-      }
-
-      const coverageCard = document.getElementById('coverageCard');
-      const coverageChips = document.getElementById('coverageChips');
-      if (Array.isArray(service.coverage) && service.coverage.length) {
-        coverageCard.style.display = 'block';
-        coverageChips.innerHTML = service.coverage.map(c => `
-          <span class="svc-coverage-chip">
-            <i class="fas fa-location-dot"></i> ${escapeHtml(c)}
-          </span>
-        `).join('');
-      } else {
-        coverageCard.style.display = 'none';
-      }
-
-      const featuresCard = document.getElementById('featuresCard');
-      const featuresList = document.getElementById('featuresList');
-      if (Array.isArray(service.features) && service.features.length) {
-        featuresCard.style.display = 'block';
-        featuresList.innerHTML = service.features.map(f => `
-          <li><i class="fas fa-circle-check"></i> <span>${escapeHtml(f)}</span></li>
-        `).join('');
-      } else {
-        featuresCard.style.display = 'none';
-      }
-
-      document.getElementById('stickyName').textContent = service.name;
-      document.getElementById('stickyBtn').href = waUrl;
-    }
+    const waUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
     document.addEventListener('DOMContentLoaded', function () {
       if (typeof loadUser === 'function') loadUser();
@@ -827,7 +470,8 @@
         else location.href = '/post.html';
       });
 
-      renderService(SERVICE);
+      document.getElementById('heroWhatsApp').href = waUrl;
+      document.getElementById('contactWhatsApp').href = waUrl;
     });
   })();
   </script>
