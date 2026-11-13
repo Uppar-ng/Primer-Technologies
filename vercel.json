@@ -16,6 +16,8 @@
     { "source": "/faq", "destination": "/faq.html" },
     { "source": "/favorites", "destination": "/favorites.html" },
     { "source": "/help", "destination": "/help.html" },
+    { "source": "/hotspot", "destination": "/hotspot.html" },
+    { "source": "/hotspots", "destination": "/hotspots.html" },
     { "source": "/post", "destination": "/post.html" },
     { "source": "/privacy", "destination": "/privacy.html" },
     { "source": "/profile", "destination": "/profile.html" },
@@ -27,13 +29,11 @@
     { "source": "/store", "destination": "/store.html" },
     { "source": "/support", "destination": "/support.html" },
     { "source": "/terms", "destination": "/terms.html" },
-    { "source": "/sitemap.xml", "destination": "/api/sitemap" }
+    { "source": "/zaure-clean", "destination": "/zaure-clean.html" }
   ],
   "redirects": [
     { "source": "/index", "destination": "/", "permanent": true },
-    { "source": "/home", "destination": "/", "permanent": true },
-    { "source": "/services.html", "destination": "/services", "permanent": true },
-    { "source": "/service.html", "destination": "/service", "permanent": true }
+    { "source": "/home", "destination": "/", "permanent": true }
   ],
   "headers": [
     {
