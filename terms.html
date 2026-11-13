@@ -4,65 +4,252 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>Terms & Conditions – Zaure</title>
-  <meta name="description" content="Terms and conditions for using Zaure marketplace.">
+  <meta name="description" content="Terms and conditions for using the Zaure platform — marketplace, services, and discovery.">
   <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
   <style>
+    /* ============ HERO ============ */
     .terms-header {
-      margin: 30px 0 20px;
+      margin: 30px 0 8px;
       text-align: center;
     }
     .terms-header h1 {
+      font-family: 'Playfair Display', serif;
       font-size: 2rem;
       font-weight: 800;
       background: linear-gradient(135deg, #1a3650, #B49450);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
     }
+    @media (min-width: 768px) { .terms-header h1 { font-size: 2.4rem; } }
     .terms-header p {
       color: var(--text-secondary);
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       margin-top: 6px;
     }
+
+    /* ============ KEY NOTICES ============ */
+    .key-notices {
+      background: linear-gradient(135deg, #f8fbfe 0%, #f1f6fb 100%);
+      border: 1px solid var(--border);
+      border-left: 4px solid #B49450;
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin: 24px 0;
+    }
+    .key-notices h3 {
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: #B49450;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .key-notices ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .key-notices li {
+      display: flex;
+      gap: 10px;
+      padding: 6px 0;
+      font-size: 0.85rem;
+      color: var(--text);
+      line-height: 1.55;
+    }
+    .key-notices li i {
+      color: #1a3650;
+      font-size: 0.7rem;
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+    [data-theme="dark"] .key-notices {
+      background: rgba(212,184,122,0.06);
+    }
+
+    /* ============ TOC ============ */
+    .toc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin-bottom: 24px;
+    }
+    .toc h3 {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+    .toc ol {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+    @media (min-width: 640px) {
+      .toc ol { grid-template-columns: 1fr 1fr; gap: 4px 20px; }
+    }
+    .toc ol li a {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      padding: 5px 0;
+      font-size: 0.82rem;
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.15s;
+      line-height: 1.4;
+    }
+    .toc ol li a:hover { color: var(--navy-2, #1a3650); }
+    .toc ol li .num {
+      color: #B49450;
+      font-weight: 800;
+      font-size: 0.7rem;
+      flex-shrink: 0;
+      min-width: 20px;
+    }
+
+    /* ============ CONTENT ============ */
     .terms-content {
       background: var(--surface);
       border-radius: 20px;
-      padding: 24px;
+      padding: 28px 24px;
       border: 1px solid var(--border);
       margin-bottom: 30px;
-      line-height: 1.8;
+      line-height: 1.75;
     }
-    .terms-content h2 {
-      font-size: 1.1rem;
+    @media (min-width: 768px) { .terms-content { padding: 36px 32px; } }
+
+    .terms-section {
+      scroll-margin-top: 90px;
+      margin-bottom: 32px;
+    }
+    .terms-section:last-of-type { margin-bottom: 0; }
+
+    .terms-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text);
+      margin: 0 0 12px;
+      letter-spacing: -0.3px;
+      line-height: 1.3;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .terms-section h2 .section-num {
+      color: #B49450;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .terms-section h3 {
+      font-size: 0.95rem;
       font-weight: 700;
       color: var(--text);
-      margin: 16px 0 8px;
+      margin: 18px 0 8px;
+      letter-spacing: -0.1px;
     }
-    .terms-content p {
+
+    .terms-section p {
       font-size: 0.9rem;
       color: var(--text-secondary);
-      margin-bottom: 8px;
+      margin-bottom: 12px;
+      line-height: 1.7;
     }
-    .terms-content ul {
+
+    .terms-section ul {
       list-style: none;
       padding: 0;
-      margin-bottom: 8px;
+      margin: 0 0 14px;
     }
-    .terms-content ul li {
-      font-size: 0.9rem;
+    .terms-section ul li {
+      font-size: 0.88rem;
       color: var(--text-secondary);
-      padding: 4px 0;
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
+      padding: 4px 0 4px 22px;
+      position: relative;
+      line-height: 1.65;
     }
-    .terms-content ul li i {
+    .terms-section ul li::before {
+      content: '•';
+      position: absolute;
+      left: 8px;
+      top: 4px;
       color: #B49450;
-      margin-top: 4px;
-      font-size: 0.7rem;
+      font-weight: 900;
+      font-size: 1rem;
+    }
+    .terms-section ul li strong {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    /* Callout within content */
+    .terms-callout {
+      background: #f8fbfe;
+      border-left: 3px solid #B49450;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin: 12px 0 16px;
+      font-size: 0.85rem;
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .terms-callout strong { color: #1a3650; }
+    [data-theme="dark"] .terms-callout {
+      background: rgba(212,184,122,0.06);
+    }
+    [data-theme="dark"] .terms-callout strong { color: #D4B87A; }
+
+    /* Back to top */
+    .back-to-top {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 14px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .back-to-top:hover { color: var(--navy-2, #1a3650); }
+    .back-to-top i { font-size: 0.65rem; }
+
+    /* Contact link */
+    .terms-content a:not(.back-to-top) {
+      color: #B49450;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .terms-content a:not(.back-to-top):hover { text-decoration: underline; }
+
+    /* Print */
+    @media print {
+      .navbar, .footer, .bottom-nav, .modal-overlay, .back-to-top { display: none !important; }
+      .terms-content { border: none; padding: 0; }
+      .key-notices { border: 1px solid #ccc; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; animation: none !important; }
     }
   </style>
 </head>
@@ -97,73 +284,368 @@
 
   <div class="container">
     <div class="terms-header">
-      <h1>Terms & Conditions</h1>
-      <p>Last updated: January 2026</p>
+      <h1>Terms &amp; Conditions</h1>
+      <p>Last updated: 12 November 2026 · Effective immediately</p>
+    </div>
+
+    <!-- KEY NOTICES -->
+    <div class="key-notices">
+      <h3><i class="fas fa-circle-info"></i> Key things to know</h3>
+      <ul>
+        <li><i class="fas fa-circle"></i> <span><strong>Zaure is a platform, not a party</strong> to peer-to-peer transactions. Buyers and sellers deal directly with each other.</span></li>
+        <li><i class="fas fa-circle"></i> <span><strong>Zaure Services</strong> (e.g. Zaure Clean) and <strong>Zaure Official Store</strong> are operated by Zaure Technologies directly — different terms apply.</span></li>
+        <li><i class="fas fa-circle"></i> <span><strong>Communication happens on WhatsApp.</strong> Zaure does not record, monitor, or moderate your conversations with other users.</span></li>
+        <li><i class="fas fa-circle"></i> <span><strong>Verification is not a guarantee.</strong> A verified badge means we've checked what we can — it does not replace your own due diligence.</span></li>
+      </ul>
+    </div>
+
+    <!-- TOC -->
+    <div class="toc">
+      <h3>Contents</h3>
+      <ol>
+        <li><a href="#s1"><span class="num">01</span> Acceptance of These Terms</a></li>
+        <li><a href="#s2"><span class="num">02</span> About Zaure</a></li>
+        <li><a href="#s3"><span class="num">03</span> Eligibility &amp; Your Account</a></li>
+        <li><a href="#s4"><span class="num">04</span> Our Platform Model</a></li>
+        <li><a href="#s5"><span class="num">05</span> Buying &amp; Selling on the Marketplace</a></li>
+        <li><a href="#s6"><span class="num">06</span> Wholesale &amp; B2B Orders</a></li>
+        <li><a href="#s7"><span class="num">07</span> Zaure Services &amp; Official Store</a></li>
+        <li><a href="#s8"><span class="num">08</span> Hotspots &amp; Find a Pro</a></li>
+        <li><a href="#s9"><span class="num">09</span> Verification &amp; Trust</a></li>
+        <li><a href="#s10"><span class="num">10</span> Communication via WhatsApp</a></li>
+        <li><a href="#s11"><span class="num">11</span> Prohibited Items &amp; Activities</a></li>
+        <li><a href="#s12"><span class="num">12</span> User Conduct</a></li>
+        <li><a href="#s13"><span class="num">13</span> Payments, Pricing &amp; Taxes</a></li>
+        <li><a href="#s14"><span class="num">14</span> Disputes Between Users</a></li>
+        <li><a href="#s15"><span class="num">15</span> Liability &amp; Disclaimers</a></li>
+        <li><a href="#s16"><span class="num">16</span> Intellectual Property</a></li>
+        <li><a href="#s17"><span class="num">17</span> Suspension &amp; Termination</a></li>
+        <li><a href="#s18"><span class="num">18</span> Privacy</a></li>
+        <li><a href="#s19"><span class="num">19</span> Changes to These Terms</a></li>
+        <li><a href="#s20"><span class="num">20</span> Governing Law</a></li>
+        <li><a href="#s21"><span class="num">21</span> Contact Us</a></li>
+      </ol>
     </div>
 
     <div class="terms-content">
-      <h2><i class="fas fa-gavel" style="color:#1a3650;"></i> 1. Acceptance of Terms</h2>
-      <p>By accessing or using Zaure, you agree to be bound by these Terms & Conditions. If you do not agree, please do not use our platform.</p>
 
-      <h2><i class="fas fa-user" style="color:#1a3650;"></i> 2. User Accounts</h2>
-      <p>To use certain features, you must create an account. You agree to:</p>
-      <ul>
-        <li><i class="fas fa-circle"></i> Provide accurate and complete information</li>
-        <li><i class="fas fa-circle"></i> Keep your account details secure</li>
-        <li><i class="fas fa-circle"></i> Not share your account with others</li>
-        <li><i class="fas fa-circle"></i> Notify us of any unauthorized access</li>
-      </ul>
+      <!-- 1 -->
+      <section class="terms-section" id="s1">
+        <h2><span class="section-num">01</span> Acceptance of These Terms</h2>
+        <p>By accessing or using Zaure (zauretech.xyz and any subdomain), you agree to be bound by these Terms &amp; Conditions and our <a href="/privacy.html">Privacy Policy</a>. If you do not agree, please do not use the platform.</p>
+        <p>These terms apply to everyone who uses Zaure — buyers, sellers, service providers, visitors, and businesses.</p>
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
 
-      <h2><i class="fas fa-tag" style="color:#1a3650;"></i> 3. Buying & Selling</h2>
-      <p>Zaure is a platform that connects buyers and sellers. We do not own, buy, or sell any items listed on our platform.</p>
-      <ul>
-        <li><i class="fas fa-circle"></i> Sellers are responsible for their listings and must provide accurate descriptions</li>
-        <li><i class="fas fa-circle"></i> Buyers are responsible for inspecting items before purchase</li>
-        <li><i class="fas fa-circle"></i> Zaure is not a party to any transaction between users</li>
-        <li><i class="fas fa-circle"></i> All transactions are at the user's own risk</li>
-      </ul>
+      <!-- 2 -->
+      <section class="terms-section" id="s2">
+        <h2><span class="section-num">02</span> About Zaure</h2>
+        <p>Zaure is operated by <strong>Zaure Technologies</strong>, a Nigerian company. The platform provides:</p>
+        <ul>
+          <li>A <strong>marketplace</strong> where buyers and sellers meet</li>
+          <li>A <strong>wholesale tier</strong> for businesses buying in bulk</li>
+          <li><strong>Zaure Services</strong> — house-operated services such as Zaure Clean</li>
+          <li><strong>Zaure Official Store</strong> — products sold directly by Zaure</li>
+          <li><strong>El</strong> — a Nigerian lifestyle brand owned by Zaure Technologies</li>
+          <li><strong>Hotspots</strong> — a discovery guide to places across Nigeria</li>
+          <li><strong>Find a Pro</strong> — a directory of service professionals</li>
+        </ul>
+        <p>Zaure is not an escrow provider, a delivery company, or a financial institution. We do not hold money, control shipments, or guarantee transactions between users.</p>
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
 
-      <h2><i class="fas fa-ban" style="color:#1a3650;"></i> 4. Prohibited Items</h2>
-      <p>The following items are not allowed on Zaure:</p>
-      <ul>
-        <li><i class="fas fa-circle"></i> Illegal drugs or controlled substances</li>
-        <li><i class="fas fa-circle"></i> Weapons, firearms, or explosives</li>
-        <li><i class="fas fa-circle"></i> Stolen or counterfeit goods</li>
-        <li><i class="fas fa-circle"></i> Adult content or services</li>
-        <li><i class="fas fa-circle"></i> Human trafficking or exploitation</li>
-        <li><i class="fas fa-circle"></i> Any item that violates Nigerian law</li>
-      </ul>
+      <!-- 3 -->
+      <section class="terms-section" id="s3">
+        <h2><span class="section-num">03</span> Eligibility &amp; Your Account</h2>
+        <p>You must be at least 18 years old to use Zaure. To access certain features, you must create an account. By creating an account, you agree to:</p>
+        <ul>
+          <li>Provide <strong>accurate, current, and complete</strong> information</li>
+          <li>Keep your login details <strong>secure and private</strong></li>
+          <li>Not share your account with anyone else</li>
+          <li>Notify Zaure immediately if you suspect unauthorized access</li>
+          <li>Take full responsibility for all activity under your account</li>
+        </ul>
+        <p>Accounts created with false information, or that impersonate another person or business, may be suspended or terminated without notice.</p>
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
 
-      <h2><i class="fas fa-shield-alt" style="color:#1a3650;"></i> 5. User Conduct</h2>
-      <p>You agree not to:</p>
-      <ul>
-        <li><i class="fas fa-circle"></i> Harass, threaten, or abuse other users</li>
-        <li><i class="fas fa-circle"></i> Post false or misleading information</li>
-        <li><i class="fas fa-circle"></i> Attempt to scam or defraud other users</li>
-        <li><i class="fas fa-circle"></i> Use the platform for illegal activities</li>
-        <li><i class="fas fa-circle"></i> Interfere with the platform's operation</li>
-      </ul>
+      <!-- 4 -->
+      <section class="terms-section" id="s4">
+        <h2><span class="section-num">04</span> Our Platform Model</h2>
+        <p>Zaure operates in <strong>two distinct modes</strong>, and it is important to understand which applies to you:</p>
 
-      <h2><i class="fas fa-exclamation-triangle" style="color:#1a3650;"></i> 6. Disclaimer of Liability</h2>
-      <p>Zaure is provided "as is" without warranties of any kind. We are not responsible for:</p>
-      <ul>
-        <li><i class="fas fa-circle"></i> The quality, safety, or legality of listed items</li>
-        <li><i class="fas fa-circle"></i> The accuracy of user-provided information</li>
-        <li><i class="fas fa-circle"></i> Any disputes between buyers and sellers</li>
-        <li><i class="fas fa-circle"></i> Any damages resulting from transactions</li>
-      </ul>
+        <div class="terms-callout">
+          <strong>Mode 1 — Platform (peer-to-peer):</strong> Buyers and sellers transact <em>directly with each other</em>. Zaure provides the listing space and the discovery tools. Zaure is <strong>not a party</strong> to the transaction.
+        </div>
 
-      <h2><i class="fas fa-copyright" style="color:#1a3650;"></i> 7. Intellectual Property</h2>
-      <p>All content on Zaure, including logos, designs, and software, is owned by Zaure Technologies. You may not copy, modify, or distribute our content without permission.</p>
+        <div class="terms-callout">
+          <strong>Mode 2 — Zaure as the seller or service provider:</strong> When you buy from <strong>Zaure Official Store</strong>, hire <strong>Zaure Clean</strong>, or purchase any <strong>Zaure-operated service</strong>, Zaure Technologies itself is the counterparty. Different obligations and liability terms apply.
+        </div>
 
-      <h2><i class="fas fa-trash" style="color:#1a3650;"></i> 8. Account Termination</h2>
-      <p>We reserve the right to suspend or terminate accounts that violate these terms or engage in fraudulent activity.</p>
+        <p>Pay attention to whether the seller is a third party or Zaure Technologies. The seller name is always displayed on the listing.</p>
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
 
-      <h2><i class="fas fa-file-contract" style="color:#1a3650;"></i> 9. Changes to Terms</h2>
-      <p>We may update these Terms & Conditions at any time. Continued use of Zaure after changes constitutes acceptance of the updated terms.</p>
+      <!-- 5 -->
+      <section class="terms-section" id="s5">
+        <h2><span class="section-num">05</span> Buying &amp; Selling on the Marketplace</h2>
 
-      <h2><i class="fas fa-phone" style="color:#1a3650;"></i> 10. Contact Us</h2>
-      <p>Questions about these Terms? Contact us on WhatsApp: <a href="https://wa.me/2349042339411" target="_blank" style="color:#D4B87A;font-weight:600;">+2349042339411</a></p>
+        <h3>For sellers</h3>
+        <ul>
+          <li>You are <strong>solely responsible</strong> for the accuracy of your listings, including title, description, price, condition, and photos</li>
+          <li>You must <strong>own the item</strong> or have the legal right to sell it</li>
+          <li>You must <strong>honor the price</strong> you list unless mutually renegotiated with the buyer</li>
+          <li>You must comply with all Nigerian laws applicable to your listings</li>
+          <li>You must deliver items or services as described</li>
+        </ul>
+
+        <h3>For buyers</h3>
+        <ul>
+          <li>You are responsible for <strong>inspecting items</strong> before paying or accepting delivery</li>
+          <li>You must confirm the seller's legitimacy independently</li>
+          <li>You must communicate your intentions clearly before committing to a purchase</li>
+          <li>You must not commit to buying unless you intend to complete the purchase</li>
+        </ul>
+
+        <div class="terms-callout">
+          <strong>Important:</strong> Zaure is <strong>not a party to peer-to-peer transactions</strong>. All transactions, payments, deliveries, and disputes between buyers and sellers are between those two parties. Zaure may assist in good faith but is under no obligation to intervene.
+        </div>
+
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
+
+      <!-- 6 -->
+      <section class="terms-section" id="s6">
+        <h2><span class="section-num">06</span> Wholesale &amp; B2B Orders</h2>
+        <p>Some sellers on Zaure offer wholesale pricing for bulk orders. Wholesale pricing is available when a product listing shows a "Buy in Bulk" option.</p>
+        <ul>
+          <li><strong>Minimum Order Quantities (MOQ)</strong> are set by the seller and must be respected</li>
+          <li><strong>Prices displayed for bulk tiers are indicative</strong> — the final quote is confirmed between buyer and seller, typically over WhatsApp</li>
+          <li><strong>Lead times, shipping, and delivery terms</strong> are arranged directly between buyer and seller</li>
+          <li>Zaure does not enforce wholesale terms, take deposits, or guarantee bulk delivery</li>
+          <li>Sample orders (if offered) are subject to the seller's own terms</li>
+        </ul>
+        <p>For B2B buyers, we recommend confirming business details of the seller before placing large orders, and using written agreements for high-value transactions.</p>
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
+
+      <!-- 7 -->
+      <section class="terms-section" id="s7">
+        <h2><span class="section-num">07</span> Zaure Services &amp; Official Store</h2>
+        <p>Zaure Technologies operates certain services and stores directly. These include (but are not limited to):</p>
+        <ul>
+          <li><strong>Zaure Clean</strong> — post-construction, pest control, weed control, and carpet cleaning services</li>
+          <li><strong>Zaure Official Store</strong> — products sold directly by Zaure</li>
+          <li><strong>El</strong> — a house brand owned and operated by Zaure Technologies</li>
+        </ul>
+
+        <h3>When you hire or buy from Zaure directly</h3>
+        <ul>
+          <li>Zaure is the <strong>service provider or seller</strong>, not a platform intermediary</li>
+          <li>Quotes, bookings, and job details are confirmed in writing (typically WhatsApp or email)</li>
+          <li>Zaure is responsible for delivering the service to the standard described in the quote</li>
+          <li>Payment terms, deposits, and cancellation policies are set out in the individual service quote</li>
+          <li>For Zaure Clean: jobs are performed by Zaure staff or vetted sub-contractors engaged by Zaure</li>
+        </ul>
+
+        <div class="terms-callout">
+          <strong>Liability for Zaure Services</strong> is different from marketplace transactions. If Zaure damages your property while performing a service, Zaure will cover it up to the value stated in the service quote. This does not extend to third-party sellers on the marketplace.
+        </div>
+
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
+
+      <!-- 8 -->
+      <section class="terms-section" id="s8">
+        <h2><span class="section-num">08</span> Hotspots &amp; Find a Pro</h2>
+
+        <h3>Hotspots</h3>
+        <p>Hotspots is a discovery guide to places across Nigeria. Zaure does not own, operate, or endorse any venue listed. Information (hours, location, pricing, contact) is provided in good faith but may be out of date. If you transact with a hotspot venue, that transaction is <strong>between you and the venue</strong> — Zaure is not involved.</p>
+
+        <h3>Find a Pro</h3>
+        <p>Find a Pro is a directory of service professionals (plumbers, electricians, etc.). <strong>Zaure does not vet, employ, or guarantee these professionals.</strong> You are responsible for checking references, agreeing scope and price, and confirming the professional's qualifications. Zaure is not a party to any job arranged through the directory.</p>
+
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
+
+      <!-- 9 -->
+      <section class="terms-section" id="s9">
+        <h2><span class="section-num">09</span> Verification &amp; Trust</h2>
+        <p>Zaure offers verification badges to sellers and businesses. Verification means we have checked certain information (phone, email, business documents, or physical address) at the time of verification.</p>
+        <ul>
+          <li><strong>Verification is not a guarantee</strong> of quality, reliability, or honesty</li>
+          <li>Verification status can change — a badge today does not guarantee the seller's conduct tomorrow</li>
+          <li>Users must still exercise their own due diligence</li>
+          <li>Zaure may revoke verification at any time if new information emerges</li>
+        </ul>
+        <p>Verification is offered in tiers (Verified, Business Verified, Trade Assured). Each tier requires different checks. The badge shown on a seller's page reflects their current tier.</p>
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
+
+      <!-- 10 -->
+      <section class="terms-section" id="s10">
+        <h2><span class="section-num">10</span> Communication via WhatsApp</h2>
+        <p>Zaure intentionally does <strong>not</strong> operate a native messaging system. All commercial conversations between buyers and sellers happen on <strong>WhatsApp</strong>. We made this choice because WhatsApp is where Nigerian commerce already happens.</p>
+        <ul>
+          <li>Zaure does <strong>not read, record, or monitor</strong> your WhatsApp conversations</li>
+          <li>Zaure has <strong>no visibility into</strong> agreements, payments, or promises made on WhatsApp</li>
+          <li>Zaure <strong>cannot retrieve</strong> deleted messages or resolve disputes based on chat history</li>
+          <li>You are solely responsible for what you say, promise, and agree to on WhatsApp</li>
+        </ul>
+        <p>Keep records of important conversations. For high-value transactions, use a written agreement in addition to WhatsApp.</p>
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
+
+      <!-- 11 -->
+      <section class="terms-section" id="s11">
+        <h2><span class="section-num">11</span> Prohibited Items &amp; Activities</h2>
+        <p>The following items may not be listed, sold, or promoted on Zaure:</p>
+        <ul>
+          <li>Illegal drugs, controlled substances, or drug paraphernalia</li>
+          <li>Firearms, ammunition, or explosives</li>
+          <li>Weapons of any kind (except legal kitchen or agricultural tools)</li>
+          <li>Stolen, counterfeit, or smuggled goods</li>
+          <li>Human organs, blood, or biological material</li>
+          <li>Endangered species or wildlife products</li>
+          <li>Adult content or sexual services</li>
+          <li>Human trafficking or exploitation in any form</li>
+          <li>Fraudulent documents, fake IDs, or official forgeries</li>
+          <li>Live animals (except where explicitly permitted by law and listed under our livestock category)</li>
+          <li>Recalled or dangerous products</li>
+          <li>Any item or service that violates Nigerian law or international sanctions</li>
+        </ul>
+        <p>Zaure may remove any listing that violates these rules, with or without notice, and may suspend the account.</p>
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
+
+      <!-- 12 -->
+      <section class="terms-section" id="s12">
+        <h2><span class="section-num">12</span> User Conduct</h2>
+        <p>You agree not to:</p>
+        <ul>
+          <li>Harass, threaten, or abuse any user</li>
+          <li>Post false, misleading, or defamatory information</li>
+          <li>Impersonate any person, business, or Zaure staff</li>
+          <li>Attempt to scam, defraud, or deceive other users</li>
+          <li>Use the platform for money laundering or any illegal purpose</li>
+          <li>Scrape, crawl, or extract data from Zaure without written permission</li>
+          <li>Attempt to interfere with the platform's operation, security, or other users' access</li>
+          <li>Reverse-engineer or attempt to gain unauthorized access to Zaure systems</li>
+          <li>Solicit Zaure users to transact outside the platform in a way that circumvents these terms</li>
+        </ul>
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
+
+      <!-- 13 -->
+      <section class="terms-section" id="s13">
+        <h2><span class="section-num">13</span> Payments, Pricing &amp; Taxes</h2>
+        <ul>
+          <li><strong>Zaure does not process payments</strong> between marketplace buyers and sellers. Payment methods are agreed directly between the parties.</li>
+          <li><strong>Zaure may accept payment</strong> for its own services (Zaure Clean, Zaure Official Store, El). These are set out in the relevant quote or checkout.</li>
+          <li>Prices shown on listings are set by the seller. Zaure does not set, control, or verify marketplace prices.</li>
+          <li><strong>Sellers are responsible</strong> for their own tax obligations (VAT, income tax, and any other applicable taxes).</li>
+          <li><strong>Zaure is responsible</strong> for tax on its own direct sales and services.</li>
+          <li>Zaure does not currently charge commission on marketplace transactions. This may change in the future, and any change will be announced in advance.</li>
+        </ul>
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
+
+      <!-- 14 -->
+      <section class="terms-section" id="s14">
+        <h2><span class="section-num">14</span> Disputes Between Users</h2>
+        <p>Disputes between buyers and sellers on the marketplace are <strong>between those parties</strong>. Zaure is not obligated to mediate, resolve, or compensate.</p>
+        <p>Zaure may, at its sole discretion, offer goodwill assistance — such as removing a fraudulent listing, suspending an account, or providing information to authorities. This is not a guarantee of resolution and does not create an obligation to mediate future disputes.</p>
+        <p>For disputes involving Zaure-operated services (Zaure Clean, Zaure Official Store, El), please contact us directly via the contact details below. We aim to resolve service disputes fairly and promptly.</p>
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
+
+      <!-- 15 -->
+      <section class="terms-section" id="s15">
+        <h2><span class="section-num">15</span> Liability &amp; Disclaimers</h2>
+        <p>Zaure is provided <strong>"as is"</strong> without warranties of any kind, express or implied. To the maximum extent permitted by law, Zaure is not liable for:</p>
+        <ul>
+          <li>The quality, safety, legality, or accuracy of any listing by a third-party seller</li>
+          <li>Fraud, misrepresentation, or misconduct by any user</li>
+          <li>Disputes, losses, or damages arising from peer-to-peer transactions</li>
+          <li>The accuracy of information on Hotspots or Find a Pro listings</li>
+          <li>Content posted by users (reviews, descriptions, photos)</li>
+          <li>Interruption, downtime, or technical failure of the platform</li>
+          <li>Any indirect, incidental, special, or consequential damages</li>
+        </ul>
+
+        <div class="terms-callout">
+          <strong>For Zaure-operated services</strong> (Zaure Clean, Zaure Official Store, El), Zaure's liability is limited to the value stated in the service quote or the price paid for the product. Zaure is not liable for indirect or consequential loss arising from a service.
+        </div>
+
+        <p>Zaure does not guarantee that the platform will be uninterrupted, error-free, or free from harmful components. You use the platform at your own risk.</p>
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
+
+      <!-- 16 -->
+      <section class="terms-section" id="s16">
+        <h2><span class="section-num">16</span> Intellectual Property</h2>
+        <p>All content on Zaure — including the Zaure name, logo, monogram, El brand, design, code, and copy — is owned by <strong>Zaure Technologies</strong> or its licensors. You may not copy, modify, distribute, or use our content without written permission.</p>
+        <p>By posting content (photos, descriptions, reviews) on Zaure, you grant Zaure a <strong>non-exclusive, worldwide, royalty-free licence</strong> to use, display, and reproduce that content for the purpose of operating the platform. You retain ownership of your content.</p>
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
+
+      <!-- 17 -->
+      <section class="terms-section" id="s17">
+        <h2><span class="section-num">17</span> Suspension &amp; Termination</h2>
+        <p>Zaure may suspend or terminate any account, at any time, with or without notice, if:</p>
+        <ul>
+          <li>We reasonably believe the account has violated these Terms</li>
+          <li>The account is involved in fraud, scams, or illegal activity</li>
+          <li>The account is used to harm or deceive other users</li>
+          <li>We are required to do so by law or a lawful order</li>
+          <li>The account has been inactive for an extended period</li>
+        </ul>
+        <p>You may delete your account at any time. Upon deletion, your listings will be removed and your personal data handled according to our <a href="/privacy.html">Privacy Policy</a>.</p>
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
+
+      <!-- 18 -->
+      <section class="terms-section" id="s18">
+        <h2><span class="section-num">18</span> Privacy</h2>
+        <p>Your use of Zaure is also governed by our <a href="/privacy.html">Privacy Policy</a>, which explains what data we collect, how we use it, and your rights over it.</p>
+        <p>Key points:</p>
+        <ul>
+          <li>We collect only what we need to operate the platform</li>
+          <li>We never sell your personal data</li>
+          <li>We use cookies and analytics to improve the platform</li>
+          <li>You have the right to request, correct, or delete your data</li>
+        </ul>
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
+
+      <!-- 19 -->
+      <section class="terms-section" id="s19">
+        <h2><span class="section-num">19</span> Changes to These Terms</h2>
+        <p>We may update these Terms &amp; Conditions at any time. When we do, we will update the "Last updated" date at the top of this page. For material changes, we will notify registered users by email or a visible notice on the platform.</p>
+        <p>Continued use of Zaure after changes takes effect constitutes acceptance of the updated terms. If you do not agree, you should stop using the platform.</p>
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
+
+      <!-- 20 -->
+      <section class="terms-section" id="s20">
+        <h2><span class="section-num">20</span> Governing Law</h2>
+        <p>These Terms &amp; Conditions are governed by the laws of the <strong>Federal Republic of Nigeria</strong>. Any dispute arising from the use of Zaure or these terms is subject to the exclusive jurisdiction of the courts of Nigeria.</p>
+        <p>Where the law permits, we encourage parties to seek amicable resolution before resorting to formal legal action.</p>
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
+
+      <!-- 21 -->
+      <section class="terms-section" id="s21">
+        <h2><span class="section-num">21</span> Contact Us</h2>
+        <p>Questions, complaints, or concerns about these Terms? We'd like to hear from you.</p>
+        <ul>
+          <li><strong>WhatsApp:</strong> <a href="https://wa.me/2349042339411" target="_blank" rel="noopener">+234 904 233 9411</a></li>
+          <li><strong>Email:</strong> <a href="mailto:hello@zauretech.xyz">hello@zauretech.xyz</a></li>
+          <li><strong>For urgent safety or fraud reports:</strong> use the WhatsApp number above and mark your message "URGENT"</li>
+        </ul>
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
+
     </div>
   </div>
 
@@ -186,22 +668,23 @@
         <div class="footer-col">
           <h4>Browse</h4>
           <a href="/category.html?slug=all">All Items</a>
-          <a href="/category.html?slug=vehicles">Vehicles</a>
-          <a href="/category.html?slug=electronics">Electronics</a>
-          <a href="/category.html?slug=furniture">Furniture</a>
+          <a href="/hotspots.html">Hotspots</a>
+          <a href="/services.html">Find a Pro</a>
           <a href="/category.html?slug=fashion">Fashion</a>
-          <a href="/category.html?slug=real-estate">Real Estate</a>
+          <a href="/category.html?slug=electronics">Electronics</a>
+          <a href="/category.html?slug=home-kitchen">Home & Kitchen</a>
         </div>
         <div class="footer-col">
           <h4>Support</h4>
           <a href="/help.html">Help Center</a>
+          <a href="/faq.html">FAQ</a>
           <a href="/safety.html">Safety Tips</a>
           <a href="/contact.html">Contact Us</a>
-          <a href="/support.html">Support</a>
         </div>
         <div class="footer-col">
           <h4>Company</h4>
           <a href="/about.html">About Us</a>
+          <a href="/alamin-ahmed.html">Founder</a>
           <a href="/careers.html">Careers</a>
           <a href="/privacy.html">Privacy Policy</a>
           <a href="/terms.html">Terms of Service</a>
@@ -279,6 +762,26 @@
       loadUser();
       initTheme();
       updateFavoriteBadge();
+
+      // Smooth scroll for TOC links
+      document.querySelectorAll('.toc a, .back-to-top').forEach(a => {
+        a.addEventListener('click', function(e) {
+          const href = this.getAttribute('href');
+          if (href === '#') {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            return;
+          }
+          if (href && href.startsWith('#')) {
+            const target = document.querySelector(href);
+            if (target) {
+              e.preventDefault();
+              target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              history.replaceState(null, '', href);
+            }
+          }
+        });
+      });
     });
   </script>
 </body>
