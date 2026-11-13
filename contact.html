@@ -1,84 +1,526 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>Contact Us – Zaure</title>
-  <meta name="description" content="Contact Zaure support team for help, inquiries, or to report issues.">
+  <meta name="description" content="Contact Zaure — WhatsApp for fastest response, form for detailed inquiries, email for non-urgent matters.">
   <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
   <style>
-    .contact-header {
-      margin: 30px 0 20px;
+    :root {
+      --navy: #0f2940;
+      --navy-2: #1a3650;
+      --gold: #D4B87A;
+      --gold-deep: #B49450;
+      --wa: #25D366;
+      --wa-dark: #1DA851;
+      --danger: #dc2626;
+    }
+
+    /* ============ BREADCRUMB ============ */
+    .contact-breadcrumb {
+      display: flex; align-items: center; gap: 7px;
+      margin: 20px 0 16px; font-size: 0.76rem;
+      color: var(--text-secondary); flex-wrap: wrap;
+    }
+    .contact-breadcrumb a {
+      color: var(--text-secondary); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .contact-breadcrumb a:hover { color: var(--navy-2); }
+    .contact-breadcrumb i { font-size: 0.5rem; opacity: 0.55; }
+    .contact-breadcrumb .current { color: var(--text); font-weight: 600; }
+
+    /* ============ HERO ============ */
+    .contact-hero {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      background: linear-gradient(135deg, #0f2940 0%, #1a3650 55%, #2a4a6a 100%);
+      border-radius: 22px;
+      padding: 44px 24px 40px;
       text-align: center;
+      color: white;
+      margin-bottom: 24px;
     }
-    .contact-header h1 {
-      font-size: 2rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, #1a3650, #B49450);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .contact-header p {
-      color: var(--text-secondary);
-      font-size: 1rem;
-      margin-top: 6px;
-    }
-    .contact-cards {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
-      margin-bottom: 30px;
-    }
-    @media (min-width: 640px) {
-      .contact-cards { grid-template-columns: repeat(3, 1fr); }
-    }
-    .contact-card {
-      background: var(--surface);
-      border-radius: 20px;
-      padding: 24px;
-      text-align: center;
-      border: 1px solid var(--border);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .contact-card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-hover);
-    }
-    .contact-card .contact-icon {
-      width: 60px;
-      height: 60px;
+    .contact-hero::before {
+      content: '';
+      position: absolute;
+      top: -30%; right: -15%;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(212,184,122,0.22) 0%, transparent 65%);
       border-radius: 50%;
-      background: var(--surface-alt);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .contact-hero > * { position: relative; z-index: 1; }
+
+    .contact-hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.62rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--gold);
+      padding: 5px 12px;
+      background: rgba(212,184,122,0.12);
+      border: 1px solid rgba(212,184,122,0.35);
+      border-radius: 40px;
+      margin-bottom: 14px;
+    }
+    .contact-hero-eyebrow i { font-size: 0.55rem; }
+
+    .contact-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.7rem, 5vw, 2.4rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.6px;
+      margin-bottom: 10px;
+    }
+    .contact-hero p {
+      font-size: clamp(0.85rem, 2vw, 0.95rem);
+      color: rgba(255,255,255,0.8);
+      line-height: 1.55;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* ============ URGENT STRIP ============ */
+    .urgent-strip {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 18px;
+      background: rgba(220,38,38,0.06);
+      border: 1px solid rgba(220,38,38,0.22);
+      border-left: 4px solid var(--danger);
+      border-radius: 14px;
+      margin-bottom: 24px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .urgent-strip:hover {
+      background: rgba(220,38,38,0.1);
+    }
+    .urgent-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--danger);
+      color: white;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 12px;
-      font-size: 1.5rem;
-      color: #1a3650;
+      font-size: 0.95rem;
+      flex-shrink: 0;
     }
-    .contact-card h3 {
-      font-size: 1rem;
-      font-weight: 700;
+    .urgent-body { flex: 1; min-width: 0; }
+    .urgent-body h3 {
+      font-size: 0.88rem;
+      font-weight: 800;
       color: var(--text);
-      margin-bottom: 4px;
+      margin-bottom: 2px;
+      line-height: 1.3;
     }
-    .contact-card p {
+    .urgent-body p {
+      font-size: 0.76rem;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+    .urgent-arrow {
+      color: var(--danger);
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    /* ============ LAYOUT ============ */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-bottom: 32px;
+      align-items: start;
+    }
+    @media (min-width: 1024px) {
+      .contact-layout {
+        grid-template-columns: minmax(0, 1fr) 320px;
+        gap: 32px;
+      }
+    }
+
+    /* ============ FORM ============ */
+    .contact-form-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px 24px;
+    }
+    @media (min-width: 768px) {
+      .contact-form-card { padding: 32px; }
+    }
+
+    .form-header {
+      margin-bottom: 22px;
+    }
+    .form-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.3px;
+      margin-bottom: 6px;
+      line-height: 1.25;
+    }
+    .form-header p {
       font-size: 0.85rem;
       color: var(--text-secondary);
+      line-height: 1.55;
     }
-    .contact-card a {
-      display: inline-block;
-      margin-top: 8px;
-      color: #1a3650;
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    @media (min-width: 640px) {
+      .form-grid { grid-template-columns: 1fr 1fr; gap: 14px 16px; }
+    }
+
+    .form-field { display: flex; flex-direction: column; min-width: 0; }
+    .form-field.full { grid-column: 1 / -1; }
+
+    .form-field label {
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .form-field label .req {
+      color: #e74c3c;
+      font-weight: 800;
+    }
+
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      width: 100%;
+      padding: 11px 13px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.88rem;
+      color: var(--text);
+      background: var(--surface);
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus {
+      border-color: var(--navy-2);
+      box-shadow: 0 0 0 3px rgba(26,54,80,0.08);
+    }
+    .form-field input::placeholder,
+    .form-field textarea::placeholder {
+      color: #94a3b8;
+    }
+    .form-field textarea {
+      resize: vertical;
+      min-height: 120px;
+      line-height: 1.5;
+    }
+    .form-field select {
+      -webkit-appearance: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 34px;
+      cursor: pointer;
+    }
+
+    .form-submit {
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: 40px;
+      background: var(--navy-2);
+      color: white;
+      border: none;
+      font-weight: 800;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: inherit;
+      transition: all 0.2s;
+      box-shadow: 0 6px 20px rgba(26,54,80,0.25);
+      margin-top: 6px;
+      grid-column: 1 / -1;
+    }
+    .form-submit:hover:not(:disabled) {
+      background: var(--navy);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(26,54,80,0.35);
+    }
+    .form-submit:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .form-fineprint {
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      text-align: center;
+      margin-top: 12px;
+      grid-column: 1 / -1;
+    }
+
+    .form-message {
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      margin-bottom: 16px;
+      display: none;
+      grid-column: 1 / -1;
+    }
+    .form-message.show { display: block; }
+    .form-message.error {
+      background: rgba(231,76,60,0.08);
+      border: 1px solid rgba(231,76,60,0.25);
+      color: #c0392b;
+    }
+    .form-message.success {
+      background: rgba(22,163,74,0.08);
+      border: 1px solid rgba(22,163,74,0.25);
+      color: #16a34a;
+    }
+    .form-message i { margin-right: 6px; }
+
+    /* ============ SIDEBAR ============ */
+    .contact-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    @media (min-width: 1024px) {
+      .contact-sidebar {
+        position: sticky;
+        top: 90px;
+        align-self: start;
+      }
+    }
+
+    .contact-method {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      text-decoration: none;
+      color: var(--text);
+      display: block;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    }
+    .contact-method:hover {
+      border-color: rgba(212,184,122,0.5);
+      box-shadow: 0 6px 18px rgba(15,41,64,0.06);
+      transform: translateY(-2px);
+    }
+
+    .cm-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .cm-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .cm-icon.wa {
+      background: var(--wa);
+      color: white;
+    }
+    .cm-icon.email {
+      background: linear-gradient(135deg, var(--navy-2), #2a4a6a);
+      color: var(--gold);
+    }
+    .cm-icon.form {
+      background: linear-gradient(135deg, var(--navy-2), #2a4a6a);
+      color: var(--gold);
+    }
+
+    .cm-title { flex: 1; min-width: 0; }
+    .cm-title h3 {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 2px;
+      line-height: 1.3;
+    }
+    .cm-title p {
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    .cm-value {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text);
+      padding-top: 8px;
+      border-top: 1px solid var(--border);
+      word-break: break-word;
+    }
+    .cm-value.best {
+      color: var(--wa-dark);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .cm-value.best::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--wa);
+      animation: pulseDot 1.8s infinite;
+    }
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    /* ============ BEFORE CONTACT ============ */
+    .before-contact {
+      background: linear-gradient(135deg, #f8fbfe 0%, #f1f6fb 100%);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--gold);
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin-bottom: 24px;
+    }
+    [data-theme="dark"] .before-contact {
+      background: rgba(212,184,122,0.06);
+    }
+    .before-contact h3 {
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--gold-deep);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .before-contact ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .before-contact li {
+      display: flex;
+      gap: 10px;
+      padding: 6px 0;
+      font-size: 0.85rem;
+      color: var(--text);
+      line-height: 1.55;
+    }
+    .before-contact li i {
+      color: var(--gold-deep);
+      font-size: 0.75rem;
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+    .before-contact li a {
+      color: var(--gold-deep);
       font-weight: 600;
       text-decoration: none;
-      font-size: 0.9rem;
     }
-    .contact-card a:hover { text-decoration: underline; }
+    .before-contact li a:hover {
+      text-decoration: underline;
+    }
+    .before-contact li strong {
+      color: var(--navy-2);
+    }
+    [data-theme="dark"] .before-contact li strong {
+      color: var(--gold);
+    }
+
+    /* ============ HOURS ============ */
+    .hours-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      margin-bottom: 24px;
+    }
+    .hours-card h3 {
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .hours-card h3 i { color: var(--gold-deep); }
+    .hours-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 6px;
+    }
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      font-size: 0.83rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .hours-row:last-child { border-bottom: none; }
+    .hours-row .day {
+      color: var(--text);
+      font-weight: 600;
+    }
+    .hours-row .time {
+      color: var(--text-secondary);
+      font-variant-numeric: tabular-nums;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -111,38 +553,183 @@
   </nav>
 
   <div class="container">
-    <div class="contact-header">
+
+    <div class="contact-breadcrumb">
+      <a href="/">Home</a>
+      <i class="fas fa-chevron-right"></i>
+      <a href="/support.html">Support</a>
+      <i class="fas fa-chevron-right"></i>
+      <span class="current">Contact Us</span>
+    </div>
+
+    <!-- ============ HERO ============ -->
+    <section class="contact-hero">
+      <span class="contact-hero-eyebrow">
+        <i class="fas fa-comments"></i> Get in touch
+      </span>
       <h1>Contact Us</h1>
-      <p>We're here to help with any questions or concerns</p>
+      <p>Whether it's a question, a report, or something we should know — here's the fastest way to reach us.</p>
+    </section>
+
+    <!-- ============ URGENT STRIP ============ -->
+    <a href="https://wa.me/2349042339411?text=URGENT%3A%20I%20need%20to%20report%20a%20scam%20or%20safety%20issue%20on%20Zaure.%0A%0AWhat%20happened%3A%20"
+       target="_blank"
+       rel="noopener"
+       class="urgent-strip">
+      <div class="urgent-icon"><i class="fas fa-exclamation-triangle"></i></div>
+      <div class="urgent-body">
+        <h3>Reporting a scam or safety issue?</h3>
+        <p>Message us on WhatsApp marked URGENT — we act on these within 24 hours.</p>
+      </div>
+      <i class="fas fa-chevron-right urgent-arrow"></i>
+    </a>
+
+    <!-- ============ BEFORE YOU CONTACT ============ -->
+    <div class="before-contact">
+      <h3><i class="fas fa-bolt"></i> Save time — you might find your answer here</h3>
+      <ul>
+        <li>
+          <i class="fas fa-book-open"></i>
+          <span><strong>Common questions:</strong> Try the <a href="/faq.html">FAQ</a> or the <a href="/help.html">Help Center</a> — most answers are already there.</span>
+        </li>
+        <li>
+          <i class="fas fa-shield-halved"></i>
+          <span><strong>Buying or selling safety:</strong> Read the <a href="/safety.html">Safety Tips</a> page — it covers every common scam pattern.</span>
+        </li>
+        <li>
+          <i class="fas fa-hand-sparkles"></i>
+          <span><strong>Zaure Clean bookings:</strong> Request a quote directly on the <a href="/zaure-clean.html">Zaure Clean page</a> — faster than contacting us.</span>
+        </li>
+      </ul>
     </div>
 
-    <div class="contact-cards">
-      <div class="contact-card">
-        <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
-        <h3>WhatsApp</h3>
-        <p>Fastest way to reach us</p>
-        <a href="https://wa.me/2349042339411" target="_blank">+234 904 233 9411</a>
+    <!-- ============ LAYOUT ============ -->
+    <div class="contact-layout">
+
+      <!-- ============ FORM ============ -->
+      <div class="contact-form-card">
+        <div class="form-header">
+          <h2>Send us a message</h2>
+          <p>For detailed inquiries, business requests, partnership opportunities, or anything that needs a written reply.</p>
+        </div>
+
+        <form class="form-grid" id="contactForm" novalidate>
+          <div class="form-message" id="formMessage"></div>
+
+          <div class="form-field">
+            <label>Your name <span class="req">*</span></label>
+            <input type="text" name="name" id="cName" placeholder="Full name" required>
+          </div>
+
+          <div class="form-field">
+            <label>Email <span class="req">*</span></label>
+            <input type="email" name="email" id="cEmail" placeholder="you@example.com" required>
+          </div>
+
+          <div class="form-field">
+            <label>Phone / WhatsApp <span class="req">*</span></label>
+            <input type="tel" name="phone" id="cPhone" placeholder="08012345678" required>
+          </div>
+
+          <div class="form-field">
+            <label>Reason for contact <span class="req">*</span></label>
+            <select name="reason" id="cReason" required>
+              <option value="">Select a reason</option>
+              <option value="General inquiry">General inquiry</option>
+              <option value="Business / B2B">Business / B2B (bulk, wholesale, supply)</option>
+              <option value="Zaure Clean">Zaure Clean</option>
+              <option value="Store verification">Store verification</option>
+              <option value="Bug report">Bug report / technical issue</option>
+              <option value="Partnership / media">Partnership / media</option>
+              <option value="Careers">Careers</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-field full">
+            <label>Subject <span class="req">*</span></label>
+            <input type="text" name="subject" id="cSubject" placeholder="A short summary of your message" required>
+          </div>
+
+          <div class="form-field full">
+            <label>Message <span class="req">*</span></label>
+            <textarea name="message" id="cMessage" placeholder="Tell us what's on your mind — the more detail, the better we can help." required></textarea>
+          </div>
+
+          <button type="submit" class="form-submit" id="cSubmit">
+            <i class="fas fa-paper-plane"></i> Send message
+          </button>
+
+          <p class="form-fineprint">
+            We respond to form submissions within 1–2 business days. For faster help, message us on WhatsApp.
+          </p>
+        </form>
       </div>
-      <div class="contact-card">
-        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-        <h3>Email</h3>
-        <p>For detailed inquiries</p>
-        <a href="mailto:support@zauretech.vercel.app">support@zauretech.vercel.app</a>
-      </div>
-      <div class="contact-card">
-        <div class="contact-icon"><i class="fas fa-clock"></i></div>
-        <h3>Support Hours</h3>
-        <p>Monday – Saturday</p>
-        <p style="font-weight:600;color:var(--text);">9:00 AM – 6:00 PM WAT</p>
-      </div>
+
+      <!-- ============ SIDEBAR ============ -->
+      <aside class="contact-sidebar">
+
+        <a href="https://wa.me/2349042339411?text=Hi%20Zaure%2C%20I%20have%20a%20question%3A%20"
+           target="_blank"
+           rel="noopener"
+           class="contact-method">
+          <div class="cm-header">
+            <div class="cm-icon wa"><i class="fab fa-whatsapp"></i></div>
+            <div class="cm-title">
+              <h3>WhatsApp</h3>
+              <p>Fastest response</p>
+            </div>
+          </div>
+          <div class="cm-value best">Recommended · a few hours</div>
+          <div class="cm-value" style="border-top: none; padding-top: 4px;">+234 904 233 9411</div>
+        </a>
+
+        <a href="mailto:hello@zauretech.xyz" class="contact-method">
+          <div class="cm-header">
+            <div class="cm-icon email"><i class="fas fa-envelope"></i></div>
+            <div class="cm-title">
+              <h3>Email</h3>
+              <p>For detailed matters</p>
+            </div>
+          </div>
+          <div class="cm-value">hello@zauretech.xyz</div>
+        </a>
+
+        <div class="hours-card">
+          <h3><i class="fas fa-clock"></i> Support hours</h3>
+          <div class="hours-grid">
+            <div class="hours-row">
+              <span class="day">Monday – Friday</span>
+              <span class="time">9:00 – 18:00 WAT</span>
+            </div>
+            <div class="hours-row">
+              <span class="day">Saturday</span>
+              <span class="time">10:00 – 16:00 WAT</span>
+            </div>
+            <div class="hours-row">
+              <span class="day">Sunday</span>
+              <span class="time">Closed</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-method" style="cursor: default;">
+          <div class="cm-header">
+            <div class="cm-icon email"><i class="fas fa-building"></i></div>
+            <div class="cm-title">
+              <h3>Zaure Technologies</h3>
+              <p>Nigeria</p>
+            </div>
+          </div>
+          <div class="cm-value" style="font-size: 0.76rem; font-weight: 500; color: var(--text-secondary);">
+            Remote-first team operating from Kaduna and Lagos. No walk-in office visits at this time.
+          </div>
+        </div>
+
+      </aside>
+
     </div>
 
-    <div style="text-align:center;padding:20px;background:var(--surface);border-radius:16px;border:1px solid var(--border);margin-bottom:30px;">
-      <p style="color:var(--text-secondary);font-size:0.9rem;">
-        For info or to report an issue, contact us on WhatsApp: 
-        <a href="https://wa.me/2349042339411" target="_blank" style="color:#D4B87A;text-decoration:none;font-weight:600;">+2349042339411</a>
-      </p>
-    </div>
   </div>
 
   <footer class="footer">
@@ -164,22 +751,23 @@
         <div class="footer-col">
           <h4>Browse</h4>
           <a href="/category.html?slug=all">All Items</a>
-          <a href="/category.html?slug=vehicles">Vehicles</a>
-          <a href="/category.html?slug=electronics">Electronics</a>
-          <a href="/category.html?slug=furniture">Furniture</a>
+          <a href="/hotspots.html">Hotspots</a>
+          <a href="/services.html">Find a Pro</a>
           <a href="/category.html?slug=fashion">Fashion</a>
-          <a href="/category.html?slug=real-estate">Real Estate</a>
+          <a href="/category.html?slug=electronics">Electronics</a>
+          <a href="/category.html?slug=home-kitchen">Home & Kitchen</a>
         </div>
         <div class="footer-col">
           <h4>Support</h4>
           <a href="/help.html">Help Center</a>
+          <a href="/faq.html">FAQ</a>
           <a href="/safety.html">Safety Tips</a>
           <a href="/contact.html">Contact Us</a>
-          <a href="/support.html">Support</a>
         </div>
         <div class="footer-col">
           <h4>Company</h4>
           <a href="/about.html">About Us</a>
+          <a href="/alamin-ahmed.html">Founder</a>
           <a href="/careers.html">Careers</a>
           <a href="/privacy.html">Privacy Policy</a>
           <a href="/terms.html">Terms of Service</a>
@@ -199,9 +787,6 @@
         <div class="footer-bottom">
           <span>&copy; 2026 <strong>Zaure Technologies</strong>. All rights reserved.</span>
           <span class="footer-lang"><i class="fas fa-globe"></i> Nigeria · English</span>
-        </div>
-        <div style="grid-column: 1/-1; text-align: center; margin-top: 8px; font-size: 0.8rem; color: #94A3B8;">
-          For info or to report an issue, contact us on WhatsApp: <a href="https://wa.me/2349042339411" target="_blank" style="color: #D4B87A; text-decoration: none; font-weight: 600;">+2349042339411</a>
         </div>
       </div>
     </div>
@@ -240,7 +825,7 @@
         <input type="hidden" id="signupState" value="">
         <label class="terms-checkbox">
           <input type="checkbox" id="termsCheckbox" required>
-          <span>By creating an account, you agree to Zaure's <a href="/terms.html" target="_blank">Terms</a>, <a href="/conditions.html" target="_blank">Conditions of Use</a>, and <a href="/privacy.html" target="_blank">Privacy Policy</a>.</span>
+          <span>By creating an account, you agree to Zaure's <a href="/terms.html" target="_blank">Terms</a> and <a href="/privacy.html" target="_blank">Privacy Policy</a>.</span>
         </label>
         <button type="submit" class="btn-primary">Sign Up</button>
       </form>
@@ -249,15 +834,111 @@
 
   <script src="/js/main.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+  (function () {
+    'use strict';
+
+    /* ============================================================
+       FORMSPREE ENDPOINT — replace with your own form ID
+       Get one at https://formspree.io → New Form → copy the URL
+       ============================================================ */
+    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
+
+    const form = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('cSubmit');
+    const messageBox = document.getElementById('formMessage');
+
+    function showMessage(type, text) {
+      messageBox.className = 'form-message show ' + type;
+      messageBox.innerHTML = (type === 'success' ? '<i class="fas fa-check-circle"></i>' : '<i class="fas fa-exclamation-circle"></i>') + ' ' + text;
+    }
+
+    function clearMessage() {
+      messageBox.className = 'form-message';
+      messageBox.innerHTML = '';
+    }
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      clearMessage();
+
+      // Basic client-side validation
+      const required = ['cName', 'cEmail', 'cPhone', 'cReason', 'cSubject', 'cMessage'];
+      for (const id of required) {
+        const el = document.getElementById(id);
+        if (!el.value.trim()) {
+          showMessage('error', 'Please fill in all required fields.');
+          el.focus();
+          return;
+        }
+      }
+
+      // Email sanity check
+      const email = document.getElementById('cEmail').value.trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showMessage('error', 'Please enter a valid email address.');
+        document.getElementById('cEmail').focus();
+        return;
+      }
+
+      // Guard: Formspree endpoint not configured
+      if (FORMSPREE_ENDPOINT.includes('YOUR_FORM_ID')) {
+        showMessage('error', 'Form is not yet connected. Please message us on WhatsApp instead: +234 904 233 9411');
+        return;
+      }
+
+      // Loading state
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+      try {
+        const formData = new FormData(form);
+        const res = await fetch(FORMSPREE_ENDPOINT, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (!res.ok) {
+          let msg = 'Could not send your message. Please try again or message us on WhatsApp.';
+          try {
+            const data = await res.json();
+            if (data && data.errors && data.errors.length) {
+              msg = data.errors.map(x => x.message).join(' ');
+            }
+          } catch (_) {}
+          throw new Error(msg);
+        }
+
+        // Success
+        showMessage('success', 'Thanks — your message has been sent. We\'ll respond within 1–2 business days. For faster help, message us on WhatsApp.');
+        form.reset();
+        submitBtn.innerHTML = '<i class="fas fa-check"></i> Message sent';
+        setTimeout(() => {
+          submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send message';
+          submitBtn.disabled = false;
+          clearMessage();
+        }, 8000);
+
+      } catch (err) {
+        showMessage('error', err.message || 'Something went wrong. Please try again or message us on WhatsApp.');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send message';
+      }
+    });
+
+    /* ============================================================
+       INIT
+       ============================================================ */
+    document.addEventListener('DOMContentLoaded', function () {
       initStateDropdown();
-      document.getElementById('fabPostAd')?.addEventListener('click', function() {
+      document.getElementById('fabPostAd')?.addEventListener('click', function () {
         if (!currentUser) { openSignup(); } else { window.location.href = '/post.html'; }
       });
       loadUser();
       initTheme();
       updateFavoriteBadge();
     });
+  })();
   </script>
 </body>
 </html>
