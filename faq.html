@@ -4,208 +4,459 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>FAQ – Zaure</title>
-  <meta name="description" content="Frequently asked questions about buying, selling, and using Zaure marketplace.">
+  <meta name="description" content="Quick answers to the most common questions about Zaure — buying, selling, wholesale, Zaure Clean, and account management.">
   <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
   <style>
-    .faq-header {
-      margin: 30px 0 20px;
-      text-align: center;
-    }
-    .faq-header h1 {
-      font-size: 2rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, #1a3650, #B49450);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .faq-header p {
-      color: var(--text-secondary);
-      font-size: 1rem;
-      margin-top: 6px;
+    :root {
+      --navy: #0f2940;
+      --navy-2: #1a3650;
+      --gold: #D4B87A;
+      --gold-deep: #B49450;
+      --wa: #25D366;
     }
 
-    /* Search bar */
-    .faq-search {
-      margin: 20px auto 30px;
-      max-width: 600px;
+    /* ============ BREADCRUMB ============ */
+    .faq-breadcrumb {
+      display: flex; align-items: center; gap: 7px;
+      margin: 20px 0 16px; font-size: 0.76rem;
+      color: var(--text-secondary); flex-wrap: wrap;
     }
-    .faq-search .search-box {
-      background: var(--surface);
-      border-radius: 60px;
-      padding: 4px 4px 4px 18px;
-      display: flex;
+    .faq-breadcrumb a {
+      color: var(--text-secondary); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .faq-breadcrumb a:hover { color: var(--navy-2); }
+    .faq-breadcrumb i { font-size: 0.5rem; opacity: 0.55; }
+    .faq-breadcrumb .current { color: var(--text); font-weight: 600; }
+
+    /* ============ HERO ============ */
+    .faq-hero {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      background: linear-gradient(135deg, #0f2940 0%, #1a3650 55%, #2a4a6a 100%);
+      border-radius: 22px;
+      padding: 40px 24px 36px;
+      text-align: center;
+      color: white;
+      margin-bottom: 20px;
+    }
+    .faq-hero::before {
+      content: '';
+      position: absolute;
+      top: -30%; right: -15%;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(212,184,122,0.22) 0%, transparent 65%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .faq-hero > * { position: relative; z-index: 1; }
+
+    .faq-hero-eyebrow {
+      display: inline-flex;
       align-items: center;
       gap: 6px;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border);
+      font-size: 0.62rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--gold);
+      padding: 5px 12px;
+      background: rgba(212,184,122,0.12);
+      border: 1px solid rgba(212,184,122,0.35);
+      border-radius: 40px;
+      margin-bottom: 14px;
     }
-    .faq-search .search-box i {
-      color: var(--text-secondary);
+    .faq-hero-eyebrow i { font-size: 0.55rem; }
+
+    .faq-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.7rem, 5vw, 2.4rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.6px;
+      margin-bottom: 10px;
     }
-    .faq-search .search-box input {
-      border: none;
-      padding: 10px 0;
-      flex: 1;
-      font-size: 0.9rem;
-      background: transparent;
-      outline: none;
-      min-width: 100px;
-      color: var(--text);
-    }
-    .faq-search .search-box input::placeholder {
-      color: var(--text-secondary);
+    .faq-hero p {
+      font-size: clamp(0.85rem, 2vw, 0.95rem);
+      color: rgba(255,255,255,0.8);
+      line-height: 1.55;
+      max-width: 480px;
+      margin: 0 auto 22px;
     }
 
-    /* Category tabs */
-    .faq-tabs {
+    /* Search */
+    .faq-search {
+      max-width: 520px;
+      margin: 0 auto;
       display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 8px;
-      margin-bottom: 20px;
-      scrollbar-width: none;
+      background: rgba(255,255,255,0.98);
+      border-radius: 40px;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.2);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.2);
     }
-    .faq-tabs::-webkit-scrollbar {
-      display: none;
+    .faq-search i {
+      align-self: center;
+      padding-left: 18px;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
     }
-    .faq-tabs .tab-btn {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 30px;
-      padding: 8px 20px;
-      font-size: 0.85rem;
-      font-weight: 600;
+    .faq-search input {
+      flex: 1;
+      padding: 13px 12px;
+      border: none;
+      background: transparent;
+      font-size: 0.9rem;
+      color: var(--text);
+      outline: none;
+      font-family: inherit;
+      min-width: 0;
+    }
+    .faq-search input::placeholder { color: var(--text-secondary); }
+    .faq-search button {
+      padding: 0 8px;
+      background: transparent;
+      border: none;
       color: var(--text-secondary);
       cursor: pointer;
+      display: none;
+      align-items: center;
+      font-size: 0.85rem;
+    }
+    .faq-search button.show { display: flex; }
+    .faq-search button:hover { color: var(--navy-2); }
+
+    /* ============ TABS ============ */
+    .faq-tabs {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      padding: 4px 0 14px;
+      margin-bottom: 4px;
+    }
+    .faq-tabs::-webkit-scrollbar { display: none; }
+
+    .faq-tab {
+      flex-shrink: 0;
+      padding: 8px 16px;
+      border-radius: 30px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-secondary);
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
       white-space: nowrap;
-      transition: all 0.3s;
+      font-family: inherit;
+      min-height: 36px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
     }
-    .faq-tabs .tab-btn:hover {
-      border-color: var(--text);
-      color: var(--text);
-    }
-    .faq-tabs .tab-btn.active {
-      background: #1a3650;
+    .faq-tab:hover { border-color: var(--navy-2); color: var(--text); }
+    .faq-tab.active {
+      background: var(--navy-2);
       color: white;
-      border-color: #1a3650;
+      border-color: var(--navy-2);
     }
-    [data-theme="dark"] .faq-tabs .tab-btn.active {
-      background: #2A3550;
-      border-color: #2A3550;
+    .faq-tab .tab-count {
+      font-size: 0.68rem;
+      opacity: 0.7;
+      margin-left: 2px;
     }
 
-    /* FAQ items */
+    /* ============ FAQ LIST ============ */
     .faq-section {
-      margin-bottom: 30px;
+      margin-bottom: 28px;
     }
-    .faq-section h2 {
+    .faq-section-title {
+      font-family: 'Playfair Display', serif;
       font-size: 1.2rem;
-      font-weight: 700;
+      font-weight: 800;
       color: var(--text);
+      letter-spacing: -0.3px;
       margin-bottom: 12px;
       display: flex;
       align-items: center;
+      gap: 10px;
+    }
+    .faq-section-title::before {
+      content: '';
+      width: 20px;
+      height: 2.5px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-deep));
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
       gap: 8px;
     }
-    .faq-section h2 i {
-      color: #B49450;
-    }
+
     .faq-item {
       background: var(--surface);
-      border-radius: 16px;
       border: 1px solid var(--border);
-      margin-bottom: 12px;
+      border-radius: 12px;
       overflow: hidden;
-      transition: border-color 0.3s;
+      transition: border-color 0.2s;
     }
-    .faq-item:hover {
-      border-color: #B49450;
+    .faq-item[open] {
+      border-color: rgba(212,184,122,0.5);
     }
-    .faq-item .faq-question {
-      padding: 16px 20px;
-      font-weight: 600;
-      font-size: 0.95rem;
+
+    .faq-item summary {
+      padding: 15px 18px;
+      font-size: 0.88rem;
+      font-weight: 700;
       color: var(--text);
       cursor: pointer;
+      list-style: none;
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 12px;
+      transition: background 0.15s;
       user-select: none;
+      line-height: 1.4;
     }
-    .faq-item .faq-question .faq-icon {
-      color: var(--text-secondary);
-      font-size: 0.8rem;
-      transition: transform 0.3s;
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary:hover { background: var(--surface-alt); }
+    .faq-item summary::after {
+      content: '+';
+      font-size: 1.3rem;
+      font-weight: 300;
+      color: var(--gold-deep);
+      transition: transform 0.2s;
       flex-shrink: 0;
+      line-height: 1;
     }
-    .faq-item .faq-question.active .faq-icon {
-      transform: rotate(180deg);
-      color: #B49450;
-    }
-    .faq-item .faq-answer {
-      padding: 0 20px 16px;
-      font-size: 0.9rem;
+    .faq-item[open] summary::after { content: '−'; }
+
+    .faq-answer {
+      padding: 0 18px 16px;
+      font-size: 0.85rem;
       color: var(--text-secondary);
       line-height: 1.7;
-      display: none;
     }
-    .faq-item .faq-answer.show {
-      display: block;
-      animation: fadeIn 0.3s ease;
+    .faq-answer p { margin-bottom: 8px; }
+    .faq-answer p:last-child { margin-bottom: 0; }
+    .faq-answer ul {
+      list-style: none;
+      padding: 0;
+      margin: 6px 0;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-5px); }
-      to { opacity: 1; transform: translateY(0); }
+    .faq-answer ul li {
+      padding: 3px 0 3px 20px;
+      position: relative;
+      line-height: 1.6;
     }
+    .faq-answer ul li::before {
+      content: '•';
+      position: absolute;
+      left: 6px;
+      top: 3px;
+      color: var(--gold-deep);
+      font-weight: 900;
+      font-size: 1rem;
+    }
+    .faq-answer ul li strong {
+      color: var(--text);
+      font-weight: 700;
+    }
+    .faq-answer a {
+      color: var(--gold-deep);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .faq-answer a:hover { text-decoration: underline; }
 
-    /* Contact section */
-    .faq-contact {
-      background: var(--surface);
-      border-radius: 20px;
-      padding: 24px;
-      border: 1px solid var(--border);
-      text-align: center;
-      margin-bottom: 30px;
+    .faq-callout {
+      background: var(--surface-alt);
+      border-left: 3px solid var(--gold-deep);
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin: 8px 0;
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: var(--text);
     }
-    .faq-contact h3 {
-      font-size: 1.1rem;
+    .faq-callout strong { color: var(--navy-2); }
+    [data-theme="dark"] .faq-callout {
+      background: rgba(212,184,122,0.06);
+    }
+    [data-theme="dark"] .faq-callout strong { color: var(--gold); }
+
+    /* ============ EMPTY STATE ============ */
+    .faq-empty {
+      display: none;
+      text-align: center;
+      padding: 50px 20px;
+      background: var(--surface-alt);
+      border: 1px dashed var(--border);
+      border-radius: 16px;
+      margin-bottom: 28px;
+    }
+    .faq-empty i {
+      font-size: 2.5rem;
+      color: var(--text-secondary);
+      opacity: 0.4;
+      margin-bottom: 14px;
+      display: block;
+    }
+    .faq-empty h3 {
+      font-size: 1rem;
       font-weight: 700;
       color: var(--text);
+      margin-bottom: 6px;
+    }
+    .faq-empty p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      max-width: 340px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .faq-empty a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 11px 22px;
+      background: var(--wa);
+      color: white;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.82rem;
+      transition: background 0.2s;
+    }
+    .faq-empty a:hover { background: #1DA851; }
+
+    /* ============ HELP CENTER CTA ============ */
+    .help-cta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 18px 20px;
+      background: linear-gradient(135deg, #f8fbfe, #f1f6fb);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--gold);
+      border-radius: 14px;
+      margin-bottom: 24px;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    [data-theme="dark"] .help-cta {
+      background: rgba(212,184,122,0.06);
+    }
+    .help-cta:hover {
+      border-color: rgba(212,184,122,0.6);
+    }
+    .help-cta-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 11px;
+      background: linear-gradient(135deg, var(--navy-2), #2a4a6a);
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .help-cta-body { flex: 1; min-width: 0; }
+    .help-cta-body h4 {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 2px;
+      line-height: 1.3;
+    }
+    .help-cta-body p {
+      font-size: 0.76rem;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+    .help-cta-arrow {
+      color: var(--gold-deep);
+      font-size: 0.8rem;
+      flex-shrink: 0;
+    }
+
+    /* ============ CONTACT ============ */
+    .faq-contact {
+      background: linear-gradient(135deg, #0f2940, #1a3650);
+      border-radius: 18px;
+      padding: 32px 24px;
+      color: white;
+      text-align: center;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .faq-contact::before {
+      content: '';
+      position: absolute;
+      top: -40%; right: -15%;
+      width: 280px; height: 280px;
+      background: radial-gradient(circle, rgba(212,184,122,0.2) 0%, transparent 65%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .faq-contact > * { position: relative; z-index: 1; }
+    .faq-contact h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 800;
       margin-bottom: 8px;
+      letter-spacing: -0.3px;
     }
     .faq-contact p {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      margin-bottom: 12px;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.55;
+      max-width: 400px;
+      margin: 0 auto 20px;
     }
-    .faq-contact .btn-whatsapp {
+    .faq-contact-btn {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: #25D366;
+      padding: 13px 26px;
+      background: var(--wa);
       color: white;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 60px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      cursor: pointer;
+      border-radius: 40px;
       text-decoration: none;
-      transition: background 0.3s;
+      font-weight: 800;
+      font-size: 0.88rem;
+      transition: all 0.2s;
+      box-shadow: 0 6px 20px rgba(37,211,102,0.3);
     }
-    .faq-contact .btn-whatsapp:hover {
+    .faq-contact-btn:hover {
       background: #1DA851;
+      transform: translateY(-1px);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- ===== NAV ===== -->
   <nav class="navbar">
     <div class="container nav-container">
       <a href="/" class="logo-wrapper">
@@ -236,176 +487,437 @@
 
   <div class="container">
 
-    <div class="faq-header">
+    <div class="faq-breadcrumb">
+      <a href="/">Home</a>
+      <i class="fas fa-chevron-right"></i>
+      <a href="/support.html">Support</a>
+      <i class="fas fa-chevron-right"></i>
+      <span class="current">FAQ</span>
+    </div>
+
+    <!-- ============ HERO ============ -->
+    <section class="faq-hero">
+      <span class="faq-hero-eyebrow">
+        <i class="fas fa-circle-question"></i> Quick answers
+      </span>
       <h1>Frequently Asked Questions</h1>
-      <p>Find answers to the most common questions about Zaure</p>
-    </div>
+      <p>The short answers to what people ask us most. Need more detail? Every answer links to the full guide.</p>
 
-    <!-- Search -->
-    <div class="faq-search">
-      <div class="search-box">
-        <i class="fas fa-search"></i>
-        <input type="text" id="faqSearchInput" placeholder="Search FAQ..." autocomplete="off">
+      <div class="faq-search" role="search">
+        <i class="fas fa-search" aria-hidden="true"></i>
+        <input type="search" id="faqSearchInput" placeholder="Search FAQs..." autocomplete="off" aria-label="Search FAQs">
+        <button type="button" id="faqSearchClear" aria-label="Clear search">
+          <i class="fas fa-times"></i>
+        </button>
       </div>
-    </div>
+    </section>
 
-    <!-- Tabs -->
+    <!-- Help Center CTA -->
+    <a href="/help.html" class="help-cta">
+      <div class="help-cta-icon"><i class="fas fa-book-open"></i></div>
+      <div class="help-cta-body">
+        <h4>Need more detail?</h4>
+        <p>Read the full Help Center — 40+ questions, step-by-step answers, and topics not covered here.</p>
+      </div>
+      <i class="fas fa-chevron-right help-cta-arrow"></i>
+    </a>
+
+    <!-- ============ TABS ============ -->
     <div class="faq-tabs" id="faqTabs">
-      <button class="tab-btn active" data-category="all">All</button>
-      <button class="tab-btn" data-category="buying">Buying</button>
-      <button class="tab-btn" data-category="selling">Selling</button>
-      <button class="tab-btn" data-category="account">Account</button>
-      <button class="tab-btn" data-category="safety">Safety</button>
-      <button class="tab-btn" data-category="business">Business</button>
+      <button type="button" class="faq-tab active" data-cat="all">All</button>
+      <button type="button" class="faq-tab" data-cat="buying">Buying</button>
+      <button type="button" class="faq-tab" data-cat="selling">Selling</button>
+      <button type="button" class="faq-tab" data-cat="wholesale">Wholesale</button>
+      <button type="button" class="faq-tab" data-cat="services">Zaure Clean</button>
+      <button type="button" class="faq-tab" data-cat="hotspots">Hotspots</button>
+      <button type="button" class="faq-tab" data-cat="account">Account</button>
+      <button type="button" class="faq-tab" data-cat="safety">Safety</button>
     </div>
 
-    <!-- FAQ Sections -->
+    <!-- ============ FAQ CONTENT ============ -->
     <div id="faqContainer">
 
-      <!-- Buying FAQs -->
-      <div class="faq-section" data-category="buying">
-        <h2><i class="fas fa-shopping-cart"></i> Buying on Zaure</h2>
-        
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFaq(this)">How do I contact a seller? <i class="fas fa-chevron-down faq-icon"></i></div>
-          <div class="faq-answer">Open the product listing and click the "Call Seller" button to call them directly, or click "WhatsApp" to chat with them on WhatsApp. No middlemen involved.</div>
-        </div>
+      <!-- ============ BUYING ============ -->
+      <section class="faq-section" data-cat="buying">
+        <h2 class="faq-section-title">Buying on Zaure</h2>
+        <div class="faq-list">
 
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFaq(this)">Is it safe to buy on Zaure? <i class="fas fa-chevron-down faq-icon"></i></div>
-          <div class="faq-answer">Yes! We verify sellers and provide safety guidelines. Always meet in public places, inspect items before purchase, avoid advance payments, and trust your instincts.</div>
-        </div>
+          <details class="faq-item">
+            <summary>How do I contact a seller?</summary>
+            <div class="faq-answer">
+              <p>Open any product page and tap the <strong>"Message on WhatsApp"</strong> button. WhatsApp opens with a message pre-filled with the product name and price, so the seller knows exactly what you're asking about.</p>
+              <p>Zaure doesn't have its own messaging system — every conversation happens on WhatsApp because that's where Nigerian commerce already lives.</p>
+            </div>
+          </details>
 
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFaq(this)">How do I save items to favorites? <i class="fas fa-chevron-down faq-icon"></i></div>
-          <div class="faq-answer">Click the heart icon on any listing to save it to your favorites. You must be signed in to use this feature. Your favorites are saved in your profile.</div>
-        </div>
+          <details class="faq-item">
+            <summary>Is Zaure free to buy on?</summary>
+            <div class="faq-answer">
+              <p>Yes — 100% free for buyers. Zaure charges no commission, no buyer fees, and no hidden charges. You only pay the seller for the item you buy.</p>
+            </div>
+          </details>
 
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFaq(this)">How do I search for items near me? <i class="fas fa-chevron-down faq-icon"></i></div>
-          <div class="faq-answer">Our platform uses location-based recommendations. Sign up with your state, and you'll see items from your area first. You can also use the search bar to find specific items.</div>
-        </div>
+          <details class="faq-item">
+            <summary>How do I save items to favorites?</summary>
+            <div class="faq-answer">
+              <p>Tap the heart icon on any product, service, or hotspot. You need to be signed in. Your saved items show on the <a href="/favorites.html">Favorites page</a>, and the number next to the heart in the header shows your total.</p>
+            </div>
+          </details>
 
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFaq(this)">Do I need to pay to buy on Zaure? <i class="fas fa-chevron-down faq-icon"></i></div>
-          <div class="faq-answer">No! Zaure is 100% free for buyers. You only pay the seller for the item you're purchasing. We charge no commission or hidden fees.</div>
-        </div>
-      </div>
+          <details class="faq-item">
+            <summary>How do I search for items near me?</summary>
+            <div class="faq-answer">
+              <p>Your recommendations are automatically sorted by your state (from your profile), so you see local sellers first. You can also use the search bar and filter by category on the <a href="/category.html?slug=all">Browse page</a>.</p>
+            </div>
+          </details>
 
-      <!-- Selling FAQs -->
-      <div class="faq-section" data-category="selling">
-        <h2><i class="fas fa-tag"></i> Selling on Zaure</h2>
-        
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFaq(this)">How do I post an ad? <i class="fas fa-chevron-down faq-icon"></i></div>
-          <div class="faq-answer">Go to the Post page and choose "Individual" or "Business." You'll be redirected to WhatsApp where you can send your item details. Our team will list it within 24 hours.</div>
-        </div>
+          <details class="faq-item">
+            <summary>What if the item isn't what was described?</summary>
+            <div class="faq-answer">
+              <p>Contact the seller first on WhatsApp and ask for a resolution. If they refuse, report the listing to us with photos showing the difference — we may remove the listing and take action on the seller's account.</p>
+              <div class="faq-callout">
+                <strong>Zaure can't force a refund</strong> because we're not a payment processor. But we do act on reports of sellers who misrepresent their items.
+              </div>
+            </div>
+          </details>
 
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFaq(this)">Is posting free? <i class="fas fa-chevron-down faq-icon"></i></div>
-          <div class="faq-answer">Yes! Posting on Zaure is 100% free. Every user gets 5 FREE listings. No commission, no hidden fees.</div>
-        </div>
+          <details class="faq-item">
+            <summary>Can I get delivery?</summary>
+            <div class="faq-answer">
+              <p>Zaure doesn't operate its own delivery. Delivery is arranged directly between you and the seller — some deliver within their city, others require pickup. Message them on WhatsApp to confirm before you commit.</p>
+            </div>
+          </details>
 
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFaq(this)">How many listings can I post? <i class="fas fa-chevron-down faq-icon"></i></div>
-          <div class="faq-answer">Every user gets 5 FREE listings. To get more listings, contact us via WhatsApp: +2349042339411</div>
         </div>
+      </section>
 
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFaq(this)">How long does it take for my listing to go live? <i class="fas fa-chevron-down faq-icon"></i></div>
-          <div class="faq-answer">Listings are reviewed and published within 24 hours. You'll receive your listing confirmation details via WhatsApp.</div>
-        </div>
+      <!-- ============ SELLING ============ -->
+      <section class="faq-section" data-cat="selling">
+        <h2 class="faq-section-title">Selling on Zaure</h2>
+        <div class="faq-list">
 
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFaq(this)">Can I boost my listing? <i class="fas fa-chevron-down faq-icon"></i></div>
-          <div class="faq-answer">Yes! Contact us on WhatsApp at +2349042339411 to boost your listing and get 10x more views.</div>
-        </div>
-      </div>
+          <details class="faq-item">
+            <summary>How do I post a listing?</summary>
+            <div class="faq-answer">
+              <p>Tap the <strong>"+"</strong> button in the bottom navigation, or tap <strong>"Post a listing"</strong> on the homepage. Fill in the title, description, price, category, and upload photos — your listing goes live <strong>immediately</strong>. No review queue, no waiting.</p>
+            </div>
+          </details>
 
-      <!-- Account FAQs -->
-      <div class="faq-section" data-category="account">
-        <h2><i class="fas fa-user"></i> Account</h2>
-        
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFaq(this)">How do I create an account? <i class="fas fa-chevron-down faq-icon"></i></div>
-          <div class="faq-answer">Click the avatar icon in the top navigation and fill out the signup form with your name, phone number, and state. It takes less than a minute.</div>
-        </div>
+          <details class="faq-item">
+            <summary>Is posting free?</summary>
+            <div class="faq-answer">
+              <p>Yes — 100% free. Unlimited listings. No commission on sales. No hidden fees. You keep everything you earn.</p>
+            </div>
+          </details>
 
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFaq(this)">How do I edit my profile? <i class="fas fa-chevron-down faq-icon"></i></div>
-          <div class="faq-answer">Go to your Profile page, click "Edit Profile," make your changes, and click "Save Changes." You can update your name, phone, email, state, and bio.</div>
-        </div>
+          <details class="faq-item">
+            <summary>How many listings can I post?</summary>
+            <div class="faq-answer">
+              <p>Unlimited. There's no cap on listings, whether you're an individual or a business. Post as many as you want.</p>
+            </div>
+          </details>
 
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFaq(this)">How do I change my profile picture? <i class="fas fa-chevron-down faq-icon"></i></div>
-          <div class="faq-answer">Go to your Profile page and click the camera icon on your avatar. Select an image from your device to upload.</div>
-        </div>
+          <details class="faq-item">
+            <summary>How long until my listing goes live?</summary>
+            <div class="faq-answer">
+              <p>Immediately. As soon as you tap "Publish," your listing is on the marketplace and visible to buyers in your category. No review delay.</p>
+            </div>
+          </details>
 
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFaq(this)">How do I delete my account? <i class="fas fa-chevron-down faq-icon"></i></div>
-          <div class="faq-answer">Go to Profile → Settings → Account → Delete Account. This action is permanent and will remove all your data.</div>
-        </div>
-      </div>
+          <details class="faq-item">
+            <summary>How do I edit or delete a listing?</summary>
+            <div class="faq-answer">
+              <p>Go to <strong>Profile → My Listings</strong>. Each listing has an Edit button and a Delete button. Edits go live immediately; deletes are permanent.</p>
+            </div>
+          </details>
 
-      <!-- Safety FAQs -->
-      <div class="faq-section" data-category="safety">
-        <h2><i class="fas fa-shield-alt"></i> Safety</h2>
-        
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFaq(this)">How does Zaure verify sellers? <i class="fas fa-chevron-down faq-icon"></i></div>
-          <div class="faq-answer">We verify sellers through phone number confirmation and track their activity. Verified sellers receive a badge on their listings and store pages.</div>
-        </div>
+          <details class="faq-item">
+            <summary>Can I boost my listing?</summary>
+            <div class="faq-answer">
+              <p>Yes. Message us on <a href="https://wa.me/2349042339411?text=Hi%20Zaure%2C%20I%27d%20like%20to%20boost%20a%20listing." target="_blank" rel="noopener">WhatsApp</a> with the listing link. Boosted listings appear at the top of category pages and get featured in homepage ad slots — typically 5–10x more views.</p>
+            </div>
+          </details>
 
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFaq(this)">What should I do if I encounter a scam? <i class="fas fa-chevron-down faq-icon"></i></div>
-          <div class="faq-answer">Report it immediately via WhatsApp: +2349042339411. Our team reviews all reports within 24 hours and takes appropriate action.</div>
-        </div>
+          <details class="faq-item">
+            <summary>How do I protect myself from buyer scams?</summary>
+            <div class="faq-answer">
+              <p>Common tricks to watch for:</p>
+              <ul>
+                <li><strong>Fake payment screenshots.</strong> Always confirm the money landed in your bank app — not a screenshot.</li>
+                <li><strong>Overpayment scam.</strong> Buyer "accidentally" sends too much and asks for a refund. Their original transfer was fake.</li>
+                <li><strong>"My agent will collect."</strong> Get written confirmation before releasing goods.</li>
+              </ul>
+              <p>Full patterns on the <a href="/safety.html">Safety Tips</a> page.</p>
+            </div>
+          </details>
 
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFaq(this)">Where should I meet buyers/sellers? <i class="fas fa-chevron-down faq-icon"></i></div>
-          <div class="faq-answer">Always meet in public, well-lit places like shopping malls, police stations, or busy markets. Never invite strangers to your home.</div>
         </div>
+      </section>
 
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFaq(this)">Should I pay in advance? <i class="fas fa-chevron-down faq-icon"></i></div>
-          <div class="faq-answer">No! Never pay for items you haven't seen. Be cautious of sellers who demand advance payments or deposits before delivery.</div>
-        </div>
-      </div>
+      <!-- ============ WHOLESALE ============ -->
+      <section class="faq-section" data-cat="wholesale">
+        <h2 class="faq-section-title">Wholesale &amp; B2B</h2>
+        <div class="faq-list">
 
-      <!-- Business FAQs -->
-      <div class="faq-section" data-category="business">
-        <h2><i class="fas fa-store"></i> Business & Retailers</h2>
-        
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFaq(this)">How do I set up a store on Zaure? <i class="fas fa-chevron-down faq-icon"></i></div>
-          <div class="faq-answer">Go to the Post page and select "Business / Retailer." Contact us via WhatsApp with your business details, and our team will set up your store.</div>
-        </div>
+          <details class="faq-item">
+            <summary>What is MOQ?</summary>
+            <div class="faq-answer">
+              <p><strong>Minimum Order Quantity</strong> — the smallest number of units a seller will sell at wholesale pricing. If MOQ is 50, you either buy 50+ at the wholesale rate, or pay retail for smaller quantities.</p>
+            </div>
+          </details>
 
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFaq(this)">Is there a fee for business stores? <i class="fas fa-chevron-down faq-icon"></i></div>
-          <div class="faq-answer">Contact us via WhatsApp at +2349042339411 for business store pricing. Basic listing is free.</div>
-        </div>
+          <details class="faq-item">
+            <summary>How does tier pricing work?</summary>
+            <div class="faq-answer">
+              <p>Wholesale prices come in <strong>tiers</strong> — the more you buy, the lower the price per unit. Example:</p>
+              <ul>
+                <li>10–49 units: ₦25,000 each</li>
+                <li>50–99 units: ₦22,000 each</li>
+                <li>100+ units: ₦20,000 each</li>
+              </ul>
+              <p>The calculator on each product page shows your exact total at any quantity.</p>
+            </div>
+          </details>
 
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleFaq(this)">What features do business stores get? <i class="fas fa-chevron-down faq-icon"></i></div>
-          <div class="faq-answer">Business stores get a dedicated store page, product listings with images, customer reviews, verified seller badge, and priority listing options.</div>
+          <details class="faq-item">
+            <summary>How do I send a bulk quote request?</summary>
+            <div class="faq-answer">
+              <p>On the product page, set your quantity in the <strong>"Buy in Bulk"</strong> calculator, then tap <strong>"Send Quote on WhatsApp"</strong>. The seller receives a message with the product, quantity, unit price, and total — ready to respond to.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>How do I become a verified supplier?</summary>
+            <div class="faq-answer">
+              <p>Message us on WhatsApp with your business name, CAC number, products, and MOQ. For high-value suppliers (agro, industrial), we may arrange a call or site visit. Verified suppliers get priority placement and buyer trust.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>How do I stay safe in B2B transactions?</summary>
+            <div class="faq-answer">
+              <p>Bulk orders involve serious money — the checks should match:</p>
+              <ul>
+                <li>Visit the warehouse before committing</li>
+                <li>Check CAC registration</li>
+                <li>Order a sample first</li>
+                <li>Use a written agreement</li>
+                <li>Never pay 100% upfront — 30–50% deposit is standard</li>
+              </ul>
+              <p>Full checklist on the <a href="/safety.html">Safety Tips</a> page.</p>
+            </div>
+          </details>
+
         </div>
-      </div>
+      </section>
+
+      <!-- ============ ZAURE CLEAN ============ -->
+      <section class="faq-section" data-cat="services">
+        <h2 class="faq-section-title">Zaure Clean</h2>
+        <div class="faq-list">
+
+          <details class="faq-item">
+            <summary>What is Zaure Clean?</summary>
+            <div class="faq-answer">
+              <p>Zaure's in-house post-construction cleaning service — rough clean, dust extraction, deep surface clean, pest control, weed control, carpet cleaning, and handover-ready finishes. Trusted by contractors, engineers, and property developers across Northern Nigeria.</p>
+              <p>Full details on the <a href="/zaure-clean.html">Zaure Clean page</a>.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>How do I book?</summary>
+            <div class="faq-answer">
+              <p>Visit <a href="/zaure-clean.html">zaure-clean.html</a> and tap <strong>"Request a quote"</strong>. Fill in the project details — location, size, handover date — and we'll respond on WhatsApp within a few hours with availability and pricing.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>How do I pay?</summary>
+            <div class="faq-answer">
+              <p>Standard terms: 50% deposit to confirm, 50% balance on completion. Bank transfer only — no cash collection on-site. You'll receive a receipt after every job.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>What if I'm not happy with the job?</summary>
+            <div class="faq-answer">
+              <p>Contact us within 24 hours with photos of any issue. We'll return to re-clean the affected areas free of charge. If you're still not satisfied, we'll refund you in full — no arguments.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Can I reschedule or cancel?</summary>
+            <div class="faq-answer">
+              <p>Yes — message us at least 48 hours before the scheduled date. Rescheduling is free if we have availability. Cancellations less than 24 hours before may forfeit the deposit.</p>
+            </div>
+          </details>
+
+        </div>
+      </section>
+
+      <!-- ============ HOTSPOTS ============ -->
+      <section class="faq-section" data-cat="hotspots">
+        <h2 class="faq-section-title">Hotspots</h2>
+        <div class="faq-list">
+
+          <details class="faq-item">
+            <summary>What are Hotspots?</summary>
+            <div class="faq-answer">
+              <p>A curated guide to restaurants, cafes, bars, beaches, parks, and landmarks across Nigeria. Browse by category, search by name, or sort by nearest. Each has photos, hours (with real-time open/closed), and a location map.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>How does "nearest to me" work?</summary>
+            <div class="faq-answer">
+              <p>If you allow browser geolocation, we sort hotspots by distance from you. The distance is calculated in your browser — your coordinates aren't stored on our servers. If you decline, hotspots are shown newest-first.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Are the hours accurate?</summary>
+            <div class="faq-answer">
+              <p>We show real-time Open/Closed badges based on each hotspot's stated hours and Lagos time, updating automatically every minute. But hours can change on holidays — for a place you're travelling to, call ahead to confirm.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Can I book through Zaure?</summary>
+            <div class="faq-answer">
+              <p>No — Hotspots is a discovery guide only. We don't own, operate, or endorse any venue. Bookings and payments are between you and the venue directly.</p>
+            </div>
+          </details>
+
+        </div>
+      </section>
+
+      <!-- ============ ACCOUNT ============ -->
+      <section class="faq-section" data-cat="account">
+        <h2 class="faq-section-title">Account</h2>
+        <div class="faq-list">
+
+          <details class="faq-item">
+            <summary>How do I create an account?</summary>
+            <div class="faq-answer">
+              <p>Tap the avatar in the top-right of any page, or the <strong>Profile</strong> tab at the bottom. Enter your name, phone number, and state — takes under a minute. No email verification needed.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>How do I edit my profile?</summary>
+            <div class="faq-answer">
+              <p>Go to <strong>Profile → Edit Profile</strong>. Update name, phone, email, state, or bio, then tap <strong>Save Changes</strong>.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>How do I change my profile picture?</summary>
+            <div class="faq-answer">
+              <p>On your profile page, tap the camera icon on your avatar. Pick a photo from your device. Your photo is stored locally — it won't sync across devices.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>How do I change the language or dark mode?</summary>
+            <div class="faq-answer">
+              <p>Both are in <strong>Profile → Settings</strong>. Zaure supports English, Hausa, Yoruba, Igbo, and Arabic. Language preference applies site-wide.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>How do I delete my account?</summary>
+            <div class="faq-answer">
+              <p>Go to <strong>Profile → Settings → Delete Account</strong>. Confirm twice. This permanently removes your profile, listings, and favorites. For server-side deletion beyond what the app removes, message us on WhatsApp.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>I lost my data after clearing my browser. Can I get it back?</summary>
+            <div class="faq-answer">
+              <p>Most Zaure data (favorites, listings, avatar, theme) is stored in your browser's localStorage — not on our servers. If you clear browser data, it's gone.</p>
+              <div class="faq-callout">
+                <strong>This is a known limitation</strong> we're working on. For now, keep a backup of any listings you care about in a note or photo folder.
+              </div>
+            </div>
+          </details>
+
+        </div>
+      </section>
+
+      <!-- ============ SAFETY ============ -->
+      <section class="faq-section" data-cat="safety">
+        <h2 class="faq-section-title">Safety</h2>
+        <div class="faq-list">
+
+          <details class="faq-item">
+            <summary>What does the verified badge mean?</summary>
+            <div class="faq-answer">
+              <p>We've checked certain details — usually phone, email, and for businesses, CAC registration and address. It does <strong>not</strong> guarantee the seller will never scam you, or that the item is exactly as described.</p>
+              <div class="faq-callout">
+                <strong>Verification is one signal, not a guarantee.</strong> Always inspect, meet, and check before paying — verified or not.
+              </div>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>What should I do if I encounter a scam?</summary>
+            <div class="faq-answer">
+              <p>Report it immediately on <a href="https://wa.me/2349042339411?text=URGENT%3A%20I%20need%20to%20report%20a%20scam%20or%20suspicious%20activity%20on%20Zaure." target="_blank" rel="noopener">WhatsApp</a> with screenshots of the conversation and the listing link. We act on all reports within 24 hours — suspend the account, and share details with authorities if you want to file a police report.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Where should I meet buyers or sellers?</summary>
+            <div class="faq-answer">
+              <p>Public, well-lit places during daylight — inside a shopping mall, at a bank, at a police station, or in a busy market. Never at your home or their home. Bring someone with you for high-value transactions.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Should I pay in advance?</summary>
+            <div class="faq-answer">
+              <p>Never to strangers. No deposits, no booking fees, no exceptions. Pay after inspecting the item, in person, at the moment of handover. If a seller insists on advance payment, walk away — there's always another listing.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Can I recover money I lost to a scam?</summary>
+            <div class="faq-answer">
+              <p>Zaure can't recover money paid directly to a seller — we're not a payment processor. Your options:</p>
+              <ul>
+                <li><strong>Report to us</strong> — we suspend the seller's account</li>
+                <li><strong>Report to your bank</strong> — some can attempt a reversal for very recent transfers</li>
+                <li><strong>Report to police or EFCC</strong> — for significant amounts</li>
+              </ul>
+            </div>
+          </details>
+
+        </div>
+      </section>
 
     </div>
 
-    <!-- Contact Section -->
-    <div class="faq-contact">
+    <!-- Empty state -->
+    <div class="faq-empty" id="faqEmpty">
+      <i class="fas fa-search"></i>
+      <h3>No results for that search</h3>
+      <p>Try a different keyword, or check the Help Center for detailed guides.</p>
+      <a href="/help.html"><i class="fas fa-book-open"></i> Open Help Center</a>
+    </div>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="faq-contact">
       <h3>Still have questions?</h3>
-      <p>Our team is here to help. Contact us on WhatsApp and we'll respond as soon as possible.</p>
-      <a href="https://wa.me/2349042339411?text=Hello%20Zaure%2C%20I%20have%20a%20question" target="_blank" class="btn-whatsapp">
-        <i class="fab fa-whatsapp"></i> Chat with Us
+      <p>Our team responds on WhatsApp within a few hours, Monday to Saturday.</p>
+      <a href="https://wa.me/2349042339411?text=Hi%20Zaure%20Support%2C%20I%20have%20a%20question%3A%20"
+         target="_blank" rel="noopener"
+         class="faq-contact-btn">
+        <i class="fab fa-whatsapp"></i> Chat with us
       </a>
-    </div>
+    </section>
 
   </div>
 
-  <!-- ===== FOOTER ===== -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
@@ -425,11 +937,11 @@
         <div class="footer-col">
           <h4>Browse</h4>
           <a href="/category.html?slug=all">All Items</a>
-          <a href="/category.html?slug=vehicles">Vehicles</a>
-          <a href="/category.html?slug=electronics">Electronics</a>
-          <a href="/category.html?slug=furniture">Furniture</a>
+          <a href="/hotspots.html">Hotspots</a>
+          <a href="/services.html">Find a Pro</a>
           <a href="/category.html?slug=fashion">Fashion</a>
-          <a href="/category.html?slug=real-estate">Real Estate</a>
+          <a href="/category.html?slug=electronics">Electronics</a>
+          <a href="/category.html?slug=home-kitchen">Home & Kitchen</a>
         </div>
         <div class="footer-col">
           <h4>Support</h4>
@@ -441,6 +953,7 @@
         <div class="footer-col">
           <h4>Company</h4>
           <a href="/about.html">About Us</a>
+          <a href="/alamin-ahmed.html">Founder</a>
           <a href="/careers.html">Careers</a>
           <a href="/privacy.html">Privacy Policy</a>
           <a href="/terms.html">Terms of Service</a>
@@ -461,14 +974,10 @@
           <span>&copy; 2026 <strong>Zaure Technologies</strong>. All rights reserved.</span>
           <span class="footer-lang"><i class="fas fa-globe"></i> Nigeria · English</span>
         </div>
-        <div style="grid-column: 1/-1; text-align: center; margin-top: 8px; font-size: 0.8rem; color: #94A3B8;">
-          For info or to report an issue, contact us on WhatsApp: <a href="https://wa.me/2349042339411" target="_blank" style="color: #D4B87A; text-decoration: none; font-weight: 600;">+2349042339411</a>
-        </div>
       </div>
     </div>
   </footer>
 
-  <!-- ===== BOTTOM NAV ===== -->
   <div class="bottom-nav">
     <a href="/" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
     <a href="/categories.html" class="nav-item"><i class="fas fa-th-large"></i><span>Categories</span></a>
@@ -477,7 +986,6 @@
     <a href="/profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
   </div>
 
-  <!-- ===== SIGNUP MODAL ===== -->
   <div class="modal-overlay" id="signupModal">
     <div class="modal">
       <div class="modal-header">
@@ -512,67 +1020,94 @@
 
   <script src="/js/main.js"></script>
   <script>
-    // Toggle FAQ items
-    function toggleFaq(element) {
-      element.classList.toggle('active');
-      element.nextElementSibling.classList.toggle('show');
+  (function () {
+    'use strict';
+
+    const searchInput = document.getElementById('faqSearchInput');
+    const searchClear = document.getElementById('faqSearchClear');
+    const faqEmpty = document.getElementById('faqEmpty');
+    const faqSections = document.querySelectorAll('.faq-section');
+    const tabBtns = document.querySelectorAll('.faq-tab');
+
+    let activeCategory = 'all';
+
+    /* ============================================================
+       FILTER LOGIC
+       ============================================================ */
+    function filterFAQs() {
+      const query = (searchInput.value || '').toLowerCase().trim();
+
+      searchClear.classList.toggle('show', query.length > 0);
+
+      let totalVisible = 0;
+
+      faqSections.forEach(function (section) {
+        const sectionCat = section.dataset.cat;
+        const catMatch = activeCategory === 'all' || sectionCat === activeCategory;
+
+        let visibleInSection = 0;
+
+        section.querySelectorAll('.faq-item').forEach(function (item) {
+          if (!catMatch) {
+            item.style.display = 'none';
+            if (item.open) item.open = false;
+            return;
+          }
+          const summary = item.querySelector('summary').textContent.toLowerCase();
+          const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+          const textMatch = !query || summary.includes(query) || answer.includes(query);
+
+          item.style.display = textMatch ? '' : 'none';
+          if (!textMatch && item.open) item.open = false;
+          if (textMatch) visibleInSection++;
+        });
+
+        const sectionVisible = catMatch && visibleInSection > 0;
+        section.style.display = sectionVisible ? '' : 'none';
+        if (sectionVisible) totalVisible += visibleInSection;
+      });
+
+      faqEmpty.style.display = totalVisible === 0 ? 'block' : 'none';
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
+    /* ============================================================
+       SEARCH INPUT
+       ============================================================ */
+    searchInput.addEventListener('input', filterFAQs);
+
+    searchClear.addEventListener('click', function () {
+      searchInput.value = '';
+      filterFAQs();
+      searchInput.focus();
+    });
+
+    /* ============================================================
+       TABS
+       ============================================================ */
+    tabBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        tabBtns.forEach(function (b) { b.classList.remove('active'); });
+        this.classList.add('active');
+        activeCategory = this.dataset.cat;
+        filterFAQs();
+      });
+    });
+
+    /* ============================================================
+       INIT
+       ============================================================ */
+    document.addEventListener('DOMContentLoaded', function () {
       initStateDropdown();
-      
-      document.getElementById('fabPostAd')?.addEventListener('click', function() {
+      document.getElementById('fabPostAd')?.addEventListener('click', function () {
         if (!currentUser) { openSignup(); } else { window.location.href = '/post.html'; }
       });
-
-      // Tabs filtering
-      const tabBtns = document.querySelectorAll('.tab-btn');
-      const faqSections = document.querySelectorAll('.faq-section');
-
-      tabBtns.forEach(tab => {
-        tab.addEventListener('click', function() {
-          tabBtns.forEach(t => t.classList.remove('active'));
-          this.classList.add('active');
-          const category = this.dataset.category;
-          faqSections.forEach(section => {
-            if (category === 'all' || section.dataset.category === category) {
-              section.style.display = 'block';
-            } else {
-              section.style.display = 'none';
-            }
-          });
-        });
-      });
-
-      // Search filtering
-      const searchInput = document.getElementById('faqSearchInput');
-      searchInput.addEventListener('input', function() {
-        const query = this.value.trim().toLowerCase();
-        const allFaqItems = document.querySelectorAll('.faq-item');
-        allFaqItems.forEach(item => {
-          const question = item.querySelector('.faq-question').textContent.toLowerCase();
-          const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
-          if (question.includes(query) || answer.includes(query) || query === '') {
-            item.style.display = 'block';
-          } else {
-            item.style.display = 'none';
-          }
-        });
-        // Hide sections with no visible items
-        faqSections.forEach(section => {
-          const visibleItems = section.querySelectorAll('.faq-item[style*="display: block"], .faq-item:not([style*="display: none"])');
-          if (query !== '' && visibleItems.length === 0) {
-            section.style.display = 'none';
-          } else if (query === '') {
-            section.style.display = 'block';
-          }
-        });
-      });
-
       loadUser();
       initTheme();
       updateFavoriteBadge();
+
+      filterFAQs();
     });
+  })();
   </script>
 </body>
 </html>
