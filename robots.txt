@@ -1,37 +1,65 @@
 # robots.txt for Zaure Technologies
 # https://zauretech.xyz/robots.txt
+# Last updated: 13 November 2026
 
+# ============================================================
+# DEFAULT — Allow all standard crawlers
+# ============================================================
 User-agent: *
 Allow: /
 
-# Disallow admin and private areas
+# ============================================================
+# PRIVATE & UTILITY PAGES — Do not index
+# ============================================================
 Disallow: /admin/
 Disallow: /private/
 Disallow: /api/
 Disallow: /assets/private/
+Disallow: /data/
 
-# Disallow dynamic parameters that create duplicate content
-Disallow: /*?*
+# User-specific or utility pages (no SEO value)
+Disallow: /profile.html
+Disallow: /favorites.html
+Disallow: /post.html
+Disallow: /search.html
+
+# Data files (not for indexing)
 Disallow: /*.json$
-Disallow: /*.xml$
 
-# Allow crawling of important pages
+# ============================================================
+# DUPLICATE-CONTENT PARAMETERS — Block tracking noise
+# ============================================================
+Disallow: /*?utm_
+Disallow: /*?fbclid
+Disallow: /*?gclid
+Disallow: /*?ref=
+
+# ============================================================
+# CONTENT PAGES — Explicitly allowed (for clarity)
+# ============================================================
 Allow: /$
-Allow: /category$
-Allow: /category?slug=*
-Allow: /detail?id=*
-Allow: /about$
-Allow: /contact$
-Allow: /help$
-Allow: /safety$
-Allow: /privacy$
-Allow: /terms$
+Allow: /categories.html
+Allow: /category.html
+Allow: /detail.html
+Allow: /services.html
+Allow: /service.html
+Allow: /stores.html
+Allow: /store.html
+Allow: /hotspots.html
+Allow: /hotspot.html
+Allow: /zaure-clean.html
+Allow: /support.html
+Allow: /help.html
+Allow: /faq.html
+Allow: /safety.html
+Allow: /about.html
+Allow: /contact.html
+Allow: /careers.html
+Allow: /alamin-ahmed.html
+Allow: /privacy.html
+Allow: /terms.html
 
-# Sitemap location
+# ============================================================
+# SITEMAP
+# ============================================================
 Sitemap: https://zauretech.xyz/sitemap.xml
-
-# Crawl-delay for aggressive bots
-Crawl-delay: 5
-
-# Host
-Host: https://zauretech.xyz
