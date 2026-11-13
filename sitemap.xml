@@ -3,105 +3,46 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
   <!-- ============================
-       Homepage
+       HOMEPAGE
        ============================ -->
   <url>
     <loc>https://zauretech.xyz/</loc>
-    <lastmod>2026-10-04</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <image:image>
       <image:loc>https://zauretech.xyz/assets/og-image.jpg</image:loc>
-      <image:caption>Zaure - Buy with Confidence</image:caption>
+      <image:caption>Zaure – Buy with Confidence</image:caption>
     </image:image>
   </url>
 
   <!-- ============================
-       Category Pages
+       MAIN HUBS
        ============================ -->
   <url>
-    <loc>https://zauretech.xyz/category.html</loc>
-    <lastmod>2026-10-04</lastmod>
+    <loc>https://zauretech.xyz/categories.html</loc>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://zauretech.xyz/categories.html</loc>
-    <lastmod>2026-10-04</lastmod>
+    <loc>https://zauretech.xyz/category.html</loc>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://zauretech.xyz/category.html?slug=all</loc>
-    <lastmod>2026-10-04</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://zauretech.xyz/category.html?slug=vehicles</loc>
-    <lastmod>2026-10-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://zauretech.xyz/category.html?slug=electronics</loc>
-    <lastmod>2026-10-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://zauretech.xyz/category.html?slug=furniture</loc>
-    <lastmod>2026-10-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://zauretech.xyz/category.html?slug=fashion</loc>
-    <lastmod>2026-10-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://zauretech.xyz/category.html?slug=real-estate</loc>
-    <lastmod>2026-10-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://zauretech.xyz/category.html?slug=services</loc>
-    <lastmod>2026-10-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://zauretech.xyz/category.html?slug=pets</loc>
-    <lastmod>2026-10-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://zauretech.xyz/category.html?slug=books</loc>
-    <lastmod>2026-10-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- ============================
-       Services (Find a Pro)
-       ============================ -->
-  <url>
     <loc>https://zauretech.xyz/services.html</loc>
-    <lastmod>2026-10-04</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -110,84 +51,263 @@
     </image:image>
   </url>
 
-  <!-- ============================
-       Stores
-       ============================ -->
   <url>
     <loc>https://zauretech.xyz/stores.html</loc>
-    <lastmod>2026-10-04</lastmod>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://zauretech.xyz/hotspots.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://zauretech.xyz/assets/og-image.jpg</image:loc>
+      <image:caption>Discover Hotspots across Nigeria – Zaure</image:caption>
+    </image:image>
+  </url>
+
+  <!-- ============================
+       CATEGORY PAGES
+       ============================ -->
+  <url>
+    <loc>https://zauretech.xyz/category.html?slug=vehicles</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://zauretech.xyz/category.html?slug=electronics</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://zauretech.xyz/category.html?slug=furniture</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://zauretech.xyz/category.html?slug=fashion</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://zauretech.xyz/category.html?slug=real-estate</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://zauretech.xyz/category.html?slug=home-kitchen</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://zauretech.xyz/category.html?slug=beauty-health</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://zauretech.xyz/category.html?slug=food-drinks</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://zauretech.xyz/category.html?slug=services</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://zauretech.xyz/category.html?slug=pets</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://zauretech.xyz/category.html?slug=books</loc>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <!-- ============================
-       Company Pages
+       ZAURE SERVICES
+       ============================ -->
+  <url>
+    <loc>https://zauretech.xyz/zaure-clean.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://zauretech.xyz/assets/og-image.jpg</image:loc>
+      <image:caption>Zaure Clean – Post-Construction Cleaning Specialists</image:caption>
+    </image:image>
+  </url>
+
+  <!-- ============================
+       HOTSPOTS (sample detail pages)
+       Note: full list is generated dynamically. Update quarterly.
+       ============================ -->
+  <url>
+    <loc>https://zauretech.xyz/hotspot.html?id=terra-kulture</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://zauretech.xyz/hotspot.html?id=lekki-conservation-centre</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://zauretech.xyz/hotspot.html?id=landmark-beach</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://zauretech.xyz/hotspot.html?id=nike-art-gallery</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://zauretech.xyz/hotspot.html?id=zuma-rock</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://zauretech.xyz/hotspot.html?id=kajuru-castle</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- ============================
+       STORES (sample detail pages)
+       ============================ -->
+  <url>
+    <loc>https://zauretech.xyz/store.html?id=zaure</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://zauretech.xyz/store.html?id=el</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://zauretech.xyz/store.html?id=teema-kitchenwares</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- ============================
+       COMPANY PAGES
        ============================ -->
   <url>
     <loc>https://zauretech.xyz/about.html</loc>
-    <lastmod>2026-10-04</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://zauretech.xyz/contact.html</loc>
-    <lastmod>2026-10-04</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://zauretech.xyz/careers.html</loc>
-    <lastmod>2026-10-04</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://zauretech.xyz/alamin-ahmed.html</loc>
-    <lastmod>2026-10-04</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
 
   <!-- ============================
-       Support Pages
+       SUPPORT PAGES
        ============================ -->
   <url>
+    <loc>https://zauretech.xyz/support.html</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
     <loc>https://zauretech.xyz/help.html</loc>
-    <lastmod>2026-10-04</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://zauretech.xyz/faq.html</loc>
-    <lastmod>2026-10-04</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://zauretech.xyz/safety.html</loc>
-    <lastmod>2026-10-04</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.6</priority>
   </url>
 
   <!-- ============================
-       Legal Pages
+       LEGAL PAGES
        ============================ -->
   <url>
     <loc>https://zauretech.xyz/privacy.html</loc>
-    <lastmod>2026-10-04</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
 
   <url>
     <loc>https://zauretech.xyz/terms.html</loc>
-    <lastmod>2026-10-04</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
