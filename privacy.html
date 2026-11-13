@@ -4,65 +4,291 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>Privacy Policy – Zaure</title>
-  <meta name="description" content="Privacy policy for Zaure marketplace. Learn how we collect, use, and protect your data.">
+  <meta name="description" content="How Zaure collects, uses, and protects your personal data. NDPR compliant.">
   <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
   <style>
+    /* ============ HERO ============ */
     .privacy-header {
-      margin: 30px 0 20px;
+      margin: 30px 0 8px;
       text-align: center;
     }
     .privacy-header h1 {
+      font-family: 'Playfair Display', serif;
       font-size: 2rem;
       font-weight: 800;
       background: linear-gradient(135deg, #1a3650, #B49450);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
     }
+    @media (min-width: 768px) { .privacy-header h1 { font-size: 2.4rem; } }
     .privacy-header p {
       color: var(--text-secondary);
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       margin-top: 6px;
     }
+
+    /* ============ KEY NOTICES ============ */
+    .key-notices {
+      background: linear-gradient(135deg, #f8fbfe 0%, #f1f6fb 100%);
+      border: 1px solid var(--border);
+      border-left: 4px solid #B49450;
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin: 24px 0;
+    }
+    .key-notices h3 {
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: #B49450;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .key-notices ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .key-notices li {
+      display: flex;
+      gap: 10px;
+      padding: 6px 0;
+      font-size: 0.85rem;
+      color: var(--text);
+      line-height: 1.55;
+    }
+    .key-notices li i {
+      color: #1a3650;
+      font-size: 0.7rem;
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+    [data-theme="dark"] .key-notices {
+      background: rgba(212,184,122,0.06);
+    }
+
+    /* ============ TOC ============ */
+    .toc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin-bottom: 24px;
+    }
+    .toc h3 {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+    .toc ol {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+    @media (min-width: 640px) {
+      .toc ol { grid-template-columns: 1fr 1fr; gap: 4px 20px; }
+    }
+    .toc ol li a {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      padding: 5px 0;
+      font-size: 0.82rem;
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.15s;
+      line-height: 1.4;
+    }
+    .toc ol li a:hover { color: var(--navy-2, #1a3650); }
+    .toc ol li .num {
+      color: #B49450;
+      font-weight: 800;
+      font-size: 0.7rem;
+      flex-shrink: 0;
+      min-width: 20px;
+    }
+
+    /* ============ CONTENT ============ */
     .privacy-content {
       background: var(--surface);
       border-radius: 20px;
-      padding: 24px;
+      padding: 28px 24px;
       border: 1px solid var(--border);
       margin-bottom: 30px;
-      line-height: 1.8;
+      line-height: 1.75;
     }
-    .privacy-content h2 {
-      font-size: 1.1rem;
+    @media (min-width: 768px) { .privacy-content { padding: 36px 32px; } }
+
+    .privacy-section {
+      scroll-margin-top: 90px;
+      margin-bottom: 32px;
+    }
+    .privacy-section:last-of-type { margin-bottom: 0; }
+
+    .privacy-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text);
+      margin: 0 0 12px;
+      letter-spacing: -0.3px;
+      line-height: 1.3;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .privacy-section h2 .section-num {
+      color: #B49450;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .privacy-section h3 {
+      font-size: 0.95rem;
       font-weight: 700;
       color: var(--text);
-      margin: 16px 0 8px;
+      margin: 18px 0 8px;
+      letter-spacing: -0.1px;
     }
-    .privacy-content p {
+
+    .privacy-section p {
       font-size: 0.9rem;
       color: var(--text-secondary);
-      margin-bottom: 8px;
+      margin-bottom: 12px;
+      line-height: 1.7;
     }
-    .privacy-content ul {
+
+    .privacy-section ul {
       list-style: none;
       padding: 0;
-      margin-bottom: 8px;
+      margin: 0 0 14px;
     }
-    .privacy-content ul li {
-      font-size: 0.9rem;
+    .privacy-section ul li {
+      font-size: 0.88rem;
       color: var(--text-secondary);
-      padding: 4px 0;
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
+      padding: 4px 0 4px 22px;
+      position: relative;
+      line-height: 1.65;
     }
-    .privacy-content ul li i {
+    .privacy-section ul li::before {
+      content: '•';
+      position: absolute;
+      left: 8px;
+      top: 4px;
       color: #B49450;
-      margin-top: 4px;
-      font-size: 0.7rem;
+      font-weight: 900;
+      font-size: 1rem;
+    }
+    .privacy-section ul li strong {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    /* Table */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 16px;
+      font-size: 0.82rem;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .data-table th {
+      background: var(--surface-alt);
+      padding: 10px 12px;
+      text-align: left;
+      font-weight: 700;
+      color: var(--text);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid var(--border);
+    }
+    .data-table td {
+      padding: 10px 12px;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.55;
+    }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table strong { color: var(--text); }
+
+    /* Callout within content */
+    .privacy-callout {
+      background: #f8fbfe;
+      border-left: 3px solid #B49450;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin: 12px 0 16px;
+      font-size: 0.85rem;
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .privacy-callout strong { color: #1a3650; }
+    [data-theme="dark"] .privacy-callout {
+      background: rgba(212,184,122,0.06);
+    }
+    [data-theme="dark"] .privacy-callout strong { color: #D4B87A; }
+
+    .privacy-callout.warn {
+      background: rgba(245,158,11,0.06);
+      border-left-color: #f59e0b;
+    }
+    [data-theme="dark"] .privacy-callout.warn {
+      background: rgba(245,158,11,0.1);
+    }
+
+    /* Back to top */
+    .back-to-top {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 14px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .back-to-top:hover { color: var(--navy-2, #1a3650); }
+    .back-to-top i { font-size: 0.65rem; }
+
+    /* Links in content */
+    .privacy-content a:not(.back-to-top) {
+      color: #B49450;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .privacy-content a:not(.back-to-top):hover { text-decoration: underline; }
+
+    /* Print */
+    @media print {
+      .navbar, .footer, .bottom-nav, .modal-overlay, .back-to-top { display: none !important; }
+      .privacy-content { border: none; padding: 0; }
+      .key-notices { border: 1px solid #ccc; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; animation: none !important; }
     }
   </style>
 </head>
@@ -98,62 +324,534 @@
   <div class="container">
     <div class="privacy-header">
       <h1>Privacy Policy</h1>
-      <p>Last updated: January 2026</p>
+      <p>Last updated: 13 November 2026 · Effective immediately</p>
+    </div>
+
+    <!-- KEY NOTICES -->
+    <div class="key-notices">
+      <h3><i class="fas fa-circle-info"></i> Key things to know</h3>
+      <ul>
+        <li><i class="fas fa-circle"></i> <span><strong>We don't sell your data.</strong> Not to advertisers, not to brokers, not to anyone.</span></li>
+        <li><i class="fas fa-circle"></i> <span><strong>Most of your data stays on your device.</strong> Zaure uses browser localStorage — favorites, theme, language, and drafts live locally, not on our servers.</span></li>
+        <li><i class="fas fa-circle"></i> <span><strong>WhatsApp conversations are not seen by us.</strong> When you chat with a seller, that conversation is between you and them on WhatsApp. We don't have access to it.</span></li>
+        <li><i class="fas fa-circle"></i> <span><strong>You have rights.</strong> Under Nigeria's NDPR and the Data Protection Act 2023, you can request, correct, or delete your data at any time.</span></li>
+      </ul>
+    </div>
+
+    <!-- TOC -->
+    <div class="toc">
+      <h3>Contents</h3>
+      <ol>
+        <li><a href="#s1"><span class="num">01</span> Who We Are</a></li>
+        <li><a href="#s2"><span class="num">02</span> Scope of This Policy</a></li>
+        <li><a href="#s3"><span class="num">03</span> Information We Collect</a></li>
+        <li><a href="#s4"><span class="num">04</span> How We Collect It</a></li>
+        <li><a href="#s5"><span class="num">05</span> How We Use Your Information</a></li>
+        <li><a href="#s6"><span class="num">06</span> Legal Basis for Processing</a></li>
+        <li><a href="#s7"><span class="num">07</span> Sharing &amp; Disclosure</a></li>
+        <li><a href="#s8"><span class="num">08</span> WhatsApp &amp; Third Parties</a></li>
+        <li><a href="#s9"><span class="num">09</span> Cookies &amp; Local Storage</a></li>
+        <li><a href="#s10"><span class="num">10</span> Analytics &amp; Tracking</a></li>
+        <li><a href="#s11"><span class="num">11</span> Verification Data</a></li>
+        <li><a href="#s12"><span class="num">12</span> Business &amp; Wholesale Data</a></li>
+        <li><a href="#s13"><span class="num">13</span> Zaure Services Data</a></li>
+        <li><a href="#s14"><span class="num">14</span> Data Retention</a></li>
+        <li><a href="#s15"><span class="num">15</span> Data Security</a></li>
+        <li><a href="#s16"><span class="num">16</span> Your Rights</a></li>
+        <li><a href="#s17"><span class="num">17</span> Account Deletion &amp; Data Erasure</a></li>
+        <li><a href="#s18"><span class="num">18</span> Children's Privacy</a></li>
+        <li><a href="#s19"><span class="num">19</span> International Transfers</a></li>
+        <li><a href="#s20"><span class="num">20</span> Marketing Communications</a></li>
+        <li><a href="#s21"><span class="num">21</span> Changes to This Policy</a></li>
+        <li><a href="#s22"><span class="num">22</span> Contact &amp; Complaints</a></li>
+      </ol>
     </div>
 
     <div class="privacy-content">
-      <h2><i class="fas fa-database" style="color:#1a3650;"></i> 1. Information We Collect</h2>
-      <p>When you use Zaure, we may collect the following information:</p>
-      <ul>
-        <li><i class="fas fa-circle"></i> Full name and phone number (when you sign up)</li>
-        <li><i class="fas fa-circle"></i> State/location information</li>
-        <li><i class="fas fa-circle"></i> Listings you post and favorites you save</li>
-        <li><i class="fas fa-circle"></i> Usage data (pages visited, search queries)</li>
-      </ul>
 
-      <h2><i class="fas fa-cogs" style="color:#1a3650;"></i> 2. How We Use Your Information</h2>
-      <p>Your information is used to:</p>
-      <ul>
-        <li><i class="fas fa-circle"></i> Create and manage your account</li>
-        <li><i class="fas fa-circle"></i> Provide location-based recommendations</li>
-        <li><i class="fas fa-circle"></i> Display your listings to other users</li>
-        <li><i class="fas fa-circle"></i> Improve our platform and user experience</li>
-        <li><i class="fas fa-circle"></i> Contact you about platform updates</li>
-      </ul>
+      <!-- 1 -->
+      <section class="privacy-section" id="s1">
+        <h2><span class="section-num">01</span> Who We Are</h2>
+        <p>Zaure is operated by <strong>Zaure Technologies</strong>, a Nigerian company. We run the Zaure marketplace, wholesale tier, Zaure Services (including Zaure Clean), Zaure Official Store, the El brand, Hotspots, and Find a Pro.</p>
+        <p>For the purposes of Nigeria's <strong>Data Protection Regulation (NDPR, 2019)</strong> and the <strong>Nigeria Data Protection Act (2023)</strong>, Zaure Technologies is the <strong>data controller</strong> for the personal information described in this policy.</p>
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
 
-      <h2><i class="fas fa-share-alt" style="color:#1a3650;"></i> 3. Information Sharing</h2>
-      <p>We do NOT sell your personal information. We may share your information with:</p>
-      <ul>
-        <li><i class="fas fa-circle"></i> Other users (your listing details are visible)</li>
-        <li><i class="fas fa-circle"></i> Law enforcement (if required by law)</li>
-      </ul>
+      <!-- 2 -->
+      <section class="privacy-section" id="s2">
+        <h2><span class="section-num">02</span> Scope of This Policy</h2>
+        <p>This policy explains what data we collect, why we collect it, how we use and protect it, and your rights over it. It applies to everyone who uses Zaure — buyers, sellers, wholesale buyers, service customers, and visitors.</p>
+        <p>It does <strong>not</strong> cover:</p>
+        <ul>
+          <li>WhatsApp conversations between users (governed by WhatsApp's own privacy policy)</li>
+          <li>Third-party websites you visit through links on Zaure</li>
+          <li>Any platform we don't own or operate</li>
+        </ul>
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
 
-      <h2><i class="fas fa-lock" style="color:#1a3650;"></i> 4. Data Security</h2>
-      <p>We take reasonable measures to protect your data. However, no method of transmission over the internet is 100% secure.</p>
+      <!-- 3 -->
+      <section class="privacy-section" id="s3">
+        <h2><span class="section-num">03</span> Information We Collect</h2>
 
-      <h2><i class="fas fa-cookie" style="color:#1a3650;"></i> 5. Cookies & Local Storage</h2>
-      <p>Zaure uses local storage to remember your preferences, theme settings, favorites, and login information on your device.</p>
+        <h3>Information you give us</h3>
+        <ul>
+          <li><strong>Account details:</strong> Full name, phone number, email address, and state when you sign up</li>
+          <li><strong>Profile information:</strong> Bio, profile picture, business details (if you register as a business seller)</li>
+          <li><strong>Listing information:</strong> Title, description, price, photos, category, location of items you sell</li>
+          <li><strong>Service bookings:</strong> For Zaure Clean — property location, size, preferred dates, contact details</li>
+          <li><strong>Communications:</strong> Messages you send us via email, WhatsApp, or the contact form</li>
+          <li><strong>Verification documents:</strong> If you apply for verification — CAC registration, business address, ID (see Section 11)</li>
+        </ul>
 
-      <h2><i class="fas fa-user-shield" style="color:#1a3650;"></i> 6. Your Rights</h2>
-      <p>You have the right to:</p>
-      <ul>
-        <li><i class="fas fa-circle"></i> Access your personal data</li>
-        <li><i class="fas fa-circle"></i> Correct inaccurate information</li>
-        <li><i class="fas fa-circle"></i> Delete your account and data</li>
-        <li><i class="fas fa-circle"></i> Opt out of communications</li>
-      </ul>
+        <h3>Information collected automatically</h3>
+        <ul>
+          <li><strong>Device &amp; browser data:</strong> Browser type, device type, operating system, screen size</li>
+          <li><strong>Usage data:</strong> Pages visited, links clicked, time spent, search queries (aggregated and anonymized)</li>
+          <li><strong>Approximate location:</strong> Only if you allow browser geolocation — used to show nearby hotspots and products (see Section 10)</li>
+          <li><strong>IP address:</strong> For security and analytics, stored in abbreviated form</li>
+        </ul>
 
-      <h2><i class="fas fa-trash" style="color:#1a3650;"></i> 7. Deleting Your Account</h2>
-      <p>You can delete your account at any time from Profile → Settings → Account → Delete Account. This will permanently remove your data from our system.</p>
+        <h3>Information we do NOT collect</h3>
+        <ul>
+          <li>Payment card details (Zaure doesn't process marketplace payments)</li>
+          <li>WhatsApp conversation content (we don't have access to it)</li>
+          <li>Contacts from your phone</li>
+          <li>Photos from your camera roll (only photos you explicitly upload)</li>
+        </ul>
 
-      <h2><i class="fas fa-child" style="color:#1a3650;"></i> 8. Children's Privacy</h2>
-      <p>Zaure is not intended for users under 18 years of age. We do not knowingly collect data from children.</p>
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
 
-      <h2><i class="fas fa-file-contract" style="color:#1a3650;"></i> 9. Changes to This Policy</h2>
-      <p>We may update this Privacy Policy from time to time. Continued use of Zaure after changes constitutes acceptance.</p>
+      <!-- 4 -->
+      <section class="privacy-section" id="s4">
+        <h2><span class="section-num">04</span> How We Collect It</h2>
+        <ul>
+          <li><strong>Directly from you</strong> — when you sign up, post a listing, book a service, or contact us</li>
+          <li><strong>Automatically</strong> — through cookies, localStorage, and analytics when you browse the site</li>
+          <li><strong>From third parties</strong> — for example, if you use Google or Facebook login (when supported), we receive your name and email from that provider</li>
+          <li><strong>From verification partners</strong> — when you submit business details for verification, our verification partners confirm accuracy</li>
+        </ul>
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
 
-      <h2><i class="fas fa-phone" style="color:#1a3650;"></i> 10. Contact Us</h2>
-      <p>Questions about this Privacy Policy? Contact us on WhatsApp: <a href="https://wa.me/2349042339411" target="_blank" style="color:#D4B87A;font-weight:600;">+2349042339411</a></p>
+      <!-- 5 -->
+      <section class="privacy-section" id="s5">
+        <h2><span class="section-num">05</span> How We Use Your Information</h2>
+
+        <table class="data-table">
+          <thead>
+            <tr><th>Purpose</th><th>Example</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Provide the platform</strong></td>
+              <td>Create your account, show your listings, store your favorites</td>
+            </tr>
+            <tr>
+              <td><strong>Connect buyers and sellers</strong></td>
+              <td>Show your WhatsApp number to interested buyers</td>
+            </tr>
+            <tr>
+              <td><strong>Location-based discovery</strong></td>
+              <td>Show hotspots near you, products in your state</td>
+            </tr>
+            <tr>
+              <td><strong>Verification</strong></td>
+              <td>Confirm business details before awarding a verified badge</td>
+            </tr>
+            <tr>
+              <td><strong>Service delivery</strong></td>
+              <td>Book Zaure Clean staff, send job details to your WhatsApp</td>
+            </tr>
+            <tr>
+              <td><strong>Trust &amp; safety</strong></td>
+              <td>Detect scams, prevent fraud, respond to reports</td>
+            </tr>
+            <tr>
+              <td><strong>Improvement</strong></td>
+              <td>Understand which pages are used, fix bugs, improve search</td>
+            </tr>
+            <tr>
+              <td><strong>Communication</strong></td>
+              <td>Notify you of important account changes (only if you opt in for non-essential messages)</td>
+            </tr>
+            <tr>
+              <td><strong>Legal compliance</strong></td>
+              <td>Respond to lawful requests from Nigerian authorities</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
+
+      <!-- 6 -->
+      <section class="privacy-section" id="s6">
+        <h2><span class="section-num">06</span> Legal Basis for Processing</h2>
+        <p>Under the NDPR and Nigeria Data Protection Act 2023, we process your data on these legal grounds:</p>
+        <ul>
+          <li><strong>Contract</strong> — to provide the Zaure platform you've signed up for</li>
+          <li><strong>Legitimate interest</strong> — to prevent fraud, improve security, and grow the platform</li>
+          <li><strong>Consent</strong> — for geolocation, marketing emails, and non-essential cookies (you can withdraw at any time)</li>
+          <li><strong>Legal obligation</strong> — to comply with tax, fraud-prevention, or court orders</li>
+        </ul>
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
+
+      <!-- 7 -->
+      <section class="privacy-section" id="s7">
+        <h2><span class="section-num">07</span> Sharing &amp; Disclosure</h2>
+        <p>We <strong>do not sell</strong> your personal data. We share only where necessary:</p>
+
+        <h3>Who we share with</h3>
+        <ul>
+          <li><strong>Other Zaure users</strong> — your public profile, listings, and contact number (as you've entered it) are visible to other users</li>
+          <li><strong>Service providers</strong> — analytics (Google Analytics), form handling (Formspree), hosting (Netlify/Vercel), all bound by data processing agreements</li>
+          <li><strong>Verification partners</strong> — when you request verification, we share your submitted documents with partners who confirm them (only if you opt in)</li>
+          <li><strong>Law enforcement</strong> — only in response to a lawful warrant or court order, and only after internal review</li>
+          <li><strong>Successor entity</strong> — if Zaure is acquired or merged, your data may transfer to the new entity under the same protections</li>
+        </ul>
+
+        <h3>What we never share</h3>
+        <ul>
+          <li>Your phone number with anyone who isn't directly transacting with you</li>
+          <li>Your email with third-party marketers</li>
+          <li>Your verification documents with anyone except our verification partner</li>
+          <li>Your IP address or device fingerprint with anyone</li>
+        </ul>
+
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
+
+      <!-- 8 -->
+      <section class="privacy-section" id="s8">
+        <h2><span class="section-num">08</span> WhatsApp &amp; Third Parties</h2>
+        <p>Zaure does <strong>not</strong> have a native messaging system. Every conversation between buyers and sellers happens on <strong>WhatsApp</strong>.</p>
+        <div class="privacy-callout warn">
+          <strong>Important:</strong> When you message a seller on WhatsApp, that conversation is between you and them. Zaure cannot see it, read it, record it, or access it in any way. WhatsApp's own privacy policy and end-to-end encryption govern that conversation.
+        </div>
+        <p>What we can see on our side:</p>
+        <ul>
+          <li>When you click a WhatsApp button on Zaure (we log that a click happened, but not the content of the message you sent)</li>
+          <li>Your public profile information visible on your Zaure listing</li>
+          <li>Any screenshots or reports you voluntarily send us about a conversation</li>
+        </ul>
+        <p>We recommend reading <a href="https://www.whatsapp.com/legal/privacy-policy" target="_blank" rel="noopener">WhatsApp's Privacy Policy</a> so you understand how they handle your data.</p>
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
+
+      <!-- 9 -->
+      <section class="privacy-section" id="s9">
+        <h2><span class="section-num">09</span> Cookies &amp; Local Storage</h2>
+        <p>Zaure uses <strong>browser localStorage</strong> more than traditional cookies. Here's what we store on your device:</p>
+
+        <table class="data-table">
+          <thead>
+            <tr><th>Key</th><th>What it stores</th><th>Where</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>zaure_user</code></td>
+              <td>Your account details (name, phone, state, bio)</td>
+              <td>Your device only</td>
+            </tr>
+            <tr>
+              <td><code>zaure_favorites</code></td>
+              <td>Product and service IDs you've saved</td>
+              <td>Your device only</td>
+            </tr>
+            <tr>
+              <td><code>zaure_hotspot_favorites</code></td>
+              <td>Hotspots you've saved</td>
+              <td>Your device only</td>
+            </tr>
+            <tr>
+              <td><code>zaure_theme</code></td>
+              <td>Light or dark mode preference</td>
+              <td>Your device only</td>
+            </tr>
+            <tr>
+              <td><code>zaure_lang</code></td>
+              <td>Preferred language (English, Hausa, Yoruba, etc.)</td>
+              <td>Your device only</td>
+            </tr>
+            <tr>
+              <td><code>zaure_avatar</code></td>
+              <td>Your profile photo (base64 encoded)</td>
+              <td>Your device only</td>
+            </tr>
+            <tr>
+              <td><code>zaure_listings</code></td>
+              <td>Listings you've posted (draft and published)</td>
+              <td>Your device only</td>
+            </tr>
+            <tr>
+              <td><code>zaure_recently_viewed</code></td>
+              <td>Products you've recently opened</td>
+              <td>Your device only</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="privacy-callout">
+          <strong>Important:</strong> Most of this data lives <strong>only on your device</strong> — it doesn't reach our servers until you perform an action that requires it (like posting a listing that gets synced). Clearing your browser data will remove all of this from your device.
+        </div>
+
+        <p>We also use a small number of traditional cookies from third-party services:</p>
+        <ul>
+          <li><strong>Analytics cookies</strong> — from Google Analytics, to understand aggregate traffic patterns</li>
+          <li><strong>No advertising cookies</strong> — we don't run third-party ads or retargeting</li>
+        </ul>
+
+        <p>You can control cookies through your browser settings. Blocking all cookies may affect platform functionality.</p>
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
+
+      <!-- 10 -->
+      <section class="privacy-section" id="s10">
+        <h2><span class="section-num">10</span> Analytics &amp; Tracking</h2>
+        <p>We use <strong>Google Analytics</strong> to understand how people use Zaure — which pages are popular, where users get stuck, and where to focus improvement.</p>
+        <ul>
+          <li>Analytics data is <strong>aggregated and anonymized</strong> — we don't see "John from Kaduna clicked this"</li>
+          <li>We anonymize IP addresses before they reach Google</li>
+          <li>We do <strong>not</strong> use Google Analytics advertising features (remarketing, interest reports)</li>
+          <li>We do <strong>not</strong> use Facebook Pixel or similar behavioral tracking</li>
+        </ul>
+
+        <h3>Geolocation</h3>
+        <p>We use your browser's geolocation only if you explicitly allow it — the browser shows a permission prompt and you choose. It's used to:</p>
+        <ul>
+          <li>Sort hotspots by distance from you</li>
+          <li>Show products from sellers near you</li>
+        </ul>
+        <p>Your coordinates are used in the browser to sort the results. They are <strong>not</strong> stored on our servers. You can revoke geolocation permission at any time from your browser settings.</p>
+
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
+
+      <!-- 11 -->
+      <section class="privacy-section" id="s11">
+        <h2><span class="section-num">11</span> Verification Data</h2>
+        <p>When you apply for verification — as an individual seller or a business — we may collect:</p>
+        <ul>
+          <li><strong>Phone number verification</strong> — an OTP sent to your number</li>
+          <li><strong>Email verification</strong> — a link sent to your email</li>
+          <li><strong>Business verification</strong> — CAC registration number, business address, bank account confirmation</li>
+          <li><strong>Identity verification</strong> — a government ID (only for high-tier verification, and only if you opt in)</li>
+        </ul>
+        <div class="privacy-callout">
+          <strong>What happens with verification data:</strong> It's stored securely, encrypted at rest, and used <em>only</em> to confirm your identity and business. It is <strong>never shown publicly</strong>. Only your verified badge appears on your profile — not the underlying documents.
+        </div>
+        <p>You can request deletion of verification documents at any time by contacting us. If deleted, your verified badge will be removed and you'll need to re-verify to regain it.</p>
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
+
+      <!-- 12 -->
+      <section class="privacy-section" id="s12">
+        <h2><span class="section-num">12</span> Business &amp; Wholesale Data</h2>
+        <p>If you register as a business seller or engage in wholesale (B2B) transactions, we may additionally collect:</p>
+        <ul>
+          <li>Business name, CAC number, business address</li>
+          <li>Product catalogs, MOQ, pricing tiers</li>
+          <li>Contact person name and role</li>
+          <li>References or supplier documents you voluntarily provide</li>
+        </ul>
+        <p>Business information is used to verify your business, display your profile on the marketplace, and help wholesale buyers find you. Some business information is <strong>publicly visible</strong> on your store profile — business name, product catalog, general location, and the verified badge. Personal contact details (phone, email) are shown only to users who interact with you.</p>
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
+
+      <!-- 13 -->
+      <section class="privacy-section" id="s13">
+        <h2><span class="section-num">13</span> Zaure Services Data</h2>
+        <p>When you book Zaure Services (such as Zaure Clean), we collect additional information specific to the job:</p>
+        <ul>
+          <li>Property address (for service delivery)</li>
+          <li>Property size, number of rooms, type of job</li>
+          <li>Preferred dates and times</li>
+          <li>Any specific notes you provide</li>
+        </ul>
+        <p>This data is:</p>
+        <ul>
+          <li>Shared with the Zaure Clean staff assigned to your job (need-to-know only)</li>
+          <li>Retained for 24 months after the job for quality, warranty, and dispute resolution</li>
+          <li><strong>Not</strong> shared with third-party marketers</li>
+        </ul>
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
+
+      <!-- 14 -->
+      <section class="privacy-section" id="s14">
+        <h2><span class="section-num">14</span> Data Retention</h2>
+        <p>We keep your data only as long as needed for the purpose it was collected:</p>
+
+        <table class="data-table">
+          <thead>
+            <tr><th>Data type</th><th>Retention period</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Account information</strong></td>
+              <td>Until you delete your account, plus 30 days for backup</td>
+            </tr>
+            <tr>
+              <td><strong>Listings</strong></td>
+              <td>Until you delete them, or 12 months after last activity</td>
+            </tr>
+            <tr>
+              <td><strong>Verification documents</strong></td>
+              <td>Until you request deletion, or 2 years after last verification</td>
+            </tr>
+            <tr>
+              <td><strong>Service bookings</strong></td>
+              <td>24 months after the job (for warranty and dispute purposes)</td>
+            </tr>
+            <tr>
+              <td><strong>Support conversations</strong></td>
+              <td>12 months after the last message</td>
+            </tr>
+            <tr>
+              <td><strong>Analytics data</strong></td>
+              <td>14 months (Google Analytics default)</td>
+            </tr>
+            <tr>
+              <td><strong>Fraud reports</strong></td>
+              <td>5 years (for legal and safety reasons)</td>
+            </tr>
+            <tr>
+              <td><strong>Device localStorage</strong></td>
+              <td>Until you clear it in your browser</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
+
+      <!-- 15 -->
+      <section class="privacy-section" id="s15">
+        <h2><span class="section-num">15</span> Data Security</h2>
+        <p>We take reasonable measures to protect your data:</p>
+        <ul>
+          <li><strong>HTTPS encryption</strong> on all pages — your connection to Zaure is encrypted</li>
+          <li><strong>Encrypted storage</strong> for sensitive data like verification documents</li>
+          <li><strong>Access controls</strong> — only staff who need your data can access it</li>
+          <li><strong>Regular backups</strong> with encryption</li>
+          <li><strong>Vendor due diligence</strong> — we work only with service providers who meet our security standards</li>
+        </ul>
+        <div class="privacy-callout warn">
+          <strong>But:</strong> No method of internet transmission is 100% secure. We can't guarantee that a determined attacker will never breach our systems. If we become aware of a data breach affecting you, we will notify you and the Nigeria Data Protection Commission promptly, as required by law.
+        </div>
+        <p>What you can do to help:</p>
+        <ul>
+          <li>Use a strong password and don't share it</li>
+          <li>Log out from shared devices</li>
+          <li>Never send passwords or OTPs to anyone claiming to be from Zaure</li>
+        </ul>
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
+
+      <!-- 16 -->
+      <section class="privacy-section" id="s16">
+        <h2><span class="section-num">16</span> Your Rights</h2>
+        <p>Under NDPR and the Nigeria Data Protection Act 2023, you have the following rights:</p>
+        <ul>
+          <li><strong>Right of access</strong> — request a copy of all personal data we hold about you</li>
+          <li><strong>Right to correction</strong> — ask us to correct inaccurate or incomplete data</li>
+          <li><strong>Right to deletion</strong> — ask us to delete your data (with some exceptions for legal obligations)</li>
+          <li><strong>Right to restrict processing</strong> — ask us to stop using your data for certain purposes</li>
+          <li><strong>Right to data portability</strong> — receive your data in a machine-readable format</li>
+          <li><strong>Right to object</strong> — object to processing based on legitimate interest</li>
+          <li><strong>Right to withdraw consent</strong> — withdraw consent for marketing or geolocation at any time</li>
+        </ul>
+        <p>To exercise any of these rights, message us on <a href="https://wa.me/2349042339411" target="_blank" rel="noopener">WhatsApp</a> or email <a href="mailto:hello@zauretech.xyz">hello@zauretech.xyz</a>. We'll respond within 30 days.</p>
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
+
+      <!-- 17 -->
+      <section class="privacy-section" id="s17">
+        <h2><span class="section-num">17</span> Account Deletion &amp; Data Erasure</h2>
+        <p>You can delete your account any time from <strong>Profile → Settings → Delete Account</strong>. When you do:</p>
+        <ul>
+          <li>Your profile, listings, and favorites are <strong>immediately removed</strong> from public view</li>
+          <li>Your data is fully deleted from our servers within <strong>30 days</strong> (except where retention is required by law)</li>
+          <li>Your data is removed from backups within <strong>90 days</strong></li>
+          <li>Your verified badge is removed and cannot be restored without re-verification</li>
+        </ul>
+        <div class="privacy-callout">
+          <strong>Some data we cannot delete immediately:</strong> fraud reports, dispute records, or data we're legally required to retain (e.g., for tax or law enforcement). We'll tell you what we're keeping and why if you request deletion.
+        </div>
+        <p>If you need us to delete server-side records faster than 30 days, message us on WhatsApp with your registered phone number.</p>
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
+
+      <!-- 18 -->
+      <section class="privacy-section" id="s18">
+        <h2><span class="section-num">18</span> Children's Privacy</h2>
+        <p>Zaure is intended for users aged <strong>18 and above</strong>. We do not knowingly collect data from anyone under 18. If you're a parent or guardian and believe your child has created an account, contact us and we'll delete it promptly.</p>
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
+
+      <!-- 19 -->
+      <section class="privacy-section" id="s19">
+        <h2><span class="section-num">19</span> International Data Transfers</h2>
+        <p>Some of our service providers are based outside Nigeria — for example, Google Analytics (United States), Netlify or Vercel (United States), and WhatsApp (Meta, United States). When your data is transferred outside Nigeria, we ensure:</p>
+        <ul>
+          <li>The receiving country has adequate data protection standards, OR</li>
+          <li>Our contracts with those providers include standard data protection clauses</li>
+          <li>The transfer is necessary for providing you the service</li>
+        </ul>
+        <p>Your verification documents are <strong>never</strong> transferred outside Nigeria unless you specifically opt in for international verification partners.</p>
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
+
+      <!-- 20 -->
+      <section class="privacy-section" id="s20">
+        <h2><span class="section-num">20</span> Marketing Communications</h2>
+        <p>We send <strong>essential messages</strong> regardless of your marketing preferences — things like account security alerts, verification status, and important policy updates.</p>
+        <p>For <strong>non-essential messages</strong> (new features, promotions, newsletters), we ask first:</p>
+        <ul>
+          <li>You opt in explicitly during signup or in settings</li>
+          <li>You can opt out at any time by clicking "unsubscribe" or updating preferences</li>
+          <li>We won't share your email with third-party marketers</li>
+        </ul>
+        <p>Zaure doesn't send marketing SMS. If you get an SMS claiming to be from Zaure asking you to click a link, it's a scam — report it on WhatsApp.</p>
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
+
+      <!-- 21 -->
+      <section class="privacy-section" id="s21">
+        <h2><span class="section-num">21</span> Changes to This Policy</h2>
+        <p>We may update this Privacy Policy from time to time. When we do:</p>
+        <ul>
+          <li>We'll update the "Last updated" date at the top</li>
+          <li>For material changes, we'll notify registered users by email or a visible notice on the platform</li>
+          <li>Continued use after changes take effect means you accept the updated policy</li>
+        </ul>
+        <p>We recommend checking this page periodically. If you disagree with any change, you can delete your account.</p>
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
+
+      <!-- 22 -->
+      <section class="privacy-section" id="s22">
+        <h2><span class="section-num">22</span> Contact &amp; Complaints</h2>
+        <p>For any question about this Privacy Policy, your data, or to exercise your rights:</p>
+        <ul>
+          <li><strong>WhatsApp:</strong> <a href="https://wa.me/2349042339411" target="_blank" rel="noopener">+234 904 233 9411</a> (fastest response)</li>
+          <li><strong>Email:</strong> <a href="mailto:hello@zauretech.xyz">hello@zauretech.xyz</a></li>
+        </ul>
+        <p>We aim to resolve all privacy questions within 7 working days and formal data subject requests within 30 days.</p>
+
+        <h3>Right to lodge a complaint</h3>
+        <p>If you believe we've handled your data improperly, you have the right to lodge a complaint with the <strong>Nigeria Data Protection Commission (NDPC)</strong>, the regulator for data protection in Nigeria:</p>
+        <ul>
+          <li>Website: <a href="https://ndpc.gov.ng" target="_blank" rel="noopener">ndpc.gov.ng</a></li>
+          <li>Email: <a href="mailto:info@ndpc.gov.ng">info@ndpc.gov.ng</a></li>
+        </ul>
+        <p>We ask that you contact us first so we can try to resolve the issue — but you always have the right to escalate to the NDPC directly.</p>
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+      </section>
+
     </div>
   </div>
 
@@ -176,22 +874,23 @@
         <div class="footer-col">
           <h4>Browse</h4>
           <a href="/category.html?slug=all">All Items</a>
-          <a href="/category.html?slug=vehicles">Vehicles</a>
-          <a href="/category.html?slug=electronics">Electronics</a>
-          <a href="/category.html?slug=furniture">Furniture</a>
+          <a href="/hotspots.html">Hotspots</a>
+          <a href="/services.html">Find a Pro</a>
           <a href="/category.html?slug=fashion">Fashion</a>
-          <a href="/category.html?slug=real-estate">Real Estate</a>
+          <a href="/category.html?slug=electronics">Electronics</a>
+          <a href="/category.html?slug=home-kitchen">Home & Kitchen</a>
         </div>
         <div class="footer-col">
           <h4>Support</h4>
           <a href="/help.html">Help Center</a>
+          <a href="/faq.html">FAQ</a>
           <a href="/safety.html">Safety Tips</a>
           <a href="/contact.html">Contact Us</a>
-          <a href="/support.html">Support</a>
         </div>
         <div class="footer-col">
           <h4>Company</h4>
           <a href="/about.html">About Us</a>
+          <a href="/alamin-ahmed.html">Founder</a>
           <a href="/careers.html">Careers</a>
           <a href="/privacy.html">Privacy Policy</a>
           <a href="/terms.html">Terms of Service</a>
@@ -211,9 +910,6 @@
         <div class="footer-bottom">
           <span>&copy; 2026 <strong>Zaure Technologies</strong>. All rights reserved.</span>
           <span class="footer-lang"><i class="fas fa-globe"></i> Nigeria · English</span>
-        </div>
-        <div style="grid-column: 1/-1; text-align: center; margin-top: 8px; font-size: 0.8rem; color: #94A3B8;">
-          For info or to report an issue, contact us on WhatsApp: <a href="https://wa.me/2349042339411" target="_blank" style="color: #D4B87A; text-decoration: none; font-weight: 600;">+2349042339411</a>
         </div>
       </div>
     </div>
@@ -269,6 +965,26 @@
       loadUser();
       initTheme();
       updateFavoriteBadge();
+
+      // Smooth scroll for TOC links and back-to-top
+      document.querySelectorAll('.toc a, .back-to-top').forEach(a => {
+        a.addEventListener('click', function(e) {
+          const href = this.getAttribute('href');
+          if (href === '#') {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            return;
+          }
+          if (href && href.startsWith('#')) {
+            const target = document.querySelector(href);
+            if (target) {
+              e.preventDefault();
+              target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              history.replaceState(null, '', href);
+            }
+          }
+        });
+      });
     });
   </script>
 </body>
