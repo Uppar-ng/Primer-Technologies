@@ -4,74 +4,576 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>Support – Zaure</title>
-  <meta name="description" content="Get support and assistance for Zaure marketplace.">
+  <meta name="description" content="Get help with Zaure — buying, selling, wholesale, services, and account support. We respond fastest on WhatsApp.">
   <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
   <style>
-    .support-header {
-      margin: 30px 0 20px;
+    :root {
+      --navy: #0f2940;
+      --navy-2: #1a3650;
+      --gold: #D4B87A;
+      --gold-deep: #B49450;
+      --wa: #25D366;
+      --wa-dark: #1DA851;
+      --urgent: #dc2626;
+      --urgent-bg: rgba(220,38,38,0.06);
+    }
+
+    /* ============ BREADCRUMB ============ */
+    .support-breadcrumb {
+      display: flex; align-items: center; gap: 7px;
+      margin: 20px 0 16px; font-size: 0.76rem;
+      color: var(--text-secondary); flex-wrap: wrap;
+    }
+    .support-breadcrumb a {
+      color: var(--text-secondary); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .support-breadcrumb a:hover { color: var(--navy-2); }
+    .support-breadcrumb i { font-size: 0.5rem; opacity: 0.55; }
+    .support-breadcrumb .current { color: var(--text); font-weight: 600; }
+
+    /* ============ HERO ============ */
+    .support-hero {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      background: linear-gradient(135deg, #0f2940 0%, #1a3650 55%, #2a4a6a 100%);
+      border-radius: 22px;
+      padding: 40px 24px 36px;
       text-align: center;
+      color: white;
+      margin-bottom: 24px;
     }
-    .support-header h1 {
-      font-size: 2rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, #1a3650, #B49450);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .support-header p {
-      color: var(--text-secondary);
-      font-size: 1rem;
-      margin-top: 6px;
-    }
-    .support-options {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
-      margin-bottom: 30px;
-    }
-    @media (min-width: 640px) {
-      .support-options { grid-template-columns: repeat(2, 1fr); }
-    }
-    .support-card {
-      background: var(--surface);
-      border-radius: 20px;
-      padding: 24px;
-      text-align: center;
-      border: 1px solid var(--border);
-      transition: transform 0.3s, box-shadow 0.3s;
-      cursor: pointer;
-      text-decoration: none;
-      color: var(--text);
-    }
-    .support-card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-hover);
-    }
-    .support-card .support-icon {
-      width: 60px;
-      height: 60px;
+    .support-hero::before {
+      content: '';
+      position: absolute;
+      top: -30%; right: -15%;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(212,184,122,0.22) 0%, transparent 65%);
       border-radius: 50%;
-      background: var(--surface-alt);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .support-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30%; left: -15%;
+      width: 340px; height: 340px;
+      background: radial-gradient(circle, rgba(212,184,122,0.10) 0%, transparent 65%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .support-hero > * { position: relative; z-index: 1; }
+
+    .support-hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.62rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--gold);
+      padding: 5px 12px;
+      background: rgba(212,184,122,0.12);
+      border: 1px solid rgba(212,184,122,0.35);
+      border-radius: 40px;
+      margin-bottom: 14px;
+    }
+    .support-hero-eyebrow i { font-size: 0.55rem; }
+
+    .support-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.7rem, 5vw, 2.4rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.6px;
+      margin-bottom: 10px;
+    }
+    .support-hero p {
+      font-size: clamp(0.85rem, 2vw, 0.95rem);
+      color: rgba(255,255,255,0.8);
+      line-height: 1.55;
+      max-width: 460px;
+      margin: 0 auto 20px;
+    }
+
+    /* Search */
+    .support-search {
+      max-width: 520px;
+      margin: 0 auto;
+      display: flex;
+      background: rgba(255,255,255,0.98);
+      border-radius: 40px;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.2);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .support-search i {
+      align-self: center;
+      padding-left: 18px;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+    .support-search input {
+      flex: 1;
+      padding: 13px 12px;
+      border: none;
+      background: transparent;
+      font-size: 0.9rem;
+      color: var(--text);
+      outline: none;
+      font-family: inherit;
+      min-width: 0;
+    }
+    .support-search input::placeholder { color: var(--text-secondary); }
+    .support-search button {
+      padding: 0 8px;
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      font-size: 0.85rem;
+    }
+    .support-search button.show { display: flex; }
+    .support-search button:hover { color: var(--navy-2); }
+
+    .popular-searches {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: center;
+    }
+    .popular-searches span {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.6);
+      margin-right: 4px;
+      align-self: center;
+    }
+    .popular-searches button {
+      padding: 5px 12px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 30px;
+      color: rgba(255,255,255,0.85);
+      font-size: 0.72rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-family: inherit;
+    }
+    .popular-searches button:hover {
+      background: rgba(255,255,255,0.18);
+      color: white;
+    }
+
+    /* ============ URGENT STRIP ============ */
+    .urgent-strip {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 18px;
+      background: var(--urgent-bg);
+      border: 1px solid rgba(220,38,38,0.22);
+      border-left: 4px solid var(--urgent);
+      border-radius: 14px;
+      margin-bottom: 24px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .urgent-strip:hover {
+      background: rgba(220,38,38,0.1);
+    }
+    .urgent-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--urgent);
+      color: white;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 12px;
-      font-size: 1.5rem;
-      color: #1a3650;
+      font-size: 0.95rem;
+      flex-shrink: 0;
     }
-    .support-card h3 {
-      font-size: 1rem;
+    .urgent-body { flex: 1; min-width: 0; }
+    .urgent-body h3 {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 2px;
+      line-height: 1.3;
+    }
+    .urgent-body p {
+      font-size: 0.76rem;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+    .urgent-arrow {
+      color: var(--urgent);
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    /* ============ SECTION ============ */
+    .support-section {
+      margin-bottom: 32px;
+    }
+    .support-section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .support-section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.3px;
+      line-height: 1.2;
+    }
+    .support-section-sub {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    /* ============ CATEGORIES ============ */
+    .support-categories {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    @media (min-width: 640px) {
+      .support-categories { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    }
+
+    .cat-card {
+      display: flex;
+      gap: 14px;
+      padding: 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      cursor: pointer;
+      text-align: left;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+      font-family: inherit;
+    }
+    .cat-card:hover {
+      border-color: rgba(212,184,122,0.5);
+      box-shadow: 0 6px 18px rgba(15,41,64,0.06);
+      transform: translateY(-2px);
+    }
+    .cat-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 11px;
+      background: linear-gradient(135deg, var(--navy-2), #2a4a6a);
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+    }
+    .cat-body { flex: 1; min-width: 0; }
+    .cat-body h3 {
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 3px;
+      line-height: 1.3;
+    }
+    .cat-body p {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ============ FAQ ============ */
+    .faq-filters {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      padding: 4px 0 10px;
+      margin-bottom: 8px;
+    }
+    .faq-filters::-webkit-scrollbar { display: none; }
+
+    .faq-filter {
+      flex-shrink: 0;
+      padding: 8px 16px;
+      border-radius: 30px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-secondary);
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+      font-family: inherit;
+      min-height: 36px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .faq-filter:hover { border-color: var(--navy-2); color: var(--text); }
+    .faq-filter.active {
+      background: var(--navy-2);
+      color: white;
+      border-color: var(--navy-2);
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .faq-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .faq-item[open] {
+      border-color: rgba(212,184,122,0.5);
+    }
+
+    .faq-item summary {
+      padding: 15px 18px;
+      font-size: 0.88rem;
       font-weight: 700;
       color: var(--text);
-      margin-bottom: 4px;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      transition: background 0.15s;
+      user-select: none;
+      line-height: 1.4;
     }
-    .support-card p {
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary:hover { background: var(--surface-alt); }
+    .faq-item summary::after {
+      content: '+';
+      font-size: 1.3rem;
+      font-weight: 300;
+      color: var(--gold-deep);
+      transition: transform 0.2s;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+    .faq-item[open] summary::after { content: '−'; }
+
+    .faq-answer {
+      padding: 0 18px 16px;
       font-size: 0.85rem;
       color: var(--text-secondary);
+      line-height: 1.7;
+    }
+    .faq-answer a {
+      color: var(--gold-deep);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .faq-answer a:hover { text-decoration: underline; }
+
+    .faq-empty {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+      background: var(--surface-alt);
+      border: 1px dashed var(--border);
+      border-radius: 14px;
+    }
+    .faq-empty i {
+      font-size: 2rem;
+      color: var(--text-secondary);
+      opacity: 0.4;
+      margin-bottom: 10px;
+      display: block;
+    }
+    .faq-empty h4 {
+      font-size: 0.95rem;
+      color: var(--text);
+      margin-bottom: 4px;
+      font-weight: 700;
+    }
+    .faq-empty p {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+    }
+    .faq-empty a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 20px;
+      background: var(--wa);
+      color: white;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.82rem;
+    }
+
+    /* ============ CONTACT ============ */
+    .contact-section {
+      background: linear-gradient(135deg, #0f2940 0%, #1a3650 100%);
+      border-radius: 20px;
+      padding: 32px 24px;
+      color: white;
+      margin-bottom: 30px;
+    }
+    .contact-section-head {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+    .contact-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+      letter-spacing: -0.3px;
+    }
+    .contact-section p {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.55;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    .contact-methods {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .contact-method {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
+      text-decoration: none;
+      color: white;
+      transition: background 0.2s, border-color 0.2s;
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+    }
+    .contact-method:hover {
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.2);
+    }
+    .contact-method.whatsapp { border-color: rgba(37,211,102,0.4); }
+    .contact-method.whatsapp:hover {
+      background: rgba(37,211,102,0.15);
+      border-color: rgba(37,211,102,0.6);
+    }
+
+    .cm-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .contact-method.whatsapp .cm-icon {
+      background: var(--wa);
+      color: white;
+    }
+    .contact-method.email .cm-icon { color: var(--gold); }
+    .contact-method.form .cm-icon { color: var(--gold); }
+
+    .cm-body { flex: 1; min-width: 0; }
+    .cm-body h4 {
+      font-size: 0.88rem;
+      font-weight: 800;
+      margin-bottom: 2px;
+      line-height: 1.3;
+    }
+    .cm-body p {
+      font-size: 0.74rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.4;
+    }
+
+    .cm-arrow {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.8rem;
+      flex-shrink: 0;
+    }
+
+    /* ============ RESOURCES ============ */
+    .resources-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+    @media (min-width: 640px) {
+      .resources-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    }
+    .resource-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .resource-link:hover {
+      border-color: var(--navy-2);
+      background: var(--surface-alt);
+    }
+    .resource-link i {
+      color: var(--gold-deep);
+      font-size: 0.85rem;
+      width: 16px;
+      text-align: center;
+    }
+    .resource-link span {
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
     }
   </style>
 </head>
@@ -105,40 +607,317 @@
   </nav>
 
   <div class="container">
-    <div class="support-header">
-      <h1>Support Center</h1>
-      <p>We're here to help you with any issues</p>
+
+    <div class="support-breadcrumb">
+      <a href="/">Home</a>
+      <i class="fas fa-chevron-right"></i>
+      <span class="current">Support</span>
     </div>
 
-    <div class="support-options">
-      <a href="/help.html" class="support-card">
-        <div class="support-icon"><i class="fas fa-question-circle"></i></div>
-        <h3>Help Center</h3>
-        <p>Find answers to common questions</p>
-      </a>
-      <a href="/safety.html" class="support-card">
-        <div class="support-icon"><i class="fas fa-shield-alt"></i></div>
-        <h3>Safety Tips</h3>
-        <p>Learn how to stay safe on Zaure</p>
-      </a>
-      <a href="/contact.html" class="support-card">
-        <div class="support-icon"><i class="fas fa-envelope"></i></div>
-        <h3>Contact Us</h3>
-        <p>Reach our support team directly</p>
-      </a>
-      <a href="https://wa.me/2349042339411" target="_blank" class="support-card">
-        <div class="support-icon"><i class="fab fa-whatsapp"></i></div>
-        <h3>WhatsApp Support</h3>
-        <p>Chat with us on WhatsApp: +2349042339411</p>
-      </a>
-    </div>
+    <!-- ============ HERO ============ -->
+    <section class="support-hero">
+      <span class="support-hero-eyebrow">
+        <i class="fas fa-life-ring"></i> We're here to help
+      </span>
+      <h1>How can we help?</h1>
+      <p>Search common questions, browse topics, or reach us directly. Our team responds fastest on WhatsApp.</p>
 
-    <div style="text-align:center;padding:20px;background:var(--surface);border-radius:16px;border:1px solid var(--border);margin-bottom:30px;">
-      <p style="color:var(--text-secondary);font-size:0.9rem;">
-        For urgent issues, contact us on WhatsApp: 
-        <a href="https://wa.me/2349042339411" target="_blank" style="color:#D4B87A;text-decoration:none;font-weight:600;">+2349042339411</a>
-      </p>
-    </div>
+      <div class="support-search" role="search">
+        <i class="fas fa-search" aria-hidden="true"></i>
+        <input
+          type="search"
+          id="supportSearch"
+          placeholder="Search for help — e.g. bulk order, verification…"
+          autocomplete="off"
+          aria-label="Search help topics"
+        >
+        <button type="button" id="searchClear" aria-label="Clear search">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="popular-searches">
+        <span>Popular:</span>
+        <button type="button" data-q="delivery">Delivery</button>
+        <button type="button" data-q="verification">Verification</button>
+        <button type="button" data-q="bulk">Bulk orders</button>
+        <button type="button" data-q="zaure clean">Zaure Clean</button>
+        <button type="button" data-q="scam">Report a scam</button>
+      </div>
+    </section>
+
+    <!-- ============ URGENT STRIP ============ -->
+    <a href="https://wa.me/2349042339411?text=URGENT%3A%20I%20need%20to%20report%20a%20scam%20or%20safety%20issue%20on%20Zaure."
+       target="_blank"
+       rel="noopener"
+       class="urgent-strip">
+      <div class="urgent-icon"><i class="fas fa-exclamation-triangle"></i></div>
+      <div class="urgent-body">
+        <h3>Report a scam or safety issue</h3>
+        <p>Fraud, threats, or dangerous listings — message us now, marked URGENT.</p>
+      </div>
+      <i class="fas fa-chevron-right urgent-arrow"></i>
+    </a>
+
+    <!-- ============ BROWSE BY TOPIC ============ -->
+    <section class="support-section">
+      <div class="support-section-head">
+        <div>
+          <h2 class="support-section-title">Browse by topic</h2>
+          <p class="support-section-sub">Choose the area you need help with</p>
+        </div>
+      </div>
+
+      <div class="support-categories">
+        <button type="button" class="cat-card" onclick="filterCategory('buying')">
+          <div class="cat-icon"><i class="fas fa-shopping-bag"></i></div>
+          <div class="cat-body">
+            <h3>Buying</h3>
+            <p>Delivery, refunds, item issues, favorites</p>
+          </div>
+        </button>
+
+        <button type="button" class="cat-card" onclick="filterCategory('selling')">
+          <div class="cat-icon"><i class="fas fa-tag"></i></div>
+          <div class="cat-body">
+            <h3>Selling</h3>
+            <p>Listings, verification, boosting, scam protection</p>
+          </div>
+        </button>
+
+        <button type="button" class="cat-card" onclick="filterCategory('wholesale')">
+          <div class="cat-icon"><i class="fas fa-cubes"></i></div>
+          <div class="cat-body">
+            <h3>Wholesale &amp; business</h3>
+            <p>Bulk orders, MOQ, quotes, supplier onboarding</p>
+          </div>
+        </button>
+
+        <button type="button" class="cat-card" onclick="filterCategory('services')">
+          <div class="cat-icon"><i class="fas fa-hand-sparkles"></i></div>
+          <div class="cat-body">
+            <h3>Zaure Services</h3>
+            <p>Zaure Clean bookings, rescheduling, quality</p>
+          </div>
+        </button>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="support-section">
+      <div class="support-section-head">
+        <div>
+          <h2 class="support-section-title">Common questions</h2>
+          <p class="support-section-sub">Answers to what users ask us most</p>
+        </div>
+      </div>
+
+      <div class="faq-filters" id="faqFilters">
+        <button type="button" class="faq-filter active" data-cat="all">All</button>
+        <button type="button" class="faq-filter" data-cat="buying">Buying</button>
+        <button type="button" class="faq-filter" data-cat="selling">Selling</button>
+        <button type="button" class="faq-filter" data-cat="wholesale">Wholesale</button>
+        <button type="button" class="faq-filter" data-cat="services">Services</button>
+        <button type="button" class="faq-filter" data-cat="account">Account</button>
+      </div>
+
+      <div class="faq-list" id="faqList">
+
+        <!-- BUYING -->
+        <details class="faq-item" data-cat="buying" data-search="delivery item paid never arrived scam refund lost">
+          <summary>I paid a seller but the item never arrived</summary>
+          <div class="faq-answer">
+            Report the seller immediately on WhatsApp with the chat screenshots, payment proof, and the listing link. We'll review the seller's account and may suspend it. Zaure is not a payment escrow — we can't recover money that was paid directly to a seller — but we can flag, suspend, and share account details with Nigerian authorities if there's clear evidence of fraud.
+          </div>
+        </details>
+
+        <details class="faq-item" data-cat="buying" data-search="item not as described different photo fake counterfeit wrong">
+          <summary>The item isn't what was described</summary>
+          <div class="faq-answer">
+            Contact the seller first and ask for a resolution. If they refuse, report the listing to us on WhatsApp with photos showing the difference. We may remove the listing and take action against the seller's account. For future purchases, always inspect items in person before paying — that's the safest way to shop on Zaure.
+          </div>
+        </details>
+
+        <details class="faq-item" data-cat="buying" data-search="inspect check before paying safe meeting public place">
+          <summary>How do I stay safe when buying?</summary>
+          <div class="faq-answer">
+            Meet in a public place during daylight. Inspect the item carefully before paying. Don't pay in advance unless you're dealing with a verified business or Zaure Official Store. Bring someone with you for high-value purchases. Read our full <a href="/safety.html">Safety Tips</a>.
+          </div>
+        </details>
+
+        <!-- SELLING -->
+        <details class="faq-item" data-cat="selling" data-search="verified verification badge business documents cac phone email">
+          <summary>How do I get verified?</summary>
+          <div class="faq-answer">
+            Create a store profile and message us on WhatsApp to request verification. We check your phone number, email, and — for business verification — your CAC registration and physical address. Once verified, you'll see a badge on your profile and listings. Verification builds buyer trust and improves your listings' visibility.
+          </div>
+        </details>
+
+        <details class="faq-item" data-cat="selling" data-search="edit delete listing update remove">
+          <summary>How do I edit or delete a listing?</summary>
+          <div class="faq-answer">
+            Go to Profile → My Listings, then use the Edit or Delete buttons on the listing. If you can't see the listing, it may have already been removed by our team for a policy issue — message us on WhatsApp to check.
+          </div>
+        </details>
+
+        <details class="faq-item" data-cat="selling" data-search="buyer scam fraud fake order no show time waster">
+          <summary>Someone is trying to scam me as a seller</summary>
+          <div class="faq-answer">
+            Common seller scams include fake payment alerts, overpayment schemes, and buyers claiming non-delivery after receiving goods. Always confirm payment has actually landed in your bank account (not just a screenshot). Report suspicious buyers on WhatsApp so we can flag their account.
+          </div>
+        </details>
+
+        <!-- WHOLESALE -->
+        <details class="faq-item" data-cat="wholesale" data-search="bulk wholesale moq minimum order quantity tier price">
+          <summary>What is MOQ and how does bulk pricing work?</summary>
+          <div class="faq-answer">
+            MOQ stands for Minimum Order Quantity — the smallest number of units a seller will sell at wholesale pricing. On any listing with a "Buy in Bulk" option, you'll see a pricing table that shows the price per unit at different quantities. Use the calculator on the product page to see your exact total before messaging the seller.
+          </div>
+        </details>
+
+        <details class="faq-item" data-cat="wholesale" data-search="quote request b2b bulk order send whatsapp supplier">
+          <summary>How do I send a bulk quote request?</summary>
+          <div class="faq-answer">
+            On the product page, set your quantity using the calculator, then tap "Send Quote on WhatsApp." The message is pre-filled with the product, quantity, unit price, tier, and total — so the seller receives a serious, ready-to-respond inquiry. For custom requirements, message them directly on WhatsApp and describe your needs.
+          </div>
+        </details>
+
+        <details class="faq-item" data-cat="wholesale" data-search="supplier list agro commodity ginger sesame become supplier onboarding">
+          <summary>How do I become a Zaure supplier (B2B)?</summary>
+          <div class="faq-answer">
+            For bulk agro and business supply, message us on WhatsApp with your business name, products, MOQ, and coverage area. Our team reviews applications and may schedule a call or site visit for high-value suppliers. Verified suppliers receive priority placement in wholesale search results.
+          </div>
+        </details>
+
+        <!-- SERVICES -->
+        <details class="faq-item" data-cat="services" data-search="zaure clean book booking cleaning service quote">
+          <summary>How do I book Zaure Clean?</summary>
+          <div class="faq-answer">
+            Visit the <a href="/zaure-clean.html">Zaure Clean page</a> and tap "Request a quote." Fill in your project details (location, size, handover date) and we'll respond on WhatsApp within a few hours with availability and pricing. For urgent bookings, message us directly on WhatsApp.
+          </div>
+        </details>
+
+        <details class="faq-item" data-cat="services" data-search="zaure clean reschedule cancel change date postpone">
+          <summary>Can I reschedule or cancel a Zaure Clean booking?</summary>
+          <div class="faq-answer">
+            Yes — message us on WhatsApp at least 48 hours before your scheduled date. Rescheduling is free if we have availability on your new date. Cancellations less than 24 hours before may forfeit the deposit, depending on the size of the job.
+          </div>
+        </details>
+
+        <details class="faq-item" data-cat="services" data-search="zaure clean quality not happy complaint refund satisfaction">
+          <summary>What if I'm not happy with a Zaure Clean job?</summary>
+          <div class="faq-answer">
+            Contact us within 24 hours with photos of any issue. We'll return to re-clean the affected areas free of charge. If you're still not satisfied, we'll refund you in full. This is our standard for every Zaure Clean job — no questions asked.
+          </div>
+        </details>
+
+        <!-- ACCOUNT -->
+        <details class="faq-item" data-cat="account" data-search="delete account remove data close profile">
+          <summary>How do I delete my account?</summary>
+          <div class="faq-answer">
+            Go to Profile → Settings → Delete Account. This removes your profile, listings, and favorites permanently. If you want us to delete any server-side records too, message us on WhatsApp with your registered phone number. See our <a href="/privacy.html">Privacy Policy</a> for more on how we handle your data.
+          </div>
+        </details>
+
+        <details class="faq-item" data-cat="account" data-search="change phone number update state edit profile email bio">
+          <summary>How do I update my phone number or state?</summary>
+          <div class="faq-answer">
+            Go to Profile → tap "Edit Profile" → update your details → tap "Save Changes." Your phone number is used for verification and buyer contact — only update it if you're sure the new number is reliable.
+          </div>
+        </details>
+
+        <details class="faq-item" data-cat="account" data-search="favorite save bookmark want later heart">
+          <summary>How do favorites work?</summary>
+          <div class="faq-answer">
+            Tap the heart icon on any product, service, or hotspot to save it to your favorites. Your favorites are stored on your account and visible on the <a href="/favorites.html">Favorites page</a>. You need to be logged in to use favorites.
+          </div>
+        </details>
+
+      </div>
+
+      <!-- Empty state for search -->
+      <div class="faq-empty" id="faqEmpty">
+        <i class="fas fa-search"></i>
+        <h4>No results for that search</h4>
+        <p>Try a different keyword, or message our team directly.</p>
+        <a href="https://wa.me/2349042339411?text=Hi%20Zaure%20Support%2C%20I%20need%20help%20with%3A%20" target="_blank" rel="noopener">
+          <i class="fab fa-whatsapp"></i> Ask us on WhatsApp
+        </a>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="contact-section">
+      <div class="contact-section-head">
+        <h2>Still need help?</h2>
+        <p>Our team responds on WhatsApp — usually within a few hours, Monday to Saturday.</p>
+      </div>
+
+      <div class="contact-methods">
+        <a href="https://wa.me/2349042339411" target="_blank" rel="noopener" class="contact-method whatsapp">
+          <div class="cm-icon"><i class="fab fa-whatsapp"></i></div>
+          <div class="cm-body">
+            <h4>WhatsApp</h4>
+            <p>+234 904 233 9411 · Fastest response</p>
+          </div>
+          <i class="fas fa-chevron-right cm-arrow"></i>
+        </a>
+
+        <a href="mailto:hello@zauretech.xyz" class="contact-method email">
+          <div class="cm-icon"><i class="fas fa-envelope"></i></div>
+          <div class="cm-body">
+            <h4>Email</h4>
+            <p>hello@zauretech.xyz · For non-urgent matters</p>
+          </div>
+          <i class="fas fa-chevron-right cm-arrow"></i>
+        </a>
+
+        <a href="/contact.html" class="contact-method form">
+          <div class="cm-icon"><i class="fas fa-paper-plane"></i></div>
+          <div class="cm-body">
+            <h4>Contact form</h4>
+            <p>Send a message through the platform</p>
+          </div>
+          <i class="fas fa-chevron-right cm-arrow"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- ============ RESOURCES ============ -->
+    <section class="support-section">
+      <div class="support-section-head">
+        <div>
+          <h2 class="support-section-title">More resources</h2>
+        </div>
+      </div>
+      <div class="resources-grid">
+        <a href="/help.html" class="resource-link">
+          <i class="fas fa-book-open"></i>
+          <span>Help Center</span>
+        </a>
+        <a href="/safety.html" class="resource-link">
+          <i class="fas fa-shield-halved"></i>
+          <span>Safety Tips</span>
+        </a>
+        <a href="/faq.html" class="resource-link">
+          <i class="fas fa-circle-question"></i>
+          <span>Full FAQ</span>
+        </a>
+        <a href="/terms.html" class="resource-link">
+          <i class="fas fa-file-contract"></i>
+          <span>Terms &amp; Conditions</span>
+        </a>
+        <a href="/privacy.html" class="resource-link">
+          <i class="fas fa-user-shield"></i>
+          <span>Privacy Policy</span>
+        </a>
+        <a href="/about.html" class="resource-link">
+          <i class="fas fa-info-circle"></i>
+          <span>About Zaure</span>
+        </a>
+      </div>
+    </section>
+
   </div>
 
   <footer class="footer">
@@ -160,22 +939,23 @@
         <div class="footer-col">
           <h4>Browse</h4>
           <a href="/category.html?slug=all">All Items</a>
-          <a href="/category.html?slug=vehicles">Vehicles</a>
-          <a href="/category.html?slug=electronics">Electronics</a>
-          <a href="/category.html?slug=furniture">Furniture</a>
+          <a href="/hotspots.html">Hotspots</a>
+          <a href="/services.html">Find a Pro</a>
           <a href="/category.html?slug=fashion">Fashion</a>
-          <a href="/category.html?slug=real-estate">Real Estate</a>
+          <a href="/category.html?slug=electronics">Electronics</a>
+          <a href="/category.html?slug=home-kitchen">Home & Kitchen</a>
         </div>
         <div class="footer-col">
           <h4>Support</h4>
           <a href="/help.html">Help Center</a>
+          <a href="/faq.html">FAQ</a>
           <a href="/safety.html">Safety Tips</a>
           <a href="/contact.html">Contact Us</a>
-          <a href="/support.html">Support</a>
         </div>
         <div class="footer-col">
           <h4>Company</h4>
           <a href="/about.html">About Us</a>
+          <a href="/alamin-ahmed.html">Founder</a>
           <a href="/careers.html">Careers</a>
           <a href="/privacy.html">Privacy Policy</a>
           <a href="/terms.html">Terms of Service</a>
@@ -245,15 +1025,131 @@
 
   <script src="/js/main.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+  (function () {
+    'use strict';
+
+    /* ============================================================
+       SEARCH + CATEGORY FILTER
+       ============================================================ */
+    const searchInput = document.getElementById('supportSearch');
+    const searchClear = document.getElementById('searchClear');
+    const faqList = document.getElementById('faqList');
+    const faqEmpty = document.getElementById('faqEmpty');
+    const filterBtns = document.querySelectorAll('.faq-filter');
+
+    let activeCategory = 'all';
+
+    function filterFAQs() {
+      const query = (searchInput.value || '').toLowerCase().trim();
+
+      // Show/hide clear button
+      searchClear.classList.toggle('show', query.length > 0);
+
+      let visible = 0;
+      faqList.querySelectorAll('.faq-item').forEach(function (item) {
+        const cat = item.dataset.cat;
+        const haystack = (item.dataset.search + ' ' + item.querySelector('summary').textContent).toLowerCase();
+
+        const catMatch = activeCategory === 'all' || cat === activeCategory;
+        const textMatch = !query || haystack.includes(query);
+
+        const show = catMatch && textMatch;
+        item.style.display = show ? '' : 'none';
+        if (show) visible++;
+
+        // Collapse when hidden
+        if (!show && item.open) item.open = false;
+      });
+
+      faqEmpty.style.display = visible === 0 ? 'block' : 'none';
+    }
+
+    // Search input handler (instant — small dataset)
+    searchInput.addEventListener('input', filterFAQs);
+
+    // Clear button
+    searchClear.addEventListener('click', function () {
+      searchInput.value = '';
+      filterFAQs();
+      searchInput.focus();
+    });
+
+    // Category pill clicks
+    filterBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        filterBtns.forEach(function (b) { b.classList.remove('active'); });
+        this.classList.add('active');
+        activeCategory = this.dataset.cat;
+
+        // Scroll FAQ into view
+        const section = this.closest('.support-section');
+        if (section) {
+          const y = section.getBoundingClientRect().top + window.scrollY - 80;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+
+        filterFAQs();
+      });
+    });
+
+    /* ============================================================
+       POPULAR SEARCH CHIPS
+       ============================================================ */
+    document.querySelectorAll('.popular-searches button').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        searchInput.value = this.dataset.q || this.textContent.trim();
+        // Reset category to "all" so the query gets full results
+        activeCategory = 'all';
+        filterBtns.forEach(function (b) {
+          b.classList.toggle('active', b.dataset.cat === 'all');
+        });
+        filterFAQs();
+
+        // Scroll to FAQ section
+        const section = document.getElementById('faqList').closest('.support-section');
+        if (section) {
+          const y = section.getBoundingClientRect().top + window.scrollY - 80;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      });
+    });
+
+    /* ============================================================
+       CATEGORY CARD CLICKS (browse by topic)
+       ============================================================ */
+    window.filterCategory = function (cat) {
+      // Set the filter pill
+      activeCategory = cat;
+      filterBtns.forEach(function (b) {
+        b.classList.toggle('active', b.dataset.cat === cat);
+      });
+      // Clear search
+      searchInput.value = '';
+      filterFAQs();
+
+      // Scroll to FAQ section
+      const section = document.getElementById('faqList').closest('.support-section');
+      if (section) {
+        const y = section.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    };
+
+    /* ============================================================
+       INIT
+       ============================================================ */
+    document.addEventListener('DOMContentLoaded', function () {
       initStateDropdown();
-      document.getElementById('fabPostAd')?.addEventListener('click', function() {
+      document.getElementById('fabPostAd')?.addEventListener('click', function () {
         if (!currentUser) { openSignup(); } else { window.location.href = '/post.html'; }
       });
       loadUser();
       initTheme();
       updateFavoriteBadge();
+
+      filterFAQs(); // Initialize state
     });
+  })();
   </script>
 </body>
 </html>
