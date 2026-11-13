@@ -2,37 +2,108 @@
   "id": "/",
   "name": "Zaure – Buy with Confidence",
   "short_name": "Zaure",
-  "description": "Nigeria's most trusted online marketplace. Buy, sell, or trade locally with confidence. No commission, no middlemen.",
-  "start_url": "/",
+  "description": "Most trusted online marketplace that connect buyers and sellers locally.",
+  "start_url": "/?utm_source=pwa",
   "scope": "/",
   "display": "standalone",
-  "display_override": ["standalone", "minimal-ui"],
-  "orientation": "portrait-primary",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "orientation": "any",
   "background_color": "#ffffff",
   "theme_color": "#1a3650",
-  "categories": ["shopping", "business", "lifestyle"],
+  "categories": ["shopping", "business", "lifestyle", "food", "local"],
   "lang": "en-NG",
   "dir": "ltr",
+  "prefer_related_applications": false,
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
+  "handle_links": "preferred",
   "icons": [
     {
       "src": "/assets/logo-icon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/icon-192-maskable.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/assets/icons/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/assets/screenshots/home-mobile.png",
+      "sizes": "540x960",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Browse products, hotspots, and services from the Zaure home page"
+    },
+    {
+      "src": "/assets/screenshots/hotspots-mobile.png",
+      "sizes": "540x960",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Discover hotspots near you — restaurants, parks, cafes, and more"
+    },
+    {
+      "src": "/assets/screenshots/clean-mobile.png",
+      "sizes": "540x960",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Book Zaure Clean for post-construction and deep cleaning"
+    },
+    {
+      "src": "/assets/screenshots/home-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Zaure on desktop — marketplace, services, and local discovery"
     }
   ],
   "shortcuts": [
     {
-      "name": "Browse Listings",
+      "name": "Browse Marketplace",
       "short_name": "Browse",
-      "url": "/category.html",
+      "url": "/category.html?slug=all",
       "description": "Browse all listings on Zaure"
+    },
+    {
+      "name": "Hotspots Near You",
+      "short_name": "Hotspots",
+      "url": "/hotspots.html",
+      "description": "Discover places to eat, relax, and hang out"
     },
     {
       "name": "Find a Pro",
       "short_name": "Find a Pro",
       "url": "/services.html",
       "description": "Find trusted local service providers"
+    },
+    {
+      "name": "Zaure Clean",
+      "short_name": "Clean",
+      "url": "/zaure-clean.html",
+      "description": "Book post-construction cleaning"
     },
     {
       "name": "Post an Ad",
@@ -46,6 +117,5 @@
       "url": "/favorites.html",
       "description": "View your saved items"
     }
-  ],
-  "prefer_related_applications": false
+  ]
 }
