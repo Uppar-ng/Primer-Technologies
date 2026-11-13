@@ -4,80 +4,539 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>Safety Tips – Zaure</title>
-  <meta name="description" content="Safety tips for buying and selling on Zaure marketplace.">
+  <meta name="description" content="Stay safe buying, selling, and booking services on Zaure. Real scam patterns to watch for, verification reality, and how to report.">
   <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
   <style>
-    .safety-header {
-      margin: 30px 0 20px;
+    :root {
+      --navy: #0f2940;
+      --navy-2: #1a3650;
+      --gold: #D4B87A;
+      --gold-deep: #B49450;
+      --wa: #25D366;
+      --wa-dark: #1DA851;
+      --danger: #dc2626;
+      --danger-bg: rgba(220,38,38,0.06);
+      --warn: #f59e0b;
+      --warn-bg: rgba(245,158,11,0.08);
+      --safe: #16a34a;
+      --safe-bg: rgba(22,163,74,0.08);
+    }
+
+    /* ============ BREADCRUMB ============ */
+    .safety-breadcrumb {
+      display: flex; align-items: center; gap: 7px;
+      margin: 20px 0 16px; font-size: 0.76rem;
+      color: var(--text-secondary); flex-wrap: wrap;
+    }
+    .safety-breadcrumb a {
+      color: var(--text-secondary); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .safety-breadcrumb a:hover { color: var(--navy-2); }
+    .safety-breadcrumb i { font-size: 0.5rem; opacity: 0.55; }
+    .safety-breadcrumb .current { color: var(--text); font-weight: 600; }
+
+    /* ============ HERO ============ */
+    .safety-hero {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      background: linear-gradient(135deg, #0f2940 0%, #1a3650 55%, #2a4a6a 100%);
+      border-radius: 22px;
+      padding: 40px 24px 36px;
       text-align: center;
+      color: white;
+      margin-bottom: 20px;
     }
-    .safety-header h1 {
-      font-size: 2rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, #1a3650, #B49450);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .safety-header p {
-      color: var(--text-secondary);
-      font-size: 1rem;
-      margin-top: 6px;
-    }
-    .safety-tip-card {
-      background: var(--surface);
-      border-radius: 20px;
-      padding: 20px;
-      border: 1px solid var(--border);
-      margin-bottom: 16px;
-      display: flex;
-      gap: 16px;
-      align-items: flex-start;
-    }
-    .safety-tip-card .tip-icon {
-      width: 50px;
-      height: 50px;
+    .safety-hero::before {
+      content: '';
+      position: absolute;
+      top: -30%; right: -15%;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(212,184,122,0.22) 0%, transparent 65%);
       border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .safety-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30%; left: -15%;
+      width: 340px; height: 340px;
+      background: radial-gradient(circle, rgba(212,184,122,0.10) 0%, transparent 65%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .safety-hero > * { position: relative; z-index: 1; }
+
+    .safety-hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.62rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--gold);
+      padding: 5px 12px;
+      background: rgba(212,184,122,0.12);
+      border: 1px solid rgba(212,184,122,0.35);
+      border-radius: 40px;
+      margin-bottom: 14px;
+    }
+    .safety-hero-eyebrow i { font-size: 0.55rem; }
+
+    .safety-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.7rem, 5vw, 2.4rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.6px;
+      margin-bottom: 10px;
+    }
+    .safety-hero p {
+      font-size: clamp(0.85rem, 2vw, 0.95rem);
+      color: rgba(255,255,255,0.8);
+      line-height: 1.55;
+      max-width: 500px;
+      margin: 0 auto 22px;
+    }
+
+    .safety-hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    .safety-hero-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 40px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+      font-family: inherit;
+      border: none;
+      cursor: pointer;
+      min-height: 44px;
+    }
+    .safety-hero-btn.danger {
+      background: var(--danger);
+      color: white;
+      box-shadow: 0 6px 20px rgba(220,38,38,0.35);
+    }
+    .safety-hero-btn.danger:hover {
+      background: #b91c1c;
+      transform: translateY(-1px);
+    }
+    .safety-hero-btn.ghost {
+      background: rgba(255,255,255,0.1);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.2);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+    }
+    .safety-hero-btn.ghost:hover {
+      background: rgba(255,255,255,0.18);
+    }
+
+    /* ============ QUICK RULES ============ */
+    .quick-rules {
+      background: linear-gradient(135deg, #f8fbfe 0%, #f1f6fb 100%);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--gold);
+      border-radius: 14px;
+      padding: 20px 22px;
+      margin-bottom: 28px;
+    }
+    [data-theme="dark"] .quick-rules {
+      background: rgba(212,184,122,0.06);
+    }
+    .quick-rules h2 {
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--gold-deep);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .quick-rules ol {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      counter-reset: rule;
+    }
+    .quick-rules li {
+      display: flex;
+      gap: 12px;
+      padding: 8px 0;
+      font-size: 0.88rem;
+      color: var(--text);
+      line-height: 1.55;
+      counter-increment: rule;
+    }
+    .quick-rules li::before {
+      content: counter(rule);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--navy-2);
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .quick-rules li strong {
+      color: var(--navy-2);
+      font-weight: 700;
+    }
+    [data-theme="dark"] .quick-rules li strong { color: var(--gold); }
+
+    /* ============ FILTER PILLS ============ */
+    .safety-filters {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      padding: 4px 0 14px;
+      margin-bottom: 4px;
+    }
+    .safety-filters::-webkit-scrollbar { display: none; }
+
+    .safety-filter {
+      flex-shrink: 0;
+      padding: 8px 16px;
+      border-radius: 30px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-secondary);
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+      font-family: inherit;
+      min-height: 36px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .safety-filter:hover { border-color: var(--navy-2); color: var(--text); }
+    .safety-filter.active {
+      background: var(--navy-2);
+      color: white;
+      border-color: var(--navy-2);
+    }
+
+    /* ============ TIP CARDS ============ */
+    .safety-tips-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .safety-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .safety-card:hover {
+      border-color: rgba(212,184,122,0.5);
+      box-shadow: 0 6px 18px rgba(15,41,64,0.06);
+    }
+
+    .safety-card-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 18px 20px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .safety-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .safety-icon.do {
+      background: linear-gradient(135deg, var(--navy-2), #2a4a6a);
+      color: var(--gold);
+    }
+    .safety-icon.dont {
+      background: var(--danger);
+      color: white;
+    }
+    .safety-icon.caution {
+      background: var(--warn);
+      color: white;
+    }
+    .safety-icon.tip {
+      background: var(--safe);
+      color: white;
+    }
+
+    .safety-card-title {
+      flex: 1;
+      min-width: 0;
+    }
+    .safety-card-title h3 {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 3px;
+      line-height: 1.3;
+    }
+    .safety-card-title p {
+      font-size: 0.76rem;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    .safety-card-arrow {
+      color: var(--text-secondary);
+      font-size: 0.72rem;
+      flex-shrink: 0;
+      transition: transform 0.25s;
+    }
+    .safety-card.open .safety-card-arrow {
+      transform: rotate(180deg);
+    }
+
+    .safety-card-body {
+      padding: 0 20px 20px;
+      display: none;
+      font-size: 0.86rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+    .safety-card.open .safety-card-body { display: block; }
+
+    .safety-card-body p {
+      margin-bottom: 10px;
+    }
+    .safety-card-body p:last-child { margin-bottom: 0; }
+    .safety-card-body ul {
+      list-style: none;
+      padding: 0;
+      margin: 8px 0;
+    }
+    .safety-card-body ul li {
+      padding: 4px 0 4px 20px;
+      position: relative;
+      line-height: 1.6;
+    }
+    .safety-card-body ul li::before {
+      content: '•';
+      position: absolute;
+      left: 6px;
+      top: 4px;
+      color: var(--gold-deep);
+      font-weight: 900;
+      font-size: 1rem;
+    }
+    .safety-card-body ul li strong {
+      color: var(--text);
+      font-weight: 700;
+    }
+    .safety-card-body a {
+      color: var(--gold-deep);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .safety-card-body a:hover { text-decoration: underline; }
+
+    .safety-callout {
       background: var(--surface-alt);
+      border-left: 3px solid var(--gold-deep);
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin: 10px 0;
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: var(--text);
+    }
+    .safety-callout.danger {
+      background: var(--danger-bg);
+      border-left-color: var(--danger);
+    }
+    .safety-callout.warn {
+      background: var(--warn-bg);
+      border-left-color: var(--warn);
+    }
+    .safety-callout.safe {
+      background: var(--safe-bg);
+      border-left-color: var(--safe);
+    }
+    .safety-callout strong {
+      color: var(--text);
+      font-weight: 700;
+    }
+    [data-theme="dark"] .safety-callout { background: rgba(255,255,255,0.03); }
+    [data-theme="dark"] .safety-callout.danger { background: rgba(220,38,38,0.08); }
+    [data-theme="dark"] .safety-callout.warn { background: rgba(245,158,11,0.1); }
+    [data-theme="dark"] .safety-callout.safe { background: rgba(22,163,74,0.1); }
+
+    /* ============ VERIFICATION NOTE ============ */
+    .verify-note {
+      background: linear-gradient(135deg, #0f2940, #1a3650);
+      border-radius: 16px;
+      padding: 24px 22px;
+      color: white;
+      margin-bottom: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .verify-note::before {
+      content: '';
+      position: absolute;
+      top: -40%; right: -15%;
+      width: 260px; height: 260px;
+      background: radial-gradient(circle, rgba(212,184,122,0.18) 0%, transparent 65%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .verify-note > * { position: relative; z-index: 1; }
+    .verify-note h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .verify-note h3 i {
+      color: var(--gold);
+      font-size: 1rem;
+    }
+    .verify-note p {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+    .verify-note p:last-child { margin-bottom: 0; }
+    .verify-note strong {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    /* ============ REPORT SECTION ============ */
+    .report-section {
+      background: linear-gradient(135deg, #0f2940, #1a3650);
+      border-radius: 20px;
+      padding: 32px 24px;
+      color: white;
+      text-align: center;
+      margin-bottom: 30px;
+      position: relative;
+      overflow: hidden;
+    }
+    .report-section::before {
+      content: '';
+      position: absolute;
+      top: -30%; right: -15%;
+      width: 320px; height: 320px;
+      background: radial-gradient(circle, rgba(220,38,38,0.18) 0%, transparent 65%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .report-section > * { position: relative; z-index: 1; }
+    .report-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: rgba(220,38,38,0.15);
+      border: 1px solid rgba(220,38,38,0.3);
+      color: #ff6b6b;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 1.3rem;
-      color: #1a3650;
-      flex-shrink: 0;
-    }
-    .safety-tip-card h3 {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 4px;
-    }
-    .safety-tip-card p {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-    .report-section {
-      background: var(--surface);
-      border-radius: 20px;
-      padding: 24px;
-      border: 1px solid var(--border);
-      margin-bottom: 30px;
-      text-align: center;
+      margin: 0 auto 16px;
     }
     .report-section h3 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--text);
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 800;
       margin-bottom: 8px;
+      letter-spacing: -0.3px;
     }
     .report-section p {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.55;
+      max-width: 440px;
+      margin: 0 auto 20px;
+    }
+    .report-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: var(--danger);
+      color: white;
+      border-radius: 40px;
+      text-decoration: none;
+      font-weight: 800;
       font-size: 0.9rem;
+      transition: all 0.2s;
+      box-shadow: 0 6px 20px rgba(220,38,38,0.35);
+      min-height: 48px;
+    }
+    .report-btn:hover {
+      background: #b91c1c;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(220,38,38,0.45);
+    }
+
+    /* ============ SECTION HEADING ============ */
+    .safety-section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.3px;
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+    .safety-section-sub {
+      font-size: 0.82rem;
       color: var(--text-secondary);
-      margin-bottom: 12px;
+      margin-bottom: 16px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
     }
   </style>
 </head>
@@ -111,66 +570,342 @@
   </nav>
 
   <div class="container">
-    <div class="safety-header">
-      <h1>Safety Tips</h1>
-      <p>Stay safe while buying and selling on Zaure</p>
+
+    <div class="safety-breadcrumb">
+      <a href="/">Home</a>
+      <i class="fas fa-chevron-right"></i>
+      <a href="/support.html">Support</a>
+      <i class="fas fa-chevron-right"></i>
+      <span class="current">Safety Tips</span>
     </div>
 
-    <div class="safety-tip-card">
-      <div class="tip-icon"><i class="fas fa-map-pin"></i></div>
-      <div>
-        <h3>Meet in Public Places</h3>
-        <p>Always meet buyers or sellers in well-lit, public locations like shopping malls, police stations, or busy markets. Never invite strangers to your home.</p>
+    <!-- ============ HERO ============ -->
+    <section class="safety-hero">
+      <span class="safety-hero-eyebrow">
+        <i class="fas fa-shield-halved"></i> Your safety comes first
+      </span>
+      <h1>Stay safe on Zaure</h1>
+      <p>Simple habits that protect you — whether you're buying a phone, ordering in bulk, or booking a service.</p>
+      <div class="safety-hero-actions">
+        <a href="https://wa.me/2349042339411?text=URGENT%3A%20I%20need%20to%20report%20a%20safety%20issue%20or%20suspicious%20activity%20on%20Zaure."
+           target="_blank" rel="noopener"
+           class="safety-hero-btn danger">
+          <i class="fas fa-exclamation-triangle"></i> Report now
+        </a>
+        <a href="#safety-tips" class="safety-hero-btn ghost">
+          <i class="fas fa-list-check"></i> Read the tips
+        </a>
       </div>
+    </section>
+
+    <!-- ============ QUICK RULES ============ -->
+    <div class="quick-rules">
+      <h2><i class="fas fa-bolt"></i> The 5 rules to remember</h2>
+      <ol>
+        <li><strong>Inspect before you pay.</strong> See the item, test it, then pay.</li>
+        <li><strong>Meet in public.</strong> Shopping malls, busy markets, police stations. Never at home.</li>
+        <li><strong>Never pay in advance</strong> to strangers — no deposits, no "booking fees", no exceptions.</li>
+        <li><strong>Verified ≠ guaranteed.</strong> A badge means we checked some details, not that the seller is perfect.</li>
+        <li><strong>If it feels wrong, walk away.</strong> There's always another deal.</li>
+      </ol>
     </div>
 
-    <div class="safety-tip-card">
-      <div class="tip-icon"><i class="fas fa-search"></i></div>
-      <div>
-        <h3>Inspect Before Purchase</h3>
-        <p>Thoroughly inspect any item before paying. Test electronics, check for damage, and verify authenticity. Don't rush the process.</p>
+    <!-- ============ TIPS ============ -->
+    <section id="safety-tips">
+      <h2 class="safety-section-title">Safety tips by situation</h2>
+      <p class="safety-section-sub">Tap any tip to read more</p>
+
+      <div class="safety-filters" id="safetyFilters">
+        <button type="button" class="safety-filter active" data-cat="all">All tips</button>
+        <button type="button" class="safety-filter" data-cat="buying">Buying</button>
+        <button type="button" class="safety-filter" data-cat="selling">Selling</button>
+        <button type="button" class="safety-filter" data-cat="wholesale">Wholesale</button>
+        <button type="button" class="safety-filter" data-cat="services">Zaure Clean</button>
+        <button type="button" class="safety-filter" data-cat="hotspots">Hotspots</button>
+        <button type="button" class="safety-filter" data-cat="scams">Scam patterns</button>
       </div>
-    </div>
 
-    <div class="safety-tip-card">
-      <div class="tip-icon"><i class="fas fa-money-bill"></i></div>
-      <div>
-        <h3>Avoid Advance Payments</h3>
-        <p>Never pay for items you haven't seen. Be cautious of sellers who demand advance payments or deposits before delivery.</p>
+      <div class="safety-tips-list" id="safetyList">
+
+        <!-- ============ BUYING ============ -->
+        <div class="safety-card" data-cat="buying">
+          <div class="safety-card-header">
+            <div class="safety-icon do"><i class="fas fa-map-pin"></i></div>
+            <div class="safety-card-title">
+              <h3>Meet in a safe, public place</h3>
+              <p>Where to meet — and where never to meet</p>
+            </div>
+            <i class="fas fa-chevron-down safety-card-arrow"></i>
+          </div>
+          <div class="safety-card-body">
+            <p>Choose a well-lit, busy public location. Good options:</p>
+            <ul>
+              <li>Inside a shopping mall or bank premises</li>
+              <li>At a police station (many stations allow this — ask first)</li>
+              <li>Busy markets, fuel stations, or café car parks</li>
+              <li>During daylight hours if possible</li>
+            </ul>
+            <div class="safety-callout danger">
+              <strong>Never:</strong> meet at your home, the seller's home, an unlit compound, or a secluded location — even if the seller seems friendly. If they insist on their house, walk away.
+            </div>
+            <p>Bring someone with you if the transaction is above ₦100,000 or involves a high-value item like a phone, laptop, or vehicle.</p>
+          </div>
+        </div>
+
+        <div class="safety-card" data-cat="buying">
+          <div class="safety-card-header">
+            <div class="safety-icon do"><i class="fas fa-magnifying-glass"></i></div>
+            <div class="safety-card-title">
+              <h3>Inspect the item before paying</h3>
+              <p>How to check properly — especially electronics</p>
+            </div>
+            <i class="fas fa-chevron-down safety-card-arrow"></i>
+          </div>
+          <div class="safety-card-body">
+            <p>Don't rush. A patient check saves you money and hassle.</p>
+            <ul>
+              <li><strong>Phones &amp; laptops:</strong> power on, check IMEI/serial, test the camera, speakers, charging port, and buttons. Check if it's been factory reset.</li>
+              <li><strong>Vehicles:</strong> check engine, chassis/VIN number, papers, and take it for a short drive. Consider bringing a mechanic.</li>
+              <li><strong>Furniture:</strong> check joints, drawers, and for insects (especially wood items).</li>
+              <li><strong>Fashion:</strong> try it on if possible, check stitching and material quality.</li>
+              <li><strong>Anything with a receipt or warranty:</strong> ask for the original receipt and any paperwork.</li>
+            </ul>
+            <div class="safety-callout warn">
+              <strong>Beware of "brand new sealed" items</strong> being sold far below market price. If a phone is ₦50,000 below everywhere else, ask why. It may be stolen, refurbished, or a fake.
+            </div>
+          </div>
+        </div>
+
+        <div class="safety-card" data-cat="buying">
+          <div class="safety-card-header">
+            <div class="safety-icon dont"><i class="fas fa-money-bill-transfer"></i></div>
+            <div class="safety-card-title">
+              <h3>Never pay in advance</h3>
+              <p>No deposits. No booking fees. No exceptions.</p>
+            </div>
+            <i class="fas fa-chevron-down safety-card-arrow"></i>
+          </div>
+          <div class="safety-card-body">
+            <p>This is the #1 rule. If you pay before seeing the item, you've handed over your money with no protection. Zaure is not an escrow — we cannot recover payments made directly to a seller.</p>
+            <div class="safety-callout danger">
+              <strong>Red flags that mean "do not pay":</strong>
+              <ul style="margin-top: 8px;">
+                <li>"Send ₦5,000 to reserve the item"</li>
+                <li>"I'm not in town, but I can ship it if you pay first"</li>
+                <li>"Just send half now, pay the rest on delivery"</li>
+                <li>"I need a deposit to hold it for you"</li>
+                <li>"Cash only, but send transfer first"</li>
+              </ul>
+            </div>
+            <p>Pay <strong>after</strong> inspecting the item, <strong>in person</strong>, at the same moment the seller hands it over. Bank transfer is fine — send it while you both stand there, and confirm it lands in their account before you leave.</p>
+          </div>
+        </div>
+
+        <div class="safety-card" data-cat="buying">
+          <div class="safety-card-header">
+            <div class="safety-icon caution"><i class="fas fa-brain"></i></div>
+            <div class="safety-card-title">
+              <h3>Trust your instincts</h3>
+              <p>If it feels too good to be true, it is</p>
+            </div>
+            <i class="fas fa-chevron-down safety-card-arrow"></i>
+          </div>
+          <div class="safety-card-body">
+            <p>Pressure tactics are a warning sign. Legitimate sellers don't rush you.</p>
+            <ul>
+              <li><strong>"I have three other buyers waiting."</strong> Real sellers don't need to tell you this — they just wait for whoever pays first.</li>
+              <li><strong>"Offer ends today only."</strong> Fabricated urgency.</li>
+              <li><strong>"Don't tell anyone about this deal."</strong> Isolation tactic.</li>
+              <li><strong>Seller refuses to meet in person.</strong> Could be shipping from abroad (unlikely at these prices), or could be a scammer with nothing to sell.</li>
+            </ul>
+            <p>Walk away. There is always another listing. You never lose money by being patient.</p>
+          </div>
+        </div>
+
+        <!-- ============ SELLING ============ -->
+        <div class="safety-card" data-cat="selling">
+          <div class="safety-card-header">
+            <div class="safety-icon dont"><i class="fas fa-user-secret"></i></div>
+            <div class="safety-card-title">
+              <h3>Watch for buyer scams</h3>
+              <p>Fake payment screenshots, overpayment, "agent" tricks</p>
+            </div>
+            <i class="fas fa-chevron-down safety-card-arrow"></i>
+          </div>
+          <div class="safety-card-body">
+            <p>As a seller, you're just as exposed as buyers. Common tricks:</p>
+            <ul>
+              <li><strong>Fake transfer screenshots.</strong> Always confirm the money actually landed in your bank — not a screenshot, not a "receipt", not a "bank alert SMS". Log in to your bank app and check.</li>
+              <li><strong>Overpayment scam.</strong> Buyer "accidentally" sends ₦500,000 instead of ₦50,000, then asks you to refund ₦450,000. Their transfer was fake — yours is real.</li>
+              <li><strong>"My agent will come and collect."</strong> Then the agent arrives, pays in cash, and later the buyer claims the goods were never delivered and demands a refund from you.</li>
+              <li><strong>"I'm a soldier/pastor/doctor."</strong> Fake credentials to build trust. Doesn't matter who they say they are — meet, inspect, pay.</li>
+              <li><strong>Fake "Zaure verification" messages.</strong> We will never ask you to pay for verification. Ignore anyone claiming to be from Zaure who asks for money.</li>
+            </ul>
+            <div class="safety-callout safe">
+              <strong>Protect yourself:</strong> Never hand over goods until payment is confirmed in <em>your</em> bank account. Take a photo of the buyer's ID for high-value items if they insist on credit.
+            </div>
+          </div>
+        </div>
+
+        <div class="safety-card" data-cat="selling">
+          <div class="safety-icon caution"><i class="fas fa-address-card"></i></div>
+          <div class="safety-card-header">
+            <div class="safety-card-title">
+              <h3>Protect your personal information</h3>
+              <p>What to share, what to keep private</p>
+            </div>
+            <i class="fas fa-chevron-down safety-card-arrow"></i>
+          </div>
+          <div class="safety-card-body">
+            <p>You'll need to share contact details to sell — but only the right ones.</p>
+            <ul>
+              <li><strong>Share:</strong> WhatsApp number, general area (e.g. "Barnawa, Kaduna"), item photos.</li>
+              <li><strong>Don't share:</strong> home address (use landmarks nearby), bank account details before a deal is agreed, BVN, NIN, or copies of your ID with strangers.</li>
+              <li><strong>Use a public meeting place</strong> even when selling — never invite a stranger to your house for a sale.</li>
+              <li><strong>Turn off "last seen" and read receipts</strong> if you don't want strangers tracking your activity.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ============ WHOLESALE / B2B ============ -->
+        <div class="safety-card" data-cat="wholesale">
+          <div class="safety-card-header">
+            <div class="safety-icon do"><i class="fas fa-cubes"></i></div>
+            <div class="safety-card-title">
+              <h3>Wholesale &amp; B2B: extra due diligence</h3>
+              <p>Bulk orders need more checks than single purchases</p>
+            </div>
+            <i class="fas fa-chevron-down safety-card-arrow"></i>
+          </div>
+          <div class="safety-card-body">
+            <p>When you're spending ₦500,000+ on a bulk order, the checks should be proportionally bigger:</p>
+            <ul>
+              <li><strong>Visit the supplier's warehouse</strong> or physical location before committing. If they have no address, that's a red flag.</li>
+              <li><strong>Check their business registration</strong> — ask for CAC documents. Real businesses have them.</li>
+              <li><strong>Order a sample first.</strong> For agro commodities especially, one bag of 100 should match the whole order.</li>
+              <li><strong>Use a written agreement</strong> — even a simple one signed by both sides with a company letterhead. Include delivery date, quality standard, and what happens if goods arrive damaged.</li>
+              <li><strong>Never pay 100% upfront</strong> on first-time bulk orders. Standard is 30–50% deposit, balance on inspection before dispatch.</li>
+              <li><strong>Bank transfer only</strong> to a business account matching the company name. Never to a personal account with a different name.</li>
+              <li><strong>Get references.</strong> Ask for 2–3 customers who've bought from them before. Then actually call them.</li>
+            </ul>
+            <div class="safety-callout danger">
+              <strong>Common B2B scam:</strong> "We can ship from Port Harcourt tomorrow if you pay full today." No inspection, no warehouse visit, no sample, no paperwork — just a promise and a bank account. This is how some people lose millions.
+            </div>
+          </div>
+        </div>
+
+        <!-- ============ ZAURE CLEAN ============ -->
+        <div class="safety-card" data-cat="services">
+          <div class="safety-card-header">
+            <div class="safety-icon safe"><i class="fas fa-hand-sparkles"></i></div>
+            <div class="safety-card-title">
+              <h3>Zaure Clean: what to expect on-site</h3>
+              <p>How to verify our staff and prepare your space</p>
+            </div>
+            <i class="fas fa-chevron-down safety-card-arrow"></i>
+          </div>
+          <div class="safety-card-body">
+            <p>Zaure Clean is operated directly by Zaure Technologies — not a third party. Staff are trained and vetted.</p>
+            <ul>
+              <li><strong>All Zaure Clean staff carry ID badges.</strong> Always ask to see it before letting anyone in.</li>
+              <li><strong>Confirm the booking</strong> — our team will message you on WhatsApp the day before with the names of the staff coming and their arrival time.</li>
+              <li><strong>Payment is 50% deposit, 50% on completion.</strong> Never pay anyone in cash on-site. All payments go through official Zaure channels.</li>
+              <li><strong>Damages:</strong> if anything is broken during a job, Zaure covers it up to the value stated in your quote. Photograph the damage and message us immediately.</li>
+              <li><strong>Never let anyone claiming to be from Zaure Clean in who isn't on your confirmed list.</strong> If it's not on the WhatsApp confirmation, they're not from us.</li>
+            </ul>
+            <div class="safety-callout safe">
+              <strong>Concerns during a job?</strong> Message us on WhatsApp immediately. If a staff member behaves inappropriately, end the session and report it — we take this seriously and will not charge you for the session.
+            </div>
+          </div>
+        </div>
+
+        <!-- ============ HOTSPOTS ============ -->
+        <div class="safety-card" data-cat="hotspots">
+          <div class="safety-card-header">
+            <div class="safety-icon caution"><i class="fas fa-fire"></i></div>
+            <div class="safety-card-title">
+              <h3>Hotspots: what we know and what we don't</h3>
+              <p>How to use the discovery guide safely</p>
+            </div>
+            <i class="fas fa-chevron-down safety-card-arrow"></i>
+          </div>
+          <div class="safety-card-body">
+            <p>Hotspots is a discovery guide — not a booking platform and not a review site. We provide information about places across Nigeria, but we don't own or operate any of them.</p>
+            <ul>
+              <li><strong>Confirm before you go.</strong> Call ahead or check the venue's Instagram/WhatsApp to confirm opening hours and that they're still operating. Situations change.</li>
+              <li><strong>Prices shown are indicative.</strong> The ₦ tiers are typical ranges, not guaranteed prices. Ask at the venue.</li>
+              <li><strong>Read the address carefully.</strong> We do our best to keep addresses accurate, but some spots move or close.</li>
+              <li><strong>Trust your surroundings.</strong> If a place feels unsafe when you arrive, leave. No hotspot is worth compromising your safety.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ============ SCAM PATTERNS ============ -->
+        <div class="safety-card" data-cat="scams">
+          <div class="safety-card-header">
+            <div class="safety-icon dont"><i class="fas fa-mask"></i></div>
+            <div class="safety-card-title">
+              <h3>Recognise the 6 common scam patterns</h3>
+              <p>The tricks you'll see most often in Nigeria</p>
+            </div>
+            <i class="fas fa-chevron-down safety-card-arrow"></i>
+          </div>
+          <div class="safety-card-body">
+            <p><strong>1. "I'm out of town — I'll ship it."</strong> Seller claims to be in another city/state and offers to send a courier after you pay. No inspection possible. Always a scam in 95% of cases.</p>
+
+            <p><strong>2. The fake alert.</strong> "Check your phone, alert has entered." Buyer shows you a fake bank SMS screenshot. Never trust SMS — check your actual account balance in the app.</p>
+
+            <p><strong>3. The overpayment refund.</strong> "I accidentally sent ₦X instead of ₦Y, please refund the difference." The original transfer was fake, the refund you send is real.</p>
+
+            <p><strong>4. The military/pastor emergency.</strong> "I'm a soldier at the front line, I can only do bank transfer, my wife will collect." Fabricated credentials to bypass your caution. It's always a scam.</p>
+
+            <p><strong>5. The "agent" pickup.</strong> Buyer's "agent" arrives, pays cash, collects goods — then days later, the "buyer" claims never to have received anything and reports you. Always get written confirmation from the buyer that their agent collected the item.</p>
+
+            <p><strong>6. The fake Zaure verification fee.</strong> Someone messages you claiming to be from Zaure, saying your account will be suspended if you don't pay ₦5,000 for verification. <strong>Zaure never charges for verification and never asks for payment via DM.</strong> Report and block.</p>
+
+            <div class="safety-callout danger">
+              <strong>None of these tricks are new.</strong> The same 6 have been used for years. Now you know them — you'll spot them coming.
+            </div>
+          </div>
+        </div>
+
       </div>
-    </div>
+    </section>
 
-    <div class="safety-tip-card">
-      <div class="tip-icon"><i class="fas fa-brain"></i></div>
-      <div>
-        <h3>Trust Your Instincts</h3>
-        <p>If something feels too good to be true, it probably is. Trust your gut and walk away from suspicious deals.</p>
-      </div>
-    </div>
-
-    <div class="safety-tip-card">
-      <div class="tip-icon"><i class="fas fa-user-check"></i></div>
-      <div>
-        <h3>Check Seller Verification</h3>
-        <p>Look for the "Verified" badge on sellers. Verified sellers have been checked by Zaure for authenticity.</p>
-      </div>
-    </div>
-
-    <div class="safety-tip-card">
-      <div class="tip-icon"><i class="fas fa-shield-alt"></i></div>
-      <div>
-        <h3>Keep Communication on Zaure</h3>
-        <p>Use Zaure's contact buttons to reach sellers. Avoid sharing personal information unnecessarily.</p>
-      </div>
-    </div>
-
-    <div class="report-section">
-      <h3><i class="fas fa-flag" style="color:#e74c3c;"></i> Report Suspicious Activity</h3>
-      <p>If you encounter a suspicious listing or seller, report it immediately.</p>
-      <p style="font-weight:600;color:var(--text);">
-        WhatsApp: <a href="https://wa.me/2349042339411" target="_blank" style="color:#D4B87A;text-decoration:none;">+2349042339411</a>
+    <!-- ============ VERIFICATION REALITY ============ -->
+    <div class="verify-note">
+      <h3><i class="fas fa-shield-halved"></i> What "Verified" actually means</h3>
+      <p>
+        A <strong>Verified badge</strong> means we've checked certain details — usually phone number, email, and for business verification, CAC registration and physical address. It does not mean:
+      </p>
+      <p>
+        ❌ That the seller will never scam you.<br>
+        ❌ That the item is exactly as described.<br>
+        ❌ That the seller is honest, reliable, or fast.<br>
+        ❌ That Zaure will refund you if things go wrong.
+      </p>
+      <p>
+        Verification is one signal, not a guarantee. Always do your own due diligence — inspect, meet, check. Trust, but verify.
       </p>
     </div>
+
+    <!-- ============ REPORT ============ -->
+    <section class="report-section">
+      <div class="report-icon">
+        <i class="fas fa-exclamation-triangle"></i>
+      </div>
+      <h3>See something suspicious?</h3>
+      <p>
+        Report scams, fake listings, unsafe behaviour, or suspicious sellers. Every report makes Zaure safer for everyone. We act on all reports within 24 hours.
+      </p>
+      <a href="https://wa.me/2349042339411?text=URGENT%3A%20I%20need%20to%20report%20a%20safety%20issue%20or%20suspicious%20activity%20on%20Zaure.%0A%0AWhat%20happened%3A%20"
+         target="_blank"
+         rel="noopener"
+         class="report-btn">
+        <i class="fab fa-whatsapp"></i> Report on WhatsApp
+      </a>
+    </section>
+
   </div>
 
   <footer class="footer">
@@ -192,22 +927,23 @@
         <div class="footer-col">
           <h4>Browse</h4>
           <a href="/category.html?slug=all">All Items</a>
-          <a href="/category.html?slug=vehicles">Vehicles</a>
-          <a href="/category.html?slug=electronics">Electronics</a>
-          <a href="/category.html?slug=furniture">Furniture</a>
+          <a href="/hotspots.html">Hotspots</a>
+          <a href="/services.html">Find a Pro</a>
           <a href="/category.html?slug=fashion">Fashion</a>
-          <a href="/category.html?slug=real-estate">Real Estate</a>
+          <a href="/category.html?slug=electronics">Electronics</a>
+          <a href="/category.html?slug=home-kitchen">Home & Kitchen</a>
         </div>
         <div class="footer-col">
           <h4>Support</h4>
           <a href="/help.html">Help Center</a>
+          <a href="/faq.html">FAQ</a>
           <a href="/safety.html">Safety Tips</a>
           <a href="/contact.html">Contact Us</a>
-          <a href="/support.html">Support</a>
         </div>
         <div class="footer-col">
           <h4>Company</h4>
           <a href="/about.html">About Us</a>
+          <a href="/alamin-ahmed.html">Founder</a>
           <a href="/careers.html">Careers</a>
           <a href="/privacy.html">Privacy Policy</a>
           <a href="/terms.html">Terms of Service</a>
@@ -227,9 +963,6 @@
         <div class="footer-bottom">
           <span>&copy; 2026 <strong>Zaure Technologies</strong>. All rights reserved.</span>
           <span class="footer-lang"><i class="fas fa-globe"></i> Nigeria · English</span>
-        </div>
-        <div style="grid-column: 1/-1; text-align: center; margin-top: 8px; font-size: 0.8rem; color: #94A3B8;">
-          For info or to report an issue, contact us on WhatsApp: <a href="https://wa.me/2349042339411" target="_blank" style="color: #D4B87A; text-decoration: none; font-weight: 600;">+2349042339411</a>
         </div>
       </div>
     </div>
@@ -268,7 +1001,7 @@
         <input type="hidden" id="signupState" value="">
         <label class="terms-checkbox">
           <input type="checkbox" id="termsCheckbox" required>
-          <span>By creating an account, you agree to Zaure's <a href="/terms.html" target="_blank">Terms</a>, <a href="/conditions.html" target="_blank">Conditions of Use</a>, and <a href="/privacy.html" target="_blank">Privacy Policy</a>.</span>
+          <span>By creating an account, you agree to Zaure's <a href="/terms.html" target="_blank">Terms</a> and <a href="/privacy.html" target="_blank">Privacy Policy</a>.</span>
         </label>
         <button type="submit" class="btn-primary">Sign Up</button>
       </form>
@@ -277,15 +1010,54 @@
 
   <script src="/js/main.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+  (function () {
+    'use strict';
+
+    /* ============================================================
+       TIP CARD EXPAND/COLLAPSE
+       ============================================================ */
+    document.querySelectorAll('.safety-card-header').forEach(function (header) {
+      header.addEventListener('click', function () {
+        this.parentElement.classList.toggle('open');
+      });
+    });
+
+    /* ============================================================
+       CATEGORY FILTER
+       ============================================================ */
+    const filterBtns = document.querySelectorAll('.safety-filter');
+
+    filterBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        filterBtns.forEach(function (b) { b.classList.remove('active'); });
+        this.classList.add('active');
+        const cat = this.dataset.cat;
+
+        document.querySelectorAll('.safety-card').forEach(function (card) {
+          const show = cat === 'all' || card.dataset.cat === cat;
+          card.style.display = show ? '' : 'none';
+          if (!show) card.classList.remove('open');
+        });
+      });
+    });
+
+    /* ============================================================
+       INIT
+       ============================================================ */
+    document.addEventListener('DOMContentLoaded', function () {
       initStateDropdown();
-      document.getElementById('fabPostAd')?.addEventListener('click', function() {
+      document.getElementById('fabPostAd')?.addEventListener('click', function () {
         if (!currentUser) { openSignup(); } else { window.location.href = '/post.html'; }
       });
       loadUser();
       initTheme();
       updateFavoriteBadge();
+
+      // Auto-open the first card for first-time visitors
+      const firstCard = document.querySelector('.safety-card');
+      if (firstCard) firstCard.classList.add('open');
     });
+  })();
   </script>
 </body>
 </html>
