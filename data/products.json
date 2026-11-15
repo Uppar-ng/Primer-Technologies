@@ -1,514 +1,262 @@
 [
   {
-    "id": "jbl-go-3-speaker",
-    "title": "JBL Go 3 Bluetooth Speaker",
-    "price": 28000,
+    "id": "solar-rechargeable-lantern",
+    "title": "Solar Rechargeable Lantern (Manufacturer Direct)",
+    "price": 6500,
     "location": "Kaduna",
     "date": "",
     "category": "electronics",
     "boosted": true,
     "featured": true,
-    "description": "Small enough to slip into your pocket, loud enough to fill a room. The JBL Go 3 is the speaker you keep reaching for — in the car, at the shop, on a picnic. Punchy bass, clear vocals, and it survives rain, dust, and the odd drop. Five hours of playtime on a single charge, and it comes in colours that actually look good. Plug it in, press play, enjoy.",
-    "tags": ["speaker", "bluetooth", "jbl", "audio", "electronics", "portable"],
-    "images": [
-      "https://lh3.googleusercontent.com/d/1PkWfvj9eD4qHXZNIPZu5bnDhcJtglOcG",
-      "https://lh3.googleusercontent.com/d/1f4RXXDeLTbdIkBklFjGrxF6KJYzp_xrf"
-    ],
+    "description": "Light that doesn't depend on NEPA. Charges in the sun or by USB, gives bright light for the evening, and can charge a phone in a pinch. Built for shops, homes, and traders who can't afford to sit in the dark. Buy direct from the manufacturer and get carton prices.",
+    "tags": ["solar", "lantern", "lighting", "rechargeable", "electronics", "manufacturer"],
+    "images": ["https://placehold.co/800x800/0E3B2C/F2A900?text=Solar+Lantern"],
     "seller": {
-      "name": "Zaure Official Store",
-      "initials": "ZA",
-      "verified": true,
-      "joined": "2026",
-      "listings": 13,
-      "rating": 5.0,
-      "sales": 800,
-      "response": "100%",
-      "bio": "Welcome to the official Zaure store. Discover featured products, exclusive deals, and trusted services from Nigeria's most reliable marketplace.",
-      "phone": "09042339411",
-      "whatsapp": "09042339411"
+      "name": "Kaduna Power Components", "initials": "KP", "verified": false, "joined": "2026",
+      "listings": 2, "rating": 0, "sales": 0, "response": "100%",
+      "bio": "Manufacturer of solar lighting and power accessories in Kaduna. Selling direct to shops, traders, and businesses.",
+      "phone": "09042339411", "whatsapp": "09042339411"
     },
-    "retail": { "enabled": true, "price": 28000, "stock": null },
+    "retail": { "enabled": true, "price": 6500, "stock": null },
     "wholesale": {
       "enabled": true,
-      "minQty": 10,
+      "minQty": 20,
       "tiers": [
-        { "minQty": 10, "maxQty": 49, "price": 25000 },
-        { "minQty": 50, "maxQty": 99, "price": 22000 },
-        { "minQty": 100, "maxQty": null, "price": 20000 }
+        { "minQty": 20, "maxQty": 49, "price": 5500 },
+        { "minQty": 50, "maxQty": 99, "price": 5000 },
+        { "minQty": 100, "maxQty": null, "price": 4500 }
       ]
     }
   },
   {
-    "id": "el-shoe-polish-neutral",
-    "title": "El Shoe Polish — Neutral",
-    "price": 1500,
+    "id": "handmade-leather-belt",
+    "title": "Handmade Leather Belt (Factory Price)",
+    "price": 3500,
     "location": "Kaduna",
     "date": "",
     "category": "fashion",
     "boosted": false,
     "featured": false,
-    "description": "For the shoes you love too much to risk ruining. This one is colourless, so it cleans, conditions, and shines without touching the shade of your leather. Works on black, brown, tan, cream — anything. If you've ever hesitated to polish a favourite pair because you weren't sure about the colour, this is the one you keep on the shelf.",
-    "tags": ["shoe polish", "el", "neutral", "leather care", "footwear", "conditioner"],
-    "images": [
-      "https://i.imgur.com/4NxvCJ2.jpeg",
-      "https://i.imgur.com/OLAfdB5.jpeg",
-      "https://i.imgur.com/QvCQVNt.jpeg",
-      "https://i.imgur.com/MqsTKnL.jpeg"
-    ],
+    "description": "Cut, stitched, and finished by hand in Northern Nigeria. Real leather, solid buckle, and a strong stitch that holds up to daily wear. Comes in black or brown, sizes 32 to 42. Ideal for boutiques, uniform suppliers, and resellers who want better margins than market-bought stock.",
+    "tags": ["belt", "leather", "handmade", "fashion", "accessories", "manufacturer"],
+    "images": ["https://placehold.co/800x800/0E3B2C/F2A900?text=Leather+Belt"],
     "seller": {
-      "name": "El",
-      "initials": "EL",
-      "verified": true,
-      "joined": "2026",
-      "listings": 4,
-      "rating": 5.0,
-      "sales": 0,
-      "response": "100%",
-      "bio": "El is a Nigerian lifestyle brand built on quality, pride, and everyday excellence. One name. Every detail.",
-      "phone": "09042339411",
-      "whatsapp": "09042339411"
+      "name": "Arewa Leather Works", "initials": "AL", "verified": false, "joined": "2026",
+      "listings": 2, "rating": 0, "sales": 0, "response": "100%",
+      "bio": "Leather goods manufacturer in Northern Nigeria. Belts, sandals, and custom orders.",
+      "phone": "09042339411", "whatsapp": "09042339411"
     },
-    "retail": { "enabled": true, "price": 1500, "stock": null },
+    "retail": { "enabled": true, "price": 3500, "stock": null },
     "wholesale": {
       "enabled": true,
       "minQty": 20,
       "tiers": [
-        { "minQty": 20, "maxQty": 49, "price": 1200 },
-        { "minQty": 50, "maxQty": 99, "price": 1000 },
-        { "minQty": 100, "maxQty": null, "price": 850 }
+        { "minQty": 20, "maxQty": 49, "price": 3000 },
+        { "minQty": 50, "maxQty": 99, "price": 2600 },
+        { "minQty": 100, "maxQty": null, "price": 2200 }
       ]
     }
   },
   {
-    "id": "levis-leather-belt",
-    "title": "Levi's Genuine Leather Belt",
+    "id": "hand-embroidered-hausa-cap",
+    "title": "Hand-Embroidered Hausa Cap (Hula)",
+    "price": 4000,
+    "location": "Kaduna",
+    "date": "",
+    "category": "fashion",
+    "boosted": false,
+    "featured": false,
+    "description": "The cap that goes with every kaftan. Neat embroidery, firm shape, and a comfortable fit for Friday prayers, weddings, and everyday wear. Made by the tailors who make it, not middlemen, so you get real factory pricing. Available in different colours and embroidery styles.",
+    "tags": ["cap", "hula", "hausa", "embroidery", "fashion", "manufacturer"],
+    "images": ["https://placehold.co/800x800/0E3B2C/F2A900?text=Hausa+Cap"],
+    "seller": {
+      "name": "Arewa Garments & Textiles", "initials": "AG", "verified": false, "joined": "2026",
+      "listings": 2, "rating": 0, "sales": 0, "response": "100%",
+      "bio": "Garment manufacturer making traditional caps and everyday clothing in Kaduna.",
+      "phone": "09042339411", "whatsapp": "09042339411"
+    },
+    "retail": { "enabled": true, "price": 4000, "stock": null },
+    "wholesale": {
+      "enabled": true,
+      "minQty": 20,
+      "tiers": [
+        { "minQty": 20, "maxQty": 49, "price": 3400 },
+        { "minQty": 50, "maxQty": 99, "price": 3000 },
+        { "minQty": 100, "maxQty": null, "price": 2600 }
+      ]
+    }
+  },
+  {
+    "id": "plain-cotton-tshirt-bulk",
+    "title": "Plain Cotton T-Shirts (Bulk, Ready to Print)",
     "price": 2500,
-    "location": "Kaduna",
-    "date": "",
-    "category": "fashion",
-    "boosted": false,
-    "featured": false,
-    "description": "A belt that doesn't quit. Real leather, classic Levi's buckle, and a fit that stays comfortable through a full day — church, office, wedding, whatever the day holds. Comes in black or brown, sizes 32 to 42. The kind of belt you buy once and stop thinking about.",
-    "tags": ["belt", "leather", "levis", "fashion", "accessories", "men"],
-    "images": [
-      "https://lh3.googleusercontent.com/d/1EqOoTr1FPv4a90hoosGv97r11tq8COj0"
-    ],
-    "seller": {
-      "name": "Zaure Official Store",
-      "initials": "ZA",
-      "verified": true,
-      "joined": "2026",
-      "listings": 13,
-      "rating": 5.0,
-      "sales": 800,
-      "response": "100%",
-      "bio": "Welcome to the official Zaure store. Discover featured products, exclusive deals, and trusted services from Nigeria's most reliable marketplace.",
-      "phone": "09042339411",
-      "whatsapp": "09042339411"
-    },
-    "retail": { "enabled": true, "price": 2500, "stock": null },
-    "wholesale": {
-      "enabled": true,
-      "minQty": 20,
-      "tiers": [
-        { "minQty": 20, "maxQty": 49, "price": 2000 },
-        { "minQty": 50, "maxQty": 99, "price": 1800 },
-        { "minQty": 100, "maxQty": null, "price": 1500 }
-      ]
-    }
-  },
-  {
-    "id": "el-shampoo",
-    "title": "El Shampoo",
-    "price": 500,
-    "location": "Kaduna",
-    "date": "",
-    "category": "beauty-health",
-    "boosted": false,
-    "featured": false,
-    "description": "Made for Nigerian hair, by people who understand Nigerian hair. Rich lather, gentle on the scalp, and it rinses out clean without leaving that heavy, filmy feeling. Leaves your hair soft, shiny, and smelling fresh all day. One name. Every detail.",
-    "tags": ["shampoo", "el", "hair care", "beauty"],
-    "images": [
-      "https://i.imgur.com/hgW0CPw.jpeg",
-      "https://i.imgur.com/Q4YU7Nq.jpeg"
-    ],
-    "seller": {
-      "name": "El",
-      "initials": "EL",
-      "verified": true,
-      "joined": "2026",
-      "listings": 4,
-      "rating": 5.0,
-      "sales": 0,
-      "response": "100%",
-      "bio": "El is a Nigerian lifestyle brand built on quality, pride, and everyday excellence. One name. Every detail.",
-      "phone": "09042339411",
-      "whatsapp": "09042339411"
-    },
-    "retail": { "enabled": true, "price": 500, "stock": null },
-    "wholesale": {
-      "enabled": true,
-      "minQty": 50,
-      "tiers": [
-        { "minQty": 50, "maxQty": 199, "price": 400 },
-        { "minQty": 200, "maxQty": 499, "price": 350 },
-        { "minQty": 500, "maxQty": null, "price": 300 }
-      ]
-    }
-  },
-  {
-    "id": "casio-classic-watch",
-    "title": "Casio Classic Analog Wristwatch",
-    "price": 10000,
-    "location": "Kaduna",
-    "date": "",
-    "category": "fashion",
-    "boosted": false,
-    "featured": false,
-    "description": "A watch that quietly does its job, every single day. Stainless steel case, genuine leather strap, water-resistant — nothing flashy, nothing to explain. Wear it to work, to Friday prayers, to a wedding. It fits every occasion and never looks out of place. This is the kind of watch you hand down, not throw out.",
-    "tags": ["watch", "wristwatch", "casio", "analog", "fashion", "accessories"],
-    "images": [
-      "https://lh3.googleusercontent.com/d/1p4zT6TwXNX3P2EDUwcprKan7YFRNjcMN",
-      "https://lh3.googleusercontent.com/d/13UfPY6n7OGgbiby9u5zggb_PjfRlT_O0",
-      "https://lh3.googleusercontent.com/d/1q3pZElW_KwEPA_iHxgbp9E0naYr-MORU"
-    ],
-    "seller": {
-      "name": "Zaure Official Store",
-      "initials": "ZA",
-      "verified": true,
-      "joined": "2026",
-      "listings": 13,
-      "rating": 5.0,
-      "sales": 800,
-      "response": "100%",
-      "bio": "Welcome to the official Zaure store. Discover featured products, exclusive deals, and trusted services from Nigeria's most reliable marketplace.",
-      "phone": "09042339411",
-      "whatsapp": "09042339411"
-    },
-    "retail": { "enabled": true, "price": 10000, "stock": null },
-    "wholesale": {
-      "enabled": true,
-      "minQty": 10,
-      "tiers": [
-        { "minQty": 10, "maxQty": 29, "price": 8500 },
-        { "minQty": 30, "maxQty": 59, "price": 7500 },
-        { "minQty": 60, "maxQty": null, "price": 6500 }
-      ]
-    }
-  },
-  {
-    "id": "hanes-cotton-boxers-pack-5",
-    "title": "Hanes Cotton Boxers (Pack of 5)",
-    "price": 4800,
     "location": "Kaduna",
     "date": "",
     "category": "fashion",
     "boosted": true,
     "featured": true,
-    "description": "Five pairs. One pack. Zero regrets. Soft cotton that breathes through the Kaduna heat, comfortable elastic waistband that doesn't dig in, and a fit that stays right all day. Assorted colours, sizes M to XXL. Buy once, forget about laundry day for a week.",
-    "tags": ["boxers", "underwear", "men", "cotton", "hanes", "pack"],
-    "images": [
-      "https://lh3.googleusercontent.com/d/1DZ8QvooowmoxBndXLR3ermwEclfrvlRA",
-      "https://lh3.googleusercontent.com/d/1XT_bYwazm10g81R8Leffi8dbFvt7UW-V"
-    ],
+    "description": "Blank, soft, and ready for your logo. Made for printers, schools, event organisers, and clothing brands that need steady supply at a fair price. Round neck, assorted colours, sizes S to XXL. Order by the dozen or by the hundred.",
+    "tags": ["t-shirt", "cotton", "blank", "bulk", "printing", "manufacturer"],
+    "images": ["https://placehold.co/800x800/0E3B2C/F2A900?text=Cotton+T-Shirts"],
     "seller": {
-      "name": "Zaure Official Store",
-      "initials": "ZA",
-      "verified": true,
-      "joined": "2026",
-      "listings": 13,
-      "rating": 5.0,
-      "sales": 800,
-      "response": "100%",
-      "bio": "Welcome to the official Zaure store. Discover featured products, exclusive deals, and trusted services from Nigeria's most reliable marketplace.",
-      "phone": "09042339411",
-      "whatsapp": "09042339411"
+      "name": "Arewa Garments & Textiles", "initials": "AG", "verified": false, "joined": "2026",
+      "listings": 2, "rating": 0, "sales": 0, "response": "100%",
+      "bio": "Garment manufacturer making traditional caps and everyday clothing in Kaduna.",
+      "phone": "09042339411", "whatsapp": "09042339411"
     },
-    "retail": { "enabled": true, "price": 4800, "stock": null },
+    "retail": { "enabled": true, "price": 2500, "stock": null },
+    "wholesale": {
+      "enabled": true,
+      "minQty": 50,
+      "tiers": [
+        { "minQty": 50, "maxQty": 199, "price": 2000 },
+        { "minQty": 200, "maxQty": 499, "price": 1700 },
+        { "minQty": 500, "maxQty": null, "price": 1450 }
+      ]
+    }
+  },
+  {
+    "id": "rubber-slippers-bulk",
+    "title": "Locally Made Rubber Slippers (Carton Price)",
+    "price": 1800,
+    "location": "Kaduna",
+    "date": "",
+    "category": "fashion",
+    "boosted": false,
+    "featured": false,
+    "description": "Light, durable, and made for Nigerian roads and compounds. Soft footbed, non-slip sole, and strong enough to last past the rainy season. Assorted sizes and colours, packed by the carton. A fast-moving item for shops, market traders, and distributors.",
+    "tags": ["slippers", "rubber", "footwear", "bulk", "everyday", "manufacturer"],
+    "images": ["https://placehold.co/800x800/0E3B2C/F2A900?text=Rubber+Slippers"],
+    "seller": {
+      "name": "Northern Plastics & Rubber", "initials": "NP", "verified": false, "joined": "2026",
+      "listings": 2, "rating": 0, "sales": 0, "response": "100%",
+      "bio": "Manufacturer of plastic and rubber products for households and traders in Kaduna.",
+      "phone": "09042339411", "whatsapp": "09042339411"
+    },
+    "retail": { "enabled": true, "price": 1800, "stock": null },
+    "wholesale": {
+      "enabled": true,
+      "minQty": 50,
+      "tiers": [
+        { "minQty": 50, "maxQty": 199, "price": 1400 },
+        { "minQty": 200, "maxQty": 499, "price": 1200 },
+        { "minQty": 500, "maxQty": null, "price": 1000 }
+      ]
+    }
+  },
+  {
+    "id": "handcrafted-leather-sandals",
+    "title": "Handcrafted Leather Sandals (Men)",
+    "price": 12000,
+    "location": "Kaduna",
+    "date": "",
+    "category": "fashion",
+    "boosted": false,
+    "featured": false,
+    "description": "Real leather sandals made by Northern Nigerian craftsmen. Comfortable from the first wear, strong enough for years, and finished the way customers expect. Brown or black, sizes 40 to 45. Buy direct from the workshop for boutiques, shoe shops, and gift orders.",
+    "tags": ["sandals", "leather", "handmade", "men", "footwear", "manufacturer"],
+    "images": ["https://placehold.co/800x800/0E3B2C/F2A900?text=Leather+Sandals"],
+    "seller": {
+      "name": "Arewa Leather Works", "initials": "AL", "verified": false, "joined": "2026",
+      "listings": 2, "rating": 0, "sales": 0, "response": "100%",
+      "bio": "Leather goods manufacturer in Northern Nigeria. Belts, sandals, and custom orders.",
+      "phone": "09042339411", "whatsapp": "09042339411"
+    },
+    "retail": { "enabled": true, "price": 12000, "stock": null },
+    "wholesale": {
+      "enabled": true,
+      "minQty": 10,
+      "tiers": [
+        { "minQty": 10, "maxQty": 29, "price": 10000 },
+        { "minQty": 30, "maxQty": 59, "price": 9000 },
+        { "minQty": 60, "maxQty": null, "price": 8000 }
+      ]
+    }
+  },
+  {
+    "id": "heavy-duty-extension-socket",
+    "title": "Heavy-Duty 4-Way Extension Socket (3m)",
+    "price": 5000,
+    "location": "Kaduna",
+    "date": "",
+    "category": "electronics",
+    "boosted": false,
+    "featured": false,
+    "description": "A thick, durable cable and four sockets that don't loosen after a month. Built for shops, offices, and homes that run several devices at once. Order direct from the manufacturer for contractors, electrical shops, and office suppliers.",
+    "tags": ["extension", "socket", "power strip", "electrical", "electronics", "manufacturer"],
+    "images": ["https://placehold.co/800x800/0E3B2C/F2A900?text=Extension+Socket"],
+    "seller": {
+      "name": "Kaduna Power Components", "initials": "KP", "verified": false, "joined": "2026",
+      "listings": 2, "rating": 0, "sales": 0, "response": "100%",
+      "bio": "Manufacturer of solar lighting and power accessories in Kaduna. Selling direct to shops, traders, and businesses.",
+      "phone": "09042339411", "whatsapp": "09042339411"
+    },
+    "retail": { "enabled": true, "price": 5000, "stock": null },
     "wholesale": {
       "enabled": true,
       "minQty": 20,
       "tiers": [
         { "minQty": 20, "maxQty": 49, "price": 4200 },
         { "minQty": 50, "maxQty": 99, "price": 3800 },
-        { "minQty": 100, "maxQty": null, "price": 3200 }
+        { "minQty": 100, "maxQty": null, "price": 3400 }
       ]
     }
   },
   {
-    "id": "el-shoe-polish-black",
-    "title": "El Shoe Polish — Black",
-    "price": 1500,
+    "id": "plastic-bucket-20l-lid",
+    "title": "Plastic Bucket with Lid (20 Litres)",
+    "price": 3500,
     "location": "Kaduna",
     "date": "",
-    "category": "fashion",
+    "category": "household",
     "boosted": true,
     "featured": true,
-    "description": "Made for Northern Nigerian leather. Trusted by cobblers, imams, bankers, and anyone who takes their shoes seriously. A deep, honest shine that lasts through the day, protects against dust and cracks, and brings old leather back to life. Step sharp, every day.",
-    "tags": ["shoe polish", "el", "black", "leather care", "footwear", "shine"],
-    "images": [
-      "https://i.imgur.com/L9Wlvax.jpeg",
-      "https://i.imgur.com/ufvgdUx.jpeg",
-      "https://i.imgur.com/OLAfdB5.jpeg",
-      "https://i.imgur.com/QvCQVNt.jpeg",
-      "https://i.imgur.com/MqsTKnL.jpeg"
-    ],
+    "description": "A strong, thick-walled bucket for water, storage, paint, and food-safe use. Tight-fitting lid, sturdy handle, and made to survive daily use. Sold direct from the factory for households, hotels, caterers, and distributors who buy in volume.",
+    "tags": ["bucket", "plastic", "storage", "household", "water", "manufacturer"],
+    "images": ["https://placehold.co/800x800/0E3B2C/F2A900?text=Plastic+Bucket"],
     "seller": {
-      "name": "El",
-      "initials": "EL",
-      "verified": true,
-      "joined": "2026",
-      "listings": 4,
-      "rating": 5.0,
-      "sales": 0,
-      "response": "100%",
-      "bio": "El is a Nigerian lifestyle brand built on quality, pride, and everyday excellence. One name. Every detail.",
-      "phone": "09042339411",
-      "whatsapp": "09042339411"
+      "name": "Northern Plastics & Rubber", "initials": "NP", "verified": false, "joined": "2026",
+      "listings": 2, "rating": 0, "sales": 0, "response": "100%",
+      "bio": "Manufacturer of plastic and rubber products for households and traders in Kaduna.",
+      "phone": "09042339411", "whatsapp": "09042339411"
     },
-    "retail": { "enabled": true, "price": 1500, "stock": null },
+    "retail": { "enabled": true, "price": 3500, "stock": null },
     "wholesale": {
       "enabled": true,
       "minQty": 20,
       "tiers": [
-        { "minQty": 20, "maxQty": 49, "price": 1200 },
-        { "minQty": 50, "maxQty": 99, "price": 1000 },
-        { "minQty": 100, "maxQty": null, "price": 850 }
+        { "minQty": 20, "maxQty": 49, "price": 2900 },
+        { "minQty": 50, "maxQty": 99, "price": 2600 },
+        { "minQty": 100, "maxQty": null, "price": 2300 }
       ]
     }
   },
   {
-    "id": "adidas-adilette-slippers",
-    "title": "Adidas Adilette Bathroom Slippers",
-    "price": 2500,
+    "id": "pure-groundnut-oil-5l",
+    "title": "Pure Groundnut Oil (5 Litres)",
+    "price": 14000,
     "location": "Kaduna",
     "date": "",
-    "category": "fashion",
+    "category": "food-agriculture",
     "boosted": false,
     "featured": false,
-    "description": "The slippers you wear at home when nobody is watching — except they look good enough that you'll wear them outside too. Soft cushioned footbed, quick-dry material, and that classic Adidas three-stripe look. Perfect for the bathroom, the compound, or a quick dash to the shop. Comes in colours to match your mood.",
-    "tags": ["adidas", "slippers", "bathroom", "footwear", "indoor"],
-    "images": [
-      "https://lh3.googleusercontent.com/d/1eAagc9Tz4CnsVmBmXe7OFjWJTfxulq2G",
-      "https://lh3.googleusercontent.com/d/1ee21BCBgUxwzvK2C8KPnFkXBG5YsTLOZ",
-      "https://lh3.googleusercontent.com/d/1dqG98F_DDm9va4L8i7GkDB4k-kdEsJKr"
-    ],
+    "description": "Pressed from Northern Nigerian groundnuts and packed at source. Clean taste, golden colour, and the kind of oil that makes suya spice, fried snacks, and everyday soups taste right. Buy by the carton for restaurants, caterers, retailers, and food sellers.",
+    "tags": ["groundnut oil", "cooking oil", "food", "agriculture", "bulk", "manufacturer"],
+    "images": ["https://placehold.co/800x800/0E3B2C/F2A900?text=Groundnut+Oil"],
     "seller": {
-      "name": "Zaure Official Store",
-      "initials": "ZA",
-      "verified": true,
-      "joined": "2026",
-      "listings": 13,
-      "rating": 5.0,
-      "sales": 800,
-      "response": "100%",
-      "bio": "Welcome to the official Zaure store. Discover featured products, exclusive deals, and trusted services from Nigeria's most reliable marketplace.",
-      "phone": "09042339411",
-      "whatsapp": "09042339411"
+      "name": "Kaduna Agro Foods", "initials": "KA", "verified": false, "joined": "2026",
+      "listings": 1, "rating": 0, "sales": 0, "response": "100%",
+      "bio": "Food processor producing groundnut oil and agro products from Northern Nigeria.",
+      "phone": "09042339411", "whatsapp": "09042339411"
     },
-    "retail": { "enabled": true, "price": 2500, "stock": null },
-    "wholesale": {
-      "enabled": true,
-      "minQty": 20,
-      "tiers": [
-        { "minQty": 20, "maxQty": 49, "price": 2000 },
-        { "minQty": 50, "maxQty": 99, "price": 1700 },
-        { "minQty": 100, "maxQty": null, "price": 1400 }
-      ]
-    }
-  },
-  {
-    "id": "toms-leather-sandals-men",
-    "title": "TOMS Leather Sandals (Men)",
-    "price": 25000,
-    "location": "Kaduna",
-    "date": "",
-    "category": "fashion",
-    "boosted": false,
-    "featured": false,
-    "description": "Real leather, honest comfort, and a fit that moulds to your feet after a few wears. These aren't the sandals you toss after one rainy season — they're the pair you keep for years. Brown or black, sizes 40 to 45. Whether it's Friday jumat, a wedding, or just a hot afternoon, they carry you comfortably.",
-    "tags": ["sandals", "leather", "men", "footwear", "toms"],
-    "images": [
-      "https://lh3.googleusercontent.com/d/1y1smiCGlb57n9Rzop6f2H3OL_yVsmaIJ",
-      "https://lh3.googleusercontent.com/d/1gyFS5uFDUUGCpb4WNY8Dhi49psU81fjf"
-    ],
-    "seller": {
-      "name": "Zaure Official Store",
-      "initials": "ZA",
-      "verified": true,
-      "joined": "2026",
-      "listings": 13,
-      "rating": 5.0,
-      "sales": 800,
-      "response": "100%",
-      "bio": "Welcome to the official Zaure store. Discover featured products, exclusive deals, and trusted services from Nigeria's most reliable marketplace.",
-      "phone": "09042339411",
-      "whatsapp": "09042339411"
-    },
-    "retail": { "enabled": true, "price": 25000, "stock": null },
-    "wholesale": {
-      "enabled": true,
-      "minQty": 5,
-      "tiers": [
-        { "minQty": 5, "maxQty": 19, "price": 22000 },
-        { "minQty": 20, "maxQty": 49, "price": 20000 },
-        { "minQty": 50, "maxQty": null, "price": 18000 }
-      ]
-    }
-  },
-  {
-    "id": "el-shoe-polish-brown",
-    "title": "El Shoe Polish — Brown",
-    "price": 1500,
-    "location": "Kaduna",
-    "date": "",
-    "category": "fashion",
-    "boosted": false,
-    "featured": true,
-    "description": "For the brown shoes that deserve better than they get. This brings back the deep, warm colour and shine that fades after weeks of wear. Made for Hausa leather, but works on any brown or tan shoe. If you've been meaning to give your favourite pair some attention, this is your sign. Step sharp, every day.",
-    "tags": ["shoe polish", "el", "brown", "leather care", "footwear", "shine"],
-    "images": [
-      "https://i.imgur.com/4fXoVoE.jpeg",
-      "https://i.imgur.com/OLAfdB5.jpeg",
-      "https://i.imgur.com/QvCQVNt.jpeg",
-      "https://i.imgur.com/MqsTKnL.jpeg"
-    ],
-    "seller": {
-      "name": "El",
-      "initials": "EL",
-      "verified": true,
-      "joined": "2026",
-      "listings": 4,
-      "rating": 5.0,
-      "sales": 0,
-      "response": "100%",
-      "bio": "El is a Nigerian lifestyle brand built on quality, pride, and everyday excellence. One name. Every detail.",
-      "phone": "09042339411",
-      "whatsapp": "09042339411"
-    },
-    "retail": { "enabled": true, "price": 1500, "stock": null },
-    "wholesale": {
-      "enabled": true,
-      "minQty": 20,
-      "tiers": [
-        { "minQty": 20, "maxQty": 49, "price": 1200 },
-        { "minQty": 50, "maxQty": 99, "price": 1000 },
-        { "minQty": 100, "maxQty": null, "price": 850 }
-      ]
-    }
-  },
-  {
-    "id": "logitech-c270-webcam",
-    "title": "Logitech C270 HD Webcam",
-    "price": 15000,
-    "location": "Kaduna",
-    "date": "",
-    "category": "electronics",
-    "boosted": false,
-    "featured": false,
-    "description": "Look sharp on every call, without fussing. The C270 clips onto any laptop or monitor in seconds, and the built-in mic picks up your voice clearly — no headset needed. Whether it's a job interview, a class, or a family call, this makes you look and sound like you showed up prepared.",
-    "tags": ["webcam", "logitech", "camera", "electronics", "video", "computer"],
-    "images": [
-      "https://lh3.googleusercontent.com/d/1QD-eMKplx28uy3HaGT1lFXySTkTpnTvh",
-      "https://lh3.googleusercontent.com/d/1SwHH4624oUL5vb5PPHrhbApOmHG6U7sc"
-    ],
-    "seller": {
-      "name": "Zaure Official Store",
-      "initials": "ZA",
-      "verified": true,
-      "joined": "2026",
-      "listings": 13,
-      "rating": 5.0,
-      "sales": 800,
-      "response": "100%",
-      "bio": "Welcome to the official Zaure store. Discover featured products, exclusive deals, and trusted services from Nigeria's most reliable marketplace.",
-      "phone": "09042339411",
-      "whatsapp": "09042339411"
-    },
-    "retail": { "enabled": true, "price": 15000, "stock": null },
+    "retail": { "enabled": true, "price": 14000, "stock": null },
     "wholesale": {
       "enabled": true,
       "minQty": 10,
       "tiers": [
-        { "minQty": 10, "maxQty": 29, "price": 13000 },
-        { "minQty": 30, "maxQty": 59, "price": 12000 },
-        { "minQty": 60, "maxQty": null, "price": 10500 }
-      ]
-    }
-  },
-  {
-    "id": "crocs-unisex-clogs",
-    "title": "Crocs Classic Unisex Clogs",
-    "price": 15000,
-    "location": "Kaduna",
-    "date": "",
-    "category": "fashion",
-    "boosted": true,
-    "featured": true,
-    "description": "Once you wear these, you'll wonder why you ever bothered with anything else. The classic black clogs, with that sporty white stripe, breathable holes, and a pivoting strap you can flip forward or back depending on your mood. Light, comfortable, and they go with everything. For men, women, and anyone who values an easy day.",
-    "tags": ["crocs", "clogs", "unisex", "footwear", "slippers", "comfortable"],
-    "images": [
-      "https://lh3.googleusercontent.com/d/1EprMMGEtPI_uuXUvTo66KS5LYtzgNH44"
-    ],
-    "seller": {
-      "name": "Zaure Official Store",
-      "initials": "ZA",
-      "verified": true,
-      "joined": "2026",
-      "listings": 13,
-      "rating": 5.0,
-      "sales": 800,
-      "response": "100%",
-      "bio": "Welcome to the official Zaure store. Discover featured products, exclusive deals, and trusted services from Nigeria's most reliable marketplace.",
-      "phone": "09042339411",
-      "whatsapp": "09042339411"
-    },
-    "retail": { "enabled": true, "price": 15000, "stock": null },
-    "wholesale": {
-      "enabled": true,
-      "minQty": 10,
-      "tiers": [
-        { "minQty": 10, "maxQty": 29, "price": 13000 },
-        { "minQty": 30, "maxQty": 59, "price": 11500 },
-        { "minQty": 60, "maxQty": null, "price": 10000 }
-      ]
-    }
-  },
-  {
-    "id": "nike-black-socks-pack",
-    "title": "Nike Everyday Cushion Black Socks (Pack of 3)",
-    "price": 700,
-    "location": "Kaduna",
-    "date": "",
-    "category": "fashion",
-    "boosted": false,
-    "featured": false,
-    "description": "Three pairs of the socks you actually reach for in the morning. Soft cotton, cushioned sole for comfort on long days, and they hold their shape after every wash. Black goes with everything — office, gym, or a pair of slippers at home. One size fits most.",
-    "tags": ["socks", "nike", "black", "pack", "fashion", "men"],
-    "images": [
-      "https://lh3.googleusercontent.com/d/1WYvmshtQuZzYO7kvsgOGaASs39AI3qAi"
-    ],
-    "seller": {
-      "name": "Zaure Official Store",
-      "initials": "ZA",
-      "verified": true,
-      "joined": "2026",
-      "listings": 13,
-      "rating": 5.0,
-      "sales": 800,
-      "response": "100%",
-      "bio": "Welcome to the official Zaure store. Discover featured products, exclusive deals, and trusted services from Nigeria's most reliable marketplace.",
-      "phone": "09042339411",
-      "whatsapp": "09042339411"
-    },
-    "retail": { "enabled": true, "price": 700, "stock": null },
-    "wholesale": {
-      "enabled": true,
-      "minQty": 50,
-      "tiers": [
-        { "minQty": 50, "maxQty": 199, "price": 550 },
-        { "minQty": 200, "maxQty": 499, "price": 450 },
-        { "minQty": 500, "maxQty": null, "price": 380 }
+        { "minQty": 10, "maxQty": 49, "price": 12500 },
+        { "minQty": 50, "maxQty": 99, "price": 11500 },
+        { "minQty": 100, "maxQty": null, "price": 10500 }
       ]
     }
   }
