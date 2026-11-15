@@ -8,7 +8,7 @@
     "location": "Nigeria",
     "profilePic": "https://i.imgur.com/HEkP9c2.jpeg",
     "coverImage": "https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=1200&h=400&fit=crop&q=80",
-    "bio": "This is our store — the one we check every morning before anything else. Featured products, hand-picked deals, and trusted services from across Nigeria, all in one place. If you're new to Zaure, start here. Everything you see has been chosen by us personally.",
+    "bio": "This is our store — the one we check every morning before anything else. Featured products, hand-picked deals, and trusted services from across Nigeria, all in one place.",
     "phone": "09042339411",
     "whatsapp": "09042339411",
     "rating": 5.0,
@@ -17,16 +17,11 @@
     "response": "100%",
     "responseTime": "under 1 hour",
     "joined": "2026",
-    "verification": {
-      "phone": true,
-      "email": true,
-      "id": true,
-      "address": true
-    },
+    "verification": { "phone": true, "email": true, "id": true, "address": true },
     "policies": {
       "returns": "7-day returns on any item that doesn't match its description. We cover return shipping.",
       "shipping": "Nationwide delivery in 2–5 business days. Free shipping on orders over ₦50,000.",
-      "warranty": "Full buyer protection on every order placed through Zaure Official. We stand behind every product."
+      "warranty": "Full buyer protection on every order placed through Zaure Official."
     }
   },
   {
@@ -47,16 +42,11 @@
     "response": "100%",
     "responseTime": "within 2 hours",
     "joined": "2026",
-    "verification": {
-      "phone": true,
-      "email": true,
-      "id": true,
-      "address": false
-    },
+    "verification": { "phone": true, "email": true, "id": true, "address": false },
     "policies": {
       "returns": "14-day returns accepted if the product is unopened and in original packaging.",
       "shipping": "Dispatched within 24 hours. Delivery in 2–4 days across Nigeria.",
-      "warranty": "Every El product is guaranteed against manufacturing defects. Contact us and we'll make it right."
+      "warranty": "Every El product is guaranteed against manufacturing defects."
     }
   },
   {
@@ -68,7 +58,7 @@
     "location": "Kaduna",
     "profilePic": "https://images.unsplash.com/photo-1584990347449-a2d4a41d2026?w=200&h=200&fit=crop&q=80",
     "coverImage": "https://images.unsplash.com/photo-1556909212-d5b604d0c90d?w=1200&h=400&fit=crop&q=80",
-    "bio": "We're a small Kaduna family business that takes kitchenware seriously. Glass jugs that don't crack, cookware that lasts, and the everyday tools that make cooking easier. Every item is one we'd use ourselves. Delivered carefully across Northern Nigeria — most of our customers come back a second time.",
+    "bio": "We're a small Kaduna family business that takes kitchenware seriously. Glass jugs that don't crack, cookware that lasts, and the everyday tools that make cooking easier.",
     "phone": "09042339411",
     "whatsapp": "09042339411",
     "rating": 4.8,
@@ -77,16 +67,111 @@
     "response": "97%",
     "responseTime": "within 4 hours",
     "joined": "2026",
-    "verification": {
-      "phone": true,
-      "email": true,
-      "id": false,
-      "address": true
-    },
+    "verification": { "phone": true, "email": true, "id": false, "address": true },
     "policies": {
       "returns": "Returns accepted within 3 days if the item arrives damaged. Send us a photo and we'll replace it.",
       "shipping": "Careful packaging and hand delivery within Kaduna. Courier to Abuja, Kano, and Jos in 2–3 days.",
       "warranty": "All glassware is inspected before dispatch. If anything arrives cracked, we replace it free."
+    }
+  },
+  {
+    "id": "arewa-cloth-house",
+    "name": "Arewa Cloth House",
+    "initials": "AC",
+    "badge": "verified",
+    "category": "fashion",
+    "location": "Kaduna",
+    "profilePic": "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=200&h=200&fit=crop&q=80",
+    "coverImage": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=400&fit=crop&q=80",
+    "bio": "Northern Nigerian cloth house weaving and importing the fabrics that shape how our region dresses. Ankara, lace, adire, aso-oke, senator — everything a tailor, boutique, or wedding planner needs, direct from source.",
+    "phone": "09042339411",
+    "whatsapp": "09042339411",
+    "rating": 4.9,
+    "sales": 240,
+    "followers": 512,
+    "response": "98%",
+    "responseTime": "within 3 hours",
+    "joined": "2026",
+    "verification": { "phone": true, "email": true, "id": true, "address": true },
+    "policies": {
+      "returns": "Fabric can be returned uncut within 7 days for a full refund. No returns on cut fabric.",
+      "shipping": "Nationwide courier in 2–4 days. Kaduna hand delivery available.",
+      "warranty": "All fabrics inspected before dispatch. Colour-fastness guaranteed on traditional weaves."
+    }
+  },
+  {
+    "id": "arewa-leather-works",
+    "name": "Arewa Leather Works",
+    "initials": "AL",
+    "badge": "verified",
+    "category": "fashion",
+    "location": "Kaduna",
+    "profilePic": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=200&h=200&fit=crop&q=80",
+    "coverImage": "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=1200&h=400&fit=crop&q=80",
+    "bio": "Handmade leather goods from Northern Nigeria. Belts, sandals, wallets, and bags cut, stitched, and finished by craftsmen — not factories. Every piece you buy supports a real workshop.",
+    "phone": "09042339411",
+    "whatsapp": "09042339411",
+    "rating": 4.9,
+    "sales": 178,
+    "followers": 394,
+    "response": "99%",
+    "responseTime": "within 2 hours",
+    "joined": "2026",
+    "verification": { "phone": true, "email": true, "id": true, "address": true },
+    "policies": {
+      "returns": "7-day returns on unworn items in original condition.",
+      "shipping": "Hand delivery within Kaduna. Courier nationwide in 3–5 days.",
+      "warranty": "Real leather backed by a 6-month stitching guarantee. Free repairs on defects."
+    }
+  },
+  {
+    "id": "kaduna-power-components",
+    "name": "Kaduna Power Components",
+    "initials": "KP",
+    "badge": "verified",
+    "category": "electronics",
+    "location": "Kaduna",
+    "profilePic": "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=200&h=200&fit=crop&q=80",
+    "coverImage": "https://images.unsplash.com/photo-1497440001374-f26997328c1b?w=1200&h=400&fit=crop&q=80",
+    "bio": "Manufacturer of solar lighting and power accessories in Kaduna. Selling direct to shops, traders, and businesses who need reliable power that doesn't wait for NEPA.",
+    "phone": "09042339411",
+    "whatsapp": "09042339411",
+    "rating": 4.7,
+    "sales": 156,
+    "followers": 287,
+    "response": "96%",
+    "responseTime": "within 3 hours",
+    "joined": "2026",
+    "verification": { "phone": true, "email": true, "id": true, "address": true },
+    "policies": {
+      "returns": "7-day returns on faulty items. We cover return shipping on defective goods.",
+      "shipping": "Nationwide dispatch in 3–5 days. Bulk orders get priority logistics.",
+      "warranty": "6-month warranty on all solar products. Panels have a 10-year performance warranty."
+    }
+  },
+  {
+    "id": "kaduna-agro-foods",
+    "name": "Kaduna Agro Foods",
+    "initials": "KA",
+    "badge": "verified",
+    "category": "food-drinks",
+    "location": "Kaduna",
+    "profilePic": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=200&h=200&fit=crop&q=80",
+    "coverImage": "https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=1200&h=400&fit=crop&q=80",
+    "bio": "Food processor and agro supplier from Northern Nigeria. Groundnut oil, honey, sesame, hibiscus — sourced from local farmers and processed at origin.",
+    "phone": "09042339411",
+    "whatsapp": "09042339411",
+    "rating": 4.8,
+    "sales": 89,
+    "followers": 214,
+    "response": "98%",
+    "responseTime": "within 4 hours",
+    "joined": "2026",
+    "verification": { "phone": true, "email": true, "id": true, "address": true },
+    "policies": {
+      "returns": "No returns on food items unless tampered packaging or confirmed defect.",
+      "shipping": "Nationwide courier. Cold-chain not required for our oil and honey products.",
+      "warranty": "Every batch is quality-checked before dispatch. Report any issue within 48 hours."
     }
   }
 ]
