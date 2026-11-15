@@ -1,443 +1,81 @@
 [
-  {
-    "id": "solar-rechargeable-lantern",
-    "title": "Solar Rechargeable Lantern (Manufacturer Direct)",
-    "price": 6500,
-    "location": "Kaduna",
-    "date": "",
-    "category": "electronics",
-    "boosted": true,
-    "featured": true,
-    "description": "Light that doesn't depend on NEPA. Charges in the sun or by USB, gives bright light for the evening, and can charge a phone in a pinch. Built for shops, homes, and traders who can't afford to sit in the dark. Buy direct from the manufacturer and get carton prices.",
-    "tags": ["solar", "lantern", "lighting", "rechargeable", "electronics", "manufacturer"],
-    "images": ["https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80"],
-    "sellerId": "zaure",
-    "seller": {
-      "id": "zaure",
-      "name": "Zaure Official Store",
-      "initials": "ZA",
-      "badge": "official",
-      "category": "marketplace",
-      "location": "Nigeria",
-      "profilePic": "https://i.imgur.com/HEkP9c2.jpeg",
-      "coverImage": "https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=1200&h=400&fit=crop&q=80",
-      "bio": "This is our store — the one we check every morning before anything else. Featured products, hand-picked deals, and trusted services from across Nigeria, all in one place. If you're new to Zaure, start here. Everything you see has been chosen by us personally.",
-      "phone": "09042339411",
-      "whatsapp": "09042339411",
-      "rating": 5.0,
-      "sales": 1200,
-      "followers": 2450,
-      "response": "100%",
-      "responseTime": "under 1 hour",
-      "joined": "2026",
-      "verification": { "phone": true, "email": true, "id": true, "address": true },
-      "policies": {
-        "returns": "7-day returns on any item that doesn't match its description. We cover return shipping.",
-        "shipping": "Nationwide delivery in 2–5 business days. Free shipping on orders over ₦50,000.",
-        "warranty": "Full buyer protection on every order placed through Zaure Official. We stand behind every product."
-      }
-    },
-    "retail": { "enabled": true, "price": 6500, "stock": null },
-    "wholesale": {
-      "enabled": true,
-      "minQty": 20,
-      "tiers": [
-        { "minQty": 20, "maxQty": 49, "price": 5500 },
-        { "minQty": 50, "maxQty": 99, "price": 5000 },
-        { "minQty": 100, "maxQty": null, "price": 4500 }
-      ]
-    }
-  },
-  {
-    "id": "handmade-leather-belt",
-    "title": "Handmade Leather Belt (Factory Price)",
-    "price": 3500,
-    "location": "Kaduna",
-    "date": "",
-    "category": "fashion",
-    "boosted": false,
-    "featured": false,
-    "description": "Cut, stitched, and finished by hand in Northern Nigeria. Real leather, solid buckle, and a strong stitch that holds up to daily wear. Comes in black or brown, sizes 32 to 42. Ideal for boutiques, uniform suppliers, and resellers who want better margins than market-bought stock.",
-    "tags": ["belt", "leather", "handmade", "fashion", "accessories"],
-    "images": ["https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&q=80"],
-    "sellerId": "el",
-    "seller": {
-      "id": "el",
-      "name": "El",
-      "initials": "EL",
-      "badge": "official",
-      "category": "brand",
-      "location": "Kaduna",
-      "profilePic": "https://i.imgur.com/L9Wlvax.jpeg",
-      "coverImage": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1200&h=400&fit=crop&q=80",
-      "bio": "El started with a simple idea: everyday things deserve to be made well. Shoe polish that actually protects. Shampoo that actually cleans. Products built for Nigerian leather, Nigerian hair, Nigerian weather. One name. Every detail.",
-      "phone": "09042339411",
-      "whatsapp": "09042339411",
-      "rating": 5.0,
-      "sales": 0,
-      "followers": 128,
-      "response": "100%",
-      "responseTime": "within 2 hours",
-      "joined": "2026",
-      "verification": { "phone": true, "email": true, "id": true, "address": false },
-      "policies": {
-        "returns": "14-day returns accepted if the product is unopened and in original packaging.",
-        "shipping": "Dispatched within 24 hours. Delivery in 2–4 days across Nigeria.",
-        "warranty": "Every El product is guaranteed against manufacturing defects. Contact us and we'll make it right."
-      }
-    },
-    "retail": { "enabled": true, "price": 3500, "stock": null },
-    "wholesale": {
-      "enabled": true,
-      "minQty": 20,
-      "tiers": [
-        { "minQty": 20, "maxQty": 49, "price": 3000 },
-        { "minQty": 50, "maxQty": 99, "price": 2600 },
-        { "minQty": 100, "maxQty": null, "price": 2200 }
-      ]
-    }
-  },
-  {
-    "id": "hand-embroidered-hausa-cap",
-    "title": "Hand-Embroidered Hausa Cap (Hula)",
-    "price": 4000,
-    "location": "Kaduna",
-    "date": "",
-    "category": "fashion",
-    "boosted": false,
-    "featured": false,
-    "description": "The cap that goes with every kaftan. Neat embroidery, firm shape, and a comfortable fit for Friday prayers, weddings, and everyday wear. Made by our tailors in Kaduna, not middlemen, so you get real factory pricing. Available in different colours and embroidery styles.",
-    "tags": ["cap", "hula", "hausa", "embroidery", "fashion"],
-    "images": ["https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=800&q=80"],
-    "sellerId": "el",
-    "seller": {
-      "id": "el",
-      "name": "El",
-      "initials": "EL",
-      "badge": "official",
-      "category": "brand",
-      "location": "Kaduna",
-      "profilePic": "https://i.imgur.com/L9Wlvax.jpeg",
-      "coverImage": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1200&h=400&fit=crop&q=80",
-      "bio": "El started with a simple idea: everyday things deserve to be made well. Shoe polish that actually protects. Shampoo that actually cleans. Products built for Nigerian leather, Nigerian hair, Nigerian weather. One name. Every detail.",
-      "phone": "09042339411",
-      "whatsapp": "09042339411",
-      "rating": 5.0,
-      "sales": 0,
-      "followers": 128,
-      "response": "100%",
-      "responseTime": "within 2 hours",
-      "joined": "2026",
-      "verification": { "phone": true, "email": true, "id": true, "address": false },
-      "policies": {
-        "returns": "14-day returns accepted if the product is unopened and in original packaging.",
-        "shipping": "Dispatched within 24 hours. Delivery in 2–4 days across Nigeria.",
-        "warranty": "Every El product is guaranteed against manufacturing defects. Contact us and we'll make it right."
-      }
-    },
-    "retail": { "enabled": true, "price": 4000, "stock": null },
-    "wholesale": {
-      "enabled": true,
-      "minQty": 20,
-      "tiers": [
-        { "minQty": 20, "maxQty": 49, "price": 3400 },
-        { "minQty": 50, "maxQty": 99, "price": 3000 },
-        { "minQty": 100, "maxQty": null, "price": 2600 }
-      ]
-    }
-  },
-  {
-    "id": "plain-cotton-tshirt-bulk",
-    "title": "Plain Cotton T-Shirts (Bulk, Ready to Print)",
-    "price": 2500,
-    "location": "Kaduna",
-    "date": "",
-    "category": "fashion",
-    "boosted": true,
-    "featured": true,
-    "description": "Blank, soft, and ready for your logo. Made for printers, schools, event organisers, and clothing brands that need steady supply at a fair price. Round neck, assorted colours, sizes S to XXL. Order by the dozen or by the hundred.",
-    "tags": ["t-shirt", "cotton", "blank", "bulk", "printing"],
-    "images": ["https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80"],
-    "sellerId": "el",
-    "seller": {
-      "id": "el",
-      "name": "El",
-      "initials": "EL",
-      "badge": "official",
-      "category": "brand",
-      "location": "Kaduna",
-      "profilePic": "https://i.imgur.com/L9Wlvax.jpeg",
-      "coverImage": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1200&h=400&fit=crop&q=80",
-      "bio": "El started with a simple idea: everyday things deserve to be made well. Shoe polish that actually protects. Shampoo that actually cleans. Products built for Nigerian leather, Nigerian hair, Nigerian weather. One name. Every detail.",
-      "phone": "09042339411",
-      "whatsapp": "09042339411",
-      "rating": 5.0,
-      "sales": 0,
-      "followers": 128,
-      "response": "100%",
-      "responseTime": "within 2 hours",
-      "joined": "2026",
-      "verification": { "phone": true, "email": true, "id": true, "address": false },
-      "policies": {
-        "returns": "14-day returns accepted if the product is unopened and in original packaging.",
-        "shipping": "Dispatched within 24 hours. Delivery in 2–4 days across Nigeria.",
-        "warranty": "Every El product is guaranteed against manufacturing defects. Contact us and we'll make it right."
-      }
-    },
-    "retail": { "enabled": true, "price": 2500, "stock": null },
-    "wholesale": {
-      "enabled": true,
-      "minQty": 50,
-      "tiers": [
-        { "minQty": 50, "maxQty": 199, "price": 2000 },
-        { "minQty": 200, "maxQty": 499, "price": 1700 },
-        { "minQty": 500, "maxQty": null, "price": 1450 }
-      ]
-    }
-  },
-  {
-    "id": "rubber-slippers-bulk",
-    "title": "Locally Made Rubber Slippers (Carton Price)",
-    "price": 1800,
-    "location": "Kaduna",
-    "date": "",
-    "category": "fashion",
-    "boosted": false,
-    "featured": false,
-    "description": "Light, durable, and made for Nigerian roads and compounds. Soft footbed, non-slip sole, and strong enough to last past the rainy season. Assorted sizes and colours, packed by the carton. A fast-moving item for shops, market traders, and distributors.",
-    "tags": ["slippers", "rubber", "footwear", "bulk", "everyday"],
-    "images": ["https://images.unsplash.com/photo-1603487742131-4160ec999306?w=800&q=80"],
-    "sellerId": "el",
-    "seller": {
-      "id": "el",
-      "name": "El",
-      "initials": "EL",
-      "badge": "official",
-      "category": "brand",
-      "location": "Kaduna",
-      "profilePic": "https://i.imgur.com/L9Wlvax.jpeg",
-      "coverImage": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1200&h=400&fit=crop&q=80",
-      "bio": "El started with a simple idea: everyday things deserve to be made well. Shoe polish that actually protects. Shampoo that actually cleans. Products built for Nigerian leather, Nigerian hair, Nigerian weather. One name. Every detail.",
-      "phone": "09042339411",
-      "whatsapp": "09042339411",
-      "rating": 5.0,
-      "sales": 0,
-      "followers": 128,
-      "response": "100%",
-      "responseTime": "within 2 hours",
-      "joined": "2026",
-      "verification": { "phone": true, "email": true, "id": true, "address": false },
-      "policies": {
-        "returns": "14-day returns accepted if the product is unopened and in original packaging.",
-        "shipping": "Dispatched within 24 hours. Delivery in 2–4 days across Nigeria.",
-        "warranty": "Every El product is guaranteed against manufacturing defects. Contact us and we'll make it right."
-      }
-    },
-    "retail": { "enabled": true, "price": 1800, "stock": null },
-    "wholesale": {
-      "enabled": true,
-      "minQty": 50,
-      "tiers": [
-        { "minQty": 50, "maxQty": 199, "price": 1400 },
-        { "minQty": 200, "maxQty": 499, "price": 1200 },
-        { "minQty": 500, "maxQty": null, "price": 1000 }
-      ]
-    }
-  },
-  {
-    "id": "handcrafted-leather-sandals",
-    "title": "Handcrafted Leather Sandals (Men)",
-    "price": 12000,
-    "location": "Kaduna",
-    "date": "",
-    "category": "fashion",
-    "boosted": false,
-    "featured": false,
-    "description": "Real leather sandals made by Northern Nigerian craftsmen. Comfortable from the first wear, strong enough for years, and finished the way customers expect. Brown or black, sizes 40 to 45. Buy direct from the workshop for boutiques, shoe shops, and gift orders.",
-    "tags": ["sandals", "leather", "handmade", "men", "footwear"],
-    "images": ["https://images.unsplash.com/photo-1603487742131-4160ec999306?w=800&q=80"],
-    "sellerId": "el",
-    "seller": {
-      "id": "el",
-      "name": "El",
-      "initials": "EL",
-      "badge": "official",
-      "category": "brand",
-      "location": "Kaduna",
-      "profilePic": "https://i.imgur.com/L9Wlvax.jpeg",
-      "coverImage": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1200&h=400&fit=crop&q=80",
-      "bio": "El started with a simple idea: everyday things deserve to be made well. Shoe polish that actually protects. Shampoo that actually cleans. Products built for Nigerian leather, Nigerian hair, Nigerian weather. One name. Every detail.",
-      "phone": "09042339411",
-      "whatsapp": "09042339411",
-      "rating": 5.0,
-      "sales": 0,
-      "followers": 128,
-      "response": "100%",
-      "responseTime": "within 2 hours",
-      "joined": "2026",
-      "verification": { "phone": true, "email": true, "id": true, "address": false },
-      "policies": {
-        "returns": "14-day returns accepted if the product is unopened and in original packaging.",
-        "shipping": "Dispatched within 24 hours. Delivery in 2–4 days across Nigeria.",
-        "warranty": "Every El product is guaranteed against manufacturing defects. Contact us and we'll make it right."
-      }
-    },
-    "retail": { "enabled": true, "price": 12000, "stock": null },
-    "wholesale": {
-      "enabled": true,
-      "minQty": 10,
-      "tiers": [
-        { "minQty": 10, "maxQty": 29, "price": 10000 },
-        { "minQty": 30, "maxQty": 59, "price": 9000 },
-        { "minQty": 60, "maxQty": null, "price": 8000 }
-      ]
-    }
-  },
-  {
-    "id": "heavy-duty-extension-socket",
-    "title": "Heavy-Duty 4-Way Extension Socket (3m)",
-    "price": 5000,
-    "location": "Kaduna",
-    "date": "",
-    "category": "electronics",
-    "boosted": false,
-    "featured": false,
-    "description": "A thick, durable cable and four sockets that don't loosen after a month. Built for shops, offices, and homes that run several devices at once. Order direct from the manufacturer for contractors, electrical shops, and office suppliers.",
-    "tags": ["extension", "socket", "power strip", "electrical", "electronics"],
-    "images": ["https://images.unsplash.com/photo-1591290619762-c588f2cd2d31?w=800&q=80"],
-    "sellerId": "zaure",
-    "seller": {
-      "id": "zaure",
-      "name": "Zaure Official Store",
-      "initials": "ZA",
-      "badge": "official",
-      "category": "marketplace",
-      "location": "Nigeria",
-      "profilePic": "https://i.imgur.com/HEkP9c2.jpeg",
-      "coverImage": "https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=1200&h=400&fit=crop&q=80",
-      "bio": "This is our store — the one we check every morning before anything else. Featured products, hand-picked deals, and trusted services from across Nigeria, all in one place. If you're new to Zaure, start here. Everything you see has been chosen by us personally.",
-      "phone": "09042339411",
-      "whatsapp": "09042339411",
-      "rating": 5.0,
-      "sales": 1200,
-      "followers": 2450,
-      "response": "100%",
-      "responseTime": "under 1 hour",
-      "joined": "2026",
-      "verification": { "phone": true, "email": true, "id": true, "address": true },
-      "policies": {
-        "returns": "7-day returns on any item that doesn't match its description. We cover return shipping.",
-        "shipping": "Nationwide delivery in 2–5 business days. Free shipping on orders over ₦50,000.",
-        "warranty": "Full buyer protection on every order placed through Zaure Official. We stand behind every product."
-      }
-    },
-    "retail": { "enabled": true, "price": 5000, "stock": null },
-    "wholesale": {
-      "enabled": true,
-      "minQty": 20,
-      "tiers": [
-        { "minQty": 20, "maxQty": 49, "price": 4200 },
-        { "minQty": 50, "maxQty": 99, "price": 3800 },
-        { "minQty": 100, "maxQty": null, "price": 3400 }
-      ]
-    }
-  },
-  {
-    "id": "plastic-bucket-20l-lid",
-    "title": "Plastic Bucket with Lid (20 Litres)",
-    "price": 3500,
-    "location": "Kaduna",
-    "date": "",
-    "category": "household",
-    "boosted": true,
-    "featured": true,
-    "description": "A strong, thick-walled bucket for water, storage, paint, and food-safe use. Tight-fitting lid, sturdy handle, and made to survive daily use. Sold direct from the factory for households, hotels, caterers, and distributors who buy in volume.",
-    "tags": ["bucket", "plastic", "storage", "household", "water"],
-    "images": ["https://images.unsplash.com/photo-1583947215259-38e31be8751f?w=800&q=80"],
-    "sellerId": "teema-kitchenwares",
-    "seller": {
-      "id": "teema-kitchenwares",
-      "name": "Teema Kitchenwares",
-      "initials": "TK",
-      "badge": "verified",
-      "category": "home-kitchen",
-      "location": "Kaduna",
-      "profilePic": "https://images.unsplash.com/photo-1584990347449-a2d4a41d2026?w=200&h=200&fit=crop&q=80",
-      "coverImage": "https://images.unsplash.com/photo-1556909212-d5b604d0c90d?w=1200&h=400&fit=crop&q=80",
-      "bio": "We're a small Kaduna family business that takes kitchenware seriously. Glass jugs that don't crack, cookware that lasts, and the everyday tools that make cooking easier. Every item is one we'd use ourselves. Delivered carefully across Northern Nigeria — most of our customers come back a second time.",
-      "phone": "09042339411",
-      "whatsapp": "09042339411",
-      "rating": 4.8,
-      "sales": 85,
-      "followers": 342,
-      "response": "97%",
-      "responseTime": "within 4 hours",
-      "joined": "2026",
-      "verification": { "phone": true, "email": true, "id": false, "address": true },
-      "policies": {
-        "returns": "Returns accepted within 3 days if the item arrives damaged. Send us a photo and we'll replace it.",
-        "shipping": "Careful packaging and hand delivery within Kaduna. Courier to Abuja, Kano, and Jos in 2–3 days.",
-        "warranty": "All glassware is inspected before dispatch. If anything arrives cracked, we replace it free."
-      }
-    },
-    "retail": { "enabled": true, "price": 3500, "stock": null },
-    "wholesale": {
-      "enabled": true,
-      "minQty": 20,
-      "tiers": [
-        { "minQty": 20, "maxQty": 49, "price": 2900 },
-        { "minQty": 50, "maxQty": 99, "price": 2600 },
-        { "minQty": 100, "maxQty": null, "price": 2300 }
-      ]
-    }
-  },
-  {
-    "id": "pure-groundnut-oil-5l",
-    "title": "Pure Groundnut Oil (5 Litres)",
-    "price": 14000,
-    "location": "Kaduna",
-    "date": "",
-    "category": "food-agriculture",
-    "boosted": false,
-    "featured": false,
-    "description": "Pressed from Northern Nigerian groundnuts and packed at source. Clean taste, golden colour, and the kind of oil that makes suya spice, fried snacks, and everyday soups taste right. Buy by the carton for restaurants, caterers, retailers, and food sellers.",
-    "tags": ["groundnut oil", "cooking oil", "food", "agriculture", "bulk"],
-    "images": ["https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=800&q=80"],
-    "sellerId": "zaure",
-    "seller": {
-      "id": "zaure",
-      "name": "Zaure Official Store",
-      "initials": "ZA",
-      "badge": "official",
-      "category": "marketplace",
-      "location": "Nigeria",
-      "profilePic": "https://i.imgur.com/HEkP9c2.jpeg",
-      "coverImage": "https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=1200&h=400&fit=crop&q=80",
-      "bio": "This is our store — the one we check every morning before anything else. Featured products, hand-picked deals, and trusted services from across Nigeria, all in one place. If you're new to Zaure, start here. Everything you see has been chosen by us personally.",
-      "phone": "09042339411",
-      "whatsapp": "09042339411",
-      "rating": 5.0,
-      "sales": 1200,
-      "followers": 2450,
-      "response": "100%",
-      "responseTime": "under 1 hour",
-      "joined": "2026",
-      "verification": { "phone": true, "email": true, "id": true, "address": true },
-      "policies": {
-        "returns": "7-day returns on any item that doesn't match its description. We cover return shipping.",
-        "shipping": "Nationwide delivery in 2–5 business days. Free shipping on orders over ₦50,000.",
-        "warranty": "Full buyer protection on every order placed through Zaure Official. We stand behind every product."
-      }
-    },
-    "retail": { "enabled": true, "price": 14000, "stock": null },
-    "wholesale": {
-      "enabled": true,
-      "minQty": 10,
-      "tiers": [
-        { "minQty": 10, "maxQty": 49, "price": 12500 },
-        { "minQty": 50, "maxQty": 99, "price": 11500 },
-        { "minQty": 100, "maxQty": null, "price": 10500 }
-      ]
-    }
-  }
+  { "id": "solar-rechargeable-lantern", "title": "Solar Rechargeable Lantern (Manufacturer Direct)", "price": 6500, "location": "Kaduna", "date": "", "category": "electronics", "boosted": true, "featured": true, "description": "Light that doesn't depend on NEPA. Charges in the sun or by USB, gives bright light for the evening, and can charge a phone in a pinch. Built for shops, homes, and traders who can't afford to sit in the dark.", "tags": ["solar", "lantern", "lighting", "rechargeable", "electronics"], "images": ["https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80"], "seller": { "id": "zaure", "name": "Zaure Official Store", "initials": "ZA", "badge": "official", "phone": "09042339411", "whatsapp": "09042339411" }, "retail": { "enabled": true, "price": 6500, "stock": null }, "wholesale": { "enabled": true, "minQty": 20, "tiers": [ { "minQty": 20, "maxQty": 49, "price": 5500 }, { "minQty": 50, "maxQty": 99, "price": 5000 }, { "minQty": 100, "maxQty": null, "price": 4500 } ] } },
+
+  { "id": "heavy-duty-extension-socket", "title": "Heavy-Duty 4-Way Extension Socket (3m)", "price": 5000, "location": "Kaduna", "date": "", "category": "electronics", "boosted": false, "featured": false, "description": "A thick, durable cable and four sockets that don't loosen after a month. Built for shops, offices, and homes that run several devices at once.", "tags": ["extension", "socket", "power strip", "electrical"], "images": ["https://images.unsplash.com/photo-1591290619762-c588f2cd2d31?w=800&q=80"], "seller": { "id": "zaure", "name": "Zaure Official Store", "initials": "ZA", "badge": "official", "phone": "09042339411", "whatsapp": "09042339411" }, "retail": { "enabled": true, "price": 5000, "stock": null }, "wholesale": { "enabled": true, "minQty": 20, "tiers": [ { "minQty": 20, "maxQty": 49, "price": 4200 }, { "minQty": 50, "maxQty": 99, "price": 3800 }, { "minQty": 100, "maxQty": null, "price": 3400 } ] } },
+
+  { "id": "wireless-earbuds", "title": "Wireless Bluetooth Earbuds with Charging Case", "price": 25000, "location": "Kaduna", "date": "", "category": "electronics", "boosted": true, "featured": false, "description": "True wireless earbuds with 24-hour battery life, noise cancellation, and touch controls. Ideal for retail shops and phone accessory resellers.", "tags": ["earbuds", "bluetooth", "wireless", "audio"], "images": ["https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=800&q=80"], "seller": { "id": "zaure", "name": "Zaure Official Store", "initials": "ZA", "badge": "official", "phone": "09042339411", "whatsapp": "09042339411" }, "retail": { "enabled": true, "price": 25000, "stock": null }, "wholesale": { "enabled": true, "minQty": 10, "tiers": [ { "minQty": 10, "maxQty": 49, "price": 20000 }, { "minQty": 50, "maxQty": 99, "price": 17000 }, { "minQty": 100, "maxQty": null, "price": 15000 } ] } },
+
+  { "id": "power-bank-20000", "title": "20,000mAh Fast-Charging Power Bank", "price": 18000, "location": "Kaduna", "date": "", "category": "electronics", "boosted": false, "featured": false, "description": "Charges a phone 3–4 times on a single fill. Dual USB ports, fast-charging support, and a durable shell that survives a drop. Perfect for travellers, field workers, and anyone tired of dead batteries.", "tags": ["power bank", "charger", "battery", "electronics"], "images": ["https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?w=800&q=80"], "seller": { "id": "zaure", "name": "Zaure Official Store", "initials": "ZA", "badge": "official", "phone": "09042339411", "whatsapp": "09042339411" }, "retail": { "enabled": true, "price": 18000, "stock": null }, "wholesale": { "enabled": true, "minQty": 10, "tiers": [ { "minQty": 10, "maxQty": 49, "price": 15000 }, { "minQty": 50, "maxQty": 99, "price": 13000 }, { "minQty": 100, "maxQty": null, "price": 11000 } ] } },
+
+  { "id": "bluetooth-speaker", "title": "Portable Bluetooth Speaker", "price": 15000, "location": "Kaduna", "date": "", "category": "electronics", "boosted": false, "featured": false, "description": "Punchy bass, clear vocals, and a waterproof shell that handles rain and dust. Five hours of playtime, quick charge, and a compact size that fits in any bag.", "tags": ["speaker", "bluetooth", "audio", "portable"], "images": ["https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=800&q=80"], "seller": { "id": "zaure", "name": "Zaure Official Store", "initials": "ZA", "badge": "official", "phone": "09042339411", "whatsapp": "09042339411" }, "retail": { "enabled": true, "price": 15000, "stock": null }, "wholesale": { "enabled": true, "minQty": 10, "tiers": [ { "minQty": 10, "maxQty": 49, "price": 12000 }, { "minQty": 50, "maxQty": 99, "price": 10000 }, { "minQty": 100, "maxQty": null, "price": 8500 } ] } },
+
+  { "id": "el-shoe-polish-black", "title": "El Shoe Polish — Black", "price": 1500, "location": "Kaduna", "date": "", "category": "beauty-health", "boosted": true, "featured": true, "description": "Made for Northern Nigerian leather. Trusted by cobblers, imams, bankers, and anyone who takes their shoes seriously. A deep, honest shine that lasts through the day, protects against dust and cracks, and brings old leather back to life.", "tags": ["shoe polish", "el", "black", "leather care"], "images": ["https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=800&q=80"], "seller": { "id": "el", "name": "El", "initials": "EL", "badge": "official", "phone": "09042339411", "whatsapp": "09042339411" }, "retail": { "enabled": true, "price": 1500, "stock": null }, "wholesale": { "enabled": true, "minQty": 20, "tiers": [ { "minQty": 20, "maxQty": 49, "price": 1200 }, { "minQty": 50, "maxQty": 99, "price": 1000 }, { "minQty": 100, "maxQty": null, "price": 850 } ] } },
+
+  { "id": "el-shoe-polish-brown", "title": "El Shoe Polish — Brown", "price": 1500, "location": "Kaduna", "date": "", "category": "beauty-health", "boosted": false, "featured": false, "description": "For the brown shoes that deserve better than they get. Brings back the deep, warm colour and shine that fades after weeks of wear. Made for Hausa leather, works on any brown or tan shoe.", "tags": ["shoe polish", "el", "brown", "leather care"], "images": ["https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=800&q=80"], "seller": { "id": "el", "name": "El", "initials": "EL", "badge": "official", "phone": "09042339411", "whatsapp": "09042339411" }, "retail": { "enabled": true, "price": 1500, "stock": null }, "wholesale": { "enabled": true, "minQty": 20, "tiers": [ { "minQty": 20, "maxQty": 49, "price": 1200 }, { "minQty": 50, "maxQty": 99, "price": 1000 }, { "minQty": 100, "maxQty": null, "price": 850 } ] } },
+
+  { "id": "el-shoe-polish-neutral", "title": "El Shoe Polish — Neutral", "price": 1500, "location": "Kaduna", "date": "", "category": "beauty-health", "boosted": false, "featured": false, "description": "Colourless. Cleans, conditions, and shines without touching the shade of your leather. Works on black, brown, tan, cream, and every shade in between.", "tags": ["shoe polish", "el", "neutral", "leather care"], "images": ["https://images.unsplash.com/photo-1614252369475-531eba835eb1?w=800&q=80"], "seller": { "id": "el", "name": "El", "initials": "EL", "badge": "official", "phone": "09042339411", "whatsapp": "09042339411" }, "retail": { "enabled": true, "price": 1500, "stock": null }, "wholesale": { "enabled": true, "minQty": 20, "tiers": [ { "minQty": 20, "maxQty": 49, "price": 1200 }, { "minQty": 50, "maxQty": 99, "price": 1000 }, { "minQty": 100, "maxQty": null, "price": 850 } ] } },
+
+  { "id": "el-shampoo", "title": "El Shampoo", "price": 500, "location": "Kaduna", "date": "", "category": "beauty-health", "boosted": true, "featured": true, "description": "Made for Nigerian hair, by people who understand Nigerian hair. Rich lather, gentle on the scalp, and it rinses out clean without leaving that heavy, filmy feeling. Leaves your hair soft, shiny, and smelling fresh all day.", "tags": ["shampoo", "el", "hair care", "beauty"], "images": ["https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=800&q=80"], "seller": { "id": "el", "name": "El", "initials": "EL", "badge": "official", "phone": "09042339411", "whatsapp": "09042339411" }, "retail": { "enabled": true, "price": 500, "stock": null }, "wholesale": { "enabled": true, "minQty": 50, "tiers": [ { "minQty": 50, "maxQty": 199, "price": 400 }, { "minQty": 200, "maxQty": 499, "price": 350 }, { "minQty": 500, "maxQty": null, "price": 300 } ] } },
+
+  { "id": "el-body-lotion", "title": "El Body Lotion", "price": 1200, "location": "Kaduna", "date": "", "category": "beauty-health", "boosted": false, "featured": false, "description": "A light, non-greasy lotion built for Nigerian weather — absorbs fast, keeps skin soft all day, and doesn't leave a heavy film in hot weather. Made with shea butter sourced from Northern cooperatives.", "tags": ["body lotion", "el", "skincare", "shea butter"], "images": ["https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&q=80"], "seller": { "id": "el", "name": "El", "initials": "EL", "badge": "official", "phone": "09042339411", "whatsapp": "09042339411" }, "retail": { "enabled": true, "price": 1200, "stock": null }, "wholesale": { "enabled": true, "minQty": 20, "tiers": [ { "minQty": 20, "maxQty": 49, "price": 950 }, { "minQty": 50, "maxQty": 99, "price": 800 }, { "minQty": 100, "maxQty": null, "price": 700 } ] } },
+
+  { "id": "el-hair-cream", "title": "El Hair Cream", "price": 900, "location": "Kaduna", "date": "", "category": "beauty-health", "boosted": false, "featured": false, "description": "Hydrating hair cream for natural, relaxed, and transitioning hair. Softens, conditions, and adds shine without the greasy heaviness of old-school pomades.", "tags": ["hair cream", "el", "hair care", "beauty"], "images": ["https://images.unsplash.com/photo-1526947425960-945c6e72858f?w=800&q=80"], "seller": { "id": "el", "name": "El", "initials": "EL", "badge": "official", "phone": "09042339411", "whatsapp": "09042339411" }, "retail": { "enabled": true, "price": 900, "stock": null }, "wholesale": { "enabled": true, "minQty": 30, "tiers": [ { "minQty": 30, "maxQty": 99, "price": 700 }, { "minQty": 100, "maxQty": 299, "price": 600 }, { "minQty": 300, "maxQty": null, "price": 500 } ] } },
+
+  { "id": "hand-embroidered-hausa-cap", "title": "Hand-Embroidered Hausa Cap (Hula)", "price": 4000, "location": "Kaduna", "date": "", "category": "fashion", "boosted": false, "featured": true, "description": "The cap that goes with every kaftan. Neat embroidery, firm shape, and a comfortable fit for Friday prayers, weddings, and everyday wear. Made by our tailors in Kaduna.", "tags": ["cap", "hula", "hausa", "embroidery", "fashion"], "images": ["https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=800&q=80"], "seller": { "id": "el", "name": "El", "initials": "EL", "badge": "official", "phone": "09042339411", "whatsapp": "09042339411" }, "retail": { "enabled": true, "price": 4000, "stock": null }, "wholesale": { "enabled": true, "minQty": 20, "tiers": [ { "minQty": 20, "maxQty": 49, "price": 3400 }, { "minQty": 50, "maxQty": 99, "price": 3000 }, { "minQty": 100, "maxQty": null, "price": 2600 } ] } },
+
+  { "id": "plain-cotton-tshirt-bulk", "title": "Plain Cotton T-Shirts (Bulk, Ready to Print)", "price": 2500, "location": "Kaduna", "date": "", "category": "fashion", "boosted": true, "featured": false, "description": "Blank, soft, and ready for your logo. Made for printers, schools, event organisers, and clothing brands that need steady supply at a fair price. Round neck, assorted colours, sizes S to XXL.", "tags": ["t-shirt", "cotton", "blank", "bulk", "printing"], "images": ["https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80"], "seller": { "id": "el", "name": "El", "initials": "EL", "badge": "official", "phone": "09042339411", "whatsapp": "09042339411" }, "retail": { "enabled": true, "price": 2500, "stock": null }, "wholesale": { "enabled": true, "minQty": 50, "tiers": [ { "minQty": 50, "maxQty": 199, "price": 2000 }, { "minQty": 200, "maxQty": 499, "price": 1700 }, { "minQty": 500, "maxQty": null, "price": 1450 } ] } },
+
+  { "id": "cooking-pot-set-12pc", "title": "12-Piece Non-Stick Cooking Pot Set", "price": 35000, "location": "Kaduna", "date": "", "category": "home-kitchen", "boosted": true, "featured": true, "description": "Complete 12-piece non-stick cookware set with tempered glass lids. Durable, scratch-resistant, and safe for all cooktops. Great for family homes, restaurants, and food businesses.", "tags": ["cookware", "pots", "kitchen", "non-stick"], "images": ["https://images.unsplash.com/photo-1556909212-d5b604d0c90d?w=800&q=80"], "seller": { "id": "teema-kitchenwares", "name": "Teema Kitchenwares", "initials": "TK", "badge": "verified", "phone": "09042339411", "whatsapp": "09042339411" }, "retail": { "enabled": true, "price": 35000, "stock": null }, "wholesale": { "enabled": true, "minQty": 10, "tiers": [ { "minQty": 10, "maxQty": 49, "price": 30000 }, { "minQty": 50, "maxQty": null, "price": 27000 } ] } },
+
+  { "id": "commercial-blender", "title": "Heavy-Duty Commercial Blender – 2L", "price": 45000, "location": "Kaduna", "date": "", "category": "home-kitchen", "boosted": false, "featured": false, "description": "1500W commercial-grade blender with 2L stainless steel jar. Ideal for smoothie bars, cafés, restaurants, and home use. Comes with a 6-month warranty.", "tags": ["blender", "kitchen", "commercial", "appliance"], "images": ["https://images.unsplash.com/photo-1570222094114-d054a817e56b?w=800&q=80"], "seller": { "id": "teema-kitchenwares", "name": "Teema Kitchenwares", "initials": "TK", "badge": "verified", "phone": "09042339411", "whatsapp": "09042339411" }, "retail": { "enabled": true, "price": 45000, "stock": null }, "wholesale": { "enabled": true, "minQty": 5, "tiers": [ { "minQty": 5, "maxQty": 24, "price": 40000 }, { "minQty": 25, "maxQty": null, "price": 35000 } ] } },
+
+  { "id": "plastic-bucket-20l-lid", "title": "Plastic Bucket with Lid (20 Litres)", "price": 3500, "location": "Kaduna", "date": "", "category": "home-kitchen", "boosted": false, "featured": false, "description": "A strong, thick-walled bucket for water, storage, paint, and food-safe use. Tight-fitting lid, sturdy handle, and made to survive daily use.", "tags": ["bucket", "plastic", "storage", "household"], "images": ["https://images.unsplash.com/photo-1583947215259-38e31be8751f?w=800&q=80"], "seller": { "id": "teema-kitchenwares", "name": "Teema Kitchenwares", "initials": "TK", "badge": "verified", "phone": "09042339411", "whatsapp": "09042339411" }, "retail": { "enabled": true, "price": 3500, "stock": null }, "wholesale": { "enabled": true, "minQty": 20, "tiers": [ { "minQty": 20, "maxQty": 49, "price": 2900 }, { "minQty": 50, "maxQty": 99, "price": 2600 }, { "minQty": 100, "maxQty": null, "price": 2300 } ] } },
+
+  { "id": "frying-pan-28cm", "title": "Non-Stick Frying Pan (28cm)", "price": 8500, "location": "Kaduna", "date": "", "category": "home-kitchen", "boosted": false, "featured": false, "description": "Thick aluminium body, non-stick coating that actually holds up, and a heat-resistant handle. Fits every stove — gas, electric, or hot plate. The pan you reach for every morning.", "tags": ["frying pan", "kitchen", "non-stick", "cookware"], "images": ["https://images.unsplash.com/photo-1584990347449-a2d4a41d2026?w=800&q=80"], "seller": { "id": "teema-kitchenwares", "name": "Teema Kitchenwares", "initials": "TK", "badge": "verified", "phone": "09042339411", "whatsapp": "09042339411" }, "retail": { "enabled": true, "price": 8500, "stock": null }, "wholesale": { "enabled": true, "minQty": 10, "tiers": [ { "minQty": 10, "maxQty": 49, "price": 7000 }, { "minQty": 50, "maxQty": 99, "price": 6200 }, { "minQty": 100, "maxQty": null, "price": 5500 } ] } },
+
+  { "id": "electric-kettle-18l", "title": "Electric Kettle 1.8L – Stainless Steel", "price": 12000, "location": "Kaduna", "date": "", "category": "home-kitchen", "boosted": false, "featured": false, "description": "Boils water in under 3 minutes. Stainless steel interior, auto shut-off, and a wide-mouth lid that makes cleaning easy. Built for daily tea, noodles, and cooking prep.", "tags": ["electric kettle", "kitchen", "appliance"], "images": ["https://images.unsplash.com/photo-1594213114663-d94db9b17125?w=800&q=80"], "seller": { "id": "teema-kitchenwares", "name": "Teema Kitchenwares", "initials": "TK", "badge": "verified", "phone": "09042339411", "whatsapp": "09042339411" }, "retail": { "enabled": true, "price": 12000, "stock": null }, "wholesale": { "enabled": true, "minQty": 10, "tiers": [ { "minQty": 10, "maxQty": 29, "price": 10000 }, { "minQty": 30, "maxQty": 59, "price": 9000 }, { "minQty": 60, "maxQty": null, "price": 8000 } ] } },
+
+  { "id": "dinner-set-24pc", "title": "24-Piece Ceramic Dinner Set", "price": 42000, "location": "Kaduna", "date": "", "category": "home-kitchen", "boosted": true, "featured": false, "description": "Service for six — dinner plates, side plates, bowls, and mugs. Glazed ceramic, chip-resistant, microwave and dishwasher safe. The set that turns a house into a home.", "tags": ["dinner set", "ceramic", "kitchen", "plates"], "images": ["https://images.unsplash.com/photo-1603199506016-b9a594b593c0?w=800&q=80"], "seller": { "id": "teema-kitchenwares", "name": "Teema Kitchenwares", "initials": "TK", "badge": "verified", "phone": "09042339411", "whatsapp": "09042339411" }, "retail": { "enabled": true, "price": 42000, "stock": null }, "wholesale": { "enabled": true, "minQty": 5, "tiers": [ { "minQty": 5, "maxQty": 19, "price": 36000 }, { "minQty": 20, "maxQty": null, "price": 32000 } ] } },
+
+  { "id": "pressure-cooker-8l", "title": "Pressure Cooker 8L – Aluminium", "price": 28000, "location": "Kaduna", "date": "", "category": "home-kitchen", "boosted": false, "featured": false, "description": "Cooks beans, rice, and tough meat in a fraction of the time. 8-litre capacity, safety valve, and a strong gasket that holds pressure. Built for family kitchens and small food businesses.", "tags": ["pressure cooker", "kitchen", "cookware"], "images": ["https://images.unsplash.com/photo-1585515320310-259814833e62?w=800&q=80"], "seller": { "id": "teema-kitchenwares", "name": "Teema Kitchenwares", "initials": "TK", "badge": "verified", "phone": "09042339411", "whatsapp": "09042339411" }, "retail": { "enabled": true, "price": 28000, "stock": null }, "wholesale": { "enabled": true, "minQty": 5, "tiers": [ { "minQty": 5, "maxQty": 19, "price": 24000 }, { "minQty": 20, "maxQty": null, "price": 21000 } ] } },
+
+  { "id": "ankara-fabric-6-yards", "title": "Ankara Fabric – 6 Yards (Wax Print)", "price": 8500, "location": "Kaduna", "date": "", "category": "fashion", "boosted": true, "featured": true, "description": "Genuine wax Ankara, sourced direct from Northern Nigerian mills. Rich colours, sharp print, and a fabric weight that holds shape after stitching. Six yards — enough for a full outfit or two.", "tags": ["ankara", "fabric", "wax print", "cloth"], "images": ["https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=800&q=80"], "seller": { "id": "arewa-cloth-house", "name": "Arewa Cloth House", "initials": "AC", "badge": "verified", "phone": "09042339411", "whatsapp": "09042339411" }, "retail": { "enabled": true, "price": 8500, "stock": null }, "wholesale": { "enabled": true, "minQty": 5, "tiers": [ { "minQty": 5, "maxQty": 19, "price": 7200 }, { "minQty": 20, "maxQty": 49, "price": 6500 }, { "minQty": 50, "maxQty": null, "price": 5800 } ] } },
+
+  { "id": "premium-lace-fabric", "title": "Premium French Lace Fabric – 5 Yards", "price": 22000, "location": "Kaduna", "date": "", "category": "fashion", "boosted": false, "featured": true, "description": "Beaded French lace for weddings, aso-ebi, and special occasions. Rich texture, intricate pattern, and a weight that drapes beautifully. Five yards, enough for a full lace gown.", "tags": ["lace", "fabric", "wedding", "french lace"], "images": ["https://images.unsplash.com/photo-1594223274512-ad4803739b7c?w=800&q=80"], "seller": { "id": "arewa-cloth-house", "name": "Arewa Cloth House", "initials": "AC", "badge": "verified", "phone": "09042339411", "whatsapp": "09042339411" }, "retail": { "enabled": true, "price": 22000, "stock": null }, "wholesale": { "enabled": true, "minQty": 3, "tiers": [ { "minQty": 3, "maxQty": 9, "price": 19000 }, { "minQty": 10, "maxQty": 29, "price": 17000 }, { "minQty": 30, "maxQty": null, "price": 15000 } ] } },
+
+  { "id": "adire-fabric-indigo", "title": "Adire Indigo Tie-Dye Fabric – 6 Yards", "price": 7500, "location": "Kaduna", "date": "", "category": "fashion", "boosted": false, "featured": false, "description": "Hand-dyed adire from Yoruba artisans. Deep indigo, traditional patterns, and a look that has never gone out of style. Every piece is unique because every piece is dyed by hand.", "tags": ["adire", "indigo", "tie-dye", "fabric"], "images": ["https://images.unsplash.com/photo-1590736969955-71cc94901144?w=800&q=80"], "seller": { "id": "arewa-cloth-house", "name": "Arewa Cloth House", "initials": "AC", "badge": "verified", "phone": "09042339411", "whatsapp": "09042339411" }, "retail": { "enabled": true, "price": 7500, "stock": null }, "wholesale": { "enabled": true, "minQty": 5, "tiers": [ { "minQty": 5, "maxQty": 19, "price": 6500 }, { "minQty": 20, "maxQty": 49, "price": 5800 }, { "minQty": 50, "maxQty": null, "price": 5000 } ] } },
+
+  { "id": "aso-oke-traditional", "title": "Aso-Oke Traditional Set – Full Outfit", "price": 38000, "location": "Kaduna", "date": "", "category": "fashion", "boosted": true, "featured": false, "description": "Handwoven aso-oke from Yoruba weavers. Set includes iro (wrapper), buba (blouse), and gele (head wrap). Gold and coral threads, traditional patterns, and the weight that signals a real aso-oke.", "tags": ["aso-oke", "traditional", "handwoven", "fabric"], "images": ["https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=800&q=80"], "seller": { "id": "arewa-cloth-house", "name": "Arewa Cloth House", "initials": "AC", "badge": "verified", "phone": "09042339411", "whatsapp": "09042339411" }, "retail": { "enabled": true, "price": 38000, "stock": null }, "wholesale": { "enabled": true, "minQty": 3, "tiers": [ { "minQty": 3, "maxQty": 9, "price": 34000 }, { "minQty": 10, "maxQty": 29, "price": 30000 }, { "minQty": 30, "maxQty": null, "price": 27000 } ] } },
+
+  { "id": "senator-material", "title": "Senator Material – 4 Yards (Classic Wool)", "price": 15000, "location": "Kaduna", "date": "", "category": "fashion", "boosted": false, "featured": false, "description": "The fabric behind every sharp senator suit. Smooth texture, subtle sheen, and a weight that falls cleanly. Four yards — enough for one full kaftan or senator outfit.", "tags": ["senator", "material", "fabric", "suit"], "images": ["https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=800&q=80"], "seller": { "id": "arewa-cloth-house", "name": "Arewa Cloth House", "initials": "AC", "badge": "verified", "phone": "09042339411", "whatsapp": "09042339411" }, "retail": { "enabled": true, "price": 15000, "stock": null }, "wholesale": { "enabled": true, "minQty": 5, "tiers": [ { "minQty": 5, "maxQty": 19, "price": 13000 }, { "minQty": 20, "maxQty": 49, "price": 11500 }, { "minQty": 50, "maxQty": null, "price": 10000 } ] } },
+
+  { "id": "kente-woven-fabric", "title": "Kente Woven Fabric – 6 Yards", "price": 18000, "location": "Kaduna", "date": "", "category": "fashion", "boosted": false, "featured": false, "description": "Handwoven kente with bold geometric patterns and rich colour blocks. A statement fabric for special occasions, graduations, and cultural events. Six yards — plenty for a full outfit.", "tags": ["kente", "woven", "fabric", "traditional"], "images": ["https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=800&q=80"], "seller": { "id": "arewa-cloth-house", "name": "Arewa Cloth House", "initials": "AC", "badge": "verified", "phone": "09042339411", "whatsapp": "09042339411" }, "retail": { "enabled": true, "price": 18000, "stock": null }, "wholesale": { "enabled": true, "minQty": 3, "tiers": [ { "minQty": 3, "maxQty": 9, "price": 16000 }, { "minQty": 10, "maxQty": 29, "price": 14000 }, { "minQty": 30, "maxQty": null, "price": 12000 } ] } },
+
+  { "id": "handmade-leather-belt", "title": "Handmade Leather Belt (Factory Price)", "price": 3500, "location": "Kaduna", "date": "", "category": "fashion", "boosted": false, "featured": false, "description": "Cut, stitched, and finished by hand in Northern Nigeria. Real leather, solid buckle, and a strong stitch that holds up to daily wear. Black or brown, sizes 32 to 42.", "tags": ["belt", "leather", "handmade", "fashion"], "images": ["https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&q=80"], "seller": { "id": "arewa-leather-works", "name": "Arewa Leather Works", "initials": "AL", "badge": "verified", "phone": "09042339411", "whatsapp": "09042339411" }, "retail": { "enabled": true, "price": 3500, "stock": null }, "wholesale": { "enabled": true, "minQty": 20, "tiers": [ { "minQty": 20, "maxQty": 49, "price": 3000 }, { "minQty": 50, "maxQty": 99, "price": 2600 }, { "minQty": 100, "maxQty": null, "price": 2200 } ] } },
+
+  { "id": "handcrafted-leather-sandals", "title": "Handcrafted Leather Sandals (Men)", "price": 12000, "location": "Kaduna", "date": "", "category": "fashion", "boosted": false, "featured": false, "description": "Real leather sandals made by Northern Nigerian craftsmen. Comfortable from the first wear, strong enough for years, and finished the way customers expect. Brown or black, sizes 40 to 45.", "tags": ["sandals", "leather", "handmade", "men"], "images": ["https://images.unsplash.com/photo-1603487742131-4160ec999306?w=800&q=80"], "seller": { "id": "arewa-leather-works", "name": "Arewa Leather Works", "initials": "AL", "badge": "verified", "phone": "09042339411", "whatsapp": "09042339411" }, "retail": { "enabled": true, "price": 12000, "stock": null }, "wholesale": { "enabled": true, "minQty": 10, "tiers": [ { "minQty": 10, "maxQty": 29, "price": 10000 }, { "minQty": 30, "maxQty": 59, "price": 9000 }, { "minQty": 60, "maxQty": null, "price": 8000 } ] } },
+
+  { "id": "leather-wallet-classic", "title": "Classic Leather Wallet (Bifold)", "price": 5500, "location": "Kaduna", "date": "", "category": "fashion", "boosted": true, "featured": false, "description": "Handstitched leather wallet with six card slots, two bill compartments, and a hidden coin pocket. Slim enough for any pocket, built to survive years of daily use.", "tags": ["wallet", "leather", "bifold", "accessories"], "images": ["https://images.unsplash.com/photo-1627123424574-724758594e93?w=800&q=80"], "seller": { "id": "arewa-leather-works", "name": "Arewa Leather Works", "initials": "AL", "badge": "verified", "phone": "09042339411", "whatsapp": "09042339411" }, "retail": { "enabled": true, "price": 5500, "stock": null }, "wholesale": { "enabled": true, "minQty": 10, "tiers": [ { "minQty": 10, "maxQty": 29, "price": 4500 }, { "minQty": 30, "maxQty": 59, "price": 4000 }, { "minQty": 60, "maxQty": null, "price": 3500 } ] } },
+
+  { "id": "leather-handbag", "title": "Genuine Leather Handbag – Handcrafted", "price": 22000, "location": "Kaduna", "date": "", "category": "fashion", "boosted": false, "featured": true, "description": "Handcrafted genuine leather handbag with adjustable strap and multiple compartments. Made locally by artisans in Kaduna. Every stitch is done by hand, not a machine.", "tags": ["handbag", "leather", "bag", "handmade"], "images": ["https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=800&q=80"], "seller": { "id": "arewa-leather-works", "name": "Arewa Leather Works", "initials": "AL", "badge": "verified", "phone": "09042339411", "whatsapp": "09042339411" }, "retail": { "enabled": true, "price": 22000, "stock": null }, "wholesale": { "enabled": true, "minQty": 5, "tiers": [ { "minQty": 5, "maxQty": 19, "price": 19000 }, { "minQty": 20, "maxQty": 49, "price": 17000 }, { "minQty": 50, "maxQty": null, "price": 15000 } ] } },
+
+  { "id": "leather-key-holder", "title": "Leather Key Holder Set", "price": 1800, "location": "Kaduna", "date": "", "category": "fashion", "boosted": false, "featured": false, "description": "Real leather key holder that holds up to six keys. A small, honest product — the kind of thing you buy once and forget about for years. Great for small gifts and corporate orders.", "tags": ["key holder", "leather", "accessories", "gift"], "images": ["https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=800&q=80"], "seller": { "id": "arewa-leather-works", "name": "Arewa Leather Works", "initials": "AL", "badge": "verified", "phone": "09042339411", "whatsapp": "09042339411" }, "retail": { "enabled": true, "price": 1800, "stock": null }, "wholesale": { "enabled": true, "minQty": 30, "tiers": [ { "minQty": 30, "maxQty": 99, "price": 1400 }, { "minQty": 100, "maxQty": 299, "price": 1200 }, { "minQty": 300, "maxQty": null, "price": 1000 } ] } },
+
+  { "id": "solar-panel-300w", "title": "300W Solar Panel – Monocrystalline", "price": 120000, "location": "Kaduna", "date": "", "category": "electronics", "boosted": true, "featured": true, "description": "High-efficiency 300W monocrystalline solar panel with 25-year performance warranty. Perfect for homes, small businesses, and solar installation companies.", "tags": ["solar", "panel", "renewable", "energy"], "images": ["https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80"], "seller": { "id": "kaduna-power-components", "name": "Kaduna Power Components", "initials": "KP", "badge": "verified", "phone": "09042339411", "whatsapp": "09042339411" }, "retail": { "enabled": true, "price": 120000, "stock": null }, "wholesale": { "enabled": true, "minQty": 5, "tiers": [ { "minQty": 5, "maxQty": 19, "price": 110000 }, { "minQty": 20, "maxQty": null, "price": 100000 } ] } },
+
+  { "id": "rechargeable-standing-fan", "title": "Rechargeable Standing Fan – 18 Inch", "price": 38000, "location": "Kaduna", "date": "", "category": "electronics", "boosted": false, "featured": false, "description": "Keeps you cool through light-out and beyond. Built-in rechargeable battery, 8-hour runtime, three speed settings, and a solar-charging option. Ideal for homes, shops, and offices.", "tags": ["fan", "rechargeable", "cooling", "appliance"], "images": ["https://images.unsplash.com/photo-1618944847023-38aa001235f0?w=800&q=80"], "seller": { "id": "kaduna-power-components", "name": "Kaduna Power Components", "initials": "KP", "badge": "verified", "phone": "09042339411", "whatsapp": "09042339411" }, "retail": { "enabled": true, "price": 38000, "stock": null }, "wholesale": { "enabled": true, "minQty": 5, "tiers": [ { "minQty": 5, "maxQty": 19, "price": 33000 }, { "minQty": 20, "maxQty": null, "price": 29000 } ] } },
+
+  { "id": "led-bulb-pack-5", "title": "LED Bulb Pack (5 Units) – 12W", "price": 4500, "location": "Kaduna", "date": "", "category": "electronics", "boosted": false, "featured": false, "description": "Five LED bulbs that cut your electricity bill without cutting your light. 12W, daylight-white brightness, and a lifespan of up to 25,000 hours. Standard E27 base — fits every fitting.", "tags": ["led", "bulb", "lighting", "energy"], "images": ["https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?w=800&q=80"], "seller": { "id": "kaduna-power-components", "name": "Kaduna Power Components", "initials": "KP", "badge": "verified", "phone": "09042339411", "whatsapp": "09042339411" }, "retail": { "enabled": true, "price": 4500, "stock": null }, "wholesale": { "enabled": true, "minQty": 20, "tiers": [ { "minQty": 20, "maxQty": 49, "price": 3800 }, { "minQty": 50, "maxQty": 99, "price": 3200 }, { "minQty": 100, "maxQty": null, "price": 2800 } ] } },
+
+  { "id": "solar-home-kit", "title": "Solar Home Kit – Panel + Battery + Lights", "price": 185000, "location": "Kaduna", "date": "", "category": "electronics", "boosted": true, "featured": true, "description": "Everything a home needs to keep the lights on: 200W panel, 100Ah battery, charge controller, and four LED bulbs with fittings. Full installation instructions and 1-year warranty.", "tags": ["solar", "home kit", "battery", "renewable"], "images": ["https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80"], "seller": { "id": "kaduna-power-components", "name": "Kaduna Power Components", "initials": "KP", "badge": "verified", "phone": "09042339411", "whatsapp": "09042339411" }, "retail": { "enabled": true, "price": 185000, "stock": null }, "wholesale": { "enabled": true, "minQty": 3, "tiers": [ { "minQty": 3, "maxQty": 9, "price": 170000 }, { "minQty": 10, "maxQty": 29, "price": 155000 }, { "minQty": 30, "maxQty": null, "price": 140000 } ] } },
+
+  { "id": "universal-phone-charger", "title": "Universal Phone Charger (Type-C + Micro USB)", "price": 2500, "location": "Kaduna", "date": "", "category": "electronics", "boosted": false, "featured": false, "description": "Fast-charging adapter with two ports — Type-C and Micro USB. Overcharge protection, compact size, and a build that survives being tossed in a bag. Works with every phone on the market.", "tags": ["charger", "phone", "usb", "accessories"], "images": ["https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=800&q=80"], "seller": { "id": "kaduna-power-components", "name": "Kaduna Power Components", "initials": "KP", "badge": "verified", "phone": "09042339411", "whatsapp": "09042339411" }, "retail": { "enabled": true, "price": 2500, "stock": null }, "wholesale": { "enabled": true, "minQty": 20, "tiers": [ { "minQty": 20, "maxQty": 49, "price": 2000 }, { "minQty": 50, "maxQty": 99, "price": 1700 }, { "minQty": 100, "maxQty": null, "price": 1400 } ] } },
+
+  { "id": "groundnut-oil-5l", "title": "Pure Groundnut Oil (5 Litres)", "price": 14000, "location": "Kaduna", "date": "", "category": "food-drinks", "boosted": true, "featured": true, "description": "Pressed from Northern Nigerian groundnuts and packed at source. Clean taste, golden colour, and the kind of oil that makes suya spice, fried snacks, and everyday soups taste right.", "tags": ["groundnut oil", "cooking oil", "food", "bulk"], "images": ["https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=800&q=80"], "seller": { "id": "kaduna-agro-foods", "name": "Kaduna Agro Foods", "initials": "KA", "badge": "verified", "phone": "09042339411", "whatsapp": "09042339411" }, "retail": { "enabled": true, "price": 14000, "stock": null }, "wholesale": { "enabled": true, "minQty": 10, "tiers": [ { "minQty": 10, "maxQty": 49, "price": 12500 }, { "minQty": 50, "maxQty": 99, "price": 11500 }, { "minQty": 100, "maxQty": null, "price": 10500 } ] } },
+
+  { "id": "raw-honey-1l", "title": "Raw Nigerian Honey – 1 Litre", "price": 9500, "location": "Kaduna", "date": "", "category": "food-drinks", "boosted": false, "featured": false, "description": "Raw, unfiltered honey from Northern Nigerian beekeepers. Thick, floral, and rich — the kind of honey that crystallises naturally because it hasn't been heated to death. Nothing added.", "tags": ["honey", "raw", "natural", "food"], "images": ["https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=800&q=80"], "seller": { "id": "kaduna-agro-foods", "name": "Kaduna Agro Foods", "initials": "KA", "badge": "verified", "phone": "09042339411", "whatsapp": "09042339411" }, "retail": { "enabled": true, "price": 9500, "stock": null }, "wholesale": { "enabled": true, "minQty": 10, "tiers": [ { "minQty": 10, "maxQty": 49, "price": 8500 }, { "minQty": 50, "maxQty": 99, "price": 7500 }, { "minQty": 100, "maxQty": null, "price": 6500 } ] } },
+
+  { "id": "sesame-seeds-25kg", "title": "Premium Sesame Seeds (25kg Bag)", "price": 95000, "location": "Kaduna", "date": "", "category": "food-drinks", "boosted": false, "featured": false, "description": "Export-grade sesame seeds sourced from Northern Nigerian farmers. 99% purity, cleaned and sorted. Sold by the 25kg bag for exporters, food processors, and oil mills.", "tags": ["sesame", "seeds", "agro", "bulk"], "images": ["https://images.unsplash.com/photo-1599909631594-8cbb98dca5f0?w=800&q=80"], "seller": { "id": "kaduna-agro-foods", "name": "Kaduna Agro Foods", "initials": "KA", "badge": "verified", "phone": "09042339411", "whatsapp": "09042339411" }, "retail": { "enabled": true, "price": 95000, "stock": null }, "wholesale": { "enabled": true, "minQty": 5, "tiers": [ { "minQty": 5, "maxQty": 19, "price": 88000 }, { "minQty": 20, "maxQty": 49, "price": 82000 }, { "minQty": 50, "maxQty": null, "price": 78000 } ] } },
+
+  { "id": "hibiscus-dried-10kg", "title": "Dried Hibiscus (Zobo Leaves) – 10kg", "price": 32000, "location": "Kaduna", "date": "", "category": "food-drinks", "boosted": true, "featured": false, "description": "Premium dried hibiscus from Northern Nigeria. Deep red colour, tangy flavour, and clean sorting. Sold by the 10kg bag for zobo drink producers, tea brands, and exporters.", "tags": ["hibiscus", "zobo", "tea", "agro"], "images": ["https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800&q=80"], "seller": { "id": "kaduna-agro-foods", "name": "Kaduna Agro Foods", "initials": "KA", "badge": "verified", "phone": "09042339411", "whatsapp": "09042339411" }, "retail": { "enabled": true, "price": 32000, "stock": null }, "wholesale": { "enabled": true, "minQty": 5, "tiers": [ { "minQty": 5, "maxQty": 19, "price": 29000 }, { "minQty": 20, "maxQty": 49, "price": 26000 }, { "minQty": 50, "maxQty": null, "price": 23000 } ] } }
 ]
