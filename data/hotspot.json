@@ -447,6 +447,27 @@
     "contact": "+2349080000921", "addedAt": 1728000000000
   },
   {
+    "id": "hibiscus-restaurant",
+    "name": "Hibiscus Restaurant",
+    "category": "Restaurant",
+    "location": "GRA, Kaduna",
+    "address": "No 1, Danlite Road, off Isa Kaita Road, GRA, Kaduna State, 800222",
+    "lat": 10.5236, "lng": 7.4421,
+    "description": "A calm, welcoming restaurant tucked off Isa Kaita Road in GRA Kaduna. Known for Nigerian and continental dishes — jollof rice, grilled chicken, pepper soup, and their signature hibiscus (zobo) drink served cold. A quiet spot for lunch meetings, family dinners, and a relaxed evening out.",
+    "images": [
+      "https://lh3.googleusercontent.com/grass-cs/AABkmLfrSCtpL5KPm6-eSBvj8_ii4hEy_TwWAbalGQGNn2z9zUL8Fra1E0NMCnkw9DhBmkgSMWEqMi8FSr4XyXzcByVtjIJTDwmjI8KeHOZ3YD2alsq_NadMdoObNiERofkqpPvYc02ol7iB0Pg=s294-w294-h220-n-k-no",
+      "https://lh3.googleusercontent.com/grass-cs/AABkmLeBTX1JMT2lgplUwJiCdtwlwGRbDVtg34xsqFmiqYr2OC7TAhWkvH2cXgfcHL9ocWYUXci9cHxu4kCVroTv27ToxsNV9-n-mvmlUNv0S-ZSjqwoSqZgNwPmFKlw9jNXynV0MdHPW1dWZGPn=s294-w294-h220-n-k-no",
+      "https://lh3.googleusercontent.com/grass-cs/AABkmLeKvFcMHDAPP4pa-W06dtr8wqDE7uFyEmIvlTiSUYLueyoeqx2W_zrnwgVLYbAISvpBJiYff_D88aFRqYQQ50eRh4OIxodtZ0TK8bAKGq9ajejvA2djNrT8gVaEIe0rV-RMu41cn5OKdBBM=s294-w294-h220-n-k-no",
+      "https://lh3.googleusercontent.com/grass-cs/AABkmLc4-UvLVavZnrEZ0IdZoYpKHPt8KZUNyZiMOpbkYuHUnje7BA9DODoor7sxmLP6wUwxUl7IXgdP2UF6qrPUgoW3oCQipD9k2ryGxUI4OMNLX_IWJEA55tN7LDDxco2aswrdzYEKS_lzNXw=s294-w294-h220-n-k-no",
+      "https://lh3.googleusercontent.com/grass-cs/AABkmLdJhpLxIqhIXqI_Ad2Gv6PP1Wi22xYtaOAYEwRkx5MEMPZJ5WvMA1sM9OsYuosJO2tmopMyeqI5IqkRZrRIncSd9cso_AxJHN8aJ9zSoUjrghfctSWrQEYmmUNdXo-fLPIm1rFM1j9KU8hm=s294-w294-h220-n-k-no",
+      "https://lh3.googleusercontent.com/grass-cs/AABkmLf1N7IGZCIvZy_ABquehbP3duuDWzM0qb3nVANZghVj5eiWssZ5jwNohGCVptOkuBl53uPSrH03z8q9RLTuNVfPrzi_FaFxSj6ch7oW0O-VQ-S4zbM-nivZ9eMqq0OAQgnHuyWRp6fL16ua=s294-w294-h220-n-k-no"
+    ],
+    "priceRange": "₦₦", "hours": "10am–11pm", "isOpen24": false,
+    "features": ["Air Conditioning","Indoor Seating","Family Friendly","Takeaway","Local Dishes","Private Dining"],
+    "tags": ["hibiscus","zobo","nigerian food","jollof rice","kaduna restaurant","gra kaduna","grilled chicken"],
+    "contact": "+2349076661825", "addedAt": 1729300000000
+  },
+  {
     "id": "barnawa-paradise-park",
     "name": "Barnawa Paradise Park",
     "category": "Park",
