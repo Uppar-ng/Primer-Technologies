@@ -7,10 +7,10 @@
     "page": "zaure-clean.html"
   },
   {
-    "id": "zaure-movers",
-    "name": "Zaure Movers",
+    "id": "zaure-move",
+    "name": "Zaure Move",
     "initial": "Z",
     "badge": "Official Service",
-    "page": "zaure-movers.html"
+    "page": "zaure-move.html"
   }
 ]
