@@ -212,55 +212,6 @@
       font-size: 0.72rem;
     }
 
-    /* ============ SCOPE NOTE ============ */
-    .svc-scope {
-      background: linear-gradient(135deg, #f8fbfe 0%, #f1f6fb 100%);
-      border: 1px solid var(--border);
-      border-left: 4px solid var(--gold);
-      border-radius: 14px;
-      padding: 18px 20px;
-      margin-top: 20px;
-    }
-    [data-theme="dark"] .svc-scope {
-      background: rgba(212,184,122,0.06);
-    }
-    .svc-scope h4 {
-      font-size: 0.78rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 1.2px;
-      color: var(--gold-deep);
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 7px;
-    }
-    .svc-scope ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .svc-scope li {
-      display: flex;
-      gap: 10px;
-      padding: 6px 0;
-      font-size: 0.85rem;
-      color: var(--text);
-      line-height: 1.55;
-    }
-    .svc-scope li i {
-      color: var(--gold-deep);
-      font-size: 0.7rem;
-      margin-top: 5px;
-      flex-shrink: 0;
-    }
-    .svc-scope li strong {
-      color: var(--navy-2);
-    }
-    [data-theme="dark"] .svc-scope li strong {
-      color: var(--gold);
-    }
-
     /* ============ CONTACT ============ */
     .svc-contact {
       background: linear-gradient(135deg, #0f2940 0%, #1a3650 100%);
@@ -338,7 +289,6 @@
     }
     .qm-overlay.active .qm-modal { transform: translateY(0); }
 
-    /* Progress bar at top */
     .qm-progress {
       height: 4px;
       background: rgba(15,41,64,0.08);
@@ -405,7 +355,6 @@
       -webkit-overflow-scrolling: touch;
     }
 
-    /* Step content */
     .qm-step { display: none; }
     .qm-step.active { display: block; animation: qmFadeIn 0.3s ease; }
     @keyframes qmFadeIn {
@@ -495,7 +444,6 @@
     }
     .qm-field.has-error .qm-field-error { display: block; }
 
-    /* Checkbox groups */
     .qm-checks {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -529,7 +477,6 @@
       font-weight: 700;
     }
 
-    /* Quantity selector for rooms */
     .qm-qty-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -589,7 +536,6 @@
       -webkit-appearance: none; margin: 0;
     }
 
-    /* Review step */
     .qm-review {
       display: flex;
       flex-direction: column;
@@ -657,7 +603,6 @@
       font-style: italic;
     }
 
-    /* Footer */
     .qm-footer {
       padding: 14px 22px calc(14px + env(safe-area-inset-bottom, 0px));
       border-top: 1px solid var(--border);
@@ -721,7 +666,6 @@
       transform: none;
     }
 
-    /* Error banner in modal */
     .qm-error-banner {
       padding: 12px 16px;
       background: rgba(231,76,60,0.08);
@@ -736,7 +680,6 @@
     .qm-error-banner.show { display: block; }
     .qm-error-banner i { margin-right: 6px; }
 
-    /* Success state */
     .qm-success {
       text-align: center;
       padding: 40px 24px;
@@ -882,23 +825,6 @@
             <p>A Zaure Move supervisor is on site from start to finish — directing the crew, keeping the schedule, and answering anything as it comes up.</p>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- ============ SCOPE ============ -->
-    <section class="svc-section">
-      <h2 class="svc-section-title">What we don't do</h2>
-      <p class="svc-section-sub">
-        Zaure Move handles small and medium moves only. These jobs are outside our scope.
-      </p>
-      <div class="svc-scope">
-        <h4><i class="fas fa-circle-info"></i> Outside our scope</h4>
-        <ul>
-          <li><i class="fas fa-circle-xmark"></i> <span><strong>Large house moves (5+ bedrooms)</strong> — outside our scope.</span></li>
-          <li><i class="fas fa-circle-xmark"></i> <span><strong>Interstate or long-distance moves</strong> — we operate within Kaduna and nearby towns.</span></li>
-          <li><i class="fas fa-circle-xmark"></i> <span><strong>Heavy industrial equipment</strong> — machinery, generators above 20KVA, and factory relocations need heavy logistics partners.</span></li>
-          <li><i class="fas fa-circle-xmark"></i> <span><strong>Fleet ownership</strong> — we coordinate transport through our vetted network of vehicle owners.</span></li>
-        </ul>
       </div>
     </section>
 
@@ -1105,9 +1031,7 @@
           <!-- STEP 5: REVIEW -->
           <div class="qm-step" data-step="5">
             <p class="qm-step-intro">Review your details and send. We'll respond on WhatsApp with a quote within a few hours.</p>
-            <div class="qm-review" id="qmReview">
-              <!-- Injected by JS -->
-            </div>
+            <div class="qm-review" id="qmReview"></div>
           </div>
 
         </form>
@@ -1173,9 +1097,6 @@
   (function () {
     'use strict';
 
-    /* ============================================================
-       FORMSPREE ENDPOINT — replace with your own form ID
-       ============================================================ */
     const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
 
     const WHATSAPP_PHONE = '2349042339411';
@@ -1188,9 +1109,6 @@
       "Any large items (beds, wardrobes, etc.): ";
     const waUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
-    /* ============================================================
-       WIZARD STATE
-       ============================================================ */
     const TOTAL_STEPS = 5;
     let currentStep = 1;
     let lastFocused = null;
@@ -1216,9 +1134,6 @@
     const errorBanner = document.getElementById('qmErrorBanner');
     const errorText = document.getElementById('qmErrorText');
 
-    /* ============================================================
-       OPEN / CLOSE MODAL
-       ============================================================ */
     function openModal(triggerBtn) {
       lastFocused = triggerBtn || document.activeElement;
       resetWizard();
@@ -1260,9 +1175,6 @@
       if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
     });
 
-    /* ============================================================
-       RENDER CURRENT STEP
-       ============================================================ */
     function renderStep() {
       document.querySelectorAll('.qm-step').forEach(s => {
         s.classList.toggle('active', parseInt(s.dataset.step, 10) === currentStep);
@@ -1278,17 +1190,12 @@
       nextBtn.style.display = currentStep === TOTAL_STEPS ? 'none' : 'flex';
       submitBtn.style.display = currentStep === TOTAL_STEPS ? 'flex' : 'none';
 
-      if (currentStep === TOTAL_STEPS) {
-        buildReview();
-      }
+      if (currentStep === TOTAL_STEPS) buildReview();
 
       hideError();
       body.scrollTop = 0;
     }
 
-    /* ============================================================
-       NAVIGATION
-       ============================================================ */
     nextBtn?.addEventListener('click', function () {
       if (!validateStep(currentStep)) return;
       if (currentStep < TOTAL_STEPS) {
@@ -1304,22 +1211,17 @@
       }
     });
 
-    /* ============================================================
-       VALIDATION
-       ============================================================ */
     function validateStep(step) {
       hideError();
       let valid = true;
 
       if (step === 1) {
-        const name = document.getElementById('qName');
-        const phone = document.getElementById('qPhone');
-        valid = validateField(name) && validateField(phone);
+        valid = validateField(document.getElementById('qName')) &&
+                validateField(document.getElementById('qPhone'));
       } else if (step === 2) {
-        const from = document.getElementById('qFrom');
-        const to = document.getElementById('qTo');
-        const date = document.getElementById('qDate');
-        valid = validateField(from) && validateField(to) && validateField(date);
+        valid = validateField(document.getElementById('qFrom')) &&
+                validateField(document.getElementById('qTo')) &&
+                validateField(document.getElementById('qDate'));
       } else if (step === 3) {
         const checked = document.querySelectorAll('#qItemsGroup input:checked').length;
         if (checked === 0) {
@@ -1362,9 +1264,6 @@
       });
     });
 
-    /* ============================================================
-       CHECKBOX VISUAL STATE
-       ============================================================ */
     document.querySelectorAll('.qm-check input').forEach(input => {
       input.addEventListener('change', function () {
         this.closest('.qm-check').classList.toggle('checked', this.checked);
@@ -1377,9 +1276,6 @@
       });
     });
 
-    /* ============================================================
-       QUANTITY CONTROLS
-       ============================================================ */
     document.querySelectorAll('.qm-qty-controls button').forEach(btn => {
       btn.addEventListener('click', function () {
         const inputId = 'q' + {
@@ -1399,9 +1295,6 @@
       });
     });
 
-    /* ============================================================
-       BUILD REVIEW
-       ============================================================ */
     function buildReview() {
       const data = collectFormData();
       const reviewEl = document.getElementById('qmReview');
@@ -1471,9 +1364,6 @@
       });
     }
 
-    /* ============================================================
-       COLLECT FORM DATA
-       ============================================================ */
     function collectFormData() {
       return {
         name: getVal('qName'),
@@ -1510,9 +1400,6 @@
       } catch (e) { return d; }
     }
 
-    /* ============================================================
-       SUBMIT TO FORMSPREE
-       ============================================================ */
     submitBtn?.addEventListener('click', async function () {
       hideError();
 
@@ -1597,9 +1484,6 @@
       subtitleEl.textContent = '';
     }
 
-    /* ============================================================
-       INIT
-       ============================================================ */
     document.addEventListener('DOMContentLoaded', function () {
       if (typeof loadUser === 'function') loadUser();
       if (typeof initTheme === 'function') initTheme();
