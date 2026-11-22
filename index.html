@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <title>Zaure – Buy &amp; Sell Locally in Nigeria | Online Marketplace</title>
   <meta name="description" content="Zaure is Nigeria's most trusted online marketplace. Buy, sell, or trade items locally in Lagos, Abuja, Kano &amp; across Nigeria. Post free ads, no commission, connect with verified buyers &amp; sellers instantly.">
-  <meta name="keywords" content="online marketplace Nigeria, buy and sell Nigeria, free ads Nigeria, marketplace Nigeria, property for sale Nigeria, cars for sale Nigeria, electronics Nigeria, furniture Nigeria, fashion Nigeria, real estate Nigeria">
+  <meta name="keywords" content="online marketplace Nigeria, buy and sell Nigeria, free ads Nigeria, marketplace Nigeria, property for sale Nigeria, cars for sale Nigeria, electronics Nigeria, furniture Nigeria, fashion Nigeria, real estate Nigeria, land for sale Nigeria">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://zauretech.xyz/">
   <meta name="google-site-verification" content="google136f38ae653f16ba">
@@ -90,7 +90,7 @@
     @media (min-width: 1024px) { .grid-2col { grid-template-columns: repeat(6, 1fr); gap: 14px; } }
 
     @media (min-width: 1024px) {
-      .listing-card, .category-card, .storefront-card {
+      .listing-card, .category-card, .storefront-card, .land-card {
         transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
       }
       .listing-card:hover {
@@ -101,84 +101,158 @@
       .category-card:hover { transform: translateY(-4px) scale(1.02); }
     }
 
-    /* ===== Hotspots section (home) ===== */
-    .hotspot-home-card {
+    /* =====================================================
+       ZAURE SERVICE NOTICE CARDS (replaced promo carousel)
+       ===================================================== */
+    .zaure-service-notice-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin: 12px 0 20px;
+    }
+    @media (min-width: 640px) {
+      .zaure-service-notice-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    }
+    @media (min-width: 1024px) {
+      .zaure-service-notice-grid { gap: 16px; margin-bottom: 24px; }
+    }
+
+    .service-notice-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px 14px 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      text-decoration: none;
+      color: var(--text);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-notice-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, #1a3650, #D4B87A);
+    }
+    .service-notice-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(15,41,64,0.1);
+      border-color: rgba(212,184,122,0.4);
+    }
+    .service-notice-card:focus-visible {
+      outline: 3px solid #D4B87A; outline-offset: 2px;
+    }
+    .service-notice-card .sn-icon {
+      flex-shrink: 0;
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #1a3650, #2f6f9e);
+      color: #D4B87A;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+    }
+    .service-notice-card .sn-content { flex: 1; min-width: 0; }
+    .service-notice-card .sn-content h3 {
+      font-size: 0.85rem; font-weight: 700; color: var(--text);
+      margin: 0 0 2px 0; line-height: 1.2;
+    }
+    .service-notice-card .sn-content p {
+      font-size: 0.72rem; color: var(--text-secondary);
+      margin: 0; line-height: 1.35;
+    }
+    .service-notice-card .sn-badge {
+      flex-shrink: 0;
+      background: #D4B87A; color: #1a3650;
+      font-size: 0.58rem; font-weight: 700;
+      padding: 3px 8px; border-radius: 20px;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+
+    /* =====================================================
+       LAND CARDS
+       ===================================================== */
+    .land-card {
       cursor: pointer;
       border-radius: 16px;
       overflow: hidden;
       background: var(--surface);
       border: 1px solid var(--border);
       transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-      position: relative;
       display: flex;
       flex-direction: column;
     }
-    .hotspot-home-card:hover {
+    .land-card:hover {
       transform: translateY(-4px);
       box-shadow: 0 12px 28px rgba(15,41,64,0.12);
       border-color: rgba(212,184,122,0.4);
     }
-    .hotspot-home-card:focus-visible {
-      outline: 3px solid #D4B87A; outline-offset: 2px;
-    }
-    .hc-img {
+    .land-card:focus-visible { outline: 3px solid #D4B87A; outline-offset: 2px; }
+    .land-card .lc-img {
       position: relative; height: 150px; overflow: hidden; background: var(--surface-alt);
     }
-    @media (min-width: 640px) { .hc-img { height: 170px; } }
-    @media (min-width: 1024px) { .hc-img { height: 180px; } }
-    .hc-img img {
+    @media (min-width: 640px) { .land-card .lc-img { height: 170px; } }
+    @media (min-width: 1024px) { .land-card .lc-img { height: 180px; } }
+    .land-card .lc-img img {
       width: 100%; height: 100%; object-fit: cover; display: block;
       transition: transform 0.5s ease;
     }
-    .hotspot-home-card:hover .hc-img img { transform: scale(1.06); }
-    .hc-cat {
+    .land-card:hover .lc-img img { transform: scale(1.06); }
+    .land-card .lc-tier {
       position: absolute; top: 10px; left: 10px;
+      padding: 4px 10px; border-radius: 20px;
+      font-size: 0.58rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.5px; z-index: 2;
+      display: inline-flex; align-items: center; gap: 4px;
+      backdrop-filter: blur(6px);
+    }
+    .lc-tier.verified { background: rgba(59,130,246,0.92); color: white; }
+    .lc-tier.guaranteed { background: rgba(212,184,122,0.95); color: #1a3650; }
+    .lc-tier.listed { background: rgba(107,114,128,0.92); color: white; }
+    .land-card .lc-cat {
+      position: absolute; top: 10px; right: 10px;
       background: rgba(15,41,64,0.85); backdrop-filter: blur(4px);
       color: white; padding: 4px 10px; border-radius: 20px;
       font-size: 0.58rem; font-weight: 700; text-transform: uppercase;
       letter-spacing: 0.8px; z-index: 2;
     }
-    .hc-status {
-      position: absolute; top: 10px; right: 10px;
-      padding: 4px 10px; border-radius: 20px;
-      font-size: 0.58rem; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.5px; backdrop-filter: blur(6px); z-index: 2;
-      display: inline-flex; align-items: center; gap: 4px;
-    }
-    .hc-status.open { background: rgba(22,163,74,0.92); color: white; }
-    .hc-status.open::before {
-      content: ''; width: 5px; height: 5px; border-radius: 50%;
-      background: white; animation: hcPulse 1.8s infinite;
-    }
-    .hc-status.closed { background: rgba(220,38,38,0.92); color: white; }
-    @keyframes hcPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-
-    .hc-fav {
-      position: absolute; bottom: 10px; right: 10px;
-      width: 32px; height: 32px; border-radius: 50%;
-      background: rgba(255,255,255,0.95); border: none; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.85rem; color: var(--text-secondary);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15); transition: 0.2s; z-index: 3;
-    }
-    .hc-fav:hover { transform: scale(1.1); }
-    .hc-fav.active { color: #e74c3c; }
-
-    .hc-body { padding: 12px 14px; flex: 1; display: flex; flex-direction: column; }
-    .hc-body h4 {
+    .land-card .lc-body { padding: 12px 14px; flex: 1; display: flex; flex-direction: column; }
+    .land-card .lc-title {
       font-weight: 700; font-size: 0.88rem; color: var(--text);
-      margin-bottom: 4px; line-height: 1.25;
+      margin: 0 0 4px 0; line-height: 1.25;
       display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;
       overflow: hidden;
     }
-    .hc-meta {
+    .land-card .lc-price {
+      font-weight: 800; font-size: 0.95rem; color: #1a3650; margin-bottom: 6px;
+    }
+    [data-theme="dark"] .land-card .lc-price { color: #D4B87A; }
+    .land-card .lc-meta {
       display: flex; gap: 10px; font-size: 0.68rem;
       color: var(--text-secondary); flex-wrap: wrap;
     }
-    .hc-meta span { display: inline-flex; align-items: center; gap: 3px; }
-    .hc-meta i { color: #1a3650; font-size: 0.65rem; }
-    [data-theme="dark"] .hc-meta i { color: #D4B87A; }
-    .hc-meta .hc-dist { color: #B49450; font-weight: 700; }
+    .land-card .lc-meta span { display: inline-flex; align-items: center; gap: 3px; }
+    .land-card .lc-meta i { color: #1a3650; font-size: 0.65rem; }
+    [data-theme="dark"] .land-card .lc-meta i { color: #D4B87A; }
+    .land-card .lc-title-status {
+      margin-top: 8px; padding-top: 8px;
+      border-top: 1px solid var(--border);
+      font-size: 0.65rem; color: var(--text-secondary);
+      display: flex; align-items: center; gap: 4px;
+    }
+    .land-card .lc-title-status i { color: #B49450; font-size: 0.6rem; }
+
+    .land-empty {
+      grid-column: 1/-1; text-align: center;
+      padding: 2rem 1rem; color: var(--text-secondary);
+    }
+    .land-empty i {
+      font-size: 2rem; display: block; margin-bottom: 8px; opacity: 0.4;
+    }
+    .land-empty a { color: #B49450; font-weight: 600; text-decoration: none; }
 
     .custom-select { position: relative !important; width: 100% !important; user-select: none !important; z-index: 9999 !important; }
     .custom-select-trigger {
@@ -362,17 +436,6 @@
       .mobile-wa-strip .wa-arrow { color: var(--text-secondary); font-size: 0.85rem; }
     }
 
-    .promo-carousel {
-      display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory;
-      padding: 4px 0 12px; margin-bottom: 8px; scrollbar-width: none;
-    }
-    .promo-carousel::-webkit-scrollbar { display: none; }
-    .promo-card { flex: 0 0 280px; scroll-snap-align: start; }
-    @media (min-width: 1024px) {
-      .promo-carousel { gap: 16px; }
-      .promo-card { flex: 1; min-width: 0; }
-    }
-
     @media (max-width: 1023px) {
       input, select, textarea { font-size: 16px !important; }
     }
@@ -508,37 +571,6 @@
       .ptr-indicator { display: flex; }
       .ptr-indicator.active { height: 50px; }
     }
-
-    #findProBtn {
-      position: fixed; right: 16px; bottom: calc(100px + env(safe-area-inset-bottom, 0px)); z-index: 700;
-      display: inline-flex; align-items: center; gap: 8px; padding: 12px 18px; border-radius: 999px;
-      text-decoration: none; font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      font-size: 0.78rem; font-weight: 600; color: #fff;
-      background: linear-gradient(115deg, #0f2940 0%, #1a3650 25%, #2f6f9e 55%, #B49450 85%, #E7D3A1 100%);
-      background-size: 220% 220%;
-      box-shadow: 0 10px 26px rgba(15, 41, 64, 0.42);
-      animation: findProShift 7s ease infinite; transition: transform 0.25s ease, filter 0.25s ease;
-      -webkit-tap-highlight-color: transparent;
-    }
-    #findProBtn:hover { filter: brightness(1.08); }
-    #findProBtn:active { transform: scale(0.96); }
-    #findProBtn i:first-child { color: #FFE9B0; }
-    #findProBtn b { color: #FFE9B0; font-weight: 800; }
-    #findProBtn i:last-child { font-size: 0.7rem; opacity: 0.85; transition: transform 0.25s; }
-    #findProBtn:hover i:last-child { transform: translateX(4px); }
-    @keyframes findProShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    @media (min-width: 1024px) {
-      #findProBtn { left: 50%; right: auto; bottom: 26px; transform: translateX(-50%); padding: 14px 26px; font-size: 0.88rem; }
-      #findProBtn:hover { transform: translateX(-50%) translateY(-4px) scale(1.03); }
-      #findProBtn:active { transform: translateX(-50%) scale(0.97); }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      #findProBtn { animation: none !important; }
-    }
   </style>
 </head>
 <body>
@@ -567,7 +599,7 @@
       <div class="nav-links">
         <a href="/">Home</a>
         <a href="/category.html?slug=all">Browse</a>
-        <a href="/hotspots.html">Hotspots</a>
+        <a href="/land.html">Land</a>
         <a href="/about.html">About</a>
       </div>
       <div class="nav-actions">
@@ -603,7 +635,7 @@
               <span class="dynamic-text">your dream home</span>
               <span class="dynamic-text">a new car</span>
               <span class="dynamic-text">great deals</span>
-              <span class="dynamic-text">local services</span>
+              <span class="dynamic-text">verified land</span>
               <span class="dynamic-text">furniture</span>
               <span class="dynamic-text">electronics</span>
               <span class="dynamic-text">fashion</span>
@@ -662,7 +694,7 @@
             <span class="dynamic-text">your dream home</span>
             <span class="dynamic-text">a new car</span>
             <span class="dynamic-text">great deals</span>
-            <span class="dynamic-text">local services</span>
+            <span class="dynamic-text">verified land</span>
             <span class="dynamic-text">furniture</span>
             <span class="dynamic-text">electronics</span>
             <span class="dynamic-text">fashion</span>
@@ -686,29 +718,37 @@
     </section>
 
     <a href="https://wa.me/2349042339411?text=Hello%20Zaure%2C%20I%20want%20to%20order%20or%20report%20something." target="_blank" class="mobile-wa-strip">
-      <span class="wa-dot"></span>
       <span class="wa-icon"><i class="fab fa-whatsapp"></i></span>
       <span class="wa-text">Order or report on <strong>WhatsApp</strong></span>
       <span class="wa-arrow"><i class="fas fa-chevron-right"></i></span>
     </a>
 
-    <div class="promo-carousel">
-      <div class="promo-card animate-promo">
-        <h3>List for Free</h3>
-        <p>Post your items at zero cost</p>
-        <a href="/post.html" class="btn-outline-light">Post Now</a>
-      </div>
-      <div class="promo-card animate-promo" style="background-image: radial-gradient(circle at 70% 30%, #1f5d8a, #0a1b2b);">
-        <h3>Top Sellers</h3>
-        <p>Shop from verified local stores</p>
-        <a href="/stores.html" class="btn-outline-light">Explore</a>
-      </div>
-      <div class="promo-card animate-promo" style="background-image: radial-gradient(circle at 30% 70%, #4a6f8f, #0d1f30);">
-        <h3>Boost your listing</h3>
-        <p>Get 10x more views</p>
-        <button class="btn-outline-light" id="boostNowBtn">Boost now</button>
-      </div>
+    <!-- ============ ZAURE SERVICE NOTICE CARDS ============ -->
+    <div class="zaure-service-notice-grid" role="list" aria-label="Zaure services">
+      <a href="/find.html" class="service-notice-card" role="listitem">
+        <div class="sn-icon"><i class="fas fa-search-location"></i></div>
+        <div class="sn-content">
+          <h3>Zaure Findr</h3>
+          <p>We find, verify &amp; negotiate land for you</p>
+        </div>
+        <span class="sn-badge">New</span>
+      </a>
+      <a href="/clean.html" class="service-notice-card" role="listitem">
+        <div class="sn-icon"><i class="fas fa-broom"></i></div>
+        <div class="sn-content">
+          <h3>Zaure Clean</h3>
+          <p>Professional cleaning for homes &amp; offices</p>
+        </div>
+      </a>
+      <a href="/move.html" class="service-notice-card" role="listitem">
+        <div class="sn-icon"><i class="fas fa-truck-moving"></i></div>
+        <div class="sn-content">
+          <h3>Zaure Move</h3>
+          <p>Safe, reliable moving across Nigeria</p>
+        </div>
+      </a>
     </div>
+    <!-- ============ /ZAURE SERVICE NOTICE CARDS ============ -->
 
     <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap;">
       <h2 class="section-title" style="margin-top:4px;">Categories</h2>
@@ -723,35 +763,40 @@
       <div class="listing-card"><div class="listing-img"><i class="fas fa-spinner fa-spin"></i></div><div class="listing-body"><div class="price">Loading...</div></div></div>
     </div>
 
+    <!-- ============ LAND FOR SALE (replaces Find a Pro) ============ -->
     <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap;">
-      <h2 class="section-title" style="margin-top:4px;">Find a Pro</h2>
-      <a href="/services.html" style="color:var(--text-secondary); font-weight:500; font-size:0.8rem; text-decoration:none;">View all</a>
+      <h2 class="section-title" style="margin-top:4px;">
+        <i class="fas fa-map-marked-alt" style="color:#B49450; margin-right:6px; font-size:0.9em;"></i>Land for Sale
+      </h2>
+      <a href="/land.html" style="color:var(--text-secondary); font-weight:500; font-size:0.8rem; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
+        View all <i class="fas fa-arrow-right" style="font-size:0.7rem;"></i>
+      </a>
     </div>
-    <div class="grid-2col-listings" id="servicesGrid">
+    <div class="grid-2col-listings" id="landGrid">
       <div class="listing-card"><div class="listing-img"><i class="fas fa-spinner fa-spin"></i></div><div class="listing-body"><div class="price">Loading...</div></div></div>
     </div>
+    <!-- ============ /LAND FOR SALE ============ -->
 
     <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap;">
       <h2 class="section-title" style="margin-top:4px;">Zaure Services</h2>
-      <a href="/services.html" style="color:var(--text-secondary); font-weight:500; font-size:0.8rem; text-decoration:none;">View all</a>
     </div>
     <div class="storefronts" id="zaureServicesGrid">
       <div class="storefront-card"><div class="store-avatar">...</div><div><div class="store-name">Loading</div></div></div>
     </div>
 
-    <!-- ============ HOTSPOTS NEAR YOU ============ -->
+    <!-- ============ VERIFIED LAND PLOTS (replaces Hotspots) ============ -->
     <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap;">
       <h2 class="section-title" style="margin-top:4px;">
-        <i class="fas fa-fire" style="color:#B49450; margin-right:6px; font-size:0.9em;"></i>Hotspots Near You
+        <i class="fas fa-shield-check" style="color:#B49450; margin-right:6px; font-size:0.9em;"></i>Verified Land Plots
       </h2>
-      <a href="/hotspots.html" style="color:var(--text-secondary); font-weight:500; font-size:0.8rem; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
+      <a href="/land.html?tier=verified" style="color:var(--text-secondary); font-weight:500; font-size:0.8rem; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
         View all <i class="fas fa-arrow-right" style="font-size:0.7rem;"></i>
       </a>
     </div>
-    <div class="grid-2col-listings" id="hotspotsGrid">
+    <div class="grid-2col-listings" id="verifiedLandGrid">
       <div class="listing-card"><div class="listing-img"><i class="fas fa-spinner fa-spin"></i></div><div class="listing-body"><div class="price">Loading...</div></div></div>
     </div>
-    <!-- ============ /HOTSPOTS NEAR YOU ============ -->
+    <!-- ============ /VERIFIED LAND PLOTS ============ -->
 
     <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap;">
       <h2 class="section-title" style="margin-top:4px;" id="trendingTitle">Trending Near You</h2>
@@ -820,11 +865,16 @@
         <div class="footer-col">
           <h4>Browse</h4>
           <a href="/category.html?slug=all">All Items</a>
-          <a href="/hotspots.html">Hotspots</a>
-          <a href="/services.html">Find a Pro</a>
+          <a href="/land.html">Land for Sale</a>
           <a href="/category.html?slug=fashion">Fashion</a>
           <a href="/category.html?slug=electronics">Electronics</a>
           <a href="/category.html?slug=home-kitchen">Home & Kitchen</a>
+        </div>
+        <div class="footer-col">
+          <h4>Zaure Services</h4>
+          <a href="/find.html">Zaure Findr</a>
+          <a href="/clean.html">Zaure Clean</a>
+          <a href="/move.html">Zaure Move</a>
         </div>
         <div class="footer-col">
           <h4>Support</h4>
@@ -863,12 +913,6 @@
       </div>
     </div>
   </footer>
-
-  <a id="findProBtn" href="/services.html" aria-label="Find a Pro">
-    <i class="fas fa-user-tie"></i>
-    <span>Find a <b>Pro</b></span>
-    <i class="fas fa-arrow-right"></i>
-  </a>
 
   <div class="bottom-nav">
     <a href="/" class="nav-item active"><i class="fas fa-home"></i><span>Home</span></a>
@@ -1049,7 +1093,7 @@
     let hoverTimer = null;
     function attachHoverPreview() {
       if (window.innerWidth < 1024) return;
-      document.querySelectorAll('.listing-card').forEach(card => {
+      document.querySelectorAll('.listing-card, .land-card').forEach(card => {
         card.addEventListener('mouseenter', function() {
           const id = this.dataset.id;
           if (!id) return;
@@ -1137,9 +1181,9 @@
       if (window.innerWidth < 1024 && navigator.vibrate) navigator.vibrate(ms);
     }
     document.addEventListener('click', e => {
-      if (e.target.closest('.fav-btn') || e.target.closest('.hc-fav')) vibrate(15);
+      if (e.target.closest('.fav-btn')) vibrate(15);
       if (e.target.closest('.post-btn')) vibrate(20);
-      if (e.target.closest('.listing-card') || e.target.closest('.hotspot-home-card')) vibrate(8);
+      if (e.target.closest('.listing-card') || e.target.closest('.land-card')) vibrate(8);
     });
     (function initPullToRefresh() {
       if (window.innerWidth >= 1024) return;
@@ -1275,211 +1319,126 @@
     }
 
     /* ============================================================
-       HOTSPOTS (HOME) — location-sorted, real-time open/closed
+       LAND LISTINGS — loads from /data/land.json with fallback
        ============================================================ */
-    let homeHotspots = [];
-
-    function hsHaversine(lat1, lng1, lat2, lng2) {
-      const R = 6371;
-      const dLat = (lat2 - lat1) * Math.PI / 180;
-      const dLng = (lng2 - lng1) * Math.PI / 180;
-      const a = Math.sin(dLat / 2) ** 2 +
-                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-                Math.sin(dLng / 2) ** 2;
-      return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    }
-    function hsFormatDistance(km) {
-      if (!isFinite(km)) return '';
-      if (km < 1) return Math.round(km * 1000) + ' m';
-      if (km < 10) return km.toFixed(1) + ' km';
-      return Math.round(km) + ' km';
-    }
-    function hsIsOpenNow(spot) {
-      if (!spot) return null;
-      if (spot.isOpen24) return true;
-      const hours = spot.hours;
-      if (!hours || typeof hours !== 'string') return null;
-      const h = hours.toLowerCase().trim();
-      if (h === '24/7' || h === '24 hours' || h === 'always open') return true;
-      const m = h.match(/(\d{1,2})(?::(\d{2}))?\s*(am|pm)?\s*[-–to]+\s*(\d{1,2})(?::(\d{2}))?\s*(am|pm)?/);
-      if (!m) return null;
-      const toHour = (hStr, minStr, ampm) => {
-        let hr = parseInt(hStr, 10);
-        const mi = parseInt(minStr || '0', 10);
-        if (ampm === 'pm' && hr !== 12) hr += 12;
-        if (ampm === 'am' && hr === 12) hr = 0;
-        return hr + mi / 60;
-      };
-      const open = toHour(m[1], m[2], m[3]);
-      const close = toHour(m[4], m[5], m[6]);
-      let now;
+    async function getLandData() {
       try {
-        const parts = new Intl.DateTimeFormat('en-NG', {
-          timeZone: 'Africa/Lagos',
-          hour: 'numeric', minute: 'numeric', hour12: false
-        }).formatToParts(new Date());
-        now = parseInt(parts.find(p => p.type === 'hour').value, 10) +
-              parseInt(parts.find(p => p.type === 'minute').value, 10) / 60;
-      } catch (e) {
-        now = new Date().getHours() + new Date().getMinutes() / 60;
-      }
-      if (close < open) return now >= open || now <= close;
-      return now >= open && now <= close;
-    }
-
-    function hsGetImage(spot) {
-      if (Array.isArray(spot.images) && spot.images.length) return spot.images[0];
-      if (spot.image) return spot.image;
-      return 'https://placehold.co/600x400?text=Hotspot';
-    }
-    function hsGetFavs() {
-      try { return JSON.parse(localStorage.getItem('zaure_hotspot_favorites') || '[]'); } catch (e) { return []; }
-    }
-    function hsIsFav(id) { return hsGetFavs().includes(String(id)); }
-    function hsToggleFav(id) {
-      const list = hsGetFavs();
-      const sid = String(id);
-      const idx = list.indexOf(sid);
-      if (idx > -1) list.splice(idx, 1);
-      else list.push(sid);
-      localStorage.setItem('zaure_hotspot_favorites', JSON.stringify(list));
-      return idx === -1;
-    }
-
-    async function loadHotspotsSection() {
-      const grid = document.getElementById('hotspotsGrid');
-      if (!grid) return;
-
-      try {
-        const res = await fetch('/data/hotspot.json', { cache: 'no-store' });
-        if (!res.ok) throw new Error('Failed to load');
-        const hotspots = await res.json();
-
-        const coords = await new Promise(resolve => {
-          if (!navigator.geolocation) return resolve(null);
-          navigator.geolocation.getCurrentPosition(
-            pos => resolve({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
-            () => resolve(null),
-            { timeout: 5000, maximumAge: 300000, enableHighAccuracy: false }
-          );
-        });
-
-        let sorted = [...hotspots];
-        if (coords) {
-          sorted.sort((a, b) => {
-            const da = (a.lat != null && a.lng != null) ? hsHaversine(coords.lat, coords.lng, a.lat, a.lng) : Infinity;
-            const db = (b.lat != null && b.lng != null) ? hsHaversine(coords.lat, coords.lng, b.lat, b.lng) : Infinity;
-            return da - db;
-          });
-        } else {
-          sorted.sort((a, b) => (b.addedAt || 0) - (a.addedAt || 0));
+        const res = await fetch('/data/land.json', { cache: 'no-store' });
+        if (res.ok) {
+          const data = await res.json();
+          if (Array.isArray(data) && data.length > 0) return data;
         }
+      } catch (e) { /* silent */ }
+      try {
+        const products = await loadProducts();
+        return products.filter(p => {
+          const cat = (p.category || '').toLowerCase();
+          const sub = (p.subcategory || '').toLowerCase();
+          return cat.includes('land') || cat.includes('property') ||
+                 cat.includes('real estate') || cat.includes('plot') ||
+                 sub.includes('land') || sub.includes('property') || sub.includes('plot');
+        });
+      } catch (e) { return []; }
+    }
 
-        homeHotspots = sorted.slice(0, 8);
+    function formatTitleStatus(s) {
+      if (!s) return '';
+      const map = {
+        'excision_completed': 'Excision Completed',
+        'excision_in_progress': 'Excision in Progress',
+        'c_of_o': 'C of O',
+        'governors_consent': "Governor's Consent",
+        'registered_deed': 'Registered Deed',
+        'survey_plan': 'Survey Plan',
+        'family_consent': 'Family Consent'
+      };
+      return map[s] || String(s).replace(/_/g, ' ');
+    }
 
-        if (homeHotspots.length === 0) {
-          grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--text-secondary);">
-            <i class="fas fa-fire" style="font-size:2rem;display:block;margin-bottom:8px;opacity:0.4;"></i>
-            No hotspots available yet.
-          </div>`;
+    function renderLandCard(item) {
+      const img = (item.images && item.images[0]) ||
+                  item.image ||
+                  'https://placehold.co/600x400?text=Land';
+      const price = item.price >= 1e6
+        ? `₦${(item.price / 1e6).toFixed(1)}M`
+        : `₦${(Number(item.price) || 0).toLocaleString()}`;
+      const tier = (item.verificationTier || 'listed').toLowerCase();
+      const tierLabel = tier === 'guaranteed' ? 'Guaranteed'
+                      : tier === 'verified' ? 'Verified'
+                      : 'Listed';
+      const tierIcon = tier === 'guaranteed' ? 'fa-shield-alt'
+                     : tier === 'verified' ? 'fa-check-circle'
+                     : 'fa-circle';
+      const cat = item.subcategory || item.category || 'Land';
+      const plotSize = item.plotSize || '';
+      const titleStatus = formatTitleStatus(item.titleStatus);
+      const loc = item.location || 'Nigeria';
+      const safeTitle = (item.title || 'Land Plot').replace(/"/g, '&quot;');
+
+      return `
+        <div class="land-card" data-id="${item.id}" onclick="viewProduct('${item.id}')" tabindex="0" role="button" aria-label="View ${safeTitle}">
+          <div class="lc-img">
+            <img src="${img}" alt="${safeTitle}" loading="lazy" onerror="this.src='https://placehold.co/600x400?text=Land'">
+            <span class="lc-tier ${tier}"><i class="fas ${tierIcon}"></i> ${tierLabel}</span>
+            <span class="lc-cat">${cat}</span>
+          </div>
+          <div class="lc-body">
+            <h4 class="lc-title">${item.title || 'Land Plot'}</h4>
+            <div class="lc-price">${price}</div>
+            <div class="lc-meta">
+              <span><i class="fas fa-map-pin"></i> ${loc}</span>
+              ${plotSize ? `<span><i class="fas fa-ruler-combined"></i> ${plotSize}</span>` : ''}
+            </div>
+            ${titleStatus ? `<div class="lc-title-status"><i class="fas fa-file-alt"></i> ${titleStatus}</div>` : ''}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderLandEmpty(grid, msg) {
+      grid.innerHTML = `<div class="land-empty">
+        <i class="fas fa-map-marked-alt"></i>
+        ${msg} <a href="/post.html">List yours free →</a>
+      </div>`;
+    }
+
+    async function loadLandSection() {
+      const grid = document.getElementById('landGrid');
+      if (!grid) return;
+      try {
+        const items = await getLandData();
+        if (!Array.isArray(items) || items.length === 0) {
+          renderLandEmpty(grid, 'No land listings yet.');
           return;
         }
-
-        grid.innerHTML = homeHotspots.map((spot, idx) => {
-          const img = hsGetImage(spot);
-          const open = hsIsOpenNow(spot);
-          const statusHtml = open === true
-            ? `<span class="hc-status open">Open</span>`
-            : open === false
-              ? `<span class="hc-status closed">Closed</span>`
-              : '';
-
-          const dist = coords && spot.lat != null && spot.lng != null
-            ? hsHaversine(coords.lat, coords.lng, spot.lat, spot.lng)
-            : null;
-          const distHtml = dist != null
-            ? `<span class="hc-dist"><i class="fas fa-location-dot"></i> ${hsFormatDistance(dist)}</span>`
-            : '';
-
-          const favActive = hsIsFav(spot.id);
-          const heartCls = favActive ? 'active fas fa-heart' : 'far fa-heart';
-
-          return `
-            <div class="hotspot-home-card" data-id="${spot.id}" tabindex="0" role="button"
-                 aria-label="View ${spot.name}"
-                 style="animation-delay:${Math.min(idx * 40, 320)}ms">
-              <div class="hc-img">
-                <img src="${img}" alt="${spot.name}" loading="lazy"
-                     onerror="this.src='https://placehold.co/600x400?text=Hotspot'">
-                <span class="hc-cat">${spot.category || 'Hotspot'}</span>
-                ${statusHtml}
-                <button class="hc-fav ${favActive ? 'active' : ''}"
-                        aria-label="${favActive ? 'Remove from favorites' : 'Save to favorites'}"
-                        aria-pressed="${favActive}">
-                  <i class="${heartCls}"></i>
-                </button>
-              </div>
-              <div class="hc-body">
-                <h4>${spot.name}</h4>
-                <div class="hc-meta">
-                  <span><i class="fas fa-map-pin"></i> ${spot.location || 'Nigeria'}</span>
-                  ${distHtml}
-                </div>
-              </div>
-            </div>
-          `;
-        }).join('');
-
-        grid.querySelectorAll('.hotspot-home-card').forEach(card => {
-          const id = card.dataset.id;
-
-          card.addEventListener('click', () => {
-            window.location.href = `/hotspot.html?id=${encodeURIComponent(id)}`;
-          });
-          card.addEventListener('keydown', e => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault();
-              window.location.href = `/hotspot.html?id=${encodeURIComponent(id)}`;
-            }
-          });
-
-          const favBtn = card.querySelector('.hc-fav');
-          favBtn.addEventListener('click', e => {
-            e.stopPropagation();
-            const nowActive = hsToggleFav(id);
-            favBtn.classList.toggle('active', nowActive);
-            favBtn.querySelector('i').className = nowActive ? 'fas fa-heart' : 'far fa-heart';
-            favBtn.setAttribute('aria-pressed', String(nowActive));
-            favBtn.setAttribute('aria-label', nowActive ? 'Remove from favorites' : 'Save to favorites');
-          });
-        });
-
+        const sorted = [...items].sort((a, b) => (b.addedAt || 0) - (a.addedAt || 0));
+        grid.innerHTML = sorted.slice(0, 8).map(renderLandCard).join('');
       } catch (err) {
-        console.error('Hotspots load error:', err);
-        grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--text-secondary);">
-          <i class="fas fa-fire" style="font-size:2rem;display:block;margin-bottom:8px;opacity:0.4;"></i>
-          Could not load hotspots. <a href="/hotspots.html" style="color:#B49450;font-weight:600;">Browse all →</a>
-        </div>`;
+        console.error('Land load error:', err);
+        renderLandEmpty(grid, 'Could not load land listings.');
       }
     }
 
-    setInterval(() => {
-      document.querySelectorAll('.hotspot-home-card[data-id]').forEach(card => {
-        const id = card.dataset.id;
-        const spot = homeHotspots.find(s => String(s.id) === String(id));
-        if (!spot) return;
-        const imgWrap = card.querySelector('.hc-img');
-        let statusEl = imgWrap.querySelector('.hc-status');
-        const open = hsIsOpenNow(spot);
-        if (open === null) { if (statusEl) statusEl.remove(); return; }
-        if (!statusEl) {
-          statusEl = document.createElement('span');
-          imgWrap.appendChild(statusEl);
+    async function loadVerifiedLandSection() {
+      const grid = document.getElementById('verifiedLandGrid');
+      if (!grid) return;
+      try {
+        const items = await getLandData();
+        if (!Array.isArray(items) || items.length === 0) {
+          renderLandEmpty(grid, 'No verified land plots yet.');
+          return;
         }
-        statusEl.className = 'hc-status ' + (open ? 'open' : 'closed');
-        statusEl.textContent = open ? 'Open' : 'Closed';
-      });
-    }, 60000);
+        const verified = items.filter(i => {
+          const t = (i.verificationTier || '').toLowerCase();
+          return t === 'verified' || t === 'guaranteed';
+        });
+        const source = verified.length > 0 ? verified : items;
+        grid.innerHTML = source.slice(0, 8).map(renderLandCard).join('');
+      } catch (err) {
+        console.error('Verified land load error:', err);
+        renderLandEmpty(grid, 'Could not load verified land plots.');
+      }
+    }
 
     document.addEventListener('DOMContentLoaded', async function() {
       const categories = await loadCategories();
@@ -1496,11 +1455,9 @@
       renderListings(recommendProducts(products, userState, 8), 'featuredGrid');
       renderListings(recommendProducts(products, userState, 8), 'listingGrid');
 
-      const services = await loadServices();
-      renderServices(recommendServices(services, userState, 8), 'servicesGrid');
-
       loadZaureServicesSection();
-      loadHotspotsSection();
+      loadLandSection();
+      loadVerifiedLandSection();
 
       const keywords = await loadTrendingKeywords();
       const trendHTML = keywords.map(k => `
