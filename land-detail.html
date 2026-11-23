@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <title>Land Details – Zaure</title>
-  <meta name="description" content="View land listing details on Zaure – Nigeria's most trusted land marketplace. Verified titles, transparent pricing, direct seller contact.">
+  <meta name="description" content="View land listing details on Zaure – Nigeria's most trusted land marketplace. Verified titles, transparent pricing, direct contact.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://zauretech.xyz/land-detail.html">
   <meta name="theme-color" content="#1a3650">
@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="/css/style.css">
 
   <style>
+    html, body { overflow-x: hidden; }
     .container { padding-left: 16px; padding-right: 16px; }
     @media (min-width: 1024px) { .container { padding-left: 24px; padding-right: 24px; } }
 
@@ -81,17 +82,18 @@
     /* ---------- GRID ---------- */
     .ld-grid {
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       gap: 20px;
       margin-bottom: 32px;
     }
     @media (min-width: 1024px) {
       .ld-grid {
-        grid-template-columns: minmax(0, 1fr) 380px;
+        grid-template-columns: minmax(0, 1fr) 360px;
         gap: 28px;
         align-items: start;
       }
     }
+    .ld-main-col, .ld-grid > * { min-width: 0; }
 
     /* ---------- GALLERY ---------- */
     .ld-gallery {
@@ -119,12 +121,6 @@
       background: rgba(212,184,122,0.96); color: #1a3650;
       box-shadow: 0 6px 18px rgba(212,184,122,0.4);
     }
-    .ld-main-img .tier-badge.verified {
-      background: rgba(59,130,246,0.92); color: white;
-    }
-    .ld-main-img .tier-badge.listed {
-      background: rgba(107,114,128,0.92); color: white;
-    }
     .ld-main-img .zoom-hint {
       position: absolute; bottom: 16px; right: 16px;
       background: rgba(15,41,64,0.7); backdrop-filter: blur(6px);
@@ -148,13 +144,12 @@
     .ld-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
     /* ---------- TITLE BLOCK ---------- */
-    .ld-title-block {
-      margin: 20px 0 16px;
-    }
+    .ld-title-block { margin: 20px 0 16px; }
     .ld-title-block h1 {
       font-family: 'Playfair Display', serif;
       font-size: 1.4rem; font-weight: 700; color: var(--text);
       line-height: 1.3; letter-spacing: -0.4px; margin-bottom: 8px;
+      overflow-wrap: anywhere;
     }
     @media (min-width: 768px) { .ld-title-block h1 { font-size: 1.7rem; } }
 
@@ -170,7 +165,7 @@
       letter-spacing: 0.5px; color: var(--text);
     }
 
-    /* ---------- MOBILE PRICE BAR ---------- */
+    /* ---------- MOBILE PRICE CARD ---------- */
     .ld-mobile-price-card {
       display: block;
       background: var(--surface); border: 1px solid var(--border);
@@ -212,13 +207,17 @@
     }
     .ld-cta.call:hover { filter: brightness(1.08); }
 
+    /* Save + Share side by side */
+    .ld-secondary-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;
+    }
     .ld-cta-full {
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      padding: 11px 16px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      padding: 10px 8px; border-radius: 12px;
       background: var(--surface-alt); border: 1px solid var(--border);
-      color: var(--text); font-size: 0.82rem; font-weight: 600;
+      color: var(--text); font-size: 0.78rem; font-weight: 600;
       text-decoration: none; cursor: pointer; font-family: inherit;
-      margin-top: 8px; width: 100%; transition: 0.2s;
+      width: 100%; margin: 0; white-space: nowrap; transition: 0.2s;
     }
     .ld-cta-full:hover { border-color: #D4B87A; background: var(--surface); }
     .ld-cta-full.saved { color: #e74c3c; border-color: #e74c3c; }
@@ -226,7 +225,7 @@
 
     /* ---------- QUICK FACTS ---------- */
     .ld-quick-facts {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px;
       margin-bottom: 20px;
     }
     .ld-fact {
@@ -241,7 +240,7 @@
     .ld-fact .f-label i { color: #B49450; font-size: 0.6rem; }
     .ld-fact .f-value {
       font-size: 0.88rem; font-weight: 700; color: var(--text);
-      line-height: 1.3;
+      line-height: 1.3; overflow-wrap: anywhere;
     }
 
     /* ---------- TABS ---------- */
@@ -274,7 +273,7 @@
     }
     .ld-desc-card p {
       font-size: 0.92rem; line-height: 1.65; color: var(--text);
-      margin-bottom: 14px;
+      margin-bottom: 14px; overflow-wrap: anywhere;
     }
     .ld-desc-card p:last-child { margin-bottom: 0; }
     .ld-desc-card h3 {
@@ -285,9 +284,7 @@
     .ld-desc-card h3:first-child { margin-top: 0; }
 
     /* ---------- DOCS ---------- */
-    .ld-docs-grid {
-      display: grid; grid-template-columns: 1fr; gap: 8px;
-    }
+    .ld-docs-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
     @media (min-width: 640px) { .ld-docs-grid { grid-template-columns: 1fr 1fr; } }
     .ld-doc-row {
       display: flex; align-items: center; gap: 10px;
@@ -310,9 +307,7 @@
       border-radius: 14px; overflow: hidden; border: 1px solid var(--border);
       margin-bottom: 14px;
     }
-    .ld-map-wrap iframe {
-      width: 100%; height: 320px; border: 0; display: block;
-    }
+    .ld-map-wrap iframe { width: 100%; height: 320px; border: 0; display: block; }
     .ld-map-address {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: 12px; padding: 14px 16px;
@@ -326,14 +321,12 @@
       white-space: nowrap;
     }
 
-    /* ---------- SELLER ---------- */
+    /* ---------- SELLER / LISTER ---------- */
     .ld-seller-card {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: 14px; padding: 18px;
     }
-    .ld-seller-head {
-      display: flex; align-items: center; gap: 14px; margin-bottom: 14px;
-    }
+    .ld-seller-head { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
     .ld-seller-avatar {
       width: 56px; height: 56px; border-radius: 50%;
       background: linear-gradient(135deg, #1a3650, #2f6f9e);
@@ -341,10 +334,7 @@
       font-family: 'Playfair Display', serif; font-weight: 800; font-size: 1.35rem;
       flex-shrink: 0;
     }
-    .ld-seller-info h4 {
-      font-size: 1rem; font-weight: 700; color: var(--text);
-      margin-bottom: 3px;
-    }
+    .ld-seller-info h4 { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 3px; }
     .ld-seller-info .verified-badge {
       display: inline-flex; align-items: center; gap: 4px;
       font-size: 0.65rem; color: #16A34A; font-weight: 600;
@@ -354,36 +344,24 @@
       display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
       margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border);
     }
-    .ld-seller-meta .sm-item {
-      font-size: 0.75rem; color: var(--text-secondary);
-    }
+    .ld-seller-meta .sm-item { font-size: 0.75rem; color: var(--text-secondary); }
     .ld-seller-meta .sm-item strong {
       display: block; color: var(--text); font-weight: 700;
       font-size: 0.85rem; margin-top: 2px;
     }
 
     /* ---------- SIDEBAR (desktop) ---------- */
-    .ld-sidebar {
-      display: none;
-    }
+    .ld-sidebar { display: none; }
     @media (min-width: 1024px) {
-      .ld-sidebar {
-        display: block;
-        position: sticky;
-        top: 20px;
-      }
+      .ld-sidebar { display: block; position: sticky; top: 20px; }
     }
-    .ld-sidebar-inner {
-      display: flex; flex-direction: column; gap: 14px;
-    }
+    .ld-sidebar-inner { display: flex; flex-direction: column; gap: 14px; }
     .ld-price-card {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: 16px; padding: 20px;
       box-shadow: 0 4px 14px rgba(0,0,0,0.04);
     }
-    .ld-price-card .ld-price-value {
-      font-size: 1.85rem; margin-bottom: 6px;
-    }
+    .ld-price-card .ld-price-value { font-size: 1.85rem; margin-bottom: 6px; }
     .ld-price-card .price-note {
       font-size: 0.72rem; color: var(--text-secondary);
       margin-bottom: 16px; display: flex; align-items: center; gap: 5px;
@@ -410,39 +388,19 @@
       background: linear-gradient(135deg, rgba(212,184,122,0.08), rgba(212,184,122,0.02));
       border-color: rgba(212,184,122,0.4);
     }
-    .ld-verify-panel.verified {
-      background: linear-gradient(135deg, rgba(59,130,246,0.08), rgba(59,130,246,0.02));
-      border-color: rgba(59,130,246,0.3);
-    }
-    .ld-verify-panel.listed {
-      background: var(--surface-alt);
-      border-color: var(--border);
-    }
-    .ld-verify-panel .vp-head {
-      display: flex; align-items: center; gap: 12px; margin-bottom: 10px;
-    }
+    .ld-verify-panel .vp-head { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
     .ld-verify-panel .vp-icon {
       width: 40px; height: 40px; border-radius: 10px;
       display: flex; align-items: center; justify-content: center;
       font-size: 1rem; flex-shrink: 0;
     }
     .ld-verify-panel.guaranteed .vp-icon { background: #D4B87A; color: #1a3650; }
-    .ld-verify-panel.verified .vp-icon { background: #3B82F6; color: white; }
-    .ld-verify-panel.listed .vp-icon { background: var(--border); color: var(--text-secondary); }
-    .ld-verify-panel .vp-text h4 {
-      font-size: 0.92rem; font-weight: 700; color: var(--text); margin-bottom: 2px;
-    }
-    .ld-verify-panel .vp-text p {
-      font-size: 0.75rem; color: var(--text-secondary);
-    }
-    .ld-verify-panel .vp-body {
-      font-size: 0.82rem; color: var(--text); line-height: 1.55;
-    }
+    .ld-verify-panel .vp-text h4 { font-size: 0.92rem; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+    .ld-verify-panel .vp-text p { font-size: 0.75rem; color: var(--text-secondary); }
+    .ld-verify-panel .vp-body { font-size: 0.82rem; color: var(--text); line-height: 1.55; }
 
     /* ---------- SIMILAR ---------- */
-    .ld-similar {
-      margin: 40px 0 20px;
-    }
+    .ld-similar { margin: 40px 0 20px; }
     .ld-similar-head {
       display: flex; justify-content: space-between; align-items: baseline;
       flex-wrap: wrap; margin-bottom: 16px;
@@ -458,9 +416,7 @@
     }
     .ld-similar-head a:hover { color: #B49450; }
 
-    .grid-2col-listings {
-      display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
-    }
+    .grid-2col-listings { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
     @media (min-width: 640px) { .grid-2col-listings { grid-template-columns: repeat(3, 1fr); gap: 16px; } }
     @media (min-width: 1024px) { .grid-2col-listings { grid-template-columns: repeat(4, 1fr); gap: 20px; } }
 
@@ -476,9 +432,7 @@
     .ld-report-row a:hover { text-decoration: underline; }
 
     /* ---------- MOBILE STICKY CTA ---------- */
-    .ld-mobile-sticky {
-      display: none;
-    }
+    .ld-mobile-sticky { display: none; }
     @media (max-width: 1023px) {
       .ld-mobile-sticky {
         display: flex; position: fixed; left: 0; right: 0;
@@ -490,19 +444,33 @@
       }
       .ld-mobile-sticky.hidden { transform: translateY(100%); }
       .ld-mobile-sticky .sticky-price {
-        flex-shrink: 0; display: flex; flex-direction: column; justify-content: center;
+        flex: 0 0 auto; display: flex; flex-direction: column; justify-content: center;
         padding: 0 6px;
       }
       .ld-mobile-sticky .sticky-price .s-label {
         font-size: 0.58rem; text-transform: uppercase;
         letter-spacing: 0.5px; color: var(--text-secondary); font-weight: 600;
       }
-      .ld-mobile-sticky .sticky-price .s-value {
-        font-size: 0.95rem; font-weight: 800; color: #1a3650;
-      }
+      .ld-mobile-sticky .sticky-price .s-value { font-size: 0.95rem; font-weight: 800; color: #1a3650; }
       [data-theme="dark"] .ld-mobile-sticky .sticky-price .s-value { color: #D4B87A; }
-      .ld-mobile-sticky .ld-cta { flex: 1; padding: 12px 10px; font-size: 0.8rem; }
+      .ld-mobile-sticky .ld-cta { flex: 1 1 0; min-width: 0; max-width: 170px; padding: 11px 8px; font-size: 0.8rem; }
       body { padding-bottom: calc(150px + env(safe-area-inset-bottom)) !important; }
+    }
+
+    /* ---------- SMALL SCREENS ---------- */
+    @media (max-width: 640px) {
+      .ld-back-btn { display: none; }
+      .ld-breadcrumb .current { max-width: 140px; }
+      .ld-main-img { height: 240px; }
+      .ld-map-wrap iframe { height: 240px; }
+      .ld-map-address { flex-wrap: wrap; }
+      .ld-map-address a { margin-left: 0; }
+      .ld-price-value { font-size: 1.45rem; }
+      .ld-desc-card { padding: 16px; }
+    }
+    @media (max-width: 380px) {
+      .ld-mobile-sticky .ld-cta i { display: none; }
+      .ld-seller-meta { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -582,7 +550,7 @@
           <div class="ld-gallery">
             <div class="ld-main-img" id="mainImgWrap">
               <img id="mainImage" src="" alt="" loading="eager">
-              <span class="tier-badge listed" id="tierBadge" style="display:none;"></span>
+              <span class="tier-badge guaranteed" id="tierBadge" style="display:none;"></span>
               <span class="zoom-hint"><i class="fas fa-camera"></i> <span id="imageCount">1</span></span>
             </div>
             <div class="ld-thumbs" id="thumbs"></div>
@@ -597,24 +565,18 @@
             </div>
           </div>
 
-          <!-- MOBILE PRICE CARD (hidden on desktop) -->
+          <!-- MOBILE PRICE CARD (hidden on desktop; WhatsApp/Call live in the sticky bar) -->
           <div class="ld-mobile-price-card">
             <div class="ld-price-label">Price</div>
             <div class="ld-price-value" id="mobilePriceValue">—</div>
-            <div class="ld-cta-row">
-              <a href="#" class="ld-cta wa" id="mobileWaBtn" target="_blank" rel="noopener">
-                <i class="fab fa-whatsapp"></i> WhatsApp
-              </a>
-              <a href="#" class="ld-cta call" id="mobileCallBtn">
-                <i class="fas fa-phone"></i> Call
-              </a>
+            <div class="ld-secondary-row">
+              <button class="ld-cta-full" id="mobileSaveBtn" type="button">
+                <i class="far fa-heart"></i> <span>Save</span>
+              </button>
+              <button class="ld-cta-full" id="mobileShareBtn" type="button">
+                <i class="fas fa-share-alt"></i> <span>Share</span>
+              </button>
             </div>
-            <button class="ld-cta-full" id="mobileSaveBtn" type="button">
-              <i class="far fa-heart"></i> <span>Save this listing</span>
-            </button>
-            <button class="ld-cta-full" id="mobileShareBtn" type="button">
-              <i class="fas fa-share-alt"></i> Share with a friend
-            </button>
           </div>
 
           <!-- QUICK FACTS -->
@@ -625,7 +587,7 @@
             <button class="ld-tab-btn active" data-tab="overview">Overview</button>
             <button class="ld-tab-btn" data-tab="documents">Documents</button>
             <button class="ld-tab-btn" data-tab="location">Location</button>
-            <button class="ld-tab-btn" data-tab="seller">Seller</button>
+            <button class="ld-tab-btn" data-tab="seller">Listed by</button>
           </div>
 
           <!-- TAB: OVERVIEW -->
@@ -641,7 +603,7 @@
             <div class="ld-desc-card">
               <h3>Title Documents</h3>
               <p style="font-size:0.82rem;color:var(--text-secondary);margin-bottom:14px;">
-                Document availability is self-reported by the seller. For full verification, request Zaure Findr.
+                Documents listed here were reviewed by Zaure Findr.
               </p>
               <div class="ld-docs-grid" id="docsGrid"></div>
             </div>
@@ -662,7 +624,7 @@
             </div>
           </div>
 
-          <!-- TAB: SELLER -->
+          <!-- TAB: LISTED BY -->
           <div class="ld-tab-content" id="tab-seller">
             <div class="ld-seller-card" id="sellerCard"></div>
           </div>
@@ -678,7 +640,7 @@
               <div class="ld-price-label">Price</div>
               <div class="ld-price-value" id="desktopPriceValue">—</div>
               <div class="price-note">
-                <i class="fas fa-check-circle"></i> No commission added. Direct seller price.
+                <i class="fas fa-check-circle"></i> No commission added.
               </div>
               <div class="ld-cta-row">
                 <a href="#" class="ld-cta wa" id="desktopWaBtn" target="_blank" rel="noopener">
@@ -688,31 +650,18 @@
                   <i class="fas fa-phone"></i> Call
                 </a>
               </div>
-              <button class="ld-cta-full" id="desktopSaveBtn" type="button">
-                <i class="far fa-heart"></i> <span>Save this listing</span>
-              </button>
-              <button class="ld-cta-full" id="desktopShareBtn" type="button">
-                <i class="fas fa-share-alt"></i> Share with a friend
-              </button>
+              <div class="ld-secondary-row">
+                <button class="ld-cta-full" id="desktopSaveBtn" type="button">
+                  <i class="far fa-heart"></i> <span>Save</span>
+                </button>
+                <button class="ld-cta-full" id="desktopShareBtn" type="button">
+                  <i class="fas fa-share-alt"></i> <span>Share</span>
+                </button>
+              </div>
               <div class="ld-trust-mini">
-                <span><i class="fas fa-shield-alt"></i> Verified Sellers</span>
+                <span><i class="fas fa-shield-alt"></i> Verified by Findr</span>
                 <span><i class="fas fa-user-check"></i> Direct Contact</span>
                 <span><i class="fas fa-handshake"></i> No Middlemen</span>
-              </div>
-            </div>
-
-            <!-- FIND FINDER CARD -->
-            <div style="background: linear-gradient(135deg, #0b1f33, #142c48 50%, #1f4a75); border-radius:16px; padding:18px; color:white; position:relative; overflow:hidden;">
-              <div style="position:absolute; right:-40px; top:-40px; width:140px; height:140px; border-radius:50%; border:2px solid rgba(255,255,255,0.1);"></div>
-              <div style="position:relative; z-index:1;">
-                <div style="width:38px;height:38px;border-radius:10px;background:rgba(212,184,122,0.2);display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
-                  <i class="fas fa-search-location" style="color:#D4B87A;font-size:0.95rem;"></i>
-                </div>
-                <h3 style="font-family:'Playfair Display',serif;font-size:0.98rem;font-weight:700;color:#fff;margin-bottom:6px;letter-spacing:-0.1px;">Want us to find and verify land for you?</h3>
-                <p style="font-size:0.72rem;line-height:1.4;color:rgba(255,255,255,0.75);margin-bottom:12px;">Zaure Findr finds, verifies, and negotiates — so you buy with 100% confidence.</p>
-                <a href="/zaure-findr.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:40px;background:rgba(212,184,122,0.9);color:#0b1f33;font-size:0.72rem;font-weight:700;text-decoration:none;">
-                  Explore Zaure Findr <i class="fas fa-arrow-right" style="font-size:0.55rem;"></i>
-                </a>
               </div>
             </div>
 
@@ -862,10 +811,10 @@
       'use strict';
 
       let ITEM = null;
-      let TYPE = 'land';
+
+      const ZAURE_PHONE = '2349042339411';
 
       const $ = (id) => document.getElementById(id);
-      const setHTML = (id, html) => { const el = $(id); if (el) el.innerHTML = html; };
       const show = (id) => { const el = $(id); if (el) el.style.display = ''; };
       const hide = (id) => { const el = $(id); if (el) el.style.display = 'none'; };
 
@@ -910,28 +859,15 @@
       }
 
       function docShortName(key) {
-        return docLabels()[key] || key.replace(/([A-Z])/g, ' $1').trim();
+        return docLabels()[key] || String(key).replace(/([A-Z])/g, ' $1').trim();
       }
 
-      function tierInfo(tier) {
-        const t = (tier || 'listed').toLowerCase();
-        if (t === 'guaranteed') return {
-          key: 'guaranteed', label: 'Guaranteed',
-          icon: 'fa-shield-alt',
-          title: 'Zaure Title Guarantee',
-          desc: 'This listing has been independently verified by Zaure and comes with our title guarantee. Buy with maximum confidence.'
-        };
-        if (t === 'verified') return {
-          key: 'verified', label: 'Verified',
-          icon: 'fa-check-circle',
-          title: 'Title Verified by Zaure',
-          desc: 'Documents were checked by our partner lawyers. Ask the seller for the verification report, or upgrade to Zaure Findr for full protection.'
-        };
+      // Every land listing is sourced by Zaure Findr
+      function tierInfo() {
         return {
-          key: 'listed', label: 'Self-Reported',
-          icon: 'fa-info-circle',
-          title: 'Not Independently Verified',
-          desc: 'Documents shown are self-reported by the seller and have not been verified by Zaure. Always conduct your own due diligence or use Zaure Findr for full verification.'
+          key: 'guaranteed', label: 'Zaure Findr', icon: 'fa-shield-alt',
+          title: 'Sourced & Verified by Zaure Findr',
+          desc: 'This land was found and vetted by the Zaure Findr team. Contact us and we will handle inspection, document checks and negotiation for you.'
         };
       }
 
@@ -959,12 +895,10 @@
         if (!id) { showNotFound('No property ID was provided in the URL.'); return; }
 
         try {
-          // Load land first
           const land = await loadLand();
           const found = land.find(l => String(l.id) === String(id));
 
           if (!found) {
-            // Not in land — maybe it's a product; redirect
             const products = await loadProducts();
             const asProduct = products.find(p => String(p.id) === String(id));
             if (asProduct) {
@@ -999,7 +933,6 @@
         const ogi = document.querySelector('meta[property="og:image"]');
         if (ogi && item.images && item.images[0]) ogi.setAttribute('content', item.images[0]);
 
-        // JSON-LD
         const schema = {
           "@context": "https://schema.org",
           "@type": "Place",
@@ -1062,7 +995,7 @@
         }
       }
 
-      // ---------- RENDER: TITLE / PRICE / TIER ----------
+      // ---------- RENDER: TITLE / PRICE / BADGE ----------
 
       function renderHeader(item) {
         $('landTitle').textContent = item.title || 'Land Plot';
@@ -1073,7 +1006,7 @@
         $('crumbCategory').textContent = isFarm ? 'Farms' : 'Plots';
         $('landCategory').textContent = isFarm ? 'Farmland' : (item.subcategory || 'Residential');
 
-        const tier = tierInfo(item.verificationTier);
+        const tier = tierInfo();
         const tierBadge = $('tierBadge');
         tierBadge.className = `tier-badge ${tier.key}`;
         tierBadge.innerHTML = `<i class="fas ${tier.icon}"></i> ${tier.label}`;
@@ -1090,7 +1023,7 @@
       function renderQuickFacts(item) {
         const facts = [];
         if (item.plotSize) facts.push({ icon: 'fa-ruler-combined', label: 'Size', value: item.plotSize });
-        if (item.titleStatus) facts.push({ icon: 'fa-file-alt', label: 'Title', value: formatTitleStatus(item.titleStatus) });
+        if (item.titleStatus) facts.push({ icon: 'fa-file-alt', label: 'Title', value: typeof formatTitleStatus === 'function' ? formatTitleStatus(item.titleStatus) : docShortName(item.titleStatus) });
         if (item.accessRoad) facts.push({ icon: 'fa-road', label: 'Access Road', value: item.accessRoad });
         if (item.lga || item.state) facts.push({
           icon: 'fa-map-marker-alt', label: 'Area',
@@ -1113,10 +1046,9 @@
           desc.textContent = item.description;
           desc.parentElement.querySelector('h3')?.remove();
         } else {
-          desc.textContent = 'No description provided by the seller. Contact them for more details.';
+          desc.textContent = 'No description available yet. Contact us for more details.';
         }
 
-        // Extra context paragraphs
         const extra = [];
         if (item.communityContext) extra.push(`<h3>Community</h3><p>${item.communityContext}</p>`);
         if (item.neighboringLand) extra.push(`<h3>Neighboring Land</h3><p>${item.neighboringLand}</p>`);
@@ -1132,8 +1064,7 @@
         }
         if (extra.length) $('descCard').insertAdjacentHTML('beforeend', extra.join(''));
 
-        // Verification panel
-        const tier = tierInfo(item.verificationTier);
+        const tier = tierInfo();
         $('verifyPanelWrap').innerHTML = `
           <div class="ld-verify-panel ${tier.key}">
             <div class="vp-head">
@@ -1202,55 +1133,46 @@
         addr.textContent = [item.address, item.lga, item.state].filter(Boolean).join(', ') || item.location || 'Nigeria';
       }
 
-      // ---------- RENDER: SELLER ----------
+      // ---------- RENDER: LISTED BY (Zaure Findr) ----------
 
       function renderSeller(item) {
-        const seller = (typeof item.seller === 'object' && item.seller) ? item.seller : {};
-        const name = seller.name || item.seller || 'Zaure Verified Seller';
-        const initials = name.trim().split(/\s+/).map(w => w.charAt(0)).slice(0, 2).join('').toUpperCase();
-        const verified = seller.verified || item.verificationTier === 'verified' || item.verificationTier === 'guaranteed';
-        const listedAt = item.addedAt ? new Date(item.addedAt).toLocaleDateString('en-NG', { month: 'short', year: 'numeric' }) : '—';
+        const listedAt = item.addedAt
+          ? new Date(item.addedAt).toLocaleDateString('en-NG', { month: 'short', year: 'numeric' })
+          : '—';
+        const listingType = item.subcategory
+          || (typeof classifyLandItem === 'function' ? classifyLandItem(item) : 'Land');
 
         $('sellerCard').innerHTML = `
           <div class="ld-seller-head">
-            <div class="ld-seller-avatar">${initials}</div>
+            <div class="ld-seller-avatar">ZF</div>
             <div class="ld-seller-info">
-              <h4>${name}</h4>
-              ${verified ? `<span class="verified-badge"><i class="fas fa-check-circle"></i> Verified Seller</span>` : ''}
+              <h4>Zaure Findr</h4>
+              <span class="verified-badge"><i class="fas fa-check-circle"></i> Listed by Zaure</span>
             </div>
           </div>
           <div class="ld-seller-meta">
             <div class="sm-item">Listed since<strong>${listedAt}</strong></div>
-            <div class="sm-item">Listing type<strong>${item.subcategory || (typeof classifyLandItem === 'function' ? classifyLandItem(item) : 'Land')}</strong></div>
+            <div class="sm-item">Listing type<strong>${listingType}</strong></div>
           </div>
-          ${seller.phone ? `
-            <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);">
-              <a href="tel:${seller.phone}" style="display:inline-flex;align-items:center;gap:8px;font-size:0.85rem;font-weight:600;color:#B49450;text-decoration:none;">
-                <i class="fas fa-phone"></i> ${seller.phone}
-              </a>
-            </div>
-          ` : ''}
         `;
       }
 
-      // ---------- RENDER: CTA (WhatsApp / Call / Save / Share) ----------
+      // ---------- CTA (WhatsApp / Call / Save / Share) ----------
 
       function wireCTA(item) {
-        const seller = (typeof item.seller === 'object' && item.seller) ? item.seller : {};
-        const phone = seller.phone || item.phone || '';
         const message = `Hi, I'm interested in "${item.title || 'this land'}" on Zaure (ID: ${item.id}) listed for ${formatPrice(item.price)} in ${item.location || 'Nigeria'}. Can you share more details?`;
 
-        const waHref = phone ? waLink(phone, message) : `https://wa.me/2349042339411?text=${encodeURIComponent('Hi Zaure, I am interested in this listing: ' + (item.title || item.id))}`;
-        const callHref = phone ? `tel:${phone}` : 'https://wa.me/2349042339411';
+        const waHref = waLink(ZAURE_PHONE, message);
+        const callHref = `tel:+${ZAURE_PHONE}`;
 
-        ['mobileWaBtn', 'desktopWaBtn', 'stickyWaBtn'].forEach(id => {
+        ['desktopWaBtn', 'stickyWaBtn'].forEach(id => {
           const el = $(id); if (el) { el.href = waHref; el.target = '_blank'; el.rel = 'noopener'; }
         });
-        ['mobileCallBtn', 'desktopCallBtn', 'stickyCallBtn'].forEach(id => {
+        ['desktopCallBtn', 'stickyCallBtn'].forEach(id => {
           const el = $(id); if (el) el.href = callHref;
         });
 
-        // Save buttons — mirror favorites logic
+        // Save buttons
         const saveBtnIds = ['mobileSaveBtn', 'desktopSaveBtn'];
         const syncSaveButtons = () => {
           const saved = typeof isFavorite === 'function' && isFavorite(item.id);
@@ -1260,7 +1182,7 @@
             btn.classList.toggle('saved', !!saved);
             btn.innerHTML = saved
               ? '<i class="fas fa-heart"></i> <span>Saved</span>'
-              : '<i class="far fa-heart"></i> <span>Save this listing</span>';
+              : '<i class="far fa-heart"></i> <span>Save</span>';
           });
         };
         saveBtnIds.forEach(id => {
@@ -1269,10 +1191,9 @@
           btn.addEventListener('click', function (e) {
             e.preventDefault();
             if (typeof window.toggleFavoriteCard === 'function') {
-              // Reuse the shared logic but trigger on our own button
               const user = typeof getCurrentUser === 'function' ? getCurrentUser() : null;
               if (!user) { window.openSignup && window.openSignup(); return; }
-              const isFav = typeof toggleFavorite === 'function' ? toggleFavorite(item.id) : false;
+              if (typeof toggleFavorite === 'function') toggleFavorite(item.id);
               syncSaveButtons();
               if (typeof updateFavoriteBadge === 'function') updateFavoriteBadge();
             }
@@ -1285,26 +1206,25 @@
           const btn = $(id);
           if (!btn) return;
           btn.addEventListener('click', function () {
-            const href = shareLink(item);
-            window.open(href, '_blank', 'noopener');
+            window.open(shareLink(item), '_blank', 'noopener');
           });
         });
 
         // Report
         const reportLink = $('reportLink');
         if (reportLink) {
-          reportLink.href = `https://wa.me/2349042339411?text=${encodeURIComponent('I want to report listing: ' + (item.title || '') + ' (ID: ' + item.id + ')')}`;
+          reportLink.href = `https://wa.me/${ZAURE_PHONE}?text=${encodeURIComponent('I want to report listing: ' + (item.title || '') + ' (ID: ' + item.id + ')')}`;
           reportLink.target = '_blank';
           reportLink.rel = 'noopener';
         }
 
-        // Category pill link
+        // Category crumb link
         const isFarm = /farm/i.test(item.category || item.subcategory || item.type || '');
         const catLink = $('crumbCategory');
         if (catLink) catLink.href = `/land.html?type=${isFarm ? 'farm' : 'plot'}`;
       }
 
-      // ---------- RENDER: TABS ----------
+      // ---------- TABS ----------
 
       function initTabs() {
         document.querySelectorAll('.ld-tab-btn').forEach(btn => {
@@ -1319,7 +1239,7 @@
         });
       }
 
-      // ---------- RENDER: SIMILAR ----------
+      // ---------- SIMILAR ----------
 
       async function renderSimilar(item) {
         const grid = $('similarGrid');
@@ -1353,15 +1273,12 @@
             return;
           }
 
-          // Use the shared renderer from main.js — identical card look
           if (typeof renderLandListings === 'function') {
             renderLandListings(similar, 'similarGrid');
           } else {
-            // fallback (shouldn't happen)
             grid.innerHTML = similar.map(s => `<div>${s.title}</div>`).join('');
           }
 
-          // Update "View more" target
           const moreLink = $('similarMoreLink');
           if (moreLink) moreLink.href = `/land.html?type=${isFarm ? 'farm' : 'plot'}`;
 
@@ -1404,7 +1321,6 @@
           }, { passive: true });
         }
 
-        // Wire nav "post" button so users can list their own land
         const fab = $('fabPostAd');
         if (fab) fab.onclick = () => {
           const user = typeof getCurrentUser === 'function' ? getCurrentUser() : null;
@@ -1416,7 +1332,6 @@
       // ---------- BOOT ----------
 
       document.addEventListener('DOMContentLoaded', function () {
-        // Small delay so main.js's DOMContentLoaded listeners run first
         setTimeout(init, 0);
       });
 
