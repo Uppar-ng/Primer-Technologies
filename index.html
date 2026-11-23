@@ -102,153 +102,131 @@
     }
 
     /* =====================================================
-       ZAURE SERVICE PROMO CARDS — gradient beauty
+       ZAURE SERVICE AUTO-SCROLLING MARQUEE
        ===================================================== */
-    .zaure-service-promo-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-      margin: 16px 0 24px;
+    .service-marquee {
+      position: relative;
+      overflow: hidden;
+      margin: 16px 0 22px;
+      -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 4%, #000 96%, transparent 100%);
+      mask-image: linear-gradient(90deg, transparent 0, #000 4%, #000 96%, transparent 100%);
     }
-    @media (min-width: 640px) {
-      .zaure-service-promo-grid { grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .service-marquee-track {
+      display: flex;
+      gap: 10px;
+      width: max-content;
+      will-change: transform;
+      animation: serviceMarqueeScroll 32s linear infinite;
     }
-    @media (min-width: 1024px) {
-      .zaure-service-promo-grid { gap: 18px; margin: 20px 0 32px; }
+    .service-marquee:hover .service-marquee-track,
+    .service-marquee:focus-within .service-marquee-track {
+      animation-play-state: paused;
+    }
+    @keyframes serviceMarqueeScroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(var(--marquee-shift, -16.6667%)); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .service-marquee {
+        overflow-x: auto;
+        -webkit-mask-image: none;
+        mask-image: none;
+      }
+      .service-marquee-track { animation: none; }
     }
 
-    .service-promo-card {
-      position: relative;
-      display: block;
-      padding: 22px 20px 20px;
-      border-radius: 20px;
+    .service-marquee-card {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      width: 175px;
+      min-height: 70px;
+      padding: 9px 11px;
+      border-radius: 12px;
       color: #fff;
       text-decoration: none;
+      position: relative;
       overflow: hidden;
-      min-height: 220px;
-      box-shadow: 0 10px 26px rgba(15, 41, 64, 0.18);
-      transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.3s ease;
       isolation: isolate;
+      box-shadow: 0 6px 16px rgba(15,41,64,0.16);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
       -webkit-tap-highlight-color: transparent;
     }
-    .service-promo-card:hover,
-    .service-promo-card:focus-visible {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 42px rgba(15, 41, 64, 0.3);
+    @media (min-width: 640px) {
+      .service-marquee-card { width: 200px; gap: 10px; padding: 10px 12px; min-height: 74px; }
+    }
+    @media (min-width: 1024px) {
+      .service-marquee-card { width: 220px; min-height: 78px; }
+    }
+    .service-marquee-card:hover,
+    .service-marquee-card:focus-visible {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 24px rgba(15,41,64,0.24);
       outline: none;
     }
-    .service-promo-card:focus-visible {
-      box-shadow: 0 0 0 3px #D4B87A, 0 20px 42px rgba(15, 41, 64, 0.3);
+    .service-marquee-card:focus-visible {
+      box-shadow: 0 0 0 2px #D4B87A, 0 12px 24px rgba(15,41,64,0.24);
     }
-
-    .service-promo-card.findr {
+    .service-marquee-card.findr {
       background:
-        radial-gradient(circle at 88% 10%, rgba(212, 184, 122, 0.24), transparent 55%),
-        linear-gradient(135deg, #0b1f33 0%, #142c48 45%, #1f4a75 100%);
+        radial-gradient(circle at 90% 0%, rgba(212,184,122,0.32), transparent 60%),
+        linear-gradient(135deg, #0b1f33 0%, #142c48 50%, #1f4a75 100%);
     }
-    .service-promo-card.clean {
+    .service-marquee-card.clean {
       background:
-        radial-gradient(circle at 88% 10%, rgba(255, 255, 255, 0.2), transparent 55%),
-        linear-gradient(135deg, #0a4b45 0%, #0d7a6f 50%, #14b8a6 100%);
+        radial-gradient(circle at 90% 0%, rgba(255,255,255,0.22), transparent 60%),
+        linear-gradient(135deg, #0a4b45 0%, #0d7a6f 55%, #14b8a6 100%);
     }
-    .service-promo-card.move {
+    .service-marquee-card.move {
       background:
-        radial-gradient(circle at 88% 10%, rgba(255, 209, 102, 0.25), transparent 55%),
-        linear-gradient(135deg, #6d2e0a 0%, #a83e0d 45%, #ea6b1c 100%);
+        radial-gradient(circle at 90% 0%, rgba(255,209,102,0.28), transparent 60%),
+        linear-gradient(135deg, #6d2e0a 0%, #a83e0d 55%, #ea6b1c 100%);
     }
-
-    .service-promo-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 0% 100%, rgba(255, 255, 255, 0.08), transparent 45%);
-      pointer-events: none;
-      z-index: 0;
-    }
-    .service-promo-card::after {
-      content: '';
-      position: absolute;
-      right: -55px; top: -55px;
-      width: 180px; height: 180px;
-      border-radius: 50%;
-      border: 2px solid rgba(255, 255, 255, 0.1);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .service-promo-card .spc-inner {
-      position: relative; z-index: 1;
-      display: flex; flex-direction: column; height: 100%;
-    }
-    .service-promo-card .spc-icon {
-      width: 48px; height: 48px;
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.16);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.24);
+    .service-marquee-card .smc-icon {
+      flex-shrink: 0;
+      width: 32px; height: 32px;
+      border-radius: 9px;
+      background: rgba(255,255,255,0.18);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.3);
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.15rem;
+      font-size: 0.78rem;
       color: #fff;
-      margin-bottom: 14px;
     }
-    .service-promo-card .spc-body { flex: 1; display: flex; flex-direction: column; }
-    .service-promo-card .spc-body h3 {
+    .service-marquee-card .smc-text { flex: 1; min-width: 0; }
+    .service-marquee-card .smc-text h4 {
       font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
+      font-size: 0.78rem;
       font-weight: 700;
       color: #fff;
-      margin: 0 0 6px 0;
-      letter-spacing: -0.2px;
+      margin: 0 0 1px;
+      line-height: 1.15;
+      letter-spacing: -0.1px;
     }
-    .service-promo-card .spc-body p {
-      font-size: 0.76rem;
-      line-height: 1.45;
-      color: rgba(255, 255, 255, 0.82);
-      margin: 0 0 16px 0;
-      flex: 1;
+    .service-marquee-card .smc-text p {
+      font-size: 0.6rem;
+      color: rgba(255,255,255,0.78);
+      margin: 0;
+      line-height: 1.25;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
-    .service-promo-card .spc-btn {
-      align-self: flex-start;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 7px 14px;
-      background: rgba(255, 255, 255, 0.16);
-      border: 1px solid rgba(255, 255, 255, 0.34);
-      border-radius: 40px;
-      font-size: 0.72rem;
-      font-weight: 600;
+    .service-marquee-card .smc-arrow {
+      flex-shrink: 0;
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.16);
+      border: 1px solid rgba(255,255,255,0.28);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.48rem;
       color: #fff;
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
       transition: background 0.2s ease;
-      letter-spacing: 0.1px;
     }
-    .service-promo-card .spc-btn i {
-      font-size: 0.62rem;
-      transition: transform 0.2s ease;
-    }
-    .service-promo-card:hover .spc-btn,
-    .service-promo-card:focus-visible .spc-btn {
-      background: rgba(255, 255, 255, 0.28);
-    }
-    .service-promo-card:hover .spc-btn i {
-      transform: translateX(2px);
-    }
-    .service-promo-card .spc-badge {
-      position: absolute;
-      top: 16px; right: 16px;
-      background: #D4B87A;
-      color: #0b1f33;
-      font-size: 0.56rem;
-      font-weight: 800;
-      padding: 3px 9px;
-      border-radius: 20px;
-      letter-spacing: 0.6px;
-      text-transform: uppercase;
-      z-index: 1;
-    }
+    .service-marquee-card:hover .smc-arrow { background: rgba(255,255,255,0.3); }
 
     /* =====================================================
        LAND CARDS
@@ -801,41 +779,36 @@
       <span class="wa-arrow"><i class="fas fa-chevron-right"></i></span>
     </a>
 
-    <!-- ============ ZAURE SERVICE PROMO CARDS ============ -->
-    <div class="zaure-service-promo-grid" role="list" aria-label="Zaure services">
-      <a href="/zaure-findr.html" class="service-promo-card findr" role="listitem">
-        <span class="spc-badge">New</span>
-        <div class="spc-inner">
-          <div class="spc-icon"><i class="fas fa-search-location"></i></div>
-          <div class="spc-body">
-            <h3>Zaure Findr</h3>
-            <p>Tell us the land you want — we find it, verify the title, negotiate the price, and close for you.</p>
-            <span class="spc-btn">Explore Service <i class="fas fa-arrow-right"></i></span>
+    <!-- ============ ZAURE SERVICE AUTO-SCROLLING MARQUEE ============ -->
+    <div class="service-marquee" aria-label="Zaure services">
+      <div class="service-marquee-track" id="serviceMarqueeTrack">
+        <a href="/zaure-findr.html" class="service-marquee-card findr">
+          <div class="smc-icon"><i class="fas fa-search-location"></i></div>
+          <div class="smc-text">
+            <h4>Zaure Findr</h4>
+            <p>We find, verify &amp; close land deals</p>
           </div>
-        </div>
-      </a>
-      <a href="/zaure-clean.html" class="service-promo-card clean" role="listitem">
-        <div class="spc-inner">
-          <div class="spc-icon"><i class="fas fa-broom"></i></div>
-          <div class="spc-body">
-            <h3>Zaure Clean</h3>
-            <p>Professional deep cleaning for homes, offices and post-move spaces — by vetted, trained cleaners.</p>
-            <span class="spc-btn">Explore Service <i class="fas fa-arrow-right"></i></span>
+          <div class="smc-arrow"><i class="fas fa-arrow-right"></i></div>
+        </a>
+        <a href="/zaure-clean.html" class="service-marquee-card clean">
+          <div class="smc-icon"><i class="fas fa-broom"></i></div>
+          <div class="smc-text">
+            <h4>Zaure Clean</h4>
+            <p>Deep cleaning for homes &amp; offices</p>
           </div>
-        </div>
-      </a>
-      <a href="/zaure-move.html" class="service-promo-card move" role="listitem">
-        <div class="spc-inner">
-          <div class="spc-icon"><i class="fas fa-truck-moving"></i></div>
-          <div class="spc-body">
-            <h3>Zaure Move</h3>
-            <p>Safe, careful moving across Nigeria. Packing, transport and setup — handled end to end.</p>
-            <span class="spc-btn">Explore Service <i class="fas fa-arrow-right"></i></span>
+          <div class="smc-arrow"><i class="fas fa-arrow-right"></i></div>
+        </a>
+        <a href="/zaure-move.html" class="service-marquee-card move">
+          <div class="smc-icon"><i class="fas fa-truck-moving"></i></div>
+          <div class="smc-text">
+            <h4>Zaure Move</h4>
+            <p>Safe, careful moving across Nigeria</p>
           </div>
-        </div>
-      </a>
+          <div class="smc-arrow"><i class="fas fa-arrow-right"></i></div>
+        </a>
+      </div>
     </div>
-    <!-- ============ /ZAURE SERVICE PROMO CARDS ============ -->
+    <!-- ============ /ZAURE SERVICE AUTO-SCROLLING MARQUEE ============ -->
 
     <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap;">
       <h2 class="section-title" style="margin-top:4px;">Categories</h2>
@@ -863,13 +836,6 @@
       <div class="listing-card"><div class="listing-img"><i class="fas fa-spinner fa-spin"></i></div><div class="listing-body"><div class="price">Loading...</div></div></div>
     </div>
     <!-- ============ /PLOTS FOR SALE ============ -->
-
-    <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap;">
-      <h2 class="section-title" style="margin-top:4px;">Zaure Services</h2>
-    </div>
-    <div class="storefronts" id="zaureServicesGrid">
-      <div class="storefront-card"><div class="store-avatar">...</div><div><div class="store-name">Loading</div></div></div>
-    </div>
 
     <!-- ============ FARMS FOR SALE ============ -->
     <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap;">
@@ -1088,6 +1054,28 @@
         if (e.key === 'Escape') selectContainer.classList.remove('active');
       });
     })();
+
+    /* ============================================================
+       SERVICE MARQUEE — duplicate the 3 cards to fill 6 copies
+       and set the animation shift so the loop is seamless
+       ============================================================ */
+    function initServiceMarquee() {
+      const track = document.getElementById('serviceMarqueeTrack');
+      if (!track) return;
+      const originals = Array.from(track.children);
+      if (originals.length === 0) return;
+      const TOTAL_COPIES = 6;
+      for (let i = 1; i < TOTAL_COPIES; i++) {
+        originals.forEach(node => {
+          const clone = node.cloneNode(true);
+          clone.setAttribute('aria-hidden', 'true');
+          clone.setAttribute('tabindex', '-1');
+          track.appendChild(clone);
+        });
+      }
+      track.style.setProperty('--marquee-shift', `-${(100 / TOTAL_COPIES).toFixed(4)}%`);
+      track.style.animation = 'serviceMarqueeScroll 32s linear infinite';
+    }
 
     function toggleHeroLayout() {
       const isDesktop = window.innerWidth >= 1024;
@@ -1365,48 +1353,6 @@
     }
 
     /* ============================================================
-       ZAURE SERVICES — loads from /data/zaure-services.json
-       ============================================================ */
-    async function loadZaureServicesSection() {
-      const grid = document.getElementById('zaureServicesGrid');
-      if (!grid) return;
-
-      try {
-        const res = await fetch('/data/zaure-services.json', { cache: 'no-store' });
-        if (!res.ok) throw new Error('Failed to load');
-        const services = await res.json();
-
-        if (!Array.isArray(services) || services.length === 0) {
-          grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--text-secondary);">
-            <i class="fas fa-hand-sparkles" style="font-size:2rem;display:block;margin-bottom:8px;opacity:0.4;"></i>
-            No Zaure services available yet.
-          </div>`;
-          return;
-        }
-
-        grid.innerHTML = services.map(s => {
-          const initial = (s.initial || s.name?.charAt(0) || 'Z').toUpperCase();
-          return `
-            <a href="/${s.page}"
-               class="storefront-card" style="text-decoration:none;">
-              <div class="store-avatar" style="background: linear-gradient(135deg, #1a3650, #2a4a6a); color: #D4B87A; font-family: 'Playfair Display', serif; font-weight: 900;">${initial}</div>
-              <div>
-                <div class="store-name">${s.name}</div>
-                <div class="store-badge"><i class="fas fa-check-circle"></i> ${s.badge || 'Official Service'}</div>
-              </div>
-            </a>
-          `;
-        }).join('');
-      } catch (err) {
-        console.error('Zaure services load error:', err);
-        grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--text-secondary);">
-          <i class="fas fa-hand-sparkles" style="font-size:2rem;display:block;margin-bottom:8px;opacity:0.4;"></i>
-          Could not load Zaure services.
-        </div>`;
-      }
-    }
-
-    /* ============================================================
        LAND — plots + farms, loads from /data/land.json with fallback
        ============================================================ */
     async function getLandData() {
@@ -1554,6 +1500,8 @@
     }
 
     document.addEventListener('DOMContentLoaded', async function() {
+      initServiceMarquee();
+
       const categories = await loadCategories();
       document.getElementById('categoryGrid').innerHTML = categories.slice(0, 6).map(cat => `
         <div class="category-card" onclick="loadCategory('${cat.slug}')">
@@ -1568,7 +1516,6 @@
       renderListings(recommendProducts(products, userState, 8), 'featuredGrid');
       renderListings(recommendProducts(products, userState, 8), 'listingGrid');
 
-      loadZaureServicesSection();
       loadPlotsSection();
       loadFarmsSection();
 
