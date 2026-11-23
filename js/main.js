@@ -42,8 +42,6 @@
     if (!trigger || !optionsList) return;
 
     // Map display name → torchv-translate language code
-    // 'ff' is the ISO code for Fulani (Fulfulde). If the library
-    // needs a different alias, try 'fulfulde' or 'fula'.
     const languageMap = {
       'English': 'english',
       'Arabic':  'arabic',
@@ -53,7 +51,6 @@
       'Igbo':    'igbo'
     };
 
-    // --- Render the language options ---
     function renderOptions() {
       optionsList.innerHTML = Object.entries(languageMap)
         .map(([name, code]) => `<li data-lang="${code}" data-name="${name}">${name}</li>`)
@@ -64,17 +61,13 @@
           const code = this.dataset.lang;
           const name = this.dataset.name;
 
-          // 1. Update visible UI
           trigger.querySelector('span').textContent = name;
           container.classList.remove('active');
 
-          // 2. Persist choice
           localStorage.setItem('zaure_lang', code);
 
-          // 3. Trigger translation
           if (window.translate && typeof translate.changeLanguage === 'function') {
             if (code === 'english') {
-              // Reverting to source language
               if (typeof translate.reset === 'function') {
                 translate.reset();
               } else {
@@ -90,7 +83,6 @@
       });
     }
 
-    // --- Toggle dropdown open/close ---
     trigger.addEventListener('click', function (e) {
       e.stopPropagation();
       container.classList.toggle('active');
@@ -100,7 +92,6 @@
       if (!container.contains(e.target)) container.classList.remove('active');
     });
 
-    // --- Set the trigger label from saved language ---
     const saved = localStorage.getItem('zaure_lang');
     if (saved) {
       const match = Object.entries(languageMap).find(([_, code]) => code === saved);
@@ -438,6 +429,144 @@ function getProductsSync() {
 }
 
 // ============================================================
+// DATA LOADING — LAND (mirrors products exactly)
+// ============================================================
+async function loadLand() {
+  const cached = localStorage.getItem('zaure_land_cache');
+  if (cached) {
+    try {
+      const parsed = JSON.parse(cached);
+      if (parsed && parsed.length > 0) {
+        fetchFreshLand();
+        return parsed;
+      }
+    } catch (e) {}
+  }
+  return fetchFreshLand();
+}
+
+async function fetchFreshLand() {
+  try {
+    const response = await fetch('/data/land.json');
+    if (!response.ok) throw new Error('Land not found');
+    const land = await response.json();
+    localStorage.setItem('zaure_land_cache', JSON.stringify(land));
+    return land;
+  } catch (error) {
+    console.warn('Land.json not found — falling back to products.json filter.');
+    // Fallback: extract land-like items from products.json
+    const products = getProductsSync();
+    const landFromProducts = products.filter(p => {
+      const cat = (p.category || '').toLowerCase();
+      const sub = (p.subcategory || '').toLowerCase();
+      const type = (p.type || '').toLowerCase();
+      return cat.includes('land') || cat.includes('property') ||
+             cat.includes('real estate') || cat.includes('plot') ||
+             cat.includes('farm') || sub.includes('land') ||
+             sub.includes('property') || sub.includes('plot') || sub.includes('farm') ||
+             type === 'plot' || type === 'farm';
+    });
+    localStorage.setItem('zaure_land_cache', JSON.stringify(landFromProducts));
+    return landFromProducts;
+  }
+}
+
+function getLandSync() {
+  const cached = localStorage.getItem('zaure_land_cache');
+  if (cached) {
+    try { return JSON.parse(cached); } catch (e) { return []; }
+  }
+  return [];
+}
+
+// ============================================================
+// COMBINED ITEMS (products + land) — used by search, etc.
+// ============================================================
+async function loadAllItems() {
+  const [products, land] = await Promise.all([loadProducts(), loadLand()]);
+  return combineItems(products, land);
+}
+
+function getAllItemsSync() {
+  return combineItems(getProductsSync(), getLandSync());
+}
+
+function combineItems(products, land) {
+  const seen = new Set();
+  const result = [];
+  // Land first (preferred data for land items — richer detail)
+  (land || []).forEach(item => {
+    if (item && item.id != null && !seen.has(String(item.id))) {
+      seen.add(String(item.id));
+      result.push(item);
+    }
+  });
+  (products || []).forEach(item => {
+    if (item && item.id != null && !seen.has(String(item.id))) {
+      seen.add(String(item.id));
+      result.push(item);
+    }
+  });
+  return result;
+}
+
+// ============================================================
+// LAND HELPERS — classify / detect
+// ============================================================
+function isLandItem(item) {
+  if (!item) return false;
+  const type = (item.type || '').toLowerCase();
+  const cat  = (item.category || '').toLowerCase();
+  const sub  = (item.subcategory || '').toLowerCase();
+  return type === 'plot' || type === 'farm' ||
+         cat === 'land' || cat === 'farmland' || cat === 'property' ||
+         sub === 'farmland' || sub === 'residential' && cat.includes('land') ||
+         cat.includes('land') || cat.includes('farm');
+}
+
+function classifyLandItem(item) {
+  const hay = [
+    item.subcategory, item.category, item.type, item.propertyType, item.title
+  ].filter(Boolean).join(' ').toLowerCase();
+  if (hay.includes('farm') || hay.includes('agro') || hay.includes('agric') ||
+      hay.includes('farmland') || hay.includes('crop')) return 'farm';
+  return 'plot';
+}
+
+function formatTitleStatus(s) {
+  if (!s) return '';
+  const map = {
+    'excision_completed': 'Excision Completed',
+    'excision_in_progress': 'Excision in Progress',
+    'c_of_o': 'C of O',
+    'governors_consent': "Governor's Consent",
+    'registered_deed': 'Registered Deed',
+    'survey_plan': 'Survey Plan',
+    'family_consent': 'Family Consent'
+  };
+  return map[s] || String(s).replace(/_/g, ' ');
+}
+
+// ============================================================
+// ITEM TYPE RESOLUTION (for view routing, hover preview, etc.)
+// ============================================================
+function getItemType(id) {
+  const sid = String(id);
+  if (getLandSync().some(l => String(l.id) === sid)) return 'land';
+  if (getProductsSync().some(p => String(p.id) === sid)) return 'product';
+  return null;
+}
+
+function resolveItemById(id) {
+  const sid = String(id);
+  const landHit = getLandSync().find(l => String(l.id) === sid);
+  if (landHit) return landHit;
+  const productHit = getProductsSync().find(p => String(p.id) === sid);
+  if (productHit) return productHit;
+  return null;
+}
+
+// ============================================================
 // SERVICES (Find a Pro) — ALWAYS FRESH FROM services.json
 // ============================================================
 async function loadServices() {
@@ -643,6 +772,24 @@ function recommendServices(services, state, count) {
   return shuffleArray(pool).slice(0, count);
 }
 
+// Same algorithm as recommendProducts — mirrors it exactly for land
+function recommendLand(land, state, count) {
+  if (!land || land.length === 0) return [];
+
+  let pool = land;
+  if (state) {
+    const stateFiltered = land.filter(l => l.location && l.location.includes(state));
+    if (stateFiltered.length >= count) {
+      pool = stateFiltered;
+    } else if (stateFiltered.length > 0) {
+      const others = land.filter(l => !l.location || !l.location.includes(state));
+      pool = [...stateFiltered, ...shuffleArray(others).slice(0, count - stateFiltered.length)];
+    }
+  }
+
+  return shuffleArray(pool).slice(0, count);
+}
+
 // ============================================================
 // RENDER SERVICES (homepage cards)
 // ============================================================
@@ -802,7 +949,7 @@ window.toggleFavoriteCard = function(productId, buttonElement) {
 };
 
 // ============================================================
-// RENDER LISTINGS (products)
+// RENDER LISTINGS (products) — reference card layout
 // ============================================================
 function renderListings(products, containerId) {
   const grid = document.getElementById(containerId);
@@ -832,7 +979,7 @@ function renderListings(products, containerId) {
     const heartColor = isFav ? 'color:#e74c3c;' : '';
 
     return `
-      <div class="listing-card" data-id="${p.id}" style="cursor:pointer;border-radius:16px;overflow:hidden;background:var(--surface);border:1px solid var(--border);transition:transform 0.2s,box-shadow 0.2s;position:relative;">
+      <div class="listing-card" data-id="${p.id}" data-type="product" style="cursor:pointer;border-radius:16px;overflow:hidden;background:var(--surface);border:1px solid var(--border);transition:transform 0.2s,box-shadow 0.2s;position:relative;">
         <button class="fav-btn" onclick="event.stopPropagation(); toggleFavoriteCard('${p.id}', this)"
                 style="position:absolute;top:12px;right:12px;z-index:2;background:rgba(255,255,255,0.9);border:none;border-radius:50%;width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;box-shadow:0 2px 8px rgba(0,0,0,0.1);${heartColor}">
           <i class="${heartIcon}"></i>
@@ -859,7 +1006,80 @@ function renderListings(products, containerId) {
 }
 
 // ============================================================
-// VIEW PRODUCT / SERVICE / CATEGORY / STORE
+// RENDER LAND LISTINGS — identical card structure to products
+// ============================================================
+function renderLandListings(land, containerId) {
+  const grid = document.getElementById(containerId);
+  if (!grid) return;
+
+  if (!land || land.length === 0) {
+    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--text-secondary);">
+      <i class="fas fa-map-marked-alt" style="font-size:2rem;display:block;margin-bottom:12px;"></i>
+      No land listings found.
+    </div>`;
+    return;
+  }
+
+  grid.innerHTML = land.map(p => {
+    const tier = (p.verificationTier || '').toLowerCase();
+
+    // Badges mirror product pattern (boosted/featured)
+    let badges = '';
+    if (tier === 'guaranteed') {
+      badges += `<span class="badge-featured" style="background:#D4B87A;color:#1a3650;"><i class="fas fa-shield-alt"></i> Guaranteed</span>`;
+    } else if (tier === 'verified') {
+      badges += `<span class="badge-featured"><i class="fas fa-check-circle"></i> Verified</span>`;
+    }
+
+    const price = p.price >= 1e6
+      ? `₦${(p.price/1e6).toFixed(1)}M`
+      : `₦${(Number(p.price) || 0).toLocaleString()}`;
+
+    const firstImage = p.images && p.images.length > 0 ? p.images[0] : (p.image || null);
+    const imageHtml = firstImage
+      ? `<img src="${firstImage}" alt="${p.title}" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\\'fas fa-map-marked-alt\\' style=\\'font-size:2.5rem;color:var(--text-secondary);\\'></i>';">`
+      : `<i class="fas fa-map-marked-alt" style="font-size:2.5rem;color:var(--text-secondary);"></i>`;
+
+    const isFav = isFavorite(p.id);
+    const heartIcon = isFav ? 'fas fa-heart' : 'far fa-heart';
+    const heartColor = isFav ? 'color:#e74c3c;' : '';
+
+    // Secondary meta mirrors product "date" — land shows plot size or category
+    const secondaryMeta = p.plotSize || (classifyLandItem(p) === 'farm' ? 'Farmland' : 'Plot');
+    const secondaryIcon = p.plotSize ? 'fa-ruler-combined' : 'fa-tag';
+
+    // Seller line mirrors product pattern — falls back to Zaure for land
+    const sellerName = (p.seller && p.seller.name) ? p.seller.name : 'Zaure';
+
+    return `
+      <div class="listing-card" data-id="${p.id}" data-type="land" style="cursor:pointer;border-radius:16px;overflow:hidden;background:var(--surface);border:1px solid var(--border);transition:transform 0.2s,box-shadow 0.2s;position:relative;">
+        <button class="fav-btn" onclick="event.stopPropagation(); toggleFavoriteCard('${p.id}', this)"
+                style="position:absolute;top:12px;right:12px;z-index:2;background:rgba(255,255,255,0.9);border:none;border-radius:50%;width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;box-shadow:0 2px 8px rgba(0,0,0,0.1);${heartColor}">
+          <i class="${heartIcon}"></i>
+        </button>
+        <div class="listing-img" style="height:180px;background:var(--surface-alt);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;" onclick="viewLand('${p.id}')">
+          ${imageHtml}
+          ${badges}
+        </div>
+        <div class="listing-body" style="padding:12px 14px 14px;" onclick="viewLand('${p.id}')">
+          <div class="price" style="font-weight:700;font-size:1.1rem;color:var(--text);">${price}</div>
+          <div class="title" style="font-weight:600;font-size:0.9rem;margin:4px 0;color:var(--text);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${p.title || 'Land Plot'}</div>
+          <div class="meta" style="display:flex;gap:12px;font-size:0.7rem;color:var(--text-secondary);margin-top:4px;">
+            <span><i class="fas fa-map-pin"></i> ${p.location || 'Nigeria'}</span>
+            <span><i class="fas ${secondaryIcon}"></i> ${secondaryMeta}</span>
+          </div>
+          <div class="listing-footer" style="display:flex;justify-content:space-between;font-size:0.7rem;color:var(--text-secondary);margin-top:8px;padding-top:8px;border-top:1px solid var(--border);">
+            <span><i class="fas fa-store"></i> ${sellerName}</span>
+            <span><i class="far fa-heart"></i> ${isFav ? 'Saved' : 'Save'}</span>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// ============================================================
+// VIEW PRODUCT / SERVICE / LAND / CATEGORY / STORE
 // ============================================================
 window.viewProduct = function(productId) {
   window.location.href = `/detail.html?id=${productId}`;
@@ -867,6 +1087,17 @@ window.viewProduct = function(productId) {
 
 window.viewService = function(serviceId) {
   window.location.href = `/service.html?id=${serviceId}`;
+};
+
+window.viewLand = function(landId) {
+  window.location.href = `/land-detail.html?id=${landId}`;
+};
+
+// Route based on which cache contains the item — for mixed contexts
+window.viewAnyItem = function(id) {
+  const type = getItemType(id);
+  if (type === 'land') return window.viewLand(id);
+  return window.viewProduct(id);
 };
 
 window.loadCategory = function(slug) {
@@ -900,7 +1131,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ============================================================
-// SEARCH HANDLER
+// SEARCH HANDLER (products + land combined)
 // ============================================================
 document.addEventListener('DOMContentLoaded', function() {
   const searchInput = document.getElementById('searchInput');
@@ -916,10 +1147,12 @@ document.addEventListener('DOMContentLoaded', function() {
         searchWrapper.classList.remove('show-autocomplete');
         return;
       }
-      const products = await loadProducts();
-      const results = products.filter(p =>
-        p.title.toLowerCase().includes(query.toLowerCase()) ||
-        p.category.toLowerCase().includes(query.toLowerCase())
+      const items = await loadAllItems();
+      const q = query.toLowerCase();
+      const results = items.filter(p =>
+        (p.title && p.title.toLowerCase().includes(q)) ||
+        (p.category && p.category.toLowerCase().includes(q)) ||
+        (p.subcategory && p.subcategory.toLowerCase().includes(q))
       ).slice(0, 5);
 
       if (results.length === 0) {
@@ -927,11 +1160,14 @@ document.addEventListener('DOMContentLoaded', function() {
       } else {
         acDropdown.innerHTML = results.map(p => {
           const firstImage = p.images && p.images.length > 0 ? p.images[0] : null;
+          const isLand = isLandItem(p);
+          const icon = isLand ? '🏞️' : '📦';
+          const fallbackImg = `data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2236%22 height=%2236%22%3E%3Crect width=%2236%22 height=%2236%22 fill=%22%23d6e1ed%22/%3E%3Ctext x=%228%22 y=%2224%22 font-size=%2220%22%3E${icon}%3C/text%3E%3C/svg%3E`;
           return `
-            <div class="ac-item" onclick="viewProduct('${p.id}')">
-              <img src="${firstImage || 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2236%22 height=%2236%22%3E%3Crect width=%2236%22 height=%2236%22 fill=%22%23d6e1ed%22/%3E%3Ctext x=%228%22 y=%2224%22 font-size=%2220%22%3E📦%3C/text%3E%3C/svg%3E'}" alt="">
+            <div class="ac-item" onclick="viewAnyItem('${p.id}')">
+              <img src="${firstImage || fallbackImg}" alt="">
               <span>${p.title}</span>
-              <small>${p.category}</small>
+              <small>${p.category}${p.subcategory ? ' · ' + p.subcategory : ''}</small>
             </div>
           `;
         }).join('');
@@ -950,11 +1186,13 @@ document.addEventListener('DOMContentLoaded', function() {
         e.preventDefault();
         const q = searchInput.value.trim();
         if (q) {
-          const products = await loadProducts();
-          const filtered = products.filter(p =>
-            p.title.toLowerCase().includes(q.toLowerCase()) ||
-            p.category.toLowerCase().includes(q.toLowerCase()) ||
-            p.location.toLowerCase().includes(q.toLowerCase())
+          const items = await loadAllItems();
+          const query = q.toLowerCase();
+          const filtered = items.filter(p =>
+            (p.title && p.title.toLowerCase().includes(query)) ||
+            (p.category && p.category.toLowerCase().includes(query)) ||
+            (p.subcategory && p.subcategory.toLowerCase().includes(query)) ||
+            (p.location && p.location.toLowerCase().includes(query))
           );
           localStorage.setItem('zaure_search_results', JSON.stringify(filtered));
           localStorage.setItem('zaure_search_query', q);
@@ -985,11 +1223,33 @@ window.getCurrentUser = getCurrentUser;
 window.loadUser = loadUser;
 window.signupUser = signupUser;
 window.updateUserProfile = updateUserProfile;
+
+// Products
 window.loadProducts = loadProducts;
+window.getProductsSync = getProductsSync;
+
+// Land (mirrors products)
+window.loadLand = loadLand;
+window.getLandSync = getLandSync;
+window.loadAllItems = loadAllItems;
+window.getAllItemsSync = getAllItemsSync;
+window.combineItems = combineItems;
+window.isLandItem = isLandItem;
+window.classifyLandItem = classifyLandItem;
+window.formatTitleStatus = formatTitleStatus;
+window.recommendLand = recommendLand;
+window.renderLandListings = renderLandListings;
+
+// Services
 window.loadServices = loadServices;
+window.getServicesSync = getServicesSync;
+
+// Categories, sellers, trending
 window.loadCategories = loadCategories;
 window.loadTopSellers = loadTopSellers;
 window.loadTrendingKeywords = loadTrendingKeywords;
+
+// Favorites
 window.getFavorites = getFavorites;
 window.saveFavorites = saveFavorites;
 window.toggleFavorite = toggleFavorite;
@@ -997,21 +1257,33 @@ window.isFavorite = isFavorite;
 window.getFavoriteCount = getFavoriteCount;
 window.updateFavoriteBadge = updateFavoriteBadge;
 window.toggleFavoriteCard = toggleFavoriteCard;
+
+// Render
 window.renderListings = renderListings;
 window.renderServices = renderServices;
-window.getProductsSync = getProductsSync;
-window.getServicesSync = getServicesSync;
-window.initTheme = initTheme;
-window.toggleTheme = toggleTheme;
+
+// Routing
 window.viewProduct = viewProduct;
+window.viewLand = viewLand;
+window.viewAnyItem = viewAnyItem;
 window.viewService = viewService;
 window.loadCategory = loadCategory;
-window.openSignup = openSignup;
 window.viewStore = viewStore;
+window.getItemType = getItemType;
+window.resolveItemById = resolveItemById;
+
+// Theme / signup / state
+window.initTheme = initTheme;
+window.toggleTheme = toggleTheme;
+window.openSignup = openSignup;
+window.initStateDropdown = initStateDropdown;
+
+// Recommendation
 window.getUserState = getUserState;
 window.recommendProducts = recommendProducts;
 window.recommendServices = recommendServices;
-window.initStateDropdown = initStateDropdown;
+
+// Seller helpers
 window.getSellerName = getSellerName;
 window.getSellerPic = getSellerPic;
 window.getSellerRating = getSellerRating;
