@@ -27,7 +27,6 @@ body{
 .zb{min-height:100dvh;display:flex;flex-direction:column;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
 .bar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-deep));transition:width .5s cubic-bezier(.2,.8,.2,1);z-index:50;box-shadow:0 0 12px rgba(212,184,122,.5)}
 
-/* ============ HEADER ============ */
 header{display:flex;justify-content:space-between;align-items:center;padding:22px 24px;gap:12px}
 .logo{display:flex;align-items:baseline;gap:12px;text-decoration:none}
 .logo b{font-size:14px;font-weight:800;letter-spacing:.32em;color:var(--fg)}
@@ -36,7 +35,6 @@ header{display:flex;justify-content:space-between;align-items:center;padding:22p
 .x:hover{color:var(--fg)}
 .x i{font-size:.7rem}
 
-/* ============ MAIN ============ */
 main{flex:1;width:100%;max-width:720px;margin:0 auto;padding:3vh 24px 24px}
 .stage{animation:in .45s cubic-bezier(.2,.8,.2,1)}
 @keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
@@ -57,7 +55,6 @@ h1{
 }
 .hint{color:var(--mut);max-width:540px;margin-bottom:32px;font-size:.94rem;line-height:1.6}
 
-/* ============ FIELDS ============ */
 .f{margin-bottom:28px}
 .l{display:block;font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--mut);margin-bottom:10px}
 
@@ -73,7 +70,6 @@ input[type=tel]{font-variant-numeric:tabular-nums}
 
 .err{color:var(--err);font-size:.88rem;min-height:1.4em;margin-top:8px;font-weight:500}
 
-/* ============ ICON TILES (property type) ============ */
 .tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 @media(min-width:560px){.tiles{grid-template-columns:repeat(4,1fr)}}
 .tile{position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent}
@@ -96,7 +92,6 @@ input[type=tel]{font-variant-numeric:tabular-nums}
 .tile input:checked + .tile-body i{color:var(--gold-soft)}
 .tile input:focus-visible + .tile-body{outline:2px solid var(--gold);outline-offset:2px}
 
-/* ============ CHECKBOX / RADIO GRID ============ */
 .checks{display:grid;grid-template-columns:1fr;gap:8px}
 @media(min-width:560px){.checks.two{grid-template-columns:1fr 1fr}}
 .check{
@@ -117,7 +112,6 @@ input[type=tel]{font-variant-numeric:tabular-nums}
 .check.checked .check-body strong{color:var(--gold-soft)}
 .check:has(input:focus-visible){outline:2px solid var(--gold);outline-offset:2px}
 
-/* ============ CUSTOM DATE PICKER ============ */
 .dp{border:1px solid var(--ln);border-radius:14px;padding:16px;background:var(--surface)}
 .dp-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
 .dp-month{font-family:'Playfair Display',serif;font-weight:800;font-size:1rem;color:var(--fg);letter-spacing:-.2px}
@@ -155,7 +149,6 @@ input[type=tel]{font-variant-numeric:tabular-nums}
 .dp-selected i{color:var(--gold)}
 .dp-selected strong{color:var(--fg);font-weight:700}
 
-/* ============ TIME SLOTS ============ */
 .time-slots{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 @media(min-width:480px){.time-slots{grid-template-columns:repeat(4,1fr)}}
 .time-slot{
@@ -170,7 +163,6 @@ input[type=tel]{font-variant-numeric:tabular-nums}
   box-shadow:0 4px 12px rgba(212,184,122,.3);
 }
 
-/* ============ QUANTITY STEPPERS ============ */
 .qty-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 @media(min-width:640px){.qty-grid{grid-template-columns:repeat(4,1fr)}}
 .qty-item{
@@ -196,7 +188,6 @@ input[type=tel]{font-variant-numeric:tabular-nums}
 .qty-controls input::-webkit-outer-spin-button,
 .qty-controls input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
 
-/* ============ NAV ============ */
 nav{
   display:flex;justify-content:space-between;align-items:center;gap:12px;
   width:100%;max-width:720px;margin:0 auto;padding:16px 24px 28px;
@@ -216,7 +207,6 @@ nav{
 .btn.ghost:hover{color:var(--fg);background:transparent;box-shadow:none;transform:none}
 .btn.ghost i{margin-right:2px}
 
-/* ============ REVIEW ROWS ============ */
 .review-card{
   background:var(--surface);border:1px solid var(--ln);border-radius:14px;
   padding:16px 18px;margin-bottom:14px;
@@ -241,7 +231,6 @@ nav{
 .review-row .rk{color:var(--mut);font-weight:500;flex-shrink:0}
 .review-row .rv{color:var(--fg);font-weight:600;text-align:right;word-break:break-word}
 
-/* ============ SUCCESS ============ */
 .success{text-align:center;padding:30px 10px}
 .success-icon{
   width:76px;height:76px;border-radius:50%;background:rgba(37,211,102,.12);
@@ -273,7 +262,7 @@ nav{
 {"key":"clean","title":"Zaure Clean","back":"/zaure-services.html","after":"We reply within 2 to 4 hours (Mon to Sat) with a site-based quote.","note":"A 50% deposit confirms your date and the balance is paid on completion. Bank transfer only. Free cancellation up to 48 hours before.","lead":3,"endpoint":"https://formspree.io/f/YOUR_FORM_ID","steps":[
 {"q":"What do you need?","h":"Select all that apply. Post-construction & renovation cleaning is our core service; the other three can be added to any job or booked on their own.","fields":[
   {"n":"svc","l":"Services","t":"multi","opts":[
-    {"v":"Post-construction & renovation cleaning","s":"Rough clean through to final handover polish","i":"fa-trowel-bricks","full":true},
+    {"v":"Post-construction & renovation cleaning","s":"Rough clean through to final handover polish","i":"fa-trowel-bricks"},
     {"v":"Pest control","s":"Pre-handover fumigation and treatment","i":"fa-bug"},
     {"v":"Weed control","s":"Compound, plot and site-edge clearing","i":"fa-seedling"},
     {"v":"Carpet deep wash","s":"Steam extraction for carpets and rugs","i":"fa-rug"}
@@ -548,8 +537,8 @@ function setNav(){
   nav.innerHTML=
     (i===0
       ? `<a class="btn ghost" href="${esc(C.back)}"><i class="fas fa-times"></i> Cancel</a>`
-      : `<button class="btn ghost" data-a="back"><i class="fas fa-arrow-left"></i> Back</button>`)
-    + `<button class="btn" data-a="${last?'send':'next'}" ${S.sending?'disabled':''}>
+      : `<button type="button" class="btn ghost" data-a="back"><i class="fas fa-arrow-left"></i> Back</button>`)
+    + `<button type="button" class="btn" data-a="${last?'send':'next'}" ${S.sending?'disabled':''}>
          ${last
            ? (S.sending ? '<i class="fas fa-spinner fa-spin"></i> Sending…' : '<i class="fas fa-paper-plane"></i> Send request')
            : (i===N-1 ? 'Review <i class="fas fa-arrow-right"></i>' : 'Continue <i class="fas fa-arrow-right"></i>')}
@@ -638,7 +627,6 @@ async function sendRequest(){
   const data=collectForSubmit();
   const endpoint=(C.endpoint||'').trim();
 
-  // If endpoint is not configured, fall back to WhatsApp
   if(!endpoint||endpoint.includes('YOUR_FORM_ID')){
     S.sending=false;setNav();
     const msg='*New '+C.title+' request*\n\n'+Object.entries(data).map(([k,v])=>k+': '+v).join('\n')+'\n\nSent from the Zaure booking form';
@@ -697,8 +685,15 @@ function back(){S.i=S.r?N:S.i-1;S.r=false;save();render();}
 
 /* ---- EVENT DELEGATION ---- */
 
+// IMPORTANT: nav is a sibling of app, not a child, so it needs its own listener.
+nav.addEventListener('click',e=>{
+  const a=e.target.closest('[data-a]')?.dataset.a;
+  if(a==='next')next();
+  else if(a==='back')back();
+  else if(a==='send')sendRequest();
+});
+
 app.addEventListener('click',e=>{
-  // date picker navigation
   const dpPrev=e.target.closest('[data-dp-prev]');
   if(dpPrev){
     const n=dpPrev.dataset.dpPrev,st=dpState[n];
@@ -723,7 +718,6 @@ app.addEventListener('click',e=>{
     const er=$('#er');if(er)er.textContent='';
     return;
   }
-  // time slot
   const slot=e.target.closest('[data-time]');
   if(slot){
     const group=slot.parentElement;
@@ -736,7 +730,6 @@ app.addEventListener('click',e=>{
     const er=$('#er');if(er)er.textContent='';
     return;
   }
-  // qty stepper
   const qty=e.target.closest('[data-qty]');
   if(qty){
     const n=qty.dataset.qty;
@@ -748,12 +741,6 @@ app.addEventListener('click',e=>{
     val=qty.dataset.op==='+'?Math.min(max,val+1):Math.max(min,val-1);
     input.value=val;S.d[n]=val;save();return;
   }
-  // nav
-  const a=e.target.closest('[data-a]')?.dataset.a;
-  if(a==='next')next();
-  else if(a==='back')back();
-  else if(a==='send')sendRequest();
-  // edit from review
   const go=e.target.closest('[data-go]');
   if(go){S.i=+go.dataset.go;S.r=true;save();render();return;}
 });
