@@ -17,12 +17,22 @@
   --fg:#f4f6f8;--mut:#8b97a4;--ln:rgba(255,255,255,.14);
   --err:#ff7b7b;--ok:#25D366;--wa:#25D366;--wa-dark:#1DA851;
 }
+/* Light theme override — activated by [data-theme="light"] on <html> */
+[data-theme="light"]{
+  --bg:#f7f9fc;--surface:#ffffff;--surface-2:#eef3f8;
+  --fg:#0f2940;--mut:#5b6b7c;--ln:rgba(15,41,64,.14);
+  --err:#c0392b;--gold-soft:#c9a962;
+}
+[data-theme="light"] body{
+  background:radial-gradient(ellipse at top right,rgba(212,184,122,.14),transparent 55%),var(--bg);
+}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{min-height:100%}
 body{
   background:radial-gradient(ellipse at top right,rgba(212,184,122,.08),transparent 50%),var(--bg);
   color:var(--fg);font:400 16px/1.5 Inter,system-ui,sans-serif;
   -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  transition:background .3s ease,color .3s ease;
 }
 .zb{min-height:100dvh;display:flex;flex-direction:column;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
 .bar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-deep));transition:width .5s cubic-bezier(.2,.8,.2,1);z-index:50;box-shadow:0 0 12px rgba(212,184,122,.5)}
@@ -31,6 +41,14 @@ header{display:flex;justify-content:space-between;align-items:center;padding:22p
 .logo{display:flex;align-items:baseline;gap:12px;text-decoration:none}
 .logo b{font-size:14px;font-weight:800;letter-spacing:.32em;color:var(--fg)}
 .logo span{font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}
+.head-right{display:flex;align-items:center;gap:8px}
+.theme-toggle{
+  width:38px;height:38px;border-radius:50%;border:1px solid var(--ln);
+  background:var(--surface);color:var(--fg);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .2s;font-family:inherit;font-size:.85rem;
+}
+.theme-toggle:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-1px)}
 .x{color:var(--mut);text-decoration:none;font-size:12px;letter-spacing:.16em;text-transform:uppercase;display:inline-flex;align-items:center;gap:6px;transition:color .2s}
 .x:hover{color:var(--fg)}
 .x i{font-size:.7rem}
@@ -45,6 +63,7 @@ main{flex:1;width:100%;max-width:720px;margin:0 auto;padding:3vh 24px 24px}
   color:var(--gold);padding:5px 12px;background:rgba(212,184,122,.1);
   border:1px solid rgba(212,184,122,.3);border-radius:40px;
 }
+[data-theme="light"] .eyebrow{color:var(--gold-deep);background:rgba(212,184,122,.18);border-color:rgba(180,148,80,.4)}
 .eyebrow i{font-size:.55rem}
 
 h1{
@@ -65,6 +84,7 @@ input[type=text],input[type=tel],textarea{
 }
 textarea{resize:none;min-height:90px;font-size:1rem;line-height:1.5}
 input::placeholder,textarea::placeholder{color:#55606b}
+[data-theme="light"] input::placeholder,[data-theme="light"] textarea::placeholder{color:#9aa7b4}
 input:focus,textarea:focus{border-color:var(--gold)}
 input[type=tel]{font-variant-numeric:tabular-nums}
 
@@ -110,6 +130,7 @@ input[type=tel]{font-variant-numeric:tabular-nums}
 .check .check-body small{display:block;font-size:.74rem;color:var(--mut);font-weight:400;line-height:1.4}
 .check.checked{border-color:var(--gold);background:rgba(212,184,122,.1)}
 .check.checked .check-body strong{color:var(--gold-soft)}
+[data-theme="light"] .check.checked .check-body strong{color:var(--gold-deep)}
 .check:has(input:focus-visible){outline:2px solid var(--gold);outline-offset:2px}
 
 .dp{border:1px solid var(--ln);border-radius:14px;padding:16px;background:var(--surface)}
@@ -137,6 +158,7 @@ input[type=tel]{font-variant-numeric:tabular-nums}
   transition:all .15s;font-family:inherit;min-height:38px;
 }
 .dp-day:hover:not(:disabled){background:rgba(212,184,122,.12);color:var(--gold-soft)}
+[data-theme="light"] .dp-day:hover:not(:disabled){color:var(--gold-deep)}
 .dp-day.other-month{opacity:0;pointer-events:none}
 .dp-day:disabled{opacity:.2;cursor:not-allowed}
 .dp-day.today{border:1.5px solid var(--gold);color:var(--gold);font-weight:800}
@@ -144,7 +166,7 @@ input[type=tel]{font-variant-numeric:tabular-nums}
 .dp-day.selected:hover{background:var(--gold-soft);color:var(--navy)}
 .dp-selected{
   margin-top:14px;padding-top:14px;border-top:1px solid var(--ln);
-  font-size:.82rem;color:var(--mut);display:flex;align-items:center;gap:8px;
+  font-size:.82rem;color:var(--mut);display:flex;align-items:center;gap:8px;flex-wrap:wrap;
 }
 .dp-selected i{color:var(--gold)}
 .dp-selected strong{color:var(--fg);font-weight:700}
@@ -158,6 +180,7 @@ input[type=tel]{font-variant-numeric:tabular-nums}
   font-family:inherit;min-height:44px;
 }
 .time-slot:hover{border-color:rgba(212,184,122,.55);background:var(--surface-2);color:var(--gold-soft)}
+[data-theme="light"] .time-slot:hover{color:var(--gold-deep)}
 .time-slot.selected{
   background:var(--gold);border-color:var(--gold);color:var(--navy);font-weight:800;
   box-shadow:0 4px 12px rgba(212,184,122,.3);
@@ -192,14 +215,14 @@ nav{
   display:flex;justify-content:space-between;align-items:center;gap:12px;
   width:100%;max-width:720px;margin:0 auto;padding:16px 24px 28px;
   background:linear-gradient(180deg,transparent,var(--bg) 30%);
-  position:sticky;bottom:0;
+  position:sticky;bottom:0;z-index:10;
 }
 .btn{
   font:700 .78rem Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;
   text-decoration:none;text-align:center;cursor:pointer;
   padding:16px 32px;border:1px solid var(--gold);background:var(--gold);color:var(--navy);
   border-radius:40px;transition:all .2s;display:inline-flex;align-items:center;gap:8px;
-  min-height:52px;
+  min-height:52px;white-space:nowrap;
 }
 .btn:hover{background:var(--gold-soft);transform:translateY(-1px);box-shadow:0 8px 24px rgba(212,184,122,.3)}
 .btn:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none}
@@ -207,29 +230,53 @@ nav{
 .btn.ghost:hover{color:var(--fg);background:transparent;box-shadow:none;transform:none}
 .btn.ghost i{margin-right:2px}
 
+/* ============ REVIEW (responsive) ============ */
+.review-grid{
+  display:grid;grid-template-columns:1fr;gap:14px;
+}
+@media(min-width:720px){
+  .review-grid{grid-template-columns:1fr 1fr;align-items:start}
+  .review-grid .review-card.full{grid-column:1 / -1}
+}
 .review-card{
   background:var(--surface);border:1px solid var(--ln);border-radius:14px;
-  padding:16px 18px;margin-bottom:14px;
+  padding:16px 18px;min-width:0;
 }
-.review-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:8px}
+.review-head{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  margin-bottom:10px;gap:10px;
+}
 .review-head h4{
   font-size:.68rem;font-weight:800;color:var(--gold);
   text-transform:uppercase;letter-spacing:1.2px;
+  line-height:1.3;flex:1;min-width:0;word-break:break-word;
 }
+[data-theme="light"] .review-head h4{color:var(--gold-deep)}
 .review-edit{
   background:transparent;border:none;color:var(--gold);font-size:.7rem;
   font-weight:700;cursor:pointer;padding:4px 10px;border-radius:6px;
-  font-family:inherit;transition:background .15s;
+  font-family:inherit;transition:background .15s;flex-shrink:0;white-space:nowrap;
 }
+[data-theme="light"] .review-edit{color:var(--gold-deep)}
 .review-edit:hover{background:rgba(212,184,122,.15)}
 .review-row{
   display:flex;justify-content:space-between;gap:14px;
   padding:7px 0;font-size:.86rem;line-height:1.5;
   border-bottom:1px solid rgba(255,255,255,.06);
+  min-width:0;
 }
+[data-theme="light"] .review-row{border-bottom-color:rgba(15,41,64,.08)}
 .review-row:last-child{border-bottom:none}
-.review-row .rk{color:var(--mut);font-weight:500;flex-shrink:0}
-.review-row .rv{color:var(--fg);font-weight:600;text-align:right;word-break:break-word}
+.review-row .rk{color:var(--mut);font-weight:500;flex-shrink:0;max-width:45%}
+.review-row .rv{
+  color:var(--fg);font-weight:600;text-align:right;
+  word-break:break-word;overflow-wrap:anywhere;min-width:0;
+}
+@media(max-width:420px){
+  .review-row{flex-direction:column;gap:2px}
+  .review-row .rk{max-width:none}
+  .review-row .rv{text-align:left}
+}
 
 .success{text-align:center;padding:30px 10px}
 .success-icon{
@@ -241,7 +288,7 @@ nav{
 .success p{color:var(--mut);font-size:.94rem;line-height:1.65;max-width:420px;margin:0 auto 24px}
 .success-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
 
-.fine{color:var(--mut);font-size:.84rem;margin-top:22px;line-height:1.6;padding-top:18px;border-top:1px solid var(--ln)}
+.fine{color:var(--mut);font-size:.84rem;margin-top:22px;line-height:1.6}
 
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -251,7 +298,12 @@ nav{
 <div class="zb">
   <header>
     <a class="logo" href="/"><b>ZAURE</b><span>Clean</span></a>
-    <a class="x" href="/zaure-services.html" aria-label="Close booking">Close <i class="fas fa-times"></i></a>
+    <div class="head-right">
+      <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <i class="fas fa-moon" id="themeIcon"></i>
+      </button>
+      <a class="x" href="/zaure-services.html" aria-label="Close booking">Close <i class="fas fa-times"></i></a>
+    </div>
   </header>
   <main id="app"></main>
   <nav id="nav"></nav>
@@ -259,7 +311,7 @@ nav{
 <noscript><p style="padding:24px;color:#fff">Please enable JavaScript to book, or message us on WhatsApp: +2349042339411</p></noscript>
 
 <script type="application/json" id="cfg">
-{"key":"clean","title":"Zaure Clean","back":"/zaure-services.html","after":"We reply within 2 to 4 hours (Mon to Sat) with a site-based quote.","note":"A 50% deposit confirms your date and the balance is paid on completion. Bank transfer only. Free cancellation up to 48 hours before.","lead":3,"endpoint":"https://formspree.io/f/YOUR_FORM_ID","steps":[
+{"key":"clean","title":"Zaure Clean","back":"/zaure-services.html","after":"We will review the site details and reply on WhatsApp within 2 to 4 hours (Mon to Sat) with a site-based quote.","note":"Our team reviews every request before quoting — we do not quote blindly. Once we've seen the site, you'll get a clear, itemised quote.","lead":3,"endpoint":"https://formspree.io/f/YOUR_FORM_ID","steps":[
 {"q":"What do you need?","h":"Select all that apply. Post-construction & renovation cleaning is our core service; the other three can be added to any job or booked on their own.","fields":[
   {"n":"svc","l":"Services","t":"multi","opts":[
     {"v":"Post-construction & renovation cleaning","s":"Rough clean through to final handover polish","i":"fa-trowel-bricks"},
@@ -280,7 +332,7 @@ nav{
   {"n":"area","l":"Area or town","t":"text","ph":"e.g. Barnawa","list":["Barnawa","GRA","Malali","City Centre","Rigasa","Kawo","Unguwan Rimi","Tudun Wada","Zaria","Kafanchan","Kujama"]},
   {"n":"addr","l":"Street or landmark (optional)","t":"text","req":false}
 ]},
-{"q":"How big is the site?","h":"A rough idea is enough — we quote after reviewing the site.","fields":[
+{"q":"How big is the site?","h":"A rough idea is enough — we'll see the site before quoting.","fields":[
   {"n":"bedrooms","l":"Bedrooms","t":"qty","min":0,"max":20,"v":3},
   {"n":"living","l":"Living rooms","t":"qty","min":0,"max":6,"v":1},
   {"n":"kitchens","l":"Kitchens","t":"qty","min":0,"max":4,"v":1},
@@ -305,7 +357,7 @@ nav{
 {"q":"Who are we working with?","h":"We work as a sub-contractor and report to you.","fields":[
   {"n":"role","l":"You are a","t":"choice","opts":["Building contractor","Property developer","Landlord or facility manager","Homeowner","Other"]}
 ]},
-{"q":"How can we reach you?","h":"We will send your quote within a few hours.","fields":[
+{"q":"How can we reach you?","h":"We'll review your site details and reply on WhatsApp with a site-based quote.","fields":[
   {"n":"name","l":"Full name","t":"text","ac":"name","ph":"e.g. Musa Ibrahim"},
   {"n":"phone","l":"WhatsApp number","t":"tel","ph":"0803 000 0000"},
   {"n":"email","l":"Email (optional)","t":"text","ac":"email","req":false,"ph":"you@company.com"},
@@ -324,6 +376,56 @@ const app=$('#app'), nav=$('#nav');
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const WA='2349042339411';
 
+/* ============================================================
+   THEME SYNC — shares the same storage key as the main site.
+   main.js uses localStorage.theme = "light" | "dark".
+   ============================================================ */
+const THEME_KEY='theme';
+function getStoredTheme(){
+  try{
+    const t=localStorage.getItem(THEME_KEY);
+    if(t==='light'||t==='dark')return t;
+  }catch(e){}
+  return matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';
+}
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme',t);
+  const icon=document.getElementById('themeIcon');
+  if(icon){
+    icon.className='fas '+(t==='dark'?'fa-moon':'fa-sun');
+  }
+  const meta=document.querySelector('meta[name="theme-color"]');
+  if(meta)meta.setAttribute('content',t==='dark'?'#0f2940':'#f7f9fc');
+}
+function setTheme(t){
+  applyTheme(t);
+  try{localStorage.setItem(THEME_KEY,t)}catch(e){}
+}
+function initTheme(){
+  applyTheme(getStoredTheme());
+  const btn=document.getElementById('themeToggle');
+  if(btn){
+    btn.addEventListener('click',()=>{
+      const cur=document.documentElement.getAttribute('data-theme')==='light'?'light':'dark';
+      setTheme(cur==='light'?'dark':'light');
+    });
+  }
+  // Reflect changes made in other tabs/pages
+  window.addEventListener('storage',e=>{
+    if(e.key===THEME_KEY && (e.newValue==='light'||e.newValue==='dark')){
+      applyTheme(e.newValue);
+    }
+  });
+  // Reflect changes made via main.js on the same page (same document, other script)
+  // by observing the data-theme attribute — but we're the ones setting it, so no-op.
+  // Also re-check on visibility/focus in case main.js toggled it while we were hidden.
+  document.addEventListener('visibilitychange',()=>{
+    if(!document.hidden)applyTheme(getStoredTheme());
+  });
+  window.addEventListener('focus',()=>applyTheme(getStoredTheme()));
+}
+
+/* ---- STATE ---- */
 let S;
 try{S=JSON.parse(sessionStorage.getItem(K))}catch(e){}
 S=S&&S.d?S:{i:0,d:{}};
@@ -568,15 +670,10 @@ function focusTop(inp){
   scrollTo({top:0,behavior:'smooth'});
 }
 
-function rows(){
-  const r=[];
-  C.steps.forEach((st,si)=>st.fields.forEach(f=>{
-    const v=S.d[f.n];
-    if(vis(f)&&!empty(f,v))r.push([si,f.l,fmt(f,v)]);
-  }));
-  return r;
-}
-
+/* ============================================================
+   REVIEW — responsive: 2-col grid on wide screens, stacked rows
+   on very narrow screens, full-width cards where appropriate.
+   ============================================================ */
 function review(){
   const grouped={};
   C.steps.forEach((st,si)=>st.fields.forEach(f=>{
@@ -587,19 +684,22 @@ function review(){
     }
   }));
   const titles=C.steps.map(s=>s.q);
-  const cards=Object.entries(grouped).map(([si,rows])=>`
-    <div class="review-card">
+  // Services card spans full width since values can be long
+  const cards=Object.entries(grouped).map(([si,rows])=>{
+    const isFull=rows.some(r=>String(r[1]).length>40);
+    return `<div class="review-card${isFull?' full':''}">
       <div class="review-head">
         <h4>${esc(titles[si])}</h4>
         <button type="button" class="review-edit" data-go="${si}">Edit</button>
       </div>
       ${rows.map(r=>`<div class="review-row"><span class="rk">${esc(r[0])}</span><span class="rv">${esc(r[1])}</span></div>`).join('')}
-    </div>`).join('');
+    </div>`;
+  }).join('');
   app.innerHTML=`<section class="stage">
     <div class="eyebrow"><i class="fas fa-check"></i> Review</div>
     <h1 tabindex="-1">Check your request.</h1>
-    <p class="hint">Edit anything, then send it to the Zaure team. We'll reply with a site-based quote.</p>
-    ${cards}
+    <p class="hint">Edit anything, then send it to the Zaure team. We'll review the site and reply on WhatsApp with a site-based quote.</p>
+    <div class="review-grid">${cards}</div>
     <p class="fine">${esc(C.note||'')}</p>
   </section>`;
   focusTop();
@@ -685,7 +785,6 @@ function back(){S.i=S.r?N:S.i-1;S.r=false;save();render();}
 
 /* ---- EVENT DELEGATION ---- */
 
-// IMPORTANT: nav is a sibling of app, not a child, so it needs its own listener.
 nav.addEventListener('click',e=>{
   const a=e.target.closest('[data-a]')?.dataset.a;
   if(a==='next')next();
@@ -787,6 +886,8 @@ app.addEventListener('keydown',e=>{
   }
 });
 
+/* ---- BOOT ---- */
+initTheme();
 if(S.i>N)S.i=0;
 render();
 })();
