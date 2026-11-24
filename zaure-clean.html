@@ -4,128 +4,255 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Book Zaure Clean — Zaure</title>
-<meta name="description" content="Book post-construction cleaning, pest control, weed control or carpet cleaning in Kaduna.">
-<meta name="theme-color" content="#05070a">
+<meta name="description" content="Book post-construction & renovation cleaning, pest control, weed control or carpet deep wash in Kaduna.">
+<meta name="theme-color" content="#0f2940">
 <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0}
 :root{
-  --bg:#05070a;--fg:#f4f6f8;--mut:#8b97a4;--ln:rgba(255,255,255,.16);
-  --gold:#D4B87A;--gold-deep:#B49450;--err:#ff7b7b;--ok:#25D366;
-  --surface:#0d1117;--surface-2:#141a22;
+  --navy:#0f2940;--navy-2:#1a3650;--navy-3:#2a4a6a;
+  --gold:#D4B87A;--gold-deep:#B49450;--gold-soft:#E7D3A1;
+  --bg:#0a1622;--surface:#0f2940;--surface-2:#14304a;
+  --fg:#f4f6f8;--mut:#8b97a4;--ln:rgba(255,255,255,.14);
+  --err:#ff7b7b;--ok:#25D366;--wa:#25D366;--wa-dark:#1DA851;
 }
+*{box-sizing:border-box;margin:0;padding:0}
 html,body{min-height:100%}
-body{background:var(--bg);color:var(--fg);font:400 16px/1.5 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+body{
+  background:radial-gradient(ellipse at top right,rgba(212,184,122,.08),transparent 50%),var(--bg);
+  color:var(--fg);font:400 16px/1.5 Inter,system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+}
 .zb{min-height:100dvh;display:flex;flex-direction:column;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
-.bar{position:fixed;top:0;left:0;height:2px;width:0;background:var(--gold);transition:width .5s cubic-bezier(.2,.8,.2,1);z-index:5}
-header{display:flex;justify-content:space-between;align-items:center;padding:22px 24px}
-.logo{font-size:13px;font-weight:700;letter-spacing:.32em;color:var(--fg);text-decoration:none}
-.logo span{color:var(--mut);font-weight:500;margin-left:12px;letter-spacing:.18em;text-transform:uppercase}
-.x{color:var(--mut);text-decoration:none;font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+.bar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-deep));transition:width .5s cubic-bezier(.2,.8,.2,1);z-index:50;box-shadow:0 0 12px rgba(212,184,122,.5)}
+
+/* ============ HEADER ============ */
+header{display:flex;justify-content:space-between;align-items:center;padding:22px 24px;gap:12px}
+.logo{display:flex;align-items:baseline;gap:12px;text-decoration:none}
+.logo b{font-size:14px;font-weight:800;letter-spacing:.32em;color:var(--fg)}
+.logo span{font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}
+.x{color:var(--mut);text-decoration:none;font-size:12px;letter-spacing:.16em;text-transform:uppercase;display:inline-flex;align-items:center;gap:6px;transition:color .2s}
 .x:hover{color:var(--fg)}
-main{flex:1;width:100%;max-width:720px;margin:0 auto;padding:4vh 24px 24px}
+.x i{font-size:.7rem}
+
+/* ============ MAIN ============ */
+main{flex:1;width:100%;max-width:720px;margin:0 auto;padding:3vh 24px 24px}
 .stage{animation:in .45s cubic-bezier(.2,.8,.2,1)}
 @keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-.eyebrow{font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
-h1{font-weight:300;font-size:clamp(2rem,6vw,3.4rem);line-height:1.08;letter-spacing:-.025em;margin:14px 0 12px;outline:0}
-.hint{color:var(--mut);max-width:520px;margin-bottom:36px}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold);padding:5px 12px;background:rgba(212,184,122,.1);
+  border:1px solid rgba(212,184,122,.3);border-radius:40px;
+}
+.eyebrow i{font-size:.55rem}
+
+h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.9rem,5.5vw,3rem);font-weight:800;
+  line-height:1.1;letter-spacing:-.6px;margin:16px 0 12px;outline:0;
+  color:var(--fg);
+}
+.hint{color:var(--mut);max-width:540px;margin-bottom:32px;font-size:.94rem;line-height:1.6}
+
+/* ============ FIELDS ============ */
 .f{margin-bottom:28px}
-.l{display:block;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);margin-bottom:10px}
-input,textarea,select{width:100%;background:transparent;border:0;border-bottom:1px solid var(--ln);border-radius:0;color:var(--fg);font:300 1.5rem/1.3 Inter,sans-serif;padding:10px 0;outline:0;transition:border-color .2s}
-textarea{resize:none;min-height:96px;font-size:1.1rem}
+.l{display:block;font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--mut);margin-bottom:10px}
+
+input[type=text],input[type=tel],textarea{
+  width:100%;background:transparent;border:0;border-bottom:1px solid var(--ln);
+  color:var(--fg);font:400 1.4rem/1.3 Inter,sans-serif;padding:10px 0;
+  outline:0;transition:border-color .2s;border-radius:0;
+}
+textarea{resize:none;min-height:90px;font-size:1rem;line-height:1.5}
 input::placeholder,textarea::placeholder{color:#55606b}
 input:focus,textarea:focus{border-color:var(--gold)}
-input[type=date]{color-scheme:dark}
-.err{color:var(--err);font-size:.9rem;min-height:1.4em;margin-top:4px}
-.note{color:var(--gold);font-size:.85rem;margin-top:8px;min-height:1.2em}
-nav{display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;max-width:720px;margin:0 auto;padding:12px 24px 28px}
-.btn{font:600 .8rem Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;text-align:center;cursor:pointer;padding:17px 34px;border:1px solid var(--gold);background:var(--gold);color:#05070a;transition:filter .2s}
-.btn:hover{filter:brightness(1.1)}
-.btn.ghost{background:transparent;color:var(--mut);border-color:transparent;padding-left:0}
-.btn.ghost:hover{color:var(--fg)}
-.btn:disabled{opacity:.5;cursor:not-allowed}
-.row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:16px 0;border-bottom:1px solid var(--ln)}
-.row .k{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);margin-bottom:4px}
-.row .v{font-size:1.05rem;overflow-wrap:anywhere}
-.row button{background:none;border:0;color:var(--gold);font:600 .75rem Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;flex-shrink:0}
-.fine{color:var(--mut);font-size:.85rem;margin-top:22px}
+input[type=tel]{font-variant-numeric:tabular-nums}
 
-/* ============ CREATIVE WIDGETS (imported from zaure-clean model) ============ */
+.err{color:var(--err);font-size:.88rem;min-height:1.4em;margin-top:8px;font-weight:500}
 
-/* Option tile (icon card) — property type / "vehicle type design" */
-.tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.tile{position:relative;cursor:pointer}
+/* ============ ICON TILES (property type) ============ */
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(min-width:560px){.tiles{grid-template-columns:repeat(4,1fr)}}
+.tile{position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .tile input{position:absolute;opacity:0;pointer-events:none;width:0;height:0}
-.tile-body{display:flex;flex-direction:column;align-items:center;gap:4px;padding:16px 8px;border:1px solid var(--ln);border-radius:12px;background:var(--surface);text-align:center;transition:all .15s}
-.tile-body i{font-size:1.15rem;color:var(--gold);margin-bottom:2px}
-.tile-body strong{font-size:.8rem;font-weight:700;color:var(--fg);line-height:1.2}
-.tile-body span{font-size:.68rem;color:var(--mut);line-height:1.3}
-.tile:hover .tile-body{border-color:var(--gold);background:rgba(212,184,122,.04)}
-.tile input:checked + .tile-body{border-color:var(--gold);background:rgba(212,184,122,.1);box-shadow:0 0 0 2px rgba(212,184,122,.12)}
+.tile-body{
+  display:flex;flex-direction:column;align-items:center;gap:5px;
+  padding:16px 10px;border:1px solid var(--ln);border-radius:14px;
+  background:var(--surface);text-align:center;transition:all .18s cubic-bezier(.2,.8,.2,1);
+  min-height:96px;justify-content:center;
+}
+.tile-body i{font-size:1.2rem;color:var(--gold);margin-bottom:3px;transition:transform .25s}
+.tile-body strong{font-size:.78rem;font-weight:700;color:var(--fg);line-height:1.2}
+.tile-body span{font-size:.66rem;color:var(--mut);line-height:1.3}
+.tile:hover .tile-body{border-color:rgba(212,184,122,.55);background:var(--surface-2);transform:translateY(-1px)}
+.tile:hover .tile-body i{transform:scale(1.1)}
+.tile input:checked + .tile-body{
+  border-color:var(--gold);background:rgba(212,184,122,.1);
+  box-shadow:0 0 0 2px rgba(212,184,122,.15),0 6px 20px rgba(212,184,122,.12);
+}
+.tile input:checked + .tile-body i{color:var(--gold-soft)}
 .tile input:focus-visible + .tile-body{outline:2px solid var(--gold);outline-offset:2px}
 
-/* Custom date picker */
-.dp{border:1px solid var(--ln);border-radius:12px;padding:14px;background:var(--surface)}
-.dp-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.dp-month{font-weight:700;font-size:.92rem;color:var(--fg)}
-.dp-nav{width:32px;height:32px;border-radius:8px;border:none;background:var(--surface-2);color:var(--fg);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s;font-family:inherit}
-.dp-nav:hover{background:rgba(255,255,255,.06)}
-.dp-nav:disabled{opacity:.3;cursor:not-allowed}
-.dp-weekdays{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:6px}
-.dp-weekdays span{text-align:center;font-size:.68rem;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.5px;padding:4px 0}
+/* ============ CHECKBOX / RADIO GRID ============ */
+.checks{display:grid;grid-template-columns:1fr;gap:8px}
+@media(min-width:560px){.checks.two{grid-template-columns:1fr 1fr}}
+.check{
+  display:flex;align-items:flex-start;gap:10px;padding:14px 16px;
+  border:1px solid var(--ln);border-radius:12px;cursor:pointer;
+  font-size:.86rem;font-weight:500;color:var(--fg);background:var(--surface);
+  transition:all .18s;user-select:none;-webkit-tap-highlight-color:transparent;line-height:1.4;
+}
+.check:hover{border-color:rgba(212,184,122,.5);background:var(--surface-2)}
+.check input{
+  accent-color:var(--gold);width:18px;height:18px;cursor:pointer;
+  flex-shrink:0;margin:1px 0 0;border:0;padding:0;
+}
+.check .check-body{flex:1;min-width:0}
+.check .check-body strong{display:block;font-size:.86rem;font-weight:700;margin-bottom:2px;color:var(--fg)}
+.check .check-body small{display:block;font-size:.74rem;color:var(--mut);font-weight:400;line-height:1.4}
+.check.checked{border-color:var(--gold);background:rgba(212,184,122,.1)}
+.check.checked .check-body strong{color:var(--gold-soft)}
+.check:has(input:focus-visible){outline:2px solid var(--gold);outline-offset:2px}
+
+/* ============ CUSTOM DATE PICKER ============ */
+.dp{border:1px solid var(--ln);border-radius:14px;padding:16px;background:var(--surface)}
+.dp-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.dp-month{font-family:'Playfair Display',serif;font-weight:800;font-size:1rem;color:var(--fg);letter-spacing:-.2px}
+.dp-nav{
+  width:34px;height:34px;border-radius:10px;border:1px solid var(--ln);
+  background:transparent;color:var(--fg);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .15s;font-family:inherit;font-size:.8rem;
+}
+.dp-nav:hover{background:rgba(212,184,122,.12);border-color:var(--gold)}
+.dp-nav:disabled{opacity:.25;cursor:not-allowed}
+.dp-nav:disabled:hover{background:transparent;border-color:var(--ln)}
+.dp-weekdays{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:8px}
+.dp-weekdays span{
+  text-align:center;font-size:.66rem;font-weight:800;color:var(--mut);
+  text-transform:uppercase;letter-spacing:.6px;padding:6px 0;
+}
 .dp-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
-.dp-day{aspect-ratio:1;border-radius:8px;border:none;background:transparent;color:var(--fg);font-size:.82rem;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s;font-family:inherit;min-height:36px}
-.dp-day:hover:not(:disabled){background:rgba(255,255,255,.06)}
-.dp-day.other-month{opacity:.2;pointer-events:none}
-.dp-day:disabled{opacity:.25;cursor:not-allowed}
-.dp-day.today{border:1.5px solid var(--gold);color:var(--gold-deep)}
-.dp-day.selected{background:var(--gold);color:#05070a}
-.dp-day.selected:hover{background:var(--gold-deep)}
-.dp-selected{margin-top:12px;padding-top:12px;border-top:1px solid var(--ln);font-size:.82rem;color:var(--mut)}
+.dp-day{
+  aspect-ratio:1;border-radius:9px;border:none;background:transparent;
+  color:var(--fg);font-size:.84rem;font-weight:600;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .15s;font-family:inherit;min-height:38px;
+}
+.dp-day:hover:not(:disabled){background:rgba(212,184,122,.12);color:var(--gold-soft)}
+.dp-day.other-month{opacity:0;pointer-events:none}
+.dp-day:disabled{opacity:.2;cursor:not-allowed}
+.dp-day.today{border:1.5px solid var(--gold);color:var(--gold);font-weight:800}
+.dp-day.selected{background:var(--gold);color:var(--navy);font-weight:800;box-shadow:0 4px 12px rgba(212,184,122,.35)}
+.dp-day.selected:hover{background:var(--gold-soft);color:var(--navy)}
+.dp-selected{
+  margin-top:14px;padding-top:14px;border-top:1px solid var(--ln);
+  font-size:.82rem;color:var(--mut);display:flex;align-items:center;gap:8px;
+}
+.dp-selected i{color:var(--gold)}
 .dp-selected strong{color:var(--fg);font-weight:700}
 
-/* Time slots */
-.time-slots{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+/* ============ TIME SLOTS ============ */
+.time-slots{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 @media(min-width:480px){.time-slots{grid-template-columns:repeat(4,1fr)}}
-.time-slot{padding:10px 6px;border-radius:8px;border:1px solid var(--ln);background:var(--surface);color:var(--fg);font-size:.78rem;font-weight:600;cursor:pointer;text-align:center;transition:all .15s;font-family:inherit;min-height:40px}
-.time-slot:hover{border-color:var(--gold);background:rgba(212,184,122,.05)}
-.time-slot.selected{background:var(--gold);border-color:var(--gold);color:#05070a}
+.time-slot{
+  padding:12px 6px;border-radius:10px;border:1px solid var(--ln);
+  background:var(--surface);color:var(--fg);font-size:.78rem;font-weight:600;
+  cursor:pointer;text-align:center;transition:all .15s;
+  font-family:inherit;min-height:44px;
+}
+.time-slot:hover{border-color:rgba(212,184,122,.55);background:var(--surface-2);color:var(--gold-soft)}
+.time-slot.selected{
+  background:var(--gold);border-color:var(--gold);color:var(--navy);font-weight:800;
+  box-shadow:0 4px 12px rgba(212,184,122,.3);
+}
 
-/* Checkbox grid (services / special) */
-.checks{display:grid;grid-template-columns:1fr 1fr;gap:6px}
-.check{display:flex;align-items:center;gap:8px;padding:10px 12px;border:1px solid var(--ln);border-radius:9px;cursor:pointer;font-size:.78rem;font-weight:600;color:var(--fg);background:var(--surface);transition:all .15s;user-select:none;-webkit-tap-highlight-color:transparent}
-.check:hover{border-color:var(--gold);background:rgba(212,184,122,.04)}
-.check input{accent-color:var(--gold);width:15px;height:15px;cursor:pointer;flex-shrink:0;margin:0;border:0;padding:0}
-.check.checked{border-color:var(--gold);background:rgba(212,184,122,.1);font-weight:700}
-
-/* Quantity steppers */
+/* ============ QUANTITY STEPPERS ============ */
 .qty-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 @media(min-width:640px){.qty-grid{grid-template-columns:repeat(4,1fr)}}
-.qty-item{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 8px;background:var(--surface);border:1px solid var(--ln);border-radius:10px}
-.qty-label{font-size:.7rem;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.5px;text-align:center}
-.qty-controls{display:flex;align-items:center;background:var(--surface-2);border-radius:8px;overflow:hidden}
-.qty-controls button{width:30px;height:30px;border:none;background:transparent;color:var(--fg);font-size:.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit}
-.qty-controls button:hover{background:rgba(255,255,255,.06)}
-.qty-controls input{width:32px;border:none;background:transparent;text-align:center;font-size:.85rem;font-weight:700;color:var(--fg);outline:none;font-family:inherit;padding:0;-moz-appearance:textfield;border-bottom:0}
-.qty-controls input::-webkit-outer-spin-button,.qty-controls input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.qty-item{
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  padding:14px 8px;background:var(--surface);border:1px solid var(--ln);border-radius:12px;
+}
+.qty-label{
+  font-size:.68rem;font-weight:800;color:var(--mut);
+  text-transform:uppercase;letter-spacing:.7px;text-align:center;
+}
+.qty-controls{display:flex;align-items:center;background:var(--surface-2);border-radius:9px;overflow:hidden;border:1px solid var(--ln)}
+.qty-controls button{
+  width:32px;height:32px;border:none;background:transparent;color:var(--fg);
+  font-size:.8rem;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-family:inherit;transition:background .15s;
+}
+.qty-controls button:hover{background:rgba(212,184,122,.15);color:var(--gold-soft)}
+.qty-controls input{
+  width:36px;border:none;background:transparent;text-align:center;
+  font-size:.9rem;font-weight:800;color:var(--fg);outline:none;
+  font-family:inherit;padding:0;-moz-appearance:textfield;
+}
+.qty-controls input::-webkit-outer-spin-button,
+.qty-controls input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
 
-/* Error banner */
-.qm-error-banner{padding:12px 16px;background:rgba(255,123,123,.08);border:1px solid rgba(255,123,123,.3);border-radius:10px;color:var(--err);font-size:.85rem;line-height:1.5;margin-bottom:14px;display:none}
-.qm-error-banner.show{display:block}
-.qm-error-banner i{margin-right:6px}
+/* ============ NAV ============ */
+nav{
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+  width:100%;max-width:720px;margin:0 auto;padding:16px 24px 28px;
+  background:linear-gradient(180deg,transparent,var(--bg) 30%);
+  position:sticky;bottom:0;
+}
+.btn{
+  font:700 .78rem Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;
+  text-decoration:none;text-align:center;cursor:pointer;
+  padding:16px 32px;border:1px solid var(--gold);background:var(--gold);color:var(--navy);
+  border-radius:40px;transition:all .2s;display:inline-flex;align-items:center;gap:8px;
+  min-height:52px;
+}
+.btn:hover{background:var(--gold-soft);transform:translateY(-1px);box-shadow:0 8px 24px rgba(212,184,122,.3)}
+.btn:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none}
+.btn.ghost{background:transparent;color:var(--mut);border-color:transparent;padding-left:16px;padding-right:16px;min-height:48px}
+.btn.ghost:hover{color:var(--fg);background:transparent;box-shadow:none;transform:none}
+.btn.ghost i{margin-right:2px}
 
-/* Success */
-.qm-success{text-align:center;padding:30px 10px}
-.qm-success-icon{width:68px;height:68px;border-radius:50%;background:rgba(37,211,102,.1);color:var(--ok);display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 20px}
-.qm-success h3{font-weight:600;font-size:1.3rem;color:var(--fg);margin-bottom:8px}
-.qm-success p{font-size:.9rem;color:var(--mut);line-height:1.6;max-width:380px;margin:0 auto 20px}
-.qm-success-actions{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
-.qm-success-actions .btn{padding:13px 26px}
+/* ============ REVIEW ROWS ============ */
+.review-card{
+  background:var(--surface);border:1px solid var(--ln);border-radius:14px;
+  padding:16px 18px;margin-bottom:14px;
+}
+.review-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:8px}
+.review-head h4{
+  font-size:.68rem;font-weight:800;color:var(--gold);
+  text-transform:uppercase;letter-spacing:1.2px;
+}
+.review-edit{
+  background:transparent;border:none;color:var(--gold);font-size:.7rem;
+  font-weight:700;cursor:pointer;padding:4px 10px;border-radius:6px;
+  font-family:inherit;transition:background .15s;
+}
+.review-edit:hover{background:rgba(212,184,122,.15)}
+.review-row{
+  display:flex;justify-content:space-between;gap:14px;
+  padding:7px 0;font-size:.86rem;line-height:1.5;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.review-row:last-child{border-bottom:none}
+.review-row .rk{color:var(--mut);font-weight:500;flex-shrink:0}
+.review-row .rv{color:var(--fg);font-weight:600;text-align:right;word-break:break-word}
 
-/* Inline note under date */
-.qm-note{color:var(--gold);font-size:.82rem;margin-top:8px;min-height:1.2em}
+/* ============ SUCCESS ============ */
+.success{text-align:center;padding:30px 10px}
+.success-icon{
+  width:76px;height:76px;border-radius:50%;background:rgba(37,211,102,.12);
+  color:var(--ok);display:flex;align-items:center;justify-content:center;
+  font-size:2rem;margin:0 auto 22px;box-shadow:0 0 0 8px rgba(37,211,102,.05);
+}
+.success h1{font-size:clamp(1.6rem,5vw,2.4rem);margin-bottom:12px}
+.success p{color:var(--mut);font-size:.94rem;line-height:1.65;max-width:420px;margin:0 auto 24px}
+.success-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+
+.fine{color:var(--mut);font-size:.84rem;margin-top:22px;line-height:1.6;padding-top:18px;border-top:1px solid var(--ln)}
 
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -134,8 +261,8 @@ nav{display:flex;justify-content:space-between;align-items:center;gap:12px;width
 <div class="bar"></div>
 <div class="zb">
   <header>
-    <a class="logo" href="/">ZAURE<span>Clean</span></a>
-    <a class="x" href="/zaure-services.html" aria-label="Close booking">Close ✕</a>
+    <a class="logo" href="/"><b>ZAURE</b><span>Clean</span></a>
+    <a class="x" href="/zaure-services.html" aria-label="Close booking">Close <i class="fas fa-times"></i></a>
   </header>
   <main id="app"></main>
   <nav id="nav"></nav>
@@ -143,44 +270,92 @@ nav{display:flex;justify-content:space-between;align-items:center;gap:12px;width
 <noscript><p style="padding:24px;color:#fff">Please enable JavaScript to book, or message us on WhatsApp: +2349042339411</p></noscript>
 
 <script type="application/json" id="cfg">
-{"key":"clean","title":"Zaure Clean","back":"/zaure-services.html","after":"We reply within 2 to 4 hours (Mon to Sat).","note":"A 50% deposit confirms your date and the balance is paid on completion. Bank transfer only. Free cancellation up to 48 hours before.","lead":3,"endpoint":"https://formspree.io/f/YOUR_FORM_ID","steps":[
-{"q":"What do you need?","h":"Select all that apply.","fields":[{"n":"svc","l":"Services","t":"multi","opts":[["Rough clean","Debris and site clearing"],["Dust extraction","Walls, ceilings, vents"],["Deep surface clean","Floors, tiles, frames"],["Glass & frame polish","No streaks"],["Paint & cement removal","Careful residue removal"],["Pest control","Pre-handover fumigation"],["Weed control","Compound and plot clearing"],["Carpet cleaning","Deep steam extraction"],["Final handover clean","Last pass before inspection"]]}]},
-{"q":"What type of property?","h":"This helps us plan the crew.","fields":[{"n":"prop","l":"Property type","t":"tiles","opts":[["New build","Fresh construction","fa-house-chimney"],["Renovation","Remodel / upgrade","fa-hammer"],["Commercial / office","Office or shop","fa-building"],["Industrial","Warehouse / factory","fa-industry"]]}]},
-{"q":"Where is the site?","h":"We cover Kaduna city and nearby towns.","fields":[{"n":"area","l":"Area or town","t":"text","ph":"e.g. Barnawa","list":["Barnawa","GRA","Malali","City Centre","Rigasa","Kawo","Unguwan Rimi","Tudun Wada","Zaria","Kafanchan","Kujama"]},{"n":"addr","l":"Street or landmark (optional)","t":"text","req":false}]},
-{"q":"How big is the site?","h":"A rough idea is enough. We quote after reviewing it.","fields":[{"n":"bedrooms","l":"Bedrooms","t":"qty","min":0,"max":20,"v":3},{"n":"living","l":"Living rooms","t":"qty","min":0,"max":6,"v":1},{"n":"kitchens","l":"Kitchens","t":"qty","min":0,"max":4,"v":1},{"n":"baths","l":"Bathrooms","t":"qty","min":0,"max":8,"v":2},{"n":"size","l":"Approximate square meters (optional)","t":"text","req":false,"ph":"e.g. 250 sqm"}]},
-{"q":"When should we come?","h":"Book at least 3 days ahead for larger sites and weekends.","fields":[{"n":"date","l":"Preferred date","t":"date"},{"n":"time","l":"Start time preference","t":"time"},{"n":"ready","l":"Site is ready: no active trades, water and power available, access arranged","t":"check","req":false}]},
-{"q":"Special requirements?","h":"Optional — tick anything that applies.","fields":[{"n":"special","l":"Anything that affects the job","t":"multi","opts":["Multi-floor / no lift","Weekend job","Same-day / urgent","Very large site (1000+ sqm)","Fragile finishes / marble","Post-fumigation cleanup"],"req":false}]},
-{"q":"Who are we working with?","h":"We work as a sub-contractor and report to you.","fields":[{"n":"role","l":"You are a","t":"choice","opts":["Building contractor","Property developer","Landlord or facility manager","Homeowner","Other"]}]},
-{"q":"How can we reach you?","h":"We will send your quote within a few hours.","fields":[{"n":"name","l":"Full name","t":"text","ac":"name"},{"n":"phone","l":"WhatsApp number","t":"tel","ph":"0803 000 0000"},{"n":"email","l":"Email (optional)","t":"text","ac":"email","req":false},{"n":"notes","l":"Anything else? (optional)","t":"textarea","req":false}]}
+{"key":"clean","title":"Zaure Clean","back":"/zaure-services.html","after":"We reply within 2 to 4 hours (Mon to Sat) with a site-based quote.","note":"A 50% deposit confirms your date and the balance is paid on completion. Bank transfer only. Free cancellation up to 48 hours before.","lead":3,"endpoint":"https://formspree.io/f/YOUR_FORM_ID","steps":[
+{"q":"What do you need?","h":"Select all that apply. Post-construction & renovation cleaning is our core service; the other three can be added to any job or booked on their own.","fields":[
+  {"n":"svc","l":"Services","t":"multi","opts":[
+    {"v":"Post-construction & renovation cleaning","s":"Rough clean through to final handover polish","i":"fa-trowel-bricks","full":true},
+    {"v":"Pest control","s":"Pre-handover fumigation and treatment","i":"fa-bug"},
+    {"v":"Weed control","s":"Compound, plot and site-edge clearing","i":"fa-seedling"},
+    {"v":"Carpet deep wash","s":"Steam extraction for carpets and rugs","i":"fa-rug"}
+  ]}
+]},
+{"q":"What type of property?","h":"This helps us plan the right crew and equipment.","fields":[
+  {"n":"prop","l":"Property type","t":"tiles","opts":[
+    {"v":"New build","s":"Fresh construction","i":"fa-house-chimney"},
+    {"v":"Renovation","s":"Remodel or upgrade","i":"fa-hammer"},
+    {"v":"Commercial","s":"Office, shop or building","i":"fa-building"},
+    {"v":"Industrial","s":"Warehouse or factory","i":"fa-industry"}
+  ]}
+]},
+{"q":"Where is the site?","h":"We cover Kaduna city and nearby towns.","fields":[
+  {"n":"area","l":"Area or town","t":"text","ph":"e.g. Barnawa","list":["Barnawa","GRA","Malali","City Centre","Rigasa","Kawo","Unguwan Rimi","Tudun Wada","Zaria","Kafanchan","Kujama"]},
+  {"n":"addr","l":"Street or landmark (optional)","t":"text","req":false}
+]},
+{"q":"How big is the site?","h":"A rough idea is enough — we quote after reviewing the site.","fields":[
+  {"n":"bedrooms","l":"Bedrooms","t":"qty","min":0,"max":20,"v":3},
+  {"n":"living","l":"Living rooms","t":"qty","min":0,"max":6,"v":1},
+  {"n":"kitchens","l":"Kitchens","t":"qty","min":0,"max":4,"v":1},
+  {"n":"baths","l":"Bathrooms","t":"qty","min":0,"max":8,"v":2},
+  {"n":"size","l":"Approximate square meters (optional)","t":"text","req":false,"ph":"e.g. 250 sqm"}
+]},
+{"q":"When should we come?","h":"Book at least 3 days ahead for larger sites and weekend jobs.","fields":[
+  {"n":"date","l":"Preferred date","t":"date"},
+  {"n":"time","l":"Start time preference","t":"time"},
+  {"n":"ready","l":"Site is ready: no active trades, water and power available, access arranged","t":"check","req":false}
+]},
+{"q":"Special requirements?","h":"Optional — tick anything that affects the job.","fields":[
+  {"n":"special","l":"Anything that affects the job","t":"multi","req":false,"opts":[
+    {"v":"Multi-floor / no lift","i":"fa-stairs"},
+    {"v":"Weekend job","i":"fa-calendar-week"},
+    {"v":"Same-day / urgent","i":"fa-bolt"},
+    {"v":"Very large site (1000+ sqm)","i":"fa-warehouse"},
+    {"v":"Fragile finishes / marble","i":"fa-gem"},
+    {"v":"Post-fumigation cleanup","i":"fa-wind"}
+  ]}
+]},
+{"q":"Who are we working with?","h":"We work as a sub-contractor and report to you.","fields":[
+  {"n":"role","l":"You are a","t":"choice","opts":["Building contractor","Property developer","Landlord or facility manager","Homeowner","Other"]}
+]},
+{"q":"How can we reach you?","h":"We will send your quote within a few hours.","fields":[
+  {"n":"name","l":"Full name","t":"text","ac":"name","ph":"e.g. Musa Ibrahim"},
+  {"n":"phone","l":"WhatsApp number","t":"tel","ph":"0803 000 0000"},
+  {"n":"email","l":"Email (optional)","t":"text","ac":"email","req":false,"ph":"you@company.com"},
+  {"n":"notes","l":"Anything else? (optional)","t":"textarea","req":false,"ph":"e.g. Fourth floor, no lift. Marble floors. Job must finish before Friday handover."}
+]}
 ]}
 </script>
 
 <script>
 (()=>{
-const C=JSON.parse(document.getElementById('cfg').textContent),K='zb_'+C.key,N=C.steps.length;
-const $=s=>document.querySelector(s),app=$('#app'),nav=$('#nav');
+'use strict';
+const C=JSON.parse(document.getElementById('cfg').textContent);
+const K='zb_'+C.key, N=C.steps.length;
+const $=s=>document.querySelector(s);
+const app=$('#app'), nav=$('#nav');
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const WA='2349042339411';
-let S;try{S=JSON.parse(sessionStorage.getItem(K))}catch(e){}
+
+let S;
+try{S=JSON.parse(sessionStorage.getItem(K))}catch(e){}
 S=S&&S.d?S:{i:0,d:{}};
 const save=()=>{try{sessionStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+
 const today=()=>new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,10);
 const vis=f=>!f.showIf||S.d[f.showIf.n]===f.showIf.v;
 const empty=(f,v)=>{
   if(f.t==='multi')return!(v&&v.length);
   if(f.t==='check')return!v;
   if(f.t==='qty')return false;
-  return!String(v||'').trim();
+  return!String(v??'').trim();
 };
 const fmt=(f,v)=>{
+  if(v===undefined||v===null||v==='')return '';
   if(f.t==='multi')return v.join(', ');
   if(f.t==='check')return v?'Yes':'No';
   if(f.t==='date')return new Date(v+'T00:00').toLocaleDateString('en-NG',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
-  if(f.t==='time')return v;
-  return v;
+  return String(v);
 };
 
-/* date picker state per field */
 const dpState={};
 
 function validate(st){
@@ -193,28 +368,68 @@ function validate(st){
       if(f.t==='time')return 'Please pick a start time.';
       return 'Please complete this to continue.';
     }
-    if(f.t==='tel'&&v&&String(v).replace(/\D/g,'').length<10)return 'Enter a valid phone number.';
+    if(f.t==='tel'&&v&&String(v).replace(/\D/g,'').length<10)return 'Enter a valid phone number (at least 10 digits).';
     if(f.t==='date'&&v&&v<today())return 'Choose today or a later date.';
   }
   return '';
 }
 
-/* ---- renderers ---- */
+/* ---- RENDERERS ---- */
+
+function renderMulti(f,v){
+  const arr=Array.isArray(v)?v:[];
+  return `<div class="f" data-n="${f.n}">
+    <div class="l">${esc(f.l)}</div>
+    <div class="checks two" role="group" aria-label="${esc(f.l)}">
+      ${f.opts.map(o=>{
+        const val=typeof o==='string'?o:o.v;
+        const sub=typeof o==='string'?'':o.s;
+        const icon=typeof o==='string'?'':o.i;
+        const on=arr.includes(val);
+        return `<label class="check${on?' checked':''}">
+          <input type="checkbox" value="${esc(val)}" ${on?'checked':''} data-multi="${f.n}">
+          <span class="check-body">
+            <strong>${icon?`<i class="fas ${esc(icon)}" style="color:var(--gold);margin-right:6px;font-size:.85em"></i>`:''}${esc(val)}</strong>
+            ${sub?`<small>${esc(sub)}</small>`:''}
+          </span>
+        </label>`;
+      }).join('')}
+    </div>
+  </div>`;
+}
 
 function renderTiles(f,v){
-  return `<div class="tiles" role="radiogroup" aria-label="${esc(f.l)}">
-    ${f.opts.map(o=>{
-      const[t,s,icon]=o;
-      const on=v===t;
-      return `<label class="tile">
-        <input type="radio" name="tile_${f.n}" value="${esc(t)}" ${on?'checked':''} data-tile="${esc(t)}">
-        <div class="tile-body">
-          <i class="fas ${esc(icon||'fa-square')}"></i>
-          <strong>${esc(t)}</strong>
-          <span>${esc(s)}</span>
-        </div>
-      </label>`;
-    }).join('')}
+  return `<div class="f" data-n="${f.n}">
+    <div class="l">${esc(f.l)}</div>
+    <div class="tiles" role="radiogroup" aria-label="${esc(f.l)}">
+      ${f.opts.map(o=>{
+        const on=v===o.v;
+        return `<label class="tile">
+          <input type="radio" name="tile_${f.n}" value="${esc(o.v)}" ${on?'checked':''} data-tile="${f.n}">
+          <div class="tile-body">
+            <i class="fas ${esc(o.i||'fa-square')}"></i>
+            <strong>${esc(o.v)}</strong>
+            <span>${esc(o.s||'')}</span>
+          </div>
+        </label>`;
+      }).join('')}
+    </div>
+  </div>`;
+}
+
+function renderChoice(f,v){
+  return `<div class="f" data-n="${f.n}">
+    <div class="l">${esc(f.l)}</div>
+    <div class="checks two" role="radiogroup" aria-label="${esc(f.l)}">
+      ${f.opts.map(o=>{
+        const val=typeof o==='string'?o:o.v;
+        const on=v===val;
+        return `<label class="check${on?' checked':''}" style="align-items:center">
+          <input type="radio" name="ch_${f.n}" value="${esc(val)}" ${on?'checked':''} data-choice="${f.n}">
+          <span class="check-body"><strong style="margin:0">${esc(val)}</strong></span>
+        </label>`;
+      }).join('')}
+    </div>
   </div>`;
 }
 
@@ -222,11 +437,11 @@ function renderQty(f,v){
   const val=v??f.v??0;
   return `<div class="f" data-n="${f.n}">
     <div class="l">${esc(f.l)}</div>
-    <div class="qty-item" style="max-width:140px">
+    <div class="qty-item">
       <div class="qty-controls">
-        <button type="button" data-qty="${f.n}" data-op="-"><i class="fas fa-minus"></i></button>
-        <input type="number" name="${f.n}" value="${val}" min="${f.min??0}" max="${f.max??99}" readonly>
-        <button type="button" data-qty="${f.n}" data-op="+"><i class="fas fa-plus"></i></button>
+        <button type="button" data-qty="${f.n}" data-op="-" aria-label="Decrease ${esc(f.l)}"><i class="fas fa-minus"></i></button>
+        <input type="number" name="${f.n}" value="${val}" min="${f.min??0}" max="${f.max??99}" readonly aria-label="${esc(f.l)}">
+        <button type="button" data-qty="${f.n}" data-op="+" aria-label="Increase ${esc(f.l)}"><i class="fas fa-plus"></i></button>
       </div>
     </div>
   </div>`;
@@ -247,18 +462,18 @@ function renderDate(f,v){
       </div>
       <div class="dp-weekdays"><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></div>
       <div class="dp-grid" data-dp-grid="${f.n}"></div>
-      <div class="dp-selected">Selected: <strong data-dp-sel="${f.n}">${v?fmt(f,v):'None yet'}</strong></div>
+      <div class="dp-selected"><i class="fas fa-calendar-check"></i> Selected: <strong data-dp-sel="${f.n}">${v?fmt(f,v):'None yet'}</strong></div>
     </div>
     <input type="hidden" name="${f.n}" value="${esc(v||'')}" data-hidden="${f.n}">
-    <div class="qm-note" data-dp-note="${f.n}"></div>
+    <div class="err" data-dp-note="${f.n}" style="color:var(--gold);min-height:1.2em"></div>
   </div>`;
 }
 
-function paintDate(f){
-  const st=dpState[f.n];if(!st)return;
-  const grid=document.querySelector(`[data-dp-grid="${f.n}"]`);
-  const monthEl=document.querySelector(`[data-dp-month="${f.n}"]`);
-  const prevBtn=document.querySelector(`[data-dp-prev="${f.n}"]`);
+function paintDate(n){
+  const st=dpState[n];if(!st)return;
+  const grid=document.querySelector(`[data-dp-grid="${n}"]`);
+  const monthEl=document.querySelector(`[data-dp-month="${n}"]`);
+  const prevBtn=document.querySelector(`[data-dp-prev="${n}"]`);
   if(!grid||!monthEl)return;
   const M=['January','February','March','April','May','June','July','August','September','October','November','December'];
   monthEl.textContent=`${M[st.viewMonth]} ${st.viewYear}`;
@@ -275,13 +490,12 @@ function paintDate(f){
     const isSel=st.selected&&thisDate.getTime()===st.selected.getTime();
     let cls='dp-day';if(isToday)cls+=' today';if(isSel)cls+=' selected';
     const iso=`${st.viewYear}-${String(st.viewMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    html+=`<button type="button" class="${cls}" data-dp-day="${f.n}" data-date="${iso}" ${isPast?'disabled':''}>${d}</button>`;
+    html+=`<button type="button" class="${cls}" data-dp-day="${n}" data-date="${iso}" ${isPast?'disabled':''}>${d}</button>`;
   }
   grid.innerHTML=html;
   const now=new Date();
   prevBtn.disabled=(st.viewYear===now.getFullYear()&&st.viewMonth===now.getMonth());
-  // note
-  const noteEl=document.querySelector(`[data-dp-note="${f.n}"]`);
+  const noteEl=document.querySelector(`[data-dp-note="${n}"]`);
   if(noteEl&&st.selected&&C.lead){
     const d=(st.selected-new Date(today()+'T00:00'))/864e5;
     noteEl.textContent=d<C.lead?`Less than ${C.lead} days away. We will confirm availability.`:'';
@@ -299,60 +513,29 @@ function renderTime(f,v){
   </div>`;
 }
 
-function renderMulti(f,v){
-  const arr=v||[];
-  return `<div class="f" data-n="${f.n}">
-    <div class="l">${esc(f.l)}</div>
-    <div class="checks" role="group" aria-label="${esc(f.l)}">
-      ${f.opts.map(o=>{
-        const t=Array.isArray(o)?o[0]:o;
-        const on=arr.includes(t);
-        return `<label class="check${on?' checked':''}">
-          <input type="checkbox" value="${esc(t)}" ${on?'checked':''} data-multi="${f.n}">
-          <span>${esc(t)}</span>
-        </label>`;
-      }).join('')}
-    </div>
-  </div>`;
-}
-
-function renderChoice(f,v){
-  return `<div class="f" data-n="${f.n}">
-    <div class="l">${esc(f.l)}</div>
-    <div class="checks" role="radiogroup" aria-label="${esc(f.l)}">
-      ${f.opts.map(o=>{
-        const t=Array.isArray(o)?o[0]:o;
-        const on=v===t;
-        return `<label class="check${on?' checked':''}">
-          <input type="radio" name="ch_${f.n}" value="${esc(t)}" ${on?'checked':''} data-choice="${f.n}">
-          <span>${esc(t)}</span>
-        </label>`;
-      }).join('')}
-    </div>
-  </div>`;
-}
-
 function field(f){
   if(!vis(f))return '';
   const v=S.d[f.n];
   if(f.t==='multi')return renderMulti(f,v);
   if(f.t==='choice')return renderChoice(f,v);
-  if(f.t==='tiles')return `<div class="f" data-n="${f.n}"><div class="l">${esc(f.l)}</div>${renderTiles(f,v)}</div>`;
+  if(f.t==='tiles')return renderTiles(f,v);
   if(f.t==='qty')return renderQty(f,v);
   if(f.t==='date')return renderDate(f,v);
   if(f.t==='time')return renderTime(f,v);
   if(f.t==='check'){
     return `<div class="f" data-n="${f.n}">
-      <label class="check${v?' checked':''}" style="padding:14px 16px">
+      <label class="check${v?' checked':''}" style="padding:16px 18px;align-items:center">
         <input type="checkbox" ${v?'checked':''} data-check="${f.n}">
-        <span>${esc(f.l)}</span>
+        <span class="check-body"><strong style="margin:0">${esc(f.l)}</strong></span>
       </label>
     </div>`;
   }
   if(f.t==='textarea'){
-    return `<div class="f" data-n="${f.n}"><label class="l" for="i_${f.n}">${esc(f.l)}</label><textarea id="i_${f.n}" rows="3" placeholder="${esc(f.ph||'')}">${esc(v||'')}</textarea></div>`;
+    return `<div class="f" data-n="${f.n}">
+      <label class="l" for="i_${f.n}">${esc(f.l)}</label>
+      <textarea id="i_${f.n}" rows="3" placeholder="${esc(f.ph||'')}" autocomplete="off">${esc(v||'')}</textarea>
+    </div>`;
   }
-  // text / tel
   return `<div class="f" data-n="${f.n}">
     <label class="l" for="i_${f.n}">${esc(f.l)}</label>
     <input id="i_${f.n}" type="${f.t==='tel'?'tel':'text'}" ${f.t==='tel'?'inputmode="tel" autocomplete="tel"':`autocomplete="${f.ac||'off'}"`} ${f.list?`list="dl_${f.n}"`:''} placeholder="${esc(f.ph||'')}" value="${esc(v||'')}">
@@ -361,9 +544,16 @@ function field(f){
 }
 
 function setNav(){
-  const i=S.i,last=i>=N;
-  nav.innerHTML=(i===0?`<a class="btn ghost" href="${esc(C.back)}">Cancel</a>`:`<button class="btn ghost" data-a="back">Back</button>`)+
-    `<button class="btn" data-a="${last?'send':'next'}" ${S.sending?'disabled':''}>${last?(S.sending?'Sending…':'Send request'):i===N-1?'Review':'Continue'}</button>`;
+  const i=S.i, last=i>=N;
+  nav.innerHTML=
+    (i===0
+      ? `<a class="btn ghost" href="${esc(C.back)}"><i class="fas fa-times"></i> Cancel</a>`
+      : `<button class="btn ghost" data-a="back"><i class="fas fa-arrow-left"></i> Back</button>`)
+    + `<button class="btn" data-a="${last?'send':'next'}" ${S.sending?'disabled':''}>
+         ${last
+           ? (S.sending ? '<i class="fas fa-spinner fa-spin"></i> Sending…' : '<i class="fas fa-paper-plane"></i> Send request')
+           : (i===N-1 ? 'Review <i class="fas fa-arrow-right"></i>' : 'Continue <i class="fas fa-arrow-right"></i>')}
+       </button>`;
 }
 
 function render(){
@@ -371,9 +561,14 @@ function render(){
   setNav();
   if(S.i>=N)return review();
   const st=C.steps[S.i];
-  app.innerHTML=`<section class="stage"><div class="eyebrow">Step ${S.i+1} of ${N}</div><h1 tabindex="-1">${esc(st.q)}</h1><p class="hint">${esc(st.h||'')}</p><div id="fs">${st.fields.map(field).join('')}</div><div class="err" role="alert" id="er"></div></section>`;
-  // paint date grids
-  st.fields.forEach(f=>{if(f.t==='date'&&vis(f))paintDate(f);});
+  app.innerHTML=`<section class="stage">
+    <div class="eyebrow"><i class="fas fa-circle"></i> Step ${S.i+1} of ${N}</div>
+    <h1 tabindex="-1">${esc(st.q)}</h1>
+    <p class="hint">${esc(st.h||'')}</p>
+    <div id="fs">${st.fields.map(field).join('')}</div>
+    <div class="err" role="alert" id="er"></div>
+  </section>`;
+  st.fields.forEach(f=>{if(f.t==='date'&&vis(f))paintDate(f.n);});
   focusTop(true);
 }
 
@@ -381,7 +576,7 @@ function focusTop(inp){
   const i=app.querySelector('input:not([type=hidden]):not([type=radio]):not([type=checkbox]),textarea');
   if(inp&&i&&matchMedia('(hover:hover)').matches)i.focus({preventScroll:true});
   else app.querySelector('h1')?.focus({preventScroll:true});
-  scrollTo({top:0});
+  scrollTo({top:0,behavior:'smooth'});
 }
 
 function rows(){
@@ -394,7 +589,30 @@ function rows(){
 }
 
 function review(){
-  app.innerHTML=`<section class="stage"><div class="eyebrow">Review</div><h1 tabindex="-1">Check your request.</h1><p class="hint">Edit anything, then send it to the Zaure team.</p>${rows().map(r=>`<div class="row"><div><div class="k">${esc(r[1])}</div><div class="v">${esc(r[2])}</div></div><button data-go="${r[0]}">Edit</button></div>`).join('')}<p class="fine">${esc(C.note||'')}</p></section>`;
+  const grouped={};
+  C.steps.forEach((st,si)=>st.fields.forEach(f=>{
+    const v=S.d[f.n];
+    if(vis(f)&&!empty(f,v)){
+      if(!grouped[si])grouped[si]=[];
+      grouped[si].push([f.l,fmt(f,v)]);
+    }
+  }));
+  const titles=C.steps.map(s=>s.q);
+  const cards=Object.entries(grouped).map(([si,rows])=>`
+    <div class="review-card">
+      <div class="review-head">
+        <h4>${esc(titles[si])}</h4>
+        <button type="button" class="review-edit" data-go="${si}">Edit</button>
+      </div>
+      ${rows.map(r=>`<div class="review-row"><span class="rk">${esc(r[0])}</span><span class="rv">${esc(r[1])}</span></div>`).join('')}
+    </div>`).join('');
+  app.innerHTML=`<section class="stage">
+    <div class="eyebrow"><i class="fas fa-check"></i> Review</div>
+    <h1 tabindex="-1">Check your request.</h1>
+    <p class="hint">Edit anything, then send it to the Zaure team. We'll reply with a site-based quote.</p>
+    ${cards}
+    <p class="fine">${esc(C.note||'')}</p>
+  </section>`;
   focusTop();
 }
 
@@ -411,17 +629,17 @@ function collectForSubmit(){
 
 async function sendRequest(){
   if(S.sending)return;
-  const e=validate(C.steps[N-1]);
+  const lastStep=C.steps[N-1];
+  const e=validate(lastStep);
   if(e){const er=$('#er');if(er)er.textContent=e;return;}
-  S.sending=true;setNav();
-  const data=collectForSubmit();
-  const fd=new FormData();
-  fd.append('_subject','New '+C.title+' request');
-  if(S.d.email)fd.append('_replyto',S.d.email);
-  Object.entries(data).forEach(([k,v])=>fd.append(k,v));
 
-  if(!C.endpoint||C.endpoint.includes('YOUR_FORM_ID')){
-    // Fallback: WhatsApp
+  S.sending=true;setNav();
+
+  const data=collectForSubmit();
+  const endpoint=(C.endpoint||'').trim();
+
+  // If endpoint is not configured, fall back to WhatsApp
+  if(!endpoint||endpoint.includes('YOUR_FORM_ID')){
     S.sending=false;setNav();
     const msg='*New '+C.title+' request*\n\n'+Object.entries(data).map(([k,v])=>k+': '+v).join('\n')+'\n\nSent from the Zaure booking form';
     window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`,'_blank');
@@ -429,20 +647,42 @@ async function sendRequest(){
     return;
   }
 
+  const fd=new FormData();
+  fd.append('_subject','New '+C.title+' request');
+  if(S.d.email)fd.append('_replyto',S.d.email);
+  Object.entries(data).forEach(([k,v])=>fd.append(k,v));
+
   try{
-    const res=await fetch(C.endpoint,{method:'POST',body:fd,headers:{'Accept':'application/json'}});
-    if(!res.ok)throw new Error('Request failed');
+    const res=await fetch(endpoint,{method:'POST',body:fd,headers:{'Accept':'application/json'}});
+    if(!res.ok){
+      let msg='Could not send your request. Please try again.';
+      try{const j=await res.json();if(j.errors&&j.errors.length)msg=j.errors.map(x=>x.message).join(' ');}catch(_){}
+      throw new Error(msg);
+    }
     done(false);
   }catch(err){
     S.sending=false;setNav();
-    const er=$('#er');if(er)er.textContent='Could not send. Please check your connection or message us on WhatsApp: +234 904 233 9411';
+    const er=$('#er');
+    if(er)er.textContent=err.message||'Something went wrong. Please check your connection or message us on WhatsApp: +234 904 233 9411';
   }
 }
 
 function done(viaWA){
   try{sessionStorage.removeItem(K)}catch(e){}
-  $('.bar').style.width='100%';nav.innerHTML='';
-  app.innerHTML=`<section class="stage"><div class="eyebrow">${viaWA?'One more step':'All done'}</div><h1 tabindex="-1">${viaWA?'Send it in WhatsApp.':'Request received.'}</h1><p class="hint">${viaWA?'Your details are ready in a WhatsApp message. Tap send to reach the Zaure team.':esc(C.after||'We will be in touch shortly.')}</p><div class="checks" style="grid-template-columns:1fr"><a class="check" href="${esc(C.back)}" style="justify-content:center;padding:16px"><span>Back to services</span></a></div></section>`;
+  $('.bar').style.width='100%';
+  nav.innerHTML='';
+  app.innerHTML=`<section class="stage success">
+    <div class="success-icon"><i class="fas fa-${viaWA?'whatsapp':'check'}"></i></div>
+    <div class="eyebrow" style="margin-bottom:14px"><i class="fas fa-circle"></i> ${viaWA?'One more step':'All done'}</div>
+    <h1 tabindex="-1">${viaWA?'Send it in WhatsApp.':'Request received.'}</h1>
+    <p>${viaWA?'Your details are ready in a WhatsApp message — tap send to reach the Zaure team.':esc(C.after||'We will be in touch shortly.')}</p>
+    <div class="success-actions">
+      ${viaWA
+        ? `<a class="btn" href="https://wa.me/${WA}" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Open WhatsApp</a>`
+        : ''}
+      <a class="btn ghost" href="${esc(C.back)}" style="border:1px solid var(--ln);color:var(--fg);padding:16px 28px">Back to services</a>
+    </div>
+  </section>`;
   focusTop();
 }
 
@@ -455,31 +695,30 @@ function next(){
 }
 function back(){S.i=S.r?N:S.i-1;S.r=false;save();render();}
 
-/* ---- event delegation ---- */
+/* ---- EVENT DELEGATION ---- */
 
 app.addEventListener('click',e=>{
-  // date picker nav
+  // date picker navigation
   const dpPrev=e.target.closest('[data-dp-prev]');
   if(dpPrev){
     const n=dpPrev.dataset.dpPrev,st=dpState[n];
     st.viewMonth--;if(st.viewMonth<0){st.viewMonth=11;st.viewYear--;}
-    paintDate({n,t:'date'});return;
+    paintDate(n);return;
   }
   const dpNext=e.target.closest('[data-dp-next]');
   if(dpNext){
     const n=dpNext.dataset.dpNext,st=dpState[n];
     st.viewMonth++;if(st.viewMonth>11){st.viewMonth=0;st.viewYear++;}
-    paintDate({n,t:'date'});return;
+    paintDate(n);return;
   }
   const dpDay=e.target.closest('[data-dp-day]');
   if(dpDay){
-    const n=dpDay.dataset.dpDay;
-    const iso=dpDay.dataset.date;
+    const n=dpDay.dataset.dpDay, iso=dpDay.dataset.date;
     dpState[n].selected=new Date(iso+'T00:00');
     S.d[n]=iso;
     document.querySelector(`[data-hidden="${n}"]`).value=iso;
     document.querySelector(`[data-dp-sel="${n}"]`).textContent=new Date(iso+'T00:00').toLocaleDateString('en-NG',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
-    paintDate({n,t:'date'});
+    paintDate(n);
     save();
     const er=$('#er');if(er)er.textContent='';
     return;
@@ -509,7 +748,7 @@ app.addEventListener('click',e=>{
     val=qty.dataset.op==='+'?Math.min(max,val+1):Math.max(min,val-1);
     input.value=val;S.d[n]=val;save();return;
   }
-  // nav buttons
+  // nav
   const a=e.target.closest('[data-a]')?.dataset.a;
   if(a==='next')next();
   else if(a==='back')back();
@@ -523,7 +762,7 @@ app.addEventListener('change',e=>{
   const t=e.target;
   if(t.dataset.tile!==undefined){
     const f=t.closest('.f'),n=f.dataset.n;
-    S.d[n]=t.dataset.tile;save();
+    S.d[n]=t.value;save();
   } else if(t.dataset.multi){
     const n=t.dataset.multi;
     const arr=new Set(S.d[n]||[]);
@@ -534,7 +773,8 @@ app.addEventListener('change',e=>{
   } else if(t.dataset.choice){
     const n=t.dataset.choice;
     S.d[n]=t.value;
-    t.closest('.checks').querySelectorAll('.check').forEach(c=>c.classList.remove('checked'));
+    const group=t.closest('.checks');
+    if(group)group.querySelectorAll('.check').forEach(c=>c.classList.remove('checked'));
     t.closest('.check').classList.add('checked');
     save();
   } else if(t.dataset.check){
@@ -547,14 +787,15 @@ app.addEventListener('change',e=>{
 
 app.addEventListener('input',e=>{
   const fe=e.target.closest('.f');if(!fe)return;
-  if(e.target.type==='number')return; // handled by stepper
+  if(e.target.type==='number')return;
   if(e.target.type==='hidden')return;
+  if(e.target.type==='checkbox'||e.target.type==='radio')return;
   S.d[fe.dataset.n]=e.target.value;save();
   const er=$('#er');if(er)er.textContent='';
 });
 
 app.addEventListener('keydown',e=>{
-  if(e.key==='Enter'&&e.target.tagName==='INPUT'&&e.target.type!=='hidden'&&e.target.type!=='checkbox'&&e.target.type!=='radio'){
+  if(e.key==='Enter'&&e.target.tagName==='INPUT'&&!['hidden','checkbox','radio','number'].includes(e.target.type)){
     e.preventDefault();next();
   }
 });
