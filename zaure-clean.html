@@ -12,30 +12,30 @@
 <style>
 :root{
   --navy:#0f2940;--navy-2:#1a3650;--navy-3:#2a4a6a;
-  --gold:#D4B87A;--gold-deep:#B49450;--gold-soft:#E7D3A1;
+  /* Teal accent replaces gold */
+  --accent:#4A9BA8;--accent-deep:#2E6E7A;--accent-soft:#7FC1CC;
   --bg:#0a1622;--surface:#0f2940;--surface-2:#14304a;
   --fg:#f4f6f8;--mut:#8b97a4;--ln:rgba(255,255,255,.14);
   --err:#ff7b7b;--ok:#25D366;--wa:#25D366;--wa-dark:#1DA851;
 }
-/* Light theme override — activated by [data-theme="light"] on <html> */
 [data-theme="light"]{
   --bg:#f7f9fc;--surface:#ffffff;--surface-2:#eef3f8;
   --fg:#0f2940;--mut:#5b6b7c;--ln:rgba(15,41,64,.14);
-  --err:#c0392b;--gold-soft:#c9a962;
-}
-[data-theme="light"] body{
-  background:radial-gradient(ellipse at top right,rgba(212,184,122,.14),transparent 55%),var(--bg);
+  --err:#c0392b;--accent:#2E6E7A;--accent-deep:#235661;--accent-soft:#4A9BA8;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{min-height:100%}
 body{
-  background:radial-gradient(ellipse at top right,rgba(212,184,122,.08),transparent 50%),var(--bg);
+  background:radial-gradient(ellipse at top right,rgba(74,155,168,.08),transparent 50%),var(--bg);
   color:var(--fg);font:400 16px/1.5 Inter,system-ui,sans-serif;
   -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
   transition:background .3s ease,color .3s ease;
 }
+[data-theme="light"] body{
+  background:radial-gradient(ellipse at top right,rgba(74,155,168,.12),transparent 55%),var(--bg);
+}
 .zb{min-height:100dvh;display:flex;flex-direction:column;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
-.bar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-deep));transition:width .5s cubic-bezier(.2,.8,.2,1);z-index:50;box-shadow:0 0 12px rgba(212,184,122,.5)}
+.bar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-deep));transition:width .5s cubic-bezier(.2,.8,.2,1);z-index:50;box-shadow:0 0 12px rgba(74,155,168,.5)}
 
 header{display:flex;justify-content:space-between;align-items:center;padding:22px 24px;gap:12px}
 .logo{display:flex;align-items:baseline;gap:12px;text-decoration:none}
@@ -48,7 +48,7 @@ header{display:flex;justify-content:space-between;align-items:center;padding:22p
   display:flex;align-items:center;justify-content:center;
   transition:all .2s;font-family:inherit;font-size:.85rem;
 }
-.theme-toggle:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-1px)}
+.theme-toggle:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
 .x{color:var(--mut);text-decoration:none;font-size:12px;letter-spacing:.16em;text-transform:uppercase;display:inline-flex;align-items:center;gap:6px;transition:color .2s}
 .x:hover{color:var(--fg)}
 .x i{font-size:.7rem}
@@ -60,10 +60,10 @@ main{flex:1;width:100%;max-width:720px;margin:0 auto;padding:3vh 24px 24px}
 .eyebrow{
   display:inline-flex;align-items:center;gap:6px;
   font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--gold);padding:5px 12px;background:rgba(212,184,122,.1);
-  border:1px solid rgba(212,184,122,.3);border-radius:40px;
+  color:var(--accent);padding:5px 12px;background:rgba(74,155,168,.1);
+  border:1px solid rgba(74,155,168,.3);border-radius:40px;
 }
-[data-theme="light"] .eyebrow{color:var(--gold-deep);background:rgba(212,184,122,.18);border-color:rgba(180,148,80,.4)}
+[data-theme="light"] .eyebrow{color:var(--accent-deep);background:rgba(74,155,168,.14);border-color:rgba(46,110,122,.35)}
 .eyebrow i{font-size:.55rem}
 
 h1{
@@ -85,7 +85,7 @@ input[type=text],input[type=tel],textarea{
 textarea{resize:none;min-height:90px;font-size:1rem;line-height:1.5}
 input::placeholder,textarea::placeholder{color:#55606b}
 [data-theme="light"] input::placeholder,[data-theme="light"] textarea::placeholder{color:#9aa7b4}
-input:focus,textarea:focus{border-color:var(--gold)}
+input:focus,textarea:focus{border-color:var(--accent)}
 input[type=tel]{font-variant-numeric:tabular-nums}
 
 .err{color:var(--err);font-size:.88rem;min-height:1.4em;margin-top:8px;font-weight:500}
@@ -100,17 +100,17 @@ input[type=tel]{font-variant-numeric:tabular-nums}
   background:var(--surface);text-align:center;transition:all .18s cubic-bezier(.2,.8,.2,1);
   min-height:96px;justify-content:center;
 }
-.tile-body i{font-size:1.2rem;color:var(--gold);margin-bottom:3px;transition:transform .25s}
+.tile-body i{font-size:1.2rem;color:var(--accent);margin-bottom:3px;transition:transform .25s}
 .tile-body strong{font-size:.78rem;font-weight:700;color:var(--fg);line-height:1.2}
 .tile-body span{font-size:.66rem;color:var(--mut);line-height:1.3}
-.tile:hover .tile-body{border-color:rgba(212,184,122,.55);background:var(--surface-2);transform:translateY(-1px)}
+.tile:hover .tile-body{border-color:rgba(74,155,168,.55);background:var(--surface-2);transform:translateY(-1px)}
 .tile:hover .tile-body i{transform:scale(1.1)}
 .tile input:checked + .tile-body{
-  border-color:var(--gold);background:rgba(212,184,122,.1);
-  box-shadow:0 0 0 2px rgba(212,184,122,.15),0 6px 20px rgba(212,184,122,.12);
+  border-color:var(--accent);background:rgba(74,155,168,.1);
+  box-shadow:0 0 0 2px rgba(74,155,168,.15),0 6px 20px rgba(74,155,168,.12);
 }
-.tile input:checked + .tile-body i{color:var(--gold-soft)}
-.tile input:focus-visible + .tile-body{outline:2px solid var(--gold);outline-offset:2px}
+.tile input:checked + .tile-body i{color:var(--accent-soft)}
+.tile input:focus-visible + .tile-body{outline:2px solid var(--accent);outline-offset:2px}
 
 .checks{display:grid;grid-template-columns:1fr;gap:8px}
 @media(min-width:560px){.checks.two{grid-template-columns:1fr 1fr}}
@@ -120,18 +120,18 @@ input[type=tel]{font-variant-numeric:tabular-nums}
   font-size:.86rem;font-weight:500;color:var(--fg);background:var(--surface);
   transition:all .18s;user-select:none;-webkit-tap-highlight-color:transparent;line-height:1.4;
 }
-.check:hover{border-color:rgba(212,184,122,.5);background:var(--surface-2)}
+.check:hover{border-color:rgba(74,155,168,.5);background:var(--surface-2)}
 .check input{
-  accent-color:var(--gold);width:18px;height:18px;cursor:pointer;
+  accent-color:var(--accent);width:18px;height:18px;cursor:pointer;
   flex-shrink:0;margin:1px 0 0;border:0;padding:0;
 }
 .check .check-body{flex:1;min-width:0}
 .check .check-body strong{display:block;font-size:.86rem;font-weight:700;margin-bottom:2px;color:var(--fg)}
 .check .check-body small{display:block;font-size:.74rem;color:var(--mut);font-weight:400;line-height:1.4}
-.check.checked{border-color:var(--gold);background:rgba(212,184,122,.1)}
-.check.checked .check-body strong{color:var(--gold-soft)}
-[data-theme="light"] .check.checked .check-body strong{color:var(--gold-deep)}
-.check:has(input:focus-visible){outline:2px solid var(--gold);outline-offset:2px}
+.check.checked{border-color:var(--accent);background:rgba(74,155,168,.1)}
+.check.checked .check-body strong{color:var(--accent-soft)}
+[data-theme="light"] .check.checked .check-body strong{color:var(--accent-deep)}
+.check:has(input:focus-visible){outline:2px solid var(--accent);outline-offset:2px}
 
 .dp{border:1px solid var(--ln);border-radius:14px;padding:16px;background:var(--surface)}
 .dp-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
@@ -142,7 +142,7 @@ input[type=tel]{font-variant-numeric:tabular-nums}
   display:flex;align-items:center;justify-content:center;
   transition:all .15s;font-family:inherit;font-size:.8rem;
 }
-.dp-nav:hover{background:rgba(212,184,122,.12);border-color:var(--gold)}
+.dp-nav:hover{background:rgba(74,155,168,.12);border-color:var(--accent)}
 .dp-nav:disabled{opacity:.25;cursor:not-allowed}
 .dp-nav:disabled:hover{background:transparent;border-color:var(--ln)}
 .dp-weekdays{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:8px}
@@ -157,18 +157,18 @@ input[type=tel]{font-variant-numeric:tabular-nums}
   display:flex;align-items:center;justify-content:center;
   transition:all .15s;font-family:inherit;min-height:38px;
 }
-.dp-day:hover:not(:disabled){background:rgba(212,184,122,.12);color:var(--gold-soft)}
-[data-theme="light"] .dp-day:hover:not(:disabled){color:var(--gold-deep)}
+.dp-day:hover:not(:disabled){background:rgba(74,155,168,.12);color:var(--accent-soft)}
+[data-theme="light"] .dp-day:hover:not(:disabled){color:var(--accent-deep)}
 .dp-day.other-month{opacity:0;pointer-events:none}
 .dp-day:disabled{opacity:.2;cursor:not-allowed}
-.dp-day.today{border:1.5px solid var(--gold);color:var(--gold);font-weight:800}
-.dp-day.selected{background:var(--gold);color:var(--navy);font-weight:800;box-shadow:0 4px 12px rgba(212,184,122,.35)}
-.dp-day.selected:hover{background:var(--gold-soft);color:var(--navy)}
+.dp-day.today{border:1.5px solid var(--accent);color:var(--accent);font-weight:800}
+.dp-day.selected{background:var(--accent);color:#fff;font-weight:800;box-shadow:0 4px 12px rgba(74,155,168,.35)}
+.dp-day.selected:hover{background:var(--accent-deep);color:#fff}
 .dp-selected{
   margin-top:14px;padding-top:14px;border-top:1px solid var(--ln);
   font-size:.82rem;color:var(--mut);display:flex;align-items:center;gap:8px;flex-wrap:wrap;
 }
-.dp-selected i{color:var(--gold)}
+.dp-selected i{color:var(--accent)}
 .dp-selected strong{color:var(--fg);font-weight:700}
 
 .time-slots{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
@@ -179,11 +179,11 @@ input[type=tel]{font-variant-numeric:tabular-nums}
   cursor:pointer;text-align:center;transition:all .15s;
   font-family:inherit;min-height:44px;
 }
-.time-slot:hover{border-color:rgba(212,184,122,.55);background:var(--surface-2);color:var(--gold-soft)}
-[data-theme="light"] .time-slot:hover{color:var(--gold-deep)}
+.time-slot:hover{border-color:rgba(74,155,168,.55);background:var(--surface-2);color:var(--accent-soft)}
+[data-theme="light"] .time-slot:hover{color:var(--accent-deep)}
 .time-slot.selected{
-  background:var(--gold);border-color:var(--gold);color:var(--navy);font-weight:800;
-  box-shadow:0 4px 12px rgba(212,184,122,.3);
+  background:var(--accent);border-color:var(--accent);color:#fff;font-weight:800;
+  box-shadow:0 4px 12px rgba(74,155,168,.3);
 }
 
 .qty-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -202,7 +202,7 @@ input[type=tel]{font-variant-numeric:tabular-nums}
   font-size:.8rem;cursor:pointer;display:flex;align-items:center;justify-content:center;
   font-family:inherit;transition:background .15s;
 }
-.qty-controls button:hover{background:rgba(212,184,122,.15);color:var(--gold-soft)}
+.qty-controls button:hover{background:rgba(74,155,168,.15);color:var(--accent-soft)}
 .qty-controls input{
   width:36px;border:none;background:transparent;text-align:center;
   font-size:.9rem;font-weight:800;color:var(--fg);outline:none;
@@ -220,20 +220,22 @@ nav{
 .btn{
   font:700 .78rem Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;
   text-decoration:none;text-align:center;cursor:pointer;
-  padding:16px 32px;border:1px solid var(--gold);background:var(--gold);color:var(--navy);
+  padding:16px 32px;border:1px solid var(--accent);background:var(--accent);color:#fff;
   border-radius:40px;transition:all .2s;display:inline-flex;align-items:center;gap:8px;
-  min-height:52px;white-space:nowrap;
+  min-height:52px;white-space:nowrap;font-family:inherit;
 }
-.btn:hover{background:var(--gold-soft);transform:translateY(-1px);box-shadow:0 8px 24px rgba(212,184,122,.3)}
+.btn:hover{background:var(--accent-deep);transform:translateY(-1px);box-shadow:0 8px 24px rgba(74,155,168,.3)}
 .btn:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none}
 .btn.ghost{background:transparent;color:var(--mut);border-color:transparent;padding-left:16px;padding-right:16px;min-height:48px}
 .btn.ghost:hover{color:var(--fg);background:transparent;box-shadow:none;transform:none}
 .btn.ghost i{margin-right:2px}
+.btn.wa{background:var(--wa);border-color:var(--wa);color:#fff}
+.btn.wa:hover{background:var(--wa-dark);border-color:var(--wa-dark);box-shadow:0 8px 24px rgba(37,211,102,.3)}
+.btn.outline{background:transparent;color:var(--fg);border-color:var(--ln)}
+.btn.outline:hover{border-color:var(--accent);color:var(--accent)}
 
 /* ============ REVIEW (responsive) ============ */
-.review-grid{
-  display:grid;grid-template-columns:1fr;gap:14px;
-}
+.review-grid{display:grid;grid-template-columns:1fr;gap:14px}
 @media(min-width:720px){
   .review-grid{grid-template-columns:1fr 1fr;align-items:start}
   .review-grid .review-card.full{grid-column:1 / -1}
@@ -247,18 +249,18 @@ nav{
   margin-bottom:10px;gap:10px;
 }
 .review-head h4{
-  font-size:.68rem;font-weight:800;color:var(--gold);
+  font-size:.68rem;font-weight:800;color:var(--accent);
   text-transform:uppercase;letter-spacing:1.2px;
   line-height:1.3;flex:1;min-width:0;word-break:break-word;
 }
-[data-theme="light"] .review-head h4{color:var(--gold-deep)}
+[data-theme="light"] .review-head h4{color:var(--accent-deep)}
 .review-edit{
-  background:transparent;border:none;color:var(--gold);font-size:.7rem;
+  background:transparent;border:none;color:var(--accent);font-size:.7rem;
   font-weight:700;cursor:pointer;padding:4px 10px;border-radius:6px;
   font-family:inherit;transition:background .15s;flex-shrink:0;white-space:nowrap;
 }
-[data-theme="light"] .review-edit{color:var(--gold-deep)}
-.review-edit:hover{background:rgba(212,184,122,.15)}
+[data-theme="light"] .review-edit{color:var(--accent-deep)}
+.review-edit:hover{background:rgba(74,155,168,.15)}
 .review-row{
   display:flex;justify-content:space-between;gap:14px;
   padding:7px 0;font-size:.86rem;line-height:1.5;
@@ -277,6 +279,35 @@ nav{
   .review-row .rk{max-width:none}
   .review-row .rv{text-align:left}
 }
+
+/* ============ SEND CHOICE ============ */
+.send-choice{
+  display:grid;grid-template-columns:1fr;gap:12px;margin-top:8px;
+}
+@media(min-width:560px){.send-choice{grid-template-columns:1fr 1fr}}
+.send-option{
+  display:flex;flex-direction:column;align-items:flex-start;gap:10px;
+  padding:22px;border:1px solid var(--ln);border-radius:16px;
+  background:var(--surface);cursor:pointer;text-align:left;
+  font-family:inherit;color:var(--fg);transition:all .2s;
+  -webkit-tap-highlight-color:transparent;
+}
+.send-option:hover{border-color:var(--accent);background:var(--surface-2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(74,155,168,.12)}
+.send-option.wa:hover{border-color:var(--wa);box-shadow:0 8px 24px rgba(37,211,102,.15)}
+.send-option:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+.send-icon{
+  width:48px;height:48px;border-radius:12px;
+  background:rgba(74,155,168,.12);color:var(--accent);
+  display:flex;align-items:center;justify-content:center;font-size:1.2rem;
+}
+.send-option.wa .send-icon{background:rgba(37,211,102,.12);color:var(--wa)}
+.send-option h4{font-size:.95rem;font-weight:800;color:var(--fg);line-height:1.3;margin:0}
+.send-option p{font-size:.8rem;color:var(--mut);line-height:1.5;margin:0}
+.send-option .send-arrow{
+  margin-top:4px;font-size:.72rem;font-weight:800;color:var(--accent);
+  text-transform:uppercase;letter-spacing:.1em;display:inline-flex;align-items:center;gap:6px;
+}
+.send-option.wa .send-arrow{color:var(--wa)}
 
 .success{text-align:center;padding:30px 10px}
 .success-icon{
@@ -377,8 +408,7 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const WA='2349042339411';
 
 /* ============================================================
-   THEME SYNC — shares the same storage key as the main site.
-   main.js uses localStorage.theme = "light" | "dark".
+   THEME SYNC
    ============================================================ */
 const THEME_KEY='theme';
 function getStoredTheme(){
@@ -391,9 +421,7 @@ function getStoredTheme(){
 function applyTheme(t){
   document.documentElement.setAttribute('data-theme',t);
   const icon=document.getElementById('themeIcon');
-  if(icon){
-    icon.className='fas '+(t==='dark'?'fa-moon':'fa-sun');
-  }
+  if(icon)icon.className='fas '+(t==='dark'?'fa-moon':'fa-sun');
   const meta=document.querySelector('meta[name="theme-color"]');
   if(meta)meta.setAttribute('content',t==='dark'?'#0f2940':'#f7f9fc');
 }
@@ -410,18 +438,10 @@ function initTheme(){
       setTheme(cur==='light'?'dark':'light');
     });
   }
-  // Reflect changes made in other tabs/pages
   window.addEventListener('storage',e=>{
-    if(e.key===THEME_KEY && (e.newValue==='light'||e.newValue==='dark')){
-      applyTheme(e.newValue);
-    }
+    if(e.key===THEME_KEY && (e.newValue==='light'||e.newValue==='dark'))applyTheme(e.newValue);
   });
-  // Reflect changes made via main.js on the same page (same document, other script)
-  // by observing the data-theme attribute — but we're the ones setting it, so no-op.
-  // Also re-check on visibility/focus in case main.js toggled it while we were hidden.
-  document.addEventListener('visibilitychange',()=>{
-    if(!document.hidden)applyTheme(getStoredTheme());
-  });
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)applyTheme(getStoredTheme());});
   window.addEventListener('focus',()=>applyTheme(getStoredTheme()));
 }
 
@@ -480,7 +500,7 @@ function renderMulti(f,v){
         return `<label class="check${on?' checked':''}">
           <input type="checkbox" value="${esc(val)}" ${on?'checked':''} data-multi="${f.n}">
           <span class="check-body">
-            <strong>${icon?`<i class="fas ${esc(icon)}" style="color:var(--gold);margin-right:6px;font-size:.85em"></i>`:''}${esc(val)}</strong>
+            <strong>${icon?`<i class="fas ${esc(icon)}" style="color:var(--accent);margin-right:6px;font-size:.85em"></i>`:''}${esc(val)}</strong>
             ${sub?`<small>${esc(sub)}</small>`:''}
           </span>
         </label>`;
@@ -556,7 +576,7 @@ function renderDate(f,v){
       <div class="dp-selected"><i class="fas fa-calendar-check"></i> Selected: <strong data-dp-sel="${f.n}">${v?fmt(f,v):'None yet'}</strong></div>
     </div>
     <input type="hidden" name="${f.n}" value="${esc(v||'')}" data-hidden="${f.n}">
-    <div class="err" data-dp-note="${f.n}" style="color:var(--gold);min-height:1.2em"></div>
+    <div class="err" data-dp-note="${f.n}" style="color:var(--accent);min-height:1.2em"></div>
   </div>`;
 }
 
@@ -642,7 +662,7 @@ function setNav(){
       : `<button type="button" class="btn ghost" data-a="back"><i class="fas fa-arrow-left"></i> Back</button>`)
     + `<button type="button" class="btn" data-a="${last?'send':'next'}" ${S.sending?'disabled':''}>
          ${last
-           ? (S.sending ? '<i class="fas fa-spinner fa-spin"></i> Sending…' : '<i class="fas fa-paper-plane"></i> Send request')
+           ? (S.sending ? '<i class="fas fa-spinner fa-spin"></i> Sending…' : '<i class="fas fa-paper-plane"></i> Continue')
            : (i===N-1 ? 'Review <i class="fas fa-arrow-right"></i>' : 'Continue <i class="fas fa-arrow-right"></i>')}
        </button>`;
 }
@@ -671,8 +691,7 @@ function focusTop(inp){
 }
 
 /* ============================================================
-   REVIEW — responsive: 2-col grid on wide screens, stacked rows
-   on very narrow screens, full-width cards where appropriate.
+   REVIEW
    ============================================================ */
 function review(){
   const grouped={};
@@ -684,7 +703,6 @@ function review(){
     }
   }));
   const titles=C.steps.map(s=>s.q);
-  // Services card spans full width since values can be long
   const cards=Object.entries(grouped).map(([si,rows])=>{
     const isFull=rows.some(r=>String(r[1]).length>40);
     return `<div class="review-card${isFull?' full':''}">
@@ -698,7 +716,7 @@ function review(){
   app.innerHTML=`<section class="stage">
     <div class="eyebrow"><i class="fas fa-check"></i> Review</div>
     <h1 tabindex="-1">Check your request.</h1>
-    <p class="hint">Edit anything, then send it to the Zaure team. We'll review the site and reply on WhatsApp with a site-based quote.</p>
+    <p class="hint">Edit anything, then choose how to send it. We'll review the site and reply on WhatsApp with a site-based quote.</p>
     <div class="review-grid">${cards}</div>
     <p class="fine">${esc(C.note||'')}</p>
   </section>`;
@@ -716,25 +734,65 @@ function collectForSubmit(){
   return d;
 }
 
-async function sendRequest(){
-  if(S.sending)return;
+/* ============================================================
+   SEND CHOICE — user picks Formspree or WhatsApp
+   ============================================================ */
+function showSendChoice(){
   const lastStep=C.steps[N-1];
   const e=validate(lastStep);
   if(e){const er=$('#er');if(er)er.textContent=e;return;}
 
-  S.sending=true;setNav();
+  const endpoint=(C.endpoint||'').trim();
+  const hasFormspree=endpoint && !endpoint.includes('YOUR_FORM_ID');
+
+  nav.innerHTML='';
+  app.innerHTML=`<section class="stage">
+    <div class="eyebrow"><i class="fas fa-paper-plane"></i> Send</div>
+    <h1 tabindex="-1">How would you like to send it?</h1>
+    <p class="hint">Pick one. Both reach the Zaure team — we reply on WhatsApp within 2 to 4 hours with a site-based quote.</p>
+    <div class="send-choice">
+      ${hasFormspree ? `
+        <button type="button" class="send-option" data-send="formspree">
+          <div class="send-icon"><i class="fas fa-envelope"></i></div>
+          <h4>Send request</h4>
+          <p>Submit directly to our team. No app switch needed.</p>
+          <span class="send-arrow">Send now <i class="fas fa-arrow-right"></i></span>
+        </button>
+      ` : ''}
+      <button type="button" class="send-option wa" data-send="whatsapp">
+        <div class="send-icon"><i class="fab fa-whatsapp"></i></div>
+        <h4>Send via WhatsApp</h4>
+        <p>Opens WhatsApp with your details pre-filled. You tap send.</p>
+        <span class="send-arrow">Open WhatsApp <i class="fas fa-arrow-right"></i></span>
+      </button>
+    </div>
+    <div class="err" role="alert" id="er"></div>
+  </section>`;
+  focusTop();
+
+  app.querySelectorAll('[data-send]').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      if(btn.dataset.send==='whatsapp')sendViaWhatsApp();
+      else sendViaFormspree();
+    });
+  });
+}
+
+function sendViaWhatsApp(){
+  const data=collectForSubmit();
+  const msg='*New '+C.title+' request*\n\n'+Object.entries(data).map(([k,v])=>k+': '+v).join('\n')+'\n\nSent from the Zaure booking form';
+  window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`,'_blank');
+  done(true);
+}
+
+async function sendViaFormspree(){
+  const endpoint=(C.endpoint||'').trim();
+  if(!endpoint||endpoint.includes('YOUR_FORM_ID')){sendViaWhatsApp();return;}
+
+  const btn=app.querySelector('[data-send="formspree"]');
+  if(btn){btn.disabled=true;btn.querySelector('.send-arrow').innerHTML='Sending… <i class="fas fa-spinner fa-spin"></i>';}
 
   const data=collectForSubmit();
-  const endpoint=(C.endpoint||'').trim();
-
-  if(!endpoint||endpoint.includes('YOUR_FORM_ID')){
-    S.sending=false;setNav();
-    const msg='*New '+C.title+' request*\n\n'+Object.entries(data).map(([k,v])=>k+': '+v).join('\n')+'\n\nSent from the Zaure booking form';
-    window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`,'_blank');
-    done(true);
-    return;
-  }
-
   const fd=new FormData();
   fd.append('_subject','New '+C.title+' request');
   if(S.d.email)fd.append('_replyto',S.d.email);
@@ -743,15 +801,18 @@ async function sendRequest(){
   try{
     const res=await fetch(endpoint,{method:'POST',body:fd,headers:{'Accept':'application/json'}});
     if(!res.ok){
-      let msg='Could not send your request. Please try again.';
+      let msg='Could not send your request. Please try WhatsApp instead.';
       try{const j=await res.json();if(j.errors&&j.errors.length)msg=j.errors.map(x=>x.message).join(' ');}catch(_){}
       throw new Error(msg);
     }
     done(false);
   }catch(err){
-    S.sending=false;setNav();
+    if(btn){
+      btn.disabled=false;
+      btn.querySelector('.send-arrow').innerHTML='Send now <i class="fas fa-arrow-right"></i>';
+    }
     const er=$('#er');
-    if(er)er.textContent=err.message||'Something went wrong. Please check your connection or message us on WhatsApp: +234 904 233 9411';
+    if(er)er.textContent=err.message||'Something went wrong. Please try WhatsApp instead.';
   }
 }
 
@@ -766,9 +827,9 @@ function done(viaWA){
     <p>${viaWA?'Your details are ready in a WhatsApp message — tap send to reach the Zaure team.':esc(C.after||'We will be in touch shortly.')}</p>
     <div class="success-actions">
       ${viaWA
-        ? `<a class="btn" href="https://wa.me/${WA}" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Open WhatsApp</a>`
+        ? `<a class="btn wa" href="https://wa.me/${WA}" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Open WhatsApp</a>`
         : ''}
-      <a class="btn ghost" href="${esc(C.back)}" style="border:1px solid var(--ln);color:var(--fg);padding:16px 28px">Back to services</a>
+      <a class="btn outline" href="${esc(C.back)}" style="padding:16px 28px">Back to services</a>
     </div>
   </section>`;
   focusTop();
@@ -789,7 +850,7 @@ nav.addEventListener('click',e=>{
   const a=e.target.closest('[data-a]')?.dataset.a;
   if(a==='next')next();
   else if(a==='back')back();
-  else if(a==='send')sendRequest();
+  else if(a==='send')showSendChoice();
 });
 
 app.addEventListener('click',e=>{
