@@ -1,2006 +1,567 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-  <title>Zaure Clean – Post-Construction Cleaning | Zaure Services</title>
-  <meta name="description" content="Zaure Clean — post-construction cleaning specialists for contractors, engineers, and developers across Northern Nigeria. Free quote in 2 minutes.">
-  <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
-  <style>
-    :root {
-      --navy: #0f2940;
-      --navy-2: #1a3650;
-      --gold: #D4B87A;
-      --gold-deep: #B49450;
-      --wa: #25D366;
-      --wa-dark: #1DA851;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Book Zaure Clean — Zaure</title>
+<meta name="description" content="Book post-construction cleaning, pest control, weed control or carpet cleaning in Kaduna.">
+<meta name="theme-color" content="#05070a">
+<link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+:root{
+  --bg:#05070a;--fg:#f4f6f8;--mut:#8b97a4;--ln:rgba(255,255,255,.16);
+  --gold:#D4B87A;--gold-deep:#B49450;--err:#ff7b7b;--ok:#25D366;
+  --surface:#0d1117;--surface-2:#141a22;
+}
+html,body{min-height:100%}
+body{background:var(--bg);color:var(--fg);font:400 16px/1.5 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.zb{min-height:100dvh;display:flex;flex-direction:column;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+.bar{position:fixed;top:0;left:0;height:2px;width:0;background:var(--gold);transition:width .5s cubic-bezier(.2,.8,.2,1);z-index:5}
+header{display:flex;justify-content:space-between;align-items:center;padding:22px 24px}
+.logo{font-size:13px;font-weight:700;letter-spacing:.32em;color:var(--fg);text-decoration:none}
+.logo span{color:var(--mut);font-weight:500;margin-left:12px;letter-spacing:.18em;text-transform:uppercase}
+.x{color:var(--mut);text-decoration:none;font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+.x:hover{color:var(--fg)}
+main{flex:1;width:100%;max-width:720px;margin:0 auto;padding:4vh 24px 24px}
+.stage{animation:in .45s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+h1{font-weight:300;font-size:clamp(2rem,6vw,3.4rem);line-height:1.08;letter-spacing:-.025em;margin:14px 0 12px;outline:0}
+.hint{color:var(--mut);max-width:520px;margin-bottom:36px}
+.f{margin-bottom:28px}
+.l{display:block;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);margin-bottom:10px}
+input,textarea,select{width:100%;background:transparent;border:0;border-bottom:1px solid var(--ln);border-radius:0;color:var(--fg);font:300 1.5rem/1.3 Inter,sans-serif;padding:10px 0;outline:0;transition:border-color .2s}
+textarea{resize:none;min-height:96px;font-size:1.1rem}
+input::placeholder,textarea::placeholder{color:#55606b}
+input:focus,textarea:focus{border-color:var(--gold)}
+input[type=date]{color-scheme:dark}
+.err{color:var(--err);font-size:.9rem;min-height:1.4em;margin-top:4px}
+.note{color:var(--gold);font-size:.85rem;margin-top:8px;min-height:1.2em}
+nav{display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;max-width:720px;margin:0 auto;padding:12px 24px 28px}
+.btn{font:600 .8rem Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;text-align:center;cursor:pointer;padding:17px 34px;border:1px solid var(--gold);background:var(--gold);color:#05070a;transition:filter .2s}
+.btn:hover{filter:brightness(1.1)}
+.btn.ghost{background:transparent;color:var(--mut);border-color:transparent;padding-left:0}
+.btn.ghost:hover{color:var(--fg)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:16px 0;border-bottom:1px solid var(--ln)}
+.row .k{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);margin-bottom:4px}
+.row .v{font-size:1.05rem;overflow-wrap:anywhere}
+.row button{background:none;border:0;color:var(--gold);font:600 .75rem Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;flex-shrink:0}
+.fine{color:var(--mut);font-size:.85rem;margin-top:22px}
 
-    /* ============ BREADCRUMB ============ */
-    .svc-breadcrumb {
-      display: flex; align-items: center; gap: 7px;
-      margin: 20px 0 16px; font-size: 0.76rem;
-      color: var(--text-secondary); flex-wrap: wrap;
-    }
-    .svc-breadcrumb a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
-    .svc-breadcrumb a:hover { color: var(--navy-2); }
-    .svc-breadcrumb i { font-size: 0.5rem; opacity: 0.55; }
-    .svc-breadcrumb .current {
-      color: var(--text); font-weight: 600;
-      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 220px;
-    }
+/* ============ CREATIVE WIDGETS (imported from zaure-clean model) ============ */
 
-    /* ============ HERO ============ */
-    .svc-hero {
-      position: relative; overflow: hidden; isolation: isolate;
-      background: linear-gradient(135deg, #0f2940 0%, #1a3650 55%, #2a4a6a 100%);
-      border-radius: 20px; padding: 44px 28px 40px; color: white; margin-bottom: 32px;
-    }
-    .svc-hero::before {
-      content: ''; position: absolute; top: -30%; right: -10%;
-      width: 380px; height: 380px;
-      background: radial-gradient(circle, rgba(212,184,122,0.2) 0%, transparent 65%);
-      border-radius: 50%; pointer-events: none; z-index: 0;
-    }
-    .svc-hero > * { position: relative; z-index: 1; }
-    .svc-hero-eyebrow {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: 0.62rem; font-weight: 800;
-      text-transform: uppercase; letter-spacing: 1.8px;
-      color: var(--gold); padding: 5px 12px;
-      background: rgba(212,184,122,0.12); border: 1px solid rgba(212,184,122,0.35);
-      border-radius: 40px; margin-bottom: 16px;
-    }
-    .svc-hero-eyebrow i { font-size: 0.55rem; }
-    .svc-hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.85rem, 5.5vw, 2.8rem); font-weight: 800;
-      line-height: 1.1; letter-spacing: -0.8px; margin-bottom: 14px; max-width: 640px;
-    }
-    .svc-hero-desc {
-      font-size: clamp(0.9rem, 2vw, 1rem); color: rgba(255,255,255,0.82);
-      line-height: 1.65; max-width: 580px; margin-bottom: 26px;
-    }
-    .svc-hero-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+/* Option tile (icon card) — property type / "vehicle type design" */
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tile{position:relative;cursor:pointer}
+.tile input{position:absolute;opacity:0;pointer-events:none;width:0;height:0}
+.tile-body{display:flex;flex-direction:column;align-items:center;gap:4px;padding:16px 8px;border:1px solid var(--ln);border-radius:12px;background:var(--surface);text-align:center;transition:all .15s}
+.tile-body i{font-size:1.15rem;color:var(--gold);margin-bottom:2px}
+.tile-body strong{font-size:.8rem;font-weight:700;color:var(--fg);line-height:1.2}
+.tile-body span{font-size:.68rem;color:var(--mut);line-height:1.3}
+.tile:hover .tile-body{border-color:var(--gold);background:rgba(212,184,122,.04)}
+.tile input:checked + .tile-body{border-color:var(--gold);background:rgba(212,184,122,.1);box-shadow:0 0 0 2px rgba(212,184,122,.12)}
+.tile input:focus-visible + .tile-body{outline:2px solid var(--gold);outline-offset:2px}
 
-    .svc-btn {
-      display: inline-flex; align-items: center; justify-content: center;
-      gap: 8px; padding: 13px 26px; border-radius: 40px;
-      text-decoration: none; font-weight: 700; font-size: 0.88rem;
-      transition: all 0.2s; font-family: inherit; border: none; cursor: pointer;
-    }
-    .svc-btn.primary {
-      background: var(--gold); color: var(--navy);
-      box-shadow: 0 6px 20px rgba(212,184,122,0.35);
-    }
-    .svc-btn.primary:hover {
-      background: #E7D3A1; transform: translateY(-1px);
-      box-shadow: 0 8px 24px rgba(212,184,122,0.45);
-    }
-    .svc-btn.wa {
-      background: var(--wa); color: white;
-      box-shadow: 0 6px 20px rgba(37,211,102,0.3);
-    }
-    .svc-btn.wa:hover { background: var(--wa-dark); transform: translateY(-1px); }
+/* Custom date picker */
+.dp{border:1px solid var(--ln);border-radius:12px;padding:14px;background:var(--surface)}
+.dp-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.dp-month{font-weight:700;font-size:.92rem;color:var(--fg)}
+.dp-nav{width:32px;height:32px;border-radius:8px;border:none;background:var(--surface-2);color:var(--fg);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s;font-family:inherit}
+.dp-nav:hover{background:rgba(255,255,255,.06)}
+.dp-nav:disabled{opacity:.3;cursor:not-allowed}
+.dp-weekdays{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:6px}
+.dp-weekdays span{text-align:center;font-size:.68rem;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.5px;padding:4px 0}
+.dp-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.dp-day{aspect-ratio:1;border-radius:8px;border:none;background:transparent;color:var(--fg);font-size:.82rem;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s;font-family:inherit;min-height:36px}
+.dp-day:hover:not(:disabled){background:rgba(255,255,255,.06)}
+.dp-day.other-month{opacity:.2;pointer-events:none}
+.dp-day:disabled{opacity:.25;cursor:not-allowed}
+.dp-day.today{border:1.5px solid var(--gold);color:var(--gold-deep)}
+.dp-day.selected{background:var(--gold);color:#05070a}
+.dp-day.selected:hover{background:var(--gold-deep)}
+.dp-selected{margin-top:12px;padding-top:12px;border-top:1px solid var(--ln);font-size:.82rem;color:var(--mut)}
+.dp-selected strong{color:var(--fg);font-weight:700}
 
-    /* ============ SECTION ============ */
-    .svc-section { margin-bottom: 40px; max-width: 780px; }
-    .svc-section-title {
-      font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 800;
-      color: var(--text); margin-bottom: 6px; letter-spacing: -0.4px; line-height: 1.2;
-    }
-    .svc-section-sub {
-      font-size: 0.9rem; color: var(--text-secondary);
-      margin-bottom: 20px; line-height: 1.6; max-width: 640px;
-    }
-    .svc-body-text {
-      font-size: 0.94rem; color: var(--text-secondary); line-height: 1.8;
-    }
-    .svc-body-text + .svc-body-text { margin-top: 14px; }
+/* Time slots */
+.time-slots{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+@media(min-width:480px){.time-slots{grid-template-columns:repeat(4,1fr)}}
+.time-slot{padding:10px 6px;border-radius:8px;border:1px solid var(--ln);background:var(--surface);color:var(--fg);font-size:.78rem;font-weight:600;cursor:pointer;text-align:center;transition:all .15s;font-family:inherit;min-height:40px}
+.time-slot:hover{border-color:var(--gold);background:rgba(212,184,122,.05)}
+.time-slot.selected{background:var(--gold);border-color:var(--gold);color:#05070a}
 
-    /* ============ HOW IT WORKS ============ */
-    .how-steps {
-      display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 20px;
-    }
-    @media (min-width: 640px) {
-      .how-steps { grid-template-columns: repeat(2, 1fr); gap: 16px; }
-    }
-    .how-step {
-      display: flex; gap: 14px; padding: 18px;
-      background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .how-step:hover {
-      border-color: rgba(212,184,122,0.5);
-      box-shadow: 0 4px 14px rgba(15,41,64,0.06);
-    }
-    .how-num {
-      width: 36px; height: 36px; border-radius: 50%;
-      background: linear-gradient(135deg, var(--navy-2), #2a4a6a);
-      color: var(--gold); font-family: 'Playfair Display', serif;
-      font-weight: 800; font-size: 1rem;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .how-body h4 {
-      font-size: 0.9rem; font-weight: 700; color: var(--text);
-      margin-bottom: 4px; line-height: 1.3;
-    }
-    .how-body p {
-      font-size: 0.8rem; color: var(--text-secondary); line-height: 1.55;
-    }
+/* Checkbox grid (services / special) */
+.checks{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.check{display:flex;align-items:center;gap:8px;padding:10px 12px;border:1px solid var(--ln);border-radius:9px;cursor:pointer;font-size:.78rem;font-weight:600;color:var(--fg);background:var(--surface);transition:all .15s;user-select:none;-webkit-tap-highlight-color:transparent}
+.check:hover{border-color:var(--gold);background:rgba(212,184,122,.04)}
+.check input{accent-color:var(--gold);width:15px;height:15px;cursor:pointer;flex-shrink:0;margin:0;border:0;padding:0}
+.check.checked{border-color:var(--gold);background:rgba(212,184,122,.1);font-weight:700}
 
-    /* ============ SERVICE LIST ============ */
-    .svc-list {
-      display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 20px;
-    }
-    @media (min-width: 640px) {
-      .svc-list { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    }
-    .svc-item {
-      display: flex; gap: 12px; padding: 16px;
-      background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .svc-item:hover {
-      border-color: rgba(212,184,122,0.5);
-      box-shadow: 0 4px 14px rgba(15,41,64,0.06);
-    }
-    .svc-item-icon {
-      width: 36px; height: 36px; border-radius: 9px;
-      background: linear-gradient(135deg, var(--navy-2), #2a4a6a);
-      color: var(--gold); display: flex; align-items: center; justify-content: center;
-      font-size: 0.85rem; flex-shrink: 0;
-    }
-    .svc-item-body h4 {
-      font-size: 0.88rem; font-weight: 700; color: var(--text);
-      margin-bottom: 4px; line-height: 1.3;
-    }
-    .svc-item-body p {
-      font-size: 0.78rem; color: var(--text-secondary); line-height: 1.55;
-    }
+/* Quantity steppers */
+.qty-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(min-width:640px){.qty-grid{grid-template-columns:repeat(4,1fr)}}
+.qty-item{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 8px;background:var(--surface);border:1px solid var(--ln);border-radius:10px}
+.qty-label{font-size:.7rem;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.5px;text-align:center}
+.qty-controls{display:flex;align-items:center;background:var(--surface-2);border-radius:8px;overflow:hidden}
+.qty-controls button{width:30px;height:30px;border:none;background:transparent;color:var(--fg);font-size:.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit}
+.qty-controls button:hover{background:rgba(255,255,255,.06)}
+.qty-controls input{width:32px;border:none;background:transparent;text-align:center;font-size:.85rem;font-weight:700;color:var(--fg);outline:none;font-family:inherit;padding:0;-moz-appearance:textfield;border-bottom:0}
+.qty-controls input::-webkit-outer-spin-button,.qty-controls input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
 
-    /* ============ COVERAGE ============ */
-    .coverage-group { margin-top: 14px; }
-    .coverage-group h4 {
-      font-size: 0.72rem; font-weight: 800;
-      text-transform: uppercase; letter-spacing: 1.2px;
-      color: var(--text-secondary); margin-bottom: 8px;
-    }
-    .svc-clients {
-      display: flex; flex-wrap: wrap; gap: 8px;
-    }
-    .svc-client-chip {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 8px 14px; background: var(--surface);
-      border: 1px solid var(--border); border-radius: 30px;
-      font-size: 0.8rem; font-weight: 600; color: var(--text);
-    }
-    .svc-client-chip i {
-      color: var(--gold-deep); font-size: 0.72rem;
-    }
+/* Error banner */
+.qm-error-banner{padding:12px 16px;background:rgba(255,123,123,.08);border:1px solid rgba(255,123,123,.3);border-radius:10px;color:var(--err);font-size:.85rem;line-height:1.5;margin-bottom:14px;display:none}
+.qm-error-banner.show{display:block}
+.qm-error-banner i{margin-right:6px}
 
-    /* ============ PREP CHECKLIST ============ */
-    .prep-list {
-      display: flex; flex-direction: column; gap: 8px; margin-top: 12px;
-    }
-    .prep-item {
-      display: flex; gap: 10px; align-items: flex-start;
-      padding: 10px 14px; background: var(--surface);
-      border: 1px solid var(--border); border-radius: 10px;
-      font-size: 0.85rem; color: var(--text); line-height: 1.55;
-    }
-    .prep-item i {
-      color: var(--gold-deep); font-size: 0.85rem;
-      margin-top: 3px; flex-shrink: 0;
-    }
+/* Success */
+.qm-success{text-align:center;padding:30px 10px}
+.qm-success-icon{width:68px;height:68px;border-radius:50%;background:rgba(37,211,102,.1);color:var(--ok);display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 20px}
+.qm-success h3{font-weight:600;font-size:1.3rem;color:var(--fg);margin-bottom:8px}
+.qm-success p{font-size:.9rem;color:var(--mut);line-height:1.6;max-width:380px;margin:0 auto 20px}
+.qm-success-actions{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.qm-success-actions .btn{padding:13px 26px}
 
-    /* ============ PAYMENT & TERMS ============ */
-    .terms-grid {
-      display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 16px;
-    }
-    @media (min-width: 640px) {
-      .terms-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    }
-    .term-item {
-      display: flex; gap: 12px; padding: 16px;
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 12px;
-    }
-    .term-item i {
-      width: 32px; height: 32px;
-      border-radius: 8px;
-      background: rgba(212,184,122,0.12);
-      color: var(--gold-deep); font-size: 0.85rem;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .term-item h4 {
-      font-size: 0.85rem; font-weight: 700; color: var(--text);
-      margin-bottom: 4px; line-height: 1.3;
-    }
-    .term-item p {
-      font-size: 0.78rem; color: var(--text-secondary); line-height: 1.55;
-    }
+/* Inline note under date */
+.qm-note{color:var(--gold);font-size:.82rem;margin-top:8px;min-height:1.2em}
 
-    /* ============ TRUST STRIP ============ */
-    .trust-strip {
-      display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px;
-      padding: 16px 18px;
-      background: linear-gradient(135deg, #f8fbfe 0%, #f1f6fb 100%);
-      border: 1px solid var(--border);
-      border-left: 4px solid var(--gold);
-      border-radius: 14px;
-    }
-    [data-theme="dark"] .trust-strip { background: rgba(212,184,122,0.06); }
-    .trust-item {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: 0.82rem; font-weight: 600; color: var(--text);
-      padding: 6px 12px;
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 30px;
-    }
-    .trust-item i {
-      color: var(--gold-deep); font-size: 0.75rem;
-    }
-
-    /* ============ CONTACT ============ */
-    .svc-contact {
-      background: linear-gradient(135deg, #0f2940 0%, #1a3650 100%);
-      border-radius: 18px; padding: 32px 26px; color: white;
-      display: flex; flex-wrap: wrap; align-items: center;
-      gap: 20px; margin-bottom: 20px;
-    }
-    .svc-contact-text { flex: 1; min-width: 220px; }
-    .svc-contact-text h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem; font-weight: 800;
-      margin-bottom: 6px; letter-spacing: -0.3px;
-    }
-    .svc-contact-text p {
-      font-size: 0.85rem; color: rgba(255,255,255,0.75); line-height: 1.55;
-    }
-    .svc-contact-actions {
-      display: flex; flex-direction: column; gap: 8px; flex-shrink: 0;
-    }
-    .svc-contact .svc-btn { width: 100%; }
-    @media (max-width: 519px) { .svc-contact-actions { width: 100%; } }
-
-    /* ============================================================
-       RELATED SERVICES — clearly clickable, animated
-       ============================================================ */
-    .related-services {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-      margin-top: 16px;
-    }
-    @media (min-width: 640px) {
-      .related-services { grid-template-columns: repeat(2, 1fr); gap: 16px; }
-    }
-
-    .related-card {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      padding: 20px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      text-decoration: none;
-      color: var(--text);
-      overflow: hidden;
-      cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
-      transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.3, 1),
-                  box-shadow 0.3s ease,
-                  border-color 0.3s ease;
-    }
-
-    .related-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: -100%;
-      width: 100%; height: 100%;
-      background: linear-gradient(
-        90deg,
-        transparent 0%,
-        rgba(212,184,122,0.12) 50%,
-        transparent 100%
-      );
-      transition: left 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-      pointer-events: none;
-      z-index: 1;
-    }
-    .related-card:hover::before {
-      left: 100%;
-    }
-
-    .related-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 14px 32px rgba(15,41,64,0.14);
-      border-color: rgba(212,184,122,0.55);
-    }
-    .related-card:active {
-      transform: translateY(-2px) scale(0.985);
-      transition-duration: 0.1s;
-    }
-    .related-card:focus-visible {
-      outline: 3px solid var(--gold);
-      outline-offset: 2px;
-    }
-
-    .related-top {
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-      margin-bottom: 16px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .related-icon {
-      width: 46px;
-      height: 46px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--navy-2), #2a4a6a);
-      color: var(--gold);
-      font-size: 1.05rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      animation: iconFloat 3s ease-in-out infinite;
-      transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.3, 1);
-      box-shadow: 0 4px 12px rgba(26,54,80,0.15);
-    }
-    @keyframes iconFloat {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-4px); }
-    }
-    .related-card:hover .related-icon {
-      transform: scale(1.12) rotate(-5deg);
-      animation-play-state: paused;
-    }
-
-    .related-body { flex: 1; min-width: 0; }
-    .related-body h4 {
-      font-size: 0.95rem;
-      font-weight: 800;
-      color: var(--text);
-      margin-bottom: 4px;
-      line-height: 1.3;
-    }
-    .related-body p {
-      font-size: 0.78rem;
-      color: var(--text-secondary);
-      line-height: 1.55;
-    }
-
-    .related-cta {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 11px 14px;
-      margin-top: auto;
-      background: rgba(212,184,122,0.1);
-      border: 1px solid rgba(212,184,122,0.35);
-      border-radius: 11px;
-      font-size: 0.82rem;
-      font-weight: 800;
-      color: var(--navy-2);
-      letter-spacing: 0.1px;
-      transition: all 0.25s ease;
-    }
-    [data-theme="dark"] .related-cta { color: var(--gold); }
-
-    .related-cta-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-    }
-    .related-cta-label i {
-      font-size: 0.75rem;
-      opacity: 0.85;
-    }
-
-    .related-cta-arrow {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: var(--navy-2);
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.72rem;
-      flex-shrink: 0;
-      animation: arrowPulse 1.8s ease-in-out infinite;
-      transition: transform 0.3s ease, background 0.3s ease;
-    }
-    @keyframes arrowPulse {
-      0%, 100% { transform: translateX(0); }
-      50% { transform: translateX(3px); }
-    }
-
-    .related-card:hover .related-cta {
-      background: rgba(212,184,122,0.2);
-      border-color: var(--gold-deep);
-    }
-    .related-card:hover .related-cta-arrow {
-      transform: translateX(4px);
-      background: var(--gold-deep);
-      animation-play-state: paused;
-    }
-
-    /* ============================================================
-       QUOTE MODAL — WIZARD (creative form)
-       ============================================================ */
-    .qm-overlay {
-      position: fixed; inset: 0;
-      background: rgba(15,41,64,0.78);
-      -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
-      z-index: 9999; display: flex; align-items: flex-end; justify-content: center;
-      opacity: 0; visibility: hidden;
-      transition: opacity 0.3s ease, visibility 0.3s ease; padding: 0;
-    }
-    @media (min-width: 640px) { .qm-overlay { align-items: center; padding: 20px; } }
-    .qm-overlay.active { opacity: 1; visibility: visible; }
-
-    .qm-modal {
-      background: var(--surface); width: 100%; max-width: 640px;
-      max-height: 94vh; border-radius: 22px 22px 0 0; overflow: hidden;
-      display: flex; flex-direction: column;
-      transform: translateY(40px);
-      transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.3, 1);
-      box-shadow: 0 -10px 60px rgba(15,41,64,0.3);
-    }
-    @media (min-width: 640px) {
-      .qm-modal { border-radius: 22px; max-height: 90vh; box-shadow: 0 30px 80px rgba(15,41,64,0.4); }
-    }
-    .qm-overlay.active .qm-modal { transform: translateY(0); }
-
-    .qm-progress {
-      height: 4px; background: rgba(15,41,64,0.08);
-      position: relative; overflow: hidden; flex-shrink: 0;
-    }
-    .qm-progress-fill {
-      height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-deep));
-      width: 20%; transition: width 0.4s ease;
-    }
-
-    .qm-header {
-      padding: 18px 22px 14px;
-      display: flex; align-items: flex-start; justify-content: space-between;
-      gap: 12px; background: linear-gradient(135deg, #0f2940 0%, #1a3650 100%);
-      color: white; flex-shrink: 0;
-    }
-    .qm-header-text { flex: 1; min-width: 0; }
-    .qm-step-label {
-      font-size: 0.62rem; font-weight: 800; text-transform: uppercase;
-      letter-spacing: 1.4px; color: var(--gold); margin-bottom: 3px;
-    }
-    .qm-header-text h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.15rem; font-weight: 800;
-      margin-bottom: 2px; letter-spacing: -0.3px; line-height: 1.2;
-    }
-    .qm-header-text p {
-      font-size: 0.74rem; color: rgba(255,255,255,0.7); line-height: 1.4;
-    }
-    .qm-close {
-      width: 32px; height: 32px; border-radius: 50%;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.15);
-      color: white; display: flex; align-items: center; justify-content: center;
-      cursor: pointer; transition: background 0.2s;
-      flex-shrink: 0; font-size: 0.8rem; -webkit-tap-highlight-color: transparent;
-    }
-    .qm-close:hover { background: rgba(255,255,255,0.2); }
-
-    .qm-body {
-      padding: 22px; overflow-y: auto; flex: 1; -webkit-overflow-scrolling: touch;
-    }
-
-    .qm-step { display: none; }
-    .qm-step.active { display: block; animation: qmFadeIn 0.3s ease; }
-    @keyframes qmFadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .qm-step-intro {
-      font-size: 0.82rem; color: var(--text-secondary);
-      line-height: 1.55; margin-bottom: 18px;
-    }
-
-    .qm-fields {
-      display: grid; grid-template-columns: 1fr; gap: 14px;
-    }
-    @media (min-width: 640px) {
-      .qm-fields.two { grid-template-columns: 1fr 1fr; gap: 14px 16px; }
-    }
-
-    .qm-field { display: flex; flex-direction: column; min-width: 0; }
-    .qm-field.full { grid-column: 1 / -1; }
-    .qm-field label {
-      font-size: 0.75rem; font-weight: 700; color: var(--text);
-      margin-bottom: 6px; display: flex; align-items: center; gap: 4px;
-    }
-    .qm-field label .req { color: #e74c3c; font-weight: 800; }
-    .qm-field label .hint {
-      margin-left: auto; font-weight: 500; font-size: 0.68rem; color: var(--text-secondary);
-    }
-    .qm-field input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]),
-    .qm-field select,
-    .qm-field textarea {
-      width: 100%; padding: 11px 13px;
-      border: 1px solid var(--border); border-radius: 10px;
-      font-size: 0.88rem; color: var(--text);
-      background: var(--surface); font-family: inherit; outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .qm-field input:focus,
-    .qm-field select:focus,
-    .qm-field textarea:focus {
-      border-color: var(--navy-2); box-shadow: 0 0 0 3px rgba(26,54,80,0.08);
-    }
-    .qm-field input::placeholder, .qm-field textarea::placeholder { color: #94a3b8; }
-    .qm-field textarea { resize: vertical; min-height: 70px; line-height: 1.5; }
-    .qm-field.has-error input,
-    .qm-field.has-error select,
-    .qm-field.has-error textarea { border-color: #e74c3c; box-shadow: 0 0 0 3px rgba(231,76,60,0.08); }
-    .qm-field-error {
-      font-size: 0.7rem; color: #e74c3c; margin-top: 4px; display: none;
-    }
-    .qm-field.has-error .qm-field-error { display: block; }
-
-    /* ============ DATE PICKER ============ */
-    .date-picker {
-      border: 1px solid var(--border); border-radius: 12px;
-      padding: 14px; background: var(--surface);
-    }
-    .dp-header {
-      display: flex; justify-content: space-between; align-items: center;
-      margin-bottom: 12px;
-    }
-    .dp-month {
-      font-weight: 700; font-size: 0.92rem; color: var(--text);
-    }
-    .dp-nav {
-      width: 32px; height: 32px; border-radius: 8px;
-      border: none; background: var(--surface-alt);
-      color: var(--text); cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: background 0.15s;
-      font-family: inherit;
-    }
-    .dp-nav:hover { background: rgba(26,54,80,0.08); }
-    .dp-nav:disabled { opacity: 0.3; cursor: not-allowed; }
-    .dp-weekdays {
-      display: grid; grid-template-columns: repeat(7, 1fr);
-      gap: 4px; margin-bottom: 6px;
-    }
-    .dp-weekdays span {
-      text-align: center; font-size: 0.68rem; font-weight: 700;
-      color: var(--text-secondary); text-transform: uppercase;
-      letter-spacing: 0.5px; padding: 4px 0;
-    }
-    .dp-grid {
-      display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px;
-    }
-    .dp-day {
-      aspect-ratio: 1; border-radius: 8px; border: none;
-      background: transparent; color: var(--text);
-      font-size: 0.82rem; font-weight: 600;
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
-      transition: background 0.15s; font-family: inherit;
-      min-height: 36px;
-    }
-    .dp-day:hover:not(:disabled) { background: rgba(26,54,80,0.08); }
-    .dp-day.other-month { opacity: 0.2; pointer-events: none; }
-    .dp-day:disabled { opacity: 0.25; cursor: not-allowed; }
-    .dp-day.today { border: 1.5px solid var(--gold); color: var(--gold-deep); }
-    .dp-day.selected {
-      background: var(--navy-2); color: white;
-    }
-    .dp-day.selected:hover { background: var(--navy); }
-
-    .dp-selected {
-      margin-top: 12px; padding-top: 12px;
-      border-top: 1px solid var(--border);
-      font-size: 0.82rem; color: var(--text-secondary);
-    }
-    .dp-selected strong {
-      color: var(--text); font-weight: 700;
-    }
-
-    /* ============ TIME SLOTS ============ */
-    .time-slots {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;
-    }
-    @media (min-width: 480px) {
-      .time-slots { grid-template-columns: repeat(4, 1fr); }
-    }
-    .time-slot {
-      padding: 10px 6px; border-radius: 8px;
-      border: 1px solid var(--border); background: var(--surface);
-      color: var(--text); font-size: 0.76rem; font-weight: 600;
-      cursor: pointer; text-align: center; transition: all 0.15s;
-      font-family: inherit; min-height: 40px;
-    }
-    .time-slot:hover { border-color: var(--navy-2); background: rgba(26,54,80,0.03); }
-    .time-slot.selected {
-      background: var(--navy-2); border-color: var(--navy-2); color: white;
-    }
-
-    /* ============ PROPERTY TYPE TILES ============ */
-    .qm-property-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
-    }
-    .qm-property {
-      position: relative; cursor: pointer;
-    }
-    .qm-property input {
-      position: absolute; opacity: 0; pointer-events: none;
-    }
-    .qm-property-body {
-      display: flex; flex-direction: column; align-items: center;
-      gap: 4px; padding: 14px 8px;
-      border: 1px solid var(--border); border-radius: 10px;
-      background: var(--surface); text-align: center;
-      transition: all 0.15s;
-    }
-    .qm-property-body i {
-      font-size: 1.1rem; color: var(--navy-2); margin-bottom: 2px;
-    }
-    .qm-property-body strong {
-      font-size: 0.78rem; font-weight: 700; color: var(--text);
-      line-height: 1.2;
-    }
-    .qm-property-body span {
-      font-size: 0.68rem; color: var(--text-secondary); line-height: 1.3;
-    }
-    .qm-property:hover .qm-property-body { border-color: var(--navy-2); background: rgba(26,54,80,0.03); }
-    .qm-property input:checked + .qm-property-body {
-      border-color: var(--navy-2); background: rgba(26,54,80,0.06);
-      box-shadow: 0 0 0 2px rgba(26,54,80,0.08);
-    }
-    .qm-property input:checked + .qm-property-body i { color: var(--gold-deep); }
-
-    /* Checkbox groups */
-    .qm-checks {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 6px;
-    }
-    .qm-check {
-      display: flex; align-items: center; gap: 8px;
-      padding: 10px 12px; border: 1px solid var(--border); border-radius: 9px;
-      cursor: pointer; font-size: 0.78rem; font-weight: 600;
-      color: var(--text); background: var(--surface);
-      transition: all 0.15s; user-select: none;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .qm-check:hover { border-color: var(--navy-2); background: rgba(26,54,80,0.03); }
-    .qm-check input {
-      accent-color: var(--navy-2); width: 15px; height: 15px;
-      cursor: pointer; flex-shrink: 0; margin: 0;
-    }
-    .qm-check.checked {
-      border-color: var(--navy-2); background: rgba(26,54,80,0.06); font-weight: 700;
-    }
-
-    .qm-qty-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
-    }
-    @media (min-width: 640px) { .qm-qty-grid { grid-template-columns: repeat(4, 1fr); } }
-    .qm-qty-item {
-      display: flex; flex-direction: column; align-items: center;
-      gap: 6px; padding: 12px 8px;
-      background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
-    }
-    .qm-qty-item .qty-label {
-      font-size: 0.7rem; font-weight: 700; color: var(--text-secondary);
-      text-transform: uppercase; letter-spacing: 0.5px; text-align: center;
-    }
-    .qm-qty-controls {
-      display: flex; align-items: center; background: var(--surface-alt);
-      border-radius: 8px; overflow: hidden;
-    }
-    .qm-qty-controls button {
-      width: 30px; height: 30px; border: none; background: transparent;
-      color: var(--text); font-size: 0.9rem; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      font-family: inherit;
-    }
-    .qm-qty-controls button:hover { background: rgba(26,54,80,0.08); }
-    .qm-qty-controls button:disabled { opacity: 0.3; cursor: not-allowed; }
-    .qm-qty-controls input {
-      width: 32px; border: none; background: transparent;
-      text-align: center; font-size: 0.85rem; font-weight: 700;
-      color: var(--text); outline: none; font-family: inherit; padding: 0;
-      -moz-appearance: textfield;
-    }
-    .qm-qty-controls input::-webkit-outer-spin-button,
-    .qm-qty-controls input::-webkit-inner-spin-button {
-      -webkit-appearance: none; margin: 0;
-    }
-
-    /* Review */
-    .qm-review { display: flex; flex-direction: column; gap: 14px; }
-    .qm-review-section {
-      background: var(--surface-alt); border: 1px solid var(--border);
-      border-radius: 12px; padding: 14px 16px;
-    }
-    .qm-review-header {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 10px; gap: 8px;
-    }
-    .qm-review-header h4 {
-      font-size: 0.72rem; font-weight: 800; color: var(--gold-deep);
-      text-transform: uppercase; letter-spacing: 1.2px;
-    }
-    .qm-review-edit {
-      background: transparent; border: none; color: var(--navy-2);
-      font-size: 0.7rem; font-weight: 700; cursor: pointer;
-      padding: 4px 8px; border-radius: 6px; font-family: inherit;
-      transition: background 0.15s;
-    }
-    .qm-review-edit:hover { background: rgba(26,54,80,0.08); }
-    [data-theme="dark"] .qm-review-edit { color: var(--gold); }
-    .qm-review-row {
-      display: flex; justify-content: space-between; gap: 12px;
-      padding: 6px 0; font-size: 0.82rem; line-height: 1.5;
-      border-bottom: 1px solid var(--border);
-    }
-    .qm-review-row:last-child { border-bottom: none; }
-    .qm-review-row .rk { color: var(--text-secondary); font-weight: 500; flex-shrink: 0; }
-    .qm-review-row .rv {
-      color: var(--text); font-weight: 600; text-align: right;
-      word-break: break-word;
-    }
-    .qm-review-row .rv.empty {
-      color: var(--text-secondary); font-weight: 400; font-style: italic;
-    }
-
-    /* Footer */
-    .qm-footer {
-      padding: 14px 22px calc(14px + env(safe-area-inset-bottom, 0px));
-      border-top: 1px solid var(--border); background: var(--surface);
-      flex-shrink: 0; display: flex; gap: 10px;
-    }
-    .qm-nav-btn {
-      flex: 1; padding: 13px 20px; border-radius: 40px; border: none;
-      font-weight: 800; font-size: 0.88rem; cursor: pointer;
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      font-family: inherit; transition: all 0.2s; min-height: 48px;
-    }
-    .qm-nav-btn.back {
-      background: var(--surface-alt); color: var(--text);
-      border: 1px solid var(--border); flex: 0 0 auto;
-      padding-left: 20px; padding-right: 20px;
-    }
-    .qm-nav-btn.back:hover { border-color: var(--navy-2); }
-    .qm-nav-btn.next {
-      background: var(--navy-2); color: white;
-      box-shadow: 0 6px 20px rgba(26,54,80,0.25);
-    }
-    .qm-nav-btn.next:hover:not(:disabled) {
-      background: var(--navy); transform: translateY(-1px);
-      box-shadow: 0 8px 24px rgba(26,54,80,0.35);
-    }
-    .qm-nav-btn.next:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-    .qm-nav-btn.submit {
-      background: var(--wa); color: white;
-      box-shadow: 0 6px 20px rgba(37,211,102,0.3);
-    }
-    .qm-nav-btn.submit:hover:not(:disabled) {
-      background: var(--wa-dark); transform: translateY(-1px);
-    }
-    .qm-nav-btn.submit:disabled {
-      opacity: 0.7; cursor: not-allowed; transform: none;
-    }
-
-    .qm-error-banner {
-      padding: 12px 16px;
-      background: rgba(231,76,60,0.08);
-      border: 1px solid rgba(231,76,60,0.25);
-      border-radius: 10px; color: #c0392b;
-      font-size: 0.82rem; line-height: 1.5;
-      margin-bottom: 14px; display: none;
-    }
-    .qm-error-banner.show { display: block; }
-    .qm-error-banner i { margin-right: 6px; }
-
-    .qm-success {
-      text-align: center; padding: 40px 24px;
-    }
-    .qm-success-icon {
-      width: 68px; height: 68px; border-radius: 50%;
-      background: rgba(22,163,74,0.1); color: #16a34a;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.8rem; margin: 0 auto 20px;
-    }
-    .qm-success h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem; font-weight: 800; color: var(--text);
-      margin-bottom: 8px; letter-spacing: -0.3px;
-    }
-    .qm-success p {
-      font-size: 0.88rem; color: var(--text-secondary);
-      line-height: 1.6; max-width: 380px; margin: 0 auto 20px;
-    }
-    .qm-success-actions {
-      display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation: none !important; transition: none !important; }
-      .related-icon, .related-cta-arrow { animation: none !important; }
-    }
-  </style>
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
 </head>
 <body>
+<div class="bar"></div>
+<div class="zb">
+  <header>
+    <a class="logo" href="/">ZAURE<span>Clean</span></a>
+    <a class="x" href="/zaure-services.html" aria-label="Close booking">Close ✕</a>
+  </header>
+  <main id="app"></main>
+  <nav id="nav"></nav>
+</div>
+<noscript><p style="padding:24px;color:#fff">Please enable JavaScript to book, or message us on WhatsApp: +2349042339411</p></noscript>
 
-  <nav class="navbar">
-    <div class="container nav-container">
-      <a href="/" class="logo-wrapper">
-        <div class="logo-text">
-          <span class="brand">Zaure</span>
-          <span class="tagline">Buy with Confidence</span>
+<script type="application/json" id="cfg">
+{"key":"clean","title":"Zaure Clean","back":"/zaure-services.html","after":"We reply within 2 to 4 hours (Mon to Sat).","note":"A 50% deposit confirms your date and the balance is paid on completion. Bank transfer only. Free cancellation up to 48 hours before.","lead":3,"endpoint":"https://formspree.io/f/YOUR_FORM_ID","steps":[
+{"q":"What do you need?","h":"Select all that apply.","fields":[{"n":"svc","l":"Services","t":"multi","opts":[["Rough clean","Debris and site clearing"],["Dust extraction","Walls, ceilings, vents"],["Deep surface clean","Floors, tiles, frames"],["Glass & frame polish","No streaks"],["Paint & cement removal","Careful residue removal"],["Pest control","Pre-handover fumigation"],["Weed control","Compound and plot clearing"],["Carpet cleaning","Deep steam extraction"],["Final handover clean","Last pass before inspection"]]}]},
+{"q":"What type of property?","h":"This helps us plan the crew.","fields":[{"n":"prop","l":"Property type","t":"tiles","opts":[["New build","Fresh construction","fa-house-chimney"],["Renovation","Remodel / upgrade","fa-hammer"],["Commercial / office","Office or shop","fa-building"],["Industrial","Warehouse / factory","fa-industry"]]}]},
+{"q":"Where is the site?","h":"We cover Kaduna city and nearby towns.","fields":[{"n":"area","l":"Area or town","t":"text","ph":"e.g. Barnawa","list":["Barnawa","GRA","Malali","City Centre","Rigasa","Kawo","Unguwan Rimi","Tudun Wada","Zaria","Kafanchan","Kujama"]},{"n":"addr","l":"Street or landmark (optional)","t":"text","req":false}]},
+{"q":"How big is the site?","h":"A rough idea is enough. We quote after reviewing it.","fields":[{"n":"bedrooms","l":"Bedrooms","t":"qty","min":0,"max":20,"v":3},{"n":"living","l":"Living rooms","t":"qty","min":0,"max":6,"v":1},{"n":"kitchens","l":"Kitchens","t":"qty","min":0,"max":4,"v":1},{"n":"baths","l":"Bathrooms","t":"qty","min":0,"max":8,"v":2},{"n":"size","l":"Approximate square meters (optional)","t":"text","req":false,"ph":"e.g. 250 sqm"}]},
+{"q":"When should we come?","h":"Book at least 3 days ahead for larger sites and weekends.","fields":[{"n":"date","l":"Preferred date","t":"date"},{"n":"time","l":"Start time preference","t":"time"},{"n":"ready","l":"Site is ready: no active trades, water and power available, access arranged","t":"check","req":false}]},
+{"q":"Special requirements?","h":"Optional — tick anything that applies.","fields":[{"n":"special","l":"Anything that affects the job","t":"multi","opts":["Multi-floor / no lift","Weekend job","Same-day / urgent","Very large site (1000+ sqm)","Fragile finishes / marble","Post-fumigation cleanup"],"req":false}]},
+{"q":"Who are we working with?","h":"We work as a sub-contractor and report to you.","fields":[{"n":"role","l":"You are a","t":"choice","opts":["Building contractor","Property developer","Landlord or facility manager","Homeowner","Other"]}]},
+{"q":"How can we reach you?","h":"We will send your quote within a few hours.","fields":[{"n":"name","l":"Full name","t":"text","ac":"name"},{"n":"phone","l":"WhatsApp number","t":"tel","ph":"0803 000 0000"},{"n":"email","l":"Email (optional)","t":"text","ac":"email","req":false},{"n":"notes","l":"Anything else? (optional)","t":"textarea","req":false}]}
+]}
+</script>
+
+<script>
+(()=>{
+const C=JSON.parse(document.getElementById('cfg').textContent),K='zb_'+C.key,N=C.steps.length;
+const $=s=>document.querySelector(s),app=$('#app'),nav=$('#nav');
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const WA='2349042339411';
+let S;try{S=JSON.parse(sessionStorage.getItem(K))}catch(e){}
+S=S&&S.d?S:{i:0,d:{}};
+const save=()=>{try{sessionStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+const today=()=>new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,10);
+const vis=f=>!f.showIf||S.d[f.showIf.n]===f.showIf.v;
+const empty=(f,v)=>{
+  if(f.t==='multi')return!(v&&v.length);
+  if(f.t==='check')return!v;
+  if(f.t==='qty')return false;
+  return!String(v||'').trim();
+};
+const fmt=(f,v)=>{
+  if(f.t==='multi')return v.join(', ');
+  if(f.t==='check')return v?'Yes':'No';
+  if(f.t==='date')return new Date(v+'T00:00').toLocaleDateString('en-NG',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
+  if(f.t==='time')return v;
+  return v;
+};
+
+/* date picker state per field */
+const dpState={};
+
+function validate(st){
+  for(const f of st.fields){
+    if(!vis(f))continue;
+    const v=S.d[f.n];
+    if(f.req!==false&&empty(f,v)){
+      if(f.t==='qty')continue;
+      if(f.t==='date')return 'Please pick a date.';
+      if(f.t==='time')return 'Please pick a start time.';
+      return 'Please complete this to continue.';
+    }
+    if(f.t==='tel'&&v&&String(v).replace(/\D/g,'').length<10)return 'Enter a valid phone number.';
+    if(f.t==='date'&&v&&v<today())return 'Choose today or a later date.';
+  }
+  return '';
+}
+
+/* ---- renderers ---- */
+
+function renderTiles(f,v){
+  return `<div class="tiles" role="radiogroup" aria-label="${esc(f.l)}">
+    ${f.opts.map(o=>{
+      const[t,s,icon]=o;
+      const on=v===t;
+      return `<label class="tile">
+        <input type="radio" name="tile_${f.n}" value="${esc(t)}" ${on?'checked':''} data-tile="${esc(t)}">
+        <div class="tile-body">
+          <i class="fas ${esc(icon||'fa-square')}"></i>
+          <strong>${esc(t)}</strong>
+          <span>${esc(s)}</span>
         </div>
-      </a>
-      <div class="nav-links">
-        <a href="/">Home</a>
-        <a href="/category.html?slug=all">Browse</a>
-        <a href="/hotspots.html">Hotspots</a>
-        <a href="/about.html">About</a>
-      </div>
-      <div class="nav-actions">
-        <button class="icon-btn" id="themeToggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
-        <a href="/favorites.html" class="icon-btn" style="position:relative;text-decoration:none;">
-          <i class="fas fa-heart"></i>
-          <span id="favBadge">0</span>
-        </a>
-        <div id="headerUserArea">
-          <div class="avatar" id="userAvatar" onclick="openSignup()">ZA</div>
-        </div>
+      </label>`;
+    }).join('')}
+  </div>`;
+}
+
+function renderQty(f,v){
+  const val=v??f.v??0;
+  return `<div class="f" data-n="${f.n}">
+    <div class="l">${esc(f.l)}</div>
+    <div class="qty-item" style="max-width:140px">
+      <div class="qty-controls">
+        <button type="button" data-qty="${f.n}" data-op="-"><i class="fas fa-minus"></i></button>
+        <input type="number" name="${f.n}" value="${val}" min="${f.min??0}" max="${f.max??99}" readonly>
+        <button type="button" data-qty="${f.n}" data-op="+"><i class="fas fa-plus"></i></button>
       </div>
     </div>
-  </nav>
+  </div>`;
+}
 
-  <div class="container">
-
-    <div class="svc-breadcrumb">
-      <a href="/">Home</a>
-      <i class="fas fa-chevron-right"></i>
-      <a href="/">Zaure Services</a>
-      <i class="fas fa-chevron-right"></i>
-      <span class="current">Zaure Clean</span>
+function renderDate(f,v){
+  if(!dpState[f.n]){
+    const base=v?new Date(v+'T00:00'):new Date();
+    dpState[f.n]={viewMonth:base.getMonth(),viewYear:base.getFullYear(),selected:v?new Date(v+'T00:00'):null};
+  }
+  return `<div class="f" data-n="${f.n}">
+    <div class="l">${esc(f.l)}</div>
+    <div class="dp" data-dp="${f.n}">
+      <div class="dp-header">
+        <button type="button" class="dp-nav" data-dp-prev="${f.n}" aria-label="Previous month"><i class="fas fa-chevron-left"></i></button>
+        <div class="dp-month" data-dp-month="${f.n}">—</div>
+        <button type="button" class="dp-nav" data-dp-next="${f.n}" aria-label="Next month"><i class="fas fa-chevron-right"></i></button>
+      </div>
+      <div class="dp-weekdays"><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></div>
+      <div class="dp-grid" data-dp-grid="${f.n}"></div>
+      <div class="dp-selected">Selected: <strong data-dp-sel="${f.n}">${v?fmt(f,v):'None yet'}</strong></div>
     </div>
+    <input type="hidden" name="${f.n}" value="${esc(v||'')}" data-hidden="${f.n}">
+    <div class="qm-note" data-dp-note="${f.n}"></div>
+  </div>`;
+}
 
-    <!-- HERO -->
-    <section class="svc-hero">
-      <span class="svc-hero-eyebrow">
-        <i class="fas fa-check-circle"></i> Post-Construction Specialists
-      </span>
-      <h1>Zaure Clean</h1>
-      <p class="svc-hero-desc">
-        We handle the final clean on construction and renovation projects — from debris removal to handover-ready finishes. Trusted by contractors, engineers, and property developers across Northern Nigeria.
-      </p>
-      <div class="svc-hero-actions">
-        <button type="button" class="svc-btn primary" id="requestQuoteBtn">
-          <i class="fas fa-file-pen"></i> Get a quote
-        </button>
-        <a href="#" id="heroWhatsApp" class="svc-btn wa" target="_blank" rel="noopener">
-          <i class="fab fa-whatsapp"></i> Message on WhatsApp
-        </a>
-      </div>
-    </section>
+function paintDate(f){
+  const st=dpState[f.n];if(!st)return;
+  const grid=document.querySelector(`[data-dp-grid="${f.n}"]`);
+  const monthEl=document.querySelector(`[data-dp-month="${f.n}"]`);
+  const prevBtn=document.querySelector(`[data-dp-prev="${f.n}"]`);
+  if(!grid||!monthEl)return;
+  const M=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  monthEl.textContent=`${M[st.viewMonth]} ${st.viewYear}`;
+  const firstDay=new Date(st.viewYear,st.viewMonth,1).getDay();
+  const daysInMonth=new Date(st.viewYear,st.viewMonth+1,0).getDate();
+  const t=new Date();t.setHours(0,0,0,0);
+  let html='';
+  const prevDays=new Date(st.viewYear,st.viewMonth,0).getDate();
+  for(let i=firstDay-1;i>=0;i--)html+=`<button type="button" class="dp-day other-month" tabindex="-1" disabled>${prevDays-i}</button>`;
+  for(let d=1;d<=daysInMonth;d++){
+    const thisDate=new Date(st.viewYear,st.viewMonth,d);thisDate.setHours(0,0,0,0);
+    const isPast=thisDate<t;
+    const isToday=thisDate.getTime()===t.getTime();
+    const isSel=st.selected&&thisDate.getTime()===st.selected.getTime();
+    let cls='dp-day';if(isToday)cls+=' today';if(isSel)cls+=' selected';
+    const iso=`${st.viewYear}-${String(st.viewMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    html+=`<button type="button" class="${cls}" data-dp-day="${f.n}" data-date="${iso}" ${isPast?'disabled':''}>${d}</button>`;
+  }
+  grid.innerHTML=html;
+  const now=new Date();
+  prevBtn.disabled=(st.viewYear===now.getFullYear()&&st.viewMonth===now.getMonth());
+  // note
+  const noteEl=document.querySelector(`[data-dp-note="${f.n}"]`);
+  if(noteEl&&st.selected&&C.lead){
+    const d=(st.selected-new Date(today()+'T00:00'))/864e5;
+    noteEl.textContent=d<C.lead?`Less than ${C.lead} days away. We will confirm availability.`:'';
+  }
+}
 
-    <!-- ABOUT -->
-    <section class="svc-section">
-      <h2 class="svc-section-title">Built for the people who finish buildings</h2>
-      <p class="svc-body-text">
-        Zaure Clean is a specialist post-construction cleaning sub-contractor. We take on the last job on the site — after the plaster has dried, the tiles are laid, and the electrical work is done. When your client walks in for the final inspection, we've already been through.
-      </p>
-      <p class="svc-body-text">
-        Contractors call us because we work to their schedule, not the other way around. Same-week mobilisation, documented completion, and a clean-site report after every job.
-      </p>
-    </section>
-
-    <!-- HOW IT WORKS -->
-    <section class="svc-section">
-      <h2 class="svc-section-title">How it works</h2>
-      <p class="svc-section-sub">
-        From first contact to handover-ready — the whole process in four steps.
-      </p>
-      <div class="how-steps">
-        <div class="how-step">
-          <div class="how-num">1</div>
-          <div class="how-body">
-            <h4>Get a quote</h4>
-            <p>Fill the form — we respond on WhatsApp within 2–4 hours with a site-based quote.</p>
-          </div>
-        </div>
-        <div class="how-step">
-          <div class="how-num">2</div>
-          <div class="how-body">
-            <h4>Confirm your date</h4>
-            <p>50% deposit locks the slot. Balance paid on completion.</p>
-          </div>
-        </div>
-        <div class="how-step">
-          <div class="how-num">3</div>
-          <div class="how-body">
-            <h4>We arrive on site</h4>
-            <p>Supervisor and crew arrive with all equipment. We clear, clean, and polish room by room.</p>
-          </div>
-        </div>
-        <div class="how-step">
-          <div class="how-num">4</div>
-          <div class="how-body">
-            <h4>Handover ready</h4>
-            <p>You walk the site with us. A written completion report follows every job.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- WHAT WE DO -->
-    <section class="svc-section">
-      <h2 class="svc-section-title">What we do on site</h2>
-      <p class="svc-section-sub">
-        Full post-construction scope — from rough debris to final polish, plus pest control, weed control, and carpet cleaning.
-      </p>
-      <div class="svc-list">
-        <div class="svc-item">
-          <div class="svc-item-icon"><i class="fas fa-trowel-bricks"></i></div>
-          <div class="svc-item-body">
-            <h4>Rough Clean</h4>
-            <p>Debris removal, packaging disposal, and site clearing after trades have finished.</p>
-          </div>
-        </div>
-        <div class="svc-item">
-          <div class="svc-item-icon"><i class="fas fa-wind"></i></div>
-          <div class="svc-item-body">
-            <h4>Dust Extraction</h4>
-            <p>Full extraction from walls, ceilings, vents, and every surface dust settles on.</p>
-          </div>
-        </div>
-        <div class="svc-item">
-          <div class="svc-item-icon"><i class="fas fa-brush"></i></div>
-          <div class="svc-item-body">
-            <h4>Deep Surface Clean</h4>
-            <p>Floors, tiles, skirting, doors, frames, windows — cleaned to spec, room by room.</p>
-          </div>
-        </div>
-        <div class="svc-item">
-          <div class="svc-item-icon"><i class="fas fa-border-all"></i></div>
-          <div class="svc-item-body">
-            <h4>Glass &amp; Frame Polish</h4>
-            <p>Interior and exterior glass, aluminium frames, and window tracks — no streaks.</p>
-          </div>
-        </div>
-        <div class="svc-item">
-          <div class="svc-item-icon"><i class="fas fa-soap"></i></div>
-          <div class="svc-item-body">
-            <h4>Paint &amp; Cement Removal</h4>
-            <p>Careful removal of splatter and residue without damaging finished surfaces.</p>
-          </div>
-        </div>
-        <div class="svc-item">
-          <div class="svc-item-icon"><i class="fas fa-bug"></i></div>
-          <div class="svc-item-body">
-            <h4>Pest Control</h4>
-            <p>Pre-handover fumigation and treatment — insects, rodents, and nesting cleared before you open the doors.</p>
-          </div>
-        </div>
-        <div class="svc-item">
-          <div class="svc-item-icon"><i class="fas fa-seedling"></i></div>
-          <div class="svc-item-body">
-            <h4>Weed Control</h4>
-            <p>Compound clearing, overgrowth removal, and site-edge weeding for residential and commercial plots.</p>
-          </div>
-        </div>
-        <div class="svc-item">
-          <div class="svc-item-icon"><i class="fas fa-rug"></i></div>
-          <div class="svc-item-body">
-            <h4>Carpet Cleaning</h4>
-            <p>Deep steam extraction for carpets and rugs — stains, odours, and embedded dirt removed.</p>
-          </div>
-        </div>
-        <div class="svc-item">
-          <div class="svc-item-icon"><i class="fas fa-clipboard-check"></i></div>
-          <div class="svc-item-body">
-            <h4>Final Handover Clean</h4>
-            <p>Handover-ready finish — the last pass before your client's walk-through.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- COVERAGE -->
-    <section class="svc-section">
-      <h2 class="svc-section-title">Where we clean</h2>
-      <p class="svc-section-sub">
-        Zaure Clean covers Kaduna city and nearby towns. Ask about other locations when you request a quote.
-      </p>
-      <div class="coverage-group">
-        <h4>Kaduna city</h4>
-        <div class="svc-clients">
-          <span class="svc-client-chip"><i class="fas fa-map-pin"></i> Barnawa</span>
-          <span class="svc-client-chip"><i class="fas fa-map-pin"></i> GRA</span>
-          <span class="svc-client-chip"><i class="fas fa-map-pin"></i> Malali</span>
-          <span class="svc-client-chip"><i class="fas fa-map-pin"></i> City Centre</span>
-          <span class="svc-client-chip"><i class="fas fa-map-pin"></i> Rigasa</span>
-          <span class="svc-client-chip"><i class="fas fa-map-pin"></i> Kawo</span>
-          <span class="svc-client-chip"><i class="fas fa-map-pin"></i> Unguwan Rimi</span>
-          <span class="svc-client-chip"><i class="fas fa-map-pin"></i> Tudun Wada</span>
-        </div>
-      </div>
-      <div class="coverage-group">
-        <h4>Nearby towns</h4>
-        <div class="svc-clients">
-          <span class="svc-client-chip"><i class="fas fa-road"></i> Zaria</span>
-          <span class="svc-client-chip"><i class="fas fa-road"></i> Kafanchan</span>
-          <span class="svc-client-chip"><i class="fas fa-road"></i> Kujama</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- PREP CHECKLIST -->
-    <section class="svc-section">
-      <h2 class="svc-section-title">Before we arrive</h2>
-      <p class="svc-section-sub">
-        A few things that make the job faster and handover smoother.
-      </p>
-      <div class="prep-list">
-        <div class="prep-item"><i class="fas fa-check-circle"></i> Ensure the site is ready for cleaning — no active trades working</div>
-        <div class="prep-item"><i class="fas fa-check-circle"></i> Have keys or site access arranged for the crew</div>
-        <div class="prep-item"><i class="fas fa-check-circle"></i> Confirm water and electricity are available on site</div>
-        <div class="prep-item"><i class="fas fa-check-circle"></i> Remove any equipment, tools, or materials that aren't staying</div>
-        <div class="prep-item"><i class="fas fa-check-circle"></i> Have your client's inspection contact ready for the walk-through</div>
-      </div>
-    </section>
-
-    <!-- PAYMENT & TERMS -->
-    <section class="svc-section">
-      <h2 class="svc-section-title">Payment &amp; booking terms</h2>
-      <div class="terms-grid">
-        <div class="term-item">
-          <i class="fas fa-credit-card"></i>
-          <div>
-            <h4>50% deposit, 50% on completion</h4>
-            <p>Bank transfer only. Receipts issued for both payments.</p>
-          </div>
-        </div>
-        <div class="term-item">
-          <i class="fas fa-clock"></i>
-          <div>
-            <h4>2–4 hour response</h4>
-            <p>Mon–Sat. Same-day requests subject to crew availability.</p>
-          </div>
-        </div>
-        <div class="term-item">
-          <i class="fas fa-rotate-left"></i>
-          <div>
-            <h4>Free cancellation (48 hours)</h4>
-            <p>Cancel up to 48 hours before your site date for a full deposit refund.</p>
-          </div>
-        </div>
-        <div class="term-item">
-          <i class="fas fa-calendar-check"></i>
-          <div>
-            <h4>Book 3 days ahead</h4>
-            <p>For larger sites and weekend jobs, please book at least 3 days in advance.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- TRUST STRIP -->
-    <section class="svc-section" style="margin-bottom: 24px;">
-      <div class="trust-strip">
-        <span class="trust-item"><i class="fas fa-people-carry-box"></i> Trained crew</span>
-        <span class="trust-item"><i class="fas fa-user-tie"></i> Supervisor on every job</span>
-        <span class="trust-item"><i class="fas fa-file-signature"></i> Written completion report</span>
-        <span class="trust-item"><i class="fas fa-shield-halved"></i> Fully insured work</span>
-      </div>
-    </section>
-
-    <!-- WHO WE WORK WITH -->
-    <section class="svc-section">
-      <h2 class="svc-section-title">Who we work with</h2>
-      <p class="svc-section-sub">
-        We're a sub-contractor — we slot into your project team and report to you.
-      </p>
-      <div class="svc-clients">
-        <span class="svc-client-chip"><i class="fas fa-helmet-safety"></i> Building Contractors</span>
-        <span class="svc-client-chip"><i class="fas fa-drafting-compass"></i> Civil Engineers</span>
-        <span class="svc-client-chip"><i class="fas fa-hard-hat"></i> Project Managers</span>
-        <span class="svc-client-chip"><i class="fas fa-city"></i> Property Developers</span>
-        <span class="svc-client-chip"><i class="fas fa-building"></i> Facility Managers</span>
-        <span class="svc-client-chip"><i class="fas fa-house"></i> Landlords &amp; Handover Teams</span>
-      </div>
-    </section>
-
-    <!-- RELATED SERVICES -->
-    <section class="svc-section">
-      <h2 class="svc-section-title">Related services</h2>
-      <p class="svc-section-sub">
-        Finishing a site? You might need these too.
-      </p>
-      <div class="related-services">
-
-        <a href="/zaure-move.html" class="related-card">
-          <div class="related-top">
-            <div class="related-icon"><i class="fas fa-truck"></i></div>
-            <div class="related-body">
-              <h4>Zaure Move</h4>
-              <p>Small and medium moves across Kaduna — packing, loading, transport, and placement, handled end to end.</p>
-            </div>
-          </div>
-          <div class="related-cta">
-            <span class="related-cta-label">
-              <i class="fas fa-arrow-up-right-from-square"></i>
-              Explore service
-            </span>
-            <span class="related-cta-arrow"><i class="fas fa-arrow-right"></i></span>
-          </div>
-        </a>
-
-        <a href="/category.html?slug=home-kitchen" class="related-card">
-          <div class="related-top">
-            <div class="related-icon"><i class="fas fa-couch"></i></div>
-            <div class="related-body">
-              <h4>Furniture &amp; home essentials</h4>
-              <p>Browse furniture, cookware, and household items from verified sellers on Zaure.</p>
-            </div>
-          </div>
-          <div class="related-cta">
-            <span class="related-cta-label">
-              <i class="fas fa-arrow-up-right-from-square"></i>
-              Browse listings
-            </span>
-            <span class="related-cta-arrow"><i class="fas fa-arrow-right"></i></span>
-          </div>
-        </a>
-
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section class="svc-contact">
-      <div class="svc-contact-text">
-        <h3>Have a site that needs the final clean?</h3>
-        <p>Get a quote in under 2 minutes — we'll respond on WhatsApp within a few hours.</p>
-      </div>
-      <div class="svc-contact-actions">
-        <button type="button" class="svc-btn primary" id="contactQuoteBtn">
-          <i class="fas fa-file-pen"></i> Get a quote
-        </button>
-        <a href="#" id="contactWhatsApp" class="svc-btn wa" target="_blank" rel="noopener">
-          <i class="fab fa-whatsapp"></i> WhatsApp instead
-        </a>
-      </div>
-    </section>
-
-  </div>
-
-  <!-- QUOTE MODAL (CREATIVE WIZARD) -->
-  <div class="qm-overlay" id="quoteModal" role="dialog" aria-modal="true" aria-labelledby="qmTitle">
-    <div class="qm-modal">
-
-      <div class="qm-progress"><div class="qm-progress-fill" id="qmProgressFill"></div></div>
-
-      <div class="qm-header">
-        <div class="qm-header-text">
-          <div class="qm-step-label" id="qmStepLabel">Step 1 of 5</div>
-          <h2 id="qmTitle">Your details</h2>
-          <p id="qmSubtitle">How can we reach you?</p>
-        </div>
-        <button type="button" class="qm-close" id="qmClose" aria-label="Close">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-
-      <div class="qm-body" id="qmBody">
-        <div class="qm-error-banner" id="qmErrorBanner">
-          <i class="fas fa-exclamation-circle"></i> <span id="qmErrorText"></span>
-        </div>
-
-        <form id="quoteForm" novalidate>
-
-          <!-- STEP 1: CONTACT -->
-          <div class="qm-step active" data-step="1">
-            <p class="qm-step-intro">So we know who's requesting and how to reach you.</p>
-            <div class="qm-fields two">
-              <div class="qm-field">
-                <label>Full name <span class="req">*</span></label>
-                <input type="text" name="name" id="qName" placeholder="e.g. Musa Ibrahim" required>
-                <div class="qm-field-error">Please enter your name</div>
-              </div>
-              <div class="qm-field">
-                <label>Phone / WhatsApp <span class="req">*</span></label>
-                <input type="tel" name="phone" id="qPhone" placeholder="08012345678" required>
-                <div class="qm-field-error">Please enter your phone number</div>
-              </div>
-              <div class="qm-field full">
-                <label>Company / business <span class="hint">optional</span></label>
-                <input type="text" name="company" id="qCompany" placeholder="e.g. Danliti Construction Ltd">
-              </div>
-              <div class="qm-field full">
-                <label>Email <span class="hint">optional</span></label>
-                <input type="email" name="email" id="qEmail" placeholder="you@company.com">
-              </div>
-            </div>
-          </div>
-
-          <!-- STEP 2: SITE DETAILS -->
-          <div class="qm-step" data-step="2">
-            <p class="qm-step-intro">Where's the site, and when do you need us?</p>
-            <div class="qm-fields">
-              <div class="qm-field">
-                <label>Site address <span class="req">*</span></label>
-                <input type="text" name="site_address" id="qFrom" placeholder="e.g. Plot 12, Barnawa, Kaduna" required>
-                <div class="qm-field-error">Please enter the site address</div>
-              </div>
-
-              <div class="qm-field full" id="dateFieldWrap">
-                <label>Preferred cleaning date <span class="req">*</span></label>
-                <div class="date-picker" id="datePicker">
-                  <div class="dp-header">
-                    <button type="button" class="dp-nav" id="dpPrev" aria-label="Previous month">
-                      <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <div class="dp-month" id="dpMonth">—</div>
-                    <button type="button" class="dp-nav" id="dpNext" aria-label="Next month">
-                      <i class="fas fa-chevron-right"></i>
-                    </button>
-                  </div>
-                  <div class="dp-weekdays">
-                    <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
-                  </div>
-                  <div class="dp-grid" id="dpGrid"></div>
-                  <div class="dp-selected">Selected: <strong id="dpSelectedDisplay">None yet</strong></div>
-                </div>
-                <input type="hidden" name="clean_date" id="qDate" required>
-                <div class="qm-field-error">Please pick a date</div>
-              </div>
-
-              <div class="qm-field full" id="timeFieldWrap">
-                <label>Start time preference <span class="req">*</span></label>
-                <div class="time-slots" id="timeSlots"></div>
-                <input type="hidden" name="clean_time" id="qTime" required>
-                <div class="qm-field-error">Please pick a time</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- STEP 3: SITE SIZE -->
-          <div class="qm-step" data-step="3">
-            <p class="qm-step-intro">Help us size the job accurately so the quote is real.</p>
-
-            <div class="qm-field full" id="propertyFieldWrap" style="margin-bottom: 16px;">
-              <label>Property type <span class="req">*</span></label>
-              <div class="qm-property-grid" id="propertyGroup">
-                <label class="qm-property">
-                  <input type="radio" name="property_type" value="New build" required>
-                  <div class="qm-property-body">
-                    <i class="fas fa-house-chimney"></i>
-                    <strong>New build</strong>
-                    <span>Fresh construction</span>
-                  </div>
-                </label>
-                <label class="qm-property">
-                  <input type="radio" name="property_type" value="Renovation">
-                  <div class="qm-property-body">
-                    <i class="fas fa-hammer"></i>
-                    <strong>Renovation</strong>
-                    <span>Remodel / upgrade</span>
-                  </div>
-                </label>
-                <label class="qm-property">
-                  <input type="radio" name="property_type" value="Commercial / office">
-                  <div class="qm-property-body">
-                    <i class="fas fa-building"></i>
-                    <strong>Commercial</strong>
-                    <span>Office / shop</span>
-                  </div>
-                </label>
-                <label class="qm-property">
-                  <input type="radio" name="property_type" value="Industrial">
-                  <div class="qm-property-body">
-                    <i class="fas fa-industry"></i>
-                    <strong>Industrial</strong>
-                    <span>Warehouse / factory</span>
-                  </div>
-                </label>
-              </div>
-              <div class="qm-field-error">Please select a property type</div>
-            </div>
-
-            <div class="qm-field" style="margin-bottom: 16px;">
-              <label>Room count</label>
-              <div class="qm-qty-grid">
-                <div class="qm-qty-item">
-                  <div class="qty-label">Bedrooms</div>
-                  <div class="qm-qty-controls">
-                    <button type="button" data-qty="bedrooms" data-op="-"><i class="fas fa-minus"></i></button>
-                    <input type="number" name="bedrooms" id="qBedrooms" value="3" min="0" max="20">
-                    <button type="button" data-qty="bedrooms" data-op="+"><i class="fas fa-plus"></i></button>
-                  </div>
-                </div>
-                <div class="qm-qty-item">
-                  <div class="qty-label">Living rooms</div>
-                  <div class="qm-qty-controls">
-                    <button type="button" data-qty="living" data-op="-"><i class="fas fa-minus"></i></button>
-                    <input type="number" name="living_rooms" id="qLiving" value="1" min="0" max="6">
-                    <button type="button" data-qty="living" data-op="+"><i class="fas fa-plus"></i></button>
-                  </div>
-                </div>
-                <div class="qm-qty-item">
-                  <div class="qty-label">Kitchens</div>
-                  <div class="qm-qty-controls">
-                    <button type="button" data-qty="kitchens" data-op="-"><i class="fas fa-minus"></i></button>
-                    <input type="number" name="kitchens" id="qKitchens" value="1" min="0" max="4">
-                    <button type="button" data-qty="kitchens" data-op="+"><i class="fas fa-plus"></i></button>
-                  </div>
-                </div>
-                <div class="qm-qty-item">
-                  <div class="qty-label">Bathrooms</div>
-                  <div class="qm-qty-controls">
-                    <button type="button" data-qty="baths" data-op="-"><i class="fas fa-minus"></i></button>
-                    <input type="number" name="bathrooms" id="qBaths" value="2" min="0" max="8">
-                    <button type="button" data-qty="baths" data-op="+"><i class="fas fa-plus"></i></button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="qm-field full">
-              <label>Approximate square meters <span class="hint">optional</span></label>
-              <input type="text" name="size" id="qSize" placeholder="e.g. 250 sqm">
-            </div>
-          </div>
-
-          <!-- STEP 4: SERVICES -->
-          <div class="qm-step" data-step="4">
-            <p class="qm-step-intro">What needs to be cleaned on site?</p>
-
-            <div class="qm-field full" id="servicesFieldWrap" style="margin-bottom: 20px;">
-              <label>Services needed <span class="req">*</span></label>
-              <div class="qm-checks" id="qServicesGroup">
-                <label class="qm-check"><input type="checkbox" name="services[]" value="Rough clean"> Rough clean</label>
-                <label class="qm-check"><input type="checkbox" name="services[]" value="Dust extraction"> Dust extraction</label>
-                <label class="qm-check"><input type="checkbox" name="services[]" value="Deep surface clean"> Deep surface clean</label>
-                <label class="qm-check"><input type="checkbox" name="services[]" value="Glass & frame polish"> Glass &amp; frames</label>
-                <label class="qm-check"><input type="checkbox" name="services[]" value="Paint & cement removal"> Paint &amp; cement</label>
-                <label class="qm-check"><input type="checkbox" name="services[]" value="Pest control"> Pest control</label>
-                <label class="qm-check"><input type="checkbox" name="services[]" value="Weed control"> Weed control</label>
-                <label class="qm-check"><input type="checkbox" name="services[]" value="Carpet cleaning"> Carpet cleaning</label>
-                <label class="qm-check"><input type="checkbox" name="services[]" value="Final handover clean"> Final handover</label>
-                <label class="qm-check"><input type="checkbox" name="services[]" value="Full package (everything)"> Full package</label>
-              </div>
-              <div class="qm-field-error" id="qServicesError">Please select at least one service</div>
-            </div>
-
-            <div class="qm-field full">
-              <label>Special requirements</label>
-              <div class="qm-checks">
-                <label class="qm-check"><input type="checkbox" name="special[]" value="Multi-floor / no lift"> Multi-floor / no lift</label>
-                <label class="qm-check"><input type="checkbox" name="special[]" value="Weekend job"> Weekend job</label>
-                <label class="qm-check"><input type="checkbox" name="special[]" value="Same-day / urgent"> Same-day / urgent</label>
-                <label class="qm-check"><input type="checkbox" name="special[]" value="Very large site (1000+ sqm)"> Very large site</label>
-                <label class="qm-check"><input type="checkbox" name="special[]" value="Fragile finishes / marble"> Fragile finishes</label>
-                <label class="qm-check"><input type="checkbox" name="special[]" value="Post-fumigation cleanup"> Post-fumigation</label>
-              </div>
-            </div>
-
-            <div class="qm-field full" style="margin-top: 14px;">
-              <label>Anything else we should know? <span class="hint">optional</span></label>
-              <textarea name="notes" id="qNotes" placeholder="e.g. Fourth floor, no lift. Marble floors. Job must finish before Friday handover."></textarea>
-            </div>
-          </div>
-
-          <!-- STEP 5: REVIEW -->
-          <div class="qm-step" data-step="5">
-            <p class="qm-step-intro">Review your details and send. We'll respond on WhatsApp with a quote within a few hours.</p>
-            <div class="qm-review" id="qmReview"></div>
-          </div>
-
-        </form>
-      </div>
-
-      <div class="qm-footer">
-        <button type="button" class="qm-nav-btn back" id="qmBack" style="display: none;">
-          <i class="fas fa-arrow-left"></i> Back
-        </button>
-        <button type="button" class="qm-nav-btn next" id="qmNext">
-          Next <i class="fas fa-arrow-right"></i>
-        </button>
-        <button type="button" class="qm-nav-btn submit" id="qmSubmit" style="display: none;">
-          <i class="fas fa-paper-plane"></i> Send quote request
-        </button>
-      </div>
-
+function renderTime(f,v){
+  const slots=['7:00 AM','8:00 AM','9:00 AM','10:00 AM','11:00 AM','12:00 PM','1:00 PM','2:00 PM','3:00 PM','4:00 PM','5:00 PM','6:00 PM'];
+  return `<div class="f" data-n="${f.n}">
+    <div class="l">${esc(f.l)}</div>
+    <div class="time-slots" data-time-group="${f.n}">
+      ${slots.map(t=>`<button type="button" class="time-slot${v===t?' selected':''}" data-time="${esc(t)}">${esc(t)}</button>`).join('')}
     </div>
-  </div>
+    <input type="hidden" name="${f.n}" value="${esc(v||'')}" data-hidden="${f.n}">
+  </div>`;
+}
 
-  <div class="bottom-nav">
-    <a href="/" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
-    <a href="/categories.html" class="nav-item"><i class="fas fa-th-large"></i><span>Categories</span></a>
-    <button class="post-btn" id="fabPostAd"><i class="fas fa-plus"></i></button>
-    <a href="/favorites.html" class="nav-item"><i class="fas fa-heart"></i><span>Favorites</span></a>
-    <a href="/profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
-  </div>
-
-  <div class="modal-overlay" id="signupModal">
-    <div class="modal">
-      <div class="modal-header">
-        <h3>Create your account</h3>
-        <button class="modal-close" id="closeSignupModalBtn"><i class="fas fa-times"></i></button>
-      </div>
-      <form id="signupForm" class="modal-form">
-        <label for="signupName">Full Name</label>
-        <input type="text" id="signupName" placeholder="Enter your full name" required>
-        <label for="signupPhone">Phone Number</label>
-        <input type="tel" id="signupPhone" placeholder="Enter your phone number" required>
-        <label>State</label>
-        <div class="custom-select" id="stateSelect">
-          <div class="custom-select-trigger" id="stateTrigger">
-            <span>Select your state</span>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          <div class="custom-select-dropdown" id="stateDropdown">
-            <input type="text" id="stateSearchInput" placeholder="Search state...">
-            <ul class="custom-select-options" id="stateOptionsList"></ul>
-          </div>
-        </div>
-        <input type="hidden" id="signupState" value="">
-        <label class="terms-checkbox">
-          <input type="checkbox" id="termsCheckbox" required>
-          <span>By creating an account, you agree to Zaure's <a href="/terms.html" target="_blank">Terms</a> and <a href="/privacy.html" target="_blank">Privacy Policy</a>.</span>
-        </label>
-        <button type="submit" class="btn-primary">Sign Up</button>
-      </form>
+function renderMulti(f,v){
+  const arr=v||[];
+  return `<div class="f" data-n="${f.n}">
+    <div class="l">${esc(f.l)}</div>
+    <div class="checks" role="group" aria-label="${esc(f.l)}">
+      ${f.opts.map(o=>{
+        const t=Array.isArray(o)?o[0]:o;
+        const on=arr.includes(t);
+        return `<label class="check${on?' checked':''}">
+          <input type="checkbox" value="${esc(t)}" ${on?'checked':''} data-multi="${f.n}">
+          <span>${esc(t)}</span>
+        </label>`;
+      }).join('')}
     </div>
-  </div>
-
-  <script src="/js/main.js"></script>
-  <script>
-  (function () {
-    'use strict';
-
-    // Replace with your actual Formspree form ID
-    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
-
-    const WHATSAPP_PHONE = '2349042339411';
-    const WHATSAPP_MESSAGE =
-      "Hi Zaure Clean, I'd like a post-construction cleaning quote.\n\n" +
-      "Site address: \n" +
-      "Property type: \n" +
-      "Services needed: \n" +
-      "Preferred date: ";
-    const waUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
-
-    const TOTAL_STEPS = 5;
-    let currentStep = 1;
-    let lastFocused = null;
-
-    const STEP_META = {
-      1: { title: 'Your details',     subtitle: 'How can we reach you?' },
-      2: { title: 'Site details',     subtitle: 'Where and when?' },
-      3: { title: 'Site size',        subtitle: 'Help us size the job' },
-      4: { title: 'Services needed',  subtitle: 'What needs to be cleaned?' },
-      5: { title: 'Review & send',    subtitle: 'Check everything, then submit' }
-    };
-
-    const modal = document.getElementById('quoteModal');
-    const body = document.getElementById('qmBody');
-    const form = document.getElementById('quoteForm');
-    const backBtn = document.getElementById('qmBack');
-    const nextBtn = document.getElementById('qmNext');
-    const submitBtn = document.getElementById('qmSubmit');
-    const progressFill = document.getElementById('qmProgressFill');
-    const stepLabel = document.getElementById('qmStepLabel');
-    const titleEl = document.getElementById('qmTitle');
-    const subtitleEl = document.getElementById('qmSubtitle');
-    const errorBanner = document.getElementById('qmErrorBanner');
-    const errorText = document.getElementById('qmErrorText');
-
-    /* DATE PICKER */
-    const dpState = {
-      viewMonth: new Date().getMonth(),
-      viewYear: new Date().getFullYear(),
-      selectedDate: null
-    };
-    const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-
-    function initDatePicker() {
-      const today = new Date();
-      dpState.viewMonth = today.getMonth();
-      dpState.viewYear = today.getFullYear();
-      dpState.selectedDate = null;
-      document.getElementById('qDate').value = '';
-      document.getElementById('dpSelectedDisplay').textContent = 'None yet';
-      renderDatePicker();
-    }
-
-    function renderDatePicker() {
-      const grid = document.getElementById('dpGrid');
-      const monthEl = document.getElementById('dpMonth');
-      const prevBtn = document.getElementById('dpPrev');
-
-      monthEl.textContent = `${MONTH_NAMES[dpState.viewMonth]} ${dpState.viewYear}`;
-
-      const firstDay = new Date(dpState.viewYear, dpState.viewMonth, 1).getDay();
-      const daysInMonth = new Date(dpState.viewYear, dpState.viewMonth + 1, 0).getDate();
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-
-      let html = '';
-      const prevMonthDays = new Date(dpState.viewYear, dpState.viewMonth, 0).getDate();
-      for (let i = firstDay - 1; i >= 0; i--) {
-        const dayNum = prevMonthDays - i;
-        html += `<button type="button" class="dp-day other-month" tabindex="-1" disabled>${dayNum}</button>`;
-      }
-
-      for (let d = 1; d <= daysInMonth; d++) {
-        const thisDate = new Date(dpState.viewYear, dpState.viewMonth, d);
-        thisDate.setHours(0, 0, 0, 0);
-        const isPast = thisDate < today;
-        const isToday = thisDate.getTime() === today.getTime();
-        const isSelected = dpState.selectedDate && thisDate.getTime() === dpState.selectedDate.getTime();
-
-        let cls = 'dp-day';
-        if (isToday) cls += ' today';
-        if (isSelected) cls += ' selected';
-
-        const isoDate = `${dpState.viewYear}-${String(dpState.viewMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-        html += `<button type="button" class="${cls}" data-date="${isoDate}" ${isPast ? 'disabled' : ''}>${d}</button>`;
-      }
-
-      grid.innerHTML = html;
-
-      const now = new Date();
-      if (dpState.viewYear === now.getFullYear() && dpState.viewMonth === now.getMonth()) {
-        prevBtn.disabled = true;
-      } else {
-        prevBtn.disabled = false;
-      }
-
-      grid.querySelectorAll('.dp-day[data-date]').forEach(btn => {
-        btn.addEventListener('click', () => {
-          dpState.selectedDate = new Date(btn.dataset.date + 'T00:00:00');
-          document.getElementById('qDate').value = btn.dataset.date;
-          document.getElementById('dpSelectedDisplay').textContent = formatDateLong(btn.dataset.date);
-          renderDatePicker();
-          document.getElementById('dateFieldWrap').classList.remove('has-error');
-        });
-      });
-    }
-
-    document.getElementById('dpPrev')?.addEventListener('click', () => {
-      dpState.viewMonth--;
-      if (dpState.viewMonth < 0) { dpState.viewMonth = 11; dpState.viewYear--; }
-      renderDatePicker();
-    });
-    document.getElementById('dpNext')?.addEventListener('click', () => {
-      dpState.viewMonth++;
-      if (dpState.viewMonth > 11) { dpState.viewMonth = 0; dpState.viewYear++; }
-      renderDatePicker();
-    });
-
-    /* TIME SLOTS */
-    const TIME_SLOTS = [
-      '7:00 AM', '8:00 AM', '9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM',
-      '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM', '6:00 PM'
-    ];
-
-    function initTimeSlots() {
-      const container = document.getElementById('timeSlots');
-      container.innerHTML = TIME_SLOTS.map(t =>
-        `<button type="button" class="time-slot" data-time="${t}">${t}</button>`
-      ).join('');
-
-      container.querySelectorAll('.time-slot').forEach(btn => {
-        btn.addEventListener('click', () => {
-          container.querySelectorAll('.time-slot').forEach(b => b.classList.remove('selected'));
-          btn.classList.add('selected');
-          document.getElementById('qTime').value = btn.dataset.time;
-          document.getElementById('timeFieldWrap').classList.remove('has-error');
-        });
-      });
-      document.getElementById('qTime').value = '';
-    }
-
-    /* OPEN / CLOSE */
-    function openModal(triggerBtn) {
-      lastFocused = triggerBtn || document.activeElement;
-      resetWizard();
-      modal.classList.add('active');
-      document.body.style.overflow = 'hidden';
-      setTimeout(() => document.getElementById('qName')?.focus(), 320);
-    }
-
-    function closeModal() {
-      modal.classList.remove('active');
-      document.body.style.overflow = '';
-      hideError();
-      if (lastFocused && typeof lastFocused.focus === 'function') {
-        setTimeout(() => lastFocused.focus(), 320);
-      }
-    }
-
-    function resetWizard() {
-      currentStep = 1;
-      form.reset();
-      document.querySelectorAll('.qm-check').forEach(c => c.classList.remove('checked'));
-      document.querySelectorAll('.qm-field').forEach(f => f.classList.remove('has-error'));
-      document.getElementById('qBedrooms').value = 3;
-      document.getElementById('qLiving').value = 1;
-      document.getElementById('qKitchens').value = 1;
-      document.getElementById('qBaths').value = 2;
-      initDatePicker();
-      initTimeSlots();
-      renderStep();
-    }
-
-    document.getElementById('requestQuoteBtn')?.addEventListener('click', function () { openModal(this); });
-    document.getElementById('contactQuoteBtn')?.addEventListener('click', function () { openModal(this); });
-    document.getElementById('qmClose')?.addEventListener('click', closeModal);
-
-    modal?.addEventListener('click', function (e) {
-      if (e.target === modal) closeModal();
-    });
-
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
-    });
-
-    /* RENDER STEP */
-    function renderStep() {
-      document.querySelectorAll('.qm-step').forEach(s => {
-        s.classList.toggle('active', parseInt(s.dataset.step, 10) === currentStep);
-      });
-
-      progressFill.style.width = ((currentStep / TOTAL_STEPS) * 100) + '%';
-      stepLabel.textContent = `Step ${currentStep} of ${TOTAL_STEPS}`;
-      const meta = STEP_META[currentStep];
-      titleEl.textContent = meta.title;
-      subtitleEl.textContent = meta.subtitle;
-
-      backBtn.style.display = currentStep === 1 ? 'none' : 'flex';
-      nextBtn.style.display = currentStep === TOTAL_STEPS ? 'none' : 'flex';
-      submitBtn.style.display = currentStep === TOTAL_STEPS ? 'flex' : 'none';
-
-      if (currentStep === TOTAL_STEPS) buildReview();
-
-      hideError();
-      body.scrollTop = 0;
-    }
-
-    nextBtn?.addEventListener('click', function () {
-      if (!validateStep(currentStep)) return;
-      if (currentStep < TOTAL_STEPS) { currentStep++; renderStep(); }
-    });
-
-    backBtn?.addEventListener('click', function () {
-      if (currentStep > 1) { currentStep--; renderStep(); }
-    });
-
-    /* VALIDATION */
-    function validateStep(step) {
-      hideError();
-      let valid = true;
-
-      if (step === 1) {
-        valid = validateField(document.getElementById('qName')) &&
-                validateField(document.getElementById('qPhone'));
-      } else if (step === 2) {
-        valid = validateField(document.getElementById('qFrom'));
-
-        if (!document.getElementById('qDate').value) {
-          document.getElementById('dateFieldWrap').classList.add('has-error');
-          valid = false;
-        } else {
-          document.getElementById('dateFieldWrap').classList.remove('has-error');
-        }
-
-        if (!document.getElementById('qTime').value) {
-          document.getElementById('timeFieldWrap').classList.add('has-error');
-          valid = false;
-        } else {
-          document.getElementById('timeFieldWrap').classList.remove('has-error');
-        }
-      } else if (step === 3) {
-        const property = document.querySelector('input[name="property_type"]:checked');
-        if (!property) {
-          document.getElementById('propertyFieldWrap').classList.add('has-error');
-          valid = false;
-        } else {
-          document.getElementById('propertyFieldWrap').classList.remove('has-error');
-        }
-      } else if (step === 4) {
-        const services = document.querySelectorAll('#qServicesGroup input:checked').length;
-        if (services === 0) {
-          document.getElementById('servicesFieldWrap').classList.add('has-error');
-          document.getElementById('qServicesError').style.display = 'block';
-          valid = false;
-        } else {
-          document.getElementById('servicesFieldWrap').classList.remove('has-error');
-          document.getElementById('qServicesError').style.display = 'none';
-        }
-      }
-
-      return valid;
-    }
-
-    function validateField(el) {
-      const value = (el.value || '').trim();
-      const field = el.closest('.qm-field');
-      if (!value) { field.classList.add('has-error'); return false; }
-      field.classList.remove('has-error');
-      return true;
-    }
-
-    function showError(msg) {
-      errorText.textContent = msg;
-      errorBanner.classList.add('show');
-      body.scrollTop = 0;
-    }
-    function hideError() { errorBanner.classList.remove('show'); }
-
-    document.querySelectorAll('.qm-field input, .qm-field select, .qm-field textarea').forEach(el => {
-      el.addEventListener('input', () => {
-        el.closest('.qm-field')?.classList.remove('has-error');
-      });
-    });
-
-    document.querySelectorAll('.qm-check input').forEach(input => {
-      input.addEventListener('change', function () {
-        this.closest('.qm-check').classList.toggle('checked', this.checked);
-        if (this.name === 'services[]') {
-          const field = document.getElementById('qServicesError')?.parentElement;
-          if (field) field.classList.remove('has-error');
-          const errEl = document.getElementById('qServicesError');
-          if (errEl) errEl.style.display = 'none';
-        }
-      });
-    });
-
-    document.querySelectorAll('.qm-qty-controls button').forEach(btn => {
-      btn.addEventListener('click', function () {
-        const inputId = 'q' + {
-          'bedrooms': 'Bedrooms', 'living': 'Living', 'kitchens': 'Kitchens', 'baths': 'Baths'
-        }[this.dataset.qty];
-        const input = document.getElementById(inputId);
-        if (!input) return;
-        let val = parseInt(input.value, 10) || 0;
-        const min = parseInt(input.min, 10) || 0;
-        const max = parseInt(input.max, 10) || 99;
-        if (this.dataset.op === '+') val = Math.min(max, val + 1);
-        else val = Math.max(min, val - 1);
-        input.value = val;
-      });
-    });
-
-    /* REVIEW */
-    function buildReview() {
-      const data = collectFormData();
-      const reviewEl = document.getElementById('qmReview');
-      const sections = [];
-
-      sections.push(`
-        <div class="qm-review-section">
-          <div class="qm-review-header">
-            <h4>Contact</h4>
-            <button type="button" class="qm-review-edit" data-goto="1">Edit</button>
-          </div>
-          <div class="qm-review-row"><span class="rk">Name</span><span class="rv">${esc(data.name)}</span></div>
-          <div class="qm-review-row"><span class="rk">Phone</span><span class="rv">${esc(data.phone)}</span></div>
-          ${data.company ? `<div class="qm-review-row"><span class="rk">Company</span><span class="rv">${esc(data.company)}</span></div>` : ''}
-          ${data.email ? `<div class="qm-review-row"><span class="rk">Email</span><span class="rv">${esc(data.email)}</span></div>` : ''}
-        </div>
-      `);
-
-      sections.push(`
-        <div class="qm-review-section">
-          <div class="qm-review-header">
-            <h4>Site details</h4>
-            <button type="button" class="qm-review-edit" data-goto="2">Edit</button>
-          </div>
-          <div class="qm-review-row"><span class="rk">Address</span><span class="rv">${esc(data.site_address)}</span></div>
-          <div class="qm-review-row"><span class="rk">Date</span><span class="rv">${formatDateLong(data.clean_date)}</span></div>
-          <div class="qm-review-row"><span class="rk">Start time</span><span class="rv">${esc(data.clean_time)}</span></div>
-        </div>
-      `);
-
-      sections.push(`
-        <div class="qm-review-section">
-          <div class="qm-review-header">
-            <h4>Site size</h4>
-            <button type="button" class="qm-review-edit" data-goto="3">Edit</button>
-          </div>
-          <div class="qm-review-row"><span class="rk">Property type</span><span class="rv">${esc(data.property_type)}</span></div>
-          <div class="qm-review-row"><span class="rk">Bedrooms</span><span class="rv">${data.bedrooms}</span></div>
-          <div class="qm-review-row"><span class="rk">Living rooms</span><span class="rv">${data.living_rooms}</span></div>
-          <div class="qm-review-row"><span class="rk">Kitchens</span><span class="rv">${data.kitchens}</span></div>
-          <div class="qm-review-row"><span class="rk">Bathrooms</span><span class="rv">${data.bathrooms}</span></div>
-          ${data.size ? `<div class="qm-review-row"><span class="rk">Size</span><span class="rv">${esc(data.size)}</span></div>` : ''}
-        </div>
-      `);
-
-      const serviceList = data.services.length ? data.services.join(', ') : '<span class="rv empty">None selected</span>';
-      sections.push(`
-        <div class="qm-review-section">
-          <div class="qm-review-header">
-            <h4>Services</h4>
-            <button type="button" class="qm-review-edit" data-goto="4">Edit</button>
-          </div>
-          <div class="qm-review-row"><span class="rk">Selected</span><span class="rv">${serviceList}</span></div>
-          ${data.special.length ? `<div class="qm-review-row"><span class="rk">Special</span><span class="rv">${esc(data.special.join(', '))}</span></div>` : ''}
-          ${data.notes ? `<div class="qm-review-row"><span class="rk">Notes</span><span class="rv">${esc(data.notes)}</span></div>` : ''}
-        </div>
-      `);
-
-      reviewEl.innerHTML = sections.join('');
-
-      reviewEl.querySelectorAll('.qm-review-edit').forEach(btn => {
-        btn.addEventListener('click', () => {
-          currentStep = parseInt(btn.dataset.goto, 10);
-          renderStep();
-        });
-      });
-    }
-
-    function collectFormData() {
-      return {
-        name: getVal('qName'),
-        phone: getVal('qPhone'),
-        company: getVal('qCompany'),
-        email: getVal('qEmail'),
-        site_address: getVal('qFrom'),
-        clean_date: getVal('qDate'),
-        clean_time: getVal('qTime'),
-        property_type: (document.querySelector('input[name="property_type"]:checked') || {}).value || '',
-        bedrooms: getVal('qBedrooms') || '0',
-        living_rooms: getVal('qLiving') || '0',
-        kitchens: getVal('qKitchens') || '0',
-        bathrooms: getVal('qBaths') || '0',
-        size: getVal('qSize'),
-        services: Array.from(document.querySelectorAll('#qServicesGroup input:checked')).map(i => i.value),
-        special: Array.from(document.querySelectorAll('input[name="special[]"]:checked')).map(i => i.value),
-        notes: getVal('qNotes')
-      };
-    }
-
-    function getVal(id) {
-      const el = document.getElementById(id);
-      return el ? (el.value || '').trim() : '';
-    }
-    function esc(s) {
-      return String(s || '').replace(/[&<>"']/g, c => ({
-        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
-      }[c]));
-    }
-    function formatDateLong(d) {
-      if (!d) return '';
-      try {
-        const date = new Date(d + 'T00:00:00');
-        return date.toLocaleDateString('en-NG', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
-      } catch (e) { return d; }
-    }
-
-    /* SUBMIT — sends to Formspree */
-    submitBtn?.addEventListener('click', async function () {
-      hideError();
-      const data = collectFormData();
-
-      // Check for placeholder Formspree ID and alert user if not replaced
-      if (FORMSPREE_ENDPOINT.includes('YOUR_FORM_ID')) {
-        showError('Formspree endpoint is not configured. Please replace "YOUR_FORM_ID" in the code with your actual Formspree form ID.');
-        return;
-      }
-
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-
-      const servicesText = data.services.length ? data.services.join(', ') : 'None specified';
-      const specialText = data.special.length ? data.special.join(', ') : 'None';
-
-      // Build FormData for Formspree
-      const fd = new FormData();
-      fd.append('_subject', 'New Zaure Clean Quote Request');
-      fd.append('_replyto', data.email || '');
-      fd.append('Name', data.name);
-      fd.append('Phone', data.phone);
-      fd.append('Company', data.company || 'Not provided');
-      fd.append('Email', data.email || 'Not provided');
-      fd.append('Site Address', data.site_address);
-      fd.append('Clean Date', formatDateLong(data.clean_date));
-      fd.append('Start Time', data.clean_time);
-      fd.append('Property Type', data.property_type);
-      fd.append('Bedrooms', data.bedrooms);
-      fd.append('Living Rooms', data.living_rooms);
-      fd.append('Kitchens', data.kitchens);
-      fd.append('Bathrooms', data.bathrooms);
-      fd.append('Approx Size', data.size || 'Not specified');
-      fd.append('Services Requested', servicesText);
-      fd.append('Special Requirements', specialText);
-      fd.append('Additional Notes', data.notes || 'None');
-
-      try {
-        const res = await fetch(FORMSPREE_ENDPOINT, {
-          method: 'POST', body: fd, headers: { 'Accept': 'application/json' }
-        });
-
-        if (!res.ok) {
-          let msg = 'Could not send your request. Please try again or message us on WhatsApp.';
-          try {
-            const errData = await res.json();
-            if (errData && errData.errors && errData.errors.length) {
-              msg = errData.errors.map(x => x.message).join(' ');
-            }
-          } catch (_) {}
-          throw new Error(msg);
-        }
-
-        showSuccess();
-      } catch (err) {
-        showError(err.message || 'Something went wrong. Please try again or message us on WhatsApp.');
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send quote request';
-      }
-    });
-
-    function showSuccess() {
-      body.innerHTML = `
-        <div class="qm-success">
-          <div class="qm-success-icon"><i class="fas fa-check"></i></div>
-          <h3>Quote request received</h3>
-          <p>Thank you — we've got your details. We'll review the site and get back to you on WhatsApp within a few hours with a quote.</p>
-          <div class="qm-success-actions">
-            <a href="${waUrl}" target="_blank" rel="noopener" class="svc-btn wa" style="padding: 11px 22px; font-size: 0.82rem;">
-              <i class="fab fa-whatsapp"></i> Message us now
-            </a>
-            <button type="button" class="svc-btn primary" onclick="location.reload()" style="padding: 11px 22px; font-size: 0.82rem;">
-              <i class="fas fa-check"></i> Done
-            </button>
-          </div>
-        </div>
-      `;
-      document.querySelector('.qm-footer').style.display = 'none';
-      document.getElementById('qmProgressFill').style.width = '100%';
-      stepLabel.textContent = 'Complete';
-      titleEl.textContent = 'All done';
-      subtitleEl.textContent = '';
-    }
-
-    /* INIT */
-    document.addEventListener('DOMContentLoaded', function () {
-      if (typeof loadUser === 'function') loadUser();
-      if (typeof initTheme === 'function') initTheme();
-      if (typeof updateFavoriteBadge === 'function') updateFavoriteBadge();
-      if (typeof initStateDropdown === 'function') initStateDropdown();
-
-      document.getElementById('fabPostAd')?.addEventListener('click', () => {
-        const user = (typeof getCurrentUser === 'function') ? getCurrentUser() : null;
-        if (!user) { if (typeof openSignup === 'function') openSignup(); }
-        else location.href = '/post.html';
-      });
-
-      document.getElementById('heroWhatsApp').href = waUrl;
-      document.getElementById('contactWhatsApp').href = waUrl;
-    });
-  })();
-  </script>
+  </div>`;
+}
+
+function renderChoice(f,v){
+  return `<div class="f" data-n="${f.n}">
+    <div class="l">${esc(f.l)}</div>
+    <div class="checks" role="radiogroup" aria-label="${esc(f.l)}">
+      ${f.opts.map(o=>{
+        const t=Array.isArray(o)?o[0]:o;
+        const on=v===t;
+        return `<label class="check${on?' checked':''}">
+          <input type="radio" name="ch_${f.n}" value="${esc(t)}" ${on?'checked':''} data-choice="${f.n}">
+          <span>${esc(t)}</span>
+        </label>`;
+      }).join('')}
+    </div>
+  </div>`;
+}
+
+function field(f){
+  if(!vis(f))return '';
+  const v=S.d[f.n];
+  if(f.t==='multi')return renderMulti(f,v);
+  if(f.t==='choice')return renderChoice(f,v);
+  if(f.t==='tiles')return `<div class="f" data-n="${f.n}"><div class="l">${esc(f.l)}</div>${renderTiles(f,v)}</div>`;
+  if(f.t==='qty')return renderQty(f,v);
+  if(f.t==='date')return renderDate(f,v);
+  if(f.t==='time')return renderTime(f,v);
+  if(f.t==='check'){
+    return `<div class="f" data-n="${f.n}">
+      <label class="check${v?' checked':''}" style="padding:14px 16px">
+        <input type="checkbox" ${v?'checked':''} data-check="${f.n}">
+        <span>${esc(f.l)}</span>
+      </label>
+    </div>`;
+  }
+  if(f.t==='textarea'){
+    return `<div class="f" data-n="${f.n}"><label class="l" for="i_${f.n}">${esc(f.l)}</label><textarea id="i_${f.n}" rows="3" placeholder="${esc(f.ph||'')}">${esc(v||'')}</textarea></div>`;
+  }
+  // text / tel
+  return `<div class="f" data-n="${f.n}">
+    <label class="l" for="i_${f.n}">${esc(f.l)}</label>
+    <input id="i_${f.n}" type="${f.t==='tel'?'tel':'text'}" ${f.t==='tel'?'inputmode="tel" autocomplete="tel"':`autocomplete="${f.ac||'off'}"`} ${f.list?`list="dl_${f.n}"`:''} placeholder="${esc(f.ph||'')}" value="${esc(v||'')}">
+    ${f.list?`<datalist id="dl_${f.n}">${f.list.map(x=>`<option value="${esc(x)}">`).join('')}</datalist>`:''}
+  </div>`;
+}
+
+function setNav(){
+  const i=S.i,last=i>=N;
+  nav.innerHTML=(i===0?`<a class="btn ghost" href="${esc(C.back)}">Cancel</a>`:`<button class="btn ghost" data-a="back">Back</button>`)+
+    `<button class="btn" data-a="${last?'send':'next'}" ${S.sending?'disabled':''}>${last?(S.sending?'Sending…':'Send request'):i===N-1?'Review':'Continue'}</button>`;
+}
+
+function render(){
+  $('.bar').style.width=Math.min(S.i/N*100,100)+'%';
+  setNav();
+  if(S.i>=N)return review();
+  const st=C.steps[S.i];
+  app.innerHTML=`<section class="stage"><div class="eyebrow">Step ${S.i+1} of ${N}</div><h1 tabindex="-1">${esc(st.q)}</h1><p class="hint">${esc(st.h||'')}</p><div id="fs">${st.fields.map(field).join('')}</div><div class="err" role="alert" id="er"></div></section>`;
+  // paint date grids
+  st.fields.forEach(f=>{if(f.t==='date'&&vis(f))paintDate(f);});
+  focusTop(true);
+}
+
+function focusTop(inp){
+  const i=app.querySelector('input:not([type=hidden]):not([type=radio]):not([type=checkbox]),textarea');
+  if(inp&&i&&matchMedia('(hover:hover)').matches)i.focus({preventScroll:true});
+  else app.querySelector('h1')?.focus({preventScroll:true});
+  scrollTo({top:0});
+}
+
+function rows(){
+  const r=[];
+  C.steps.forEach((st,si)=>st.fields.forEach(f=>{
+    const v=S.d[f.n];
+    if(vis(f)&&!empty(f,v))r.push([si,f.l,fmt(f,v)]);
+  }));
+  return r;
+}
+
+function review(){
+  app.innerHTML=`<section class="stage"><div class="eyebrow">Review</div><h1 tabindex="-1">Check your request.</h1><p class="hint">Edit anything, then send it to the Zaure team.</p>${rows().map(r=>`<div class="row"><div><div class="k">${esc(r[1])}</div><div class="v">${esc(r[2])}</div></div><button data-go="${r[0]}">Edit</button></div>`).join('')}<p class="fine">${esc(C.note||'')}</p></section>`;
+  focusTop();
+}
+
+function collectForSubmit(){
+  const d={};
+  C.steps.forEach(st=>st.fields.forEach(f=>{
+    if(!vis(f))return;
+    const v=S.d[f.n];
+    if(empty(f,v))return;
+    d[f.l]=fmt(f,v);
+  }));
+  return d;
+}
+
+async function sendRequest(){
+  if(S.sending)return;
+  const e=validate(C.steps[N-1]);
+  if(e){const er=$('#er');if(er)er.textContent=e;return;}
+  S.sending=true;setNav();
+  const data=collectForSubmit();
+  const fd=new FormData();
+  fd.append('_subject','New '+C.title+' request');
+  if(S.d.email)fd.append('_replyto',S.d.email);
+  Object.entries(data).forEach(([k,v])=>fd.append(k,v));
+
+  if(!C.endpoint||C.endpoint.includes('YOUR_FORM_ID')){
+    // Fallback: WhatsApp
+    S.sending=false;setNav();
+    const msg='*New '+C.title+' request*\n\n'+Object.entries(data).map(([k,v])=>k+': '+v).join('\n')+'\n\nSent from the Zaure booking form';
+    window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`,'_blank');
+    done(true);
+    return;
+  }
+
+  try{
+    const res=await fetch(C.endpoint,{method:'POST',body:fd,headers:{'Accept':'application/json'}});
+    if(!res.ok)throw new Error('Request failed');
+    done(false);
+  }catch(err){
+    S.sending=false;setNav();
+    const er=$('#er');if(er)er.textContent='Could not send. Please check your connection or message us on WhatsApp: +234 904 233 9411';
+  }
+}
+
+function done(viaWA){
+  try{sessionStorage.removeItem(K)}catch(e){}
+  $('.bar').style.width='100%';nav.innerHTML='';
+  app.innerHTML=`<section class="stage"><div class="eyebrow">${viaWA?'One more step':'All done'}</div><h1 tabindex="-1">${viaWA?'Send it in WhatsApp.':'Request received.'}</h1><p class="hint">${viaWA?'Your details are ready in a WhatsApp message. Tap send to reach the Zaure team.':esc(C.after||'We will be in touch shortly.')}</p><div class="checks" style="grid-template-columns:1fr"><a class="check" href="${esc(C.back)}" style="justify-content:center;padding:16px"><span>Back to services</span></a></div></section>`;
+  focusTop();
+}
+
+function next(){
+  if(S.i<N){
+    const e=validate(C.steps[S.i]);
+    if(e){const er=$('#er');if(er)er.textContent=e;return;}
+  }
+  S.i=S.r?N:S.i+1;S.r=false;save();render();
+}
+function back(){S.i=S.r?N:S.i-1;S.r=false;save();render();}
+
+/* ---- event delegation ---- */
+
+app.addEventListener('click',e=>{
+  // date picker nav
+  const dpPrev=e.target.closest('[data-dp-prev]');
+  if(dpPrev){
+    const n=dpPrev.dataset.dpPrev,st=dpState[n];
+    st.viewMonth--;if(st.viewMonth<0){st.viewMonth=11;st.viewYear--;}
+    paintDate({n,t:'date'});return;
+  }
+  const dpNext=e.target.closest('[data-dp-next]');
+  if(dpNext){
+    const n=dpNext.dataset.dpNext,st=dpState[n];
+    st.viewMonth++;if(st.viewMonth>11){st.viewMonth=0;st.viewYear++;}
+    paintDate({n,t:'date'});return;
+  }
+  const dpDay=e.target.closest('[data-dp-day]');
+  if(dpDay){
+    const n=dpDay.dataset.dpDay;
+    const iso=dpDay.dataset.date;
+    dpState[n].selected=new Date(iso+'T00:00');
+    S.d[n]=iso;
+    document.querySelector(`[data-hidden="${n}"]`).value=iso;
+    document.querySelector(`[data-dp-sel="${n}"]`).textContent=new Date(iso+'T00:00').toLocaleDateString('en-NG',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
+    paintDate({n,t:'date'});
+    save();
+    const er=$('#er');if(er)er.textContent='';
+    return;
+  }
+  // time slot
+  const slot=e.target.closest('[data-time]');
+  if(slot){
+    const group=slot.parentElement;
+    group.querySelectorAll('.time-slot').forEach(b=>b.classList.remove('selected'));
+    slot.classList.add('selected');
+    const n=group.dataset.timeGroup;
+    S.d[n]=slot.dataset.time;
+    const h=document.querySelector(`[data-hidden="${n}"]`);if(h)h.value=slot.dataset.time;
+    save();
+    const er=$('#er');if(er)er.textContent='';
+    return;
+  }
+  // qty stepper
+  const qty=e.target.closest('[data-qty]');
+  if(qty){
+    const n=qty.dataset.qty;
+    const input=app.querySelector(`input[name="${n}"]`);
+    if(!input)return;
+    let val=parseInt(input.value,10)||0;
+    const min=parseInt(input.min,10)||0;
+    const max=parseInt(input.max,10)||99;
+    val=qty.dataset.op==='+'?Math.min(max,val+1):Math.max(min,val-1);
+    input.value=val;S.d[n]=val;save();return;
+  }
+  // nav buttons
+  const a=e.target.closest('[data-a]')?.dataset.a;
+  if(a==='next')next();
+  else if(a==='back')back();
+  else if(a==='send')sendRequest();
+  // edit from review
+  const go=e.target.closest('[data-go]');
+  if(go){S.i=+go.dataset.go;S.r=true;save();render();return;}
+});
+
+app.addEventListener('change',e=>{
+  const t=e.target;
+  if(t.dataset.tile!==undefined){
+    const f=t.closest('.f'),n=f.dataset.n;
+    S.d[n]=t.dataset.tile;save();
+  } else if(t.dataset.multi){
+    const n=t.dataset.multi;
+    const arr=new Set(S.d[n]||[]);
+    if(t.checked)arr.add(t.value);else arr.delete(t.value);
+    S.d[n]=[...arr];
+    t.closest('.check').classList.toggle('checked',t.checked);
+    save();
+  } else if(t.dataset.choice){
+    const n=t.dataset.choice;
+    S.d[n]=t.value;
+    t.closest('.checks').querySelectorAll('.check').forEach(c=>c.classList.remove('checked'));
+    t.closest('.check').classList.add('checked');
+    save();
+  } else if(t.dataset.check){
+    const n=t.dataset.check;
+    S.d[n]=t.checked;
+    t.closest('.check').classList.toggle('checked',t.checked);
+    save();
+  }
+});
+
+app.addEventListener('input',e=>{
+  const fe=e.target.closest('.f');if(!fe)return;
+  if(e.target.type==='number')return; // handled by stepper
+  if(e.target.type==='hidden')return;
+  S.d[fe.dataset.n]=e.target.value;save();
+  const er=$('#er');if(er)er.textContent='';
+});
+
+app.addEventListener('keydown',e=>{
+  if(e.key==='Enter'&&e.target.tagName==='INPUT'&&e.target.type!=='hidden'&&e.target.type!=='checkbox'&&e.target.type!=='radio'){
+    e.preventDefault();next();
+  }
+});
+
+if(S.i>N)S.i=0;
+render();
+})();
+</script>
 </body>
 </html>
