@@ -440,7 +440,7 @@
     }
 
     /* ============================================================
-       QUOTE MODAL — WIZARD
+       QUOTE MODAL — WIZARD (creative form)
        ============================================================ */
     .qm-overlay {
       position: fixed; inset: 0;
@@ -1193,7 +1193,7 @@
 
   </div>
 
-  <!-- QUOTE MODAL -->
+  <!-- QUOTE MODAL (CREATIVE WIZARD) -->
   <div class="qm-overlay" id="quoteModal" role="dialog" aria-modal="true" aria-labelledby="qmTitle">
     <div class="qm-modal">
 
@@ -1478,6 +1478,7 @@
   (function () {
     'use strict';
 
+    // Replace with your actual Formspree form ID
     const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
 
     const WHATSAPP_PHONE = '2349042339411';
@@ -1898,13 +1899,14 @@
       } catch (e) { return d; }
     }
 
-    /* SUBMIT */
+    /* SUBMIT — sends to Formspree */
     submitBtn?.addEventListener('click', async function () {
       hideError();
       const data = collectFormData();
 
+      // Check for placeholder Formspree ID and alert user if not replaced
       if (FORMSPREE_ENDPOINT.includes('YOUR_FORM_ID')) {
-        showError('Form is not yet connected. Please message us on WhatsApp instead: +234 904 233 9411');
+        showError('Formspree endpoint is not configured. Please replace "YOUR_FORM_ID" in the code with your actual Formspree form ID.');
         return;
       }
 
@@ -1914,6 +1916,7 @@
       const servicesText = data.services.length ? data.services.join(', ') : 'None specified';
       const specialText = data.special.length ? data.special.join(', ') : 'None';
 
+      // Build FormData for Formspree
       const fd = new FormData();
       fd.append('_subject', 'New Zaure Clean Quote Request');
       fd.append('_replyto', data.email || '');
