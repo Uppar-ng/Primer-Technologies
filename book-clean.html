@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Book Zaure Clean — Zaure</title>
+<meta name="description" content="Book post-construction & renovation cleaning, pest control, weed control or carpet deep wash in Kaduna.">
+<meta name="theme-color" content="#0f2940">
+<link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0f2940;--navy-2:#1a3650;--navy-3:#2a4a6a;
+  /* Accent = dark navy itself */
+  --accent:var(--navy-2);--accent-deep:var(--navy);--accent-soft:#3d6a92;
+  --bg:#0a1622;--surface:#0f2940;--surface-2:#14304a;
+  --fg:#f4f6f8;--mut:#8b97a4;--ln:rgba(255,255,255,.14);
+  --err:#ff7b7b;--ok:#25D366;--wa:#25D366;--wa-dark:#1DA851;
+}
+[data-theme="light"]{
+  --bg:#f7f9fc;--surface:#ffffff;--surface-2:#eef3f8;
+  --fg:#0f2940;--mut:#5b6b7c;--ln:rgba(15,41,64,.14);
+  --err:#c0392b;
+  --accent:#1a3650;--accent-deep:#0f2940;--accent-soft:#2a4a6a;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%}
+body{
+  background:radial-gradient(ellipse at top right,rgba(26,54,80,.18),transparent 55%),var(--bg);
+  color:var(--fg);font:400 16px/1.5 Inter,system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  transition:background .3s ease,color .3s ease;
+}
+[data-theme="light"] body{
+  background:radial-gradient(ellipse at top right,rgba(26,54,80,.08),transparent 55%),var(--bg);
+}
+.zb{min-height:100dvh;display:flex;flex-direction:column;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+.bar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-deep));transition:width .5s cubic-bezier(.2,.8,.2,1);z-index:50;box-shadow:0 0 12px rgba(26,54,80,.5)}
+
+header{display:flex;justify-content:space-between;align-items:center;padding:22px 24px;gap:12px}
+.logo{display:flex;align-items:baseline;gap:12px;text-decoration:none}
+.logo b{font-size:14px;font-weight:800;letter-spacing:.32em;color:var(--fg)}
+.logo span{font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}
+.head-right{display:flex;align-items:center;gap:8px}
+.theme-toggle{
+  width:38px;height:38px;border-radius:50%;border:1px solid var(--ln);
+  background:var(--surface);color:var(--fg);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .2s;font-family:inherit;font-size:.85rem;
+}
+.theme-toggle:hover{border-color:var(--accent-soft);color:var(--accent-soft);transform:translateY(-1px)}
+.x{color:var(--mut);text-decoration:none;font-size:12px;letter-spacing:.16em;text-transform:uppercase;display:inline-flex;align-items:center;gap:6px;transition:color .2s}
+.x:hover{color:var(--fg)}
+.x i{font-size:.7rem}
+
+main{flex:1;width:100%;max-width:720px;margin:0 auto;padding:3vh 24px 24px}
+.stage{animation:in .45s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--fg);padding:5px 12px;background:rgba(26,54,80,.35);
+  border:1px solid rgba(61,106,146,.45);border-radius:40px;
+}
+[data-theme="light"] .eyebrow{color:var(--accent-deep);background:rgba(26,54,80,.08);border-color:rgba(26,54,80,.25)}
+.eyebrow i{font-size:.55rem}
+
+h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.9rem,5.5vw,3rem);font-weight:800;
+  line-height:1.1;letter-spacing:-.6px;margin:16px 0 12px;outline:0;
+  color:var(--fg);
+}
+.hint{color:var(--mut);max-width:540px;margin-bottom:32px;font-size:.94rem;line-height:1.6}
+
+.f{margin-bottom:28px}
+.l{display:block;font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--mut);margin-bottom:10px}
+
+input[type=text],input[type=tel],textarea{
+  width:100%;background:transparent;border:0;border-bottom:1px solid var(--ln);
+  color:var(--fg);font:400 1.4rem/1.3 Inter,sans-serif;padding:10px 0;
+  outline:0;transition:border-color .2s;border-radius:0;
+}
+textarea{resize:none;min-height:90px;font-size:1rem;line-height:1.5}
+input::placeholder,textarea::placeholder{color:#55606b}
+[data-theme="light"] input::placeholder,[data-theme="light"] textarea::placeholder{color:#9aa7b4}
+input:focus,textarea:focus{border-color:var(--accent-soft)}
+input[type=tel]{font-variant-numeric:tabular-nums}
+
+.err{color:var(--err);font-size:.88rem;min-height:1.4em;margin-top:8px;font-weight:500}
+
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(min-width:560px){.tiles{grid-template-columns:repeat(4,1fr)}}
+.tile{position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.tile input{position:absolute;opacity:0;pointer-events:none;width:0;height:0}
+.tile-body{
+  display:flex;flex-direction:column;align-items:center;gap:5px;
+  padding:16px 10px;border:1px solid var(--ln);border-radius:14px;
+  background:var(--surface);text-align:center;transition:all .18s cubic-bezier(.2,.8,.2,1);
+  min-height:96px;justify-content:center;
+}
+.tile-body i{font-size:1.2rem;color:var(--accent-soft);margin-bottom:3px;transition:transform .25s}
+.tile-body strong{font-size:.78rem;font-weight:700;color:var(--fg);line-height:1.2}
+.tile-body span{font-size:.66rem;color:var(--mut);line-height:1.3}
+.tile:hover .tile-body{border-color:var(--accent-soft);background:var(--surface-2);transform:translateY(-1px)}
+.tile:hover .tile-body i{transform:scale(1.1)}
+.tile input:checked + .tile-body{
+  border-color:var(--accent-soft);background:rgba(42,74,106,.35);
+  box-shadow:0 0 0 2px rgba(61,106,146,.25),0 6px 20px rgba(26,54,80,.3);
+}
+.tile input:checked + .tile-body i{color:#9dc4e3}
+.tile input:focus-visible + .tile-body{outline:2px solid var(--accent-soft);outline-offset:2px}
+
+.checks{display:grid;grid-template-columns:1fr;gap:8px}
+@media(min-width:560px){.checks.two{grid-template-columns:1fr 1fr}}
+.check{
+  display:flex;align-items:flex-start;gap:10px;padding:14px 16px;
+  border:1px solid var(--ln);border-radius:12px;cursor:pointer;
+  font-size:.86rem;font-weight:500;color:var(--fg);background:var(--surface);
+  transition:all .18s;user-select:none;-webkit-tap-highlight-color:transparent;line-height:1.4;
+}
+.check:hover{border-color:var(--accent-soft);background:var(--surface-2)}
+.check input{
+  accent-color:var(--accent-soft);width:18px;height:18px;cursor:pointer;
+  flex-shrink:0;margin:1px 0 0;border:0;padding:0;
+}
+.check .check-body{flex:1;min-width:0}
+.check .check-body strong{display:block;font-size:.86rem;font-weight:700;margin-bottom:2px;color:var(--fg)}
+.check .check-body small{display:block;font-size:.74rem;color:var(--mut);font-weight:400;line-height:1.4}
+.check.checked{border-color:var(--accent-soft);background:rgba(42,74,106,.3)}
+.check.checked .check-body strong{color:#9dc4e3}
+[data-theme="light"] .check.checked{background:rgba(26,54,80,.08)}
+[data-theme="light"] .check.checked .check-body strong{color:var(--accent-deep)}
+.check:has(input:focus-visible){outline:2px solid var(--accent-soft);outline-offset:2px}
+
+.dp{border:1px solid var(--ln);border-radius:14px;padding:16px;background:var(--surface)}
+.dp-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.dp-month{font-family:'Playfair Display',serif;font-weight:800;font-size:1rem;color:var(--fg);letter-spacing:-.2px}
+.dp-nav{
+  width:34px;height:34px;border-radius:10px;border:1px solid var(--ln);
+  background:transparent;color:var(--fg);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .15s;font-family:inherit;font-size:.8rem;
+}
+.dp-nav:hover{background:rgba(61,106,146,.18);border-color:var(--accent-soft)}
+.dp-nav:disabled{opacity:.25;cursor:not-allowed}
+.dp-nav:disabled:hover{background:transparent;border-color:var(--ln)}
+.dp-weekdays{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:8px}
+.dp-weekdays span{
+  text-align:center;font-size:.66rem;font-weight:800;color:var(--mut);
+  text-transform:uppercase;letter-spacing:.6px;padding:6px 0;
+}
+.dp-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.dp-day{
+  aspect-ratio:1;border-radius:9px;border:none;background:transparent;
+  color:var(--fg);font-size:.84rem;font-weight:600;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .15s;font-family:inherit;min-height:38px;
+}
+.dp-day:hover:not(:disabled){background:rgba(61,106,146,.18);color:#9dc4e3}
+[data-theme="light"] .dp-day:hover:not(:disabled){color:var(--accent-deep)}
+.dp-day.other-month{opacity:0;pointer-events:none}
+.dp-day:disabled{opacity:.2;cursor:not-allowed}
+.dp-day.today{border:1.5px solid var(--accent-soft);color:var(--accent-soft);font-weight:800}
+.dp-day.selected{background:var(--accent);color:#fff;font-weight:800;box-shadow:0 4px 12px rgba(26,54,80,.4)}
+.dp-day.selected:hover{background:var(--accent-deep);color:#fff}
+.dp-selected{
+  margin-top:14px;padding-top:14px;border-top:1px solid var(--ln);
+  font-size:.82rem;color:var(--mut);display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+}
+.dp-selected i{color:var(--accent-soft)}
+.dp-selected strong{color:var(--fg);font-weight:700}
+
+.time-slots{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@media(min-width:480px){.time-slots{grid-template-columns:repeat(4,1fr)}}
+.time-slot{
+  padding:12px 6px;border-radius:10px;border:1px solid var(--ln);
+  background:var(--surface);color:var(--fg);font-size:.78rem;font-weight:600;
+  cursor:pointer;text-align:center;transition:all .15s;
+  font-family:inherit;min-height:44px;
+}
+.time-slot:hover{border-color:var(--accent-soft);background:var(--surface-2);color:#9dc4e3}
+[data-theme="light"] .time-slot:hover{color:var(--accent-deep)}
+.time-slot.selected{
+  background:var(--accent);border-color:var(--accent);color:#fff;font-weight:800;
+  box-shadow:0 4px 12px rgba(26,54,80,.35);
+}
+
+.qty-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(min-width:640px){.qty-grid{grid-template-columns:repeat(4,1fr)}}
+.qty-item{
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  padding:14px 8px;background:var(--surface);border:1px solid var(--ln);border-radius:12px;
+}
+.qty-label{
+  font-size:.68rem;font-weight:800;color:var(--mut);
+  text-transform:uppercase;letter-spacing:.7px;text-align:center;
+}
+.qty-controls{display:flex;align-items:center;background:var(--surface-2);border-radius:9px;overflow:hidden;border:1px solid var(--ln)}
+.qty-controls button{
+  width:32px;height:32px;border:none;background:transparent;color:var(--fg);
+  font-size:.8rem;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-family:inherit;transition:background .15s;
+}
+.qty-controls button:hover{background:rgba(61,106,146,.25);color:#9dc4e3}
+.qty-controls input{
+  width:36px;border:none;background:transparent;text-align:center;
+  font-size:.9rem;font-weight:800;color:var(--fg);outline:none;
+  font-family:inherit;padding:0;-moz-appearance:textfield;
+}
+.qty-controls input::-webkit-outer-spin-button,
+.qty-controls input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+
+nav{
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+  width:100%;max-width:720px;margin:0 auto;padding:16px 24px 28px;
+  background:linear-gradient(180deg,transparent,var(--bg) 30%);
+  position:sticky;bottom:0;z-index:10;
+}
+.btn{
+  font:700 .78rem Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;
+  text-decoration:none;text-align:center;cursor:pointer;
+  padding:16px 32px;border:1px solid var(--accent);background:var(--accent);color:#fff;
+  border-radius:40px;transition:all .2s;display:inline-flex;align-items:center;gap:8px;
+  min-height:52px;white-space:nowrap;font-family:inherit;
+}
+.btn:hover{background:var(--accent-deep);transform:translateY(-1px);box-shadow:0 8px 24px rgba(26,54,80,.45)}
+.btn:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none}
+.btn.ghost{background:transparent;color:var(--mut);border-color:transparent;padding-left:16px;padding-right:16px;min-height:48px}
+.btn.ghost:hover{color:var(--fg);background:transparent;box-shadow:none;transform:none}
+.btn.ghost i{margin-right:2px}
+.btn.wa{background:var(--wa);border-color:var(--wa);color:#fff}
+.btn.wa:hover{background:var(--wa-dark);border-color:var(--wa-dark);box-shadow:0 8px 24px rgba(37,211,102,.3)}
+.btn.outline{background:transparent;color:var(--fg);border-color:var(--ln)}
+.btn.outline:hover{border-color:var(--accent-soft);color:var(--accent-soft)}
+
+/* ============ REVIEW ============ */
+.review-grid{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:720px){
+  .review-grid{grid-template-columns:1fr 1fr;align-items:start}
+  .review-grid .review-card.full{grid-column:1 / -1}
+}
+.review-card{
+  background:var(--surface);border:1px solid var(--ln);border-radius:14px;
+  padding:16px 18px;min-width:0;
+}
+.review-head{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  margin-bottom:10px;gap:10px;
+}
+.review-head h4{
+  font-size:.68rem;font-weight:800;color:var(--accent-soft);
+  text-transform:uppercase;letter-spacing:1.2px;
+  line-height:1.3;flex:1;min-width:0;word-break:break-word;
+}
+[data-theme="light"] .review-head h4{color:var(--accent-deep)}
+.review-edit{
+  background:transparent;border:none;color:var(--accent-soft);font-size:.7rem;
+  font-weight:700;cursor:pointer;padding:4px 10px;border-radius:6px;
+  font-family:inherit;transition:background .15s;flex-shrink:0;white-space:nowrap;
+}
+[data-theme="light"] .review-edit{color:var(--accent-deep)}
+.review-edit:hover{background:rgba(61,106,146,.18)}
+.review-row{
+  display:flex;justify-content:space-between;gap:14px;
+  padding:7px 0;font-size:.86rem;line-height:1.5;
+  border-bottom:1px solid rgba(255,255,255,.06);
+  min-width:0;
+}
+[data-theme="light"] .review-row{border-bottom-color:rgba(15,41,64,.08)}
+.review-row:last-child{border-bottom:none}
+.review-row .rk{color:var(--mut);font-weight:500;flex-shrink:0;max-width:45%}
+.review-row .rv{
+  color:var(--fg);font-weight:600;text-align:right;
+  word-break:break-word;overflow-wrap:anywhere;min-width:0;
+}
+@media(max-width:420px){
+  .review-row{flex-direction:column;gap:2px}
+  .review-row .rk{max-width:none}
+  .review-row .rv{text-align:left}
+}
+
+/* ============ SEND CHOICE ============ */
+.send-choice{
+  display:grid;grid-template-columns:1fr;gap:12px;margin-top:8px;
+}
+@media(min-width:560px){.send-choice{grid-template-columns:1fr 1fr}}
+.send-option{
+  display:flex;flex-direction:column;align-items:flex-start;gap:10px;
+  padding:22px;border:1px solid var(--ln);border-radius:16px;
+  background:var(--surface);cursor:pointer;text-align:left;
+  font-family:inherit;color:var(--fg);transition:all .2s;
+  -webkit-tap-highlight-color:transparent;
+}
+.send-option:hover{border-color:var(--accent-soft);background:var(--surface-2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(26,54,80,.35)}
+.send-option.wa:hover{border-color:var(--wa);box-shadow:0 8px 24px rgba(37,211,102,.15)}
+.send-option:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+.send-icon{
+  width:48px;height:48px;border-radius:12px;
+  background:rgba(61,106,146,.25);color:var(--accent-soft);
+  display:flex;align-items:center;justify-content:center;font-size:1.2rem;
+}
+.send-option.wa .send-icon{background:rgba(37,211,102,.12);color:var(--wa)}
+.send-option h4{font-size:.95rem;font-weight:800;color:var(--fg);line-height:1.3;margin:0}
+.send-option p{font-size:.8rem;color:var(--mut);line-height:1.5;margin:0}
+.send-option .send-arrow{
+  margin-top:4px;font-size:.72rem;font-weight:800;color:var(--accent-soft);
+  text-transform:uppercase;letter-spacing:.1em;display:inline-flex;align-items:center;gap:6px;
+}
+[data-theme="light"] .send-option .send-arrow{color:var(--accent-deep)}
+.send-option.wa .send-arrow{color:var(--wa)}
+
+.success{text-align:center;padding:30px 10px}
+.success-icon{
+  width:76px;height:76px;border-radius:50%;background:rgba(37,211,102,.12);
+  color:var(--ok);display:flex;align-items:center;justify-content:center;
+  font-size:2rem;margin:0 auto 22px;box-shadow:0 0 0 8px rgba(37,211,102,.05);
+}
+.success h1{font-size:clamp(1.6rem,5vw,2.4rem);margin-bottom:12px}
+.success p{color:var(--mut);font-size:.94rem;line-height:1.65;max-width:420px;margin:0 auto 24px}
+.success-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+
+.fine{color:var(--mut);font-size:.84rem;margin-top:22px;line-height:1.6}
+
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="bar"></div>
+<div class="zb">
+  <header>
+    <a class="logo" href="/"><b>ZAURE</b><span>Clean</span></a>
+    <div class="head-right">
+      <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <i class="fas fa-moon" id="themeIcon"></i>
+      </button>
+      <a class="x" href="/zaure-services.html" aria-label="Close booking">Close <i class="fas fa-times"></i></a>
+    </div>
+  </header>
+  <main id="app"></main>
+  <nav id="nav"></nav>
+</div>
+<noscript><p style="padding:24px;color:#fff">Please enable JavaScript to book, or message us on WhatsApp: +2349042339411</p></noscript>
+
+<script type="application/json" id="cfg">
+{"key":"clean","title":"Zaure Clean","back":"/zaure-services.html","after":"We will review the site details and reply on WhatsApp within 2 to 4 hours (Mon to Sat) with a site-based quote.","note":"Our team reviews every request before quoting — we do not quote blindly. Once we've seen the site, you'll get a clear, itemised quote.","lead":3,"endpoint":"https://formspree.io/f/YOUR_FORM_ID","steps":[
+{"q":"What do you need?","h":"Select all that apply. Post-construction & renovation cleaning is our core service; the other three can be added to any job or booked on their own.","fields":[
+  {"n":"svc","l":"Services","t":"multi","opts":[
+    {"v":"Post-construction & renovation cleaning","s":"Rough clean through to final handover polish","i":"fa-trowel-bricks"},
+    {"v":"Pest control","s":"Pre-handover fumigation and treatment","i":"fa-bug"},
+    {"v":"Weed control","s":"Compound, plot and site-edge clearing","i":"fa-seedling"},
+    {"v":"Carpet deep wash","s":"Steam extraction for carpets and rugs","i":"fa-rug"}
+  ]}
+]},
+{"q":"What type of property?","h":"This helps us plan the right crew and equipment.","fields":[
+  {"n":"prop","l":"Property type","t":"tiles","opts":[
+    {"v":"New build","s":"Fresh construction","i":"fa-house-chimney"},
+    {"v":"Renovation","s":"Remodel or upgrade","i":"fa-hammer"},
+    {"v":"Commercial","s":"Office, shop or building","i":"fa-building"},
+    {"v":"Industrial","s":"Warehouse or factory","i":"fa-industry"}
+  ]}
+]},
+{"q":"Where is the site?","h":"We cover Kaduna city and nearby towns.","fields":[
+  {"n":"area","l":"Area or town","t":"text","ph":"e.g. Barnawa","list":["Barnawa","GRA","Malali","City Centre","Rigasa","Kawo","Unguwan Rimi","Tudun Wada","Zaria","Kafanchan","Kujama"]},
+  {"n":"addr","l":"Street or landmark (optional)","t":"text","req":false}
+]},
+{"q":"How big is the site?","h":"A rough idea is enough — we'll see the site before quoting.","fields":[
+  {"n":"bedrooms","l":"Bedrooms","t":"qty","min":0,"max":20,"v":3},
+  {"n":"living","l":"Living rooms","t":"qty","min":0,"max":6,"v":1},
+  {"n":"kitchens","l":"Kitchens","t":"qty","min":0,"max":4,"v":1},
+  {"n":"baths","l":"Bathrooms","t":"qty","min":0,"max":8,"v":2},
+  {"n":"size","l":"Approximate square meters (optional)","t":"text","req":false,"ph":"e.g. 250 sqm"}
+]},
+{"q":"When should we come?","h":"Book at least 3 days ahead for larger sites and weekend jobs.","fields":[
+  {"n":"date","l":"Preferred date","t":"date"},
+  {"n":"time","l":"Start time preference","t":"time"},
+  {"n":"ready","l":"Site is ready: no active trades, water and power available, access arranged","t":"check","req":false}
+]},
+{"q":"Special requirements?","h":"Optional — tick anything that affects the job.","fields":[
+  {"n":"special","l":"Anything that affects the job","t":"multi","req":false,"opts":[
+    {"v":"Multi-floor / no lift","i":"fa-stairs"},
+    {"v":"Weekend job","i":"fa-calendar-week"},
+    {"v":"Same-day / urgent","i":"fa-bolt"},
+    {"v":"Very large site (1000+ sqm)","i":"fa-warehouse"},
+    {"v":"Fragile finishes / marble","i":"fa-gem"},
+    {"v":"Post-fumigation cleanup","i":"fa-wind"}
+  ]}
+]},
+{"q":"Who are we working with?","h":"We work as a sub-contractor and report to you.","fields":[
+  {"n":"role","l":"You are a","t":"choice","opts":["Building contractor","Property developer","Landlord or facility manager","Homeowner","Other"]}
+]},
+{"q":"How can we reach you?","h":"We'll review your site details and reply on WhatsApp with a site-based quote.","fields":[
+  {"n":"name","l":"Full name","t":"text","ac":"name","ph":"e.g. Musa Ibrahim"},
+  {"n":"phone","l":"WhatsApp number","t":"tel","ph":"0803 000 0000"},
+  {"n":"email","l":"Email (optional)","t":"text","ac":"email","req":false,"ph":"you@company.com"},
+  {"n":"notes","l":"Anything else? (optional)","t":"textarea","req":false,"ph":"e.g. Fourth floor, no lift. Marble floors. Job must finish before Friday handover."}
+]}
+]}
+</script>
+
+<script>
+(()=>{
+'use strict';
+const C=JSON.parse(document.getElementById('cfg').textContent);
+const K='zb_'+C.key, N=C.steps.length;
+const $=s=>document.querySelector(s);
+const app=$('#app'), nav=$('#nav');
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const WA='2349042339411';
+
+const THEME_KEY='theme';
+function getStoredTheme(){
+  try{
+    const t=localStorage.getItem(THEME_KEY);
+    if(t==='light'||t==='dark')return t;
+  }catch(e){}
+  return matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';
+}
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme',t);
+  const icon=document.getElementById('themeIcon');
+  if(icon)icon.className='fas '+(t==='dark'?'fa-moon':'fa-sun');
+  const meta=document.querySelector('meta[name="theme-color"]');
+  if(meta)meta.setAttribute('content',t==='dark'?'#0f2940':'#f7f9fc');
+}
+function setTheme(t){
+  applyTheme(t);
+  try{localStorage.setItem(THEME_KEY,t)}catch(e){}
+}
+function initTheme(){
+  applyTheme(getStoredTheme());
+  const btn=document.getElementById('themeToggle');
+  if(btn){
+    btn.addEventListener('click',()=>{
+      const cur=document.documentElement.getAttribute('data-theme')==='light'?'light':'dark';
+      setTheme(cur==='light'?'dark':'light');
+    });
+  }
+  window.addEventListener('storage',e=>{
+    if(e.key===THEME_KEY && (e.newValue==='light'||e.newValue==='dark'))applyTheme(e.newValue);
+  });
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)applyTheme(getStoredTheme());});
+  window.addEventListener('focus',()=>applyTheme(getStoredTheme()));
+}
+
+let S;
+try{S=JSON.parse(sessionStorage.getItem(K))}catch(e){}
+S=S&&S.d?S:{i:0,d:{}};
+const save=()=>{try{sessionStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+
+const today=()=>new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,10);
+const vis=f=>!f.showIf||S.d[f.showIf.n]===f.showIf.v;
+const empty=(f,v)=>{
+  if(f.t==='multi')return!(v&&v.length);
+  if(f.t==='check')return!v;
+  if(f.t==='qty')return false;
+  return!String(v??'').trim();
+};
+const fmt=(f,v)=>{
+  if(v===undefined||v===null||v==='')return '';
+  if(f.t==='multi')return v.join(', ');
+  if(f.t==='check')return v?'Yes':'No';
+  if(f.t==='date')return new Date(v+'T00:00').toLocaleDateString('en-NG',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
+  return String(v);
+};
+
+const dpState={};
+
+function validate(st){
+  for(const f of st.fields){
+    if(!vis(f))continue;
+    const v=S.d[f.n];
+    if(f.req!==false&&empty(f,v)){
+      if(f.t==='qty')continue;
+      if(f.t==='date')return 'Please pick a date.';
+      if(f.t==='time')return 'Please pick a start time.';
+      return 'Please complete this to continue.';
+    }
+    if(f.t==='tel'&&v&&String(v).replace(/\D/g,'').length<10)return 'Enter a valid phone number (at least 10 digits).';
+    if(f.t==='date'&&v&&v<today())return 'Choose today or a later date.';
+  }
+  return '';
+}
+
+function renderMulti(f,v){
+  const arr=Array.isArray(v)?v:[];
+  return `<div class="f" data-n="${f.n}">
+    <div class="l">${esc(f.l)}</div>
+    <div class="checks two" role="group" aria-label="${esc(f.l)}">
+      ${f.opts.map(o=>{
+        const val=typeof o==='string'?o:o.v;
+        const sub=typeof o==='string'?'':o.s;
+        const icon=typeof o==='string'?'':o.i;
+        const on=arr.includes(val);
+        return `<label class="check${on?' checked':''}">
+          <input type="checkbox" value="${esc(val)}" ${on?'checked':''} data-multi="${f.n}">
+          <span class="check-body">
+            <strong>${icon?`<i class="fas ${esc(icon)}" style="color:var(--accent-soft);margin-right:6px;font-size:.85em"></i>`:''}${esc(val)}</strong>
+            ${sub?`<small>${esc(sub)}</small>`:''}
+          </span>
+        </label>`;
+      }).join('')}
+    </div>
+  </div>`;
+}
+
+function renderTiles(f,v){
+  return `<div class="f" data-n="${f.n}">
+    <div class="l">${esc(f.l)}</div>
+    <div class="tiles" role="radiogroup" aria-label="${esc(f.l)}">
+      ${f.opts.map(o=>{
+        const on=v===o.v;
+        return `<label class="tile">
+          <input type="radio" name="tile_${f.n}" value="${esc(o.v)}" ${on?'checked':''} data-tile="${f.n}">
+          <div class="tile-body">
+            <i class="fas ${esc(o.i||'fa-square')}"></i>
+            <strong>${esc(o.v)}</strong>
+            <span>${esc(o.s||'')}</span>
+          </div>
+        </label>`;
+      }).join('')}
+    </div>
+  </div>`;
+}
+
+function renderChoice(f,v){
+  return `<div class="f" data-n="${f.n}">
+    <div class="l">${esc(f.l)}</div>
+    <div class="checks two" role="radiogroup" aria-label="${esc(f.l)}">
+      ${f.opts.map(o=>{
+        const val=typeof o==='string'?o:o.v;
+        const on=v===val;
+        return `<label class="check${on?' checked':''}" style="align-items:center">
+          <input type="radio" name="ch_${f.n}" value="${esc(val)}" ${on?'checked':''} data-choice="${f.n}">
+          <span class="check-body"><strong style="margin:0">${esc(val)}</strong></span>
+        </label>`;
+      }).join('')}
+    </div>
+  </div>`;
+}
+
+function renderQty(f,v){
+  const val=v??f.v??0;
+  return `<div class="f" data-n="${f.n}">
+    <div class="l">${esc(f.l)}</div>
+    <div class="qty-item">
+      <div class="qty-controls">
+        <button type="button" data-qty="${f.n}" data-op="-" aria-label="Decrease ${esc(f.l)}"><i class="fas fa-minus"></i></button>
+        <input type="number" name="${f.n}" value="${val}" min="${f.min??0}" max="${f.max??99}" readonly aria-label="${esc(f.l)}">
+        <button type="button" data-qty="${f.n}" data-op="+" aria-label="Increase ${esc(f.l)}"><i class="fas fa-plus"></i></button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderDate(f,v){
+  if(!dpState[f.n]){
+    const base=v?new Date(v+'T00:00'):new Date();
+    dpState[f.n]={viewMonth:base.getMonth(),viewYear:base.getFullYear(),selected:v?new Date(v+'T00:00'):null};
+  }
+  return `<div class="f" data-n="${f.n}">
+    <div class="l">${esc(f.l)}</div>
+    <div class="dp" data-dp="${f.n}">
+      <div class="dp-header">
+        <button type="button" class="dp-nav" data-dp-prev="${f.n}" aria-label="Previous month"><i class="fas fa-chevron-left"></i></button>
+        <div class="dp-month" data-dp-month="${f.n}">—</div>
+        <button type="button" class="dp-nav" data-dp-next="${f.n}" aria-label="Next month"><i class="fas fa-chevron-right"></i></button>
+      </div>
+      <div class="dp-weekdays"><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></div>
+      <div class="dp-grid" data-dp-grid="${f.n}"></div>
+      <div class="dp-selected"><i class="fas fa-calendar-check"></i> Selected: <strong data-dp-sel="${f.n}">${v?fmt(f,v):'None yet'}</strong></div>
+    </div>
+    <input type="hidden" name="${f.n}" value="${esc(v||'')}" data-hidden="${f.n}">
+    <div class="err" data-dp-note="${f.n}" style="color:var(--accent-soft);min-height:1.2em"></div>
+  </div>`;
+}
+
+function paintDate(n){
+  const st=dpState[n];if(!st)return;
+  const grid=document.querySelector(`[data-dp-grid="${n}"]`);
+  const monthEl=document.querySelector(`[data-dp-month="${n}"]`);
+  const prevBtn=document.querySelector(`[data-dp-prev="${n}"]`);
+  if(!grid||!monthEl)return;
+  const M=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  monthEl.textContent=`${M[st.viewMonth]} ${st.viewYear}`;
+  const firstDay=new Date(st.viewYear,st.viewMonth,1).getDay();
+  const daysInMonth=new Date(st.viewYear,st.viewMonth+1,0).getDate();
+  const t=new Date();t.setHours(0,0,0,0);
+  let html='';
+  const prevDays=new Date(st.viewYear,st.viewMonth,0).getDate();
+  for(let i=firstDay-1;i>=0;i--)html+=`<button type="button" class="dp-day other-month" tabindex="-1" disabled>${prevDays-i}</button>`;
+  for(let d=1;d<=daysInMonth;d++){
+    const thisDate=new Date(st.viewYear,st.viewMonth,d);thisDate.setHours(0,0,0,0);
+    const isPast=thisDate<t;
+    const isToday=thisDate.getTime()===t.getTime();
+    const isSel=st.selected&&thisDate.getTime()===st.selected.getTime();
+    let cls='dp-day';if(isToday)cls+=' today';if(isSel)cls+=' selected';
+    const iso=`${st.viewYear}-${String(st.viewMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    html+=`<button type="button" class="${cls}" data-dp-day="${n}" data-date="${iso}" ${isPast?'disabled':''}>${d}</button>`;
+  }
+  grid.innerHTML=html;
+  const now=new Date();
+  prevBtn.disabled=(st.viewYear===now.getFullYear()&&st.viewMonth===now.getMonth());
+  const noteEl=document.querySelector(`[data-dp-note="${n}"]`);
+  if(noteEl&&st.selected&&C.lead){
+    const d=(st.selected-new Date(today()+'T00:00'))/864e5;
+    noteEl.textContent=d<C.lead?`Less than ${C.lead} days away. We will confirm availability.`:'';
+  }
+}
+
+function renderTime(f,v){
+  const slots=['7:00 AM','8:00 AM','9:00 AM','10:00 AM','11:00 AM','12:00 PM','1:00 PM','2:00 PM','3:00 PM','4:00 PM','5:00 PM','6:00 PM'];
+  return `<div class="f" data-n="${f.n}">
+    <div class="l">${esc(f.l)}</div>
+    <div class="time-slots" data-time-group="${f.n}">
+      ${slots.map(t=>`<button type="button" class="time-slot${v===t?' selected':''}" data-time="${esc(t)}">${esc(t)}</button>`).join('')}
+    </div>
+    <input type="hidden" name="${f.n}" value="${esc(v||'')}" data-hidden="${f.n}">
+  </div>`;
+}
+
+function field(f){
+  if(!vis(f))return '';
+  const v=S.d[f.n];
+  if(f.t==='multi')return renderMulti(f,v);
+  if(f.t==='choice')return renderChoice(f,v);
+  if(f.t==='tiles')return renderTiles(f,v);
+  if(f.t==='qty')return renderQty(f,v);
+  if(f.t==='date')return renderDate(f,v);
+  if(f.t==='time')return renderTime(f,v);
+  if(f.t==='check'){
+    return `<div class="f" data-n="${f.n}">
+      <label class="check${v?' checked':''}" style="padding:16px 18px;align-items:center">
+        <input type="checkbox" ${v?'checked':''} data-check="${f.n}">
+        <span class="check-body"><strong style="margin:0">${esc(f.l)}</strong></span>
+      </label>
+    </div>`;
+  }
+  if(f.t==='textarea'){
+    return `<div class="f" data-n="${f.n}">
+      <label class="l" for="i_${f.n}">${esc(f.l)}</label>
+      <textarea id="i_${f.n}" rows="3" placeholder="${esc(f.ph||'')}" autocomplete="off">${esc(v||'')}</textarea>
+    </div>`;
+  }
+  return `<div class="f" data-n="${f.n}">
+    <label class="l" for="i_${f.n}">${esc(f.l)}</label>
+    <input id="i_${f.n}" type="${f.t==='tel'?'tel':'text'}" ${f.t==='tel'?'inputmode="tel" autocomplete="tel"':`autocomplete="${f.ac||'off'}"`} ${f.list?`list="dl_${f.n}"`:''} placeholder="${esc(f.ph||'')}" value="${esc(v||'')}">
+    ${f.list?`<datalist id="dl_${f.n}">${f.list.map(x=>`<option value="${esc(x)}">`).join('')}</datalist>`:''}
+  </div>`;
+}
+
+function setNav(){
+  const i=S.i, last=i>=N;
+  nav.innerHTML=
+    (i===0
+      ? `<a class="btn ghost" href="${esc(C.back)}"><i class="fas fa-times"></i> Cancel</a>`
+      : `<button type="button" class="btn ghost" data-a="back"><i class="fas fa-arrow-left"></i> Back</button>`)
+    + `<button type="button" class="btn" data-a="${last?'send':'next'}" ${S.sending?'disabled':''}>
+         ${last
+           ? (S.sending ? '<i class="fas fa-spinner fa-spin"></i> Sending…' : '<i class="fas fa-paper-plane"></i> Continue')
+           : (i===N-1 ? 'Review <i class="fas fa-arrow-right"></i>' : 'Continue <i class="fas fa-arrow-right"></i>')}
+       </button>`;
+}
+
+function render(){
+  $('.bar').style.width=Math.min(S.i/N*100,100)+'%';
+  setNav();
+  if(S.i>=N)return review();
+  const st=C.steps[S.i];
+  app.innerHTML=`<section class="stage">
+    <div class="eyebrow"><i class="fas fa-circle"></i> Step ${S.i+1} of ${N}</div>
+    <h1 tabindex="-1">${esc(st.q)}</h1>
+    <p class="hint">${esc(st.h||'')}</p>
+    <div id="fs">${st.fields.map(field).join('')}</div>
+    <div class="err" role="alert" id="er"></div>
+  </section>`;
+  st.fields.forEach(f=>{if(f.t==='date'&&vis(f))paintDate(f.n);});
+  focusTop(true);
+}
+
+function focusTop(inp){
+  const i=app.querySelector('input:not([type=hidden]):not([type=radio]):not([type=checkbox]),textarea');
+  if(inp&&i&&matchMedia('(hover:hover)').matches)i.focus({preventScroll:true});
+  else app.querySelector('h1')?.focus({preventScroll:true});
+  scrollTo({top:0,behavior:'smooth'});
+}
+
+function review(){
+  const grouped={};
+  C.steps.forEach((st,si)=>st.fields.forEach(f=>{
+    const v=S.d[f.n];
+    if(vis(f)&&!empty(f,v)){
+      if(!grouped[si])grouped[si]=[];
+      grouped[si].push([f.l,fmt(f,v)]);
+    }
+  }));
+  const titles=C.steps.map(s=>s.q);
+  const cards=Object.entries(grouped).map(([si,rows])=>{
+    const isFull=rows.some(r=>String(r[1]).length>40);
+    return `<div class="review-card${isFull?' full':''}">
+      <div class="review-head">
+        <h4>${esc(titles[si])}</h4>
+        <button type="button" class="review-edit" data-go="${si}">Edit</button>
+      </div>
+      ${rows.map(r=>`<div class="review-row"><span class="rk">${esc(r[0])}</span><span class="rv">${esc(r[1])}</span></div>`).join('')}
+    </div>`;
+  }).join('');
+  app.innerHTML=`<section class="stage">
+    <div class="eyebrow"><i class="fas fa-check"></i> Review</div>
+    <h1 tabindex="-1">Check your request.</h1>
+    <p class="hint">Edit anything, then choose how to send it. We'll review the site and reply on WhatsApp with a site-based quote.</p>
+    <div class="review-grid">${cards}</div>
+    <p class="fine">${esc(C.note||'')}</p>
+  </section>`;
+  focusTop();
+}
+
+function collectForSubmit(){
+  const d={};
+  C.steps.forEach(st=>st.fields.forEach(f=>{
+    if(!vis(f))return;
+    const v=S.d[f.n];
+    if(empty(f,v))return;
+    d[f.l]=fmt(f,v);
+  }));
+  return d;
+}
+
+function showSendChoice(){
+  const lastStep=C.steps[N-1];
+  const e=validate(lastStep);
+  if(e){const er=$('#er');if(er)er.textContent=e;return;}
+
+  const endpoint=(C.endpoint||'').trim();
+  const hasFormspree=endpoint && !endpoint.includes('YOUR_FORM_ID');
+
+  nav.innerHTML='';
+  app.innerHTML=`<section class="stage">
+    <div class="eyebrow"><i class="fas fa-paper-plane"></i> Send</div>
+    <h1 tabindex="-1">How would you like to send it?</h1>
+    <p class="hint">Pick one. Both reach the Zaure team — we reply on WhatsApp within 2 to 4 hours with a site-based quote.</p>
+    <div class="send-choice">
+      ${hasFormspree ? `
+        <button type="button" class="send-option" data-send="formspree">
+          <div class="send-icon"><i class="fas fa-envelope"></i></div>
+          <h4>Send request</h4>
+          <p>Submit directly to our team. No app switch needed.</p>
+          <span class="send-arrow">Send now <i class="fas fa-arrow-right"></i></span>
+        </button>
+      ` : ''}
+      <button type="button" class="send-option wa" data-send="whatsapp">
+        <div class="send-icon"><i class="fab fa-whatsapp"></i></div>
+        <h4>Send via WhatsApp</h4>
+        <p>Opens WhatsApp with your details pre-filled. You tap send.</p>
+        <span class="send-arrow">Open WhatsApp <i class="fas fa-arrow-right"></i></span>
+      </button>
+    </div>
+    <div class="err" role="alert" id="er"></div>
+  </section>`;
+  focusTop();
+
+  app.querySelectorAll('[data-send]').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      if(btn.dataset.send==='whatsapp')sendViaWhatsApp();
+      else sendViaFormspree();
+    });
+  });
+}
+
+function sendViaWhatsApp(){
+  const data=collectForSubmit();
+  const msg='*New '+C.title+' request*\n\n'+Object.entries(data).map(([k,v])=>k+': '+v).join('\n')+'\n\nSent from the Zaure booking form';
+  window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`,'_blank');
+  done(true);
+}
+
+async function sendViaFormspree(){
+  const endpoint=(C.endpoint||'').trim();
+  if(!endpoint||endpoint.includes('YOUR_FORM_ID')){sendViaWhatsApp();return;}
+
+  const btn=app.querySelector('[data-send="formspree"]');
+  if(btn){btn.disabled=true;btn.querySelector('.send-arrow').innerHTML='Sending… <i class="fas fa-spinner fa-spin"></i>';}
+
+  const data=collectForSubmit();
+  const fd=new FormData();
+  fd.append('_subject','New '+C.title+' request');
+  if(S.d.email)fd.append('_replyto',S.d.email);
+  Object.entries(data).forEach(([k,v])=>fd.append(k,v));
+
+  try{
+    const res=await fetch(endpoint,{method:'POST',body:fd,headers:{'Accept':'application/json'}});
+    if(!res.ok){
+      let msg='Could not send your request. Please try WhatsApp instead.';
+      try{const j=await res.json();if(j.errors&&j.errors.length)msg=j.errors.map(x=>x.message).join(' ');}catch(_){}
+      throw new Error(msg);
+    }
+    done(false);
+  }catch(err){
+    if(btn){
+      btn.disabled=false;
+      btn.querySelector('.send-arrow').innerHTML='Send now <i class="fas fa-arrow-right"></i>';
+    }
+    const er=$('#er');
+    if(er)er.textContent=err.message||'Something went wrong. Please try WhatsApp instead.';
+  }
+}
+
+function done(viaWA){
+  try{sessionStorage.removeItem(K)}catch(e){}
+  $('.bar').style.width='100%';
+  nav.innerHTML='';
+  app.innerHTML=`<section class="stage success">
+    <div class="success-icon"><i class="fas fa-${viaWA?'whatsapp':'check'}"></i></div>
+    <div class="eyebrow" style="margin-bottom:14px"><i class="fas fa-circle"></i> ${viaWA?'One more step':'All done'}</div>
+    <h1 tabindex="-1">${viaWA?'Send it in WhatsApp.':'Request received.'}</h1>
+    <p>${viaWA?'Your details are ready in a WhatsApp message — tap send to reach the Zaure team.':esc(C.after||'We will be in touch shortly.')}</p>
+    <div class="success-actions">
+      ${viaWA
+        ? `<a class="btn wa" href="https://wa.me/${WA}" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Open WhatsApp</a>`
+        : ''}
+      <a class="btn outline" href="${esc(C.back)}" style="padding:16px 28px">Back to services</a>
+    </div>
+  </section>`;
+  focusTop();
+}
+
+function next(){
+  if(S.i<N){
+    const e=validate(C.steps[S.i]);
+    if(e){const er=$('#er');if(er)er.textContent=e;return;}
+  }
+  S.i=S.r?N:S.i+1;S.r=false;save();render();
+}
+function back(){S.i=S.r?N:S.i-1;S.r=false;save();render();}
+
+nav.addEventListener('click',e=>{
+  const a=e.target.closest('[data-a]')?.dataset.a;
+  if(a==='next')next();
+  else if(a==='back')back();
+  else if(a==='send')showSendChoice();
+});
+
+app.addEventListener('click',e=>{
+  const dpPrev=e.target.closest('[data-dp-prev]');
+  if(dpPrev){
+    const n=dpPrev.dataset.dpPrev,st=dpState[n];
+    st.viewMonth--;if(st.viewMonth<0){st.viewMonth=11;st.viewYear--;}
+    paintDate(n);return;
+  }
+  const dpNext=e.target.closest('[data-dp-next]');
+  if(dpNext){
+    const n=dpNext.dataset.dpNext,st=dpState[n];
+    st.viewMonth++;if(st.viewMonth>11){st.viewMonth=0;st.viewYear++;}
+    paintDate(n);return;
+  }
+  const dpDay=e.target.closest('[data-dp-day]');
+  if(dpDay){
+    const n=dpDay.dataset.dpDay, iso=dpDay.dataset.date;
+    dpState[n].selected=new Date(iso+'T00:00');
+    S.d[n]=iso;
+    document.querySelector(`[data-hidden="${n}"]`).value=iso;
+    document.querySelector(`[data-dp-sel="${n}"]`).textContent=new Date(iso+'T00:00').toLocaleDateString('en-NG',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
+    paintDate(n);
+    save();
+    const er=$('#er');if(er)er.textContent='';
+    return;
+  }
+  const slot=e.target.closest('[data-time]');
+  if(slot){
+    const group=slot.parentElement;
+    group.querySelectorAll('.time-slot').forEach(b=>b.classList.remove('selected'));
+    slot.classList.add('selected');
+    const n=group.dataset.timeGroup;
+    S.d[n]=slot.dataset.time;
+    const h=document.querySelector(`[data-hidden="${n}"]`);if(h)h.value=slot.dataset.time;
+    save();
+    const er=$('#er');if(er)er.textContent='';
+    return;
+  }
+  const qty=e.target.closest('[data-qty]');
+  if(qty){
+    const n=qty.dataset.qty;
+    const input=app.querySelector(`input[name="${n}"]`);
+    if(!input)return;
+    let val=parseInt(input.value,10)||0;
+    const min=parseInt(input.min,10)||0;
+    const max=parseInt(input.max,10)||99;
+    val=qty.dataset.op==='+'?Math.min(max,val+1):Math.max(min,val-1);
+    input.value=val;S.d[n]=val;save();return;
+  }
+  const go=e.target.closest('[data-go]');
+  if(go){S.i=+go.dataset.go;S.r=true;save();render();return;}
+});
+
+app.addEventListener('change',e=>{
+  const t=e.target;
+  if(t.dataset.tile!==undefined){
+    const f=t.closest('.f'),n=f.dataset.n;
+    S.d[n]=t.value;save();
+  } else if(t.dataset.multi){
+    const n=t.dataset.multi;
+    const arr=new Set(S.d[n]||[]);
+    if(t.checked)arr.add(t.value);else arr.delete(t.value);
+    S.d[n]=[...arr];
+    t.closest('.check').classList.toggle('checked',t.checked);
+    save();
+  } else if(t.dataset.choice){
+    const n=t.dataset.choice;
+    S.d[n]=t.value;
+    const group=t.closest('.checks');
+    if(group)group.querySelectorAll('.check').forEach(c=>c.classList.remove('checked'));
+    t.closest('.check').classList.add('checked');
+    save();
+  } else if(t.dataset.check){
+    const n=t.dataset.check;
+    S.d[n]=t.checked;
+    t.closest('.check').classList.toggle('checked',t.checked);
+    save();
+  }
+});
+
+app.addEventListener('input',e=>{
+  const fe=e.target.closest('.f');if(!fe)return;
+  if(e.target.type==='number')return;
+  if(e.target.type==='hidden')return;
+  if(e.target.type==='checkbox'||e.target.type==='radio')return;
+  S.d[fe.dataset.n]=e.target.value;save();
+  const er=$('#er');if(er)er.textContent='';
+});
+
+app.addEventListener('keydown',e=>{
+  if(e.key==='Enter'&&e.target.tagName==='INPUT'&&!['hidden','checkbox','radio','number'].includes(e.target.type)){
+    e.preventDefault();next();
+  }
+});
+
+initTheme();
+if(S.i>N)S.i=0;
+render();
+})();
+</script>
+</body>
+</html>
