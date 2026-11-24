@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-  <title>Zaure Services – Find, Clean &amp; Move | Zaure</title>
-  <meta name="description" content="Zaure Services — three professional services built to help Nigerians buy land, clean homes, and move safely. Vetted professionals, transparent pricing, escrow-backed payments.">
-  <meta name="keywords" content="Zaure services, land concierge Nigeria, cleaning service Nigeria, moving service Nigeria, buyer's agent Nigeria, zaure findr, zaure clean, zaure move">
+  <title>Zaure Services – Find, Clean, Move &amp; Deliver | Zaure</title>
+  <meta name="description" content="Zaure Services — four professional services built to help Nigerians buy land, clean homes, move safely, and deliver parcels across the city. Learn how each service works, then book on its individual page.">
+  <meta name="keywords" content="Zaure services, land concierge Nigeria, cleaning service Nigeria, moving service Nigeria, delivery service Nigeria, buyer's agent Nigeria, zaure findr, zaure clean, zaure move, zaure delivery">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://zauretech.xyz/zaure-services.html">
   <meta name="theme-color" content="#1a3650">
 
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://zauretech.xyz/zaure-services.html">
-  <meta property="og:title" content="Zaure Services – Find, Clean &amp; Move">
-  <meta property="og:description" content="Three professional services. One trusted platform. Vetted professionals, transparent pricing, escrow-backed payments.">
+  <meta property="og:title" content="Zaure Services – Find, Clean, Move &amp; Deliver">
+  <meta property="og:description" content="Four professional services. One trusted platform. Vetted professionals, transparent pricing, easy booking.">
   <meta property="og:image" content="https://zauretech.xyz/assets/logo-icon.svg">
   <meta property="og:site_name" content="Zaure">
 
@@ -108,7 +108,7 @@
       font-size: 0.95rem;
       line-height: 1.6;
       color: rgba(255,255,255,0.78);
-      max-width: 620px;
+      max-width: 640px;
       margin: 0 auto 28px;
     }
     @media (min-width: 768px) { .zs-hero p.lead { font-size: 1.05rem; } }
@@ -215,12 +215,13 @@
       grid-template-columns: 1fr;
       gap: 16px;
     }
-    @media (min-width: 768px) { .zs-services-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; } }
-    @media (min-width: 1024px) { .zs-services-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; } }
+    @media (min-width: 640px) { .zs-services-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; } }
+    @media (min-width: 1024px) { .zs-services-grid { grid-template-columns: repeat(2, 1fr); gap: 22px; } }
 
     .zs-service-card {
       position: relative;
-      display: block;
+      display: flex;
+      flex-direction: column;
       padding: 24px 22px 22px;
       border-radius: 22px;
       color: #fff;
@@ -230,8 +231,7 @@
       box-shadow: 0 12px 30px rgba(15,41,64,0.18);
       transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.3s ease;
       -webkit-tap-highlight-color: transparent;
-      min-height: 380px;
-      display: flex; flex-direction: column;
+      min-height: 340px;
     }
     .zs-service-card:hover,
     .zs-service-card:focus-visible {
@@ -257,6 +257,11 @@
       background:
         radial-gradient(circle at 88% 8%, rgba(255,209,102,0.28), transparent 55%),
         linear-gradient(135deg, #6d2e0a 0%, #a83e0d 45%, #ea6b1c 100%);
+    }
+    .zs-service-card.delivery {
+      background:
+        radial-gradient(circle at 88% 8%, rgba(255,255,255,0.22), transparent 55%),
+        linear-gradient(135deg, #2e1a52 0%, #4c2a8a 48%, #7c3aed 100%);
     }
 
     .zs-service-card::before {
@@ -348,7 +353,8 @@
       display: flex; align-items: center; justify-content: center;
     }
     .zs-service-card.clean .zs-card-features li i,
-    .zs-service-card.move .zs-card-features li i {
+    .zs-service-card.move .zs-card-features li i,
+    .zs-service-card.delivery .zs-card-features li i {
       color: #fff;
       background: rgba(255,255,255,0.22);
     }
@@ -517,50 +523,6 @@
     }
 
     /* ============================================================
-       FINAL CTA
-       ============================================================ */
-    .zs-final-cta {
-      margin: 56px 0 40px;
-      padding: 48px 24px;
-      border-radius: 24px;
-      background:
-        radial-gradient(circle at 12% 88%, rgba(212,184,122,0.18), transparent 55%),
-        linear-gradient(135deg, #0b1f33 0%, #142c48 50%, #1a3650 100%);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-      isolation: isolate;
-    }
-    .zs-final-cta::before {
-      content: '';
-      position: absolute;
-      top: -100px; right: -100px;
-      width: 300px; height: 300px;
-      border-radius: 50%;
-      border: 2px solid rgba(212,184,122,0.12);
-      z-index: 0;
-    }
-    .zs-final-cta > * { position: relative; z-index: 1; }
-    .zs-final-cta h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
-      font-weight: 800;
-      color: #fff;
-      line-height: 1.25;
-      letter-spacing: -0.5px;
-      margin-bottom: 12px;
-    }
-    @media (min-width: 768px) { .zs-final-cta h2 { font-size: 2.1rem; } }
-    .zs-final-cta p {
-      font-size: 0.9rem;
-      line-height: 1.55;
-      color: rgba(255,255,255,0.78);
-      max-width: 520px;
-      margin: 0 auto 26px;
-    }
-    @media (min-width: 768px) { .zs-final-cta { padding: 64px 40px; } }
-
-    /* ============================================================
        MOBILE STICKY CTA
        ============================================================ */
     .zs-mobile-cta {
@@ -584,11 +546,6 @@
         font-size: 0.82rem;
         padding: 12px 10px;
       }
-      .zs-mobile-cta .zs-btn.primary {
-        box-shadow: 0 6px 18px rgba(37,211,102,0.28);
-        background: linear-gradient(135deg, #25D366, #1DA851);
-        color: #fff;
-      }
       body { padding-bottom: calc(150px + env(safe-area-inset-bottom)) !important; }
     }
   </style>
@@ -608,7 +565,7 @@
         <a href="/">Home</a>
         <a href="/category.html?slug=all">Browse</a>
         <a href="/land.html">Land</a>
-        <a href="/zaure-services.html" class="active" style="color:#B49450;font-weight:700;">Services</a>
+        <a href="/zaure-services.html" style="color:#B49450;font-weight:700;">Services</a>
         <a href="/about.html">About</a>
       </div>
       <div class="nav-actions">
@@ -631,21 +588,21 @@
       <span class="zs-eyebrow"><i class="fas fa-hand-sparkles"></i> Zaure Services</span>
       <h1>More than a marketplace.<br><span class="highlight">A full-service platform.</span></h1>
       <p class="lead">
-        Three professional services built to help Nigerians buy land, clean homes, and move safely — with verified professionals, transparent pricing, and Zaure's trusted guarantee.
+        Four professional services built to help Nigerians buy land, clean homes, move safely, and deliver parcels across the city — with vetted professionals and transparent pricing. Learn how each one works below, then book directly on its page.
       </p>
       <div class="zs-hero-actions">
         <a href="#services" class="zs-btn primary">
-          <i class="fas fa-th-large"></i> Explore services
+          <i class="fas fa-th-large"></i> See all services
         </a>
         <a href="https://wa.me/2349042339411?text=Hello%20Zaure%2C%20I%20want%20to%20know%20more%20about%20your%20services." target="_blank" rel="noopener" class="zs-btn ghost">
-          <i class="fab fa-whatsapp"></i> Talk to us
+          <i class="fab fa-whatsapp"></i> Ask a question
         </a>
       </div>
 
       <div class="zs-hero-stats">
-        <div class="zs-stat"><strong>3</strong><span>Services</span></div>
+        <div class="zs-stat"><strong>4</strong><span>Services</span></div>
         <div class="zs-stat"><strong>100%</strong><span>Vetted Pros</span></div>
-        <div class="zs-stat"><strong>Escrow</strong><span>Protected</span></div>
+        <div class="zs-stat"><strong>Same-Day</strong><span>Options</span></div>
         <div class="zs-stat"><strong>24/7</strong><span>Support</span></div>
       </div>
     </section>
@@ -655,29 +612,29 @@
       <div class="zs-section-head">
         <span class="zs-eyebrow"><i class="fas fa-star"></i> Our Services</span>
         <h2>Everything you need,<br>under one trusted roof.</h2>
-        <p>Pick a service. We handle the rest — from finding verified land to cleaning and moving your new home.</p>
+        <p>Each service has its own dedicated page where you can book in minutes. Explore what each does below, then click <strong>Book</strong> to get started.</p>
       </div>
 
       <div class="zs-services-grid">
 
         <!-- ZAURE FINDR -->
-        <a href="/zaure-findr.html" class="zs-service-card findr" aria-label="Explore Zaure Findr">
+        <a href="/zaure-findr.html" class="zs-service-card findr" aria-label="Book Zaure Findr">
           <span class="zs-card-badge">New</span>
           <div class="zs-card-inner">
             <div class="zs-card-icon"><i class="fas fa-search-location"></i></div>
             <h3>Zaure Findr</h3>
-            <p class="desc">Buyer-side land concierge. Tell us what you want — we find, verify, negotiate, and close on your behalf.</p>
+            <p class="desc">Buyer-side land concierge. Tell us what you want — we find, verify, negotiate, and close the deal on your behalf.</p>
             <ul class="zs-card-features">
               <li><i class="fas fa-check"></i> Verified title search</li>
-              <li><i class="fas fa-check"></i> Off-platform sourcing</li>
-              <li><i class="fas fa-check"></i> Negotiation &amp; escrow close</li>
+              <li><i class="fas fa-check"></i> Off-platform land sourcing</li>
+              <li><i class="fas fa-check"></i> Negotiation &amp; closing</li>
             </ul>
-            <span class="zs-card-cta">Explore Findr <i class="fas fa-arrow-right"></i></span>
+            <span class="zs-card-cta">Book Findr <i class="fas fa-arrow-right"></i></span>
           </div>
         </a>
 
         <!-- ZAURE CLEAN -->
-        <a href="/zaure-clean.html" class="zs-service-card clean" aria-label="Explore Zaure Clean">
+        <a href="/zaure-clean.html" class="zs-service-card clean" aria-label="Book Zaure Clean">
           <div class="zs-card-inner">
             <div class="zs-card-icon"><i class="fas fa-broom"></i></div>
             <h3>Zaure Clean</h3>
@@ -687,22 +644,37 @@
               <li><i class="fas fa-check"></i> Move-in / move-out deep clean</li>
               <li><i class="fas fa-check"></i> Vetted, insured cleaners</li>
             </ul>
-            <span class="zs-card-cta">Explore Clean <i class="fas fa-arrow-right"></i></span>
+            <span class="zs-card-cta">Book Clean <i class="fas fa-arrow-right"></i></span>
           </div>
         </a>
 
         <!-- ZAURE MOVE -->
-        <a href="/zaure-move.html" class="zs-service-card move" aria-label="Explore Zaure Move">
+        <a href="/zaure-move.html" class="zs-service-card move" aria-label="Book Zaure Move">
           <div class="zs-card-inner">
             <div class="zs-card-icon"><i class="fas fa-truck-moving"></i></div>
             <h3>Zaure Move</h3>
-            <p class="desc">Safe, careful moving across Nigeria. Packing, transport, and setup — handled end to end by professionals.</p>
+            <p class="desc">Safe, careful moving across Nigeria. Packing, loading, transport, and setup — all handled end to end.</p>
             <ul class="zs-card-features">
               <li><i class="fas fa-check"></i> Packing &amp; loading</li>
               <li><i class="fas fa-check"></i> Inter-city moving</li>
               <li><i class="fas fa-check"></i> Setup at destination</li>
             </ul>
-            <span class="zs-card-cta">Explore Move <i class="fas fa-arrow-right"></i></span>
+            <span class="zs-card-cta">Book Move <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </a>
+
+        <!-- ZAURE DELIVERY -->
+        <a href="/zaure-delivery.html" class="zs-service-card delivery" aria-label="Book Zaure Delivery">
+          <div class="zs-card-inner">
+            <div class="zs-card-icon"><i class="fas fa-truck-fast"></i></div>
+            <h3>Zaure Delivery</h3>
+            <p class="desc">Fast intra-city pickup and delivery. Send anything from one location to another within your city — safely and reliably.</p>
+            <ul class="zs-card-features">
+              <li><i class="fas fa-check"></i> Same-city pickup &amp; drop</li>
+              <li><i class="fas fa-check"></i> Documents, parcels &amp; packages</li>
+              <li><i class="fas fa-check"></i> Real-time delivery updates</li>
+            </ul>
+            <span class="zs-card-cta">Book Delivery <i class="fas fa-arrow-right"></i></span>
           </div>
         </a>
 
@@ -729,14 +701,14 @@
           <p>You see the full price upfront — no commission, no surprises, no hidden fees after the job starts.</p>
         </div>
         <div class="zs-why-card">
-          <div class="zs-why-icon"><i class="fas fa-lock"></i></div>
-          <h3>Escrow-backed payment</h3>
-          <p>Your money stays protected in escrow until the job is done and you confirm you're satisfied.</p>
+          <div class="zs-why-icon"><i class="fas fa-th-large"></i></div>
+          <h3>Four services, one platform</h3>
+          <p>Land, cleaning, moving, and delivery — all under one trusted Zaure roof, all bookable in minutes.</p>
         </div>
         <div class="zs-why-card">
-          <div class="zs-why-icon"><i class="fas fa-headset"></i></div>
-          <h3>Zaure-backed support</h3>
-          <p>Something goes wrong? You have a real Zaure team behind you — not just an anonymous contractor.</p>
+          <div class="zs-why-icon"><i class="fab fa-whatsapp"></i></div>
+          <h3>Direct booking, no middlemen</h3>
+          <p>Each service has its own page — you book directly with Zaure, at the price you see, with no hidden agents.</p>
         </div>
       </div>
     </section>
@@ -746,24 +718,24 @@
       <div class="zs-section-head">
         <span class="zs-eyebrow"><i class="fas fa-route"></i> How it works</span>
         <h2>Three simple steps.</h2>
-        <p>From booking to delivery, every Zaure service follows the same simple, protected flow.</p>
+        <p>From choosing a service to the job being done, every Zaure service follows the same simple flow.</p>
       </div>
 
       <div class="zs-how-grid">
         <div class="zs-step">
           <div class="zs-step-num">1</div>
           <h3>Choose your service</h3>
-          <p>Pick Findr, Clean, or Move. Tell us what you need on WhatsApp or through the service page.</p>
+          <p>Pick Findr, Clean, Move, or Delivery. Read how it works on this page, then click Book.</p>
         </div>
         <div class="zs-step">
           <div class="zs-step-num">2</div>
-          <h3>Book &amp; pay securely</h3>
-          <p>Get a fixed quote. Your payment goes into escrow — protected until the job is done right.</p>
+          <h3>Book on the service page</h3>
+          <p>Each service page has a simple booking flow — tell us what you need, confirm the quote, and lock in your slot.</p>
         </div>
         <div class="zs-step">
           <div class="zs-step-num">3</div>
-          <h3>We deliver</h3>
-          <p>Vetted professionals handle the job. You confirm satisfaction, escrow releases, everyone wins.</p>
+          <h3>We deliver the job</h3>
+          <p>Vetted professionals handle the work — whether it's finding land, cleaning a home, moving your things, or delivering a parcel.</p>
         </div>
       </div>
     </section>
@@ -778,30 +750,44 @@
 
       <div class="zs-faq-list">
         <details class="zs-faq-item">
+          <summary>How do I book a service?</summary>
+          <div class="zs-faq-body">
+            Each service has its own dedicated page — <strong>Zaure Findr</strong>, <strong>Zaure Clean</strong>, <strong>Zaure Move</strong>, and <strong>Zaure Delivery</strong>. Click the <em>Book</em> button on this page to go to that service's page, fill in a simple form, and confirm your booking.
+          </div>
+        </details>
+
+        <details class="zs-faq-item">
           <summary>Who are the professionals on Zaure Services?</summary>
           <div class="zs-faq-body">
-            Every cleaner, mover, and title lawyer on our roster has been individually vetted by Zaure — including background checks and a skills review. We only onboard professionals we'd use ourselves.
+            Every cleaner, mover, delivery rider, and title lawyer on our roster has been individually vetted by Zaure — including background checks and a skills review. We only onboard professionals we'd use ourselves.
           </div>
         </details>
 
         <details class="zs-faq-item">
           <summary>Which cities do you serve?</summary>
           <div class="zs-faq-body">
-            We're currently live in <strong>Kaduna</strong> and <strong>Abuja</strong>, with expansion to Lagos and Kano planned. Land title verification (Zaure Findr) works nationwide. For other cities, contact us on WhatsApp and we'll see what we can arrange.
+            Zaure Findr works <strong>nationwide</strong> (land title verification has no city limits). Zaure Clean, Zaure Move, and Zaure Delivery are currently live in <strong>Kaduna</strong> and <strong>Abuja</strong>, with expansion to Lagos and Kano planned. For other cities, message us on WhatsApp and we'll see what we can arrange.
+          </div>
+        </details>
+
+        <details class="zs-faq-item">
+          <summary>What types of items can Zaure Delivery carry?</summary>
+          <div class="zs-faq-body">
+            Zaure Delivery is built for intra-city pickup and drop — documents, parcels, packages, small goods, and everyday items that need to move from one location to another inside the same city. For larger items or full home relocations, use <strong>Zaure Move</strong> instead.
           </div>
         </details>
 
         <details class="zs-faq-item">
           <summary>How does payment work?</summary>
           <div class="zs-faq-body">
-            You pay into escrow through our partner provider (Paystack / Moniepoint). Your money is held safely until you confirm the job was completed to your satisfaction. If anything goes wrong, we intervene before releasing funds.
+            Each service page shows the full price upfront before you book. Payment is handled directly with Zaure — no commission, no hidden fees, no surprise charges after the job starts.
           </div>
         </details>
 
         <details class="zs-faq-item">
           <summary>What if I'm not satisfied with the service?</summary>
           <div class="zs-faq-body">
-            Contact us immediately on WhatsApp. We'll review the job, arrange a re-do if needed, or refund you from escrow. Your satisfaction is the guarantee — that's the whole point of Zaure Services.
+            Message us immediately on WhatsApp. We'll review the job and arrange a re-do or a fair refund as appropriate. Your satisfaction is what we care about most — that's the whole point of Zaure Services.
           </div>
         </details>
 
@@ -815,23 +801,9 @@
         <details class="zs-faq-item">
           <summary>Can I use Zaure Services outside Nigeria?</summary>
           <div class="zs-faq-body">
-            Yes — this is exactly what Zaure Findr was built for. If you're in the diaspora and want to buy land in Nigeria without being scammed, Findr handles verification, negotiation, and closing on your behalf. Cleaning and moving require an on-ground presence, but we can coordinate for family or agents too.
+            Yes — this is exactly what Zaure Findr was built for. If you're in the diaspora and want to buy land in Nigeria without being scammed, Findr handles verification, negotiation, and closing on your behalf. Cleaning, moving, and delivery require someone on the ground, but we can coordinate with family, tenants, or your agent.
           </div>
         </details>
-      </div>
-    </section>
-
-    <!-- ============ FINAL CTA ============ -->
-    <section class="zs-final-cta">
-      <h2>Ready to get started?</h2>
-      <p>Pick the service you need. Message us on WhatsApp and we'll take it from there — usually within minutes.</p>
-      <div class="zs-hero-actions">
-        <a href="https://wa.me/2349042339411?text=Hello%20Zaure%2C%20I%20want%20to%20book%20a%20service." target="_blank" rel="noopener" class="zs-btn primary">
-          <i class="fab fa-whatsapp"></i> Book on WhatsApp
-        </a>
-        <a href="#services" class="zs-btn ghost">
-          <i class="fas fa-arrow-up"></i> Back to services
-        </a>
       </div>
     </section>
 
@@ -839,11 +811,11 @@
 
   <!-- MOBILE STICKY CTA -->
   <div class="zs-mobile-cta">
-    <a href="https://wa.me/2349042339411?text=Hello%20Zaure%2C%20I%20want%20to%20book%20a%20service." target="_blank" rel="noopener" class="zs-btn primary">
-      <i class="fab fa-whatsapp"></i> Book on WhatsApp
+    <a href="#services" class="zs-btn primary">
+      <i class="fas fa-th-large"></i> See services
     </a>
-    <a href="#services" class="zs-btn ghost" style="background:var(--surface-alt);color:var(--text);border:1px solid var(--border);">
-      <i class="fas fa-th-large"></i> Services
+    <a href="https://wa.me/2349042339411?text=Hello%20Zaure%2C%20I%20have%20a%20question%20about%20your%20services." target="_blank" rel="noopener" class="zs-btn ghost" style="background:var(--surface-alt);color:var(--text);border:1px solid var(--border);">
+      <i class="fab fa-whatsapp"></i> Ask us
     </a>
   </div>
 
@@ -878,6 +850,7 @@
           <a href="/zaure-findr.html">Zaure Findr</a>
           <a href="/zaure-clean.html">Zaure Clean</a>
           <a href="/zaure-move.html">Zaure Move</a>
+          <a href="/zaure-delivery.html">Zaure Delivery</a>
         </div>
         <div class="footer-col">
           <h4>Support</h4>
