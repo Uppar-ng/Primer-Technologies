@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>Zaure Services – Find, Clean &amp; Move | Zaure</title>
+  <meta name="description" content="Zaure Services — three professional services built to help Nigerians buy land, clean homes, and move safely. Vetted professionals, transparent pricing, escrow-backed payments.">
+  <meta name="keywords" content="Zaure services, land concierge Nigeria, cleaning service Nigeria, moving service Nigeria, buyer's agent Nigeria, zaure findr, zaure clean, zaure move">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://zauretech.xyz/zaure-services.html">
+  <meta name="theme-color" content="#1a3650">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://zauretech.xyz/zaure-services.html">
+  <meta property="og:title" content="Zaure Services – Find, Clean &amp; Move">
+  <meta property="og:description" content="Three professional services. One trusted platform. Vetted professionals, transparent pricing, escrow-backed payments.">
+  <meta property="og:image" content="https://zauretech.xyz/assets/logo-icon.svg">
+  <meta property="og:site_name" content="Zaure">
+
+  <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
+  <link rel="apple-touch-icon" href="/assets/logo-icon.svg">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <style>
+    .container { padding-left: 16px; padding-right: 16px; }
+    @media (min-width: 1024px) { .container { padding-left: 24px; padding-right: 24px; } }
+
+    /* ============================================================
+       HERO
+       ============================================================ */
+    .zs-hero {
+      position: relative;
+      overflow: hidden;
+      padding: 56px 20px 48px;
+      border-radius: 24px;
+      margin: 16px 0 8px;
+      background:
+        radial-gradient(circle at 92% 8%, rgba(212,184,122,0.18), transparent 55%),
+        radial-gradient(circle at 8% 92%, rgba(47,111,158,0.2), transparent 55%),
+        linear-gradient(135deg, #0b1f33 0%, #142c48 45%, #1a3650 100%);
+      text-align: center;
+      isolation: isolate;
+    }
+    .zs-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .zs-hero::after {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 260px; height: 260px;
+      border-radius: 50%;
+      border: 2px solid rgba(212,184,122,0.15);
+      z-index: 0;
+      pointer-events: none;
+    }
+    .zs-hero > * { position: relative; z-index: 1; }
+
+    .zs-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.68rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 3px;
+      color: #D4B87A;
+      padding: 6px 14px;
+      border: 1px solid rgba(212,184,122,0.35);
+      background: rgba(212,184,122,0.08);
+      border-radius: 40px;
+      margin-bottom: 18px;
+    }
+    .zs-eyebrow i { font-size: 0.62rem; }
+
+    .zs-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.15;
+      letter-spacing: -0.8px;
+      margin-bottom: 14px;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .zs-hero h1 .highlight {
+      color: #D4B87A;
+      display: inline-block;
+    }
+    @media (min-width: 768px) {
+      .zs-hero { padding: 72px 32px 64px; }
+      .zs-hero h1 { font-size: 2.8rem; }
+    }
+    @media (min-width: 1024px) {
+      .zs-hero { padding: 88px 40px 76px; margin: 20px 0 12px; }
+      .zs-hero h1 { font-size: 3.2rem; }
+    }
+
+    .zs-hero p.lead {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.78);
+      max-width: 620px;
+      margin: 0 auto 28px;
+    }
+    @media (min-width: 768px) { .zs-hero p.lead { font-size: 1.05rem; } }
+
+    .zs-hero-actions {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      justify-content: center;
+    }
+    .zs-btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 12px 22px;
+      border-radius: 40px;
+      font-size: 0.88rem; font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.2s, filter 0.2s, box-shadow 0.2s;
+      border: none; font-family: inherit;
+    }
+    .zs-btn:active { transform: scale(0.97); }
+    .zs-btn.primary {
+      background: #D4B87A;
+      color: #0b1f33;
+      box-shadow: 0 8px 22px rgba(212,184,122,0.35);
+    }
+    .zs-btn.primary:hover { filter: brightness(1.06); box-shadow: 0 12px 28px rgba(212,184,122,0.45); }
+    .zs-btn.ghost {
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.22);
+      backdrop-filter: blur(6px);
+    }
+    .zs-btn.ghost:hover { background: rgba(255,255,255,0.16); }
+
+    .zs-hero-stats {
+      display: flex; flex-wrap: wrap; gap: 20px;
+      justify-content: center;
+      margin-top: 36px;
+      padding-top: 28px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .zs-stat {
+      display: flex; flex-direction: column; align-items: center;
+      min-width: 100px;
+    }
+    .zs-stat strong {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; font-weight: 800; color: #D4B87A;
+      line-height: 1.1;
+    }
+    .zs-stat span {
+      font-size: 0.68rem; font-weight: 600;
+      color: rgba(255,255,255,0.62);
+      text-transform: uppercase; letter-spacing: 1px;
+      margin-top: 4px;
+    }
+    @media (min-width: 768px) {
+      .zs-stat { min-width: 140px; }
+      .zs-stat strong { font-size: 1.65rem; }
+    }
+
+    /* ============================================================
+       SECTION HEADERS
+       ============================================================ */
+    .zs-section {
+      margin: 48px 0 32px;
+    }
+    @media (min-width: 1024px) { .zs-section { margin: 64px 0 44px; } }
+
+    .zs-section-head {
+      text-align: center;
+      margin-bottom: 32px;
+      max-width: 680px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .zs-section-head .zs-eyebrow {
+      background: rgba(212,184,122,0.1);
+      border-color: rgba(212,184,122,0.35);
+      color: #B49450;
+      margin-bottom: 14px;
+    }
+    .zs-section-head h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.5px;
+      line-height: 1.25;
+      margin-bottom: 12px;
+    }
+    @media (min-width: 768px) { .zs-section-head h2 { font-size: 2rem; } }
+    .zs-section-head p {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+    @media (min-width: 768px) { .zs-section-head p { font-size: 0.95rem; } }
+
+    /* ============================================================
+       SERVICE CARDS
+       ============================================================ */
+    .zs-services-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    @media (min-width: 768px) { .zs-services-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; } }
+    @media (min-width: 1024px) { .zs-services-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; } }
+
+    .zs-service-card {
+      position: relative;
+      display: block;
+      padding: 24px 22px 22px;
+      border-radius: 22px;
+      color: #fff;
+      text-decoration: none;
+      overflow: hidden;
+      isolation: isolate;
+      box-shadow: 0 12px 30px rgba(15,41,64,0.18);
+      transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.3s ease;
+      -webkit-tap-highlight-color: transparent;
+      min-height: 380px;
+      display: flex; flex-direction: column;
+    }
+    .zs-service-card:hover,
+    .zs-service-card:focus-visible {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 48px rgba(15,41,64,0.32);
+      outline: none;
+    }
+    .zs-service-card:focus-visible {
+      box-shadow: 0 0 0 3px #D4B87A, 0 24px 48px rgba(15,41,64,0.32);
+    }
+
+    .zs-service-card.findr {
+      background:
+        radial-gradient(circle at 88% 8%, rgba(212,184,122,0.28), transparent 55%),
+        linear-gradient(135deg, #0b1f33 0%, #142c48 45%, #1f4a75 100%);
+    }
+    .zs-service-card.clean {
+      background:
+        radial-gradient(circle at 88% 8%, rgba(255,255,255,0.22), transparent 55%),
+        linear-gradient(135deg, #0a4b45 0%, #0d7a6f 50%, #14b8a6 100%);
+    }
+    .zs-service-card.move {
+      background:
+        radial-gradient(circle at 88% 8%, rgba(255,209,102,0.28), transparent 55%),
+        linear-gradient(135deg, #6d2e0a 0%, #a83e0d 45%, #ea6b1c 100%);
+    }
+
+    .zs-service-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 0% 100%, rgba(255,255,255,0.08), transparent 45%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .zs-service-card::after {
+      content: '';
+      position: absolute;
+      right: -55px; top: -55px;
+      width: 180px; height: 180px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.1);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .zs-card-badge {
+      position: absolute;
+      top: 18px; right: 18px;
+      background: #D4B87A;
+      color: #0b1f33;
+      font-size: 0.58rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 40px;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      z-index: 2;
+    }
+
+    .zs-card-inner {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; height: 100%;
+    }
+
+    .zs-card-icon {
+      width: 54px; height: 54px;
+      border-radius: 15px;
+      background: rgba(255,255,255,0.16);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.24);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.25rem;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .zs-card-inner h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+      letter-spacing: -0.3px;
+    }
+    .zs-card-inner p.desc {
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: rgba(255,255,255,0.82);
+      margin-bottom: 16px;
+    }
+
+    .zs-card-features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 20px 0;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .zs-card-features li {
+      display: flex; align-items: flex-start; gap: 8px;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.4;
+    }
+    .zs-card-features li i {
+      flex-shrink: 0;
+      margin-top: 3px;
+      font-size: 0.6rem;
+      color: #D4B87A;
+      background: rgba(212,184,122,0.16);
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .zs-service-card.clean .zs-card-features li i,
+    .zs-service-card.move .zs-card-features li i {
+      color: #fff;
+      background: rgba(255,255,255,0.22);
+    }
+
+    .zs-card-cta {
+      margin-top: auto;
+      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.34);
+      border-radius: 40px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #fff;
+      backdrop-filter: blur(6px);
+      transition: background 0.2s;
+    }
+    .zs-service-card:hover .zs-card-cta { background: rgba(255,255,255,0.3); }
+    .zs-card-cta i {
+      font-size: 0.65rem;
+      transition: transform 0.2s;
+    }
+    .zs-service-card:hover .zs-card-cta i { transform: translateX(3px); }
+
+    /* ============================================================
+       WHY ZAURE SERVICES
+       ============================================================ */
+    .zs-why-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    @media (min-width: 640px) { .zs-why-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; } }
+    @media (min-width: 1024px) { .zs-why-grid { grid-template-columns: repeat(4, 1fr); gap: 18px; } }
+
+    .zs-why-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px 20px;
+      position: relative;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    .zs-why-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 28px rgba(15,41,64,0.1);
+      border-color: rgba(212,184,122,0.4);
+    }
+    .zs-why-icon {
+      width: 42px; height: 42px;
+      border-radius: 11px;
+      background: linear-gradient(135deg, #1a3650, #2f6f9e);
+      color: #D4B87A;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      margin-bottom: 14px;
+    }
+    .zs-why-card h3 {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+    .zs-why-card p {
+      font-size: 0.78rem;
+      line-height: 1.5;
+      color: var(--text-secondary);
+    }
+
+    /* ============================================================
+       HOW IT WORKS
+       ============================================================ */
+    .zs-how-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+    @media (min-width: 768px) { .zs-how-grid { grid-template-columns: repeat(3, 1fr); gap: 22px; } }
+
+    .zs-step {
+      text-align: center;
+      position: relative;
+      padding: 8px 12px;
+    }
+    .zs-step-num {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1a3650, #2f6f9e);
+      color: #D4B87A;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 800;
+      margin: 0 auto 14px;
+      box-shadow: 0 8px 18px rgba(15,41,64,0.2);
+    }
+    .zs-step h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .zs-step p {
+      font-size: 0.82rem;
+      line-height: 1.55;
+      color: var(--text-secondary);
+      max-width: 260px;
+      margin: 0 auto;
+    }
+
+    /* ============================================================
+       FAQ
+       ============================================================ */
+    .zs-faq-list {
+      max-width: 780px;
+      margin: 0 auto;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .zs-faq-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .zs-faq-item[open] {
+      border-color: rgba(212,184,122,0.4);
+      box-shadow: 0 8px 20px rgba(15,41,64,0.06);
+    }
+    .zs-faq-item summary {
+      list-style: none;
+      padding: 16px 20px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.4;
+      user-select: none;
+    }
+    .zs-faq-item summary::-webkit-details-marker { display: none; }
+    .zs-faq-item summary::after {
+      content: '\f078';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      font-size: 0.65rem;
+      color: var(--text-secondary);
+      transition: transform 0.2s;
+      flex-shrink: 0;
+    }
+    .zs-faq-item[open] summary::after { transform: rotate(180deg); color: #B49450; }
+    .zs-faq-body {
+      padding: 0 20px 18px;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    /* ============================================================
+       FINAL CTA
+       ============================================================ */
+    .zs-final-cta {
+      margin: 56px 0 40px;
+      padding: 48px 24px;
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 12% 88%, rgba(212,184,122,0.18), transparent 55%),
+        linear-gradient(135deg, #0b1f33 0%, #142c48 50%, #1a3650 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .zs-final-cta::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      border: 2px solid rgba(212,184,122,0.12);
+      z-index: 0;
+    }
+    .zs-final-cta > * { position: relative; z-index: 1; }
+    .zs-final-cta h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.25;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+    @media (min-width: 768px) { .zs-final-cta h2 { font-size: 2.1rem; } }
+    .zs-final-cta p {
+      font-size: 0.9rem;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.78);
+      max-width: 520px;
+      margin: 0 auto 26px;
+    }
+    @media (min-width: 768px) { .zs-final-cta { padding: 64px 40px; } }
+
+    /* ============================================================
+       MOBILE STICKY CTA
+       ============================================================ */
+    .zs-mobile-cta {
+      display: none;
+    }
+    @media (max-width: 1023px) {
+      .zs-mobile-cta {
+        display: flex;
+        position: fixed;
+        left: 0; right: 0;
+        bottom: calc(72px + env(safe-area-inset-bottom));
+        z-index: 250;
+        background: var(--surface);
+        border-top: 1px solid var(--border);
+        padding: 10px 12px;
+        gap: 8px;
+        box-shadow: 0 -4px 18px rgba(0,0,0,0.08);
+      }
+      .zs-mobile-cta .zs-btn {
+        flex: 1;
+        font-size: 0.82rem;
+        padding: 12px 10px;
+      }
+      .zs-mobile-cta .zs-btn.primary {
+        box-shadow: 0 6px 18px rgba(37,211,102,0.28);
+        background: linear-gradient(135deg, #25D366, #1DA851);
+        color: #fff;
+      }
+      body { padding-bottom: calc(150px + env(safe-area-inset-bottom)) !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ NAVBAR ============ -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="/" class="logo-wrapper">
+        <div class="logo-text">
+          <span class="brand">Zaure</span>
+          <span class="tagline">Buy with Confidence</span>
+        </div>
+      </a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/category.html?slug=all">Browse</a>
+        <a href="/land.html">Land</a>
+        <a href="/zaure-services.html" class="active" style="color:#B49450;font-weight:700;">Services</a>
+        <a href="/about.html">About</a>
+      </div>
+      <div class="nav-actions">
+        <button class="icon-btn" id="themeToggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
+        <a href="/favorites.html" class="icon-btn" style="position:relative;text-decoration:none;">
+          <i class="fas fa-heart"></i>
+          <span id="favBadge">0</span>
+        </a>
+        <div id="headerUserArea">
+          <div class="avatar" id="userAvatar" onclick="openSignup()">ZA</div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <!-- ============ HERO ============ -->
+    <section class="zs-hero">
+      <span class="zs-eyebrow"><i class="fas fa-hand-sparkles"></i> Zaure Services</span>
+      <h1>More than a marketplace.<br><span class="highlight">A full-service platform.</span></h1>
+      <p class="lead">
+        Three professional services built to help Nigerians buy land, clean homes, and move safely — with verified professionals, transparent pricing, and Zaure's trusted guarantee.
+      </p>
+      <div class="zs-hero-actions">
+        <a href="#services" class="zs-btn primary">
+          <i class="fas fa-th-large"></i> Explore services
+        </a>
+        <a href="https://wa.me/2349042339411?text=Hello%20Zaure%2C%20I%20want%20to%20know%20more%20about%20your%20services." target="_blank" rel="noopener" class="zs-btn ghost">
+          <i class="fab fa-whatsapp"></i> Talk to us
+        </a>
+      </div>
+
+      <div class="zs-hero-stats">
+        <div class="zs-stat"><strong>3</strong><span>Services</span></div>
+        <div class="zs-stat"><strong>100%</strong><span>Vetted Pros</span></div>
+        <div class="zs-stat"><strong>Escrow</strong><span>Protected</span></div>
+        <div class="zs-stat"><strong>24/7</strong><span>Support</span></div>
+      </div>
+    </section>
+
+    <!-- ============ SERVICES ============ -->
+    <section id="services" class="zs-section">
+      <div class="zs-section-head">
+        <span class="zs-eyebrow"><i class="fas fa-star"></i> Our Services</span>
+        <h2>Everything you need,<br>under one trusted roof.</h2>
+        <p>Pick a service. We handle the rest — from finding verified land to cleaning and moving your new home.</p>
+      </div>
+
+      <div class="zs-services-grid">
+
+        <!-- ZAURE FINDR -->
+        <a href="/zaure-findr.html" class="zs-service-card findr" aria-label="Explore Zaure Findr">
+          <span class="zs-card-badge">New</span>
+          <div class="zs-card-inner">
+            <div class="zs-card-icon"><i class="fas fa-search-location"></i></div>
+            <h3>Zaure Findr</h3>
+            <p class="desc">Buyer-side land concierge. Tell us what you want — we find, verify, negotiate, and close on your behalf.</p>
+            <ul class="zs-card-features">
+              <li><i class="fas fa-check"></i> Verified title search</li>
+              <li><i class="fas fa-check"></i> Off-platform sourcing</li>
+              <li><i class="fas fa-check"></i> Negotiation &amp; escrow close</li>
+            </ul>
+            <span class="zs-card-cta">Explore Findr <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </a>
+
+        <!-- ZAURE CLEAN -->
+        <a href="/zaure-clean.html" class="zs-service-card clean" aria-label="Explore Zaure Clean">
+          <div class="zs-card-inner">
+            <div class="zs-card-icon"><i class="fas fa-broom"></i></div>
+            <h3>Zaure Clean</h3>
+            <p class="desc">Professional deep cleaning for homes, offices, and post-move spaces — by trained, background-checked cleaners.</p>
+            <ul class="zs-card-features">
+              <li><i class="fas fa-check"></i> Home &amp; office cleaning</li>
+              <li><i class="fas fa-check"></i> Move-in / move-out deep clean</li>
+              <li><i class="fas fa-check"></i> Vetted, insured cleaners</li>
+            </ul>
+            <span class="zs-card-cta">Explore Clean <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </a>
+
+        <!-- ZAURE MOVE -->
+        <a href="/zaure-move.html" class="zs-service-card move" aria-label="Explore Zaure Move">
+          <div class="zs-card-inner">
+            <div class="zs-card-icon"><i class="fas fa-truck-moving"></i></div>
+            <h3>Zaure Move</h3>
+            <p class="desc">Safe, careful moving across Nigeria. Packing, transport, and setup — handled end to end by professionals.</p>
+            <ul class="zs-card-features">
+              <li><i class="fas fa-check"></i> Packing &amp; loading</li>
+              <li><i class="fas fa-check"></i> Inter-city moving</li>
+              <li><i class="fas fa-check"></i> Setup at destination</li>
+            </ul>
+            <span class="zs-card-cta">Explore Move <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- ============ WHY ZAURE SERVICES ============ -->
+    <section class="zs-section">
+      <div class="zs-section-head">
+        <span class="zs-eyebrow"><i class="fas fa-shield-alt"></i> Why Zaure Services</span>
+        <h2>Trust built into every step.</h2>
+        <p>Every Zaure service is designed around the same promise that built this platform — buy with confidence.</p>
+      </div>
+
+      <div class="zs-why-grid">
+        <div class="zs-why-card">
+          <div class="zs-why-icon"><i class="fas fa-user-check"></i></div>
+          <h3>Vetted professionals</h3>
+          <p>Every cleaner, mover, and title lawyer on our roster has passed background checks and a skills review.</p>
+        </div>
+        <div class="zs-why-card">
+          <div class="zs-why-icon"><i class="fas fa-tag"></i></div>
+          <h3>Transparent pricing</h3>
+          <p>You see the full price upfront — no commission, no surprises, no hidden fees after the job starts.</p>
+        </div>
+        <div class="zs-why-card">
+          <div class="zs-why-icon"><i class="fas fa-lock"></i></div>
+          <h3>Escrow-backed payment</h3>
+          <p>Your money stays protected in escrow until the job is done and you confirm you're satisfied.</p>
+        </div>
+        <div class="zs-why-card">
+          <div class="zs-why-icon"><i class="fas fa-headset"></i></div>
+          <h3>Zaure-backed support</h3>
+          <p>Something goes wrong? You have a real Zaure team behind you — not just an anonymous contractor.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ HOW IT WORKS ============ -->
+    <section class="zs-section">
+      <div class="zs-section-head">
+        <span class="zs-eyebrow"><i class="fas fa-route"></i> How it works</span>
+        <h2>Three simple steps.</h2>
+        <p>From booking to delivery, every Zaure service follows the same simple, protected flow.</p>
+      </div>
+
+      <div class="zs-how-grid">
+        <div class="zs-step">
+          <div class="zs-step-num">1</div>
+          <h3>Choose your service</h3>
+          <p>Pick Findr, Clean, or Move. Tell us what you need on WhatsApp or through the service page.</p>
+        </div>
+        <div class="zs-step">
+          <div class="zs-step-num">2</div>
+          <h3>Book &amp; pay securely</h3>
+          <p>Get a fixed quote. Your payment goes into escrow — protected until the job is done right.</p>
+        </div>
+        <div class="zs-step">
+          <div class="zs-step-num">3</div>
+          <h3>We deliver</h3>
+          <p>Vetted professionals handle the job. You confirm satisfaction, escrow releases, everyone wins.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="zs-section">
+      <div class="zs-section-head">
+        <span class="zs-eyebrow"><i class="fas fa-question-circle"></i> FAQ</span>
+        <h2>Questions, answered.</h2>
+        <p>Everything you need to know before you book a Zaure service.</p>
+      </div>
+
+      <div class="zs-faq-list">
+        <details class="zs-faq-item">
+          <summary>Who are the professionals on Zaure Services?</summary>
+          <div class="zs-faq-body">
+            Every cleaner, mover, and title lawyer on our roster has been individually vetted by Zaure — including background checks and a skills review. We only onboard professionals we'd use ourselves.
+          </div>
+        </details>
+
+        <details class="zs-faq-item">
+          <summary>Which cities do you serve?</summary>
+          <div class="zs-faq-body">
+            We're currently live in <strong>Kaduna</strong> and <strong>Abuja</strong>, with expansion to Lagos and Kano planned. Land title verification (Zaure Findr) works nationwide. For other cities, contact us on WhatsApp and we'll see what we can arrange.
+          </div>
+        </details>
+
+        <details class="zs-faq-item">
+          <summary>How does payment work?</summary>
+          <div class="zs-faq-body">
+            You pay into escrow through our partner provider (Paystack / Moniepoint). Your money is held safely until you confirm the job was completed to your satisfaction. If anything goes wrong, we intervene before releasing funds.
+          </div>
+        </details>
+
+        <details class="zs-faq-item">
+          <summary>What if I'm not satisfied with the service?</summary>
+          <div class="zs-faq-body">
+            Contact us immediately on WhatsApp. We'll review the job, arrange a re-do if needed, or refund you from escrow. Your satisfaction is the guarantee — that's the whole point of Zaure Services.
+          </div>
+        </details>
+
+        <details class="zs-faq-item">
+          <summary>Do you take commission from sellers or providers?</summary>
+          <div class="zs-faq-body">
+            No. Zaure has never taken commission from sellers on our marketplace, and we don't take it from service providers either. You pay a clear, upfront service fee — that's it.
+          </div>
+        </details>
+
+        <details class="zs-faq-item">
+          <summary>Can I use Zaure Services outside Nigeria?</summary>
+          <div class="zs-faq-body">
+            Yes — this is exactly what Zaure Findr was built for. If you're in the diaspora and want to buy land in Nigeria without being scammed, Findr handles verification, negotiation, and closing on your behalf. Cleaning and moving require an on-ground presence, but we can coordinate for family or agents too.
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- ============ FINAL CTA ============ -->
+    <section class="zs-final-cta">
+      <h2>Ready to get started?</h2>
+      <p>Pick the service you need. Message us on WhatsApp and we'll take it from there — usually within minutes.</p>
+      <div class="zs-hero-actions">
+        <a href="https://wa.me/2349042339411?text=Hello%20Zaure%2C%20I%20want%20to%20book%20a%20service." target="_blank" rel="noopener" class="zs-btn primary">
+          <i class="fab fa-whatsapp"></i> Book on WhatsApp
+        </a>
+        <a href="#services" class="zs-btn ghost">
+          <i class="fas fa-arrow-up"></i> Back to services
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MOBILE STICKY CTA -->
+  <div class="zs-mobile-cta">
+    <a href="https://wa.me/2349042339411?text=Hello%20Zaure%2C%20I%20want%20to%20book%20a%20service." target="_blank" rel="noopener" class="zs-btn primary">
+      <i class="fab fa-whatsapp"></i> Book on WhatsApp
+    </a>
+    <a href="#services" class="zs-btn ghost" style="background:var(--surface-alt);color:var(--text);border:1px solid var(--border);">
+      <i class="fas fa-th-large"></i> Services
+    </a>
+  </div>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col brand">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <span style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:white;">Zaure</span>
+            <span style="font-size:0.7rem;color:#94A3B8;">Buy with Confidence</span>
+          </div>
+          <p>Nigeria's most trusted online marketplace. Buy, sell, or trade locally. No commission, no middlemen.</p>
+          <div class="social">
+            <a href="https://twitter.com/zauretech" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com/zauretech" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://linkedin.com/company/zauretech" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://facebook.com/zauretech" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Browse</h4>
+          <a href="/category.html?slug=all">All Items</a>
+          <a href="/land.html">Land for Sale</a>
+          <a href="/land.html?type=plot">Plots</a>
+          <a href="/land.html?type=farm">Farms</a>
+          <a href="/category.html?slug=fashion">Fashion</a>
+          <a href="/category.html?slug=electronics">Electronics</a>
+        </div>
+        <div class="footer-col">
+          <h4>Zaure Services</h4>
+          <a href="/zaure-findr.html">Zaure Findr</a>
+          <a href="/zaure-clean.html">Zaure Clean</a>
+          <a href="/zaure-move.html">Zaure Move</a>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <a href="/help.html">Help Center</a>
+          <a href="/faq.html">FAQ</a>
+          <a href="/safety.html">Safety Tips</a>
+          <a href="/contact.html">Contact Us</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="/about.html">About Us</a>
+          <a href="/alamin-ahmed.html">Founder</a>
+          <a href="/careers.html">Careers</a>
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Service</a>
+        </div>
+        <div class="trust-badges">
+          <div class="badges-row">
+            <span class="badge-item"><i class="fas fa-shield-alt"></i> Verified Users</span>
+            <span class="badge-item"><i class="fas fa-handshake"></i> No Commission</span>
+            <span class="badge-item"><i class="fas fa-user-check"></i> Identity Verified</span>
+            <span class="badge-item"><i class="fas fa-lock"></i> Secure Platform</span>
+            <span class="badge-item"><i class="fas fa-clock"></i> 24/7 Support</span>
+            <span class="badge-item"><i class="fas fa-star"></i> Trusted by Thousands</span>
+            <span class="badge-item"><i class="fas fa-phone"></i> Direct Contact</span>
+            <span class="badge-item"><i class="fas fa-credit-card"></i> Secure Payments</span>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>&copy; 2026 <strong>Zaure Technologies</strong>. All rights reserved.</span>
+          <span class="footer-lang"><i class="fas fa-globe"></i> Nigeria · English</span>
+        </div>
+        <div style="grid-column: 1/-1; text-align: center; margin-top: 8px; font-size: 0.8rem; color: #94A3B8;">
+          For info or to report an issue, contact us on WhatsApp: <a href="https://wa.me/2349042339411" target="_blank" style="color: #D4B87A; text-decoration: none; font-weight: 600;">+2349042339411</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BOTTOM NAV (mobile) -->
+  <div class="bottom-nav">
+    <a href="/" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
+    <a href="/categories.html" class="nav-item"><i class="fas fa-th-large"></i><span>Categories</span></a>
+    <button class="post-btn" id="fabPostAd"><i class="fas fa-plus"></i></button>
+    <a href="/favorites.html" class="nav-item"><i class="fas fa-heart"></i><span>Favorites</span></a>
+    <a href="/profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
+  </div>
+
+  <!-- SIGNUP MODAL -->
+  <div class="modal-overlay" id="signupModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Create your account</h3>
+        <button class="modal-close" id="closeSignupModalBtn"><i class="fas fa-times"></i></button>
+      </div>
+      <form id="signupForm" class="modal-form">
+        <label for="signupName">Full Name</label>
+        <input type="text" id="signupName" placeholder="Enter your full name" required>
+        <label for="signupPhone">Phone Number</label>
+        <input type="tel" id="signupPhone" placeholder="Enter your phone number" required>
+        <label>State</label>
+        <div class="custom-select" id="stateSelect">
+          <div class="custom-select-trigger" id="stateTrigger">
+            <span>Select your state</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="custom-select-dropdown" id="stateDropdown">
+            <input type="text" id="stateSearchInput" placeholder="Search state...">
+            <ul class="custom-select-options" id="stateOptionsList"></ul>
+          </div>
+        </div>
+        <input type="hidden" id="signupState" value="">
+        <label class="terms-checkbox">
+          <input type="checkbox" id="termsCheckbox" required>
+          <span>By creating an account, you agree to Zaure's <a href="/terms.html" target="_blank">Terms & Conditions</a> and <a href="/privacy.html" target="_blank">Privacy Policy</a>.</span>
+        </label>
+        <button type="submit" class="btn-primary">Sign Up</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/main.js"></script>
+  <script>
+    (function initStateDropdownInline() {
+      const nigerianStates = [
+        'Abia','Adamawa','Akwa Ibom','Anambra','Bauchi','Bayelsa','Benue','Borno',
+        'Cross River','Delta','Ebonyi','Edo','Ekiti','Enugu','FCT','Gombe','Imo',
+        'Jigawa','Kaduna','Kano','Katsina','Kebbi','Kogi','Kwara','Lagos','Nasarawa',
+        'Niger','Ogun','Ondo','Osun','Oyo','Plateau','Rivers','Sokoto','Taraba','Yobe','Zamfara'
+      ];
+      const selectContainer = document.getElementById('stateSelect');
+      const trigger = document.getElementById('stateTrigger');
+      const searchInput = document.getElementById('stateSearchInput');
+      const optionsList = document.getElementById('stateOptionsList');
+      const hiddenInput = document.getElementById('signupState');
+      if (!selectContainer || !trigger || !searchInput || !optionsList || !hiddenInput) return;
+      function renderOptions(filter = '') {
+        const filtered = nigerianStates.filter(s => s.toLowerCase().includes(filter.toLowerCase()));
+        optionsList.innerHTML = filtered.length
+          ? filtered.map(s => `<li data-value="${s}">${s}</li>`).join('')
+          : '<li style="text-align:center;color:#94A3B8;">No state found</li>';
+        optionsList.querySelectorAll('li').forEach(li => {
+          li.addEventListener('click', function(e) {
+            e.stopPropagation();
+            hiddenInput.value = this.dataset.value;
+            trigger.querySelector('span').textContent = this.dataset.value;
+            selectContainer.classList.remove('active');
+            searchInput.value = '';
+            renderOptions();
+          });
+        });
+      }
+      renderOptions();
+      trigger.addEventListener('click', e => {
+        e.preventDefault(); e.stopPropagation();
+        selectContainer.classList.toggle('active');
+        if (selectContainer.classList.contains('active')) setTimeout(() => searchInput.focus(), 50);
+      });
+      searchInput.addEventListener('input', e => { e.stopPropagation(); renderOptions(this.value); });
+      searchInput.addEventListener('click', e => e.stopPropagation());
+      document.addEventListener('click', e => {
+        if (!selectContainer.contains(e.target)) selectContainer.classList.remove('active');
+      });
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') selectContainer.classList.remove('active');
+      });
+    })();
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href').slice(1);
+        if (!targetId) return;
+        const el = document.getElementById(targetId);
+        if (el) {
+          e.preventDefault();
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
