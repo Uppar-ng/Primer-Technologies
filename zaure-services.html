@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <title>Zaure Services — Find, Clean, Move, Deliver</title>
-  <meta name="description" content="Four services. One standard. Land concierge, professional cleaning, careful moving, and fast delivery — vetted professionals, upfront pricing, done right.">
-  <meta name="keywords" content="Zaure services, land concierge Nigeria, cleaning service Nigeria, moving service Nigeria, delivery service Nigeria, zaure findr, zaure clean, zaure move, zaure delivery">
+  <meta name="description" content="Four services. One standard. Land concierge, post-construction cleaning, careful moving, and delivery — trained crews, supervised jobs, done right.">
+  <meta name="keywords" content="Zaure services, land concierge Nigeria, post construction cleaning Kaduna, pest control Kaduna, weed control Kaduna, moving service Kaduna, delivery service Nigeria, zaure findr, zaure clean, zaure move, zaure delivery">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://zauretech.xyz/zaure-services.html">
   <meta name="theme-color" content="#0b1f33">
@@ -13,7 +13,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://zauretech.xyz/zaure-services.html">
   <meta property="og:title" content="Zaure Services — Find, Clean, Move, Deliver">
-  <meta property="og:description" content="Four services. One standard. Vetted professionals, upfront pricing, done right.">
+  <meta property="og:description" content="Four services. One standard. Trained crews, supervised jobs, done right.">
   <meta property="og:image" content="https://zauretech.xyz/assets/logo-icon.svg">
   <meta property="og:site_name" content="Zaure">
 
@@ -29,7 +29,7 @@
     @media (min-width: 1024px) { .container { padding-left: 24px; padding-right: 24px; } }
 
     /* ============================================================
-       HERO — big, quiet, confident
+       HERO
        ============================================================ */
     .zs-hero {
       position: relative;
@@ -109,10 +109,7 @@
       letter-spacing: 0.1px;
     }
     .zs-btn:active { transform: scale(0.97); }
-    .zs-btn.primary {
-      background: #D4B87A;
-      color: #0b1f33;
-    }
+    .zs-btn.primary { background: #D4B87A; color: #0b1f33; }
     .zs-btn.primary:hover { filter: brightness(1.08); }
     .zs-btn.ghost {
       background: rgba(255,255,255,0.06);
@@ -122,15 +119,10 @@
     .zs-btn.ghost:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.3); }
 
     /* ============================================================
-       SECTION HEAD (minimal)
+       SECTION HEAD
        ============================================================ */
-    .zs-services-section {
-      margin: 0 0 20px;
-    }
-    .zs-section-head {
-      text-align: center;
-      margin-bottom: 36px;
-    }
+    .zs-services-section { margin: 0 0 20px; }
+    .zs-section-head { text-align: center; margin-bottom: 36px; }
     .zs-section-head .zs-eyebrow {
       background: rgba(212,184,122,0.08);
       border-color: rgba(212,184,122,0.3);
@@ -145,18 +137,25 @@
       letter-spacing: -0.6px;
       line-height: 1.2;
     }
+    .zs-section-head p {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      max-width: 520px;
+      margin: 10px auto 0;
+    }
 
     /* ============================================================
-       SERVICE GRID — 4 self-contained cards
+       SERVICE GRID
        ============================================================ */
     .zs-service-grid {
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
       gap: 16px;
       margin-bottom: 48px;
     }
     @media (min-width: 768px) {
-      .zs-service-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+      .zs-service-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
     }
     @media (min-width: 1024px) {
       .zs-service-grid { gap: 24px; margin-bottom: 64px; }
@@ -264,9 +263,9 @@
       gap: 8px;
     }
     .zs-card-features li {
-      font-size: 0.76rem;
+      font-size: 0.78rem;
       font-weight: 500;
-      color: rgba(255,255,255,0.72);
+      color: rgba(255,255,255,0.78);
       display: flex;
       align-items: center;
       gap: 10px;
@@ -292,6 +291,7 @@
       font-weight: 700;
       text-decoration: none;
       align-self: flex-start;
+      margin-top: auto;
       transition: filter 0.2s, transform 0.15s;
       position: relative;
       z-index: 1;
@@ -299,14 +299,52 @@
     }
     .zs-card-cta:hover { filter: brightness(1.1); }
     .zs-card-cta:active { transform: scale(0.97); }
-    .zs-card-cta i {
-      font-size: 0.62rem;
-      transition: transform 0.2s;
-    }
+    .zs-card-cta i { font-size: 0.62rem; transition: transform 0.2s; }
     .zs-card-cta:hover i { transform: translateX(3px); }
 
     /* ============================================================
-       TRUST BAND (single statement line)
+       HOW IT WORKS (Clean & Move)
+       ============================================================ */
+    .zs-steps-section { margin-bottom: 56px; }
+    .zs-steps {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 12px;
+    }
+    @media (min-width: 640px) { .zs-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (min-width: 1024px) { .zs-steps { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; } }
+
+    .zs-step {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px 20px;
+    }
+    .zs-step-num {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: #0b1f33;
+      color: #D4B87A;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 14px;
+    }
+    .zs-step h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .zs-step p {
+      font-size: 0.82rem;
+      line-height: 1.55;
+      color: var(--text-secondary);
+    }
+
+    /* ============================================================
+       TRUST BAND
        ============================================================ */
     .zs-trust-band {
       background: var(--surface);
@@ -341,21 +379,13 @@
       font-weight: 600;
       color: var(--text-secondary);
     }
-    .zs-trust-pills i {
-      color: #B49450;
-      font-size: 0.62rem;
-    }
+    .zs-trust-pills i { color: #B49450; font-size: 0.62rem; }
 
     /* ============================================================
        FAQ
        ============================================================ */
-    .zs-faq {
-      margin-bottom: 64px;
-    }
-    .zs-faq-head {
-      text-align: center;
-      margin-bottom: 32px;
-    }
+    .zs-faq { margin-bottom: 64px; }
+    .zs-faq-head { text-align: center; margin-bottom: 32px; }
     .zs-faq-head h2 {
       font-family: 'Playfair Display', serif;
       font-size: clamp(1.4rem, 3.5vw, 1.85rem);
@@ -373,10 +403,7 @@
       border-radius: 16px;
       overflow: hidden;
     }
-    .zs-faq-item {
-      background: var(--surface);
-      border: none;
-    }
+    .zs-faq-item { background: var(--surface); border: none; }
     .zs-faq-item summary {
       list-style: none;
       padding: 20px 24px;
@@ -409,27 +436,6 @@
       font-size: 0.86rem;
       line-height: 1.65;
       color: var(--text-secondary);
-    }
-
-    /* ============================================================
-       MOBILE STICKY CTA
-       ============================================================ */
-    .zs-mobile-cta { display: none; }
-    @media (max-width: 1023px) {
-      .zs-mobile-cta {
-        display: flex;
-        position: fixed;
-        left: 0; right: 0;
-        bottom: calc(72px + env(safe-area-inset-bottom));
-        z-index: 250;
-        background: var(--surface);
-        border-top: 1px solid var(--border);
-        padding: 10px 12px;
-        gap: 8px;
-        box-shadow: 0 -4px 18px rgba(0,0,0,0.08);
-      }
-      .zs-mobile-cta .zs-btn { flex: 1; font-size: 0.82rem; padding: 12px 10px; }
-      body { padding-bottom: calc(150px + env(safe-area-inset-bottom)) !important; }
     }
   </style>
 </head>
@@ -470,8 +476,8 @@
       <span class="zs-eyebrow"><i class="fas fa-hand-sparkles"></i> Zaure Services</span>
       <h1>Four services.<br><span class="accent">One standard.</span></h1>
       <p class="lead">
-        Land concierge. Professional cleaning. Careful moving. Fast delivery.<br>
-        Vetted professionals. Upfront pricing. Done right.
+        Land concierge. Post-construction cleaning. Careful moving. Delivery.<br>
+        Trained crews. Supervised jobs. Done right.
       </p>
       <div class="zs-hero-actions">
         <a href="#services" class="zs-btn primary">
@@ -500,11 +506,12 @@
           </div>
           <div class="zs-card-body">
             <h3 class="zs-card-name">Zaure Findr</h3>
-            <p class="zs-card-tagline">Buyer-side land concierge. We find it, verify it, negotiate it. You close it.</p>
+            <p class="zs-card-tagline">Buyer-side land concierge. We find it and verify it. You close it.</p>
             <ul class="zs-card-features">
-              <li>Title verification by partner lawyers</li>
+              <li>Land search for your budget and location</li>
+              <li>Title and document verification</li>
               <li>Off-platform sourcing from owners &amp; families</li>
-              <li>Negotiation and closing on your behalf</li>
+              <li>Support through to closing</li>
             </ul>
             <a href="/zaure-findr.html" class="zs-card-cta">
               Book Findr <i class="fas fa-arrow-right"></i>
@@ -520,11 +527,12 @@
           </div>
           <div class="zs-card-body">
             <h3 class="zs-card-name">Zaure Clean</h3>
-            <p class="zs-card-tagline">Deep cleaning for homes and offices. A standard you'll notice from the door.</p>
+            <p class="zs-card-tagline">Specialist post-construction cleaning for contractors, developers and landlords. We do the last job on site, so your handover is ready.</p>
             <ul class="zs-card-features">
-              <li>Home &amp; office deep cleaning</li>
-              <li>Move-in / move-out reset</li>
-              <li>Background-checked, insured cleaners</li>
+              <li>Post-construction cleaning, rough clean to final polish</li>
+              <li>Pest control and pre-handover fumigation</li>
+              <li>Weed control and compound clearing</li>
+              <li>Carpet cleaning</li>
             </ul>
             <a href="/zaure-clean.html" class="zs-card-cta">
               Book Clean <i class="fas fa-arrow-right"></i>
@@ -540,11 +548,12 @@
           </div>
           <div class="zs-card-body">
             <h3 class="zs-card-name">Zaure Move</h3>
-            <p class="zs-card-tagline">Packing, loading, transport, setup. Across the street or across Nigeria.</p>
+            <p class="zs-card-tagline">Small and medium moves across Kaduna for students, families, small offices, shops and landlords. One supervisor, one schedule, one crew from your door to the new one.</p>
             <ul class="zs-card-features">
-              <li>Full-service packing and loading</li>
-              <li>Inter-city relocation</li>
-              <li>Setup at destination</li>
+              <li>Packing &amp; wrapping, boxes supplied if you need them</li>
+              <li>Loading &amp; unloading</li>
+              <li>Transport coordination</li>
+              <li>Supervisor on site from start to finish</li>
             </ul>
             <a href="/zaure-move.html" class="zs-card-cta">
               Book Move <i class="fas fa-arrow-right"></i>
@@ -560,11 +569,11 @@
           </div>
           <div class="zs-card-body">
             <h3 class="zs-card-name">Zaure Delivery</h3>
-            <p class="zs-card-tagline">Same-city pickup and drop. Documents, parcels, packages — tracked end to end.</p>
+            <p class="zs-card-tagline">We go to your location, collect your items and deliver them for you.</p>
             <ul class="zs-card-features">
-              <li>Intra-city pickup and drop</li>
+              <li>Pickup from your location</li>
+              <li>Delivery to your destination</li>
               <li>Documents, parcels &amp; small items</li>
-              <li>Tracked from pickup to delivery</li>
             </ul>
             <a href="/zaure-delivery.html" class="zs-card-cta">
               Book Delivery <i class="fas fa-arrow-right"></i>
@@ -575,16 +584,47 @@
       </div>
     </section>
 
+    <!-- ============ HOW IT WORKS ============ -->
+    <section class="zs-steps-section">
+      <div class="zs-section-head">
+        <span class="zs-eyebrow"><i class="fas fa-list-ol"></i> How it works</span>
+        <h2>Booking Clean or Move in four steps.</h2>
+        <p>From first contact to done, the same simple process.</p>
+      </div>
+      <div class="zs-steps">
+        <div class="zs-step">
+          <div class="zs-step-num">1</div>
+          <h3>Get a quote</h3>
+          <p>Fill the form. We reply on WhatsApp within 2–4 hours with your quote.</p>
+        </div>
+        <div class="zs-step">
+          <div class="zs-step-num">2</div>
+          <h3>Confirm your date</h3>
+          <p>A 50% deposit locks your slot. The balance is paid on completion.</p>
+        </div>
+        <div class="zs-step">
+          <div class="zs-step-num">3</div>
+          <h3>We arrive</h3>
+          <p>Our supervisor and crew arrive ready, with the equipment and materials needed.</p>
+        </div>
+        <div class="zs-step">
+          <div class="zs-step-num">4</div>
+          <h3>Done and documented</h3>
+          <p>You check the work with us, and a written completion report follows every job.</p>
+        </div>
+      </div>
+    </section>
+
     <!-- ============ TRUST BAND ============ -->
     <section class="zs-trust-band">
       <p class="zs-statement">
-        Book in under a minute. Pay the price you see. <span class="dim">We show up and do the job right.</span>
+        Quote in 2–4 hours. 50% deposit locks your date. <span class="dim">We show up and do the job right.</span>
       </p>
       <div class="zs-trust-pills">
-        <span><i class="fas fa-check-circle"></i> Vetted professionals</span>
-        <span><i class="fas fa-check-circle"></i> Upfront pricing</span>
-        <span><i class="fas fa-check-circle"></i> Real human support</span>
-        <span><i class="fas fa-check-circle"></i> Direct booking</span>
+        <span><i class="fas fa-check-circle"></i> Trained crews</span>
+        <span><i class="fas fa-check-circle"></i> Supervisor on every job</span>
+        <span><i class="fas fa-check-circle"></i> Written completion report</span>
+        <span><i class="fas fa-check-circle"></i> Free cancellation up to 48 hours before</span>
       </div>
     </section>
 
@@ -596,53 +636,43 @@
 
       <div class="zs-faq-list">
         <details class="zs-faq-item">
-          <summary>Which cities do you serve?</summary>
+          <summary>Where do you work?</summary>
           <div class="zs-faq-body">
-            Zaure Findr works nationwide — land verification has no city limit. Cleaning, moving, and delivery are live in <strong>Kaduna</strong> and <strong>Abuja</strong>, expanding to Lagos and Kano soon. For other cities, message us on WhatsApp.
+            <strong>Zaure Clean</strong> and <strong>Zaure Move</strong> cover Kaduna city (Barnawa, GRA, Malali, City Centre, Rigasa, Kawo, Unguwan Rimi, Tudun Wada) and nearby towns (Zaria, Kafanchan, Kujama). Kaduna to Abuja moves are available on request. <strong>Zaure Findr</strong> works nationwide. For delivery or any other location, message us on WhatsApp.
           </div>
         </details>
 
         <details class="zs-faq-item">
-          <summary>Who are the professionals?</summary>
+          <summary>Who does the work?</summary>
           <div class="zs-faq-body">
-            Every Zaure pro is vetted: background-checked, skills-tested, and continuously reviewed. We don't onboard anyone we wouldn't use ourselves.
+            Every Zaure Clean and Zaure Move job is led by a Zaure supervisor with a trained crew, and ends with a written completion report. Cleaning work is fully insured. Moves are supported by our vetted network of vehicle owners.
           </div>
         </details>
 
         <details class="zs-faq-item">
-          <summary>How does pricing work?</summary>
+          <summary>How do quotes and payment work?</summary>
           <div class="zs-faq-body">
-            You see the full price before you book. No commission, no hidden fees, no surprise charges after the job starts. What you see is what you pay.
+            Send a request and we reply on WhatsApp within 2–4 hours (Mon–Sat) with your quote. A 50% deposit locks your date and the other 50% is paid on completion. Payment is by bank transfer only, and we issue receipts for both payments. Same-day requests depend on crew and vehicle availability.
           </div>
         </details>
 
         <details class="zs-faq-item">
-          <summary>What if I'm not satisfied?</summary>
+          <summary>Can I cancel or reschedule?</summary>
           <div class="zs-faq-body">
-            Message us on WhatsApp. We'll review the job and arrange a re-do or a fair refund. That's the standard — no exceptions.
+            Cancel up to 48 hours before your date for a full deposit refund. For Zaure Move, the deposit is forfeited if you cancel within 48 hours. For larger sites, weekend jobs and big crews, please book at least 3 days ahead.
           </div>
         </details>
 
         <details class="zs-faq-item">
           <summary>Findr, Clean, Move, Delivery — which do I need?</summary>
           <div class="zs-faq-body">
-            <strong>Findr</strong> to buy land. <strong>Clean</strong> to clean a home or office. <strong>Move</strong> to relocate everything to a new address. <strong>Delivery</strong> to send a parcel or small item across your city.
+            <strong>Findr</strong> to find and verify land to buy. <strong>Clean</strong> for post-construction cleaning, pest control, weed control or carpet cleaning. <strong>Move</strong> to relocate a home, shop or small office. <strong>Delivery</strong> to have us collect items from one place and deliver them to another.
           </div>
         </details>
       </div>
     </section>
 
   </main>
-
-  <!-- MOBILE STICKY CTA -->
-  <div class="zs-mobile-cta">
-    <a href="#services" class="zs-btn primary">
-      See the services
-    </a>
-    <a href="https://wa.me/2349042339411?text=Hello%20Zaure%2C%20I%20have%20a%20question." target="_blank" rel="noopener" class="zs-btn ghost" style="background:var(--surface-alt);color:var(--text);border:1px solid var(--border);">
-      <i class="fab fa-whatsapp"></i> Chat
-    </a>
-  </div>
 
   <!-- ============ FOOTER ============ -->
   <footer class="footer">
@@ -792,7 +822,7 @@
         selectContainer.classList.toggle('active');
         if (selectContainer.classList.contains('active')) setTimeout(() => searchInput.focus(), 50);
       });
-      searchInput.addEventListener('input', e => { e.stopPropagation(); renderOptions(this.value); });
+      searchInput.addEventListener('input', e => { e.stopPropagation(); renderOptions(e.target.value); });
       searchInput.addEventListener('click', e => e.stopPropagation());
       document.addEventListener('click', e => {
         if (!selectContainer.contains(e.target)) selectContainer.classList.remove('active');
