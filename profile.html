@@ -3,66 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-  <title>Zaure – Buy &amp; Sell Locally in Nigeria | Online Marketplace</title>
-  <meta name="description" content="Zaure is Nigeria's most trusted online marketplace. Buy, sell, or trade items locally in Lagos, Abuja, Kano &amp; across Nigeria. Post free ads, no commission, connect with verified buyers &amp; sellers instantly.">
-  <meta name="keywords" content="online marketplace Nigeria, buy and sell Nigeria, free ads Nigeria, marketplace Nigeria, property for sale Nigeria, cars for sale Nigeria, electronics Nigeria, furniture Nigeria, fashion Nigeria, real estate Nigeria, land for sale Nigeria">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://zauretech.xyz/">
-  <meta name="google-site-verification" content="google136f38ae653f16ba">
+  <title>My Profile — Zaure</title>
+  <meta name="description" content="Your Zaure account — manage listings, favorites, and book Zaure services.">
   <meta name="theme-color" content="#1a3650">
-
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://zauretech.xyz/">
-  <meta property="og:title" content="Zaure – Buy &amp; Sell Locally in Nigeria | Online Marketplace">
-  <meta property="og:description" content="Zaure is Nigeria's most trusted online marketplace. Buy, sell, or trade items locally. Post free ads, no commission.">
-  <meta property="og:image" content="https://zauretech.xyz/assets/logo-icon.svg">
-  <meta property="og:image:type" content="image/svg+xml">
-  <meta property="og:image:alt" content="Zaure – Buy with Confidence">
-  <meta property="og:site_name" content="Zaure">
-
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@zauretech">
-  <meta name="twitter:title" content="Zaure – Buy &amp; Sell Locally in Nigeria">
-  <meta name="twitter:description" content="Nigeria's most trusted online marketplace. Buy with Confidence.">
-  <meta name="twitter:image" content="https://zauretech.xyz/assets/logo-icon.svg">
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "Zaure",
-    "alternateName": ["ZaureTech", "Zaure Technologies"],
-    "url": "https://zauretech.xyz/"
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Zaure",
-    "alternateName": "Zaure Technologies",
-    "url": "https://zauretech.xyz",
-    "logo": "https://zauretech.xyz/assets/logo-icon.svg",
-    "description": "Nigeria's most trusted online marketplace. Buy with Confidence.",
-    "foundingDate": "2025",
-    "founder": {
-      "@type": "Person",
-      "name": "Alamin Ahmed",
-      "jobTitle": "Founder & President"
-    },
-    "sameAs": [
-      "https://twitter.com/zauretech",
-      "https://instagram.com/zauretech",
-      "https://linkedin.com/company/zauretech",
-      "https://facebook.com/zauretech"
-    ]
-  }
-  </script>
-
   <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
-  <link rel="apple-touch-icon" href="/assets/logo-icon.svg">
-  <link rel="manifest" href="/site.webmanifest">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
@@ -70,668 +14,546 @@
     .container { padding-left: 16px; padding-right: 16px; }
     @media (min-width: 1024px) { .container { padding-left: 24px; padding-right: 24px; } }
 
-    .section-title {
-      margin-top: 36px !important; margin-bottom: 16px !important;
-      font-size: 1.35rem; letter-spacing: -0.4px;
+    /* ============ PAGE HEADER ============ */
+    .profile-page-head {
+      padding: 32px 0 24px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 28px;
     }
-    @media (min-width: 1024px) {
-      .section-title { margin-top: 48px !important; margin-bottom: 20px !important; font-size: 1.5rem; }
+    .profile-page-head h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.6px;
+      margin: 0 0 4px;
     }
-
-    .grid-2col-listings {
-      display: grid; grid-template-columns: repeat(2, 1fr);
-      gap: 12px; margin-bottom: 12px;
-    }
-    @media (min-width: 640px) { .grid-2col-listings { grid-template-columns: repeat(3, 1fr); gap: 16px; } }
-    @media (min-width: 1024px) { .grid-2col-listings { grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 24px; } }
-
-    .grid-2col { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    @media (min-width: 480px) { .grid-2col { grid-template-columns: repeat(3, 1fr); } }
-    @media (min-width: 1024px) { .grid-2col { grid-template-columns: repeat(6, 1fr); gap: 14px; } }
-
-    @media (min-width: 1024px) {
-      .listing-card, .category-card, .storefront-card, .land-card {
-        transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
-      }
-      .listing-card:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 16px 32px rgba(15,41,64,0.12);
-        border-color: rgba(212,184,122,0.4);
-      }
-      .category-card:hover { transform: translateY(-4px) scale(1.02); }
+    .profile-page-head p {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      margin: 0;
+      line-height: 1.55;
     }
 
-    /* =====================================================
-       ZAURE SERVICES — heading + auto-scrolling marquee
-       ===================================================== */
-    .zaure-services-wrap {
-      margin: 18px 0 24px;
+    /* ============ PROFILE CARD (flat, minimal) ============ */
+    .profile-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 28px;
     }
-    @media (min-width: 1024px) {
-      .zaure-services-wrap { margin: 24px 0 30px; }
+    .profile-card-top {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .profile-avatar {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: #1a3650;
+      color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; font-weight: 800;
+      letter-spacing: -1px;
+      flex-shrink: 0;
+    }
+    @media (min-width: 640px) {
+      .profile-avatar { width: 72px; height: 72px; font-size: 1.7rem; }
+    }
+    .profile-details { flex: 1; min-width: 180px; }
+    .profile-details h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.3px;
+      margin: 0 0 4px;
+      line-height: 1.2;
+    }
+    .profile-details .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 14px;
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+    .profile-details .meta span {
+      display: inline-flex; align-items: center; gap: 5px;
+    }
+    .profile-details .meta i { font-size: 0.68rem; opacity: 0.7; }
+    .verified-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 0.66rem; font-weight: 700;
+      color: #1a3650;
+      background: rgba(26,54,80,0.08);
+      border: 1px solid rgba(26,54,80,0.18);
+      padding: 3px 10px;
+      border-radius: 30px;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+    [data-theme="dark"] .verified-badge {
+      color: #D4B87A;
+      background: rgba(212,184,122,0.1);
+      border-color: rgba(212,184,122,0.3);
+    }
+    .verified-badge i { font-size: 0.55rem; }
+
+    .profile-edit {
+      flex-shrink: 0;
+      padding: 9px 18px;
+      border-radius: 40px;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .profile-edit:hover {
+      border-color: #1a3650;
+      background: #1a3650;
+      color: #fff;
+    }
+    [data-theme="dark"] .profile-edit:hover {
+      border-color: #D4B87A;
+      background: #D4B87A;
+      color: #0f2940;
+    }
+    .profile-edit i { font-size: 0.68rem; }
+
+    /* Stats row */
+    .profile-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      background: var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    @media (min-width: 640px) { .profile-stats { grid-template-columns: repeat(4, 1fr); } }
+    .stat {
+      background: var(--surface);
+      padding: 14px 12px;
+      text-align: center;
+    }
+    .stat .num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.1;
+      margin-bottom: 3px;
+    }
+    .stat .label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
     }
 
-    .zaure-services-head {
+    /* ============ SECTION HEADING ============ */
+    .section-head {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       flex-wrap: wrap;
     }
-    .zaure-services-title {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
+    .section-head h3 {
       font-family: 'Playfair Display', serif;
       font-size: 1.1rem;
       font-weight: 800;
       color: var(--text);
       letter-spacing: -0.3px;
+      margin: 0;
     }
-    @media (min-width: 640px) { .zaure-services-title { font-size: 1.25rem; } }
-    @media (min-width: 1024px) { .zaure-services-title { font-size: 1.4rem; } }
-    .zaure-services-title .zs-tag {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.56rem;
-      font-weight: 800;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: #B49450;
-      background: rgba(212,184,122,0.12);
-      border: 1px solid rgba(212,184,122,0.35);
-      padding: 3px 9px;
-      border-radius: 20px;
+    .section-head a {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-decoration: none;
       display: inline-flex;
       align-items: center;
       gap: 4px;
+      transition: color 0.2s;
     }
-    .zaure-services-title .zs-tag i { font-size: 0.5rem; }
+    .section-head a:hover { color: #1a3650; }
+    [data-theme="dark"] .section-head a:hover { color: #D4B87A; }
+    .section-head a i { font-size: 0.6rem; }
 
-    .zaure-services-view-more {
+    /* ============ SERVICE LINKS (flat, no gradients) ============ */
+    .service-links {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+    @media (min-width: 640px) { .service-links { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .service-links { grid-template-columns: repeat(4, 1fr); } }
+
+    .service-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .service-link:hover {
+      border-color: #1a3650;
+      background: var(--surface-alt);
+    }
+    [data-theme="dark"] .service-link:hover { border-color: #D4B87A; }
+    .service-link-icon {
+      width: 36px; height: 36px;
+      border-radius: 9px;
+      background: rgba(26,54,80,0.08);
+      color: #1a3650;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+    [data-theme="dark"] .service-link-icon {
+      background: rgba(212,184,122,0.12);
+      color: #D4B87A;
+    }
+    .service-link-body { flex: 1; min-width: 0; }
+    .service-link-body h4 {
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 0 0 2px;
+      line-height: 1.2;
+    }
+    .service-link-body p {
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+      margin: 0;
+      line-height: 1.35;
+    }
+    .service-link-arrow {
+      color: var(--text-secondary);
+      font-size: 0.6rem;
+      flex-shrink: 0;
+    }
+
+    /* ============ MENU LIST ============ */
+    .menu-list {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+    .menu-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--text);
+      background: transparent;
+      cursor: pointer;
+      width: 100%;
+      text-align: left;
+      font-family: inherit;
+      font-size: 0.88rem;
+      border-left: none;
+      border-right: none;
+      border-top: none;
+      transition: background 0.15s;
+    }
+    .menu-row:last-child { border-bottom: none; }
+    .menu-row:hover { background: var(--surface-alt); }
+    .menu-row-icon {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      background: rgba(26,54,80,0.06);
+      color: #1a3650;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.78rem;
+      flex-shrink: 0;
+    }
+    [data-theme="dark"] .menu-row-icon {
+      background: rgba(212,184,122,0.1);
+      color: #D4B87A;
+    }
+    .menu-row-body { flex: 1; min-width: 0; }
+    .menu-row-body .title {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 0 0 1px;
+    }
+    .menu-row-body .sub {
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+    .menu-row-arrow {
+      color: var(--text-secondary);
+      font-size: 0.6rem;
+      flex-shrink: 0;
+    }
+    .menu-row.danger .menu-row-icon { background: rgba(231,76,60,0.08); color: #c0392b; }
+    .menu-row.danger .menu-row-body .title { color: #c0392b; }
+    [data-theme="dark"] .menu-row.danger .menu-row-icon { background: rgba(231,76,60,0.15); color: #ff7b7b; }
+    [data-theme="dark"] .menu-row.danger .menu-row-body .title { color: #ff7b7b; }
+
+    /* ============ EMPTY STATE ============ */
+    .empty-block {
+      padding: 28px 20px;
+      text-align: center;
+      background: var(--surface);
+      border: 1px dashed var(--border);
+      border-radius: 14px;
+      color: var(--text-secondary);
+      font-size: 0.86rem;
+      margin-bottom: 28px;
+    }
+    .empty-block i {
+      font-size: 1.5rem;
+      display: block;
+      margin-bottom: 8px;
+      opacity: 0.35;
+    }
+    .empty-block a {
+      color: #1a3650;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 6px;
+    }
+    [data-theme="dark"] .empty-block a { color: #D4B87A; }
+
+    /* ============ SIGNED-OUT STATE ============ */
+    .signed-out-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px 24px;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .signed-out-card .icon {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: rgba(26,54,80,0.08);
+      color: #1a3650;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      margin: 0 auto 16px;
+    }
+    [data-theme="dark"] .signed-out-card .icon {
+      background: rgba(212,184,122,0.1);
+      color: #D4B87A;
+    }
+    .signed-out-card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--text);
+      margin: 0 0 8px;
+      letter-spacing: -0.3px;
+    }
+    .signed-out-card p {
+      font-size: 0.86rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      max-width: 400px;
+      margin: 0 auto 18px;
+    }
+    .signed-out-card .btn-primary {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 8px 16px;
+      gap: 7px;
+      padding: 11px 24px;
       border-radius: 40px;
-      background: transparent;
-      border: 1.5px solid var(--border);
-      color: var(--text);
-      font-family: inherit;
-      font-size: 0.76rem;
-      font-weight: 700;
-      text-decoration: none;
-      transition: all 0.2s;
-      white-space: nowrap;
-    }
-    .zaure-services-view-more i { font-size: 0.6rem; transition: transform 0.2s; }
-    .zaure-services-view-more:hover {
-      border-color: #1a3650;
       background: #1a3650;
       color: #fff;
+      border: none;
+      font-family: inherit;
+      font-size: 0.84rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: filter 0.2s;
     }
-    [data-theme="dark"] .zaure-services-view-more:hover {
-      border-color: #D4B87A;
+    .signed-out-card .btn-primary:hover { filter: brightness(1.1); }
+    [data-theme="dark"] .signed-out-card .btn-primary {
       background: #D4B87A;
       color: #0f2940;
     }
-    .zaure-services-view-more:hover i { transform: translateX(3px); }
+    .signed-out-card .btn-primary i { font-size: 0.72rem; }
 
-    .service-marquee {
-      position: relative;
-      overflow: hidden;
-      -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 4%, #000 96%, transparent 100%);
-      mask-image: linear-gradient(90deg, transparent 0, #000 4%, #000 96%, transparent 100%);
-    }
-    .service-marquee-track {
-      display: flex;
-      gap: 12px;
-      width: max-content;
-      will-change: transform;
-      animation: serviceMarqueeScroll 36s linear infinite;
-    }
-    .service-marquee:hover .service-marquee-track,
-    .service-marquee:focus-within .service-marquee-track {
-      animation-play-state: paused;
-    }
-    @keyframes serviceMarqueeScroll {
-      from { transform: translateX(0); }
-      to { transform: translateX(var(--marquee-shift, -25%)); }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .service-marquee {
-        overflow-x: auto;
-        -webkit-mask-image: none;
-        mask-image: none;
-      }
-      .service-marquee-track { animation: none; }
-    }
-
-    .service-marquee-card {
-      flex: 0 0 auto;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      width: 220px;
-      min-height: 88px;
-      padding: 12px 14px;
-      border-radius: 14px;
-      color: #fff;
-      text-decoration: none;
-      position: relative;
-      overflow: hidden;
-      isolation: isolate;
-      box-shadow: 0 6px 18px rgba(15,41,64,0.18);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-      -webkit-tap-highlight-color: transparent;
-    }
-    @media (min-width: 640px) {
-      .service-marquee-card { width: 250px; gap: 14px; padding: 14px 16px; min-height: 96px; }
-    }
-    @media (min-width: 1024px) {
-      .service-marquee-card { width: 280px; min-height: 104px; padding: 16px 18px; }
-    }
-    .service-marquee-card:hover,
-    .service-marquee-card:focus-visible {
-      transform: translateY(-4px);
-      box-shadow: 0 14px 28px rgba(15,41,64,0.26);
-      outline: none;
-    }
-    .service-marquee-card:focus-visible {
-      box-shadow: 0 0 0 2px #D4B87A, 0 14px 28px rgba(15,41,64,0.26);
-    }
-    .service-marquee-card.findr {
-      background:
-        radial-gradient(circle at 90% 0%, rgba(212,184,122,0.32), transparent 60%),
-        linear-gradient(135deg, #0b1f33 0%, #142c48 50%, #1f4a75 100%);
-    }
-    .service-marquee-card.clean {
-      background:
-        radial-gradient(circle at 90% 0%, rgba(255,255,255,0.22), transparent 60%),
-        linear-gradient(135deg, #0a4b45 0%, #0d7a6f 55%, #14b8a6 100%);
-    }
-    .service-marquee-card.move {
-      background:
-        radial-gradient(circle at 90% 0%, rgba(255,209,102,0.28), transparent 60%),
-        linear-gradient(135deg, #6d2e0a 0%, #a83e0d 55%, #ea6b1c 100%);
-    }
-    .service-marquee-card.delivery {
-      background:
-        radial-gradient(circle at 90% 0%, rgba(216,180,254,0.32), transparent 60%),
-        linear-gradient(135deg, #3b1a6b 0%, #6b21a8 55%, #a855f7 100%);
-    }
-    .service-marquee-card .smc-icon {
-      flex-shrink: 0;
-      width: 40px; height: 40px;
-      border-radius: 11px;
-      background: rgba(255,255,255,0.18);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,0.3);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.95rem;
-      color: #fff;
-    }
-    @media (min-width: 640px) {
-      .service-marquee-card .smc-icon { width: 44px; height: 44px; font-size: 1rem; }
-    }
-    @media (min-width: 1024px) {
-      .service-marquee-card .smc-icon { width: 48px; height: 48px; font-size: 1.05rem; }
-    }
-    .service-marquee-card .smc-text { flex: 1; min-width: 0; }
-    .service-marquee-card .smc-text h4 {
-      font-family: 'Playfair Display', serif;
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: #fff;
-      margin: 0 0 2px;
-      line-height: 1.2;
-      letter-spacing: -0.1px;
-    }
-    @media (min-width: 1024px) {
-      .service-marquee-card .smc-text h4 { font-size: 0.96rem; }
-    }
-    .service-marquee-card .smc-text p {
-      font-size: 0.68rem;
-      color: rgba(255,255,255,0.82);
-      margin: 0;
-      line-height: 1.3;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-    @media (min-width: 1024px) {
-      .service-marquee-card .smc-text p { font-size: 0.72rem; }
-    }
-    .service-marquee-card .smc-arrow {
-      flex-shrink: 0;
-      width: 24px; height: 24px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.16);
-      border: 1px solid rgba(255,255,255,0.28);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.52rem;
-      color: #fff;
-      transition: background 0.2s ease;
-    }
-    .service-marquee-card:hover .smc-arrow { background: rgba(255,255,255,0.32); }
-
-    /* =====================================================
-       LAND CARDS
-       ===================================================== */
-    .land-card {
-      cursor: pointer;
-      border-radius: 16px;
-      overflow: hidden;
+    /* ============ MOBILE QUICK LINKS ============ */
+    .mobile-quick-links {
+      display: block;
       background: var(--surface);
       border: 1px solid var(--border);
-      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      border-radius: 14px;
+      padding: 8px;
+      margin-bottom: 28px;
+    }
+    .mobile-quick-links .ql-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--text-secondary);
+      padding: 8px 8px 10px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .mobile-quick-links .ql-title i { color: #1a3650; font-size: 0.6rem; }
+    [data-theme="dark"] .mobile-quick-links .ql-title i { color: #D4B87A; }
+    .mobile-quick-links .ql-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+    }
+    .mobile-quick-links a {
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 9px;
+      background: var(--surface-alt);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 500;
+      transition: background 0.2s;
     }
-    .land-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 28px rgba(15,41,64,0.12);
-      border-color: rgba(212,184,122,0.4);
+    .mobile-quick-links a:hover { background: var(--border); }
+    .mobile-quick-links a i {
+      font-size: 0.75rem;
+      color: #1a3650;
+      width: 16px;
+      text-align: center;
     }
-    .land-card:focus-visible { outline: 3px solid #D4B87A; outline-offset: 2px; }
-    .land-card .lc-img {
-      position: relative; height: 150px; overflow: hidden; background: var(--surface-alt);
-    }
-    @media (min-width: 640px) { .land-card .lc-img { height: 170px; } }
-    @media (min-width: 1024px) { .land-card .lc-img { height: 180px; } }
-    .land-card .lc-img img {
-      width: 100%; height: 100%; object-fit: cover; display: block;
-      transition: transform 0.5s ease;
-    }
-    .land-card:hover .lc-img img { transform: scale(1.06); }
-    .land-card .lc-tier {
-      position: absolute; top: 10px; left: 10px;
-      padding: 4px 10px; border-radius: 20px;
-      font-size: 0.58rem; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.5px; z-index: 2;
-      display: inline-flex; align-items: center; gap: 4px;
-      backdrop-filter: blur(6px);
-    }
-    .lc-tier.verified { background: rgba(59,130,246,0.92); color: white; }
-    .lc-tier.guaranteed { background: rgba(212,184,122,0.95); color: #1a3650; }
-    .lc-tier.listed { background: rgba(107,114,128,0.92); color: white; }
-    .land-card .lc-cat {
-      position: absolute; top: 10px; right: 10px;
-      background: rgba(15,41,64,0.85); backdrop-filter: blur(4px);
-      color: white; padding: 4px 10px; border-radius: 20px;
-      font-size: 0.58rem; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.8px; z-index: 2;
-    }
-    .land-card .lc-body { padding: 12px 14px; flex: 1; display: flex; flex-direction: column; }
-    .land-card .lc-title {
-      font-weight: 700; font-size: 0.88rem; color: var(--text);
-      margin: 0 0 4px 0; line-height: 1.25;
-      display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-    .land-card .lc-price {
-      font-weight: 800; font-size: 0.95rem; color: #1a3650; margin-bottom: 6px;
-    }
-    [data-theme="dark"] .land-card .lc-price { color: #D4B87A; }
-    .land-card .lc-meta {
-      display: flex; gap: 10px; font-size: 0.68rem;
-      color: var(--text-secondary); flex-wrap: wrap;
-    }
-    .land-card .lc-meta span { display: inline-flex; align-items: center; gap: 3px; }
-    .land-card .lc-meta i { color: #1a3650; font-size: 0.65rem; }
-    [data-theme="dark"] .land-card .lc-meta i { color: #D4B87A; }
-    .land-card .lc-title-status {
-      margin-top: 8px; padding-top: 8px;
-      border-top: 1px solid var(--border);
-      font-size: 0.65rem; color: var(--text-secondary);
-      display: flex; align-items: center; gap: 4px;
-    }
-    .land-card .lc-title-status i { color: #B49450; font-size: 0.6rem; }
+    [data-theme="dark"] .mobile-quick-links a i { color: #D4B87A; }
 
-    .land-empty {
-      grid-column: 1/-1; text-align: center;
-      padding: 2rem 1rem; color: var(--text-secondary);
+    /* ============ STATE DROPDOWN (WORKS) ============ */
+    .state-dd { position: relative; width: 100%; user-select: none; }
+    .state-dd-trigger {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+      font-size: 0.92rem;
+      font-family: inherit;
+      transition: border-color 0.2s;
     }
-    .land-empty i {
-      font-size: 2rem; display: block; margin-bottom: 8px; opacity: 0.4;
+    .state-dd-trigger:hover { border-color: #1a3650; }
+    [data-theme="dark"] .state-dd-trigger:hover { border-color: #D4B87A; }
+    .state-dd-trigger i {
+      font-size: 0.68rem;
+      color: var(--text-secondary);
+      transition: transform 0.2s;
     }
-    .land-empty a { color: #B49450; font-weight: 600; text-decoration: none; }
-
-    .custom-select { position: relative !important; width: 100% !important; user-select: none !important; z-index: 9999 !important; }
-    .custom-select-trigger {
-      display: flex !important; justify-content: space-between !important; align-items: center !important;
-      padding: 0.8rem 1rem !important; border: 1px solid #e5ecf3 !important; border-radius: 12px !important;
-      background: #ffffff !important; cursor: pointer !important; font-size: 0.95rem !important;
-      color: #151e28 !important; transition: border-color 0.2s !important;
+    .state-dd.open .state-dd-trigger i { transform: rotate(180deg); }
+    .state-dd-menu {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0; right: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.18);
+      max-height: 240px;
+      overflow-y: auto;
+      z-index: 500;
+      display: none;
     }
-    .custom-select-trigger:hover { border-color: #1a3650 !important; }
-    .custom-select-dropdown {
-      position: absolute !important; top: calc(100% + 4px) !important;
-      left: 0 !important; right: 0 !important; background: #ffffff !important;
-      border: 1px solid #e5ecf3 !important; border-radius: 12px !important;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.15) !important; max-height: 220px !important;
-      overflow-y: auto !important; z-index: 99999 !important; display: none !important;
-    }
-    .custom-select.active .custom-select-dropdown { display: block !important; }
-    .custom-select-dropdown input[type="text"] {
-      width: calc(100% - 20px) !important; margin: 10px !important; padding: 8px 10px !important;
-      border: 1px solid #e5ecf3 !important; border-radius: 8px !important; font-size: 0.85rem !important;
-      background: #ffffff !important; color: #151e28 !important; outline: none !important;
-    }
-    .custom-select-options { list-style: none !important; padding: 0 !important; margin: 0 !important; }
-    .custom-select-options li {
-      padding: 10px 16px !important; cursor: pointer !important; font-size: 0.9rem !important;
-      color: #151e28 !important; transition: background 0.2s !important;
-    }
-    .custom-select-options li:hover { background: #f0f5fc !important; }
-
-    .hero {
-      position: relative; overflow: hidden; border-radius: 28px; padding: 0;
-      margin: 8px 0 16px; min-height: 320px; display: flex; align-items: center;
-    }
-    .hero-slider { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
-    .hero-slider .slide {
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      background-size: cover; background-position: center; opacity: 0;
-      transition: opacity 1.5s ease-in-out; animation: slideFade 18s infinite;
-    }
-    .hero-slider .slide:nth-child(1) { background-image: url('https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=1200&h=600&fit=crop&q=80'); animation-delay: 0s; }
-    .hero-slider .slide:nth-child(2) { background-image: url('https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1200&h=600&fit=crop&q=80'); animation-delay: 1.8s; }
-    .hero-slider .slide:nth-child(3) { background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&h=600&fit=crop&q=80'); animation-delay: 3.6s; }
-    .hero-slider .slide:nth-child(4) { background-image: url('/assets/hero/zaure-primary.jpg'); animation-delay: 5.4s; }
-    .hero-slider .slide:nth-child(5) { background-image: url('https://i.imgur.com/haSkWAA.jpeg'); animation-delay: 7.2s; }
-    .hero-slider .slide:nth-child(6) { background-image: url('https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1200&h=600&fit=crop&q=80'); animation-delay: 9.0s; }
-    .hero-slider .slide:nth-child(7) { background-image: url('https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1200&h=600&fit=crop&q=80'); animation-delay: 10.8s; }
-    .hero-slider .slide:nth-child(8) { background-image: url('https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=1200&h=600&fit=crop&q=80'); animation-delay: 12.6s; }
-    .hero-slider .slide:nth-child(9) { background-image: url('https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?w=1200&h=600&fit=crop&q=80'); animation-delay: 14.4s; }
-    .hero-slider .slide:nth-child(10) { background-image: url('https://images.unsplash.com/photo-1488590528505-98d2b853aba4?w=1200&h=600&fit=crop&q=80'); animation-delay: 16.2s; }
-    @keyframes slideFade {
-      0%, 8% { opacity: 1; transform: scale(1); }
-      10%, 18% { opacity: 1; transform: scale(1.05); }
-      20%, 100% { opacity: 0; transform: scale(1.1); }
-    }
-    .hero-overlay {
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      background: linear-gradient(135deg, rgba(26,31,46,0.75) 0%, rgba(26,31,46,0.55) 50%, rgba(26,31,46,0.7) 100%);
+    .state-dd.open .state-dd-menu { display: block; }
+    .state-dd-search {
+      padding: 8px;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: var(--surface);
       z-index: 1;
     }
-    [data-theme="dark"] .hero-overlay { background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.65) 50%, rgba(0,0,0,0.8) 100%); }
-    .hero-content-wrapper { position: relative; z-index: 2; padding: 40px 24px; width: 100%; }
-    .hero-content-wrapper .hero-tagline {
-      font-size: 0.75rem; font-weight: 600; color: rgba(255,255,255,0.6);
-      text-transform: uppercase; letter-spacing: 3px; margin-bottom: 8px;
-      display: inline-block; padding: 4px 16px;
-      border: 1px solid rgba(255,255,255,0.1); border-radius: 40px;
-      backdrop-filter: blur(4px); background: rgba(255,255,255,0.05);
+    .state-dd-search input {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface-alt);
+      color: var(--text);
+      font-size: 0.84rem;
+      outline: none;
+      font-family: inherit;
+      box-sizing: border-box;
     }
-    .hero-rotating-text { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px; }
-    .hero-rotating-text .static-text { font-size: 1.8rem; font-weight: 800; color: white; line-height: 1.2; }
-    .hero-rotating-text .dynamic-text-wrapper { display: inline-block; height: 2.2rem; overflow: hidden; vertical-align: bottom; }
-    .hero-rotating-text .dynamic-text-wrapper .dynamic-text {
-      display: block; font-size: 1.8rem; font-weight: 800;
-      color: #D4B87A; line-height: 1.2; animation: textRotate 20s infinite; white-space: nowrap;
+    .state-dd-search input:focus { border-color: #1a3650; }
+    [data-theme="dark"] .state-dd-search input:focus { border-color: #D4B87A; }
+    .state-dd-list {
+      list-style: none;
+      padding: 4px 0;
+      margin: 0;
     }
-    @keyframes textRotate {
-      0%, 8% { transform: translateY(0); } 10%, 18% { transform: translateY(0); }
-      20%, 28% { transform: translateY(-2.2rem); } 30%, 38% { transform: translateY(-2.2rem); }
-      40%, 48% { transform: translateY(-4.4rem); } 50%, 58% { transform: translateY(-4.4rem); }
-      60%, 68% { transform: translateY(-6.6rem); } 70%, 78% { transform: translateY(-6.6rem); }
-      80%, 88% { transform: translateY(-8.8rem); } 90%, 98% { transform: translateY(-8.8rem); }
-      100% { transform: translateY(-11rem); }
+    .state-dd-list li {
+      padding: 9px 14px;
+      cursor: pointer;
+      font-size: 0.88rem;
+      color: var(--text);
+      transition: background 0.15s;
     }
-    .dynamic-text:nth-child(1) { animation-delay: 0s; }
-    .dynamic-text:nth-child(2) { animation-delay: 2s; }
-    .dynamic-text:nth-child(3) { animation-delay: 4s; }
-    .dynamic-text:nth-child(4) { animation-delay: 6s; }
-    .dynamic-text:nth-child(5) { animation-delay: 8s; }
-    .dynamic-text:nth-child(6) { animation-delay: 10s; }
-    .dynamic-text:nth-child(7) { animation-delay: 12s; }
-    .dynamic-text:nth-child(8) { animation-delay: 14s; }
-    .dynamic-text:nth-child(9) { animation-delay: 16s; }
-    .dynamic-text:nth-child(10) { animation-delay: 18s; }
-    .hero-subtitle { color: rgba(255,255,255,0.8); font-size: 0.95rem; margin-top: 8px; max-width: 500px; }
-    .hero .search-wrapper { position: relative; z-index: 2; margin-top: 16px; }
-    .hero .search-box {
-      background: rgba(255,255,255,0.95); backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    .state-dd-list li:hover { background: var(--surface-alt); }
+    .state-dd-list li.selected {
+      background: rgba(26,54,80,0.08);
+      font-weight: 600;
+      color: #1a3650;
     }
-    [data-theme="dark"] .hero .search-box { background: rgba(19,28,49,0.95); border-color: rgba(255,255,255,0.05); }
-    .hero .search-box input { color: var(--text); }
-    .hero .search-box input::placeholder { color: var(--text-secondary); }
-    .hero .trending-keywords { position: relative; z-index: 2; }
-    .hero .trending-keywords .keyword {
-      background: rgba(255,255,255,0.1); backdrop-filter: blur(4px);
-      border: 1px solid rgba(255,255,255,0.08); color: rgba(255,255,255,0.7);
+    [data-theme="dark"] .state-dd-list li.selected {
+      background: rgba(212,184,122,0.12);
+      color: #D4B87A;
     }
-    .hero .trending-keywords .keyword:hover { background: rgba(255,255,255,0.2); color: white; }
-    .hero .trending-keywords .keyword i { color: #D4B87A; }
-    .hero-indicators { position: absolute; bottom: 16px; right: 24px; z-index: 3; display: flex; gap: 6px; }
-    .hero-indicators .dot {
-      width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.3);
-      transition: all 0.3s ease; animation: dotPulse 18s infinite;
-    }
-    .hero-indicators .dot:nth-child(1) { animation-delay: 0s; }
-    .hero-indicators .dot:nth-child(2) { animation-delay: 1.8s; }
-    .hero-indicators .dot:nth-child(3) { animation-delay: 3.6s; }
-    .hero-indicators .dot:nth-child(4) { animation-delay: 5.4s; }
-    .hero-indicators .dot:nth-child(5) { animation-delay: 7.2s; }
-    .hero-indicators .dot:nth-child(6) { animation-delay: 9.0s; }
-    .hero-indicators .dot:nth-child(7) { animation-delay: 10.8s; }
-    .hero-indicators .dot:nth-child(8) { animation-delay: 12.6s; }
-    .hero-indicators .dot:nth-child(9) { animation-delay: 14.4s; }
-    .hero-indicators .dot:nth-child(10) { animation-delay: 16.2s; }
-    @keyframes dotPulse {
-      0%, 8% { background: #D4B87A; transform: scale(1.2); }
-      10%, 100% { background: rgba(255,255,255,0.3); transform: scale(1); }
-    }
-    @media (max-width: 640px) {
-      .hero { min-height: 280px; }
-      .hero-content-wrapper { padding: 28px 16px; }
-      .hero-rotating-text .static-text,
-      .hero-rotating-text .dynamic-text-wrapper .dynamic-text { font-size: 1.4rem; }
-      .hero-rotating-text .dynamic-text-wrapper { height: 1.8rem; }
-      @keyframes textRotate {
-        0%, 8% { transform: translateY(0); } 10%, 18% { transform: translateY(0); }
-        20%, 28% { transform: translateY(-1.8rem); } 30%, 38% { transform: translateY(-1.8rem); }
-        40%, 48% { transform: translateY(-3.6rem); } 50%, 58% { transform: translateY(-3.6rem); }
-        60%, 68% { transform: translateY(-5.4rem); } 70%, 78% { transform: translateY(-5.4rem); }
-        80%, 88% { transform: translateY(-7.2rem); } 90%, 98% { transform: translateY(-7.2rem); }
-        100% { transform: translateY(-9rem); }
-      }
-      .hero .hero-tagline { font-size: 0.6rem; letter-spacing: 2px; }
-      .hero-subtitle { font-size: 0.8rem; }
-    }
-    @media (min-width: 768px) {
-      .hero-content-wrapper { padding: 50px 40px; }
-      .hero-rotating-text .static-text,
-      .hero-rotating-text .dynamic-text-wrapper .dynamic-text { font-size: 2.4rem; }
-      .hero-rotating-text .dynamic-text-wrapper { height: 2.8rem; }
-      @keyframes textRotate {
-        0%, 8% { transform: translateY(0); } 10%, 18% { transform: translateY(0); }
-        20%, 28% { transform: translateY(-2.8rem); } 30%, 38% { transform: translateY(-2.8rem); }
-        40%, 48% { transform: translateY(-5.6rem); } 50%, 58% { transform: translateY(-5.6rem); }
-        60%, 68% { transform: translateY(-8.4rem); } 70%, 78% { transform: translateY(-8.4rem); }
-        80%, 88% { transform: translateY(-11.2rem); } 90%, 98% { transform: translateY(-11.2rem); }
-        100% { transform: translateY(-14rem); }
-      }
+    .state-dd-list .no-result {
+      text-align: center;
+      color: var(--text-secondary);
+      pointer-events: none;
+      font-size: 0.82rem;
+      padding: 16px;
     }
 
-    .mobile-wa-strip { display: none; }
-    @media (max-width: 1023px) {
-      .mobile-wa-strip {
-        display: flex; align-items: center; gap: 10px;
-        background: var(--surface); border: 1px solid var(--border);
-        color: var(--text); padding: 10px 14px; border-radius: 40px;
-        margin: 12px 0; text-decoration: none;
-        box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-        position: relative; overflow: hidden; transition: transform 0.2s;
-      }
-      .mobile-wa-strip:active { transform: scale(0.98); }
-      .mobile-wa-strip .wa-icon {
-        width: 32px; height: 32px; border-radius: 50%;
-        background: linear-gradient(135deg, #25D366, #1DA851);
-        color: white; display: flex; align-items: center; justify-content: center;
-        font-size: 1rem; flex-shrink: 0;
-      }
-      .mobile-wa-strip .wa-text { flex: 1; font-size: 0.82rem; font-weight: 600; }
-      .mobile-wa-strip .wa-text strong { color: #1a3650; font-weight: 700; }
-      [data-theme="dark"] .mobile-wa-strip .wa-text strong { color: #D4B87A; }
-      .mobile-wa-strip .wa-arrow { color: var(--text-secondary); font-size: 0.85rem; }
-    }
+    /* ============ SIGNED-IN / OUT TOGGLES ============ */
+    .signed-in-only { display: none; }
+    .signed-out-only { display: block; }
+    body.logged-in .signed-in-only { display: block; }
+    body.logged-in .signed-out-only { display: none; }
 
-    @media (max-width: 1023px) {
-      input, select, textarea { font-size: 16px !important; }
-    }
-
-    @media (max-width: 1023px) {
-      .bottom-nav { padding-bottom: calc(8px + env(safe-area-inset-bottom)) !important; }
-      body { padding-bottom: calc(80px + env(safe-area-inset-bottom)) !important; }
-    }
-
-    .desktop-trending-bar { display: none; }
-    @media (min-width: 1024px) {
-      .desktop-trending-bar {
-        display: block;
-        background: linear-gradient(90deg, #1a3650, #0f2940);
-        color: #E5ECF3; font-size: 0.72rem; padding: 6px 0;
-        overflow: hidden; white-space: nowrap;
-      }
-      .desktop-trending-bar .container { display: flex; align-items: center; gap: 20px; }
-      .desktop-trending-bar .trend-label {
-        color: #D4B87A; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
-        font-size: 0.65rem; display: flex; align-items: center; gap: 6px; flex-shrink: 0;
-      }
-      .desktop-trending-bar .trend-items { display: flex; gap: 16px; overflow-x: auto; scrollbar-width: none; }
-      .desktop-trending-bar .trend-items::-webkit-scrollbar { display: none; }
-      .desktop-trending-bar .trend-items a { color: #E5ECF3; text-decoration: none; transition: color 0.2s; flex-shrink: 0; }
-      .desktop-trending-bar .trend-items a:hover { color: #D4B87A; }
-      .desktop-trending-bar .trend-items a:not(:last-child)::after { content: '·'; margin-left: 16px; color: #64748B; }
-    }
-
-    .hero-side-promos { display: none; }
-    @media (min-width: 1024px) {
-      .hero-side-promos {
-        display: grid; grid-template-columns: 2fr 1fr;
-        gap: 16px; margin-bottom: 16px;
-      }
-      .hero-side-promos .hero { margin: 0; }
-      .hero-side-promos .side-stack { display: flex; flex-direction: column; gap: 12px; position: relative; }
-      .hero-side-promos .ad-label {
-        font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
-        color: var(--text-secondary); display: flex; align-items: center; gap: 6px; margin-bottom: -4px;
-      }
-      .hero-side-promos .ad-label i { color: #B49450; }
-      .hero-side-promos .ad-slot { flex: 1; border-radius: 20px; overflow: hidden; position: relative; cursor: pointer; min-height: 0; }
-      .hero-side-promos .ad-slot .ad-slide {
-        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-        opacity: 0; transform: scale(1.05); transition: opacity 0.8s ease, transform 1.2s ease;
-        display: flex; flex-direction: column; justify-content: flex-end;
-        padding: 16px; color: white; background-size: cover; background-position: center;
-      }
-      .hero-side-promos .ad-slot .ad-slide::before {
-        content: ''; position: absolute; inset: 0;
-        background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.85) 100%); z-index: 1;
-      }
-      .hero-side-promos .ad-slot .ad-slide.active { opacity: 1; transform: scale(1); }
-      .hero-side-promos .ad-slot .ad-slide .ad-tag {
-        position: absolute; top: 12px; right: 12px;
-        background: rgba(255,255,255,0.2); backdrop-filter: blur(8px);
-        padding: 3px 10px; border-radius: 20px;
-        font-size: 0.58rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; z-index: 2;
-      }
-      .hero-side-promos .ad-slot .ad-slide .ad-content { position: relative; z-index: 2; }
-      .hero-side-promos .ad-slot .ad-slide .ad-content .ad-cat {
-        font-size: 0.62rem; font-weight: 700; color: #D4B87A; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 4px;
-      }
-      .hero-side-promos .ad-slot .ad-slide .ad-content h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; line-height: 1.25; }
-      .hero-side-promos .ad-slot .ad-slide .ad-content .ad-price { font-size: 1.1rem; font-weight: 800; color: #D4B87A; margin-bottom: 8px; }
-      .hero-side-promos .ad-slot .ad-slide .ad-content .ad-cta {
-        display: inline-flex; align-items: center; gap: 4px; font-size: 0.7rem; font-weight: 700;
-        border: 1px solid rgba(255,255,255,0.4); padding: 5px 12px; border-radius: 40px;
-        background: rgba(255,255,255,0.1); backdrop-filter: blur(4px);
-      }
-      .hero-side-promos .ad-slot .ad-slide:hover .ad-content .ad-cta { background: rgba(255,255,255,0.25); }
-      .hero-side-promos .ad-progress {
-        position: absolute; bottom: 0; left: 0; height: 2px; background: #D4B87A; width: 0%; transition: width 0.1s linear; z-index: 3;
-      }
-    }
-
-    .hover-preview {
-      display: none; position: fixed; z-index: 500; width: 320px; background: var(--surface);
-      border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.25);
-      border: 1px solid var(--border); padding: 16px; pointer-events: none; opacity: 0; transition: opacity 0.2s ease;
-    }
-    @media (min-width: 1024px) { .hover-preview { display: block; } }
-    .hover-preview.show { opacity: 1; }
-    .hover-preview .hp-img { width: 100%; height: 180px; object-fit: cover; border-radius: 10px; margin-bottom: 12px; background: var(--surface-alt); }
-    .hover-preview .hp-title { font-weight: 700; font-size: 1rem; color: var(--text); margin-bottom: 6px; }
-    .hover-preview .hp-price { font-size: 1.3rem; font-weight: 800; color: #1a3650; margin-bottom: 8px; }
-    [data-theme="dark"] .hover-preview .hp-price { color: #D4B87A; }
-    .hover-preview .hp-meta { font-size: 0.75rem; color: var(--text-secondary); display: flex; gap: 12px; padding-top: 8px; border-top: 1px solid var(--border); }
-    .hover-preview .hp-hint { margin-top: 10px; font-size: 0.7rem; color: var(--text-secondary); text-align: center; padding-top: 8px; border-top: 1px dashed var(--border); }
-
-    .recently-viewed-panel {
-      display: none; position: fixed; bottom: 24px; right: 24px; z-index: 300; width: 280px; background: var(--surface);
-      border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); border: 1px solid var(--border); overflow: hidden;
-      transform: translateY(20px); opacity: 0; transition: all 0.3s ease;
-    }
-    @media (min-width: 1024px) { .recently-viewed-panel { display: block; } }
-    .recently-viewed-panel.show { transform: translateY(0); opacity: 1; }
-    .recently-viewed-panel .rv-header { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #1a3650; color: white; }
-    .recently-viewed-panel .rv-header h4 { font-size: 0.85rem; font-weight: 700; }
-    .recently-viewed-panel .rv-header .rv-close { background: none; border: none; color: white; cursor: pointer; font-size: 0.9rem; opacity: 0.7; }
-    .recently-viewed-panel .rv-list { padding: 8px; max-height: 280px; overflow-y: auto; }
-    .recently-viewed-panel .rv-item { display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 10px; cursor: pointer; transition: background 0.2s; }
-    .recently-viewed-panel .rv-item:hover { background: var(--surface-alt); }
-    .recently-viewed-panel .rv-item img { width: 42px; height: 42px; border-radius: 8px; object-fit: cover; flex-shrink: 0; background: var(--surface-alt); }
-    .recently-viewed-panel .rv-item .rv-info { flex: 1; min-width: 0; }
-    .recently-viewed-panel .rv-item .rv-title { font-size: 0.8rem; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .recently-viewed-panel .rv-item .rv-price { font-size: 0.75rem; font-weight: 700; color: #B49450; margin-top: 2px; }
-
-    .kbd-hint { display: none; position: fixed; bottom: 24px; left: 24px; z-index: 300; }
-    @media (min-width: 1024px) { .kbd-hint { display: block; } }
-    .kbd-hint .kbd-btn {
-      width: 44px; height: 44px; border-radius: 50%; background: var(--surface); border: 1px solid var(--border);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1); cursor: pointer; font-size: 1rem; color: var(--text-secondary);
-      display: flex; align-items: center; justify-content: center; transition: all 0.2s;
-    }
-    .kbd-hint .kbd-btn:hover { background: #1a3650; color: white; border-color: #1a3650; }
-    .kbd-panel {
-      position: fixed; bottom: 80px; left: 24px; width: 260px; background: var(--surface); border-radius: 14px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.2); border: 1px solid var(--border); padding: 16px; z-index: 301;
-      opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.2s;
-    }
-    .kbd-panel.show { opacity: 1; visibility: visible; transform: translateY(0); }
-    .kbd-panel h5 { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-secondary); margin-bottom: 12px; }
-    .kbd-panel .kbd-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; font-size: 0.8rem; color: var(--text); }
-    .kbd-panel .kbd-row kbd { background: var(--surface-alt); border: 1px solid var(--border); border-radius: 6px; padding: 2px 8px; font-size: 0.7rem; font-family: monospace; font-weight: 700; color: var(--text); }
-
-    .ptr-indicator {
-      display: none; position: fixed; top: 0; left: 0; right: 0; height: 0; background: #1a3650; color: white;
-      align-items: center; justify-content: center; font-size: 0.8rem; z-index: 400; transition: height 0.2s;
-    }
-    @media (max-width: 1023px) {
-      .ptr-indicator { display: flex; }
-      .ptr-indicator.active { height: 50px; }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
     }
   </style>
 </head>
 <body>
-
-  <div class="ptr-indicator" id="ptrIndicator">
-    <i class="fas fa-spinner fa-spin" style="margin-right:8px;"></i> Release to refresh
-  </div>
-
-  <div class="desktop-trending-bar">
-    <div class="container">
-      <span class="trend-label"><i class="fas fa-fire"></i> Trending now</span>
-      <div class="trend-items" id="desktopTrendingItems">
-        <a href="javascript:void(0)">Loading...</a>
-      </div>
-    </div>
-  </div>
 
   <nav class="navbar">
     <div class="container nav-container">
@@ -745,6 +567,7 @@
         <a href="/">Home</a>
         <a href="/category.html?slug=all">Browse</a>
         <a href="/land.html">Land</a>
+        <a href="/zaure-services.html">Services</a>
         <a href="/about.html">About</a>
       </div>
       <div class="nav-actions">
@@ -760,332 +583,202 @@
     </div>
   </nav>
 
-  <div class="container">
+  <main class="container">
 
-    <div class="hero-side-promos">
-      <section class="hero" aria-label="Find anything near you">
-        <div class="hero-slider">
-          <div class="slide"></div><div class="slide"></div><div class="slide"></div>
-          <div class="slide"></div><div class="slide"></div><div class="slide"></div>
-          <div class="slide"></div><div class="slide"></div><div class="slide"></div>
-          <div class="slide"></div>
-        </div>
-        <div class="hero-overlay"></div>
-        <div class="hero-content-wrapper">
-          <span class="hero-tagline"><i class="fas fa-shield-alt" style="margin-right:4px;"></i> Nigeria's Most Trusted Marketplace</span>
-          <div class="hero-rotating-text">
-            <span class="static-text">Find</span>
-            <span class="dynamic-text-wrapper">
-              <span class="dynamic-text">anything</span>
-              <span class="dynamic-text">your dream home</span>
-              <span class="dynamic-text">a new car</span>
-              <span class="dynamic-text">great deals</span>
-              <span class="dynamic-text">verified land</span>
-              <span class="dynamic-text">furniture</span>
-              <span class="dynamic-text">electronics</span>
-              <span class="dynamic-text">fashion</span>
-              <span class="dynamic-text">farmland</span>
-              <span class="dynamic-text">apartments</span>
-            </span>
-            <span class="static-text">near you.</span>
-          </div>
-          <p class="hero-subtitle">Nigeria's most trusted online marketplace – buy, sell and trade locally, scam‑free.</p>
-          <div class="search-wrapper" id="searchWrapper">
-            <div class="search-box" role="search">
-              <i class="fas fa-search" aria-hidden="true"></i>
-              <input type="text" id="searchInput" placeholder="Search for anything..." autocomplete="off" aria-label="Search for items">
-              <button class="search-location-btn" id="searchLocationBtn" title="Use my location"><i class="fas fa-location-arrow"></i></button>
-              <button id="searchBtn" aria-label="Search"><i class="fas fa-arrow-right" style="margin-right:4px;" aria-hidden="true"></i> Search</button>
-            </div>
-            <div class="autocomplete-dropdown" id="acDropdown" role="listbox"></div>
-          </div>
-          <div class="trending-keywords" id="trendingKeywords">
-            <span class="keyword"><i class="fas fa-fire"></i> Loading...</span>
-          </div>
-        </div>
-        <div class="hero-indicators">
-          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-          <span class="dot"></span>
-        </div>
-      </section>
-
-      <div class="side-stack">
-        <div class="ad-label"><i class="fas fa-bullhorn"></i> Featured products</div>
-        <div class="ad-slot" id="adSlot1">
-          <div class="ad-progress" id="adProgress1"></div>
-        </div>
-        <div class="ad-slot" id="adSlot2">
-          <div class="ad-progress" id="adProgress2"></div>
-        </div>
-      </div>
+    <!-- Page header -->
+    <div class="profile-page-head">
+      <h1>Profile</h1>
+      <p>Your account, listings, favorites and Zaure services — all in one place.</p>
     </div>
 
-    <section class="hero mobile-hero" style="display:none;" aria-label="Find anything near you">
-      <div class="hero-slider">
-        <div class="slide"></div><div class="slide"></div><div class="slide"></div>
-        <div class="slide"></div><div class="slide"></div><div class="slide"></div>
-        <div class="slide"></div><div class="slide"></div><div class="slide"></div>
-        <div class="slide"></div>
+    <!-- ============ SIGNED-OUT ============ -->
+    <div class="signed-out-only">
+
+      <div class="signed-out-card">
+        <div class="icon"><i class="fas fa-user"></i></div>
+        <h2>Sign in to your account</h2>
+        <p>Create an account or sign in to manage your listings, save favorites, and book Zaure services.</p>
+        <button type="button" class="btn-primary" onclick="openSignup()">
+          <i class="fas fa-user-plus"></i> Create account / Sign in
+        </button>
       </div>
-      <div class="hero-overlay"></div>
-      <div class="hero-content-wrapper">
-        <span class="hero-tagline"><i class="fas fa-shield-alt" style="margin-right:4px;"></i> Nigeria's Most Trusted Marketplace</span>
-        <div class="hero-rotating-text">
-          <span class="static-text">Find</span>
-          <span class="dynamic-text-wrapper">
-            <span class="dynamic-text">anything</span>
-            <span class="dynamic-text">your dream home</span>
-            <span class="dynamic-text">a new car</span>
-            <span class="dynamic-text">great deals</span>
-            <span class="dynamic-text">verified land</span>
-            <span class="dynamic-text">furniture</span>
-            <span class="dynamic-text">electronics</span>
-            <span class="dynamic-text">fashion</span>
-            <span class="dynamic-text">farmland</span>
-            <span class="dynamic-text">apartments</span>
-          </span>
-          <span class="static-text">near you.</span>
+
+      <!-- Mobile quick links so signed-out users know what exists -->
+      <div class="mobile-quick-links">
+        <div class="ql-title"><i class="fas fa-compass"></i> Explore Zaure</div>
+        <div class="ql-grid">
+          <a href="/post.html"><i class="fas fa-plus-circle"></i> Post a listing</a>
+          <a href="/favorites.html"><i class="fas fa-heart"></i> Favorites</a>
+          <a href="/category.html?slug=all"><i class="fas fa-th-large"></i> Browse items</a>
+          <a href="/land.html"><i class="fas fa-map-marked-alt"></i> Land for sale</a>
+          <a href="/zaure-services.html"><i class="fas fa-briefcase"></i> Zaure Services</a>
+          <a href="/help.html"><i class="fas fa-circle-question"></i> Help center</a>
+          <a href="/about.html"><i class="fas fa-info-circle"></i> About us</a>
+          <a href="/contact.html"><i class="fas fa-envelope"></i> Contact</a>
         </div>
-        <p class="hero-subtitle">Nigeria's most trusted online marketplace – buy, sell and trade locally, scam‑free.</p>
-        <div class="search-wrapper" id="searchWrapperMobile">
-          <div class="search-box" role="search">
-            <i class="fas fa-search"></i>
-            <input type="text" id="searchInputMobile" placeholder="Search for anything..." autocomplete="off">
-            <button id="searchBtnMobile"><i class="fas fa-arrow-right" style="margin-right:4px;"></i> Search</button>
+      </div>
+
+    </div>
+
+    <!-- ============ SIGNED-IN ============ -->
+    <div class="signed-in-only">
+
+      <!-- Profile card -->
+      <div class="profile-card">
+        <div class="profile-card-top">
+          <div class="profile-avatar" id="profileAvatar">ZA</div>
+          <div class="profile-details">
+            <h2 id="profileName">Your Name</h2>
+            <div class="meta">
+              <span id="profilePhone"><i class="fas fa-phone"></i> —</span>
+              <span id="profileState"><i class="fas fa-map-pin"></i> —</span>
+              <span id="profileJoined"><i class="fas fa-calendar"></i> Joined 2026</span>
+            </div>
+            <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span>
+          </div>
+          <button type="button" class="profile-edit" id="editProfileBtn">
+            <i class="fas fa-pen"></i> Edit
+          </button>
+        </div>
+
+        <div class="profile-stats">
+          <div class="stat">
+            <div class="num" id="statListings">0</div>
+            <div class="label">Listings</div>
+          </div>
+          <div class="stat">
+            <div class="num" id="statFavorites">0</div>
+            <div class="label">Favorites</div>
+          </div>
+          <div class="stat">
+            <div class="num" id="statServices">0</div>
+            <div class="label">Services booked</div>
+          </div>
+          <div class="stat">
+            <div class="num" id="statRating">—</div>
+            <div class="label">Rating</div>
           </div>
         </div>
-        <div class="trending-keywords" id="trendingKeywordsMobile">
-          <span class="keyword"><i class="fas fa-fire"></i> Loading...</span>
-        </div>
       </div>
-    </section>
 
-    <a href="https://wa.me/2349042339411?text=Hello%20Zaure%2C%20I%20want%20to%20order%20or%20report%20something." target="_blank" class="mobile-wa-strip">
-      <span class="wa-icon"><i class="fab fa-whatsapp"></i></span>
-      <span class="wa-text">Order or report on <strong>WhatsApp</strong></span>
-      <span class="wa-arrow"><i class="fas fa-chevron-right"></i></span>
-    </a>
-
-    <!-- ============ ZAURE SERVICES — heading + marquee ============ -->
-    <section class="zaure-services-wrap" aria-label="Zaure services">
-      <div class="zaure-services-head">
-        <h2 class="zaure-services-title">
-          <span class="zs-tag"><i class="fas fa-briefcase"></i> Zaure Services</span>
-          Services we offer
-        </h2>
-        <a href="/zaure-services.html" class="zaure-services-view-more">
-          View more <i class="fas fa-arrow-right"></i>
+      <!-- Zaure Services -->
+      <div class="section-head">
+        <h3>Zaure Services</h3>
+        <a href="/zaure-services.html">View all <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="service-links">
+        <a href="/book-findr.html" class="service-link">
+          <div class="service-link-icon"><i class="fas fa-search-location"></i></div>
+          <div class="service-link-body">
+            <h4>Zaure Findr</h4>
+            <p>Land search &amp; title verification</p>
+          </div>
+          <i class="fas fa-chevron-right service-link-arrow"></i>
+        </a>
+        <a href="/book-clean.html" class="service-link">
+          <div class="service-link-icon"><i class="fas fa-broom"></i></div>
+          <div class="service-link-body">
+            <h4>Zaure Clean</h4>
+            <p>Post-construction &amp; deep cleaning</p>
+          </div>
+          <i class="fas fa-chevron-right service-link-arrow"></i>
+        </a>
+        <a href="/book-move.html" class="service-link">
+          <div class="service-link-icon"><i class="fas fa-truck-moving"></i></div>
+          <div class="service-link-body">
+            <h4>Zaure Move</h4>
+            <p>Small &amp; medium moves across Kaduna</p>
+          </div>
+          <i class="fas fa-chevron-right service-link-arrow"></i>
+        </a>
+        <a href="/book-delivery.html" class="service-link">
+          <div class="service-link-icon"><i class="fas fa-truck-fast"></i></div>
+          <div class="service-link-body">
+            <h4>Zaure Delivery</h4>
+            <p>Parcels, documents &amp; small items</p>
+          </div>
+          <i class="fas fa-chevron-right service-link-arrow"></i>
         </a>
       </div>
 
-      <div class="service-marquee">
-        <div class="service-marquee-track" id="serviceMarqueeTrack">
-          <a href="/book-findr.html" class="service-marquee-card findr">
-            <div class="smc-icon"><i class="fas fa-search-location"></i></div>
-            <div class="smc-text">
-              <h4>Zaure Findr</h4>
-              <p>We find, verify &amp; close land deals</p>
-            </div>
-            <div class="smc-arrow"><i class="fas fa-arrow-right"></i></div>
-          </a>
-          <a href="/book-clean.html" class="service-marquee-card clean">
-            <div class="smc-icon"><i class="fas fa-broom"></i></div>
-            <div class="smc-text">
-              <h4>Zaure Clean</h4>
-              <p>Deep cleaning for homes &amp; offices</p>
-            </div>
-            <div class="smc-arrow"><i class="fas fa-arrow-right"></i></div>
-          </a>
-          <a href="/book-move.html" class="service-marquee-card move">
-            <div class="smc-icon"><i class="fas fa-truck-moving"></i></div>
-            <div class="smc-text">
-              <h4>Zaure Move</h4>
-              <p>Safe, careful moving across Nigeria</p>
-            </div>
-            <div class="smc-arrow"><i class="fas fa-arrow-right"></i></div>
-          </a>
-          <a href="/book-delivery.html" class="service-marquee-card delivery">
-            <div class="smc-icon"><i class="fas fa-truck-fast"></i></div>
-            <div class="smc-text">
-              <h4>Zaure Delivery</h4>
-              <p>Pickup &amp; drop-off for small items</p>
-            </div>
-            <div class="smc-arrow"><i class="fas fa-arrow-right"></i></div>
-          </a>
+      <!-- My Listings -->
+      <div class="section-head">
+        <h3>My Listings</h3>
+        <a href="/post.html">Post new <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="empty-block">
+        <i class="fas fa-box-open"></i>
+        You haven't posted anything yet.
+        <a href="/post.html">Post your first listing →</a>
+      </div>
+
+      <!-- Favorites -->
+      <div class="section-head">
+        <h3>Favorites</h3>
+        <a href="/favorites.html">View all <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="empty-block">
+        <i class="fas fa-heart"></i>
+        No favorites yet.
+        <a href="/category.html?slug=all">Browse listings →</a>
+      </div>
+
+      <!-- Account -->
+      <div class="section-head">
+        <h3>Account</h3>
+      </div>
+      <div class="menu-list">
+        <a href="#" class="menu-row" id="menuEditAccount">
+          <div class="menu-row-icon"><i class="fas fa-user-pen"></i></div>
+          <div class="menu-row-body">
+            <div class="title">Edit account</div>
+            <div class="sub">Name, phone, state and profile</div>
+          </div>
+          <i class="fas fa-chevron-right menu-row-arrow"></i>
+        </a>
+        <a href="/favorites.html" class="menu-row">
+          <div class="menu-row-icon"><i class="fas fa-heart"></i></div>
+          <div class="menu-row-body">
+            <div class="title">Saved items</div>
+            <div class="sub">Your favorites and wishlist</div>
+          </div>
+          <i class="fas fa-chevron-right menu-row-arrow"></i>
+        </a>
+        <a href="/help.html" class="menu-row">
+          <div class="menu-row-icon"><i class="fas fa-circle-question"></i></div>
+          <div class="menu-row-body">
+            <div class="title">Help &amp; support</div>
+            <div class="sub">FAQs, contact and safety tips</div>
+          </div>
+          <i class="fas fa-chevron-right menu-row-arrow"></i>
+        </a>
+        <button type="button" class="menu-row danger" id="logoutBtn">
+          <div class="menu-row-icon"><i class="fas fa-right-from-bracket"></i></div>
+          <div class="menu-row-body">
+            <div class="title">Log out</div>
+            <div class="sub">Sign out of your Zaure account</div>
+          </div>
+          <i class="fas fa-chevron-right menu-row-arrow"></i>
+        </button>
+      </div>
+
+      <!-- Mobile quick links (still useful when signed in) -->
+      <div class="mobile-quick-links">
+        <div class="ql-title"><i class="fas fa-compass"></i> Explore Zaure</div>
+        <div class="ql-grid">
+          <a href="/post.html"><i class="fas fa-plus-circle"></i> Post a listing</a>
+          <a href="/favorites.html"><i class="fas fa-heart"></i> Favorites</a>
+          <a href="/category.html?slug=all"><i class="fas fa-th-large"></i> Browse items</a>
+          <a href="/land.html"><i class="fas fa-map-marked-alt"></i> Land for sale</a>
+          <a href="/zaure-services.html"><i class="fas fa-briefcase"></i> Zaure Services</a>
+          <a href="/help.html"><i class="fas fa-circle-question"></i> Help center</a>
         </div>
       </div>
-    </section>
-    <!-- ============ /ZAURE SERVICES ============ -->
 
-    <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap;">
-      <h2 class="section-title" style="margin-top:4px;">Categories</h2>
-      <a href="/categories.html" style="color:var(--text-secondary); font-weight:500; font-size:0.8rem; text-decoration:none;">View all</a>
     </div>
-    <div class="grid-2col" id="categoryGrid">
-      <div class="category-card"><div class="icon-circle"><i class="fas fa-spinner fa-spin"></i></div><h3>Loading...</h3></div>
-    </div>
+  </main>
 
-    <h2 class="section-title">Featured Products</h2>
-    <div class="grid-2col-listings" id="featuredGrid">
-      <div class="listing-card"><div class="listing-img"><i class="fas fa-spinner fa-spin"></i></div><div class="listing-body"><div class="price">Loading...</div></div></div>
-    </div>
-
-    <!-- ============ PLOTS FOR SALE ============ -->
-    <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap;">
-      <h2 class="section-title" style="margin-top:4px;">
-        <i class="fas fa-map-marked-alt" style="color:#B49450; margin-right:6px; font-size:0.9em;"></i>Plots for Sale
-      </h2>
-      <a href="/land.html?type=plot" style="color:var(--text-secondary); font-weight:500; font-size:0.8rem; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
-        View more <i class="fas fa-arrow-right" style="font-size:0.7rem;"></i>
-      </a>
-    </div>
-    <div class="grid-2col-listings" id="plotsGrid">
-      <div class="listing-card"><div class="listing-img"><i class="fas fa-spinner fa-spin"></i></div><div class="listing-body"><div class="price">Loading...</div></div></div>
-    </div>
-    <!-- ============ /PLOTS FOR SALE ============ -->
-
-    <!-- ============ FARMS FOR SALE ============ -->
-    <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap;">
-      <h2 class="section-title" style="margin-top:4px;">
-        <i class="fas fa-seedling" style="color:#B49450; margin-right:6px; font-size:0.9em;"></i>Farms for Sale
-      </h2>
-      <a href="/land.html?type=farm" style="color:var(--text-secondary); font-weight:500; font-size:0.8rem; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
-        View more <i class="fas fa-arrow-right" style="font-size:0.7rem;"></i>
-      </a>
-    </div>
-    <div class="grid-2col-listings" id="farmsGrid">
-      <div class="listing-card"><div class="listing-img"><i class="fas fa-spinner fa-spin"></i></div><div class="listing-body"><div class="price">Loading...</div></div></div>
-    </div>
-    <!-- ============ /FARMS FOR SALE ============ -->
-
-    <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap;">
-      <h2 class="section-title" style="margin-top:4px;" id="trendingTitle">Trending Near You</h2>
-      <a href="/category.html?slug=all" style="color:var(--text-secondary); font-weight:500; font-size:0.8rem; text-decoration:none;">View all</a>
-    </div>
-    <div class="grid-2col-listings" id="listingGrid">
-      <div class="listing-card"><div class="listing-img"><i class="fas fa-spinner fa-spin"></i></div><div class="listing-body"><div class="price">Loading...</div></div></div>
-    </div>
-
-    <section class="cta-banner">
-      <div><h2>Ready to sell?</h2><p>List your item in minutes – reach local buyers.</p></div>
-      <div><button class="btn-primary" id="postAdCta"><i class="fas fa-plus-circle"></i> Post a listing</button></div>
-    </section>
-
-  </div>
-
-  <div class="hover-preview" id="hoverPreview">
-    <img class="hp-img" id="hpImage" src="" alt="">
-    <div class="hp-title" id="hpTitle">—</div>
-    <div class="hp-price" id="hpPrice">—</div>
-    <div class="hp-meta">
-      <span id="hpLocation">—</span>
-      <span id="hpSeller">—</span>
-    </div>
-    <div class="hp-hint"><i class="fas fa-mouse-pointer"></i> Click to view full details</div>
-  </div>
-
-  <div class="recently-viewed-panel" id="recentlyViewedPanel">
-    <div class="rv-header">
-      <h4><i class="fas fa-history"></i> Recently Viewed</h4>
-      <button class="rv-close" id="rvClose"><i class="fas fa-times"></i></button>
-    </div>
-    <div class="rv-list" id="rvList"></div>
-  </div>
-
-  <div class="kbd-hint">
-    <button class="kbd-btn" id="kbdBtn" title="Keyboard shortcuts (?)"><i class="fas fa-keyboard"></i></button>
-  </div>
-  <div class="kbd-panel" id="kbdPanel">
-    <h5>Keyboard Shortcuts</h5>
-    <div class="kbd-row"><span>Focus search</span><kbd>/</kbd></div>
-    <div class="kbd-row"><span>Go home</span><kbd>H</kbd></div>
-    <div class="kbd-row"><span>Categories</span><kbd>C</kbd></div>
-    <div class="kbd-row"><span>Favorites</span><kbd>F</kbd></div>
-    <div class="kbd-row"><span>Post listing</span><kbd>P</kbd></div>
-    <div class="kbd-row"><span>Shortcuts</span><kbd>?</kbd></div>
-    <div class="kbd-row"><span>Close panel</span><kbd>Esc</kbd></div>
-  </div>
-
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-col brand">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
-            <span style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:white;">Zaure</span>
-            <span style="font-size:0.7rem;color:#94A3B8;">Buy with Confidence</span>
-          </div>
-          <p>Nigeria's most trusted online marketplace. Buy, sell, or trade locally. No commission, no middlemen.</p>
-          <div class="social">
-            <a href="https://twitter.com/zauretech" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-            <a href="https://instagram.com/zauretech" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="https://linkedin.com/company/zauretech" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://facebook.com/zauretech" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-          </div>
-        </div>
-        <div class="footer-col">
-          <h4>Browse</h4>
-          <a href="/category.html?slug=all">All Items</a>
-          <a href="/land.html">Land for Sale</a>
-          <a href="/land.html?type=plot">Plots</a>
-          <a href="/land.html?type=farm">Farms</a>
-          <a href="/category.html?slug=fashion">Fashion</a>
-          <a href="/category.html?slug=electronics">Electronics</a>
-        </div>
-        <div class="footer-col">
-          <h4>Zaure Services</h4>
-          <a href="/book-findr.html">Zaure Findr</a>
-          <a href="/book-clean.html">Zaure Clean</a>
-          <a href="/book-move.html">Zaure Move</a>
-          <a href="/book-delivery.html">Zaure Delivery</a>
-        </div>
-        <div class="footer-col">
-          <h4>Support</h4>
-          <a href="/help.html">Help Center</a>
-          <a href="/faq.html">FAQ</a>
-          <a href="/safety.html">Safety Tips</a>
-          <a href="/contact.html">Contact Us</a>
-        </div>
-        <div class="footer-col">
-          <h4>Company</h4>
-          <a href="/about.html">About Us</a>
-          <a href="/alamin-ahmed.html">Founder</a>
-          <a href="/careers.html">Careers</a>
-          <a href="/privacy.html">Privacy Policy</a>
-          <a href="/terms.html">Terms of Service</a>
-        </div>
-        <div class="trust-badges">
-          <div class="badges-row">
-            <span class="badge-item"><i class="fas fa-shield-alt"></i> Verified Users</span>
-            <span class="badge-item"><i class="fas fa-handshake"></i> No Commission</span>
-            <span class="badge-item"><i class="fas fa-user-check"></i> Identity Verified</span>
-            <span class="badge-item"><i class="fas fa-lock"></i> Secure Platform</span>
-            <span class="badge-item"><i class="fas fa-clock"></i> 24/7 Support</span>
-            <span class="badge-item"><i class="fas fa-star"></i> Trusted by Thousands</span>
-            <span class="badge-item"><i class="fas fa-phone"></i> Direct Contact</span>
-            <span class="badge-item"><i class="fas fa-credit-card"></i> Secure Payments</span>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          <span>&copy; 2026 <strong>Zaure Technologies</strong>. All rights reserved.</span>
-          <span class="footer-lang"><i class="fas fa-globe"></i> Nigeria · English</span>
-        </div>
-        <div style="grid-column: 1/-1; text-align: center; margin-top: 8px; font-size: 0.8rem; color: #94A3B8;">
-          For info or to report an issue, contact us on WhatsApp: <a href="https://wa.me/2349042339411" target="_blank" style="color: #D4B87A; text-decoration: none; font-weight: 600;">+2349042339411</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <div class="bottom-nav">
-    <a href="/" class="nav-item active"><i class="fas fa-home"></i><span>Home</span></a>
-    <a href="/categories.html" class="nav-item"><i class="fas fa-th-large"></i><span>Categories</span></a>
-    <button class="post-btn" id="fabPostAd"><i class="fas fa-plus"></i></button>
-    <a href="/favorites.html" class="nav-item"><i class="fas fa-heart"></i><span>Favorites</span></a>
-    <a href="/profile.html" class="nav-item"><i class="fas fa-user"></i><span>Profile</span></a>
-  </div>
-
+  <!-- Signup modal -->
   <div class="modal-overlay" id="signupModal">
     <div class="modal">
       <div class="modal-header">
@@ -1098,563 +791,207 @@
         <label for="signupPhone">Phone Number</label>
         <input type="tel" id="signupPhone" placeholder="Enter your phone number" required>
         <label>State</label>
-        <div class="custom-select" id="stateSelect">
-          <div class="custom-select-trigger" id="stateTrigger">
+        <div class="state-dd" id="stateDD">
+          <div class="state-dd-trigger" id="stateTrigger">
             <span>Select your state</span>
             <i class="fas fa-chevron-down"></i>
           </div>
-          <div class="custom-select-dropdown" id="stateDropdown">
-            <input type="text" id="stateSearchInput" placeholder="Search state...">
-            <ul class="custom-select-options" id="stateOptionsList"></ul>
+          <div class="state-dd-menu" id="stateMenu">
+            <div class="state-dd-search">
+              <input type="text" id="stateSearch" placeholder="Search state..." autocomplete="off">
+            </div>
+            <ul class="state-dd-list" id="stateList"></ul>
           </div>
         </div>
         <input type="hidden" id="signupState" value="">
         <label class="terms-checkbox">
           <input type="checkbox" id="termsCheckbox" required>
-          <span>By creating an account, you agree to Zaure's <a href="/terms.html" target="_blank">Terms & Conditions</a> and <a href="/privacy.html" target="_blank">Privacy Policy</a>.</span>
+          <span>By creating an account, you agree to Zaure's <a href="/terms.html" target="_blank">Terms</a> and <a href="/privacy.html" target="_blank">Privacy Policy</a>.</span>
         </label>
         <button type="submit" class="btn-primary">Sign Up</button>
       </form>
     </div>
   </div>
 
+  <!-- Bottom nav -->
+  <div class="bottom-nav">
+    <a href="/" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
+    <a href="/categories.html" class="nav-item"><i class="fas fa-th-large"></i><span>Categories</span></a>
+    <button class="post-btn" id="fabPostAd"><i class="fas fa-plus"></i></button>
+    <a href="/favorites.html" class="nav-item"><i class="fas fa-heart"></i><span>Favorites</span></a>
+    <a href="/profile.html" class="nav-item active"><i class="fas fa-user"></i><span>Profile</span></a>
+  </div>
+
   <script src="/js/main.js"></script>
   <script>
-    (function initStateDropdownInline() {
-      const nigerianStates = [
+    /* ============================================================
+       STATE DROPDOWN — self-contained, robust
+       ============================================================ */
+    (function initStateDropdown() {
+      const STATES = [
         'Abia','Adamawa','Akwa Ibom','Anambra','Bauchi','Bayelsa','Benue','Borno',
         'Cross River','Delta','Ebonyi','Edo','Ekiti','Enugu','FCT','Gombe','Imo',
         'Jigawa','Kaduna','Kano','Katsina','Kebbi','Kogi','Kwara','Lagos','Nasarawa',
         'Niger','Ogun','Ondo','Osun','Oyo','Plateau','Rivers','Sokoto','Taraba','Yobe','Zamfara'
       ];
-      const selectContainer = document.getElementById('stateSelect');
+
+      const dd = document.getElementById('stateDD');
       const trigger = document.getElementById('stateTrigger');
-      const searchInput = document.getElementById('stateSearchInput');
-      const optionsList = document.getElementById('stateOptionsList');
-      const hiddenInput = document.getElementById('signupState');
-      if (!selectContainer || !trigger || !searchInput || !optionsList || !hiddenInput) return;
-      function renderOptions(filter = '') {
-        const filtered = nigerianStates.filter(s => s.toLowerCase().includes(filter.toLowerCase()));
-        optionsList.innerHTML = filtered.length
-          ? filtered.map(s => `<li data-value="${s}">${s}</li>`).join('')
-          : '<li style="text-align:center;color:#94A3B8;">No state found</li>';
-        optionsList.querySelectorAll('li').forEach(li => {
-          li.addEventListener('click', function(e) {
+      const menu = document.getElementById('stateMenu');
+      const search = document.getElementById('stateSearch');
+      const list = document.getElementById('stateList');
+      const hidden = document.getElementById('signupState');
+      const triggerLabel = trigger ? trigger.querySelector('span') : null;
+
+      if (!dd || !trigger || !menu || !search || !list || !hidden || !triggerLabel) return;
+
+      let open = false;
+
+      function render(filter) {
+        const f = (filter || '').trim().toLowerCase();
+        const filtered = f ? STATES.filter(s => s.toLowerCase().includes(f)) : STATES;
+
+        if (!filtered.length) {
+          list.innerHTML = '<li class="no-result">No state found</li>';
+          return;
+        }
+
+        list.innerHTML = filtered.map(s => {
+          const selected = hidden.value === s ? ' class="selected"' : '';
+          return `<li data-value="${s}"${selected}>${s}</li>`;
+        }).join('');
+
+        list.querySelectorAll('li[data-value]').forEach(li => {
+          li.addEventListener('click', function (e) {
             e.stopPropagation();
-            hiddenInput.value = this.dataset.value;
-            trigger.querySelector('span').textContent = this.dataset.value;
-            selectContainer.classList.remove('active');
-            searchInput.value = '';
-            renderOptions();
+            const val = this.dataset.value;
+            hidden.value = val;
+            triggerLabel.textContent = val;
+            close();
           });
         });
       }
-      renderOptions();
-      trigger.addEventListener('click', e => {
-        e.preventDefault(); e.stopPropagation();
-        selectContainer.classList.toggle('active');
-        if (selectContainer.classList.contains('active')) setTimeout(() => searchInput.focus(), 50);
+
+      function openMenu() {
+        open = true;
+        dd.classList.add('open');
+        render('');
+        setTimeout(() => search.focus(), 40);
+      }
+
+      function close() {
+        open = false;
+        dd.classList.remove('open');
+        search.value = '';
+        render('');
+      }
+
+      trigger.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (open) close(); else openMenu();
       });
-      searchInput.addEventListener('input', e => { e.stopPropagation(); renderOptions(this.value); });
-      searchInput.addEventListener('click', e => e.stopPropagation());
-      document.addEventListener('click', e => {
-        if (!selectContainer.contains(e.target)) selectContainer.classList.remove('active');
+
+      search.addEventListener('click', e => e.stopPropagation());
+      search.addEventListener('input', function () { render(this.value); });
+      search.addEventListener('keydown', function (e) {
+        e.stopPropagation();
+        if (e.key === 'Escape') close();
       });
-      document.addEventListener('keydown', e => {
-        if (e.key === 'Escape') selectContainer.classList.remove('active');
+
+      document.addEventListener('pointerdown', function (e) {
+        if (open && !dd.contains(e.target)) close();
       });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && open) close();
+      });
+
+      render('');
     })();
 
     /* ============================================================
-       SERVICE MARQUEE — duplicate the 4 cards into 6 copies
-       and set the animation shift so the loop is seamless
+       PROFILE LOAD
        ============================================================ */
-    function initServiceMarquee() {
-      const track = document.getElementById('serviceMarqueeTrack');
-      if (!track) return;
-      const originals = Array.from(track.children);
-      if (originals.length === 0) return;
-      const TOTAL_COPIES = 6;
-      for (let i = 1; i < TOTAL_COPIES; i++) {
-        originals.forEach(node => {
-          const clone = node.cloneNode(true);
-          clone.setAttribute('aria-hidden', 'true');
-          clone.setAttribute('tabindex', '-1');
-          track.appendChild(clone);
-        });
+    function loadProfilePage() {
+      const user = (typeof getCurrentUser === 'function') ? getCurrentUser() : null;
+      if (!user) {
+        document.body.classList.remove('logged-in');
+        return;
       }
-      track.style.setProperty('--marquee-shift', `-${(100 / TOTAL_COPIES).toFixed(4)}%`);
-      track.style.animation = 'serviceMarqueeScroll 36s linear infinite';
-    }
+      document.body.classList.add('logged-in');
 
-    function toggleHeroLayout() {
-      const isDesktop = window.innerWidth >= 1024;
-      const d = document.querySelector('.hero-side-promos');
-      const m = document.querySelector('.mobile-hero');
-      if (d) d.style.display = isDesktop ? 'grid' : 'none';
-      if (m) m.style.display = isDesktop ? 'none' : 'block';
-    }
-    toggleHeroLayout();
-    window.addEventListener('resize', toggleHeroLayout);
+      const name = user.name || 'Zaure User';
+      const initials = name.split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase();
 
-    function performSearch(query) {
-      if (!query) return;
-      const trimmed = query.trim();
-      if (!trimmed) return;
-      const products = getProductsSync();
-      const q = trimmed.toLowerCase();
-      const filtered = products.filter(p =>
-        (p.title && p.title.toLowerCase().includes(q)) ||
-        (p.category && p.category.toLowerCase().includes(q)) ||
-        (p.location && p.location.toLowerCase().includes(q)) ||
-        (p.tags && p.tags.some(t => t.toLowerCase().includes(q)))
-      );
-      localStorage.setItem('zaure_search_results', JSON.stringify(filtered));
-      localStorage.setItem('zaure_search_query', trimmed);
-      window.location.href = '/search.html';
-    }
-    window.performSearch = performSearch;
+      const setHTML = (id, html) => { const el = document.getElementById(id); if (el) el.innerHTML = html; };
+      const setText = (id, text) => { const el = document.getElementById(id); if (el) el.textContent = text; };
 
-    function initSearch() {
-      const inputD = document.getElementById('searchInput');
-      const btnD = document.getElementById('searchBtn');
-      const wrapperD = document.getElementById('searchWrapper');
-      const acD = document.getElementById('acDropdown');
-      const inputM = document.getElementById('searchInputMobile');
-      const btnM = document.getElementById('searchBtnMobile');
-
-      if (inputD && btnD) {
-        btnD.addEventListener('click', e => { e.preventDefault(); performSearch(inputD.value); });
-        inputD.addEventListener('keydown', e => {
-          if (e.key === 'Enter') { e.preventDefault(); performSearch(inputD.value); }
-        });
-        inputD.addEventListener('input', async function() {
-          const query = this.value.trim();
-          if (query.length < 2) {
-            if (acD) acD.innerHTML = '';
-            if (wrapperD) wrapperD.classList.remove('show-autocomplete');
-            return;
-          }
-          const products = await loadProducts();
-          const results = products.filter(p =>
-            (p.title && p.title.toLowerCase().includes(query.toLowerCase())) ||
-            (p.category && p.category.toLowerCase().includes(query.toLowerCase()))
-          ).slice(0, 5);
-          if (acD) {
-            acD.innerHTML = results.length === 0
-              ? `<div class="ac-item" style="justify-content:center;color:var(--text-secondary);">No results found</div>`
-              : results.map(p => {
-                  const img = (p.images && p.images[0]) || 'https://placehold.co/36x36?text=Z';
-                  return `<div class="ac-item" onclick="viewProduct('${p.id}')">
-                    <img src="${img}" alt="">
-                    <span>${p.title}</span>
-                    <small>${p.category}</small>
-                  </div>`;
-                }).join('');
-            if (wrapperD) wrapperD.classList.add('show-autocomplete');
-          }
-        });
-        document.addEventListener('click', e => {
-          if (wrapperD && !wrapperD.contains(e.target)) wrapperD.classList.remove('show-autocomplete');
-        });
-      }
-      if (inputM && btnM) {
-        btnM.addEventListener('click', e => { e.preventDefault(); performSearch(inputM.value); });
-        inputM.addEventListener('keydown', e => {
-          if (e.key === 'Enter') { e.preventDefault(); performSearch(inputM.value); }
-        });
-      }
-    }
-    initSearch();
-
-    function setupPostButtons() {
-      const fab = document.getElementById('fabPostAd');
-      if (fab) fab.onclick = () => { window.location.href = '/post.html'; };
-      const cta = document.getElementById('postAdCta');
-      if (cta) cta.onclick = () => { window.location.href = '/post.html'; };
-    }
-    setupPostButtons();
-
-    const hoverPreview = document.getElementById('hoverPreview');
-    let hoverTimer = null;
-    function attachHoverPreview() {
-      if (window.innerWidth < 1024) return;
-      document.querySelectorAll('.listing-card, .land-card').forEach(card => {
-        card.addEventListener('mouseenter', function() {
-          const id = this.dataset.id;
-          if (!id) return;
-          const products = getProductsSync();
-          const product = products.find(p => String(p.id) === String(id));
-          if (!product) return;
-          clearTimeout(hoverTimer);
-          hoverTimer = setTimeout(() => {
-            const img = (product.images && product.images[0]) || 'https://placehold.co/300x200?text=Zaure';
-            document.getElementById('hpImage').src = img;
-            document.getElementById('hpTitle').textContent = product.title;
-            const price = product.price >= 1e6 ? `₦${(product.price/1e6).toFixed(1)}M` : `₦${product.price.toLocaleString()}`;
-            document.getElementById('hpPrice').textContent = price;
-            document.getElementById('hpLocation').innerHTML = `<i class="fas fa-map-pin"></i> ${product.location || 'Nigeria'}`;
-            document.getElementById('hpSeller').innerHTML = `<i class="fas fa-store"></i> ${product.seller?.name || 'Zaure'}`;
-            const rect = this.getBoundingClientRect();
-            const pw = 320;
-            let left = rect.right + 12;
-            let top = rect.top;
-            if (left + pw > window.innerWidth - 12) left = rect.left - pw - 12;
-            if (top + 320 > window.innerHeight - 12) top = window.innerHeight - 320 - 12;
-            if (top < 12) top = 12;
-            hoverPreview.style.left = left + 'px';
-            hoverPreview.style.top = top + 'px';
-            hoverPreview.classList.add('show');
-          }, 550);
-        });
-        card.addEventListener('mouseleave', () => {
-          clearTimeout(hoverTimer);
-          hoverPreview.classList.remove('show');
-        });
-      });
-    }
-
-    function loadRecentlyViewed() {
-      const panel = document.getElementById('recentlyViewedPanel');
-      const list = document.getElementById('rvList');
-      if (!panel || !list) return;
-      const ids = JSON.parse(localStorage.getItem('zaure_recently_viewed') || '[]');
-      if (ids.length === 0) { panel.classList.remove('show'); return; }
-      const products = getProductsSync();
-      const items = ids.map(id => products.find(p => String(p.id) === String(id))).filter(Boolean).slice(0, 5);
-      if (items.length === 0) { panel.classList.remove('show'); return; }
-      list.innerHTML = items.map(p => {
-        const price = p.price >= 1e6 ? `₦${(p.price/1e6).toFixed(1)}M` : `₦${p.price.toLocaleString()}`;
-        const img = (p.images && p.images[0]) || 'https://placehold.co/60x60?text=Z';
-        return `<div class="rv-item" onclick="viewProduct('${p.id}')">
-          <img src="${img}" alt="${p.title}">
-          <div class="rv-info">
-            <div class="rv-title">${p.title}</div>
-            <div class="rv-price">${price}</div>
-          </div>
-        </div>`;
-      }).join('');
-      panel.classList.add('show');
-    }
-    document.getElementById('rvClose')?.addEventListener('click', () => {
-      document.getElementById('recentlyViewedPanel').classList.remove('show');
-    });
-
-    document.getElementById('kbdBtn')?.addEventListener('click', e => {
-      e.stopPropagation();
-      document.getElementById('kbdPanel').classList.toggle('show');
-    });
-    document.addEventListener('click', e => {
-      const p = document.getElementById('kbdPanel');
-      if (p && !p.contains(e.target) && !e.target.closest('#kbdBtn')) p.classList.remove('show');
-    });
-    document.addEventListener('keydown', e => {
-      if (['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)) return;
-      const k = e.key.toLowerCase();
-      if (k === '/') { e.preventDefault(); (document.getElementById('searchInput') || document.getElementById('searchInputMobile'))?.focus(); }
-      else if (k === 'h') window.location.href = '/';
-      else if (k === 'c') window.location.href = '/categories.html';
-      else if (k === 'f') window.location.href = '/favorites.html';
-      else if (k === 'p') window.location.href = '/post.html';
-      else if (k === '?') document.getElementById('kbdPanel')?.classList.toggle('show');
-      else if (e.key === 'Escape') {
-        document.getElementById('kbdPanel')?.classList.remove('show');
-        document.getElementById('signupModal')?.classList.remove('active');
-      }
-    });
-
-    function vibrate(ms = 10) {
-      if (window.innerWidth < 1024 && navigator.vibrate) navigator.vibrate(ms);
-    }
-    document.addEventListener('click', e => {
-      if (e.target.closest('.fav-btn')) vibrate(15);
-      if (e.target.closest('.post-btn')) vibrate(20);
-      if (e.target.closest('.listing-card') || e.target.closest('.land-card')) vibrate(8);
-    });
-    (function initPullToRefresh() {
-      if (window.innerWidth >= 1024) return;
-      let startY = 0, pulling = false;
-      const indicator = document.getElementById('ptrIndicator');
-      document.addEventListener('touchstart', e => {
-        if (window.scrollY === 0) { startY = e.touches[0].pageY; pulling = true; }
-      }, { passive: true });
-      document.addEventListener('touchmove', e => {
-        if (!pulling) return;
-        const diff = e.touches[0].pageY - startY;
-        if (diff > 80 && indicator) {
-          indicator.classList.add('active');
-          indicator.innerHTML = '<i class="fas fa-sync fa-spin" style="margin-right:8px;"></i> Release to refresh';
-        }
-      }, { passive: true });
-      document.addEventListener('touchend', () => {
-        if (!pulling) return;
-        if (indicator && indicator.classList.contains('active')) {
-          indicator.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right:8px;"></i> Refreshing...';
-          vibrate(20);
-          setTimeout(() => { window.location.reload(); }, 500);
-        }
-        pulling = false;
-      });
-    })();
-
-    function initAdSlots(products) {
-      if (window.innerWidth < 1024) return;
-      if (!products || products.length === 0) return;
-      const shuffled = [...products].sort(() => Math.random() - 0.5);
-      const pool = shuffled.slice(0, 8);
-      const slot1Items = pool.slice(0, 4);
-      const slot2Items = pool.slice(4, 8);
-
-      function buildSlide(p) {
-        const img = (p.images && p.images[0]) || 'https://placehold.co/400x400?text=Zaure';
-        const price = p.price >= 1e6 ? `₦${(p.price/1e6).toFixed(1)}M` : `₦${p.price.toLocaleString()}`;
-        return `
-          <div class="ad-slide" style="background-image: url('${img}');" onclick="viewProduct('${p.id}')">
-            <span class="ad-tag">Featured</span>
-            <div class="ad-content">
-              <div class="ad-cat">${p.category || 'Product'}</div>
-              <h3>${p.title}</h3>
-              <div class="ad-price">${price}</div>
-              <span class="ad-cta">View <i class="fas fa-arrow-right"></i></span>
-            </div>
-          </div>
-        `;
+      setText('profileAvatar', initials);
+      setText('profileName', name);
+      setHTML('profilePhone', `<i class="fas fa-phone"></i> ${user.phone || '—'}`);
+      setHTML('profileState', `<i class="fas fa-map-pin"></i> ${user.state || 'Nigeria'}`);
+      if (user.joinedAt) {
+        const d = new Date(user.joinedAt);
+        setHTML('profileJoined', `<i class="fas fa-calendar"></i> Joined ${d.toLocaleDateString('en-NG', { month: 'short', year: 'numeric' })}`);
       }
 
-      const slot1 = document.getElementById('adSlot1');
-      const slot2 = document.getElementById('adSlot2');
+      try {
+        const favorites = JSON.parse(localStorage.getItem('zaure_favorites') || '[]');
+        setText('statFavorites', favorites.length);
+      } catch (e) {}
 
-      if (slot1) {
-        slot1.innerHTML = '<div class="ad-progress" id="adProgress1"></div>' + slot1Items.map(buildSlide).join('');
-        cycleAdSlot(slot1, 'adProgress1', 4500);
-      }
-      if (slot2) {
-        slot2.innerHTML = '<div class="ad-progress" id="adProgress2"></div>' + slot2Items.map(buildSlide).join('');
-        cycleAdSlot(slot2, 'adProgress2', 5500);
-      }
-    }
+      try {
+        const products = (typeof getProductsSync === 'function') ? getProductsSync() : [];
+        const mine = products.filter(p => String(p.sellerId) === String(user.id) || p.seller?.phone === user.phone);
+        setText('statListings', mine.length);
+      } catch (e) {}
 
-    function cycleAdSlot(slot, progressId, duration) {
-      const slides = slot.querySelectorAll('.ad-slide');
-      const progress = document.getElementById(progressId);
-      if (slides.length === 0) return;
-      let current = 0;
-      slides[0].classList.add('active');
-      function nextSlide() {
-        slides[current].classList.remove('active');
-        current = (current + 1) % slides.length;
-        slides[current].classList.add('active');
-        if (progress) {
-          progress.style.transition = 'none';
-          progress.style.width = '0%';
-          setTimeout(() => {
-            progress.style.transition = `width ${duration}ms linear`;
-            progress.style.width = '100%';
-          }, 50);
-        }
-      }
-      if (progress) {
-        setTimeout(() => {
-          progress.style.transition = `width ${duration}ms linear`;
-          progress.style.width = '100%';
-        }, 50);
-      }
-      setInterval(nextSlide, duration);
+      try {
+        const bookings = JSON.parse(localStorage.getItem('zaure_service_bookings') || '[]');
+        setText('statServices', bookings.length);
+      } catch (e) {}
     }
 
     /* ============================================================
-       LAND — plots + farms, loads from /data/land.json with fallback
+       BOOT
        ============================================================ */
-    async function getLandData() {
-      try {
-        const res = await fetch('/data/land.json', { cache: 'no-store' });
-        if (res.ok) {
-          const data = await res.json();
-          if (Array.isArray(data) && data.length > 0) return data;
-        }
-      } catch (e) { /* silent */ }
-      try {
-        const products = await loadProducts();
-        return products.filter(p => {
-          const cat = (p.category || '').toLowerCase();
-          const sub = (p.subcategory || '').toLowerCase();
-          return cat.includes('land') || cat.includes('property') ||
-                 cat.includes('real estate') || cat.includes('plot') ||
-                 cat.includes('farm') || sub.includes('land') ||
-                 sub.includes('property') || sub.includes('plot') || sub.includes('farm');
-        });
-      } catch (e) { return []; }
-    }
+    document.addEventListener('DOMContentLoaded', function () {
+      if (typeof loadUser === 'function') loadUser();
+      if (typeof initTheme === 'function') initTheme();
+      if (typeof updateFavoriteBadge === 'function') updateFavoriteBadge();
 
-    function classifyLandItem(item) {
-      const hay = [
-        item.subcategory, item.category, item.type, item.propertyType, item.title
-      ].filter(Boolean).join(' ').toLowerCase();
-      if (hay.includes('farm') || hay.includes('agro') || hay.includes('agric') ||
-          hay.includes('farmland') || hay.includes('crop')) return 'farm';
-      return 'plot';
-    }
+      loadProfilePage();
 
-    function formatTitleStatus(s) {
-      if (!s) return '';
-      const map = {
-        'excision_completed': 'Excision Completed',
-        'excision_in_progress': 'Excision in Progress',
-        'c_of_o': 'C of O',
-        'governors_consent': "Governor's Consent",
-        'registered_deed': 'Registered Deed',
-        'survey_plan': 'Survey Plan',
-        'family_consent': 'Family Consent'
-      };
-      return map[s] || String(s).replace(/_/g, ' ');
-    }
-
-    function goToLandDetail(id) {
-      if (!id) return;
-      window.location.href = `/land-detail.html?id=${encodeURIComponent(id)}`;
-    }
-    window.goToLandDetail = goToLandDetail;
-
-    function renderLandCard(item) {
-      const img = (item.images && item.images[0]) ||
-                  item.image ||
-                  'https://placehold.co/600x400?text=Land';
-      const price = item.price >= 1e6
-        ? `₦${(item.price / 1e6).toFixed(1)}M`
-        : `₦${(Number(item.price) || 0).toLocaleString()}`;
-      const tier = (item.verificationTier || 'listed').toLowerCase();
-      const tierLabel = tier === 'guaranteed' ? 'Guaranteed'
-                      : tier === 'verified' ? 'Verified'
-                      : 'Listed';
-      const tierIcon = tier === 'guaranteed' ? 'fa-shield-alt'
-                     : tier === 'verified' ? 'fa-check-circle'
-                     : 'fa-circle';
-      const cat = item.subcategory || item.category || 'Land';
-      const plotSize = item.plotSize || '';
-      const titleStatus = formatTitleStatus(item.titleStatus);
-      const loc = item.location || 'Nigeria';
-      const safeTitle = (item.title || 'Land Plot').replace(/"/g, '&quot;');
-      const idSafe = String(item.id).replace(/'/g, "\\'");
-
-      return `
-        <div class="land-card" data-id="${item.id}"
-             onclick="goToLandDetail('${idSafe}')"
-             tabindex="0" role="button" aria-label="View ${safeTitle}">
-          <div class="lc-img">
-            <img src="${img}" alt="${safeTitle}" loading="lazy" onerror="this.src='https://placehold.co/600x400?text=Land'">
-            <span class="lc-tier ${tier}"><i class="fas ${tierIcon}"></i> ${tierLabel}</span>
-            <span class="lc-cat">${cat}</span>
-          </div>
-          <div class="lc-body">
-            <h4 class="lc-title">${item.title || 'Land Plot'}</h4>
-            <div class="lc-price">${price}</div>
-            <div class="lc-meta">
-              <span><i class="fas fa-map-pin"></i> ${loc}</span>
-              ${plotSize ? `<span><i class="fas fa-ruler-combined"></i> ${plotSize}</span>` : ''}
-            </div>
-            ${titleStatus ? `<div class="lc-title-status"><i class="fas fa-file-alt"></i> ${titleStatus}</div>` : ''}
-          </div>
-        </div>
-      `;
-    }
-
-    function renderLandEmpty(grid, msg) {
-      grid.innerHTML = `<div class="land-empty">
-        <i class="fas fa-map-marked-alt"></i>
-        ${msg} <a href="/post.html">List yours free →</a>
-      </div>`;
-    }
-
-    function bindLandCardKeys(grid) {
-      if (!grid) return;
-      grid.querySelectorAll('.land-card[data-id]').forEach(card => {
-        card.addEventListener('keydown', e => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            goToLandDetail(card.dataset.id);
-          }
-        });
+      document.getElementById('editProfileBtn')?.addEventListener('click', () => {
+        if (typeof openSignup === 'function') openSignup();
       });
-    }
+      document.getElementById('menuEditAccount')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (typeof openSignup === 'function') openSignup();
+      });
 
-    async function loadPlotsSection() {
-      const grid = document.getElementById('plotsGrid');
-      if (!grid) return;
-      try {
-        const items = await getLandData();
-        const plots = (items || []).filter(i => classifyLandItem(i) === 'plot');
-        if (plots.length === 0) { renderLandEmpty(grid, 'No plots for sale yet.'); return; }
-        const sorted = [...plots].sort((a, b) => (b.addedAt || 0) - (a.addedAt || 0));
-        grid.innerHTML = sorted.slice(0, 8).map(renderLandCard).join('');
-        bindLandCardKeys(grid);
-      } catch (err) {
-        console.error('Plots load error:', err);
-        renderLandEmpty(grid, 'Could not load plots.');
-      }
-    }
+      document.getElementById('logoutBtn')?.addEventListener('click', () => {
+        if (typeof logout === 'function') {
+          logout();
+        } else {
+          try {
+            localStorage.removeItem('zaure_user');
+            localStorage.removeItem('zaure_auth');
+            localStorage.removeItem('zaure_token');
+          } catch (e) {}
+          window.location.reload();
+        }
+      });
 
-    async function loadFarmsSection() {
-      const grid = document.getElementById('farmsGrid');
-      if (!grid) return;
-      try {
-        const items = await getLandData();
-        const farms = (items || []).filter(i => classifyLandItem(i) === 'farm');
-        if (farms.length === 0) { renderLandEmpty(grid, 'No farms for sale yet.'); return; }
-        const sorted = [...farms].sort((a, b) => (b.addedAt || 0) - (a.addedAt || 0));
-        grid.innerHTML = sorted.slice(0, 8).map(renderLandCard).join('');
-        bindLandCardKeys(grid);
-      } catch (err) {
-        console.error('Farms load error:', err);
-        renderLandEmpty(grid, 'Could not load farms.');
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', async function() {
-      initServiceMarquee();
-
-      const categories = await loadCategories();
-      document.getElementById('categoryGrid').innerHTML = categories.slice(0, 6).map(cat => `
-        <div class="category-card" onclick="loadCategory('${cat.slug}')">
-          <div class="icon-circle"><i class="${cat.icon}"></i></div>
-          <h3>${cat.name}</h3>
-        </div>
-      `).join('');
-
-      const products = await loadProducts();
-      const userState = await getUserState();
-
-      renderListings(recommendProducts(products, userState, 8), 'featuredGrid');
-      renderListings(recommendProducts(products, userState, 8), 'listingGrid');
-
-      loadPlotsSection();
-      loadFarmsSection();
-
-      const keywords = await loadTrendingKeywords();
-      const trendHTML = keywords.map(k => `
-        <span class="keyword" onclick="performSearch('${k}')">
-          <i class="fas fa-fire"></i> ${k}
-        </span>
-      `).join('');
-      const kwD = document.getElementById('trendingKeywords');
-      const kwM = document.getElementById('trendingKeywordsMobile');
-      if (kwD) kwD.innerHTML = trendHTML;
-      if (kwM) kwM.innerHTML = trendHTML;
-
-      const bar = document.getElementById('desktopTrendingItems');
-      if (bar) {
-        bar.innerHTML = keywords.slice(0, 8).map(k => `
-          <a href="javascript:void(0)" onclick="performSearch('${k}')">${k}</a>
-        `).join('');
-      }
-
-      initAdSlots(products);
-
-      loadUser();
-      initTheme();
-      updateFavoriteBadge();
-
-      setTimeout(attachHoverPreview, 300);
-      loadRecentlyViewed();
+      document.getElementById('fabPostAd')?.addEventListener('click', () => {
+        const u = (typeof getCurrentUser === 'function') ? getCurrentUser() : null;
+        if (!u) {
+          if (typeof openSignup === 'function') openSignup();
+        } else {
+          window.location.href = '/post.html';
+        }
+      });
     });
   </script>
 </body>
