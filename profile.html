@@ -35,7 +35,7 @@
       line-height: 1.55;
     }
 
-    /* ============ PROFILE CARD (flat, minimal) ============ */
+    /* ============ PROFILE CARD ============ */
     .profile-card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -131,39 +131,26 @@
     }
     .profile-edit i { font-size: 0.68rem; }
 
-    /* Stats row */
-    .profile-stats {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1px;
+    /* Single stat (favorites only) */
+    .profile-stat-single {
       margin-top: 20px;
       padding-top: 20px;
       border-top: 1px solid var(--border);
-      background: var(--border);
-      border-radius: 10px;
-      overflow: hidden;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.86rem;
+      color: var(--text-secondary);
     }
-    @media (min-width: 640px) { .profile-stats { grid-template-columns: repeat(4, 1fr); } }
-    .stat {
-      background: var(--surface);
-      padding: 14px 12px;
-      text-align: center;
-    }
-    .stat .num {
+    .profile-stat-single .num {
       font-family: 'Playfair Display', serif;
-      font-size: 1.35rem;
+      font-size: 1.25rem;
       font-weight: 800;
       color: var(--text);
-      line-height: 1.1;
-      margin-bottom: 3px;
+      line-height: 1;
     }
-    .stat .label {
-      font-size: 0.68rem;
-      font-weight: 600;
-      color: var(--text-secondary);
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-    }
+    .profile-stat-single i { color: #1a3650; font-size: 0.85rem; }
+    [data-theme="dark"] .profile-stat-single i { color: #D4B87A; }
 
     /* ============ SECTION HEADING ============ */
     .section-head {
@@ -196,7 +183,7 @@
     [data-theme="dark"] .section-head a:hover { color: #D4B87A; }
     .section-head a i { font-size: 0.6rem; }
 
-    /* ============ SERVICE LINKS (flat, no gradients) ============ */
+    /* ============ SERVICE LINKS ============ */
     .service-links {
       display: grid;
       grid-template-columns: 1fr;
@@ -452,7 +439,7 @@
     }
     [data-theme="dark"] .mobile-quick-links a i { color: #D4B87A; }
 
-    /* ============ STATE DROPDOWN (WORKS) ============ */
+    /* ============ STATE DROPDOWN ============ */
     .state-dd { position: relative; width: 100%; user-select: none; }
     .state-dd-trigger {
       display: flex;
@@ -585,7 +572,6 @@
 
   <main class="container">
 
-    <!-- Page header -->
     <div class="profile-page-head">
       <h1>Profile</h1>
       <p>Your account, listings, favorites and Zaure services — all in one place.</p>
@@ -593,7 +579,6 @@
 
     <!-- ============ SIGNED-OUT ============ -->
     <div class="signed-out-only">
-
       <div class="signed-out-card">
         <div class="icon"><i class="fas fa-user"></i></div>
         <h2>Sign in to your account</h2>
@@ -603,7 +588,6 @@
         </button>
       </div>
 
-      <!-- Mobile quick links so signed-out users know what exists -->
       <div class="mobile-quick-links">
         <div class="ql-title"><i class="fas fa-compass"></i> Explore Zaure</div>
         <div class="ql-grid">
@@ -617,13 +601,11 @@
           <a href="/contact.html"><i class="fas fa-envelope"></i> Contact</a>
         </div>
       </div>
-
     </div>
 
     <!-- ============ SIGNED-IN ============ -->
     <div class="signed-in-only">
 
-      <!-- Profile card -->
       <div class="profile-card">
         <div class="profile-card-top">
           <div class="profile-avatar" id="profileAvatar">ZA</div>
@@ -641,27 +623,13 @@
           </button>
         </div>
 
-        <div class="profile-stats">
-          <div class="stat">
-            <div class="num" id="statListings">0</div>
-            <div class="label">Listings</div>
-          </div>
-          <div class="stat">
-            <div class="num" id="statFavorites">0</div>
-            <div class="label">Favorites</div>
-          </div>
-          <div class="stat">
-            <div class="num" id="statServices">0</div>
-            <div class="label">Services booked</div>
-          </div>
-          <div class="stat">
-            <div class="num" id="statRating">—</div>
-            <div class="label">Rating</div>
-          </div>
+        <div class="profile-stat-single">
+          <i class="fas fa-heart"></i>
+          <span class="num" id="statFavorites">0</span>
+          <span>items saved to favorites</span>
         </div>
       </div>
 
-      <!-- Zaure Services -->
       <div class="section-head">
         <h3>Zaure Services</h3>
         <a href="/zaure-services.html">View all <i class="fas fa-arrow-right"></i></a>
@@ -701,7 +669,6 @@
         </a>
       </div>
 
-      <!-- My Listings -->
       <div class="section-head">
         <h3>My Listings</h3>
         <a href="/post.html">Post new <i class="fas fa-arrow-right"></i></a>
@@ -712,7 +679,6 @@
         <a href="/post.html">Post your first listing →</a>
       </div>
 
-      <!-- Favorites -->
       <div class="section-head">
         <h3>Favorites</h3>
         <a href="/favorites.html">View all <i class="fas fa-arrow-right"></i></a>
@@ -723,19 +689,18 @@
         <a href="/category.html?slug=all">Browse listings →</a>
       </div>
 
-      <!-- Account -->
       <div class="section-head">
         <h3>Account</h3>
       </div>
       <div class="menu-list">
-        <a href="#" class="menu-row" id="menuEditAccount">
+        <button type="button" class="menu-row" id="menuEditAccount">
           <div class="menu-row-icon"><i class="fas fa-user-pen"></i></div>
           <div class="menu-row-body">
             <div class="title">Edit account</div>
             <div class="sub">Name, phone, state and profile</div>
           </div>
           <i class="fas fa-chevron-right menu-row-arrow"></i>
-        </a>
+        </button>
         <a href="/favorites.html" class="menu-row">
           <div class="menu-row-icon"><i class="fas fa-heart"></i></div>
           <div class="menu-row-body">
@@ -762,7 +727,6 @@
         </button>
       </div>
 
-      <!-- Mobile quick links (still useful when signed in) -->
       <div class="mobile-quick-links">
         <div class="ql-title"><i class="fas fa-compass"></i> Explore Zaure</div>
         <div class="ql-grid">
@@ -778,7 +742,7 @@
     </div>
   </main>
 
-  <!-- Signup modal -->
+  <!-- ============ SIGNUP MODAL (unchanged) ============ -->
   <div class="modal-overlay" id="signupModal">
     <div class="modal">
       <div class="modal-header">
@@ -791,16 +755,16 @@
         <label for="signupPhone">Phone Number</label>
         <input type="tel" id="signupPhone" placeholder="Enter your phone number" required>
         <label>State</label>
-        <div class="state-dd" id="stateDD">
-          <div class="state-dd-trigger" id="stateTrigger">
+        <div class="state-dd" id="signupStateDD">
+          <div class="state-dd-trigger" id="signupStateTrigger">
             <span>Select your state</span>
             <i class="fas fa-chevron-down"></i>
           </div>
-          <div class="state-dd-menu" id="stateMenu">
+          <div class="state-dd-menu" id="signupStateMenu">
             <div class="state-dd-search">
-              <input type="text" id="stateSearch" placeholder="Search state..." autocomplete="off">
+              <input type="text" id="signupStateSearch" placeholder="Search state..." autocomplete="off">
             </div>
-            <ul class="state-dd-list" id="stateList"></ul>
+            <ul class="state-dd-list" id="signupStateList"></ul>
           </div>
         </div>
         <input type="hidden" id="signupState" value="">
@@ -809,6 +773,40 @@
           <span>By creating an account, you agree to Zaure's <a href="/terms.html" target="_blank">Terms</a> and <a href="/privacy.html" target="_blank">Privacy Policy</a>.</span>
         </label>
         <button type="submit" class="btn-primary">Sign Up</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============ EDIT PROFILE MODAL ============ -->
+  <div class="modal-overlay" id="editProfileModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Edit your account</h3>
+        <button class="modal-close" id="closeEditModalBtn" type="button"><i class="fas fa-times"></i></button>
+      </div>
+      <form id="editProfileForm" class="modal-form">
+        <label for="editName">Full Name</label>
+        <input type="text" id="editName" placeholder="Enter your full name" required>
+
+        <label for="editPhone">Phone Number</label>
+        <input type="tel" id="editPhone" placeholder="Enter your phone number" required>
+
+        <label>State</label>
+        <div class="state-dd" id="editStateDD">
+          <div class="state-dd-trigger" id="editStateTrigger">
+            <span>Select your state</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="state-dd-menu" id="editStateMenu">
+            <div class="state-dd-search">
+              <input type="text" id="editStateSearch" placeholder="Search state..." autocomplete="off">
+            </div>
+            <ul class="state-dd-list" id="editStateList"></ul>
+          </div>
+        </div>
+        <input type="hidden" id="editState" value="">
+
+        <button type="submit" class="btn-primary" style="margin-top:8px;">Save changes</button>
       </form>
     </div>
   </div>
@@ -825,31 +823,31 @@
   <script src="/js/main.js"></script>
   <script>
     /* ============================================================
-       STATE DROPDOWN — self-contained, robust
+       STATE DROPDOWN — reusable, self-contained
        ============================================================ */
-    (function initStateDropdown() {
-      const STATES = [
-        'Abia','Adamawa','Akwa Ibom','Anambra','Bauchi','Bayelsa','Benue','Borno',
-        'Cross River','Delta','Ebonyi','Edo','Ekiti','Enugu','FCT','Gombe','Imo',
-        'Jigawa','Kaduna','Kano','Katsina','Kebbi','Kogi','Kwara','Lagos','Nasarawa',
-        'Niger','Ogun','Ondo','Osun','Oyo','Plateau','Rivers','Sokoto','Taraba','Yobe','Zamfara'
-      ];
+    const NIGERIAN_STATES = [
+      'Abia','Adamawa','Akwa Ibom','Anambra','Bauchi','Bayelsa','Benue','Borno',
+      'Cross River','Delta','Ebonyi','Edo','Ekiti','Enugu','FCT','Gombe','Imo',
+      'Jigawa','Kaduna','Kano','Katsina','Kebbi','Kogi','Kwara','Lagos','Nasarawa',
+      'Niger','Ogun','Ondo','Osun','Oyo','Plateau','Rivers','Sokoto','Taraba','Yobe','Zamfara'
+    ];
 
-      const dd = document.getElementById('stateDD');
-      const trigger = document.getElementById('stateTrigger');
-      const menu = document.getElementById('stateMenu');
-      const search = document.getElementById('stateSearch');
-      const list = document.getElementById('stateList');
-      const hidden = document.getElementById('signupState');
+    function createStateDropdown(opts) {
+      const dd = document.getElementById(opts.ddId);
+      const trigger = document.getElementById(opts.triggerId);
+      const menu = document.getElementById(opts.menuId);
+      const search = document.getElementById(opts.searchId);
+      const list = document.getElementById(opts.listId);
+      const hidden = document.getElementById(opts.hiddenId);
       const triggerLabel = trigger ? trigger.querySelector('span') : null;
 
-      if (!dd || !trigger || !menu || !search || !list || !hidden || !triggerLabel) return;
+      if (!dd || !trigger || !menu || !search || !list || !hidden || !triggerLabel) return null;
 
       let open = false;
 
       function render(filter) {
         const f = (filter || '').trim().toLowerCase();
-        const filtered = f ? STATES.filter(s => s.toLowerCase().includes(f)) : STATES;
+        const filtered = f ? NIGERIAN_STATES.filter(s => s.toLowerCase().includes(f)) : NIGERIAN_STATES;
 
         if (!filtered.length) {
           list.innerHTML = '<li class="no-result">No state found</li>';
@@ -902,13 +900,31 @@
       document.addEventListener('pointerdown', function (e) {
         if (open && !dd.contains(e.target)) close();
       });
-
       document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape' && open) close();
       });
 
       render('');
-    })();
+
+      return {
+        setValue: function (val) {
+          hidden.value = val || '';
+          triggerLabel.textContent = val || 'Select your state';
+          render('');
+        },
+        getValue: function () { return hidden.value; }
+      };
+    }
+
+    // Initialize both state dropdowns (signup + edit)
+    const signupStateDD = createStateDropdown({
+      ddId: 'signupStateDD', triggerId: 'signupStateTrigger', menuId: 'signupStateMenu',
+      searchId: 'signupStateSearch', listId: 'signupStateList', hiddenId: 'signupState'
+    });
+    const editStateDD = createStateDropdown({
+      ddId: 'editStateDD', triggerId: 'editStateTrigger', menuId: 'editStateMenu',
+      searchId: 'editStateSearch', listId: 'editStateList', hiddenId: 'editState'
+    });
 
     /* ============================================================
        PROFILE LOAD
@@ -940,17 +956,51 @@
         const favorites = JSON.parse(localStorage.getItem('zaure_favorites') || '[]');
         setText('statFavorites', favorites.length);
       } catch (e) {}
+    }
 
-      try {
-        const products = (typeof getProductsSync === 'function') ? getProductsSync() : [];
-        const mine = products.filter(p => String(p.sellerId) === String(user.id) || p.seller?.phone === user.phone);
-        setText('statListings', mine.length);
-      } catch (e) {}
+    /* ============================================================
+       EDIT PROFILE MODAL
+       ============================================================ */
+    function openEditProfileModal() {
+      const user = (typeof getCurrentUser === 'function') ? getCurrentUser() : null;
+      if (!user) return;
 
-      try {
-        const bookings = JSON.parse(localStorage.getItem('zaure_service_bookings') || '[]');
-        setText('statServices', bookings.length);
-      } catch (e) {}
+      document.getElementById('editName').value = user.name || '';
+      document.getElementById('editPhone').value = user.phone || '';
+      if (editStateDD) editStateDD.setValue(user.state || '');
+
+      const modal = document.getElementById('editProfileModal');
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => document.getElementById('editName').focus(), 250);
+    }
+
+    function closeEditProfileModal() {
+      document.getElementById('editProfileModal').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function saveEditProfile(e) {
+      e.preventDefault();
+      const name = (document.getElementById('editName').value || '').trim();
+      const phone = (document.getElementById('editPhone').value || '').trim();
+      const state = (document.getElementById('editState').value || '').trim();
+
+      if (!name) { alert('Please enter your name.'); return; }
+      if (phone.replace(/\D/g, '').length < 10) { alert('Please enter a valid phone number.'); return; }
+
+      const current = (typeof getCurrentUser === 'function') ? getCurrentUser() : null;
+      const updated = Object.assign({}, current || {}, { name, phone, state });
+
+      // Persist to the same storage main.js uses
+      try { localStorage.setItem('zaure_user', JSON.stringify(updated)); } catch (err) {}
+      try { localStorage.setItem('zaure_auth', JSON.stringify(updated)); } catch (err) {}
+
+      // Close + refresh view
+      closeEditProfileModal();
+      if (typeof loadUser === 'function') { try { loadUser(); } catch (err) {} }
+      loadProfilePage();
+      if (typeof updateFavoriteBadge === 'function') updateFavoriteBadge();
     }
 
     /* ============================================================
@@ -963,12 +1013,20 @@
 
       loadProfilePage();
 
-      document.getElementById('editProfileBtn')?.addEventListener('click', () => {
-        if (typeof openSignup === 'function') openSignup();
+      document.getElementById('editProfileBtn')?.addEventListener('click', openEditProfileModal);
+      document.getElementById('menuEditAccount')?.addEventListener('click', openEditProfileModal);
+      document.getElementById('closeEditModalBtn')?.addEventListener('click', closeEditProfileModal);
+      document.getElementById('editProfileForm')?.addEventListener('submit', saveEditProfile);
+
+      // Close edit modal when clicking overlay
+      document.getElementById('editProfileModal')?.addEventListener('click', function (e) {
+        if (e.target === this) closeEditProfileModal();
       });
-      document.getElementById('menuEditAccount')?.addEventListener('click', (e) => {
-        e.preventDefault();
-        if (typeof openSignup === 'function') openSignup();
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          const m = document.getElementById('editProfileModal');
+          if (m && m.classList.contains('active')) closeEditProfileModal();
+        }
       });
 
       document.getElementById('logoutBtn')?.addEventListener('click', () => {
