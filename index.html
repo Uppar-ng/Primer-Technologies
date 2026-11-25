@@ -102,13 +102,13 @@
     }
 
     /* =====================================================
-       ZAURE SERVICES — heading row + auto-scrolling marquee
+       ZAURE SERVICES — heading + auto-scrolling marquee
        ===================================================== */
     .zaure-services-wrap {
-      margin: 20px 0 26px;
+      margin: 18px 0 24px;
     }
     @media (min-width: 1024px) {
-      .zaure-services-wrap { margin: 28px 0 32px; }
+      .zaure-services-wrap { margin: 24px 0 30px; }
     }
 
     .zaure-services-head {
@@ -129,15 +129,11 @@
       color: var(--text);
       letter-spacing: -0.3px;
     }
-    @media (min-width: 640px) {
-      .zaure-services-title { font-size: 1.25rem; }
-    }
-    @media (min-width: 1024px) {
-      .zaure-services-title { font-size: 1.4rem; }
-    }
+    @media (min-width: 640px) { .zaure-services-title { font-size: 1.25rem; } }
+    @media (min-width: 1024px) { .zaure-services-title { font-size: 1.4rem; } }
     .zaure-services-title .zs-tag {
       font-family: 'Inter', sans-serif;
-      font-size: 0.58rem;
+      font-size: 0.56rem;
       font-weight: 800;
       letter-spacing: 2px;
       text-transform: uppercase;
@@ -152,40 +148,34 @@
     }
     .zaure-services-title .zs-tag i { font-size: 0.5rem; }
 
-    .zaure-services-view-more {
+    .zaure-services-view-all {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 9px 18px;
+      gap: 6px;
+      padding: 7px 14px;
       border-radius: 40px;
       background: transparent;
       border: 1.5px solid var(--border);
       color: var(--text);
       font-family: inherit;
-      font-size: 0.78rem;
+      font-size: 0.74rem;
       font-weight: 700;
-      letter-spacing: 0.2px;
       text-decoration: none;
-      cursor: pointer;
-      transition: border-color 0.2s, background 0.2s, color 0.2s, transform 0.15s;
+      transition: all 0.2s;
       white-space: nowrap;
     }
-    .zaure-services-view-more i {
-      font-size: 0.62rem;
-      transition: transform 0.2s;
-    }
-    .zaure-services-view-more:hover {
+    .zaure-services-view-all i { font-size: 0.58rem; transition: transform 0.2s; }
+    .zaure-services-view-all:hover {
       border-color: #1a3650;
       background: #1a3650;
       color: #fff;
     }
-    [data-theme="dark"] .zaure-services-view-more:hover {
+    [data-theme="dark"] .zaure-services-view-all:hover {
       border-color: #D4B87A;
       background: #D4B87A;
       color: #0f2940;
     }
-    .zaure-services-view-more:hover i { transform: translateX(3px); }
-    .zaure-services-view-more:active { transform: scale(0.97); }
+    .zaure-services-view-all:hover i { transform: translateX(3px); }
 
     .service-marquee {
       position: relative;
@@ -206,7 +196,7 @@
     }
     @keyframes serviceMarqueeScroll {
       from { transform: translateX(0); }
-      to { transform: translateX(var(--marquee-shift, -16.6667%)); }
+      to { transform: translateX(var(--marquee-shift, -25%)); }
     }
     @media (prefers-reduced-motion: reduce) {
       .service-marquee {
@@ -222,8 +212,8 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      width: 230px;
-      min-height: 92px;
+      width: 220px;
+      min-height: 88px;
       padding: 12px 14px;
       border-radius: 14px;
       color: #fff;
@@ -236,10 +226,10 @@
       -webkit-tap-highlight-color: transparent;
     }
     @media (min-width: 640px) {
-      .service-marquee-card { width: 260px; gap: 14px; padding: 14px 16px; min-height: 100px; }
+      .service-marquee-card { width: 250px; gap: 14px; padding: 14px 16px; min-height: 96px; }
     }
     @media (min-width: 1024px) {
-      .service-marquee-card { width: 290px; min-height: 108px; padding: 16px 18px; }
+      .service-marquee-card { width: 280px; min-height: 104px; padding: 16px 18px; }
     }
     .service-marquee-card:hover,
     .service-marquee-card:focus-visible {
@@ -272,56 +262,56 @@
     }
     .service-marquee-card .smc-icon {
       flex-shrink: 0;
-      width: 42px; height: 42px;
+      width: 40px; height: 40px;
       border-radius: 11px;
       background: rgba(255,255,255,0.18);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       border: 1px solid rgba(255,255,255,0.3);
       display: flex; align-items: center; justify-content: center;
-      font-size: 1rem;
+      font-size: 0.95rem;
       color: #fff;
     }
     @media (min-width: 640px) {
-      .service-marquee-card .smc-icon { width: 46px; height: 46px; font-size: 1.05rem; }
+      .service-marquee-card .smc-icon { width: 44px; height: 44px; font-size: 1rem; }
     }
     @media (min-width: 1024px) {
-      .service-marquee-card .smc-icon { width: 50px; height: 50px; font-size: 1.1rem; }
+      .service-marquee-card .smc-icon { width: 48px; height: 48px; font-size: 1.05rem; }
     }
     .service-marquee-card .smc-text { flex: 1; min-width: 0; }
     .service-marquee-card .smc-text h4 {
       font-family: 'Playfair Display', serif;
-      font-size: 0.92rem;
+      font-size: 0.88rem;
       font-weight: 700;
       color: #fff;
-      margin: 0 0 3px;
+      margin: 0 0 2px;
       line-height: 1.2;
       letter-spacing: -0.1px;
     }
     @media (min-width: 1024px) {
-      .service-marquee-card .smc-text h4 { font-size: 1rem; }
+      .service-marquee-card .smc-text h4 { font-size: 0.96rem; }
     }
     .service-marquee-card .smc-text p {
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       color: rgba(255,255,255,0.82);
       margin: 0;
-      line-height: 1.35;
+      line-height: 1.3;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
     @media (min-width: 1024px) {
-      .service-marquee-card .smc-text p { font-size: 0.74rem; }
+      .service-marquee-card .smc-text p { font-size: 0.72rem; }
     }
     .service-marquee-card .smc-arrow {
       flex-shrink: 0;
-      width: 26px; height: 26px;
+      width: 24px; height: 24px;
       border-radius: 50%;
       background: rgba(255,255,255,0.16);
       border: 1px solid rgba(255,255,255,0.28);
       display: flex; align-items: center; justify-content: center;
-      font-size: 0.56rem;
+      font-size: 0.52rem;
       color: #fff;
       transition: background 0.2s ease;
     }
@@ -339,6 +329,7 @@
       transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
       display: flex;
       flex-direction: column;
+      position: relative;
     }
     .land-card:hover {
       transform: translateY(-4px);
@@ -374,6 +365,24 @@
       font-size: 0.58rem; font-weight: 700; text-transform: uppercase;
       letter-spacing: 0.8px; z-index: 2;
     }
+    /* Favorite button on land cards */
+    .land-card .lc-fav {
+      position: absolute;
+      top: 46px; right: 10px;
+      z-index: 2;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.92);
+      border: none;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.82rem;
+      color: #1a3650;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      transition: transform 0.15s, background 0.2s;
+    }
+    .land-card .lc-fav:hover { background: #fff; transform: scale(1.08); }
+    .land-card .lc-fav.is-fav { color: #e74c3c; }
     .land-card .lc-body { padding: 12px 14px; flex: 1; display: flex; flex-direction: column; }
     .land-card .lc-title {
       font-weight: 700; font-size: 0.88rem; color: var(--text);
@@ -502,6 +511,53 @@
     .dynamic-text:nth-child(9) { animation-delay: 16s; }
     .dynamic-text:nth-child(10) { animation-delay: 18s; }
     .hero-subtitle { color: rgba(255,255,255,0.8); font-size: 0.95rem; margin-top: 8px; max-width: 500px; }
+    /* NEW: hero services info line */
+    .hero-services-info {
+      display: inline-flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+      padding: 8px 14px;
+      border-radius: 30px;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.12);
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.88);
+    }
+    .hero-services-info .hsi-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: #D4B87A;
+      font-weight: 700;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      padding-right: 10px;
+      border-right: 1px solid rgba(255,255,255,0.18);
+    }
+    .hero-services-info .hsi-label i { font-size: 0.6rem; }
+    .hero-services-info .hsi-list {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 4px 10px;
+    }
+    .hero-services-info .hsi-list a {
+      color: rgba(255,255,255,0.92);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+    .hero-services-info .hsi-list a:hover { color: #D4B87A; }
+    .hero-services-info .hsi-list a i { font-size: 0.6rem; margin-right: 3px; opacity: 0.7; }
+    .hero-services-info .hsi-list span {
+      color: rgba(255,255,255,0.35);
+      font-weight: 300;
+    }
     .hero .search-wrapper { position: relative; z-index: 2; margin-top: 16px; }
     .hero .search-box {
       background: rgba(255,255,255,0.95); backdrop-filter: blur(8px);
@@ -552,6 +608,9 @@
       }
       .hero .hero-tagline { font-size: 0.6rem; letter-spacing: 2px; }
       .hero-subtitle { font-size: 0.8rem; }
+      .hero-services-info { font-size: 0.68rem; gap: 6px; padding: 6px 10px; }
+      .hero-services-info .hsi-label { font-size: 0.6rem; padding-right: 8px; }
+      .hero-services-info .hsi-list { gap: 3px 8px; }
     }
     @media (min-width: 768px) {
       .hero-content-wrapper { padding: 50px 40px; }
@@ -800,6 +859,18 @@
             <span class="static-text">near you.</span>
           </div>
           <p class="hero-subtitle">Nigeria's most trusted online marketplace – buy, sell and trade locally, scam‑free.</p>
+          <div class="hero-services-info">
+            <span class="hsi-label"><i class="fas fa-briefcase"></i> Zaure Services</span>
+            <span class="hsi-list">
+              <a href="/book-findr.html"><i class="fas fa-search-location"></i>Findr</a>
+              <span>·</span>
+              <a href="/book-clean.html"><i class="fas fa-broom"></i>Clean</a>
+              <span>·</span>
+              <a href="/book-move.html"><i class="fas fa-truck-moving"></i>Move</a>
+              <span>·</span>
+              <a href="/book-delivery.html"><i class="fas fa-truck-fast"></i>Delivery</a>
+            </span>
+          </div>
           <div class="search-wrapper" id="searchWrapper">
             <div class="search-box" role="search">
               <i class="fas fa-search" aria-hidden="true"></i>
@@ -859,6 +930,18 @@
           <span class="static-text">near you.</span>
         </div>
         <p class="hero-subtitle">Nigeria's most trusted online marketplace – buy, sell and trade locally, scam‑free.</p>
+        <div class="hero-services-info">
+          <span class="hsi-label"><i class="fas fa-briefcase"></i> Zaure Services</span>
+          <span class="hsi-list">
+            <a href="/book-findr.html"><i class="fas fa-search-location"></i>Findr</a>
+            <span>·</span>
+            <a href="/book-clean.html"><i class="fas fa-broom"></i>Clean</a>
+            <span>·</span>
+            <a href="/book-move.html"><i class="fas fa-truck-moving"></i>Move</a>
+            <span>·</span>
+            <a href="/book-delivery.html"><i class="fas fa-truck-fast"></i>Delivery</a>
+          </span>
+        </div>
         <div class="search-wrapper" id="searchWrapperMobile">
           <div class="search-box" role="search">
             <i class="fas fa-search"></i>
@@ -883,10 +966,9 @@
       <div class="zaure-services-head">
         <h2 class="zaure-services-title">
           <span class="zs-tag"><i class="fas fa-briefcase"></i> Zaure Services</span>
-          Services we offer
         </h2>
-        <a href="/zaure-services.html" class="zaure-services-view-more">
-          View more <i class="fas fa-arrow-right"></i>
+        <a href="/zaure-services.html" class="zaure-services-view-all">
+          View all <i class="fas fa-arrow-right"></i>
         </a>
       </div>
 
@@ -948,7 +1030,7 @@
         <i class="fas fa-map-marked-alt" style="color:#B49450; margin-right:6px; font-size:0.9em;"></i>Plots for Sale
       </h2>
       <a href="/land.html?type=plot" style="color:var(--text-secondary); font-weight:500; font-size:0.8rem; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
-        View more <i class="fas fa-arrow-right" style="font-size:0.7rem;"></i>
+        View all <i class="fas fa-arrow-right" style="font-size:0.7rem;"></i>
       </a>
     </div>
     <div class="grid-2col-listings" id="plotsGrid">
@@ -962,7 +1044,7 @@
         <i class="fas fa-seedling" style="color:#B49450; margin-right:6px; font-size:0.9em;"></i>Farms for Sale
       </h2>
       <a href="/land.html?type=farm" style="color:var(--text-secondary); font-weight:500; font-size:0.8rem; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
-        View more <i class="fas fa-arrow-right" style="font-size:0.7rem;"></i>
+        View all <i class="fas fa-arrow-right" style="font-size:0.7rem;"></i>
       </a>
     </div>
     <div class="grid-2col-listings" id="farmsGrid">
@@ -1176,9 +1258,7 @@
     })();
 
     /* ============================================================
-       SERVICE MARQUEE — duplicate the 4 cards into 6 copies for a
-       seamless loop. Shift is 1/6 of the track width regardless of
-       how many cards are in the "originals" set.
+       SERVICE MARQUEE — duplicate 4 cards into 6 copies
        ============================================================ */
     function initServiceMarquee() {
       const track = document.getElementById('serviceMarqueeTrack');
@@ -1473,6 +1553,9 @@
       setInterval(nextSlide, duration);
     }
 
+    /* ============================================================
+       LAND — plots + farms
+       ============================================================ */
     async function getLandData() {
       try {
         const res = await fetch('/data/land.json', { cache: 'no-store' });
@@ -1544,6 +1627,11 @@
       const safeTitle = (item.title || 'Land Plot').replace(/"/g, '&quot;');
       const idSafe = String(item.id).replace(/'/g, "\\'");
 
+      // Favorite state
+      const isFav = (typeof isFavorite === 'function') ? isFavorite(item.id) : false;
+      const heartIcon = isFav ? 'fas fa-heart' : 'far fa-heart';
+      const favClass = isFav ? 'lc-fav is-fav' : 'lc-fav';
+
       return `
         <div class="land-card" data-id="${item.id}"
              onclick="goToLandDetail('${idSafe}')"
@@ -1552,6 +1640,11 @@
             <img src="${img}" alt="${safeTitle}" loading="lazy" onerror="this.src='https://placehold.co/600x400?text=Land'">
             <span class="lc-tier ${tier}"><i class="fas ${tierIcon}"></i> ${tierLabel}</span>
             <span class="lc-cat">${cat}</span>
+            <button type="button" class="${favClass}" data-fav-id="${item.id}"
+                    onclick="event.stopPropagation(); toggleLandFavorite('${idSafe}', this)"
+                    aria-label="Save to favorites">
+              <i class="${heartIcon}"></i>
+            </button>
           </div>
           <div class="lc-body">
             <h4 class="lc-title">${item.title || 'Land Plot'}</h4>
@@ -1566,6 +1659,23 @@
       `;
     }
 
+    /* Favorite toggle for land cards — reuses main.js favorites API */
+    window.toggleLandFavorite = function (id, buttonEl) {
+      if (typeof toggleFavorite === 'function') {
+        // toggleFavorite requires a user; openSignup if not logged in
+        const wasFav = (typeof isFavorite === 'function') && isFavorite(id);
+        const result = toggleFavorite(id);
+        if (result === false && !(typeof getCurrentUser === 'function' && getCurrentUser())) {
+          return; // openSignup was already called inside toggleFavorite
+        }
+        const nowFav = (typeof isFavorite === 'function') ? isFavorite(id) : !wasFav;
+        const icon = buttonEl.querySelector('i');
+        if (icon) icon.className = nowFav ? 'fas fa-heart' : 'far fa-heart';
+        buttonEl.classList.toggle('is-fav', nowFav);
+        if (typeof updateFavoriteBadge === 'function') updateFavoriteBadge();
+      }
+    };
+
     function renderLandEmpty(grid, msg) {
       grid.innerHTML = `<div class="land-empty">
         <i class="fas fa-map-marked-alt"></i>
@@ -1578,6 +1688,7 @@
       grid.querySelectorAll('.land-card[data-id]').forEach(card => {
         card.addEventListener('keydown', e => {
           if (e.key === 'Enter' || e.key === ' ') {
+            if (e.target.closest('.lc-fav')) return;
             e.preventDefault();
             goToLandDetail(card.dataset.id);
           }
