@@ -14,7 +14,6 @@
     .container { padding-left: 16px; padding-right: 16px; }
     @media (min-width: 1024px) { .container { padding-left: 24px; padding-right: 24px; } }
 
-    /* ============ PAGE HEADER ============ */
     .profile-page-head {
       padding: 32px 0 24px;
       border-bottom: 1px solid var(--border);
@@ -35,7 +34,6 @@
       line-height: 1.55;
     }
 
-    /* ============ PROFILE CARD ============ */
     .profile-card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -131,7 +129,6 @@
     }
     .profile-edit i { font-size: 0.68rem; }
 
-    /* Single stat (favorites only) */
     .profile-stat-single {
       margin-top: 20px;
       padding-top: 20px;
@@ -152,7 +149,6 @@
     .profile-stat-single i { color: #1a3650; font-size: 0.85rem; }
     [data-theme="dark"] .profile-stat-single i { color: #D4B87A; }
 
-    /* ============ SECTION HEADING ============ */
     .section-head {
       display: flex;
       align-items: center;
@@ -183,7 +179,6 @@
     [data-theme="dark"] .section-head a:hover { color: #D4B87A; }
     .section-head a i { font-size: 0.6rem; }
 
-    /* ============ SERVICE LINKS ============ */
     .service-links {
       display: grid;
       grid-template-columns: 1fr;
@@ -243,7 +238,6 @@
       flex-shrink: 0;
     }
 
-    /* ============ MENU LIST ============ */
     .menu-list {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -307,7 +301,6 @@
     [data-theme="dark"] .menu-row.danger .menu-row-icon { background: rgba(231,76,60,0.15); color: #ff7b7b; }
     [data-theme="dark"] .menu-row.danger .menu-row-body .title { color: #ff7b7b; }
 
-    /* ============ EMPTY STATE ============ */
     .empty-block {
       padding: 28px 20px;
       text-align: center;
@@ -333,7 +326,6 @@
     }
     [data-theme="dark"] .empty-block a { color: #D4B87A; }
 
-    /* ============ SIGNED-OUT STATE ============ */
     .signed-out-card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -392,7 +384,6 @@
     }
     .signed-out-card .btn-primary i { font-size: 0.72rem; }
 
-    /* ============ MOBILE QUICK LINKS ============ */
     .mobile-quick-links {
       display: block;
       background: var(--surface);
@@ -439,97 +430,37 @@
     }
     [data-theme="dark"] .mobile-quick-links a i { color: #D4B87A; }
 
-    /* ============ STATE DROPDOWN ============ */
-    .state-dd { position: relative; width: 100%; user-select: none; }
-    .state-dd-trigger {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 14px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      background: var(--surface);
-      color: var(--text);
-      cursor: pointer;
-      font-size: 0.92rem;
-      font-family: inherit;
-      transition: border-color 0.2s;
+    /* State dropdown — matches main.js expectations exactly */
+    .custom-select { position: relative !important; width: 100% !important; user-select: none !important; }
+    .custom-select-trigger {
+      display: flex !important; justify-content: space-between !important; align-items: center !important;
+      padding: 12px 14px !important; border: 1px solid var(--border) !important; border-radius: 10px !important;
+      background: var(--surface) !important; cursor: pointer !important; font-size: 0.92rem !important;
+      color: var(--text) !important; transition: border-color 0.2s !important;
     }
-    .state-dd-trigger:hover { border-color: #1a3650; }
-    [data-theme="dark"] .state-dd-trigger:hover { border-color: #D4B87A; }
-    .state-dd-trigger i {
-      font-size: 0.68rem;
-      color: var(--text-secondary);
-      transition: transform 0.2s;
+    .custom-select-trigger:hover { border-color: #1a3650 !important; }
+    [data-theme="dark"] .custom-select-trigger:hover { border-color: #D4B87A !important; }
+    .custom-select-dropdown {
+      position: absolute !important; top: calc(100% + 4px) !important;
+      left: 0 !important; right: 0 !important; background: var(--surface) !important;
+      border: 1px solid var(--border) !important; border-radius: 10px !important;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.18) !important; max-height: 240px !important;
+      overflow-y: auto !important; z-index: 99999 !important; display: none !important;
     }
-    .state-dd.open .state-dd-trigger i { transform: rotate(180deg); }
-    .state-dd-menu {
-      position: absolute;
-      top: calc(100% + 4px);
-      left: 0; right: 0;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      box-shadow: 0 8px 28px rgba(0,0,0,0.18);
-      max-height: 240px;
-      overflow-y: auto;
-      z-index: 500;
-      display: none;
+    .custom-select.active .custom-select-dropdown { display: block !important; }
+    .custom-select-dropdown input[type="text"] {
+      width: calc(100% - 16px) !important; margin: 8px !important; padding: 8px 10px !important;
+      border: 1px solid var(--border) !important; border-radius: 8px !important; font-size: 0.85rem !important;
+      background: var(--surface-alt) !important; color: var(--text) !important; outline: none !important;
+      box-sizing: border-box !important; font-family: inherit !important;
     }
-    .state-dd.open .state-dd-menu { display: block; }
-    .state-dd-search {
-      padding: 8px;
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      background: var(--surface);
-      z-index: 1;
+    .custom-select-options { list-style: none !important; padding: 4px 0 !important; margin: 0 !important; }
+    .custom-select-options li {
+      padding: 9px 14px !important; cursor: pointer !important; font-size: 0.88rem !important;
+      color: var(--text) !important; transition: background 0.15s !important;
     }
-    .state-dd-search input {
-      width: 100%;
-      padding: 8px 10px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: var(--surface-alt);
-      color: var(--text);
-      font-size: 0.84rem;
-      outline: none;
-      font-family: inherit;
-      box-sizing: border-box;
-    }
-    .state-dd-search input:focus { border-color: #1a3650; }
-    [data-theme="dark"] .state-dd-search input:focus { border-color: #D4B87A; }
-    .state-dd-list {
-      list-style: none;
-      padding: 4px 0;
-      margin: 0;
-    }
-    .state-dd-list li {
-      padding: 9px 14px;
-      cursor: pointer;
-      font-size: 0.88rem;
-      color: var(--text);
-      transition: background 0.15s;
-    }
-    .state-dd-list li:hover { background: var(--surface-alt); }
-    .state-dd-list li.selected {
-      background: rgba(26,54,80,0.08);
-      font-weight: 600;
-      color: #1a3650;
-    }
-    [data-theme="dark"] .state-dd-list li.selected {
-      background: rgba(212,184,122,0.12);
-      color: #D4B87A;
-    }
-    .state-dd-list .no-result {
-      text-align: center;
-      color: var(--text-secondary);
-      pointer-events: none;
-      font-size: 0.82rem;
-      padding: 16px;
-    }
+    .custom-select-options li:hover { background: var(--surface-alt) !important; }
 
-    /* ============ SIGNED-IN / OUT TOGGLES ============ */
     .signed-in-only { display: none; }
     .signed-out-only { display: block; }
     body.logged-in .signed-in-only { display: block; }
@@ -574,7 +505,7 @@
 
     <div class="profile-page-head">
       <h1>Profile</h1>
-      <p>Your account, listings, favorites and Zaure services — all in one place.</p>
+      <p>Your account, favorites and Zaure services — all in one place.</p>
     </div>
 
     <!-- ============ SIGNED-OUT ============ -->
@@ -614,7 +545,7 @@
             <div class="meta">
               <span id="profilePhone"><i class="fas fa-phone"></i> —</span>
               <span id="profileState"><i class="fas fa-map-pin"></i> —</span>
-              <span id="profileJoined"><i class="fas fa-calendar"></i> Joined 2026</span>
+              <span id="profileJoined"><i class="fas fa-calendar"></i> —</span>
             </div>
             <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span>
           </div>
@@ -673,7 +604,7 @@
         <h3>My Listings</h3>
         <a href="/post.html">Post new <i class="fas fa-arrow-right"></i></a>
       </div>
-      <div class="empty-block">
+      <div class="empty-block" id="listingsBlock">
         <i class="fas fa-box-open"></i>
         You haven't posted anything yet.
         <a href="/post.html">Post your first listing →</a>
@@ -683,7 +614,7 @@
         <h3>Favorites</h3>
         <a href="/favorites.html">View all <i class="fas fa-arrow-right"></i></a>
       </div>
-      <div class="empty-block">
+      <div class="empty-block" id="favoritesBlock">
         <i class="fas fa-heart"></i>
         No favorites yet.
         <a href="/category.html?slug=all">Browse listings →</a>
@@ -742,7 +673,7 @@
     </div>
   </main>
 
-  <!-- ============ SIGNUP MODAL (unchanged) ============ -->
+  <!-- ============ SIGNUP MODAL (IDs match main.js initStateDropdown) ============ -->
   <div class="modal-overlay" id="signupModal">
     <div class="modal">
       <div class="modal-header">
@@ -755,16 +686,14 @@
         <label for="signupPhone">Phone Number</label>
         <input type="tel" id="signupPhone" placeholder="Enter your phone number" required>
         <label>State</label>
-        <div class="state-dd" id="signupStateDD">
-          <div class="state-dd-trigger" id="signupStateTrigger">
+        <div class="custom-select" id="stateSelect">
+          <div class="custom-select-trigger" id="stateTrigger">
             <span>Select your state</span>
             <i class="fas fa-chevron-down"></i>
           </div>
-          <div class="state-dd-menu" id="signupStateMenu">
-            <div class="state-dd-search">
-              <input type="text" id="signupStateSearch" placeholder="Search state..." autocomplete="off">
-            </div>
-            <ul class="state-dd-list" id="signupStateList"></ul>
+          <div class="custom-select-dropdown" id="stateDropdown">
+            <input type="text" id="stateSearchInput" placeholder="Search state...">
+            <ul class="custom-select-options" id="stateOptionsList"></ul>
           </div>
         </div>
         <input type="hidden" id="signupState" value="">
@@ -792,16 +721,14 @@
         <input type="tel" id="editPhone" placeholder="Enter your phone number" required>
 
         <label>State</label>
-        <div class="state-dd" id="editStateDD">
-          <div class="state-dd-trigger" id="editStateTrigger">
+        <div class="custom-select" id="editStateSelect">
+          <div class="custom-select-trigger" id="editStateTrigger">
             <span>Select your state</span>
             <i class="fas fa-chevron-down"></i>
           </div>
-          <div class="state-dd-menu" id="editStateMenu">
-            <div class="state-dd-search">
-              <input type="text" id="editStateSearch" placeholder="Search state..." autocomplete="off">
-            </div>
-            <ul class="state-dd-list" id="editStateList"></ul>
+          <div class="custom-select-dropdown" id="editStateDropdown">
+            <input type="text" id="editStateSearchInput" placeholder="Search state...">
+            <ul class="custom-select-options" id="editStateOptionsList"></ul>
           </div>
         </div>
         <input type="hidden" id="editState" value="">
@@ -823,114 +750,86 @@
   <script src="/js/main.js"></script>
   <script>
     /* ============================================================
-       STATE DROPDOWN — reusable, self-contained
+       EDIT STATE DROPDOWN — build our own for the edit modal
+       (main.js only handles #stateSelect; we add a second one)
        ============================================================ */
-    const NIGERIAN_STATES = [
-      'Abia','Adamawa','Akwa Ibom','Anambra','Bauchi','Bayelsa','Benue','Borno',
-      'Cross River','Delta','Ebonyi','Edo','Ekiti','Enugu','FCT','Gombe','Imo',
-      'Jigawa','Kaduna','Kano','Katsina','Kebbi','Kogi','Kwara','Lagos','Nasarawa',
-      'Niger','Ogun','Ondo','Osun','Oyo','Plateau','Rivers','Sokoto','Taraba','Yobe','Zamfara'
-    ];
-
-    function createStateDropdown(opts) {
-      const dd = document.getElementById(opts.ddId);
-      const trigger = document.getElementById(opts.triggerId);
-      const menu = document.getElementById(opts.menuId);
-      const search = document.getElementById(opts.searchId);
-      const list = document.getElementById(opts.listId);
-      const hidden = document.getElementById(opts.hiddenId);
-      const triggerLabel = trigger ? trigger.querySelector('span') : null;
-
-      if (!dd || !trigger || !menu || !search || !list || !hidden || !triggerLabel) return null;
+    function initEditStateDropdown() {
+      const STATES = [
+        'Abia','Adamawa','Akwa Ibom','Anambra','Bauchi','Bayelsa','Benue','Borno',
+        'Cross River','Delta','Ebonyi','Edo','Ekiti','Enugu','FCT','Gombe','Imo',
+        'Jigawa','Kaduna','Kano','Katsina','Kebbi','Kogi','Kwara','Lagos','Nasarawa',
+        'Niger','Ogun','Ondo','Osun','Oyo','Plateau','Rivers','Sokoto','Taraba','Yobe','Zamfara'
+      ];
+      const container = document.getElementById('editStateSelect');
+      const trigger = document.getElementById('editStateTrigger');
+      const dropdown = document.getElementById('editStateDropdown');
+      const search = document.getElementById('editStateSearchInput');
+      const list = document.getElementById('editStateOptionsList');
+      const hidden = document.getElementById('editState');
+      if (!container || !trigger || !dropdown || !search || !list || !hidden) return;
 
       let open = false;
 
       function render(filter) {
         const f = (filter || '').trim().toLowerCase();
-        const filtered = f ? NIGERIAN_STATES.filter(s => s.toLowerCase().includes(f)) : NIGERIAN_STATES;
-
-        if (!filtered.length) {
-          list.innerHTML = '<li class="no-result">No state found</li>';
-          return;
-        }
-
-        list.innerHTML = filtered.map(s => {
-          const selected = hidden.value === s ? ' class="selected"' : '';
-          return `<li data-value="${s}"${selected}>${s}</li>`;
-        }).join('');
-
+        const filtered = f ? STATES.filter(s => s.toLowerCase().includes(f)) : STATES;
+        list.innerHTML = filtered.length
+          ? filtered.map(s => `<li data-value="${s}">${s}</li>`).join('')
+          : '<li style="text-align:center;color:var(--text-secondary);pointer-events:none;">No state found</li>';
         list.querySelectorAll('li[data-value]').forEach(li => {
           li.addEventListener('click', function (e) {
             e.stopPropagation();
             const val = this.dataset.value;
             hidden.value = val;
-            triggerLabel.textContent = val;
+            trigger.querySelector('span').textContent = val;
             close();
           });
         });
       }
-
       function openMenu() {
         open = true;
-        dd.classList.add('open');
+        container.classList.add('active');
         render('');
         setTimeout(() => search.focus(), 40);
       }
-
       function close() {
         open = false;
-        dd.classList.remove('open');
+        container.classList.remove('active');
         search.value = '';
         render('');
       }
 
-      trigger.addEventListener('click', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
+      trigger.addEventListener('click', e => {
+        e.preventDefault(); e.stopPropagation();
         if (open) close(); else openMenu();
       });
-
       search.addEventListener('click', e => e.stopPropagation());
       search.addEventListener('input', function () { render(this.value); });
-      search.addEventListener('keydown', function (e) {
+      search.addEventListener('keydown', e => {
         e.stopPropagation();
         if (e.key === 'Escape') close();
       });
-
-      document.addEventListener('pointerdown', function (e) {
-        if (open && !dd.contains(e.target)) close();
+      document.addEventListener('pointerdown', e => {
+        if (open && !container.contains(e.target)) close();
       });
-      document.addEventListener('keydown', function (e) {
+      document.addEventListener('keydown', e => {
         if (e.key === 'Escape' && open) close();
       });
-
       render('');
 
-      return {
-        setValue: function (val) {
-          hidden.value = val || '';
-          triggerLabel.textContent = val || 'Select your state';
-          render('');
-        },
-        getValue: function () { return hidden.value; }
+      window.__setEditState = function (val) {
+        hidden.value = val || '';
+        trigger.querySelector('span').textContent = val || 'Select your state';
+        render('');
       };
     }
 
-    // Initialize both state dropdowns (signup + edit)
-    const signupStateDD = createStateDropdown({
-      ddId: 'signupStateDD', triggerId: 'signupStateTrigger', menuId: 'signupStateMenu',
-      searchId: 'signupStateSearch', listId: 'signupStateList', hiddenId: 'signupState'
-    });
-    const editStateDD = createStateDropdown({
-      ddId: 'editStateDD', triggerId: 'editStateTrigger', menuId: 'editStateMenu',
-      searchId: 'editStateSearch', listId: 'editStateList', hiddenId: 'editState'
-    });
-
     /* ============================================================
-       PROFILE LOAD
+       PROFILE VIEW
        ============================================================ */
-    function loadProfilePage() {
+    function renderProfileView() {
       const user = (typeof getCurrentUser === 'function') ? getCurrentUser() : null;
+
       if (!user) {
         document.body.classList.remove('logged-in');
         return;
@@ -947,15 +846,43 @@
       setText('profileName', name);
       setHTML('profilePhone', `<i class="fas fa-phone"></i> ${user.phone || '—'}`);
       setHTML('profileState', `<i class="fas fa-map-pin"></i> ${user.state || 'Nigeria'}`);
-      if (user.joinedAt) {
-        const d = new Date(user.joinedAt);
-        setHTML('profileJoined', `<i class="fas fa-calendar"></i> Joined ${d.toLocaleDateString('en-NG', { month: 'short', year: 'numeric' })}`);
+
+      const joinedRaw = user.joined || user.joinedAt;
+      if (joinedRaw) {
+        const d = new Date(joinedRaw);
+        if (!isNaN(d)) {
+          setHTML('profileJoined', `<i class="fas fa-calendar"></i> Joined ${d.toLocaleDateString('en-NG', { month: 'short', year: 'numeric' })}`);
+        }
+      }
+
+      const favCount = (typeof getFavoriteCount === 'function') ? getFavoriteCount() : 0;
+      setText('statFavorites', favCount);
+
+      const favBlock = document.getElementById('favoritesBlock');
+      if (favBlock && favCount > 0) {
+        favBlock.innerHTML = `
+          <i class="fas fa-heart"></i>
+          You have <strong>${favCount}</strong> saved item${favCount === 1 ? '' : 's'}.
+          <a href="/favorites.html">View favorites →</a>
+        `;
       }
 
       try {
-        const favorites = JSON.parse(localStorage.getItem('zaure_favorites') || '[]');
-        setText('statFavorites', favorites.length);
-      } catch (e) {}
+        const products = (typeof getProductsSync === 'function') ? getProductsSync() : [];
+        const mine = products.filter(p =>
+          String(p.sellerId) === String(user.id) ||
+          p.seller?.phone === user.phone ||
+          p.seller?.name === user.name
+        );
+        const block = document.getElementById('listingsBlock');
+        if (block && mine.length > 0) {
+          block.innerHTML = `
+            <i class="fas fa-box-open"></i>
+            You have <strong>${mine.length}</strong> listing${mine.length === 1 ? '' : 's'}.
+            <a href="/category.html?slug=all">Manage listings →</a>
+          `;
+        }
+      } catch (err) {}
     }
 
     /* ============================================================
@@ -967,19 +894,16 @@
 
       document.getElementById('editName').value = user.name || '';
       document.getElementById('editPhone').value = user.phone || '';
-      if (editStateDD) editStateDD.setValue(user.state || '');
+      if (window.__setEditState) window.__setEditState(user.state || '');
 
-      const modal = document.getElementById('editProfileModal');
-      modal.classList.add('active');
+      document.getElementById('editProfileModal').classList.add('active');
       document.body.style.overflow = 'hidden';
       setTimeout(() => document.getElementById('editName').focus(), 250);
     }
-
     function closeEditProfileModal() {
       document.getElementById('editProfileModal').classList.remove('active');
       document.body.style.overflow = '';
     }
-
     function saveEditProfile(e) {
       e.preventDefault();
       const name = (document.getElementById('editName').value || '').trim();
@@ -988,67 +912,59 @@
 
       if (!name) { alert('Please enter your name.'); return; }
       if (phone.replace(/\D/g, '').length < 10) { alert('Please enter a valid phone number.'); return; }
+      if (!state) { alert('Please select your state.'); return; }
 
-      const current = (typeof getCurrentUser === 'function') ? getCurrentUser() : null;
-      const updated = Object.assign({}, current || {}, { name, phone, state });
+      // Use main.js's updateUserProfile if available
+      if (typeof updateUserProfile === 'function') {
+        const updated = updateUserProfile({ name, phone, state });
+        if (updated && updated.error) { alert(updated.error); return; }
+      } else {
+        // Fallback — write directly to the key main.js reads
+        const current = getCurrentUser() || {};
+        const merged = Object.assign({}, current, { name, phone, state });
+        try { localStorage.setItem('zaure_user', JSON.stringify(merged)); } catch (err) {}
+      }
 
-      // Persist to the same storage main.js uses
-      try { localStorage.setItem('zaure_user', JSON.stringify(updated)); } catch (err) {}
-      try { localStorage.setItem('zaure_auth', JSON.stringify(updated)); } catch (err) {}
-
-      // Close + refresh view
-      closeEditProfileModal();
+      // Refresh everything
       if (typeof loadUser === 'function') { try { loadUser(); } catch (err) {} }
-      loadProfilePage();
-      if (typeof updateFavoriteBadge === 'function') updateFavoriteBadge();
+      if (typeof updateFavoriteBadge === 'function') { try { updateFavoriteBadge(); } catch (err) {} }
+      renderProfileView();
+      closeEditProfileModal();
     }
 
     /* ============================================================
        BOOT
        ============================================================ */
     document.addEventListener('DOMContentLoaded', function () {
+      // main.js runs its own boot too — this just adds what it doesn't do
       if (typeof loadUser === 'function') loadUser();
       if (typeof initTheme === 'function') initTheme();
       if (typeof updateFavoriteBadge === 'function') updateFavoriteBadge();
 
-      loadProfilePage();
+      // main.js already wires the signup state dropdown via initStateDropdown().
+      // Add the second (edit) dropdown.
+      initEditStateDropdown();
+
+      renderProfileView();
 
       document.getElementById('editProfileBtn')?.addEventListener('click', openEditProfileModal);
       document.getElementById('menuEditAccount')?.addEventListener('click', openEditProfileModal);
       document.getElementById('closeEditModalBtn')?.addEventListener('click', closeEditProfileModal);
       document.getElementById('editProfileForm')?.addEventListener('submit', saveEditProfile);
-
-      // Close edit modal when clicking overlay
       document.getElementById('editProfileModal')?.addEventListener('click', function (e) {
         if (e.target === this) closeEditProfileModal();
       });
       document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') {
-          const m = document.getElementById('editProfileModal');
-          if (m && m.classList.contains('active')) closeEditProfileModal();
-        }
+        const m = document.getElementById('editProfileModal');
+        if (e.key === 'Escape' && m && m.classList.contains('active')) closeEditProfileModal();
       });
 
-      document.getElementById('logoutBtn')?.addEventListener('click', () => {
-        if (typeof logout === 'function') {
-          logout();
-        } else {
-          try {
-            localStorage.removeItem('zaure_user');
-            localStorage.removeItem('zaure_auth');
-            localStorage.removeItem('zaure_token');
-          } catch (e) {}
-          window.location.reload();
-        }
-      });
-
-      document.getElementById('fabPostAd')?.addEventListener('click', () => {
-        const u = (typeof getCurrentUser === 'function') ? getCurrentUser() : null;
-        if (!u) {
-          if (typeof openSignup === 'function') openSignup();
-        } else {
-          window.location.href = '/post.html';
-        }
+      // Logout — main.js has no logout, so we clear zaure_user ourselves
+      document.getElementById('logoutBtn')?.addEventListener('click', function () {
+        try { localStorage.removeItem('zaure_user'); } catch (e) {}
+        try { localStorage.removeItem('zaure_token'); } catch (e) {}
+        try { localStorage.removeItem('zaure_auth'); } catch (e) {}
+        window.location.reload();
       });
     });
   </script>
