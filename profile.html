@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <title>My Profile — Zaure</title>
   <meta name="description" content="Your Zaure account — manage listings, favorites, and book Zaure services.">
-  <meta name="theme-color" content="#0f2940">
+  <meta name="theme-color" content="#1a3650">
   <link rel="icon" type="image/svg+xml" href="/assets/logo-icon.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
   <style>
     .container { padding-left: 16px; padding-right: 16px; }
@@ -292,6 +292,81 @@
     body.logged-in .signed-in-only { display: block; }
     body.logged-in .signed-out-only { display: none; }
 
+    /* ============ STATE DROPDOWN — FIXED ============ */
+    .custom-select {
+      position: relative;
+      width: 100%;
+      user-select: none;
+      z-index: 100;
+    }
+    .custom-select-trigger {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--border, #e5ecf3);
+      border-radius: 12px;
+      background: var(--surface, #ffffff);
+      color: var(--text, #151e28);
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: border-color 0.2s;
+      font-family: inherit;
+    }
+    .custom-select-trigger:hover { border-color: #1a3650; }
+    .custom-select-trigger i {
+      font-size: 0.7rem;
+      transition: transform 0.2s;
+      color: var(--text-secondary, #94A3B8);
+    }
+    .custom-select.active .custom-select-trigger i { transform: rotate(180deg); }
+    .custom-select-dropdown {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      right: 0;
+      background: var(--surface, #ffffff);
+      border: 1px solid var(--border, #e5ecf3);
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      max-height: 260px;
+      overflow-y: auto;
+      z-index: 1000;
+      display: none;
+    }
+    .custom-select.active .custom-select-dropdown { display: block; }
+    .custom-select-dropdown input[type="text"] {
+      width: calc(100% - 20px);
+      margin: 10px;
+      padding: 8px 10px;
+      border: 1px solid var(--border, #e5ecf3);
+      border-radius: 8px;
+      font-size: 0.85rem;
+      background: var(--surface, #ffffff);
+      color: var(--text, #151e28);
+      outline: none;
+      font-family: inherit;
+      box-sizing: border-box;
+    }
+    .custom-select-options {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .custom-select-options li {
+      padding: 10px 16px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      color: var(--text, #151e28);
+      transition: background 0.15s;
+    }
+    .custom-select-options li:hover { background: rgba(26,54,80,0.06); }
+    .custom-select-options li.selected {
+      background: rgba(212,184,122,0.15);
+      color: #B49450;
+      font-weight: 600;
+    }
+
     @media (prefers-reduced-motion: reduce) {
       * { animation: none !important; transition: none !important; }
     }
@@ -538,7 +613,8 @@
 
   <script src="/js/main.js"></script>
   <script>
-    (function initStateDropdownInline() {
+    /* ============ STATE DROPDOWN — FIXED ============ */
+    (function initStateDropdown() {
       const nigerianStates = [
         'Abia','Adamawa','Akwa Ibom','Anambra','Bauchi','Bayelsa','Benue','Borno',
         'Cross River','Delta','Ebonyi','Edo','Ekiti','Enugu','FCT','Gombe','Imo',
@@ -550,35 +626,96 @@
       const searchInput = document.getElementById('stateSearchInput');
       const optionsList = document.getElementById('stateOptionsList');
       const hiddenInput = document.getElementById('signupState');
-      if (!selectContainer || !trigger || !searchInput || !optionsList || !hiddenInput) return;
-      function renderOptions(filter = '') {
-        const filtered = nigerianStates.filter(s => s.toLowerCase().includes(filter.toLowerCase()));
-        optionsList.innerHTML = filtered.length
-          ? filtered.map(s => `<li data-value="${s}">${s}</li>`).join('')
-          : '<li style="text-align:center;color:#94A3B8;">No state found</li>';
-        optionsList.querySelectorAll('li').forEach(li => {
-          li.addEventListener('click', function(e) {
+      const triggerLabel = trigger ? trigger.querySelector('span') : null;
+
+      if (!selectContainer || !trigger || !searchInput || !optionsList || !hiddenInput || !triggerLabel) {
+        return;
+      }
+
+      let isOpen = false;
+
+      function openDropdown() {
+        isOpen = true;
+        selectContainer.classList.add('active');
+        setTimeout(() => searchInput.focus(), 40);
+      }
+
+      function closeDropdown() {
+        isOpen = false;
+        selectContainer.classList.remove('active');
+        searchInput.value = '';
+        renderOptions('');
+      }
+
+      function toggleDropdown() {
+        if (isOpen) closeDropdown();
+        else openDropdown();
+      }
+
+      function renderOptions(filter) {
+        const f = (filter || '').trim().toLowerCase();
+        const filtered = f
+          ? nigerianStates.filter(s => s.toLowerCase().includes(f))
+          : nigerianStates;
+
+        if (filtered.length === 0) {
+          optionsList.innerHTML = '<li style="text-align:center;color:#94A3B8;pointer-events:none;">No state found</li>';
+          return;
+        }
+
+        optionsList.innerHTML = filtered.map(s => {
+          const isSelected = hiddenInput.value === s;
+          return `<li data-value="${s}"${isSelected ? ' class="selected"' : ''}>${s}</li>`;
+        }).join('');
+
+        optionsList.querySelectorAll('li[data-value]').forEach(li => {
+          li.addEventListener('click', function (e) {
             e.stopPropagation();
-            hiddenInput.value = this.dataset.value;
-            trigger.querySelector('span').textContent = this.dataset.value;
-            selectContainer.classList.remove('active');
-            searchInput.value = '';
-            renderOptions();
+            const value = this.dataset.value;
+            hiddenInput.value = value;
+            triggerLabel.textContent = value;
+            closeDropdown();
           });
         });
       }
-      renderOptions();
-      trigger.addEventListener('click', e => {
-        e.preventDefault(); e.stopPropagation();
-        selectContainer.classList.toggle('active');
-        if (selectContainer.classList.contains('active')) setTimeout(() => searchInput.focus(), 50);
+
+      /* Trigger click — stopPropagation so the modal doesn't close */
+      trigger.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleDropdown();
       });
-      searchInput.addEventListener('input', function() { renderOptions(this.value); });
-      document.addEventListener('click', e => {
-        if (!selectContainer.contains(e.target)) selectContainer.classList.remove('active');
+
+      /* Search input — stop clicks from bubbling to document */
+      searchInput.addEventListener('click', function (e) {
+        e.stopPropagation();
       });
+      searchInput.addEventListener('input', function (e) {
+        e.stopPropagation();
+        renderOptions(this.value);
+      });
+      searchInput.addEventListener('keydown', function (e) {
+        e.stopPropagation();
+        if (e.key === 'Escape') closeDropdown();
+      });
+
+      /* Click outside closes — use 'pointerdown' for touch reliability */
+      document.addEventListener('pointerdown', function (e) {
+        if (isOpen && !selectContainer.contains(e.target)) {
+          closeDropdown();
+        }
+      });
+
+      /* Escape closes */
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && isOpen) closeDropdown();
+      });
+
+      /* Initial render */
+      renderOptions('');
     })();
 
+    /* ============ PROFILE PAGE ============ */
     function loadProfilePage() {
       const user = (typeof getCurrentUser === 'function') ? getCurrentUser() : null;
       if (!user) {
@@ -628,7 +765,7 @@
       } catch (e) {}
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       if (typeof loadUser === 'function') loadUser();
       if (typeof initTheme === 'function') initTheme();
       if (typeof updateFavoriteBadge === 'function') updateFavoriteBadge();
@@ -638,7 +775,7 @@
       document.getElementById('editProfileBtn')?.addEventListener('click', () => {
         if (typeof openSignup === 'function') openSignup();
       });
-      document.getElementById('menuEditAccount')?.addEventListener('click', e => {
+      document.getElementById('menuEditAccount')?.addEventListener('click', (e) => {
         e.preventDefault();
         if (typeof openSignup === 'function') openSignup();
       });
